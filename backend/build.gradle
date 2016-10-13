@@ -33,14 +33,18 @@ configurations {
 }
 
 dependencies {
+    compile('com.mysema.querydsl:querydsl-jpa:3.6.3')
+    compile('com.mysema.querydsl:querydsl-apt:3.6.3:jpa')
+    compile('com.auth0:auth0-spring-security-api:0.3.0')
+    compile('com.auth0:auth0:0.3.0')
+
+    // Spring Initializr
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
     compile('org.springframework.boot:spring-boot-starter-jooq')
     compile('org.projectlombok:lombok')
     compile('org.springframework.boot:spring-boot-starter-security')
     compile('org.springframework.boot:spring-boot-starter-web')
     compile("org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}")
-    compile('com.auth0:auth0-spring-security-api:0.3.0')
-    compile('com.auth0:auth0:0.3.0')
     runtime('com.h2database:h2')
     runtime('mysql:mysql-connector-java')
     providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
