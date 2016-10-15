@@ -8,7 +8,6 @@ import org.springframework.context.annotation.PropertySources
 @SpringBootApplication
 @PropertySources(
         PropertySource("classpath:application.properties"),
-        PropertySource("classpath:dataSource.properties"),
         PropertySource("classpath:auth0.properties"))
 open class OutstandingCobraServerApplication
 
