@@ -30,6 +30,9 @@ public class Semester {
     @OneToMany
     private List<Subject> subjects;
 
+    @OneToMany
+    private List<MarkReport> markReports;
+
     @OneToOne
     private Timetable timetable;
 }
