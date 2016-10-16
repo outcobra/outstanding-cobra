@@ -4,10 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
@@ -25,9 +22,12 @@ public class Institution {
     @ManyToOne
     private User user;
 
-    @OneToMany
+    @OneToOne
+    private Institution parent;
+
+    @OneToMany(mappedBy = "institution")
     private List<Holiday> holidays;
 
-    @OneToMany
+    @OneToMany(mappedBy = "institution")
     private List<SchoolYear> schoolYears;
 }

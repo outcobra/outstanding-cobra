@@ -26,6 +26,6 @@ public class MarkReport {
     @ManyToOne
     private Semester semester;
 
-    @OneToMany
+    @OneToMany(mappedBy = "report")
     private List<MarkReportEntry> entries;
 }

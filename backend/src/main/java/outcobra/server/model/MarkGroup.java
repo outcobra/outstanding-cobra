@@ -16,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class MarkGroup extends Mark {
-    @OneToMany
+    @OneToMany(mappedBy = "markGroup")
     private List<Mark> marks;
 
     @OneToOne(mappedBy = "markGroup")

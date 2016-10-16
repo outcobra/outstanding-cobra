@@ -8,7 +8,6 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
@@ -24,9 +23,6 @@ public class User {
     @NotNull
     private String username;
 
-    @OneToOne
-    private User parent;
-
-    @OneToMany
+    @OneToMany(mappedBy = "user")
     private List<Institution> institutions;
 }

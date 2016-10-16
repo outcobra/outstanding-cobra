@@ -27,10 +27,10 @@ public class Semester {
     @NotNull
     private SchoolYear schoolYear;
 
-    @OneToMany
+    @OneToMany(mappedBy = "semester")
     private List<Subject> subjects;
 
-    @OneToMany
+    @OneToMany(mappedBy = "semester")
     private List<MarkReport> markReports;
 
     @OneToOne

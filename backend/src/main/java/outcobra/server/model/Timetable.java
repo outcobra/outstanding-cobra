@@ -23,6 +23,6 @@ public class Timetable {
     @OneToOne(mappedBy = "timetable")
     private Semester semester;
 
-    @OneToMany
+    @OneToMany(mappedBy = "timetable")
     private List<TimetableEntry> entries;
 }

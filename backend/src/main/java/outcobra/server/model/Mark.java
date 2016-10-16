@@ -23,6 +23,9 @@ public abstract class Mark {
     @OneToOne(mappedBy = "mark")
     private Exam exam;
 
+    @ManyToOne
+    private MarkGroup markGroup;
+
     public abstract double getValue();
 
     public abstract double getWeight();

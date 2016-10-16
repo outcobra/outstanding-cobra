@@ -11,4 +11,7 @@ class TestEndpoint {
 
     @RequestMapping("/safe")
     fun safe(): String = "Safe hello"
+
+    fun test() {
+    }
 }

@@ -29,6 +29,6 @@ public class SchoolYear {
     @ManyToOne
     private Institution institution;
 
-    @OneToMany
+    @OneToMany(mappedBy = "schoolYear")
     private List<Semester> semesters;
 }

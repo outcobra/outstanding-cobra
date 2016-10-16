@@ -22,16 +22,16 @@ public class Subject {
     @ManyToOne
     private Semester semester;
 
-    @OneToMany
+    @OneToMany(mappedBy = "subject")
     private List<TimetableEntry> timetableEntries;
 
-    @OneToMany
+    @OneToMany(mappedBy = "subject")
     private List<Task> tasks;
 
-    @OneToMany
+    @OneToMany(mappedBy = "subject")
     private List<MarkReportEntry> markReportEntries;
 
-    @OneToMany
+    @OneToMany(mappedBy = "subject")
     private List<Exam> exams;
 
     @OneToOne
