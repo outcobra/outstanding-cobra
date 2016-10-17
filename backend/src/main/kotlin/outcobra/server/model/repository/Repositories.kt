@@ -1,8 +1,9 @@
-package outcobra.server.model
+package outcobra.server.model.repository
 
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.querydsl.QueryDslPredicateExecutor
 import org.springframework.stereotype.Repository
+import outcobra.server.model.*
 
 @Repository interface UserRepository : JpaRepository<User, String>, QueryDslPredicateExecutor<User>
 @Repository interface InstitutionRepository : JpaRepository<Institution, Long>, QueryDslPredicateExecutor<Institution>
