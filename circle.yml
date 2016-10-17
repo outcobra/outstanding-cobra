@@ -6,6 +6,10 @@ dependencies:
   pre:
     - chmod +x gradlew
 
+database:
+  override:
+    - mysql -u ubuntu < "CREATE SCHEMA outstandingcobra; GRANT ALL ON outstandingcobra.* TO root@localhost IDENTIFIED BY '1234';"
+
 test:
   post:
     - mkdir -p $CIRCLE_TEST_REPORTS/junit/
