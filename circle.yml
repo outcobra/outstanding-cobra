@@ -8,7 +8,7 @@ dependencies:
 
 database:
   override:
-    - mysql -u ubuntu < "CREATE SCHEMA outstandingcobra; GRANT ALL ON outstandingcobra.* TO root@localhost IDENTIFIED BY '1234';"
+    - mysql -u ubuntu --execute "CREATE SCHEMA outstandingcobra; GRANT ALL ON outstandingcobra.* TO root@localhost IDENTIFIED BY '1234';"
 
 test:
   post:
