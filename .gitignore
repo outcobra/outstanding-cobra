@@ -3,3 +3,4 @@
 **/classes/
 **/.idea/
 **/auth0.properties
+**/*.iml
