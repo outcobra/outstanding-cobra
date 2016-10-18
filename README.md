@@ -3,6 +3,17 @@
 This installation is written for Windows and Ubuntu (14.04 and above).
 
 ## Backend
+
+Gradle is our project and dependency management tool for the backend.
+
+You do not need to install Gradle yourself since we are using the Gradle wrapper in this project.
+
+Before you can build the project, you need to go to `backend/src/main/resources` and copy `auth0.example.properties` to `auth0.properties`.  In this file, `auth0.clientSecret` needs to be set. If you are building for production, you will get this from [Joel](https://github.com/jmesserli), otherwise you will have to create your own Auth0 account and update all values according to the app you create there.
+
+To build the project, you can just run `./gradlew build` on Linux or `gradlew.bat build` on Windows. You might need to adjust the file permissions on Linux using `chmod +x gradlew`.
+
+To start the backend, run `./gradlew runBoot` or `gradlew.bat runBoot` respectively.
+
 ## Frontend
 
 Like quite every web frontend project we are using nodejs to manage our packages.
@@ -37,8 +48,10 @@ Then you can run `sudo apt-get update && sudo apt-get install yarn`
 To check the installation you can run `yarn version`.
 
 **Windows:**
-You can download the yarn install under this [link](https://yarnpkg.com/en/docs/install)
-Then follow the instructions in the installer and then run the following command to make yarn globally available in the console.
+
+Since you have npm installed through NodeJs anyway, you could just run `npm i -g yarn` or follow this guide:
+Download the yarn installer [here](https://yarnpkg.com/en/docs/install).
+Then follow the instructions in the installer and run the following command to make yarn globally available in the console.
 `set PATH=%PATH%;C:\.yarn\bin`
 Probably you have to adjust the installation location in the above command.
 
@@ -60,8 +73,7 @@ You can find the whole documentation on their [GitHub](https://github.com/angula
 To start using the Angular CLI in this project you need to run `ng init` in the **frontend** folder.
 This is only necessary when you clone this repository.
 
-The you can run `ng serve` and visit the application in the browser on `localhost:42000`.
+The you can run `ng serve` and visit the application in the browser on `localhost:4200`.
 You can also enable the production version with `ng serve -prod`.
- 
-For more detailed information on the cli visit their [GitHub](https://github.com/angular/angular-cli) page, go to the README.md in the frontend project or just ask Mario Kunz (mario99.kunz@gmail.com).
 
+For more detailed information on the CLI visit their [GitHub](https://github.com/angular/angular-cli) page, go to the README.md in the frontend project or just ask Mario Kunz (mario99.kunz@gmail.com).
