@@ -11,6 +11,12 @@ database:
     - mysql -u ubuntu --execute "CREATE SCHEMA outstandingcobra; GRANT ALL ON outstandingcobra.* TO root@localhost IDENTIFIED BY '1234';"
 
 test:
+  override:
+    - cp backend/src/main/resources/auth0.example.properties backend/src/main/resources/auth0.properties
+    - chmod +x gradlew
+    - ./gradlew build
+
+test:
   post:
     - mkdir -p $CIRCLE_TEST_REPORTS/junit/
     - find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
