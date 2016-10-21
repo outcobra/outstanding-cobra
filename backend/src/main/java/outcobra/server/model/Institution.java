@@ -22,12 +22,6 @@ public class Institution {
     @ManyToOne
     private User user;
 
-    @OneToOne
-    private Institution parent;
-
     @OneToMany(mappedBy = "institution")
-    private List<Holiday> holidays;
-
-    @OneToMany(mappedBy = "institution")
-    private List<SchoolYear> schoolYears;
+    private List<SchoolClass> schoolClasses;
 }

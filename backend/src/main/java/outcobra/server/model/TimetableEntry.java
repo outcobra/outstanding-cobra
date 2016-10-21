@@ -23,6 +23,8 @@ public class TimetableEntry {
     @NotNull
     private LocalTime time;
 
+    private String room;
+
     @ManyToOne
     private Timetable timetable;
 

@@ -25,5 +25,5 @@ public class Holiday {
     private LocalDate validFrom, validTo;
 
     @ManyToOne
-    private Institution institution;
+    private SchoolYear schoolYear;
 }
