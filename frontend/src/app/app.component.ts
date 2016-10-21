@@ -7,11 +7,10 @@ import {TranslateService} from "ng2-translate";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  title = 'Outcobra!';
 
   constructor(translate: TranslateService) {
     translate.setDefaultLang('en');
     translate.use(translate.getBrowserLang())
   }
-
-  title = 'app works!';
 }
