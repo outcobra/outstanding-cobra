@@ -25,8 +25,8 @@ open class AuthConfig : Auth0SecurityConfig() {
         val security = http!!
 
         security.authorizeRequests()
-                .antMatchers("/test/unsafe").permitAll()
-                .anyRequest().authenticated()
+                .anyRequest().permitAll()
+        // todo .anyRequest().authenticated()
     }
 }
 
