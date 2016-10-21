@@ -9,29 +9,22 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
 import java.util.List;
 
 @Data
-@Entity
+@Entity(name = "class")
 @AllArgsConstructor
 @NoArgsConstructor
-public class SchoolYear {
+public class SchoolClass {
     @Id
     private Long id;
 
     @NotNull
-    private String name;
-
-    @NotNull
-    private LocalDate validFrom, validTo;
+    private String normalizedName;
 
     @ManyToOne
-    private SchoolClass schoolClass;
+    private Institution institution;
 
-    @OneToMany(mappedBy = "schoolYear")
-    private List<Holiday> holidays;
-
-    @OneToMany(mappedBy = "schoolYear")
-    private List<Semester> semesters;
+    @OneToMany(mappedBy = "schoolClass")
+    private List<SchoolYear> schoolYears;
 }

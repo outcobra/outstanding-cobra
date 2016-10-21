@@ -7,21 +7,23 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.transaction.annotation.Transactional
+import outcobra.server.model.QUser
 import outcobra.server.model.User
 
 @RunWith(SpringRunner::class)
 @SpringBootTest
-open class UserRepositoryTest  {
+open class UserRepositoryTest {
 
     @Autowired
-    val userRepository : UserRepository? = null
+    val userRepository: UserRepository? = null
+
+    val myUser = User("some_auth0_id", "jmesserli", null)
 
     @Test
     @Transactional
     open fun testUserRepository() {
-        if (userRepository == null) throw Exception("")
+        userRepository!!
 
-        val myUser = User("some_auth0_id", "jmesserli", null)
         userRepository.save(myUser)
         userRepository.flush()
         assertThat(userRepository.findAll().size).isEqualTo(1)
@@ -33,4 +35,19 @@ open class UserRepositoryTest  {
         assertThat(userRepository.findAll().size).isEqualTo(0)
     }
 
+    @Test
+    @Transactional
+    open fun testQuerydslExecutor() {
+        userRepository!!
+
+        userRepository.save(myUser)
+
+        val predicate = QUser.user.auth0Id.eq(myUser.auth0Id)
+        val savedUser = userRepository.findOne(predicate)
+
+        assertThat(savedUser).isEqualTo(myUser)
+
+        userRepository.delete(savedUser.auth0Id)
+        assertThat(userRepository.findAll().size).isEqualTo(0)
+    }
 }
