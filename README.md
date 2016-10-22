@@ -14,7 +14,7 @@ If you are using IntelliJ, you will also have to set up annotation processing. F
 
 To build the project, you can just run `./gradlew build` on Linux or `gradlew.bat build` on Windows. You might need to adjust the file permissions on Linux using `chmod +x gradlew`.
 
-To start the backend, run `./gradlew runBoot` or `gradlew.bat runBoot` respectively.
+To start the backend, run `./gradlew bootRun` or `gradlew.bat bootRun` respectively.
 
 ## Frontend
 
@@ -79,3 +79,10 @@ The you can run `ng serve` and visit the application in the browser on `localhos
 You can also enable the production version with `ng serve -prod`.
 
 For more detailed information on the CLI visit their [GitHub](https://github.com/angular/angular-cli) page, go to the README.md in the frontend project or just ask Mario Kunz (mario99.kunz@gmail.com).
+
+#GIT
+
+##Pushing and Pull requests
+
+Minor changes (change on one file, less than 5 lines and without bigger influence) can be pushed to the master branch directly.
+For every other change please create a pull request.
