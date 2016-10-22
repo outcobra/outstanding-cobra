@@ -13,7 +13,7 @@ import lombok.*;
 @NoArgsConstructor
 public class Teacher {
     @Id
-    private long id;
+    private Long id;
 
     @NotNull
     private String name;
