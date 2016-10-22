@@ -80,7 +80,7 @@ You can also enable the production version with `ng serve -prod`.
 
 For more detailed information on the CLI visit their [GitHub](https://github.com/angular/angular-cli) page, go to the README.md in the frontend project or just ask Mario Kunz (mario99.kunz@gmail.com).
 
-#GIT
+#Contributing Guidelines
 
 ##Commit Messages
 
