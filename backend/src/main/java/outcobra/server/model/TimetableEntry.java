@@ -30,7 +30,7 @@ public class TimetableEntry {
      * there are multiples TimeTableEntries
      */
     @NotNull
-    private int repeateEveryNWeek;
+    private int repeatEveryNWeek;
 
     private String room;
 
