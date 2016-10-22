@@ -84,5 +84,5 @@ For more detailed information on the CLI visit their [GitHub](https://github.com
 
 ##Pushing and Pull requests
 
-Minor changes (change on one file, less than 5 lines and without bigger influence) can be pushed to the master branch directly
-For every other change please create a pull request
+Minor changes (change on one file, less than 5 lines and without bigger influence) can be pushed to the master branch directly.
+For every other change please create a pull request.
