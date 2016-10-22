@@ -17,11 +17,19 @@ apply plugin: 'kotlin'
 apply plugin: 'eclipse-wtp'
 apply plugin: 'spring-boot'
 apply plugin: 'war'
+apply plugin: 'idea'
 
 war {
     baseName = 'outstanding-cobra-server'
     version = '0.0.1-SNAPSHOT'
 }
+
+idea {
+    module {
+        sourceDirs += file('src/main/generated')
+    }
+}
+
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 

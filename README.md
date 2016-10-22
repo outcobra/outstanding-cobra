@@ -10,6 +10,8 @@ You do not need to install Gradle yourself since we are using the Gradle wrapper
 
 Before you can build the project, you need to go to `backend/src/main/resources` and copy `auth0.example.properties` to `auth0.properties`.  In this file, `auth0.clientSecret` needs to be set. If you are building for production, you will get this from [Joel](https://github.com/jmesserli), otherwise you will have to create your own Auth0 account and update all values according to the app you create there.
 
+If you are using IntelliJ, you will also have to set up annotation processing. For this, open the settings (`CTRL + ALT + S`) and navigate to `Build, Execution, Deployment > Compiler > Annotation Processors`. You should see the module `backend_main` there. Click it and select `Module content root` for `Store generated sources relative to:`. Also make sure that the `Production sources directory` is set to `generated`.
+
 To build the project, you can just run `./gradlew build` on Linux or `gradlew.bat build` on Windows. You might need to adjust the file permissions on Linux using `chmod +x gradlew`.
 
 To start the backend, run `./gradlew runBoot` or `gradlew.bat runBoot` respectively.
