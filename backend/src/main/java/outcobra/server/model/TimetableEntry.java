@@ -23,6 +23,15 @@ public class TimetableEntry {
     @NotNull
     private LocalTime time;
 
+
+    /**
+     * value needs to be >=1
+     * if a subject takes place more than once a week
+     * there are multiples TimeTableEntries
+     */
+    @NotNull
+    private int repeteEveryNWeek;
+
     private String room;
 
     @ManyToOne
