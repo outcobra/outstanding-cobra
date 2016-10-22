@@ -18,8 +18,6 @@ public class Subject {
     @NotNull
     private String name;
 
-    private String teacher;
-
     @ManyToOne
     private Semester semester;
 
@@ -37,4 +35,7 @@ public class Subject {
 
     @OneToOne
     private MarkGroup markGroup;
+
+    @ManyToOne
+    private Teacher teacher;
 }

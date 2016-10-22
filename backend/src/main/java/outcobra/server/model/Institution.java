@@ -23,4 +23,7 @@ public class Institution {
 
     @OneToMany(mappedBy = "institution")
     private List<SchoolClass> schoolClasses;
+
+    @OneToMany(mappedBy = "institution")
+    private List<Teacher> teachers;
 }

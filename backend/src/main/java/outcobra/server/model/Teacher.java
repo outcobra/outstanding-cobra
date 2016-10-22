@@ -1,7 +1,8 @@
 package outcobra.server.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import java.util.List;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import lombok.*;
@@ -18,4 +19,10 @@ public class Teacher {
     private String name;
 
     private String email;
+
+    @ManyToOne
+    private Institution institution;
+
+    @OneToMany(mappedBy = "teacher")
+    private List<Subject> subjects;
 }
