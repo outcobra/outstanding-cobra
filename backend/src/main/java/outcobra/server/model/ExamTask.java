@@ -21,5 +21,5 @@ public class ExamTask {
     private Exam exam;
 
     @NotNull
-    private boolean isFinished;
+    private boolean finished;
 }
