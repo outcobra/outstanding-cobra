@@ -1,15 +1,12 @@
-machine:
-  timezone:
-    Europe/Zurich
+#machine:
+#  timezone:
+#    Europe/Zurich
 
 dependencies:
   pre:
     - chmod +x gradlew
   override:
-    - ./gradlew assemble testClasses
-  cache_directories:
-    - ~/.gradle
-    - .gradle
+    - echo "I'm not doing anything here since spinning up gradle takes longer than just downloading the dependencies every time."
 
 database:
   override:
