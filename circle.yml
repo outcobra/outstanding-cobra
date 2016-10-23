@@ -6,7 +6,7 @@ dependencies:
   pre:
     - chmod +x gradlew
   override:
-    - ./gradlew classes testClasses
+    - ./gradlew assemble testClasses
   cache_directories:
     - ~/.gradle
     - .gradle
