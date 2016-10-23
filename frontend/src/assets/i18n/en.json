@@ -1,5 +1,9 @@
 {
-  "demo": {
-    "hello": "Hello {{target}}!"
-  }
+    "demo": {
+        "hello": "Hello {{target}}!",
+        "error": {
+            "content": "error fuck",
+            "title": "fucking error"
+        }
+    }
 }

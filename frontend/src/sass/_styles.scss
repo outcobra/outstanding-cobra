@@ -1,3 +1,5 @@
+@import '../../node_modules/materialize-css/sass/components/color';
+
 body {
     background-color: #f5f5f5 !important;
 }
@@ -14,3 +16,21 @@ body {
     position: absolute;
     margin: 0 auto;
 }
+
+.error {
+    @extend .red, .darken-1;
+}
+
+.info {
+    @extend .blue;
+}
+
+.success {
+    @extend .green;
+}
+
+.alert {
+    @extend .yellow, .darken-2;
+}
+
+
