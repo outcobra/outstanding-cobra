@@ -21,33 +21,33 @@ export class NotificationWrapperService extends NotificationsService {
         super();
     }
 
-    success(title: string, content: string, override?: any): Notification {
-        return this.create(title, content, 'success', this.ic.success, override);
+    success(title: string, content: string, optionsOverride?: any): Notification {
+        return this.create(title, content, 'success', this.ic.success, optionsOverride);
     }
 
-    error(title: string, content: string, override?: any): Notification {
-        return this.create(title, content, 'error', this.ic.error, override);
+    error(title: string, content: string, optionsOverride?: any): Notification {
+        return this.create(title, content, 'error', this.ic.error, optionsOverride);
     }
 
-    alert(title: string, content: string, override?: any): Notification {
-        return this.create(title, content, 'alert', this.ic.alert, override);
+    alert(title: string, content: string, optionsOverride?: any): Notification {
+        return this.create(title, content, 'alert', this.ic.alert, optionsOverride);
     }
 
-    info(title: string, content: string, override?: any): Notification {
-        return this.create(title, content, 'info', this.ic.info, override);
+    info(title: string, content: string, optionsOverride?: any): Notification {
+        return this.create(title, content, 'info', this.ic.info, optionsOverride);
     }
 
-    create(title: string, content: string, type: string, icon: string, override?: any): Notification {
+    create(title: string, content: string, type: string, icon: string, optionsOverride?: any): Notification {
         return super.set({
                 title: this._translateService.instant(title),
                 content: this._translateService.instant(content),
                 type: type,
                 icon: icon,
-                override: this.mergeOptions(override)
+                override: this.mergeOptions(optionsOverride)
             }, true);
     }
 
-    mergeOptions(override: any) {
-        return _.extend(this._defaultOptions, override);
+    mergeOptions(optionsOverride: any) {
+        return _.extend(this._defaultOptions, optionsOverride);
     }
 }

@@ -78,7 +78,6 @@ export class HttpInterceptor extends Http {
             /:([a-zA-Z]+[\w-]*)/g,
             ($0, token) => {
                 if (_.has(requestOptions.params, token)) return this.extractValue(requestOptions.params, token);
-                if (_.has(requestOptions.data, token)) return this.extractValue(requestOptions.data, token);
                 return "";
             }
         );
@@ -95,26 +94,10 @@ export class HttpInterceptor extends Http {
         return value;
     }
 
-    /*request(url: string | Request, options?: RequestOptionsArgs): Observable<Response> {
-     return super.request(url, options)
-     .catch((err: any, caught: Observable<Response>) => {
-     this._notificationsService.error('Error!', 'Requested resource could not be found.');
-     return Observable.empty();
-     });
-     }
-
-     get(url: string, options?: RequestOptionsArgs): Observable<Response> {
-     return super.get(url, options)
-     .catch((err: any, caught: Observable<Response>) => {
-     this._notificationsService.error('Error!', 'Requested resource could not be found.');
-     return Observable.empty();
-     });
-     }*/
-
 
     private addContentType(request: any) {
-        if (request.method !== RequestMethod.Get) {
-            request.options['Content-Type'] = "application/json; charset=UTF-8";
+        if (request.method !== RequestMethod.Get || request.method !== RequestMethod.Delete) {
+            request.options['Content-Type'] = "application/json ; charset=UTF-8";
         }
         return request;
     }
