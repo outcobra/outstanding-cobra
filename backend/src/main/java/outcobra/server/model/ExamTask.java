@@ -19,4 +19,7 @@ public class ExamTask {
     @NotNull
     @ManyToOne
     private Exam exam;
+
+    @NotNull
+    private boolean finished;
 }
