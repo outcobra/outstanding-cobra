@@ -1,6 +1,6 @@
 package outcobra.server.model;
 
-import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -11,20 +11,18 @@ import lombok.*;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Task {
+public class Teacher {
     @Id
     private Long id;
 
     @NotNull
     private String name;
 
-    private String description;
-
-    private LocalDate todoDate, dueDate;
-
-    // Effort in minutes
-    private Integer effort, progress = 0;
+    private String email;
 
     @ManyToOne
-    private Subject subject;
+    private Institution institution;
+
+    @OneToMany(mappedBy = "teacher")
+    private List<Subject> subjects;
 }
