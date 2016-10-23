@@ -5,6 +5,11 @@ machine:
 dependencies:
   pre:
     - chmod +x gradlew
+  override:
+    - ./gradlew compileTestJava
+  cache_directories:
+    - ~/.gradle
+    - .gradle
 
 database:
   override:
@@ -13,7 +18,6 @@ database:
 test:
   override:
     - cp backend/src/main/resources/auth0.example.properties backend/src/main/resources/auth0.properties
-    - chmod +x gradlew
     - ./gradlew build
   post:
     - mkdir -p $CIRCLE_TEST_REPORTS/junit/
