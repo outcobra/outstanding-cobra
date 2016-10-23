@@ -25,4 +25,5 @@ import {NotificationWrapperService} from "./notifications/notification-wrapper.s
         }
     ],
 })
-export class SharedModule{}
+export class SharedModule {
+}

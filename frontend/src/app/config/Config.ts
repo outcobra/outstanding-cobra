@@ -16,7 +16,6 @@ export class Config {
         return new Promise((resolve) => {
             this._http.get(`assets/config/:envName.json`, {envName: this._env['envName']})
                 .subscribe(config => {
-                    console.log(config);
                     this._config = config;
                     resolve();
                 });

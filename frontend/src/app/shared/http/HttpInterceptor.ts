@@ -69,7 +69,33 @@ export class HttpInterceptor extends Http {
         })
     }
 
-    ///////////////////////////////////////////////////////////////////////////
+
+    put(url: string, data: any, params?: any): Observable<Response> {
+        return this.request({
+            method: RequestMethod.Put,
+            url: url,
+            data: data,
+            params: params
+        });
+    }
+
+    delete(url: string, params?: any): Observable<Response> {
+        return this.request({
+            method: RequestMethod.Delete,
+            url: url,
+            params: params
+        });
+    }
+
+    patch(url: string, data: any, params?: any): Observable<Response> {
+        return this.request({
+            method: RequestMethod.Patch,
+            url: url,
+            params: params
+        });
+    }
+
+///////////////////////////////////////////////////////////////////////////
     ///////// Helper Functions ////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
 
@@ -97,7 +123,7 @@ export class HttpInterceptor extends Http {
 
     private addContentType(request: any) {
         if (request.method !== RequestMethod.Get || request.method !== RequestMethod.Delete) {
-            request.options['Content-Type'] = "application/json ; charset=UTF-8";
+            request.headers['Content-Type'] = "application/json ; charset=UTF-8";
         }
         return request;
     }

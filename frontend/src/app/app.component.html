@@ -1,9 +1,16 @@
-<h1>
-  {{title}}
-</h1>
+<md-sidenav-layout>
+    <md-sidenav #sidenav mode="push">
+        <button md-button>ABC</button>
+        <button md-button>DEF</button>
+    </md-sidenav>
 
-<p>{{ 'demo.hello' | translate:{target: 'User'} }}</p>
-<md-icon (click)="click()">person</md-icon>
+    <md-toolbar color="primary">
+        <md-icon class="toolbar-icon" (click)="sidenav.open()">menu</md-icon>
+        <span>{{title}}</span>
+        {{date}}
+    </md-toolbar>
 
+    <material-datepicker (onSelect)="date = $event"></material-datepicker>
 
-<simple-notifications></simple-notifications>
+    <simple-notifications></simple-notifications>
+</md-sidenav-layout>

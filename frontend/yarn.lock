@@ -263,6 +263,10 @@ angular-cli@1.0.0-beta.17:
     webpack-merge "^0.14.0"
     zone.js "^0.6.23"
 
+angular2-material-datepicker:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/angular2-material-datepicker/-/angular2-material-datepicker-0.4.0.tgz#b0132a84e720500189318390bcff9862ea80bc5b"
+
 angular2-materialize@^5.2.1:
   version "5.2.1"
   resolved "https://registry.yarnpkg.com/angular2-materialize/-/angular2-materialize-5.2.1.tgz#0787719b7c7da8567b677e524d4136b707d1b5af"
