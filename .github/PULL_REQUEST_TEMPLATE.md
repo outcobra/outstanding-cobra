@@ -1,4 +1,4 @@
-This fixes issue # .
+This closes issue # .
 
 
 
