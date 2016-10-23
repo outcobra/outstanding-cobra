@@ -7,6 +7,8 @@ import {TranslateModule, TranslateLoader, TranslateStaticLoader} from 'ng2-trans
 
 import {AppComponent} from './app.component';
 import {Config} from "./config/Config";
+import {SharedModule} from "./shared/shared.module";
+import {SimpleNotificationsModule} from "angular2-notifications";
 
 @NgModule({
     declarations: [
@@ -16,12 +18,14 @@ import {Config} from "./config/Config";
         BrowserModule,
         FormsModule,
         HttpModule,
+        SharedModule,
         MaterialModule.forRoot(),
         TranslateModule.forRoot({
             provide: TranslateLoader,
             useFactory: (http: Http) => new TranslateStaticLoader(http, '/assets/i18n', '.json'),
             deps: [Http]
-        })
+        }),
+        SimpleNotificationsModule
     ],
     providers: [
         Config,
