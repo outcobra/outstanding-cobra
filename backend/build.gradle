@@ -2,6 +2,11 @@ buildscript {
     ext {
         kotlinVersion = '1.0.3'
         springBootVersion = '1.4.1.RELEASE'
+        outstandingCobraVersion = '0.0.1-SNAPSHOT'
+
+        if (System.getenv("CIRCLE_BUILD_NUM") != null) {
+            outstandingCobraVersion = outstandingCobraVersion + '-' + System.getenv("CIRCLE_BUILD_NUM")
+        }
     }
     repositories {
         mavenCentral()
@@ -21,7 +26,7 @@ apply plugin: 'idea'
 
 war {
     baseName = 'outstanding-cobra-server'
-    version = '0.0.1-SNAPSHOT'
+    version = outstandingCobraVersion
 }
 
 idea {
