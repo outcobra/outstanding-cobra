@@ -9,8 +9,11 @@
         <span>{{title}}</span>
         {{date}}
     </md-toolbar>
+    <div class="container">
+        <md-input [type]="'text'" placeholder="Input"></md-input>
 
-    <material-datepicker (onSelect)="date = $event"></material-datepicker>
+        <datepicker></datepicker>
+    </div>
 
     <simple-notifications></simple-notifications>
 </md-sidenav-layout>

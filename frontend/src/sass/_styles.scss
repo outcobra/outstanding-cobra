@@ -1,4 +1,7 @@
 @import '../../node_modules/materialize-css/sass/components/color';
+html {
+    color: rgba(0, 0, 0, 0.87);
+}
 
 body {
     background-color: #f5f5f5 !important;

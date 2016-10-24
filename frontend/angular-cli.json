@@ -16,7 +16,6 @@
       "mobile": false,
       "styles": [
           "outcobra.scss",
-          "../node_modules/materialize-css/bin/materialize.css",
           "../node_modules/material-design-icons/iconfont/material-icons.css"
       ],
       "scripts": [

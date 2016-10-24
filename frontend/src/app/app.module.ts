@@ -9,7 +9,7 @@ import {AppComponent} from './app.component';
 import {Config} from "./config/Config";
 import {SharedModule} from "./shared/shared.module";
 import {SimpleNotificationsModule} from "angular2-notifications";
-import {DatepickerModule} from "angular2-material-datepicker";
+//import {DatepickerModule} from "angular2-material-datepicker";
 
 @NgModule({
     declarations: [
@@ -20,7 +20,7 @@ import {DatepickerModule} from "angular2-material-datepicker";
         FormsModule,
         HttpModule,
         SharedModule,
-        DatepickerModule,
+        //DatepickerModule,
         MaterialModule.forRoot(),
         TranslateModule.forRoot({
             provide: TranslateLoader,

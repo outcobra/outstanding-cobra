@@ -1,0 +1,19 @@
+<div class="datepicker-wrapper">
+    <md-input [type]="'text'">
+        <button md-icon-button md-suffix (click)="open()">
+            <md-icon>event</md-icon>
+        </button>
+    </md-input>
+    <div class="datepicker z-depth-1-half" [class.opened]="opened" [ngSwitch]="pickerMode">
+        <div class="datepicker-header">
+            <span class="year">{{today | date:'y'}}</span><br>
+            <span class="date">{{today | date:'E d MMM'}}</span>
+        </div>
+        <yearpicker *ngSwitchCase="'year'"></yearpicker>
+        <daypicker *ngSwitchDefault></daypicker>
+        <div class="datepicker-footer">
+            <button md-button>Cancel</button>
+            <button md-button>OK</button>
+        </div>
+    </div>
+</div>

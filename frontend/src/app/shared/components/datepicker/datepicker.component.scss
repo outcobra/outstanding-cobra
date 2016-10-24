@@ -1,0 +1,38 @@
+@import '../../../../sass/color';
+
+.datepicker-wrapper {
+    display: inline-block;
+    position: relative;
+
+    .datepicker {
+        display: none;
+        z-index: 1000;
+        position: absolute;
+    }
+    .datepicker.opened {
+        display: block;
+    }
+
+    .datepicker-header {
+        @extend .color-primary;
+        @extend .text-primary-dark;
+        padding: 10px 15px;
+
+        .year {
+            font-size: 0.8em;
+        }
+        .date {
+            font-size: 1.4em;
+        }
+    }
+
+    .daypicker-header {
+        .month {
+            line-height: 40px;
+            display: inline-block;
+            width: calc(100% - 80px);
+            text-align: center;
+        }
+    }
+
+}
