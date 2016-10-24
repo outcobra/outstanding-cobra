@@ -82,6 +82,13 @@ For more detailed information on the CLI visit their [GitHub](https://github.com
 
 #Contributing Guidelines
 
+##Angular 2
+###Style Guide
+
+We develop with the official Angular 2 Style Guidelines in mind. We care about Clean Code.
+You can find the Style Guidelines under [this](https://angular.io/docs/ts/latest/guide/style-guide.html) link.
+
+
 ##Commit Messages
 
 Please be nice to your colleagues and write a short explanation what exactly changed in this commit.
