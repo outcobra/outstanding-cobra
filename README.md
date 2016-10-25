@@ -19,6 +19,12 @@ To build the project, you can just run `./gradlew build` on Linux or `gradlew.ba
 
 To start the backend, run `./gradlew bootRun` or `gradlew.bat bootRun` respectively.
 
+### Accessing API-Documentation
+
+We are automatically generating Swagger 2 api specifications.
+
+You can reach the api specification at `/v2/api-docs` and at `/swagger-ui.html` you'll find a nice UI to explore the api with and test requests.
+
 ## Frontend
 
 Like quite every web frontend project we are using nodejs to manage our packages.
@@ -96,32 +102,32 @@ You can find the Style Guidelines under [this](https://angular.io/docs/ts/latest
 
 Please be nice to your colleagues and write a short explanation what exactly changed in this commit.
 Samples for invalid commit messages are:
- - Fixed something|bug
- - added feature
- - asdfghjklö
- - qwertz
- - random shit
- - minor changes
- - offensive messages
- - correcting typo
- 
+- Fixed something|bug
+- added feature
+- asdfghjklö
+- qwertz
+- random shit
+- minor changes
+- offensive messages
+- correcting typo
+
 ##Branch naming
 
 We want to have some branch categories and those categories have their own prefix.
 
- - **feature**
+- **feature**
    adding a new feature e.g. a user story
- - **bugfix**
+- **bugfix**
    fixing a bug, reference issue if it exists
- - **doc**
+- **doc**
    changing documentation files, mostly *.md files
- - **upgrade**
+- **upgrade**
    3rd party library update like Angular or angular-cli
- - **config**
+- **config**
    configuration changes e.g. gradle etc.
- - **amend**
+- **amend**
    changing non-feature related things in code (e.g. frontend changing scaffolding)
-   
+
 Those are the most common branch types.
 All of them follow the same syntax in naming. 
 Use the name from above as a prefix, then a slash (/) and after that a short identifier.
