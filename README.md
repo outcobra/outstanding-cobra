@@ -1,3 +1,6 @@
+#Outstanding Cobra
+[![codebeat badge](https://codebeat.co/badges/d8dd9a81-a229-46e3-b5b2-d016ca70cfa4)](https://codebeat.co/projects/github-com-outcobra-outstanding-cobra)
+
 # Installation
 
 This installation is written for Windows and Ubuntu (14.04 and above).
