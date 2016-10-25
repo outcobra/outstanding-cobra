@@ -15,7 +15,7 @@
 
     .datepicker-header {
         @extend .color-primary;
-        @extend .text-primary-dark;
+        @extend .text-primary-light;
         padding: 10px 15px;
 
         .year {
@@ -32,6 +32,30 @@
             display: inline-block;
             width: calc(100% - 80px);
             text-align: center;
+        }
+    }
+
+    .daypicker-body {
+        thead {
+            border: none;
+        }
+        thead td {
+            @extend .text-secondary-dark;
+        }
+        td {
+            padding: 0;
+        }
+        td div {
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            text-align: center;
+            line-height: 40px;
+        }
+
+        tbody td:hover {
+            border-radius: 50%;
+            @extend .color-primary;
         }
     }
 

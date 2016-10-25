@@ -21,24 +21,24 @@ $warn:    md-palette($md-red);
     background-color: md-color($warn) !important;
 }
 
-.text-primary-light {
+.text-primary-dark {
     color: rgba(0, 0, 0, 0.87)
 }
 
-.text-secondary-light {
+.text-secondary-dark {
     color: rgba(0, 0, 0, 0.54);
 }
-.text-disabled-light {
+.text-disabled-dark {
     color: rgba(0, 0, 0, 0.38);
 }
 
-.text-primary-dark {
+.text-primary-light {
     color: rgb(255, 255, 255);
 }
 
-.text-secondary-dark {
+.text-secondary-light {
     color: rgba(255, 255, 255, 0.70);
 }
-.text-disabled-dark {
+.text-disabled-light {
     color: rgba(255, 255, 255, 0.5);
 }

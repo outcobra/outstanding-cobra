@@ -1,14 +1,19 @@
 <div class="daypicker-header">
-    <button md-icon-button class="left"><md-icon>navigate_before</md-icon></button>
-    <span class="month left">October</span>
-    <button md-icon-button class="left"><md-icon>navigate_next</md-icon></button>
+    <button md-icon-button class="left" (click)="changeMonth(-1)"><md-icon>navigate_before</md-icon></button>
+    <span class="month left">{{ monthLabel }}</span>
+    <button md-icon-button class="left" (click)="changeMonth(1)"><md-icon>navigate_next</md-icon></button>
 </div>
 <div class="daypicker-body">
     <table>
         <thead>
             <tr>
-                <td *ngFor="let day of dayLabels">{{day}}</td>
+                <td *ngFor="let day of dayLabels"><div>{{day | slice:0:1}}</div></td>
             </tr>
         </thead>
+        <tbody>
+            <tr *ngFor="let row of rows">
+                <td *ngFor="let day of row"><div>{{day}}</div></td>
+            </tr>
+        </tbody>
     </table>
 </div>
