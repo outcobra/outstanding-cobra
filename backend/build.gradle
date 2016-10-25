@@ -51,6 +51,9 @@ dependencies {
     compile 'com.querydsl:querydsl-apt:4.1.4:jpa'
     compile('com.auth0:auth0-spring-security-api:0.3.0')
     compile('com.auth0:auth0:0.3.0')
+    compile('io.springfox:springfox-swagger2:2.6.0')
+    compile('io.springfox:springfox-swagger-ui:2.6.0')
+    compile('io.springfox:springfox-staticdocs:2.6.0')
     testCompile('com.google.truth:truth:0.30')
 
     // Spring Initializr
