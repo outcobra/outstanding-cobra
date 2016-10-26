@@ -11,6 +11,7 @@ import { DatepickerComponent } from './components/datepicker/datepicker.componen
 import {MaterialModule} from "@angular/material";
 import {DaypickerComponent} from "./components/datepicker/daypicker.component";
 import {YearpickerComponent} from "./components/datepicker/yearpicker.component";
+import {DateUtil} from "./services/DateUtil";
 
 @NgModule({
     declarations: [
@@ -29,6 +30,7 @@ import {YearpickerComponent} from "./components/datepicker/yearpicker.component"
         SimpleNotificationsModule
     ],
     providers: [
+        DateUtil,
         {
             provide: HttpInterceptor,
             useFactory: (backend: XHRBackend, defaultOptions: RequestOptions, notificationsService: NotificationsService) => new HttpInterceptor(backend, defaultOptions, notificationsService),

@@ -7,12 +7,11 @@
     <md-toolbar color="primary">
         <md-icon class="toolbar-icon" (click)="sidenav.open()">menu</md-icon>
         <span>{{title}}</span>
-        {{date}}
     </md-toolbar>
     <div class="container">
         <md-input [type]="'text'" placeholder="Input"></md-input>
 
-        <datepicker></datepicker>
+        <datepicker [initDate]="date"></datepicker>
     </div>
 
     <simple-notifications></simple-notifications>

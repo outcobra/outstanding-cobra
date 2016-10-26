@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {Input} from "@angular/core/src/metadata/directives";
 import * as moment from 'moment';
 
@@ -11,7 +11,6 @@ import * as moment from 'moment';
 export class DatepickerComponent implements OnInit {
     @Input() public opened: boolean = true;
     @Input() public currentDate: Date;
-    @Input() public today: Date = new Date();
     @Input() public initDate: Date;
     @Input() public minDate: Date;
     @Input() public maxDate: Date;
@@ -22,11 +21,19 @@ export class DatepickerComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.currentDate = this.today;
+        this.currentDate = (this.initDate instanceof Date) ? this.initDate :  new Date();
     }
 
     open() {
         this.opened = !this.opened;
+    }
+
+    selectDate(date: Date) {
+        this.currentDate = date;
+    }
+
+    selectYear(date: Date) {
+
     }
 
 }

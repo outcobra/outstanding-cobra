@@ -1,13 +1,13 @@
 <div class="datepicker-wrapper">
     <md-input [type]="'text'">
-        <button md-icon-button md-suffix (click)="open()">
+        <button md-icon-button md-suffix (click)="open()"> <!-- todo stop click propagation -->
             <md-icon>event</md-icon>
         </button>
     </md-input>
     <div class="datepicker z-depth-1-half" [class.opened]="opened" [ngSwitch]="pickerMode">
         <div class="datepicker-header">
-            <span class="year">{{today | date:'y'}}</span><br>
-            <span class="date">{{today | date:'E d MMM'}}</span>
+            <span class="year">{{currentDate | date:'y'}}</span><br>
+            <span class="date">{{currentDate | date:'E d MMM'}}</span>
         </div>
         <yearpicker *ngSwitchCase="'year'"></yearpicker>
         <daypicker *ngSwitchDefault></daypicker>

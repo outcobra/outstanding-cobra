@@ -1,12 +1,31 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation, style, keyframes, animate, transition, trigger} from '@angular/core';
 import * as moment from 'moment';
 import {DatepickerComponent} from "./datepicker.component";
+import {DateUtil} from "../../services/DateUtil";
 
 @Component({
     selector: 'daypicker',
     templateUrl: './daypicker.component.html',
     styleUrls: [],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    animations: [
+        trigger('daypickerAnimation', [
+            transition('* => left', [
+                animate(180, keyframes([
+                    style({ transform: 'translateX(105%)', offset: 0.5 }),
+                    style({ transform: 'translateX(-130%)', offset: 0.51 }),
+                    style({ transform: 'translateX(0)', offset: 1 })
+                ]))
+            ]),
+            transition('* => right', [
+                animate(180, keyframes([
+                    style({ transform: 'translateX(-105%)', offset: 0.5 }),
+                    style({ transform: 'translateX(130%)', offset: 0.51 }),
+                    style({ transform: 'translateX(0)', offset: 1 })
+                ]))
+            ])
+        ])
+    ]
 })
 export class DaypickerComponent implements OnInit {
     private dayLabels: string[] = [];
@@ -14,8 +33,9 @@ export class DaypickerComponent implements OnInit {
     private rows: any[] = [];
     private year: number;
     private month: number;
+    private animate: string;
 
-    constructor(private datePicker: DatepickerComponent) {
+    constructor(private datePicker: DatepickerComponent, private dateUtil: DateUtil) {
     }
 
     ngOnInit() {
@@ -30,7 +50,14 @@ export class DaypickerComponent implements OnInit {
         this.dayLabels.splice(0, 1);
         this.year = this.datePicker.currentDate.getFullYear();
         this.month = this.datePicker.currentDate.getMonth();
+        this.datePicker.minDate = new Date('2016-10-10');
         this.update();
+    }
+
+    selectDay(date: Date) {
+        if (!this.isDisabled(date) && !this.isActive(date)) {
+            this.datePicker.selectDate(date);
+        }
     }
 
     changeMonth(direction: number) {
@@ -38,6 +65,7 @@ export class DaypickerComponent implements OnInit {
         this.year = date.year();
         this.month = date.month();
         this.update();
+        this.animateDayPicker(direction > 0 ? 'right' : 'left');
     }
 
     update() {
@@ -48,13 +76,13 @@ export class DaypickerComponent implements OnInit {
         let firstDayOfMonth = new Date(year, month, 1);
         this.monthLabel = moment(firstDayOfMonth).format('MMMM YYYY');
 
-        let daysInMonth = new Date(year, month+1, 0).getDate();
+        let daysInMonth = new Date(year, month + 1, 0).getDate();
         let dayIndex = moment().isoWeekday(firstDayOfMonth.getDay()).isoWeekday() - 1;
 
         let days = [];
 
         for (let i = 0; i < daysInMonth; i++) {
-            days[i + dayIndex] = new Date(year, month, i + 1).getDate();
+            days[i + dayIndex] = new Date(year, month, i + 1);
         }
         this.rows = this.split(days, 7);
     }
@@ -65,6 +93,26 @@ export class DaypickerComponent implements OnInit {
             out.push(array.splice(0, length));
         }
         return out;
+    }
+
+    isDisabled(date: Date) {
+        return this.datePicker.minDate > date || this.datePicker.maxDate < date;
+    }
+
+    isActive(date: Date) {
+        return this.dateUtil.isSameDay(this.datePicker.currentDate, date);
+    }
+
+    setDateSpanClasses(date: Date) {
+        return {
+            active: this.isActive(date),
+            disabled: this.isDisabled(date)
+        };
+    }
+
+    animateDayPicker(direction: string) {
+        this.animate = direction;
+        setTimeout(() => this.animate = 'reset', 200);
     }
 
 }

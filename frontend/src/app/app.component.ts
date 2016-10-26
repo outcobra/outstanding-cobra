@@ -9,7 +9,7 @@ import {NotificationsService} from "angular2-notifications";
 })
 export class AppComponent {
     title = 'Outcobra!';
-    date = null;
+    date = new Date('2016-10-10');
 
     constructor(translate: TranslateService, private _n: NotificationsService) {
         translate.setDefaultLang('en');
