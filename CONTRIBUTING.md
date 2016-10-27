@@ -65,7 +65,7 @@ If you find a bug please take the time to report it.
 Your first step should be to check the existing issues for information about your problem.
 To make sure we can fix the bug as soon as possible we would like to add some rules.
  
-The issue must contain the fallowing data:
+The issue must contain the following data:
 1. Browser and version
 2. Step by step description (about how we can reproduce the bug)
 3. Short comment
