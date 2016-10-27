@@ -50,7 +50,7 @@ Minor changes (change on one file, less than 5 lines and without bigger influenc
 For every other change please create a pull request.
 
 ###Branches 
-According to [Git-Flow](https://danielkummer.github.io/git-flow-cheatsheet/) we wont to have an organized branching.
+According to [Git-Flow](https://danielkummer.github.io/git-flow-cheatsheet/) we want to have an organized branching.
 
 * Master: Used for releases only
 * Development: Use this to add all your fancy stable features to our system
