@@ -50,7 +50,6 @@ export class DaypickerComponent implements OnInit {
         this.dayLabels.splice(0, 1);
         this.year = this.datePicker.currentDate.getFullYear();
         this.month = this.datePicker.currentDate.getMonth();
-        this.datePicker.minDate = new Date('2016-10-10');
         this.update();
     }
 
@@ -96,7 +95,7 @@ export class DaypickerComponent implements OnInit {
     }
 
     isDisabled(date: Date) {
-        return this.datePicker.minDate > date || this.datePicker.maxDate < date;
+        return !this.dateUtil.isBetweenDay(date, this.datePicker.minDate, this.datePicker.maxDate);
     }
 
     isActive(date: Date) {

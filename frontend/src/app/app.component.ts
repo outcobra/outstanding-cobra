@@ -10,6 +10,8 @@ import {NotificationsService} from "angular2-notifications";
 export class AppComponent {
     title = 'Outcobra!';
     date = new Date('2016-10-10');
+    minDate = new Date('2016-10-12');
+    maxDate = new Date('2018-1-1');
 
     constructor(translate: TranslateService, private _n: NotificationsService) {
         translate.setDefaultLang('en');
