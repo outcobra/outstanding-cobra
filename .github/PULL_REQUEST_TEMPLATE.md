@@ -1,4 +1,4 @@
-This closes issue # .
+This closes # .
 
 
 
