@@ -7,11 +7,12 @@
     <md-toolbar color="primary">
         <md-icon class="toolbar-icon" (click)="sidenav.open()">menu</md-icon>
         <span>{{title}}</span>
+        {{activeDate}}
     </md-toolbar>
     <div class="container">
         <md-input [type]="'text'" placeholder="Input"></md-input>
 
-        <datepicker [minDate]="minDate" [maxDate]="maxDate"></datepicker>
+        <datepicker [(ngModel)]="activeDate" [minDate]="minDate" [maxDate]="maxDate"></datepicker>
     </div>
 
     <simple-notifications></simple-notifications>

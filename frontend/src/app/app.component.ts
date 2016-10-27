@@ -12,6 +12,7 @@ export class AppComponent {
     date = new Date('2016-10-10');
     minDate = new Date('2016-10-12');
     maxDate = new Date('2018-1-1');
+    activeDate: Date;
 
     constructor(translate: TranslateService, private _n: NotificationsService) {
         translate.setDefaultLang('en');
