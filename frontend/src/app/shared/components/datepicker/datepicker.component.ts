@@ -1,5 +1,4 @@
-import {Component, OnInit, ViewEncapsulation, forwardRef} from '@angular/core';
-import {Input} from "@angular/core/src/metadata/directives";
+import {Component, Input, OnInit, ViewEncapsulation, forwardRef, ElementRef} from '@angular/core';
 import * as moment from 'moment';
 import {DateUtil} from "../../services/DateUtil";
 import {DatePickerMaxDateSmallerThanMinDateError} from "./datepicker-errors";
@@ -18,6 +17,9 @@ export const DATEPICKER_CONTROL_VALUE_ACCESSOR: any = {
     templateUrl: './datepicker.component.html',
     styleUrls: ['./datepicker.component.scss'],
     encapsulation: ViewEncapsulation.None,
+    host: {
+        '(document: click)': 'onDocumentClick($event)'
+    },
     providers: [DATEPICKER_CONTROL_VALUE_ACCESSOR]
 })
 export class DatepickerComponent implements OnInit, ControlValueAccessor {
@@ -28,13 +30,16 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
     @Input() public maxDate: Date;
     @Input() public pickerMode: string;
 
+    // emitted Date
     private outDate: Date;
+    // date for inputField
+    private formattedDate: string;
 
     private onTouchedCallback: () => void = noop;
     private onChangeCallback: (_: any) => void = noop;
 
 
-    constructor(private dateUtil: DateUtil) {
+    constructor(private dateUtil: DateUtil, private elementRef: ElementRef) {
     }
 
     ngOnInit() {
@@ -44,13 +49,37 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
             throw new DatePickerMaxDateSmallerThanMinDateError();
         }
         this.currentDate = this.initDate = this.checkInitDate();
-        console.log(this.minDate);
-        console.log(this.maxDate);
-
     }
 
     open() {
-        this.opened = !this.opened;
+        this.opened = true;
+    }
+
+    close() {
+        this.opened = false;
+    }
+
+    toggle() {
+        if (this.isOpen()) {
+            this.close();
+        } else {
+            this.open();
+        }
+    }
+
+    isOpen() {
+        return this.opened;
+    }
+
+    // target function of document click (see @Component Metadata)
+    onDocumentClick(event: Event) {
+        if (!this.elementRef.nativeElement.contains(event.target)) {
+            this.close();
+        }
+    }
+
+    inputDateChanged(value: any) {
+
     }
 
     checkInitDate(): Date {
