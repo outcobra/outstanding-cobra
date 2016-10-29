@@ -59,7 +59,6 @@ dependencies {
     // Spring Initializr
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
     compile('org.springframework.boot:spring-boot-starter-jooq')
-    compile('org.projectlombok:lombok')
     compile('org.springframework.boot:spring-boot-starter-security')
     compile('org.springframework.boot:spring-boot-starter-web')
     compile("org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}")
