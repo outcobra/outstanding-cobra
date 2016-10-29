@@ -10,7 +10,7 @@ public abstract class Mark {
     @NotNull
     protected Double weight;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
     @OneToOne(mappedBy = "mark")
     private Exam exam;

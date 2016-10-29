@@ -5,12 +5,9 @@ import java.time.LocalDate;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-import lombok.*;
 
-@Data
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
+
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
