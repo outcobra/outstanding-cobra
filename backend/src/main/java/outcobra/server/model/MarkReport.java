@@ -5,13 +5,11 @@ import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-import lombok.*;
 
-@Data
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
 public class MarkReport {
+
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private Long id;
 
@@ -24,4 +22,77 @@ public class MarkReport {
 
     @OneToMany(mappedBy = "report")
     private List<MarkReportEntry> entries;
+
+    //region constructors
+
+    public MarkReport(String name, Semester semester, List<MarkReportEntry> entries) {
+        this.name = name;
+        this.semester = semester;
+        this.entries = entries;
+    }
+
+    public MarkReport() {
+    }
+
+    //endregion
+
+    //region default functions
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Semester getSemester() {
+        return semester;
+    }
+
+    public void setSemester(Semester semester) {
+        this.semester = semester;
+    }
+
+    public List<MarkReportEntry> getEntries() {
+        return entries;
+    }
+
+    public void setEntries(List<MarkReportEntry> entries) {
+        this.entries = entries;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof MarkReport)) return false;
+
+        MarkReport that = (MarkReport) o;
+
+        if (!id.equals(that.id)) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (semester != null ? !semester.equals(that.semester) : that.semester != null)
+            return false;
+        return entries != null ? entries.equals(that.entries) : that.entries == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (semester != null ? semester.hashCode() : 0);
+        result = 31 * result + (entries != null ? entries.hashCode() : 0);
+        return result;
+    }
+
+//endregion
+
 }
