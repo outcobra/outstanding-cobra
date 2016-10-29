@@ -14,6 +14,8 @@ public class MarkGroup extends Mark {
     @OneToOne(mappedBy = "markGroup")
     private Subject subject;
 
+    //region constructors
+
     public MarkGroup(Double weight, Exam exam, MarkGroup markGroup, List<Mark> marks, Subject subject) {
         super(weight, exam, markGroup);
         this.marks = marks;
@@ -30,12 +32,12 @@ public class MarkGroup extends Mark {
         this.marks = new ArrayList<>();
     }
 
+    //endregion
+
     // Todo persist
     public void addMark(Mark mark) {
         marks.add(mark);
     }
-
-    //region constructors
 
     // Todo persist
     public void removeMark(Mark mark) {
@@ -59,7 +61,7 @@ public class MarkGroup extends Mark {
         return valueSum / weightSum;
     }
 
-    //endregion
+
 
     //region default functions
 

@@ -7,11 +7,13 @@ import javax.validation.constraints.NotNull;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Mark {
 
-    @NotNull
-    protected Double weight;
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
+    
+    @NotNull
+    protected Double weight;
+
     @OneToOne(mappedBy = "mark")
     private Exam exam;
 
