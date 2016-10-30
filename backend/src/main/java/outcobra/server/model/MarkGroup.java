@@ -14,26 +14,6 @@ public class MarkGroup extends Mark {
     @OneToOne(mappedBy = "markGroup")
     private Subject subject;
 
-    //region constructors
-
-    public MarkGroup(Double weight, Exam exam, MarkGroup markGroup, List<Mark> marks, Subject subject) {
-        super(weight, exam, markGroup);
-        this.marks = marks;
-        this.subject = subject;
-    }
-
-    public MarkGroup(List<Mark> marks, Subject subject) {
-        this.marks = marks;
-        this.subject = subject;
-    }
-
-    public MarkGroup() {
-        super();
-        this.marks = new ArrayList<>();
-    }
-
-    //endregion
-
     // Todo persist
     public void addMark(Mark mark) {
         marks.add(mark);
@@ -61,7 +41,24 @@ public class MarkGroup extends Mark {
         return valueSum / weightSum;
     }
 
+    //region constructors
 
+    public MarkGroup(Double weight, Exam exam, MarkGroup markGroup, List<Mark> marks, Subject subject) {
+        super(weight, exam, markGroup);
+        this.marks = marks;
+        this.subject = subject;
+    }
+
+    public MarkGroup(List<Mark> marks, Subject subject) {
+        this.marks = marks;
+        this.subject = subject;
+    }
+
+    public MarkGroup() {
+        super();
+        this.marks = new ArrayList<>();
+    }
+    //endregion
 
     //region default functions
 
