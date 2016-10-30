@@ -16,12 +16,13 @@ export class AuthService {
 
         this.lock = new Auth0Lock(this.auth0Config.clientID, this.auth0Config.domain, {
             auth: {
-                redirectUrl: this.auth0Config.callbackURL
+                redirectUrl: this.auth0Config.callbackURL,
+                responseType: 'token'
             }
         });
 
 
-        this.lock.on('authenticated', function(authResult) {
+        this.lock.on('authenticated', function (authResult) {
             console.log(authResult);
         });
     }
