@@ -48,6 +48,70 @@ public class Semester {
         this.markReports = new ArrayList<>();
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public LocalDate getValidFrom() {
+        return validFrom;
+    }
+
+    public void setValidFrom(LocalDate validFrom) {
+        this.validFrom = validFrom;
+    }
+
+    public LocalDate getValidTo() {
+        return validTo;
+    }
+
+    public void setValidTo(LocalDate validTo) {
+        this.validTo = validTo;
+    }
+
+    public SchoolYear getSchoolYear() {
+        return schoolYear;
+    }
+
+    public void setSchoolYear(SchoolYear schoolYear) {
+        this.schoolYear = schoolYear;
+    }
+
+    public List<Subject> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(List<Subject> subjects) {
+        this.subjects = subjects;
+    }
+
+    public List<MarkReport> getMarkReports() {
+        return markReports;
+    }
+
+    public void setMarkReports(List<MarkReport> markReports) {
+        this.markReports = markReports;
+    }
+
+    public Timetable getTimetable() {
+        return timetable;
+    }
+
+    public void setTimetable(Timetable timetable) {
+        this.timetable = timetable;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
