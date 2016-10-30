@@ -12,4 +12,5 @@ import javax.inject.Inject
 @RestController
 @RequestMapping("/api/institution")
 class InstitutionEndpoint @Inject constructor(val institutionService: InstitutionService) {
+
 }
