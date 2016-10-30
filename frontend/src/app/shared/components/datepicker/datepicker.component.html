@@ -1,5 +1,5 @@
 <div class="datepicker-wrapper">
-    <md-input [type]="'text'">
+    <md-input [type]="'text'" [ngModel]="formattedDate" (ngModelChange)="inputDateChanged($event)">
         <button md-icon-button md-suffix (click)="open()"> <!-- todo stop click propagation -->
             <md-icon>event</md-icon>
         </button>

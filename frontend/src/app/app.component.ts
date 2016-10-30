@@ -21,10 +21,7 @@ export class AppComponent {
         translate.use(translate.getDefaultLang());
     }
 
-    click() {
-        this._n.error('demo.error.title', 'demo.error.title');
-        this._n.alert('abcdef', 'daskhdkasd');
-        this._n.success('abcdef', 'daskhdkasd');
-        this._n.info('abcdef', 'daskhdkasd');
+    login() {
+        this.auth.login();
     }
 }

@@ -11,6 +11,7 @@ import {SharedModule} from "./shared/shared.module";
 import {SimpleNotificationsModule} from "angular2-notifications";
 import {AUTH_PROVIDERS} from "angular2-jwt";
 import {AppRoutingModule} from "./app-routing.module";
+import {MainModule} from "./main/main.module";
 
 @NgModule({
     declarations: [
@@ -22,6 +23,7 @@ import {AppRoutingModule} from "./app-routing.module";
         HttpModule,
         AppRoutingModule,
         SharedModule,
+        MainModule,
         MaterialModule.forRoot(),
         TranslateModule.forRoot({
             provide: TranslateLoader,

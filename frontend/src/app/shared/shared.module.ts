@@ -12,6 +12,9 @@ import {MaterialModule} from "@angular/material";
 import {DaypickerComponent} from "./components/datepicker/daypicker.component";
 import {YearpickerComponent} from "./components/datepicker/yearpicker.component";
 import {DateUtil} from "./services/DateUtil";
+import {FormsModule} from "@angular/forms";
+import {AuthService} from "./services/auth/AuthService";
+import {AUTH_PROVIDERS} from "angular2-jwt";
 
 @NgModule({
     declarations: [
@@ -26,11 +29,13 @@ import {DateUtil} from "./services/DateUtil";
     imports: [
         HttpModule,
         CommonModule,
+        FormsModule,
         MaterialModule.forRoot(),
         SimpleNotificationsModule
     ],
     providers: [
         DateUtil,
+        AuthService,
         {
             provide: HttpInterceptor,
             useFactory: (backend: XHRBackend, defaultOptions: RequestOptions, notificationsService: NotificationsService) => new HttpInterceptor(backend, defaultOptions, notificationsService),

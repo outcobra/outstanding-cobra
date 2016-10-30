@@ -79,7 +79,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
     }
 
     inputDateChanged(value: any) {
-
+        console.log(value);
     }
 
     checkInitDate(): Date {
