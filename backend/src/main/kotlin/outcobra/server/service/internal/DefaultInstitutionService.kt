@@ -13,6 +13,14 @@ import javax.inject.Inject
  */
 @Component
 open class DefaultInstitutionService @Inject constructor(val mapper: InstitutionDtoMapper, val userService: DefaultUserService, val repository: InstitutionRepository) : InstitutionService {
+    override fun createInstitution(name: String): InstitutionDto {
+        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun updateInstitution(id: Long, name: String): InstitutionDto {
+        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun getInstitutionById(id: Long): InstitutionDto {
         var institution: Institution = repository.getOne(id)
         if (userService.getCurrentUser().userId == institution.user.auth0Id) {
@@ -23,14 +31,6 @@ open class DefaultInstitutionService @Inject constructor(val mapper: Institution
 
     override fun deleteInstitution(id: Long) {
 
-    }
-
-    override fun createInstitution(name: String) {
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun updateInstitution(id: Long name: String) {
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
 }
