@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {TranslateService} from "ng2-translate";
 import {NotificationsService} from "angular2-notifications";
+import {AuthService} from "./shared/services/auth/AuthService";
 
 @Component({
     selector: 'app-root',
@@ -14,7 +15,7 @@ export class AppComponent {
     maxDate = new Date('2018-1-1');
     activeDate: Date;
 
-    constructor(translate: TranslateService, private _n: NotificationsService) {
+    constructor(translate: TranslateService, private _n: NotificationsService, private auth: AuthService) {
         translate.setDefaultLang('en');
         //translate.use(translate.getBrowserLang());
         translate.use(translate.getDefaultLang());
