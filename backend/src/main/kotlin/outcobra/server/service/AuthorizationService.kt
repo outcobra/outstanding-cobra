@@ -6,10 +6,10 @@ import javax.swing.text.html.parser.Entity
 /**
  * Created by Florian on 30.10.2016.
  */
-interface AuthorisationService {
-    fun verifyOwner(institutionId: Institution): Boolean
-    fun verifyOwner(teacherId: Teacher): Boolean
-    fun verifyOwner(schoolClassId: SchoolClass): Boolean
+interface AuthorizationService {
+    fun verifyOwner(institution: Institution): Boolean
+    fun verifyOwner(teacher: Teacher): Boolean
+    fun verifyOwner(schoolClass: SchoolClass): Boolean
     fun verifyOwner(schoolYear: SchoolYear): Boolean
     fun verifyOwner(subject: Subject): Boolean
     fun verifyOwner(timetable: Timetable): Boolean
@@ -24,8 +24,4 @@ interface AuthorisationService {
     fun verifyOwner(semester: Semester): Boolean
     fun verifyOwner(holiday: Holiday): Boolean
     fun verifyOwner(markValue: MarkValue): Boolean
-
-
-
-
 }

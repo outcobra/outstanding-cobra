@@ -9,7 +9,7 @@ import javax.inject.Inject
 /**
  * Created by Florian on 30.10.2016.
  */
-class DefaultAuthorisationService
+class DefaultAuthorizationService
 @Inject constructor(val userService: UserService,
                     val institutionRepository: InstitutionRepository, val holidayRepository: HolidayRepository,
                     val teacherRepository: TeacherRepository) {
