@@ -15,13 +15,13 @@
       "prefix": "app",
       "mobile": false,
       "styles": [
-          "outcobra.scss",
-          "../node_modules/materialize-css/bin/materialize.css",
-          "../node_modules/material-design-icons/iconfont/material-icons.css"
+          "../node_modules/material-design-icons/iconfont/material-icons.css",
+          "outcobra.scss"
       ],
       "scripts": [
           "../node_modules/jquery/dist/jquery.js",
-          "../node_modules/materialize-css/bin/materialize.js"
+          "../node_modules/materialize-css/bin/materialize.js",
+          "assets/scripts/auth0.min.js"
       ],
       "environments": {
         "source": "environments/environment.ts",
