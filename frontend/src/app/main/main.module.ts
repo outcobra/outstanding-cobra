@@ -18,6 +18,9 @@ import {FormsModule} from "@angular/forms";
     declarations: [
         MainComponent,
         DashboardComponent
+    ],
+    providers: [
+
     ]
 })
 export class MainModule {

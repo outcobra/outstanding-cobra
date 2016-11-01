@@ -8,7 +8,8 @@
         <md-icon class="toolbar-icon" (click)="sidenav.open()">menu</md-icon>
         <a routerLink="/">{{title}}</a>
         <span class="toolbar-fill-space"></span>
-        <button md-button (click)="login()">Login</button>
+        <button md-button *ngIf="!auth.isLoggedIn()" (click)="login()">Login</button>
+        <button md-button *ngIf="auth.isLoggedIn()" (click)="logout()">Logout</button>
     </md-toolbar>
     <div class="container">
         <router-outlet></router-outlet>
