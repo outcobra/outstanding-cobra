@@ -19,7 +19,7 @@ open class DefaultUserService
     override fun getCurrentUser(): UserDto {
         val userDetails = getUserDetails()
         try {
-            val user = userRepository.getOne(userDetails.getAuth0Attribute("user_id") as String)
+            val user = userRepository.getOne(userDetails.getAuth0Attribute("sub") as String)
             return userDtoMapper toDto user
         } catch (e: EntityNotFoundException) {
             return UserDto("", "")
@@ -35,7 +35,7 @@ open class DefaultUserService
         if (getCurrentUser().userId.isNotEmpty()) return
 
         val userDetails = getUserDetails()
-        val newUser = User(userDetails.getAuth0Attribute("user_id") as String, userDetails.username, null)
+        val newUser = User(userDetails.getAuth0Attribute("sub") as String, userDetails.username, null)
         userRepository.save(newUser)
     }
 }
