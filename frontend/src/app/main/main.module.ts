@@ -6,6 +6,7 @@ import {MainRoutingModule} from "./main-routing.module";
 import {SharedModule} from "../shared/shared.module";
 import {MaterialModule} from "@angular/material";
 import {FormsModule} from "@angular/forms";
+import {AuthGuard} from "../shared/services/auth/auth-guard.service";
 
 @NgModule({
     imports: [
@@ -20,7 +21,7 @@ import {FormsModule} from "@angular/forms";
         DashboardComponent
     ],
     providers: [
-
+        AuthGuard
     ]
 })
 export class MainModule {

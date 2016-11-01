@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {TranslateService} from "ng2-translate";
 import {NotificationsService} from "angular2-notifications";
-import {AuthService} from "./shared/services/auth/AuthService";
+import {AuthService} from "./shared/services/auth/auth.service";
 
 @Component({
     selector: 'app-root',
@@ -23,5 +23,9 @@ export class AppComponent {
 
     login() {
         this.auth.login();
+    }
+
+    logout() {
+        this.auth.logout();
     }
 }

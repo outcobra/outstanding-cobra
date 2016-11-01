@@ -1,6 +1,6 @@
 import {Component, Input, OnInit, ViewEncapsulation, forwardRef, ElementRef} from '@angular/core';
 import * as moment from 'moment';
-import {DateUtil} from "../../services/DateUtil";
+import {DateUtil} from "../../services/date-util.service";
 import {DatePickerMaxDateSmallerThanMinDateError} from "./datepicker-errors";
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 

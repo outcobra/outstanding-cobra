@@ -17,7 +17,6 @@ export class Config {
             this.http.get(`assets/config/${this._env['envName']}.json`)
                 .map(response => response.json())
                 .subscribe(config => {
-                    console.log(config);
                     this._config = config;
                     resolve();
                 });

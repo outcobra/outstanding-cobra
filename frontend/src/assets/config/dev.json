@@ -19,7 +19,7 @@
     "auth0": {
         "clientID": "1pKxXXDoMlxWxlNAEmIXpoJfxP7iscim",
         "domain": "outcobra.eu.auth0.com",
-        "callbackURL": "http://localhost:4200/dashboard"
+        "callbackURL": "http://localhost:4200/"
     },
     "locStorage": {
         "tokenLocation": "id_token",

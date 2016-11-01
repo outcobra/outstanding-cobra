@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewEncapsulation, style, keyframes, animate, transition, trigger} from '@angular/core';
 import * as moment from 'moment';
 import {DatepickerComponent} from "./datepicker.component";
-import {DateUtil} from "../../services/DateUtil";
+import {DateUtil} from "../../services/date-util.service";
 
 @Component({
     selector: 'daypicker',

@@ -3,7 +3,7 @@ import {Config} from "../../../config/Config";
 import {tokenNotExpired} from "angular2-jwt";
 import {NotificationsService} from "angular2-notifications";
 import {TranslateService} from "ng2-translate";
-import {HttpInterceptor} from "../../http/HttpInterceptor";
+import {Router} from "@angular/router";
 
 declare var Auth0Lock: any;
 
@@ -13,7 +13,7 @@ export class AuthService {
     private readonly supportedLangs: Array<string> = ['de', 'en'];
     lock;
 
-    constructor(private config: Config, private http: HttpInterceptor, private notificationService: NotificationsService, private translateService: TranslateService) {
+    constructor(private config: Config, private router: Router, private translateService: TranslateService) {
         this.auth0Config = this.config.get('auth0');
 
         this.lock = new Auth0Lock(this.auth0Config.clientID, this.auth0Config.domain, {
@@ -26,7 +26,7 @@ export class AuthService {
             loginAfterSignUp: true,
             additionalSignUpFields: [{
                 name: 'name',
-                placeholder: 'Enter your username'
+                placeholder: 'Enter your username' // todo i18n
             }],
             theme: {
                 logo: 'https://avatars0.githubusercontent.com/u/22800787?v=3&s=200',
@@ -36,10 +36,11 @@ export class AuthService {
 
 
         this.lock.on('authenticated', (authResult) => {
+            localStorage.setItem(this.config.get('locStorage.tokenLocation'), authResult.idToken);
             this.lock.getProfile(authResult.idToken, (err, profile) => {
-                localStorage.setItem(this.config.get('locStorage.tokenLocation'), authResult.idToken);
                 localStorage.setItem(this.config.get('locStorage.profileLocation'), JSON.stringify(profile));
             });
+            this.router.navigate(['/dashboard']);
         });
     }
 
@@ -54,11 +55,14 @@ export class AuthService {
     logout() {
         localStorage.removeItem(this.config.get('locStorage.tokenLocation'));
         localStorage.removeItem(this.config.get('locStorage.profileLocation'));
+        this.router.navigate(['']);
     }
 
 
     isLoggedIn(): boolean {
-        return tokenNotExpired();
+        let expired = tokenNotExpired();
+        //console.log(expired);
+        return expired;
     }
 
 }
