@@ -1,12 +1,12 @@
 package outcobra.server.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.time.LocalTime;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import java.time.LocalTime;
+
+import lombok.*;
 
 @Data
 @Entity
@@ -22,6 +22,15 @@ public class TimetableEntry {
 
     @NotNull
     private LocalTime time;
+
+    /**
+     * value needs to be >=1
+     * if a subject takes place more than once a week
+     * there are multiples TimeTableEntries
+     */
+    @Min(1)
+    @NotNull
+    private int repeatEveryNWeeks;
 
     private String room;
 

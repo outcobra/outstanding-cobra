@@ -2,6 +2,11 @@ buildscript {
     ext {
         kotlinVersion = '1.0.3'
         springBootVersion = '1.4.1.RELEASE'
+        outstandingCobraVersion = '0.0.1-SNAPSHOT'
+
+        if (System.getenv("CIRCLE_BUILD_NUM") != null) {
+            outstandingCobraVersion = outstandingCobraVersion + '-' + System.getenv("CIRCLE_BUILD_NUM")
+        }
     }
     repositories {
         mavenCentral()
@@ -21,7 +26,7 @@ apply plugin: 'idea'
 
 war {
     baseName = 'outstanding-cobra-server'
-    version = '0.0.1-SNAPSHOT'
+    version = outstandingCobraVersion
 }
 
 idea {
@@ -46,6 +51,9 @@ dependencies {
     compile 'com.querydsl:querydsl-apt:4.1.4:jpa'
     compile('com.auth0:auth0-spring-security-api:0.3.0')
     compile('com.auth0:auth0:0.3.0')
+    compile('io.springfox:springfox-swagger2:2.6.0')
+    compile('io.springfox:springfox-swagger-ui:2.6.0')
+    compile('io.springfox:springfox-staticdocs:2.6.0')
     testCompile('com.google.truth:truth:0.30')
 
     // Spring Initializr

@@ -1,10 +1,12 @@
-machine:
-  timezone:
-    Europe/Zurich
+#machine:
+#  timezone:
+#    Europe/Zurich
 
 dependencies:
   pre:
     - chmod +x gradlew
+  override:
+    - echo "I'm not doing anything here since spinning up gradle takes longer than just downloading the dependencies every time."
 
 database:
   override:
@@ -13,8 +15,8 @@ database:
 test:
   override:
     - cp backend/src/main/resources/auth0.example.properties backend/src/main/resources/auth0.properties
-    - chmod +x gradlew
     - ./gradlew build
   post:
     - mkdir -p $CIRCLE_TEST_REPORTS/junit/
     - find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
+    - find . -wholename "./backend/build/libs/*.war" -exec cp {} $CIRCLE_ARTIFACTS/ \;
