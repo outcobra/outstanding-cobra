@@ -33,4 +33,15 @@ body {
     @extend .yellow, .darken-2;
 }
 
+md-sidenav-layout,
+.md-sidenav-content {
+    min-height: 100vh;
+}
 
+.toolbar-icon {
+    margin: 16px 16px 16px 0;
+}
+
+.auth0-lock {
+    font-family: 'Roboto', sans-serif !important;
+}
