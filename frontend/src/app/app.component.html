@@ -1,9 +1,19 @@
-<h1>
-  {{title}}
-</h1>
+<md-sidenav-layout>
+    <md-sidenav #sidenav mode="push">
+        <a routerLink="/dashboard" md-button>Dashboard</a>
+        <button md-button>Bla</button>
+    </md-sidenav>
 
-<p>{{ 'demo.hello' | translate:{target: 'User'} }}</p>
-<md-icon (click)="click()">person</md-icon>
+    <md-toolbar color="primary">
+        <md-icon class="toolbar-icon" (click)="sidenav.open()">menu</md-icon>
+        <a routerLink="/">{{title}}</a>
+        <span class="toolbar-fill-space"></span>
+        <button md-button *ngIf="!auth.isLoggedIn()" (click)="login()">Login</button>
+        <button md-button *ngIf="auth.isLoggedIn()" (click)="logout()">Logout</button>
+    </md-toolbar>
+    <div class="container">
+        <router-outlet></router-outlet>
+    </div>
 
-
-<simple-notifications></simple-notifications>
+    <simple-notifications></simple-notifications>
+</md-sidenav-layout>
