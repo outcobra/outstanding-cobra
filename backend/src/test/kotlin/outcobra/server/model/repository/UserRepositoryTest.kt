@@ -15,15 +15,12 @@ import outcobra.server.model.User
 open class UserRepositoryTest {
 
     @Autowired
-    val userRepository: UserRepository? = null
-
+    lateinit var userRepository: UserRepository
     val myUser = User("some_auth0_id", "jmesserli", null)
 
     @Test
     @Transactional
     open fun testUserRepository() {
-        userRepository!!
-
         userRepository.save(myUser)
         userRepository.flush()
         assertThat(userRepository.findAll().size).isEqualTo(1)
@@ -38,8 +35,6 @@ open class UserRepositoryTest {
     @Test
     @Transactional
     open fun testQuerydslExecutor() {
-        userRepository!!
-
         userRepository.save(myUser)
 
         val predicate = QUser.user.auth0Id.eq(myUser.auth0Id)
