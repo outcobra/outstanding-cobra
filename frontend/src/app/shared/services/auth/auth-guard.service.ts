@@ -10,10 +10,8 @@ export class AuthGuard implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean>|Promise<boolean>|boolean {
         if (this.authService.isLoggedIn()) {
-            console.log('true');
             return true;
         } else {
-            console.log('false');
             this.authService.login();
             return false;
         }

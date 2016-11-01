@@ -124,7 +124,7 @@ export class HttpInterceptor {
             }
         );
         // cleanup double slashes
-        requestOptions.url = this.removeDoubleDashes(requestOptions.url);
+        requestOptions.url = this.removeRepeatedSlashes(requestOptions.url);
         // cleanup unnecessary slashes at the end
         requestOptions.url = requestOptions.url.replace(/\/+$/g, "");
         return ( requestOptions );
@@ -166,7 +166,7 @@ export class HttpInterceptor {
     private buildApiUrl(request): string {
         let api = this.getApiFromConfig(request.apiName);
         console.log(api);
-        return this.removeDoubleDashes(`${api['apiBase']}/${api['context']}/${request.url}`); // concat Url and remove double slashes
+        return this.removeRepeatedSlashes(`${api['apiBase']}/${request.url}`); // concat Url and remove double slashes
     }
 
     private getApiFromConfig(apiName: string): any {
@@ -174,7 +174,7 @@ export class HttpInterceptor {
         return this.config.get('api.apis').find(api => api.name === name);
     }
 
-    private removeDoubleDashes(str: string): string {
+    private removeRepeatedSlashes(str: string): string {
         return str.replace(/\/{2,}/g, "/");
     }
 }

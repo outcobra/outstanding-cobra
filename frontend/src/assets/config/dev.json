@@ -4,15 +4,8 @@
         "apis": [
             {
                 "name": "outcobra",
-                "apiBase": "http://localhost/",
-                "context": "api",
+                "apiBase": "http://localhost:8080/api/",
                 "authToken": true
-            },
-            {
-                "name": "svmeal",
-                "apiBase": "https://svmeal-api.jmnw.me/",
-                "context": "api",
-                "authToken": false
             }
         ]
     },
