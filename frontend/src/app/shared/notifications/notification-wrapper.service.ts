@@ -15,32 +15,32 @@ export class NotificationWrapperService extends NotificationsService {
         lastOnBottom: true,
         clickToClose: true
     };
-    private ic: Icons = appIcons;
+    private icons: Icons = appIcons;
 
-    constructor(private _translateService: TranslateService) {
+    constructor(private translateService: TranslateService) {
         super();
     }
 
     success(title: string, content: string, optionsOverride?: any): Notification {
-        return this.create(title, content, 'success', this.ic.success, optionsOverride);
+        return this.create(title, content, 'success', this.icons.success, optionsOverride);
     }
 
     error(title: string, content: string, optionsOverride?: any): Notification {
-        return this.create(title, content, 'error', this.ic.error, optionsOverride);
+        return this.create(title, content, 'error', this.icons.error, optionsOverride);
     }
 
     alert(title: string, content: string, optionsOverride?: any): Notification {
-        return this.create(title, content, 'alert', this.ic.alert, optionsOverride);
+        return this.create(title, content, 'alert', this.icons.alert, optionsOverride);
     }
 
     info(title: string, content: string, optionsOverride?: any): Notification {
-        return this.create(title, content, 'info', this.ic.info, optionsOverride);
+        return this.create(title, content, 'info', this.icons.info, optionsOverride);
     }
 
     create(title: string, content: string, type: string, icon: string, optionsOverride?: any): Notification {
         return super.set({
-                title: this._translateService.instant(title),
-                content: this._translateService.instant(content),
+                title: this.translateService.instant(title),
+                content: this.translateService.instant(content),
                 type: type,
                 icon: icon,
                 override: this.mergeOptions(optionsOverride)

@@ -1,22 +1,22 @@
 import {Injectable} from "@angular/core";
 import {environment} from "../../environments/environment";
-import {HttpInterceptor} from "../shared/http/HttpInterceptor";
+import {Http} from "@angular/http";
 
 @Injectable()
 export class Config {
     private _env: Object;
     private _config: Object;
 
-    constructor(private _http: HttpInterceptor) {
+    constructor(private http: Http) {
         this._env = environment;
     }
 
     load() {
         //noinspection TypeScriptUnresolvedFunction
         return new Promise((resolve) => {
-            this._http.get(`assets/config/:envName.json`, {envName: this._env['envName']})
+            this.http.get(`assets/config/${this._env['envName']}.json`)
+                .map(response => response.json())
                 .subscribe(config => {
-                    console.log(config);
                     this._config = config;
                     resolve();
                 });

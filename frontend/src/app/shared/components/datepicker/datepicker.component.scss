@@ -1,0 +1,74 @@
+@import '../../../../sass/color';
+
+.datepicker-wrapper {
+    display: inline-block;
+    position: relative;
+
+    .datepicker {
+        overflow: hidden;
+        display: none;
+        z-index: 1000;
+        position: absolute;
+    }
+    .datepicker.opened {
+        display: block;
+    }
+
+    .datepicker-header {
+        @extend .color-primary;
+        @extend .text-primary-light;
+        padding: 10px 15px;
+
+        .year {
+            font-size: 0.8em;
+        }
+        .date {
+            font-size: 1.4em;
+        }
+    }
+
+    .daypicker-header {
+        .month {
+            line-height: 40px;
+            display: inline-block;
+            width: calc(100% - 80px);
+            text-align: center;
+        }
+    }
+
+    .daypicker-body {
+        thead {
+            border: none;
+        }
+        thead td {
+            @extend .text-secondary-dark;
+        }
+        td {
+            padding: 0;
+        }
+        td span {
+            display: block;
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            text-align: center;
+            line-height: 40px;
+        }
+
+        tbody td span.disabled {
+            @extend .text-disabled-dark;
+        }
+
+        tbody td span.active {
+            border-radius: 50%;
+            @extend .color-primary;
+        }
+
+        tbody td span:hover:not(.disabled) {
+            border-radius: 50%;
+            cursor: pointer;
+            @extend .color-accent;
+        }
+    }
+
+}

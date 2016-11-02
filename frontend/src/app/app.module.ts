@@ -9,6 +9,8 @@ import {AppComponent} from './app.component';
 import {Config} from "./config/Config";
 import {SharedModule} from "./shared/shared.module";
 import {SimpleNotificationsModule} from "angular2-notifications";
+import {AppRoutingModule} from "./app-routing.module";
+import {MainModule} from "./main/main.module";
 
 @NgModule({
     declarations: [
@@ -18,7 +20,9 @@ import {SimpleNotificationsModule} from "angular2-notifications";
         BrowserModule,
         FormsModule,
         HttpModule,
+        AppRoutingModule,
         SharedModule,
+        MainModule,
         MaterialModule.forRoot(),
         TranslateModule.forRoot({
             provide: TranslateLoader,
