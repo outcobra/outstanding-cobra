@@ -82,5 +82,14 @@ public class User {
         return result;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "auth0Id='" + auth0Id + '\'' +
+                ", username='" + username + '\'' +
+                ", institutions=" + institutions +
+                '}';
+    }
+
     //endregion
 }

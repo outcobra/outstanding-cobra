@@ -7,6 +7,7 @@ import javax.swing.text.html.parser.Entity
  * Created by Florian on 30.10.2016.
  */
 interface AuthorizationService {
+    fun verifyOwner(user: User): Boolean
     fun verifyOwner(institution: Institution): Boolean
     fun verifyOwner(teacher: Teacher): Boolean
     fun verifyOwner(schoolClass: SchoolClass): Boolean
