@@ -1,31 +1,18 @@
 package outcobra.server.filter
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.google.common.collect.HashBasedTable
-import com.sun.org.apache.xpath.internal.operations.Bool
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.json.JacksonJsonParser
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder
 import org.springframework.stereotype.Component
 import org.springframework.web.filter.GenericFilterBean
 import outcobra.server.model.Institution
-import outcobra.server.model.SchoolClass
 import outcobra.server.model.Teacher
 import outcobra.server.model.User
 import outcobra.server.service.AuthorizationService
-import springfox.documentation.spring.web.json.JacksonModuleRegistrar
-import java.io.ByteArrayOutputStream
-import java.io.IOException
 import java.util.*
-import javax.inject.Inject
 import javax.servlet.FilterChain
 import javax.servlet.ServletRequest
 import javax.servlet.ServletResponse
 import javax.servlet.http.HttpServletRequest
-import javax.servlet.http.HttpServletRequestWrapper
-import javax.xml.ws.RequestWrapper
-import kotlin.reflect.KClass
-import kotlin.reflect.KFunction2
 
 
 /**
@@ -34,7 +21,7 @@ import kotlin.reflect.KFunction2
 @Component
 open class RequestAuthorizationFilter : GenericFilterBean() {
     @Autowired
-    lateinit var authorizationService : AuthorizationService
+    lateinit var authorizationService: AuthorizationService
     var endpointObjectMapping = HashMap<String, Class<out Any>>()
 
     init {
@@ -50,7 +37,7 @@ open class RequestAuthorizationFilter : GenericFilterBean() {
             var objectMapper = ObjectMapper()
             var json = request.reader.readText()
             var entity = objectMapper.readValue(json, type)
-            if(!verifyOwnership(entity)){
+            if (!verifyOwnership(entity)) {
                 println("message will be dismissed")
                 destroy()
             } else {
@@ -59,7 +46,7 @@ open class RequestAuthorizationFilter : GenericFilterBean() {
         }
     }
 
-    fun verifyOwnership(entity : Any) : Boolean{
+    fun verifyOwnership(entity: Any): Boolean {
         when (entity) {
             is User -> authorizationService.verifyOwner(entity)
             is Institution -> authorizationService.verifyOwner(entity)
