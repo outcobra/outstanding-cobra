@@ -1,6 +1,7 @@
 package outcobra.server.filter
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import org.springframework.web.filter.GenericFilterBean
@@ -20,6 +21,8 @@ import javax.servlet.http.HttpServletRequest
  */
 @Component
 open class RequestAuthorizationFilter : GenericFilterBean() {
+    private val LOGGER = LoggerFactory.getLogger(javaClass)
+
     @Autowired
     lateinit var authorizationService: AuthorizationService
     var endpointObjectMapping = HashMap<String, Class<out Any>>()
@@ -38,7 +41,7 @@ open class RequestAuthorizationFilter : GenericFilterBean() {
             var json = request.reader.readText()
             var entity = objectMapper.readValue(json, type)
             if (!verifyOwnership(entity)) {
-                println("message will be dismissed")
+                LOGGER.warn("Dropping request '$request' because of ownership mismatch")
                 destroy()
             } else {
                 chain?.doFilter(request, response)
