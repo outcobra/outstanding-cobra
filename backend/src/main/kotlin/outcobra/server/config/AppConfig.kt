@@ -9,7 +9,7 @@ import outcobra.server.filter.RequestAuthorizationFilter
  * Created by bbuerf on 01.11.2016.
  */
 @Configuration
-final class AppConfig {
+class AppConfig {
     @Bean
     fun ApiRequestFilterRegistration(): FilterRegistrationBean {
         var registration = FilterRegistrationBean()

@@ -33,7 +33,7 @@ open class RequestAuthorizationFilter : GenericFilterBean() {
 
     override fun doFilter(request: ServletRequest?, response: ServletResponse?, chain: FilterChain?) {
         if (request is HttpServletRequest) {
-            var type = endpointObjectMapping.get("api/user"/*request.requestURI*/)
+            var type = endpointObjectMapping["api/user"]
             var objectMapper = ObjectMapper()
             var json = request.reader.readText()
             var entity = objectMapper.readValue(json, type)
@@ -47,12 +47,12 @@ open class RequestAuthorizationFilter : GenericFilterBean() {
     }
 
     fun verifyOwnership(entity: Any): Boolean {
-        when (entity) {
+        return when (entity) {
             is User -> authorizationService.verifyOwner(entity)
             is Institution -> authorizationService.verifyOwner(entity)
             is Teacher -> authorizationService.verifyOwner(entity)
+            else -> false
         }
-        return true
     }
 }
 
