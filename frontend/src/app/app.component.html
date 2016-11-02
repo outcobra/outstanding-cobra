@@ -1,9 +1,20 @@
-<md-sidenav-layout>
-    <md-sidenav #sidenav mode="push">
-        <a routerLink="/dashboard" md-button>Dashboard</a>
-        <button md-button>Bla</button>
-    </md-sidenav>
-
+<sidenav-layout>
+    <sidenav>
+        <nav>
+            <div class="nav-row">
+                <a [routerLink]="'/dashboard'">
+                    <span>Dashboard</span>
+                    <span class="link-icon"><md-icon>dashboard</md-icon></span>
+                </a>
+            </div>
+            <div class="nav-row">
+                <a [routerLink]="'/'">
+                    <span>E fucking lenge name</span>
+                    <span class="link-icon"><md-icon>person</md-icon></span>
+                </a>
+            </div>
+        </nav>
+    </sidenav>
     <md-toolbar color="primary">
         <md-icon class="toolbar-icon" (click)="sidenav.open()">menu</md-icon>
         <a routerLink="/">{{title}}</a>
@@ -16,4 +27,4 @@
     </div>
 
     <simple-notifications></simple-notifications>
-</md-sidenav-layout>
+</sidenav-layout>

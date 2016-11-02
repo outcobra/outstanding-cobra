@@ -1,0 +1,54 @@
+@import '../../../../sass/color';
+
+sidenav-layout {
+    display: block;
+    overflow: hidden;
+}
+
+.sidenav-content {
+    display: block;
+    height: 100%;
+    overflow: auto;
+    margin-left: 50px;
+}
+
+sidenav {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 100;
+    min-width: 5%;
+    @extend .color-primary;
+
+    nav {
+
+        .nav-row {
+            margin-left: 20px;
+        }
+
+        a {
+            float: right;
+        }
+
+        a span {
+            @extend .text-primary-light;
+            display: block;
+            height: 50px;
+            line-height: 50px;
+            text-align: right;
+            float: left;
+        }
+
+        a span.link-icon {
+            width: 50px;
+            text-align: center;
+
+            md-icon {
+                line-height: 50px;
+            }
+        }
+    }
+
+}
