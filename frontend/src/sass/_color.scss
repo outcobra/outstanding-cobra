@@ -5,6 +5,7 @@
 // hue.
 $primary: md-palette($md-indigo);
 $accent:  md-palette($md-pink, A200, A100, A400);
+$accent-dark: md-palette($md-grey, 800);
 
 // The warn palette is optional (defaults to red).
 $warn:    md-palette($md-red);
@@ -15,6 +16,10 @@ $warn:    md-palette($md-red);
 
 .color-accent {
     background-color: md-color($accent) !important;
+}
+
+.color-accent-dark {
+    background-color: md-color($accent-dark) !important;
 }
 
 .color-warn {
