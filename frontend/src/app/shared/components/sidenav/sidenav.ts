@@ -19,6 +19,8 @@ export class SidenavComponent implements OnInit {
 
     @Output('open') public onOpen = new EventEmitter<void>();
     @Output('close') public onClose = new EventEmitter<void>();
+    @Output('openStart') public onOpenStart = new EventEmitter<void>();
+    @Output('closeStart') public onCloseStart = new EventEmitter<void>();
 
     private openPromise: Promise<any>;
     private openPromiseResolve: () => void;
@@ -54,6 +56,7 @@ export class SidenavComponent implements OnInit {
                     this.openPromiseReject = reject;
                 });
             }
+            this.onOpenStart.emit();
             return this.openPromise;
         }
         else {
@@ -63,6 +66,7 @@ export class SidenavComponent implements OnInit {
                     this.closePromiseReject = reject;
                 });
             }
+            this.onCloseStart.emit();
             return this.closePromise;
         }
     }
@@ -137,8 +141,8 @@ export class SidenavLayout implements AfterContentInit {
     constructor(private renderer: Renderer, private elRef: ElementRef){}
 
     ngAfterContentInit(): void {
-        this.sidenav.onOpen.subscribe(() => this.setLayoutClass(true));
-        this.sidenav.onClose.subscribe(() => this.setLayoutClass(false));
+        this.sidenav.onOpenStart.subscribe(() => this.setLayoutClass(true));
+        this.sidenav.onCloseStart.subscribe(() => this.setLayoutClass(false));
     }
 
     closeSidenav(): Promise<void> {
