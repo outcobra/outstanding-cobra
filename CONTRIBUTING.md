@@ -27,18 +27,14 @@ Full example: `git commit -a -m "Use multiple instances to link Institution to C
 
 We want to have some branch categories and those categories have their own prefix.
 
-- **feature**
-  Anything related to a user story. May only implement a part of the user story.
-- **bugfix**
-  Fixing a bug, reference the issue if there is one. Reference it like this: `bugfix/<issueid>-some-branch-name` where `<issueid>` quite obviously represents the id of the issue.
-- **doc**
-  Changing documentation files like this one. You could also use this if you are going on a mission to Javadoc every method that exists (for example).
-- **upgrade**
-  3rd party library updates like Angular or angular-cli.
-- **config**
-  Configuration changes, e.g. 
-- **amend**
-   Any code changes that don't fit into the other categories.
+| Branch Prefix | Description                              |
+| ------------- | ---------------------------------------- |
+| **feature**   | Anything related to a user story. May only implement a part of the user story. |
+| **bugfix**    | Fixing a bug, reference the issue if there is one. Reference it like this: `bugfix/<issueid>-some-branch-name` where `<issueid>` quite obviously represents the id of the issue. |
+| **doc**       | Changing documentation files like this one. You could also use this if you are going on a mission to Javadoc every method that exists (for example). |
+| **upgrade**   | 3rd party library updates like Angular or angular-cli. |
+| **config**    | Configuration changes, e.g. adding a dependency in a Gradle file |
+| **amend**     | Any code changes that don't fit into the other categories. |
 
 All of them follow the same syntax: chose one of the prefixes and append a short, lower- and [kebab-case](https://en.wikipedia.org/wiki/Letter_case#Special_case_styles) identifier, separated by a slash.
 
