@@ -5,9 +5,13 @@ import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import outcobra.server.model.dto.MarkReportDto;
+import outcobra.server.model.mapper.Mapper;
+import outcobra.server.model.marker.OwnerVerifiable;
+
 
 @Entity
-public class MarkReport {
+public class MarkReport implements OwnerVerifiable, MappableEntity<MarkReportDto,MarkReport> {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
@@ -91,6 +95,22 @@ public class MarkReport {
         result = 31 * result + (semester != null ? semester.hashCode() : 0);
         result = 31 * result + (entries != null ? entries.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public boolean verifyOwner(@org.jetbrains.annotations.NotNull String owner) {
+        return false;
+    }
+
+    @Override
+    public MarkReportDto toDto() {
+        return null;
+    }
+
+    @org.jetbrains.annotations.NotNull
+    @Override
+    public Mapper<MarkReportDto, MarkReport> getMapper() {
+        return null;
     }
 
 //endregion

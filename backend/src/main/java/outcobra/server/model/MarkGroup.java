@@ -1,12 +1,18 @@
 package outcobra.server.model;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
 
+import outcobra.server.model.dto.MarkGroupDto;
+import outcobra.server.model.mapper.Mapper;
+import outcobra.server.model.marker.OwnerVerifiable;
+
 @Entity
-public class MarkGroup extends Mark {
+public class MarkGroup extends Mark implements OwnerVerifiable, MappableEntity<MarkGroupDto,MarkGroup> {
 
     @OneToMany(mappedBy = "markGroup")
     private List<Mark> marks;
@@ -98,6 +104,22 @@ public class MarkGroup extends Mark {
         result = 31 * result + (getMarks() != null ? getMarks().hashCode() : 0);
         result = 31 * result + (getSubject() != null ? getSubject().hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public boolean verifyOwner(@NotNull String owner) {
+        return false;
+    }
+
+    @Override
+    public MarkGroupDto toDto() {
+        return null;
+    }
+
+    @NotNull
+    @Override
+    public Mapper<MarkGroupDto, MarkGroup> getMapper() {
+        return null;
     }
 
     //endregion

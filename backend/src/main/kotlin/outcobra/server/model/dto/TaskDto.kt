@@ -1,15 +1,19 @@
 package outcobra.server.model.dto
 
 import noutcobra.server.model.mapper.MappableDto
-import outcobra.server.model.User
+import outcobra.server.model.Task
 import outcobra.server.model.mapper.Mapper
 
-data class UserDto(val userId: String, val username: String) : MappableDto<UserDto, User> {
-    override fun getMapper(): Mapper<UserDto, User> {
+/**
+ * Created by Florian on 04.11.2016.
+ */
+class TaskDto : MappableDto<TaskDto, Task> {
+    override fun getMapper(): Mapper<TaskDto, Task> {
         throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun toEntity(): User {
+    override fun toEntity(): Task {
         throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
+//TODO Implement
 }

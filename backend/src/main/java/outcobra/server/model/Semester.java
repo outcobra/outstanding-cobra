@@ -7,8 +7,12 @@ import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import outcobra.server.model.dto.SemesterDto;
+import outcobra.server.model.mapper.Mapper;
+import outcobra.server.model.marker.OwnerVerifiable;
+
 @Entity
-public class Semester {
+public class Semester implements OwnerVerifiable, MappableEntity<SemesterDto,Semester> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -146,5 +150,21 @@ public class Semester {
         result = 31 * result + (markReports != null ? markReports.hashCode() : 0);
         result = 31 * result + (timetable != null ? timetable.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public boolean verifyOwner(@org.jetbrains.annotations.NotNull String owner) {
+        return false;
+    }
+
+    @Override
+    public SemesterDto toDto() {
+        return null;
+    }
+
+    @org.jetbrains.annotations.NotNull
+    @Override
+    public Mapper<SemesterDto, Semester> getMapper() {
+        return null;
     }
 }

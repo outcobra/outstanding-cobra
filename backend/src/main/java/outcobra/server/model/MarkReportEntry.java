@@ -3,8 +3,12 @@ package outcobra.server.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import outcobra.server.model.dto.MarkReportEntryDto;
+import outcobra.server.model.mapper.Mapper;
+import outcobra.server.model.marker.OwnerVerifiable;
+
 @Entity
-public class MarkReportEntry {
+public class MarkReportEntry implements OwnerVerifiable, MappableEntity<MarkReportEntryDto,MarkReportEntry>{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -91,6 +95,22 @@ public class MarkReportEntry {
         result = 31 * result + (getSubject() != null ? getSubject().hashCode() : 0);
         result = 31 * result + (getReport() != null ? getReport().hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public boolean verifyOwner(@org.jetbrains.annotations.NotNull String owner) {
+        return false;
+    }
+
+    @Override
+    public MarkReportEntryDto toDto() {
+        return null;
+    }
+
+    @org.jetbrains.annotations.NotNull
+    @Override
+    public Mapper<MarkReportEntryDto, MarkReportEntry> getMapper() {
+        return null;
     }
 
     //endregion

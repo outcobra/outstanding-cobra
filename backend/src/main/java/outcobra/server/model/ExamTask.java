@@ -3,8 +3,12 @@ package outcobra.server.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import outcobra.server.model.dto.ExamTaskDto;
+import outcobra.server.model.mapper.Mapper;
+import outcobra.server.model.marker.OwnerVerifiable;
+
 @Entity
-public class ExamTask {
+public class ExamTask implements OwnerVerifiable, MappableEntity<ExamTaskDto,ExamTask> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -89,6 +93,22 @@ public class ExamTask {
         result = 31 * result + getExam().hashCode();
         result = 31 * result + (isFinished() ? 1 : 0);
         return result;
+    }
+
+    @Override
+    public boolean verifyOwner(@org.jetbrains.annotations.NotNull String owner) {
+        return false;
+    }
+
+    @Override
+    public ExamTaskDto toDto() {
+        return null;
+    }
+
+    @org.jetbrains.annotations.NotNull
+    @Override
+    public Mapper<ExamTaskDto, ExamTask> getMapper() {
+        return null;
     }
 
     //endregion

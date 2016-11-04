@@ -51,7 +51,6 @@ public class MarkValue extends Mark {
         MarkValue markValue = (MarkValue) o;
 
         return getValue() == markValue.getValue();
-
     }
 
     @Override
@@ -59,6 +58,11 @@ public class MarkValue extends Mark {
         int result = super.hashCode();
         result = (int) (31 * result + getValue());
         return result;
+    }
+
+    @Override
+    public boolean verifyOwner(@org.jetbrains.annotations.NotNull String owner) {
+        return false;
     }
 
     //endregion

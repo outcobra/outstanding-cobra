@@ -6,8 +6,12 @@ import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import outcobra.server.model.dto.TeacherDto;
+import outcobra.server.model.mapper.Mapper;
+import outcobra.server.model.marker.OwnerVerifiable;
+
 @Entity
-public class Teacher {
+public class Teacher implements OwnerVerifiable, MappableEntity<TeacherDto,Teacher>{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -106,6 +110,22 @@ public class Teacher {
         result = 31 * result + (getInstitution() != null ? getInstitution().hashCode() : 0);
         result = 31 * result + (getSubjects() != null ? getSubjects().hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public boolean verifyOwner(@org.jetbrains.annotations.NotNull String owner) {
+        return false;
+    }
+
+    @Override
+    public TeacherDto toDto() {
+        return null;
+    }
+
+    @org.jetbrains.annotations.NotNull
+    @Override
+    public Mapper<TeacherDto, Teacher> getMapper() {
+        return null;
     }
 
     //endregion

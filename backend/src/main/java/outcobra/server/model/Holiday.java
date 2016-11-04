@@ -5,8 +5,12 @@ import java.time.LocalDate;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import outcobra.server.model.dto.HolidayDto;
+import outcobra.server.model.mapper.Mapper;
+import outcobra.server.model.marker.OwnerVerifiable;
+
 @Entity
-public class Holiday {
+public class Holiday implements OwnerVerifiable,MappableEntity<HolidayDto,Holiday> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -103,6 +107,22 @@ public class Holiday {
         result = 31 * result + (getValidTo() != null ? getValidTo().hashCode() : 0);
         result = 31 * result + (getSchoolYear() != null ? getSchoolYear().hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public boolean verifyOwner(@org.jetbrains.annotations.NotNull String owner) {
+        return false;
+    }
+
+    @Override
+    public HolidayDto toDto() {
+        return null;
+    }
+
+    @org.jetbrains.annotations.NotNull
+    @Override
+    public Mapper<HolidayDto, Holiday> getMapper() {
+        return null;
     }
 
     //endregion

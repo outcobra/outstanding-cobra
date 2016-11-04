@@ -5,10 +5,14 @@ import java.time.LocalDate;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import outcobra.server.model.dto.TaskDto;
+import outcobra.server.model.mapper.Mapper;
+import outcobra.server.model.marker.OwnerVerifiable;
+
 
 @Entity
 
-public class Task {
+public class Task implements OwnerVerifiable, MappableEntity<TaskDto,Task>{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -145,6 +149,22 @@ public class Task {
         result = 31 * result + (getProgress() != null ? getProgress().hashCode() : 0);
         result = 31 * result + (getSubject() != null ? getSubject().hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public boolean verifyOwner(@org.jetbrains.annotations.NotNull String owner) {
+        return false;
+    }
+
+    @Override
+    public TaskDto toDto() {
+        return null;
+    }
+
+    @org.jetbrains.annotations.NotNull
+    @Override
+    public Mapper<TaskDto, Task> getMapper() {
+        return null;
     }
 
     //endregion0
