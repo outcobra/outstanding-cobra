@@ -10,64 +10,70 @@ You can find the Style Guidelines under [this](https://angular.io/docs/ts/latest
 ##Commit Messages
 
 Please be nice to your colleagues and write a short explanation what exactly changed in this commit.
-Samples for invalid commit messages are:
-- Fixed something|bug
-- added feature
-- asdfghjklö
-- qwertz
-- random shit
-- minor changes
-- offensive messages
-- correcting typo
+Some examples of invalid commit messages are:
+
+Fixed something|bug, added feature, asdfghjklö, qwertz, random shit, minor changes, offensive messages or correcting typo.
+
+Valid messages could look like this:
+
+* Updated UserRepository to use generics
+* Fixed alignment of delete button on the user edit modal. Fixes #1343
+
+Also, please use multiple `-m`s for `git commit` to create multiple lines. If you are using a GUI to create your commits, you should be able to just write stuff on multiple lines. A good thing to put on a second line would be a more detailed description of the changes or a Github reference like `Fixes #1343`.
+
+Full example: `git commit -a -m "Use multiple instances to link Institution to Class" -m "Querydsl is acting weird (only returning the first result) if two Institutions are linked by the same instance of InstitutionClass" -m "Fixes #1343" `
 
 ##Branch naming
 
 We want to have some branch categories and those categories have their own prefix.
 
 - **feature**
-   adding a new feature e.g. a user story
+  Anything related to a user story. May only implement a part of the user story.
 - **bugfix**
-   fixing a bug, reference issue if it exists
+  Fixing a bug, reference the issue if there is one. Reference it like this: `bugfix/<issueid>-some-branch-name` where `<issueid>` quite obviously represents the id of the issue.
 - **doc**
-   changing documentation files, mostly *.md files
+  Changing documentation files like this one. You could also use this if you are going on a mission to Javadoc every method that exists (for example).
 - **upgrade**
-   3rd party library update like Angular or angular-cli
+  3rd party library updates like Angular or angular-cli.
 - **config**
-   configuration changes e.g. gradle etc.
+  Configuration changes, e.g. 
 - **amend**
-   changing non-feature related things in code (e.g. frontend changing scaffolding)
+   Any code changes that don't fit into the other categories.
 
-Those are the most common branch types.
-All of them follow the same syntax in naming. 
-Use the name from above as a prefix, then a slash (/) and after that a short identifier.
+All of them follow the same syntax: chose one of the prefixes and append a short, lower- and [kebab-case](https://en.wikipedia.org/wiki/Letter_case#Special_case_styles) identifier, separated by a slash.
 
 Example:
 `feature/calculate-mark-report`
 
 ##Pushing and Pull requests
 
-Minor changes (change on one file, less than 5 lines and without bigger influence) can be pushed to the master branch directly.
-For every other change please create a pull request.
+Minor changes can be pushed to the `develop` branch directly. Minor changes must fulfill the following criteria:
+
+* Changes to one file
+* Less than 5 [LLOC](https://en.wikipedia.org/wiki/Source_lines_of_code#Measurement_methods)
+* No wider influence
+
+For all other changes, please create a branch and pull request.
 
 ###Branches 
-According to [Git-Flow](https://danielkummer.github.io/git-flow-cheatsheet/) we want to have an organized branching.
+Our branch names are inspired by [git-flow](https://danielkummer.github.io/git-flow-cheatsheet/#getting_started).
 
-* Master: Used for releases only
-* Development: Use this to add all your fancy stable features to our system
-* feature/YourFeature: Please use your own branch to develop your stuff.
+* `master`: Used for releases only
+* `develop`: Should only contain finished, tested and stable features
+* `feature/my-awesome-feature`: Every feature gets a branch and it can be unstable or even unbuildable.
 
 ##Issues
-To track our bugs and tasks we use the GitHub issue feature.
-Every issue must be labeled. (e.g.: question, bug)
+We use Github issues to track bugs and tasks. Additionally, we use ZenHub for Scrum-related stuff.
+Every issue (by contributors) must be labeled (e.g.: `question`, `bug`, `task`).
 
 ### Bugs
 If you find a bug please take the time to report it.
-Your first step should be to check the existing issues for information about your problem.
-To make sure we can fix the bug as soon as possible we would like to add some rules.
- 
-The issue must contain the following data:
+Your first step should be to check if there is an existing issue that matches the bug you encountered. If you find an existing issue, you might be able to add some detail but please don't open another issue.
+
+
+To make the process of reproducing and fixing a bug quicker, we would like to ask you to include the following fields in your bug report:
+
 1. Browser and version
-2. Step by step description (about how we can reproduce the bug)
+2. Steps to reproduce the bug
 3. Short comment
 
-Please **label your issue as bug** and we will take a look at it as soon as possible.
