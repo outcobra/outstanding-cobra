@@ -1,6 +1,6 @@
 <div class="datepicker-wrapper">
     <md-input [type]="'text'" [ngModel]="formattedDate" (ngModelChange)="inputDateChanged($event)">
-        <button md-icon-button md-suffix (click)="open()"> <!-- todo stop click propagation -->
+        <button md-icon-button md-suffix (click)="toggle()"> <!-- todo stop click propagation -->
             <md-icon>event</md-icon>
         </button>
     </md-input>
@@ -12,8 +12,8 @@
         <yearpicker *ngSwitchCase="'year'"></yearpicker>
         <daypicker *ngSwitchDefault></daypicker>
         <div class="datepicker-footer">
-            <button md-button>Cancel</button>
-            <button md-button>OK</button>
+            <button md-button (click)="cancel()">Cancel</button>
+            <button md-button (click)="submit()">OK</button>
         </div>
     </div>
 </div>

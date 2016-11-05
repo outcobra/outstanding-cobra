@@ -1,6 +1,6 @@
 import {
     Component, OnInit, ViewEncapsulation, ElementRef, Renderer, HostBinding, AfterContentInit,
-    EventEmitter, Output, ViewChild, ContentChild
+    EventEmitter, Output, ContentChild
 } from '@angular/core';
 
 @Component({
@@ -8,8 +8,7 @@ import {
     template: `<ng-content></ng-content>`,
     encapsulation: ViewEncapsulation.None,
     host: {
-        '(transitionend)': 'onTransitionEnd($event)',
-        '(document: click)': 'onDocumentClick($event)'
+        '(transitionend)': 'onTransitionEnd($event)'
     }
 })
 export class SidenavComponent implements OnInit {
@@ -98,12 +97,6 @@ export class SidenavComponent implements OnInit {
             }
             this.openPromise = null;
             this.closePromise = null;
-        }
-    }
-
-    onDocumentClick(event: Event) {
-        if (event.target !== this.elRef.nativeElement && !this.transition) {
-            this.close();
         }
     }
 

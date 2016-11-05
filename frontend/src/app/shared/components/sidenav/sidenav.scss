@@ -1,8 +1,9 @@
 @import '../../../../sass/color';
 
 sidenav-layout {
+    box-sizing: border-box;
     display: block;
-    overflow: hidden;
+    height: 100%;
 }
 sidenav-layout.sidenav-shown {
     .sidenav-overlay {
@@ -29,7 +30,6 @@ sidenav-layout.sidenav-shown {
 .sidenav-content {
     display: block;
     height: 100%;
-    overflow: auto;
     margin-left: 50px;
 }
 
