@@ -92,8 +92,11 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
         }
     }
 
-    inputDateChanged(value: any) {
-        console.log(value);
+    inputDateChanged() { // todo make a better parser for the input field (low priority)
+        let date = Date.parse(this.formattedDate);
+        if (!isNaN(date)) {
+            this.selectDate(new Date(date));
+        }
     }
 
     formatDate(date: Date) {
@@ -117,9 +120,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
     }
 
     selectDate(date: Date) {
-        console.log(date);
         this.currentDate = date;
-        console.log(date);
         this.writeValue(date);
         this.onSelectDate.emit(date);
         this.formattedDate = this.formatDate(date);
@@ -131,7 +132,6 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
 
     writeValue(value: any): void {
         if (value && this.outDate !== value) {
-            console.log(this);
             this.outDate = value;
             this.onChangeCallback(value);
         }

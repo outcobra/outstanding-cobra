@@ -16,26 +16,26 @@ export class NotificationWrapperService extends NotificationsService {
         clickToClose: true
     };
 
-    private ic: Icons = appIcons; // can't name it icons because of super class
+    private icns: Icons = appIcons; // can't name it icons because of super class
 
     constructor(private translateService: TranslateService) {
         super();
     }
 
     success(title: string, content: string, optionsOverride?: any): Notification {
-        return this.create(title, content, 'success', this.ic.success, optionsOverride);
+        return this.create(title, content, 'success', this.icns.success, optionsOverride);
     }
 
     error(title: string, content: string, optionsOverride?: any): Notification {
-        return this.create(title, content, 'error', this.ic.error, optionsOverride);
+        return this.create(title, content, 'error', this.icns.error, optionsOverride);
     }
 
     alert(title: string, content: string, optionsOverride?: any): Notification {
-        return this.create(title, content, 'alert', this.ic.alert, optionsOverride);
+        return this.create(title, content, 'alert', this.icns.alert, optionsOverride);
     }
 
     info(title: string, content: string, optionsOverride?: any): Notification {
-        return this.create(title, content, 'info', this.ic.info, optionsOverride);
+        return this.create(title, content, 'info', this.icns.info, optionsOverride);
     }
 
     create(title: string, content: string, type: string, icon: string, optionsOverride?: any): Notification {
