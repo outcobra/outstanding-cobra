@@ -2,7 +2,6 @@ package outcobra.server.filter
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.slf4j.LoggerFactory
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Component
 import org.springframework.web.bind.annotation.RequestMethod
@@ -28,27 +27,34 @@ import javax.servlet.http.HttpServletRequest
  * Created by bbuerf on 01.11.2016.
  */
 @Component
-open class RequestAuthorizationFilter @Inject constructor(institutionRepository: InstitutionRepository, schoolClassRepository: SchoolClassRepository) : GenericFilterBean() {
+open class RequestAuthorizationFilter @Inject constructor(val userService: UserService, institutionRepository: InstitutionRepository, schoolClassRepository: SchoolClassRepository) : GenericFilterBean() {
     private val LOGGER = LoggerFactory.getLogger(javaClass)
-    var endpointObjectMapping = HashMap<String, Class<out MappableDto<*, out OwnerVerifiable>>>()
-    var endpointRepositoryMapping = HashMap<String, JpaRepository<out OwnerVerifiable, Long>>()
-    @Autowired
-    lateinit var userService: UserService
+    var uriObjectMapping = HashMap<String, Class<out MappableDto<*, out OwnerVerifiable>>>()
+    var uriRepositoryMapping = HashMap<String, JpaRepository<out OwnerVerifiable, Long>>()
 
     init {
-        //endpointObjectMapping.put("api/user", UserDto::class.java)
-        endpointObjectMapping.put("api/institution", InstitutionDto::class.java)
-        endpointObjectMapping.put("api/class", SchoolClassDto::class.java)
-        endpointObjectMapping.put("api/teacher", TeacherDto::class.java)
+        //uriObjectMapping.put("api/user", UserDto::class.java)
+        uriObjectMapping.put("api/institution", InstitutionDto::class.java)
+        uriObjectMapping.put("api/class", SchoolClassDto::class.java)
+        uriObjectMapping.put("api/teacher", TeacherDto::class.java)
 
-        endpointRepositoryMapping.put("api/institution", institutionRepository)
-        endpointRepositoryMapping.put("api/class", schoolClassRepository)
+        uriRepositoryMapping.put("api/institution", institutionRepository)
+        uriRepositoryMapping.put("api/class", schoolClassRepository)
     }
 
     private val uriPattern = Pattern.compile("^/?(.*?)/?$")
+    private val typePattern = Pattern.compile("api/(.*?)/(\\d+).*")
 
-    private fun normalizeUrl(url: String): String {
-        val matcher = uriPattern.matcher(url)
+
+    private fun normalizeUri(uri: String): String {
+        val matcher = uriPattern.matcher(uri)
+        if (!matcher.matches()) return ""
+        else return matcher.group(1)
+    }
+
+    private fun extractType(uri: String): String {
+        normalizeUri(uri)
+        val matcher = typePattern.matcher(uri)
         if (!matcher.matches()) return ""
         else return matcher.group(1)
     }
@@ -57,7 +63,7 @@ open class RequestAuthorizationFilter @Inject constructor(institutionRepository:
         if (request is HttpServletRequest) {
             var userId = userService.getCurrentUser().userId
             var method = request.method
-            var type = endpointObjectMapping[normalizeUrl(request.requestURI)]
+            var type = uriObjectMapping[normalizeUri(request.requestURI)]
             if (method.equals(RequestMethod.POST)) {
                 var json = request.reader.readText()
                 var entity = ObjectMapper().readValue(json, type).toEntity()
