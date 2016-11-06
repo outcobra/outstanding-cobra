@@ -2,6 +2,7 @@ import {
     Component, OnInit, ViewEncapsulation, ElementRef, Renderer, HostBinding, AfterContentInit,
     EventEmitter, Output, ContentChild
 } from '@angular/core';
+import {Router, NavigationEnd} from "@angular/router";
 
 @Component({
     selector: 'sidenav',
@@ -28,7 +29,12 @@ export class SidenavComponent implements OnInit {
     private closePromiseResolve: () => void;
     private closePromiseReject: () => void;
 
-    constructor(private elRef: ElementRef, private renderer: Renderer) {
+    constructor(private elRef: ElementRef, private renderer: Renderer, private router: Router) {
+        this.router.events.subscribe((event) => {
+            if (event instanceof NavigationEnd) {
+                this.close();
+            }
+        });
     }
 
     ngOnInit() {

@@ -3,6 +3,7 @@ import * as moment from 'moment';
 import {DateUtil} from "../../services/date-util.service";
 import {DatePickerMaxDateSmallerThanMinDateError} from "./datepicker-errors";
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
+import {Router, NavigationStart, NavigationEnd} from "@angular/router";
 
 const noop = () => {};
 
@@ -62,7 +63,8 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
         this.opened = false;
     }
 
-    toggle() {
+    toggle(event: Event) {
+        event.stopPropagation();
         if (this.isOpen()) {
             this.close();
         } else {
