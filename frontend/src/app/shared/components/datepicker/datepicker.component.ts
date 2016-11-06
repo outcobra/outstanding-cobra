@@ -1,8 +1,9 @@
-import {Component, Input, OnInit, ViewEncapsulation, forwardRef, ElementRef} from '@angular/core';
+import {Component, Input, OnInit, ViewEncapsulation, forwardRef, ElementRef, Output, EventEmitter} from '@angular/core';
 import * as moment from 'moment';
 import {DateUtil} from "../../services/date-util.service";
 import {DatePickerMaxDateSmallerThanMinDateError} from "./datepicker-errors";
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
+import {Router, NavigationStart, NavigationEnd} from "@angular/router";
 
 const noop = () => {};
 
@@ -35,6 +36,8 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
     // date for inputField
     private formattedDate: string;
 
+    @Output() onSelectDate = new EventEmitter<Date>();
+
     private onTouchedCallback: () => void = noop;
     private onChangeCallback: (_: any) => void = noop;
 
@@ -56,10 +59,12 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
     }
 
     close() {
+        this.onTouchedCallback();
         this.opened = false;
     }
 
-    toggle() {
+    toggle(event: Event) {
+        event.stopPropagation();
         if (this.isOpen()) {
             this.close();
         } else {
@@ -71,6 +76,15 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
         return this.opened;
     }
 
+    submit() {
+        this.close();
+    }
+
+    cancel() {
+        this.selectDate(this.initDate);
+        this.close();
+    }
+
     // target function of document click (see @Component Metadata)
     onDocumentClick(event: Event) {
         if (!this.elementRef.nativeElement.contains(event.target)) {
@@ -78,12 +92,25 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
         }
     }
 
-    inputDateChanged(value: any) {
-        console.log(value);
+    inputDateChanged() { // todo make a better parser for the input field (low priority)
+        let date = Date.parse(this.formattedDate);
+        if (!isNaN(date)) {
+            this.selectDate(new Date(date));
+        }
+    }
+
+    formatDate(date: Date) {
+        return moment(date).format('DD.MM.YYYY');
     }
 
     checkInitDate(): Date {
-        let date = (this.initDate instanceof Date) ? this.initDate : new Date();
+        let date:Date;
+        if (this.initDate instanceof Date) {
+            date = this.initDate;
+            this.formattedDate = this.formatDate(date);
+        } else {
+            date = new Date();
+        }
         if (this.dateUtil.isBetweenDay(date, this.minDate, this.maxDate)) {
             return date;
         }
@@ -95,6 +122,8 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
     selectDate(date: Date) {
         this.currentDate = date;
         this.writeValue(date);
+        this.onSelectDate.emit(date);
+        this.formattedDate = this.formatDate(date);
     }
 
     selectYear(date: Date) {
@@ -102,7 +131,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
     }
 
     writeValue(value: any): void {
-        if (this.outDate !== value) {
+        if (value && this.outDate !== value) {
             this.outDate = value;
             this.onChangeCallback(value);
         }
