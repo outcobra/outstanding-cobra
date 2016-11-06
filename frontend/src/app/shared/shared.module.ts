@@ -14,16 +14,21 @@ import {YearpickerComponent} from "./components/datepicker/yearpicker.component"
 import {DateUtil} from "./services/date-util.service";
 import {FormsModule} from "@angular/forms";
 import {AuthService} from "./services/auth/auth.service";
+import {SidenavComponent, SidenavLayout} from "./components/sidenav/sidenav";
 
 @NgModule({
     declarations: [
         TimepickerComponent,
         DatepickerComponent,
         DaypickerComponent,
-        YearpickerComponent
+        YearpickerComponent,
+        SidenavComponent,
+        SidenavLayout
     ],
     exports: [
-        DatepickerComponent
+        DatepickerComponent,
+        SidenavComponent,
+        SidenavLayout
     ],
     imports: [
         HttpModule,
