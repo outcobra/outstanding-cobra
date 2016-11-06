@@ -1,6 +1,6 @@
 package outcobra.server.model.dto
 
-import noutcobra.server.model.mapper.MappableDto
+import outcobra.server.model.mapper.MappableDto
 import outcobra.server.model.TimetableEntry
 import outcobra.server.model.mapper.Mapper
 

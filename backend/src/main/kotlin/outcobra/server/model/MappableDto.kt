@@ -1,4 +1,4 @@
-package noutcobra.server.model.mapper
+package outcobra.server.model.mapper
 
 import outcobra.server.model.Mappable
 

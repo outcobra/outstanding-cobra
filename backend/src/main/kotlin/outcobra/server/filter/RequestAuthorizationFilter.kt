@@ -1,7 +1,6 @@
 package outcobra.server.filter
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import noutcobra.server.model.mapper.MappableDto
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
@@ -10,6 +9,7 @@ import org.springframework.web.filter.GenericFilterBean
 import outcobra.server.model.dto.InstitutionDto
 import outcobra.server.model.dto.SchoolClassDto
 import outcobra.server.model.dto.TeacherDto
+import outcobra.server.model.mapper.MappableDto
 import outcobra.server.model.marker.OwnerVerifiable
 import outcobra.server.service.UserService
 import java.util.*
