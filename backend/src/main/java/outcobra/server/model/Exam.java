@@ -7,12 +7,12 @@ import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-import outcobra.server.model.dto.EamDto;
+import outcobra.server.model.dto.ExamDto;
 import outcobra.server.model.mapper.Mapper;
 import outcobra.server.model.marker.OwnerVerifiable;
 
 @Entity
-public class Exam implements OwnerVerifiable, MappableEntity<EamDto,Exam> {
+public class Exam implements OwnerVerifiable, MappableEntity<ExamDto,Exam> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -133,14 +133,14 @@ public class Exam implements OwnerVerifiable, MappableEntity<EamDto,Exam> {
     }
 
     @Override
-    public EamDto toDto() {
+    public ExamDto toDto() {
         return null;
     }
 
     @org.jetbrains.annotations.NotNull
     @Override
-    public Mapper<EamDto, Exam> getMapper() {
-        return null;
+    public Mapper<ExamDto, Exam> getMapper() {
+        throw new UnsupportedOperationException("not implemented");
     }
 
     //endregion

@@ -57,43 +57,43 @@ class DefaultAuthorizationService
     }
 
     override fun verifyOwner(timetable: Timetable): Boolean {
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+        throw UnsupportedOperationException("not implemented")
     }
 
     override fun verifyOwner(timetableEntry: TimetableEntry): Boolean {
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+        throw UnsupportedOperationException("not implemented")
     }
 
     override fun verifyOwner(markReport: MarkReport): Boolean {
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+        throw UnsupportedOperationException("not implemented")
     }
 
     override fun verifyOwner(mark: Mark): Boolean {
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+        throw UnsupportedOperationException("not implemented")
     }
 
     override fun verifyOwner(markGroup: MarkGroup): Boolean {
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+        throw UnsupportedOperationException("not implemented")
     }
 
     override fun verifyOwner(markReportEntry: MarkReportEntry): Boolean {
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+        throw UnsupportedOperationException("not implemented")
     }
 
     override fun verifyOwner(task: Task): Boolean {
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+        throw UnsupportedOperationException("not implemented")
     }
 
     override fun verifyOwner(exam: Exam): Boolean {
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+        throw UnsupportedOperationException("not implemented")
     }
 
     override fun verifyOwner(examTask: ExamTask): Boolean {
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+        throw UnsupportedOperationException("not implemented")
     }
 
     override fun verifyOwner(markValue: MarkValue): Boolean {
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+        throw UnsupportedOperationException("not implemented")
     }
 
 }

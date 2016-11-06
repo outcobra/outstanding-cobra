@@ -9,11 +9,11 @@ import outcobra.server.model.mapper.Mapper
  */
 class SchoolYearDto : MappableDto<SchoolYearDto, SchoolYear> {
     override fun getMapper(): Mapper<SchoolYearDto, SchoolYear> {
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+        throw UnsupportedOperationException("not implemented")
     }
 
     override fun toEntity(): SchoolYear {
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+        throw UnsupportedOperationException("not implemented")
     }
 //TODO Implement
 }

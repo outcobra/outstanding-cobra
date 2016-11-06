@@ -9,10 +9,10 @@ import outcobra.server.model.mapper.Mapper
  */
 class ExamTaskDto : MappableDto<ExamTaskDto,ExamTask> {
     override fun getMapper(): Mapper<ExamTaskDto, ExamTask> {
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+        throw UnsupportedOperationException("not implemented")
     }
 
     override fun toEntity(): ExamTask {
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+        throw UnsupportedOperationException("not implemented")
     }
 }

@@ -6,10 +6,10 @@ import outcobra.server.model.mapper.Mapper
 
 data class UserDto(val userId: String, val username: String) : MappableDto<UserDto, User> {
     override fun getMapper(): Mapper<UserDto, User> {
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+        throw UnsupportedOperationException("not implemented")
     }
 
     override fun toEntity(): User {
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+        throw UnsupportedOperationException("not implemented")
     }
 }
