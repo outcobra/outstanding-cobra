@@ -20,7 +20,7 @@ open class DefaultUserService
         val userDetails = getUserDetails()
         try {
             val user = userRepository.getOne(userDetails.getAuth0Attribute("sub") as String)
-            return userDtoMapper toDto user
+            return userDtoMapper.toDto(user)
         } catch (e: EntityNotFoundException) {
             return UserDto("", "")
         }

@@ -43,7 +43,6 @@ export class HttpInterceptor {
                 headers: request.headers,
                 search: this.buildUrlSearchParams(request.params),
                 body: JSON.stringify(request.data)
-
             })
         ).catch(error => {
             this.notificationsService.error('Error!', 'Requested resource could not be found.'); // TODO i18n + i18nKey by error.status
@@ -81,7 +80,6 @@ export class HttpInterceptor {
             apiName: apiName
         })
     }
-
 
     put(url: string, data: any, apiName?: string, params?: any): Observable<Response> {
         return this.request({
@@ -136,7 +134,6 @@ export class HttpInterceptor {
         return value;
     }
 
-
     private addContentType(request: any) {
         if (request.method !== RequestMethod.Get || request.method !== RequestMethod.Delete) {
             request.headers['Content-Type'] = "application/json ; charset=UTF-8";
@@ -174,7 +171,7 @@ export class HttpInterceptor {
     }
 
     private removeRepeatedSlashes(str: string): string {
-        return str.replace(/\/{2,}/g, "/");
+        return str.replace(/([^:])\/{2,}/g, (match, prefix) => prefix + '/');
     }
 }
 
