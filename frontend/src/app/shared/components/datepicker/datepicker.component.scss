@@ -6,12 +6,13 @@
 
     .datepicker {
         overflow: hidden;
-        display: none;
+        display: block;
+        visibility: hidden;
         z-index: 1000;
         position: absolute;
     }
     .datepicker.opened {
-        display: block;
+        visibility: visible;
     }
 
     .datepicker-header {

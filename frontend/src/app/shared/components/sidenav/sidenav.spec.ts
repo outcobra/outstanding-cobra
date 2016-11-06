@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { SidenavComponent } from './sidenav.component';
+import { SidenavComponent } from './sidenav';
 
 describe('SidenavComponent', () => {
   let component: SidenavComponent;
