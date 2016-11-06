@@ -13,7 +13,7 @@ class UserController @Inject constructor(val userService: UserService) {
 
     @RequestMapping(method = arrayOf(RequestMethod.GET))
     fun getCurrentUser(): UserDto {
-        return userService.getCurrentUser()
+        return userService.getCurrentUserDto()
     }
 
 }

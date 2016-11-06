@@ -30,6 +30,12 @@ public class Institution {
         this.schoolClasses = new ArrayList<>();
     }
 
+    public Institution(String name, User user) {
+        this();
+        this.name = name;
+        this.user = user;
+    }
+
     public Institution(String name, User user, List<SchoolClass> schoolClasses, List<Teacher> teachers) {
         this.name = name;
         this.user = user;
