@@ -1,5 +1,29 @@
 {
-  "demo": {
-    "hello": "Hallo {{target}}!"
-  }
+    "common": {
+        "actions": {
+            "save": "Speichern",
+            "delete": "Löschen",
+            "cancel": "Abbrechen"
+        }
+    },
+    "modules": {
+        "exam": {
+            "linkTitle": "Prüfungen"
+        },
+        "mark": {
+            "linkTitle": "Noten"
+        },
+        "task": {
+            "linkTitle": "Aufgaben"
+        },
+        "timetable": {
+            "linkTitle": "Stundenplan"
+        },
+        "dashboard": {
+            "linkTitle": "Dashboard"
+        },
+        "manage": {
+            "linkTitle": "Verwalten"
+        }
+    }
 }

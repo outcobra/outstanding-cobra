@@ -1,6 +1,6 @@
 import {
-    Component, OnInit, ViewEncapsulation, ElementRef, Renderer, HostBinding, AfterContentInit,
-    EventEmitter, Output, ContentChild
+    Component, ViewEncapsulation, ElementRef, Renderer, HostBinding,
+    EventEmitter, Output, ContentChild, AfterViewChecked, AfterContentInit
 } from '@angular/core';
 import {Router, NavigationEnd} from "@angular/router";
 
@@ -12,7 +12,7 @@ import {Router, NavigationEnd} from "@angular/router";
         '(transitionend)': 'onTransitionEnd($event)'
     }
 })
-export class SidenavComponent implements OnInit {
+export class SidenavComponent implements AfterViewChecked {
 
     public opened = false;
     private transition: boolean;
@@ -37,7 +37,7 @@ export class SidenavComponent implements OnInit {
         });
     }
 
-    ngOnInit() {
+    ngAfterViewChecked() {
         this.updateSidenavStyle();
     }
 

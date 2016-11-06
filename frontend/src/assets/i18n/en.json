@@ -1,9 +1,29 @@
 {
-    "demo": {
-        "hello": "Hello {{target}}!",
-        "error": {
-            "content": "error fuck",
-            "title": "fucking error"
+    "common": {
+        "actions": {
+            "save": "Save",
+            "delete": "Delete",
+            "cancel": "cancel"
+        }
+    },
+    "modules": {
+        "exam": {
+
+        },
+        "mark": {
+
+        },
+        "task": {
+
+        },
+        "timetable": {
+
+        },
+        "dashboard": {
+            "linkTitle": "Dashboard"
+        },
+        "manage": {
+            "linkTitle": "Manage"
         }
     }
 }
