@@ -36,8 +36,8 @@ export class AuthService {
 
 
         this.lock.on('authenticated', (authResult) => {
+            localStorage.setItem(this.config.get('locStorage.tokenLocation'), authResult.idToken);
             this.lock.getProfile(authResult.idToken, (err, profile) => {
-                localStorage.setItem(this.config.get('locStorage.tokenLocation'), authResult.idToken);
                 localStorage.setItem(this.config.get('locStorage.profileLocation'), JSON.stringify(profile));
             });
             this.router.navigate(['/dashboard']);
@@ -61,9 +61,7 @@ export class AuthService {
 
 
     isLoggedIn(): boolean {
-        let expired = tokenNotExpired();
-        //console.log(expired);
-        return expired;
+        return tokenNotExpired();
     }
 
 }
