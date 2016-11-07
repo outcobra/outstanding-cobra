@@ -13,8 +13,6 @@ export class AppComponent implements OnInit {
     constructor(private translate: TranslateService, private auth: AuthService) {
         this.translate.setDefaultLang('en');
         this.translate.use(this.translate.getBrowserLang());
-
-        console.log(translate.get('modules.manage.linkTitle').subscribe(res => console.log(res)));
     }
 
     ngOnInit(): void {

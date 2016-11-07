@@ -1,4 +1,6 @@
 @import '../../node_modules/materialize-css/sass/components/color';
+@import 'color';
+
 html {
     color: rgba(0, 0, 0, 0.87);
     display: block;
@@ -38,9 +40,9 @@ body {
     @extend .yellow, .darken-2;
 }
 
-md-sidenav-layout,
-.md-sidenav-content {
-    min-height: 100vh;
+sidenav {
+    @extend .color-accent;
+    width: 250px;
 }
 
 .toolbar-icon {
