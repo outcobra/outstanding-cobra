@@ -9,9 +9,6 @@ import outcobra.server.service.AuthorizationService
 import outcobra.server.service.UserService
 import javax.inject.Inject
 
-/**
- * Created by Florian on 30.10.2016.
- */
 @Component
 class DefaultAuthorizationService
 @Inject constructor(val userService: UserService,

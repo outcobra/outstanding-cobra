@@ -6,9 +6,6 @@ import org.springframework.context.annotation.Configuration
 import outcobra.server.filter.RequestAuthorizationFilter
 import javax.inject.Inject
 
-/**
- * Created by bbuerf on 01.11.2016.
- */
 @Configuration
 open class AppConfig {
     @Bean @Inject

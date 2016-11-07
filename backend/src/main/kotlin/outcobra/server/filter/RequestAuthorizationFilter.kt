@@ -23,9 +23,6 @@ import javax.servlet.ServletResponse
 import javax.servlet.http.HttpServletRequest
 
 
-/**
- * Created by bbuerf on 01.11.2016.
- */
 @Component
 open class RequestAuthorizationFilter @Inject constructor(val userService: UserService, institutionRepository: InstitutionRepository, schoolClassRepository: SchoolClassRepository) : GenericFilterBean() {
     private val LOGGER = LoggerFactory.getLogger(javaClass)

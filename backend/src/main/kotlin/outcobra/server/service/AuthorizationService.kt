@@ -2,9 +2,6 @@ package outcobra.server.service
 
 import outcobra.server.model.*
 
-/**
- * Created by Florian on 30.10.2016.
- */
 interface AuthorizationService {
     fun verifyOwner(user: User): Boolean
     fun verifyOwner(institution: Institution): Boolean
