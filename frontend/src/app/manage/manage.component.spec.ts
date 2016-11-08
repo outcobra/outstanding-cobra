@@ -1,7 +1,7 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {ManagerComponent} from './manager.component';
+import {ManagerComponent} from './manage.component';
 
 describe('ManagerComponent', () => {
   let component: ManagerComponent;

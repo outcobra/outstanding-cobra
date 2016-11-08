@@ -10,9 +10,7 @@ import {AuthService} from "./shared/services/auth/auth.service";
 export class AppComponent implements OnInit {
     title = 'Outcobra!';
 
-    constructor(private translate: TranslateService, private auth: AuthService) {
-        this.translate.setDefaultLang('en');
-        this.translate.use(this.translate.getBrowserLang());
+    constructor(private auth: AuthService) {
     }
 
     ngOnInit(): void {

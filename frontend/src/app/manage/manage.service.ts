@@ -1,19 +1,23 @@
 import {Injectable} from "@angular/core";
 import {HttpInterceptor} from "../shared/http/HttpInterceptor";
 import {Observable} from "rxjs";
-import {Institution} from "./Institution";
 import 'rxjs/add/operator/map';
+import {Response} from "@angular/http";
+import {ManageData} from "./manage-data";
 
 @Injectable()
-export class ManagerService {
+export class ManageService {
 
     constructor(private http: HttpInterceptor) {}
 
-    public createInstitution(institutionName: string): Observable<Institution> {
+    public getManageData(): Observable<Response> {
+        return this.http.get('/manage', 'outcobra');
+    }
+
+    public createInstitution(institutionName: string): Observable<Response> {
         return this.http.post('/institution', {
             institutionName: institutionName
         }, 'outcobra')
-            .map(res => res as Institution);
     }
 
 }

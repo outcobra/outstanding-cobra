@@ -19,13 +19,13 @@ open class DefaultManageService : ManageService {
                                                 Arrays.asList(
                                                         SchoolYearDto(
                                                                 1, "2016/17",
-                                                                LocalDate.MIN,
-                                                                LocalDate.MAX,
+                                                                LocalDate.of(2016, 8, 1),
+                                                                LocalDate.of(2017, 7, 31),
                                                                 Arrays.asList(
                                                                         SemesterDto(
                                                                                 1, "1. Semester",
-                                                                                LocalDate.MIN,
-                                                                                LocalDate.MAX,
+                                                                                LocalDate.of(2016, 8, 1),
+                                                                                LocalDate.of(2017, 1, 30),
                                                                                 Arrays.asList(
                                                                                         SubjectDto(
                                                                                                 1, "Mathematik"

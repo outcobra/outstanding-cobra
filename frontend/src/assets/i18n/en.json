@@ -8,28 +8,26 @@
     },
     "modules": {
         "exam": {
-
         },
         "mark": {
-
         },
         "task": {
-
         },
         "timetable": {
-
         },
         "dashboard": {
             "linkTitle": "Dashboard"
         },
         "manage": {
             "linkTitle": "Manage"
-    "login": {
-    },
-    "http": {
-        "error": {
-            "title": "Error!",
-            "message": "A server-side error occurred! Please try again."
+        },
+        "login": {
+        },
+        "http": {
+            "error": {
+                "title": "Error!",
+                "message": "A server-side error occurred! Please try again."
+            }
         }
     }
 }

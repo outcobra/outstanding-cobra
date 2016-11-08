@@ -8,7 +8,7 @@ interface UserService {
     /**
      * Returns the currently logged-in user from the database
      */
-    fun getCurrentUser(): UserDto
+    fun getCurrentUserDto(): UserDto
 
     /**
      * Gets the user's Auth0UserDetails

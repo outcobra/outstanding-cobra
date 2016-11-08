@@ -10,7 +10,7 @@
         ]
     },
     "auth0": {
-        "clientID": "cVzf1vE5BOFKOqW8ic8sac0UqM2CqDN4",
+        "clientID": "Qih42aYQMS2CGCAqNkgalzFdIyacqi5r",
         "domain": "outcobra.eu.auth0.com",
         "callbackURL": "{TODO}"
     },
