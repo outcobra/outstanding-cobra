@@ -10,7 +10,7 @@
         ]
     },
     "auth0": {
-        "clientID": "1pKxXXDoMlxWxlNAEmIXpoJfxP7iscim",
+        "clientID": "Qih42aYQMS2CGCAqNkgalzFdIyacqi5r",
         "domain": "outcobra.eu.auth0.com",
         "callbackURL": "http://localhost:4200/"
     },

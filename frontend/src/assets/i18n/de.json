@@ -1,5 +1,13 @@
 {
-  "demo": {
-    "hello": "Hallo {{target}}!"
-  }
+    "login": {
+    },
+    "http": {
+        "error": {
+            "title": "Fehler!",
+            "message": "Ein serverseitiger Fehler ist aufgetreten! Bitte versuchen Sie es nochmals."
+        }
+    },
+    "demo": {
+        "hello": "Hallo {{target}}!"
+    }
 }

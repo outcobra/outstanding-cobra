@@ -1,13 +1,10 @@
 import {Injectable} from "@angular/core";
-import {
-    Http, Request, Response,
-    RequestMethod, URLSearchParams
-} from "@angular/http";
+import {Http, Request, Response, RequestMethod, URLSearchParams} from "@angular/http";
+import {NotificationWrapperService} from "../notifications/notification-wrapper.service";
+import {Config} from "../../config/Config";
 import {Observable} from "rxjs";
-import {NotificationsService} from "angular2-notifications";
 import "rxjs/add/operator/map";
 import * as _ from "underscore";
-import {Config} from "../../config/Config";
 
 @Injectable()
 export class HttpInterceptor {
@@ -15,7 +12,7 @@ export class HttpInterceptor {
     private apiNames: string[];
     private defaultApiName: string;
 
-    constructor(private http: Http, private notificationsService: NotificationsService, private config: Config) {
+    constructor(private http: Http, private notificationsService: NotificationWrapperService, private config: Config) {
         this.defaultApiName = this.config.get('api.defaultApiName');
         this.apiNames = this.config.get('api.apis').map(api => {
             return api['name']
@@ -45,7 +42,7 @@ export class HttpInterceptor {
                 body: JSON.stringify(request.data)
             })
         ).catch(error => {
-            this.notificationsService.error('Error!', 'Requested resource could not be found.'); // TODO i18n + i18nKey by error.status
+            this.notificationsService.error('http.error.title', 'http.error.message'); // TODO i18n + i18nKey by error.status
             return Observable.empty();
         }).map(this.unwrapHttpResponse);
     }

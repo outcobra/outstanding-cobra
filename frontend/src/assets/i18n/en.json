@@ -1,4 +1,12 @@
 {
+    "login": {
+    },
+    "http": {
+        "error": {
+            "title": "Error!",
+            "message": "A server-side error occurred! Please try again."
+        }
+    },
     "demo": {
         "hello": "Hello {{target}}!",
         "error": {
