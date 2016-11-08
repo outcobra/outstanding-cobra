@@ -6,13 +6,13 @@ import com.auth0.spring.security.api.Auth0UserDetails
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Component
 import outcobra.server.config.Auth0Client
+import outcobra.server.model.QUser
 import outcobra.server.model.User
 import outcobra.server.model.dto.UserDto
 import outcobra.server.model.mapper.Mapper
 import outcobra.server.model.repository.UserRepository
 import outcobra.server.service.UserService
 import javax.inject.Inject
-import javax.persistence.EntityNotFoundException
 
 @Component
 open class DefaultUserService
@@ -26,12 +26,9 @@ open class DefaultUserService
     }
 
     override fun getCurrentUser(): UserDto {
-        try {
-            val user = userRepository.getOne(getTokenUserId())
-            return userDtoMapper.toDto(user)
-        } catch (e: EntityNotFoundException) {
-            return UserDto("", "")
-        }
+        val auth0Id = getTokenUserId()
+        val user = userRepository.findOne(QUser.user.auth0Id.eq(auth0Id)) ?: return UserDto("", "")
+        return userDtoMapper.toDto(user)
     }
 
     override fun getUserProfile(): UserProfile {
