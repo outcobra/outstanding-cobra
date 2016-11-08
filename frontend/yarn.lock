@@ -270,7 +270,7 @@ angular-cli@1.0.0-beta.18:
     tslint-loader "^2.1.4"
     typedoc "^0.4.2"
     typescript "~2.0.3"
-    uri-loader "^0.5.7"
+    url-loader "^0.5.7"
     webpack "2.1.0-beta.25"
     webpack-dev-server "2.1.0-beta.9"
     webpack-md5-hash "0.0.5"
@@ -1392,9 +1392,9 @@ clap@^1.0.9:
   dependencies:
     chalk "^1.1.3"
 
-clean-base-uri@^1.0.0:
+clean-base-url@^1.0.0:
   version "1.0.0"
-  resolved "https://registry.yarnpkg.com/clean-base-uri/-/clean-base-uri-1.0.0.tgz#c901cf0a20b972435b0eccd52d056824a4351b7b"
+  resolved "https://registry.yarnpkg.com/clean-base-url/-/clean-base-url-1.0.0.tgz#c901cf0a20b972435b0eccd52d056824a4351b7b"
 
 clean-css-promise@^0.1.0:
   version "0.1.1"
@@ -1911,7 +1911,7 @@ cssesc@^0.1.0:
     postcss-minify-params "^1.0.4"
     postcss-minify-selectors "^2.0.4"
     postcss-normalize-charset "^1.1.0"
-    postcss-normalize-uri "^3.0.7"
+    postcss-normalize-url "^3.0.7"
     postcss-ordered-values "^2.1.0"
     postcss-reduce-idents "^2.2.2"
     postcss-reduce-initial "^1.0.0"
@@ -2297,7 +2297,7 @@ ember-cli@2.5.0:
     broccoli-source "^1.1.0"
     broccoli-viz "^2.0.1"
     chalk "^1.1.1"
-    clean-base-uri "^1.0.0"
+    clean-base-url "^1.0.0"
     compression "^1.4.4"
     configstore "^2.0.0"
     core-object "0.0.2"
@@ -2330,7 +2330,7 @@ ember-cli@2.5.0:
     http-proxy "^1.9.0"
     inflection "^1.7.0"
     inquirer "^0.12.0"
-    is-git-uri "^0.2.0"
+    is-git-url "^0.2.0"
     isbinaryfile "^2.0.3"
     leek "0.0.21"
     lodash "^4.6.1"
@@ -2396,7 +2396,7 @@ engine.io-client@1.6.9:
     indexof "0.0.1"
     parsejson "0.0.1"
     parseqs "0.0.2"
-    parseuri "0.0.4"
+    parseurl "0.0.4"
     ws "1.0.1"
     xmlhttprequest-ssl "1.5.1"
     yeast "0.1.2"
@@ -2724,7 +2724,7 @@ fast-sourcemap-concat@^1.0.1:
     mkdirp "^0.5.0"
     rsvp "^3.0.14"
     source-map "^0.4.2"
-    source-map-uri "^0.3.0"
+    source-map-url "^0.3.0"
 
 fastparse@^1.1.1:
   version "1.1.1"
@@ -3092,13 +3092,13 @@ git-repo-info@^1.0.4:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/git-repo-info/-/git-repo-info-1.3.0.tgz#d49c30955cf58c0ec1acd52d26bc5b8af13afd58"
 
-github-uri-from-git@~1.4.0:
+github-url-from-git@~1.4.0:
   version "1.4.0"
-  resolved "https://registry.yarnpkg.com/github-uri-from-git/-/github-uri-from-git-1.4.0.tgz#285e6b520819001bde128674704379e4ff03e0de"
+  resolved "https://registry.yarnpkg.com/github-url-from-git/-/github-url-from-git-1.4.0.tgz#285e6b520819001bde128674704379e4ff03e0de"
 
-github-uri-from-username-repo@~1.0.2:
+github-url-from-username-repo@~1.0.2:
   version "1.0.2"
-  resolved "https://registry.yarnpkg.com/github-uri-from-username-repo/-/github-uri-from-username-repo-1.0.2.tgz#7dd79330d2abe69c10c2cef79714c97215791dfa"
+  resolved "https://registry.yarnpkg.com/github-url-from-username-repo/-/github-url-from-username-repo-1.0.2.tgz#7dd79330d2abe69c10c2cef79714c97215791dfa"
 
 glob-base@^0.3.0:
   version "0.3.0"
@@ -3643,9 +3643,9 @@ ipaddr.js@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/ipaddr.js/-/ipaddr.js-1.1.1.tgz#c791d95f52b29c1247d5df80ada39b8a73647230"
 
-is-absolute-uri@^2.0.0:
+is-absolute-url@^2.0.0:
   version "2.0.0"
-  resolved "https://registry.yarnpkg.com/is-absolute-uri/-/is-absolute-uri-2.0.0.tgz#9c4b20b0e5c0cbef9a479a367ede6f991679f359"
+  resolved "https://registry.yarnpkg.com/is-absolute-url/-/is-absolute-url-2.0.0.tgz#9c4b20b0e5c0cbef9a479a367ede6f991679f359"
 
 is-arrayish@^0.2.1:
   version "0.2.1"
@@ -3709,9 +3709,9 @@ is-fullwidth-code-point@^1.0.0:
   dependencies:
     number-is-nan "^1.0.0"
 
-is-git-uri@^0.2.0:
+is-git-url@^0.2.0:
   version "0.2.3"
-  resolved "https://registry.yarnpkg.com/is-git-uri/-/is-git-uri-0.2.3.tgz#445200d6fbd6da028fb5e01440d9afc93f3ccb64"
+  resolved "https://registry.yarnpkg.com/is-git-url/-/is-git-url-0.2.3.tgz#445200d6fbd6da028fb5e01440d9afc93f3ccb64"
 
 is-glob@^2.0.0, is-glob@^2.0.1:
   version "2.0.1"
@@ -5092,7 +5092,7 @@ node-libs-browser@^1.0.0:
     string_decoder "~0.10.25"
     timers-browserify "^1.0.1"
     tty-browserify "0.0.0"
-    uri "~0.11.0"
+    url "~0.11.0"
     util "~0.10.3"
     vm-browserify "0.0.4"
 
@@ -5166,9 +5166,9 @@ nopt@^3.0.1, nopt@~3.0.1, nopt@~3.0.6, "nopt@2 || 3", nopt@3.x:
   dependencies:
     abbrev "1"
 
-normalize-git-uri@~3.0.1:
+normalize-git-url@~3.0.1:
   version "3.0.2"
-  resolved "https://registry.yarnpkg.com/normalize-git-uri/-/normalize-git-uri-3.0.2.tgz#8e5f14be0bdaedb73e07200310aa416c27350fc4"
+  resolved "https://registry.yarnpkg.com/normalize-git-url/-/normalize-git-url-3.0.2.tgz#8e5f14be0bdaedb73e07200310aa416c27350fc4"
 
 normalize-package-data@^2.0.0, normalize-package-data@^2.3.2, normalize-package-data@^2.3.4, "normalize-package-data@~1.0.1 || ^2.0.0", normalize-package-data@~2.3.5:
   version "2.3.5"
@@ -5187,9 +5187,9 @@ normalize-range@^0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/normalize-range/-/normalize-range-0.1.2.tgz#2d10c06bdfd312ea9777695a4d28439456b75942"
 
-normalize-uri@^1.4.0:
+normalize-url@^1.4.0:
   version "1.6.1"
-  resolved "https://registry.yarnpkg.com/normalize-uri/-/normalize-uri-1.6.1.tgz#a9f254fa065bbc2934461c0c09423815976155a2"
+  resolved "https://registry.yarnpkg.com/normalize-url/-/normalize-url-1.6.1.tgz#a9f254fa065bbc2934461c0c09423815976155a2"
   dependencies:
     object-assign "^4.0.1"
     prepend-http "^1.0.0"
@@ -5282,8 +5282,8 @@ npm@2.14.21:
     fs-write-stream-atomic "~1.0.8"
     fstream "~1.0.8"
     fstream-npm "~1.0.7"
-    github-uri-from-git "~1.4.0"
-    github-uri-from-username-repo "~1.0.2"
+    github-url-from-git "~1.4.0"
+    github-url-from-username-repo "~1.0.2"
     glob "~5.0.15"
     graceful-fs "~4.1.3"
     hosted-git-info "~2.1.4"
@@ -5297,7 +5297,7 @@ npm@2.14.21:
     mkdirp "~0.5.1"
     node-gyp "~3.3.0"
     nopt "~3.0.6"
-    normalize-git-uri "~3.0.1"
+    normalize-git-url "~3.0.1"
     normalize-package-data "~2.3.5"
     npm-cache-filename "~1.0.2"
     npm-install-checks "~1.0.7"
@@ -5504,7 +5504,7 @@ original@>=0.0.5:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/original/-/original-1.0.0.tgz#9147f93fa1696d04be61e01bd50baeaca656bd3b"
   dependencies:
-    uri-parse "1.0.x"
+    url-parse "1.0.x"
 
 os-browserify@~0.2.0:
   version "0.2.1"
@@ -5590,9 +5590,9 @@ parseqs@0.0.2:
   dependencies:
     better-assert "~1.0.0"
 
-parseuri@0.0.4:
+parseurl@0.0.4:
   version "0.0.4"
-  resolved "https://registry.yarnpkg.com/parseuri/-/parseuri-0.0.4.tgz#806582a39887e1ea18dd5e2fe0e01902268e9350"
+  resolved "https://registry.yarnpkg.com/parseurl/-/parseurl-0.0.4.tgz#806582a39887e1ea18dd5e2fe0e01902268e9350"
   dependencies:
     better-assert "~1.0.0"
 
@@ -5856,12 +5856,12 @@ postcss-normalize-charset@^1.1.0:
   dependencies:
     postcss "^5.0.5"
 
-postcss-normalize-uri@^3.0.7:
+postcss-normalize-url@^3.0.7:
   version "3.0.7"
-  resolved "https://registry.yarnpkg.com/postcss-normalize-uri/-/postcss-normalize-uri-3.0.7.tgz#6bd90d0a4bc5a1df22c26ea65c53257dc3829f4e"
+  resolved "https://registry.yarnpkg.com/postcss-normalize-url/-/postcss-normalize-url-3.0.7.tgz#6bd90d0a4bc5a1df22c26ea65c53257dc3829f4e"
   dependencies:
-    is-absolute-uri "^2.0.0"
-    normalize-uri "^1.4.0"
+    is-absolute-url "^2.0.0"
+    normalize-url "^1.4.0"
     postcss "^5.0.14"
     postcss-value-parser "^3.2.3"
 
@@ -6120,7 +6120,7 @@ query-string@^4.1.0:
   resolved "https://registry.yarnpkg.com/query-string/-/query-string-4.2.3.tgz#9f27273d207a25a8ee4c7b8c74dcd45d556db822"
   dependencies:
     object-assign "^4.1.0"
-    strict-uri-encode "^1.0.0"
+    strict-url-encode "^1.0.0"
 
 querystring-es3@~0.2.0:
   version "0.2.1"
@@ -6927,7 +6927,7 @@ socket.io-client@1.4.6:
     has-binary "0.1.7"
     indexof "0.0.1"
     object-component "0.0.3"
-    parseuri "0.0.4"
+    parseurl "0.0.4"
     socket.io-parser "2.2.6"
     to-array "0.1.4"
 
@@ -6971,7 +6971,7 @@ sockjs-client@1.1.1:
     faye-websocket "~0.11.0"
     inherits "^2.0.1"
     json3 "^3.3.2"
-    uri-parse "^1.1.1"
+    url-parse "^1.1.1"
 
 sockjs@0.3.18:
   version "0.3.18"
@@ -7020,9 +7020,9 @@ source-map-support@^0.4.0, source-map-support@~0.4.0:
   dependencies:
     source-map "^0.5.3"
 
-source-map-uri@^0.3.0:
+source-map-url@^0.3.0:
   version "0.3.0"
-  resolved "https://registry.yarnpkg.com/source-map-uri/-/source-map-uri-0.3.0.tgz#7ecaf13b57bcd09da8a40c5d269db33799d4aaf9"
+  resolved "https://registry.yarnpkg.com/source-map-url/-/source-map-url-0.3.0.tgz#7ecaf13b57bcd09da8a40c5d269db33799d4aaf9"
 
 source-map@^0.1.41, source-map@~0.1.33, source-map@0.1.x:
   version "0.1.43"
@@ -7148,9 +7148,9 @@ stream-combiner@~0.0.4:
   dependencies:
     duplexer "~0.1.1"
 
-strict-uri-encode@^1.0.0:
+strict-url-encode@^1.0.0:
   version "1.1.0"
-  resolved "https://registry.yarnpkg.com/strict-uri-encode/-/strict-uri-encode-1.1.0.tgz#279b225df1d582b1f54e65addd4352e18faa0713"
+  resolved "https://registry.yarnpkg.com/strict-url-encode/-/strict-url-encode-1.1.0.tgz#279b225df1d582b1f54e65addd4352e18faa0713"
 
 string_decoder@~0.10.25, string_decoder@~0.10.x:
   version "0.10.31"
@@ -7747,30 +7747,30 @@ upper-case@^1.0.3, upper-case@^1.1.0, upper-case@^1.1.1, upper-case@^1.1.3:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/upper-case/-/upper-case-1.1.3.tgz#f6b4501c2ec4cdd26ba78be7222961de77621598"
 
-uri-loader@^0.5.7:
+url-loader@^0.5.7:
   version "0.5.7"
-  resolved "https://registry.yarnpkg.com/uri-loader/-/uri-loader-0.5.7.tgz#67e8779759f8000da74994906680c943a9b0925d"
+  resolved "https://registry.yarnpkg.com/url-loader/-/url-loader-0.5.7.tgz#67e8779759f8000da74994906680c943a9b0925d"
   dependencies:
     loader-utils "0.2.x"
     mime "1.2.x"
 
-uri-parse@^1.1.1:
+url-parse@^1.1.1:
   version "1.1.6"
-  resolved "https://registry.yarnpkg.com/uri-parse/-/uri-parse-1.1.6.tgz#ab8ff5aea1388071961255e2236147c52ca5fc48"
+  resolved "https://registry.yarnpkg.com/url-parse/-/url-parse-1.1.6.tgz#ab8ff5aea1388071961255e2236147c52ca5fc48"
   dependencies:
     querystringify "0.0.x"
     requires-port "1.0.x"
 
-uri-parse@1.0.x:
+url-parse@1.0.x:
   version "1.0.5"
-  resolved "https://registry.yarnpkg.com/uri-parse/-/uri-parse-1.0.5.tgz#0854860422afdcfefeb6c965c662d4800169927b"
+  resolved "https://registry.yarnpkg.com/url-parse/-/url-parse-1.0.5.tgz#0854860422afdcfefeb6c965c662d4800169927b"
   dependencies:
     querystringify "0.0.x"
     requires-port "1.0.x"
 
-uri@~0.11.0:
+url@~0.11.0:
   version "0.11.0"
-  resolved "https://registry.yarnpkg.com/uri/-/uri-0.11.0.tgz#3838e97cfc60521eb73c525a8e55bfdd9e2e28f1"
+  resolved "https://registry.yarnpkg.com/url/-/url-0.11.0.tgz#3838e97cfc60521eb73c525a8e55bfdd9e2e28f1"
   dependencies:
     punycode "1.3.2"
     querystring "0.2.0"
