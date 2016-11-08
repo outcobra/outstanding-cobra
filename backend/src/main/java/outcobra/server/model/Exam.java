@@ -1,18 +1,19 @@
 package outcobra.server.model;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.querydsl.QueryDslPredicateExecutor;
+import outcobra.server.model.dto.emptyDto.ExamDto;
+import outcobra.server.model.mapper.Mapper;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-
-import outcobra.server.model.dto.ExamDto;
-import outcobra.server.model.mapper.Mapper;
-import outcobra.server.model.marker.OwnerVerifiable;
-
 @Entity
-public class Exam implements OwnerVerifiable, MappableEntity<ExamDto,Exam> {
+public class Exam implements OutcobraEntity<Exam, ExamDto> {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

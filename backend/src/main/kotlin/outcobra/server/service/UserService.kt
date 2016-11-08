@@ -1,7 +1,7 @@
 package outcobra.server.service
 
 import com.auth0.spring.security.api.Auth0UserDetails
-import outcobra.server.model.dto.UserDto
+import outcobra.server.model.dto.emptyDto.UserDto
 
 interface UserService {
     /**

@@ -1,17 +1,17 @@
 package outcobra.server.model;
 
-import java.time.LocalTime;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.querydsl.QueryDslPredicateExecutor;
+import outcobra.server.model.dto.emptyDto.TimetableEntryDto;
+import outcobra.server.model.mapper.Mapper;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-
-import outcobra.server.model.dto.TimetableDto;
-import outcobra.server.model.mapper.Mapper;
-import outcobra.server.model.marker.OwnerVerifiable;
+import java.time.LocalTime;
 
 @Entity
-public class TimetableEntry implements OwnerVerifiable,MappableEntity<TimetableDto,Timetable>{
+public class TimetableEntry implements OutcobraEntity<TimetableEntry, TimetableEntryDto> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -153,13 +153,13 @@ public class TimetableEntry implements OwnerVerifiable,MappableEntity<TimetableD
     }
 
     @Override
-    public TimetableDto toDto() {
+    public TimetableEntryDto toDto() {
         return null;
     }
 
     @org.jetbrains.annotations.NotNull
     @Override
-    public Mapper<TimetableDto, Timetable> getMapper() {
+    public Mapper<TimetableEntryDto, TimetableEntry> getMapper() {
         return null;
     }
 

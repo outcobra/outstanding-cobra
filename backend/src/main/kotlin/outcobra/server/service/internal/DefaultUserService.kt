@@ -4,7 +4,7 @@ import com.auth0.spring.security.api.Auth0UserDetails
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Component
 import outcobra.server.model.User
-import outcobra.server.model.dto.UserDto
+import outcobra.server.model.dto.emptyDto.UserDto
 import outcobra.server.model.mapper.Mapper
 import outcobra.server.model.repository.UserRepository
 import outcobra.server.service.UserService

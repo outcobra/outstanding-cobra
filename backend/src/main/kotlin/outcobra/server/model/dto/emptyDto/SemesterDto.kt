@@ -1,15 +1,15 @@
-package outcobra.server.model.dto
+package outcobra.server.model.dto.emptyDto
 
+import outcobra.server.model.Semester
 import outcobra.server.model.mapper.MappableDto
-import outcobra.server.model.Task
 import outcobra.server.model.mapper.Mapper
 
-class TaskDto : MappableDto<TaskDto, Task> {
-    override fun getMapper(): Mapper<TaskDto, Task> {
+class SemesterDto : MappableDto<SemesterDto, Semester> {
+    override fun getMapper(): Mapper<SemesterDto, Semester> {
         throw UnsupportedOperationException("not implemented")
     }
 
-    override fun toEntity(): Task {
+    override fun toEntity(): Semester {
         throw UnsupportedOperationException("not implemented")
     }
 //TODO Implement

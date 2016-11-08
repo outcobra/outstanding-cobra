@@ -1,16 +1,16 @@
 package outcobra.server.model;
 
-import java.time.LocalDate;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.querydsl.QueryDslPredicateExecutor;
+import outcobra.server.model.dto.emptyDto.HolidayDto;
+import outcobra.server.model.mapper.Mapper;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-
-import outcobra.server.model.dto.HolidayDto;
-import outcobra.server.model.mapper.Mapper;
-import outcobra.server.model.marker.OwnerVerifiable;
+import java.time.LocalDate;
 
 @Entity
-public class Holiday implements OwnerVerifiable,MappableEntity<HolidayDto,Holiday> {
+public class Holiday implements OutcobraEntity<Holiday, HolidayDto> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

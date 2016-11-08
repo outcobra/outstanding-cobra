@@ -1,18 +1,19 @@
 package outcobra.server.model;
 
 import org.jetbrains.annotations.NotNull;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.querydsl.QueryDslPredicateExecutor;
+import outcobra.server.model.dto.emptyDto.MarkGroupDto;
+import outcobra.server.model.mapper.Mapper;
 
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.*;
-
-import outcobra.server.model.dto.MarkGroupDto;
-import outcobra.server.model.mapper.Mapper;
-import outcobra.server.model.marker.OwnerVerifiable;
-
 @Entity
-public class MarkGroup extends Mark implements OwnerVerifiable, MappableEntity<MarkGroupDto,MarkGroup> {
+public class MarkGroup extends Mark implements OutcobraEntity<MarkGroup, MarkGroupDto> {
 
     @OneToMany(mappedBy = "markGroup")
     private List<Mark> marks;
@@ -20,10 +21,28 @@ public class MarkGroup extends Mark implements OwnerVerifiable, MappableEntity<M
     @OneToOne(mappedBy = "markGroup")
     private Subject subject;
 
+    public MarkGroup(Double weight, Exam exam, MarkGroup markGroup, List<Mark> marks, Subject subject) {
+        super(weight, exam, markGroup);
+        this.marks = marks;
+        this.subject = subject;
+    }
+
+    public MarkGroup(List<Mark> marks, Subject subject) {
+        this.marks = marks;
+        this.subject = subject;
+    }
+
+    public MarkGroup() {
+        super();
+        this.marks = new ArrayList<>();
+    }
+
     // Todo persist
     public void addMark(Mark mark) {
         marks.add(mark);
     }
+
+    //region constructors
 
     // Todo persist
     public void removeMark(Mark mark) {
@@ -45,24 +64,6 @@ public class MarkGroup extends Mark implements OwnerVerifiable, MappableEntity<M
         }
 
         return valueSum / weightSum;
-    }
-
-    //region constructors
-
-    public MarkGroup(Double weight, Exam exam, MarkGroup markGroup, List<Mark> marks, Subject subject) {
-        super(weight, exam, markGroup);
-        this.marks = marks;
-        this.subject = subject;
-    }
-
-    public MarkGroup(List<Mark> marks, Subject subject) {
-        this.marks = marks;
-        this.subject = subject;
-    }
-
-    public MarkGroup() {
-        super();
-        this.marks = new ArrayList<>();
     }
     //endregion
 

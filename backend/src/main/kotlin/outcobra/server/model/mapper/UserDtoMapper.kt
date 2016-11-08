@@ -2,7 +2,7 @@ package outcobra.server.model.mapper
 
 import org.springframework.stereotype.Component
 import outcobra.server.model.User
-import outcobra.server.model.dto.UserDto
+import outcobra.server.model.dto.emptyDto.UserDto
 import java.util.*
 
 @Component

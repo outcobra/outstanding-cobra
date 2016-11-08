@@ -1,15 +1,15 @@
-package outcobra.server.model.dto
+package outcobra.server.model.dto.emptyDto
 
+import outcobra.server.model.MarkGroup
 import outcobra.server.model.mapper.MappableDto
-import outcobra.server.model.Teacher
 import outcobra.server.model.mapper.Mapper
 
-class TeacherDto : MappableDto<TeacherDto, Teacher> {
-    override fun getMapper(): Mapper<TeacherDto, Teacher> {
+class MarkGroupDto : MappableDto<MarkGroupDto, MarkGroup> {
+    override fun toEntity(): MarkGroup {
         throw UnsupportedOperationException("not implemented")
     }
 
-    override fun toEntity(): Teacher {
+    override fun getMapper(): Mapper<MarkGroupDto, MarkGroup> {
         throw UnsupportedOperationException("not implemented")
     }
 //TODO Implement

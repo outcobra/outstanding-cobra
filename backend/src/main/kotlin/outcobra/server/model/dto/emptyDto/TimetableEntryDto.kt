@@ -1,7 +1,7 @@
-package outcobra.server.model.dto
+package outcobra.server.model.dto.emptyDto
 
-import outcobra.server.model.mapper.MappableDto
 import outcobra.server.model.TimetableEntry
+import outcobra.server.model.mapper.MappableDto
 import outcobra.server.model.mapper.Mapper
 
 class TimetableEntryDto : MappableDto<TimetableEntryDto, TimetableEntry> {

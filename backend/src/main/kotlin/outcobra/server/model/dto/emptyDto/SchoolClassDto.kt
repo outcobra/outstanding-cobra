@@ -1,7 +1,7 @@
-package outcobra.server.model.dto
+package outcobra.server.model.dto.emptyDto
 
-import outcobra.server.model.mapper.MappableDto
 import outcobra.server.model.SchoolClass
+import outcobra.server.model.mapper.MappableDto
 import outcobra.server.model.mapper.Mapper
 
 class SchoolClassDto : MappableDto<SchoolClassDto, SchoolClass> {

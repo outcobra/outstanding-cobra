@@ -1,18 +1,18 @@
 package outcobra.server.model;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.querydsl.QueryDslPredicateExecutor;
+import outcobra.server.model.dto.emptyDto.SemesterDto;
+import outcobra.server.model.mapper.Mapper;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-
-import outcobra.server.model.dto.SemesterDto;
-import outcobra.server.model.mapper.Mapper;
-import outcobra.server.model.marker.OwnerVerifiable;
-
 @Entity
-public class Semester implements OwnerVerifiable, MappableEntity<SemesterDto,Semester> {
+public class Semester implements OutcobraEntity<Semester, SemesterDto> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -167,4 +167,5 @@ public class Semester implements OwnerVerifiable, MappableEntity<SemesterDto,Sem
     public Mapper<SemesterDto, Semester> getMapper() {
         return null;
     }
+
 }
