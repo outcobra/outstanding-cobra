@@ -3,6 +3,7 @@ package outcobra.server.service.internal
 import com.auth0.spring.security.api.Auth0UserDetails
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.context.SecurityContextHolder
+import org.springframework.stereotype.Component
 import org.springframework.stereotype.Service
 import outcobra.server.config.Auth0Client
 import outcobra.server.model.User
@@ -31,12 +32,27 @@ open class DefaultUserService
     }
 
     override fun getCurrentUser(): User {
+    override fun getCurrentUser(): UserDto {
         val userDetails = getUserDetails()
         try {
             return userRepository.getOne(userDetails.getAuth0Attribute("user_id") as String)
+            val user = userRepository.getOne(userDetails.getAuth0Attribute("sub") as String)
+            return userDtoMapper.toDto(user)
         } catch (e: EntityNotFoundException) {
             return User() // TODO what should we return here
         }
     }
 
+    override fun getUserDetails(): Auth0UserDetails {
+        val auth = SecurityContextHolder.getContext().authentication
+        return auth.principal as Auth0UserDetails
+    }
+
+    override fun loginRegister() {
+        if (getCurrentUser().userId.isNotEmpty()) return
+
+        val userDetails = getUserDetails()
+        val newUser = User(userDetails.getAuth0Attribute("sub") as String, userDetails.username, null)
+        userRepository.save(newUser)
+    }
 }

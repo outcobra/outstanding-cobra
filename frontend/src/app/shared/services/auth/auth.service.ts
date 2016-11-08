@@ -31,17 +31,20 @@ export class AuthService {
             theme: {
                 logo: 'https://cdn.peg.nu/sites/outcobra/logo.jpg',
                 primaryColor: '#3f51b5'
+            },
+            languageDictionary: {
+                title: "Outcobra"
             }
         });
-
 
         this.lock.on('authenticated', (authResult) => {
             localStorage.setItem(this.config.get('locStorage.tokenLocation'), authResult.idToken);
             this.lock.getProfile(authResult.idToken, (err, profile) => {
                 localStorage.setItem(this.config.get('locStorage.profileLocation'), JSON.stringify(profile));
             });
+            // We need to subscribe here because the request does not get triggered if we don't
+            this.http.get('/user/login', 'outcobra').subscribe();
             this.router.navigate(['/dashboard']);
-            this.http.get('/user/login', 'outcobra');
         });
     }
 

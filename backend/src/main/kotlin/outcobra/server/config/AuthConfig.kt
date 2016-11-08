@@ -21,12 +21,8 @@ open class AuthConfig : Auth0SecurityConfig() {
     }
 
     override fun authorizeRequests(http: HttpSecurity?) {
-        // Convert to non-nullable HttpSecurity; throws NullPointerException if http is null
-        val security = http!!
-
-        security.authorizeRequests()
-                .anyRequest().permitAll()
-        // todo .anyRequest().authenticated()
+        http!!.authorizeRequests()
+                .anyRequest().authenticated()
     }
 }
 
