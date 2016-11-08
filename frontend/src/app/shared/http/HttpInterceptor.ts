@@ -165,7 +165,6 @@ export class HttpInterceptor {
 
     private buildApiUrl(request): string {
         let api = this.getApiFromConfig(request.apiName);
-        console.log(api);
         return this.removeRepeatedSlashes(`${api['apiBase']}/${request.url}`); // concat Url and remove double slashes
     }
 
