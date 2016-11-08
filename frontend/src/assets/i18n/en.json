@@ -24,6 +24,12 @@
         },
         "manage": {
             "linkTitle": "Manage"
+    "login": {
+    },
+    "http": {
+        "error": {
+            "title": "Error!",
+            "message": "A server-side error occurred! Please try again."
         }
     }
 }

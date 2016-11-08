@@ -1,6 +1,21 @@
 {
     "api": {
-        "apiBase": "https://svmeal-api.jmnw.me/",
-        "context": "api"
+        "defaultApiName": "outcobra",
+        "apis": [
+            {
+                "name": "outcobra",
+                "apiBase": "{TODO}",
+                "authToken": true
+            }
+        ]
+    },
+    "auth0": {
+        "clientID": "cVzf1vE5BOFKOqW8ic8sac0UqM2CqDN4",
+        "domain": "outcobra.eu.auth0.com",
+        "callbackURL": "{TODO}"
+    },
+    "locStorage": {
+        "tokenLocation": "id_token",
+        "profileLocation": "profile"
     }
 }

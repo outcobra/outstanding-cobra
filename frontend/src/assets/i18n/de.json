@@ -26,4 +26,12 @@
             "linkTitle": "Verwalten"
         }
     }
+    "login": {
+    },
+    "http": {
+        "error": {
+            "title": "Fehler!",
+            "message": "Ein serverseitiger Fehler ist aufgetreten! Bitte versuchen Sie es nochmals."
+        }
+    }
 }
