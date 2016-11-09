@@ -28,4 +28,5 @@ dependencies {
     compile 'org.hibernate:hibernate-validator:5.3.1.Final'
     compile 'javax.validation:validation-api:1.1.0.Final'
     compile 'com.querydsl:querydsl-jpa:4.1.4'
+    compile 'javax.jdo:jdo-api:3.1'
 }

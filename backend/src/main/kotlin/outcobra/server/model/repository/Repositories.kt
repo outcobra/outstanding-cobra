@@ -5,7 +5,7 @@ import org.springframework.data.querydsl.QueryDslPredicateExecutor
 import org.springframework.stereotype.Repository
 import outcobra.server.model.*
 
-@Repository interface UserRepository : JpaRepository<User, String>, QueryDslPredicateExecutor<User>
+@Repository interface UserRepository : JpaRepository<User, Long>, QueryDslPredicateExecutor<User>
 @Repository interface InstitutionRepository : JpaRepository<Institution, Long>, QueryDslPredicateExecutor<Institution>
 @Repository interface SchoolYearRepository : JpaRepository<SchoolYear, Long>, QueryDslPredicateExecutor<SchoolYear>
 @Repository interface HolidayRepository : JpaRepository<Holiday, Long>, QueryDslPredicateExecutor<Holiday>
