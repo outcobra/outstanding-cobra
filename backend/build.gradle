@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        kotlinVersion = '1.0.3'
+        kotlinVersion = '1.0.5'
         springBootVersion = '1.4.1.RELEASE'
         outstandingCobraVersion = '0.0.1-SNAPSHOT'
 
