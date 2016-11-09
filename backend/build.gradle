@@ -29,12 +29,6 @@ war {
     version = outstandingCobraVersion
 }
 
-idea {
-    module {
-        sourceDirs += file('src/main/generated')
-    }
-}
-
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
@@ -42,13 +36,12 @@ repositories {
     mavenCentral()
 }
 
-configurations {
-    providedRuntime
-}
+configurations { providedRuntime }
 
 dependencies {
+    compile project(path: ':backend-model', configuration: 'shadow')
     compile 'com.querydsl:querydsl-jpa:4.1.4'
-    compile 'com.querydsl:querydsl-apt:4.1.4:jpa'
+//    compile 'com.querydsl:querydsl-apt:4.1.4:jpa'
     compile('com.auth0:auth0-spring-security-api:0.3.0')
     compile('com.auth0:auth0:0.3.0')
     compile('io.springfox:springfox-swagger2:2.6.0')

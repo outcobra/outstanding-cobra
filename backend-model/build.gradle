@@ -1,0 +1,31 @@
+plugins {
+    id "com.ewerk.gradle.plugins.querydsl" version "1.0.7"
+    id 'com.github.johnrengelman.shadow' version '1.2.4'
+}
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+
+querydsl {
+    querydslSourcesDir = "src/main/generated"
+    jpa = true
+}
+
+sourceSets {
+    querydsl {
+        compileClasspath += configurations.compile
+        compileClasspath += sourceSets.main.runtimeClasspath
+    }
+}
+
+dependencies {
+    compile 'org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final'
+    compile 'org.hibernate:hibernate-validator:5.3.1.Final'
+    compile 'javax.validation:validation-api:1.1.0.Final'
+    compile 'com.querydsl:querydsl-jpa:4.1.4'
+}
