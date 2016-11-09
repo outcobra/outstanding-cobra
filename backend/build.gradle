@@ -36,12 +36,10 @@ repositories {
     mavenCentral()
 }
 
-configurations {
-    providedRuntime
-}
+configurations { providedRuntime }
 
 dependencies {
-    compile project(':backend-model')
+    compile project(path: ':backend-model', configuration: 'shadow')
     compile 'com.querydsl:querydsl-jpa:4.1.4'
 //    compile 'com.querydsl:querydsl-apt:4.1.4:jpa'
     compile('com.auth0:auth0-spring-security-api:0.3.0')
