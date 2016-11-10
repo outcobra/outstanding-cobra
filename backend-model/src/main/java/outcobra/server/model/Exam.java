@@ -1,11 +1,10 @@
 package outcobra.server.model;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Entity
 public class Exam {

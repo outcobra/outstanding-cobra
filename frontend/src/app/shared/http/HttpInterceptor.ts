@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Http, Request, Response, RequestMethod, URLSearchParams} from "@angular/http";
-import {NotificationWrapperService} from "../notifications/notification-wrapper.service";
+import {NotificationsService} from "angular2-notifications";
 import {Config} from "../../config/Config";
 import {Observable} from "rxjs";
 import "rxjs/add/operator/map";
@@ -12,7 +12,7 @@ export class HttpInterceptor {
     private apiNames: string[];
     private defaultApiName: string;
 
-    constructor(private http: Http, private notificationsService: NotificationWrapperService, private config: Config) {
+    constructor(private http: Http, private notificationsService: NotificationsService, private config: Config) {
         this.defaultApiName = this.config.get('api.defaultApiName');
         this.apiNames = this.config.get('api.apis').map(api => {
             return api['name']
