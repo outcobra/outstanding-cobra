@@ -45,7 +45,6 @@ open class RequestAuthorizationFilter @Inject constructor(val userService: UserS
     private val paramPattern = Pattern.compile("api/(.*?)/(\\d+).*")
     private val idPattern = Pattern.compile("/\\d+")
 
-
     private fun normalizeUri(uri: String): String {
         val matcher = uriPattern.matcher(uri)
         if (!matcher.matches()) return ""
