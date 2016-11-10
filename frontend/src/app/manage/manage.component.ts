@@ -1,19 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ManageService} from "./manage.service";
+import {ManageData} from "./model/ManageData";
 
 @Component({
-  selector: 'manager',
-  templateUrl: './manage.component.html',
-  styleUrls: ['./manage.component.scss']
+    selector: 'manager',
+    templateUrl: './manage.component.html',
+    styleUrls: ['./manage.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class ManageComponent implements OnInit {
 
-  constructor(private manageService: ManageService) { }
+    private manageData: ManageData;
 
-  ngOnInit() {
-      this.manageService.getManageData()
-          .subscribe((res) => console.log(res));
+    constructor(private manageService: ManageService) {
+    }
 
-  }
+    ngOnInit() {
+        this.manageService.getManageData()
+            .subscribe((res) => this.manageData = res);
+    }
 
 }

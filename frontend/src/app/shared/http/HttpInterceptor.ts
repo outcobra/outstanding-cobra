@@ -19,7 +19,7 @@ export class HttpInterceptor {
         });
     }
 
-    request(request: any): Observable<Response> {
+    request<T>(request: any): Observable<T> {
         request.method = (request.method || RequestMethod.Get);
         request.url = (request.url || '');
         request.headers = (request.headers || {});
@@ -44,7 +44,7 @@ export class HttpInterceptor {
         ).catch(error => {
             this.notificationsService.error('http.error.title', 'http.error.message'); // TODO i18n + i18nKey by error.status
             return Observable.empty();
-        }).map(this.unwrapHttpResponse);
+        }).map((res) => this.unwrapHttpResponse<T>(res));
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -59,8 +59,8 @@ export class HttpInterceptor {
      * @param apiName
      * @returns {Observable<Response>}
      */
-    get(url: string, apiName?: string, params?: any): Observable<Response> {
-        return this.request({
+    get<T>(url: string, apiName?: string, params?: any): Observable<T> {
+        return this.request<T>({
             method: RequestMethod.Get,
             url: url,
             params: params,
@@ -68,8 +68,8 @@ export class HttpInterceptor {
         });
     }
 
-    post(url: string, data: any, apiName?: string, params?: any): Observable<Response> {
-        return this.request({
+    post<T>(url: string, data: any, apiName?: string, params?: any): Observable<T> {
+        return this.request<T>({
             method: RequestMethod.Post,
             url: url,
             data: data,
@@ -78,8 +78,8 @@ export class HttpInterceptor {
         })
     }
 
-    put(url: string, data: any, apiName?: string, params?: any): Observable<Response> {
-        return this.request({
+    put<T>(url: string, data: any, apiName?: string, params?: any): Observable<T> {
+        return this.request<T>({
             method: RequestMethod.Put,
             url: url,
             data: data,
@@ -88,8 +88,8 @@ export class HttpInterceptor {
         });
     }
 
-    delete(url: string, apiName?: string, params?: any): Observable<Response> {
-        return this.request({
+    delete<T>(url: string, apiName?: string, params?: any): Observable<T> {
+        return this.request<T>({
             method: RequestMethod.Delete,
             url: url,
             params: params,
@@ -97,8 +97,8 @@ export class HttpInterceptor {
         });
     }
 
-    patch(url: string, data: any, apiName?: string, params?: any): Observable<Response> {
-        return this.request({
+    patch<T>(url: string, data: any, apiName?: string, params?: any): Observable<T> {
+        return this.request<T>({
             method: RequestMethod.Patch,
             url: url,
             params: params,
@@ -153,8 +153,8 @@ export class HttpInterceptor {
         }
     }
 
-    private unwrapHttpResponse(response) {
-        return response.json();
+    private unwrapHttpResponse<T>(response): T {
+        return response.json() as T;
     }
 
     private buildApiUrl(request): string {

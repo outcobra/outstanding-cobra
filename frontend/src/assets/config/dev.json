@@ -4,7 +4,7 @@
         "apis": [
             {
                 "name": "outcobra",
-                "apiBase": "http://localhost:8080/api/",
+                "apiBase": "http://192.168.1.8:8080/api/",
                 "authToken": true
             }
         ]

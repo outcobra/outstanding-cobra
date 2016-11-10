@@ -26,7 +26,8 @@
         <button md-button *ngIf="!auth.isLoggedIn()" (click)="login()">Login</button>
         <button md-button *ngIf="auth.isLoggedIn()" (click)="logout()">Logout</button>
     </md-toolbar>
-    <div class="container">
+
+    <div class="app-content">
         <router-outlet></router-outlet>
     </div>
 

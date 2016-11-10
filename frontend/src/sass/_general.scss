@@ -1,0 +1,21 @@
+@import 'color';
+
+.border {
+    box-sizing: border-box;
+}
+
+.border-left {
+    border-left: 1px solid $slightly-dark;
+}
+
+.border-right {
+    border-right: 1px solid $slightly-dark;
+}
+
+.border-top {
+    border-top: 1px solid $slightly-dark;
+}
+
+.border-bottom {
+    border-bottom: 1px solid $slightly-dark;
+}

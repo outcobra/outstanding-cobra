@@ -10,6 +10,14 @@ $accent-dark: md-palette($md-grey, 800);
 // The warn palette is optional (defaults to red).
 $warn:    md-palette($md-red);
 
+$primary-dark: rgba(0, 0, 0, 0.87);
+$secondary-dark: rgba(0, 0, 0, 0.54);
+$disabled-dark: rgba(0, 0, 0, 0.38);
+$slightly-dark: rgba(0, 0, 0, 0.15);
+$primary-light: rgb(255, 255, 255);
+$secondary-light: rgba(255, 255, 255, 0.70);
+$disabled-light: rgba(255, 255, 255, 0.5);
+
 .color-primary, .md-primary {
     background-color: md-color($primary) !important;
 }
@@ -27,23 +35,23 @@ $warn:    md-palette($md-red);
 }
 
 .text-primary-dark {
-    color: rgba(0, 0, 0, 0.87)
+    color: $primary-dark;
 }
 
 .text-secondary-dark {
-    color: rgba(0, 0, 0, 0.54);
+    color: $secondary-dark;
 }
 .text-disabled-dark {
-    color: rgba(0, 0, 0, 0.38);
+    color: $disabled-dark;
 }
 
 .text-primary-light {
-    color: rgb(255, 255, 255);
+    color: $primary-light;
 }
 
 .text-secondary-light {
-    color: rgba(255, 255, 255, 0.70);
+    color: $secondary-light;
 }
 .text-disabled-light {
-    color: rgba(255, 255, 255, 0.5);
+    color: $disabled-dark;
 }

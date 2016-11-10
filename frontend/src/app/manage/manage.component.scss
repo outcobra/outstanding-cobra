@@ -1,0 +1,20 @@
+@import '../../sass/general';
+
+manager, .manage-rows {
+    height: 100%;
+}
+
+.manage-rows {
+    margin: 0;
+
+    .col {
+        height: 100%;
+
+        .manage-entity {
+            height: 100px;
+            width: 100%;
+
+            @extend .border-bottom;
+        }
+    }
+}
