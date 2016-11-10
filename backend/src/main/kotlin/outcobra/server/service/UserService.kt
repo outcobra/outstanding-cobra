@@ -1,6 +1,5 @@
 package outcobra.server.service
 
-import com.auth0.spring.security.api.Auth0UserDetails
 import outcobra.server.model.User
 import com.auth0.authentication.result.UserProfile
 import outcobra.server.model.dto.UserDto
