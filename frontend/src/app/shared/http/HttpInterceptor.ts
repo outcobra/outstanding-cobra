@@ -1,13 +1,10 @@
 import {Injectable} from "@angular/core";
-import {
-    Http, Request, Response,
-    RequestMethod, URLSearchParams
-} from "@angular/http";
-import {Observable} from "rxjs";
+import {Http, Request, Response, RequestMethod, URLSearchParams} from "@angular/http";
 import {NotificationsService} from "angular2-notifications";
+import {Config} from "../../config/Config";
+import {Observable} from "rxjs";
 import "rxjs/add/operator/map";
 import * as _ from "underscore";
-import {Config} from "../../config/Config";
 
 @Injectable()
 export class HttpInterceptor {
@@ -43,10 +40,9 @@ export class HttpInterceptor {
                 headers: request.headers,
                 search: this.buildUrlSearchParams(request.params),
                 body: JSON.stringify(request.data)
-
             })
         ).catch(error => {
-            this.notificationsService.error('Error!', 'Requested resource could not be found.'); // TODO i18n + i18nKey by error.status
+            this.notificationsService.error('http.error.title', 'http.error.message'); // TODO i18n + i18nKey by error.status
             return Observable.empty();
         }).map(this.unwrapHttpResponse);
     }
@@ -81,7 +77,6 @@ export class HttpInterceptor {
             apiName: apiName
         })
     }
-
 
     put(url: string, data: any, apiName?: string, params?: any): Observable<Response> {
         return this.request({
@@ -136,7 +131,6 @@ export class HttpInterceptor {
         return value;
     }
 
-
     private addContentType(request: any) {
         if (request.method !== RequestMethod.Get || request.method !== RequestMethod.Delete) {
             request.headers['Content-Type'] = "application/json ; charset=UTF-8";
@@ -174,7 +168,7 @@ export class HttpInterceptor {
     }
 
     private removeRepeatedSlashes(str: string): string {
-        return str.replace(/\/{2,}/g, "/");
+        return str.replace(/([^:])\/{2,}/g, (match, prefix) => prefix + '/');
     }
 }
 

@@ -1,7 +1,7 @@
 package outcobra.server.service
 
-import com.auth0.spring.security.api.Auth0UserDetails
-import outcobra.server.model.dto.emptyDto.UserDto
+import com.auth0.authentication.result.UserProfile
+import outcobra.server.model.dto.UserDto
 
 interface UserService {
     /**
@@ -10,9 +10,14 @@ interface UserService {
     fun getCurrentUser(): UserDto
 
     /**
-     * Gets the user's Auth0UserDetails
+     * Returns the user's id by reading the JWT Token. This is faster than #getUserProfile because it does not call the Auth0 API
      */
-    fun getUserDetails(): Auth0UserDetails
+    fun getTokenUserId(): String
+
+    /**
+     * Gets the user's UserProfile
+     */
+    fun getUserProfile(): UserProfile
 
     /**
      * Saves the user to the database if it's his first time using the application

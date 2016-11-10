@@ -21,11 +21,11 @@ open class UserRepositoryTest {
     @Test
     @Transactional
     open fun testUserRepository() {
-        userRepository.save(myUser)
+        val saved = userRepository.save(myUser)
         userRepository.flush()
         assertThat(userRepository.findAll().size).isEqualTo(1)
 
-        val savedUser = userRepository.findOne("some_auth0_id")
+        val savedUser = userRepository.findOne(saved.id)
         assertThat(savedUser).isEqualTo(myUser)
 
         userRepository.delete(savedUser)
@@ -42,7 +42,7 @@ open class UserRepositoryTest {
 
         assertThat(savedUser).isEqualTo(myUser)
 
-        userRepository.delete(savedUser.auth0Id)
+        userRepository.delete(savedUser.id)
         assertThat(userRepository.findAll().size).isEqualTo(0)
     }
 }

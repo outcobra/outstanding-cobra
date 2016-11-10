@@ -2,8 +2,6 @@
 /build/
 !gradle/wrapper/gradle-wrapper.jar
 
-src/main/generated/
-
 ### STS ###
 .classpath
 .factorypath

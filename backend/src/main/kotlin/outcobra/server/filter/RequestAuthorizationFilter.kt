@@ -6,11 +6,11 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Component
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.filter.GenericFilterBean
-import outcobra.server.model.OwnerVerifiable
-import outcobra.server.model.dto.emptyDto.InstitutionDto
-import outcobra.server.model.dto.emptyDto.SchoolClassDto
-import outcobra.server.model.dto.emptyDto.TeacherDto
-import outcobra.server.model.mapper.MappableDto
+import outcobra.server.model.dto.InstitutionDto
+import outcobra.server.model.dto.SchoolClassDto
+import outcobra.server.model.dto.TeacherDto
+import outcobra.server.model.interfaces.MappableDto
+import outcobra.server.model.interfaces.OwnerVerifiable
 import outcobra.server.model.repository.InstitutionRepository
 import outcobra.server.model.repository.SchoolClassRepository
 import outcobra.server.service.UserService
@@ -21,7 +21,6 @@ import javax.servlet.FilterChain
 import javax.servlet.ServletRequest
 import javax.servlet.ServletResponse
 import javax.servlet.http.HttpServletRequest
-
 
 @Component
 open class RequestAuthorizationFilter @Inject constructor(val userService: UserService,
