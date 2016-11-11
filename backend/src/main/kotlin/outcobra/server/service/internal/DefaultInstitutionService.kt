@@ -1,8 +1,10 @@
 package outcobra.server.service.internal
 
+import com.querydsl.core.types.dsl.BooleanExpression
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import outcobra.server.model.Institution
+import outcobra.server.model.QInstitution
 import outcobra.server.model.dto.InstitutionDto
 import outcobra.server.model.mapper.Mapper
 import outcobra.server.model.repository.InstitutionRepository
@@ -15,6 +17,12 @@ open class DefaultInstitutionService
 @Inject constructor(val mapper: Mapper<Institution, InstitutionDto>,
                     val userService: DefaultUserService,
                     val repository: InstitutionRepository) : InstitutionService {
+
+    override fun readAllInstitutions(): List<InstitutionDto> {
+        val qInstitution = QInstitution.institution
+        val filter: BooleanExpression = qInstitution.user.eq(userService.getCurrentUser())
+        return repository.findAll(filter).map { entity -> mapper.toDto(entity) }
+    }
 
     override fun createInstitution(name: String): InstitutionDto {
         val institution: Institution = Institution(name, userService.getCurrentUser())

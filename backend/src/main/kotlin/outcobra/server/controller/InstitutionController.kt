@@ -25,4 +25,8 @@ class InstitutionController @Inject constructor(val institutionService: Institut
         return institutionService.updateInstitution(institutionDto)
     }
 
+    @RequestMapping(method = arrayOf(RequestMethod.GET))
+    fun readAllInstitutions() : List<InstitutionDto>{
+        return institutionService.readAllInstitutions()
+    }
 }
