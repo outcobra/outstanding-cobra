@@ -22,7 +22,7 @@ class InstitutionController @Inject constructor(val institutionService: Institut
 
     @RequestMapping(method = arrayOf(RequestMethod.POST))
     fun updateInstitution(@RequestBody institutionDto: InstitutionDto): InstitutionDto {
-        return institutionService.updateInstitution(institutionDto.institutionId, institutionDto.institutionName)
+        return institutionService.updateInstitution(institutionDto)
     }
 
 }
