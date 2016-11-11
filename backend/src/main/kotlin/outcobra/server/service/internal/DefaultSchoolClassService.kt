@@ -28,7 +28,7 @@ open class DefaultSchoolClassService
     override fun createSchoolClass(schoolClassDto: SchoolClassDto): SchoolClassDto {
         var schoolClass = mapper.fromDto(schoolClassDto)
         schoolClass = schoolClassRepository.save(schoolClass)
-        mapper.toDto(schoolClass)
+        return mapper.toDto(schoolClass)
     }
 
     @RequestMapping(method = arrayOf(RequestMethod.GET))
@@ -37,8 +37,10 @@ open class DefaultSchoolClassService
     }
 
     override fun readAllSchoolClasses(): List<SchoolClassDto> {
-        val filter = QSchoolClass.schoolClass.institution.user.eq(userService.getCurrentUser())
-        schoolClassRepository.findAll(filter).map { entity ->  mapper.toDto(entity)}
+        val qInstitution= QSchoolClass.schoolClass.institution
+        val filter = qInstitution.user.auth0Id.eq(userService.getCurrentUser().userId)
+        return schoolClassRepository.findAll(filter).map { entity: SchoolClass -> mapper.toDto(entity) }
+
     }
 
     override fun updateSchoolClass(schoolClassDto: SchoolClassDto): SchoolClassDto {
