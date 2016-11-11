@@ -1,7 +1,7 @@
 package outcobra.server.service
 
-import outcobra.server.model.User
 import com.auth0.authentication.result.UserProfile
+import outcobra.server.model.User
 import outcobra.server.model.dto.UserDto
 
 interface UserService {
@@ -24,5 +24,6 @@ interface UserService {
      * Saves the user to the database if it's his first time using the application
      */
     fun loginRegister(): Unit
+
     open fun getCurrentUser(): User
 }
