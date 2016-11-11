@@ -18,6 +18,8 @@ $primary-light: rgb(255, 255, 255);
 $secondary-light: rgba(255, 255, 255, 0.70);
 $disabled-light: rgba(255, 255, 255, 0.5);
 
+$hover-dark: rgba(0, 0, 0, 0.1);
+
 .color-primary, .md-primary {
     background-color: md-color($primary) !important;
 }

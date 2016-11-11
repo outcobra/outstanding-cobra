@@ -6,7 +6,7 @@ import {Router, NavigationEnd} from "@angular/router";
 
 @Component({
     selector: 'sidenav',
-    template: `<ng-content></ng-content>`,
+    template: `<div class="sidenav-wrapper"><ng-content></ng-content></div>`,
     encapsulation: ViewEncapsulation.None,
     host: {
         '(transitionend)': 'onTransitionEnd($event)'

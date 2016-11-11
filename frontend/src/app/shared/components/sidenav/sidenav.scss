@@ -10,6 +10,10 @@ sidenav-layout {
             opacity: 0.6;
             transition-delay: 0s;
         }
+
+        sidenav {
+            box-shadow: 0 0 10px 0 $primary-dark;
+        }
     }
 
     .sidenav-overlay {
@@ -35,7 +39,7 @@ sidenav-layout {
 }
 
 sidenav {
-    transition: left;
+    transition: left, box-shadow;
     transition-timing-function: ease-in-out;
     transition-duration: 500ms;
     display: block;
@@ -46,32 +50,48 @@ sidenav {
     min-width: 5%;
     background-color: #FF5252;
 
-    nav {
+    .sidenav-wrapper {
+        position: relative;
+        box-sizing: border-box;
+        display: block;
 
-        .nav-row {
-            margin-left: 20px;
-        }
+        nav {
+            ul {
+                margin: 0;
+                li {
+                    display: block;
+                    width: 100%;
+                    padding: 5px 0;
+                    height: 40px;
 
-        a {
-            float: right;
-        }
+                    a {
+                        position: relative;
+                        display: block;
+                        width: 100%;
+                        height: inherit;
+                        transition: background-color .15s ease-in-out;
+                    }
 
-        a span {
-            @extend .text-primary-light;
-            display: block;
-            height: 50px;
-            line-height: 50px;
-            text-align: right;
-            float: left;
-        }
+                    a:hover {
+                        background-color: $hover-dark;
+                    }
 
-        a span.link-icon {
-            width: 50px;
-            text-align: center;
+                    a span {
+                        @extend .text-primary-light;
+                        height: 40px;
+                        line-height: 40px;
+                        float: right;
+                    }
 
-            md-icon {
-                line-height: 50px;
+                    a .link-icon {
+                        width: 50px;
+                        float: right;
+                        text-align: center;
+                        line-height: 40px;
+                    }
+                }
             }
+
         }
     }
 }

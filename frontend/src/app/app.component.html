@@ -1,22 +1,20 @@
 <sidenav-layout>
     <sidenav #sidenav>
         <nav>
-            <div class="nav-row">
-                <a [routerLink]="'/dashboard'">
-                    <span>{{ 'modules.dashboard.linkTitle' | translate }}</span>
-                    <span class="link-icon">
-                        <md-icon>dashboard</md-icon>
-                    </span>
-                </a>
-            </div>
-            <div class="nav-row">
-                <a [routerLink]="'/manage'">
-                    <span>{{ 'modules.manage.linkTitle' | translate }}</span>
-                    <span class="link-icon">
-                        <md-icon>settings</md-icon>
-                    </span>
-                </a>
-            </div>
+            <ul>
+                <li class="nav-row">
+                    <a [routerLink]="'/dashboard'" md-ripple md-ripple-trigger>
+                        <md-icon class="link-icon">dashboard</md-icon>
+                        <span>{{ 'modules.dashboard.linkTitle' | translate }}</span>
+                    </a>
+                </li>
+                <li class="nav-row">
+                    <a [routerLink]="'/manage'" md-ripple md-ripple-trigger>
+                        <md-icon class="link-icon">settings</md-icon>
+                        <span>{{ 'modules.manage.linkTitle' | translate }}</span>
+                    </a>
+                </li>
+            </ul>
         </nav>
     </sidenav>
     <md-toolbar color="primary">
