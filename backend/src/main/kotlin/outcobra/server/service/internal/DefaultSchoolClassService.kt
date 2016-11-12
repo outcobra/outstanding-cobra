@@ -24,15 +24,14 @@ open class DefaultSchoolClassService
                         val schoolClassRepository: SchoolClassRepository,
                         val userService: UserService) : SchoolClassService {
 
-    @RequestMapping(method = arrayOf(RequestMethod.PUT))
     override fun createSchoolClass(schoolClassDto: SchoolClassDto): SchoolClassDto {
         var schoolClass = mapper.fromDto(schoolClassDto)
         schoolClass = schoolClassRepository.save(schoolClass)
         return mapper.toDto(schoolClass)
     }
 
-    @RequestMapping(method = arrayOf(RequestMethod.GET))
-    override fun readSchoolClassById(@PathParam("") id: Long): SchoolClassDto {
+
+    override fun readSchoolClassById(id: Long): SchoolClassDto {
         return mapper.toDto(schoolClassRepository.getOne(id))
     }
 
@@ -44,11 +43,12 @@ open class DefaultSchoolClassService
     }
 
     override fun updateSchoolClass(schoolClassDto: SchoolClassDto): SchoolClassDto {
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+        var schoolClass = mapper.fromDto(schoolClassDto)
+        schoolClass = schoolClassRepository.save(schoolClass)
+        return mapper.toDto(schoolClass)
     }
 
     override fun deleteSchoolClass(id: Long) {
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+        schoolClassRepository.delete(id)
     }
-//TODO Implement
 }
