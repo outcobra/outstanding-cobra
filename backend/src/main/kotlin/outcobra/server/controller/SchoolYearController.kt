@@ -8,7 +8,8 @@ import javax.inject.Inject
 /**
  * Created by Florian on 12.11.2016.
  */
-@RestController("/api")
+@RestController
+@RequestMapping("/api")
 class SchoolYearController @Inject constructor(val schoolYearService: SchoolYearService) {
     @RequestMapping(value = "/schoolYear", method = arrayOf(RequestMethod.PUT))
     fun createSchoolYear(@RequestBody schoolYearDto: SchoolYearDto): SchoolYearDto {
