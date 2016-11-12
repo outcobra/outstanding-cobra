@@ -15,7 +15,7 @@ class InstitutionController @Inject constructor(val institutionService: Institut
         institutionService.createInstitution(institutionDto.institutionName)
     }
 
-    @RequestMapping(value = "{id}", method = arrayOf(RequestMethod.GET))
+    @RequestMapping(value = "/{id}", method = arrayOf(RequestMethod.GET))
     fun readInstitutionById(@PathVariable("id") id: Long): InstitutionDto {
         return institutionService.readInstitutionById(id)
     }
@@ -25,7 +25,7 @@ class InstitutionController @Inject constructor(val institutionService: Institut
         return institutionService.updateInstitution(institutionDto)
     }
 
-    @RequestMapping(method = arrayOf(RequestMethod.GET))
+    @RequestMapping(value = "/all", method = arrayOf(RequestMethod.GET))
     fun readAllInstitutions() : List<InstitutionDto>{
         return institutionService.readAllInstitutions()
     }
