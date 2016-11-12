@@ -118,11 +118,11 @@ public class Teacher implements OutcobraEntity<Teacher, TeacherDto> {
 
     @Override
     public TeacherDto toDto() {
-        return null;
+        return getMapper().toDto(this);
     }
 
     @Override
-    public Mapper<TeacherDto, Teacher> getMapper() {
+    public Mapper<Teacher, TeacherDto> getMapper() {
         return null;
     }
     //endregion

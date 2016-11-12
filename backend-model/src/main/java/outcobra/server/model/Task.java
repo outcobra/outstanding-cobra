@@ -157,11 +157,11 @@ public class Task implements OutcobraEntity<Task, TaskDto> {
 
     @Override
     public TaskDto toDto() {
-        return null;
+        return getMapper().toDto(this);
     }
 
     @Override
-    public Mapper<TaskDto, Task> getMapper() {
+    public Mapper<Task, TaskDto> getMapper() {
         return null;
     }
     //endregion0

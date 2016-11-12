@@ -158,11 +158,11 @@ public class Semester implements OutcobraEntity<Semester, SemesterDto> {
 
     @Override
     public SemesterDto toDto() {
-        return null;
+        return getMapper().toDto(this);
     }
 
     @Override
-    public Mapper<SemesterDto, Semester> getMapper() {
+    public Mapper<Semester, SemesterDto> getMapper() {
         return null;
     }
 }

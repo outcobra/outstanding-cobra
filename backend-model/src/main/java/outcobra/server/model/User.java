@@ -1,6 +1,8 @@
 package outcobra.server.model;
 
 import org.hibernate.validator.constraints.Length;
+import outcobra.server.model.interfaces.ParentLink;
+import outcobra.server.model.interfaces.ParentLinked;
 
 import javax.jdo.annotations.Index;
 import javax.jdo.annotations.Unique;
@@ -13,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class User {
+public class User implements ParentLinked<User> {
     @Id
     @GeneratedValue
     private Long id;
@@ -107,11 +109,12 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "auth0Id='" + auth0Id + '\'' +
-                ", username='" + username + '\'' +
-                ", institutions=" + institutions +
-                '}';
+        return String.format("User{auth0Id='%s', username='%s', institutions=%s}", auth0Id, username, institutions);
+    }
+
+    @Override
+    public ParentLink<User> getParentLink() {
+        return null;
     }
     //endregion
 }

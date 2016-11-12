@@ -147,11 +147,11 @@ public class SchoolYear implements OutcobraEntity<SchoolYear, SchoolYearDto> {
 
     @Override
     public SchoolYearDto toDto() {
-        return null;
+        return getMapper().toDto(this);
     }
 
     @Override
-    public Mapper<SchoolYearDto, SchoolYear> getMapper() {
+    public Mapper<SchoolYear, SchoolYearDto> getMapper() {
         return null;
     }
     //endregion

@@ -183,11 +183,11 @@ public class Subject implements OutcobraEntity<Subject, SubjectDto> {
 
     @Override
     public SubjectDto toDto() {
-        return null;
+        return getMapper().toDto(this);
     }
 
     @Override
-    public Mapper<SubjectDto, Subject> getMapper() {
+    public Mapper<Subject, SubjectDto> getMapper() {
         return null;
     }
     //endregion

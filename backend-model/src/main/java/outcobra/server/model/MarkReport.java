@@ -103,14 +103,12 @@ public class MarkReport implements OutcobraEntity<MarkReport, MarkReportDto> {
 
     @Override
     public MarkReportDto toDto() {
-        return null;
+        return getMapper().toDto(this);
     }
 
     @Override
-    public Mapper<MarkReportDto, MarkReport> getMapper() {
+    public Mapper<MarkReport, MarkReportDto> getMapper() {
         return null;
     }
-
 //endregion
-
 }

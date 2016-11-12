@@ -105,11 +105,11 @@ public class MarkReportEntry implements OutcobraEntity<MarkReportEntry, MarkRepo
 
     @Override
     public MarkReportEntryDto toDto() {
-        return null;
+        return getMapper().toDto(this);
     }
 
     @Override
-    public Mapper<MarkReportEntryDto, MarkReportEntry> getMapper() {
+    public Mapper<MarkReportEntry, MarkReportEntryDto> getMapper() {
         return null;
     }
     //endregion

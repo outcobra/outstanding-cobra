@@ -81,8 +81,6 @@ public abstract class Mark implements OwnerVerifiable {
             return false;
         if (exam != null ? !exam.equals(mark.exam) : mark.exam != null) return false;
         return markGroup != null ? markGroup.equals(mark.markGroup) : mark.markGroup == null;
-
-
     }
 
     @Override

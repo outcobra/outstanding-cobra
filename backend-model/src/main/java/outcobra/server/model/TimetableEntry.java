@@ -153,11 +153,11 @@ public class TimetableEntry implements OutcobraEntity<TimetableEntry, TimetableE
 
     @Override
     public TimetableEntryDto toDto() {
-        return null;
+        return getMapper().toDto(this);
     }
 
     @Override
-    public Mapper<TimetableEntryDto, TimetableEntry> getMapper() {
+    public Mapper<TimetableEntry, TimetableEntryDto> getMapper() {
         return null;
     }
     //endregion

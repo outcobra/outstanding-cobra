@@ -102,14 +102,13 @@ public class ExamTask implements OutcobraEntity<ExamTask, ExamTaskDto> {
 
     @Override
     public ExamTaskDto toDto() {
-        return null;
+        return getMapper().toDto(this);
     }
 
     @Override
-    public Mapper<ExamTaskDto, ExamTask> getMapper() {
+    public Mapper<ExamTask, ExamTaskDto> getMapper() {
         return null;
     }
-
     //endregion
 }
 

@@ -1,6 +1,6 @@
 package outcobra.server.model.interfaces;
 
-public interface MappableEntity<DtoType, EntityType> extends Mappable<DtoType, EntityType> {
+public interface MappableEntity<EntityType, DtoType> extends Mappable<EntityType, DtoType> {
     DtoType toDto();
 }
 

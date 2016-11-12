@@ -115,13 +115,12 @@ public class Holiday implements OutcobraEntity<Holiday, HolidayDto> {
 
     @Override
     public HolidayDto toDto() {
-        return null;
+        return getMapper().toDto(this);
     }
 
     @Override
-    public Mapper<HolidayDto, Holiday> getMapper() {
+    public Mapper<Holiday, HolidayDto> getMapper() {
         return null;
     }
-
     //endregion
 }

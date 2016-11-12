@@ -134,13 +134,12 @@ public class Exam implements OutcobraEntity<Exam, ExamDto> {
 
     @Override
     public ExamDto toDto() {
-        return null;
+        return getMapper().toDto(this);
     }
 
     @Override
-    public Mapper<ExamDto, Exam> getMapper() {
-        throw new UnsupportedOperationException("not implemented");
+    public Mapper<Exam, ExamDto> getMapper() {
+        return null;
     }
-
     //endregion
 }
