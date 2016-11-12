@@ -32,17 +32,17 @@ class SchoolClassController @Inject constructor(val schoolClassService: SchoolCl
      * @param id the id of the schoolClass you want to read, as [PathParam]
      */
     @RequestMapping(method = arrayOf(RequestMethod.GET))
-    fun readSchoolClassById(@PathParam("") id :Long) : SchoolClassDto {
+    fun readSchoolClassById(@PathParam("schoolClass/{value}") id :Long) : SchoolClassDto {
         return schoolClassService.readSchoolClassById(id)
     }
-
     /**
      * This method reads all schoolClasses that belong to the current user
-     * @return a list of [SchoolClassDto]s
+     * @return a list of [SchoolClassDto]s under the given Institution
      */
-    @RequestMapping(method = arrayOf(RequestMethod.GET))
-    fun readAllSchoolClasses() : List<SchoolClassDto> {
-        return schoolClassService.readAllSchoolClasses()
+
+    @RequestMapping("/institution",method = arrayOf(RequestMethod.GET))
+    fun readAllSchoolClasses(@PathParam("institution/{value}") institutionId :Long) : List<SchoolClassDto> {
+        return schoolClassService.readAllSchoolClasses(institutionId)
     }
 
     /**
@@ -60,7 +60,7 @@ class SchoolClassController @Inject constructor(val schoolClassService: SchoolCl
      * @param id the id of the SchoolClass you want to delete, as [PathParam]
      */
     @RequestMapping(method = arrayOf(RequestMethod.DELETE))
-    fun deleteSchoolClass(@PathParam("") id : Long){
+    fun deleteSchoolClass(@PathParam("schoolClass/{value}") id : Long){
         schoolClassService.deleteSchoolClass(id)
     }
 }

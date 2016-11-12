@@ -26,7 +26,7 @@ import outcobra.server.model.dto.SchoolClassDto
     * that belong to the current user
     * @return a list of [SchoolClassDto]s
     */
-    fun readAllSchoolClasses() : List<SchoolClassDto>
+    fun readAllSchoolClasses(institutionId :Long) : List<SchoolClassDto>
 
    /**
     * This function updates an existing SchoolClass

@@ -2,8 +2,6 @@ package outcobra.server.service.internal
 
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestMethod
 import outcobra.server.model.QSchoolClass
 import outcobra.server.model.SchoolClass
 import outcobra.server.model.dto.SchoolClassDto
@@ -12,7 +10,6 @@ import outcobra.server.model.repository.SchoolClassRepository
 import outcobra.server.service.SchoolClassService
 import outcobra.server.service.UserService
 import javax.inject.Inject
-import javax.websocket.server.PathParam
 
 /**
  * Created by Florian on 11.11.2016.
@@ -35,9 +32,9 @@ open class DefaultSchoolClassService
         return mapper.toDto(schoolClassRepository.getOne(id))
     }
 
-    override fun readAllSchoolClasses(): List<SchoolClassDto> {
+    override fun readAllSchoolClasses(institutionId: Long): List<SchoolClassDto> {
         val qInstitution= QSchoolClass.schoolClass.institution
-        val filter = qInstitution.user.auth0Id.eq(userService.getCurrentUser().userId)
+        val filter = qInstitution.user.auth0Id.eq(userService.getCurrentUser().userId).and(qInstitution.id.eq(institutionId))
         return schoolClassRepository.findAll(filter).map { entity: SchoolClass -> mapper.toDto(entity) }
 
     }
