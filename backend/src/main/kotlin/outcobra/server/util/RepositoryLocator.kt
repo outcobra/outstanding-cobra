@@ -13,7 +13,7 @@ class RepositoryLocator @Inject constructor(val context: ApplicationContext) {
      * @throws NoRepositoryFoundException if the requested repository could not be found
      */
     fun getForEntityName(entityName: String): JpaRepository<*, Long> {
-        val repoName = entityName + "Repository"
+        val repoName = entityName.firstToLower() + "Repository"
 
         try {
             val repoBean = context.getBean(repoName) as? JpaRepository<*, Long>
@@ -28,6 +28,11 @@ class RepositoryLocator @Inject constructor(val context: ApplicationContext) {
 
     fun <T> getForEntityClass(entityClass: Class<T>): JpaRepository<T, Long> {
         return getForEntityName(entityClass.simpleName) as JpaRepository<T, Long>
+    }
+
+    private fun String.firstToLower(): String {
+        if (this.isNullOrEmpty()) return this
+        return substring(0, 1).toLowerCase() + substring(1, length)
     }
 }
 
