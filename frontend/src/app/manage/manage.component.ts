@@ -17,7 +17,7 @@ export class ManageComponent implements OnInit {
 
     ngOnInit() {
         this.manageService.getManageData()
-            .subscribe((res) => this.manageData = res);
+            .subscribe((res) => {this.manageData = res; console.log(res)});
     }
 
 }

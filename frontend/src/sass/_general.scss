@@ -19,3 +19,17 @@
 .border-bottom {
     border-bottom: 1px solid $slightly-dark;
 }
+
+.collapsible-header {
+    md-icon {
+        width: 2rem;
+        font-size: 1.6rem;
+        height: 100%;
+        vertical-align: middle;
+        line-height: 3rem;
+        display: block;
+        float: left;
+        text-align: center;
+        margin-right: 1rem;
+    }
+}

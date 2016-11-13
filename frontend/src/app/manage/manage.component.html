@@ -1,9 +1,22 @@
 <div class="row manage-rows">
     <div class="col s4 border-right">
-        <div class="manage-entity">
-            <h3>GIBB</h3>
-            <button md-icon-button><md-icon>edit</md-icon></button>
-        </div>
+        <ul class="collapsible" data-collapsible="accordion">
+            <li *ngFor="let institution of manageData?.institutions">
+                <collapsible>
+                    <collapsible-header>
+                        <md-icon>school</md-icon>
+                        <span>{{ institution.name }}</span>
+                    </collapsible-header>
+                    <collapsible-body>
+                        <ul>
+                            <li *ngFor="let schoolClass of institution.schoolClasses">
+                                {{ schoolClass.normalizedName }}
+                            </li>
+                        </ul>
+                    </collapsible-body>
+                </collapsible>
+            </li>
+        </ul>
     </div>
     <div class="col s4">
 

@@ -8,6 +8,7 @@ manager, .manage-rows {
     margin: 0;
 
     .col {
+        padding: 10px;
         height: 100%;
 
         .manage-entity {
@@ -15,6 +16,12 @@ manager, .manage-rows {
             width: 100%;
 
             @extend .border-bottom;
+        }
+    }
+
+    .md-list-text {
+        *[md-line] {
+            overflow-x: visible;
         }
     }
 }
