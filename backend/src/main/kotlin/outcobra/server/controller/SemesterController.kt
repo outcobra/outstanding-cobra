@@ -22,7 +22,7 @@ open class SemesterController @Inject constructor(val semesterService: SemesterS
         return semesterService.readSemesterById(id)
     }
     @RequestMapping(value = "/schoolYear/{schoolYearId}/semester", method = arrayOf(RequestMethod.GET))
-    fun readAllSemestersBySchoolYear(schoolYearId: Long): List<SemesterDto> {
+    fun readAllSemestersBySchoolYear(@PathVariable schoolYearId: Long): List<SemesterDto> {
         return semesterService.readAllSemestersBySchoolYear(schoolYearId)
     }
     @RequestMapping(value = "/semester", method = arrayOf(RequestMethod.POST))
@@ -30,7 +30,7 @@ open class SemesterController @Inject constructor(val semesterService: SemesterS
         return semesterService.updateSemester(semesterDto)
     }
 
-    @RequestMapping(value = "/semester/{id}", method = arrayOf(RequestMethod.GET))
+    @RequestMapping(value = "/semester/{id}", method = arrayOf(RequestMethod.DELETE))
     fun deleteSemester(@PathVariable id: Long) {
         semesterService.deleteSemester(id)
     }
