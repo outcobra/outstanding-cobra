@@ -1,4 +1,4 @@
-package outcobra.server.service.internal
+package outcobra.server.service
 
 import outcobra.server.model.dto.SchoolYearDto
 
@@ -9,6 +9,6 @@ interface SchoolYearService {
     fun createSchoolYear(schoolYearDto: SchoolYearDto) : SchoolYearDto
     fun readSchoolYearById(id : Long) : SchoolYearDto
     fun readAllYearsByClass(schoolClassId : Long) : List<SchoolYearDto>
-    fun updateSchoolYear(schoolYearDto: SchoolYearDto) :SchoolYearDto
+    fun updateSchoolYear(schoolYearDto: SchoolYearDto) : SchoolYearDto
     fun deleteSchoolYear(id : Long)
 }

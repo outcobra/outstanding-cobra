@@ -2,7 +2,7 @@ package outcobra.server.controller
 
 import org.springframework.web.bind.annotation.*
 import outcobra.server.model.dto.SchoolYearDto
-import outcobra.server.service.internal.SchoolYearService
+import outcobra.server.service.SchoolYearService
 import javax.inject.Inject
 
 /**
