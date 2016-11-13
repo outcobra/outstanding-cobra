@@ -39,13 +39,15 @@ class AuthFilterTest {
 
     companion object {
         val INSTITUTION_NAME = "TestInstitution"
-
         val USER_AUTH0_ID = "test|1111111110"
         val USER_NICKNAME = "jmesserli"
+        val USER2_AUTH0_ID = "saf123123"
+        val USER2_NICKNAME = "needToRoll"
 
         lateinit var INSTITUTION: Institution
+        lateinit var INSTITUTION2: Institution
+        lateinit var USER2: User
         lateinit var USER: User
-
         lateinit var NOOP_FILTER_CHAIN: FilterChain
         lateinit var EMPTY_RESPONSE: ServletResponse
     }
@@ -53,9 +55,11 @@ class AuthFilterTest {
     @Before
     fun setup() {
         USER = userRepository.save(User(null, USER_AUTH0_ID, USER_NICKNAME, null))
+        USER2 = userRepository.save(User(null, USER2_AUTH0_ID, USER2_NICKNAME, null))
         INSTITUTION = institutionRepository.save(Institution(INSTITUTION_NAME, USER, null, null))
+        INSTITUTION2 = institutionRepository.save(Institution(INSTITUTION_NAME, USER2, null, null))
         USER = userRepository.findOne(USER.id)
-
+        USER2 = userRepository.findOne(USER2.id)
         NOOP_FILTER_CHAIN = mock(FilterChain::class.java)
         EMPTY_RESPONSE = mock(ServletResponse::class.java)
     }
@@ -71,6 +75,14 @@ class AuthFilterTest {
     }
 
     @Test
+    fun testInvalidPostFilter() {
+        val mockRequest = makeMockRequest("POST", ObjectMapper().writeValueAsString(INSTITUTION2), "/api/institution")
+        authFilter.doFilter(mockRequest, EMPTY_RESPONSE, NOOP_FILTER_CHAIN)
+        // Request should be destroyed since it is invalid
+        verifyZeroInteractions(NOOP_FILTER_CHAIN)
+    }
+
+    @Test
     fun testGetFilter() {
         val mockRequest = makeMockRequest("GET", "", "/api/institution/${INSTITUTION.id}")
 
@@ -78,6 +90,15 @@ class AuthFilterTest {
 
         // Request should be passed on since it is valid
         verify(NOOP_FILTER_CHAIN).doFilter(mockRequest, EMPTY_RESPONSE)
+    }
+
+    @Test
+    fun testInvalidGetFilter() {
+        val mockRequest = makeMockRequest("GET", "", "/api/institution/${INSTITUTION2.id}")
+        authFilter.doFilter(mockRequest, EMPTY_RESPONSE, NOOP_FILTER_CHAIN)
+
+        // Request should be destroyed since it is invalid
+        verifyZeroInteractions(NOOP_FILTER_CHAIN)
     }
 
     @After
