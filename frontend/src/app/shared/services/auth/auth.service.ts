@@ -10,7 +10,9 @@ declare var Auth0Lock: any;
 @Injectable()
 export class AuthService {
     private auth0Config: any;
-    private readonly supportedLangs: Array<string> = ['de', 'en'];
+    private readonly supportedLangs: Array<string> = ['de', 'en']; // TODO
+    private readonly defaultRedirectRoute = '/dashboard';
+    private redirectRoute: string;
     lock;
 
     constructor(private config: Config, private router: Router, private http: HttpInterceptor, private translateService: TranslateService) {
@@ -44,13 +46,14 @@ export class AuthService {
             });
             // We need to subscribe here because the request does not get triggered if we don't
             this.http.get('/user/login', 'outcobra').subscribe();
-            this.router.navigate(['/dashboard']);
+            this.router.navigate([this.redirectRoute]);
         });
     }
 
-    login() {
+    login(redirectRoute: string = this.defaultRedirectRoute) {
         if (!this.isLoggedIn()) {
-            this.lock.show({ //TODO language and save to our db
+            this.redirectRoute = redirectRoute;
+            this.lock.show({ //TODO language
                 language: "de"
             });
         }
