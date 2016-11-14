@@ -1,15 +1,13 @@
 package outcobra.server.model;
 
-import outcobra.server.model.dto.HolidayDto;
-import outcobra.server.model.interfaces.Mapper;
-import outcobra.server.model.interfaces.OutcobraEntity;
+import outcobra.server.model.interfaces.ParentLinked;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
-public class Holiday implements OutcobraEntity<Holiday, HolidayDto> {
+public class Holiday implements ParentLinked {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -109,18 +107,9 @@ public class Holiday implements OutcobraEntity<Holiday, HolidayDto> {
     }
 
     @Override
-    public boolean verifyOwner(String owner) {
-        return false;
+    public ParentLinked getParent() {
+        return schoolYear;
     }
 
-    @Override
-    public HolidayDto toDto() {
-        return getMapper().toDto(this);
-    }
-
-    @Override
-    public Mapper<Holiday, HolidayDto> getMapper() {
-        return null;
-    }
     //endregion
 }

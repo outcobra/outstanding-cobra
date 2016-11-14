@@ -1,30 +1,25 @@
 package outcobra.server.service.internal
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Component
 import outcobra.server.model.User
-import outcobra.server.model.interfaces.ParentLink
 import outcobra.server.model.interfaces.ParentLinked
 import outcobra.server.service.AuthorizationService
 import outcobra.server.service.UserService
+import outcobra.server.util.DtoLocator
 import outcobra.server.util.RepositoryLocator
 import javax.inject.Inject
 
 @Component
 class DefaultAuthorizationService
 @Inject constructor(val userService: UserService,
-                    val repositoryLocator: RepositoryLocator) : AuthorizationService {
-
-    override fun parentLinkOf(id: Long, entityName: String): ParentLink<*> {
+                    val repositoryLocator: RepositoryLocator,
+                    val dtoLocator: DtoLocator) : AuthorizationService {
+    override fun getParentLinkedEntityOf(id: Long, entityName: String): ParentLinked {
         try {
-            val repo = repositoryLocator.getForEntityName(entityName) as JpaRepository<ParentLinked<*>, Long>
-            val parentLinked = repo.findOne(id)
-
-            if (parentLinked != null) {
-                return parentLinked.parentLink
-            } else {
-                throw RuntimeException("Could not find entity for id $id")
-            }
+            val repo = repositoryLocator.getForEntityName(entityName) as JpaRepository<ParentLinked, Long>
+            return repo.findOne(id) ?: throw RuntimeException("Could not find entity for id $id")
         } catch (iae: IllegalArgumentException) {
             throw RuntimeException("Could not locate repository for $entityName")
         } catch(tce: TypeCastException) {
@@ -32,29 +27,25 @@ class DefaultAuthorizationService
         }
     }
 
-    override fun <T> verifyOwner(link: ParentLink<T>): Boolean {
+    override fun verifyDto(dtoString: String, entityName: String, new: Boolean): Boolean {
+        val dtoClass = dtoLocator.getForEntityName(entityName)
+        val parsedDto = ObjectMapper().readValue(dtoString, dtoClass)
+
+        if (!new) {
+
+        }
+    }
+
+    override fun verifyOwner(link: ParentLinked): Boolean {
         val entityOwner = followToUser(link)
         return entityOwner.auth0Id == userService.getTokenUserId()
     }
 
-    tailrec private fun followToUser(link: ParentLink<*>): User {
-        val repo = repositoryLocator.getForEntityClass(link.parentClass)
-        val parent = repo.findOne(link.parentId()) as? ParentLinked<*>
-
-        if (parent is User) {
-            return parent
-        }
-        if (parent == null) {
-            throw RuntimeException("parent is null")
-        }
-
-        val nextLink = parent.parentLink
-        if (nextLink is ParentLink<*>) {
-            return followToUser(nextLink)
-        } else {
-            throw RuntimeException("$parent.parentLink is not a ParentLink<*>")
+    tailrec private fun followToUser(link: ParentLinked): User {
+        if (link is User) return link
+        if (link != null) return followToUser(link.parent)
+        else {
+            throw RuntimeException()
         }
     }
 }
-
-class NoParentFoundException(override val message: String) : Exception(message)

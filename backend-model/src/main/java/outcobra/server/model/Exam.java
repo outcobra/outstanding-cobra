@@ -1,8 +1,6 @@
 package outcobra.server.model;
 
-import outcobra.server.model.dto.ExamDto;
-import outcobra.server.model.interfaces.Mapper;
-import outcobra.server.model.interfaces.OutcobraEntity;
+import outcobra.server.model.interfaces.ParentLinked;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -11,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Exam implements OutcobraEntity<Exam, ExamDto> {
+public class Exam implements ParentLinked {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -128,18 +126,8 @@ public class Exam implements OutcobraEntity<Exam, ExamDto> {
     }
 
     @Override
-    public boolean verifyOwner(String owner) {
-        return false;
-    }
-
-    @Override
-    public ExamDto toDto() {
-        return getMapper().toDto(this);
-    }
-
-    @Override
-    public Mapper<Exam, ExamDto> getMapper() {
-        return null;
+    public ParentLinked getParent() {
+        return subject;
     }
     //endregion
 }

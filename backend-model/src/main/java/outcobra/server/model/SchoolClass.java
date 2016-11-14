@@ -1,6 +1,5 @@
 package outcobra.server.model;
 
-import outcobra.server.model.interfaces.ParentLink;
 import outcobra.server.model.interfaces.ParentLinked;
 
 import javax.persistence.*;
@@ -96,10 +95,6 @@ public class SchoolClass implements ParentLinked<Institution> {
         return result;
     }
 
-    @Override
-    public ParentLink<Institution> getParentLink() {
-        return ParentLink.make(institution.getId(), Institution.class);
-    }
     //endregion
 }
 

@@ -1,7 +1,6 @@
 package outcobra.server.model;
 
 import org.hibernate.validator.constraints.Length;
-import outcobra.server.model.interfaces.ParentLink;
 import outcobra.server.model.interfaces.ParentLinked;
 
 import javax.jdo.annotations.Index;
@@ -112,9 +111,5 @@ public class User implements ParentLinked<User> {
         return String.format("User{auth0Id='%s', username='%s', institutions=%s}", auth0Id, username, institutions);
     }
 
-    @Override
-    public ParentLink<User> getParentLink() {
-        return null;
-    }
     //endregion
 }
