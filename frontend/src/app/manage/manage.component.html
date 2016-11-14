@@ -4,21 +4,80 @@
             <li *ngFor="let institution of manageData?.institutions">
                 <collapsible>
                     <collapsible-header>
-                        <md-icon>school</md-icon>
-                        <span>{{ institution.name }}</span>
+                        <div class="entity">
+                            <div class="entity-desc">
+                                <md-icon class="entity-icon">school</md-icon>
+                                <span>{{ institution.name }}</span>
+                            </div>
+                            <div class="entity-menu">
+                                <button md-icon-button class="right">
+                                    <md-icon [md-menu-trigger-for]="menu"
+                                             (click)="$event.stopPropagation()">
+                                        more_vert
+                                    </md-icon>
+                                </button>
+
+                                <md-menu #menu="mdMenu">
+                                    <button md-menu-item>
+                                        <md-icon>delete</md-icon>
+                                        <span>Delete</span></button>
+                                    <button md-menu-item>
+                                        <md-icon>edit</md-icon>
+                                        <span>Edit</span></button>
+                                </md-menu>
+                            </div>
+                        </div>
                     </collapsible-header>
                     <collapsible-body>
                         <ul>
                             <li *ngFor="let schoolClass of institution.schoolClasses">
-                                {{ schoolClass.normalizedName }}
+                                <div class="entity">
+                                    <div class="entity-desc">
+                                        <md-icon class="entity-icon">subdirectory_arrow_right</md-icon>
+                                        <md-icon class="entity-icon">class</md-icon>
+                                        <span>{{ schoolClass.normalizedName }}</span>
+                                    </div>
+                                    <div class="entity-menu">
+                                        <button md-icon-button class="right">
+                                            <md-icon [md-menu-trigger-for]="menu"
+                                                     (click)="$event.stopPropagation()">
+                                                more_vert
+                                            </md-icon>
+                                        </button>
+
+                                        <md-menu #menu="mdMenu">
+                                            <button md-menu-item>
+                                                <md-icon>delete</md-icon>
+                                                <span>Delete</span></button>
+                                            <button md-menu-item>
+                                                <md-icon>edit</md-icon>
+                                                <span>Edit</span></button>
+                                        </md-menu>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="action-button">
+                                    <button md-raised-button color="accent">Add class</button>
+                                </div>
                             </li>
                         </ul>
                     </collapsible-body>
                 </collapsible>
             </li>
+            <li>
+                <div class="action-button">
+                    <button md-raised-button color="accent">Add institutuion</button>
+                </div>
+            </li>
         </ul>
     </div>
     <div class="col s4">
+        <button md-icon-button>
+            <md-icon>
+                more_vert
+            </md-icon>
+        </button>
 
     </div>
     <div class="col s4 border-left">

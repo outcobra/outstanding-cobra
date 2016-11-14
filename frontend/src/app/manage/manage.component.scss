@@ -19,9 +19,36 @@ manager, .manage-rows {
         }
     }
 
-    .md-list-text {
-        *[md-line] {
-            overflow-x: visible;
+    .entity {
+        padding: 0 10px;
+        height: 100%;
+        box-sizing: inherit;
+
+        .entity-desc md-icon {
+            float: left;
+            height: 100%;
+            line-height: 50px !important;
+            margin-right: 20px;
+        }
+
+        .entity-desc span {
+            display: block;
+            float: left;
+            height: 100%;
+            line-height: 50px;
+        }
+
+        .entity-menu button {
+            margin: 5px 0;
+        }
+    }
+
+    li {
+        display: block;
+
+        .action-button {
+            padding: 10px;
+            text-align: right;
         }
     }
 }

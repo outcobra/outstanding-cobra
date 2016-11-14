@@ -11,24 +11,9 @@ collapsible-header {
     cursor: pointer;
     width: 100%;
     box-sizing: border-box;
-    padding: 0 10px;
     height: 50px;
     line-height: 50px;
     @extend .border-bottom;
-
-    md-icon {
-        float: left;
-        height: 100%;
-        line-height: 50px !important;
-        margin-right: 20px;
-    }
-
-    span {
-        display: block;
-        float: left;
-        height: 100%;
-        line-height: 50px;
-    }
 }
 
 collapsible-body {
@@ -39,8 +24,8 @@ collapsible-body {
         height: inherit;
         overflow-y: hidden;
         li {
-            padding: 10px;
             overflow-y: hidden;
+            @extend .border-bottom;
         }
     }
 }

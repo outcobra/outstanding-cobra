@@ -54,6 +54,12 @@ sidenav {
     width: 250px;
 }
 
+button[md-raised-button], button[md-button] {
+    md-icon {
+        vertical-align: middle;
+    }
+}
+
 .app-content {
     height: calc(100% - 64px);
     overflow-y: scroll;
