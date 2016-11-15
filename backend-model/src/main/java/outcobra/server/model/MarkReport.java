@@ -1,17 +1,15 @@
 package outcobra.server.model;
 
-import outcobra.server.model.dto.MarkReportDto;
-import outcobra.server.model.interfaces.Mapper;
-import outcobra.server.model.interfaces.OutcobraEntity;
+import java.util.List;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.List;
+
+import outcobra.server.model.interfaces.ParentLinked;
 
 
 @Entity
-public class MarkReport implements OutcobraEntity<MarkReport, MarkReportDto> {
-
+public class MarkReport implements ParentLinked {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private Long id;
@@ -97,18 +95,8 @@ public class MarkReport implements OutcobraEntity<MarkReport, MarkReportDto> {
     }
 
     @Override
-    public boolean verifyOwner(String owner) {
-        return false;
-    }
-
-    @Override
-    public MarkReportDto toDto() {
-        return getMapper().toDto(this);
-    }
-
-    @Override
-    public Mapper<MarkReport, MarkReportDto> getMapper() {
-        return null;
+    public ParentLinked getParent() {
+        return semester;
     }
 //endregion
 }

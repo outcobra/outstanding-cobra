@@ -17,6 +17,7 @@ import outcobra.server.OutstandingCobraServerApplication
 import outcobra.server.model.Institution
 import outcobra.server.model.User
 import outcobra.server.model.dto.UserDto
+import outcobra.server.model.mapper.InstitutionMapper
 import outcobra.server.model.repository.InstitutionRepository
 import outcobra.server.model.repository.UserRepository
 import outcobra.server.service.UserService
@@ -36,11 +37,15 @@ class AuthFilterTest {
     lateinit var userRepository: UserRepository
     @Autowired
     lateinit var authFilter: RequestAuthorizationFilter
+    @Autowired
+    lateinit var institutionMapper: InstitutionMapper
 
     companion object {
         val INSTITUTION_NAME = "TestInstitution"
+
         val USER_AUTH0_ID = "test|1111111110"
         val USER_NICKNAME = "jmesserli"
+
         val USER2_AUTH0_ID = "saf123123"
         val USER2_NICKNAME = "needToRoll"
 
@@ -48,6 +53,7 @@ class AuthFilterTest {
         lateinit var INSTITUTION2: Institution
         lateinit var USER2: User
         lateinit var USER: User
+
         lateinit var NOOP_FILTER_CHAIN: FilterChain
         lateinit var EMPTY_RESPONSE: ServletResponse
     }
@@ -56,17 +62,20 @@ class AuthFilterTest {
     fun setup() {
         USER = userRepository.save(User(null, USER_AUTH0_ID, USER_NICKNAME, null))
         USER2 = userRepository.save(User(null, USER2_AUTH0_ID, USER2_NICKNAME, null))
+
         INSTITUTION = institutionRepository.save(Institution(INSTITUTION_NAME, USER, null, null))
         INSTITUTION2 = institutionRepository.save(Institution(INSTITUTION_NAME, USER2, null, null))
+
         USER = userRepository.findOne(USER.id)
         USER2 = userRepository.findOne(USER2.id)
+
         NOOP_FILTER_CHAIN = mock(FilterChain::class.java)
         EMPTY_RESPONSE = mock(ServletResponse::class.java)
     }
 
     @Test
     fun testPostFilter() {
-        val mockRequest = makeMockRequest("POST", ObjectMapper().writeValueAsString(INSTITUTION), "/api/institution")
+        val mockRequest = makeMockRequest("POST", ObjectMapper().writeValueAsString(institutionMapper.toDto(INSTITUTION)), "/api/institution")
 
         authFilter.doFilter(mockRequest, EMPTY_RESPONSE, NOOP_FILTER_CHAIN)
 
@@ -76,7 +85,7 @@ class AuthFilterTest {
 
     @Test
     fun testInvalidPostFilter() {
-        val mockRequest = makeMockRequest("POST", ObjectMapper().writeValueAsString(INSTITUTION2), "/api/institution")
+        val mockRequest = makeMockRequest("POST", ObjectMapper().writeValueAsString(institutionMapper.toDto(INSTITUTION2)), "/api/institution")
         authFilter.doFilter(mockRequest, EMPTY_RESPONSE, NOOP_FILTER_CHAIN)
         // Request should be destroyed since it is invalid
         verifyZeroInteractions(NOOP_FILTER_CHAIN)
@@ -127,7 +136,7 @@ class AuthFilterTest {
         open fun mockUserService(): UserService {
             val mockService = mock(UserService::class.java)
 
-            `when`(mockService.getCurrentUser()).then { UserDto(USER_AUTH0_ID, USER_NICKNAME) }
+            `when`(mockService.getCurrentUser()).then { UserDto(USER.id, USER_AUTH0_ID, USER_NICKNAME) }
             `when`(mockService.getTokenUserId()).then { USER_AUTH0_ID }
 
             return mockService

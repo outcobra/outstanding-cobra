@@ -3,6 +3,8 @@ package outcobra.server.model;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
+import outcobra.server.model.interfaces.ParentLinked;
+
 @Entity
 public class MarkValue extends Mark {
     @NotNull
@@ -61,8 +63,8 @@ public class MarkValue extends Mark {
     }
 
     @Override
-    public boolean verifyOwner(String owner) {
-        return false;
+    public ParentLinked getParent() {
+        return getMarkGroup();
     }
     //endregion
 }

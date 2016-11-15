@@ -1,17 +1,16 @@
 package outcobra.server.model;
 
-import outcobra.server.model.dto.TaskDto;
-import outcobra.server.model.interfaces.Mapper;
-import outcobra.server.model.interfaces.OutcobraEntity;
+import java.time.LocalDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
+
+import outcobra.server.model.interfaces.ParentLinked;
 
 
 @Entity
 
-public class Task implements OutcobraEntity<Task, TaskDto> {
+public class Task implements ParentLinked {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -151,18 +150,8 @@ public class Task implements OutcobraEntity<Task, TaskDto> {
     }
 
     @Override
-    public boolean verifyOwner(String owner) {
-        return false;
-    }
-
-    @Override
-    public TaskDto toDto() {
-        return getMapper().toDto(this);
-    }
-
-    @Override
-    public Mapper<Task, TaskDto> getMapper() {
-        return null;
+    public ParentLinked getParent() {
+        return subject;
     }
     //endregion0
 }

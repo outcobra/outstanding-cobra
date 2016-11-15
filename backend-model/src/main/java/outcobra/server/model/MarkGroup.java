@@ -1,17 +1,14 @@
 package outcobra.server.model;
 
-import outcobra.server.model.dto.MarkGroupDto;
-import outcobra.server.model.interfaces.Mapper;
-import outcobra.server.model.interfaces.OutcobraEntity;
-
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.*;
+
+import outcobra.server.model.interfaces.ParentLinked;
+
 @Entity
-public class MarkGroup extends Mark implements OutcobraEntity<MarkGroup, MarkGroupDto> {
+public class MarkGroup extends Mark {
 
     @OneToMany(mappedBy = "markGroup")
     private List<Mark> marks;
@@ -106,18 +103,8 @@ public class MarkGroup extends Mark implements OutcobraEntity<MarkGroup, MarkGro
     }
 
     @Override
-    public boolean verifyOwner(String owner) {
-        return false;
-    }
-
-    @Override
-    public MarkGroupDto toDto() {
-        return getMapper().toDto(this);
-    }
-
-    @Override
-    public Mapper<MarkGroup, MarkGroupDto> getMapper() {
-        return null;
+    public ParentLinked getParent() {
+        return subject;
     }
     //endregion
 }

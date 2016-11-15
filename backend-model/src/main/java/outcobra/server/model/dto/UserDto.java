@@ -1,13 +1,21 @@
 package outcobra.server.model.dto;
 
 import outcobra.server.model.User;
-import outcobra.server.model.interfaces.MappableDto;
-import outcobra.server.model.interfaces.Mapper;
+import outcobra.server.model.interfaces.*;
 
-public class UserDto implements MappableDto<UserDto, User> {
+import static outcobra.server.model.interfaces.ParentLink.make;
+
+public class UserDto implements Identifiable, ParentLinkedDto {
+    private final Long id;
     private final String userId, username;
 
-    public UserDto(String userId, String username) {
+    public UserDto() {
+        this.id = null;
+        this.userId = this.username = null;
+    }
+
+    public UserDto(Long id, String userId, String username) {
+        this.id = id;
         this.userId = userId;
         this.username = username;
     }
@@ -21,12 +29,12 @@ public class UserDto implements MappableDto<UserDto, User> {
     }
 
     @Override
-    public Mapper<UserDto, User> getMapper() {
-        throw new UnsupportedOperationException("not implemented");
+    public Long getId() {
+        return id;
     }
 
     @Override
-    public User toEntity() {
-        throw new UnsupportedOperationException("not implemented");
+    public ParentLink getParentLink() {
+        return make(id, User.class);
     }
 }

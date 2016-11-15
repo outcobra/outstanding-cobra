@@ -1,15 +1,16 @@
 package outcobra.server.model;
 
-import outcobra.server.model.interfaces.ParentLinked;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
+import outcobra.server.model.interfaces.ParentLinked;
+
 @Entity
-public class SchoolYear implements ParentLinked<SchoolClass> {
+public class SchoolYear implements ParentLinked {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -138,5 +139,9 @@ public class SchoolYear implements ParentLinked<SchoolClass> {
         return result;
     }
 
+    @Override
+    public ParentLinked getParent() {
+        return schoolClass;
+    }
     //endregion
 }

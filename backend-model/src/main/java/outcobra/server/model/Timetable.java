@@ -1,16 +1,15 @@
 package outcobra.server.model;
 
-import outcobra.server.model.dto.TimetableDto;
-import outcobra.server.model.interfaces.Mapper;
-import outcobra.server.model.interfaces.OutcobraEntity;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
+import outcobra.server.model.interfaces.ParentLinked;
+
 @Entity
-public class Timetable implements OutcobraEntity<Timetable, TimetableDto> {
+public class Timetable implements ParentLinked {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -84,18 +83,8 @@ public class Timetable implements OutcobraEntity<Timetable, TimetableDto> {
     }
 
     @Override
-    public boolean verifyOwner(String owner) {
-        return false;
-    }
-
-    @Override
-    public TimetableDto toDto() {
-        return getMapper().toDto(this);
-    }
-
-    @Override
-    public Mapper<Timetable, TimetableDto> getMapper() {
-        return null;
+    public ParentLinked getParent() {
+        return semester;
     }
     //endregion
 }

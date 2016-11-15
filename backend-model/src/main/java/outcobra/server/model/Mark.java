@@ -1,13 +1,13 @@
 package outcobra.server.model;
 
-import outcobra.server.model.interfaces.OwnerVerifiable;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import outcobra.server.model.interfaces.ParentLinked;
+
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class Mark implements OwnerVerifiable {
+public abstract class Mark implements ParentLinked {
     @NotNull
     protected Double weight;
     @Id
@@ -20,7 +20,6 @@ public abstract class Mark implements OwnerVerifiable {
     private MarkGroup markGroup;
 
     //region constructors
-
     public Mark(Double weight, Exam exam, MarkGroup markGroup) {
         this.weight = weight;
         this.exam = exam;
@@ -28,13 +27,10 @@ public abstract class Mark implements OwnerVerifiable {
     }
 
     public Mark() {
-
     }
-
     //endregion
 
     //region default functions
-
     public abstract double getValue();
 
     public abstract double getWeight();

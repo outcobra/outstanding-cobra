@@ -1,4 +1,5 @@
 package outcobra.server.model.interfaces;
 
-public class Identifiable {
+public interface Identifiable {
+    public Long getId();
 }

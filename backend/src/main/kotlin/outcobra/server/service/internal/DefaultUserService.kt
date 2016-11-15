@@ -27,7 +27,7 @@ open class DefaultUserService
 
     override fun getCurrentUser(): UserDto {
         val auth0Id = getTokenUserId()
-        val user = userRepository.findOne(QUser.user.auth0Id.eq(auth0Id)) ?: return UserDto("", "")
+        val user = userRepository.findOne(QUser.user.auth0Id.eq(auth0Id)) ?: return UserDto(-1, "", "")
         return userDtoMapper.toDto(user)
     }
 
