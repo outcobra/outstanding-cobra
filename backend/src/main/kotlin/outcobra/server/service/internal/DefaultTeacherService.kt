@@ -30,7 +30,7 @@ open class DefaultTeacherService @Inject constructor(val repository: TeacherRepo
 
     override fun readAllYearsByInstitution(institutionId: Long): List<TeacherDto> {
         val qInstitution = QTeacher.teacher.institution
-        val filter = qInstitution.id.eq(institutionId).and(qInstitution.user.auth0Id.eq(userService.getCurrentUser().userId))
+        val filter = qInstitution.id.eq(institutionId).and(qInstitution.user.auth0Id.eq(userService.getCurrentUserDto().userId))
         return repository.findAll(filter).map { entity -> mapper.toDto(entity) }
     }
 

@@ -17,9 +17,9 @@ import javax.inject.Inject
 @Component
 @Transactional
 open class DefaultSchoolClassService
-    @Inject constructor(val mapper : Mapper<SchoolClass,SchoolClassDto>,
-                        val schoolClassRepository: SchoolClassRepository,
-                        val userService: UserService) : SchoolClassService {
+@Inject constructor(val mapper: Mapper<SchoolClass, SchoolClassDto>,
+                    val schoolClassRepository: SchoolClassRepository,
+                    val userService: UserService) : SchoolClassService {
 
     override fun createSchoolClass(schoolClassDto: SchoolClassDto): SchoolClassDto {
         var schoolClass = mapper.fromDto(schoolClassDto)
@@ -33,8 +33,8 @@ open class DefaultSchoolClassService
     }
 
     override fun readAllSchoolClasses(institutionId: Long): List<SchoolClassDto> {
-        val qInstitution= QSchoolClass.schoolClass.institution
-        val filter = qInstitution.user.auth0Id.eq(userService.getCurrentUser().userId).and(qInstitution.id.eq(institutionId))
+        val qInstitution = QSchoolClass.schoolClass.institution
+        val filter = qInstitution.user.auth0Id.eq(userService.getCurrentUserDto().userId).and(qInstitution.id.eq(institutionId))
         return schoolClassRepository.findAll(filter).map { entity: SchoolClass -> mapper.toDto(entity) }
 
     }

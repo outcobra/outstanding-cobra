@@ -34,7 +34,7 @@ open class DefaultSemesterService @Inject constructor(val repository: SemesterRe
     override fun readAllSemestersBySchoolYear(schoolYearId: Long): List<SemesterDto> {
         val qSchoolYear = QSchoolYear.schoolYear
         val qUserId = qSchoolYear.schoolClass.institution.user.auth0Id
-        val filter = qSchoolYear.id.eq(schoolYearId).and(qUserId.eq(userService.getCurrentUser().userId))
+        val filter = qSchoolYear.id.eq(schoolYearId).and(qUserId.eq(userService.getCurrentUserDto().userId))
         return repository.findAll(filter).map { entity -> mapper.toDto(entity) }
     }
 

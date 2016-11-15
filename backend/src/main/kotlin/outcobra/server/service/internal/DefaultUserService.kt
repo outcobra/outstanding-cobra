@@ -19,6 +19,7 @@ open class DefaultUserService
 @Inject constructor(val userRepository: UserRepository,
                     val userDtoMapper: Mapper<User, UserDto>,
                     val auth0Client: Auth0Client) : UserService {
+
     override fun getTokenUserId(): String {
         val userDetails = SecurityContextHolder.getContext().authentication.principal as Auth0UserDetails
         return userDetails.getAuth0Attribute("sub") as String
