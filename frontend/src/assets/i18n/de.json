@@ -36,6 +36,9 @@
             },
             "semester": {
                 "add": "Semester hinzufügen"
+            },
+            "subject": {
+                "add": "Fach hinzufügen"
             }
         }
     },

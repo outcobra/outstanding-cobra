@@ -32,6 +32,9 @@
             },
             "semester": {
                 "add": "Add new semester"
+            },
+            "subject": {
+                "add": "Add new subject"
             }
         },
         "login": {

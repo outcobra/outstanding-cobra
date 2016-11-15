@@ -8,6 +8,8 @@ import {SharedModule} from "../shared/shared.module";
 import {ManageService} from "./manage.service";
 import { EntityMenuComponent } from './entity-menu/entity-menu.component';
 import {TranslateModule} from "ng2-translate";
+import { InstitutionDialog } from './institution-dialog/institution-dialog.component';
+import { SchoolClassDialog } from './school-class-dialog/school-class-dialog.component';
 
 @NgModule({
     imports: [
@@ -20,7 +22,13 @@ import {TranslateModule} from "ng2-translate";
     ],
     declarations: [
         ManageComponent,
-        EntityMenuComponent
+        EntityMenuComponent,
+        InstitutionDialog,
+        SchoolClassDialog
+    ],
+    entryComponents: [
+        InstitutionDialog,
+        SchoolClassDialog
     ],
     providers: [
         ManageService

@@ -8,7 +8,7 @@
                     <collapsible-header>
                         <div class="entity">
                             <div class="entity-desc">
-                                <md-icon class="entity-icon">school</md-icon>
+                                <md-icon class="entity-icon">business</md-icon>
                                 <span>{{ institution.name }}</span>
                             </div>
                             <entity-menu></entity-menu>
@@ -40,7 +40,7 @@
             </li>
             <li>
                 <div class="action-button">
-                    <button md-raised-button color="accent">
+                    <button md-raised-button color="accent" (click)="addInstitution()">
                         <md-icon>add</md-icon>
                         {{ 'modules.manage.institution.add' | translate }}
                     </button>
@@ -58,7 +58,7 @@
                     <collapsible-header>
                         <div class="entity">
                             <div class="entity-desc">
-                                <md-icon class="entity-icon">school</md-icon>
+                                <md-icon class="entity-icon">perm_contact_calendar</md-icon>
                                 <span>{{ schoolYear.name }}</span>
                             </div>
                             <entity-menu></entity-menu>
@@ -70,7 +70,7 @@
                                 <div class="entity child-entity" (click)="selectSemester(semester.id)">
                                     <div class="entity-desc">
                                         <md-icon class="entity-icon">subdirectory_arrow_right</md-icon>
-                                        <md-icon class="entity-icon">class</md-icon>
+                                        <md-icon class="entity-icon">school</md-icon>
                                         <span>{{ semester.name }}</span>
                                     </div>
                                     <entity-menu></entity-menu>
@@ -108,14 +108,14 @@
                     <collapsible-header>
                         <div class="entity">
                             <div class="entity-desc">
-                                <md-icon class="entity-icon">school</md-icon>
+                                <md-icon class="entity-icon">library_books</md-icon>
                                 <span>{{ subject.name }}</span>
                             </div>
                             <entity-menu></entity-menu>
                         </div>
                     </collapsible-header>
                     <collapsible-body>
-                        {{ subject | json }}
+                        <!--{{ subject | json }} TODO what comes here-->
                     </collapsible-body>
                 </collapsible>
             </li>
@@ -123,7 +123,7 @@
                 <div class="action-button">
                     <button md-raised-button color="accent">
                         <md-icon>add</md-icon>
-                        {{ 'modules.manage.schoolYear.add' | translate }}
+                        {{ 'modules.manage.subject.add' | translate }}
                     </button>
                 </div>
             </li>

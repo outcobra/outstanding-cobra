@@ -2,6 +2,8 @@ import {Component, OnInit, ViewEncapsulation} from "@angular/core";
 import {ManageService} from "./manage.service";
 import {ManageData, Institution, SchoolClass, SchoolYear, Semester, Subject} from "./model/ManageData";
 import {Util} from "../shared/services/util";
+import {MdDialog, MdDialogRef} from "@angular/material";
+import {InstitutionDialog} from "./institution-dialog/institution-dialog.component";
 
 @Component({
     selector: 'manager',
@@ -17,7 +19,9 @@ export class ManageComponent implements OnInit {
     private yearSemesterModel: SchoolYear[] = null;
     private subjectModel: Subject[] = null;
 
-    constructor(private manageService: ManageService) {
+    private institutionDialogRef: MdDialogRef<InstitutionDialog>;
+
+    constructor(private manageService: ManageService, private dialog: MdDialog) {
     }
 
     ngOnInit() {
@@ -56,8 +60,28 @@ export class ManageComponent implements OnInit {
         this.manageData = this.institutionClasses = manageData;
     }
 
-    keys(obj: Object) {
-        return Util.keys(obj);
+    addInstitution() {
+        this.institutionDialogRef = this.dialog.open(InstitutionDialog);
     }
+
+    addSchoolClass() {
+
+    }
+
+    addSchoolYear() {
+
+    }
+
+    addSemester() {
+
+    }
+
+    addSubject() {
+
+    }
+
+    /*keys(obj: Object) {
+        return Util.keys(obj);
+    }*/
 
 }
