@@ -1,19 +1,20 @@
 export interface ManageData {
-    institutions: Array<Institution>}
+    institutions: Array<Institution>
+}
 
-interface Institution {
+export interface Institution {
     id: number,
     name: string,
     schoolClasses: Array<SchoolClass>
 }
 
-interface SchoolClass {
+export interface SchoolClass {
     id: number,
     normalizedName: string,
     schoolYears: Array<SchoolYear>
 }
 
-interface SchoolYear {
+export interface SchoolYear {
     id: number,
     name: string,
     validFrom: Date,
@@ -21,7 +22,7 @@ interface SchoolYear {
     semesters: Array<Semester>
 }
 
-interface Semester {
+export interface Semester {
     id: number,
     name: string,
     validFrom: Date,
@@ -29,7 +30,7 @@ interface Semester {
     subjects: Array<Subject>
 }
 
-interface Subject {
+export interface Subject {
     id: number,
     name: string
 }

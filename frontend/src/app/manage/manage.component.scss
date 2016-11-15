@@ -20,9 +20,21 @@ manager, .manage-rows {
     }
 
     .entity {
+        &:hover {
+            background-color: $hover-light;
+        }
+
+        cursor: pointer;
         padding: 0 10px;
         height: 100%;
         box-sizing: inherit;
+
+        span, md-icon {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
 
         .entity-desc md-icon {
             float: left;
@@ -38,9 +50,12 @@ manager, .manage-rows {
             line-height: 50px;
         }
 
-        .entity-menu button {
-            margin: 5px 0;
-        }
+    }
+
+    .child-entity {
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
     }
 
     li {

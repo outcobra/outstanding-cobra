@@ -15,20 +15,20 @@ open class DefaultManageService : ManageService {
                                 1, "IET-gibb",
                                 Arrays.asList(
                                         SchoolClassDto(
-                                                1, "INF2014.5G",
+                                                2, "INF2014.5G",
                                                 Arrays.asList(
                                                         SchoolYearDto(
-                                                                1, "2016/17",
+                                                                3, "2016/17",
                                                                 LocalDate.of(2016, 8, 1),
                                                                 LocalDate.of(2017, 7, 31),
                                                                 Arrays.asList(
                                                                         SemesterDto(
-                                                                                1, "1. Semester",
+                                                                                4, "1. Semester",
                                                                                 LocalDate.of(2016, 8, 1),
                                                                                 LocalDate.of(2017, 1, 30),
                                                                                 Arrays.asList(
                                                                                         SubjectDto(
-                                                                                                1, "Mathematik"
+                                                                                                5, "Mathematik"
                                                                                         )
                                                                                 )
                                                                         )
@@ -37,20 +37,20 @@ open class DefaultManageService : ManageService {
                                                 )
                                         ),
                                         SchoolClassDto(
-                                                1, "INF2014.5K",
+                                                6, "INF2014.5K",
                                                 Arrays.asList(
                                                         SchoolYearDto(
-                                                                1, "2016/17",
+                                                                7, "2016/17",
                                                                 LocalDate.of(2016, 8, 1),
                                                                 LocalDate.of(2017, 7, 31),
                                                                 Arrays.asList(
                                                                         SemesterDto(
-                                                                                1, "2. Semester",
+                                                                                8, "2. Semester",
                                                                                 LocalDate.of(2016, 8, 1),
                                                                                 LocalDate.of(2017, 1, 30),
                                                                                 Arrays.asList(
                                                                                         SubjectDto(
-                                                                                                1, "Modul 201"
+                                                                                                9, "Modul 201"
                                                                                         )
                                                                                 )
                                                                         )
@@ -61,23 +61,23 @@ open class DefaultManageService : ManageService {
                                 )
                         ),
                         InstitutionDto(
-                                1, "BMS-gibb",
+                                10, "BMS-gibb",
                                 Arrays.asList(
                                         SchoolClassDto(
-                                                1, "BMSi2014C",
+                                                11, "BMSi2014C",
                                                 Arrays.asList(
                                                         SchoolYearDto(
-                                                                1, "2016/17",
+                                                                12, "2016/17",
                                                                 LocalDate.of(2016, 8, 1),
                                                                 LocalDate.of(2017, 7, 31),
                                                                 Arrays.asList(
                                                                         SemesterDto(
-                                                                                1, "1. Semester",
+                                                                                13, "1. Semester",
                                                                                 LocalDate.of(2016, 8, 1),
                                                                                 LocalDate.of(2017, 1, 30),
                                                                                 Arrays.asList(
                                                                                         SubjectDto(
-                                                                                                1, "Mathematik"
+                                                                                                14, "Mathematik"
                                                                                         )
                                                                                 )
                                                                         )
@@ -86,20 +86,20 @@ open class DefaultManageService : ManageService {
                                                 )
                                         ),
                                         SchoolClassDto(
-                                                1, "BMSi2014A",
+                                                15, "BMSi2014A",
                                                 Arrays.asList(
                                                         SchoolYearDto(
-                                                                1, "2016/17",
+                                                                16, "2016/17",
                                                                 LocalDate.of(2016, 8, 1),
                                                                 LocalDate.of(2017, 7, 31),
                                                                 Arrays.asList(
                                                                         SemesterDto(
-                                                                                1, "2. Semester",
+                                                                                17, "2. Semester",
                                                                                 LocalDate.of(2016, 8, 1),
                                                                                 LocalDate.of(2017, 1, 30),
                                                                                 Arrays.asList(
                                                                                         SubjectDto(
-                                                                                                1, "Englisch"
+                                                                                                18, "Englisch"
                                                                                         )
                                                                                 )
                                                                         )

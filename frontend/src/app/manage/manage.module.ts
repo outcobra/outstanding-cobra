@@ -6,6 +6,8 @@ import {FormsModule} from "@angular/forms";
 import {MaterialModule} from "@angular/material";
 import {SharedModule} from "../shared/shared.module";
 import {ManageService} from "./manage.service";
+import { EntityMenuComponent } from './entity-menu/entity-menu.component';
+import {TranslateModule} from "ng2-translate";
 
 @NgModule({
     imports: [
@@ -13,10 +15,12 @@ import {ManageService} from "./manage.service";
         FormsModule,
         ManageRoutingModule,
         MaterialModule.forRoot(),
+        TranslateModule,
         SharedModule
     ],
     declarations: [
-        ManageComponent
+        ManageComponent,
+        EntityMenuComponent
     ],
     providers: [
         ManageService

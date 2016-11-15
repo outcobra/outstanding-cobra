@@ -4,11 +4,11 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue.
 $primary: md-palette($md-indigo, 700);
-$accent:  md-palette($md-pink, A200);
+$accent: md-palette($md-pink, A200);
 $accent-dark: md-palette($md-grey, 800);
 
 // The warn palette is optional (defaults to red).
-$warn:    md-palette($md-red);
+$warn: md-palette($md-red);
 
 $primary-dark: rgba(0, 0, 0, 0.87);
 $secondary-dark: rgba(0, 0, 0, 0.54);
@@ -19,6 +19,7 @@ $secondary-light: rgba(255, 255, 255, 0.70);
 $disabled-light: rgba(255, 255, 255, 0.5);
 
 $hover-dark: rgba(0, 0, 0, 0.1);
+$hover-light: rgba(0, 0, 0, 0.04);
 
 .color-primary, .md-primary {
     background-color: md-color($primary) !important;
@@ -43,6 +44,7 @@ $hover-dark: rgba(0, 0, 0, 0.1);
 .text-secondary-dark {
     color: $secondary-dark;
 }
+
 .text-disabled-dark {
     color: $disabled-dark;
 }
@@ -54,6 +56,7 @@ $hover-dark: rgba(0, 0, 0, 0.1);
 .text-secondary-light {
     color: $secondary-light;
 }
+
 .text-disabled-light {
     color: $disabled-dark;
 }

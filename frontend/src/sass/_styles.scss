@@ -55,7 +55,7 @@ sidenav {
 }
 
 button[md-raised-button], button[md-button] {
-    md-icon {
+    .md-button-wrapper > * {
         vertical-align: middle;
     }
 }

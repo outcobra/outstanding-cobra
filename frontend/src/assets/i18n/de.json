@@ -3,7 +3,8 @@
         "actions": {
             "save": "Speichern",
             "delete": "Löschen",
-            "cancel": "Abbrechen"
+            "cancel": "Abbrechen",
+            "edit": "Bearbeiten"
         }
     },
     "modules": {
@@ -23,7 +24,19 @@
             "linkTitle": "Dashboard"
         },
         "manage": {
-            "linkTitle": "Verwalten"
+            "linkTitle": "Verwalten",
+            "institution": {
+                "add": "Institution hinzufügen"
+            },
+            "schoolClass": {
+                "add": "Klasse hinzufügen"
+            },
+            "schoolYear": {
+                "add": "Schuljahr hinzufügen"
+            },
+            "semester": {
+                "add": "Semester hinzufügen"
+            }
         }
     },
     "login": {
