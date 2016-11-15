@@ -12,6 +12,7 @@ import javax.servlet.FilterChain
 import javax.servlet.ServletRequest
 import javax.servlet.ServletResponse
 import javax.servlet.http.HttpServletRequest
+import javax.validation.ValidationException
 
 @Component
 open class RequestAuthorizationFilter @Inject constructor(val authorizationService: AuthorizationService) : GenericFilterBean() {
@@ -51,8 +52,9 @@ open class RequestAuthorizationFilter @Inject constructor(val authorizationServi
                         LOGGER.warn("Dropping request to ${request.requestURI} because of owner mismatch or missing parent link ($parentLinked)")
                         return destroy()
                     }
-                } catch (e: Exception) {
-                    LOGGER.error("some exception", e)
+                } catch (e: ValidationException) {
+                    LOGGER.error("Could not validate request to ${request.requestURI}", e);
+                    return destroy()
                 }
                 // Update and create
             } else if (request.method in arrayOf(RequestMethod.POST.name, RequestMethod.PUT.name)) {

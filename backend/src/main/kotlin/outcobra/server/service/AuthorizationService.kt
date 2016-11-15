@@ -7,5 +7,5 @@ interface AuthorizationService {
     fun getParentLinkedEntityOf(id: Long, entityName: String): ParentLinked
     fun verifyDto(dtoString: String, entityName: String, new: Boolean): Boolean
     fun verifyOwner(linked: ParentLinked): Boolean
-    open fun verifyOwner(link: ParentLink): Boolean
+    fun verifyOwner(link: ParentLink): Boolean
 }

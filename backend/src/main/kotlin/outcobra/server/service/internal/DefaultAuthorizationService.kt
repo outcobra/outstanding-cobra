@@ -14,6 +14,7 @@ import outcobra.server.service.UserService
 import outcobra.server.util.DtoLocator
 import outcobra.server.util.RepositoryLocator
 import javax.inject.Inject
+import javax.validation.ValidationException
 
 @Component
 class DefaultAuthorizationService
@@ -28,12 +29,13 @@ class DefaultAuthorizationService
 
     override fun getParentLinkedEntityOf(id: Long, entityName: String): ParentLinked {
         try {
+            @Suppress("UNCHECKED_CAST")
             val repo = repositoryLocator.getForEntityName(entityName) as JpaRepository<ParentLinked, Long>
-            return repo.findOne(id) ?: throw RuntimeException("Could not find entity for id $id")
+            return repo.findOne(id) ?: throw ValidationException("Could not find $entityName with id $id")
         } catch (iae: IllegalArgumentException) {
-            throw RuntimeException("Could not locate repository for $entityName")
+            throw ValidationException("Could not locate repository for $entityName")
         } catch(tce: TypeCastException) {
-            throw RuntimeException("$entityName's repository is not ParentLinked!")
+            throw ValidationException("$entityName does not implement ParentLinked!")
         }
     }
 
@@ -48,16 +50,22 @@ class DefaultAuthorizationService
 
         if (!new) {
             // verify old owner
-            val dtoRepo = repositoryLocator.getForEntityName(entityName) as JpaRepository<out ParentLinked, Long>
-            val existing = dtoRepo.findOne(parsedDto.id)
+            try {
+                @Suppress("UNCHECKED_CAST")
+                val dtoRepo = repositoryLocator.getForEntityName(entityName) as JpaRepository<out ParentLinked, Long>
+                val existing = dtoRepo.findOne(parsedDto.id)
 
-            if (existing == null) {
-                LOGGER.warn("The entity you are trying to modify does not exist")
-                return false
-            }
+                if (existing == null) {
+                    LOGGER.warn("The entity you are trying to modify does not exist")
+                    return false
+                }
 
-            if (!verifyOwner(existing)) {
-                LOGGER.warn("The entity you are trying to modify is owned by another user")
+                if (!verifyOwner(existing)) {
+                    LOGGER.warn("The entity you are trying to modify is owned by another user")
+                    return false
+                }
+            } catch (tce: TypeCastException) {
+                LOGGER.warn("Could not find repository for $entityName or $entityName does not implement ParentLinked", tce)
                 return false
             }
         }
@@ -80,9 +88,6 @@ class DefaultAuthorizationService
 
     tailrec private fun followToUser(link: ParentLinked): User {
         if (link is User) return link
-        if (link != null) return followToUser(link.parent)
-        else {
-            throw RuntimeException("wtf")
-        }
+        return followToUser(link.parent)
     }
 }
