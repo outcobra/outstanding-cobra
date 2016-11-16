@@ -19,6 +19,12 @@ export class HttpInterceptor {
         });
     }
 
+    /**
+     * performs an http request with the method described in the request object
+     *
+     * @param request
+     * @returns {Observable<T>}
+     */
     request<T>(request: any): Observable<T> {
         request.method = (request.method || RequestMethod.Get);
         request.url = (request.url || '');
@@ -57,7 +63,7 @@ export class HttpInterceptor {
      * @param url
      * @param params
      * @param apiName
-     * @returns {Observable<Response>}
+     * @returns {Observable<T>}
      */
     get<T>(url: string, apiName?: string, params?: any): Observable<T> {
         return this.request<T>({
@@ -68,6 +74,15 @@ export class HttpInterceptor {
         });
     }
 
+    /**
+     * performs a simple post request
+     *
+     * @param url as string
+     * @param data which needs to be sent as request body
+     * @param params additional parameters(headers)
+     * @param apiName name of the api to call (described in the config file)
+     * @returns {Observable<T>}
+     */
     post<T>(url: string, data: any, apiName?: string, params?: any): Observable<T> {
         return this.request<T>({
             method: RequestMethod.Post,
@@ -78,6 +93,15 @@ export class HttpInterceptor {
         })
     }
 
+    /**
+     * performs a simple put request
+     *
+     * @param url as string
+     * @param data which needs to be sent as request body
+     * @param params additional parameters(headers)
+     * @param apiName name of the api to call (described in the config file)
+     * @returns {Observable<T>}
+     */
     put<T>(url: string, data: any, apiName?: string, params?: any): Observable<T> {
         return this.request<T>({
             method: RequestMethod.Put,
@@ -88,6 +112,14 @@ export class HttpInterceptor {
         });
     }
 
+    /**
+     * performs a simple delete request
+     *
+     * @param url as string
+     * @param params additional parameters(headers)
+     * @param apiName name of the api to call (described in the config file)
+     * @returns {Observable<T>}
+     */
     delete<T>(url: string, apiName?: string, params?: any): Observable<T> {
         return this.request<T>({
             method: RequestMethod.Delete,
@@ -97,6 +129,15 @@ export class HttpInterceptor {
         });
     }
 
+    /**
+     * performs a simple patch request
+     *
+     * @param url as string
+     * @param data which needs to be sent as request body
+     * @param params additional parameters(headers)
+     * @param apiName name of the api to call (described in the config file)
+     * @returns {Observable<T>}
+     */
     patch<T>(url: string, data: any, apiName?: string, params?: any): Observable<T> {
         return this.request<T>({
             method: RequestMethod.Patch,
