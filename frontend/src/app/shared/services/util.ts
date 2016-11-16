@@ -1,3 +1,6 @@
+/**
+ * not really sure what this is currently
+ */
 export class Util {
 
     public static clone(obj: any): Object {

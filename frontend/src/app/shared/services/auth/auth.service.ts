@@ -18,6 +18,7 @@ export class AuthService {
     constructor(private config: Config, private router: Router, private http: HttpInterceptor, private translateService: TranslateService) {
         this.auth0Config = this.config.get('auth0');
 
+        // auth0 lock configuration
         this.lock = new Auth0Lock(this.auth0Config.clientID, this.auth0Config.domain, {
             auth: {
                 redirectUrl: this.auth0Config.callbackURL,
@@ -39,6 +40,12 @@ export class AuthService {
             }
         });
 
+        /*
+         * handles the authResult when the user logs in correctly
+         * sets the needed localStorage items
+         *
+         * redirects to the provided redirectRoute
+         */
         this.lock.on('authenticated', (authResult) => {
             localStorage.setItem(this.config.get('locStorage.tokenLocation'), authResult.idToken);
             this.lock.getProfile(authResult.idToken, (err, profile) => {
@@ -50,6 +57,13 @@ export class AuthService {
         });
     }
 
+    /**
+     * shows the auth0 login lock
+     * but only when the user isn't loggedin already
+     * sets the redirectRoute for redirecting after the user has loggedin
+     *
+     * @param redirectRoute
+     */
     login(redirectRoute: string = this.defaultRedirectRoute) {
         if (!this.isLoggedIn()) {
             this.redirectRoute = redirectRoute;
@@ -59,13 +73,22 @@ export class AuthService {
         }
     }
 
+    /**
+     * logs the user out and removes the corresponding localStorage items
+     *
+     * redirects to the home
+     */
     logout() {
         localStorage.removeItem(this.config.get('locStorage.tokenLocation'));
         localStorage.removeItem(this.config.get('locStorage.profileLocation'));
         this.router.navigate(['']);
     }
 
-
+    /**
+     * checks whether a not expired valid JWT-Token is stored in the localStorage
+     *
+     * @returns {boolean}
+     */
     isLoggedIn(): boolean {
         return tokenNotExpired();
     }

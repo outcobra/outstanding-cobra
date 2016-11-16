@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {Http, Request, Response, RequestMethod, URLSearchParams} from "@angular/http";
+import {Http, Request, RequestMethod, URLSearchParams, Response} from "@angular/http";
 import {NotificationsService} from "angular2-notifications";
 import {Config} from "../../config/Config";
 import {Observable} from "rxjs";
@@ -7,6 +7,20 @@ import "rxjs/add/operator/map";
 import * as _ from "underscore";
 
 @Injectable()
+/**
+ * HttpInterceptor to customize the http request and http responses
+ *
+ * uses the Http class in the @angular/http module
+ *
+ * adds default headers like Content-Type or Auth Token
+ * every api that we wanna call needs to be registered in the config files of the application
+ * the config object of an api lets us define the following properties
+ *      name: name of the api
+ *      apiBase: base address of the api e.g. http://localhost:8080/api/
+ *      authToken: boolean which tells whether the api needs the authToken from the authService
+ *
+ *
+ */
 export class HttpInterceptor {
 
     private apiNames: string[];
@@ -14,7 +28,8 @@ export class HttpInterceptor {
 
     constructor(private http: Http, private notificationsService: NotificationsService, private config: Config) {
         this.defaultApiName = this.config.get('api.defaultApiName');
-        this.apiNames = this.config.get('api.apis').map(api => {
+        this.apiNames = this.config.get('api.apis')
+            .map(api => {
             return api['name']
         });
     }
@@ -50,7 +65,7 @@ export class HttpInterceptor {
         ).catch(error => {
             this.notificationsService.error('http.error.title', 'http.error.message'); // TODO i18n + i18nKey by error.status
             return Observable.empty();
-        }).map((res) => this.unwrapHttpResponse<T>(res));
+        }).map((res: Response) => this.unwrapHttpResponse<T>(res));
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -142,6 +157,7 @@ export class HttpInterceptor {
         return this.request<T>({
             method: RequestMethod.Patch,
             url: url,
+            data: data,
             params: params,
             apiName: apiName
         });
@@ -151,6 +167,15 @@ export class HttpInterceptor {
 ///////// Helper Functions ////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 
+    /**
+     * interpolates the url in the requestOptions
+     * replaces strings like ':paramName' with the corresponding value in the params object of the requestOptions
+     *
+     * /resource/:id --> /resource/1
+     *
+     * @param requestOptions
+     * @returns returns the requestOptions object with the updated url
+     */
     private interpolateUrl(requestOptions: any) {
         requestOptions.url = requestOptions.url.replace(
             /:([a-zA-Z]+[\w-]*)/g,
@@ -166,12 +191,26 @@ export class HttpInterceptor {
         return ( requestOptions );
     }
 
+    /**
+     * returns the value of a key in an object
+     * afterwards it removes the key-value-pair from the object
+     *
+     * @param obj to remove and return the pair
+     * @param key to remove and return value from it
+     * @returns value of the key in the object
+     */
     private extractValue(obj, key) {
         let value = obj[key];
         delete obj[key];
         return value;
     }
 
+    /**
+     * adds the application/json header when the request is not Get or Delete
+     *
+     * @param request requestOptions object
+     * @returns requestOptions object with the updated headers
+     */
     private addContentType(request: any) {
         if (request.method !== RequestMethod.Get || request.method !== RequestMethod.Delete) {
             request.headers['Content-Type'] = "application/json ; charset=UTF-8";
@@ -179,6 +218,12 @@ export class HttpInterceptor {
         return request;
     }
 
+    /**
+     * builds the query string with the angular 2 URLSearchParams class
+     *
+     * @param params object containing the params
+     * @returns {URLSearchParams} all search params
+     */
     private buildUrlSearchParams(params: {}|any) {
         let urlParams = new URLSearchParams();
         for (let key in params) {
@@ -187,6 +232,11 @@ export class HttpInterceptor {
         return urlParams;
     }
 
+    /**
+     * adds the auth token to the headers if the config of the api says it
+     *
+     * @param request
+     */
     private addAuthToken(request) {
         let api = this.getApiFromConfig(request.apiName);
         if (api.authToken === true) {
@@ -194,20 +244,45 @@ export class HttpInterceptor {
         }
     }
 
-    private unwrapHttpResponse<T>(response): T {
+    /**
+     * unwraps an http response and returns it as T
+     *
+     * @param response
+     * @returns http response as T
+     */
+    private unwrapHttpResponse<T>(response: Response): T {
         return response.json() as T;
     }
 
+    /**
+     * builds the base api url from the config
+     *
+     * @param request
+     * @returns {string} api base url
+     */
     private buildApiUrl(request): string {
         let api = this.getApiFromConfig(request.apiName);
         return this.removeRepeatedSlashes(`${api['apiBase']}/${request.url}`); // concat Url and remove double slashes
     }
 
+    /**
+     * gets the api config object from the Config service and returns it
+     *
+     * @param apiName
+     * @returns {any}
+     */
     private getApiFromConfig(apiName: string): any {
         let name = (this.apiNames.indexOf(apiName) >= 0) ? apiName : this.defaultApiName;
-        return this.config.get('api.apis').find(api => api.name === name);
+        return this.config.get('api.apis')
+            .find(api => api.name === name);
     }
 
+    /**
+     * removes double slashes in the url except after the protocol
+     *
+     * @param str url
+     * @returns {string} formatted url
+     */
     private removeRepeatedSlashes(str: string): string {
         return str.replace(/([^:])\/{2,}/g, (match, prefix) => prefix + '/');
     }
