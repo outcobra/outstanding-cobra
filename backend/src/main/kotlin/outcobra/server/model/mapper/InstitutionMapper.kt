@@ -8,7 +8,7 @@ import outcobra.server.model.repository.UserRepository
 import javax.inject.Inject
 
 @Component
-class InstitutionMapper @Inject constructor(private val userRepository: UserRepository) : Mapper<Institution, InstitutionDto> {
+open class InstitutionMapper @Inject constructor(private val userRepository: UserRepository) : Mapper<Institution, InstitutionDto> {
 
     override fun fromDto(from: InstitutionDto?): Institution {
         if (from == null) return Institution()

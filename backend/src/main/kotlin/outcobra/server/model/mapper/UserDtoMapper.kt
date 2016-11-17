@@ -7,7 +7,7 @@ import outcobra.server.model.interfaces.Mapper
 import java.util.*
 
 @Component
-class UserDtoMapper : Mapper<User, UserDto> {
+open class UserDtoMapper : Mapper<User, UserDto> {
     override fun fromDto(from: UserDto): User = User(from.userId, from.username, ArrayList())
     override fun toDto(from: User): UserDto = UserDto(from.id, from.auth0Id, from.username)
 }

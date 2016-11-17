@@ -15,7 +15,7 @@ import javax.inject.Inject
  * @since <since>
  */
 @Component
-class RepositoryLocator @Inject constructor(val context: ApplicationContext) {
+open class RepositoryLocator @Inject constructor(val context: ApplicationContext) {
     /**
      * Searches a [JpaRepository] bean using Spring's [ApplicationContext].
      * If you need a repository that already has the correct generic types see [getForEntityClass].

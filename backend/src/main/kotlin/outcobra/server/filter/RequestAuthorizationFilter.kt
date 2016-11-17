@@ -53,7 +53,7 @@ open class RequestAuthorizationFilter @Inject constructor(val authorizationServi
                         return destroy()
                     }
                 } catch (e: ValidationException) {
-                    LOGGER.error("Could not validate request to ${request.requestURI}", e);
+                    LOGGER.error("Could not validate request to ${request.requestURI}", e)
                     return destroy()
                 }
                 // Update and create

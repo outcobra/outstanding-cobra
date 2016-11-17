@@ -10,11 +10,11 @@ import javax.inject.Inject
 open class AppConfig {
     @Bean @Inject
     open fun ApiRequestFilterRegistration(requestAuthorizationFilter: RequestAuthorizationFilter): FilterRegistrationBean {
-        var registration = FilterRegistrationBean()
-        registration.addUrlPatterns("/api/*")
-        registration.setName("RequestAuthorization")
-        registration.order = 2
-        registration.filter = requestAuthorizationFilter
-        return registration
+        val filterRegistration = FilterRegistrationBean(requestAuthorizationFilter)
+        filterRegistration.addUrlPatterns("/api/*")
+        filterRegistration.setName("Request Authorization Filter")
+        filterRegistration.order = 2
+
+        return filterRegistration
     }
 }

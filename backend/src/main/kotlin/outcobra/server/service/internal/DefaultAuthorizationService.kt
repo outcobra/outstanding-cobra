@@ -1,6 +1,7 @@
 package outcobra.server.service.internal
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Component
@@ -17,13 +18,13 @@ import javax.inject.Inject
 import javax.validation.ValidationException
 
 @Component
-class DefaultAuthorizationService
+open class DefaultAuthorizationService
 @Inject constructor(val userService: UserService,
                     val repositoryLocator: RepositoryLocator,
                     val dtoLocator: DtoLocator) : AuthorizationService {
 
     companion object {
-        val LOGGER = LoggerFactory.getLogger(DefaultAuthorizationService::class.java)
+        val LOGGER: Logger = LoggerFactory.getLogger(DefaultAuthorizationService::class.java)
         val objectMapper = ObjectMapper()
     }
 
