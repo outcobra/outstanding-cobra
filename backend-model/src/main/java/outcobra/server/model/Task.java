@@ -112,6 +112,7 @@ public class Task implements ParentLinked {
         this.subject = subject;
     }
 
+    @SuppressWarnings("SimplifiableIfStatement")
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

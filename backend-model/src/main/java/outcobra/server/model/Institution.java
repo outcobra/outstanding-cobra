@@ -83,6 +83,7 @@ public class Institution implements ParentLinked {
         this.teachers = teachers;
     }
 
+    @SuppressWarnings("SimplifiableIfStatement")
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -63,6 +63,7 @@ public abstract class Mark implements ParentLinked {
         this.markGroup = markGroup;
     }
 
+    @SuppressWarnings("SimplifiableIfStatement")
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

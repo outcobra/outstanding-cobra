@@ -43,7 +43,7 @@ public class Exam implements ParentLinked {
     }
 
     public Exam() {
-        this.tasks = new ArrayList<ExamTask>();
+        this.tasks = new ArrayList<>();
     }
 
     //endregion
@@ -98,6 +98,7 @@ public class Exam implements ParentLinked {
         this.mark = mark;
     }
 
+    @SuppressWarnings("SimplifiableIfStatement")
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

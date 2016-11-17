@@ -114,6 +114,7 @@ public class Semester implements ParentLinked {
         this.timetable = timetable;
     }
 
+    @SuppressWarnings("SimplifiableIfStatement")
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

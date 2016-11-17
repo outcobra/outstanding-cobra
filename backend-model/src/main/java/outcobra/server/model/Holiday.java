@@ -78,6 +78,7 @@ public class Holiday implements ParentLinked {
         this.schoolYear = schoolYear;
     }
 
+    @SuppressWarnings("SimplifiableIfStatement")
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

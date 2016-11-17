@@ -60,6 +60,7 @@ public class Timetable implements ParentLinked {
         this.entries = entries;
     }
 
+    @SuppressWarnings("SimplifiableIfStatement")
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

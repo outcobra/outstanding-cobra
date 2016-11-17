@@ -71,6 +71,7 @@ public class MarkReportEntry implements ParentLinked {
         this.report = report;
     }
 
+    @SuppressWarnings("SimplifiableIfStatement")
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -71,6 +71,7 @@ public class SchoolClass implements ParentLinked {
         this.schoolYears = schoolYears;
     }
 
+    @SuppressWarnings("SimplifiableIfStatement")
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

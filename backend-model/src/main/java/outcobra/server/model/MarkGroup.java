@@ -80,6 +80,7 @@ public class MarkGroup extends Mark {
         this.subject = subject;
     }
 
+    @SuppressWarnings("SimplifiableIfStatement")
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

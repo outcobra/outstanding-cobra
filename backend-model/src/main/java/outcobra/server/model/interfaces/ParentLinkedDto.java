@@ -4,5 +4,5 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public interface ParentLinkedDto {
     @JsonIgnore
-    public ParentLink getParentLink();
+    ParentLink getParentLink();
 }

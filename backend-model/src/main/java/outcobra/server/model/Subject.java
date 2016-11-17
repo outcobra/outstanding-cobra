@@ -135,6 +135,7 @@ public class Subject implements ParentLinked {
         this.teacher = teacher;
     }
 
+    @SuppressWarnings("SimplifiableIfStatement")
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
