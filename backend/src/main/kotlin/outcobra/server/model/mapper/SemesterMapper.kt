@@ -5,16 +5,18 @@ import outcobra.server.model.Semester
 import outcobra.server.model.dto.SemesterDto
 
 /**
- * Created by Florian on 13.11.2016.
+ * Maps [Semester]s to [SemesterDto]s and back
+ *
+ * @author Florian Bürgi
+ * @since <since>
  */
 @Component
-open class SemesterDtoMapper : Mapper<Semester, SemesterDto> {
-    //TODO Implement
+open class SemesterMapper : Mapper<Semester, SemesterDto> {
     override fun toDto(from: Semester): SemesterDto {
-        return SemesterDto()
+        throw UnsupportedOperationException()
     }
 
     override fun fromDto(from: SemesterDto): Semester {
-        return Semester()
+        throw UnsupportedOperationException()
     }
 }
