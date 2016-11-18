@@ -5,9 +5,6 @@ import outcobra.server.model.dto.TeacherDto
 import outcobra.server.service.TeacherService
 import javax.inject.Inject
 
-/**
- * Created by Florian on 13.11.2016.
- */
 @RestController
 @RequestMapping("/api")
 open class TeacherController @Inject constructor(val teacherService: TeacherService) : TeacherService {
@@ -31,8 +28,8 @@ open class TeacherController @Inject constructor(val teacherService: TeacherServ
         return teacherService.updateTeacher(teacherDto)
     }
 
-    @RequestMapping(value = "/teacher", method = arrayOf(RequestMethod.DELETE))
-    override fun deleteTeacher(id: Long) {
+    @RequestMapping(value = "/teacher/{id}", method = arrayOf(RequestMethod.DELETE))
+    override fun deleteTeacher(@PathVariable id: Long) {
         teacherService.deleteTeacher(id)
     }
 }
