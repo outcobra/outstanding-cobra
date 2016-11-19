@@ -8,7 +8,6 @@ import outcobra.server.model.dto.SchoolClassDto
 import outcobra.server.model.mapper.Mapper
 import outcobra.server.model.repository.SchoolClassRepository
 import outcobra.server.service.SchoolClassService
-import outcobra.server.service.UserService
 import javax.inject.Inject
 
 /**
@@ -18,8 +17,7 @@ import javax.inject.Inject
 @Transactional
 open class DefaultSchoolClassService
 @Inject constructor(val mapper: Mapper<SchoolClass, SchoolClassDto>,
-                    val schoolClassRepository: SchoolClassRepository,
-                    val userService: UserService) : SchoolClassService {
+                    val schoolClassRepository: SchoolClassRepository) : SchoolClassService {
 
     override fun createSchoolClass(schoolClassDto: SchoolClassDto): SchoolClassDto {
         var schoolClass = mapper.fromDto(schoolClassDto)
