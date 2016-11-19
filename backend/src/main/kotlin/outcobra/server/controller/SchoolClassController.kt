@@ -8,8 +8,10 @@ import javax.inject.Inject
 import javax.websocket.server.PathParam
 
 /**
- * This Class defines all functions in the schoolClass endpoint of the REST APi
- * @author Florian Buergi
+ * This Class defines all functions for the schoolClass endpoint of the REST API
+ *
+ * @author Florian Bürgi
+ * @since <since>
  */
 @RestController
 @RequestMapping("/api")
@@ -20,7 +22,7 @@ class SchoolClassController @Inject constructor(val schoolClassService: SchoolCl
     }
 
     /**
-     * This method writes the given SchoolClassDto into the database
+     * This method saves the given SchoolClassDto into the database
      * @param schoolClassDto the new [SchoolClassDto] you want to save, as Json in the [RequestBody]
      * @return the [schoolClassDto] that has been saved in the database
      */
@@ -39,8 +41,9 @@ class SchoolClassController @Inject constructor(val schoolClassService: SchoolCl
     }
 
     /**
-     * This method reads all schoolClasses that belong to the current user
-     * @return a list of [SchoolClassDto]s under the given Institution
+     * This method reads all SchoolClasses that are associated with a specific Institution
+     * @param institutionId The id of the Institution of which to get all SchoolClasses
+     * @return All SchoolClasses that are associated with the given Institution
      */
 
     @RequestMapping(value = "/institution/{institutionId}/schoolClass", method = arrayOf(RequestMethod.GET))
@@ -51,7 +54,7 @@ class SchoolClassController @Inject constructor(val schoolClassService: SchoolCl
     /**
      * This method saves the changes on a [SchoolClassDto] to the database
      * @param schoolClassDto the updated [SchoolClassDto] you want to save, as Json in the [RequestBody]
-     * * @return the [schoolClassDto] that has been saved in the database
+     * @return the [schoolClassDto] that has been saved in the database
      */
     @RequestMapping(method = arrayOf(RequestMethod.POST))
     fun updateSchoolClass(@RequestBody schoolClassDto: SchoolClassDto): SchoolClassDto {
@@ -60,7 +63,7 @@ class SchoolClassController @Inject constructor(val schoolClassService: SchoolCl
 
     /**
      * This method deletes a schoolClass
-     * @param id the id of the SchoolClass you want to delete, as [PathParam]
+     * @param id The id of the SchoolClass that should be deleted
      */
     @RequestMapping(value = "/schoolClass/{id}", method = arrayOf(RequestMethod.DELETE))
     fun deleteSchoolClass(@PathVariable id: Long) {

@@ -1,9 +1,8 @@
 package outcobra.server.model;
 
-import java.util.List;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 
 @Entity

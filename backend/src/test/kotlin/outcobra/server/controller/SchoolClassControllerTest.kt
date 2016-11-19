@@ -1,5 +1,6 @@
 package outcobra.server.controller
 
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.boot.test.context.SpringBootTest
@@ -17,9 +18,10 @@ import java.net.URI
 class SchoolClassControllerTest {
 
     @Test
+    @Ignore
     fun testCreateSchoolClass() {
-        var restTemplate = RestTemplate()
-        var serverMock = MockRestServiceServer.bindTo(restTemplate).build()
+        val restTemplate = RestTemplate()
+        val serverMock = MockRestServiceServer.bindTo(restTemplate).build()
         serverMock.expect(manyTimes(), requestTo("/api/schoolClass")).andExpect(method(HttpMethod.PUT))
         restTemplate.requestFactory.createRequest(URI.create("/api/schoolClass"), HttpMethod.PUT)
     }
