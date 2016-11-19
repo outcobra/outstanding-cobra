@@ -5,16 +5,13 @@ import outcobra.server.model.dto.SemesterDto
 import outcobra.server.service.SemesterService
 import javax.inject.Inject
 
-/**
- * Created by Florian on 13.11.2016.
- */
 @RestController
 @RequestMapping("/api")
 open class SemesterController @Inject constructor(val semesterService: SemesterService) {
 
     @RequestMapping(value = "/semester", method = arrayOf(RequestMethod.PUT))
     fun createSemester(@RequestBody semesterDto: SemesterDto): SemesterDto {
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return semesterService.createSemester(semesterDto)
     }
 
     @RequestMapping(value = "/semester/{id}", method = arrayOf(RequestMethod.GET))
