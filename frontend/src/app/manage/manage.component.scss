@@ -36,18 +36,21 @@ manager, .manage-rows {
             user-select: none;
         }
 
-        .entity-desc md-icon {
-            float: left;
-            height: 100%;
-            line-height: 50px !important;
-            margin-right: 20px;
-        }
+        .entity-desc {
+            md-icon {
+                float: left;
+                height: 100%;
+                line-height: 50px !important;
+                margin-right: 20px;
+            }
 
-        .entity-desc span {
-            display: block;
-            float: left;
-            height: 100%;
-            line-height: 50px;
+            span {
+                display: block;
+                float: left;
+                height: 100%;
+                line-height: 50px;
+
+            }
         }
 
     }

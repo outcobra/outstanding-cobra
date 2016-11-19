@@ -13,11 +13,11 @@ import * as _ from "underscore";
  * uses the Http class in the @angular/http module
  *
  * adds default headers like Content-Type or Auth Token
- * every api that we wanna call needs to be registered in the config files of the application
+ * every api that we want to call needs to be registered in the config files of the application
  * the config object of an api lets us define the following properties
  *      name: name of the api
- *      apiBase: base address of the api e.g. http://localhost:8080/api/
- *      authToken: boolean which tells whether the api needs the authToken from the authService
+ *      apiBase: base address of the api e.g. http://localhost:8080/api
+ *      authToken: boolean which tells whether or not the api needs the authToken from the authService
  *
  *
  */
@@ -65,7 +65,7 @@ export class HttpInterceptor {
         ).catch(error => {
             this.notificationsService.error('http.error.title', 'http.error.message'); // TODO i18n + i18nKey by error.status
             return Observable.empty();
-        }).map((res: Response) => this.unwrapHttpResponse<T>(res));
+        }).map((res: Response) => this.unwrapAndCastHttpResponse<T>(res));
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -170,6 +170,9 @@ export class HttpInterceptor {
     /**
      * interpolates the url in the requestOptions
      * replaces strings like ':paramName' with the corresponding value in the params object of the requestOptions
+     * the interpolated values will be removed from the requetsOptions object
+     *
+     * the placeholders in the url must begin with a letter an can then contain any alphanumeric characters and also dashes
      *
      * /resource/:id --> /resource/1
      *
@@ -195,18 +198,18 @@ export class HttpInterceptor {
      * returns the value of a key in an object
      * afterwards it removes the key-value-pair from the object
      *
-     * @param obj to remove and return the pair
+     * @param obj Object to extract value from
      * @param key to remove and return value from it
      * @returns value of the key in the object
      */
-    private extractValue(obj, key) {
+    private extractValue(obj: Object, key: string): any {
         let value = obj[key];
         delete obj[key];
         return value;
     }
 
     /**
-     * adds the application/json header when the request is not Get or Delete
+     * adds the Content-Type: application/json header when the request is not Get or Delete
      *
      * @param request requestOptions object
      * @returns requestOptions object with the updated headers
@@ -233,7 +236,7 @@ export class HttpInterceptor {
     }
 
     /**
-     * adds the auth token to the headers if the config of the api says it
+     * adds the auth token to the headers if the authToken flag of the api is true
      *
      * @param request
      */
@@ -250,15 +253,15 @@ export class HttpInterceptor {
      * @param response
      * @returns http response as T
      */
-    private unwrapHttpResponse<T>(response: Response): T {
+    private unwrapAndCastHttpResponse<T>(response: Response): T {
         return response.json() as T;
     }
 
     /**
-     * builds the base api url from the config
+     * Builds the url for a request by combining the apis base and the request url
      *
      * @param request
-     * @returns {string} api base url
+     * @returns {string} Request url
      */
     private buildApiUrl(request): string {
         let api = this.getApiFromConfig(request.apiName);
@@ -269,9 +272,9 @@ export class HttpInterceptor {
      * gets the api config object from the Config service and returns it
      *
      * @param apiName
-     * @returns {any}
+     * @returns {any} api object from the config
      */
-    private getApiFromConfig(apiName: string): any {
+    private getApiFromConfig(apiName: string) {
         let name = (this.apiNames.indexOf(apiName) >= 0) ? apiName : this.defaultApiName;
         return this.config.get('api.apis')
             .find(api => api.name === name);

@@ -8,7 +8,7 @@ export class DateUtil {
     public readonly MAX_DATE = new Date(9999, 11, 31);
 
     /**
-     * checks if the 2 dates are at the same day
+     * checks if the 2 dates are on the same day
      * the time doesn't matter
      *
      * @param date1
