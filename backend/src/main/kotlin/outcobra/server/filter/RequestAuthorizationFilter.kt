@@ -20,7 +20,7 @@ open class RequestAuthorizationFilter @Inject constructor(val authorizationServi
         private val LOGGER = LoggerFactory.getLogger(RequestAuthorizationFilter::class.java)
         private val URI_NORMALIZING_PATTERN = Pattern.compile("^/?(.*?)/?$")
         private val URI_RESOURCE_EXTRACTING_PATTERN = Pattern.compile("^api/([^/]+)/(\\d+)(/.*)?")
-        private val URI_PUTPOST_RESOURCE_EXTRACTING_PATTERN = Pattern.compile("^api/([^/]+)/?.*")
+        private val URI_PUT_POST_RESOURCE_EXTRACTING_PATTERN = Pattern.compile("^api/([^/]+)/?.*")
     }
 
     private fun normalizeUri(uri: String): String {
@@ -30,7 +30,7 @@ open class RequestAuthorizationFilter @Inject constructor(val authorizationServi
     }
 
     private fun getEntityName(uri: String): String {
-        val matcher = URI_PUTPOST_RESOURCE_EXTRACTING_PATTERN.matcher(uri)
+        val matcher = URI_PUT_POST_RESOURCE_EXTRACTING_PATTERN.matcher(uri)
         if (!matcher.matches()) return ""
         return matcher.group(1)
     }

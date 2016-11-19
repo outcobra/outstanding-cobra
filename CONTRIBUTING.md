@@ -4,7 +4,7 @@
 ###Style Guide
 
 We develop with the official Angular 2 Style Guidelines in mind. We care about Clean Code.
-You can find the Style Guidelines under [this](https://angular.io/docs/ts/latest/guide/style-guide.html) linked.
+You can find the Style Guidelines under [this](https://angular.io/docs/ts/latest/guide/style-guide.html) link.
 
 
 ##Commit Messages
