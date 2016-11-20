@@ -10,13 +10,13 @@ import javax.inject.Inject
 @RequestMapping("/api/institution")
 class InstitutionController @Inject constructor(val institutionService: InstitutionService) {
 
-    @RequestMapping(method = arrayOf(RequestMethod.PUT))
+    @RequestMapping(value = "/", method = arrayOf(RequestMethod.PUT))
     fun createInstitution(@RequestBody institutionDto: InstitutionDto) {
-        institutionService.createInstitution(institutionDto.institutionName)
+        institutionService.createInstitution(institutionDto)
     }
 
     @RequestMapping(value = "/{id}", method = arrayOf(RequestMethod.GET))
-    fun readInstitutionById(@PathVariable("id") id: Long): InstitutionDto {
+    fun readInstitutionById(@PathVariable id: Long): InstitutionDto {
         return institutionService.readInstitutionById(id)
     }
 
@@ -25,8 +25,13 @@ class InstitutionController @Inject constructor(val institutionService: Institut
         return institutionService.updateInstitution(institutionDto)
     }
 
-    @RequestMapping(value = "/all", method = arrayOf(RequestMethod.GET))
-    fun readAllInstitutions() : List<InstitutionDto>{
+    @RequestMapping(value = "/", method = arrayOf(RequestMethod.GET))
+    fun readAllInstitutions(): List<InstitutionDto> {
         return institutionService.readAllInstitutions()
+    }
+
+    @RequestMapping(value = "/{id}", method = arrayOf(RequestMethod.DELETE))
+    fun deleteInstitution(@PathVariable id: Long) {
+        institutionService.deleteInstitution(id)
     }
 }

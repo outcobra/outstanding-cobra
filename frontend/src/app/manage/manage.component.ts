@@ -1,7 +1,6 @@
 import {Component, OnInit, ViewEncapsulation} from "@angular/core";
 import {ManageService} from "./manage.service";
 import {ManageData, Institution, SchoolClass, SchoolYear, Semester, Subject} from "./model/ManageData";
-import {Util} from "../shared/services/util";
 import {MdDialog, MdDialogRef} from "@angular/material";
 import {InstitutionDialog} from "./institution-dialog/institution-dialog.component";
 
@@ -12,7 +11,6 @@ import {InstitutionDialog} from "./institution-dialog/institution-dialog.compone
     encapsulation: ViewEncapsulation.None
 })
 export class ManageComponent implements OnInit {
-
     private manageData: ManageData;
 
     private institutionClasses: any = {};
@@ -79,9 +77,4 @@ export class ManageComponent implements OnInit {
     addSubject() {
 
     }
-
-    /*keys(obj: Object) {
-        return Util.keys(obj);
-    }*/
-
 }

@@ -30,8 +30,8 @@ export class HttpInterceptor {
         this.defaultApiName = this.config.get('api.defaultApiName');
         this.apiNames = this.config.get('api.apis')
             .map(api => {
-            return api['name']
-        });
+                return api['name']
+            });
     }
 
     /**
