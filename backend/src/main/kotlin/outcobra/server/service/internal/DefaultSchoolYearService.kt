@@ -8,14 +8,12 @@ import outcobra.server.model.dto.SchoolYearDto
 import outcobra.server.model.mapper.Mapper
 import outcobra.server.model.repository.SchoolYearRepository
 import outcobra.server.service.SchoolYearService
-import outcobra.server.service.UserService
 import javax.inject.Inject
 
 @Component
 @Transactional
 open class DefaultSchoolYearService @Inject constructor(val repository: SchoolYearRepository,
-                                                        val mapper: Mapper<SchoolYear, SchoolYearDto>,
-                                                        val userService: UserService) : SchoolYearService {
+                                                        val mapper: Mapper<SchoolYear, SchoolYearDto>) : SchoolYearService {
 
     override fun createSchoolYear(schoolYearDto: SchoolYearDto): SchoolYearDto {
         var schoolYear = mapper.fromDto(schoolYearDto)
@@ -42,5 +40,4 @@ open class DefaultSchoolYearService @Inject constructor(val repository: SchoolYe
     override fun deleteSchoolYear(id: Long) {
         repository.delete(id)
     }
-
 }
