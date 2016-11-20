@@ -1,9 +1,11 @@
 package outcobra.server.model.dto
 
-/**
- * Created by Florian on 13.11.2016.
- */
+import outcobra.server.model.Institution
+import outcobra.server.model.interfaces.OutcobraDto
+import outcobra.server.model.interfaces.ParentLink
 
-class TeacherDto{
-    //TODO implement
+data class TeacherDto(val teacherId: Long, val institutionId: Long) : OutcobraDto {
+    override fun getId(): Long = teacherId
+
+    override fun getParentLink(): ParentLink = ParentLink.make(institutionId, Institution::class.java)
 }

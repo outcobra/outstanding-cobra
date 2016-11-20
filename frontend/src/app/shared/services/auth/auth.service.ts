@@ -10,7 +10,6 @@ declare var Auth0Lock: any;
 @Injectable()
 export class AuthService {
     private auth0Config: any;
-    private readonly supportedLangs: Array<string> = ['de', 'en']; // TODO
     private readonly defaultRedirectRoute = '/dashboard';
     private redirectRoute: string;
     lock;

@@ -5,17 +5,15 @@ import org.springframework.transaction.annotation.Transactional
 import outcobra.server.model.QSemester
 import outcobra.server.model.Semester
 import outcobra.server.model.dto.SemesterDto
-import outcobra.server.model.mapper.Mapper
+import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.SemesterRepository
 import outcobra.server.service.SemesterService
-import outcobra.server.service.UserService
 import javax.inject.Inject
 
 @Component
 @Transactional
 open class DefaultSemesterService @Inject constructor(val repository: SemesterRepository,
-                                                      val mapper: Mapper<Semester, SemesterDto>,
-                                                      val userService: UserService) : SemesterService {
+                                                      val mapper: Mapper<Semester, SemesterDto>) : SemesterService {
 
     override fun createSemester(semesterDto: SemesterDto): SemesterDto {
         var semester = mapper.fromDto(semesterDto)

@@ -5,20 +5,15 @@ import org.springframework.transaction.annotation.Transactional
 import outcobra.server.model.QSchoolYear
 import outcobra.server.model.SchoolYear
 import outcobra.server.model.dto.SchoolYearDto
-import outcobra.server.model.mapper.Mapper
+import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.SchoolYearRepository
-import outcobra.server.service.UserService
 import outcobra.server.service.SchoolYearService
 import javax.inject.Inject
 
-/**
- * Created by Florian on 12.11.2016.
- */
 @Component
 @Transactional
 open class DefaultSchoolYearService @Inject constructor(val repository: SchoolYearRepository,
-                                                        val mapper: Mapper<SchoolYear, SchoolYearDto>,
-                                                        val userService: UserService) : SchoolYearService {
+                                                        val mapper: Mapper<SchoolYear, SchoolYearDto>) : SchoolYearService {
 
     override fun createSchoolYear(schoolYearDto: SchoolYearDto): SchoolYearDto {
         var schoolYear = mapper.fromDto(schoolYearDto)
@@ -32,10 +27,8 @@ open class DefaultSchoolYearService @Inject constructor(val repository: SchoolYe
     }
 
     override fun readAllYearsByClass(schoolClassId: Long): List<SchoolYearDto> {
-        val classCriteria = QSchoolYear.schoolYear.schoolClass
-        val userCriteria = classCriteria.institution.user.auth0Id
-        val filter = classCriteria.id.eq(schoolClassId).and(userCriteria.eq(userService.getCurrentUserDto().userId))
-        return repository.findAll(filter).map { entity -> mapper.toDto(entity) }
+        val filter = QSchoolYear.schoolYear.schoolClass.id.eq(schoolClassId)
+        return repository.findAll(filter).map { mapper.toDto(it) }
     }
 
     override fun updateSchoolYear(schoolYearDto: SchoolYearDto): SchoolYearDto {
@@ -47,5 +40,4 @@ open class DefaultSchoolYearService @Inject constructor(val repository: SchoolYe
     override fun deleteSchoolYear(id: Long) {
         repository.delete(id)
     }
-
 }

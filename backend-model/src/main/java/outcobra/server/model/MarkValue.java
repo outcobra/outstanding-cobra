@@ -1,5 +1,7 @@
 package outcobra.server.model;
 
+import outcobra.server.model.interfaces.ParentLinked;
+
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
@@ -51,7 +53,6 @@ public class MarkValue extends Mark {
         MarkValue markValue = (MarkValue) o;
 
         return getValue() == markValue.getValue();
-
     }
 
     @Override
@@ -61,6 +62,9 @@ public class MarkValue extends Mark {
         return result;
     }
 
+    @Override
+    public ParentLinked getParent() {
+        return getMarkGroup();
+    }
     //endregion
-
 }

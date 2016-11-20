@@ -1,5 +1,5 @@
-import {Component, OnInit, ViewEncapsulation, style, keyframes, animate, transition, trigger} from '@angular/core';
-import * as moment from 'moment';
+import {Component, OnInit, ViewEncapsulation, style, keyframes, animate, transition, trigger} from "@angular/core";
+import * as moment from "moment";
 import {DatepickerComponent} from "./datepicker.component";
 import {DateUtil} from "../../services/date-util.service";
 
@@ -12,16 +12,16 @@ import {DateUtil} from "../../services/date-util.service";
         trigger('daypickerAnimation', [
             transition('* => left', [
                 animate(180, keyframes([
-                    style({ transform: 'translateX(105%)', offset: 0.5 }),
-                    style({ transform: 'translateX(-130%)', offset: 0.51 }),
-                    style({ transform: 'translateX(0)', offset: 1 })
+                    style({transform: 'translateX(105%)', offset: 0.5}),
+                    style({transform: 'translateX(-130%)', offset: 0.51}),
+                    style({transform: 'translateX(0)', offset: 1})
                 ]))
             ]),
             transition('* => right', [
                 animate(180, keyframes([
-                    style({ transform: 'translateX(-105%)', offset: 0.5 }),
-                    style({ transform: 'translateX(130%)', offset: 0.51 }),
-                    style({ transform: 'translateX(0)', offset: 1 })
+                    style({transform: 'translateX(-105%)', offset: 0.5}),
+                    style({transform: 'translateX(130%)', offset: 0.51}),
+                    style({transform: 'translateX(0)', offset: 1})
                 ]))
             ])
         ])

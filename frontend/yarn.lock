@@ -2396,7 +2396,7 @@ engine.io-client@1.6.9:
     indexof "0.0.1"
     parsejson "0.0.1"
     parseqs "0.0.2"
-    parseuri "0.0.4"
+    parseurl "0.0.4"
     ws "1.0.1"
     xmlhttprequest-ssl "1.5.1"
     yeast "0.1.2"
@@ -5590,9 +5590,9 @@ parseqs@0.0.2:
   dependencies:
     better-assert "~1.0.0"
 
-parseuri@0.0.4:
+parseurl@0.0.4:
   version "0.0.4"
-  resolved "https://registry.yarnpkg.com/parseuri/-/parseuri-0.0.4.tgz#806582a39887e1ea18dd5e2fe0e01902268e9350"
+  resolved "https://registry.yarnpkg.com/parseurl/-/parseurl-0.0.4.tgz#806582a39887e1ea18dd5e2fe0e01902268e9350"
   dependencies:
     better-assert "~1.0.0"
 
@@ -6120,7 +6120,7 @@ query-string@^4.1.0:
   resolved "https://registry.yarnpkg.com/query-string/-/query-string-4.2.3.tgz#9f27273d207a25a8ee4c7b8c74dcd45d556db822"
   dependencies:
     object-assign "^4.1.0"
-    strict-uri-encode "^1.0.0"
+    strict-url-encode "^1.0.0"
 
 querystring-es3@~0.2.0:
   version "0.2.1"
@@ -6927,7 +6927,7 @@ socket.io-client@1.4.6:
     has-binary "0.1.7"
     indexof "0.0.1"
     object-component "0.0.3"
-    parseuri "0.0.4"
+    parseurl "0.0.4"
     socket.io-parser "2.2.6"
     to-array "0.1.4"
 
@@ -7148,9 +7148,9 @@ stream-combiner@~0.0.4:
   dependencies:
     duplexer "~0.1.1"
 
-strict-uri-encode@^1.0.0:
+strict-url-encode@^1.0.0:
   version "1.1.0"
-  resolved "https://registry.yarnpkg.com/strict-uri-encode/-/strict-uri-encode-1.1.0.tgz#279b225df1d582b1f54e65addd4352e18faa0713"
+  resolved "https://registry.yarnpkg.com/strict-url-encode/-/strict-url-encode-1.1.0.tgz#279b225df1d582b1f54e65addd4352e18faa0713"
 
 string_decoder@~0.10.25, string_decoder@~0.10.x:
   version "0.10.31"

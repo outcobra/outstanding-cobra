@@ -1,6 +1,7 @@
 package outcobra.server.model;
 
 import org.hibernate.validator.constraints.Length;
+import outcobra.server.model.interfaces.ParentLinked;
 
 import javax.jdo.annotations.Index;
 import javax.jdo.annotations.Unique;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class User {
+public class User implements ParentLinked {
     @Id
     @GeneratedValue
     private Long id;
@@ -90,6 +91,7 @@ public class User {
         this.institutions = institutions;
     }
 
+    @SuppressWarnings("SimplifiableIfStatement")
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -111,5 +113,16 @@ public class User {
         result = 31 * result + (getInstitutions() != null ? getInstitutions().hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return String.format("User{auth0Id='%s', username='%s', institutions=%s}", auth0Id, username, institutions);
+    }
+
+    @Override
+    public ParentLinked getParent() {
+        return this;
+    }
+
     //endregion
 }

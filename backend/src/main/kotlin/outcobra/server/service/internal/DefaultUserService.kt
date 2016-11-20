@@ -9,7 +9,7 @@ import outcobra.server.config.Auth0Client
 import outcobra.server.model.QUser
 import outcobra.server.model.User
 import outcobra.server.model.dto.UserDto
-import outcobra.server.model.mapper.Mapper
+import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.UserRepository
 import outcobra.server.service.UserService
 import javax.inject.Inject
@@ -40,7 +40,7 @@ open class DefaultUserService
     }
 
     override fun loginRegister() {
-        if (getCurrentUserDto().userId.isNotEmpty()) return
+        if (getCurrentUserDto().userId > 0) return
 
         val userDetails = getUserProfile()
         val newUser = User(userDetails.id, userDetails.nickname, null)

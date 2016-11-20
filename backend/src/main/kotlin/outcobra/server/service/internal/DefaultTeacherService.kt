@@ -4,20 +4,15 @@ import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 import outcobra.server.model.QTeacher
 import outcobra.server.model.dto.TeacherDto
-import outcobra.server.model.mapper.TeacherDtoMapper
+import outcobra.server.model.mapper.TeacherMapper
 import outcobra.server.model.repository.TeacherRepository
 import outcobra.server.service.TeacherService
-import outcobra.server.service.UserService
 import javax.inject.Inject
 
-/**
- * Created by Florian on 13.11.2016.
- */
 @Component
 @Transactional
 open class DefaultTeacherService @Inject constructor(val repository: TeacherRepository,
-                                                     val mapper: TeacherDtoMapper,
-                                                     val userService: UserService) : TeacherService {
+                                                     val mapper: TeacherMapper) : TeacherService {
     override fun createTeacher(teacherDto: TeacherDto): TeacherDto {
         var teacher = mapper.fromDto(teacherDto)
         teacher = repository.save(teacher)
@@ -29,9 +24,8 @@ open class DefaultTeacherService @Inject constructor(val repository: TeacherRepo
     }
 
     override fun readAllYearsByInstitution(institutionId: Long): List<TeacherDto> {
-        val qInstitution = QTeacher.teacher.institution
-        val filter = qInstitution.id.eq(institutionId).and(qInstitution.user.auth0Id.eq(userService.getCurrentUserDto().userId))
-        return repository.findAll(filter).map { entity -> mapper.toDto(entity) }
+        val withSameId = QTeacher.teacher.institution.id.eq(institutionId)
+        return repository.findAll(withSameId).map { mapper.toDto(it) }
     }
 
     override fun updateTeacher(teacherDto: TeacherDto): TeacherDto {

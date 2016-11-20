@@ -35,9 +35,7 @@ class MarkGroupTest {
 
     @Test
     fun checkCompositing() {
-        fun addMarkTo(group: MarkGroup): (Mark) -> Unit {
-            return { group.addMark(it) }
-        }
+        fun addMarkTo(group: MarkGroup): (Mark) -> Unit = { group.addMark(it) }
 
         val mark1 = MarkValue(1.0, 2.0)
         val mark3 = MarkValue(3.0, 1.0)

@@ -14,7 +14,11 @@ import {DateUtil} from "./services/date-util.service";
 import {FormsModule} from "@angular/forms";
 import {AuthService} from "./services/auth/auth.service";
 import {SidenavComponent, SidenavLayout} from "./components/sidenav/sidenav";
-import {CollapsibleComponent, CollapsibleBodyComponent, CollapsibleHeaderComponent} from "./components/collapsible/collapsible";
+import {
+    CollapsibleComponent,
+    CollapsibleBodyComponent,
+    CollapsibleHeaderComponent
+} from "./components/collapsible/collapsible";
 
 @NgModule({
     declarations: [

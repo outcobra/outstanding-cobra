@@ -1,18 +1,18 @@
 package outcobra.server.model;
 
+import outcobra.server.model.interfaces.ParentLinked;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class Mark {
+public abstract class Mark implements ParentLinked {
+    @NotNull
+    protected Double weight;
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
-
-    @NotNull
-    protected Double weight;
-
     @OneToOne(mappedBy = "mark")
     private Exam exam;
 
@@ -20,7 +20,6 @@ public abstract class Mark {
     private MarkGroup markGroup;
 
     //region constructors
-
     public Mark(Double weight, Exam exam, MarkGroup markGroup) {
         this.weight = weight;
         this.exam = exam;
@@ -28,13 +27,10 @@ public abstract class Mark {
     }
 
     public Mark() {
-
     }
-
     //endregion
 
     //region default functions
-
     public abstract double getValue();
 
     public abstract double getWeight();
@@ -67,6 +63,7 @@ public abstract class Mark {
         this.markGroup = markGroup;
     }
 
+    @SuppressWarnings("SimplifiableIfStatement")
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -81,8 +78,6 @@ public abstract class Mark {
             return false;
         if (exam != null ? !exam.equals(mark.exam) : mark.exam != null) return false;
         return markGroup != null ? markGroup.equals(mark.markGroup) : mark.markGroup == null;
-
-
     }
 
     @Override
