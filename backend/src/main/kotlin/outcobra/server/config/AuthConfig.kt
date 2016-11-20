@@ -31,7 +31,7 @@ open class AuthConfig : Auth0SecurityConfig() {
     }
 }
 
-open class Auth0Client(val clientId: String, val domain: String, val auth0: Auth0 = Auth0(clientId, domain), val client: AuthenticationAPIClient = auth0.newAuthenticationAPIClient()) {
+class Auth0Client(val clientId: String, val domain: String, val auth0: Auth0 = Auth0(clientId, domain), val client: AuthenticationAPIClient = auth0.newAuthenticationAPIClient()) {
     fun getUsername(token: Auth0JWTToken): String = client.tokenInfo(token.jwt).execute().email
 
     fun getUserProfile(token: Auth0JWTToken): UserProfile = client.tokenInfo(token.jwt).execute()

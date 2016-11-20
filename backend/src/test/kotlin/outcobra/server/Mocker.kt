@@ -1,25 +1,24 @@
 package outcobra.server
 
 import org.mockito.Mockito
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Primary
 import org.springframework.context.annotation.Profile
-import outcobra.server.model.Institution
 import outcobra.server.model.User
-import outcobra.server.model.dto.UserDto
 import outcobra.server.model.repository.UserRepository
 import outcobra.server.service.UserService
-import java.util.*
 
 @Configuration
 @Profile("mock")
 open class Mocker(userRepository: UserRepository) {
 
+    var USER: User
+    var USER2: User
+
     init {
-        USER = userRepository.save(User(null, Mocker.USER_AUTH0_ID, Mocker.USER_NICKNAME, null))
-        USER2 = userRepository.save(User(null, Mocker.USER2_AUTH0_ID, Mocker.USER2_NICKNAME, null))
+        USER = userRepository.save(User(null, USER_AUTH0_ID, USER_NICKNAME, null))
+        USER2 = userRepository.save(User(null, USER2_AUTH0_ID, USER2_NICKNAME, null))
     }
 
     companion object {
@@ -28,9 +27,6 @@ open class Mocker(userRepository: UserRepository) {
 
         val USER2_AUTH0_ID = "saf123123"
         val USER2_NICKNAME = "needToRoll"
-
-        lateinit var USER2: User
-        lateinit var USER: User
     }
 
     @Bean
