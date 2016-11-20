@@ -10,7 +10,7 @@ import outcobra.server.model.repository.UserRepository
 import outcobra.server.service.UserService
 
 @Configuration
-@Profile("mock")
+@Profile(ProfileRegistry.PROFILE_MOCK_SERVICES)
 open class Mocker(userRepository: UserRepository) {
 
     var USER: User
