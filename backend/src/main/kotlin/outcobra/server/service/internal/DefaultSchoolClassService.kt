@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 /**
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.0.0
  */
 @Component
 @Transactional

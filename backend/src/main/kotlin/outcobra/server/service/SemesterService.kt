@@ -7,7 +7,7 @@ import outcobra.server.model.dto.SemesterDto
  * Service which handles the business logic and data for [Semester]s
  *
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.0.0
  */
 interface SemesterService {
     /**

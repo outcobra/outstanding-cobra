@@ -6,7 +6,7 @@ import outcobra.server.model.dto.SchoolClassDto
 import outcobra.server.model.interfaces.Mapper
 
 /**
- * @since <since>
+ * @since 1.0.0
  */
 @Component
 class SchoolClassMapper : Mapper<SchoolClass, SchoolClassDto> {

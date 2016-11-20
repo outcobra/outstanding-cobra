@@ -6,7 +6,7 @@ import outcobra.server.model.dto.TeacherDto
  * Service which handles all business logic and data for Teacher entities
  *
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.0.0
  */
 interface TeacherService {
     /**

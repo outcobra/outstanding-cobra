@@ -4,7 +4,7 @@ package outcobra.server.util
  * Upper-Cases the first character of a string
  *
  * @author Joel Messerli
- * @since <since>
+ * @since 1.0.0
  */
 fun String.firstToUpper(): String {
     if (this.isEmpty()) return this

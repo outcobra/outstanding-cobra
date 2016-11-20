@@ -6,7 +6,7 @@ import outcobra.server.model.dto.SchoolYearDto
  * Service which contains all business logic for the SchoolYear entity
  *
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.0.0
  */
 interface SchoolYearService {
     /**

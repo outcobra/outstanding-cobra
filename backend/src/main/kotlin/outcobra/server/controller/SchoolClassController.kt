@@ -10,7 +10,7 @@ import javax.websocket.server.PathParam
  * This Class defines all functions for the schoolClass endpoint of the REST API
  *
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.0.0
  */
 @RestController
 @RequestMapping("/api")

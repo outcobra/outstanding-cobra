@@ -12,7 +12,7 @@ import javax.inject.Inject
  * Can be used to find instances of repositories by their entity's name or class
  *
  * @author Joel Messerli
- * @since <since>
+ * @since 1.0.0
  */
 @Component
 open class RepositoryLocator @Inject constructor(val context: ApplicationContext) {
@@ -22,7 +22,7 @@ open class RepositoryLocator @Inject constructor(val context: ApplicationContext
      *
      * @throws NoRepositoryFoundException if the requested repository could not be found
      * @see [BeanFactory.getBean]
-     * @since <since>
+     * @since 1.0.0
      */
     fun getForEntityName(entityName: String): JpaRepository<*, Long> {
         val repoName = entityName.firstToLower() + "Repository"
@@ -44,7 +44,7 @@ open class RepositoryLocator @Inject constructor(val context: ApplicationContext
      *
      * @see getForEntityName
      * @throws NoRepositoryFoundException if the requested repository could not be found or has an illegal type
-     * @since <since>
+     * @since 1.0.0
      */
     fun <T> getForEntityClass(entityClass: Class<T>): JpaRepository<T, Long> {
         @Suppress("UNCHECKED_CAST")
@@ -61,6 +61,6 @@ open class RepositoryLocator @Inject constructor(val context: ApplicationContext
  * Is thrown when a repository can not be found or has an invalid type
  *
  * @author Joel Messerli
- * @since <since>
+ * @since 1.0.0
  */
 class NoRepositoryFoundException(message: String, cause: Throwable? = null) : Exception(message, cause)

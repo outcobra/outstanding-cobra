@@ -7,7 +7,7 @@ import outcobra.server.model.dto.InstitutionDto
  * Service which handles all the business logic for the [Institution] entity
  *
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.0.0
  */
 interface InstitutionService {
     /**

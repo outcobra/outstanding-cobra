@@ -7,7 +7,7 @@ import org.springframework.util.ClassUtils
  * Can be used to find the class of a dto by the name of the corresponding entity
  *
  * @author Joel Messerli
- * @since <since>
+ * @since 1.0.0
  */
 @Component
 open class DtoLocator {
@@ -21,7 +21,7 @@ open class DtoLocator {
     /**
      * Returns the class of a dto by its entitys name
      *
-     * @since <since>
+     * @since 1.0.0
      * @throws ClassNotFoundException if the dtos class could not be found
      */
     fun getForEntityName(entityName: String): Class<*> {
