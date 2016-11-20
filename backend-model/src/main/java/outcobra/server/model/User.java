@@ -44,6 +44,13 @@ public class User {
         this.institutions = institutions;
     }
 
+    public User(Long id, String auth0Id, String username) {
+        this();
+        this.id = id;
+        this.auth0Id = auth0Id;
+        this.username = username;
+    }
+
     public User() {
         this.institutions = new ArrayList<>();
     }

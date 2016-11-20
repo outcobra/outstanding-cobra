@@ -9,13 +9,14 @@ import outcobra.server.model.dto.InstitutionDto
 import outcobra.server.model.mapper.Mapper
 import outcobra.server.model.repository.InstitutionRepository
 import outcobra.server.service.InstitutionService
+import outcobra.server.service.UserService
 import javax.inject.Inject
 
 @Service
 @Transactional
 open class DefaultInstitutionService
 @Inject constructor(val mapper: Mapper<Institution, InstitutionDto>,
-                    val userService: DefaultUserService,
+                    val userService: UserService,
                     val repository: InstitutionRepository) : InstitutionService {
 
     override fun readAllInstitutions(): List<InstitutionDto> {
