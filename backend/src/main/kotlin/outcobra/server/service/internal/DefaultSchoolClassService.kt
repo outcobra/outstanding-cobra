@@ -5,7 +5,7 @@ import org.springframework.transaction.annotation.Transactional
 import outcobra.server.model.QSchoolClass
 import outcobra.server.model.SchoolClass
 import outcobra.server.model.dto.SchoolClassDto
-import outcobra.server.model.mapper.Mapper
+import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.SchoolClassRepository
 import outcobra.server.service.SchoolClassService
 import javax.inject.Inject

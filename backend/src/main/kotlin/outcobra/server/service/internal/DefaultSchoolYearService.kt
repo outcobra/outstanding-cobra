@@ -5,7 +5,7 @@ import org.springframework.transaction.annotation.Transactional
 import outcobra.server.model.QSchoolYear
 import outcobra.server.model.SchoolYear
 import outcobra.server.model.dto.SchoolYearDto
-import outcobra.server.model.mapper.Mapper
+import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.SchoolYearRepository
 import outcobra.server.service.SchoolYearService
 import javax.inject.Inject

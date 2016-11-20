@@ -5,8 +5,10 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import outcobra.server.model.interfaces.ParentLinked;
+
 @Entity
-public class Institution {
+public class Institution implements ParentLinked {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -86,6 +88,7 @@ public class Institution {
         this.teachers = teachers;
     }
 
+    @SuppressWarnings("SimplifiableIfStatement")
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -112,5 +115,9 @@ public class Institution {
         return result;
     }
 
+    @Override
+    public ParentLinked getParent() {
+        return user;
+    }
     //endregion
 }

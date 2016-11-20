@@ -1,5 +1,7 @@
 package outcobra.server.model;
 
+import outcobra.server.model.interfaces.ParentLinked;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
@@ -7,7 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Exam {
+public class Exam implements ParentLinked {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -40,7 +43,7 @@ public class Exam {
     }
 
     public Exam() {
-        this.tasks = new ArrayList<ExamTask>();
+        this.tasks = new ArrayList<>();
     }
 
     //endregion
@@ -95,6 +98,7 @@ public class Exam {
         this.mark = mark;
     }
 
+    @SuppressWarnings("SimplifiableIfStatement")
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -122,5 +126,9 @@ public class Exam {
         return result;
     }
 
+    @Override
+    public ParentLinked getParent() {
+        return subject;
+    }
     //endregion
 }

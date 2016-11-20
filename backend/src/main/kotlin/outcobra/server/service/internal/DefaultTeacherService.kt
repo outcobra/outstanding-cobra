@@ -7,14 +7,12 @@ import outcobra.server.model.dto.TeacherDto
 import outcobra.server.model.mapper.TeacherMapper
 import outcobra.server.model.repository.TeacherRepository
 import outcobra.server.service.TeacherService
-import outcobra.server.service.UserService
 import javax.inject.Inject
 
 @Component
 @Transactional
 open class DefaultTeacherService @Inject constructor(val repository: TeacherRepository,
-                                                     val mapper: TeacherMapper,
-                                                     val userService: UserService) : TeacherService {
+                                                     val mapper: TeacherMapper) : TeacherService {
     override fun createTeacher(teacherDto: TeacherDto): TeacherDto {
         var teacher = mapper.fromDto(teacherDto)
         teacher = repository.save(teacher)

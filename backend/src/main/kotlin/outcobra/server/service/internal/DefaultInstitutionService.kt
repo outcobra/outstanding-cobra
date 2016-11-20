@@ -5,7 +5,7 @@ import org.springframework.transaction.annotation.Transactional
 import outcobra.server.model.Institution
 import outcobra.server.model.QInstitution
 import outcobra.server.model.dto.InstitutionDto
-import outcobra.server.model.mapper.Mapper
+import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.InstitutionRepository
 import outcobra.server.service.InstitutionService
 import javax.inject.Inject

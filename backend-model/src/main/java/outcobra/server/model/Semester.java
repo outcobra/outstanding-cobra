@@ -1,5 +1,7 @@
 package outcobra.server.model;
 
+import outcobra.server.model.interfaces.ParentLinked;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
@@ -7,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Semester {
+public class Semester implements ParentLinked {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -47,6 +49,71 @@ public class Semester {
         this.markReports = new ArrayList<>();
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public LocalDate getValidFrom() {
+        return validFrom;
+    }
+
+    public void setValidFrom(LocalDate validFrom) {
+        this.validFrom = validFrom;
+    }
+
+    public LocalDate getValidTo() {
+        return validTo;
+    }
+
+    public void setValidTo(LocalDate validTo) {
+        this.validTo = validTo;
+    }
+
+    public SchoolYear getSchoolYear() {
+        return schoolYear;
+    }
+
+    public void setSchoolYear(SchoolYear schoolYear) {
+        this.schoolYear = schoolYear;
+    }
+
+    public List<Subject> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(List<Subject> subjects) {
+        this.subjects = subjects;
+    }
+
+    public List<MarkReport> getMarkReports() {
+        return markReports;
+    }
+
+    public void setMarkReports(List<MarkReport> markReports) {
+        this.markReports = markReports;
+    }
+
+    public Timetable getTimetable() {
+        return timetable;
+    }
+
+    public void setTimetable(Timetable timetable) {
+        this.timetable = timetable;
+    }
+
+    @SuppressWarnings("SimplifiableIfStatement")
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -81,5 +148,10 @@ public class Semester {
         result = 31 * result + (markReports != null ? markReports.hashCode() : 0);
         result = 31 * result + (timetable != null ? timetable.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public ParentLinked getParent() {
+        return schoolYear;
     }
 }

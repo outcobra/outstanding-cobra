@@ -3,6 +3,7 @@ package outcobra.server.model.mapper
 import org.springframework.stereotype.Component
 import outcobra.server.model.SchoolClass
 import outcobra.server.model.dto.SchoolClassDto
+import outcobra.server.model.interfaces.Mapper
 
 /**
  * @since <since>

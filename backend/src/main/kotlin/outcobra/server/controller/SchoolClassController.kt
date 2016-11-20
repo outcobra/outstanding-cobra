@@ -1,6 +1,5 @@
 package outcobra.server.controller
 
-import org.slf4j.LoggerFactory
 import org.springframework.web.bind.annotation.*
 import outcobra.server.model.dto.SchoolClassDto
 import outcobra.server.service.SchoolClassService
@@ -16,10 +15,6 @@ import javax.websocket.server.PathParam
 @RestController
 @RequestMapping("/api")
 class SchoolClassController @Inject constructor(val schoolClassService: SchoolClassService) {
-
-    companion object {
-        val LOGGER = LoggerFactory.getLogger(javaClass)
-    }
 
     /**
      * This method saves the given SchoolClassDto into the database
