@@ -1,11 +1,11 @@
-import {Component, Input, OnInit, ViewEncapsulation, forwardRef, ElementRef, Output, EventEmitter} from '@angular/core';
-import * as moment from 'moment';
+import {Component, Input, OnInit, ViewEncapsulation, forwardRef, ElementRef, Output, EventEmitter} from "@angular/core";
+import * as moment from "moment";
 import {DateUtil} from "../../services/date-util.service";
 import {DatePickerMaxDateSmallerThanMinDateError} from "./datepicker-errors";
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
-import {Router, NavigationStart, NavigationEnd} from "@angular/router";
 
-const noop = () => {};
+const noop = () => {
+};
 
 export const DATEPICKER_CONTROL_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
@@ -104,7 +104,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
     }
 
     checkInitDate(): Date {
-        let date:Date;
+        let date: Date;
         if (this.initDate instanceof Date) {
             date = this.initDate;
             this.formattedDate = this.formatDate(date);

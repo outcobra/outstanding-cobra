@@ -1,11 +1,11 @@
 package outcobra.server.model;
 
+import outcobra.server.model.interfaces.ParentLinked;
+
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.time.LocalTime;
-
-import outcobra.server.model.interfaces.ParentLinked;
 
 @Entity
 public class TimetableEntry implements ParentLinked {

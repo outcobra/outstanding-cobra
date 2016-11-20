@@ -1,10 +1,10 @@
 package outcobra.server.model;
 
 
+import outcobra.server.model.interfaces.ParentLinked;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-
-import outcobra.server.model.interfaces.ParentLinked;
 
 @Entity
 public class MarkReportEntry implements ParentLinked {

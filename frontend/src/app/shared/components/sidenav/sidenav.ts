@@ -1,7 +1,15 @@
 import {
-    Component, ViewEncapsulation, ElementRef, Renderer, HostBinding,
-    EventEmitter, Output, ContentChild, AfterViewChecked, AfterContentInit
-} from '@angular/core';
+    Component,
+    ViewEncapsulation,
+    ElementRef,
+    Renderer,
+    HostBinding,
+    EventEmitter,
+    Output,
+    ContentChild,
+    AfterViewChecked,
+    AfterContentInit
+} from "@angular/core";
 import {Router, NavigationEnd} from "@angular/router";
 
 @Component({
@@ -109,12 +117,15 @@ export class SidenavComponent implements AfterViewChecked {
     @HostBinding('class.sidenav-closing') get isClosing() {
         return !this.opened && this.transition;
     }
+
     @HostBinding('class.sidenav-opening') get isOpening() {
         return this.opened && this.transition;
     }
+
     @HostBinding('class.sidenav-closed') get isClosed() {
         return !this.opened && !this.transition;
     }
+
     @HostBinding('class.sidenav-opened') get isOpened() {
         return this.opened && !this.transition;
     }
@@ -137,7 +148,8 @@ export class SidenavComponent implements AfterViewChecked {
 export class SidenavLayout implements AfterContentInit {
     @ContentChild(SidenavComponent) sidenav: SidenavComponent;
 
-    constructor(private renderer: Renderer, private elRef: ElementRef){}
+    constructor(private renderer: Renderer, private elRef: ElementRef) {
+    }
 
     ngAfterContentInit(): void {
         this.sidenav.onOpenStart.subscribe(() => this.setLayoutClass(true));

@@ -2,7 +2,6 @@ import {Injectable} from "@angular/core";
 import {NotificationsService, Notification, Icons} from "angular2-notifications";
 import {TranslateService} from "ng2-translate";
 import * as _ from "underscore";
-
 import "rxjs/add/operator/toPromise";
 import {appIcons} from "./icons";
 
@@ -84,12 +83,12 @@ export class NotificationWrapperService extends NotificationsService {
      */
     create(title: string, content: string, type: string, icon: string, optionsOverride?: any): Notification {
         return super.set({
-                title: this.translateService.instant(title),
-                content: this.translateService.instant(content),
-                type: type,
-                icon: icon,
-                override: this.mergeOptions(optionsOverride)
-            }, true);
+            title: this.translateService.instant(title),
+            content: this.translateService.instant(content),
+            type: type,
+            icon: icon,
+            override: this.mergeOptions(optionsOverride)
+        }, true);
     }
 
     /**

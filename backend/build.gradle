@@ -1,7 +1,7 @@
 buildscript {
     ext {
         springBootVersion = '1.4.1.RELEASE'
-        outstandingCobraVersion = '0.0.1-SNAPSHOT'
+        outstandingCobraVersion = '1.0.0'
 
         if (System.getenv("CIRCLE_BUILD_NUM") != null) {
             outstandingCobraVersion = outstandingCobraVersion + '-' + System.getenv("CIRCLE_BUILD_NUM")

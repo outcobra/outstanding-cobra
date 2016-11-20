@@ -18,10 +18,12 @@ open class SemesterController @Inject constructor(val semesterService: SemesterS
     fun readSemesterById(@PathVariable id: Long): SemesterDto {
         return semesterService.readSemesterById(id)
     }
+
     @RequestMapping(value = "/schoolYear/{schoolYearId}/semester", method = arrayOf(RequestMethod.GET))
     fun readAllSemestersBySchoolYear(@PathVariable schoolYearId: Long): List<SemesterDto> {
         return semesterService.readAllSemestersBySchoolYear(schoolYearId)
     }
+
     @RequestMapping(value = "/semester", method = arrayOf(RequestMethod.POST))
     fun updateSemester(@RequestBody semesterDto: SemesterDto): SemesterDto {
         return semesterService.updateSemester(semesterDto)

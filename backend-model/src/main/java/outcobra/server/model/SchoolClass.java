@@ -1,11 +1,11 @@
 package outcobra.server.model;
 
+import outcobra.server.model.interfaces.ParentLinked;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
-
-import outcobra.server.model.interfaces.ParentLinked;
 
 @Entity(name = "class")
 public class SchoolClass implements ParentLinked {
