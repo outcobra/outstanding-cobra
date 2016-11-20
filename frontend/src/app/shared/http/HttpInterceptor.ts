@@ -44,7 +44,7 @@ export class HttpInterceptor {
         ).catch(error => {
             this.notificationsService.error('http.error.title', 'http.error.message'); // TODO i18n + i18nKey by error.status
             return Observable.empty();
-        }).map((res) => this.unwrapHttpResponse<T>(res));
+        }).map((res) => this.unwrapAndCastHttpResponse<T>(res));
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -153,7 +153,7 @@ export class HttpInterceptor {
         }
     }
 
-    private unwrapHttpResponse<T>(response): T {
+    private unwrapAndCastHttpResponse<T>(response): T {
         return response.json() as T;
     }
 

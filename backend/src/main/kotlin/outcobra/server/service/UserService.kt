@@ -25,5 +25,8 @@ interface UserService {
      */
     fun loginRegister(): Unit
 
-    open fun getCurrentUser(): User
+    /**
+     * Reads the currently logged in user from the database
+     */
+    fun getCurrentUser(): User
 }

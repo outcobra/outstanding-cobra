@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from "@angular/core";
 import {ManageService} from "./manage.service";
 import {ManageData} from "./model/ManageData";
 
@@ -17,7 +17,9 @@ export class ManageComponent implements OnInit {
 
     ngOnInit() {
         this.manageService.getManageData()
-            .subscribe((res) => {this.manageData = res; console.log(res)});
+            .subscribe((res) => {
+                this.manageData = res
+            });
     }
 
 }

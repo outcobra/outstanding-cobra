@@ -12,7 +12,7 @@ class InstitutionController @Inject constructor(val institutionService: Institut
 
     @RequestMapping(value = "/", method = arrayOf(RequestMethod.PUT))
     fun createInstitution(@RequestBody institutionDto: InstitutionDto) {
-        institutionService.createInstitution(institutionDto.institutionName)
+        institutionService.createInstitution(institutionDto)
     }
 
     @RequestMapping(value = "/{id}", method = arrayOf(RequestMethod.GET))
