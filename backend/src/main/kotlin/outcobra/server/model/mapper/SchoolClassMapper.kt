@@ -5,16 +5,15 @@ import outcobra.server.model.SchoolClass
 import outcobra.server.model.dto.SchoolClassDto
 
 /**
- * Created by Florian on 12.11.2016.
+ * @since <since>
  */
 @Component
-class SchoolClassDtoMapper : Mapper<SchoolClass, SchoolClassDto> {
-    //TODO implement
+class SchoolClassMapper : Mapper<SchoolClass, SchoolClassDto> {
     override fun toDto(from: SchoolClass): SchoolClassDto {
-        return SchoolClassDto()
+        throw UnsupportedOperationException()
     }
 
     override fun fromDto(from: SchoolClassDto): SchoolClass {
-        return SchoolClass()
+        throw UnsupportedOperationException()
     }
 }

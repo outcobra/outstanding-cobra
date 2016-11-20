@@ -1,9 +1,8 @@
 package outcobra.server.model;
 
-import java.time.LocalDate;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 
 @Entity
 public class Holiday {

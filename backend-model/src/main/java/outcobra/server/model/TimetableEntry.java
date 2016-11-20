@@ -1,10 +1,9 @@
 package outcobra.server.model;
 
-import java.time.LocalTime;
-
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.time.LocalTime;
 
 @Entity
 public class TimetableEntry {

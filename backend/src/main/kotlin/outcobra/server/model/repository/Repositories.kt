@@ -16,5 +16,5 @@ import outcobra.server.model.*
 @Repository interface MarkReportRepository : JpaRepository<MarkReport, Long>, QueryDslPredicateExecutor<MarkReport>
 @Repository interface ExamRepository : JpaRepository<Exam, Long>, QueryDslPredicateExecutor<Exam>
 @Repository interface MarkRepository : JpaRepository<Mark, Long>, QueryDslPredicateExecutor<Mark>
-@Repository interface SchoolClassRepository : JpaRepository<SchoolClass,Long>, QueryDslPredicateExecutor<SchoolClass>
+@Repository interface SchoolClassRepository : JpaRepository<SchoolClass, Long>, QueryDslPredicateExecutor<SchoolClass>
 @Repository interface TeacherRepository : JpaRepository<Teacher, Long>, QueryDslPredicateExecutor<Teacher>
