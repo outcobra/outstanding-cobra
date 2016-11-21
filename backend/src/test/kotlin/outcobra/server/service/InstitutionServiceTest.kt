@@ -9,7 +9,9 @@ import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit4.SpringRunner
 import outcobra.server.ProfileRegistry
 import outcobra.server.model.QInstitution
+import outcobra.server.model.dto.InstitutionDto
 import outcobra.server.model.repository.InstitutionRepository
+import java.util.*
 
 @RunWith(SpringRunner::class)
 @SpringBootTest
@@ -27,13 +29,49 @@ class InstitutionServiceTest {
 
     @Test
     fun createInstitutionTest() {
-        institutionService.createInstitution(INSTITUTION_NAME)
+        institutionService.createInstitution(InstitutionDto(institutionName = INSTITUTION_NAME))
 
         val institution = institutionRepository.findOne(QInstitution.institution.name.eq(INSTITUTION_NAME))
         Assert.assertNotNull(institution)
         Assert.assertEquals(institution.name, INSTITUTION_NAME)
     }
 
+    @Test
+    fun updateInstitutionTest() {
+        var institutionDto = institutionService.createInstitution(InstitutionDto(institutionName = INSTITUTION_NAME))
+        val institutionId = institutionDto.institutionId
+        var updatedName = "testUpdateInstitution"
+        var updateDto = InstitutionDto(institutionId,0,updatedName)
+        institutionService.updateInstitution(updateDto)
+        val institution = institutionRepository.findOne(QInstitution.institution.id.eq(institutionId))
+        Assert.assertNotNull(institution)
+        Assert.assertEquals(institution.name, updatedName)
+    }
 
+    @Test
+    fun readAllInstitutionsTest() {
+        var institution1 = institutionService.createInstitution(InstitutionDto(institutionName = INSTITUTION_NAME))
+        var institution2 = institutionService.createInstitution(InstitutionDto(institutionName = "laslsafl"))
 
+        val expected = ArrayList<InstitutionDto>(Arrays.asList(institution1,institution2))
+        val institutions = institutionService.readAllInstitutions()
+
+        Assert.assertEquals(expected,institutions)
+
+    }
+
+    @Test
+    fun readInstitutionTest() {
+        var institutionDto = institutionService.createInstitution(InstitutionDto(institutionName = INSTITUTION_NAME))
+        val institutionId = institutionDto.institutionId
+        Assert.assertEquals(institutionDto,institutionService.readInstitutionById(institutionId))
+    }
+
+    @Test
+    fun deleteInstitutionTest() {
+        var institutionDto = institutionService.createInstitution(InstitutionDto(institutionName = INSTITUTION_NAME))
+        val institutionId = institutionDto.institutionId
+        institutionService.deleteInstitution(institutionId)
+        Assert.assertNull(institutionRepository.findOne(QInstitution.institution.id.eq(institutionId)))
+    }
 }
