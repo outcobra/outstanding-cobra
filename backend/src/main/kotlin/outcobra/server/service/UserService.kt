@@ -29,4 +29,7 @@ interface UserService {
      * Reads the currently logged in user from the database
      */
     fun getCurrentUser(): User
+
+    fun readUserById(id: Long): User
+
 }

@@ -5,6 +5,7 @@ import com.auth0.spring.security.api.Auth0JWTToken
 import com.auth0.spring.security.api.Auth0UserDetails
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Service
+import outcobra.server.annotation.DefaultImplementation
 import outcobra.server.config.Auth0Client
 import outcobra.server.model.QUser
 import outcobra.server.model.User
@@ -15,10 +16,15 @@ import outcobra.server.service.UserService
 import javax.inject.Inject
 
 @Service
+@DefaultImplementation
 open class DefaultUserService
 @Inject constructor(val userRepository: UserRepository,
                     val userDtoMapper: Mapper<User, UserDto>,
                     val auth0Client: Auth0Client) : UserService {
+
+    override fun readUserById(id: Long): User {
+        return userRepository.findOne(id)
+    }
 
     override fun getTokenUserId(): String {
         val userDetails = SecurityContextHolder.getContext().authentication.principal as Auth0UserDetails

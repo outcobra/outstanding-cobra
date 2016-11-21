@@ -3,18 +3,18 @@ package outcobra.server.model.repository
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.transaction.annotation.Transactional
 import outcobra.server.model.QUser
 import outcobra.server.model.User
+import javax.inject.Inject
 
 @RunWith(SpringRunner::class)
 @SpringBootTest
 open class UserRepositoryTest {
 
-    @Autowired
+    @Inject
     lateinit var userRepository: UserRepository
     val myUser = User("some_auth0_id", "jmesserli", null)
 

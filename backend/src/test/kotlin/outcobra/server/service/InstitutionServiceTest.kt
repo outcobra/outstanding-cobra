@@ -1,9 +1,10 @@
 package outcobra.server.service
 
-import org.junit.Assert
+import org.junit.After
+import org.junit.Assert.*
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit4.SpringRunner
@@ -12,19 +13,25 @@ import outcobra.server.model.QInstitution
 import outcobra.server.model.dto.InstitutionDto
 import outcobra.server.model.repository.InstitutionRepository
 import java.util.*
+import javax.inject.Inject
 
 @RunWith(SpringRunner::class)
 @SpringBootTest
 @ActiveProfiles(ProfileRegistry.PROFILE_MOCK_SERVICES)
 class InstitutionServiceTest {
 
-    @Autowired
+    @Inject
     lateinit var institutionService: InstitutionService
-    @Autowired
+    @Inject
     lateinit var institutionRepository: InstitutionRepository
 
     companion object {
         val INSTITUTION_NAME: String = "Institution 1"
+    }
+
+    @Before
+    fun cleanUp() {
+        institutionRepository.deleteAll()
     }
 
     @Test
@@ -32,31 +39,33 @@ class InstitutionServiceTest {
         institutionService.createInstitution(InstitutionDto(institutionName = INSTITUTION_NAME))
 
         val institution = institutionRepository.findOne(QInstitution.institution.name.eq(INSTITUTION_NAME))
-        Assert.assertNotNull(institution)
-        Assert.assertEquals(institution.name, INSTITUTION_NAME)
+        assertNotNull(institution)
+        assertEquals(institution.name, INSTITUTION_NAME)
     }
 
     @Test
     fun updateInstitutionTest() {
-        var institutionDto = institutionService.createInstitution(InstitutionDto(institutionName = INSTITUTION_NAME))
-        val institutionId = institutionDto.institutionId
-        var updatedName = "testUpdateInstitution"
-        var updateDto = InstitutionDto(institutionId,0,updatedName)
+        val savedDto = institutionService.createInstitution(InstitutionDto(institutionName = INSTITUTION_NAME))
+        val institutionId = savedDto.institutionId
+        val updatedName = "testUpdateInstitution"
+        val updateDto = InstitutionDto(institutionId, 0, updatedName)
         institutionService.updateInstitution(updateDto)
         val institution = institutionRepository.findOne(QInstitution.institution.id.eq(institutionId))
-        Assert.assertNotNull(institution)
-        Assert.assertEquals(institution.name, updatedName)
+        assertNotNull(institution)
+        assertEquals(institution.name, updatedName)
     }
 
     @Test
     fun readAllInstitutionsTest() {
-        var institution1 = institutionService.createInstitution(InstitutionDto(institutionName = INSTITUTION_NAME))
-        var institution2 = institutionService.createInstitution(InstitutionDto(institutionName = "laslsafl"))
+        val institution1 = institutionService.createInstitution(InstitutionDto(institutionName = INSTITUTION_NAME))
+        val institution2 = institutionService.createInstitution(InstitutionDto(institutionName = "laslsafl"))
+        val dto = InstitutionDto(institutionName = "notInList", userId = 2L)
+        val institution3 = institutionService.createInstitution(dto)
 
-        val expected = ArrayList<InstitutionDto>(Arrays.asList(institution1,institution2))
+        val expected = ArrayList<InstitutionDto>(listOf(institution1, institution2))
         val institutions = institutionService.readAllInstitutions()
 
-        Assert.assertEquals(expected,institutions)
+        assertEquals(expected, institutions)
 
     }
 
@@ -64,7 +73,7 @@ class InstitutionServiceTest {
     fun readInstitutionTest() {
         var institutionDto = institutionService.createInstitution(InstitutionDto(institutionName = INSTITUTION_NAME))
         val institutionId = institutionDto.institutionId
-        Assert.assertEquals(institutionDto,institutionService.readInstitutionById(institutionId))
+        assertEquals(institutionDto, institutionService.readInstitutionById(institutionId))
     }
 
     @Test
@@ -72,6 +81,12 @@ class InstitutionServiceTest {
         var institutionDto = institutionService.createInstitution(InstitutionDto(institutionName = INSTITUTION_NAME))
         val institutionId = institutionDto.institutionId
         institutionService.deleteInstitution(institutionId)
-        Assert.assertNull(institutionRepository.findOne(QInstitution.institution.id.eq(institutionId)))
+        assertNull(institutionRepository.findOne(QInstitution.institution.id.eq(institutionId)))
     }
+
+    @After
+    fun tearDown() {
+        cleanUp()
+    }
+
 }

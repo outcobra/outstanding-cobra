@@ -1,13 +1,16 @@
 package outcobra.server
 
+import org.mockito.Matchers
 import org.mockito.Mockito
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Primary
 import org.springframework.context.annotation.Profile
+import outcobra.server.annotation.DefaultImplementation
 import outcobra.server.model.User
 import outcobra.server.model.repository.UserRepository
 import outcobra.server.service.UserService
+import javax.inject.Inject
 
 @Configuration
 @Profile(ProfileRegistry.PROFILE_MOCK_SERVICES)
@@ -15,6 +18,10 @@ open class Mocker(userRepository: UserRepository) {
 
     var USER: User
     var USER2: User
+
+    @Inject
+    @DefaultImplementation
+    lateinit var userService: UserService
 
     init {
         USER = userRepository.save(User(null, USER_AUTH0_ID, USER_NICKNAME, null))
@@ -34,9 +41,10 @@ open class Mocker(userRepository: UserRepository) {
     open fun mockUserService(): UserService {
         val mockService = Mockito.mock(UserService::class.java)
 
+
         Mockito.`when`(mockService.getCurrentUser()).then { User(USER.id, USER_AUTH0_ID, USER_NICKNAME) }
         Mockito.`when`(mockService.getTokenUserId()).then { USER_AUTH0_ID }
-
+        Mockito.`when`(mockService.readUserById(Matchers.anyLong())).then { i -> userService.readUserById(i.arguments[0] as Long) }
         return mockService
     }
 
