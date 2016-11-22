@@ -15,6 +15,9 @@ import outcobra.server.model.repository.InstitutionRepository
 import java.util.*
 import javax.inject.Inject
 
+/**
+ * Test class for the InstitutionService implementation
+ */
 @RunWith(SpringRunner::class)
 @SpringBootTest
 @ActiveProfiles(ProfileRegistry.PROFILE_MOCK_SERVICES)
@@ -25,15 +28,24 @@ class InstitutionServiceTest {
     @Inject
     lateinit var institutionRepository: InstitutionRepository
 
+    /**
+     * class constants and default values
+     */
     companion object {
         val INSTITUTION_NAME: String = "Institution 1"
     }
 
+    /**
+     * deletes all existing institutions to make sure to have a clean environment
+     */
     @Before
     fun cleanUp() {
         institutionRepository.deleteAll()
     }
 
+    /**
+     * tests if we can find an institution by name in the database after inserting it
+     */
     @Test
     fun createInstitutionTest() {
         institutionService.createInstitution(InstitutionDto(institutionName = INSTITUTION_NAME))
@@ -55,6 +67,10 @@ class InstitutionServiceTest {
         assertThat(institution.name).isEqualTo(updatedName)
     }
 
+    /**
+     * creates 2 institutions for the current user and one for another user
+     * expects to get the 2 first institutions when reading all institutions
+     */
     @Test
     fun readAllInstitutionsTest() {
         val institution1 = institutionService.createInstitution(InstitutionDto(institutionName = INSTITUTION_NAME))
@@ -69,21 +85,32 @@ class InstitutionServiceTest {
 
     }
 
+    /**
+     * creates an institution and reads it by id
+     * checks if these two are the same
+     */
     @Test
     fun readInstitutionTest() {
-        var institutionDto = institutionService.createInstitution(InstitutionDto(institutionName = INSTITUTION_NAME))
+        val institutionDto = institutionService.createInstitution(InstitutionDto(institutionName = INSTITUTION_NAME))
         val institutionId = institutionDto.institutionId
         assertThat(institutionDto).isEqualTo(institutionService.readInstitutionById(institutionId))
     }
 
+    /**
+     * creates a new institution and deletes this institution by id
+     * expects to get null when searching for the institution
+     */
     @Test
     fun deleteInstitutionTest() {
-        var institutionDto = institutionService.createInstitution(InstitutionDto(institutionName = INSTITUTION_NAME))
+        val institutionDto = institutionService.createInstitution(InstitutionDto(institutionName = INSTITUTION_NAME))
         val institutionId = institutionDto.institutionId
         institutionService.deleteInstitution(institutionId)
         assertThat(institutionRepository.findOne(QInstitution.institution.id.eq(institutionId))).isNull()
     }
 
+    /**
+     * performs a cleanUp after all tests have executed
+     */
     @After
     fun tearDown() {
         cleanUp()
