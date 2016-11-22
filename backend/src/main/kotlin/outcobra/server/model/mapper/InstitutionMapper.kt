@@ -18,10 +18,9 @@ constructor(val userService: UserService) : Mapper<Institution, InstitutionDto> 
         val institution = Institution()
         institution.id = from.institutionId
         institution.name = from.institutionName
-        if (from.userId != 0L) {
-            institution.user = userService.readUserById(from.userId)
-        } else {
-            institution.user = userService.getCurrentUser()
+        institution.user = when (from.userId) {
+            in 1L..Long.MAX_VALUE -> userService.readUserById(from.userId)
+            else -> userService.getCurrentUser()
         }
         return institution
     }
