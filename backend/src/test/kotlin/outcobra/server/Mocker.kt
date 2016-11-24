@@ -44,7 +44,7 @@ open class Mocker(userRepository: UserRepository) {
 
         Mockito.`when`(mockService.getCurrentUser()).then { User(USER.id, USER_AUTH0_ID, USER_NICKNAME) }
         Mockito.`when`(mockService.getTokenUserId()).then { USER_AUTH0_ID }
-        Mockito.`when`(mockService.readUserById(Matchers.anyLong())).then { i -> userService.readUserById(i.arguments[0] as Long) }
+        Mockito.`when`(mockService.readUserById(Matchers.anyLong())).then {userService.readUserById(it.arguments[0] as Long) }
         return mockService
     }
 
