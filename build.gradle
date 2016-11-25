@@ -21,7 +21,7 @@ buildscript {
 apply plugin: 'org.jetbrains.dokka'
 
 dokka {
-    moduleName = 'data'
+    moduleName = 'outcobra-server'
     outputFormat = 'javadoc'
     outputDirectory = "$buildDir/javadoc"
     sourceDirs = files('backend/src/main/kotlin/outcobra','backend-model/src/main/java/outcobra')
