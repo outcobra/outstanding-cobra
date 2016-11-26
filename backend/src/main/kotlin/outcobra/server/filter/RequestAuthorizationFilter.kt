@@ -21,6 +21,8 @@ open class RequestAuthorizationFilter @Inject constructor(val authorizationServi
         private val URI_NORMALIZING_PATTERN = Pattern.compile("^/?(.*?)/?$")
         private val URI_RESOURCE_EXTRACTING_PATTERN = Pattern.compile("^api/([^/]+)/(\\d+)(/.*)?")
         private val URI_PUT_POST_RESOURCE_EXTRACTING_PATTERN = Pattern.compile("^api/([^/]+)/?.*")
+
+        private val IGNORED_URIS = arrayListOf("/api/manage", "/api/user/login")
     }
 
     private fun normalizeUri(uri: String): String {
@@ -45,24 +47,26 @@ open class RequestAuthorizationFilter @Inject constructor(val authorizationServi
     override fun doFilter(request: ServletRequest?, response: ServletResponse?, chain: FilterChain?) {
         if (request is HttpServletRequest) {
             // Get 1 && Get all
-            if (request.method == RequestMethod.GET.name) {
-                try {
-                    val parentLinked = extractFirstEntity(normalizeUri(request.requestURI))
-                    if (parentLinked == null || !authorizationService.verifyOwner(parentLinked)) {
-                        LOGGER.warn("Dropping request to ${request.requestURI} because of owner mismatch or missing parent link ($parentLinked)")
+            if (!IGNORED_URIS.contains(request.requestURI)) {
+                if (request.method == RequestMethod.GET.name) {
+                    try {
+                        val parentLinked = extractFirstEntity(normalizeUri(request.requestURI))
+                        if (parentLinked == null || !authorizationService.verifyOwner(parentLinked)) {
+                            LOGGER.warn("Dropping request to ${request.requestURI} because of owner mismatch or missing parent link ($parentLinked)")
+                            return destroy()
+                        }
+                    } catch (e: ValidationException) {
+                        LOGGER.error("Could not validate request to ${request.requestURI}", e)
                         return destroy()
                     }
-                } catch (e: ValidationException) {
-                    LOGGER.error("Could not validate request to ${request.requestURI}", e)
-                    return destroy()
-                }
-                // Update and create
-            } else if (request.method in arrayOf(RequestMethod.POST.name, RequestMethod.PUT.name)) {
-                val dtoText = request.reader.readText()
-                val entityName = getEntityName(normalizeUri(request.requestURI))
-                if (!authorizationService.verifyDto(dtoText, entityName, request.method == RequestMethod.PUT.name)) {
-                    LOGGER.warn("Dropping request to ${request.requestURI} because of ownership mismatch")
-                    return destroy()
+                    // Update and create
+                } else if (request.method in arrayOf(RequestMethod.POST.name, RequestMethod.PUT.name)) {
+                    val dtoText = request.reader.readText()
+                    val entityName = getEntityName(normalizeUri(request.requestURI))
+                    if (!authorizationService.verifyDto(dtoText, entityName, request.method == RequestMethod.PUT.name)) {
+                        LOGGER.warn("Dropping request to ${request.requestURI} because of ownership mismatch")
+                        return destroy()
+                    }
                 }
             }
             chain?.doFilter(request, response)
