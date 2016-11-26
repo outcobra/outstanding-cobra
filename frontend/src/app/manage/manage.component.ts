@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from "@angular/core";
 import {ManageService} from "./manage.service";
 import {ManageData, Institution, SchoolClass, SchoolYear, Semester, Subject} from "./model/ManageData";
-import {MdDialog, MdDialogRef} from "@angular/material";
+import {MdDialog, MdDialogRef, MdDialogConfig} from "@angular/material";
 import {InstitutionDialog} from "./institution-dialog/institution-dialog.component";
 
 @Component({
@@ -59,7 +59,7 @@ export class ManageComponent implements OnInit {
     }
 
     addInstitution() {
-        this.institutionDialogRef = this.dialog.open(InstitutionDialog);
+        this.institutionDialogRef = this.dialog.open(InstitutionDialog, new MdDialogConfig());
     }
 
     addSchoolClass() {
