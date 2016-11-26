@@ -19,6 +19,8 @@ class SchoolClassMapper @Inject constructor(val schoolYearMapper: Mapper<SchoolY
     }
 
     override fun fromDto(from: SchoolClassDto): SchoolClass {
-        return SchoolClass(from.normalizedName, institutionRepository.findOne(from.institutionId), from.schoolYears.map { schoolYearMapper.fromDto(it) })
+        val schoolClass = SchoolClass(from.normalizedName, institutionRepository.findOne(from.institutionId), from.schoolYears.map { schoolYearMapper.fromDto(it) })
+        schoolClass.id = from.institutionId
+        return schoolClass
     }
 }

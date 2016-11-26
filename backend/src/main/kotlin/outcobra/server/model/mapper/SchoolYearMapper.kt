@@ -16,9 +16,11 @@ class SchoolYearMapper @Inject constructor(val semesterMapper: Mapper<Semester, 
                                            val classRepository: SchoolClassRepository,
                                            val holidayRepository: HolidayRepository) : Mapper<SchoolYear, SchoolYearDto> {
     override fun fromDto(from: SchoolYearDto): SchoolYear {
-        return SchoolYear(from.name, from.validFrom, from.validTo, classRepository.findOne(from.schoolClassId),
+        val schoolYear = SchoolYear(from.name, from.validFrom, from.validTo, classRepository.findOne(from.schoolClassId),
                 holidayRepository.findAll(QHoliday.holiday.schoolYear.id.eq(from.schoolYearId)).toList(),
                 from.semesters.map { semesterMapper.fromDto(it) })
+        schoolYear.id = from.schoolYearId
+        return schoolYear
     }
 
     override fun toDto(from: SchoolYear): SchoolYearDto {

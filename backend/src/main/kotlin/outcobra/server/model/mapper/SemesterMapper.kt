@@ -28,8 +28,10 @@ open class SemesterMapper @Inject constructor(val subjectMapper: Mapper<Subject,
     }
 
     override fun fromDto(from: SemesterDto): Semester {
-        return Semester(from.semesterName, from.validFrom, from.validTo, schoolYearRepository.findOne(from.schoolYearId),
+        val semester = Semester(from.semesterName, from.validFrom, from.validTo, schoolYearRepository.findOne(from.schoolYearId),
                 from.subjects.map { subjectMapper.fromDto(it) }, from.markReportIds.map { markReportRepository.findOne(it) },
                 timetableRepository.findOne(QTimetable.timetable.semester.id.eq(from.id)))
+        semester.id = from.semesterId
+        return semester
     }
 }
