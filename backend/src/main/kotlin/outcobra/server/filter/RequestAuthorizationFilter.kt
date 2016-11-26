@@ -76,7 +76,7 @@ open class RequestAuthorizationFilter @Inject constructor(val authorizationServi
             } else {
                 LOGGER.info("Directly passing request to ${request.requestURI} because it's on the ignore list")
             }
-            chain?.doFilter(request, response)
+            chain!!.doFilter(request, response)
         }
     }
 }
