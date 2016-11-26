@@ -7,7 +7,7 @@ import outcobra.server.model.dto.SubjectDto
  */
 interface SubjectService {
     fun createSubject(subjectDto: SubjectDto): SubjectDto
-    fun readAllSubjectsByInstitution(institutionId: Long) :List<SubjectDto>
+    fun readAllSubjectsBySemester(semesterId: Long): List<SubjectDto>
     fun readSubjectById(subjectId: Long): SubjectDto
     fun updateSubject(subjectDto: SubjectDto): SubjectDto
     fun deleteSubject(subjectId: Long)

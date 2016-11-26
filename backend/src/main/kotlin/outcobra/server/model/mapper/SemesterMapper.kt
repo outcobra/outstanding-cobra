@@ -22,9 +22,9 @@ import javax.inject.Inject
 open class SemesterMapper @Inject constructor(val subjectMapper: Mapper<Subject, SubjectDto>,
                                               val schoolYearRepository: SchoolYearRepository,
                                               val markReportRepository: MarkReportRepository,
-                                              val timetableRepository: TimetableRepository)   : Mapper<Semester, SemesterDto> {
+                                              val timetableRepository: TimetableRepository) : Mapper<Semester, SemesterDto> {
     override fun toDto(from: Semester): SemesterDto {
-        return SemesterDto(from.id, from.schoolYear.id, from.name, from.validFrom, from.validTo, from.subjects.map { subjectMapper.toDto(it) },from.markReports.map { it.id }, from.timetable.id)
+        return SemesterDto(from.id, from.schoolYear.id, from.name, from.validFrom, from.validTo, from.subjects.map { subjectMapper.toDto(it) }, from.markReports.map { it.id }, from.timetable.id)
     }
 
     override fun fromDto(from: SemesterDto): Semester {

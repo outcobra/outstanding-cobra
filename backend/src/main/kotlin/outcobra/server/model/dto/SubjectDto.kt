@@ -10,7 +10,7 @@ import outcobra.server.model.interfaces.ParentLink
 data class SubjectDto(val subjectId: Long = 0,
                       val semesterId: Long = 0,
                       val subjectName: String = "",
-                      val teacher: TeacherDto? = null) : OutcobraDto{
+                      val teacher: TeacherDto? = null) : OutcobraDto {
     override fun getId(): Long = semesterId
 
     override fun getParentLink(): ParentLink = ParentLink.make(semesterId, Semester::class.java)
