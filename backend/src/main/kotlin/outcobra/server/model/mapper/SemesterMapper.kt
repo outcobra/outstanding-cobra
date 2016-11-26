@@ -24,13 +24,17 @@ open class SemesterMapper @Inject constructor(val subjectMapper: Mapper<Subject,
                                               val markReportRepository: MarkReportRepository,
                                               val timetableRepository: TimetableRepository) : Mapper<Semester, SemesterDto> {
     override fun toDto(from: Semester): SemesterDto {
-        return SemesterDto(from.id, from.schoolYear.id, from.name, from.validFrom, from.validTo, from.subjects.map { subjectMapper.toDto(it) }, from.markReports.map { it.id }, from.timetable.id)
+        val subjects = from.subjects.map { subjectMapper.toDto(it) }
+        val reports = from.markReports.map { it.id }
+        return SemesterDto(from.id, from.schoolYear.id, from.name, from.validFrom, from.validTo, subjects, reports, from.timetable.id)
     }
 
     override fun fromDto(from: SemesterDto): Semester {
-        val semester = Semester(from.semesterName, from.validFrom, from.validTo, schoolYearRepository.findOne(from.schoolYearId),
-                from.subjects.map { subjectMapper.fromDto(it) }, from.markReportIds.map { markReportRepository.findOne(it) },
-                timetableRepository.findOne(QTimetable.timetable.semester.id.eq(from.id)))
+        val year = schoolYearRepository.findOne(from.schoolYearId)
+        val subjects = from.subjects.map { subjectMapper.fromDto(it) }
+        val reports = from.markReportIds.map { markReportRepository.findOne(it) }
+        val timeTable = timetableRepository.findOne(QTimetable.timetable.semester.id.eq(from.id))
+        val semester = Semester(from.semesterName, from.validFrom, from.validTo, year, subjects, reports, timeTable)
         semester.id = from.semesterId
         return semester
     }

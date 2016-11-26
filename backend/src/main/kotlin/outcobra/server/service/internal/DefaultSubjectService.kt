@@ -10,9 +10,7 @@ import outcobra.server.model.repository.SubjectRepository
 import outcobra.server.service.SubjectService
 import javax.inject.Inject
 
-/**
- * Created by Florian on 26.11.2016.
- */
+
 @Service
 @Transactional
 open class DefaultSubjectService @Inject constructor(val repository: SubjectRepository,

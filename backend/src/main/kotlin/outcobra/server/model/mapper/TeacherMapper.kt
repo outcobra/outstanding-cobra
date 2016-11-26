@@ -12,10 +12,11 @@ import javax.inject.Inject
 @Component
 open class TeacherMapper @Inject constructor(val subjectRepository: SubjectRepository,
                                              val institutionRepository: InstitutionRepository) : Mapper<Teacher, TeacherDto> {
-    //TODO implement
+
     override fun fromDto(from: TeacherDto): Teacher {
         val subjects = subjectRepository.findAll(QSubject.subject.teacher.id.eq(from.teacherId)).toList()
-        val teacher = Teacher(from.teacherName, from.teacherEmail, institutionRepository.findOne(from.institutionId), subjects)
+        val institution = institutionRepository.findOne(from.institutionId)
+        val teacher = Teacher(from.teacherName, from.teacherEmail, institution, subjects)
         teacher.id = from.teacherId
         return teacher
     }

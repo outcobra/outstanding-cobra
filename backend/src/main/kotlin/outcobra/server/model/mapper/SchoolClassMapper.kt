@@ -14,13 +14,17 @@ import javax.inject.Inject
  * @since 1.0.0
  */
 @Component
-open class SchoolClassMapper @Inject constructor(val schoolYearMapper: Mapper<SchoolYear, SchoolYearDto>, val institutionRepository: InstitutionRepository) : Mapper<SchoolClass, SchoolClassDto> {
+open class SchoolClassMapper @Inject constructor(val schoolYearMapper: Mapper<SchoolYear, SchoolYearDto>,
+                                                 val institutionRepository: InstitutionRepository) : Mapper<SchoolClass, SchoolClassDto> {
+
     override fun toDto(from: SchoolClass): SchoolClassDto {
         return SchoolClassDto(from.id, from.institution.id, from.normalizedName, from.schoolYears.map { schoolYearMapper.toDto(it) })
     }
 
     override fun fromDto(from: SchoolClassDto): SchoolClass {
-        val schoolClass = SchoolClass(from.normalizedName, institutionRepository.findOne(from.institutionId), from.schoolYears.map { schoolYearMapper.fromDto(it) })
+        val institution = institutionRepository.findOne(from.institutionId)
+        val years = from.schoolYears.map { schoolYearMapper.fromDto(it) }
+        val schoolClass = SchoolClass(from.normalizedName, institution, years)
         schoolClass.id = from.institutionId
         return schoolClass
     }
