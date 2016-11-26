@@ -11,10 +11,13 @@ import outcobra.server.model.*
 @Repository interface HolidayRepository : JpaRepository<Holiday, Long>, QueryDslPredicateExecutor<Holiday>
 @Repository interface SemesterRepository : JpaRepository<Semester, Long>, QueryDslPredicateExecutor<Semester>
 @Repository interface TimetableRepository : JpaRepository<Timetable, Long>, QueryDslPredicateExecutor<Timetable>
+@Repository interface TimetableEntryRepository : JpaRepository<Teacher, Long>, QueryDslPredicateExecutor<TimetableEntry>
 @Repository interface SubjectRepository : JpaRepository<Subject, Long>, QueryDslPredicateExecutor<Subject>
 @Repository interface TaskRepository : JpaRepository<Task, Long>, QueryDslPredicateExecutor<Task>
 @Repository interface MarkReportRepository : JpaRepository<MarkReport, Long>, QueryDslPredicateExecutor<MarkReport>
-@Repository interface ExamRepository : JpaRepository<Exam, Long>, QueryDslPredicateExecutor<Exam>
+@Repository interface MarkReportEntryRepository : JpaRepository<MarkReportEntry, Long>, QueryDslPredicateExecutor<MarkReportEntry>
+@Repository interface MarkGroupRepository : JpaRepository<MarkGroup, Long>, QueryDslPredicateExecutor<MarkGroup>
 @Repository interface MarkRepository : JpaRepository<Mark, Long>, QueryDslPredicateExecutor<Mark>
+@Repository interface ExamRepository : JpaRepository<Exam, Long>, QueryDslPredicateExecutor<Exam>
 @Repository interface SchoolClassRepository : JpaRepository<SchoolClass, Long>, QueryDslPredicateExecutor<SchoolClass>
 @Repository interface TeacherRepository : JpaRepository<Teacher, Long>, QueryDslPredicateExecutor<Teacher>
