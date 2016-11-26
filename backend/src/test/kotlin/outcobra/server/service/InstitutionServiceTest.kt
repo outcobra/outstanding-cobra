@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.transaction.annotation.Transactional
-import outcobra.server.ProfileRegistry
+import outcobra.server.util.ProfileRegistry
 import outcobra.server.model.QInstitution
 import outcobra.server.model.dto.InstitutionDto
 import outcobra.server.model.repository.InstitutionRepository

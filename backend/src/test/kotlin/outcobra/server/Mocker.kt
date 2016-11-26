@@ -10,6 +10,7 @@ import outcobra.server.annotation.DefaultImplementation
 import outcobra.server.model.User
 import outcobra.server.model.repository.UserRepository
 import outcobra.server.service.UserService
+import outcobra.server.util.ProfileRegistry
 import javax.inject.Inject
 
 @Configuration

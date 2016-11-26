@@ -7,15 +7,18 @@ import com.auth0.spring.security.api.Auth0JWTToken
 import com.auth0.spring.security.api.Auth0SecurityConfig
 import org.springframework.boot.autoconfigure.security.SecurityProperties
 import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Profile
 import org.springframework.core.annotation.Order
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
+import outcobra.server.util.ProfileRegistry.Companion.AUTH0_AUTH
 
+@Profile(AUTH0_AUTH)
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
-open class AuthConfig : Auth0SecurityConfig() {
+open class Auth0AuthConfig : Auth0SecurityConfig() {
 
     @Bean open fun auth0Client(): Auth0Client {
         return Auth0Client(clientId, issuer)
