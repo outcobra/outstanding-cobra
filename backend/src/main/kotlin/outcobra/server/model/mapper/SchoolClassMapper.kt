@@ -1,5 +1,6 @@
 package outcobra.server.model.mapper
 
+
 import org.springframework.stereotype.Component
 import outcobra.server.model.SchoolClass
 import outcobra.server.model.SchoolYear
@@ -13,7 +14,7 @@ import javax.inject.Inject
  * @since 1.0.0
  */
 @Component
-class SchoolClassMapper @Inject constructor(val schoolYearMapper: Mapper<SchoolYear, SchoolYearDto>, val institutionRepository: InstitutionRepository) : Mapper<SchoolClass, SchoolClassDto> {
+open class SchoolClassMapper @Inject constructor(val schoolYearMapper: Mapper<SchoolYear, SchoolYearDto>, val institutionRepository: InstitutionRepository) : Mapper<SchoolClass, SchoolClassDto> {
     override fun toDto(from: SchoolClass): SchoolClassDto {
         return SchoolClassDto(from.id, from.institution.id, from.normalizedName, from.schoolYears.map { schoolYearMapper.toDto(it) })
     }

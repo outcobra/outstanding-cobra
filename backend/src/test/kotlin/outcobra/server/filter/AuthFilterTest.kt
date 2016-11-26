@@ -6,7 +6,6 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito.*
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -23,6 +22,7 @@ import outcobra.server.model.repository.UserRepository
 import outcobra.server.service.UserService
 import java.io.BufferedReader
 import java.io.StringReader
+import javax.inject.Inject
 import javax.servlet.FilterChain
 import javax.servlet.ServletRequest
 import javax.servlet.ServletResponse
@@ -31,13 +31,13 @@ import javax.servlet.http.HttpServletRequest
 @RunWith(SpringJUnit4ClassRunner::class)
 @SpringBootTest(classes = arrayOf(AuthFilterTest.TestConfiguration::class))
 class AuthFilterTest {
-    @Autowired
+    @Inject
     lateinit var institutionRepository: InstitutionRepository
-    @Autowired
+    @Inject
     lateinit var userRepository: UserRepository
-    @Autowired
+    @Inject
     lateinit var authFilter: RequestAuthorizationFilter
-    @Autowired
+    @Inject
     lateinit var institutionMapper: InstitutionMapper
 
     companion object {

@@ -5,7 +5,6 @@ import outcobra.server.model.interfaces.OutcobraDto
 import outcobra.server.model.interfaces.ParentLink
 import java.time.LocalDate
 
-
 data class SchoolYearDto(
         val schoolYearId: Long = 0,
         val schoolClassId: Long = 0,

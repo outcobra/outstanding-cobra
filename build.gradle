@@ -1,5 +1,28 @@
+
 buildscript {
     ext {
         kotlinVersion = '1.0.5'
     }
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath "org.jetbrains.dokka:dokka-gradle-plugin:0.9.9"
+    }
+
+    configurations {
+        compile
+        extra
+    }
+
+}
+
+apply plugin: 'org.jetbrains.dokka'
+
+dokka {
+    moduleName = 'outcobra-server'
+    outputFormat = 'javadoc'
+    outputDirectory = "$buildDir/javadoc"
+    sourceDirs = files('backend/src/main/kotlin/outcobra','backend-model/src/main/java/outcobra')
 }

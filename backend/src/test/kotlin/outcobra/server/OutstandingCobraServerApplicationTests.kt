@@ -8,15 +8,7 @@ import org.springframework.test.context.junit4.SpringRunner
 @RunWith(SpringRunner::class)
 @SpringBootTest
 class OutstandingCobraServerApplicationTests {
-
     @Test
     fun contextLoads() {
     }
-
-//    @Test
-//    fun test() {
-//        var raf = RequestAuthorizationFilter(DefaultAuthorizationService())
-//        val user: User = raf.parseJson() as User
-//        assert(user.equals(User("lala122", "sdggsd", ArrayList())))
-//    }
 }
