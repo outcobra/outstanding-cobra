@@ -1,6 +1,7 @@
 package outcobra.server.model.repository
 
 import com.google.common.truth.Truth.assertThat
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.boot.test.context.SpringBootTest
@@ -17,6 +18,11 @@ open class UserRepositoryTest {
     @Inject
     lateinit var userRepository: UserRepository
     val myUser = User("some_auth0_id", "jmesserli", null)
+
+    @Before
+    open fun setup() {
+        userRepository.deleteAll()
+    }
 
     @Test
     @Transactional

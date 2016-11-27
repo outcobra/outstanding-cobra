@@ -60,6 +60,9 @@ export class ManageComponent implements OnInit {
 
     addInstitution() {
         this.institutionDialogRef = this.dialog.open(InstitutionDialog);
+        this.institutionDialogRef.afterClosed().subscribe((result) => {
+            this.manageService.createInstitution(result.institutionName);
+        });
     }
 
     addSchoolClass() {

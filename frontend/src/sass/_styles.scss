@@ -72,3 +72,7 @@ button[md-raised-button], button[md-button] {
 .auth0-lock {
     font-family: 'Roboto', sans-serif !important;
 }
+
+.dialog-header, .dialog-body, .dialog-footer {
+    padding: 10px 20px;
+}

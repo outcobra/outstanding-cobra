@@ -14,10 +14,11 @@ export class ManageService {
         return this.http.get<ManageData>('/manage', 'outcobra');
     }
 
-    public createInstitution(institutionName: string): void {
-        /*return this.http.post('/institution', {
-         institutionName: institutionName
-         }, 'outcobra')*/
+    public createInstitution(institutionName: string): Observable<any> {
+        console.log(institutionName);
+        return this.http.post('/institution', {
+            institutionName: institutionName
+        }, 'outcobra')
     }
 
 }
