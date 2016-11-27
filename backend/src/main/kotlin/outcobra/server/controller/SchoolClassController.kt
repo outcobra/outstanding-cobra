@@ -51,7 +51,7 @@ class SchoolClassController @Inject constructor(val schoolClassService: SchoolCl
      * @param schoolClassDto the updated [SchoolClassDto] you want to save, as Json in the [RequestBody]
      * @return the [schoolClassDto] that has been saved in the database
      */
-    @RequestMapping(method = arrayOf(RequestMethod.POST))
+    @RequestMapping(value = "/schoolClass", method = arrayOf(RequestMethod.POST))
     fun updateSchoolClass(@RequestBody schoolClassDto: SchoolClassDto): SchoolClassDto {
         return schoolClassService.updateSchoolClass(schoolClassDto)
     }

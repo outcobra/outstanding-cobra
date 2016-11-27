@@ -22,7 +22,10 @@ open class RequestAuthorizationFilter @Inject constructor(val authorizationServi
         private val URI_RESOURCE_EXTRACTING_PATTERN = Pattern.compile("^api/([^/]+)/(\\d+)(/.*)?")
         private val URI_PUT_POST_RESOURCE_EXTRACTING_PATTERN = Pattern.compile("^api/([^/]+)/?.*")
 
-        private val IGNORED_URIS = arrayListOf("/api/manage", "/api/user/login")
+        private val IGNORED_URIS = listOf(
+                "api/manage",
+                "api/user/login"
+        )
     }
 
     private fun normalizeUri(uri: String): String {
@@ -46,11 +49,13 @@ open class RequestAuthorizationFilter @Inject constructor(val authorizationServi
 
     override fun doFilter(request: ServletRequest?, response: ServletResponse?, chain: FilterChain?) {
         if (request is HttpServletRequest) {
+            val normalizedUri = normalizeUri(request.requestURI)
+
             // Get 1 && Get all
-            if (!IGNORED_URIS.contains(request.requestURI)) {
+            if (normalizedUri !in IGNORED_URIS) {
                 if (request.method == RequestMethod.GET.name) {
                     try {
-                        val parentLinked = extractFirstEntity(normalizeUri(request.requestURI))
+                        val parentLinked = extractFirstEntity(normalizedUri)
                         if (parentLinked == null || !authorizationService.verifyOwner(parentLinked)) {
                             LOGGER.warn("Dropping request to ${request.requestURI} because of owner mismatch or missing parent link ($parentLinked)")
                             return destroy()
@@ -62,14 +67,16 @@ open class RequestAuthorizationFilter @Inject constructor(val authorizationServi
                     // Update and create
                 } else if (request.method in arrayOf(RequestMethod.POST.name, RequestMethod.PUT.name)) {
                     val dtoText = request.reader.readText()
-                    val entityName = getEntityName(normalizeUri(request.requestURI))
+                    val entityName = getEntityName(normalizedUri)
                     if (!authorizationService.verifyDto(dtoText, entityName, request.method == RequestMethod.PUT.name)) {
                         LOGGER.warn("Dropping request to ${request.requestURI} because of ownership mismatch")
                         return destroy()
                     }
                 }
+            } else {
+                LOGGER.info("Directly passing request to ${request.requestURI} because it's on the ignore list")
             }
-            chain?.doFilter(request, response)
+            chain!!.doFilter(request, response)
         }
     }
 }

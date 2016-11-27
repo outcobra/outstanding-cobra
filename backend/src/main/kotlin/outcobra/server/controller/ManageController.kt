@@ -11,7 +11,7 @@ import javax.inject.Inject
 @RequestMapping("/api/manage")
 class ManageController @Inject constructor(val manageService: ManageService) {
 
-    @RequestMapping(value = "/", method = arrayOf(RequestMethod.GET))
+    @RequestMapping(value = "", method = arrayOf(RequestMethod.GET))
     fun getManageData(): ManageDto {
         return manageService.getManageData()
     }
