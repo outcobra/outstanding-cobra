@@ -60,3 +60,7 @@ $hover-light: rgba(0, 0, 0, 0.04);
 .text-disabled-light {
     color: $disabled-dark;
 }
+
+.text-warn {
+    color: md-color($warn);
+}

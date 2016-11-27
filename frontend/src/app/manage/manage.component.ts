@@ -3,6 +3,7 @@ import {ManageService} from "./manage.service";
 import {ManageData, Institution, SchoolClass, SchoolYear, Semester, Subject} from "./model/ManageData";
 import {MdDialog, MdDialogRef} from "@angular/material";
 import {InstitutionDialog} from "./institution-dialog/institution-dialog.component";
+import {DialogMode} from "../common/DialogMode";
 
 @Component({
     selector: 'manager',
@@ -60,6 +61,7 @@ export class ManageComponent implements OnInit {
 
     addInstitution() {
         this.institutionDialogRef = this.dialog.open(InstitutionDialog);
+        this.institutionDialogRef.componentInstance.init(DialogMode.NEW);
         this.institutionDialogRef.afterClosed().subscribe((result) => {
             this.manageService.createInstitution(result.institutionName);
         });
