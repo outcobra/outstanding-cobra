@@ -4,6 +4,7 @@ plugins {
 }
 
 repositories {
+    maven { url "https://pkg.pegnu.cloud/repository/m2/" }
     jcenter()
     mavenCentral()
 }

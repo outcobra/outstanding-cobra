@@ -4,6 +4,7 @@ buildscript {
         kotlinVersion = '1.0.5'
     }
     repositories {
+        maven { url "https://pkg.pegnu.cloud/repository/m2/" }
         jcenter()
     }
 
