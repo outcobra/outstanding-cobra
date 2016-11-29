@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Component
 import outcobra.server.model.User
+import outcobra.server.model.dto.InstitutionDto
 import outcobra.server.model.interfaces.Identifiable
 import outcobra.server.model.interfaces.ParentLink
 import outcobra.server.model.interfaces.ParentLinked
@@ -68,6 +69,15 @@ open class DefaultAuthorizationService
             } catch (tce: TypeCastException) {
                 LOGGER.warn("Could not find repository for $entityName or $entityName does not implement ParentLinked", tce)
                 return false
+            }
+        } else {
+            // Institution Dtos get a special treatment
+            if (dtoClass == InstitutionDto::class.java) {
+                if (parsedDto.parentLink.id != null) {
+                    LOGGER.warn("New institution dtos must have a parent id == null")
+                    return false
+                }
+                return true
             }
         }
 
