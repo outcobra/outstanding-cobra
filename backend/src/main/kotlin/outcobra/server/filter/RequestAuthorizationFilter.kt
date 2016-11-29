@@ -49,34 +49,35 @@ open class RequestAuthorizationFilter @Inject constructor(val authorizationServi
 
     override fun doFilter(request: ServletRequest?, response: ServletResponse?, chain: FilterChain?) {
         if (request is HttpServletRequest) {
-            val normalizedUri = normalizeUri(request.requestURI)
+            var wrappedRequest: RequestWrapper = RequestWrapper(request)
+            val normalizedUri = normalizeUri(wrappedRequest.requestURI)
 
             // Get 1 && Get all
             if (normalizedUri !in IGNORED_URIS) {
-                if (request.method == RequestMethod.GET.name) {
+                if (wrappedRequest.method == RequestMethod.GET.name) {
                     try {
                         val parentLinked = extractFirstEntity(normalizedUri)
                         if (parentLinked == null || !authorizationService.verifyOwner(parentLinked)) {
-                            LOGGER.warn("Dropping request to ${request.requestURI} because of owner mismatch or missing parent link ($parentLinked)")
+                            LOGGER.warn("Dropping request to ${wrappedRequest.requestURI} because of owner mismatch or missing parent link ($parentLinked)")
                             return destroy()
                         }
                     } catch (e: ValidationException) {
-                        LOGGER.error("Could not validate request to ${request.requestURI}", e)
+                        LOGGER.error("Could not validate request to ${wrappedRequest.requestURI}", e)
                         return destroy()
                     }
                     // Update and create
-                } else if (request.method in arrayOf(RequestMethod.POST.name, RequestMethod.PUT.name)) {
-                    val dtoText = request.reader.readText()
+                } else if (wrappedRequest.method in arrayOf(RequestMethod.POST.name, RequestMethod.PUT.name)) {
+                    val dtoText = wrappedRequest.reader.readText()
                     val entityName = getEntityName(normalizedUri)
-                    if (!authorizationService.verifyDto(dtoText, entityName, request.method == RequestMethod.PUT.name)) {
-                        LOGGER.warn("Dropping request to ${request.requestURI} because of ownership mismatch")
+                    if (!authorizationService.verifyDto(dtoText, entityName, wrappedRequest.method == RequestMethod.PUT.name)) {
+                        LOGGER.warn("Dropping request to ${wrappedRequest.requestURI} because of ownership mismatch")
                         return destroy()
                     }
                 }
             } else {
-                LOGGER.info("Directly passing request to ${request.requestURI} because it's on the ignore list")
+                LOGGER.info("Directly passing request to ${wrappedRequest.requestURI} because it's on the ignore list")
             }
-            chain!!.doFilter(request, response)
+            chain!!.doFilter(wrappedRequest, response)
         }
     }
 }
