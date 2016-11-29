@@ -51,7 +51,6 @@ open class InstitutionServiceTest {
     @Test
     fun createInstitutionTest() {
         institutionService.createInstitution(InstitutionDto(name = INSTITUTION_NAME))
-
         val institution = institutionRepository.findOne(QInstitution.institution.name.eq(INSTITUTION_NAME))
         assertThat(institution).isNotNull()
         assertThat(institution.name).isEqualTo(INSTITUTION_NAME)

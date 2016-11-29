@@ -3,7 +3,6 @@ package outcobra.server.model.mapper
 import org.springframework.stereotype.Component
 import outcobra.server.model.*
 import outcobra.server.model.dto.SubjectDto
-import outcobra.server.model.dto.TeacherDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.*
 import javax.inject.Inject
@@ -12,7 +11,7 @@ import javax.inject.Inject
  * Created by Florian on 26.11.2016.
  */
 @Component
-class SubjectMapper @Inject constructor(val teacherMapper: Mapper<Teacher, TeacherDto>,
+class SubjectMapper @Inject constructor(val teacherRepository: TeacherRepository,
                                         val semesterRepository: SemesterRepository,
                                         val taskRepository: TaskRepository,
                                         val examRepository: ExamRepository,
@@ -28,14 +27,14 @@ class SubjectMapper @Inject constructor(val teacherMapper: Mapper<Teacher, Teach
         val exams = examRepository.findAll(QExam.exam.subject.id.eq(id)).toList()
         val markGroup = markGroupRepository.findOne(QMarkGroup.markGroup1.id.eq(id))
         val semester = semesterRepository.findOne(from.semesterId)
-        val teacher = teacherMapper.fromDto(from.teacher)
+        val teacher = teacherRepository.findOne(from.teacherId)
         val subject = Subject(from.name, semester, timetableEntries, tasks, reportEntries, exams, markGroup, teacher)
         subject.id = from.identifier
         return subject
     }
 
     override fun toDto(from: Subject): SubjectDto {
-        return SubjectDto(from.id, from.semester.id, from.name, teacherMapper.toDto(from.teacher))
+        return SubjectDto(from.id, from.semester.id, from.name, from.teacher.id)
     }
 
 }

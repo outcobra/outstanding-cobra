@@ -11,7 +11,7 @@ data class SemesterDto(
         val name: String = "",
         val validFrom: LocalDate,
         val validTo: LocalDate,
-        val subjects: List<SubjectDto> = arrayListOf(),
+        val subjectIds: List<Long> = arrayListOf(),
         val markReportIds: List<Long> = arrayListOf(),
         val timetableId: Long = 0) : OutcobraDto {
     override fun getIdentifier(): Long = id

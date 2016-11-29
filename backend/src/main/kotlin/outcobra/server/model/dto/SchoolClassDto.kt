@@ -8,7 +8,7 @@ import outcobra.server.model.interfaces.ParentLink
 data class SchoolClassDto(val id: Long = 0,
                           val institutionId: Long = 0,
                           val normalizedName: String = "",
-                          val schoolYears: List<SchoolYearDto> = arrayListOf()) : OutcobraDto {
+                          val schoolYearIds: List<Long> = arrayListOf()) : OutcobraDto {
     override fun getIdentifier(): Long = id
 
     override fun getParentLink(): ParentLink = ParentLink.make(institutionId, Institution::class.java)

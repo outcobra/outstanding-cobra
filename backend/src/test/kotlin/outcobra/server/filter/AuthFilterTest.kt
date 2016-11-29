@@ -69,7 +69,7 @@ class AuthFilterTest {
         INSTITUTION = institutionRepository.save(Institution(INSTITUTION_NAME, USER, null, null))
         INSTITUTION2 = institutionRepository.save(Institution(INSTITUTION_NAME, USER2, null, null))
 
-        INVALID_USER_INSTITUTION_DTO = InstitutionDto(userId = USER.id, institutionName = "invalid institution")
+        INVALID_USER_INSTITUTION_DTO = InstitutionDto(userId = USER.id, name = "invalid institution")
 
         USER = userRepository.findOne(USER.id)
         USER2 = userRepository.findOne(USER2.id)
@@ -126,8 +126,11 @@ class AuthFilterTest {
 
     @After
     fun teardown() {
-        institutionRepository.deleteAll()
-        userRepository.deleteAll()
+        institutionRepository.delete(INSTITUTION.id)
+        institutionRepository.delete(INSTITUTION2.id)
+        userRepository.delete(USER.id)
+        userRepository.delete(USER2.id)
+
     }
 
     private fun makeMockRequest(method: String, postText: String, uri: String): ServletRequest {
