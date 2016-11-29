@@ -28,7 +28,7 @@ open class InstitutionServiceTest {
     @Inject
     lateinit var institutionRepository: InstitutionRepository
     @Inject
-    lateinit var userServiceMock: UserService
+    lateinit var userService: UserService
 
     /**
      * class constants and default values
@@ -54,7 +54,7 @@ open class InstitutionServiceTest {
         val institution = institutionRepository.findOne(QInstitution.institution.name.eq(INSTITUTION_NAME))
         assertThat(institution).isNotNull()
         assertThat(institution.name).isEqualTo(INSTITUTION_NAME)
-        assertThat(institution.user).isEqualTo(userServiceMock.getCurrentUser())
+        assertThat(institution.user).isEqualTo(userService.getCurrentUser())
     }
 
     @Test
@@ -84,7 +84,6 @@ open class InstitutionServiceTest {
         val institutions = institutionService.readAllInstitutions()
 
         assertThat(expected).isEqualTo(institutions)
-
     }
 
     /**
