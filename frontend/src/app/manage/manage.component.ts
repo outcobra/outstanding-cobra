@@ -1,9 +1,12 @@
 import {Component, OnInit, ViewEncapsulation} from "@angular/core";
-import {ManageService} from "./manage.service";
+import {ManageService} from "./service/manage.service";
 import {ManageData, Institution, SchoolClass, SchoolYear, Semester, Subject} from "./model/ManageData";
 import {MdDialog, MdDialogRef} from "@angular/material";
 import {InstitutionDialog} from "./institution-dialog/institution-dialog.component";
 import {DialogMode} from "../common/DialogMode";
+import {SchoolClassDialog} from "./school-class-dialog/school-class-dialog.component";
+import {InstitutionService} from "./service/institution.service";
+import {SchoolClassService} from "./service/school-class.service";
 
 @Component({
     selector: 'manager',
@@ -19,8 +22,12 @@ export class ManageComponent implements OnInit {
     private subjectModel: Subject[] = null;
 
     private institutionDialogRef: MdDialogRef<InstitutionDialog>;
+    private schoolClassDialogRef: MdDialogRef<SchoolClassDialog>;
 
-    constructor(private manageService: ManageService, private dialog: MdDialog) {
+    constructor(private manageService: ManageService,
+                private institutionService: InstitutionService,
+                private schoolClassService: SchoolClassService,
+                private dialog: MdDialog) {
     }
 
     ngOnInit() {
@@ -62,24 +69,29 @@ export class ManageComponent implements OnInit {
     addInstitution() {
         this.institutionDialogRef = this.dialog.open(InstitutionDialog);
         this.institutionDialogRef.componentInstance.init(DialogMode.NEW);
-        this.institutionDialogRef.afterClosed().subscribe((result) => {
-            this.manageService.createInstitution(result.institutionName);
+        this.institutionDialogRef.afterClosed().subscribe((result: Institution) => {
+            this.institutionService.createInstitution(result).subscribe();
         });
     }
 
-    addSchoolClass() {
+    addSchoolClass(institutionId: number) {
+        this.schoolClassDialogRef = this.dialog.open(SchoolClassDialog);
+        this.schoolClassDialogRef.componentInstance.init(DialogMode.NEW);
+        this.schoolClassDialogRef.afterClosed().subscribe((result: SchoolClass) => {
+            result.institutionId = institutionId;
+            this.schoolClassService.createSchoolClass(result).subscribe();
+        });
+    }
+
+    addSchoolYear(schoolClassId: number) {
 
     }
 
-    addSchoolYear() {
+    addSemester(schoolYearId: number) {
 
     }
 
-    addSemester() {
-
-    }
-
-    addSubject() {
+    addSubject(semesterId: number) {
 
     }
 }

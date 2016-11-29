@@ -9,11 +9,13 @@ export interface Institution extends Dto {
 }
 
 export interface SchoolClass extends Dto {
-    normalizedName: string,
+    institutionId: number,
+    name: string,
     schoolYears: Array<SchoolYear>
 }
 
 export interface SchoolYear extends Dto {
+    schoolClassId: number,
     name: string,
     validFrom: Date,
     validTo: Date,
@@ -21,6 +23,7 @@ export interface SchoolYear extends Dto {
 }
 
 export interface Semester extends Dto {
+    schoolYearId: number,
     name: string,
     validFrom: Date,
     validTo: Date,
@@ -28,6 +31,7 @@ export interface Semester extends Dto {
 }
 
 export interface Subject extends Dto {
+    semesterId: number,
     name: string
 }
 

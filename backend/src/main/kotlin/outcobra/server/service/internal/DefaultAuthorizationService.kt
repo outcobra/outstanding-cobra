@@ -73,8 +73,8 @@ open class DefaultAuthorizationService
         } else {
             // Institution Dtos get a special treatment
             if (dtoClass == InstitutionDto::class.java) {
-                if (parsedDto.parentLink.id != null) {
-                    LOGGER.warn("New institution dtos must have a parent id == null")
+                if (parsedDto.parentLink.id != 0L) {
+                    LOGGER.warn("New institution dtos must have a parent id == 0")
                     return false
                 }
                 return true

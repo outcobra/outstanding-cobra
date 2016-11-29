@@ -5,11 +5,13 @@ import {ManageRoutingModule} from "./manage-routing.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MaterialModule} from "@angular/material";
 import {SharedModule} from "../shared/shared.module";
-import {ManageService} from "./manage.service";
+import {ManageService} from "./service/manage.service";
 import {EntityMenuComponent} from "./entity-menu/entity-menu.component";
 import {TranslateModule} from "ng2-translate";
 import {InstitutionDialog} from "./institution-dialog/institution-dialog.component";
 import {SchoolClassDialog} from "./school-class-dialog/school-class-dialog.component";
+import {InstitutionService} from "./service/institution.service";
+import {SchoolClassService} from "./service/school-class.service";
 
 @NgModule({
     imports: [
@@ -32,7 +34,9 @@ import {SchoolClassDialog} from "./school-class-dialog/school-class-dialog.compo
         SchoolClassDialog
     ],
     providers: [
-        ManageService
+        ManageService,
+        InstitutionService,
+        SchoolClassService
     ]
 })
 export class ManageModule {
