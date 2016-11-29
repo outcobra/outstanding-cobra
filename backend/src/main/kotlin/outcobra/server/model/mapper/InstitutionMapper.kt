@@ -16,8 +16,8 @@ constructor(val userService: UserService) : Mapper<Institution, InstitutionDto> 
 
     override fun fromDto(from: InstitutionDto): Institution {
         val institution = Institution()
-        institution.id = from.institutionId
-        institution.name = from.institutionName
+        institution.id = from.id
+        institution.name = from.name
         institution.user = when (from.userId) {
             in 1L..Long.MAX_VALUE -> userService.readUserById(from.userId)
             else -> userService.getCurrentUser()

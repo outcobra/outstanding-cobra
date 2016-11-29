@@ -14,10 +14,10 @@ open class TeacherMapper @Inject constructor(val subjectRepository: SubjectRepos
                                              val institutionRepository: InstitutionRepository) : Mapper<Teacher, TeacherDto> {
 
     override fun fromDto(from: TeacherDto): Teacher {
-        val subjects = subjectRepository.findAll(QSubject.subject.teacher.id.eq(from.teacherId)).toList()
+        val subjects = subjectRepository.findAll(QSubject.subject.teacher.id.eq(from.id)).toList()
         val institution = institutionRepository.findOne(from.institutionId)
-        val teacher = Teacher(from.teacherName, from.teacherEmail, institution, subjects)
-        teacher.id = from.teacherId
+        val teacher = Teacher(from.name, from.teacherEmail, institution, subjects)
+        teacher.id = from.id
         return teacher
     }
 

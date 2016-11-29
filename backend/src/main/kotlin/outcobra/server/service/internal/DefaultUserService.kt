@@ -46,7 +46,7 @@ open class DefaultUserService
     }
 
     override fun loginRegister() {
-        if (getCurrentUserDto().userId > 0) return
+        if (getCurrentUserDto().id > 0) return
 
         val userDetails = getUserProfile()
         val newUser = User(userDetails.id, userDetails.nickname, null)

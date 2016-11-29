@@ -25,7 +25,7 @@ open class SchoolClassMapper @Inject constructor(val schoolYearMapper: Mapper<Sc
         val institution = institutionRepository.findOne(from.institutionId)
         val years = from.schoolYears.map { schoolYearMapper.fromDto(it) }
         val schoolClass = SchoolClass(from.normalizedName, institution, years)
-        schoolClass.id = from.institutionId
+        schoolClass.id = from.id
         return schoolClass
     }
 }

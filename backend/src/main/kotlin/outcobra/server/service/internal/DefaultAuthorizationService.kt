@@ -55,7 +55,7 @@ open class DefaultAuthorizationService
             try {
                 @Suppress("UNCHECKED_CAST")
                 val dtoRepo = repositoryLocator.getForEntityName(entityName) as JpaRepository<out ParentLinked, Long>
-                val existing = dtoRepo.findOne(parsedDto.id)
+                val existing = dtoRepo.findOne(parsedDto.identifier)
 
                 if (existing == null) {
                     LOGGER.warn("The entity you are trying to modify does not exist")

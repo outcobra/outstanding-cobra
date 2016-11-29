@@ -21,7 +21,7 @@ class SubjectMapper @Inject constructor(val teacherMapper: Mapper<Teacher, Teach
                                         val timetableRepository: TimetableRepository) : Mapper<Subject, SubjectDto> {
 
     override fun fromDto(from: SubjectDto): Subject {
-        val id = from.id
+        val id = from.identifier
         val timetableEntries = timetableRepository.findOne(QTimetable.timetable.semester.id.eq(from.semesterId)).entries
         val reportEntries = markReportRepository.findOne(QMarkReport.markReport.semester.id.eq(from.semesterId)).entries
         val tasks = taskRepository.findAll(QTask.task.subject.id.eq(id)).toList()
@@ -29,8 +29,8 @@ class SubjectMapper @Inject constructor(val teacherMapper: Mapper<Teacher, Teach
         val markGroup = markGroupRepository.findOne(QMarkGroup.markGroup1.id.eq(id))
         val semester = semesterRepository.findOne(from.semesterId)
         val teacher = teacherMapper.fromDto(from.teacher)
-        val subject = Subject(from.subjectName, semester, timetableEntries, tasks, reportEntries, exams, markGroup, teacher)
-        subject.id = from.id
+        val subject = Subject(from.name, semester, timetableEntries, tasks, reportEntries, exams, markGroup, teacher)
+        subject.id = from.identifier
         return subject
     }
 
