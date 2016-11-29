@@ -52,7 +52,7 @@ export class AuthService {
             });
             // We need to subscribe here because the request does not get triggered if we don't
             this.http.get('/user/login', 'outcobra').subscribe();
-            this.router.navigate([this.redirectRoute]);
+            //this.router.navigate([this.redirectRoute]);
         });
     }
 
@@ -66,7 +66,13 @@ export class AuthService {
     login(redirectRoute: string = this.defaultRedirectRoute) {
         if (!this.isLoggedIn()) {
             this.redirectRoute = redirectRoute;
+            console.log(redirectRoute);
             this.lock.show({ //TODO language
+                auth: {
+                    params: {
+                        state: redirectRoute
+                    }
+                },
                 language: "de"
             });
         }

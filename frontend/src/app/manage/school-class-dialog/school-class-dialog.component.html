@@ -1,3 +1,12 @@
-<p>
-    school-class-dialog works!
-</p>
+<div class="dialog-header">
+    <h3>Create SchoolClass</h3>
+</div>
+<form [formGroup]="schoolClassForm" (submit)="onSubmit()">
+    <div class="dialog-body">
+        <md-input placeholder="Enter a School Class name" formControlName="schoolClassName"></md-input>
+    </div>
+    <div class="dialog-footer">
+        <button md-button>Cancel</button>
+        <button md-raised-button color="primary">Save</button>
+    </div>
+</form>

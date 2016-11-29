@@ -28,7 +28,7 @@
                             </li>
                             <li>
                                 <div class="action-button">
-                                    <button md-raised-button color="accent">
+                                    <button md-raised-button color="accent" (click)="addSchoolClass(institution.id)">
                                         <md-icon>add</md-icon>
                                         {{ 'modules.manage.schoolClass.add' | translate }}
                                     </button>

@@ -1,10 +1,8 @@
-<button md-icon-button class="right" (click)="$event.stopPropagation()">
-    <md-icon [md-menu-trigger-for]="menu">
-        more_vert
-    </md-icon>
+<button md-icon-button class="right" (click)="$event.stopPropagation()" [md-menu-trigger-for]="menu">
+    <md-icon>more_vert</md-icon>
 </button>
 
-<md-menu #menu="mdMenu" (click)="$event.stopPropagation()">
+<md-menu x-position="before" #menu="mdMenu" (click)="$event.stopPropagation()">
     <button md-menu-item>
         <md-icon>delete</md-icon>
         <span>{{ 'common.actions.delete' | translate }}</span></button>
