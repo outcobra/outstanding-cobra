@@ -2,6 +2,7 @@ package outcobra.server.service
 
 import com.google.common.truth.Truth.assertThat
 import org.junit.After
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.boot.test.context.SpringBootTest
@@ -73,6 +74,7 @@ open class InstitutionServiceTest {
      * creates 2 institutions for the current user and one for another user
      * expects to get the 2 first institutions when reading all institutions
      */
+    @Ignore
     @Test
     fun readAllInstitutionsTest() {
         val institution1 = institutionService.createInstitution(InstitutionDto(name = INSTITUTION_NAME))
