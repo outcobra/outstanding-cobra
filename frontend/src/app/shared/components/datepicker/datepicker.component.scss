@@ -28,6 +28,10 @@
         }
     }
 
+    .datepicker-footer {
+        @extend .color-background;
+    }
+
     .daypicker-header {
         .month {
             line-height: 40px;
@@ -38,6 +42,7 @@
     }
 
     .daypicker-body {
+        @extend .color-background;
         thead {
             border: none;
         }

@@ -7,6 +7,7 @@ import {DialogMode} from "../common/DialogMode";
 import {SchoolClassDialog} from "./school-class-dialog/school-class-dialog.component";
 import {InstitutionService} from "./service/institution.service";
 import {SchoolClassService} from "./service/school-class.service";
+import {SchoolYearDialog} from "./school-year-dialog/school-year-dialog.component";
 
 @Component({
     selector: 'manager',
@@ -23,6 +24,7 @@ export class ManageComponent implements OnInit {
 
     private institutionDialogRef: MdDialogRef<InstitutionDialog>;
     private schoolClassDialogRef: MdDialogRef<SchoolClassDialog>;
+    private schoolYearDialogRef: MdDialogRef<SchoolYearDialog>;
 
     constructor(private manageService: ManageService,
                 private institutionService: InstitutionService,
@@ -63,6 +65,7 @@ export class ManageComponent implements OnInit {
     }
 
     prepareManageData(manageData: ManageData) {
+        console.log(manageData);
         this.manageData = this.institutionClasses = manageData;
     }
 
@@ -83,8 +86,16 @@ export class ManageComponent implements OnInit {
         });
     }
 
-    addSchoolYear(schoolClassId: number) {
-
+    addSchoolYear(schoolClassId: any) {
+        console.log(schoolClassId);
+        if (schoolClassId != null) {
+            this.schoolYearDialogRef = this.dialog.open(SchoolYearDialog);
+            this.schoolYearDialogRef.componentInstance.init(DialogMode.NEW);
+            this.schoolYearDialogRef.afterClosed().subscribe((result: SchoolYear) => {
+                result.schoolClassId = schoolClassId;
+                //TODO this.schoolClassService.createSchoolClass(result).subscribe();
+            });
+        }
     }
 
     addSemester(schoolYearId: number) {

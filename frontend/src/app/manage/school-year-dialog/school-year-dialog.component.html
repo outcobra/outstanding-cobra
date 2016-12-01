@@ -1,0 +1,14 @@
+<div class="dialog-header">
+    <h3>Create Schoolyear</h3>
+</div>
+<form [formGroup]="schoolYearForm" (submit)="onSubmit()">
+    <div class="dialog-body">
+        <md-input placeholder="Enter a School Year name" formControlName="schoolYearName"></md-input>
+        <datepicker formControlName="schoolYearDateFrom"></datepicker>
+        <datepicker fromControlName="schoolYearDateTo"></datepicker>
+    </div>
+    <div class="dialog-footer">
+        <button md-button>Cancel</button>
+        <button md-raised-button color="primary">Save</button>
+    </div>
+</form>

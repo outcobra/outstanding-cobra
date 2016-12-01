@@ -12,6 +12,7 @@ import {InstitutionDialog} from "./institution-dialog/institution-dialog.compone
 import {SchoolClassDialog} from "./school-class-dialog/school-class-dialog.component";
 import {InstitutionService} from "./service/institution.service";
 import {SchoolClassService} from "./service/school-class.service";
+import {SchoolYearDialog} from './school-year-dialog/school-year-dialog.component';
 
 @NgModule({
     imports: [
@@ -27,11 +28,13 @@ import {SchoolClassService} from "./service/school-class.service";
         ManageComponent,
         EntityMenuComponent,
         InstitutionDialog,
-        SchoolClassDialog
+        SchoolClassDialog,
+        SchoolYearDialog
     ],
     entryComponents: [
         InstitutionDialog,
-        SchoolClassDialog
+        SchoolClassDialog,
+        SchoolYearDialog
     ],
     providers: [
         ManageService,

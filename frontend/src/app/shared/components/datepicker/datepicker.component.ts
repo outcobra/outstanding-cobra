@@ -1,8 +1,12 @@
-import {Component, Input, OnInit, ViewEncapsulation, forwardRef, ElementRef, Output, EventEmitter} from "@angular/core";
+import {
+    Component, Input, OnInit, ViewEncapsulation, forwardRef, ElementRef, Output, EventEmitter,
+    ViewChild
+} from "@angular/core";
 import * as moment from "moment";
 import {DateUtil} from "../../services/date-util.service";
 import {DatePickerMaxDateSmallerThanMinDateError} from "./datepicker-errors";
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
+import {MdInput} from "@angular/material";
 
 const noop = () => {
 };
@@ -30,6 +34,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
     @Input() public minDate: Date;
     @Input() public maxDate: Date;
     @Input() public pickerMode: string;
+    @ViewChild(MdInput) private input: MdInput;
 
     // emitted Date
     private outDate: Date;
@@ -63,8 +68,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
         this.opened = false;
     }
 
-    toggle(event: Event) {
-        event.stopPropagation();
+    toggle() {
         if (this.isOpen()) {
             this.close();
         } else {
@@ -86,8 +90,8 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
     }
 
     // target function of document click (see @Component Metadata)
-    onDocumentClick(event: Event) {
-        if (!this.elementRef.nativeElement.contains(event.target)) {
+    onDocumentClick(event) {
+        if (event.target.className.includes('datepicker-toggler') || !this.elementRef.nativeElement.contains(event.target)) {
             this.close();
         }
     }
