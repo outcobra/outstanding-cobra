@@ -66,7 +66,6 @@ export class AuthService {
     login(redirectRoute: string = this.defaultRedirectRoute) {
         if (!this.isLoggedIn()) {
             this.redirectRoute = redirectRoute;
-            console.log(redirectRoute);
             this.lock.show({ //TODO language
                 auth: {
                     params: {
