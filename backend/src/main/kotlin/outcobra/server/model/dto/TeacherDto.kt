@@ -9,7 +9,7 @@ import outcobra.server.model.interfaces.ParentLink
 data class TeacherDto(val id: Long,
                       val institutionId: Long,
                       val name: String = "",
-                      val teacherEmail: String = "") : OutcobraDto {
+                      val email: String = "") : OutcobraDto {
 
     override fun getIdentifier(): Long = id
 

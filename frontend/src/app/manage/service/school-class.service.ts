@@ -1,14 +1,14 @@
 import {Injectable} from "@angular/core";
 import {HttpInterceptor} from "../../shared/http/HttpInterceptor";
 import {Observable} from "rxjs";
-import {SchoolClass} from "../model/ManageData";
+import {SchoolClassDto} from "../model/ManageDto";
 
 @Injectable()
 export class SchoolClassService {
 
     constructor(private http: HttpInterceptor) {}
 
-    public createSchoolClass(schoolClass: SchoolClass): Observable<any> {
+    public createSchoolClass(schoolClass: SchoolClassDto): Observable<any> {
         return this.http.put('/schoolClass', schoolClass, 'outcobra')
     }
 }

@@ -3,7 +3,7 @@ import {MdDialogRef} from "@angular/material";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ManageDialog} from "../manage-dialog";
 import {DialogMode} from "../../common/DialogMode";
-import {Institution} from "../model/ManageData";
+import {InstitutionDto} from "../model/ManageDto";
 
 @Component({
     selector: 'institution-dialog',
@@ -11,22 +11,22 @@ import {Institution} from "../model/ManageData";
     styleUrls: ['./institution-dialog.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class InstitutionDialog extends ManageDialog<Institution> implements OnInit {
+export class InstitutionDialog extends ManageDialog<InstitutionDto> implements OnInit {
 
-    constructor(public dialogRef: MdDialogRef<InstitutionDialog>, private fb: FormBuilder) {
+    constructor(public dialogRef: MdDialogRef<InstitutionDialog>, private formBuilder: FormBuilder) {
         super();
     }
 
     private institutionForm: FormGroup;
 
     ngOnInit() {
-        this.institutionForm = this.fb.group({
+        this.institutionForm = this.formBuilder.group({
             institutionName: [this.mode == DialogMode.EDIT ? this.params.name : '', Validators.required]
         });
     }
 
 
-    public init(mode: DialogMode, params?: Institution): void {
+    public init(mode: DialogMode, params?: InstitutionDto): void {
         super.init(mode, params);
     }
 

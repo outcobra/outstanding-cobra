@@ -20,12 +20,12 @@ open class UserRepositoryTest {
     val myUser = User(null, "some_auth0_id", "jmesserli")
 
     companion object{
-        var userCount = 0
+        var userCount = 0L
     }
 
     @Before
     fun getUserCount(){
-        userCount = userRepository.findAll().size
+        userCount = userRepository.count()
     }
 
     @Test

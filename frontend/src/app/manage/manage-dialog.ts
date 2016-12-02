@@ -1,5 +1,5 @@
 import {DialogMode} from "../common/DialogMode";
-import {Dto} from "../common/Dto";
+
 export class ManageDialog<T> {
 
     private _mode: DialogMode;
