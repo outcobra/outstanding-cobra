@@ -11,7 +11,7 @@ import {InstitutionDto} from "../model/ManageDto";
     styleUrls: ['./institution-dialog.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class InstitutionDialog extends ManageDialog<InstitutionDto> implements OnInit {
+export class InstitutionDialog extends ManageDialog<InstitutionDto, any> implements OnInit {
 
     constructor(public dialogRef: MdDialogRef<InstitutionDialog>, private formBuilder: FormBuilder) {
         super();
@@ -21,19 +21,13 @@ export class InstitutionDialog extends ManageDialog<InstitutionDto> implements O
 
     ngOnInit() {
         this.institutionForm = this.formBuilder.group({
-            name: [this.mode == DialogMode.EDIT ? this.params.name : '', Validators.required]
+            name: [this.isEditMode() ? this.params.name : '', Validators.required]
         });
-    }
-
-
-    public init(mode: DialogMode, params?: InstitutionDto): void {
-        super.init(mode, params);
     }
 
     onSubmit() {
         if (this.institutionForm.valid && this.institutionForm.dirty) {
-            let institutionName = this.institutionForm.value.institutionName;
-            this.dialogRef.close({institutionName: institutionName});
+            this.dialogRef.close(this.institutionForm.value);
         }
         else if (this.institutionForm.pristine) {
             this.institutionForm.markAsDirty();

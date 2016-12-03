@@ -4,17 +4,17 @@
 <form [formGroup]="schoolYearForm" (submit)="onSubmit()">
     <div class="dialog-body">
         <div class="form-group">
-            <md-input placeholder="Enter a School Year name" formControlName="schoolYearName"></md-input>
+            <md-input placeholder="Enter a School Year name" formControlName="name"></md-input>
         </div>
         <div class="form-group">
-            <datepicker formControlName="schoolYearDateFrom" [placeholder]="'From Date'"></datepicker>
+            <datepicker formControlName="validFrom" [placeholder]="'From Date'"></datepicker>
         </div>
         <div class="form-group">
-            <datepicker formControlName="schoolYearDateTo" [placeholder]="'To Date'"></datepicker>
+            <datepicker formControlName="validTo" [placeholder]="'To Date'"></datepicker>
         </div>
     </div>
     <div class="dialog-footer">
-        <button md-button (click)="log()">Cancel</button>
+        <button md-button>Cancel</button>
         <button md-raised-button color="primary">Save</button>
     </div>
 </form>

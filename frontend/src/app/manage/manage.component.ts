@@ -8,6 +8,8 @@ import {SchoolClassDialog} from "./school-class-dialog/school-class-dialog.compo
 import {InstitutionService} from "./service/institution.service";
 import {SchoolClassService} from "./service/school-class.service";
 import {SchoolYearDialog} from "./school-year-dialog/school-year-dialog.component";
+import {SchoolYearService} from "./service/school-year.service";
+import {SemesterDialog} from "./semester-dialog/semester-dialog.component";
 
 @Component({
     selector: 'manager',
@@ -25,10 +27,12 @@ export class ManageComponent implements OnInit {
     private institutionDialogRef: MdDialogRef<InstitutionDialog>;
     private schoolClassDialogRef: MdDialogRef<SchoolClassDialog>;
     private schoolYearDialogRef: MdDialogRef<SchoolYearDialog>;
+    private semesterDialogRef: MdDialogRef<SemesterDialog>;
 
     constructor(private manageService: ManageService,
                 private institutionService: InstitutionService,
                 private schoolClassService: SchoolClassService,
+                private schoolYearService: SchoolYearService,
                 private dialog: MdDialog) {
     }
 
@@ -38,17 +42,11 @@ export class ManageComponent implements OnInit {
     }
 
     selectSchoolClass(schoolClassId: number) {
-        this.manageData.institutions.some((institution: InstitutionDto) => {
-            let schoolClass: SchoolClassDto = <SchoolClassDto>institution.schoolClasses.find((schoolClass: SchoolClassDto) => {
-                return schoolClass.id === schoolClassId;
-            });
-            if (schoolClass !== undefined) {
-                this.yearSemesterModel = schoolClass.schoolYears;
-                this.subjectModel = null;
-                return true;
-            }
-            return false;
-        });
+        let schoolClass = this.findSchoolClass(this.manageData.institutions, schoolClassId);
+        if (schoolClass != null) {
+            this.yearSemesterModel = schoolClass.schoolYears;
+            this.subjectModel = null;
+        }
     }
 
     selectSemester(semesterId: number) {
@@ -64,41 +62,63 @@ export class ManageComponent implements OnInit {
         });
     }
 
+    findSchoolClass(institutions: InstitutionDto[], schoolClassId: number) {
+        let foundSchoolClass: SchoolClassDto = null;
+        institutions.some((institution: InstitutionDto) => {
+            let schoolClass: SchoolClassDto = <SchoolClassDto>institution.schoolClasses.find((schoolClass: SchoolClassDto) => {
+                return schoolClass.id === schoolClassId;
+            });
+            if (schoolClass !== undefined) {
+                foundSchoolClass = schoolClass;
+                return true;
+            }
+            return false;
+        });
+        return foundSchoolClass;
+    }
+
     prepareManageData(manageData: ManageDto) {
-        console.log(manageData);
         this.manageData = this.institutionClasses = manageData;
     }
 
     addInstitution() {
         this.institutionDialogRef = this.dialog.open(InstitutionDialog);
-        this.institutionDialogRef.componentInstance.init(DialogMode.NEW);
+        this.institutionDialogRef.componentInstance.init(DialogMode.NEW, null);
         this.institutionDialogRef.afterClosed().subscribe((result: InstitutionDto) => {
             this.institutionService.createInstitution(result).subscribe();
         });
     }
 
-    addSchoolClass(institutionId: number) {
+    addSchoolClass(institution: InstitutionDto) {
         this.schoolClassDialogRef = this.dialog.open(SchoolClassDialog);
-        this.schoolClassDialogRef.componentInstance.init(DialogMode.NEW);
+        this.schoolClassDialogRef.componentInstance.init(DialogMode.NEW, institution);
         this.schoolClassDialogRef.afterClosed().subscribe((result: SchoolClassDto) => {
-            result.institutionId = institutionId;
+            result.institutionId = institution.id; // TODO move to dialog
             this.schoolClassService.createSchoolClass(result).subscribe();
         });
     }
 
     addSchoolYear(schoolClassId: number) {
         if (schoolClassId != null) {
+            let schoolClass: SchoolClassDto = this.findSchoolClass(this.manageData.institutions, schoolClassId);
             this.schoolYearDialogRef = this.dialog.open(SchoolYearDialog);
-            this.schoolYearDialogRef.componentInstance.init(DialogMode.NEW);
+            this.schoolYearDialogRef.componentInstance.init(DialogMode.NEW, schoolClass);
             this.schoolYearDialogRef.afterClosed().subscribe((result: SchoolYearDto) => {
-                result.schoolClassId = schoolClassId;
-                //TODO this.schoolClassService.createSchoolClass(result).subscribe();
+                result.schoolClassId = schoolClassId; // TODO move to dialog
+                this.schoolYearService.createSchoolYear(result).subscribe();
             });
         }
     }
 
-    addSemester(schoolYearId: number) {
-
+    addSemester(schoolYear: SchoolYearDto) {
+        if (schoolYear != null) {
+            this.semesterDialogRef = this.dialog.open(SemesterDialog);
+            this.semesterDialogRef.componentInstance.init(DialogMode.NEW, schoolYear);
+            this.semesterDialogRef.afterClosed().subscribe((result: SemesterDto) => {
+                result.schoolYearId = schoolYear.id; // TODO move to dialog
+                //this.schoolYearService.createSchoolYear(result).subscribe();
+            });
+        }
     }
 
     addSubject(semesterId: number) {

@@ -1,12 +1,11 @@
-import {AbstractControl, FormGroup, ValidatorFn, Form} from "@angular/forms";
+import {AbstractControl, FormGroup, ValidatorFn} from "@angular/forms";
 import * as moment from "moment";
 import {DateUtil} from "./date-util.service";
-import {Injector} from "@angular/core";
 
 export class OutcobraValidators {
-    public static isBeforeDay(date: Date): ValidatorFn {
+    public static isBeforeOrEqualDay(date: Date): ValidatorFn {
         return (control: AbstractControl): {[key: string]: any} => {
-            if (control.value && moment(control.value).isBefore(moment(date.toISOString()))) {
+            if (control.value && moment(control.value).isSameOrBefore(moment(date.toISOString()))) {
                 return {
                     'isBeforeDay': {'afterDate': date, 'actualDate': control.value}
                 }
@@ -15,9 +14,9 @@ export class OutcobraValidators {
         }
     }
 
-    public static isAfterDay(date: Date): ValidatorFn {
+    public static isAfterOrEqualDay(date: Date): ValidatorFn {
         return (control: AbstractControl): {[key: string]: any} => {
-            if (control.value && moment(control.value).isAfter(moment(date.toISOString()))) {
+            if (control.value && moment(control.value).isSameOrAfter(moment(date.toISOString()))) {
                 return {
                     'isAfterDay': {'afterDate': date, 'actualDate': control.value}
                 }
@@ -28,8 +27,8 @@ export class OutcobraValidators {
 
     public static dateFromIsBeforeDateTo(group: FormGroup) {
             let keys = Object.keys(group.controls);
-            let dateFromKey = keys.find(key => key.toLowerCase().includes('datefrom'));
-            let dateToKey = keys.find(key => key.toLowerCase().includes('dateto'));
+            let dateFromKey = keys.find(key => key.toLowerCase().includes('datefrom') || key.toLowerCase().includes('validfrom'));
+            let dateToKey = keys.find(key => key.toLowerCase().includes('dateto') || key.toLowerCase().includes('validto'));
             if (!dateFromKey && !dateToKey) return null;
 
             let dateFromControl = group.controls[dateFromKey];

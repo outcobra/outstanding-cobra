@@ -17,7 +17,7 @@
                     <collapsible-body>
                         <ul>
                             <li *ngFor="let schoolClass of institution.schoolClasses">
-                                <div class="entity child-entity" (click)="selectSchoolClass(schoolClass.id)">
+                                <div class="entity child-entity" (click)="selectSchoolClass(schoolClass).id">
                                     <div class="entity-desc">
                                         <md-icon class="entity-icon">subdirectory_arrow_right</md-icon>
                                         <md-icon class="entity-icon">class</md-icon>
@@ -28,7 +28,7 @@
                             </li>
                             <li>
                                 <div class="action-button">
-                                    <button md-raised-button color="accent" (click)="addSchoolClass(institution.id)">
+                                    <button md-raised-button color="accent" (click)="addSchoolClass(institution)">
                                         <md-icon>add</md-icon>
                                         {{ 'modules.manage.schoolClass.add' | translate }}
                                     </button>
@@ -78,7 +78,7 @@
                             </li>
                             <li>
                                 <div class="action-button">
-                                    <button md-raised-button color="accent">
+                                    <button md-raised-button color="accent" (click)="addSemester(schoolYear)">
                                         <md-icon>add</md-icon>
                                         {{ 'modules.manage.semester.add' | translate }}
                                     </button>
