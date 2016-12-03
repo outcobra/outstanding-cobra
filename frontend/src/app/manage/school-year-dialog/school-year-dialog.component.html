@@ -3,12 +3,18 @@
 </div>
 <form [formGroup]="schoolYearForm" (submit)="onSubmit()">
     <div class="dialog-body">
-        <md-input placeholder="Enter a School Year name" formControlName="schoolYearName"></md-input>
-        <datepicker formControlName="schoolYearDateFrom"></datepicker>
-        <datepicker fromControlName="schoolYearDateTo"></datepicker>
+        <div class="form-group">
+            <md-input placeholder="Enter a School Year name" formControlName="schoolYearName"></md-input>
+        </div>
+        <div class="form-group">
+            <datepicker formControlName="schoolYearDateFrom" [placeholder]="'From Date'"></datepicker>
+        </div>
+        <div class="form-group">
+            <datepicker formControlName="schoolYearDateTo" [placeholder]="'To Date'"></datepicker>
+        </div>
     </div>
     <div class="dialog-footer">
-        <button md-button>Cancel</button>
+        <button md-button (click)="log()">Cancel</button>
         <button md-raised-button color="primary">Save</button>
     </div>
 </form>

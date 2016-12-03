@@ -1,5 +1,5 @@
 <div class="datepicker-wrapper">
-    <md-input [type]="'text'" [(ngModel)]="formattedDate" (blur)="inputDateChanged()">
+    <md-input [type]="'text'" [(ngModel)]="formattedDate" (blur)="inputDateChanged()" [placeholder]="placeholder">
         <button md-icon-button md-suffix (click)="toggle($event)" class="datepicker-toggler"> <!-- todo stop click propagation -->
             <md-icon>event</md-icon>
         </button>
@@ -7,7 +7,7 @@
     <div class="datepicker z-depth-1-half" [class.opened]="opened" [ngSwitch]="pickerMode">
         <div class="datepicker-header">
             <span class="year">{{currentDate | date:'y'}}</span><br>
-            <span class="date">{{currentDate | date:'E d MMM'}}</span>
+            <span class="date">{{currentDate | date:'mediumDate'}}</span>
         </div>
         <yearpicker *ngSwitchCase="'year'"></yearpicker>
         <daypicker *ngSwitchDefault></daypicker>

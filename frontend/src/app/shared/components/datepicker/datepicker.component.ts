@@ -5,8 +5,9 @@ import {
 import * as moment from "moment";
 import {DateUtil} from "../../services/date-util.service";
 import {DatePickerMaxDateSmallerThanMinDateError} from "./datepicker-errors";
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
+import {ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS, AbstractControl, Validator} from "@angular/forms";
 import {MdInput} from "@angular/material";
+import {OutcobraValidators} from "../../services/outcobra-validators";
 
 const noop = () => {
 };
@@ -16,6 +17,11 @@ export const DATEPICKER_CONTROL_VALUE_ACCESSOR: any = {
     useExisting: forwardRef(() => DatepickerComponent),
     multi: true
 };
+export const DATEPICKER_MAX_MIN_VALIDATOR: any = {
+        provide: NG_VALIDATORS,
+        useExisting: forwardRef(() => DatepickerComponent),
+        multi: true
+    };
 
 @Component({
     selector: 'datepicker',
@@ -25,16 +31,16 @@ export const DATEPICKER_CONTROL_VALUE_ACCESSOR: any = {
     host: {
         '(document: click)': 'onDocumentClick($event)'
     },
-    providers: [DATEPICKER_CONTROL_VALUE_ACCESSOR]
+    providers: [DATEPICKER_CONTROL_VALUE_ACCESSOR, DATEPICKER_MAX_MIN_VALIDATOR]
 })
-export class DatepickerComponent implements OnInit, ControlValueAccessor {
+export class DatepickerComponent implements OnInit, ControlValueAccessor, Validator {
     @Input() public opened: boolean = true;
     @Input() public currentDate: Date;
     @Input() public initDate: Date;
     @Input() public minDate: Date;
     @Input() public maxDate: Date;
     @Input() public pickerMode: string;
-    @ViewChild(MdInput) private input: MdInput;
+    @Input() public placeholder: string;
 
     // emitted Date
     private outDate: Date;
@@ -46,17 +52,20 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
     private onTouchedCallback: () => void = noop;
     private onChangeCallback: (_: any) => void = noop;
 
+    validateFn: Function;
 
-    constructor(private dateUtil: DateUtil, private elementRef: ElementRef) {
+
+    constructor(private elementRef: ElementRef) {
     }
 
     ngOnInit() {
-        this.minDate = (this.minDate || this.dateUtil.MIN_DATE);
-        this.maxDate = (this.maxDate || this.dateUtil.MAX_DATE);
+        this.minDate = (this.minDate || DateUtil.MIN_DATE);
+        this.maxDate = (this.maxDate || DateUtil.MAX_DATE);
         if (this.minDate > this.maxDate) {
             throw new DatePickerMaxDateSmallerThanMinDateError();
         }
         this.currentDate = this.initDate = this.checkInitDate();
+        this.validateFn = OutcobraValidators.isBetweenDay(this.minDate, this.maxDate);
     }
 
     open() {
@@ -97,7 +106,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
     }
 
     inputDateChanged() { // todo make a better parser for the input field (low priority)
-        let date = Date.parse(this.formattedDate);
+        let date = moment(this.formattedDate, 'DD.MM.YYYY').valueOf();
         if (!isNaN(date)) {
             this.selectDate(new Date(date));
         }
@@ -115,12 +124,12 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
         } else {
             date = new Date();
         }
-        if (this.dateUtil.isBetweenDay(date, this.minDate, this.maxDate)) {
+        if (DateUtil.isBetweenDay(date, this.minDate, this.maxDate)) {
             return date;
         }
         return (date < this.minDate) ?
-            (this.dateUtil.isMinDate(this.minDate) ? new Date() : this.minDate) :
-            (this.dateUtil.isMaxDate(this.maxDate) ? new Date() : this.maxDate);
+            (DateUtil.isMinDate(this.minDate) ? new Date() : this.minDate) :
+            (DateUtil.isMaxDate(this.maxDate) ? new Date() : this.maxDate);
     }
 
     selectDate(date: Date) {
@@ -147,6 +156,10 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
 
     registerOnTouched(fn: any): void {
         this.onTouchedCallback = fn;
+    }
+
+    validate(control: AbstractControl) {
+        return this.validateFn(control);
     }
 
 }

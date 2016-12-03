@@ -77,12 +77,19 @@ button[md-raised-button], button[md-button] {
     padding: 10px 20px;
 }
 
-md-input.ng-invalid.ng-dirty {
-    .md-input-underline {
-        border-color: md-color($warn);
-    }
+datepicker, md-input {
+    &.ng-invalid.ng-dirty {
+        .md-input-underline {
+            border-color: md-color($warn);
+        }
 
-    label {
-        @extend .text-warn;
+        label, input {
+            @extend .text-warn;
+        }
     }
+}
+
+.form-group {
+    width: 100%;
+    margin-bottom: 15px;
 }

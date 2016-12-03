@@ -35,7 +35,7 @@ export class DaypickerComponent implements OnInit {
     private month: number;
     private animate: string;
 
-    constructor(private datePicker: DatepickerComponent, private dateUtil: DateUtil) {
+    constructor(private datePicker: DatepickerComponent) {
     }
 
     ngOnInit() {
@@ -95,11 +95,11 @@ export class DaypickerComponent implements OnInit {
     }
 
     isDisabled(date: Date) {
-        return !this.dateUtil.isBetweenDay(date, this.datePicker.minDate, this.datePicker.maxDate);
+        //return !DateUtil.isBetweenDay(date, this.datePicker.minDate, this.datePicker.maxDate);
     }
 
     isActive(date: Date) {
-        return this.dateUtil.isSameDay(this.datePicker.currentDate, date);
+        return DateUtil.isSameDay(this.datePicker.currentDate, date);
     }
 
     setDateSpanClasses(date: Date) {

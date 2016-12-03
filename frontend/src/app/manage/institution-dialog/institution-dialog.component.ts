@@ -21,7 +21,7 @@ export class InstitutionDialog extends ManageDialog<InstitutionDto> implements O
 
     ngOnInit() {
         this.institutionForm = this.formBuilder.group({
-            institutionName: [this.mode == DialogMode.EDIT ? this.params.name : '', Validators.required]
+            name: [this.mode == DialogMode.EDIT ? this.params.name : '', Validators.required]
         });
     }
 

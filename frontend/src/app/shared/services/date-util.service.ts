@@ -1,11 +1,8 @@
-import {Injectable} from "@angular/core";
-
-@Injectable()
 export class DateUtil {
 
     // technically min and max date
-    public readonly MIN_DATE = new Date(1000, 1, 1);
-    public readonly MAX_DATE = new Date(9999, 11, 31);
+    public static readonly MIN_DATE = new Date(1000, 1, 1);
+    public static readonly MAX_DATE = new Date(9999, 11, 31);
 
     /**
      * checks if the 2 dates are on the same day
@@ -15,7 +12,7 @@ export class DateUtil {
      * @param date2
      * @returns {boolean}
      */
-    public isSameDay(date1: Date, date2: Date): boolean {
+    public static isSameDay(date1: Date, date2: Date): boolean {
         return date1.getDate() === date2.getDate() &&
             date1.getMonth() === date2.getMonth() &&
             date1.getFullYear() === date2.getFullYear();
@@ -29,7 +26,7 @@ export class DateUtil {
      * @param upperBound
      * @returns {boolean}
      */
-    public isBetweenDay(date: Date, lowerBound: Date, upperBound: Date): boolean {
+    public static isBetweenDay(date: Date, lowerBound: Date, upperBound: Date): boolean {
         let normalizedDate = this.normalizeDate(date);
         return this.normalizeDate(lowerBound) <= normalizedDate && normalizedDate <= this.normalizeDate(upperBound);
     }
@@ -41,7 +38,7 @@ export class DateUtil {
      * @param date with time
      * @returns {Date} same date as input but without time
      */
-    public normalizeDate(date: Date): Date {
+    public static normalizeDate(date: Date): Date {
         return new Date(date.getFullYear(), date.getMonth(), date.getDate());
     }
 
@@ -51,7 +48,7 @@ export class DateUtil {
      * @param date
      * @returns {boolean}
      */
-    public isMinDate(date: Date) {
+    public static isMinDate(date: Date) {
         return this.isSameDay(date, this.MIN_DATE);
     }
 
@@ -61,7 +58,7 @@ export class DateUtil {
      * @param date
      * @returns {boolean}
      */
-    public isMaxDate(date: Date) {
+    public static isMaxDate(date: Date) {
         return this.isSameDay(date, this.MAX_DATE);
     }
 
