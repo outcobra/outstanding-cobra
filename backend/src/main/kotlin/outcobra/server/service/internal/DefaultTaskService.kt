@@ -44,12 +44,12 @@ open class DefaultTaskService @Inject constructor(val repository: TaskRepository
         return repository.findAll(filter).map { mapper.toDto(it) }
     }
 
-    fun readAllOpenTasks(): List<TaskDto>{
+    override fun readAllOpenTasks(): List<TaskDto>{
         val filter = QTask.task.dueDate.after(LocalDate.now())
         return repository.findAll(filter).map { mapper.toDto(it) }
     }
 
-    fun readAllOpenTasksBySemester(semesterId: Long): List<TaskDto>{
+    override fun readAllOpenTasksBySemester(semesterId: Long): List<TaskDto>{
         val filter = QTask.task.dueDate.after(LocalDate.now()).and(QTask.task.subject.semester.id.eq(semesterId))
         return repository.findAll(filter).map { mapper.toDto(it) }
     }
