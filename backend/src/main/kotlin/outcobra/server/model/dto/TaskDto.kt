@@ -1,6 +1,6 @@
 package outcobra.server.model.dto
 
-import outcobra.server.model.Task
+import outcobra.server.model.Subject
 import outcobra.server.model.interfaces.OutcobraDto
 import outcobra.server.model.interfaces.ParentLink
 import java.time.LocalDate
@@ -20,6 +20,6 @@ data class TaskDto(
 
     override fun getIdentifier(): Long = id
 
-    override fun getParentLink(): ParentLink = ParentLink.make(subjectId, Task::class.java)
+    override fun getParentLink(): ParentLink = ParentLink.make(subjectId, Subject::class.java)
 
 }

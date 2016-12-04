@@ -9,15 +9,16 @@ import outcobra.server.model.interfaces.Mapper
  * Created by Florian on 29.11.2016.
  */
 @Component
-open class ManageDtoMapper : Mapper<List<Institution>,ManageDto> {
+open class ManageDtoMapper : Mapper<List<Institution>, ManageDto> {
     override fun fromDto(from: ManageDto?): List<Institution> {
         throw UnsupportedOperationException("this operation will not be used")
     }
+
     override fun toDto(from: List<Institution>?): ManageDto {
-        return  if (from!=null) ManageDto(from.map { toInternalDto(it) }) else null!!
+        return if (from != null) ManageDto(from.map { toInternalDto(it) }) else null!!
     }
 
-    private fun toInternalDto(from: Institution) : InstitutionDto{
+    private fun toInternalDto(from: Institution): InstitutionDto {
         return InstitutionDto(from.id, from.name, from.schoolClasses.map { schoolClass ->
             SchoolClassDto(schoolClass.id, schoolClass.normalizedName,
                     schoolClass.schoolYears.map { year ->

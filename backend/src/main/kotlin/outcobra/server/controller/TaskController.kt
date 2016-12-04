@@ -10,12 +10,11 @@ import javax.inject.Inject
  */
 @RestController
 @RequestMapping("/api")
-open class TaskController @Inject constructor(val taskService: TaskService){
+open class TaskController @Inject constructor(val taskService: TaskService) {
 
     @RequestMapping(value = "/task", method = arrayOf(RequestMethod.PUT))
     fun createTask(@RequestBody taskDto: TaskDto): TaskDto {
-        throw UnsupportedOperationException("not implemented")
-        //TODO Implement create
+        return taskService.createTask(taskDto)
     }
 
     @RequestMapping(value = "/task/{id}", method = arrayOf(RequestMethod.GET))
@@ -31,6 +30,15 @@ open class TaskController @Inject constructor(val taskService: TaskService){
     @RequestMapping(value = "/semester/{semesterId}/task", method = arrayOf(RequestMethod.GET))
     fun readAllTasksOfSemester(@PathVariable semesterId: Long): List<TaskDto> {
         return taskService.readAllTasksOfSemester(semesterId)
+    }
+    @RequestMapping(value = "/subject/{subjectId}/task/open", method = arrayOf(RequestMethod.GET))
+    fun readAllOpenTasks(subjectId: Long): List<TaskDto> {
+        return taskService.readAllOpenTasksBySubject(subjectId)
+    }
+
+    @RequestMapping(value = "/semester/{semesterId}/task/open", method = arrayOf(RequestMethod.GET))
+    fun readAllOpenTasksBySemester(semesterId: Long): List<TaskDto> {
+        return taskService.readAllOpenTasksBySemester(semesterId)
     }
 
     @RequestMapping(value = "/task", method = arrayOf(RequestMethod.POST))

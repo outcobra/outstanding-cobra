@@ -8,6 +8,7 @@ import outcobra.server.model.dto.TaskDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.TaskRepository
 import outcobra.server.service.TaskService
+import outcobra.server.service.UserService
 import java.time.LocalDate
 import javax.inject.Inject
 
@@ -17,7 +18,8 @@ import javax.inject.Inject
 @Component
 @Transactional
 open class DefaultTaskService @Inject constructor(val repository: TaskRepository,
-                                                  val mapper: Mapper<Task, TaskDto>) : TaskService {
+                                                  val mapper: Mapper<Task, TaskDto>,
+                                                  val userService: UserService) : TaskService {
     override fun createTask(taskDto: TaskDto): TaskDto {
         var task = mapper.fromDto(taskDto)
         task = repository.save(task)
@@ -44,12 +46,13 @@ open class DefaultTaskService @Inject constructor(val repository: TaskRepository
         return repository.findAll(filter).map { mapper.toDto(it) }
     }
 
-    override fun readAllOpenTasks(): List<TaskDto>{
-        val filter = QTask.task.dueDate.after(LocalDate.now())
+
+    override fun readAllOpenTasksBySubject(subjectId: Long): List<TaskDto> {
+        val filter = QTask.task.dueDate.after(LocalDate.now()).and(QTask.task.subject.id.eq(subjectId))
         return repository.findAll(filter).map { mapper.toDto(it) }
     }
 
-    override fun readAllOpenTasksBySemester(semesterId: Long): List<TaskDto>{
+    override fun readAllOpenTasksBySemester(semesterId: Long): List<TaskDto> {
         val filter = QTask.task.dueDate.after(LocalDate.now()).and(QTask.task.subject.semester.id.eq(semesterId))
         return repository.findAll(filter).map { mapper.toDto(it) }
     }
