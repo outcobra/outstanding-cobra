@@ -7,11 +7,11 @@ import outcobra.server.model.interfaces.Mapper
 
 @Component
 open class ManageDtoMapper : Mapper<List<Institution>,ManageDto> {
-    override fun fromDto(from: ManageDto?): List<Institution> {
+    override fun fromDto(from: ManageDto): List<Institution> {
         throw UnsupportedOperationException("this operation will not be used")
     }
-    override fun toDto(from: List<Institution>?): ManageDto {
-        return  if (from!=null) ManageDto(from.map { toInternalDto(it) }) else null!!
+    override fun toDto(from: List<Institution>): ManageDto {
+        return   ManageDto(from.map { toInternalDto(it) })
     }
 
     private fun toInternalDto(from: Institution) : InstitutionDto{
