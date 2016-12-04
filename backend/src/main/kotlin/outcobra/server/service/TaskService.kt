@@ -5,7 +5,7 @@ import outcobra.server.model.dto.TaskDto
 /**
  * Created by Vincent on 15.11.2016.
  */
-interface TaskSrvice{
+interface TaskService {
     fun createTask(taskDto: TaskDto) : TaskDto
     fun readTaskById(id : Long) : TaskDto
     fun readAllTasksOfSubject(subjectId : Long) : List<TaskDto>

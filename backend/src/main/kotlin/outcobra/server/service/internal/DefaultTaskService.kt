@@ -6,7 +6,7 @@ import outcobra.server.model.Task
 import outcobra.server.model.dto.TaskDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.TaskRepository
-import outcobra.server.service.TaskSrvice
+import outcobra.server.service.TaskService
 import outcobra.server.service.UserService
 import javax.inject.Inject
 
@@ -17,7 +17,7 @@ import javax.inject.Inject
 @Transactional
 open class DefaultTaskService @Inject constructor(val repository: TaskRepository,
                                                   val mapper: Mapper<Task, TaskDto>,
-                                                  val userService: UserService) : TaskSrvice{
+                                                  val userService: UserService) : TaskService {
     override fun createTask(taskDto: TaskDto): TaskDto {
         var task = mapper.fromDto(taskDto)
         task = repository.save(task)

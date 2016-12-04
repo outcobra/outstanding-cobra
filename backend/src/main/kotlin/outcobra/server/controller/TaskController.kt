@@ -2,7 +2,7 @@ package outcobra.server.controller
 
 import org.springframework.web.bind.annotation.*
 import outcobra.server.model.dto.TaskDto
-import outcobra.server.service.TaskSrvice
+import outcobra.server.service.TaskService
 import javax.inject.Inject
 
 /**
@@ -10,11 +10,12 @@ import javax.inject.Inject
  */
 @RestController
 @RequestMapping("/api")
-open class TaskController @Inject constructor(val taskService: TaskSrvice){
+open class TaskController @Inject constructor(val taskService: TaskService){
 
     @RequestMapping(value = "/task", method = arrayOf(RequestMethod.PUT))
     fun createTask(@RequestBody taskDto: TaskDto): TaskDto {
         throw UnsupportedOperationException("not implemented")
+        //TODO Implement create
     }
 
     @RequestMapping(value = "/task/{id}", method = arrayOf(RequestMethod.GET))
@@ -28,7 +29,7 @@ open class TaskController @Inject constructor(val taskService: TaskSrvice){
     }
 
     @RequestMapping(value = "/semester/{semesterId}/task", method = arrayOf(RequestMethod.GET))
-    fun readAllTasksIfSemester(@PathVariable semesterId: Long): List<TaskDto> {
+    fun readAllTasksOfSemester(@PathVariable semesterId: Long): List<TaskDto> {
         return taskService.readAllTasksOfSemester(semesterId)
     }
 
