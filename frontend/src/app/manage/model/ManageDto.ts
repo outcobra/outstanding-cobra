@@ -11,7 +11,7 @@ export interface InstitutionDto extends Dto {
 
 export interface SchoolClassDto extends Dto {
     institutionId: number,
-    name: string,
+    normalizedName: string,
     schoolYears: Array<SchoolYearDto>
 }
 

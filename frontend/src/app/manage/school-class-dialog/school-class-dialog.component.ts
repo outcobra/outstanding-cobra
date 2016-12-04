@@ -3,7 +3,6 @@ import {ManageDialog} from "../manage-dialog";
 import {SchoolClassDto, InstitutionDto} from "../model/ManageDto";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MdDialogRef} from "@angular/material";
-import {DialogMode} from "../../common/DialogMode";
 
 @Component({
     selector: 'school-class-dialog',
@@ -20,7 +19,7 @@ export class SchoolClassDialog extends ManageDialog<SchoolClassDto, InstitutionD
 
     ngOnInit() {
         this.schoolClassForm = this.formBuilder.group({
-            name: [this.isEditMode() ? this.params.name : '', Validators.required]
+            normalizedName: [this.isEditMode() ? this.params.normalizedName : '', Validators.required]
         })
     }
 

@@ -24,7 +24,6 @@ class SchoolClassController @Inject constructor(val schoolClassService: SchoolCl
      */
     @RequestMapping(value = "/schoolClass", method = arrayOf(RequestMethod.PUT))
     fun createSchoolClass(@RequestBody schoolClassDto: SchoolClassDto): SchoolClassDto {
-        LoggerFactory.getLogger(SchoolClassController::class.java).debug(schoolClassDto.normalizedName)
         return schoolClassService.createSchoolClass(schoolClassDto)
     }
 

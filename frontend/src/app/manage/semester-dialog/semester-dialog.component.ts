@@ -2,7 +2,6 @@ import {Component, OnInit, ViewEncapsulation} from "@angular/core";
 import {MdDialogRef} from "@angular/material";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ManageDialog} from "../manage-dialog";
-import {DialogMode} from "../../common/DialogMode";
 import {SemesterDto, SchoolYearDto} from "../model/ManageDto";
 import {OutcobraValidators} from "../../shared/services/outcobra-validators";
 
