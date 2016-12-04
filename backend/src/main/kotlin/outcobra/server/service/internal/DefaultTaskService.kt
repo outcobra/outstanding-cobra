@@ -2,12 +2,13 @@ package outcobra.server.service.internal
 
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
+import outcobra.server.model.QTask
 import outcobra.server.model.Task
 import outcobra.server.model.dto.TaskDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.TaskRepository
 import outcobra.server.service.TaskService
-import outcobra.server.service.UserService
+import java.time.LocalDate
 import javax.inject.Inject
 
 /**
@@ -16,8 +17,7 @@ import javax.inject.Inject
 @Component
 @Transactional
 open class DefaultTaskService @Inject constructor(val repository: TaskRepository,
-                                                  val mapper: Mapper<Task, TaskDto>,
-                                                  val userService: UserService) : TaskService {
+                                                  val mapper: Mapper<Task, TaskDto>) : TaskService {
     override fun createTask(taskDto: TaskDto): TaskDto {
         var task = mapper.fromDto(taskDto)
         task = repository.save(task)
@@ -35,17 +35,26 @@ open class DefaultTaskService @Inject constructor(val repository: TaskRepository
     }
 
     override fun readAllTasksOfSubject(subjectId: Long): List<TaskDto> {
-        //TODO implement read by Subject
-        throw UnsupportedOperationException("not implemented")
+        val filter = QTask.task.subject.id.eq(subjectId)
+        return repository.findAll(filter).map { mapper.toDto(it) }
     }
 
     override fun readAllTasksOfSemester(semesterId: Long): List<TaskDto> {
-        //TODO implement read by Semester
-        throw UnsupportedOperationException("not implemented")
+        val filter = QTask.task.subject.semester.id.eq(semesterId)
+        return repository.findAll(filter).map { mapper.toDto(it) }
+    }
+
+    fun readAllOpenTasks(): List<TaskDto>{
+        val filter = QTask.task.dueDate.after(LocalDate.now())
+        return repository.findAll(filter).map { mapper.toDto(it) }
+    }
+
+    fun readAllOpenTasksBySemester(semesterId: Long): List<TaskDto>{
+        val filter = QTask.task.dueDate.after(LocalDate.now()).and(QTask.task.subject.semester.id.eq(semesterId))
+        return repository.findAll(filter).map { mapper.toDto(it) }
     }
 
     override fun deleteTask(id: Long) {
         repository.delete(id)
     }
 }
-

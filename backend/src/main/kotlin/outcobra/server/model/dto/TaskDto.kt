@@ -9,8 +9,8 @@ import java.time.LocalDate
  * Created by Vincent on 15.11.2016.
  */
 data class TaskDto(
-        val id: Long,
-        val taskId: Long = 0,
+        val id: Long = 0,
+        val subjectId: Long = 0,
         val name: String = "",
         val description: String,
         val todoDate: LocalDate,
@@ -18,8 +18,8 @@ data class TaskDto(
         val effort: Int,
         val progress: Int) : OutcobraDto {
 
-    override fun getIdentifier(): Long = taskId
+    override fun getIdentifier(): Long = id
 
-    override fun getParentLink(): ParentLink = ParentLink.make(taskId, Task::class.java)
+    override fun getParentLink(): ParentLink = ParentLink.make(subjectId, Task::class.java)
 
 }

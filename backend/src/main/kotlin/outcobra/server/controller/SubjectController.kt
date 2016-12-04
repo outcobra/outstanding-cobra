@@ -22,9 +22,9 @@ class SubjectController @Inject constructor(val subjectService: SubjectService) 
         return subjectService.readAllSubjectsBySemester(semesterId)
     }
 
-    @RequestMapping(value = "/subject/{subjectId}", method = arrayOf(RequestMethod.GET))
-    fun readSubjectById(@PathVariable subjectId: Long): SubjectDto {
-        return subjectService.readSubjectById(subjectId)
+    @RequestMapping(value = "/subject/{id}", method = arrayOf(RequestMethod.GET))
+    fun readSubjectById(@PathVariable id: Long): SubjectDto {
+        return subjectService.readSubjectById(id)
     }
 
     @RequestMapping(value = "/subject", method = arrayOf(RequestMethod.POST))
