@@ -15,6 +15,7 @@ import {SchoolClassService} from "./service/school-class.service";
 import {SchoolYearDialog} from './school-year-dialog/school-year-dialog.component';
 import {SemesterDialog} from "./semester-dialog/semester-dialog.component";
 import {SchoolYearService} from "./service/school-year.service";
+import {SemesterService} from "./service/semester.service";
 
 @NgModule({
     imports: [
@@ -44,7 +45,8 @@ import {SchoolYearService} from "./service/school-year.service";
         ManageService,
         InstitutionService,
         SchoolClassService,
-        SchoolYearService
+        SchoolYearService,
+        SemesterService
     ]
 })
 export class ManageModule {

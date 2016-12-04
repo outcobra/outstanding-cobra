@@ -10,6 +10,7 @@ import {SchoolClassService} from "./service/school-class.service";
 import {SchoolYearDialog} from "./school-year-dialog/school-year-dialog.component";
 import {SchoolYearService} from "./service/school-year.service";
 import {SemesterDialog} from "./semester-dialog/semester-dialog.component";
+import {SemesterService} from "./service/semester.service";
 
 @Component({
     selector: 'manager',
@@ -33,6 +34,7 @@ export class ManageComponent implements OnInit {
                 private institutionService: InstitutionService,
                 private schoolClassService: SchoolClassService,
                 private schoolYearService: SchoolYearService,
+                private semesterService: SemesterService,
                 private dialog: MdDialog) {
     }
 
@@ -116,7 +118,7 @@ export class ManageComponent implements OnInit {
             this.semesterDialogRef.componentInstance.init(DialogMode.NEW, schoolYear);
             this.semesterDialogRef.afterClosed().subscribe((result: SemesterDto) => {
                 result.schoolYearId = schoolYear.id; // TODO move to dialog
-                //this.schoolYearService.createSchoolYear(result).subscribe();
+                this.semesterService.createSemester(result).subscribe();
             });
         }
     }
