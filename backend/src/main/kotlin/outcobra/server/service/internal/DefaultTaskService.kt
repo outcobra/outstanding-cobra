@@ -10,9 +10,6 @@ import outcobra.server.model.repository.TaskRepository
 import outcobra.server.service.TaskService
 import javax.inject.Inject
 
-/**
- * Created by Vincent on 15.11.2016.
- */
 @Component
 @Transactional
 open class DefaultTaskService @Inject constructor(val repository: TaskRepository,
