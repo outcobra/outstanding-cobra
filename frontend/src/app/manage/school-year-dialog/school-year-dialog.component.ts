@@ -1,9 +1,9 @@
 import {Component, OnInit, ViewEncapsulation} from "@angular/core";
 import {ManageDialog} from "../manage-dialog";
-import {SchoolYearDto} from "../model/ManageDto";
+import {SchoolYearDto, SchoolClassDto} from "../model/ManageDto";
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {MdDialogRef} from "@angular/material";
-import {DialogMode} from "../../common/DialogMode";
+import {OutcobraValidators} from "../../shared/services/outcobra-validators";
 
 @Component({
     selector: 'school-year-dialog',
@@ -11,7 +11,7 @@ import {DialogMode} from "../../common/DialogMode";
     styleUrls: ['school-year-dialog.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class SchoolYearDialog extends ManageDialog<SchoolYearDto> implements OnInit {
+export class SchoolYearDialog extends ManageDialog<SchoolYearDto, SchoolClassDto> implements OnInit {
 
     private schoolYearForm: FormGroup;
 
@@ -21,20 +21,23 @@ export class SchoolYearDialog extends ManageDialog<SchoolYearDto> implements OnI
 
     ngOnInit() {
         this.schoolYearForm = this.formBuilder.group({
-            schoolYearName: [this.mode == DialogMode.EDIT ? this.params.name : '', Validators.required],
-            schoolYearDateFrom: [this.mode == DialogMode.EDIT ? this.params.validFrom : '', Validators.required],
-            schoolYearDateTo: [this.mode == DialogMode.EDIT ? this.params.validTo : '', Validators.required]
-        })
+                name: [this.isEditMode() ? this.params.name : '', Validators.required],
+                validFrom: [this.isEditMode() ? this.params.validFrom : '', Validators.required],
+                validTo: [this.isEditMode() ? this.params.validTo : '', Validators.required]
+            },
+            {
+                validator: OutcobraValidators.dateFromIsBeforeDateTo
+            }
+        );
     }
 
-    onSubmit() {/*
-     if (this.schoolClassForm.valid && this.schoolClassForm.dirty) {
-     let schoolClassName = this.schoolClassForm.value.schoolClassName;
-     this.dialogRef.close({normalizedName: schoolClassName});
-     }
-     else if (this.schoolClassForm.pristine) {
-     this.schoolClassForm.markAsDirty();
-     }*/
+    onSubmit() {
+        if (this.schoolYearForm.valid && this.schoolYearForm.dirty) {
+            this.dialogRef.close(this.schoolYearForm.value);
+        }
+        else if (this.schoolYearForm.pristine) {
+            this.schoolYearForm.markAsDirty();
+        }
     }
 
 }
