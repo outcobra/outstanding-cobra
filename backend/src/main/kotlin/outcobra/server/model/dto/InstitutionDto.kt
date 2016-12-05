@@ -8,9 +8,9 @@ data class InstitutionDto(val id: Long = 0,
                           val userId: Long = 0,
                           val name: String = "",
                           val schoolClassIds: List<Long> = arrayListOf()) : OutcobraDto {
-
     constructor() : this(id = 0)
 
     override fun getIdentifier(): Long = id
+
     override fun getParentLink(): ParentLink = ParentLink.make(userId, User::class.java)
 }

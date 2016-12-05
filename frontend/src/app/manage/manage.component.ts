@@ -24,6 +24,8 @@ export class ManageComponent implements OnInit {
     private institutionClasses: any = {};
     private yearSemesterModel: SchoolYearDto[] = null;
     private subjectModel: SubjectDto[] = null;
+    private activeSchoolClassId: number = null;
+    private activeSemesterId: number = null;
 
     private institutionDialogRef: MdDialogRef<InstitutionDialog>;
     private schoolClassDialogRef: MdDialogRef<SchoolClassDialog>;
@@ -47,7 +49,8 @@ export class ManageComponent implements OnInit {
         let schoolClass = this.findSchoolClass(this.manageData.institutions, schoolClassId);
         if (schoolClass != null) {
             this.yearSemesterModel = schoolClass.schoolYears;
-            this.subjectModel = null;
+            this.activeSchoolClassId = schoolClass.id;
+            this.activeSemesterId = this.subjectModel = null;
         }
     }
 
@@ -58,6 +61,7 @@ export class ManageComponent implements OnInit {
             });
             if (semester !== undefined) {
                 this.subjectModel = semester.subjects;
+                this.activeSemesterId = semester.id;
                 return true;
             }
             return false;
@@ -87,9 +91,11 @@ export class ManageComponent implements OnInit {
         this.institutionDialogRef = this.dialog.open(InstitutionDialog);
         this.institutionDialogRef.componentInstance.init(DialogMode.NEW, null);
         this.institutionDialogRef.afterClosed().subscribe((result: InstitutionDto) => {
-            this.institutionService.createInstitution(result).subscribe((institution: InstitutionDto)=> {
-                this.institutionClasses.institutions.push(institution)
-            });
+            if (result != null) {
+                this.institutionService.createInstitution(result).subscribe((institution: InstitutionDto)=> {
+                    this.institutionClasses.institutions.push(institution)
+                });
+            }
         });
     }
 
@@ -97,10 +103,12 @@ export class ManageComponent implements OnInit {
         this.schoolClassDialogRef = this.dialog.open(SchoolClassDialog);
         this.schoolClassDialogRef.componentInstance.init(DialogMode.NEW, institution);
         this.schoolClassDialogRef.afterClosed().subscribe((result: SchoolClassDto) => {
-            result.institutionId = institution.id; // TODO move to dialog
-            this.schoolClassService.createSchoolClass(result).subscribe((schoolClass: SchoolClassDto) => {
-                institution.schoolClasses.push(schoolClass)
-            });
+            if (result) {
+                result.institutionId = institution.id; // TODO move to dialog
+                this.schoolClassService.createSchoolClass(result).subscribe((schoolClass: SchoolClassDto) => {
+                    institution.schoolClasses.push(schoolClass)
+                });
+            }
         });
     }
 
@@ -110,8 +118,10 @@ export class ManageComponent implements OnInit {
             this.schoolYearDialogRef = this.dialog.open(SchoolYearDialog);
             this.schoolYearDialogRef.componentInstance.init(DialogMode.NEW, schoolClass);
             this.schoolYearDialogRef.afterClosed().subscribe((result: SchoolYearDto) => {
-                result.schoolClassId = schoolClassId; // TODO move to dialog
-                this.schoolYearService.createSchoolYear(result).subscribe();
+                if (result) {
+                    result.schoolClassId = schoolClassId; // TODO move to dialog
+                    this.schoolYearService.createSchoolYear(result).subscribe();
+                }
             });
         }
     }
@@ -121,8 +131,10 @@ export class ManageComponent implements OnInit {
             this.semesterDialogRef = this.dialog.open(SemesterDialog);
             this.semesterDialogRef.componentInstance.init(DialogMode.NEW, schoolYear);
             this.semesterDialogRef.afterClosed().subscribe((result: SemesterDto) => {
-                result.schoolYearId = schoolYear.id; // TODO move to dialog
-                this.semesterService.createSemester(result).subscribe();
+                if (result) {
+                    result.schoolYearId = schoolYear.id; // TODO move to dialog
+                    this.semesterService.createSemester(result).subscribe();
+                }
             });
         }
     }

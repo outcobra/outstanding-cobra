@@ -4,6 +4,15 @@
     display: inline-block;
     position: relative;
 
+    md-input {
+        label {
+            top: 14px;
+            &.md-input-placeholder.md-focused {
+                top: 0;
+            }
+        }
+    }
+
     .datepicker {
         overflow: hidden;
         display: block;
