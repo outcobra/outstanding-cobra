@@ -8,12 +8,13 @@ import java.time.LocalDate
 data class SchoolYearDto(
         val id: Long = 0,
         val schoolClassId: Long = 0,
-        val name: String,
-        val validFrom: LocalDate,
-        val validTo: LocalDate,
+        val name: String = "",
+        val validFrom: LocalDate? = null,
+        val validTo: LocalDate? = null,
         val semesterIds: List<Long> = arrayListOf()) : OutcobraDto {
 
-    override fun getIdentifier(): Long = id
+    constructor() : this(id = 0)
 
+    override fun getIdentifier(): Long = id
     override fun getParentLink(): ParentLink = ParentLink.make(schoolClassId, SchoolClass::class.java)
 }

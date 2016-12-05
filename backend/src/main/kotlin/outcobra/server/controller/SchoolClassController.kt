@@ -1,6 +1,5 @@
 package outcobra.server.controller
 
-import org.slf4j.LoggerFactory
 import org.springframework.web.bind.annotation.*
 import outcobra.server.model.dto.SchoolClassDto
 import outcobra.server.service.SchoolClassService

@@ -11,8 +11,8 @@ import javax.inject.Inject
 class InstitutionController @Inject constructor(val institutionService: InstitutionService) {
 
     @RequestMapping(value = "", method = arrayOf(RequestMethod.PUT))
-    fun createInstitution(@RequestBody institutionDto: InstitutionDto) {
-        institutionService.createInstitution(institutionDto)
+    fun createInstitution(@RequestBody institutionDto: InstitutionDto): InstitutionDto {
+        return institutionService.createInstitution(institutionDto)
     }
 
     @RequestMapping(value = "/{id}", method = arrayOf(RequestMethod.GET))
