@@ -9,6 +9,6 @@ export class InstitutionService {
     constructor(private http: HttpInterceptor) {}
 
     public createInstitution(institution: InstitutionDto): Observable<any> {
-        return this.http.put('/institution', institution, 'outcobra')
+        return this.http.put<InstitutionDto>('/institution', institution, 'outcobra')
     }
 }

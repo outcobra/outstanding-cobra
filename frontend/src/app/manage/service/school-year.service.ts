@@ -8,6 +8,6 @@ export class SchoolYearService {
     constructor(private http: HttpInterceptor) {}
 
     public createSchoolYear(schoolYear: SchoolYearDto): Observable<any> {
-        return this.http.put('/schoolYear', schoolYear, 'outcobra')
+        return this.http.put<SchoolYearDto>('/schoolYear', schoolYear, 'outcobra')
     }
 }

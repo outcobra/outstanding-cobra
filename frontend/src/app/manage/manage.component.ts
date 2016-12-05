@@ -87,7 +87,9 @@ export class ManageComponent implements OnInit {
         this.institutionDialogRef = this.dialog.open(InstitutionDialog);
         this.institutionDialogRef.componentInstance.init(DialogMode.NEW, null);
         this.institutionDialogRef.afterClosed().subscribe((result: InstitutionDto) => {
-            this.institutionService.createInstitution(result).subscribe();
+            this.institutionService.createInstitution(result).subscribe((institution: InstitutionDto)=> {
+                this.institutionClasses.institutions.push(institution)
+            });
         });
     }
 
@@ -96,7 +98,9 @@ export class ManageComponent implements OnInit {
         this.schoolClassDialogRef.componentInstance.init(DialogMode.NEW, institution);
         this.schoolClassDialogRef.afterClosed().subscribe((result: SchoolClassDto) => {
             result.institutionId = institution.id; // TODO move to dialog
-            this.schoolClassService.createSchoolClass(result).subscribe();
+            this.schoolClassService.createSchoolClass(result).subscribe((schoolClass: SchoolClassDto) => {
+                institution.schoolClasses.push(schoolClass)
+            });
         });
     }
 

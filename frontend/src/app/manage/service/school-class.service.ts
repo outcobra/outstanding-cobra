@@ -9,6 +9,6 @@ export class SchoolClassService {
     constructor(private http: HttpInterceptor) {}
 
     public createSchoolClass(schoolClass: SchoolClassDto): Observable<any> {
-        return this.http.put('/schoolClass', schoolClass, 'outcobra')
+        return this.http.put<SchoolClassDto>('/schoolClass', schoolClass, 'outcobra')
     }
 }
