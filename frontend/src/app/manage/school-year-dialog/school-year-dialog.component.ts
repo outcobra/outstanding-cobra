@@ -31,12 +31,16 @@ export class SchoolYearDialog extends ManageDialog<SchoolYearDto, SchoolClassDto
         );
     }
 
+    onCancel() {
+        this.dialogRef.close(null);
+    }
+
     onSubmit() {
         if (this.schoolYearForm.valid && this.schoolYearForm.dirty) {
             this.dialogRef.close(this.schoolYearForm.value);
         }
         else if (this.schoolYearForm.pristine) {
-            this.schoolYearForm.markAsDirty();
+            this.revalidateForm(this.schoolYearForm);
         }
     }
 

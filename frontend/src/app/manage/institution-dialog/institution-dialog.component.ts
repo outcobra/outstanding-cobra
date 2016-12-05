@@ -24,12 +24,16 @@ export class InstitutionDialog extends ManageDialog<InstitutionDto, any> impleme
         });
     }
 
+    onCancel() {
+        this.dialogRef.close(null);
+    }
+
     onSubmit() {
         if (this.institutionForm.valid && this.institutionForm.dirty) {
             this.dialogRef.close(this.institutionForm.value);
         }
         else if (this.institutionForm.pristine) {
-            this.institutionForm.markAsDirty();
+            this.revalidateForm(this.institutionForm);
         }
     }
 

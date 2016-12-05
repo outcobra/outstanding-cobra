@@ -32,12 +32,16 @@ export class SemesterDialog extends ManageDialog<SemesterDto, SchoolYearDto> imp
         );
     }
 
+    onCancel() {
+        this.dialogRef.close(null);
+    }
+
     onSubmit() {
         if (this.semesterForm.valid && this.semesterForm.dirty) {
             this.dialogRef.close(this.semesterForm.value);
         }
         else if (this.semesterForm.pristine) {
-            this.semesterForm.markAsDirty();
+            this.revalidateForm(this.semesterForm);
         }
     }
 

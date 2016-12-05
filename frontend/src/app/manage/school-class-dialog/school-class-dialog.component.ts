@@ -23,12 +23,16 @@ export class SchoolClassDialog extends ManageDialog<SchoolClassDto, InstitutionD
         })
     }
 
+    onCancel() {
+        this.dialogRef.close(null);
+    }
+
     onSubmit() {
         if (this.schoolClassForm.valid && this.schoolClassForm.dirty) {
             this.dialogRef.close(this.schoolClassForm.value);
         }
         else if (this.schoolClassForm.pristine) {
-            this.schoolClassForm.markAsDirty();
+            this.revalidateForm(this.schoolClassForm);
         }
     }
 

@@ -90,7 +90,7 @@
             </li>
             <li>
                 <div class="action-button">
-                    <button md-raised-button color="accent" (click)="addSchoolYear(yearSemesterModel[0].schoolClassId)">
+                    <button md-raised-button color="accent" (click)="addSchoolYear(activeSchoolClassId)">
                         <md-icon>add</md-icon>
                         {{ 'modules.manage.schoolYear.add' | translate }}
                     </button>
@@ -121,7 +121,7 @@
             </li>
             <li>
                 <div class="action-button">
-                    <button md-raised-button codlor="accent">
+                    <button md-raised-button color="accent" (click)="addSemester(activeSemesterId)">
                         <md-icon>add</md-icon>
                         {{ 'modules.manage.subject.add' | translate }}
                     </button>
