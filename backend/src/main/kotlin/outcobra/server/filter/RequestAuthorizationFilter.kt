@@ -1,7 +1,6 @@
 package outcobra.server.filter
 
 import org.slf4j.LoggerFactory
-import org.springframework.stereotype.Component
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.filter.GenericFilterBean
 import outcobra.server.model.interfaces.ParentLinked
@@ -14,7 +13,6 @@ import javax.servlet.ServletResponse
 import javax.servlet.http.HttpServletRequest
 import javax.validation.ValidationException
 
-@Component
 open class RequestAuthorizationFilter @Inject constructor(val authorizationService: AuthorizationService) : GenericFilterBean() {
     companion object {
         private val LOGGER = LoggerFactory.getLogger(RequestAuthorizationFilter::class.java)
