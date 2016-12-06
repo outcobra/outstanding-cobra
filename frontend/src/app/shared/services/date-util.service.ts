@@ -1,3 +1,5 @@
+import * as moment from "moment";
+
 export class DateUtil {
 
     // technically min and max date
@@ -39,7 +41,8 @@ export class DateUtil {
      * @returns {Date} same date as input but without time
      */
     public static normalizeDate(date: Date): Date {
-        return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+        console.log(date.toLocaleDateString());
+        return new Date(date.toLocaleDateString());
     }
 
     /**
@@ -63,3 +66,7 @@ export class DateUtil {
     }
 
 }
+
+Date.prototype.toJSON = (key?: any) => {
+    return moment(this).format('YYYY-MM-DD');
+};

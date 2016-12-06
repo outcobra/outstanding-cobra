@@ -11,6 +11,8 @@ import {SchoolYearDialog} from "./school-year-dialog/school-year-dialog.componen
 import {SchoolYearService} from "./service/school-year.service";
 import {SemesterDialog} from "./semester-dialog/semester-dialog.component";
 import {SemesterService} from "./service/semester.service";
+import {NotificationsService} from "angular2-notifications";
+import {ConfirmDialogService} from "../shared/services/confirm-dialog.service";
 
 @Component({
     selector: 'manager',
@@ -37,6 +39,8 @@ export class ManageComponent implements OnInit {
                 private schoolClassService: SchoolClassService,
                 private schoolYearService: SchoolYearService,
                 private semesterService: SemesterService,
+                private notificationService: NotificationsService,
+                private confirmDialogService: ConfirmDialogService,
                 private dialog: MdDialog) {
     }
 
@@ -92,8 +96,9 @@ export class ManageComponent implements OnInit {
         this.institutionDialogRef.componentInstance.init(DialogMode.NEW, null);
         this.institutionDialogRef.afterClosed().subscribe((result: InstitutionDto) => {
             if (result != null) {
-                this.institutionService.createInstitution(result).subscribe((institution: InstitutionDto)=> {
-                    this.institutionClasses.institutions.push(institution)
+                this.institutionService.createInstitution(result).subscribe((institution: InstitutionDto) => {
+                    this.notificationService.success('common.notification.success.save', 'modules.manage.institution.notificationMessage.saveSuccess');
+                    this.institutionClasses.institutions.push(institution);
                 });
             }
         });
@@ -106,7 +111,9 @@ export class ManageComponent implements OnInit {
             if (result) {
                 result.institutionId = institution.id; // TODO move to dialog
                 this.schoolClassService.createSchoolClass(result).subscribe((schoolClass: SchoolClassDto) => {
-                    institution.schoolClasses.push(schoolClass)
+                    this.notificationService.success('common.notification.success.save', 'modules.manage.schoolClass.notificationMessage.saveSuccess');
+                    console.log(institution.schoolClasses);
+                    institution.schoolClasses.push(schoolClass);
                 });
             }
         });
@@ -120,7 +127,10 @@ export class ManageComponent implements OnInit {
             this.schoolYearDialogRef.afterClosed().subscribe((result: SchoolYearDto) => {
                 if (result) {
                     result.schoolClassId = schoolClassId; // TODO move to dialog
-                    this.schoolYearService.createSchoolYear(result).subscribe();
+                    this.schoolYearService.createSchoolYear(result).subscribe((schoolYear: SchoolYearDto) => {
+                        this.notificationService.success('common.notification.success.save', 'modules.manage.schoolYear.notificationMessage.saveSuccess');
+                        this.yearSemesterModel.push(schoolYear);
+                    });
                 }
             });
         }
@@ -133,7 +143,10 @@ export class ManageComponent implements OnInit {
             this.semesterDialogRef.afterClosed().subscribe((result: SemesterDto) => {
                 if (result) {
                     result.schoolYearId = schoolYear.id; // TODO move to dialog
-                    this.semesterService.createSemester(result).subscribe();
+                    this.semesterService.createSemester(result).subscribe((semester: SemesterDto) => {
+                        this.notificationService.success('common.notification.success.save', 'modules.manage.semester.notificationMessage.saveSuccess');
+                        schoolYear.semesters.push(semester);
+                    });
                 }
             });
         }
@@ -141,5 +154,37 @@ export class ManageComponent implements OnInit {
 
     addSubject(semesterId: number) {
 
+    }
+
+    deleteInstitution(institution: InstitutionDto) {
+        this.confirmDialogService.open('modules.manage.assureDeletion', 'modules.manage.institution.confirmDeleteMessage').subscribe((result) => {
+            if (result === true) {
+                this.institutionService.deleteInstitution(institution).subscribe();
+            }
+        });
+    }
+
+    deleteSchoolClass(schoolClass: SchoolClassDto) {
+        this.confirmDialogService.open('modules.manage.assureDeletion', 'modules.manage.schoolClass.confirmDeleteMessage').subscribe((result) => {
+            if (result === true) {
+                this.schoolClassService.deleteSchoolClass(schoolClass).subscribe();
+            }
+        });
+    }
+
+    deleteSchoolYear(schoolYear: SchoolYearDto) {
+        this.confirmDialogService.open('modules.manage.assureDeletion', 'modules.manage.schoolYear.confirmDeleteMessage').subscribe((result) => {
+            if (result === true) {
+                this.schoolYearService.deleteSchoolYear(schoolYear).subscribe();
+            }
+        });
+    }
+
+    deleteSemester(semester: SemesterDto) {
+        this.confirmDialogService.open('modules.manage.assureDeletion', 'modules.manage.semester.confirmDeleteMessage').subscribe((result) => {
+            if (result === true) {
+                this.semesterService.deleteSemester(semester).subscribe();
+            }
+        });
     }
 }

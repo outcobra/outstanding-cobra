@@ -1,0 +1,11 @@
+<div class="dialog-header">
+    <h3>{{title | translate}}</h3>
+</div>
+<div class="dialog-body">
+    {{message | translate}}
+</div>
+<div class="dialog-footer">
+    <button md-button (click)="cancel()">{{'common.actions.cancel' | translate}}</button>
+    <button md-button (click)="no()">{{'common.actions.no' | translate}}</button>
+    <button md-raised-button color="primary" (click)="yes()">{{'common.actions.yes' | translate}}</button>
+</div>

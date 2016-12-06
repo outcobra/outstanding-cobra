@@ -26,7 +26,7 @@ public class SchoolYear implements ParentLinked {
     @OneToMany(mappedBy = "schoolYear")
     private List<Holiday> holidays;
 
-    @OneToMany(mappedBy = "schoolYear")
+    @OneToMany(mappedBy = "schoolYear", cascade = CascadeType.REMOVE)
     private List<Semester> semesters;
 
     //region constructors
