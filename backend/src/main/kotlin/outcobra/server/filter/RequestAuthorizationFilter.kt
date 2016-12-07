@@ -13,13 +13,30 @@ import javax.servlet.ServletResponse
 import javax.servlet.http.HttpServletRequest
 import javax.validation.ValidationException
 
+/**
+ * A filter used to validate requests to the outcobra api
+ * currently deactivated
+ * @author Joel Messerli
+ * @since
+ */
 open class RequestAuthorizationFilter @Inject constructor(val authorizationService: AuthorizationService) : GenericFilterBean() {
+    // companion object is the kotlin equivalent to javas static instance fields
     companion object {
+        /**
+         * @see LOGGER
+         * An object used to print log messages
+         */
         private val LOGGER = LoggerFactory.getLogger(RequestAuthorizationFilter::class.java)
+        /**
+         * The fallowing three instance fields are [Pattern]s to extract data from the request url
+         */
         private val URI_NORMALIZING_PATTERN = Pattern.compile("^/?(.*?)/?$")
         private val URI_RESOURCE_EXTRACTING_PATTERN = Pattern.compile("^api/([^/]+)/(\\d+)(/.*)?")
         private val URI_PUT_POST_RESOURCE_EXTRACTING_PATTERN = Pattern.compile("^api/([^/]+)/?.*")
 
+        /**
+         * requests to the fallowing endpoints do not need to be validated
+         */
         private val IGNORED_URIS = listOf(
                 "api/manage",
                 "api/user/login"
@@ -45,6 +62,11 @@ open class RequestAuthorizationFilter @Inject constructor(val authorizationServi
         return authorizationService.getParentLinkedEntityOf(matcher.group(2).toLong(), matcher.group(1))
     }
 
+    /**
+     * This function is called every time someone makes a request to our api
+     * It tries to validate the request and drop it if something is not right.
+     * e.g. if the ownership of the given object does not match the current user
+     */
     override fun doFilter(request: ServletRequest?, response: ServletResponse?, chain: FilterChain?) {
         if (request is HttpServletRequest) {
             var wrappedRequest: RequestWrapper = RequestWrapper(request)
