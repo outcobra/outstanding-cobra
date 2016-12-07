@@ -5,6 +5,7 @@ import {Config} from "../../config/Config";
 import {Observable} from "rxjs";
 import "rxjs/add/operator/map";
 import * as _ from "underscore";
+import {dateReviver} from "./http-util";
 
 @Injectable()
 /**
@@ -170,7 +171,7 @@ export class HttpInterceptor {
     /**
      * interpolates the url in the requestOptions
      * replaces strings like ':paramName' with the corresponding value in the params object of the requestOptions
-     * the interpolated values will be removed from the requetsOptions object
+     * the interpolated values will be removed from the requestOptions object
      *
      * the placeholders in the url must begin with a letter an can then contain any alphanumeric characters and also dashes
      *
@@ -254,7 +255,7 @@ export class HttpInterceptor {
      * @returns http response as T
      */
     private unwrapAndCastHttpResponse<T>(response: Response): T {
-        return response.json() as T;
+        return JSON.parse(response.text(), dateReviver) as T;
     }
 
     /**

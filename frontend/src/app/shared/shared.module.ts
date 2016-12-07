@@ -19,6 +19,8 @@ import {
     CollapsibleBodyComponent,
     CollapsibleHeaderComponent
 } from "./components/collapsible/collapsible";
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import {ConfirmDialogService} from "./services/confirm-dialog.service";
 
 @NgModule({
     declarations: [
@@ -30,7 +32,8 @@ import {
         SidenavLayout,
         CollapsibleComponent,
         CollapsibleHeaderComponent,
-        CollapsibleBodyComponent
+        CollapsibleBodyComponent,
+        ConfirmDialogComponent
     ],
     exports: [
         DatepickerComponent,
@@ -48,10 +51,14 @@ import {
         MaterialModule.forRoot(),
         SimpleNotificationsModule
     ],
+    entryComponents: [
+        ConfirmDialogComponent
+    ],
     providers: [
         DateUtil,
         AuthService,
         HttpInterceptor,
+        ConfirmDialogService,
         NotificationWrapperService,
         {
             provide: NotificationsService,

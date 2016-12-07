@@ -3,7 +3,15 @@
 </div>
 <form [formGroup]="semesterForm" (submit)="onSubmit()">
     <div class="dialog-body">
-        <md-input placeholder="Enter an institution name" formControlName="name"></md-input>
+        <div class="form-group">
+            <md-input placeholder="Enter a Semester name" formControlName="name"></md-input>
+        </div>
+        <div class="form-group">
+            <datepicker formControlName="validFrom" [placeholder]="'From Date'" [minDate]="parent.validFrom"></datepicker>
+        </div>
+        <div class="form-group">
+            <datepicker formControlName="validTo" [placeholder]="'To Date'" [maxDate]="parent.validTo"></datepicker>
+        </div>
     </div>
     <div class="dialog-footer">
         <button md-button (click)="onCancel()">Cancel</button>

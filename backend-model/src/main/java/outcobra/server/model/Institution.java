@@ -27,7 +27,7 @@ public class Institution implements ParentLinked {
     @ManyToOne
     private User user;
 
-    @OneToMany(mappedBy = "institution")
+    @OneToMany(mappedBy = "institution", cascade = CascadeType.REMOVE)
     private List<SchoolClass> schoolClasses;
 
     @OneToMany(mappedBy = "institution")

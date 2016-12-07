@@ -11,7 +11,10 @@
                                 <md-icon class="entity-icon">business</md-icon>
                                 <span>{{ institution.name }}</span>
                             </div>
-                            <entity-menu></entity-menu>
+                            <entity-menu
+                                (delete)="deleteInstitution(institution)"
+                                (edit)="editInstitution(institution)"
+                            ></entity-menu>
                         </div>
                     </collapsible-header>
                     <collapsible-body>
@@ -23,7 +26,10 @@
                                         <md-icon class="entity-icon">class</md-icon>
                                         <span>{{ schoolClass.normalizedName }}</span>
                                     </div>
-                                    <entity-menu></entity-menu>
+                                    <entity-menu
+                                        (delete)="deleteSchoolClass(schoolClass)"
+                                        (edit)="editSchoolClass(schoolClass)"
+                                    ></entity-menu>
                                 </div>
                             </li>
                             <li>
@@ -61,7 +67,10 @@
                                 <md-icon class="entity-icon">date_range</md-icon>
                                 <span>{{ schoolYear.name }}</span>
                             </div>
-                            <entity-menu></entity-menu>
+                            <entity-menu
+                                (delete)="deleteSchoolYear(schoolYear)"
+                                (edit)="editSchoolYear(schoolYear)"
+                            ></entity-menu>
                         </div>
                     </collapsible-header>
                     <collapsible-body>
@@ -73,7 +82,10 @@
                                         <md-icon class="entity-icon">school</md-icon>
                                         <span>{{ semester.name }}</span>
                                     </div>
-                                    <entity-menu></entity-menu>
+                                    <entity-menu
+                                        (delete)="deleteSemester(semester)"
+                                        (edit)="editSemester(semester)"
+                                    ></entity-menu>
                                 </div>
                             </li>
                             <li>
