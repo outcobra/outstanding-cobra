@@ -68,3 +68,30 @@ manager, .manage-rows {
         }
     }
 }
+
+.md-overlay-container {
+    .md-dialog-container {
+        overflow: visible;
+
+        institution-dialog,
+        school-class-dialog,
+        school-year-dialog,
+        semester-dialog {
+            width: 600px;
+            display: block;
+
+            .dialog-body {
+                md-input {
+                    width: 200px;
+                }
+            }
+
+            .dialog-footer {
+                .footer-right {
+                    //float: right;
+                    text-align: right;
+                }
+            }
+        }
+    }
+}

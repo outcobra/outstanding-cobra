@@ -41,7 +41,6 @@ export class DateUtil {
      * @returns {Date} same date as input but without time
      */
     public static normalizeDate(date: Date): Date {
-        console.log(date.toLocaleDateString());
         return new Date(date.toLocaleDateString());
     }
 

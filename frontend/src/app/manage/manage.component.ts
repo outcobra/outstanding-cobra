@@ -92,7 +92,7 @@ export class ManageComponent implements OnInit {
     }
 
     addInstitution() {
-        this.institutionDialogRef = this.dialog.open(InstitutionDialog);
+        this.institutionDialogRef = this.dialog.open(InstitutionDialog, {position: {top: '20px'}});
         this.institutionDialogRef.componentInstance.init(DialogMode.NEW, null);
         this.institutionDialogRef.afterClosed().subscribe((result: InstitutionDto) => {
             if (result != null) {
@@ -105,14 +105,13 @@ export class ManageComponent implements OnInit {
     }
 
     addSchoolClass(institution: InstitutionDto) {
-        this.schoolClassDialogRef = this.dialog.open(SchoolClassDialog);
+        this.schoolClassDialogRef = this.dialog.open(SchoolClassDialog, {position: {top: '20px'}});
         this.schoolClassDialogRef.componentInstance.init(DialogMode.NEW, institution);
         this.schoolClassDialogRef.afterClosed().subscribe((result: SchoolClassDto) => {
             if (result) {
                 result.institutionId = institution.id; // TODO move to dialog
                 this.schoolClassService.createSchoolClass(result).subscribe((schoolClass: SchoolClassDto) => {
                     this.notificationService.success('common.notification.success.save', 'modules.manage.schoolClass.notificationMessage.saveSuccess');
-                    console.log(institution.schoolClasses);
                     institution.schoolClasses.push(schoolClass);
                 });
             }
@@ -122,7 +121,7 @@ export class ManageComponent implements OnInit {
     addSchoolYear(schoolClassId: number) {
         if (schoolClassId != null) {
             let schoolClass: SchoolClassDto = this.findSchoolClass(this.manageData.institutions, schoolClassId);
-            this.schoolYearDialogRef = this.dialog.open(SchoolYearDialog);
+            this.schoolYearDialogRef = this.dialog.open(SchoolYearDialog, {position: {top: '20px'}});
             this.schoolYearDialogRef.componentInstance.init(DialogMode.NEW, schoolClass);
             this.schoolYearDialogRef.afterClosed().subscribe((result: SchoolYearDto) => {
                 if (result) {
@@ -138,7 +137,7 @@ export class ManageComponent implements OnInit {
 
     addSemester(schoolYear: SchoolYearDto) {
         if (schoolYear != null) {
-            this.semesterDialogRef = this.dialog.open(SemesterDialog);
+            this.semesterDialogRef = this.dialog.open(SemesterDialog, {position: {top: '20px'}});
             this.semesterDialogRef.componentInstance.init(DialogMode.NEW, schoolYear);
             this.semesterDialogRef.afterClosed().subscribe((result: SemesterDto) => {
                 if (result) {
@@ -157,7 +156,7 @@ export class ManageComponent implements OnInit {
     }
 
     deleteInstitution(institution: InstitutionDto) {
-        this.confirmDialogService.open('modules.manage.assureDeletion', 'modules.manage.institution.confirmDeleteMessage').subscribe((result) => {
+        this.openDeleteConfirmDialog('institution').subscribe((result) => {
             if (result === true) {
                 this.institutionService.deleteInstitution(institution).subscribe();
             }
@@ -165,7 +164,7 @@ export class ManageComponent implements OnInit {
     }
 
     deleteSchoolClass(schoolClass: SchoolClassDto) {
-        this.confirmDialogService.open('modules.manage.assureDeletion', 'modules.manage.schoolClass.confirmDeleteMessage').subscribe((result) => {
+        this.openDeleteConfirmDialog('schoolClass').subscribe((result) => {
             if (result === true) {
                 this.schoolClassService.deleteSchoolClass(schoolClass).subscribe();
             }
@@ -173,7 +172,7 @@ export class ManageComponent implements OnInit {
     }
 
     deleteSchoolYear(schoolYear: SchoolYearDto) {
-        this.confirmDialogService.open('modules.manage.assureDeletion', 'modules.manage.schoolYear.confirmDeleteMessage').subscribe((result) => {
+        this.openDeleteConfirmDialog('schoolYear').subscribe((result) => {
             if (result === true) {
                 this.schoolYearService.deleteSchoolYear(schoolYear).subscribe();
             }
@@ -181,10 +180,14 @@ export class ManageComponent implements OnInit {
     }
 
     deleteSemester(semester: SemesterDto) {
-        this.confirmDialogService.open('modules.manage.assureDeletion', 'modules.manage.semester.confirmDeleteMessage').subscribe((result) => {
+        this.openDeleteConfirmDialog('semester').subscribe((result) => {
             if (result === true) {
                 this.semesterService.deleteSemester(semester).subscribe();
             }
         });
+    }
+
+    openDeleteConfirmDialog(moduleName: string) {
+        return this.confirmDialogService.open('modules.manage.assureDeletion', `modules.manage.${moduleName}.confirmDeleteMessage`);
     }
 }

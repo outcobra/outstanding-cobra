@@ -4,7 +4,6 @@ import {NotificationsService} from "angular2-notifications";
 import {Config} from "../../config/Config";
 import {Observable} from "rxjs";
 import "rxjs/add/operator/map";
-import * as _ from "underscore";
 import {dateReviver} from "./http-util";
 
 @Injectable()
@@ -184,7 +183,7 @@ export class HttpInterceptor {
         requestOptions.url = requestOptions.url.replace(
             /:([a-zA-Z]+[\w-]*)/g,
             ($0, token) => {
-                if (_.has(requestOptions.params, token)) return this.extractValue(requestOptions.params, token);
+                if (requestOptions.params.hasOwnProperty(token)) return this.extractValue(requestOptions.params, token);
                 return "";
             }
         );

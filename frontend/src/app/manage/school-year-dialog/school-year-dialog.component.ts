@@ -32,7 +32,8 @@ export class SchoolYearDialog extends ManageDialog<SchoolYearDto, SchoolClassDto
     }
 
     onCancel() {
-        this.dialogRef.close(null);
+        console.log(this.schoolYearForm.controls);
+        //this.dialogRef.close(null);
     }
 
     onSubmit() {

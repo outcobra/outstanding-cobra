@@ -1,12 +1,8 @@
-import {
-    Component, Input, OnInit, ViewEncapsulation, forwardRef, ElementRef, Output, EventEmitter,
-    ViewChild
-} from "@angular/core";
+import {Component, Input, OnInit, ViewEncapsulation, forwardRef, ElementRef, Output, EventEmitter} from "@angular/core";
 import * as moment from "moment";
 import {DateUtil} from "../../services/date-util.service";
 import {DatePickerMaxDateSmallerThanMinDateError} from "./datepicker-errors";
 import {ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS, AbstractControl, Validator} from "@angular/forms";
-import {MdInput} from "@angular/material";
 import {OutcobraValidators} from "../../services/outcobra-validators";
 
 const noop = () => {
@@ -18,10 +14,10 @@ export const DATEPICKER_CONTROL_VALUE_ACCESSOR: any = {
     multi: true
 };
 export const DATEPICKER_MAX_MIN_VALIDATOR: any = {
-        provide: NG_VALIDATORS,
-        useExisting: forwardRef(() => DatepickerComponent),
-        multi: true
-    };
+    provide: NG_VALIDATORS,
+    useExisting: forwardRef(() => DatepickerComponent),
+    multi: true
+};
 
 @Component({
     selector: 'datepicker',
@@ -34,7 +30,7 @@ export const DATEPICKER_MAX_MIN_VALIDATOR: any = {
     providers: [DATEPICKER_CONTROL_VALUE_ACCESSOR, DATEPICKER_MAX_MIN_VALIDATOR]
 })
 export class DatepickerComponent implements OnInit, ControlValueAccessor, Validator {
-    @Input() public opened: boolean = true;
+    @Input() public opened: boolean = false;
     @Input() public currentDate: Date;
     @Input() public initDate: Date;
     @Input() public minDate: Date;
@@ -73,11 +69,14 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor, Valida
     }
 
     close() {
-        this.onTouchedCallback();
-        this.opened = false;
+        if (this.isOpen()) {
+            this.onTouchedCallback();
+            this.opened = false;
+        }
     }
 
-    toggle() {
+    toggle(event: Event) {
+        event.stopPropagation();
         if (this.isOpen()) {
             this.close();
         } else {

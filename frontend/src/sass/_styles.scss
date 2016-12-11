@@ -74,6 +74,8 @@ button[md-raised-button], button[md-button] {
 }
 
 .dialog-header, .dialog-body, .dialog-footer {
+    display: block;
+    width: 100%;
     padding: 10px 20px;
 }
 

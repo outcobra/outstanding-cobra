@@ -7,14 +7,17 @@
             <md-input placeholder="Enter a Semester name" formControlName="name"></md-input>
         </div>
         <div class="form-group">
-            <datepicker formControlName="validFrom" [placeholder]="'From Date'" [minDate]="parent.validFrom"></datepicker>
+            <datepicker formControlName="validFrom" [placeholder]="'From Date'"
+                        [minDate]="parent.validFrom"></datepicker>
         </div>
         <div class="form-group">
             <datepicker formControlName="validTo" [placeholder]="'To Date'" [maxDate]="parent.validTo"></datepicker>
         </div>
     </div>
     <div class="dialog-footer">
-        <button md-button (click)="onCancel()">Cancel</button>
-        <button md-raised-button color="primary">Save</button>
+        <div class="footer-right">
+            <button md-button (click)="onCancel()" type="button">Cancel</button>
+            <button md-raised-button color="primary" type="submit">Save</button>
+        </div>
     </div>
 </form>
