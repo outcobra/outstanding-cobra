@@ -5,7 +5,7 @@ import {SchoolClassDto} from "../model/ManageDto";
 
 @Injectable()
 export class SchoolClassService {
-    private readonly baseUri: string = '/institution';
+    private readonly baseUri: string = '/schoolClass';
 
     constructor(private http: HttpInterceptor) {}
 

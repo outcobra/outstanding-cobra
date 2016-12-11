@@ -27,7 +27,7 @@ const DEFAULT_CONFIG: MdDialogConfig = {position: {top: '20px'}};
 export class ManageComponent implements OnInit {
 
     private manageData: ManageDto;
-    private institutionClasses: any = {};
+    private institutionClasses: InstitutionDto[] = null;
     private yearSemesterModel: SchoolYearDto[] = null;
     private subjectModel: SubjectDto[] = null;
     private activeSchoolClassId: number = null;
@@ -56,7 +56,7 @@ export class ManageComponent implements OnInit {
     }
 
     selectSchoolClass(schoolClassId: number) {
-        let schoolClass = this.findSchoolClass(this.manageData.institutions, schoolClassId);
+        let schoolClass = this.findSchoolClass(this.institutionClasses, schoolClassId);
         if (schoolClass != null) {
             this.yearSemesterModel = schoolClass.schoolYears;
             this.activeSchoolClassId = schoolClass.id;
@@ -94,7 +94,8 @@ export class ManageComponent implements OnInit {
     }
 
     prepareManageData(manageData: ManageDto) {
-        this.manageData = this.institutionClasses = manageData;
+        this.manageData = manageData;
+        this.institutionClasses = manageData.institutions;
     }
 
     addInstitution() {
@@ -103,7 +104,7 @@ export class ManageComponent implements OnInit {
             if (result != null) {
                 this.institutionService.createInstitution(result).subscribe((institution: InstitutionDto) => {
                     this.showSuccessNotification('institution');
-                    this.institutionClasses.institutions.push(institution);
+                    this.institutionClasses.push(institution);
                 });
             }
         });
@@ -123,7 +124,7 @@ export class ManageComponent implements OnInit {
 
     addSchoolYear(schoolClassId: number) {
         if (schoolClassId != null) {
-            let schoolClass: SchoolClassDto = this.findSchoolClass(this.manageData.institutions, schoolClassId);
+            let schoolClass: SchoolClassDto = this.findSchoolClass(this.institutionClasses, schoolClassId);
             this.schoolYearDialogRef = this.factory.getDialog(SchoolYearDialog, DialogMode.NEW, schoolClass, DEFAULT_CONFIG);
             this.schoolYearDialogRef.afterClosed().subscribe((result: SchoolYearDto) => {
                 if (result) {

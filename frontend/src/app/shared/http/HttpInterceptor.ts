@@ -4,7 +4,7 @@ import {NotificationsService} from "angular2-notifications";
 import {Config} from "../../config/Config";
 import {Observable} from "rxjs";
 import "rxjs/add/operator/map";
-import {dateReviver} from "./http-util";
+import {dateReviver, dateReplacer} from "./http-util";
 
 @Injectable()
 /**
@@ -60,7 +60,7 @@ export class HttpInterceptor {
                 url: this.buildApiUrl(request),
                 headers: request.headers,
                 search: this.buildUrlSearchParams(request.params),
-                body: JSON.stringify(request.data)
+                body: JSON.stringify(request.data, dateReplacer)
             })
         ).catch(error => {
             this.notificationsService.error('http.error.title', 'http.error.message'); // TODO i18n + i18nKey by error.status
@@ -249,12 +249,15 @@ export class HttpInterceptor {
 
     /**
      * unwraps an http response and returns it as T
+     * if no response is present then it returns null
      *
      * @param response
      * @returns http response as T
      */
     private unwrapAndCastHttpResponse<T>(response: Response): T {
-        return JSON.parse(response.text(), dateReviver) as T;
+        let responseStr = response.text();
+        if (responseStr.length <= 0) return null;
+        return JSON.parse(responseStr, dateReviver) as T;
     }
 
     /**

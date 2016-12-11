@@ -65,7 +65,3 @@ export class DateUtil {
     }
 
 }
-
-Date.prototype.toJSON = (key?: any) => {
-    return moment(this).format('YYYY-MM-DD');
-};
