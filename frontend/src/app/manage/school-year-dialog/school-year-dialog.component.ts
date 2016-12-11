@@ -32,13 +32,14 @@ export class SchoolYearDialog extends ManageDialog<SchoolYearDto, SchoolClassDto
     }
 
     onCancel() {
-        console.log(this.schoolYearForm.controls);
-        //this.dialogRef.close(null);
+        this.dialogRef.close(null);
     }
 
     onSubmit() {
         if (this.schoolYearForm.valid && this.schoolYearForm.dirty) {
-            this.dialogRef.close(this.schoolYearForm.value);
+            let value = this.schoolYearForm.value;
+            value.schoolClassId = this.parent.id;
+            this.dialogRef.close(value);
         }
         else if (this.schoolYearForm.pristine) {
             this.revalidateForm(this.schoolYearForm);

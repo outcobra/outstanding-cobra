@@ -33,7 +33,7 @@ export class ManageDialog<T, E> {
     }
 
     revalidateForm(form: FormGroup) {
-        Util.keys(form.controls).forEach((key) => {
+        Object.keys(form.controls).forEach((key) => {
             let control = form.controls[key];
             if (!control.valid) {
                 control.markAsDirty();

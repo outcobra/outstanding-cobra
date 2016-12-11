@@ -37,7 +37,9 @@ export class SemesterDialog extends ManageDialog<SemesterDto, SchoolYearDto> imp
 
     onSubmit() {
         if (this.semesterForm.valid && this.semesterForm.dirty) {
-            this.dialogRef.close(this.semesterForm.value);
+            let value = this.semesterForm.value;
+            value.schoolYearId = this.parent.id;
+            this.dialogRef.close(value);
         }
         else if (this.semesterForm.pristine) {
             this.revalidateForm(this.semesterForm);

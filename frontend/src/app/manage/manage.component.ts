@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from "@angular/core";
 import {ManageService} from "./service/manage.service";
 import {ManageDto, InstitutionDto, SchoolClassDto, SchoolYearDto, SemesterDto, SubjectDto} from "./model/ManageDto";
-import {MdDialog, MdDialogRef} from "@angular/material";
+import {MdDialog, MdDialogRef, MdDialogConfig} from "@angular/material";
 import {InstitutionDialog} from "./institution-dialog/institution-dialog.component";
 import {DialogMode} from "../common/DialogMode";
 import {SchoolClassDialog} from "./school-class-dialog/school-class-dialog.component";
@@ -13,6 +13,10 @@ import {SemesterDialog} from "./semester-dialog/semester-dialog.component";
 import {SemesterService} from "./service/semester.service";
 import {NotificationsService} from "angular2-notifications";
 import {ConfirmDialogService} from "../shared/services/confirm-dialog.service";
+import {ManageDialogFactory} from "./service/manage-dialog-factory";
+
+
+const DEFAULT_CONFIG: MdDialogConfig = {position: {top: '20px'}};
 
 @Component({
     selector: 'manager',
@@ -21,17 +25,18 @@ import {ConfirmDialogService} from "../shared/services/confirm-dialog.service";
     encapsulation: ViewEncapsulation.None
 })
 export class ManageComponent implements OnInit {
-    private manageData: ManageDto;
 
+    private manageData: ManageDto;
     private institutionClasses: any = {};
     private yearSemesterModel: SchoolYearDto[] = null;
     private subjectModel: SubjectDto[] = null;
     private activeSchoolClassId: number = null;
-    private activeSemesterId: number = null;
 
+    private activeSemesterId: number = null;
     private institutionDialogRef: MdDialogRef<InstitutionDialog>;
     private schoolClassDialogRef: MdDialogRef<SchoolClassDialog>;
     private schoolYearDialogRef: MdDialogRef<SchoolYearDialog>;
+
     private semesterDialogRef: MdDialogRef<SemesterDialog>;
 
     constructor(private manageService: ManageService,
@@ -41,7 +46,8 @@ export class ManageComponent implements OnInit {
                 private semesterService: SemesterService,
                 private notificationService: NotificationsService,
                 private confirmDialogService: ConfirmDialogService,
-                private dialog: MdDialog) {
+                private dialog: MdDialog,
+                private factory: ManageDialogFactory) {
     }
 
     ngOnInit() {
@@ -92,12 +98,11 @@ export class ManageComponent implements OnInit {
     }
 
     addInstitution() {
-        this.institutionDialogRef = this.dialog.open(InstitutionDialog, {position: {top: '20px'}});
-        this.institutionDialogRef.componentInstance.init(DialogMode.NEW, null);
+        this.institutionDialogRef = this.factory.getDialog(InstitutionDialog, DialogMode.NEW, null, DEFAULT_CONFIG);
         this.institutionDialogRef.afterClosed().subscribe((result: InstitutionDto) => {
             if (result != null) {
                 this.institutionService.createInstitution(result).subscribe((institution: InstitutionDto) => {
-                    this.notificationService.success('common.notification.success.save', 'modules.manage.institution.notificationMessage.saveSuccess');
+                    this.showSuccessNotification('institution');
                     this.institutionClasses.institutions.push(institution);
                 });
             }
@@ -105,13 +110,11 @@ export class ManageComponent implements OnInit {
     }
 
     addSchoolClass(institution: InstitutionDto) {
-        this.schoolClassDialogRef = this.dialog.open(SchoolClassDialog, {position: {top: '20px'}});
-        this.schoolClassDialogRef.componentInstance.init(DialogMode.NEW, institution);
+        this.schoolClassDialogRef = this.factory.getDialog(SchoolClassDialog, DialogMode.NEW, institution, DEFAULT_CONFIG);
         this.schoolClassDialogRef.afterClosed().subscribe((result: SchoolClassDto) => {
             if (result) {
-                result.institutionId = institution.id; // TODO move to dialog
                 this.schoolClassService.createSchoolClass(result).subscribe((schoolClass: SchoolClassDto) => {
-                    this.notificationService.success('common.notification.success.save', 'modules.manage.schoolClass.notificationMessage.saveSuccess');
+                    this.showSuccessNotification('schoolClass');
                     institution.schoolClasses.push(schoolClass);
                 });
             }
@@ -121,13 +124,11 @@ export class ManageComponent implements OnInit {
     addSchoolYear(schoolClassId: number) {
         if (schoolClassId != null) {
             let schoolClass: SchoolClassDto = this.findSchoolClass(this.manageData.institutions, schoolClassId);
-            this.schoolYearDialogRef = this.dialog.open(SchoolYearDialog, {position: {top: '20px'}});
-            this.schoolYearDialogRef.componentInstance.init(DialogMode.NEW, schoolClass);
+            this.schoolYearDialogRef = this.factory.getDialog(SchoolYearDialog, DialogMode.NEW, schoolClass, DEFAULT_CONFIG);
             this.schoolYearDialogRef.afterClosed().subscribe((result: SchoolYearDto) => {
                 if (result) {
-                    result.schoolClassId = schoolClassId; // TODO move to dialog
                     this.schoolYearService.createSchoolYear(result).subscribe((schoolYear: SchoolYearDto) => {
-                        this.notificationService.success('common.notification.success.save', 'modules.manage.schoolYear.notificationMessage.saveSuccess');
+                        this.showSuccessNotification('schoolYear');
                         this.yearSemesterModel.push(schoolYear);
                     });
                 }
@@ -137,13 +138,11 @@ export class ManageComponent implements OnInit {
 
     addSemester(schoolYear: SchoolYearDto) {
         if (schoolYear != null) {
-            this.semesterDialogRef = this.dialog.open(SemesterDialog, {position: {top: '20px'}});
-            this.semesterDialogRef.componentInstance.init(DialogMode.NEW, schoolYear);
+            this.semesterDialogRef = this.factory.getDialog(SemesterDialog, DialogMode.NEW, schoolYear, DEFAULT_CONFIG);
             this.semesterDialogRef.afterClosed().subscribe((result: SemesterDto) => {
                 if (result) {
-                    result.schoolYearId = schoolYear.id; // TODO move to dialog
                     this.semesterService.createSemester(result).subscribe((semester: SemesterDto) => {
-                        this.notificationService.success('common.notification.success.save', 'modules.manage.semester.notificationMessage.saveSuccess');
+                        this.showSuccessNotification('schoolYear');
                         schoolYear.semesters.push(semester);
                     });
                 }
@@ -189,5 +188,9 @@ export class ManageComponent implements OnInit {
 
     openDeleteConfirmDialog(moduleName: string) {
         return this.confirmDialogService.open('modules.manage.assureDeletion', `modules.manage.${moduleName}.confirmDeleteMessage`);
+    }
+
+    showSuccessNotification(entity: string) {
+        this.notificationService.success('common.notification.success.save', `modules.manage.${entity}.notificationMessage.saveSuccess`);
     }
 }
