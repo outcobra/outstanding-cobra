@@ -1,20 +1,20 @@
 /* tslint:disable:no-unused-variable */
 import {async, ComponentFixture, TestBed} from "@angular/core/testing";
-import {InstitutionDialog} from "./semester-dialog.component";
+import {SemesterDialog} from "./semester-dialog.component";
 
-describe('InstitutionDialog', () => {
-    let component: InstitutionDialog;
-    let fixture: ComponentFixture<InstitutionDialog>;
+describe('SemesterDialog', () => {
+    let component: SemesterDialog;
+    let fixture: ComponentFixture<SemesterDialog>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [InstitutionDialog]
+            declarations: [SemesterDialog]
         })
             .compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(InstitutionDialog);
+        fixture = TestBed.createComponent(SemesterDialog);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

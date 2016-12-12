@@ -13,7 +13,7 @@ export class OutcobraValidators {
      */
     public static isBeforeOrEqualDay(date: Date): ValidatorFn {
         return (control: AbstractControl): {[key: string]: any} => {
-            if (control.value && !moment(control.value).isSameOrBefore(moment(date.toISOString()))) {
+            if (control.value && !DateUtil.isBeforeDay(control.value, date)) {
                 return {
                     'isBeforeDay': {'beforeDate': date, 'actualDate': control.value}
                 }
@@ -31,7 +31,7 @@ export class OutcobraValidators {
      */
     public static isAfterOrEqualDay(date: Date): ValidatorFn {
         return (control: AbstractControl): {[key: string]: any} => {
-            if (control.value && !moment(control.value).isSameOrAfter(moment(date.toISOString()))) {
+            if (control.value && !DateUtil.isAfterDay(control.value, date)) {
                 return {
                     'isAfterDay': {'afterDate': date, 'actualDate': control.value}
                 }

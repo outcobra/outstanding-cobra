@@ -62,6 +62,8 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor, Valida
         }
         this.currentDate = this.initDate = this.checkInitDate();
         this.validateFn = OutcobraValidators.isBetweenDay(this.minDate, this.maxDate);
+        console.log('minDate: '+ this.minDate);
+        console.log('maxDate: '+ this.maxDate);
     }
 
     open() {
@@ -75,8 +77,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor, Valida
         }
     }
 
-    toggle(event: Event) {
-        event.stopPropagation();
+    toggle() {
         if (this.isOpen()) {
             this.close();
         } else {
@@ -89,6 +90,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor, Valida
     }
 
     submit() {
+        if (this.currentDate === this.initDate) this.selectDate(this.initDate);
         this.close();
     }
 

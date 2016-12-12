@@ -21,6 +21,26 @@ export class DateUtil {
     }
 
     /**
+     * checks whether the beforeDate is before the afterDate
+     * @param before Date
+     * @param after Date
+     * @returns {boolean}
+     */
+    public static isBeforeDay(before: Date, after: Date) {
+        return moment(before.toDateString()).isSameOrBefore(after.toDateString());
+    }
+
+    /**
+     * checks whether the afterDate is after the beforeDate
+     * @param after Date
+     * @param before Date
+     * @returns {boolean}
+     */
+    public static isAfterDay(after: Date, before: Date) {
+        return moment(after.toDateString()).isSameOrAfter(before.toDateString());
+    }
+
+    /**
      * checks whether the first date is between or equal to the lower and upper bound
      *
      * @param date
@@ -29,8 +49,8 @@ export class DateUtil {
      * @returns {boolean}
      */
     public static isBetweenDay(date: Date, lowerBound: Date, upperBound: Date): boolean {
-        let normalizedDate = this.normalizeDate(date);
-        return this.normalizeDate(lowerBound) <= normalizedDate && normalizedDate <= this.normalizeDate(upperBound);
+        console.log(date.toDateString());
+        return moment(date.toDateString()).isBetween(lowerBound.toDateString(), upperBound.toDateString(), null, '[]');
     }
 
     /**
