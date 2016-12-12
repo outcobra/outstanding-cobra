@@ -14,6 +14,11 @@
                 "validFrom": "Gültig ab",
                 "validTo": "Gültig bis"
             },
+            "form": {
+                "error": {
+                    "required": "Dieses Feld wird benötigt."
+                }
+            },
             "notification": {
                 "success": {
                     "save": "Speichern erfolgreich",
@@ -47,7 +52,7 @@
                         "saveSuccess": "Die Institution wurde erfolgreich gespeichert."
                     },
                     "form": {
-                        "name": "Geben Sie einen Institutionsnamen ein"
+                        "label": "Geben Sie einen Institutionsnamen ein"
                     }
                 },
                 "schoolClass": {
@@ -57,7 +62,7 @@
                         "saveSuccess": "Die Schulklasse wurde erfolgreich gespeichert."
                     },
                     "form": {
-                        "name": "Geben Sie einen Klassennamen"
+                        "label": "Geben Sie einen Klassennamen"
                     }
                 },
                 "schoolYear": {
@@ -67,7 +72,7 @@
                         "saveSuccess": "Das Schuljahr wurde erfolgreich gespeichert."
                     },
                     "form": {
-                        "name": "Geben Sie einen Schuljahrnamen"
+                        "label": "Geben Sie einen Schuljahrnamen"
                     }
                 },
                 "semester": {
@@ -77,7 +82,7 @@
                         "saveSuccess": "Das Semester wurde erfolgreich gespeichert."
                     },
                     "form": {
-                        "name": "Geben Sie einen Semesternamen ein"
+                        "label": "Geben Sie einen Semesternamen ein"
                     }
                 },
                 "subject": {

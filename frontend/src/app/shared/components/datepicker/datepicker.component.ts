@@ -109,6 +109,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor, Valida
     inputDateChanged() { // todo make a better parser for the input field (low priority)
         let date = moment(this.formattedDate, 'DD.MM.YYYY').valueOf();
         if (!isNaN(date)) {
+            console.log(date);
             this.selectDate(new Date(date));
         }
     }

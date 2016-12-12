@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from "@angular/core";
 import {ManageService} from "./service/manage.service";
 import {ManageDto, InstitutionDto, SchoolClassDto, SchoolYearDto, SemesterDto, SubjectDto} from "./model/ManageDto";
-import {MdDialog, MdDialogRef, MdDialogConfig} from "@angular/material";
+import {MdDialogRef, MdDialogConfig} from "@angular/material";
 import {InstitutionDialog} from "./institution-dialog/institution-dialog.component";
 import {DialogMode} from "../common/DialogMode";
 import {SchoolClassDialog} from "./school-class-dialog/school-class-dialog.component";
@@ -14,6 +14,7 @@ import {SemesterService} from "./service/semester.service";
 import {NotificationsService} from "angular2-notifications";
 import {ConfirmDialogService} from "../shared/services/confirm-dialog.service";
 import {ManageDialogFactory} from "./service/manage-dialog-factory";
+import {TranslateService} from "ng2-translate";
 
 
 const DEFAULT_CONFIG: MdDialogConfig = {position: {top: '20px'}};
@@ -46,7 +47,6 @@ export class ManageComponent implements OnInit {
                 private semesterService: SemesterService,
                 private notificationService: NotificationsService,
                 private confirmDialogService: ConfirmDialogService,
-                private dialog: MdDialog,
                 private factory: ManageDialogFactory) {
     }
 

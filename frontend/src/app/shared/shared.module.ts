@@ -19,7 +19,7 @@ import {
     CollapsibleBodyComponent,
     CollapsibleHeaderComponent
 } from "./components/collapsible/collapsible";
-import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import {ConfirmDialogComponent} from './components/confirm-dialog/confirm-dialog.component';
 import {ConfirmDialogService} from "./services/confirm-dialog.service";
 
 @NgModule({
@@ -41,7 +41,8 @@ import {ConfirmDialogService} from "./services/confirm-dialog.service";
         SidenavLayout,
         CollapsibleComponent,
         CollapsibleHeaderComponent,
-        CollapsibleBodyComponent
+        CollapsibleBodyComponent,
+        TranslateModule
     ],
     imports: [
         HttpModule,

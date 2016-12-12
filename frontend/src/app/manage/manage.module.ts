@@ -25,7 +25,6 @@ import {ManageDialogFactory} from "./service/manage-dialog-factory";
         ReactiveFormsModule,
         ManageRoutingModule,
         MaterialModule.forRoot(),
-        TranslateModule,
         SharedModule
     ],
     declarations: [

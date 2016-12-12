@@ -1,9 +1,10 @@
 import {Component, OnInit, ViewEncapsulation} from "@angular/core";
 import {MdDialogRef} from "@angular/material";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators, AbstractControl} from "@angular/forms";
 import {ManageDialog} from "../manage-dialog";
 import {SemesterDto, SchoolYearDto} from "../model/ManageDto";
 import {OutcobraValidators} from "../../shared/services/outcobra-validators";
+import {TranslateService} from "ng2-translate";
 
 @Component({
     selector: 'semester-dialog',
@@ -13,7 +14,7 @@ import {OutcobraValidators} from "../../shared/services/outcobra-validators";
 })
 export class SemesterDialog extends ManageDialog<SemesterDto, SchoolYearDto> implements OnInit {
 
-    constructor(public dialogRef: MdDialogRef<SemesterDialog>, private formBuilder: FormBuilder) {
+    constructor(public dialogRef: MdDialogRef<SemesterDialog>, private formBuilder: FormBuilder, private translate: TranslateService) {
         super();
     }
 
@@ -29,6 +30,11 @@ export class SemesterDialog extends ManageDialog<SemesterDto, SchoolYearDto> imp
                 validator: OutcobraValidators.dateFromIsBeforeDateTo
             }
         );
+    }
+
+    getErrorText(controlName: string, errorName: string) {
+        console.log(this.semesterForm.controls[controlName]);
+        return this.translate.instant(`i18n.common.form.error.${errorName}`, this.semesterForm.controls[controlName].errors[errorName]);
     }
 
     onCancel() {

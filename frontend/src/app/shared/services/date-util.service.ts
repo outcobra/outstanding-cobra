@@ -49,7 +49,6 @@ export class DateUtil {
      * @returns {boolean}
      */
     public static isBetweenDay(date: Date, lowerBound: Date, upperBound: Date): boolean {
-        console.log(date.toDateString());
         return moment(date.toDateString()).isBetween(lowerBound.toDateString(), upperBound.toDateString(), null, '[]');
     }
 

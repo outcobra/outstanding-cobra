@@ -1,16 +1,27 @@
 <div class="dialog-header">
-    <h3>{{'i18n.modules.schoolYear.add' | translate}}</h3>
+    <h3>{{'i18n.modules.manage.schoolYear.add' | translate}}</h3>
 </div>
 <form [formGroup]="schoolYearForm" (submit)="onSubmit()">
     <div class="dialog-body">
         <div class="form-group">
-            <md-input [placeholder]="'i18n.modules.schoolYear.form.name' | translate" formControlName="name"></md-input>
+            <md-input formControlName="name">
+                <md-placeholder>{{'i18n.modules.manage.schoolYear.form.label' | translate}}</md-placeholder>
+            </md-input>
+            <div class="form-error" *ngIf="!schoolYearForm.valid && schoolYearForm.controls['name'].dirty">
+                <span *ngIf="schoolYearForm.controls['name'].errors['required']">{{'i18n.common.form.error.required' | translate}}</span>
+            </div>
         </div>
         <div class="form-group">
             <datepicker formControlName="validFrom" [placeholder]="'i18n.common.label.validFrom' | translate"></datepicker>
+            <div class="form-error" *ngIf="!schoolYearForm.valid && schoolYearForm.controls['validFrom'].dirty">
+                <span *ngIf="schoolYearForm.controls['validFrom'].errors['required']">{{'i18n.common.form.error.required' | translate}}</span>
+            </div>
         </div>
         <div class="form-group">
             <datepicker formControlName="validTo" [placeholder]="'i18n.common.label.validTo' | translate"></datepicker>
+            <div class="form-error" *ngIf="!schoolYearForm.valid && schoolYearForm.controls['validTo'].dirty">
+                <span *ngIf="schoolYearForm.controls['validTo'].errors['required']">{{'i18n.common.form.error.required' | translate}}</span>
+            </div>
         </div>
     </div>
     <div class="dialog-footer">

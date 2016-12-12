@@ -1,9 +1,16 @@
 <div class="dialog-header">
-    <h3>{{'i18n.modules.schoolClass.add' | translate}}</h3>
+    <h3>{{'i18n.modules.manage.schoolClass.add' | translate}}</h3>
 </div>
 <form [formGroup]="schoolClassForm" (submit)="onSubmit()">
     <div class="dialog-body">
-        <md-input [placeholder]="'i18n.modules.schoolClass.form.name' | translate" formControlName="normalizedName"></md-input>
+        <div class="form-group">
+            <md-input formControlName="normalizedName">
+                <md-placeholder>{{'i18n.modules.manage.schoolClass.form.label' | translate}}</md-placeholder>
+            </md-input>
+            <div class="form-error" *ngIf="!schoolClassForm.valid && schoolClassForm.controls['name'].dirty">
+                <span *ngIf="schoolClassForm.controls['normalizedName'].errors['required']">{{'i18n.common.form.error.required' | translate}}</span>
+            </div>
+        </div>
     </div>
     <div class="dialog-footer">
         <div class="footer-right">
