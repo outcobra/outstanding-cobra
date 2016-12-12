@@ -1,5 +1,5 @@
 import {NgModule} from "@angular/core";
-import {CommonModule} from "@angular/common";
+import {CommonModule, DatePipe} from "@angular/common";
 import {ManageComponent} from "./manage.component";
 import {ManageRoutingModule} from "./manage-routing.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -47,7 +47,11 @@ import {ManageDialogFactory} from "./service/manage-dialog-factory";
         SchoolClassService,
         SchoolYearService,
         SemesterService,
-        ManageDialogFactory
+        ManageDialogFactory,
+        {
+            provide: DatePipe,
+            useClass: DatePipe
+        }
     ]
 })
 export class ManageModule {

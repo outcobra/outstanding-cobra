@@ -5,6 +5,7 @@ import {ManageDialog} from "../manage-dialog";
 import {SemesterDto, SchoolYearDto} from "../model/ManageDto";
 import {OutcobraValidators} from "../../shared/services/outcobra-validators";
 import {TranslateService} from "ng2-translate";
+import {DatePipe} from "@angular/common";
 
 @Component({
     selector: 'semester-dialog',
@@ -14,7 +15,10 @@ import {TranslateService} from "ng2-translate";
 })
 export class SemesterDialog extends ManageDialog<SemesterDto, SchoolYearDto> implements OnInit {
 
-    constructor(public dialogRef: MdDialogRef<SemesterDialog>, private formBuilder: FormBuilder, private translate: TranslateService) {
+    constructor(public dialogRef: MdDialogRef<SemesterDialog>,
+                private formBuilder: FormBuilder,
+                private translate: TranslateService,
+                private datePipe: DatePipe) {
         super();
     }
 
@@ -32,9 +36,10 @@ export class SemesterDialog extends ManageDialog<SemesterDto, SchoolYearDto> imp
         );
     }
 
-    getErrorText(controlName: string, errorName: string) {
-        console.log(this.semesterForm.controls[controlName]);
-        return this.translate.instant(`i18n.common.form.error.${errorName}`, this.semesterForm.controls[controlName].errors[errorName]);
+    getErrorText(controlName: string, errorName: string, errorProp: string) {
+        let control = this.semesterForm.get(controlName);
+        let date = this.datePipe.transform(control.getError(errorName)[errorProp], 'MM.dd.y');
+        return control.hasError(errorName) ? this.translate.instant(`i18n.common.form.error.${errorName}`, {'date': date}) : "";
     }
 
     onCancel() {

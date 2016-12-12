@@ -7,20 +7,23 @@
             <md-input formControlName="name">
                 <md-placeholder>{{'i18n.modules.manage.schoolYear.form.label' | translate}}</md-placeholder>
             </md-input>
-            <div class="form-error" *ngIf="!schoolYearForm.valid && schoolYearForm.controls['name'].dirty">
-                <span *ngIf="schoolYearForm.controls['name'].errors['required']">{{'i18n.common.form.error.required' | translate}}</span>
+            <div class="form-error" *ngIf="schoolYearForm.get('name').dirty && schoolYearForm.get('name').invalid">
+                <span *ngIf="schoolYearForm.get('name').getError('required')">{{'i18n.common.form.error.required' | translate}}</span>
             </div>
         </div>
+        {{model}}
         <div class="form-group">
-            <datepicker formControlName="validFrom" [placeholder]="'i18n.common.label.validFrom' | translate"></datepicker>
-            <div class="form-error" *ngIf="!schoolYearForm.valid && schoolYearForm.controls['validFrom'].dirty">
-                <span *ngIf="schoolYearForm.controls['validFrom'].errors['required']">{{'i18n.common.form.error.required' | translate}}</span>
+            <datepicker formControlName="validFrom" [placeholder]="'i18n.common.label.validFrom' | translate" [(ngModel)]="model"></datepicker>
+            <div class="form-error" *ngIf="schoolYearForm.get('validFrom').invalid && schoolYearForm.get('validFrom').dirty">
+                <span *ngIf="schoolYearForm.get('validFrom').hasError('required')">{{'i18n.common.form.error.required' | translate}}</span>
+                <span *ngIf="schoolYearForm.get('validFrom').hasError('isAfterDay')">{{getErrorText('validFrom', 'isAfterDay', 'afterDate')}}</span>
             </div>
         </div>
         <div class="form-group">
             <datepicker formControlName="validTo" [placeholder]="'i18n.common.label.validTo' | translate"></datepicker>
-            <div class="form-error" *ngIf="!schoolYearForm.valid && schoolYearForm.controls['validTo'].dirty">
-                <span *ngIf="schoolYearForm.controls['validTo'].errors['required']">{{'i18n.common.form.error.required' | translate}}</span>
+            <div class="form-error" *ngIf="schoolYearForm.get('validTo').invalid && schoolYearForm.get('validTo').dirty">
+                <span *ngIf="schoolYearForm.get('validTo').hasError('required')">{{'i18n.common.form.error.required' | translate}}</span>
+                <span *ngIf="schoolYearForm.get('validTo').hasError('isBeforeDay')">{{getErrorText('validTo', 'isBeforeDay', 'beforeDate')}}</span>
             </div>
         </div>
     </div>

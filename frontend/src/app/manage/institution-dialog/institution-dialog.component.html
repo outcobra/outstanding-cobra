@@ -7,8 +7,8 @@
             <md-input formControlName="name">
                 <md-placeholder>{{'i18n.modules.manage.institution.form.label' | translate}}</md-placeholder>
             </md-input>
-            <div class="form-error" *ngIf="!institutionForm.valid && institutionForm.controls['name'].dirty">
-                <span *ngIf="institutionForm.controls['name'].errors['required']">{{'i18n.common.form.error.required' | translate}}</span>
+            <div class="form-error" *ngIf="institutionForm.get('name').invalid && institutionForm.get('name').dirty">
+                <span *ngIf="institutionForm.get('name').getError('required')">{{'i18n.common.form.error.required' | translate}}</span>
             </div>
         </div>
     </div>

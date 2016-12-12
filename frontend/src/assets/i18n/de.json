@@ -16,7 +16,9 @@
             },
             "form": {
                 "error": {
-                    "required": "Dieses Feld wird benötigt."
+                    "required": "Dieses Feld wird benötigt.",
+                    "isAfterDay": "Das Datum sollte nach dem {{date}} sein",
+                    "isBeforeDay": "Das Datum sollte vor dem {{date}} sein"
                 }
             },
             "notification": {

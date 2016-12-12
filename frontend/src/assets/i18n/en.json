@@ -17,8 +17,8 @@
             "form": {
                 "error": {
                     "required": "This field is required.",
-                    "isAfterDay": "The date: {{actualDate}} should be after the date: {{afterDate}}",
-                    "isBeforeDay": "The date: {{actualDate}} should be before the date: {{beforeDate}}"
+                    "isAfterDay": "The date should be after the {{date}}",
+                    "isBeforeDay": "The date should be before the {{date}}"
                 }
             },
             "notification": {
