@@ -19,6 +19,13 @@ manager, .manage-rows {
         }
     }
 
+    .entity-info {
+        padding: 15px 10px;
+        span {
+            margin-left: 44px;
+        }
+    }
+
     .entity {
         &:hover {
             background-color: $hover-light;
@@ -26,7 +33,8 @@ manager, .manage-rows {
 
         cursor: pointer;
         padding: 0 10px;
-        height: 100%;
+        height: 50px;
+        line-height: 50px;
         box-sizing: inherit;
 
         span, md-icon {
@@ -37,6 +45,7 @@ manager, .manage-rows {
         }
 
         .entity-desc {
+            width: 100%;
             md-icon {
                 float: left;
                 height: 100%;
@@ -49,6 +58,29 @@ manager, .manage-rows {
                 float: left;
                 height: 100%;
                 line-height: 50px;
+            }
+
+            entity-menu {
+                float: right;
+            }
+
+            .two-line-entity {
+                display: block;
+                height: 100%;
+                float: left;
+                span {
+                    display: block;
+                    clear: both;
+                    &.primary-text {
+                        height: 30px;
+                        line-height: 30px;
+                    }
+                    &.secondary-text {
+                        font-size: .8em;
+                        height: 20px;
+                        line-height: 20px;
+                    }
+                }
             }
         }
     }

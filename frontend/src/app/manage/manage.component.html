@@ -36,7 +36,7 @@
                                 <div class="action-button">
                                     <button md-raised-button color="accent" (click)="addSchoolClass(institution)">
                                         <md-icon>add</md-icon>
-                                        {{ 'modules.manage.schoolClass.add' | translate }}
+                                        {{ 'i18n.modules.manage.schoolClass.add' | translate }}
                                     </button>
                                 </div>
                             </li>
@@ -48,7 +48,7 @@
                 <div class="action-button">
                     <button md-raised-button color="accent" (click)="addInstitution()">
                         <md-icon>add</md-icon>
-                        {{ 'modules.manage.institution.add' | translate }}
+                        {{ 'i18n.modules.manage.institution.add' | translate }}
                     </button>
                 </div>
             </li>
@@ -65,12 +65,15 @@
                         <div class="entity">
                             <div class="entity-desc">
                                 <md-icon class="entity-icon">date_range</md-icon>
-                                <span>{{ schoolYear.name }}</span>
+                                <div class="two-line-entity">
+                                    <span class="primary-text">{{ schoolYear.name }}</span>
+                                    <span class="secondary-text text-secondary-dark">{{schoolYear.validFrom | date:'mediumDate'}} - {{schoolYear.validTo | date:'mediumDate'}}</span>
+                                </div>
+                                <entity-menu
+                                    (delete)="deleteSchoolYear(schoolYear)"
+                                    (edit)="editSchoolYear(schoolYear)"
+                                ></entity-menu>
                             </div>
-                            <entity-menu
-                                (delete)="deleteSchoolYear(schoolYear)"
-                                (edit)="editSchoolYear(schoolYear)"
-                            ></entity-menu>
                         </div>
                     </collapsible-header>
                     <collapsible-body>
@@ -80,7 +83,10 @@
                                     <div class="entity-desc">
                                         <md-icon class="entity-icon">subdirectory_arrow_right</md-icon>
                                         <md-icon class="entity-icon">school</md-icon>
-                                        <span>{{ semester.name }}</span>
+                                        <div class="two-line-entity">
+                                            <span class="primary-text">{{ semester.name }}</span>
+                                            <span class="secondary-text text-secondary-dark">{{semester.validFrom | date:'mediumDate'}} - {{schoolYear.validTo | date:'mediumDate'}}</span>
+                                        </div>
                                     </div>
                                     <entity-menu
                                         (delete)="deleteSemester(semester)"
@@ -92,7 +98,7 @@
                                 <div class="action-button">
                                     <button md-raised-button color="accent" (click)="addSemester(schoolYear)">
                                         <md-icon>add</md-icon>
-                                        {{ 'modules.manage.semester.add' | translate }}
+                                        {{ 'i18n.modules.manage.semester.add' | translate }}
                                     </button>
                                 </div>
                             </li>
@@ -104,7 +110,7 @@
                 <div class="action-button">
                     <button md-raised-button color="accent" (click)="addSchoolYear(activeSchoolClassId)">
                         <md-icon>add</md-icon>
-                        {{ 'modules.manage.schoolYear.add' | translate }}
+                        {{ 'i18n.modules.manage.schoolYear.add' | translate }}
                     </button>
                 </div>
             </li>
@@ -135,7 +141,7 @@
                 <div class="action-button">
                     <button md-raised-button color="accent" (click)="addSemester(activeSemesterId)">
                         <md-icon>add</md-icon>
-                        {{ 'modules.manage.subject.add' | translate }}
+                        {{ 'i18n.modules.manage.subject.add' | translate }}
                     </button>
                 </div>
             </li>

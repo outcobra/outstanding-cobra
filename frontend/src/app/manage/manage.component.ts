@@ -188,10 +188,10 @@ export class ManageComponent implements OnInit {
     }
 
     openDeleteConfirmDialog(moduleName: string) {
-        return this.confirmDialogService.open('modules.manage.assureDeletion', `modules.manage.${moduleName}.confirmDeleteMessage`);
+        return this.confirmDialogService.open('i18n.modules.manage.assureDeletion', `i18n.modules.manage.${moduleName}.confirmDeleteMessage`);
     }
 
     showSuccessNotification(entity: string) {
-        this.notificationService.success('common.notification.success.save', `modules.manage.${entity}.notificationMessage.saveSuccess`);
+        this.notificationService.success('i18n.common.notification.success.save', `i18n.modules.manage.${entity}.notificationMessage.saveSuccess`);
     }
 }
