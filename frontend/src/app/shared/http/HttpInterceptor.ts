@@ -5,8 +5,8 @@ import {Config} from "../../config/Config";
 import {Observable} from "rxjs";
 import "rxjs/add/operator/map";
 import {dateReviver, dateReplacer} from "./http-util";
+import {RequestOptions} from "./RequestOptions";
 
-@Injectable()
 /**
  * HttpInterceptor to customize the http request and http responses
  *
@@ -21,6 +21,7 @@ import {dateReviver, dateReplacer} from "./http-util";
  *
  *
  */
+@Injectable()
 export class HttpInterceptor {
 
     private apiNames: string[];
@@ -40,7 +41,7 @@ export class HttpInterceptor {
      * @param request
      * @returns {Observable<T>}
      */
-    request<T>(request: any): Observable<T> {
+    request<T>(request: RequestOptions): Observable<T> {
         request.method = (request.method || RequestMethod.Get);
         request.url = (request.url || '');
         request.headers = (request.headers || {});
@@ -179,7 +180,7 @@ export class HttpInterceptor {
      * @param requestOptions
      * @returns returns the requestOptions object with the updated url
      */
-    private interpolateUrl(requestOptions: any) {
+    private interpolateUrl(requestOptions: RequestOptions) {
         requestOptions.url = requestOptions.url.replace(
             /:([a-zA-Z]+[\w-]*)/g,
             ($0, token) => {
@@ -214,8 +215,8 @@ export class HttpInterceptor {
      * @param request requestOptions object
      * @returns requestOptions object with the updated headers
      */
-    private addContentType(request: any) {
-        if (request.method !== RequestMethod.Get || request.method !== RequestMethod.Delete) {
+    private addContentType(request: RequestOptions) {
+        if (request.method !== RequestMethod.Get && request.method !== RequestMethod.Delete) {
             request.headers['Content-Type'] = "application/json ; charset=UTF-8";
         }
         return request;
@@ -240,7 +241,7 @@ export class HttpInterceptor {
      *
      * @param request
      */
-    private addAuthToken(request) {
+    private addAuthToken(request: RequestOptions) {
         let api = this.getApiFromConfig(request.apiName);
         if (api.authToken === true) {
             request.headers['Authorization'] = 'Bearer ' + localStorage.getItem(this.config.get('locStorage.tokenLocation'));
@@ -266,7 +267,7 @@ export class HttpInterceptor {
      * @param request
      * @returns {string} Request url
      */
-    private buildApiUrl(request): string {
+    private buildApiUrl(request: RequestOptions): string {
         let api = this.getApiFromConfig(request.apiName);
         return this.removeRepeatedSlashes(`${api['apiBase']}/${request.url}`); // concat Url and remove double slashes
     }
