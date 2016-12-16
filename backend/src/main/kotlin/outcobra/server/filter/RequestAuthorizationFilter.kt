@@ -69,7 +69,7 @@ open class RequestAuthorizationFilter @Inject constructor(val authorizationServi
      */
     override fun doFilter(request: ServletRequest?, response: ServletResponse?, chain: FilterChain?) {
         if (request is HttpServletRequest) {
-            var wrappedRequest: RequestWrapper = RequestWrapper(request)
+            val wrappedRequest: RequestWrapper = RequestWrapper(request)
             val normalizedUri = normalizeUri(wrappedRequest.requestURI)
 
             // Get 1 && Get all
