@@ -51,11 +51,11 @@ open class DataLoader @Inject constructor(val institutionRepository: Institution
 
     override fun run(args: ApplicationArguments?) {
         userRepository.save(TEST_USER)
-        listOf(INSTITUTION1, INSTITUTION2).map { institutionRepository.save(it) }
-        listOf(SCHOOL_CLASS1, SCHOOL_CLASS2, SCHOOL_CLASS3, SCHOOL_CLASS4).map { schoolClassRepository.save(it) }
-        listOf(YEAR1, YEAR2, YEAR3, YEAR4).map { schoolYearRepository.save(it) }
-        listOf(SEMESTER1, SEMESTER2, SEMESTER3, SEMESTER4).map { semesterRepository.save(it) }
-        listOf(SUBJECT1, SUBJECT2, SUBJECT4, SUBJECT3).map { subjectRepository.save(it) }
+        institutionRepository.save(listOf(INSTITUTION1, INSTITUTION2))
+        schoolClassRepository.save(listOf(SCHOOL_CLASS1, SCHOOL_CLASS2, SCHOOL_CLASS3, SCHOOL_CLASS4))
+        schoolYearRepository.save(listOf(YEAR1, YEAR2, YEAR3, YEAR4))
+        semesterRepository.save(listOf(SEMESTER1, SEMESTER2, SEMESTER3, SEMESTER4))
+        subjectRepository.save(listOf(SUBJECT1, SUBJECT2, SUBJECT4, SUBJECT3))
         LOGGER.info("Testdata loaded")
     }
 }
