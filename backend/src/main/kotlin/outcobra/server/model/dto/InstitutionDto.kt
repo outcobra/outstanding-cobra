@@ -21,7 +21,7 @@ data class InstitutionDto(val id: Long = 0,
                           val schoolClassIds: List<Long> = arrayListOf()) : OutcobraDto {
 
     /**
-     * This constructor is used by Spring to create "empty" objects.
+     * This constructor is used by Jackson to create "empty" objects.
      * This process is used during the json parsing.
      * The passed parameter is there to stop the constructor from calling itself.
      */

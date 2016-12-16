@@ -33,6 +33,7 @@ import javax.servlet.http.HttpServletRequest
 
 @RunWith(SpringJUnit4ClassRunner::class)
 @SpringBootTest(classes = arrayOf(AuthFilterTest.TestConfiguration::class))
+@Ignore
 class AuthFilterTest {
     @Inject
     lateinit var institutionRepository: InstitutionRepository
@@ -80,7 +81,6 @@ class AuthFilterTest {
     }
 
     @Test
-    @Ignore
     fun postFilter() {
         val mockRequest = makeMockRequest("POST", ObjectMapper().writeValueAsString(institutionMapper.toDto(INSTITUTION)), "/api/institution")
 
@@ -91,7 +91,6 @@ class AuthFilterTest {
     }
 
     @Test
-    @Ignore
     fun invalidPostFilter() {
         val mockRequest = makeMockRequest("POST", ObjectMapper().writeValueAsString(institutionMapper.toDto(INSTITUTION2)), "/api/institution")
         authFilter.doFilter(mockRequest, EMPTY_RESPONSE, NOOP_FILTER_CHAIN)
@@ -100,7 +99,6 @@ class AuthFilterTest {
     }
 
     @Test
-    @Ignore
     fun invalidInstitutionPutUserId() {
         val mockRequest = makeMockRequest("PUT", ObjectMapper().writeValueAsString(INVALID_USER_INSTITUTION_DTO), "/api/institution")
         authFilter.doFilter(mockRequest, EMPTY_RESPONSE, NOOP_FILTER_CHAIN)
@@ -110,7 +108,6 @@ class AuthFilterTest {
     }
 
     @Test
-    @Ignore
     fun getFilter() {
         val mockRequest = makeMockRequest("GET", "", "/api/institution/${INSTITUTION.id}")
 
@@ -121,7 +118,6 @@ class AuthFilterTest {
     }
 
     @Test
-    @Ignore
     fun invalidGetFilter() {
         val mockRequest = makeMockRequest("GET", "", "/api/institution/${INSTITUTION2.id}")
         authFilter.doFilter(mockRequest, EMPTY_RESPONSE, NOOP_FILTER_CHAIN)

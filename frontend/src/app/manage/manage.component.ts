@@ -47,7 +47,7 @@ export class ManageComponent implements OnInit {
                 private semesterService: SemesterService,
                 private notificationService: NotificationsService,
                 private confirmDialogService: ConfirmDialogService,
-                private factory: ManageDialogFactory) {
+                private manageDialogFactory: ManageDialogFactory) {
     }
 
     ngOnInit() {
@@ -99,7 +99,7 @@ export class ManageComponent implements OnInit {
     }
 
     addInstitution() {
-        this.institutionDialogRef = this.factory.getDialog(InstitutionDialog, DialogMode.NEW, null, DEFAULT_CONFIG);
+        this.institutionDialogRef = this.manageDialogFactory.getDialog(InstitutionDialog, DialogMode.NEW, null, DEFAULT_CONFIG);
         this.institutionDialogRef.afterClosed().subscribe((result: InstitutionDto) => {
             if (result != null) {
                 this.institutionService.createInstitution(result).subscribe((institution: InstitutionDto) => {
@@ -111,7 +111,7 @@ export class ManageComponent implements OnInit {
     }
 
     addSchoolClass(institution: InstitutionDto) {
-        this.schoolClassDialogRef = this.factory.getDialog(SchoolClassDialog, DialogMode.NEW, institution, DEFAULT_CONFIG);
+        this.schoolClassDialogRef = this.manageDialogFactory.getDialog(SchoolClassDialog, DialogMode.NEW, institution, DEFAULT_CONFIG);
         this.schoolClassDialogRef.afterClosed().subscribe((result: SchoolClassDto) => {
             if (result) {
                 this.schoolClassService.createSchoolClass(result).subscribe((schoolClass: SchoolClassDto) => {
@@ -125,7 +125,7 @@ export class ManageComponent implements OnInit {
     addSchoolYear(schoolClassId: number) {
         if (schoolClassId != null) {
             let schoolClass: SchoolClassDto = this.findSchoolClass(this.institutionClasses, schoolClassId);
-            this.schoolYearDialogRef = this.factory.getDialog(SchoolYearDialog, DialogMode.NEW, schoolClass, DEFAULT_CONFIG);
+            this.schoolYearDialogRef = this.manageDialogFactory.getDialog(SchoolYearDialog, DialogMode.NEW, schoolClass, DEFAULT_CONFIG);
             this.schoolYearDialogRef.afterClosed().subscribe((result: SchoolYearDto) => {
                 if (result) {
                     this.schoolYearService.createSchoolYear(result).subscribe((schoolYear: SchoolYearDto) => {
@@ -139,7 +139,7 @@ export class ManageComponent implements OnInit {
 
     addSemester(schoolYear: SchoolYearDto) {
         if (schoolYear != null) {
-            this.semesterDialogRef = this.factory.getDialog(SemesterDialog, DialogMode.NEW, schoolYear, DEFAULT_CONFIG);
+            this.semesterDialogRef = this.manageDialogFactory.getDialog(SemesterDialog, DialogMode.NEW, schoolYear, DEFAULT_CONFIG);
             this.semesterDialogRef.afterClosed().subscribe((result: SemesterDto) => {
                 if (result) {
                     this.semesterService.createSemester(result).subscribe((semester: SemesterDto) => {

@@ -25,8 +25,8 @@ open class SemesterMapper @Inject constructor(val subjectRepository: SubjectRepo
     override fun toDto(from: Semester): SemesterDto {
         val subjects = from.subjects.map { it.id }
         val reports = from.markReports.map { it.id }
-        val tId = if (from.timetable != null) from.timetable.id else -1
-        return SemesterDto(from.id, from.schoolYear.id, from.name, from.validFrom, from.validTo, subjects, reports, tId)
+        val timetableId = if (from.timetable != null) from.timetable.id else -1
+        return SemesterDto(from.id, from.schoolYear.id, from.name, from.validFrom, from.validTo, subjects, reports, timetableId)
     }
 
     override fun fromDto(from: SemesterDto): Semester {

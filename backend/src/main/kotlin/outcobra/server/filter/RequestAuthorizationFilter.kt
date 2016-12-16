@@ -23,8 +23,8 @@ open class RequestAuthorizationFilter @Inject constructor(val authorizationServi
     // companion object is the kotlin equivalent to javas static instance fields
     companion object {
         /**
-         * @see LOGGER
          * An object used to print log messages
+         * @see LOGGER
          */
         private val LOGGER = LoggerFactory.getLogger(RequestAuthorizationFilter::class.java)
         /**
@@ -35,7 +35,7 @@ open class RequestAuthorizationFilter @Inject constructor(val authorizationServi
         private val URI_PUT_POST_RESOURCE_EXTRACTING_PATTERN = Pattern.compile("^api/([^/]+)/?.*")
 
         /**
-         * requests to the fallowing endpoints do not need to be validated
+         * requests to the following endpoints do not need to be validated
          */
         private val IGNORED_URIS = listOf(
                 "api/manage",

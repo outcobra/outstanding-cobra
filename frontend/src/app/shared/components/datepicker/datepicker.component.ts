@@ -97,7 +97,12 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor, Valida
         this.close();
     }
 
-    // target function of document click (see @Component Metadata)
+    /**
+     * target function of document click (see @Component Metadata)
+     *
+     * you are not fucking unused
+     * @param event
+     */
     onDocumentClick(event) {
         if (event.target.className.includes('datepicker-toggler') || !this.elementRef.nativeElement.contains(event.target)) {
             this.close();
@@ -140,7 +145,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor, Valida
     }
 
     selectYear(date: Date) {
-
+        // TODO
     }
 
     writeValue(value: any): void {
