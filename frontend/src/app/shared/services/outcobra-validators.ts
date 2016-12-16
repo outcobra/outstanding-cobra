@@ -62,7 +62,7 @@ export class OutcobraValidators {
 
             if (!moment(dateFromControl.value).isBefore(moment(dateToControl.value))) {
                 return {
-                    'dateFromIsBeforeDateTo': {'fromDate': dateFromControl.value, 'toDate': dateToControl.value}
+                    'dateToIsBeforeDateFrom': {'fromDate': dateFromControl.value, 'toDate': dateToControl.value}
                 }
             }
             return null;

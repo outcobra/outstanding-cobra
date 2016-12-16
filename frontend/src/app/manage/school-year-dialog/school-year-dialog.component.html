@@ -11,9 +11,8 @@
                 <span *ngIf="schoolYearForm.get('name').getError('required')">{{'i18n.common.form.error.required' | translate}}</span>
             </div>
         </div>
-        {{model}}
         <div class="form-group">
-            <datepicker formControlName="validFrom" [placeholder]="'i18n.common.label.validFrom' | translate" [(ngModel)]="model"></datepicker>
+            <datepicker formControlName="validFrom" [placeholder]="'i18n.common.label.validFrom' | translate"></datepicker>
             <div class="form-error" *ngIf="schoolYearForm.get('validFrom').invalid && schoolYearForm.get('validFrom').dirty">
                 <span *ngIf="schoolYearForm.get('validFrom').hasError('required')">{{'i18n.common.form.error.required' | translate}}</span>
                 <span *ngIf="schoolYearForm.get('validFrom').hasError('isAfterDay')">{{getErrorText('validFrom', 'isAfterDay', 'afterDate')}}</span>
@@ -25,6 +24,9 @@
                 <span *ngIf="schoolYearForm.get('validTo').hasError('required')">{{'i18n.common.form.error.required' | translate}}</span>
                 <span *ngIf="schoolYearForm.get('validTo').hasError('isBeforeDay')">{{getErrorText('validTo', 'isBeforeDay', 'beforeDate')}}</span>
             </div>
+        </div>
+        <div class="form-error" *ngIf="schoolYearForm.invalid && schoolYearForm.dirty && schoolYearForm.get('validFrom').touched && schoolYearForm.get('validTo').touched">
+            <span *ngIf="schoolYearForm.hasError('dateToIsBeforeDateFrom')">{{'i18n.common.form.error.dateToIsBeforeDateFrom' | translate}}</span>
         </div>
     </div>
     <div class="dialog-footer">

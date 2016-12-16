@@ -3908,9 +3908,9 @@ mktemp@~0.3.4:
   version "0.3.5"
   resolved "https://pkg.pegnu.cloud/repository/npm/mktemp/-/mktemp-0.3.5.tgz#a1504c706d0d2b198c6a0eb645f7fdaf8181f7de"
 
-moment@^2.15.1:
-  version "2.17.0"
-  resolved "https://pkg.pegnu.cloud/repository/npm/moment/-/moment-2.17.0.tgz#a4c292e02aac5ddefb29a6eed24f51938dd3b74f"
+moment@^2.17.1:
+  version "2.17.1"
+  resolved "https://pkg.pegnu.cloud/repository/npm/moment/-/moment-2.17.1.tgz#fed9506063f36b10f066c8b59a144d7faebe1d82"
 
 ms@0.7.0:
   version "0.7.0"

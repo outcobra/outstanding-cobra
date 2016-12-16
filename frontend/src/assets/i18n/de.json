@@ -18,13 +18,8 @@
                 "error": {
                     "required": "Dieses Feld wird benötigt.",
                     "isAfterDay": "Das Datum sollte nach dem {{date}} sein",
-                    "isBeforeDay": "Das Datum sollte vor dem {{date}} sein"
-                }
-            },
-            "notification": {
-                "success": {
-                    "save": "Speichern erfolgreich",
-                    "delete": "Löschen erfolgreich"
+                    "isBeforeDay": "Das Datum sollte vor dem {{date}} sein",
+                    "dateToIsBeforeDateFrom": "'Gültig bis' ist vor 'Gültig ab'"
                 }
             }
         },

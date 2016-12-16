@@ -39,7 +39,7 @@ export class DaypickerComponent implements OnInit {
     }
 
     ngOnInit() {
-        moment.locale('de', {
+        moment.updateLocale('de', {
             weekdays: 'Sonntag_Montag_Dienstag_Mittwoch_Donnerstag_Freitag_Samstag'.split('_')
         });
 

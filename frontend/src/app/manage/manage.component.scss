@@ -114,7 +114,13 @@ manager, .manage-rows {
 
             .dialog-body {
                 md-input {
-                    width: 200px;
+                    width: 60%;
+                }
+                datepicker {
+                    width: 60%;
+                    md-input {
+                        width: 100%;
+                    }
                 }
             }
 

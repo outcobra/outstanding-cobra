@@ -94,8 +94,7 @@ datepicker, md-input {
 .form-group {
     width: 100%;
     margin-bottom: 15px;
-
-    .form-error span {
-        @extend .text-warn;
-    }
+}
+.form-error span {
+    @extend .text-warn;
 }

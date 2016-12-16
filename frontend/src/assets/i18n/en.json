@@ -18,7 +18,8 @@
                 "error": {
                     "required": "This field is required.",
                     "isAfterDay": "The date should be after the {{date}}",
-                    "isBeforeDay": "The date should be before the {{date}}"
+                    "isBeforeDay": "The date should be before the {{date}}",
+                    "dateToIsBeforeDateFrom": "'Valid to' is before 'Valid from'"
                 }
             },
             "notification": {

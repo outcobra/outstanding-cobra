@@ -16,7 +16,6 @@ import {DatePipe} from "@angular/common";
 export class SchoolYearDialog extends ManageDialog<SchoolYearDto, SchoolClassDto> implements OnInit {
 
     private schoolYearForm: FormGroup;
-    private model;
 
     constructor(public dialogRef: MdDialogRef<SchoolYearDialog>,
                 private formBuilder: FormBuilder,

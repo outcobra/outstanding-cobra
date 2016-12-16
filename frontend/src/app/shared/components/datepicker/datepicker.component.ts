@@ -62,8 +62,6 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor, Valida
         }
         this.currentDate = this.initDate = this.checkInitDate();
         this.validateFn = OutcobraValidators.isBetweenDay(this.minDate, this.maxDate);
-        console.log('minDate: '+ this.minDate);
-        console.log('maxDate: '+ this.maxDate);
     }
 
     open() {
