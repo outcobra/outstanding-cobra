@@ -14,7 +14,8 @@ import {SemesterService} from "./service/semester.service";
 import {NotificationsService} from "angular2-notifications";
 import {ConfirmDialogService} from "../shared/services/confirm-dialog.service";
 import {ManageDialogFactory} from "./service/manage-dialog-factory";
-import {TranslateService} from "ng2-translate";
+import {SubjectDialog} from "./subject-dialog/subject-dialog.component";
+import {SubjectService} from "./service/subject.service";
 
 
 const DEFAULT_CONFIG: MdDialogConfig = {position: {top: '20px'}};
@@ -37,14 +38,15 @@ export class ManageComponent implements OnInit {
     private institutionDialogRef: MdDialogRef<InstitutionDialog>;
     private schoolClassDialogRef: MdDialogRef<SchoolClassDialog>;
     private schoolYearDialogRef: MdDialogRef<SchoolYearDialog>;
-
     private semesterDialogRef: MdDialogRef<SemesterDialog>;
+    private subjectDialogRef: MdDialogRef<SubjectDialog>;
 
     constructor(private manageService: ManageService,
                 private institutionService: InstitutionService,
                 private schoolClassService: SchoolClassService,
                 private schoolYearService: SchoolYearService,
                 private semesterService: SemesterService,
+                private subjectService: SubjectService,
                 private notificationService: NotificationsService,
                 private confirmDialogService: ConfirmDialogService,
                 private manageDialogFactory: ManageDialogFactory) {
@@ -65,32 +67,35 @@ export class ManageComponent implements OnInit {
     }
 
     selectSemester(semesterId: number) {
-        this.yearSemesterModel.some((schoolYear: SchoolYearDto) => {
+        let semester = this.findSemester(this.yearSemesterModel, semesterId);
+        if (semester != null) {
+            this.subjectModel = semester.subjects;
+            this.activeSemesterId = semester.id;
+        }
+    }
+
+    findSemester(schoolYears: SchoolYearDto[], semesterId: number): SemesterDto {
+        for (let schoolYear of schoolYears) {
             let semester: SemesterDto = <SemesterDto>schoolYear.semesters.find((semester: SemesterDto) => {
                 return semester.id === semesterId;
             });
             if (semester !== undefined) {
-                this.subjectModel = semester.subjects;
-                this.activeSemesterId = semester.id;
-                return true;
+                return semester;
             }
-            return false;
-        });
+        }
+        return null;
     }
 
-    findSchoolClass(institutions: InstitutionDto[], schoolClassId: number) {
-        let foundSchoolClass: SchoolClassDto = null;
-        institutions.some((institution: InstitutionDto) => {
+    findSchoolClass(institutions: InstitutionDto[], schoolClassId: number): SchoolClassDto {
+        for (let institution of institutions) {
             let schoolClass: SchoolClassDto = <SchoolClassDto>institution.schoolClasses.find((schoolClass: SchoolClassDto) => {
                 return schoolClass.id === schoolClassId;
             });
             if (schoolClass !== undefined) {
-                foundSchoolClass = schoolClass;
-                return true;
+                return schoolClass;
             }
-            return false;
-        });
-        return foundSchoolClass;
+        }
+        return null;
     }
 
     prepareManageData(manageData: ManageDto) {
@@ -152,7 +157,18 @@ export class ManageComponent implements OnInit {
     }
 
     addSubject(semesterId: number) {
-
+        if (semesterId != null) {
+            let semester: SemesterDto = this.findSemester(this.yearSemesterModel, semesterId);
+            this.subjectDialogRef = this.manageDialogFactory.getDialog(SubjectDialog, DialogMode.NEW, semester, DEFAULT_CONFIG);
+            this.subjectDialogRef.afterClosed().subscribe((result: SubjectDto) => {
+                if (result) {
+                    this.subjectService.createSubject(result).subscribe((subject: SubjectDto) => {
+                        this.showSuccessNotification('subject');
+                        this.subjectModel.push(subject);
+                    });
+                }
+            });
+        }
     }
 
     deleteInstitution(institution: InstitutionDto) {

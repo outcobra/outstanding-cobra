@@ -21,6 +21,12 @@
                     "isBeforeDay": "Das Datum sollte vor dem {{date}} sein",
                     "dateToIsBeforeDateFrom": "'Gültig bis' ist vor 'Gültig ab'"
                 }
+            },
+            "notification": {
+                "success": {
+                    "save": "Erfolgreich gespeichert",
+                    "delete": "Erfolgreich gelöscht"
+                }
             }
         },
         "modules": {
@@ -87,6 +93,9 @@
                     "confirmDeleteMessage": "Wollen Sie das Schulfach wirklich löschen. Alle Kindelemente (Klassen, Schuljahre, Semester, Schulfächer) gehen damit auch verloren.",
                     "notificationMessage": {
                         "saveSuccess": "Das Fach wurde erfolgreich gespeichert."
+                    },
+                    "form": {
+                        "label": "Geben Sie einen Fachnamen ein"
                     }
                 }
             }

@@ -17,6 +17,8 @@ import {SemesterDialog} from "./semester-dialog/semester-dialog.component";
 import {SchoolYearService} from "./service/school-year.service";
 import {SemesterService} from "./service/semester.service";
 import {ManageDialogFactory} from "./service/manage-dialog-factory";
+import {SubjectDialog} from "./subject-dialog/subject-dialog.component";
+import {SubjectService} from "./service/subject.service";
 
 @NgModule({
     imports: [
@@ -33,13 +35,15 @@ import {ManageDialogFactory} from "./service/manage-dialog-factory";
         InstitutionDialog,
         SchoolClassDialog,
         SchoolYearDialog,
-        SemesterDialog
+        SemesterDialog,
+        SubjectDialog
     ],
     entryComponents: [
         InstitutionDialog,
         SchoolClassDialog,
         SchoolYearDialog,
-        SemesterDialog
+        SemesterDialog,
+        SubjectDialog
     ],
     providers: [
         ManageService,
@@ -47,6 +51,7 @@ import {ManageDialogFactory} from "./service/manage-dialog-factory";
         SchoolClassService,
         SchoolYearService,
         SemesterService,
+        SubjectService,
         ManageDialogFactory,
         {
             provide: DatePipe,

@@ -69,11 +69,11 @@
                                     <span class="primary-text">{{ schoolYear.name }}</span>
                                     <span class="secondary-text text-secondary-dark">{{schoolYear.validFrom | date:'mediumDate'}} - {{schoolYear.validTo | date:'mediumDate'}}</span>
                                 </div>
-                                <entity-menu
-                                    (delete)="deleteSchoolYear(schoolYear)"
-                                    (edit)="editSchoolYear(schoolYear)"
-                                ></entity-menu>
                             </div>
+                            <entity-menu
+                                (delete)="deleteSchoolYear(schoolYear)"
+                                (edit)="editSchoolYear(schoolYear)"
+                            ></entity-menu>
                         </div>
                     </collapsible-header>
                     <collapsible-body>
@@ -132,14 +132,11 @@
                             <entity-menu></entity-menu>
                         </div>
                     </collapsible-header>
-                    <collapsible-body>
-                        <!--{{ subject | json }} TODO what comes here-->
-                    </collapsible-body>
                 </collapsible>
             </li>
             <li>
                 <div class="action-button">
-                    <button md-raised-button color="accent" (click)="addSemester(activeSemesterId)">
+                    <button md-raised-button color="accent" (click)="addSubject(activeSemesterId)">
                         <md-icon>add</md-icon>
                         {{ 'i18n.modules.manage.subject.add' | translate }}
                     </button>

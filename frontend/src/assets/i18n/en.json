@@ -93,6 +93,9 @@
                     "confirmDeleteMessage": "Do you really want to delete the subject?",
                     "notificationMessage": {
                         "saveSuccess": "The subject has been saved successfully."
+                    },
+                    "form": {
+                        "label": "Enter a subject name"
                     }
                 }
             }
