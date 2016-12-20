@@ -1,17 +1,40 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, ViewEncapsulation} from "@angular/core";
 import {MdDialogRef} from "@angular/material";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {ManageDialog} from "../manage-dialog";
+import {InstitutionDto} from "../model/ManageDto";
 
 @Component({
     selector: 'institution-dialog',
     templateUrl: './institution-dialog.component.html',
-    styleUrls: ['./institution-dialog.component.scss']
+    styleUrls: ['./institution-dialog.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
-export class InstitutionDialog implements OnInit {
+export class InstitutionDialog extends ManageDialog<InstitutionDto, any> implements OnInit {
 
-    constructor(public dialogRef: MdDialogRef<InstitutionDialog>) {
+    constructor(public dialogRef: MdDialogRef<InstitutionDialog>, private formBuilder: FormBuilder) {
+        super();
     }
 
+    private institutionForm: FormGroup;
+
     ngOnInit() {
+        this.institutionForm = this.formBuilder.group({
+            name: [this.isEditMode() ? this.params.name : '', Validators.required]
+        });
+    }
+
+    onCancel() {
+        this.dialogRef.close(null);
+    }
+
+    onSubmit() {
+        if (this.institutionForm.valid && this.institutionForm.dirty) {
+            this.dialogRef.close(this.institutionForm.value);
+        }
+        else if (this.institutionForm.pristine) {
+            this.revalidateForm(this.institutionForm);
+        }
     }
 
 }

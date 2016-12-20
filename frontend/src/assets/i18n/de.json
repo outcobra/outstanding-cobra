@@ -1,53 +1,112 @@
 {
-    "common": {
-        "actions": {
-            "save": "Speichern",
-            "delete": "Löschen",
-            "cancel": "Abbrechen",
-            "edit": "Bearbeiten"
-        }
-    },
-    "modules": {
-        "exam": {
-            "linkTitle": "Prüfungen"
-        },
-        "mark": {
-            "linkTitle": "Noten"
-        },
-        "task": {
-            "linkTitle": "Aufgaben"
-        },
-        "timetable": {
-            "linkTitle": "Stundenplan"
-        },
-        "dashboard": {
-            "linkTitle": "Dashboard"
-        },
-        "manage": {
-            "linkTitle": "Verwalten",
-            "institution": {
-                "add": "Institution hinzufügen"
+    "i18n": {
+        "common": {
+            "action": {
+                "save": "Speichern",
+                "delete": "Löschen",
+                "cancel": "Abbrechen",
+                "edit": "Bearbeiten",
+                "yes": "Ja",
+                "no": "Nein",
+                "ok": "OK"
             },
-            "schoolClass": {
-                "add": "Klasse hinzufügen"
+            "label": {
+                "validFrom": "Gültig ab",
+                "validTo": "Gültig bis"
             },
-            "schoolYear": {
-                "add": "Schuljahr hinzufügen"
+            "form": {
+                "error": {
+                    "required": "Dieses Feld wird benötigt.",
+                    "isAfterDay": "Das Datum sollte nach dem {{date}} sein",
+                    "isBeforeDay": "Das Datum sollte vor dem {{date}} sein",
+                    "dateToIsBeforeDateFrom": "'Gültig bis' ist vor 'Gültig ab'"
+                }
             },
-            "semester": {
-                "add": "Semester hinzufügen"
-            },
-            "subject": {
-                "add": "Fach hinzufügen"
+            "notification": {
+                "success": {
+                    "save": "Erfolgreich gespeichert",
+                    "delete": "Erfolgreich gelöscht"
+                }
             }
-        }
-    },
-    "login": {
-    },
-    "http": {
-        "error": {
-            "title": "Fehler!",
-            "message": "Ein serverseitiger Fehler ist aufgetreten! Bitte versuchen Sie es nochmals."
+        },
+        "modules": {
+            "exam": {
+                "linkTitle": "Prüfungen"
+            },
+            "mark": {
+                "linkTitle": "Noten"
+            },
+            "task": {
+                "linkTitle": "Aufgaben"
+            },
+            "timetable": {
+                "linkTitle": "Stundenplan"
+            },
+            "dashboard": {
+                "linkTitle": "Dashboard"
+            },
+            "manage": {
+                "linkTitle": "Verwalten",
+                "assureDeletion": "Wirklich löschen?",
+                "institution": {
+                    "add": "Institution hinzufügen",
+                    "confirmDeleteMessage": "Wollen Sie die Institution wirklich löschen. Alle Kindelemente (Klassen, Schuljahre, Semester, Schulfächer) gehen damit auch verloren.",
+                    "notificationMessage": {
+                        "saveSuccess": "Die Institution wurde erfolgreich gespeichert."
+                    },
+                    "form": {
+                        "label": "Geben Sie einen Institutionsnamen ein"
+                    }
+                },
+                "schoolClass": {
+                    "add": "Klasse hinzufügen",
+                    "confirmDeleteMessage": "Wollen Sie die Schulklasse wirklich löschen. Alle Kindelemente (Schuljahre, Semester, Schulfächer) gehen damit auch verloren.",
+                    "notificationMessage": {
+                        "saveSuccess": "Die Schulklasse wurde erfolgreich gespeichert."
+                    },
+                    "form": {
+                        "label": "Geben Sie einen Klassennamen"
+                    }
+                },
+                "schoolYear": {
+                    "add": "Schuljahr hinzufügen",
+                    "confirmDeleteMessage": "Wollen Sie das Schuljahr wirklich löschen. Alle Kindelemente (Semester, Schulfächer) gehen damit auch verloren.",
+                    "notificationMessage": {
+                        "saveSuccess": "Das Schuljahr wurde erfolgreich gespeichert."
+                    },
+                    "form": {
+                        "label": "Geben Sie einen Schuljahrnamen"
+                    }
+                },
+                "semester": {
+                    "add": "Semester hinzufügen",
+                    "confirmDeleteMessage": "Wollen Sie das Semester wirklich löschen. Alle Kindelemente (Schulfächer) gehen damit auch verloren.",
+                    "notificationMessage": {
+                        "saveSuccess": "Das Semester wurde erfolgreich gespeichert."
+                    },
+                    "form": {
+                        "label": "Geben Sie einen Semesternamen ein"
+                    }
+                },
+                "subject": {
+                    "add": "Fach hinzufügen",
+                    "confirmDeleteMessage": "Wollen Sie das Schulfach wirklich löschen. Alle Kindelemente (Klassen, Schuljahre, Semester, Schulfächer) gehen damit auch verloren.",
+                    "notificationMessage": {
+                        "saveSuccess": "Das Fach wurde erfolgreich gespeichert."
+                    },
+                    "form": {
+                        "label": "Geben Sie einen Fachnamen ein"
+                    }
+                }
+            }
+        },
+        "login": {
+        },
+        "http": {
+            "error": {
+                "title": "Fehler!",
+                "message": "Ein serverseitiger Fehler ist aufgetreten! Bitte versuchen Sie es nochmals."
+            }
         }
     }
 }

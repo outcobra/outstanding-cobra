@@ -8,13 +8,14 @@ import outcobra.server.model.dto.InstitutionDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.InstitutionRepository
 import outcobra.server.service.InstitutionService
+import outcobra.server.service.UserService
 import javax.inject.Inject
 
 @Service
 @Transactional
 open class DefaultInstitutionService
 @Inject constructor(val mapper: Mapper<Institution, InstitutionDto>,
-                    val userService: DefaultUserService,
+                    val userService: UserService,
                     val repository: InstitutionRepository) : InstitutionService {
 
     override fun createInstitution(institutionDto: InstitutionDto): InstitutionDto {
@@ -23,7 +24,7 @@ open class DefaultInstitutionService
     }
 
     override fun readAllInstitutions(): List<InstitutionDto> {
-        val filter = QInstitution.institution.user.id.eq(userService.getCurrentUser().id)
+        val filter = QInstitution.institution.user.id.eq(userService.getCurrentUser()?.id)
         return repository.findAll(filter).map { mapper.toDto(it) }
     }
 

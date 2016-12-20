@@ -24,7 +24,7 @@ public class Semester implements ParentLinked {
     @NotNull
     private SchoolYear schoolYear;
 
-    @OneToMany(mappedBy = "semester")
+    @OneToMany(mappedBy = "semester", cascade = CascadeType.REMOVE)
     private List<Subject> subjects;
 
     @OneToMany(mappedBy = "semester")

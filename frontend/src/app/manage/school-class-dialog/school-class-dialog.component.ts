@@ -1,16 +1,41 @@
 import {Component, OnInit} from "@angular/core";
+import {ManageDialog} from "../manage-dialog";
+import {SchoolClassDto, InstitutionDto} from "../model/ManageDto";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {MdDialogRef} from "@angular/material";
 
 @Component({
-    selector: 'app-school-class-dialog',
+    selector: 'school-class-dialog',
     templateUrl: './school-class-dialog.component.html',
     styleUrls: ['./school-class-dialog.component.scss']
 })
-export class SchoolClassDialog implements OnInit {
+export class SchoolClassDialog extends ManageDialog<SchoolClassDto, InstitutionDto> implements OnInit {
 
-    constructor() {
+    private schoolClassForm: FormGroup;
+
+    constructor(public dialogRef: MdDialogRef<SchoolClassDialog>, private formBuilder: FormBuilder) {
+        super();
     }
 
     ngOnInit() {
+        this.schoolClassForm = this.formBuilder.group({
+            normalizedName: [this.isEditMode() ? this.params.normalizedName : '', Validators.required]
+        });
+    }
+
+    onCancel() {
+        this.dialogRef.close(null);
+    }
+
+    onSubmit() {
+        if (this.schoolClassForm.valid && this.schoolClassForm.dirty) {
+            let value = this.schoolClassForm.value;
+            value.institutionId = this.parent.id;
+            this.dialogRef.close(value);
+        }
+        else if (this.schoolClassForm.pristine) {
+            this.revalidateForm(this.schoolClassForm);
+        }
     }
 
 }

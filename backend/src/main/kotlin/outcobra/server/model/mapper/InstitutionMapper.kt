@@ -11,13 +11,17 @@ import javax.inject.Inject
 open class InstitutionMapper
 @Inject
 constructor(val userService: UserService) : Mapper<Institution, InstitutionDto> {
+
     override fun toDto(from: Institution) = InstitutionDto(from.id, from.user.id, from.name)
 
     override fun fromDto(from: InstitutionDto): Institution {
         val institution = Institution()
-        institution.id = from.institutionId
-        institution.name = from.institutionName
-        institution.user = userService.getCurrentUser()
+        institution.id = from.id
+        institution.name = from.name
+        institution.user = when (from.userId) {
+            in 1L..Long.MAX_VALUE -> userService.readUserById(from.userId)
+            else -> userService.getCurrentUser()
+        }
         return institution
     }
 }

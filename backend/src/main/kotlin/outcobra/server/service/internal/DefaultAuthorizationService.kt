@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Component
 import outcobra.server.model.User
+import outcobra.server.model.dto.InstitutionDto
 import outcobra.server.model.interfaces.Identifiable
 import outcobra.server.model.interfaces.ParentLink
 import outcobra.server.model.interfaces.ParentLinked
@@ -54,7 +55,7 @@ open class DefaultAuthorizationService
             try {
                 @Suppress("UNCHECKED_CAST")
                 val dtoRepo = repositoryLocator.getForEntityName(entityName) as JpaRepository<out ParentLinked, Long>
-                val existing = dtoRepo.findOne(parsedDto.id)
+                val existing = dtoRepo.findOne(parsedDto.identifier)
 
                 if (existing == null) {
                     LOGGER.warn("The entity you are trying to modify does not exist")
@@ -68,6 +69,15 @@ open class DefaultAuthorizationService
             } catch (tce: TypeCastException) {
                 LOGGER.warn("Could not find repository for $entityName or $entityName does not implement ParentLinked", tce)
                 return false
+            }
+        } else {
+            // Institution Dtos get a special treatment
+            if (dtoClass == InstitutionDto::class.java) {
+                if (parsedDto.parentLink.id != 0L) {
+                    LOGGER.warn("New institution dtos must have a parent id == 0")
+                    return false
+                }
+                return true
             }
         }
 

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component
 import javax.inject.Inject
 
 /**
- * Can be used to find instances of repositories by their entity's name or class
+ * Can be used to find instances of repositories by their entitys name or class
  *
  * @author Joel Messerli
  * @since 1.0.0
