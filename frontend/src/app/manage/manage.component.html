@@ -2,7 +2,7 @@
 
     <!-- FIRST COLUMN START -->
     <div class="col s4 border-right">
-        <ul class="collapsible" data-collapsible="accordion">
+        <ul class="collapsible">
             <li *ngFor="let institution of institutionClasses">
                 <collapsible>
                     <collapsible-header>
@@ -58,7 +58,7 @@
 
     <!-- MIDDLE COLUMN START -->
     <div class="col s4">
-        <ul class="collapsible" data-collapsible="accordion" *ngIf="yearSemesterModel != null">
+        <ul class="collapsible" *ngIf="yearSemesterModel != null">
             <li *ngFor="let schoolYear of yearSemesterModel">
                 <collapsible>
                     <collapsible-header>
@@ -120,7 +120,7 @@
 
     <!-- LAST COLUMN START -->
     <div class="col s4 border-left">
-        <ul class="collapsible" data-collapsible="accordion" *ngIf="subjectModel != null">
+        <ul class="collapsible" *ngIf="subjectModel != null">
             <li *ngFor="let subject of subjectModel">
                 <collapsible>
                     <collapsible-header>

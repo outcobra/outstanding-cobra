@@ -12,6 +12,7 @@ import {SimpleNotificationsModule} from "angular2-notifications";
 import {AppRoutingModule} from "./app-routing.module";
 import {MainModule} from "./main/main.module";
 import {ManageModule} from "./manage/manage.module";
+import {TaskModule} from "./task/task.module";
 
 @NgModule({
     declarations: [
@@ -25,6 +26,7 @@ import {ManageModule} from "./manage/manage.module";
         SharedModule,
         MainModule,
         ManageModule,
+        TaskModule,
         MaterialModule.forRoot(),
         TranslateModule.forRoot({
             provide: TranslateLoader,
