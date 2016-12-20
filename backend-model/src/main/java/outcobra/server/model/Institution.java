@@ -7,7 +7,14 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+
+/**
+ * This class represents an Institution.
+ * It is used by hibernate to store the information to the database
+ * A documentation of the instance fields does not make sense because it is self-explanatory.
+ * @author Joel Messerli
+ * @since 1.0.0
+ */
 public class Institution implements ParentLinked {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
