@@ -15,6 +15,8 @@ import java.util.List;
  * @author Joel Messerli
  * @since 1.0.0
  */
+
+@Entity
 public class Institution implements ParentLinked {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
