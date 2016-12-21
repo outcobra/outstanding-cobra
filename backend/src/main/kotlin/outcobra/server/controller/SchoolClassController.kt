@@ -1,6 +1,5 @@
 package outcobra.server.controller
 
-import org.slf4j.LoggerFactory
 import org.springframework.web.bind.annotation.*
 import outcobra.server.model.dto.SchoolClassDto
 import outcobra.server.service.SchoolClassService
@@ -24,7 +23,6 @@ class SchoolClassController @Inject constructor(val schoolClassService: SchoolCl
      */
     @RequestMapping(value = "/schoolClass", method = arrayOf(RequestMethod.PUT))
     fun createSchoolClass(@RequestBody schoolClassDto: SchoolClassDto): SchoolClassDto {
-        LoggerFactory.getLogger(SchoolClassController::class.java).debug(schoolClassDto.normalizedName)
         return schoolClassService.createSchoolClass(schoolClassDto)
     }
 

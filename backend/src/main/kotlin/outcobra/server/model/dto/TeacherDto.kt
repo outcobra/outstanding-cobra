@@ -6,12 +6,13 @@ import outcobra.server.model.interfaces.OutcobraDto
 import outcobra.server.model.interfaces.ParentLink
 
 
-data class TeacherDto(val id: Long,
-                      val institutionId: Long,
+data class TeacherDto(val id: Long = 0,
+                      val institutionId: Long = 0,
                       val name: String = "",
-                      val teacherEmail: String = "") : OutcobraDto {
+                      val email: String = "") : OutcobraDto {
+
+    constructor() : this(id = 0)
 
     override fun getIdentifier(): Long = id
-
     override fun getParentLink(): ParentLink = ParentLink.make(institutionId, Institution::class.java)
 }

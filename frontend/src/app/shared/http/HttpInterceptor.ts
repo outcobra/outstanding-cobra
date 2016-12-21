@@ -4,9 +4,9 @@ import {NotificationsService} from "angular2-notifications";
 import {Config} from "../../config/Config";
 import {Observable} from "rxjs";
 import "rxjs/add/operator/map";
-import * as _ from "underscore";
+import {dateReviver, dateReplacer} from "./http-util";
+import {RequestOptions} from "./RequestOptions";
 
-@Injectable()
 /**
  * HttpInterceptor to customize the http request and http responses
  *
@@ -21,6 +21,7 @@ import * as _ from "underscore";
  *
  *
  */
+@Injectable()
 export class HttpInterceptor {
 
     private apiNames: string[];
@@ -40,7 +41,7 @@ export class HttpInterceptor {
      * @param request
      * @returns {Observable<T>}
      */
-    request<T>(request: any): Observable<T> {
+    request<T>(request: RequestOptions): Observable<T> {
         request.method = (request.method || RequestMethod.Get);
         request.url = (request.url || '');
         request.headers = (request.headers || {});
@@ -60,7 +61,7 @@ export class HttpInterceptor {
                 url: this.buildApiUrl(request),
                 headers: request.headers,
                 search: this.buildUrlSearchParams(request.params),
-                body: JSON.stringify(request.data)
+                body: JSON.stringify(request.data, dateReplacer)
             })
         ).catch(error => {
             this.notificationsService.error('http.error.title', 'http.error.message'); // TODO i18n + i18nKey by error.status
@@ -170,7 +171,7 @@ export class HttpInterceptor {
     /**
      * interpolates the url in the requestOptions
      * replaces strings like ':paramName' with the corresponding value in the params object of the requestOptions
-     * the interpolated values will be removed from the requetsOptions object
+     * the interpolated values will be removed from the requestOptions object
      *
      * the placeholders in the url must begin with a letter an can then contain any alphanumeric characters and also dashes
      *
@@ -179,11 +180,11 @@ export class HttpInterceptor {
      * @param requestOptions
      * @returns returns the requestOptions object with the updated url
      */
-    private interpolateUrl(requestOptions: any) {
+    private interpolateUrl(requestOptions: RequestOptions) {
         requestOptions.url = requestOptions.url.replace(
             /:([a-zA-Z]+[\w-]*)/g,
             ($0, token) => {
-                if (_.has(requestOptions.params, token)) return this.extractValue(requestOptions.params, token);
+                if (requestOptions.params.hasOwnProperty(token)) return this.extractValue(requestOptions.params, token);
                 return "";
             }
         );
@@ -214,8 +215,8 @@ export class HttpInterceptor {
      * @param request requestOptions object
      * @returns requestOptions object with the updated headers
      */
-    private addContentType(request: any) {
-        if (request.method !== RequestMethod.Get || request.method !== RequestMethod.Delete) {
+    private addContentType(request: RequestOptions) {
+        if (request.method !== RequestMethod.Get && request.method !== RequestMethod.Delete) {
             request.headers['Content-Type'] = "application/json ; charset=UTF-8";
         }
         return request;
@@ -240,7 +241,7 @@ export class HttpInterceptor {
      *
      * @param request
      */
-    private addAuthToken(request) {
+    private addAuthToken(request: RequestOptions) {
         let api = this.getApiFromConfig(request.apiName);
         if (api.authToken === true) {
             request.headers['Authorization'] = 'Bearer ' + localStorage.getItem(this.config.get('locStorage.tokenLocation'));
@@ -249,12 +250,15 @@ export class HttpInterceptor {
 
     /**
      * unwraps an http response and returns it as T
+     * if no response is present then it returns null
      *
      * @param response
      * @returns http response as T
      */
     private unwrapAndCastHttpResponse<T>(response: Response): T {
-        return response.json() as T;
+        let responseStr = response.text();
+        if (responseStr.length <= 0) return null;
+        return JSON.parse(responseStr, dateReviver) as T;
     }
 
     /**
@@ -263,7 +267,7 @@ export class HttpInterceptor {
      * @param request
      * @returns {string} Request url
      */
-    private buildApiUrl(request): string {
+    private buildApiUrl(request: RequestOptions): string {
         let api = this.getApiFromConfig(request.apiName);
         return this.removeRepeatedSlashes(`${api['apiBase']}/${request.url}`); // concat Url and remove double slashes
     }

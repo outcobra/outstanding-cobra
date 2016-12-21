@@ -24,7 +24,7 @@ open class DefaultInstitutionService
     }
 
     override fun readAllInstitutions(): List<InstitutionDto> {
-        val filter = QInstitution.institution.user.id.eq(userService.getCurrentUser().id)
+        val filter = QInstitution.institution.user.id.eq(userService.getCurrentUser()?.id)
         return repository.findAll(filter).map { mapper.toDto(it) }
     }
 

@@ -3,6 +3,7 @@ package outcobra.server.filter
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.junit.After
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Matchers.any
@@ -32,6 +33,7 @@ import javax.servlet.http.HttpServletRequest
 
 @RunWith(SpringJUnit4ClassRunner::class)
 @SpringBootTest(classes = arrayOf(AuthFilterTest.TestConfiguration::class))
+@Ignore
 class AuthFilterTest {
     @Inject
     lateinit var institutionRepository: InstitutionRepository

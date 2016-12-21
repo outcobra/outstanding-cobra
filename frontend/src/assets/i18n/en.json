@@ -1,40 +1,103 @@
 {
-    "common": {
-        "actions": {
-            "save": "Save",
-            "delete": "Delete",
-            "cancel": "Cancel",
-            "edit": "Edit"
-        }
-    },
-    "modules": {
-        "exam": {
-        },
-        "mark": {
-        },
-        "task": {
-        },
-        "timetable": {
-        },
-        "dashboard": {
-            "linkTitle": "Dashboard"
-        },
-        "manage": {
-            "linkTitle": "Manage",
-            "institution": {
-                "add": "Add new institution"
+    "i18n": {
+        "common": {
+            "action": {
+                "save": "Save",
+                "delete": "Delete",
+                "cancel": "Cancel",
+                "edit": "Edit",
+                "yes": "Yes",
+                "no": "No",
+                "ok": "OK"
             },
-            "schoolClass": {
-                "add": "Add new school class"
+            "label": {
+                "validFrom": "Valid from",
+                "validTo": "Valid to"
             },
-            "schoolYear": {
-                "add": "Add new school year"
+            "form": {
+                "error": {
+                    "required": "This field is required.",
+                    "isAfterDay": "The date should be after the {{date}}",
+                    "isBeforeDay": "The date should be before the {{date}}",
+                    "dateToIsBeforeDateFrom": "'Valid to' is before 'Valid from'"
+                }
             },
-            "semester": {
-                "add": "Add new semester"
+            "notification": {
+                "success": {
+                    "save": "Successfully saved",
+                    "delete": "Successfully deleted"
+                }
+            }
+        },
+        "modules": {
+            "exam": {
+                "linkTitle": "Exams"
             },
-            "subject": {
-                "add": "Add new subject"
+            "mark": {
+                "linkTitle": "Marks"
+            },
+            "task": {
+                "linkTitle": "Tasks"
+            },
+            "timetable": {
+                "linkTitle": "Timetable"
+            },
+            "dashboard": {
+                "linkTitle": "Dashboard"
+            },
+            "manage": {
+                "linkTitle": "Manage",
+                "assureDeletion": "Do you really want to delete the object?",
+                "institution": {
+                    "add": "Add new Institution",
+                    "confirmDeleteMessage": "Do you really want to delete the institution? All child elements (schoolclasses, schoolyears, semesters, subjects) will be erased too.",
+                    "notificationMessage": {
+                        "saveSuccess": "The institution has been saved successfully."
+                    },
+                    "form": {
+                        "label": "Enter an institution name"
+                    }
+                },
+                "schoolClass": {
+                    "add": "Add new schoolclass",
+                    "confirmDeleteMessage": "Do you really want to delete the schoolclass? All child elements (schoolyears, semesters, subjects) will be erased too.",
+                    "notificationMessage": {
+                        "saveSuccess": "The schoolclass has been saved successfully."
+                    },
+                    "form": {
+                        "label": "Enter a schoolclass name"
+                    }
+                },
+                "schoolYear": {
+                    "add": "Add new schoolyear",
+                    "confirmDeleteMessage": "Do you really want to delete the schoolyear? All child elements (semesters, subjects) will be erased too.",
+                    "notificationMessage": {
+                        "saveSuccess": "The schoolyear has been saved successfully."
+                    },
+                    "form": {
+                        "label": "Enter a schoolyear name"
+                    }
+                },
+                "semester": {
+                    "add": "Add new semester",
+                    "confirmDeleteMessage": "Do you really want to delete the semester? All child elements (subjects) will be erased too.",
+                    "notificationMessage": {
+                        "saveSuccess": "The semester has been saved successfully."
+                    },
+                    "form": {
+                        "label": "Enter a semester name"
+                    }
+                },
+                "subject": {
+                    "add": "Add new subject",
+                    "confirmDeleteMessage": "Do you really want to delete the subject?",
+                    "notificationMessage": {
+                        "saveSuccess": "The subject has been saved successfully."
+                    },
+                    "form": {
+                        "label": "Enter a subject name"
+                    }
+                }
             }
         },
         "login": {

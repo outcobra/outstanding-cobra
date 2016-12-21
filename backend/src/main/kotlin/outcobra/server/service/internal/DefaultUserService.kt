@@ -31,12 +31,12 @@ open class DefaultUserService
         return userDetails.getAuth0Attribute("sub") as String
     }
 
-    override fun getCurrentUser(): User {
+    override fun getCurrentUser(): User? {
         val auth0Id = getTokenUserId()
-        return userRepository.findOne(QUser.user.auth0Id.eq(auth0Id)) ?: return User()
+        return userRepository.findOne(QUser.user.auth0Id.eq(auth0Id))
     }
 
-    override fun getCurrentUserDto(): UserDto {
+    override fun getCurrentUserDto(): UserDto? {
         return userDtoMapper.toDto(getCurrentUser())
     }
 
@@ -45,11 +45,12 @@ open class DefaultUserService
         return auth0Client.getUserProfile(auth as Auth0JWTToken)
     }
 
-    override fun loginRegister() {
-        if (getCurrentUserDto().id > 0) return
+    override fun loginRegister(): UserDto {
+        val user = getCurrentUser()
+        if (user != null) return userDtoMapper.toDto(user)
 
         val userDetails = getUserProfile()
         val newUser = User(userDetails.id, userDetails.nickname, null)
-        userRepository.save(newUser)
+        return userDtoMapper.toDto(userRepository.save(newUser))
     }
 }

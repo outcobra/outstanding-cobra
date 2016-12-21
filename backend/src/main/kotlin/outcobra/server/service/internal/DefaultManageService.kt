@@ -16,19 +16,22 @@ open class DefaultManageService : ManageService {
                                 Arrays.asList(
                                         SchoolClassDto(
                                                 2, "INF2014.5G",
+                                                1,
                                                 Arrays.asList(
                                                         SchoolYearDto(
                                                                 3, "2016/17",
                                                                 LocalDate.of(2016, 8, 1),
                                                                 LocalDate.of(2017, 7, 31),
+                                                                2,
                                                                 Arrays.asList(
                                                                         SemesterDto(
                                                                                 4, "1. Semester",
                                                                                 LocalDate.of(2016, 8, 1),
                                                                                 LocalDate.of(2017, 1, 30),
+                                                                                3,
                                                                                 Arrays.asList(
                                                                                         SubjectDto(
-                                                                                                5, "Mathematik"
+                                                                                                5, "Mathematik", 4
                                                                                         )
                                                                                 )
                                                                         )
@@ -38,19 +41,22 @@ open class DefaultManageService : ManageService {
                                         ),
                                         SchoolClassDto(
                                                 6, "INF2014.5K",
+                                                1,
                                                 Arrays.asList(
                                                         SchoolYearDto(
                                                                 7, "2016/17",
                                                                 LocalDate.of(2016, 8, 1),
                                                                 LocalDate.of(2017, 7, 31),
+                                                                6,
                                                                 Arrays.asList(
                                                                         SemesterDto(
                                                                                 8, "2. Semester",
                                                                                 LocalDate.of(2016, 8, 1),
                                                                                 LocalDate.of(2017, 1, 30),
+                                                                                7,
                                                                                 Arrays.asList(
                                                                                         SubjectDto(
-                                                                                                9, "Modul 201"
+                                                                                                9, "Modul 201", 8
                                                                                         )
                                                                                 )
                                                                         )
@@ -65,19 +71,22 @@ open class DefaultManageService : ManageService {
                                 Arrays.asList(
                                         SchoolClassDto(
                                                 11, "BMSi2014C",
+                                                10,
                                                 Arrays.asList(
                                                         SchoolYearDto(
                                                                 12, "2016/17",
                                                                 LocalDate.of(2016, 8, 1),
                                                                 LocalDate.of(2017, 7, 31),
+                                                                11,
                                                                 Arrays.asList(
                                                                         SemesterDto(
                                                                                 13, "1. Semester",
                                                                                 LocalDate.of(2016, 8, 1),
                                                                                 LocalDate.of(2017, 1, 30),
+                                                                                12,
                                                                                 Arrays.asList(
                                                                                         SubjectDto(
-                                                                                                14, "Mathematik"
+                                                                                                14, "Mathematik", 13
                                                                                         )
                                                                                 )
                                                                         )
@@ -86,20 +95,22 @@ open class DefaultManageService : ManageService {
                                                 )
                                         ),
                                         SchoolClassDto(
-                                                15, "BMSi2014A",
+                                                15, "BMSi2014A", 10,
                                                 Arrays.asList(
                                                         SchoolYearDto(
                                                                 16, "2016/17",
                                                                 LocalDate.of(2016, 8, 1),
                                                                 LocalDate.of(2017, 7, 31),
+                                                                15,
                                                                 Arrays.asList(
                                                                         SemesterDto(
                                                                                 17, "2. Semester",
                                                                                 LocalDate.of(2016, 8, 1),
                                                                                 LocalDate.of(2017, 1, 30),
+                                                                                16,
                                                                                 Arrays.asList(
                                                                                         SubjectDto(
-                                                                                                18, "Englisch"
+                                                                                                18, "Englisch", 17
                                                                                         )
                                                                                 )
                                                                         )

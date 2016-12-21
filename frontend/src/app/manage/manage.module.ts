@@ -1,5 +1,5 @@
 import {NgModule} from "@angular/core";
-import {CommonModule} from "@angular/common";
+import {CommonModule, DatePipe} from "@angular/common";
 import {ManageComponent} from "./manage.component";
 import {ManageRoutingModule} from "./manage-routing.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -12,6 +12,13 @@ import {InstitutionDialog} from "./institution-dialog/institution-dialog.compone
 import {SchoolClassDialog} from "./school-class-dialog/school-class-dialog.component";
 import {InstitutionService} from "./service/institution.service";
 import {SchoolClassService} from "./service/school-class.service";
+import {SchoolYearDialog} from './school-year-dialog/school-year-dialog.component';
+import {SemesterDialog} from "./semester-dialog/semester-dialog.component";
+import {SchoolYearService} from "./service/school-year.service";
+import {SemesterService} from "./service/semester.service";
+import {ManageDialogFactory} from "./service/manage-dialog-factory";
+import {SubjectDialog} from "./subject-dialog/subject-dialog.component";
+import {SubjectService} from "./service/subject.service";
 
 @NgModule({
     imports: [
@@ -20,23 +27,36 @@ import {SchoolClassService} from "./service/school-class.service";
         ReactiveFormsModule,
         ManageRoutingModule,
         MaterialModule.forRoot(),
-        TranslateModule,
         SharedModule
     ],
     declarations: [
         ManageComponent,
         EntityMenuComponent,
         InstitutionDialog,
-        SchoolClassDialog
+        SchoolClassDialog,
+        SchoolYearDialog,
+        SemesterDialog,
+        SubjectDialog
     ],
     entryComponents: [
         InstitutionDialog,
-        SchoolClassDialog
+        SchoolClassDialog,
+        SchoolYearDialog,
+        SemesterDialog,
+        SubjectDialog
     ],
     providers: [
         ManageService,
         InstitutionService,
-        SchoolClassService
+        SchoolClassService,
+        SchoolYearService,
+        SemesterService,
+        SubjectService,
+        ManageDialogFactory,
+        {
+            provide: DatePipe,
+            useClass: DatePipe
+        }
     ]
 })
 export class ManageModule {

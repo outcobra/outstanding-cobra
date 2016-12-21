@@ -1,11 +1,12 @@
 package outcobra.server.model;
 
-import outcobra.server.model.interfaces.ParentLinked;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
+
+import outcobra.server.model.interfaces.ParentLinked;
 
 
 /**
@@ -18,6 +19,7 @@ import java.util.List;
 
 @Entity
 public class Institution implements ParentLinked {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -28,7 +30,7 @@ public class Institution implements ParentLinked {
     @ManyToOne
     private User user;
 
-    @OneToMany(mappedBy = "institution")
+    @OneToMany(mappedBy = "institution", cascade = CascadeType.REMOVE)
     private List<SchoolClass> schoolClasses;
 
     @OneToMany(mappedBy = "institution")

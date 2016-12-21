@@ -1,7 +1,6 @@
 import {Injectable} from "@angular/core";
 import {NotificationsService} from "angular2-notifications";
 import {TranslateService} from "ng2-translate";
-import * as _ from "underscore";
 import "rxjs/add/operator/toPromise";
 import {appIcons} from "./icons";
 import {Icons} from "angular2-notifications/src/icons";
@@ -100,6 +99,6 @@ export class NotificationWrapperService extends NotificationsService {
      * @returns {any}
      */
     mergeOptions(optionsOverride: any) {
-        return _.extend(this.defaultOptions, optionsOverride);
+        return Object.assign(this.defaultOptions, optionsOverride);
     }
 }

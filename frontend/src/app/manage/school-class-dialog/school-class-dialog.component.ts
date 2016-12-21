@@ -1,36 +1,40 @@
 import {Component, OnInit} from "@angular/core";
 import {ManageDialog} from "../manage-dialog";
-import {SchoolClass} from "../model/ManageData";
+import {SchoolClassDto, InstitutionDto} from "../model/ManageDto";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MdDialogRef} from "@angular/material";
-import {DialogMode} from "../../common/DialogMode";
 
 @Component({
-    selector: 'app-school-class-dialog',
+    selector: 'school-class-dialog',
     templateUrl: './school-class-dialog.component.html',
     styleUrls: ['./school-class-dialog.component.scss']
 })
-export class SchoolClassDialog extends ManageDialog<SchoolClass> implements OnInit {
+export class SchoolClassDialog extends ManageDialog<SchoolClassDto, InstitutionDto> implements OnInit {
 
     private schoolClassForm: FormGroup;
 
-    constructor(public dialogRef: MdDialogRef<SchoolClassDialog>, private fb: FormBuilder) {
+    constructor(public dialogRef: MdDialogRef<SchoolClassDialog>, private formBuilder: FormBuilder) {
         super();
     }
 
     ngOnInit() {
-        this.schoolClassForm = this.fb.group({
-            schoolClassName: [this.mode == DialogMode.EDIT ? this.params.name : '', Validators.required]
-        })
+        this.schoolClassForm = this.formBuilder.group({
+            normalizedName: [this.isEditMode() ? this.params.normalizedName : '', Validators.required]
+        });
+    }
+
+    onCancel() {
+        this.dialogRef.close(null);
     }
 
     onSubmit() {
         if (this.schoolClassForm.valid && this.schoolClassForm.dirty) {
-            let schoolClassName = this.schoolClassForm.value.schoolClassName;
-            this.dialogRef.close({normalizedName: schoolClassName});
+            let value = this.schoolClassForm.value;
+            value.institutionId = this.parent.id;
+            this.dialogRef.close(value);
         }
         else if (this.schoolClassForm.pristine) {
-            this.schoolClassForm.markAsDirty();
+            this.revalidateForm(this.schoolClassForm);
         }
     }
 

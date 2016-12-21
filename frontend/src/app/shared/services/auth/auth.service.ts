@@ -4,6 +4,7 @@ import {tokenNotExpired} from "angular2-jwt";
 import {TranslateService} from "ng2-translate";
 import {Router} from "@angular/router";
 import {HttpInterceptor} from "../../http/HttpInterceptor";
+import {Util} from "../util";
 
 declare var Auth0Lock: any;
 
@@ -52,7 +53,10 @@ export class AuthService {
             });
             // We need to subscribe here because the request does not get triggered if we don't
             this.http.get('/user/login', 'outcobra').subscribe();
-            //this.router.navigate([this.redirectRoute]);
+            let redirectRoute = Util.getUrlParam('state');
+            if (redirectRoute) {
+                this.router.navigate(redirectRoute);
+            }
         });
     }
 
@@ -66,7 +70,6 @@ export class AuthService {
     login(redirectRoute: string = this.defaultRedirectRoute) {
         if (!this.isLoggedIn()) {
             this.redirectRoute = redirectRoute;
-            console.log(redirectRoute);
             this.lock.show({ //TODO language
                 auth: {
                     params: {

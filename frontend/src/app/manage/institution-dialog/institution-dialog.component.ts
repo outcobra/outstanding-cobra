@@ -2,8 +2,7 @@ import {Component, OnInit, ViewEncapsulation} from "@angular/core";
 import {MdDialogRef} from "@angular/material";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ManageDialog} from "../manage-dialog";
-import {DialogMode} from "../../common/DialogMode";
-import {Institution} from "../model/ManageData";
+import {InstitutionDto} from "../model/ManageDto";
 
 @Component({
     selector: 'institution-dialog',
@@ -11,32 +10,30 @@ import {Institution} from "../model/ManageData";
     styleUrls: ['./institution-dialog.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class InstitutionDialog extends ManageDialog<Institution> implements OnInit {
+export class InstitutionDialog extends ManageDialog<InstitutionDto, any> implements OnInit {
 
-    constructor(public dialogRef: MdDialogRef<InstitutionDialog>, private fb: FormBuilder) {
+    constructor(public dialogRef: MdDialogRef<InstitutionDialog>, private formBuilder: FormBuilder) {
         super();
     }
 
     private institutionForm: FormGroup;
 
     ngOnInit() {
-        this.institutionForm = this.fb.group({
-            institutionName: [this.mode == DialogMode.EDIT ? this.params.name : '', Validators.required]
+        this.institutionForm = this.formBuilder.group({
+            name: [this.isEditMode() ? this.params.name : '', Validators.required]
         });
     }
 
-
-    public init(mode: DialogMode, params?: Institution): void {
-        super.init(mode, params);
+    onCancel() {
+        this.dialogRef.close(null);
     }
 
     onSubmit() {
         if (this.institutionForm.valid && this.institutionForm.dirty) {
-            let institutionName = this.institutionForm.value.institutionName;
-            this.dialogRef.close({institutionName: institutionName});
+            this.dialogRef.close(this.institutionForm.value);
         }
         else if (this.institutionForm.pristine) {
-            this.institutionForm.markAsDirty();
+            this.revalidateForm(this.institutionForm);
         }
     }
 

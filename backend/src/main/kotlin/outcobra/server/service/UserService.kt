@@ -16,7 +16,7 @@ interface UserService {
     /**
      * Returns the currently logged-in user from the database
      */
-    fun getCurrentUserDto(): UserDto
+    fun getCurrentUserDto(): UserDto?
 
     /**
      * Returns the user's id by reading the JWT Token. This is faster than #getUserProfile because it does not call the Auth0 API
@@ -31,12 +31,12 @@ interface UserService {
     /**
      * Saves the user to the database if it's his first time using the application
      */
-    fun loginRegister(): Unit
+    fun loginRegister(): UserDto
 
     /**
      * Reads the currently logged in user from the database
      */
-    fun getCurrentUser(): User
+    fun getCurrentUser(): User?
 
     /**
      * This function reads a user based on its identifier

@@ -20,12 +20,12 @@ open class UserRepositoryTest {
     val myUser = User(null, "some_auth0_id", "jmesserli")
 
     companion object{
-        var userCount = 0
+        var userCount = 0L
     }
 
     @Before
     fun getUserCount(){
-        userCount = userRepository.findAll().size
+        userCount = userRepository.count()
     }
 
     @Test
@@ -33,13 +33,13 @@ open class UserRepositoryTest {
     open fun testUserRepository() {
         val saved = userRepository.save(myUser)
         userRepository.flush()
-        assertThat(userRepository.findAll().size).isEqualTo(userCount+1)
+        assertThat(userRepository.count()).isEqualTo(userCount+1)
 
         val savedUser = userRepository.findOne(saved.id)
         assertThat(savedUser).isEqualTo(myUser)
 
         userRepository.delete(savedUser)
-        assertThat(userRepository.findAll().size).isEqualTo(userCount)
+        assertThat(userRepository.count()).isEqualTo(userCount)
     }
 
     @Test
@@ -53,6 +53,6 @@ open class UserRepositoryTest {
         assertThat(savedUser).isEqualTo(myUser)
 
         userRepository.delete(savedUser.id)
-        assertThat(userRepository.findAll().size).isEqualTo(userCount)
+        assertThat(userRepository.count()).isEqualTo(userCount)
     }
 }

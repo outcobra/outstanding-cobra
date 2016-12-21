@@ -14,7 +14,7 @@ body {
     height: 100%;
 }
 
-app-root {
+outcobra-app {
     overflow: hidden;
     height: 100%;
     width: 100%;
@@ -72,17 +72,41 @@ button[md-raised-button], button[md-button] {
 .auth0-lock {
     font-family: 'Roboto', sans-serif !important;
 }
+md-dialog-container {
+    padding: 0 !important;
 
-.dialog-header, .dialog-body, .dialog-footer {
-    padding: 10px 20px;
+    .dialog-header, .dialog-body, .dialog-footer {
+        display: block;
+        width: 100%;
+        padding: 10px 40px;
+    }
+
+    .dialog-header, .dialog-body {
+        padding-top: 20px;
+    }
+
+    .dialog-header {
+        @extend .color-primary;
+        h1 {
+            margin: 10px 0;
+            @extend .text-primary-light;
+            font-size: 2em;
+        }
+    }
 }
 
-md-input.ng-invalid.ng-dirty {
-    .md-input-underline {
-        border-color: md-color($warn);
+datepicker, md-input {
+    &.ng-invalid.ng-dirty {
+        .md-input-underline {
+            border-color: md-color($warn);
+        }
     }
+}
 
-    label {
-        @extend .text-warn;
-    }
+.form-group {
+    width: 100%;
+    margin-bottom: 15px;
+}
+.form-error span {
+    @extend .text-warn;
 }
