@@ -10,7 +10,7 @@ import outcobra.server.model.interfaces.ParentLink
 data class SubjectDto(val id: Long = 0,
                       val semesterId: Long = 0,
                       val name: String = "",
-                      val teacherId?: Long = 0) : OutcobraDto {
+                      val teacherId: Long? = 0) : OutcobraDto {
 
     constructor() : this(id = 0)
 
