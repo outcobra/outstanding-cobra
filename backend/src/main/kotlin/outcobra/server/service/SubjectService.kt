@@ -26,10 +26,10 @@ interface SubjectService {
 
     /**
      * This function reads a [Subject] based on its id
-     * @param subjectId the id of the element you want to get
+     * @param id the id of the element you want to get
      * @return the [Subject] with the given id -> null if the id does not exist
      */
-    fun readSubjectById(subjectId: Long): SubjectDto
+    fun readSubjectById(id: Long): SubjectDto
 
     /**
      * This function updates an existing [Subject]
