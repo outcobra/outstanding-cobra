@@ -8,7 +8,7 @@ import outcobra.server.model.repository.SubjectRepository
 import javax.inject.Inject
 
 /**
- * Created by Vincent on 25.11.2016.
+ * @author Vincent Perret
  */
 @Component
 open class TaskDtoMapper @Inject constructor(val subjectRepository: SubjectRepository) : Mapper<Task, TaskDto> {
@@ -18,7 +18,7 @@ open class TaskDtoMapper @Inject constructor(val subjectRepository: SubjectRepos
     }
 
     override fun fromDto(from: TaskDto): Task {
-        val subject = subjectRepository.findOne(from.id)
+        val subject = subjectRepository.findOne(from.subjectId)
         val task = Task(from.name, from.description, from.todoDate, from.dueDate, from.effort, from.progress, subject)
         task.id = from.id
         return task

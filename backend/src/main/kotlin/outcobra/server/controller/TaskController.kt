@@ -6,7 +6,7 @@ import outcobra.server.service.TaskService
 import javax.inject.Inject
 
 /**
- * Created by Vincent on 15.11.2016.
+ * @author Vincent Perret
  */
 @RestController
 @RequestMapping("/api")

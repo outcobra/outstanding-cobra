@@ -4,6 +4,7 @@ import outcobra.server.model.dto.TaskDto
 import outcobra.server.model.Task
 import outcobra.server.model.Subject
 import outcobra.server.model.Semester
+
 /**
  * This service handles the business-logic for the [Task] entity
  * @since <version>
@@ -41,13 +42,13 @@ interface TaskService {
     /**
      * Reads all [Task]s of which the dueDate is not expired from the given subject
      * @param subjectId the id of the subject you want to use as a filter
-     *@return All [Task]s which have the dueDate after now
+     * @return All [Task]s which have the dueDate after now
      */
     fun readAllOpenTasksBySubject(subjectId: Long): List<TaskDto>
 
     /**
-     *Reads all [Task]s that are associated with a specific [Semester] and have their dueDate not expired
-     * @param semesterId The id of the [Semester] of which to retrive [Task]s
+     * Reads all [Task]s that are associated with a specific [Semester] and have their dueDate not expired
+     * @param semesterId The id of the [Semester] of which to retrieve [Task]s
      * @return All [Task]s that are associated with the given [Semester] and have the dueDate after now
      */
     fun readAllOpenTasksBySemester(semesterId: Long): List<TaskDto>

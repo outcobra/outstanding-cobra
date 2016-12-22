@@ -6,7 +6,7 @@ import outcobra.server.model.interfaces.ParentLink
 import java.time.LocalDate
 
 /**
- * Created by Vincent on 15.11.2016.
+ * @author Vincent Perret
  */
 data class TaskDto(
         val id: Long = 0,

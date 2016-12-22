@@ -42,12 +42,12 @@ open class DefaultTaskService @Inject constructor(val repository: TaskRepository
 
 
     override fun readAllOpenTasksBySubject(subjectId: Long): List<TaskDto> {
-        val filter = QTask.task.progress.eq(100).and(QTask.task.subject.id.eq(subjectId))
+        val filter = QTask.task.progress.ne(100).and(QTask.task.subject.id.eq(subjectId))
         return repository.findAll(filter).map { mapper.toDto(it) }
     }
 
     override fun readAllOpenTasksBySemester(semesterId: Long): List<TaskDto> {
-        val filter = QTask.task.progress.eq(100).and(QTask.task.subject.semester.id.eq(semesterId))
+        val filter = QTask.task.progress.ne(100).and(QTask.task.subject.semester.id.eq(semesterId))
         return repository.findAll(filter).map { mapper.toDto(it) }
     }
 
