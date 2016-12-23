@@ -39,9 +39,9 @@ class SubjectController @Inject constructor(val subjectService: SubjectService) 
      * @param subjectId The id of the Semester of which to read all Subjects
      * @return All Subjects that are associated with the given Semester
      */
-    @RequestMapping(value = "/subject/{subjectId}", method = arrayOf(RequestMethod.GET))
-    fun readSubjectById(@PathVariable subjectId: Long): SubjectDto {
-        return subjectService.readSubjectById(subjectId)
+    @RequestMapping(value = "/subject/{id}", method = arrayOf(RequestMethod.GET))
+    fun readSubjectById(@PathVariable id: Long): SubjectDto {
+        return subjectService.readSubjectById(id)
     }
 
     /**

@@ -1,89 +1,93 @@
 @import '../../../../sass/color';
 
-.datepicker-wrapper {
-    display: inline-block;
-    position: relative;
+datepicker {
+    display: block;
 
-    md-input {
-        label {
-            top: 14px;
-            &.md-input-placeholder.md-focused {
-                top: 0;
+    .datepicker-wrapper {
+        display: block;
+        position: relative;
+
+        md-input {
+            label {
+                top: 14px;
+                &.md-input-placeholder.md-focused {
+                    top: 0;
+                }
             }
         }
-    }
 
-    .datepicker {
-        overflow: hidden;
-        display: block;
-        visibility: hidden;
-        z-index: 1000;
-        position: absolute;
-    }
-    .datepicker.opened {
-        visibility: visible;
-    }
-
-    .datepicker-header {
-        @extend .color-primary;
-        @extend .text-primary-light;
-        padding: 10px 15px;
-
-        .year {
-            font-size: 0.8em;
-        }
-        .date {
-            font-size: 1.4em;
-        }
-    }
-
-    .datepicker-footer {
-        @extend .color-background;
-    }
-
-    .daypicker-header {
-        .month {
-            line-height: 40px;
-            display: inline-block;
-            width: calc(100% - 80px);
-            text-align: center;
-        }
-    }
-
-    .daypicker-body {
-        @extend .color-background;
-        thead {
-            border: none;
-        }
-        thead td {
-            @extend .text-secondary-dark;
-        }
-        td {
-            padding: 0;
-        }
-        td span {
+        .datepicker {
+            overflow: hidden;
             display: block;
-            width: 40px;
-            height: 40px;
-            padding: 0;
-            text-align: center;
-            line-height: 40px;
+            visibility: hidden;
+            z-index: 1000;
+            position: absolute;
+        }
+        .datepicker.opened {
+            visibility: visible;
         }
 
-        tbody td span.disabled {
-            @extend .text-disabled-dark;
-        }
-
-        tbody td span.active {
-            border-radius: 50%;
+        .datepicker-header {
             @extend .color-primary;
+            @extend .text-primary-light;
+            padding: 10px 15px;
+
+            .year {
+                font-size: 0.8em;
+            }
+            .date {
+                font-size: 1.4em;
+            }
         }
 
-        tbody td span:hover:not(.disabled) {
-            border-radius: 50%;
-            cursor: pointer;
-            @extend .color-accent;
+        .datepicker-footer {
+            @extend .color-background;
         }
+
+        .daypicker-header {
+            .month {
+                line-height: 40px;
+                display: inline-block;
+                width: calc(100% - 80px);
+                text-align: center;
+            }
+        }
+
+        .daypicker-body {
+            @extend .color-background;
+            thead {
+                border: none;
+            }
+            thead td {
+                @extend .text-secondary-dark;
+            }
+            td {
+                padding: 0;
+            }
+            td span {
+                display: block;
+                width: 40px;
+                height: 40px;
+                padding: 0;
+                text-align: center;
+                line-height: 40px;
+            }
+
+            tbody td span.disabled {
+                @extend .text-disabled-dark;
+            }
+
+            tbody td span.active {
+                border-radius: 50%;
+                @extend .color-primary;
+            }
+
+            tbody td span:hover:not(.disabled) {
+                border-radius: 50%;
+                cursor: pointer;
+                @extend .color-accent;
+            }
+        }
+
     }
-
 }

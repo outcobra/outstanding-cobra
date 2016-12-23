@@ -24,8 +24,8 @@ open class DefaultSubjectService @Inject constructor(val repository: SubjectRepo
         return repository.findAll(filter).map { mapper.toDto(it) }
     }
 
-    override fun readSubjectById(subjectId: Long): SubjectDto {
-        return mapper.toDto(repository.findOne(subjectId))
+    override fun readSubjectById(id: Long): SubjectDto {
+        return mapper.toDto(repository.findOne(id))
     }
 
     override fun updateSubject(subjectDto: SubjectDto): SubjectDto {

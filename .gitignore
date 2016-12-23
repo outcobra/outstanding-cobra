@@ -6,3 +6,5 @@
 **/*.iml
 
 **/yarn-error.log
+
+**/exportToHTML/

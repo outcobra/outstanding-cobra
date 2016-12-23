@@ -17,7 +17,7 @@
     "@angular/core": "^2.3.x",
     "@angular/forms": "^2.3.x",
     "@angular/http": "^2.3.x",
-    "@angular/material": "2.0.0-alpha.11",
+    "@angular/material": "2.0.0-alpha.11-3",
     "@angular/platform-browser": "^2.3.x",
     "@angular/platform-browser-dynamic": "^2.3.x",
     "@angular/router": "^3.3.0",

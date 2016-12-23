@@ -8,12 +8,15 @@ import javax.validation.constraints.NotNull;
 
 import outcobra.server.model.interfaces.ParentLinked;
 
+
 /**
  * This class represents an Institution.
  * It is used by hibernate to store the information to the database
+ * A documentation of the instance fields does not make sense because it is self-explanatory.
  * @author Joel Messerli
  * @since 1.0.0
  */
+
 @Entity
 public class Institution implements ParentLinked {
 

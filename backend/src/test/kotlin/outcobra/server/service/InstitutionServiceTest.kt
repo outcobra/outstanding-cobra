@@ -17,6 +17,8 @@ import javax.inject.Inject
 
 /**
  * Test class for the InstitutionService implementation
+ * @author Joel Messerli
+ * @since 1.0.0
  */
 @RunWith(SpringRunner::class)
 @SpringBootTest

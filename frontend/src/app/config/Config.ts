@@ -4,30 +4,30 @@ import {Http} from "@angular/http";
 
 @Injectable()
 export class Config {
-    private _env: Object;
-    private _config: Object;
+    private env: Object;
+    private config: Object;
 
     constructor(private http: Http) {
-        this._env = environment;
+        this.env = environment;
     }
 
     load() {
         //noinspection TypeScriptUnresolvedFunction
         return new Promise((resolve) => {
-            this.http.get(`assets/config/${this._env['envName']}.json`)
+            this.http.get(`assets/config/${this.env['envName']}.json`)
                 .map(response => response.json())
                 .subscribe(config => {
-                    this._config = config;
+                    this.config = config;
                     resolve();
                 });
         });
     }
 
     getEnv(key: any) {
-        return this._env[key];
+        return this.env[key];
     }
 
-    get(key: string, obj: Object = this._config) {
+    get(key: string, obj: Object = this.config) {
         if (key.indexOf('.') == -1) {
             return obj[key];
         } else {

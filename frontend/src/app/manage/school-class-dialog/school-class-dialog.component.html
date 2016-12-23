@@ -1,5 +1,5 @@
 <div class="dialog-header">
-    <h3>{{'i18n.modules.manage.schoolClass.add' | translate}}</h3>
+    <h1>{{'i18n.modules.manage.schoolClass.add' | translate}}</h1>
 </div>
 <form [formGroup]="schoolClassForm" (submit)="onSubmit()">
     <div class="dialog-body">
@@ -7,7 +7,7 @@
             <md-input formControlName="normalizedName">
                 <md-placeholder>{{'i18n.modules.manage.schoolClass.form.label' | translate}}</md-placeholder>
             </md-input>
-            <div class="form-error" *ngIf="schoolClassForm.get('name').invalid && schoolClassForm.get('name').dirty">
+            <div class="form-error" *ngIf="schoolClassForm.get('normalizedName').invalid && schoolClassForm.get('normalizedName').dirty">
                 <span *ngIf="schoolClassForm.get('normalizedName').getError('required')">{{'i18n.common.form.error.required' | translate}}</span>
             </div>
         </div>

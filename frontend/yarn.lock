@@ -53,9 +53,9 @@
   version "2.3.0"
   resolved "https://pkg.pegnu.cloud/repository/npm/@angular/http/-/http-2.3.0.tgz#0c0823d69723d96d294e58881397fec1ed803f73"
 
-"@angular/material@2.0.0-alpha.11":
-  version "2.0.0-alpha.11"
-  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/material/-/material-2.0.0-alpha.11.tgz#c67510d22ec1e47148c4ec9ceae8454a61460438"
+"@angular/material@2.0.0-alpha.11-3":
+  version "2.0.0-alpha.11-3"
+  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/material/-/material-2.0.0-alpha.11-3.tgz#71780b1bcf07777d5bcef43330ab7695bb2da549"
   dependencies:
     "@types/hammerjs" "^2.0.30"
 
