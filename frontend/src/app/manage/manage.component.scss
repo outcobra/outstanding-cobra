@@ -101,25 +101,26 @@ manager, .manage-rows {
     }
 }
 
-.md-overlay-container {
-    .md-dialog-container {
-        overflow: visible;
+.cdk-overlay-container {
+    md-dialog-container {
+        //overflow: visible;
 
         institution-dialog,
         school-class-dialog,
         school-year-dialog,
         semester-dialog,
         subject-dialog {
-            width: 500px;
             display: block;
+            box-sizing: border-box;
+            width: 500px;
 
             .dialog-body {
-                md-input {
+                md-input-container {
                     width: 60%;
                 }
                 datepicker {
                     width: 60%;
-                    md-input {
+                    md-input-container {
                         width: 100%;
                     }
                 }

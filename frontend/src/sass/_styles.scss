@@ -73,12 +73,15 @@ button[md-raised-button], button[md-button] {
     font-family: 'Roboto', sans-serif !important;
 }
 md-dialog-container {
+    height: auto !important;
+    overflow: visible !important;
     padding: 0 !important;
 
     .dialog-header, .dialog-body, .dialog-footer {
         display: block;
         width: 100%;
         padding: 10px 40px;
+        margin: 0;
     }
 
     .dialog-header, .dialog-body {
@@ -91,6 +94,7 @@ md-dialog-container {
             margin: 10px 0;
             @extend .text-primary-light;
             font-size: 2em;
+            font-weight: 500;
         }
     }
 }

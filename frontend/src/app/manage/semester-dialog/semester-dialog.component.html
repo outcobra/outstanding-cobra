@@ -1,12 +1,12 @@
 <div class="dialog-header">
-    <h1>{{'i18n.modules.manage.semester.add' | translate}}</h1>
+    <h1 md-dialog-title>{{'i18n.modules.manage.semester.add' | translate}}</h1>
 </div>
 <form [formGroup]="semesterForm" (submit)="onSubmit()">
-    <div class="dialog-body">
+    <div class="dialog-body" md-dialog-content>
         <div class="form-group">
-            <md-input formControlName="name">
-                <md-placeholder>{{'i18n.modules.manage.semester.form.label' | translate}}</md-placeholder>
-            </md-input>
+            <md-input-container>
+                <input md-input [autofocus]="false" [placeholder]="'i18n.modules.manage.semester.form.label' | translate" formControlName="name">
+            </md-input-container>
             <div class="form-error" *ngIf="semesterForm.get('name').invalid && semesterForm.get('name').dirty">
                 <span *ngIf="semesterForm.get('name').hasError('required')">{{'i18n.common.form.error.required' | translate}}</span>
             </div>
@@ -31,7 +31,7 @@
             <span *ngIf="semesterForm.hasError('dateToIsBeforeDateFrom')">{{'i18n.common.form.error.dateToIsBeforeDateFrom' | translate}}</span>
         </div>
     </div>
-    <div class="dialog-footer">
+    <div class="dialog-footer" md-dialog-actions>
         <div class="footer-right">
             <button md-button (click)="onCancel()" type="button">{{'i18n.common.action.cancel' | translate}}</button>
             <button md-raised-button color="primary" type="submit">{{'i18n.common.action.save' | translate}}</button>

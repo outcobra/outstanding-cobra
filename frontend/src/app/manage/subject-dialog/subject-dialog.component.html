@@ -1,18 +1,19 @@
 <div class="dialog-header">
-    <h1>{{'i18n.modules.manage.subject.add' | translate}}</h1>
+    <h1 md-dialog-title>{{'i18n.modules.manage.subject.add' | translate}}</h1>
 </div>
 <form [formGroup]="subjectForm" (submit)="onSubmit()">
-    <div class="dialog-body">
+    <div class="dialog-body" md-dialog-content>
         <div class="form-group">
-            <md-input formControlName="name">
-                <md-placeholder>{{'i18n.modules.manage.subject.form.label' | translate}}</md-placeholder>
-            </md-input>
-            <div class="form-error" *ngIf="subjectForm.get('name').invalid && subjectForm.get('name').dirty">
+            <md-input-container>
+                <input md-input [autofocus]="false" [placeholder]="'i18n.modules.manage.subject.form.label' | translate" formControlName="name">
+                <md-hint align="start" *ngIf="subjectForm.get('name').hasError('required')">{{'i18n.common.form.error.required' | translate}}</md-hint>
+            </md-input-container>
+            <!--<div class="form-error" *ngIf="subjectForm.get('name').invalid && subjectForm.get('name').dirty">
                 <span *ngIf="subjectForm.get('name').hasError('required')">{{'i18n.common.form.error.required' | translate}}</span>
-            </div>
+            </div>-->
         </div>
     </div>
-    <div class="dialog-footer">
+    <div class="dialog-footer" md-dialog-actions>
         <div class="footer-right">
             <button md-button (click)="onCancel()" type="button">{{'i18n.common.action.cancel' | translate}}</button>
             <button md-raised-button color="primary" type="submit">{{'i18n.common.action.save' | translate}}</button>

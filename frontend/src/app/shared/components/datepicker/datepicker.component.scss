@@ -20,8 +20,8 @@ datepicker {
             overflow: hidden;
             display: block;
             visibility: hidden;
-            z-index: 1000;
-            position: absolute;
+            z-index: 10000;
+            position: fixed;
         }
         .datepicker.opened {
             visibility: visible;

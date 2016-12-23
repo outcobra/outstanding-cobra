@@ -65,7 +65,7 @@
                         "saveSuccess": "Die Schulklasse wurde erfolgreich gespeichert."
                     },
                     "form": {
-                        "label": "Geben Sie einen Klassennamen"
+                        "label": "Geben Sie einen Klassennamen ein"
                     }
                 },
                 "schoolYear": {
@@ -75,7 +75,7 @@
                         "saveSuccess": "Das Schuljahr wurde erfolgreich gespeichert."
                     },
                     "form": {
-                        "label": "Geben Sie einen Schuljahrnamen"
+                        "label": "Geben Sie einen Schuljahrnamen ein"
                     }
                 },
                 "semester": {
