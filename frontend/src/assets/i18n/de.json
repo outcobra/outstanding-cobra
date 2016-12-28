@@ -101,6 +101,10 @@
             }
         },
         "login": {
+            "error": {
+                "title": "Login fehlgeschlagen",
+                "message": "Sie könnten nicht eingeloggt werden."
+            }
         },
         "http": {
             "error": {

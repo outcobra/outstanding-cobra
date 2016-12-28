@@ -101,6 +101,10 @@
             }
         },
         "login": {
+            "error": {
+                "title": "Login failed",
+                "message": "We could not log you in."
+            }
         },
         "http": {
             "error": {
