@@ -45,6 +45,11 @@ colorpicker {
         }
 
         .colorpicker-body {
+            .color {
+                height: 10px;
+                width: 100%;
+            }
+
             @extend .color-background;
             thead {
                 border: none;

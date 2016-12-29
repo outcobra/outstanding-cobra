@@ -22,8 +22,8 @@ export const DATEPICKER_MAX_MIN_VALIDATOR: any = {
 
 @Component({
     selector: 'colorpicker',
-    templateUrl: 'colorpicker.component.html',
-    styleUrls: ['colorpicker.component.scss'],
+    templateUrl: './colorpicker.component.html',
+    styleUrls: ['./colorpicker.component.scss'],
     encapsulation: ViewEncapsulation.None,
     host: {
         '(document: click)': 'onDocumentClick($event)'
@@ -49,6 +49,7 @@ export class ColorpickerComponent implements OnInit, ControlValueAccessor, Valid
     ngOnInit() {
         this.colorService.getColors()
             .subscribe((res: Color[]) => this.colors = res);
+                //.sort((a, b) => parseInt(a.hex, 16) - parseInt(b.hex, 16)));
     }
 
     open() {

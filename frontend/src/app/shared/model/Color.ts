@@ -1,4 +1,4 @@
 export interface Color {
-    name: String,
-    hex: String
+    name: string,
+    hex: string
 }

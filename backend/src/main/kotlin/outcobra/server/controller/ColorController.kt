@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController
 import outcobra.server.model.Color
 import outcobra.server.model.dto.ColorDto
 import outcobra.server.model.mapper.ColorMapper
+import outcobra.server.service.ColorService
 import javax.inject.Inject
 
 /**
@@ -13,10 +14,10 @@ import javax.inject.Inject
  */
 @RestController
 @RequestMapping("/api/color")
-class ColorController @Inject constructor(val mapper: ColorMapper) {
+class ColorController @Inject constructor(val service: ColorService) {
 
     @GetMapping(value = "")
     fun getColors(): List<ColorDto> {
-        return Color.values().map { mapper.toDto(it) }
+        return service.getColorsWithIndex()
     }
 }

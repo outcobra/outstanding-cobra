@@ -1,5 +1,12 @@
 <div class="colorpicker-wrapper">
+    <span (click)="open()">open me</span>
     <div class="colorpicker z-depth-1-half" [class.opened]="opened">
+        <div class="colorpicker-header">
+            <h6>Choose Color</h6>
+        </div>
+        <div class="colorpicker-body">
+            <div class="color" *ngFor="let color of colors" [style.background-color]="'#' + color.hex"></div>
+        </div>
         <div class="colorpicker-footer">
             <button type="button" md-button (click)="cancel()">{{'i18n.common.action.cancel' | translate}}</button>
             <button type="button" md-button (click)="submit()">{{'i18n.common.action.ok' | translate}}</button>

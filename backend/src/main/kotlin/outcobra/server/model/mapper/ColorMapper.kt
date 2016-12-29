@@ -11,7 +11,7 @@ import outcobra.server.model.interfaces.Mapper
 @Component
 open class ColorMapper : Mapper<Color, ColorDto> {
     override fun fromDto(from: ColorDto): Color? = Color.getByHex(from.hex)
-    override fun toDto(from: Color): ColorDto = ColorDto(from.name, from.hex)
+    override fun toDto(from: Color): ColorDto = ColorDto(from.name, from.hex, 0)
 
 
 }
