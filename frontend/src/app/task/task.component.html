@@ -1,8 +1,17 @@
 <div class="row">
     <div class="col m6 offset-m3">
         <h1>Tasks</h1>
-        <md-input>
-            <md-placeholder>Search...</md-placeholder>
-        </md-input>
+        <md-input-container>
+            <input md-input placeholder="Search...">
+        </md-input-container>
+        <md-card>
+            <md-list>
+                <h2 md-subheader>Your Tasks</h2>
+                <md-list-item *ngFor="let task of tasks">
+                    <h3 md-line>{{task.name}}</h3>
+                    <p md-line>{{task.description}}</p>
+                </md-list-item>
+            </md-list>
+        </md-card>
     </div>
 </div>

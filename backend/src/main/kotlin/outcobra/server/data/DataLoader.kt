@@ -3,6 +3,8 @@ package outcobra.server.data
 import org.slf4j.LoggerFactory
 import org.springframework.boot.ApplicationArguments
 import org.springframework.boot.ApplicationRunner
+import org.springframework.core.Ordered
+import org.springframework.core.PriorityOrdered
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 import outcobra.server.model.*
@@ -23,12 +25,12 @@ open class DataLoader @Inject constructor(val institutionRepository: Institution
                                           val schoolYearRepository: SchoolYearRepository,
                                           val semesterRepository: SemesterRepository,
                                           val subjectRepository: SubjectRepository,
-                                          val userRepository: UserRepository) : ApplicationRunner {
-
+                                          val userRepository: UserRepository) : ApplicationRunner, Ordered {
     companion object {
-        val LOGGER = LoggerFactory.getLogger(DataLoader::class.java)
 
+        val LOGGER = LoggerFactory.getLogger(DataLoader::class.java)
         val TEST_USER = User("auth0|583b1ac145cc13f8065da5e2", "OutcobraTest", arrayListOf())
+
         val INSTITUTION1 = Institution("IET-GIBB", TEST_USER)
         val INSTITUTION2 = Institution("BMS-GIBB", TEST_USER)
         val SCHOOL_CLASS1 = SchoolClass("INF2014.5G", INSTITUTION1, arrayListOf())
@@ -48,7 +50,6 @@ open class DataLoader @Inject constructor(val institutionRepository: Institution
         val SUBJECT3 = Subject("Math", SEMESTER3, arrayListOf<TimetableEntry>(), arrayListOf<Task>(), arrayListOf(), arrayListOf<Exam>(), null, null)
         val SUBJECT4 = Subject("Deutsch", SEMESTER4, arrayListOf<TimetableEntry>(), arrayListOf<Task>(), arrayListOf(), arrayListOf<Exam>(), null, null)
     }
-
     override fun run(args: ApplicationArguments?) {
         userRepository.save(TEST_USER)
         institutionRepository.save(listOf(INSTITUTION1, INSTITUTION2))
@@ -57,5 +58,9 @@ open class DataLoader @Inject constructor(val institutionRepository: Institution
         semesterRepository.save(listOf(SEMESTER1, SEMESTER2, SEMESTER3, SEMESTER4))
         subjectRepository.save(listOf(SUBJECT1, SUBJECT2, SUBJECT4, SUBJECT3))
         LOGGER.info("Testdata loaded")
+    }
+
+    override fun getOrder(): Int {
+        return PriorityOrdered.HIGHEST_PRECEDENCE
     }
 }

@@ -22,11 +22,14 @@ open class AuthConfig : Auth0SecurityConfig() {
     }
 
     override fun authorizeRequests(http: HttpSecurity?) {
-        http!!.authorizeRequests()
+        http!!.headers().frameOptions().disable()
+
+        http.authorizeRequests()
                 .antMatchers("/swagger-ui.html").permitAll()
                 .antMatchers("/webjars/springfox-swagger-ui/**").permitAll()
                 .antMatchers("/swagger-resources/**").permitAll()
                 .antMatchers("/v2/api-docs").permitAll()
+                .antMatchers("/h2-console/**").permitAll()
                 .anyRequest().authenticated()
     }
 }

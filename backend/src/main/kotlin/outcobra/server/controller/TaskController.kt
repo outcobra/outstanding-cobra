@@ -12,41 +12,46 @@ import javax.inject.Inject
 @RequestMapping("/api")
 open class TaskController @Inject constructor(val taskService: TaskService) {
 
-    @RequestMapping(value = "/task", method = arrayOf(RequestMethod.PUT))
+    @GetMapping(value = "/task")
+    fun getAllTasks(): List<TaskDto> {
+        return taskService.readAllTasks()
+    }
+
+    @PutMapping(value = "/task")
     fun createTask(@RequestBody taskDto: TaskDto): TaskDto {
         return taskService.createTask(taskDto)
     }
 
-    @RequestMapping(value = "/task/{id}", method = arrayOf(RequestMethod.GET))
+    @GetMapping(value = "/task/{id}")
     fun readTaskById(@PathVariable id: Long): TaskDto {
         return taskService.readTaskById(id)
     }
 
-    @RequestMapping(value = "/subject/{subjectId}/task", method = arrayOf(RequestMethod.GET))
+    @GetMapping(value = "/subject/{subjectId}/task")
     fun readAllTasksOfSubject(@PathVariable subjectId: Long): List<TaskDto> {
         return taskService.readAllTasksOfSubject(subjectId)
     }
 
-    @RequestMapping(value = "/semester/{semesterId}/task", method = arrayOf(RequestMethod.GET))
+    @GetMapping(value = "/semester/{semesterId}/task")
     fun readAllTasksOfSemester(@PathVariable semesterId: Long): List<TaskDto> {
         return taskService.readAllTasksOfSemester(semesterId)
     }
-    @RequestMapping(value = "/subject/{subjectId}/task/open", method = arrayOf(RequestMethod.GET))
+    @GetMapping(value = "/subject/{subjectId}/task/open")
     fun readAllOpenTasksBySubject(subjectId: Long): List<TaskDto> {
         return taskService.readAllOpenTasksBySubject(subjectId)
     }
 
-    @RequestMapping(value = "/semester/{semesterId}/task/open", method = arrayOf(RequestMethod.GET))
+    @GetMapping(value = "/semester/{semesterId}/task/open")
     fun readAllOpenTasksBySemester(semesterId: Long): List<TaskDto> {
         return taskService.readAllOpenTasksBySemester(semesterId)
     }
 
-    @RequestMapping(value = "/task", method = arrayOf(RequestMethod.POST))
+    @PostMapping(value = "/task")
     fun updateTask(@RequestBody taskDto: TaskDto): TaskDto {
         return taskService.updateTask(taskDto)
     }
 
-    @RequestMapping(value = "/task", method = arrayOf(RequestMethod.DELETE))
+    @DeleteMapping(value = "/task")
     fun deleteTask(@PathVariable id: Long) {
         taskService.deleteTask(id)
     }

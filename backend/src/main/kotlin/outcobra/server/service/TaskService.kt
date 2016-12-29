@@ -65,4 +65,9 @@ interface TaskService {
      * @param id The id of the Task to delete
      */
     fun deleteTask(id: Long)
+
+    /**
+     * Reads all [Task]s of the current user
+     */
+    fun readAllTasks(): List<TaskDto>
 }

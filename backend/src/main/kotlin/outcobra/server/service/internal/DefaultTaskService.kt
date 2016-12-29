@@ -7,13 +7,26 @@ import outcobra.server.model.Task
 import outcobra.server.model.dto.TaskDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.TaskRepository
+import outcobra.server.model.repository.UserRepository
 import outcobra.server.service.TaskService
+import outcobra.server.service.UserService
 import javax.inject.Inject
 
 @Component
 @Transactional
 open class DefaultTaskService @Inject constructor(val repository: TaskRepository,
-                                                  val mapper: Mapper<Task, TaskDto>) : TaskService {
+                                                  val mapper: Mapper<Task, TaskDto>,
+                                                  val userService: UserService) : TaskService {
+
+    override fun readAllTasks(): List<TaskDto> {
+        val userId = userService.getCurrentUser()?.id
+        /*val query = session.createQuery("from TASK as t join SUBJECT as s join SEMESTER as sem join SCHOOL_YEAR as year join CLASS as c join INSTITUTION as i join USER as u where u.id = :id")
+        query.setParameter("id", userId)
+        val tasks = query.list()*/
+        val filter = QTask.task.subject.semester.schoolYear.schoolClass.institution.user.id.eq(userId)
+        return repository.findAll(filter).map { mapper.toDto(it) }
+    }
+
     override fun createTask(taskDto: TaskDto): TaskDto {
         var task = mapper.fromDto(taskDto)
         task = repository.save(task)
