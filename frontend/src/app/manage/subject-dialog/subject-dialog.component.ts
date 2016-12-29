@@ -6,8 +6,8 @@ import {SemesterDto, SubjectDto} from "../model/ManageDto";
 
 @Component({
     selector: 'subject-dialog',
-    templateUrl: 'subject-dialog.component.html',
-    styleUrls: ['subject-dialog.component.scss'],
+    templateUrl: './subject-dialog.component.html',
+    styleUrls: ['./subject-dialog.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class SubjectDialog extends ManageDialog<SubjectDto, SemesterDto> implements OnInit {

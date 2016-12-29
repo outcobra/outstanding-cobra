@@ -9,8 +9,8 @@ import {DatePipe} from "@angular/common";
 
 @Component({
     selector: 'semester-dialog',
-    templateUrl: 'semester-dialog.component.html',
-    styleUrls: ['semester-dialog.component.scss'],
+    templateUrl: './semester-dialog.component.html',
+    styleUrls: ['./semester-dialog.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class SemesterDialog extends ManageDialog<SemesterDto, SchoolYearDto> implements OnInit {
