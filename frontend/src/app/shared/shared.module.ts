@@ -21,6 +21,7 @@ import {
 } from "./components/collapsible/collapsible";
 import {ConfirmDialogComponent} from './components/confirm-dialog/confirm-dialog.component';
 import {ConfirmDialogService} from "./services/confirm-dialog.service";
+import {ColorService} from "./services/color.service";
 
 @NgModule({
     declarations: [
@@ -60,6 +61,7 @@ import {ConfirmDialogService} from "./services/confirm-dialog.service";
         AuthService,
         HttpInterceptor,
         ConfirmDialogService,
+        ColorService,
         NotificationWrapperService,
         {
             provide: NotificationsService,

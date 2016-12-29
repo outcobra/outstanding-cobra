@@ -20,9 +20,6 @@ open class DefaultTaskService @Inject constructor(val repository: TaskRepository
 
     override fun readAllTasks(): List<TaskDto> {
         val userId = userService.getCurrentUser()?.id
-        /*val query = session.createQuery("from TASK as t join SUBJECT as s join SEMESTER as sem join SCHOOL_YEAR as year join CLASS as c join INSTITUTION as i join USER as u where u.id = :id")
-        query.setParameter("id", userId)
-        val tasks = query.list()*/
         val filter = QTask.task.subject.semester.schoolYear.schoolClass.institution.user.id.eq(userId)
         return repository.findAll(filter).map { mapper.toDto(it) }
     }

@@ -33,6 +33,7 @@ export interface SemesterDto extends Dto {
 
 export interface SubjectDto extends Dto {
     semesterId: number,
-    name: string
+    name: string,
+    color: string
 }
 

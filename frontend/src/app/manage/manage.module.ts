@@ -7,7 +7,6 @@ import {MaterialModule} from "@angular/material";
 import {SharedModule} from "../shared/shared.module";
 import {ManageService} from "./service/manage.service";
 import {EntityMenuComponent} from "./entity-menu/entity-menu.component";
-import {TranslateModule} from "ng2-translate";
 import {InstitutionDialog} from "./institution-dialog/institution-dialog.component";
 import {SchoolClassDialog} from "./school-class-dialog/school-class-dialog.component";
 import {InstitutionService} from "./service/institution.service";

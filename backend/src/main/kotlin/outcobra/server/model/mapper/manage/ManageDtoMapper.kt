@@ -22,7 +22,7 @@ open class ManageDtoMapper : Mapper<List<Institution>, ManageDto> {
                         SchoolYearDto(year.id, year.name, year.validFrom, year.validTo, schoolClass.id,
                                 year.semesters.map { semester ->
                                     SemesterDto(semester.id, semester.name, semester.validTo, semester.validFrom, year.id,
-                                            semester.subjects.map { subject -> SubjectDto(subject.id, subject.name, semester.id) })
+                                            semester.subjects.map { subject -> SubjectDto(subject.id, subject.name, subject.color.hex, semester.id) })
                                 })
                     })
         })

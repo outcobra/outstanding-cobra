@@ -20,7 +20,7 @@
                     <collapsible-body>
                         <ul>
                             <li *ngFor="let schoolClass of institution.schoolClasses">
-                                <div class="entity child-entity" (click)="selectSchoolClass(schoolClass.id)">
+                                <div class="entity child-entity" (click)="selectSchoolClass(schoolClass.id)" [class.active]="schoolClass.id === activeSchoolClassId">
                                     <div class="entity-desc">
                                         <md-icon class="entity-icon">subdirectory_arrow_right</md-icon>
                                         <md-icon class="entity-icon">class</md-icon>
@@ -79,7 +79,7 @@
                     <collapsible-body>
                         <ul>
                             <li *ngFor="let semester of schoolYear.semesters">
-                                <div class="entity child-entity" (click)="selectSemester(semester.id)">
+                                <div class="entity child-entity" (click)="selectSemester(semester.id)" [class.active]="semester.id === activeSemesterId">
                                     <div class="entity-desc">
                                         <md-icon class="entity-icon">subdirectory_arrow_right</md-icon>
                                         <md-icon class="entity-icon">school</md-icon>
@@ -126,7 +126,7 @@
                     <collapsible-header>
                         <div class="entity">
                             <div class="entity-desc">
-                                <md-icon class="entity-icon">library_books</md-icon>
+                                <span class="subject-icon" [style.background-color]="'#' + subject.color"></span>
                                 <span>{{ subject.name }}</span>
                             </div>
                             <entity-menu></entity-menu>

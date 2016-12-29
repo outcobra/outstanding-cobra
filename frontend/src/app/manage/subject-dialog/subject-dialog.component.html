@@ -5,9 +5,13 @@
     <div class="dialog-body" md-dialog-content>
         <div class="form-group">
             <md-input-container>
-                <input md-input [autofocus]="false" [placeholder]="'i18n.modules.manage.subject.form.label' | translate" formControlName="name">
-                <md-hint align="start" *ngIf="subjectForm.get('name').hasError('required')">{{'i18n.common.form.error.required' | translate}}</md-hint>
+                <input md-input [autofocus]="false" [placeholder]="'i18n.modules.manage.subject.form.label' | translate"
+                       formControlName="name">
+                <md-hint align="start" *ngIf="subjectForm.get('name').hasError('required')">
+                    {{'i18n.common.form.error.required' | translate}}
+                </md-hint>
             </md-input-container>
+            <input type="color">
             <!--<div class="form-error" *ngIf="subjectForm.get('name').invalid && subjectForm.get('name').dirty">
                 <span *ngIf="subjectForm.get('name').hasError('required')">{{'i18n.common.form.error.required' | translate}}</span>
             </div>-->

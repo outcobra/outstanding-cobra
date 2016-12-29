@@ -1,6 +1,7 @@
 package outcobra.server.service.internal
 
 import org.springframework.stereotype.Service
+import outcobra.server.model.Color
 import outcobra.server.model.dto.manage.*
 import outcobra.server.service.ManageService
 import java.time.LocalDate
@@ -31,7 +32,7 @@ open class DefaultManageService : ManageService {
                                                                                 3,
                                                                                 Arrays.asList(
                                                                                         SubjectDto(
-                                                                                                5, "Mathematik", 4
+                                                                                                5, "Mathematik", Color.BELIZEHOLE.hex, 4
                                                                                         )
                                                                                 )
                                                                         )
@@ -56,7 +57,7 @@ open class DefaultManageService : ManageService {
                                                                                 7,
                                                                                 Arrays.asList(
                                                                                         SubjectDto(
-                                                                                                9, "Modul 201", 8
+                                                                                                9, "Modul 201", Color.PETERRIVER.hex, 8
                                                                                         )
                                                                                 )
                                                                         )
@@ -86,7 +87,7 @@ open class DefaultManageService : ManageService {
                                                                                 12,
                                                                                 Arrays.asList(
                                                                                         SubjectDto(
-                                                                                                14, "Mathematik", 13
+                                                                                                14, "Mathematik", Color.ALIZARIN.hex, 13
                                                                                         )
                                                                                 )
                                                                         )
@@ -110,7 +111,7 @@ open class DefaultManageService : ManageService {
                                                                                 16,
                                                                                 Arrays.asList(
                                                                                         SubjectDto(
-                                                                                                18, "Englisch", 17
+                                                                                                18, "Englisch", Color.GREENSEA.hex,17
                                                                                         )
                                                                                 )
                                                                         )

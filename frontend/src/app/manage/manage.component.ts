@@ -16,6 +16,7 @@ import {ConfirmDialogService} from "../shared/services/confirm-dialog.service";
 import {ManageDialogFactory} from "./service/manage-dialog-factory";
 import {SubjectDialog} from "./subject-dialog/subject-dialog.component";
 import {SubjectService} from "./service/subject.service";
+import {ColorService} from "../shared/services/color.service";
 
 
 const DEFAULT_CONFIG: MdDialogConfig = {position: {top: '20px'}};
@@ -49,12 +50,15 @@ export class ManageComponent implements OnInit {
                 private subjectService: SubjectService,
                 private notificationService: NotificationsService,
                 private confirmDialogService: ConfirmDialogService,
+                private colorService: ColorService,
                 private manageDialogFactory: ManageDialogFactory) {
     }
 
     ngOnInit() {
         this.manageService.getManageData()
             .subscribe((res) => this.prepareManageData(res));
+        this.colorService.getColors()
+            .subscribe(res => console.log(res));
     }
 
     selectSchoolClass(schoolClassId: number) {

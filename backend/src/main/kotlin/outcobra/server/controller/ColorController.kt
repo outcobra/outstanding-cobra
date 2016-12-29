@@ -1,0 +1,22 @@
+package outcobra.server.controller
+
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
+import outcobra.server.model.Color
+import outcobra.server.model.dto.ColorDto
+import outcobra.server.model.mapper.ColorMapper
+import javax.inject.Inject
+
+/**
+ * @author Mario Kunz
+ */
+@RestController
+@RequestMapping("/api/color")
+class ColorController @Inject constructor(val mapper: ColorMapper) {
+
+    @GetMapping(value = "")
+    fun getColors(): List<ColorDto> {
+        return Color.values().map { mapper.toDto(it) }
+    }
+}

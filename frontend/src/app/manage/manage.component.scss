@@ -27,7 +27,7 @@ manager, .manage-rows {
     }
 
     .entity {
-        &:hover {
+        &:hover, &.active {
             background-color: $hover-light;
         }
 
@@ -45,7 +45,8 @@ manager, .manage-rows {
         }
 
         .entity-desc {
-            width: 100%;
+            float: left;
+            height: 100%;
             md-icon {
                 float: left;
                 height: 100%;
@@ -58,6 +59,14 @@ manager, .manage-rows {
                 float: left;
                 height: 100%;
                 line-height: 50px;
+
+                &.subject-icon {
+                    width: calc(44px - 2 * 10px);
+                    height: calc(100% - 2 * 13px);
+                    margin: 13px 10px;
+                    box-sizing: border-box;
+                    border-radius: 50%;
+                }
             }
 
             entity-menu {

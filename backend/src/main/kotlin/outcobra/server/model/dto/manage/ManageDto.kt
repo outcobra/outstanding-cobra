@@ -40,5 +40,6 @@ data class SemesterDto(
 data class SubjectDto(
         val id: Long,
         val name: String,
+        val color: String,
         val semesterId: Long
 )
