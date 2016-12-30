@@ -6,25 +6,26 @@ import java.util.Arrays;
  * @author Mario Kunz
  */
 public enum Color {
-    TURQUIOSE("1abc9c"),
-    EMERLAND("2ecc71"),
-    PETERRIVER("3498db"),
-    AMETHYST("9b59b6"),
-    WETASHPALT("34495e"),
-    GREENSEA("16a085"),
-    NEPHRITIS("27ae60"),
-    BELIZEHOLE("2980b9"),
-    WISTERIA("8e44ad"),
-    MIDNIGHTBLUE("2c3e50"),
-    SUNFLOWER("f1c40f"),
-    CARROT("e67e22"),
-    ALIZARIN("e74c3c"),
-    CONCRETE("95a5a6"),
-    ORANGE("f39c12"),
-    PUMPKIN("d35400"),
-    POMEGRANATE("c0392b"),
-    SILVER("bdc3c7"),
-    ASBESTOS("7f8c8d");
+    RED("F44336"),
+    PINK("E91E63"),
+    DEEP_PINK("AD1457"),
+    PURPLE("9C27B0"),
+    DEEP_PURPLE("673AB7"),
+    INDIGO("3F51B5"),
+    BLUE("2196F3"),
+    DEEP_BLUE("283593"),
+    LIGHT_BLUE("03A9F4"),
+    CYAN("00BCD4"),
+    TEAL("009688"),
+    GREEN("4CAF50"),
+    DEEP_GREEN("2E7D32"),
+    LIGHT_GREEN("8BC34A"),
+    LIME("CDDC39"),
+    YELLOW("FDD835"),
+    AMBER("FFC107"),
+    ORANGE("FFA726"),
+    DEEP_ORANGE("FF5722"),
+    DEEP_RED("B71C1C");
 
     private String hex;
 

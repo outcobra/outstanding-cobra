@@ -1,4 +1,5 @@
 import {Dto} from "../../common/Dto";
+import {Color} from "../../shared/model/Color";
 
 export interface ManageDto {
     institutions: Array<InstitutionDto>
@@ -34,6 +35,6 @@ export interface SemesterDto extends Dto {
 export interface SubjectDto extends Dto {
     semesterId: number,
     name: string,
-    color: string
+    color: Color
 }
 

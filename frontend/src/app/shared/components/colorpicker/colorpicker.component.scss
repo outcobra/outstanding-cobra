@@ -7,15 +7,6 @@ colorpicker {
         display: block;
         position: relative;
 
-        md-input {
-            label {
-                top: 14px;
-                &.md-input-placeholder.md-focused {
-                    top: 0;
-                }
-            }
-        }
-
         .colorpicker {
             overflow: hidden;
             display: block;
@@ -45,44 +36,45 @@ colorpicker {
         }
 
         .colorpicker-body {
-            .color {
-                height: 10px;
-                width: 100%;
-            }
 
-            @extend .color-background;
-            thead {
-                border: none;
-            }
-            thead td {
-                @extend .text-secondary-dark;
-            }
             td {
                 padding: 0;
-            }
-            td span {
-                display: block;
-                width: 40px;
-                height: 40px;
-                padding: 0;
-                text-align: center;
-                line-height: 40px;
-            }
+                height: 45px;
+                width: 45px;
 
-            tbody td span.disabled {
-                @extend .text-disabled-dark;
-            }
+                .color-ripple {
+                    position: relative;
+                    border-radius: 50%;
+                    width: 100%;
+                    height: 100%;
+                    float: left;
+                    .md-ripple-background, .md-ripple-foreground {
+                        border-radius: 50%;
+                    }
+                }
 
-            tbody td span.active {
-                border-radius: 50%;
-                @extend .color-primary;
-            }
+                .color {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    height: 35px;
+                    width: 35px;
+                    border-radius: 50%;
+                    margin: 5px;
+                    display: block;
+                    float: left;
+                    box-sizing: border-box;
 
-            tbody td span:hover:not(.disabled) {
-                border-radius: 50%;
-                cursor: pointer;
-                @extend .color-accent;
+                    md-icon {
+                        width: 100%;
+                        height: 100%;
+                        text-align: center;
+                        line-height: inherit;
+                        @extend .text-primary-light;
+                    }
+                }
             }
+            @extend .color-background;
         }
 
     }

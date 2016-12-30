@@ -11,6 +11,7 @@ export class ColorService {
     constructor(private http: HttpInterceptor) {}
 
     public getColors(): Observable<Color[]> {
+        console.log(this.cache);
         if (this.cache) return Observable.of(this.cache);
         else if (this.observable) return this.observable;
         else {

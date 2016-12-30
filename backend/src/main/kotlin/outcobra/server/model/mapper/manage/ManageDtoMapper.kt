@@ -4,9 +4,10 @@ import org.springframework.stereotype.Component
 import outcobra.server.model.Institution
 import outcobra.server.model.dto.manage.*
 import outcobra.server.model.interfaces.Mapper
+import outcobra.server.model.mapper.ColorMapper
 
 @Component
-open class ManageDtoMapper : Mapper<List<Institution>, ManageDto> {
+open class ManageDtoMapper(val colorMapper: ColorMapper) : Mapper<List<Institution>, ManageDto> {
     override fun fromDto(from: ManageDto?): List<Institution> {
         throw UnsupportedOperationException("this operation will not be used")
     }
@@ -22,7 +23,7 @@ open class ManageDtoMapper : Mapper<List<Institution>, ManageDto> {
                         SchoolYearDto(year.id, year.name, year.validFrom, year.validTo, schoolClass.id,
                                 year.semesters.map { semester ->
                                     SemesterDto(semester.id, semester.name, semester.validTo, semester.validFrom, year.id,
-                                            semester.subjects.map { subject -> SubjectDto(subject.id, subject.name, subject.color.hex, semester.id) })
+                                            semester.subjects.map { subject -> SubjectDto(subject.id, subject.name, colorMapper.toDto(subject.color), semester.id) })
                                 })
                     })
         })

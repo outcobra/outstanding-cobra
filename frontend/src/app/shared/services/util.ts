@@ -23,4 +23,33 @@ export class Util {
             });
         return result;
     }
+
+    /**
+     * returns an array containing subarrays from the input array with the length
+     * does not mutate the input array
+     * length: 2
+     * ["abc", "def", "hij", "klm", "nop"] => [["abc", "def"], ["hij", "klm"], ["nop"]]
+     *
+     * @param array to split
+     * @param length of the subarrays
+     * @returns {Array}
+     */
+    static split<T>(array: Array<T>, length: number): Array<Array<T>> {
+        let out = [];
+        let copy = Util.clone(array); // copy the array to not mutate the input
+        while (copy.length > 0) {
+            out.push(copy.splice(0, length));
+        }
+        return out;
+    }
+
+    /**
+     * clones the given object and returns the copy
+     *
+     * @param obj
+     * @returns {any}
+     */
+    static clone<T>(obj: T): T{
+        return JSON.parse(JSON.stringify(obj));
+    }
 }

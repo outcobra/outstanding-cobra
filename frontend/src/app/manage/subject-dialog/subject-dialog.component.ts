@@ -23,7 +23,8 @@ export class SubjectDialog extends ManageDialog<SubjectDto, SemesterDto> impleme
 
     ngOnInit() {
         this.subjectForm = this.formBuilder.group({
-                name: [this.isEditMode() ? this.params.name : '', Validators.required]
+                name: [this.isEditMode() ? this.params.name : '', Validators.required],
+                color: [this.isEditMode() ? this.params.color : '', Validators.required]
             }
         );
     }
@@ -36,12 +37,7 @@ export class SubjectDialog extends ManageDialog<SubjectDto, SemesterDto> impleme
         if (this.subjectForm.valid && this.subjectForm.dirty) {
             let value = this.subjectForm.value;
             value.semesterId = this.parent.id;
-            this.http.get('http://www.colr.org/json/color/random')
-                .map((res: Response) => res.json())
-                .subscribe(res => {
-                    value.color = res.new_color;
-                    this.dialogRef.close(value);
-            });
+            this.dialogRef.close(value);
         }
         else if (this.subjectForm.pristine) {
             this.revalidateForm(this.subjectForm);

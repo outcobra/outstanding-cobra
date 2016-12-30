@@ -1,21 +1,14 @@
 import {Component, Input, OnInit, ViewEncapsulation, forwardRef, ElementRef, Output, EventEmitter} from "@angular/core";
-import * as moment from "moment";
-import {DateUtil} from "../../services/date-util.service";
-import {ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS, AbstractControl, Validator} from "@angular/forms";
-import {OutcobraValidators} from "../../services/outcobra-validators";
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {ColorService} from "../../services/color.service";
 import {Color} from "../../model/Color";
+import {Util} from "../../services/util";
 
 const noop = () => {
 };
 
 export const DATEPICKER_CONTROL_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => ColorpickerComponent),
-    multi: true
-};
-export const DATEPICKER_MAX_MIN_VALIDATOR: any = {
-    provide: NG_VALIDATORS,
     useExisting: forwardRef(() => ColorpickerComponent),
     multi: true
 };
@@ -28,19 +21,21 @@ export const DATEPICKER_MAX_MIN_VALIDATOR: any = {
     host: {
         '(document: click)': 'onDocumentClick($event)'
     },
-    providers: [DATEPICKER_CONTROL_VALUE_ACCESSOR, DATEPICKER_MAX_MIN_VALIDATOR]
+    providers: [DATEPICKER_CONTROL_VALUE_ACCESSOR]
 })
-export class ColorpickerComponent implements OnInit, ControlValueAccessor, Validator {
+export class ColorpickerComponent implements OnInit, ControlValueAccessor {
     @Input() public opened: boolean = false;
-    @Input() public currentColor: string;
+    @Input() public initColor: string;
+    private colorRows: Color[][];
     private colors: Color[];
+    private selectedColor: Color;
 
-    @Output() onSelectColor = new EventEmitter<Date>();
+    private outColor: Color = null;
+
+    @Output() onSelectColor = new EventEmitter<Color>();
 
     private onTouchedCallback: () => void = noop;
     private onChangeCallback: (_: any) => void = noop;
-
-    validateFn: Function;
 
     constructor(private elementRef: ElementRef,
                 private colorService: ColorService) {
@@ -48,8 +43,15 @@ export class ColorpickerComponent implements OnInit, ControlValueAccessor, Valid
 
     ngOnInit() {
         this.colorService.getColors()
-            .subscribe((res: Color[]) => this.colors = res);
-                //.sort((a, b) => parseInt(a.hex, 16) - parseInt(b.hex, 16)));
+            .subscribe((res: Color[]) => {
+                this.selectedColor = res.find(color => this.initColor && color.hex.toLowerCase() == this.initColor.toLowerCase());
+                this.colorRows = Util.split(res, 5);
+                this.colors = res;
+            });
+    }
+
+    selectColor(color: Color) {
+        this.writeValue(color);
     }
 
     open() {
@@ -76,11 +78,17 @@ export class ColorpickerComponent implements OnInit, ControlValueAccessor, Valid
     }
 
     submit() {
+        if (!this.outColor) this.selectColor(this.getRandomColor());
         this.close();
     }
 
     cancel() {
+        this.selectColor(this.getRandomColor());
         this.close();
+    }
+
+    private getRandomColor() {
+        return this.colors[Math.floor(Math.random() * this.colors.length)];
     }
 
     /**
@@ -95,8 +103,11 @@ export class ColorpickerComponent implements OnInit, ControlValueAccessor, Valid
         }
     }
 
-    writeValue(value: any): void {
-        if (value /*&& this.outDate !== value*/) {
+    writeValue(value: Color): void {
+        if (value && this.selectedColor !== value) {
+            this.selectedColor = value;
+            this.onSelectColor.emit(value);
+            this.outColor = value;
             this.onChangeCallback(value);
         }
     }
@@ -108,9 +119,4 @@ export class ColorpickerComponent implements OnInit, ControlValueAccessor, Valid
     registerOnTouched(fn: any): void {
         this.onTouchedCallback = fn;
     }
-
-    validate(control: AbstractControl) {
-        return this.validateFn(control);
-    }
-
 }

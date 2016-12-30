@@ -45,10 +45,10 @@ open class DataLoader @Inject constructor(val institutionRepository: Institution
         val SEMESTER2 = Semester("1. Semester", LocalDate.of(2016, 8, 1), LocalDate.of(2017, 1, 30), YEAR3, arrayListOf<Subject>(), arrayListOf<MarkReport>(), null)
         val SEMESTER3 = Semester("2. Semester", LocalDate.of(2017, 2, 1), LocalDate.of(2017, 7, 31), YEAR4, arrayListOf<Subject>(), arrayListOf<MarkReport>(), null)
         val SEMESTER4 = Semester("2. Semester", LocalDate.of(2016, 2, 1), LocalDate.of(2017, 7, 31), YEAR1, arrayListOf<Subject>(), arrayListOf<MarkReport>(), null)
-        val SUBJECT1 = Subject("Scrum", Color.ALIZARIN, SEMESTER1, arrayListOf<TimetableEntry>(), arrayListOf<Task>(), arrayListOf(), arrayListOf<Exam>(), null, null)
-        val SUBJECT2 = Subject("Kleinprojekt", Color.EMERLAND, SEMESTER2, arrayListOf<TimetableEntry>(), arrayListOf<Task>(), arrayListOf(), arrayListOf<Exam>(), null, null)
-        val SUBJECT3 = Subject("Math", Color.GREENSEA, SEMESTER3, arrayListOf<TimetableEntry>(), arrayListOf<Task>(), arrayListOf(), arrayListOf<Exam>(), null, null)
-        val SUBJECT4 = Subject("Deutsch", Color.PUMPKIN, SEMESTER4, arrayListOf<TimetableEntry>(), arrayListOf<Task>(), arrayListOf(), arrayListOf<Exam>(), null, null)
+        val SUBJECT1 = Subject("Scrum", Color.INDIGO, SEMESTER1, arrayListOf<TimetableEntry>(), arrayListOf<Task>(), arrayListOf(), arrayListOf<Exam>(), null, null)
+        val SUBJECT2 = Subject("Kleinprojekt", Color.PINK, SEMESTER2, arrayListOf<TimetableEntry>(), arrayListOf<Task>(), arrayListOf(), arrayListOf<Exam>(), null, null)
+        val SUBJECT3 = Subject("Math", Color.PURPLE, SEMESTER3, arrayListOf<TimetableEntry>(), arrayListOf<Task>(), arrayListOf(), arrayListOf<Exam>(), null, null)
+        val SUBJECT4 = Subject("Deutsch", Color.DEEP_BLUE, SEMESTER4, arrayListOf<TimetableEntry>(), arrayListOf<Task>(), arrayListOf(), arrayListOf<Exam>(), null, null)
     }
     override fun run(args: ApplicationArguments?) {
         userRepository.save(TEST_USER)
