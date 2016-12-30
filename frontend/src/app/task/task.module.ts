@@ -5,6 +5,9 @@ import {TaskRoutingModule} from "./task-routing.module";
 import {AuthGuard} from "../shared/services/auth/auth-guard.service";
 import {MaterialModule} from "@angular/material";
 import {TaskService} from "./service/task.service";
+import {TaskListItemComponent} from "./task-list-item/task-list-item.component";
+import {TaskDetailComponent} from "./task-detail-component/task-detail.component";
+import {TaskResolver} from "./service/task-resolver.service";
 
 @NgModule({
     imports: [
@@ -13,11 +16,14 @@ import {TaskService} from "./service/task.service";
         MaterialModule
     ],
     declarations: [
-        TaskComponent
+        TaskComponent,
+        TaskListItemComponent,
+        TaskDetailComponent
     ],
     providers: [
         AuthGuard,
-        TaskService
+        TaskService,
+        TaskResolver
     ]
 })
 export class TaskModule {

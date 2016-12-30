@@ -66,6 +66,7 @@ button[md-raised-button], button[md-button] {
 }
 
 .toolbar-icon {
+    cursor: pointer;
     margin: 16px 16px 16px 0;
 }
 
@@ -120,4 +121,8 @@ md-list-item {
     h1, h2, h3, h4, h5, h6 {
         line-height: normal;
     }
+}
+
+md-card.list-card {
+    padding: 0;
 }

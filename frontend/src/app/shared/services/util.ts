@@ -52,4 +52,12 @@ export class Util {
     static clone<T>(obj: T): T{
         return JSON.parse(JSON.stringify(obj));
     }
+
+    /**
+     * returns the time in milliseconds since the 01.01.1970
+     * @returns {number}
+     */
+    static getMillis(): number {
+        return new Date().getTime();
+    }
 }

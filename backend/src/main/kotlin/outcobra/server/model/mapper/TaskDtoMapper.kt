@@ -11,14 +11,15 @@ import javax.inject.Inject
  * @author Vincent Perret
  */
 @Component
-open class TaskDtoMapper @Inject constructor(val subjectRepository: SubjectRepository) : Mapper<Task, TaskDto> {
+open class TaskDtoMapper @Inject constructor(val subjectRepository: SubjectRepository,
+                                             val subjectMapper: SubjectMapper) : Mapper<Task, TaskDto> {
 
     override fun toDto(from: Task): TaskDto {
-        return TaskDto(from.id, from.subject.id, from.name, from.description, from.todoDate, from.dueDate, from.effort, from.progress)
+        return TaskDto(from.id, subjectMapper.toDto(from.subject) , from.name, from.description, from.todoDate, from.dueDate, from.effort, from.progress)
     }
 
     override fun fromDto(from: TaskDto): Task {
-        val subject = subjectRepository.findOne(from.subjectId)
+        val subject = subjectRepository.findOne(from.subject.id)
         val task = Task(from.name, from.description, from.todoDate, from.dueDate, from.effort, from.progress, subject)
         task.id = from.id
         return task

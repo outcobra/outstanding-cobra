@@ -1,0 +1,20 @@
+@import '../../../sass/color';
+
+md-list-item {
+    position: relative;
+    cursor: pointer;
+    padding: 0 10px;
+    transition: all .2s ease-in-out;
+
+    &:hover {
+        background-color: $hover-dark;
+    }
+}
+
+span[md-list-avatar] {
+    border-radius: 50%;
+    line-height: 40px;
+    font-size: 1.5em;
+    text-align: center;
+    @extend .text-primary-light;
+}

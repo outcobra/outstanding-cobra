@@ -10,13 +10,31 @@
                 </li>
                 <li class="nav-row">
                     <a [routerLink]="'/task'" md-ripple mdRippleTrigger>
+                        <md-icon class="link-icon">event</md-icon>
+                        <span>{{ 'i18n.modules.timetable.linkTitle' | translate }}</span>
+                    </a>
+                </li>
+                <li class="nav-row">
+                    <a [routerLink]="'/task'" md-ripple mdRippleTrigger>
+                        <md-icon class="link-icon">filter_6</md-icon>
+                        <span>{{ 'i18n.modules.exam.linkTitle' | translate }}</span>
+                    </a>
+                </li>
+                <li class="nav-row">
+                    <a [routerLink]="'/task'" md-ripple mdRippleTrigger>
+                        <md-icon class="link-icon">poll</md-icon>
+                        <span>{{ 'i18n.modules.mark.linkTitle' | translate }}</span>
+                    </a>
+                </li>
+                <li class="nav-row">
+                    <a [routerLink]="'/task'" md-ripple mdRippleTrigger>
                         <md-icon class="link-icon">assignment_turned_in</md-icon>
                         <span>{{ 'i18n.modules.task.linkTitle' | translate }}</span>
                     </a>
                 </li>
                 <li class="nav-row">
                     <a [routerLink]="'/manage'" md-ripple mdRippleTrigger>
-                        <md-icon class="link-icon">settings</md-icon>
+                        <md-icon class="link-icon">widgets</md-icon>
                         <span>{{ 'i18n.modules.manage.linkTitle' | translate }}</span>
                     </a>
                 </li>

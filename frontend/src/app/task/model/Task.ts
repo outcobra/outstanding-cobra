@@ -1,3 +1,5 @@
+import {SubjectDto} from "../../manage/model/ManageDto";
+
 export interface Task {
     id: number,
     description: string,
@@ -6,5 +8,5 @@ export interface Task {
     todoDate: Date,
     effort: number,
     progress: number,
-    subjectId: number
+    subject: SubjectDto
 }

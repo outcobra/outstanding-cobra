@@ -37,7 +37,13 @@
                 "linkTitle": "Marks"
             },
             "task": {
-                "linkTitle": "Tasks"
+                "linkTitle": "Tasks",
+                "error": {
+                    "taskNotFound": {
+                        "title": "Task not found",
+                        "message": "We couldn't find the requested task"
+                    }
+                }
             },
             "timetable": {
                 "linkTitle": "Timetable"

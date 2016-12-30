@@ -37,7 +37,13 @@
                 "linkTitle": "Noten"
             },
             "task": {
-                "linkTitle": "Aufgaben"
+                "linkTitle": "Aufgaben",
+                "error": {
+                    "taskNotFound": {
+                        "title": "Aufgabe nicht gefunden",
+                        "message": "Wir konnten die gesuchte Aufgabe nicht finden"
+                    }
+                }
             },
             "timetable": {
                 "linkTitle": "Stundenplan"
