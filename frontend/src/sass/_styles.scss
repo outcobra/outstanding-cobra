@@ -73,6 +73,7 @@ button[md-raised-button], button[md-button] {
 .auth0-lock {
     font-family: 'Roboto', sans-serif !important;
 }
+
 md-dialog-container {
     height: auto !important;
     overflow: visible !important;
@@ -112,17 +113,21 @@ datepicker, md-input {
     width: 100%;
     margin-bottom: 15px;
 }
+
 .form-error span {
     @extend .text-warn;
 }
 
-
 md-list-item {
-    h1, h2, h3, h4, h5, h6 {
+    h1, h2, h3, h4, h5, h6, p, span {
         line-height: normal;
     }
 }
 
-md-card.list-card {
-    padding: 0;
+md-card {
+    line-height: 1;
+
+    &.list-card {
+        padding: 0;
+    }
 }

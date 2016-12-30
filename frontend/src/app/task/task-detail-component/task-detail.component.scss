@@ -1,0 +1,13 @@
+@import '../../../sass/color';
+
+.task-detail {
+    margin-top: 20px;
+}
+
+span[md-card-avatar] {
+    border-radius: 50%;
+    line-height: 40px;
+    font-size: 1.5em;
+    text-align: center;
+    @extend .text-primary-light;
+}

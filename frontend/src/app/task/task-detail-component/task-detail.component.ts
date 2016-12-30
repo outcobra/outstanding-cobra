@@ -1,5 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Task} from "../model/Task";
 
 @Component({
@@ -10,7 +10,7 @@ import {Task} from "../model/Task";
 export class TaskDetailComponent implements OnInit {
     private task: Task;
 
-    constructor(private route: ActivatedRoute) {
+    constructor(private route: ActivatedRoute, private router: Router) {
     }
 
     ngOnInit() {
@@ -18,6 +18,10 @@ export class TaskDetailComponent implements OnInit {
             .subscribe((data: {task: Task}) => {
                 this.task = data.task;
             })
+    }
+
+    closeCard() {
+        this.router.navigate(['/task']);
     }
 
 }

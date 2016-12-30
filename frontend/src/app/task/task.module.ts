@@ -8,12 +8,14 @@ import {TaskService} from "./service/task.service";
 import {TaskListItemComponent} from "./task-list-item/task-list-item.component";
 import {TaskDetailComponent} from "./task-detail-component/task-detail.component";
 import {TaskResolver} from "./service/task-resolver.service";
+import {TranslateModule} from "ng2-translate";
 
 @NgModule({
     imports: [
         CommonModule,
         TaskRoutingModule,
-        MaterialModule
+        MaterialModule,
+        TranslateModule
     ],
     declarations: [
         TaskComponent,
