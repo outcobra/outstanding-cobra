@@ -27,7 +27,7 @@ open class DefaultTaskService @Inject constructor(val repository: TaskRepository
     }
 
     override fun readTaskById(id: Long): TaskDto {
-        return mapper.toDto(repository.findOne(id))
+        return mapper.toDto(repository.getOne(id))
     }
 
     override fun readAllTasksOfSubject(subjectId: Long): List<TaskDto> {

@@ -23,7 +23,7 @@ open class DefaultUserService
                     val auth0Client: Auth0Client) : UserService {
 
     override fun readUserById(id: Long): User {
-        return userRepository.findOne(id)
+        return userRepository.getOne(id)
     }
 
     override fun getTokenUserId(): String {

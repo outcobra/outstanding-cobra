@@ -20,7 +20,7 @@ open class DefaultTeacherService @Inject constructor(val repository: TeacherRepo
     }
 
     override fun readTeacherById(id: Long): TeacherDto {
-        return mapper.toDto(repository.findOne(id))
+        return mapper.toDto(repository.getOne(id))
     }
 
     override fun readAllYearsByInstitution(institutionId: Long): List<TeacherDto> {
