@@ -17,7 +17,6 @@ export class TaskService implements Cacheable<Task[]> {
     public getTaskById(id: number): Observable<Task> {
         if (this.hasCache()) {
             let task = this.cache.find(task => task.id == id);
-            console.log(task);
             if (task) return Observable.of(task);
         }
         return this.http.get<Task>(`/task/${id}`, 'outcobra');
@@ -45,7 +44,6 @@ export class TaskService implements Cacheable<Task[]> {
 
     saveCache(tasks: Task[]): void {
         this.cache = tasks;
-        console.log('abcdefg');
         this.expiration = Util.getMillis();
     }
 

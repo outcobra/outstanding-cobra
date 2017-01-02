@@ -1,10 +1,13 @@
 md-input-container {
-    display: block;
+    display: block !important;
     box-sizing: border-box;
     margin: 0 20px;
+    label {
+        font-size: 30px !important;
+    }
     input {
         height: 40px;
         width: 100%;
-        font-size: 40px !important;
+        font-size: 30px !important;
     }
 }

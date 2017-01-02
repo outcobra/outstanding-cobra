@@ -4,6 +4,7 @@ import {Task} from "../model/Task";
 import {Observable} from "rxjs";
 import {TaskService} from "./task.service";
 import {NotificationsService} from "angular2-notifications";
+import {HttpStatus} from "../../shared/model/HttpStatus";
 
 @Injectable()
 export class TaskResolver implements Resolve<Task> {
@@ -14,9 +15,15 @@ export class TaskResolver implements Resolve<Task> {
         return this.taskService.getTaskById(id)
             .map(task => {
                 if (task) return task;
-                this.router.navigate(['/task']);
-                this.notificationService.error('i18n.modules.task.error.taskNotFound.title','i18n.modules.task.error.taskNotFound.message');
                 return null;
+            })
+            .catch(error => {
+                if (error.status == HttpStatus.NOT_FOUND) {
+                    this.notificationService.remove();
+                    this.router.navigate(['/task']);
+                    this.notificationService.error('i18n.modules.task.error.taskNotFound.title','i18n.modules.task.error.taskNotFound.message');
+                }
+                return Observable.of(null);
             });
     }
 
