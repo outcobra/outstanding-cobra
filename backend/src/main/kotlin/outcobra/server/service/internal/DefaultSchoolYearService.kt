@@ -22,7 +22,7 @@ open class DefaultSchoolYearService @Inject constructor(val repository: SchoolYe
     }
 
     override fun readSchoolYearById(id: Long): SchoolYearDto {
-        var schoolYear = repository.findOne(id)
+        var schoolYear = repository.getOne(id)
         return mapper.toDto(schoolYear)
     }
 

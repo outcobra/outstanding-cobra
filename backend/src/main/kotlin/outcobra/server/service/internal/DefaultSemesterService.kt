@@ -22,7 +22,7 @@ open class DefaultSemesterService @Inject constructor(val repository: SemesterRe
     }
 
     override fun readSemesterById(id: Long): SemesterDto {
-        return mapper.toDto(repository.findOne(id))
+        return mapper.toDto(repository.getOne(id))
     }
 
     override fun readAllSemestersBySchoolYear(schoolYearId: Long): List<SemesterDto> {
