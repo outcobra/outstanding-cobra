@@ -2,6 +2,8 @@ import {Component, OnInit, ViewEncapsulation} from "@angular/core";
 import {TaskService} from "./service/task.service";
 import {Task} from "./model/Task";
 import {FormBuilder, FormGroup} from "@angular/forms";
+import {SubjectService} from "../manage/service/subject.service";
+import {SubjectDto} from "../manage/model/ManageDto";
 
 @Component({
     selector: 'task',
@@ -11,24 +13,33 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 })
 export class TaskComponent implements OnInit {
     private filterForm: FormGroup;
+    private searchForm: FormGroup;
     private tasks: Task[];
+    private subjects: SubjectDto[];
     private filteredTasks: Task[];
 
     private filter = {
         subjectId: 0
     };
 
-    constructor(private taskService: TaskService, private formBuilder: FormBuilder) {
+    constructor(private taskService: TaskService,
+                private subjectService: SubjectService,
+                private formBuilder: FormBuilder) {
     }
 
     ngOnInit() {
-        this.filterForm = this.formBuilder.group({
+        this.searchForm = this.formBuilder.group({
             searchTerm: ['']
+        });
+        this.filterForm = this.formBuilder.group({
+            subjectId: ['']
         });
         this.taskService.getAll()
             .subscribe((tasks: Task[]) => this.tasks = this.filteredTasks = tasks);
+        this.subjectService.getAll()
+            .subscribe((subjects: SubjectDto[]) => this.subjects = subjects);
 
-        this.filterForm.get('searchTerm').valueChanges
+        this.searchForm.get('searchTerm').valueChanges
             .debounceTime(300)
             .distinctUntilChanged()
             .subscribe(searchTerm => this.filteredTasks = this.search(searchTerm));
@@ -49,8 +60,8 @@ export class TaskComponent implements OnInit {
     }
 
     filterTasks() {
-        if (this.filter.subjectId != 0) {
-            this.filteredTasks = this.tasks.filter(task => task.subject.id == this.filter.subjectId);
+        if (this.filterForm.get('subjectId').touched) {
+            this.filteredTasks = this.tasks.filter(task => task.subject.id == this.filterForm.get('subjectId').value);
         }
     }
 

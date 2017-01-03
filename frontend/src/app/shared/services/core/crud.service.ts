@@ -1,4 +1,5 @@
 import {Observable} from "rxjs";
+
 export interface CrudService<T> {
     create(arg: T): Observable<T>;
     getById(id: number): Observable<T>;

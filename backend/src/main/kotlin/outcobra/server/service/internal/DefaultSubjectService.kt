@@ -8,13 +8,21 @@ import outcobra.server.model.dto.SubjectDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.SubjectRepository
 import outcobra.server.service.SubjectService
+import outcobra.server.service.UserService
 import javax.inject.Inject
 
 
 @Service
 @Transactional
 open class DefaultSubjectService @Inject constructor(val repository: SubjectRepository,
+                                                     val userService: UserService,
                                                      val mapper: Mapper<Subject, SubjectDto>) : SubjectService {
+    override fun readAllSubjectsByUser(): List<SubjectDto> {
+        val userId = userService.getCurrentUser()?.id
+        val filter = QSubject.subject.semester.schoolYear.schoolClass.institution.user.id.eq(userId)
+        return repository.findAll(filter).map { mapper.toDto(it) }
+    }
+
     override fun createSubject(subjectDto: SubjectDto): SubjectDto {
         return mapper.toDto(repository.save(mapper.fromDto(subjectDto)))
     }

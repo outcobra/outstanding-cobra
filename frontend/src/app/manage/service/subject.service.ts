@@ -19,7 +19,7 @@ export class SubjectService extends AppCrudService<SubjectDto> {
     }
 
     getAll(): Observable<SubjectDto[]> {
-        throw new Error('not implemented');
+        return this.http.get<SubjectDto[]>(this.baseUri, 'outcobra');
     }
 
     deleteById(id: number): Observable<any> {

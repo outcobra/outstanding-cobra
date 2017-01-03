@@ -1,10 +1,14 @@
-<div class="row" [formGroup]="filterForm">
+<div class="row" [formGroup]="searchForm">
     <div class="col m6 offset-m3">
         <router-outlet></router-outlet>
         <h1>Tasks</h1>
         <md-input-container>
             <input md-input placeholder="Search..." formControlName="searchTerm">
         </md-input-container>
+    </div>
+</div>
+<div class="row" [formGroup]="filterForm">
+    <div class="col m6 offset-m3">
         <md-card class="list-card">
             <md-list>
                 <h2 md-subheader>Your Tasks</h2>
@@ -16,7 +20,7 @@
         <md-card>
             <md-card-title>{{'i18n.modules.task.filter' | translate}}</md-card-title>
             <md-card-content>
-                <md-select [(ngModel)]="filter.subjectId">
+                <md-select formControlName="subjectId">
                     <md-option *ngFor="let subject of subjects" [value]="subject.id">{{subject.name}}</md-option>
                 </md-select>
             </md-card-content>
