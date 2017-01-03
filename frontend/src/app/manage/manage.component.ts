@@ -57,8 +57,6 @@ export class ManageComponent implements OnInit {
     ngOnInit() {
         this.manageService.getManageData()
             .subscribe((res) => this.prepareManageData(res));
-        this.colorService.getColors()
-            .subscribe(res => console.log(res));
     }
 
     selectSchoolClass(schoolClassId: number) {

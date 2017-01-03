@@ -12,7 +12,7 @@ export class TaskResolver implements Resolve<Task> {
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Task>|Promise<Task>|Task {
         let id: number = route.params['id'];
-        return this.taskService.getTaskById(id)
+        return this.taskService.getById(id)
             .map(task => {
                 if (task) return task;
                 return null;
