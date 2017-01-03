@@ -9,7 +9,8 @@
                 "close": "Schliessen",
                 "yes": "Ja",
                 "no": "Nein",
-                "ok": "OK"
+                "ok": "OK",
+                "filter": "Filtern"
             },
             "label": {
                 "validFrom": "Gültig ab",
@@ -39,6 +40,7 @@
             },
             "task": {
                 "linkTitle": "Aufgaben",
+                "filter": "Aufgaben filtern",
                 "error": {
                     "taskNotFound": {
                         "title": "Aufgabe nicht gefunden",
