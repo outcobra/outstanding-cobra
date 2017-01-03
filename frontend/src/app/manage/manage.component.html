@@ -128,7 +128,10 @@
                                 <span class="subject-icon" [style.background-color]="'#' + subject.color.hex"></span>
                                 <span>{{ subject.name }}</span>
                             </div>
-                            <entity-menu></entity-menu>
+                            <entity-menu
+                                (delete)="deleteSubject(subject)"
+                                (edit)="editSubject(subject)"
+                            ></entity-menu>
                         </div>
                     </collapsible-header>
                 </collapsible>

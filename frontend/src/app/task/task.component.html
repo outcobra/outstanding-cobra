@@ -1,14 +1,14 @@
 <div class="row">
-    <div class="col m6 offset-m3">
+    <div class="col m6 offset-m3" [formGroup]="filterForm">
         <router-outlet></router-outlet>
         <h1>Tasks</h1>
         <md-input-container>
-            <input md-input placeholder="Search...">
+            <input md-input placeholder="Search..." formControlName="searchTerm">
         </md-input-container>
         <md-card class="list-card">
             <md-list>
                 <h2 md-subheader>Your Tasks</h2>
-                <task-list-item *ngFor="let task of tasks" [task]="task"></task-list-item>
+                <task-list-item *ngFor="let task of filteredTasks" [task]="task"></task-list-item>
             </md-list>
         </md-card>
     </div>

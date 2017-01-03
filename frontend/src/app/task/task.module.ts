@@ -9,10 +9,13 @@ import {TaskListItemComponent} from "./task-list-item/task-list-item.component";
 import {TaskDetailComponent} from "./task-detail-component/task-detail.component";
 import {TaskResolver} from "./service/task-resolver.service";
 import {TranslateModule} from "ng2-translate";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
     imports: [
         CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
         TaskRoutingModule,
         MaterialModule,
         TranslateModule

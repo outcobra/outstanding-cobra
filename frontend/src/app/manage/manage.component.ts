@@ -205,6 +205,14 @@ export class ManageComponent implements OnInit {
         });
     }
 
+    deleteSubject(subject: SubjectDto) {
+        this.openDeleteConfirmDialog('subject').subscribe((result) => {
+            if (result === true) {
+                this.subjectService.deleteById(subject.id).subscribe();
+            }
+        });
+    }
+
     openDeleteConfirmDialog(moduleName: string) {
         return this.confirmDialogService.open('i18n.modules.manage.assureDeletion', `i18n.modules.manage.${moduleName}.confirmDeleteMessage`);
     }
