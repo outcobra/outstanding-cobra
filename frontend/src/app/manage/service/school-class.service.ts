@@ -2,18 +2,31 @@ import {Injectable} from "@angular/core";
 import {HttpInterceptor} from "../../shared/http/HttpInterceptor";
 import {Observable} from "rxjs";
 import {SchoolClassDto} from "../model/ManageDto";
+import {AppCrudService} from "../../shared/services/core/app-crud.service";
 
 @Injectable()
-export class SchoolClassService {
-    private readonly baseUri: string = '/schoolClass';
+export class SchoolClassService extends AppCrudService<SchoolClassDto> {
+    constructor(http: HttpInterceptor) {
+        super(http, '/schoolClass')
+    }
 
-    constructor(private http: HttpInterceptor) {}
-
-    public createSchoolClass(schoolClass: SchoolClassDto): Observable<any> {
+    create(schoolClass: SchoolClassDto): Observable<SchoolClassDto> {
         return this.http.put<SchoolClassDto>('/schoolClass', schoolClass, 'outcobra')
     }
 
-    public deleteSchoolClass(schoolClass: SchoolClassDto): Observable<any> {
-        return this.http.delete(`${this.baseUri}/${schoolClass.id}`, 'outcobra');
+    getById(id: number): Observable<SchoolClassDto> {
+        throw new Error('not implemented');
+    }
+
+    getAll(): Observable<SchoolClassDto[]> {
+        throw new Error('not implemented');
+    }
+
+    deleteById(id: number): Observable<any> {
+        return this.http.delete(`${this.baseUri}/${id}`, 'outcobra');
+    }
+
+    update(arg: SchoolClassDto): Observable<SchoolClassDto> {
+        throw new Error('not implemented');
     }
 }

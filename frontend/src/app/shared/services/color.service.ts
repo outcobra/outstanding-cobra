@@ -2,26 +2,47 @@ import {Injectable} from "@angular/core";
 import {HttpInterceptor} from "../http/HttpInterceptor";
 import {Color} from "../model/Color";
 import {Observable} from "rxjs";
+import {Cacheable} from "../interfaces/Cacheable";
+import {Util} from "./util";
 
 @Injectable()
-export class ColorService {
-    private cache: Color[];
-    private observable: Observable<Color[]>;
+export class ColorService implements Cacheable<Color> {
+    expiration: number;
+    cache: Color[];
+    observable: Observable<Color[]>;
 
-    constructor(private http: HttpInterceptor) {}
+    constructor(private http: HttpInterceptor) {
+    }
 
     public getColors(): Observable<Color[]> {
-        console.log(this.cache);
-        if (this.cache) return Observable.of(this.cache);
+        if (this.hasCache()) return Observable.of(this.cache);
         else if (this.observable) return this.observable;
-        else {
-            this.observable = this.http.get<Color[]>('/color', 'outcobra')
+        else this.saveObservable(this.http.get<Color[]>('/color', 'outcobra')
                 .map((res: Color[]) => {
-                    this.observable = null;
-                    this.cache = res;
+                    this.clearObservable();
+                    this.saveCache(res);
                     return this.cache;
-                }).share();
-            return this.observable;
-        }
+                }).share()
+            );
+    }
+
+    saveCache(arg: Color[]): void {
+        this.cache = arg;
+    }
+
+    saveObservable(observable: Observable<Color[]>): Observable<Color[]> {
+        return this.observable = observable;
+    }
+
+    clearCache(): void {
+        this.cache = null;
+    }
+
+    clearObservable(): void {
+        this.cache = null;
+    }
+
+    hasCache(): boolean {
+        return this.cache && this.expiration && Util.getMillis() - this.expiration <= 600000; // cache not older than 10 minutes TODO other?
     }
 }
