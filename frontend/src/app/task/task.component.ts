@@ -3,7 +3,8 @@ import {TaskService} from "./service/task.service";
 import {Task} from "./model/Task";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {SubjectService} from "../manage/service/subject.service";
-import {SubjectDto} from "../manage/model/ManageDto";
+import {SubjectDto, ManageDto} from "../manage/model/ManageDto";
+import {ManageService} from "../manage/service/manage.service";
 
 @Component({
     selector: 'task',
@@ -18,11 +19,14 @@ export class TaskComponent implements OnInit {
     private subjects: SubjectDto[];
     private filteredTasks: Task[];
 
+    private filterData: ManageDto;
+
     private filter = {
         subjectId: 0
     };
 
     constructor(private taskService: TaskService,
+                private manageService: ManageService,
                 private subjectService: SubjectService,
                 private formBuilder: FormBuilder) {
     }
@@ -38,6 +42,9 @@ export class TaskComponent implements OnInit {
             .subscribe((tasks: Task[]) => this.tasks = this.filteredTasks = tasks);
         this.subjectService.getAll()
             .subscribe((subjects: SubjectDto[]) => this.subjects = subjects);
+
+        this.manageService.getManageData()
+            .subscribe((manageData: ManageDto) => this.filterData = manageData);
 
         this.searchForm.get('searchTerm').valueChanges
             .debounceTime(300)
