@@ -20,12 +20,17 @@
         <md-card>
             <md-card-title>{{'i18n.modules.task.filter' | translate}}</md-card-title>
             <md-card-content>
+                <md-select formControlName="schoolClassId">
+                    <md-option *ngFor="let schoolClass of filterData?.schoolClasses" [value]="schoolClass.id">{{schoolClass.normalizedName}}</md-option>
+                </md-select>
                 <md-select formControlName="subjectId">
-                    <md-option *ngFor="let subject of subjects" [value]="subject.id">{{subject.name}}</md-option>
+                    <md-option *ngFor="let subject of filterData?.subjects" [value]="subject.id">{{subject.name}}</md-option>
                 </md-select>
             </md-card-content>
             <md-card-actions>
-                <button md-raised-button color="primary" (click)="filterTasks()">{{'i18n.common.action.filter' | translate}}</button>
+                <button md-raised-button color="primary" (click)="filterTasks()">{{'i18n.common.action.filter' |
+                    translate}}
+                </button>
             </md-card-actions>
         </md-card>
     </div>

@@ -7,7 +7,7 @@ import {NotificationsService} from "angular2-notifications";
 import {HttpStatus} from "../../shared/model/HttpStatus";
 
 @Injectable()
-export class TaskResolver implements Resolve<Task> {
+export class TaskDetailResolver implements Resolve<Task> {
     constructor(private taskService: TaskService, private router: Router, private notificationService: NotificationsService) {}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Task>|Promise<Task>|Task {

@@ -7,9 +7,11 @@ import {MaterialModule} from "@angular/material";
 import {TaskService} from "./service/task.service";
 import {TaskListItemComponent} from "./task-list-item/task-list-item.component";
 import {TaskDetailComponent} from "./task-detail-component/task-detail.component";
-import {TaskResolver} from "./service/task-resolver.service";
+import {TaskDetailResolver} from "./service/task-detail-resolver.service";
 import {TranslateModule} from "ng2-translate";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {TaskListResolver} from "./service/task-list-resolver.service";
+import {TaskFilterResolver} from "./service/task-filter-resolver.service";
 
 @NgModule({
     imports: [
@@ -28,7 +30,9 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     providers: [
         AuthGuard,
         TaskService,
-        TaskResolver
+        TaskDetailResolver,
+        TaskListResolver,
+        TaskFilterResolver
     ]
 })
 export class TaskModule {

@@ -5,7 +5,6 @@ import org.springframework.transaction.annotation.Transactional
 import outcobra.server.model.QTask
 import outcobra.server.model.Task
 import outcobra.server.model.dto.TaskDto
-import outcobra.server.model.dto.TaskFilterDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.TaskRepository
 import outcobra.server.service.*
@@ -67,14 +66,5 @@ open class DefaultTaskService @Inject constructor(val repository: TaskRepository
 
     override fun deleteTask(id: Long) {
         repository.delete(id)
-    }
-
-    override fun getTaskFilterData(): TaskFilterDto {
-        val institutions = institutionService.readAllInstitutions()
-        val schoolClasses = institutions.flatMap { schoolClassService.readAllSchoolClasses(it.id) }
-        val schoolYears = schoolClasses.flatMap { schoolYearService.readAllYearsByClass(it.id) }
-        val semesters = schoolYears.flatMap { semesterService.readAllSemestersBySchoolYear(it.id) }
-        val subjects = semesters.flatMap { subjectService.readAllSubjectsBySemester(it.id) }
-        return TaskFilterDto(institutions, schoolClasses, schoolYears, semesters, subjects)
     }
 }

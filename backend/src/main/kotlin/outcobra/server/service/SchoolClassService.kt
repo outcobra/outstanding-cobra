@@ -43,4 +43,6 @@ interface SchoolClassService {
      * @param id the id of the SchoolClass you want to delete
      */
     fun deleteSchoolClass(id: Long)
+
+    fun readAllSchoolClassesByUser(): List<SchoolClassDto>
 }

@@ -3,8 +3,10 @@ import {TaskService} from "./service/task.service";
 import {Task} from "./model/Task";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {SubjectService} from "../manage/service/subject.service";
-import {SubjectDto, ManageDto} from "../manage/model/ManageDto";
-import {ManageService} from "../manage/service/manage.service";
+import {SubjectDto} from "../manage/model/ManageDto";
+import {SchoolClassService} from "../manage/service/school-class.service";
+import {ActivatedRoute} from "@angular/router";
+import {TaskFilter} from "./model/TaskFilter";
 
 @Component({
     selector: 'task',
@@ -18,15 +20,15 @@ export class TaskComponent implements OnInit {
     private tasks: Task[];
     private subjects: SubjectDto[];
     private filteredTasks: Task[];
-
-    private filterData: ManageDto;
+    private filterData: TaskFilter;
 
     private filter = {
         subjectId: 0
     };
 
     constructor(private taskService: TaskService,
-                private manageService: ManageService,
+                private route: ActivatedRoute,
+                private schoolClassService: SchoolClassService,
                 private subjectService: SubjectService,
                 private formBuilder: FormBuilder) {
     }
@@ -36,15 +38,17 @@ export class TaskComponent implements OnInit {
             searchTerm: ['']
         });
         this.filterForm = this.formBuilder.group({
+            institutionId: [''],
+            schoolClassId: [''],
+            schoolYearId: [''],
+            semesterId: [''],
             subjectId: ['']
         });
-        this.taskService.getAll()
-            .subscribe((tasks: Task[]) => this.tasks = this.filteredTasks = tasks);
-        this.subjectService.getAll()
-            .subscribe((subjects: SubjectDto[]) => this.subjects = subjects);
 
-        this.manageService.getManageData()
-            .subscribe((manageData: ManageDto) => this.filterData = manageData);
+        this.route.data.subscribe((data : {taskFilter: TaskFilter, tasks: Task[]}) => {
+            this.filterData = data.taskFilter;
+            this.tasks = this.filteredTasks = data.tasks;
+        });
 
         this.searchForm.get('searchTerm').valueChanges
             .debounceTime(300)

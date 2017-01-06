@@ -8,6 +8,7 @@ import outcobra.server.model.dto.SchoolClassDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.SchoolClassRepository
 import outcobra.server.service.SchoolClassService
+import outcobra.server.service.UserService
 import javax.inject.Inject
 
 /**
@@ -16,32 +17,37 @@ import javax.inject.Inject
  */
 @Component
 @Transactional
-open class DefaultSchoolClassService
-@Inject constructor(val mapper: Mapper<SchoolClass, SchoolClassDto>,
-                    val schoolClassRepository: SchoolClassRepository) : SchoolClassService {
+open class DefaultSchoolClassService @Inject constructor(val mapper: Mapper<SchoolClass, SchoolClassDto>,
+                                                         val userService: UserService,
+                                                         val repository: SchoolClassRepository) : SchoolClassService {
+    override fun readAllSchoolClassesByUser(): List<SchoolClassDto> {
+        val userId = userService.getCurrentUser()?.id
+        val filter = QSchoolClass.schoolClass.institution.user.id.eq(userId)
+        return repository.findAll(filter).map { mapper.toDto(it) }
+    }
 
     override fun createSchoolClass(schoolClassDto: SchoolClassDto): SchoolClassDto {
         var schoolClass = mapper.fromDto(schoolClassDto)
-        schoolClass = schoolClassRepository.save(schoolClass)
+        schoolClass = repository.save(schoolClass)
         return mapper.toDto(schoolClass)
     }
 
     override fun readSchoolClassById(id: Long): SchoolClassDto {
-        return mapper.toDto(schoolClassRepository.getOne(id))
+        return mapper.toDto(repository.getOne(id))
     }
 
     override fun readAllSchoolClasses(institutionId: Long): List<SchoolClassDto> {
         val filter = QSchoolClass.schoolClass.institution.id.eq(institutionId)
-        return schoolClassRepository.findAll(filter).map { mapper.toDto(it) }
+        return repository.findAll(filter).map { mapper.toDto(it) }
     }
 
     override fun updateSchoolClass(schoolClassDto: SchoolClassDto): SchoolClassDto {
         var schoolClass = mapper.fromDto(schoolClassDto)
-        schoolClass = schoolClassRepository.save(schoolClass)
+        schoolClass = repository.save(schoolClass)
         return mapper.toDto(schoolClass)
     }
 
     override fun deleteSchoolClass(id: Long) {
-        schoolClassRepository.delete(id)
+        repository.delete(id)
     }
 }

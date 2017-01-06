@@ -2,7 +2,6 @@ package outcobra.server.controller
 
 import org.springframework.web.bind.annotation.*
 import outcobra.server.model.dto.TaskDto
-import outcobra.server.model.dto.TaskFilterDto
 import outcobra.server.service.TaskService
 import javax.inject.Inject
 
@@ -55,10 +54,5 @@ open class TaskController @Inject constructor(val taskService: TaskService) {
     @DeleteMapping(value = "/task/{id}")
     fun deleteTask(@PathVariable id: Long) {
         taskService.deleteTask(id)
-    }
-
-    @GetMapping
-    fun getTaskFilter(): TaskFilterDto {
-        return taskService.getTaskFilterData()
     }
 }

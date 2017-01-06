@@ -7,12 +7,12 @@ import {AppService} from "./app.service";
 /**
  * Default implementation of a caching service
  */
-export abstract class CacheableService<T> extends AppService<T> implements Cacheable<T> {
+export abstract class CacheableService<T> extends AppService implements Cacheable<T> {
     expiration: number;
     cache: T[];
     observable: Observable<T[]>;
 
-    constructor(http: HttpInterceptor, baseUri: string, private expiredAfter: number = 600000) {
+    constructor(http: HttpInterceptor = null, baseUri: string = '', private expiredAfter: number = 600000) {
         super(http, baseUri);
     }
 
