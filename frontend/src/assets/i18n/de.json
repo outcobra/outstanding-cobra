@@ -138,8 +138,22 @@
         },
         "http": {
             "error": {
-                "title": "Fehler!",
-                "message": "Ein serverseitiger Fehler ist aufgetreten! Bitte versuchen Sie es nochmals."
+                "0": {
+                    "title": "Verbindungsfehler",
+                    "message": "Der Server ist derzeit nicht erreichbar. Bitte versuchen Sie es später nocheinmal."
+                },
+                "400": {
+                    "title": "Datenfehler",
+                    "message": "Der Server meldet eine ungültige Eingabe"
+                },
+                "404": {
+                    "title": "Nicht gefunden",
+                    "message": "Das angeforderte Element konnte nicht gefunden werden"
+                },
+                "500": {
+                    "title": "Serverfehler",
+                    "message": "Ein unbekannter Serverfehler ist aufgetreten, bitte versuchen sie es später nochmals"
+                }
             }
         }
     }

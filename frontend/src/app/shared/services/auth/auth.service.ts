@@ -56,7 +56,6 @@ export class AuthService {
             // We need to subscribe here because the request does not get triggered if we don't
             this.http.get('/user/login', 'outcobra')
                 .catch(err => {
-                    this.notificationService.remove(); //remove all notifications
                     this.logout();
                     this.notificationService.error('i18n.login.error.title', 'i18n.login.error.title');
                     return Observable.empty();
