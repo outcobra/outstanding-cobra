@@ -37,6 +37,7 @@ open class TaskController @Inject constructor(val taskService: TaskService) {
     fun readAllTasksOfSemester(@PathVariable semesterId: Long): List<TaskDto> {
         return taskService.readAllTasksOfSemester(semesterId)
     }
+
     @GetMapping(value = "/subject/{subjectId}/task/open")
     fun readAllOpenTasksBySubject(@PathVariable subjectId: Long): List<TaskDto> {
         return taskService.readAllOpenTasksBySubject(subjectId)

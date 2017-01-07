@@ -1,7 +1,6 @@
 package outcobra.server.controller
 
 import org.springframework.web.bind.annotation.*
-import outcobra.server.model.Subject
 import outcobra.server.model.dto.SubjectDto
 import outcobra.server.service.SubjectService
 import javax.inject.Inject

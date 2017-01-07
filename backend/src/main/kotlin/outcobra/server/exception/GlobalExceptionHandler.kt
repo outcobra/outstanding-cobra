@@ -11,6 +11,12 @@ import javax.persistence.EntityNotFoundException
 open class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(EntityNotFoundException::class)
-    fun handleNotFound() {}
+    fun handleNotFound() {
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(DateOutsideExpectedRangeException::class)
+    fun handleDateOverlap() {
+    }
 
 }

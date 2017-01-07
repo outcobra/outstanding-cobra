@@ -76,7 +76,6 @@ open class DataLoader @Inject constructor(val institutionRepository: Institution
     }
 
 
-
     override fun getOrder(): Int {
         return PriorityOrdered.HIGHEST_PRECEDENCE
     }

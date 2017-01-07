@@ -10,7 +10,6 @@ import outcobra.server.model.repository.SubjectRepository
 import outcobra.server.service.SemesterService
 import outcobra.server.service.SubjectService
 import outcobra.server.service.UserService
-import java.util.*
 import javax.inject.Inject
 
 
