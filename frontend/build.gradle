@@ -7,7 +7,10 @@ node {
     download = true
 }
 
-task ngBuild(type: YarnTask, dependsOn: [yarn_install]) { args = ['run', 'ng', 'build', '"-prod"'] }
+task ngBuild(type: YarnTask, dependsOn: [yarn_install]) {
+    enabled = false
+    args = ['run', 'ng', 'build', '"-prod"']
+}
 
 task assemble(dependsOn: ngBuild)
 
