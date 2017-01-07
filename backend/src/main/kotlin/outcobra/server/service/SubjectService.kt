@@ -51,4 +51,5 @@ interface SubjectService {
     fun readAllSubjectsByUser(): List<SubjectDto>
 
     fun readSubjectsBySchoolClassId(schoolClassId: Long): List<SubjectDto>
+    fun readSubjectsByCurrentSemester(): List<SubjectDto>
 }

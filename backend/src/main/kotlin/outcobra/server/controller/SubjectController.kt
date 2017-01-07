@@ -31,6 +31,11 @@ class SubjectController @Inject constructor(val subjectService: SubjectService) 
         return subjectService.readAllSubjectsByUser()
     }
 
+    @GetMapping(value = "/subject/current")
+    fun readSubjectsByCurrentSemester(): List<SubjectDto> {
+        return subjectService.readSubjectsByCurrentSemester()
+    }
+
     /**
      * This method reads a subject out of the database and returns it as a [SubjectDto]
      * @param semesterId the id of the subject to read

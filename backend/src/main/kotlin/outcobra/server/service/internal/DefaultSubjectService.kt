@@ -7,8 +7,10 @@ import outcobra.server.model.Subject
 import outcobra.server.model.dto.SubjectDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.SubjectRepository
+import outcobra.server.service.SemesterService
 import outcobra.server.service.SubjectService
 import outcobra.server.service.UserService
+import java.util.*
 import javax.inject.Inject
 
 
@@ -16,7 +18,13 @@ import javax.inject.Inject
 @Transactional
 open class DefaultSubjectService @Inject constructor(val repository: SubjectRepository,
                                                      val userService: UserService,
+                                                     val semesterService: SemesterService,
                                                      val mapper: Mapper<Subject, SubjectDto>) : SubjectService {
+    override fun readSubjectsByCurrentSemester(): List<SubjectDto> {
+        val currentSemester = semesterService.getCurrentSemester() ?: return listOf()
+        return readAllSubjectsBySemester(currentSemester.id)
+    }
+
     override fun readAllSubjectsByUser(): List<SubjectDto> {
         val userId = userService.getCurrentUser()?.id
         val filter = QSubject.subject.semester.schoolYear.schoolClass.institution.user.id.eq(userId)
