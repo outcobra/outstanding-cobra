@@ -1,15 +1,44 @@
-<div class="row">
+<div class="row" [formGroup]="searchForm">
     <div class="col m6 offset-m3">
         <router-outlet></router-outlet>
         <h1>Tasks</h1>
-        <md-input-container>
-            <input md-input placeholder="Search...">
+        <md-input-container id="task-search">
+            <input md-input placeholder="Search..." formControlName="searchTerm">
         </md-input-container>
+    </div>
+</div>
+<div class="row" [formGroup]="filterForm">
+    <div class="col m6 offset-m3">
         <md-card class="list-card">
             <md-list>
                 <h2 md-subheader>Your Tasks</h2>
-                <task-list-item *ngFor="let task of tasks" [task]="task"></task-list-item>
+                <task-list-item *ngFor="let task of filteredTasks" [task]="task" (onMarkDone)="markTaskAsDone($event)"></task-list-item>
             </md-list>
         </md-card>
     </div>
+    <div class="col m3">
+        <md-card>
+            <md-card-title>{{'i18n.modules.task.filter' | translate}}</md-card-title>
+            <md-card-content>
+                <md-select formControlName="subjectId">
+                    <template ngFor let-subjectClass [ngForOf]="filterData.subjectClasses">
+                        <md-option *ngFor="let subject of subjectClass.subjects" [value]="subject.id">
+                            {{ subjectClass.schoolClass.normalizedName + ' - ' + subject.name }}
+                        </md-option>
+                    </template>
+                </md-select>
+            </md-card-content>
+            <md-card-actions>
+                <button md-raised-button color="primary" (click)="filterTasks()">{{'i18n.common.action.filter' |
+                    translate}}
+                </button>
+                <button md-raised-button (click)="resetFilter()">{{'i18n.common.action.reset' |
+                    translate}}
+                </button>
+            </md-card-actions>
+        </md-card>
+    </div>
 </div>
+<button md-fab [mdTooltip]="'i18n.modules.task.add' | translate" mdTooltipPosition="left" (click)="addTask()">
+    <md-icon>add</md-icon>
+</button>

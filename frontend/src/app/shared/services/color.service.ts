@@ -2,26 +2,23 @@ import {Injectable} from "@angular/core";
 import {HttpInterceptor} from "../http/HttpInterceptor";
 import {Color} from "../model/Color";
 import {Observable} from "rxjs";
+import {CacheableService} from "./core/cacheable.service";
 
 @Injectable()
-export class ColorService {
-    private cache: Color[];
-    private observable: Observable<Color[]>;
-
-    constructor(private http: HttpInterceptor) {}
+export class ColorService extends CacheableService<Color[]> {
+    constructor(http: HttpInterceptor) {
+        super(http, '/color')
+    }
 
     public getColors(): Observable<Color[]> {
-        console.log(this.cache);
-        if (this.cache) return Observable.of(this.cache);
+        if (this.hasCache()) return Observable.of(this.cache);
         else if (this.observable) return this.observable;
-        else {
-            this.observable = this.http.get<Color[]>('/color', 'outcobra')
+        return this.saveObservable(this.http.get<Color[]>(this.baseUri, 'outcobra')
                 .map((res: Color[]) => {
-                    this.observable = null;
-                    this.cache = res;
+                    this.clearObservable();
+                    this.saveCache(res);
                     return this.cache;
-                }).share();
-            return this.observable;
-        }
+                }).share()
+            );
     }
 }

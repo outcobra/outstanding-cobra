@@ -7,13 +7,17 @@
                 "cancel": "Cancel",
                 "edit": "Edit",
                 "close": "Close",
+                "reset": "Reset",
                 "yes": "Yes",
                 "no": "No",
-                "ok": "OK"
+                "ok": "OK",
+                "filter": "Filter"
             },
             "label": {
                 "validFrom": "Valid from",
-                "validTo": "Valid to"
+                "validTo": "Valid to",
+                "dueDate": "Due Date",
+                "todoDate": "Todo Date"
             },
             "form": {
                 "error": {
@@ -39,6 +43,25 @@
             },
             "task": {
                 "linkTitle": "Tasks",
+                "add": "Add Task",
+                "filter": "Filter Tasks",
+                "dialogs": {
+                    "confirmDeleteDialog": {
+                        "title": "Do you want to delete the Task?",
+                        "message": "The task will be lost forever (A very long long time)"
+                    },
+                    "add": {
+                        "name": {
+                            "label": "Enter a task name"
+                        },
+                        "desc": {
+                            "label": "Enter a task description"
+                        },
+                        "effort": {
+                            "label": "Expected effort (in h)"
+                        }
+                    }
+                },
                 "error": {
                     "taskNotFound": {
                         "title": "Task not found",

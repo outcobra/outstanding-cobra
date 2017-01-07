@@ -5,9 +5,16 @@ md-list-item {
     cursor: pointer;
     padding: 0 10px;
     transition: all .2s ease-in-out;
+    .show-on-hover {
+        transition: visibility .2s ease-in-out;
+        visibility: hidden;
+    }
 
     &:hover {
         background-color: $hover-dark;
+        .show-on-hover {
+            visibility: visible;
+        }
     }
 }
 

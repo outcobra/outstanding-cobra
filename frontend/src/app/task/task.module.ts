@@ -7,25 +7,39 @@ import {MaterialModule} from "@angular/material";
 import {TaskService} from "./service/task.service";
 import {TaskListItemComponent} from "./task-list-item/task-list-item.component";
 import {TaskDetailComponent} from "./task-detail-component/task-detail.component";
-import {TaskResolver} from "./service/task-resolver.service";
+import {TaskDetailResolver} from "./service/task-detail-resolver.service";
 import {TranslateModule} from "ng2-translate";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {TaskListResolver} from "./service/task-list-resolver.service";
+import {TaskFilterResolver} from "./service/task-filter-resolver.service";
+import { TaskAddDialogComponent } from './task-add-dialog/task-add-dialog.component';
+import {SharedModule} from "../shared/shared.module";
 
 @NgModule({
     imports: [
         CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
         TaskRoutingModule,
         MaterialModule,
+        SharedModule,
         TranslateModule
     ],
     declarations: [
         TaskComponent,
         TaskListItemComponent,
-        TaskDetailComponent
+        TaskDetailComponent,
+        TaskAddDialogComponent
     ],
     providers: [
         AuthGuard,
         TaskService,
-        TaskResolver
+        TaskDetailResolver,
+        TaskListResolver,
+        TaskFilterResolver
+    ],
+    entryComponents: [
+        TaskAddDialogComponent
     ]
 })
 export class TaskModule {

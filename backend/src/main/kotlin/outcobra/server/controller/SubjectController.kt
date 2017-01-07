@@ -1,6 +1,7 @@
 package outcobra.server.controller
 
 import org.springframework.web.bind.annotation.*
+import outcobra.server.model.Subject
 import outcobra.server.model.dto.SubjectDto
 import outcobra.server.service.SubjectService
 import javax.inject.Inject
@@ -20,26 +21,36 @@ class SubjectController @Inject constructor(val subjectService: SubjectService) 
      * @param subjectDto the new [SubjectDto] as Json in the [RequestBody]
      * @return the [SubjectDto] that has been saved in the database
      */
-    @RequestMapping(value = "/subject", method = arrayOf(RequestMethod.PUT))
+    @PutMapping(value = "/subject")
     fun createSubject(@RequestBody subjectDto: SubjectDto): SubjectDto {
         return subjectService.createSubject(subjectDto)
+    }
+
+    @GetMapping(value = "/subject")
+    fun readAllSubjectsByUser(): List<SubjectDto> {
+        return subjectService.readAllSubjectsByUser()
+    }
+
+    @GetMapping(value = "/subject/current")
+    fun readSubjectsByCurrentSemester(): List<SubjectDto> {
+        return subjectService.readSubjectsByCurrentSemester()
     }
 
     /**
      * This method reads a subject out of the database and returns it as a [SubjectDto]
      * @param semesterId the id of the subject to read
      */
-    @RequestMapping(value = "/semester/{semesterId}/subject", method = arrayOf(RequestMethod.GET))
+    @GetMapping(value = "/semester/{semesterId}/subject")
     fun readAllSubjectsBySemester(@PathVariable semesterId: Long): List<SubjectDto> {
         return subjectService.readAllSubjectsBySemester(semesterId)
     }
 
     /**
      * This method reads all subjects that are associated with a specific Semester
-     * @param subjectId The id of the Semester of which to read all Subjects
+     * @param id The id of the Semester of which to read all Subjects
      * @return All Subjects that are associated with the given Semester
      */
-    @RequestMapping(value = "/subject/{id}", method = arrayOf(RequestMethod.GET))
+    @GetMapping(value = "/subject/{id}")
     fun readSubjectById(@PathVariable id: Long): SubjectDto {
         return subjectService.readSubjectById(id)
     }
@@ -49,18 +60,17 @@ class SubjectController @Inject constructor(val subjectService: SubjectService) 
      * @param subjectDto the updated [SubjectDto] as Json in the [RequestBody]
      * @return the [SubjectDto] that has been updated in the database
      */
-    @RequestMapping(value = "/subject", method = arrayOf(RequestMethod.POST))
+    @PostMapping(value = "/subject")
     fun updateSubject(@RequestBody subjectDto: SubjectDto): SubjectDto {
         return subjectService.updateSubject(subjectDto)
     }
 
     /**
      * This method deletes a subject
-     * @param id The id of the Subject that should be deleted
+     * @param subjectId The id of the Subject that should be deleted
      */
-    @RequestMapping(value = "/subject/{subjectId}", method = arrayOf(RequestMethod.DELETE))
+    @DeleteMapping(value = "/subject/{subjectId}")
     fun deleteSubject(@PathVariable subjectId: Long) {
         subjectService.deleteSubject(subjectId)
     }
-
 }

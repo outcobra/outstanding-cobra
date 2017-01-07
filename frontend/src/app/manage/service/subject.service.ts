@@ -2,18 +2,35 @@ import {Injectable} from "@angular/core";
 import {HttpInterceptor} from "../../shared/http/HttpInterceptor";
 import {Observable} from "rxjs";
 import {SubjectDto} from "../model/ManageDto";
+import {AppCrudService} from "../../shared/services/core/app-crud.service";
 
 @Injectable()
-export class SubjectService {
-    private readonly baseUri: string = '/subject';
+export class SubjectService extends AppCrudService<SubjectDto> {
+    constructor(http: HttpInterceptor) {
+        super(http, '/subject')
+    }
 
-    constructor(private http: HttpInterceptor) {}
-
-    public createSubject(subject: SubjectDto): Observable<any> {
+    create(subject: SubjectDto): Observable<SubjectDto> {
         return this.http.put<SubjectDto>(this.baseUri, subject, 'outcobra')
     }
 
-    public deleteSubject(subject: SubjectDto): Observable<any> {
-        return this.http.delete(`${this.baseUri}/${subject.id}`, 'outcobra');
+    getById(id: number): Observable<SubjectDto> {
+        throw new Error('not implemented');
+    }
+
+    getAll(): Observable<SubjectDto[]> {
+        return this.http.get<SubjectDto[]>(this.baseUri, 'outcobra');
+    }
+
+    deleteById(id: number): Observable<any> {
+        return this.http.delete(`${this.baseUri}/${id}`, 'outcobra');
+    }
+
+    update(arg: SubjectDto): Observable<SubjectDto> {
+        throw new Error('not implemented');
+    }
+
+    getCurrentSubjects(): Observable<SubjectDto[]> {
+        return this.http.get<SubjectDto[]>(`${this.baseUri}/current`, 'outcobra');
     }
 }

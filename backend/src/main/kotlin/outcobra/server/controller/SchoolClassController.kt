@@ -35,6 +35,11 @@ class SchoolClassController @Inject constructor(val schoolClassService: SchoolCl
         return schoolClassService.readSchoolClassById(id)
     }
 
+    @GetMapping(value = "/schoolClass")
+    fun readSchoolClassesByUser(): List<SchoolClassDto> {
+        return schoolClassService.readAllSchoolClassesByUser()
+    }
+
     /**
      * This method reads all SchoolClasses that are associated with a specific Institution
      * @param institutionId The id of the Institution of which to get all SchoolClasses

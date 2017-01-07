@@ -57,8 +57,6 @@ export class ManageComponent implements OnInit {
     ngOnInit() {
         this.manageService.getManageData()
             .subscribe((res) => this.prepareManageData(res));
-        this.colorService.getColors()
-            .subscribe(res => console.log(res));
     }
 
     selectSchoolClass(schoolClassId: number) {
@@ -111,7 +109,7 @@ export class ManageComponent implements OnInit {
         this.institutionDialogRef = this.manageDialogFactory.getDialog(InstitutionDialog, DialogMode.NEW, null, DEFAULT_CONFIG);
         this.institutionDialogRef.afterClosed().subscribe((result: InstitutionDto) => {
             if (result != null) {
-                this.institutionService.createInstitution(result).subscribe((institution: InstitutionDto) => {
+                this.institutionService.create(result).subscribe((institution: InstitutionDto) => {
                     this.showSuccessNotification('institution');
                     this.institutionClasses.push(institution);
                 });
@@ -123,7 +121,7 @@ export class ManageComponent implements OnInit {
         this.schoolClassDialogRef = this.manageDialogFactory.getDialog(SchoolClassDialog, DialogMode.NEW, institution, DEFAULT_CONFIG);
         this.schoolClassDialogRef.afterClosed().subscribe((result: SchoolClassDto) => {
             if (result) {
-                this.schoolClassService.createSchoolClass(result).subscribe((schoolClass: SchoolClassDto) => {
+                this.schoolClassService.create(result).subscribe((schoolClass: SchoolClassDto) => {
                     this.showSuccessNotification('schoolClass');
                     institution.schoolClasses.push(schoolClass);
                 });
@@ -137,7 +135,7 @@ export class ManageComponent implements OnInit {
             this.schoolYearDialogRef = this.manageDialogFactory.getDialog(SchoolYearDialog, DialogMode.NEW, schoolClass, DEFAULT_CONFIG);
             this.schoolYearDialogRef.afterClosed().subscribe((result: SchoolYearDto) => {
                 if (result) {
-                    this.schoolYearService.createSchoolYear(result).subscribe((schoolYear: SchoolYearDto) => {
+                    this.schoolYearService.create(result).subscribe((schoolYear: SchoolYearDto) => {
                         this.showSuccessNotification('schoolYear');
                         this.yearSemesterModel.push(schoolYear);
                     });
@@ -151,7 +149,7 @@ export class ManageComponent implements OnInit {
             this.semesterDialogRef = this.manageDialogFactory.getDialog(SemesterDialog, DialogMode.NEW, schoolYear, DEFAULT_CONFIG);
             this.semesterDialogRef.afterClosed().subscribe((result: SemesterDto) => {
                 if (result) {
-                    this.semesterService.createSemester(result).subscribe((semester: SemesterDto) => {
+                    this.semesterService.create(result).subscribe((semester: SemesterDto) => {
                         this.showSuccessNotification('schoolYear');
                         schoolYear.semesters.push(semester);
                     });
@@ -166,7 +164,7 @@ export class ManageComponent implements OnInit {
             this.subjectDialogRef = this.manageDialogFactory.getDialog(SubjectDialog, DialogMode.NEW, semester, DEFAULT_CONFIG);
             this.subjectDialogRef.afterClosed().subscribe((result: SubjectDto) => {
                 if (result) {
-                    this.subjectService.createSubject(result).subscribe((subject: SubjectDto) => {
+                    this.subjectService.create(result).subscribe((subject: SubjectDto) => {
                         this.showSuccessNotification('subject');
                         this.subjectModel.push(subject);
                     });
@@ -178,7 +176,7 @@ export class ManageComponent implements OnInit {
     deleteInstitution(institution: InstitutionDto) {
         this.openDeleteConfirmDialog('institution').subscribe((result) => {
             if (result === true) {
-                this.institutionService.deleteInstitution(institution).subscribe();
+                this.institutionService.deleteById(institution.id).subscribe();
             }
         });
     }
@@ -186,7 +184,7 @@ export class ManageComponent implements OnInit {
     deleteSchoolClass(schoolClass: SchoolClassDto) {
         this.openDeleteConfirmDialog('schoolClass').subscribe((result) => {
             if (result === true) {
-                this.schoolClassService.deleteSchoolClass(schoolClass).subscribe();
+                this.schoolClassService.deleteById(schoolClass.id).subscribe();
             }
         });
     }
@@ -194,7 +192,7 @@ export class ManageComponent implements OnInit {
     deleteSchoolYear(schoolYear: SchoolYearDto) {
         this.openDeleteConfirmDialog('schoolYear').subscribe((result) => {
             if (result === true) {
-                this.schoolYearService.deleteSchoolYear(schoolYear).subscribe();
+                this.schoolYearService.deleteById(schoolYear.id).subscribe();
             }
         });
     }
@@ -202,7 +200,15 @@ export class ManageComponent implements OnInit {
     deleteSemester(semester: SemesterDto) {
         this.openDeleteConfirmDialog('semester').subscribe((result) => {
             if (result === true) {
-                this.semesterService.deleteSemester(semester).subscribe();
+                this.semesterService.deleteById(semester.id).subscribe();
+            }
+        });
+    }
+
+    deleteSubject(subject: SubjectDto) {
+        this.openDeleteConfirmDialog('subject').subscribe((result) => {
+            if (result === true) {
+                this.subjectService.deleteById(subject.id).subscribe();
             }
         });
     }

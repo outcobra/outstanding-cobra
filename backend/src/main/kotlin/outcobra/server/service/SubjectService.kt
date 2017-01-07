@@ -43,4 +43,13 @@ interface SubjectService {
      * @param subjectId the id of the element you want to delete
      */
     fun deleteSubject(subjectId: Long)
+
+    /**
+     * This function reads all [Subject]s from the current User
+     * @return all [SubjectDto]s which belong to the current user
+     */
+    fun readAllSubjectsByUser(): List<SubjectDto>
+
+    fun readSubjectsBySchoolClassId(schoolClassId: Long): List<SubjectDto>
+    fun readSubjectsByCurrentSemester(): List<SubjectDto>
 }

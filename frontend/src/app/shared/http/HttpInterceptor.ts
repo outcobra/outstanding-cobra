@@ -65,7 +65,7 @@ export class HttpInterceptor {
             })
         ).catch(error => {
             this.notificationsService.error('http.error.title', 'http.error.message'); // TODO i18n + i18nKey by error.status
-            return Observable.throw(new Error(error));
+            return Observable.throw(error);
         }).map((res: Response) => this.unwrapAndCastHttpResponse<T>(res));
     }
 

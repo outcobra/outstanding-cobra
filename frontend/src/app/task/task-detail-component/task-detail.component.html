@@ -6,9 +6,12 @@
         <md-card-subtitle>{{task.subject.name}}</md-card-subtitle>
     </md-card-header>
     <md-card-content>
-        {{task.description}}
+        <p>{{task.description}}</p>
+        <md-slider [value]="task.progress" thumbLabel step="5"></md-slider>
     </md-card-content>
     <md-card-actions>
+        <button md-raised-button (click)="editTask()">{{'i18n.common.action.edit' | translate}}</button>
+        <button md-raised-button (click)="deleteTask()">{{'i18n.common.action.delete' | translate}}</button>
         <button md-button (click)="closeCard()">{{'i18n.common.action.close' | translate}}</button>
     </md-card-actions>
 </md-card>

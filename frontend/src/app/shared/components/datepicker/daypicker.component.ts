@@ -31,7 +31,7 @@ import {Util} from "../../services/util";
 export class DaypickerComponent implements OnInit {
     private dayLabels: string[] = [];
     private monthLabel: string;
-    private rows: any[] = [];
+    private rows: Date[][] = null;
     private year: number;
     private month: number;
     private animate: string;
@@ -84,7 +84,7 @@ export class DaypickerComponent implements OnInit {
         for (let i = 0; i < daysInMonth; i++) {
             days[i + dayIndex] = new Date(year, month, i + 1);
         }
-        this.rows = Util.split(days, 7);
+        this.rows = Util.split<Date>(days, 7);
     }
 
     isDisabled(date: Date) {
