@@ -6,7 +6,7 @@ import "rxjs/add/operator/map";
 import {AppService} from "../../shared/services/core/app.service";
 
 @Injectable()
-export class ManageService extends AppService<ManageDto> {
+export class ManageService extends AppService {
 
     constructor(http: HttpInterceptor) {
         super(http, '/manage')

@@ -7,6 +7,8 @@ import {SubjectDto} from "../manage/model/ManageDto";
 import {SchoolClassService} from "../manage/service/school-class.service";
 import {ActivatedRoute} from "@angular/router";
 import {TaskFilter} from "./model/TaskFilter";
+import {MdDialog, MdDialogRef} from "@angular/material";
+import {TaskAddDialogComponent} from "./task-add-dialog/task-add-dialog.component";
 
 @Component({
     selector: 'task',
@@ -18,18 +20,18 @@ export class TaskComponent implements OnInit {
     private filterForm: FormGroup;
     private searchForm: FormGroup;
     private tasks: Task[];
-    private subjects: SubjectDto[];
     private filteredTasks: Task[];
     private filterData: TaskFilter;
+
+    private taskAddDialog: MdDialogRef<TaskAddDialogComponent>;
 
     private filter = {
         subjectId: 0
     };
 
     constructor(private taskService: TaskService,
+                private dialogService: MdDialog,
                 private route: ActivatedRoute,
-                private schoolClassService: SchoolClassService,
-                private subjectService: SubjectService,
                 private formBuilder: FormBuilder) {
     }
 
@@ -38,15 +40,12 @@ export class TaskComponent implements OnInit {
             searchTerm: ['']
         });
         this.filterForm = this.formBuilder.group({
-            institutionId: [''],
-            schoolClassId: [''],
-            schoolYearId: [''],
-            semesterId: [''],
             subjectId: ['']
         });
 
         this.route.data.subscribe((data : {taskFilter: TaskFilter, tasks: Task[]}) => {
             this.filterData = data.taskFilter;
+            console.log(this.filterData);
             this.tasks = this.filteredTasks = data.tasks;
         });
 
@@ -54,6 +53,18 @@ export class TaskComponent implements OnInit {
             .debounceTime(300)
             .distinctUntilChanged()
             .subscribe(searchTerm => this.filteredTasks = this.search(searchTerm));
+    }
+
+    addTask() {
+        this.taskAddDialog = this.dialogService.open(TaskAddDialogComponent, {width: '500px', position: {top: '20px'}})
+    }
+
+    markTaskAsDone(task: Task) {
+        if (task.progress != 100) {
+            task.progress = 100;
+            this.taskService.update(task)
+                .subscribe();
+        }
     }
 
     /**
@@ -74,6 +85,11 @@ export class TaskComponent implements OnInit {
         if (this.filterForm.get('subjectId').touched) {
             this.filteredTasks = this.tasks.filter(task => task.subject.id == this.filterForm.get('subjectId').value);
         }
+    }
+
+    resetFilter() {
+        this.filterForm.reset();
+        this.filteredTasks = this.tasks;
     }
 
 }

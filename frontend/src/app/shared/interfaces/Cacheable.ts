@@ -12,22 +12,22 @@ export interface Cacheable<T> {
     /**
      * the cache where the cached Objects should be saved
      */
-    cache: T[];
+    cache: T;
     /**
      * observable cache to save the observable returned by an asynchronous operation
      * can be returned by a cached function when the asynchronous operation is still in progress and the cache on the cache property isn't available yet
      */
-    observable: Observable<T[]>;
+    observable: Observable<T>;
     /**
      * saves the given argument in the cache
      * @param arg
      */
-    saveCache(arg: T[]): void;
+    saveCache(arg: T): void;
     /**
      * saves the given observable
      * @param observable
      */
-    saveObservable(observable: Observable<T[]>): Observable<T[]>;
+    saveObservable(observable: Observable<T>): Observable<T>;
     /**
      * clears the current cache
      */

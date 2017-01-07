@@ -7,6 +7,7 @@
                 "cancel": "Abbrechen",
                 "edit": "Bearbeiten",
                 "close": "Schliessen",
+                "reset": "Zurücksetzen",
                 "yes": "Ja",
                 "no": "Nein",
                 "ok": "OK",
@@ -14,7 +15,9 @@
             },
             "label": {
                 "validFrom": "Gültig ab",
-                "validTo": "Gültig bis"
+                "validTo": "Gültig bis",
+                "todoDate": "Erledigungsdatum",
+                "dueDate": "Fälligkeitsdatum"
             },
             "form": {
                 "error": {
@@ -40,7 +43,25 @@
             },
             "task": {
                 "linkTitle": "Aufgaben",
+                "add": "Aufgabe hinzufügen",
                 "filter": "Aufgaben filtern",
+                "dialogs": {
+                    "confirmDeleteDialog": {
+                        "title": "Willst du die Aufgabe wirklich löschen?",
+                        "message": "Die Aufgabe wird für immer weg sein (Eine sehr sehr lange Zeit)"
+                    },
+                    "add": {
+                        "name": {
+                            "label": "Enter a task name"
+                        },
+                        "desc": {
+                            "label": "Enter a task description"
+                        },
+                        "effort": {
+                            "label": "Erwarteter Aufwand (in h)"
+                        }
+                    }
+                },
                 "error": {
                     "taskNotFound": {
                         "title": "Aufgabe nicht gefunden",

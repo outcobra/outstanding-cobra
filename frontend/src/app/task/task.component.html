@@ -12,7 +12,7 @@
         <md-card class="list-card">
             <md-list>
                 <h2 md-subheader>Your Tasks</h2>
-                <task-list-item *ngFor="let task of filteredTasks" [task]="task"></task-list-item>
+                <task-list-item *ngFor="let task of filteredTasks" [task]="task" (onMarkDone)="markTaskAsDone($event)"></task-list-item>
             </md-list>
         </md-card>
     </div>
@@ -20,18 +20,25 @@
         <md-card>
             <md-card-title>{{'i18n.modules.task.filter' | translate}}</md-card-title>
             <md-card-content>
-                <md-select formControlName="schoolClassId">
-                    <md-option *ngFor="let schoolClass of filterData?.schoolClasses" [value]="schoolClass.id">{{schoolClass.normalizedName}}</md-option>
-                </md-select>
                 <md-select formControlName="subjectId">
-                    <md-option *ngFor="let subject of filterData?.subjects" [value]="subject.id">{{subject.name}}</md-option>
+                    <template ngFor let-subjectClass [ngForOf]="filterData.subjectClasses">
+                        <md-option *ngFor="let subject of subjectClass.subjects" [value]="subject.id">
+                            {{ subjectClass.schoolClass.normalizedName + ' - ' + subject.name }}
+                        </md-option>
+                    </template>
                 </md-select>
             </md-card-content>
             <md-card-actions>
                 <button md-raised-button color="primary" (click)="filterTasks()">{{'i18n.common.action.filter' |
                     translate}}
                 </button>
+                <button md-raised-button (click)="resetFilter()">{{'i18n.common.action.reset' |
+                    translate}}
+                </button>
             </md-card-actions>
         </md-card>
     </div>
 </div>
+<button md-fab [mdTooltip]="'i18n.modules.task.add' | translate" mdTooltipPosition="left" (click)="addTask()">
+    <md-icon>add</md-icon>
+</button>

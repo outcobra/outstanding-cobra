@@ -49,4 +49,6 @@ interface SubjectService {
      * @return all [SubjectDto]s which belong to the current user
      */
     fun readAllSubjectsByUser(): List<SubjectDto>
+
+    fun readSubjectsBySchoolClassId(schoolClassId: Long): List<SubjectDto>
 }

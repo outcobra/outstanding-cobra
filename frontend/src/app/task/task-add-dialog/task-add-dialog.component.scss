@@ -1,0 +1,17 @@
+md-input-container {
+    width: 100%;
+
+    textarea {
+        resize: vertical;
+    }
+}
+
+.half {
+    float: left;
+    width: 50%;
+    &datepicker {
+        .md-input-container {
+            width: 50%;
+        }
+    }
+}

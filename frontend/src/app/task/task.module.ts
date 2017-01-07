@@ -12,6 +12,8 @@ import {TranslateModule} from "ng2-translate";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {TaskListResolver} from "./service/task-list-resolver.service";
 import {TaskFilterResolver} from "./service/task-filter-resolver.service";
+import { TaskAddDialogComponent } from './task-add-dialog/task-add-dialog.component';
+import {SharedModule} from "../shared/shared.module";
 
 @NgModule({
     imports: [
@@ -20,12 +22,14 @@ import {TaskFilterResolver} from "./service/task-filter-resolver.service";
         ReactiveFormsModule,
         TaskRoutingModule,
         MaterialModule,
+        SharedModule,
         TranslateModule
     ],
     declarations: [
         TaskComponent,
         TaskListItemComponent,
-        TaskDetailComponent
+        TaskDetailComponent,
+        TaskAddDialogComponent
     ],
     providers: [
         AuthGuard,
@@ -33,6 +37,9 @@ import {TaskFilterResolver} from "./service/task-filter-resolver.service";
         TaskDetailResolver,
         TaskListResolver,
         TaskFilterResolver
+    ],
+    entryComponents: [
+        TaskAddDialogComponent
     ]
 })
 export class TaskModule {

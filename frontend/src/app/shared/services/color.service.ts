@@ -5,7 +5,7 @@ import {Observable} from "rxjs";
 import {CacheableService} from "./core/cacheable.service";
 
 @Injectable()
-export class ColorService extends CacheableService<Color> {
+export class ColorService extends CacheableService<Color[]> {
     constructor(http: HttpInterceptor) {
         super(http, '/color')
     }

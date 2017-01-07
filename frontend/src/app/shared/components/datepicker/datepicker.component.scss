@@ -7,9 +7,9 @@ datepicker {
         display: block;
         position: relative;
 
-        md-input {
+        md-input-container {
             label {
-                top: 14px;
+                top: 12px;
                 &.md-input-placeholder.md-focused {
                     top: 0;
                 }

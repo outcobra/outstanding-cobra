@@ -3,9 +3,10 @@ import {HttpInterceptor} from "../../shared/http/HttpInterceptor";
 import {Task} from "../model/Task";
 import {Observable} from "rxjs";
 import {CacheableCrudService} from "../../shared/services/core/cacheable-crud.service";
+import {TaskFilter} from "../model/TaskFilter";
 
 @Injectable()
-export class TaskService extends CacheableCrudService<Task> {
+export class TaskService extends CacheableCrudService<Task, Task[]> {
     constructor(http: HttpInterceptor) {
         super(http, '/task');
     }
@@ -35,10 +36,15 @@ export class TaskService extends CacheableCrudService<Task> {
     }
 
     deleteById(id: number): Observable<any> {
-        throw new Error('not implemented');
+        console.log(id);
+        return this.http.delete(`${this.baseUri}/${id}`, 'outcobra');
     }
 
-    update(arg: Task): Observable<Task> {
-        return undefined;
+    update(task: Task): Observable<Task> {
+        return this.http.post<Task>(this.baseUri, task, 'outcobra');
+    }
+
+    getTaskFilter(): Observable<TaskFilter> {
+        return this.http.get<TaskFilter>(`${this.baseUri}/filter`, 'outcobra');
     }
 }

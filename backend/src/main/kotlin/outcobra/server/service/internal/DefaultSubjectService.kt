@@ -43,4 +43,9 @@ open class DefaultSubjectService @Inject constructor(val repository: SubjectRepo
     override fun deleteSubject(subjectId: Long) {
         repository.delete(subjectId)
     }
+
+    override fun readSubjectsBySchoolClassId(schoolClassId: Long): List<SubjectDto> {
+        val filter = QSubject.subject.semester.schoolYear.schoolClass.id.eq(schoolClassId)
+        return repository.findAll(filter).map { mapper.toDto(it) }
+    }
 }

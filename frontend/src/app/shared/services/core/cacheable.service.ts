@@ -9,19 +9,19 @@ import {AppService} from "./app.service";
  */
 export abstract class CacheableService<T> extends AppService implements Cacheable<T> {
     expiration: number;
-    cache: T[];
-    observable: Observable<T[]>;
+    cache: T;
+    observable: Observable<T>;
 
     constructor(http: HttpInterceptor = null, baseUri: string = '', private expiredAfter: number = 600000) {
         super(http, baseUri);
     }
 
-    saveCache(arg: T[]): void {
+    saveCache(arg: T): void {
         this.cache = arg;
         this.expiration = Util.getMillis();
     }
 
-    saveObservable(observable: Observable<T[]>): Observable<T[]> {
+    saveObservable(observable: Observable<T>): Observable<T> {
         return this.observable = observable;
     }
 

@@ -4,20 +4,22 @@ import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 import outcobra.server.model.QTask
 import outcobra.server.model.Task
+import outcobra.server.model.dto.ParentClass
 import outcobra.server.model.dto.TaskDto
+import outcobra.server.model.dto.TaskFilterDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.TaskRepository
-import outcobra.server.service.*
+import outcobra.server.service.SchoolClassService
+import outcobra.server.service.SubjectService
+import outcobra.server.service.TaskService
+import outcobra.server.service.UserService
 import javax.inject.Inject
 
 @Component
 @Transactional
 open class DefaultTaskService @Inject constructor(val repository: TaskRepository,
                                                   val mapper: Mapper<Task, TaskDto>,
-                                                  val institutionService: InstitutionService,
                                                   val schoolClassService: SchoolClassService,
-                                                  val schoolYearService: SchoolYearService,
-                                                  val semesterService: SemesterService,
                                                   val subjectService: SubjectService,
                                                   val userService: UserService) : TaskService {
 
@@ -66,5 +68,11 @@ open class DefaultTaskService @Inject constructor(val repository: TaskRepository
 
     override fun deleteTask(id: Long) {
         repository.delete(id)
+    }
+
+    override fun getTaskFilter(): TaskFilterDto {
+        return TaskFilterDto(schoolClassService.readAllSchoolClassesByUser().map {
+            ParentClass(it, subjectService.readSubjectsBySchoolClassId(it.id))
+        })
     }
 }
