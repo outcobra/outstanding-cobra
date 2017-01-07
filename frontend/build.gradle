@@ -9,4 +9,6 @@ node {
 
 task ngBuild(type: YarnTask, dependsOn: [yarn_install]) { args = ['run', 'ng', 'build', '"-prod"'] }
 
-task build(dependsOn: ngBuild)
+task assemble(dependsOn: ngBuild)
+
+task build(dependsOn: assemble)
