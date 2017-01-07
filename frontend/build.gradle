@@ -1,13 +1,12 @@
-//buildscript {
-//  repositories {
-//    maven {
-//      url "https://plugins.gradle.org/m2/"
-//    }
-//  }
-//
-//  dependencies {
-//    classpath "com.moowork.gradle:gradle-node-plugin:0.13"
-//  }
-//}
-//
-//apply plugin: 'com.moowork.node'
+plugins {
+    id "com.moowork.node" version "1.0.1"
+}
+
+node {
+    version = '7.4.0'
+    download = true
+}
+
+task ngBuild(type: YarnTask, dependsOn: [yarn_install]) { args = ['run', 'ng', 'build', '"-prod"'] }
+
+task build(dependsOn: ngBuild)
