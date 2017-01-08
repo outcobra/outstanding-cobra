@@ -44,6 +44,8 @@
             "task": {
                 "linkTitle": "Aufgaben",
                 "add": "Aufgabe hinzufügen",
+                "desc": "Aufgaben Beschreibung",
+                "progress": "Fortschritt",
                 "filter": {
                     "title": "Aufgaben filtern",
                     "subject": "Nach Fach filtern",

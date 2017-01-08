@@ -26,7 +26,7 @@ export class TaskDetailComponent implements OnInit {
     }
 
     editTask() {
-
+        //TODO
     }
 
     deleteTask() {

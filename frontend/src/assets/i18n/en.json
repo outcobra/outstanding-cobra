@@ -44,6 +44,8 @@
             "task": {
                 "linkTitle": "Tasks",
                 "add": "Add Task",
+                "desc": "Task description",
+                "progress": "Progress",
                 "filter": {
                     "title": "Filter Tasks",
                     "subject": "Filter by subject",
