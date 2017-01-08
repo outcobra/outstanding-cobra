@@ -2,7 +2,7 @@ import {Component, OnInit, ViewEncapsulation} from "@angular/core";
 import {TaskService} from "./service/task.service";
 import {Task} from "./model/Task";
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router, NavigationEnd, NavigationStart} from "@angular/router";
 import {TaskFilter} from "./model/TaskFilter";
 import {MdDialog, MdDialogRef} from "@angular/material";
 import {TaskAddDialogComponent} from "./task-add-dialog/task-add-dialog.component";
@@ -29,6 +29,7 @@ export class TaskComponent implements OnInit {
                 private dialogService: MdDialog,
                 private notificationService: NotificationsService,
                 private route: ActivatedRoute,
+                private router: Router,
                 private formBuilder: FormBuilder) {
     }
 
@@ -51,10 +52,19 @@ export class TaskComponent implements OnInit {
             .debounceTime(300)
             .distinctUntilChanged()
             .subscribe(searchTerm => this.filteredTasks = Util.cloneArray(this.search(searchTerm)));
+
+        this.router.events.subscribe((event) => {
+            if (event instanceof NavigationEnd && !this.taskService.hasCache()) {
+                this.taskService.readAll().subscribe((tasks: Task[]) => {
+                    this.tasks = tasks;
+                    this.filteredTasks = this.isFiltered ? Util.cloneArray(tasks) : this.filterTasks(Util.cloneArray(tasks));
+                });
+            }
+        });
     }
 
     addTask() {
-        this.taskAddDialog = this.dialogService.open(TaskAddDialogComponent, {width: '500px', position: {top: '20px'}})
+        this.taskAddDialog = this.dialogService.open(TaskAddDialogComponent, {width: '500px', position: {top: '20px'}});
         this.taskAddDialog.afterClosed()
             .subscribe((result) => {
                 if (!result) return;

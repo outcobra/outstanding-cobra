@@ -12,6 +12,7 @@ export class TaskService extends CacheableCrudService<Task, Task[]> {
     }
 
     public create (task: Task): Observable<Task> {
+        this.clearCache();
         return this.http.put<Task>(this.baseUri, task, 'outcobra');
     }
 
@@ -36,10 +37,12 @@ export class TaskService extends CacheableCrudService<Task, Task[]> {
     }
 
     deleteById(id: number): Observable<any> {
+        this.clearCache();
         return this.http.delete(`${this.baseUri}/${id}`, 'outcobra');
     }
 
     update(task: Task): Observable<Task> {
+        this.clearCache();
         return this.http.post<Task>(this.baseUri, task, 'outcobra');
     }
 
