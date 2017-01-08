@@ -3,9 +3,7 @@ package outcobra.server.controller
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import outcobra.server.model.Color
 import outcobra.server.model.dto.ColorDto
-import outcobra.server.model.mapper.ColorMapper
 import outcobra.server.service.ColorService
 import javax.inject.Inject
 

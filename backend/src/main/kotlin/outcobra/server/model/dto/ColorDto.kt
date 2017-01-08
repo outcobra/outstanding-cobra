@@ -1,7 +1,5 @@
 package outcobra.server.model.dto
 
-import kotlin.comparisons.compareValuesBy
-
 /**
  * @author Mario Kunz
  */
