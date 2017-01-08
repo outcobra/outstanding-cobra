@@ -21,7 +21,7 @@ open class DefaultSchoolClassService @Inject constructor(val mapper: Mapper<Scho
                                                          val userService: UserService,
                                                          val repository: SchoolClassRepository) : SchoolClassService {
     override fun readAllSchoolClassesByUser(): List<SchoolClassDto> {
-        val userId = userService.getCurrentUser()?.id
+        val userId = userService.getCurrentUser()!!.id
         val filter = QSchoolClass.schoolClass.institution.user.id.eq(userId)
         return repository.findAll(filter).map { mapper.toDto(it) }
     }

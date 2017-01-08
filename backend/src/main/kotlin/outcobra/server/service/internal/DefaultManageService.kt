@@ -14,7 +14,7 @@ open class DefaultManageService @Inject constructor(val institutionRepository: I
                                                     val userService: UserService,
                                                     val manageDtoMapper: ManageDtoMapper) : ManageService {
     override fun getManageData(): ManageDto {
-        val institutions = institutionRepository.findAll(QInstitution.institution.user.id.eq(userService.getCurrentUser()?.id)).toList()
+        val institutions = institutionRepository.findAll(QInstitution.institution.user.id.eq(userService.getCurrentUser()!!.id)).toList()
         return manageDtoMapper.toDto(institutions)
     }
 

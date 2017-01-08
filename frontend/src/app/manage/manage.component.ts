@@ -59,7 +59,6 @@ export class ManageComponent implements OnInit {
     }
 
     selectSchoolClass(schoolClassId: number) {
-        console.log(schoolClassId);
         let schoolClass = this.findSchoolClass(this.institutionClasses, schoolClassId);
         if (schoolClass != null) {
             this.yearSemesterModel = schoolClass.schoolYears;
