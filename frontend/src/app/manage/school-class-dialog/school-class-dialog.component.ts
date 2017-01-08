@@ -3,6 +3,7 @@ import {ManageDialog} from "../manage-dialog";
 import {SchoolClassDto, InstitutionDto} from "../model/ManageDto";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MdDialogRef} from "@angular/material";
+import {Util} from "../../shared/services/util";
 
 @Component({
     selector: 'school-class-dialog',
@@ -34,7 +35,7 @@ export class SchoolClassDialog extends ManageDialog<SchoolClassDto, InstitutionD
             this.dialogRef.close(value);
         }
         else if (this.schoolClassForm.pristine) {
-            this.revalidateForm(this.schoolClassForm);
+            Util.revalidateForm(this.schoolClassForm);
         }
     }
 

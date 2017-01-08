@@ -6,10 +6,10 @@
         <div class="form-group">
             <md-input-container>
                 <input md-input [autofocus]="false" [placeholder]="'i18n.modules.manage.schoolClass.form.label' | translate" formControlName="normalizedName">
+                <md-hint class="form-error" align="start" *ngIf="schoolClassForm.get('normalizedName').invalid && schoolClassForm.get('normalizedName').touched">
+                    <template [ngIf]="schoolClassForm.get('normalizedName').hasError('required')">{{'i18n.common.form.error.required' | translate}}</template>
+                </md-hint>
             </md-input-container>
-            <div class="form-error" *ngIf="schoolClassForm.get('normalizedName').invalid && schoolClassForm.get('normalizedName').dirty">
-                <span *ngIf="schoolClassForm.get('normalizedName').getError('required')">{{'i18n.common.form.error.required' | translate}}</span>
-            </div>
         </div>
     </div>
     <div class="dialog-footer" md-dialog-actions>

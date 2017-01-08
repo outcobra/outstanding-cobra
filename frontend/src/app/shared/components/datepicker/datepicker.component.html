@@ -1,9 +1,10 @@
 <div class="datepicker-wrapper">
-    <md-input-container>
+    <md-input-container (click)="toggle()">
         <input md-input [autofocus]="false" type="text" [(ngModel)]="formattedDate" (blur)="inputDateChanged()" [placeholder]="placeholder">
-        <button type="button" md-icon-button md-suffix (click)="toggle()" class="datepicker-toggler"> <!-- todo stop click propagation -->
-            <md-icon>event</md-icon>
-        </button>
+        <!--<button type="button" md-icon-button md-suffix (click)="toggle()" class="datepicker-toggler">-->
+            <md-icon md-suffix>event</md-icon>
+        <!--</button>-->
+        <ng-content select="md-hint"></ng-content>
     </md-input-container>
     <div class="datepicker z-depth-1-half" [class.opened]="opened" [ngSwitch]="pickerMode">
         <div class="datepicker-header">

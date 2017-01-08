@@ -44,7 +44,17 @@
             "task": {
                 "linkTitle": "Tasks",
                 "add": "Add Task",
-                "filter": "Filter Tasks",
+                "filter": {
+                    "title": "Filter Tasks",
+                    "subject": "Filter by subject",
+                    "progress": "Show only unfinished tasks"
+                },
+                "notification": {
+                    "add": {
+                        "title": "Task added",
+                        "message": "The task has been successfully created"
+                    }
+                },
                 "dialogs": {
                     "confirmDeleteDialog": {
                         "title": "Do you want to delete the Task?",

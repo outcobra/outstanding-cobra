@@ -44,7 +44,17 @@
             "task": {
                 "linkTitle": "Aufgaben",
                 "add": "Aufgabe hinzufügen",
-                "filter": "Aufgaben filtern",
+                "filter": {
+                    "title": "Aufgaben filtern",
+                    "subject": "Nach Fach filtern",
+                    "progress": "Nur pendente Aufgaben zeigen"
+                },
+                "notification": {
+                    "add": {
+                        "title": "Aufgabe hinzugefügt",
+                        "message": "Die Aufgabe wurde erfolgreich erstellt"
+                    }
+                },
                 "dialogs": {
                     "confirmDeleteDialog": {
                         "title": "Willst du die Aufgabe wirklich löschen?",

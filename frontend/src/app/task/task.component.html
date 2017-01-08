@@ -12,24 +12,33 @@
         <md-card class="list-card">
             <md-list>
                 <h2 md-subheader>Your Tasks</h2>
-                <task-list-item *ngFor="let task of filteredTasks" [task]="task" (onMarkDone)="markTaskAsDone($event)"></task-list-item>
+                <task-list-item *ngFor="let task of filteredTasks" [task]="task"
+                                (onMarkDone)="markTaskAsDone($event)"></task-list-item>
             </md-list>
         </md-card>
     </div>
     <div class="col m3">
         <md-card>
-            <md-card-title>{{'i18n.modules.task.filter' | translate}}</md-card-title>
+            <md-card-title>{{'i18n.modules.task.filter.title' | translate}}</md-card-title>
             <md-card-content>
-                <md-select formControlName="subjectId">
-                    <template ngFor let-subjectClass [ngForOf]="filterData.subjectClasses">
-                        <md-option *ngFor="let subject of subjectClass.subjects" [value]="subject.id">
-                            {{ subjectClass.schoolClass.normalizedName + ' - ' + subject.name }}
-                        </md-option>
-                    </template>
-                </md-select>
+                <div class="form-group">
+                    <label>{{'i18n.modules.task.filter.subject' | translate}}</label>
+                    <md-select formControlName="subjectId">
+                        <template ngFor let-subjectClass [ngForOf]="filterData.subjectClasses">
+                            <md-option *ngFor="let subject of subjectClass.subjects" [value]="subject.id">
+                                {{ subjectClass.schoolClass.normalizedName + ' - ' + subject.name }}
+                            </md-option>
+                        </template>
+                    </md-select>
+                </div>
+                <div class="form-group">
+                    <md-slide-toggle formControlName="finished">
+                        {{'i18n.modules.task.filter.progress' | translate}}
+                    </md-slide-toggle>
+                </div>
             </md-card-content>
             <md-card-actions>
-                <button md-raised-button color="primary" (click)="filterTasks()">{{'i18n.common.action.filter' |
+                <button md-raised-button color="primary" (click)="doFilter()">{{'i18n.common.action.filter' |
                     translate}}
                 </button>
                 <button md-raised-button (click)="resetFilter()">{{'i18n.common.action.reset' |

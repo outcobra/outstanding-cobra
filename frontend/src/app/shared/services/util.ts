@@ -1,4 +1,5 @@
 import {dateReplacer, dateReviver} from "../http/http-util";
+import {FormGroup} from "@angular/forms";
 /**
  * Util class
  * contains everything that does not fit in another service
@@ -55,10 +56,39 @@ export class Util {
     }
 
     /**
+     *
+     */
+    static cloneArray<T>(array: Array<T>): Array<T> {
+        return array.slice(0);
+    }
+
+    /**
      * returns the time in milliseconds since the 01.01.1970
      * @returns {number}
      */
     static getMillis(): number {
         return new Date().getTime();
     }
+
+    /**
+     * marks invalid fields in the FormGroup as touched
+     * used for validation on submit
+     *
+     * @param form FormGroup
+     */
+    static revalidateForm(form: FormGroup) {
+        Object.keys(form.controls).forEach((key) => {
+            let control = form.controls[key];
+            if (control instanceof FormGroup) {
+                this.revalidateForm(control);
+            }
+            if (!control.valid) {
+                control.markAsTouched();
+            }
+        });
+    }
+}
+
+export function and<T>(predicates: Predicate<T>[]): Predicate<T> {
+    return (arg) => predicates.every(p => p(arg));
 }
