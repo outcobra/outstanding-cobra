@@ -1,21 +1,25 @@
 import {Dto} from "../../common/Dto";
+import {Color} from "../../shared/model/Color";
 
 export interface ManageDto {
     institutions: Array<InstitutionDto>
 }
 
 export interface InstitutionDto extends Dto {
+    id: number,
     name: string,
     schoolClasses: Array<SchoolClassDto>
 }
 
 export interface SchoolClassDto extends Dto {
+    id: number,
     institutionId: number,
     normalizedName: string,
     schoolYears: Array<SchoolYearDto>
 }
 
 export interface SchoolYearDto extends Dto {
+    id: number,
     schoolClassId: number,
     name: string,
     validFrom: Date,
@@ -24,6 +28,7 @@ export interface SchoolYearDto extends Dto {
 }
 
 export interface SemesterDto extends Dto {
+    id: number,
     schoolYearId: number,
     name: string,
     validFrom: Date,
@@ -32,7 +37,9 @@ export interface SemesterDto extends Dto {
 }
 
 export interface SubjectDto extends Dto {
+    id: number,
     semesterId: number,
-    name: string
+    name: string,
+    color: Color
 }
 

@@ -10,7 +10,7 @@ import java.time.LocalDate
  */
 data class TaskDto(
         val id: Long = 0,
-        val subjectId: Long = 0,
+        val subject: SubjectDto = SubjectDto(),
         val name: String = "",
         val description: String,
         val todoDate: LocalDate,
@@ -20,6 +20,6 @@ data class TaskDto(
 
     override fun getIdentifier(): Long = id
 
-    override fun getParentLink(): ParentLink = ParentLink.make(subjectId, Subject::class.java)
+    override fun getParentLink(): ParentLink = ParentLink.make(subject.id, Subject::class.java)
 
 }

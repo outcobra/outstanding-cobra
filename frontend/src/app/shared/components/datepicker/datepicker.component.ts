@@ -104,7 +104,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor, Valida
      * @param event
      */
     onDocumentClick(event) {
-        if (event.target.className.includes('datepicker-toggler') || !this.elementRef.nativeElement.contains(event.target)) {
+        if (!this.elementRef.nativeElement.contains(event.target)) {
             this.close();
         }
     }
@@ -112,7 +112,6 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor, Valida
     inputDateChanged() { // todo make a better parser for the input field (low priority)
         let date = moment(this.formattedDate, 'DD.MM.YYYY').valueOf();
         if (!isNaN(date)) {
-            console.log(date);
             this.selectDate(new Date(date));
         }
     }

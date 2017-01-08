@@ -1,5 +1,6 @@
 package outcobra.server.model;
 
+import com.querydsl.core.annotations.QueryInit;
 import outcobra.server.model.interfaces.ParentLinked;
 
 import javax.persistence.*;
@@ -22,6 +23,7 @@ public class Semester implements ParentLinked {
 
     @ManyToOne
     @NotNull
+    @QueryInit("schoolClass.institution.user")
     private SchoolYear schoolYear;
 
     @OneToMany(mappedBy = "semester", cascade = CascadeType.REMOVE)

@@ -1,5 +1,6 @@
 package outcobra.server.model.dto.manage
 
+import outcobra.server.model.dto.ColorDto
 import java.time.LocalDate
 
 data class ManageDto(
@@ -40,5 +41,6 @@ data class SemesterDto(
 data class SubjectDto(
         val id: Long,
         val name: String,
+        val color: ColorDto,
         val semesterId: Long
 )

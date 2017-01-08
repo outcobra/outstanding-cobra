@@ -5,6 +5,8 @@ import {TranslateService} from "ng2-translate";
 import {Router} from "@angular/router";
 import {HttpInterceptor} from "../../http/HttpInterceptor";
 import {Util} from "../util";
+import {NotificationsService} from "angular2-notifications";
+import {Observable} from "rxjs";
 
 declare var Auth0Lock: any;
 
@@ -15,7 +17,7 @@ export class AuthService {
     private redirectRoute: string;
     lock;
 
-    constructor(private config: Config, private router: Router, private http: HttpInterceptor, private translateService: TranslateService) {
+    constructor(private config: Config, private router: Router, private http: HttpInterceptor, private notificationService: NotificationsService) {
         this.auth0Config = this.config.get('auth0');
 
         // auth0 lock configuration
@@ -52,7 +54,13 @@ export class AuthService {
                 localStorage.setItem(this.config.get('locStorage.profileLocation'), JSON.stringify(profile));
             });
             // We need to subscribe here because the request does not get triggered if we don't
-            this.http.get('/user/login', 'outcobra').subscribe();
+            this.http.get('/user/login', 'outcobra')
+                .catch(err => {
+                    this.logout();
+                    this.notificationService.error('i18n.login.error.title', 'i18n.login.error.title');
+                    return Observable.empty();
+                })
+                .subscribe();
             let redirectRoute = Util.getUrlParam('state');
             if (redirectRoute) {
                 this.router.navigate(redirectRoute);

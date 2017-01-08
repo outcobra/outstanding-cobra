@@ -1,0 +1,22 @@
+@import '../../sass/color';
+
+md-input-container#task-search {
+    display: block !important;
+    box-sizing: border-box;
+    margin: 0 20px;
+    label {
+        font-size: 30px !important;
+    }
+    input {
+        height: 40px;
+        width: 100%;
+        font-size: 30px !important;
+    }
+}
+
+button[md-fab] {
+    position: absolute;
+    bottom: 23px;
+    right: 23px;
+    @extend .text-primary-light;
+}

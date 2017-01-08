@@ -6,13 +6,18 @@
                 "delete": "Delete",
                 "cancel": "Cancel",
                 "edit": "Edit",
+                "close": "Close",
+                "reset": "Reset",
                 "yes": "Yes",
                 "no": "No",
-                "ok": "OK"
+                "ok": "OK",
+                "filter": "Filter"
             },
             "label": {
                 "validFrom": "Valid from",
-                "validTo": "Valid to"
+                "validTo": "Valid to",
+                "dueDate": "Due Date",
+                "todoDate": "Todo Date"
             },
             "form": {
                 "error": {
@@ -37,7 +42,44 @@
                 "linkTitle": "Marks"
             },
             "task": {
-                "linkTitle": "Tasks"
+                "linkTitle": "Tasks",
+                "add": "Add Task",
+                "desc": "Task description",
+                "progress": "Progress",
+                "filter": {
+                    "title": "Filter Tasks",
+                    "subject": "Filter by subject",
+                    "showPending": "Show only unfinished tasks"
+                },
+                "notification": {
+                    "add": {
+                        "title": "Task added",
+                        "message": "The task has been successfully created"
+                    }
+                },
+                "dialogs": {
+                    "confirmDeleteDialog": {
+                        "title": "Do you want to delete the Task?",
+                        "message": "The task will be lost forever (A very long long time)"
+                    },
+                    "add": {
+                        "name": {
+                            "label": "Enter a task name"
+                        },
+                        "desc": {
+                            "label": "Enter a task description"
+                        },
+                        "effort": {
+                            "label": "Expected effort (in h)"
+                        }
+                    }
+                },
+                "error": {
+                    "taskNotFound": {
+                        "title": "Task not found",
+                        "message": "We couldn't find the requested task"
+                    }
+                }
             },
             "timetable": {
                 "linkTitle": "Timetable"
@@ -101,11 +143,29 @@
             }
         },
         "login": {
+            "error": {
+                "title": "Login failed",
+                "message": "We could not log you in"
+            }
         },
         "http": {
             "error": {
-                "title": "Error!",
-                "message": "A server-side error occurred! Please try again."
+                "0": {
+                    "title": "Connection Error",
+                    "message": "The server is currently not reachable. Please try again later."
+                },
+                "400": {
+                    "title": "Data Error",
+                    "message": "The server is indicating invalid input data"
+                },
+                "404": {
+                    "title": "Not Found",
+                    "message": "The requested element could not be found"
+                },
+                "500": {
+                    "title": "Server Error",
+                    "message": "An unknown server error has occurred"
+                }
             }
         }
     }

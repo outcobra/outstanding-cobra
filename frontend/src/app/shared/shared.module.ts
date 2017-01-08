@@ -21,6 +21,8 @@ import {
 } from "./components/collapsible/collapsible";
 import {ConfirmDialogComponent} from './components/confirm-dialog/confirm-dialog.component';
 import {ConfirmDialogService} from "./services/confirm-dialog.service";
+import {ColorService} from "./services/color.service";
+import {ColorpickerComponent} from "./components/colorpicker/colorpicker.component";
 
 @NgModule({
     declarations: [
@@ -28,6 +30,7 @@ import {ConfirmDialogService} from "./services/confirm-dialog.service";
         DatepickerComponent,
         DaypickerComponent,
         YearpickerComponent,
+        ColorpickerComponent,
         SidenavComponent,
         SidenavLayout,
         CollapsibleComponent,
@@ -37,6 +40,7 @@ import {ConfirmDialogService} from "./services/confirm-dialog.service";
     ],
     exports: [
         DatepickerComponent,
+        ColorpickerComponent,
         SidenavComponent,
         SidenavLayout,
         CollapsibleComponent,
@@ -60,6 +64,7 @@ import {ConfirmDialogService} from "./services/confirm-dialog.service";
         AuthService,
         HttpInterceptor,
         ConfirmDialogService,
+        ColorService,
         NotificationWrapperService,
         {
             provide: NotificationsService,

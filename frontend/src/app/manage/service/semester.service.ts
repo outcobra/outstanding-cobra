@@ -2,18 +2,31 @@ import {Injectable} from "@angular/core";
 import {HttpInterceptor} from "../../shared/http/HttpInterceptor";
 import {Observable} from "rxjs";
 import {SemesterDto} from "../model/ManageDto";
+import {AppCrudService} from "../../shared/services/core/app-crud.service";
 
 @Injectable()
-export class SemesterService {
-    private readonly baseUri: string = '/semester';
+export class SemesterService extends AppCrudService<SemesterDto> {
+    constructor(http: HttpInterceptor) {
+        super(http, '/semester');
+    }
 
-    constructor(private http: HttpInterceptor) {}
-
-    public createSemester(semester: SemesterDto): Observable<any> {
+    create(semester: SemesterDto): Observable<SemesterDto> {
         return this.http.put<SemesterDto>('/semester', semester, 'outcobra')
     }
 
-    public deleteSemester(semester: SemesterDto): Observable<any> {
-        return this.http.delete(`${this.baseUri}/${semester.id}`, 'outcobra');
+    readById(id: number): Observable<SemesterDto> {
+        throw new Error('not implemented');
+    }
+
+    readAll(): Observable<SemesterDto[]> {
+        throw new Error('not implemented');
+    }
+
+    deleteById(id: number): Observable<any> {
+        return this.http.delete(`${this.baseUri}/${id}`, 'outcobra');
+    }
+
+    update(arg: SemesterDto): Observable<SemesterDto> {
+        throw new Error('not implemented');
     }
 }

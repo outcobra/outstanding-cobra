@@ -2,6 +2,7 @@ import {Component, OnInit, ViewEncapsulation, style, keyframes, animate, transit
 import * as moment from "moment";
 import {DatepickerComponent} from "./datepicker.component";
 import {DateUtil} from "../../services/date-util.service";
+import {Util} from "../../services/util";
 
 @Component({
     selector: 'daypicker',
@@ -30,7 +31,7 @@ import {DateUtil} from "../../services/date-util.service";
 export class DaypickerComponent implements OnInit {
     private dayLabels: string[] = [];
     private monthLabel: string;
-    private rows: any[] = [];
+    private rows: Date[][] = null;
     private year: number;
     private month: number;
     private animate: string;
@@ -83,15 +84,7 @@ export class DaypickerComponent implements OnInit {
         for (let i = 0; i < daysInMonth; i++) {
             days[i + dayIndex] = new Date(year, month, i + 1);
         }
-        this.rows = this.split(days, 7);
-    }
-
-    split(array: Array<any>, length: number) {
-        let out = [];
-        while (array.length > 0) {
-            out.push(array.splice(0, length));
-        }
-        return out;
+        this.rows = Util.split<Date>(days, 7);
     }
 
     isDisabled(date: Date) {

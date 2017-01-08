@@ -1,11 +1,11 @@
 <div class="dialog-header">
-    <h3>{{title | translate}}</h3>
+    <h1 md-dialog-title>{{title | translate}}</h1>
 </div>
-<div class="dialog-body">
+<div class="dialog-body" md-dialog-content>
     {{message | translate}}
 </div>
-<div class="dialog-footer">
-    <button md-button (click)="cancel()">{{'i18n.common.actions.cancel' | translate}}</button>
-    <button md-button (click)="no()">{{'i18n.common.actions.no' | translate}}</button>
-    <button md-raised-button color="primary" (click)="yes()">{{'i18n.common.actions.yes' | translate}}</button>
+<div class="dialog-footer" md-dialog-actions>
+    <button md-raised-button color="primary" (click)="yes()">{{'i18n.common.action.yes' | translate}}</button>
+    <button md-raised-button (click)="no()">{{'i18n.common.action.no' | translate}}</button>
+    <button md-button (click)="cancel()">{{'i18n.common.action.cancel' | translate}}</button>
 </div>

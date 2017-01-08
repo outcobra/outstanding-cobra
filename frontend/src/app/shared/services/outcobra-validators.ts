@@ -48,25 +48,28 @@ export class OutcobraValidators {
      *
      * @jmesserli please review this
      *
-     * @param formGroup to search the controls in it
+     * @param firstDateName
+     * @param secondDateName
+     * @param isSameDayPossible
      * @returns {any}
      */
-    public static dateFromIsBeforeDateTo(formGroup: FormGroup) {
+    public static dateFromIsBeforeDateTo(firstDateName: string = 'datefrom', secondDateName: string = 'dateto', isSameDayPossible: boolean = false) {
+        return (formGroup: FormGroup): {[key: string]: any} => {
             let keys = Object.keys(formGroup.controls);
-            let dateFromKey = keys.find(key => key.toLowerCase().includes('datefrom') || key.toLowerCase().includes('validfrom'));
-            let dateToKey = keys.find(key => key.toLowerCase().includes('dateto') || key.toLowerCase().includes('validto'));
+            let dateFromKey = keys.find(key => key.toLowerCase().includes(firstDateName.toLowerCase()) || key.toLowerCase().includes('validfrom'));
+            let dateToKey = keys.find(key => key.toLowerCase().includes(secondDateName.toLowerCase()) || key.toLowerCase().includes('validto'));
             if (!dateFromKey && !dateToKey) return null;
 
             let dateFromControl = formGroup.controls[dateFromKey];
             let dateToControl = formGroup.controls[dateToKey];
 
-            if (!moment(dateFromControl.value).isBefore(moment(dateToControl.value))) {
+            if (!moment(dateFromControl.value).isBefore(moment(dateToControl.value)) || (isSameDayPossible && !moment(dateFromControl.value).isSameOrBefore(moment(dateToControl.value)))) {
                 return {
                     'dateToIsBeforeDateFrom': {'fromDate': dateFromControl.value, 'toDate': dateToControl.value}
                 }
             }
             return null;
-
+        }
     }
 
     /**

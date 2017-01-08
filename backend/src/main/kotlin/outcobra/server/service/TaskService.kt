@@ -1,9 +1,10 @@
 package outcobra.server.service
 
-import outcobra.server.model.dto.TaskDto
-import outcobra.server.model.Task
-import outcobra.server.model.Subject
 import outcobra.server.model.Semester
+import outcobra.server.model.Subject
+import outcobra.server.model.Task
+import outcobra.server.model.dto.TaskDto
+import outcobra.server.model.dto.TaskFilterDto
 
 /**
  * This service handles the business-logic for the [Task] entity
@@ -65,4 +66,11 @@ interface TaskService {
      * @param id The id of the Task to delete
      */
     fun deleteTask(id: Long)
+
+    /**
+     * Reads all [Task]s of the current user
+     */
+    fun readAllTasks(): List<TaskDto>
+
+    fun getTaskFilter(): TaskFilterDto
 }

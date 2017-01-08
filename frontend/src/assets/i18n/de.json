@@ -6,13 +6,18 @@
                 "delete": "Löschen",
                 "cancel": "Abbrechen",
                 "edit": "Bearbeiten",
+                "close": "Schliessen",
+                "reset": "Zurücksetzen",
                 "yes": "Ja",
                 "no": "Nein",
-                "ok": "OK"
+                "ok": "OK",
+                "filter": "Filtern"
             },
             "label": {
                 "validFrom": "Gültig ab",
-                "validTo": "Gültig bis"
+                "validTo": "Gültig bis",
+                "todoDate": "Erledigungsdatum",
+                "dueDate": "Fälligkeitsdatum"
             },
             "form": {
                 "error": {
@@ -37,7 +42,44 @@
                 "linkTitle": "Noten"
             },
             "task": {
-                "linkTitle": "Aufgaben"
+                "linkTitle": "Aufgaben",
+                "add": "Aufgabe hinzufügen",
+                "desc": "Aufgaben Beschreibung",
+                "progress": "Fortschritt",
+                "filter": {
+                    "title": "Aufgaben filtern",
+                    "subject": "Nach Fach filtern",
+                    "showPending": "Nur pendente Aufgaben zeigen"
+                },
+                "notification": {
+                    "add": {
+                        "title": "Aufgabe hinzugefügt",
+                        "message": "Die Aufgabe wurde erfolgreich erstellt"
+                    }
+                },
+                "dialogs": {
+                    "confirmDeleteDialog": {
+                        "title": "Willst du die Aufgabe wirklich löschen?",
+                        "message": "Die Aufgabe wird für immer weg sein (Eine sehr sehr lange Zeit)"
+                    },
+                    "add": {
+                        "name": {
+                            "label": "Gib einen Aufgabennamen ein"
+                        },
+                        "desc": {
+                            "label": "Gib eine Aufgabenbeschreibung ein"
+                        },
+                        "effort": {
+                            "label": "Erwarteter Aufwand (in Stunden)"
+                        }
+                    }
+                },
+                "error": {
+                    "taskNotFound": {
+                        "title": "Aufgabe nicht gefunden",
+                        "message": "Wir konnten die gesuchte Aufgabe nicht finden"
+                    }
+                }
             },
             "timetable": {
                 "linkTitle": "Stundenplan"
@@ -65,7 +107,7 @@
                         "saveSuccess": "Die Schulklasse wurde erfolgreich gespeichert."
                     },
                     "form": {
-                        "label": "Geben Sie einen Klassennamen"
+                        "label": "Geben Sie einen Klassennamen ein"
                     }
                 },
                 "schoolYear": {
@@ -75,7 +117,7 @@
                         "saveSuccess": "Das Schuljahr wurde erfolgreich gespeichert."
                     },
                     "form": {
-                        "label": "Geben Sie einen Schuljahrnamen"
+                        "label": "Geben Sie einen Schuljahrnamen ein"
                     }
                 },
                 "semester": {
@@ -101,11 +143,29 @@
             }
         },
         "login": {
+            "error": {
+                "title": "Login fehlgeschlagen",
+                "message": "Sie konnten nicht eingeloggt werden"
+            }
         },
         "http": {
             "error": {
-                "title": "Fehler!",
-                "message": "Ein serverseitiger Fehler ist aufgetreten! Bitte versuchen Sie es nochmals."
+                "0": {
+                    "title": "Verbindungsfehler",
+                    "message": "Der Server ist derzeit nicht erreichbar. Bitte versuchen Sie es später nocheinmal."
+                },
+                "400": {
+                    "title": "Datenfehler",
+                    "message": "Der Server meldet eine ungültige Eingabe"
+                },
+                "404": {
+                    "title": "Nicht gefunden",
+                    "message": "Das angeforderte Element konnte nicht gefunden werden"
+                },
+                "500": {
+                    "title": "Serverfehler",
+                    "message": "Ein unbekannter Serverfehler ist aufgetreten, bitte versuchen sie es später nochmals"
+                }
             }
         }
     }

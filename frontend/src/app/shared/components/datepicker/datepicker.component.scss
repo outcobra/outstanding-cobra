@@ -7,12 +7,16 @@ datepicker {
         display: block;
         position: relative;
 
-        md-input {
+        md-input-container {
+            width: 100%;
             label {
-                top: 14px;
+                top: 5px;
                 &.md-input-placeholder.md-focused {
                     top: 0;
                 }
+            }
+            md-hint {
+                bottom: -2em;
             }
         }
 
@@ -20,8 +24,8 @@ datepicker {
             overflow: hidden;
             display: block;
             visibility: hidden;
-            z-index: 1000;
-            position: absolute;
+            z-index: 10000;
+            position: fixed;
         }
         .datepicker.opened {
             visibility: visible;

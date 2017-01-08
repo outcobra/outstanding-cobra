@@ -1,5 +1,6 @@
 package outcobra.server.model;
 
+import com.querydsl.core.annotations.QueryInit;
 import outcobra.server.model.interfaces.ParentLinked;
 
 import javax.persistence.*;
@@ -16,7 +17,12 @@ public class Subject implements ParentLinked {
     @NotNull
     private String name;
 
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private Color color;
+
     @ManyToOne
+    @QueryInit("schoolYear.schoolClass.institution.user")
     private Semester semester;
 
     @OneToMany(mappedBy = "subject")
@@ -39,9 +45,10 @@ public class Subject implements ParentLinked {
 
     //region constructors
 
-    public Subject(String name, Semester semester, List<TimetableEntry> timetableEntries, List<Task> tasks,
+    public Subject(String name, Color color, Semester semester, List<TimetableEntry> timetableEntries, List<Task> tasks,
                    List<MarkReportEntry> markReportEntries, List<Exam> exams, MarkGroup markGroup, Teacher teacher) {
         this.name = name;
+        this.color = color;
         this.semester = semester;
         this.timetableEntries = timetableEntries;
         this.tasks = tasks;
@@ -145,6 +152,7 @@ public class Subject implements ParentLinked {
         if (!getId().equals(subject.getId())) return false;
         if (getName() != null ? !getName().equals(subject.getName()) : subject.getName() != null)
             return false;
+        if (getColor() != null ? !getColor().equals(subject.getColor()) : subject.getColor() != null)
         if (getSemester() != null ? !getSemester().equals(subject.getSemester()) : subject.getSemester() != null)
             return false;
         if (getTimetableEntries() != null ? !getTimetableEntries().equals(subject.getTimetableEntries()) : subject.getTimetableEntries() != null)
@@ -165,6 +173,7 @@ public class Subject implements ParentLinked {
     public int hashCode() {
         int result = getId().hashCode();
         result = 31 * result + (getName() != null ? getName().hashCode() : 0);
+        result = 31 * result + (getColor() != null ? getColor().hashCode() : 0);
         result = 31 * result + (getSemester() != null ? getSemester().hashCode() : 0);
         result = 31 * result + (getTimetableEntries() != null ? getTimetableEntries().hashCode() : 0);
         result = 31 * result + (getTasks() != null ? getTasks().hashCode() : 0);
@@ -178,6 +187,14 @@ public class Subject implements ParentLinked {
     @Override
     public ParentLinked getParent() {
         return semester;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
     //endregion
 }

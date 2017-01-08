@@ -3,6 +3,7 @@
 @import 'general';
 
 html {
+    line-height: normal;
     color: rgba(0, 0, 0, 0.87);
     width: 100%;
     height: 100%;
@@ -66,19 +67,24 @@ button[md-raised-button], button[md-button] {
 }
 
 .toolbar-icon {
+    cursor: pointer;
     margin: 16px 16px 16px 0;
 }
 
 .auth0-lock {
     font-family: 'Roboto', sans-serif !important;
 }
+
 md-dialog-container {
+    height: auto !important;
+    overflow: visible !important;
     padding: 0 !important;
 
     .dialog-header, .dialog-body, .dialog-footer {
         display: block;
         width: 100%;
         padding: 10px 40px;
+        margin: 0;
     }
 
     .dialog-header, .dialog-body {
@@ -91,14 +97,24 @@ md-dialog-container {
             margin: 10px 0;
             @extend .text-primary-light;
             font-size: 2em;
+            font-weight: normal;
         }
     }
 }
 
-datepicker, md-input {
-    &.ng-invalid.ng-dirty {
+datepicker, md-input-container {
+    &.ng-invalid.ng-touched {
+        label {
+            color: md-color($warn);
+        }
+        //noinspection CssOptimizeSimilarProperties
         .md-input-underline {
-            border-color: md-color($warn);
+            .md-input-ripple {
+                background-color: md-color($warn);
+            }
+            border: md-color($warn);
+            border-top-width: 1px;
+            border-top-style: solid;
         }
     }
 }
@@ -107,6 +123,19 @@ datepicker, md-input {
     width: 100%;
     margin-bottom: 15px;
 }
-.form-error span {
+
+.form-error {
     @extend .text-warn;
+}
+
+md-list-item {
+    h1, h2, h3, h4, h5, h6, p, span {
+        line-height: normal;
+    }
+}
+
+md-card {
+    &.list-card {
+        padding: 0;
+    }
 }

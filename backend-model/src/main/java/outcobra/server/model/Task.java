@@ -1,5 +1,6 @@
 package outcobra.server.model;
 
+import com.querydsl.core.annotations.QueryInit;
 import outcobra.server.model.interfaces.ParentLinked;
 
 import javax.persistence.*;
@@ -25,6 +26,7 @@ public class Task implements ParentLinked {
     private Integer effort, progress = 0;
 
     @ManyToOne
+    @QueryInit("semester.schoolYear.schoolClass.institution.user")
     private Subject subject;
 
     //region constructors

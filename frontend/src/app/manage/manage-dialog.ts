@@ -30,13 +30,4 @@ export class ManageDialog<T, E> {
     isEditMode(): boolean {
         return this.mode == DialogMode.EDIT;
     }
-
-    revalidateForm(form: FormGroup) {
-        Object.keys(form.controls).forEach((key) => {
-            let control = form.controls[key];
-            if (!control.valid) {
-                control.markAsDirty();
-            }
-        });
-    }
 }

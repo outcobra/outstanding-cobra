@@ -43,4 +43,6 @@ interface SemesterService {
      * @param id The id of the Semester to delete
      */
     fun deleteSemester(id: Long)
+
+    fun getCurrentSemester(): SemesterDto?
 }
