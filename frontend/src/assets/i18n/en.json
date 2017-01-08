@@ -150,8 +150,22 @@
         },
         "http": {
             "error": {
-                "title": "Error!",
-                "message": "A server-side error occurred! Please try again."
+                "0": {
+                    "title": "Connection Error",
+                    "message": "The server is currently not reachable. Please try again later."
+                },
+                "400": {
+                    "title": "Data Error",
+                    "message": "The server is indicating invalid input data"
+                },
+                "404": {
+                    "title": "Not Found",
+                    "message": "The requested element could not be found"
+                },
+                "500": {
+                    "title": "Server Error",
+                    "message": "An unknown server error has occurred"
+                }
             }
         }
     }
