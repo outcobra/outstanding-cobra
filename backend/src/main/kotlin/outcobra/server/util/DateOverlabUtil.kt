@@ -13,9 +13,9 @@ class DateOverlabUtil {
             }
         }
 
-        private fun isBeforeOrEqual(a: LocalDate, b: LocalDate): Boolean = a.isBefore(b) || a.isEqual(b)
+        fun isBeforeOrEqual(a: LocalDate, b: LocalDate): Boolean = a.isBefore(b) || a.isEqual(b)
 
-        private fun isAfterOrEqual(a: LocalDate, b: LocalDate): Boolean = a.isAfter(b) || a.isEqual(b)
+        fun isAfterOrEqual(a: LocalDate, b: LocalDate): Boolean = a.isAfter(b) || a.isEqual(b)
 
     }
 }

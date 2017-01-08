@@ -19,16 +19,16 @@ open class DefaultSchoolYearService @Inject constructor(val repository: SchoolYe
                                                         val schoolYearValidator: SchoolYearValidator) : SchoolYearService {
 
     override fun createSchoolYear(schoolYearDto: SchoolYearDto): SchoolYearDto {
-        if (!schoolYearValidator.validateSchhoolYearCreation(schoolYearDto)) {
+        var schoolYear = mapper.fromDto(schoolYearDto)
+        if (!schoolYearValidator.validateSchoolYearCreation(schoolYear)) {
             throw DateOutsideExpectedRangeException("The new school-year overlaps with an existing one")
         }
-        var schoolYear = mapper.fromDto(schoolYearDto)
         schoolYear = repository.save(schoolYear)
         return mapper.toDto(schoolYear)
     }
 
     override fun readSchoolYearById(id: Long): SchoolYearDto {
-        var schoolYear = repository.getOne(id)
+        val schoolYear = repository.getOne(id)
         return mapper.toDto(schoolYear)
     }
 
@@ -39,6 +39,9 @@ open class DefaultSchoolYearService @Inject constructor(val repository: SchoolYe
 
     override fun updateSchoolYear(schoolYearDto: SchoolYearDto): SchoolYearDto {
         var schoolYear = mapper.fromDto(schoolYearDto)
+        if (!schoolYearValidator.validateSchoolYearCreation(schoolYear)) {
+            throw DateOutsideExpectedRangeException("The updated school-year overlaps with an existing one")
+        }
         schoolYear = repository.save(schoolYear)
         return mapper.toDto(schoolYear)
     }

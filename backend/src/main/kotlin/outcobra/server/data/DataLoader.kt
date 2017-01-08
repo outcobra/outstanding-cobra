@@ -60,7 +60,7 @@ open class DataLoader @Inject constructor(val institutionRepository: Institution
         val SUBJECT8 = Subject("Deutsch", getRandomColor(), SEMESTER8, arrayListOf<TimetableEntry>(), arrayListOf<Task>(), arrayListOf(), arrayListOf<Exam>(), null, null)
 
         fun getRandomColor(): Color {
-            val rand = Random().nextInt(Color.values().size + 1)
+            val rand = Random().nextInt(Color.values().size)
             return Color.values()[rand]
         }
     }
