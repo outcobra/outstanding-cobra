@@ -119,4 +119,9 @@ export class ColorpickerComponent implements OnInit, ControlValueAccessor {
     registerOnTouched(fn: any): void {
         this.onTouchedCallback = fn;
     }
+
+    getSelectedColorHex(): string {
+        if (!this.selectedColor) return '#00000';
+        return `#${this.selectedColor.hex}`
+    }
 }

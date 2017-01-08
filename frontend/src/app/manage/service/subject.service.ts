@@ -31,6 +31,6 @@ export class SubjectService extends AppCrudService<SubjectDto> {
     }
 
     getCurrentSubjects(): Observable<SubjectDto[]> {
-        return this.http.get<SubjectDto[]>(`${this.baseUri}/current`, 'outcobra');
+        return this.http.get<SubjectDto[]>(`/semester/current/${this.baseUri}`, 'outcobra');
     }
 }

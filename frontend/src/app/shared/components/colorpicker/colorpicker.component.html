@@ -1,7 +1,7 @@
 <div class="colorpicker-wrapper">
     <button md-raised-button (click)="open()">
         <span>Choose color</span>
-        <md-icon [style.color]="'#' + selectedColor">colorize</md-icon>
+        <md-icon [style.color]="getSelectedColorHex()">colorize</md-icon>
     </button>
     <div class="colorpicker z-depth-1-half" [class.opened]="opened">
         <div class="colorpicker-header">

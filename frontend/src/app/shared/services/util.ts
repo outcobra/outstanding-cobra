@@ -38,7 +38,7 @@ export class Util {
      */
     static split<T>(array: Array<T>, length: number): Array<Array<T>> {
         let out = [];
-        let copy = Util.clone<Array<T>>(array); // copy the array to not mutate the input
+        let copy = Util.cloneArray<T>(array); // copy the array to not mutate the input
         while (copy.length > 0) {
             out.push(copy.splice(0, length));
         }
