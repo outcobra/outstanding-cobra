@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component
 import outcobra.server.model.QSchoolYear
 import outcobra.server.model.SchoolYear
 import outcobra.server.model.repository.SchoolYearRepository
-import outcobra.server.util.DateOverlabUtil
+import outcobra.server.util.doesNotOverlap
 import javax.inject.Inject
 
 @Component
@@ -15,10 +15,8 @@ open class SchoolYearValidator
 
         val predicate = QSchoolYear.schoolYear.schoolClass.id.eq(schoolYear.schoolClass.id)
         val schoolYears = schoolYearRepository.findAll(predicate).toList()
-        return schoolYears.all { checkOverlap(it, schoolYear) }
+        return schoolYears.all { it.doesNotOverlap(schoolYear) }
     }
 
-    private fun checkOverlap(existing: SchoolYear, new: SchoolYear): Boolean {
-        return !DateOverlabUtil.isOverlab(existing.validFrom, existing.validTo, new.validFrom, new.validTo)
-    }
+
 }
