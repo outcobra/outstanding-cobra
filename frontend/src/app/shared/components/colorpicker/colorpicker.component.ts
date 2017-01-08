@@ -7,7 +7,7 @@ import {Util} from "../../services/util";
 const noop = () => {
 };
 
-export const DATEPICKER_CONTROL_VALUE_ACCESSOR: any = {
+export const COLORPICKER_CONTROL_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => ColorpickerComponent),
     multi: true
@@ -21,7 +21,7 @@ export const DATEPICKER_CONTROL_VALUE_ACCESSOR: any = {
     host: {
         '(document: click)': 'onDocumentClick($event)'
     },
-    providers: [DATEPICKER_CONTROL_VALUE_ACCESSOR]
+    providers: [COLORPICKER_CONTROL_VALUE_ACCESSOR]
 })
 export class ColorpickerComponent implements OnInit, ControlValueAccessor {
     @Input() public opened: boolean = false;
@@ -94,7 +94,7 @@ export class ColorpickerComponent implements OnInit, ControlValueAccessor {
     /**
      * target function of document click (see @Component Metadata)
      *
-     * you are not fucking unused
+     * you are not unused
      * @param event
      */
     onDocumentClick(event) {
@@ -118,5 +118,10 @@ export class ColorpickerComponent implements OnInit, ControlValueAccessor {
 
     registerOnTouched(fn: any): void {
         this.onTouchedCallback = fn;
+    }
+
+    getSelectedColorHex(): string {
+        if (!this.selectedColor) return '#00000';
+        return `#${this.selectedColor.hex}`
     }
 }

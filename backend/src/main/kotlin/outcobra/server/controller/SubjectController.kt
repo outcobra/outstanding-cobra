@@ -30,7 +30,7 @@ class SubjectController @Inject constructor(val subjectService: SubjectService) 
         return subjectService.readAllSubjectsByUser()
     }
 
-    @GetMapping(value = "/subject/current")
+    @GetMapping(value = "/semester/current/subject")
     fun readSubjectsByCurrentSemester(): List<SubjectDto> {
         return subjectService.readSubjectsByCurrentSemester()
     }
@@ -46,12 +46,12 @@ class SubjectController @Inject constructor(val subjectService: SubjectService) 
 
     /**
      * This method reads all subjects that are associated with a specific Semester
-     * @param id The id of the Semester of which to read all Subjects
+     * @param subjectId The subjectId of the Semester of which to read all Subjects
      * @return All Subjects that are associated with the given Semester
      */
-    @GetMapping(value = "/subject/{id}")
-    fun readSubjectById(@PathVariable id: Long): SubjectDto {
-        return subjectService.readSubjectById(id)
+    @GetMapping(value = "/subject/{subjectId}")
+    fun readSubjectById(@PathVariable subjectId: Long): SubjectDto {
+        return subjectService.readSubjectById(subjectId)
     }
 
     /**

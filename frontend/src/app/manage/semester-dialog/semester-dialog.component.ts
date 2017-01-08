@@ -6,6 +6,7 @@ import {SemesterDto, SchoolYearDto} from "../model/ManageDto";
 import {OutcobraValidators} from "../../shared/services/outcobra-validators";
 import {TranslateService} from "ng2-translate";
 import {DatePipe} from "@angular/common";
+import {Util} from "../../shared/services/util";
 
 @Component({
     selector: 'semester-dialog',
@@ -53,7 +54,7 @@ export class SemesterDialog extends ManageDialog<SemesterDto, SchoolYearDto> imp
             this.dialogRef.close(value);
         }
         else if (this.semesterForm.pristine) {
-            this.revalidateForm(this.semesterForm);
+            Util.revalidateForm(this.semesterForm);
         }
     }
 

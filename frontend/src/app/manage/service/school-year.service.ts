@@ -14,11 +14,11 @@ export class SchoolYearService extends AppCrudService<SchoolYearDto> {
         return this.http.put<SchoolYearDto>('/schoolYear', schoolYear, 'outcobra')
     }
 
-    getById(id: number): Observable<SchoolYearDto> {
+    readById(id: number): Observable<SchoolYearDto> {
         throw new Error('not implemented');
     }
 
-    getAll(): Observable<SchoolYearDto[]> {
+    readAll(): Observable<SchoolYearDto[]> {
         throw new Error('not implemented');
     }
 

@@ -1,4 +1,5 @@
 import {dateReplacer, dateReviver} from "../http/http-util";
+import {FormGroup} from "@angular/forms";
 /**
  * Util class
  * contains everything that does not fit in another service
@@ -37,7 +38,7 @@ export class Util {
      */
     static split<T>(array: Array<T>, length: number): Array<Array<T>> {
         let out = [];
-        let copy = Util.clone<Array<T>>(array); // copy the array to not mutate the input
+        let copy = Util.cloneArray<T>(array); // copy the array to not mutate the input
         while (copy.length > 0) {
             out.push(copy.splice(0, length));
         }
@@ -51,7 +52,14 @@ export class Util {
      * @returns {any}
      */
     static clone<T>(obj: T): T{
-        return JSON.parse(JSON.stringify(obj, dateReplacer), dateReviver);
+        return JSON.parse(JSON.stringify(obj, dateReplacer), dateReviver) as T;
+    }
+
+    /**
+     *
+     */
+    static cloneArray<T>(array: Array<T>): Array<T> {
+        return array.slice(0);
     }
 
     /**
@@ -61,4 +69,26 @@ export class Util {
     static getMillis(): number {
         return new Date().getTime();
     }
+
+    /**
+     * marks invalid fields in the FormGroup as touched
+     * used for validation on submit
+     *
+     * @param form FormGroup
+     */
+    static revalidateForm(form: FormGroup) {
+        Object.keys(form.controls).forEach((key) => {
+            let control = form.controls[key];
+            if (control instanceof FormGroup) {
+                this.revalidateForm(control);
+            }
+            if (!control.valid) {
+                control.markAsTouched();
+            }
+        });
+    }
+}
+
+export function and<T>(predicates: Predicate<T>[]): Predicate<T> {
+    return (arg) => predicates.every(p => p(arg));
 }

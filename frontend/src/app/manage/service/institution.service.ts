@@ -14,11 +14,11 @@ export class InstitutionService extends AppCrudService<InstitutionDto> {
         return this.http.put<InstitutionDto>(this.baseUri, institution, 'outcobra')
     }
 
-    getById(id: number): Observable<InstitutionDto> {
+    readById(id: number): Observable<InstitutionDto> {
         throw new Error('not implemented');
     }
 
-    getAll(): Observable<InstitutionDto[]> {
+    readAll(): Observable<InstitutionDto[]> {
         throw new Error('not implemented');
     }
 

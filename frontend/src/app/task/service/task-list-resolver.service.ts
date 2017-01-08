@@ -8,7 +8,7 @@ import {TaskService} from "./task.service";
 export class TaskListResolver implements Resolve<Task[]> {
     constructor(private taskService: TaskService) {}
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Task[]>|Promise<Task[]>|Task[] {
-        return this.taskService.getAll();
+        return this.taskService.readAll();
     }
 
 }

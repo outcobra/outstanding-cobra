@@ -1,7 +1,7 @@
 <div class="colorpicker-wrapper">
     <button md-raised-button (click)="open()">
         <span>Choose color</span>
-        <md-icon>colorize</md-icon>
+        <md-icon [style.color]="getSelectedColorHex()">colorize</md-icon>
     </button>
     <div class="colorpicker z-depth-1-half" [class.opened]="opened">
         <div class="colorpicker-header">
@@ -19,7 +19,6 @@
                     </td>
                 </tr>
             </table>
-            <!--<div class="color" *ngFor="let color of colors" [style.background-color]="'#' + color.hex"></div>-->
         </div>
         <div class="colorpicker-footer">
             <button type="button" md-button (click)="cancel()">{{'i18n.common.action.cancel' | translate}}</button>

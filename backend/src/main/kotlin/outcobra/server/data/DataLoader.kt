@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional
 import outcobra.server.model.*
 import outcobra.server.model.repository.*
 import java.time.LocalDate
-import java.util.*
 import javax.inject.Inject
 
 /**
@@ -50,19 +49,14 @@ open class DataLoader @Inject constructor(val institutionRepository: Institution
         val SEMESTER6 = Semester("2. Semester 17/18", LocalDate.of(2018, 2, 1), LocalDate.of(2018, 7, 31), YEAR2, arrayListOf<Subject>(), arrayListOf<MarkReport>(), null)
         val SEMESTER7 = Semester("2. Semester 18/19", LocalDate.of(2019, 2, 1), LocalDate.of(2019, 7, 31), YEAR3, arrayListOf<Subject>(), arrayListOf<MarkReport>(), null)
         val SEMESTER8 = Semester("2. Semester 19/20", LocalDate.of(2020, 2, 1), LocalDate.of(2020, 7, 31), YEAR4, arrayListOf<Subject>(), arrayListOf<MarkReport>(), null)
-        val SUBJECT1 = Subject("Scrum", getRandomColor(), SEMESTER1, arrayListOf<TimetableEntry>(), arrayListOf<Task>(), arrayListOf(), arrayListOf<Exam>(), null, null)
-        val SUBJECT2 = Subject("Objektorientiert implementieren", getRandomColor(), SEMESTER2, arrayListOf<TimetableEntry>(), arrayListOf<Task>(), arrayListOf(), arrayListOf<Exam>(), null, null)
-        val SUBJECT3 = Subject("Geschichte und Politik", getRandomColor(), SEMESTER3, arrayListOf<TimetableEntry>(), arrayListOf<Task>(), arrayListOf(), arrayListOf<Exam>(), null, null)
-        val SUBJECT4 = Subject("Physik", getRandomColor(), SEMESTER4, arrayListOf<TimetableEntry>(), arrayListOf<Task>(), arrayListOf(), arrayListOf<Exam>(), null, null)
-        val SUBJECT5 = Subject("Objektorientiert entwerfen", getRandomColor(), SEMESTER5, arrayListOf<TimetableEntry>(), arrayListOf<Task>(), arrayListOf(), arrayListOf<Exam>(), null, null)
-        val SUBJECT6 = Subject("IT-Kleinprojekt", getRandomColor(), SEMESTER6, arrayListOf<TimetableEntry>(), arrayListOf<Task>(), arrayListOf(), arrayListOf<Exam>(), null, null)
-        val SUBJECT7 = Subject("Math", getRandomColor(), SEMESTER7, arrayListOf<TimetableEntry>(), arrayListOf<Task>(), arrayListOf(), arrayListOf<Exam>(), null, null)
-        val SUBJECT8 = Subject("Deutsch", getRandomColor(), SEMESTER8, arrayListOf<TimetableEntry>(), arrayListOf<Task>(), arrayListOf(), arrayListOf<Exam>(), null, null)
-
-        fun getRandomColor(): Color {
-            val rand = Random().nextInt(Color.values().size)
-            return Color.values()[rand]
-        }
+        val SUBJECT1 = Subject("Scrum", Color.getRandomColor(), SEMESTER1, arrayListOf<TimetableEntry>(), arrayListOf<Task>(), arrayListOf(), arrayListOf<Exam>(), null, null)
+        val SUBJECT2 = Subject("Objektorientiert implementieren", Color.getRandomColor(), SEMESTER2, arrayListOf<TimetableEntry>(), arrayListOf<Task>(), arrayListOf(), arrayListOf<Exam>(), null, null)
+        val SUBJECT3 = Subject("Geschichte und Politik", Color.getRandomColor(), SEMESTER3, arrayListOf<TimetableEntry>(), arrayListOf<Task>(), arrayListOf(), arrayListOf<Exam>(), null, null)
+        val SUBJECT4 = Subject("Physik", Color.getRandomColor(), SEMESTER4, arrayListOf<TimetableEntry>(), arrayListOf<Task>(), arrayListOf(), arrayListOf<Exam>(), null, null)
+        val SUBJECT5 = Subject("Objektorientiert entwerfen", Color.getRandomColor(), SEMESTER5, arrayListOf<TimetableEntry>(), arrayListOf<Task>(), arrayListOf(), arrayListOf<Exam>(), null, null)
+        val SUBJECT6 = Subject("IT-Kleinprojekt", Color.getRandomColor(), SEMESTER6, arrayListOf<TimetableEntry>(), arrayListOf<Task>(), arrayListOf(), arrayListOf<Exam>(), null, null)
+        val SUBJECT7 = Subject("Math", Color.getRandomColor(), SEMESTER7, arrayListOf<TimetableEntry>(), arrayListOf<Task>(), arrayListOf(), arrayListOf<Exam>(), null, null)
+        val SUBJECT8 = Subject("Deutsch", Color.getRandomColor(), SEMESTER8, arrayListOf<TimetableEntry>(), arrayListOf<Task>(), arrayListOf(), arrayListOf<Exam>(), null, null)
     }
 
     override fun run(args: ApplicationArguments?) {
@@ -74,7 +68,6 @@ open class DataLoader @Inject constructor(val institutionRepository: Institution
         subjectRepository.save(listOf(SUBJECT1, SUBJECT2, SUBJECT4, SUBJECT3, SUBJECT5, SUBJECT6, SUBJECT7, SUBJECT8))
         LOGGER.info("Testdata loaded")
     }
-
 
     override fun getOrder(): Int {
         return PriorityOrdered.HIGHEST_PRECEDENCE

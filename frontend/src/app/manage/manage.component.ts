@@ -50,7 +50,6 @@ export class ManageComponent implements OnInit {
                 private subjectService: SubjectService,
                 private notificationService: NotificationsService,
                 private confirmDialogService: ConfirmDialogService,
-                private colorService: ColorService,
                 private manageDialogFactory: ManageDialogFactory) {
     }
 

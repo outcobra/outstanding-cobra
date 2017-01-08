@@ -25,11 +25,11 @@ interface SubjectService {
     fun readAllSubjectsBySemester(semesterId: Long): List<SubjectDto>
 
     /**
-     * This function reads a [Subject] based on its id
-     * @param id the id of the element you want to get
-     * @return the [Subject] with the given id -> null if the id does not exist
+     * This function reads a [Subject] based on its subjectId
+     * @param subjectId the subjectId of the element you want to get
+     * @return the [Subject] with the given subjectId -> null if the subjectId does not exist
      */
-    fun readSubjectById(id: Long): SubjectDto
+    fun readSubjectById(subjectId: Long): SubjectDto
 
     /**
      * This function updates an existing [Subject]

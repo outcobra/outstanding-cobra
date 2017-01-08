@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 import outcobra.server.model.QTask
 import outcobra.server.model.Task
-import outcobra.server.model.dto.ParentClass
+import outcobra.server.model.dto.SchoolClassSubjects
 import outcobra.server.model.dto.TaskDto
 import outcobra.server.model.dto.TaskFilterDto
 import outcobra.server.model.interfaces.Mapper
@@ -72,7 +72,7 @@ open class DefaultTaskService @Inject constructor(val repository: TaskRepository
 
     override fun getTaskFilter(): TaskFilterDto {
         return TaskFilterDto(schoolClassService.readAllSchoolClassesByUser().map {
-            ParentClass(it, subjectService.readSubjectsBySchoolClassId(it.id))
+            SchoolClassSubjects(it, subjectService.readSubjectsBySchoolClassId(it.id))
         })
     }
 }

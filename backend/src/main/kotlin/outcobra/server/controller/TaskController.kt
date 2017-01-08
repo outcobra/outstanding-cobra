@@ -53,9 +53,9 @@ open class TaskController @Inject constructor(val taskService: TaskService) {
         return taskService.updateTask(taskDto)
     }
 
-    @DeleteMapping(value = "/task/{id}")
-    fun deleteTask(@PathVariable id: Long) {
-        taskService.deleteTask(id)
+    @DeleteMapping(value = "/task/{taskId}")
+    fun deleteTask(@PathVariable taskId: Long) {
+        taskService.deleteTask(taskId)
     }
 
     @GetMapping(value = "/task/filter")

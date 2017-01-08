@@ -4,8 +4,8 @@ import {Observable} from "rxjs";
 
 export abstract class AppCrudService<T> extends AppService implements CrudService<T> {
     abstract create(arg: T): Observable<T>;
-    abstract getById(id: number): Observable<T>;
-    abstract getAll(): Observable<T[]>;
+    abstract readById(id: number): Observable<T>;
+    abstract readAll(): Observable<T[]>;
     abstract deleteById(id: number): Observable<any>;
     abstract update(arg: T): Observable<T>;
 }

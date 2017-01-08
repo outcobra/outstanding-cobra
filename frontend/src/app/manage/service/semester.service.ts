@@ -14,11 +14,11 @@ export class SemesterService extends AppCrudService<SemesterDto> {
         return this.http.put<SemesterDto>('/semester', semester, 'outcobra')
     }
 
-    getById(id: number): Observable<SemesterDto> {
+    readById(id: number): Observable<SemesterDto> {
         throw new Error('not implemented');
     }
 
-    getAll(): Observable<SemesterDto[]> {
+    readAll(): Observable<SemesterDto[]> {
         throw new Error('not implemented');
     }
 

@@ -7,3 +7,5 @@ declare var System: any;
 interface Array<T> {
     find(predicate: (search: T) => boolean): T;
 }
+
+type Predicate<T> = (arg: T) => boolean;

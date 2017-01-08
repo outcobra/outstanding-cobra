@@ -14,11 +14,11 @@ export class SchoolClassService extends AppCrudService<SchoolClassDto> {
         return this.http.put<SchoolClassDto>(this.baseUri, schoolClass, 'outcobra')
     }
 
-    getById(id: number): Observable<SchoolClassDto> {
+    readById(id: number): Observable<SchoolClassDto> {
         throw new Error('not implemented');
     }
 
-    getAll(): Observable<SchoolClassDto[]> {
+    readAll(): Observable<SchoolClassDto[]> {
         return this.http.get<SchoolClassDto[]>(this.baseUri, 'outcobra');
     }
 

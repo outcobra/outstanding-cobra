@@ -44,7 +44,19 @@
             "task": {
                 "linkTitle": "Aufgaben",
                 "add": "Aufgabe hinzufügen",
-                "filter": "Aufgaben filtern",
+                "desc": "Aufgaben Beschreibung",
+                "progress": "Fortschritt",
+                "filter": {
+                    "title": "Aufgaben filtern",
+                    "subject": "Nach Fach filtern",
+                    "showPending": "Nur pendente Aufgaben zeigen"
+                },
+                "notification": {
+                    "add": {
+                        "title": "Aufgabe hinzugefügt",
+                        "message": "Die Aufgabe wurde erfolgreich erstellt"
+                    }
+                },
                 "dialogs": {
                     "confirmDeleteDialog": {
                         "title": "Willst du die Aufgabe wirklich löschen?",
@@ -52,13 +64,13 @@
                     },
                     "add": {
                         "name": {
-                            "label": "Enter a task name"
+                            "label": "Gib einen Aufgabennamen ein"
                         },
                         "desc": {
-                            "label": "Enter a task description"
+                            "label": "Gib eine Aufgabenbeschreibung ein"
                         },
                         "effort": {
-                            "label": "Erwarteter Aufwand (in h)"
+                            "label": "Erwarteter Aufwand (in Stunden)"
                         }
                     }
                 },
@@ -133,13 +145,27 @@
         "login": {
             "error": {
                 "title": "Login fehlgeschlagen",
-                "message": "Sie könnten nicht eingeloggt werden."
+                "message": "Sie konnten nicht eingeloggt werden"
             }
         },
         "http": {
             "error": {
-                "title": "Fehler!",
-                "message": "Ein serverseitiger Fehler ist aufgetreten! Bitte versuchen Sie es nochmals."
+                "0": {
+                    "title": "Verbindungsfehler",
+                    "message": "Der Server ist derzeit nicht erreichbar. Bitte versuchen Sie es später nocheinmal."
+                },
+                "400": {
+                    "title": "Datenfehler",
+                    "message": "Der Server meldet eine ungültige Eingabe"
+                },
+                "404": {
+                    "title": "Nicht gefunden",
+                    "message": "Das angeforderte Element konnte nicht gefunden werden"
+                },
+                "500": {
+                    "title": "Serverfehler",
+                    "message": "Ein unbekannter Serverfehler ist aufgetreten, bitte versuchen sie es später nochmals"
+                }
             }
         }
     }
