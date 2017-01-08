@@ -27,6 +27,7 @@ open class AuthConfig : Auth0SecurityConfig() {
                 .antMatchers("/webjars/springfox-swagger-ui/**").permitAll()
                 .antMatchers("/swagger-resources/**").permitAll()
                 .antMatchers("/v2/api-docs").permitAll()
+                .antMatchers("/api/ping").permitAll()
                 .anyRequest().authenticated()
     }
 }
