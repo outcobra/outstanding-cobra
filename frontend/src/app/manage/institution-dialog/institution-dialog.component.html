@@ -10,9 +10,6 @@
                     <template [ngIf]="institutionForm.get('name').hasError('required')">{{'i18n.common.form.error.required' | translate}}</template>
                 </md-hint>
             </md-input-container>
-            <!--<div class="form-error" *ngIf="institutionForm.get('name').invalid && institutionForm.get('name').dirty">
-                <span *ngIf="institutionForm.get('name').getError('required')">{{'i18n.common.form.error.required' | translate}}</span>
-            </div>-->
         </div>
     </div>
     <div class="dialog-footer" md-dialog-actions>

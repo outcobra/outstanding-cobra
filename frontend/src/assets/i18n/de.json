@@ -62,13 +62,13 @@
                     },
                     "add": {
                         "name": {
-                            "label": "Enter a task name"
+                            "label": "Gib einen Aufgabennamen ein"
                         },
                         "desc": {
-                            "label": "Enter a task description"
+                            "label": "Gib eine Aufgabenbeschreibung ein"
                         },
                         "effort": {
-                            "label": "Erwarteter Aufwand (in h)"
+                            "label": "Erwarteter Aufwand (in Stunden)"
                         }
                     }
                 },
@@ -143,7 +143,7 @@
         "login": {
             "error": {
                 "title": "Login fehlgeschlagen",
-                "message": "Sie könnten nicht eingeloggt werden."
+                "message": "Sie konnten nicht eingeloggt werden"
             }
         },
         "http": {

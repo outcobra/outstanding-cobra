@@ -5,9 +5,10 @@ import outcobra.server.model.Institution
 import outcobra.server.model.dto.manage.*
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.mapper.ColorMapper
+import javax.inject.Inject
 
 @Component
-open class ManageDtoMapper(val colorMapper: ColorMapper) : Mapper<List<Institution>, ManageDto> {
+open class ManageDtoMapper @Inject constructor(val colorMapper: ColorMapper) : Mapper<List<Institution>, ManageDto> {
     override fun fromDto(from: ManageDto?): List<Institution> {
         throw UnsupportedOperationException("this operation will not be used")
     }

@@ -13,9 +13,10 @@ colorpicker {
             visibility: hidden;
             z-index: 10000;
             position: fixed;
-        }
-        .colorpicker.opened {
-            visibility: visible;
+
+            &.opened {
+                visibility: visible;
+            }
         }
 
         .colorpicker-header {

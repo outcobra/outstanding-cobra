@@ -43,7 +43,7 @@ export class TaskAddDialogComponent implements OnInit {
 
     onSubmit() {
         if (this.taskAddForm.valid && this.taskAddForm.dirty) {
-            this.dialogRef.close(this.formToModel(this.taskAddForm));
+            this.dialogRef.close(this.formToTask(this.taskAddForm));
         }
         else if (this.taskAddForm.pristine) {
             Util.revalidateForm(this.taskAddForm);
@@ -54,7 +54,7 @@ export class TaskAddDialogComponent implements OnInit {
         this.dialogRef.close();
     }
 
-    private formToModel(formGroup: FormGroup): Task {
+    private formToTask(formGroup: FormGroup): Task {
         let formValue = formGroup.value;
         return {
             name: formValue.name,

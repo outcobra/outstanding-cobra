@@ -1,6 +1,7 @@
 package outcobra.server.model;
 
 import java.util.Arrays;
+import java.util.Random;
 
 /**
  * @author Mario Kunz
@@ -41,5 +42,10 @@ public enum Color {
         return Arrays.stream(values())
                 .filter(color -> color.hex.equals(hex))
                 .findFirst().orElse(null);
+    }
+
+    public static Color getRandomColor() {
+        int rand = new Random().nextInt(Color.values().length + 1);
+        return Color.values()[rand];
     }
 }

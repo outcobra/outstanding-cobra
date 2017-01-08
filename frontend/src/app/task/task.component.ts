@@ -57,19 +57,18 @@ export class TaskComponent implements OnInit {
         this.taskAddDialog = this.dialogService.open(TaskAddDialogComponent, {width: '500px', position: {top: '20px'}})
         this.taskAddDialog.afterClosed()
             .subscribe((result) => {
-                if (result) {
-                    this.taskService.create(result)
-                        .subscribe((task: Task) => {
-                            this.notificationService.success('i18n.modules.task.notification.add.title', 'i18n.modules.task.notification.add.message');
-                            this.tasks.push(task);
-                            if (this.isFiltered) {
-                                let filter = this.buildFilterPredicate();
-                                if (this.filterTask(task, filter)) { // only add to filteredTasks if it passes the current filter
-                                    this.filteredTasks.push(task);
-                                }
-                            }
-                        });
-                }
+                if (!result) return;
+                this.taskService.create(result)
+                    .subscribe((task: Task) => {
+                        this.notificationService.success('i18n.modules.task.notification.add.title', 'i18n.modules.task.notification.add.message');
+                        this.tasks.push(task);
+                        if (!this.isFiltered) return;
+                        let filter = this.buildFilterPredicate();
+                        if (this.filterTask(task, filter)) { // only add to filteredTasks if it passes the current filter
+                            this.filteredTasks.push(task);
+                        }
+                    });
+
 
             });
     }

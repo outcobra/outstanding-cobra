@@ -14,11 +14,11 @@ export class SubjectService extends AppCrudService<SubjectDto> {
         return this.http.put<SubjectDto>(this.baseUri, subject, 'outcobra')
     }
 
-    getById(id: number): Observable<SubjectDto> {
+    readById(id: number): Observable<SubjectDto> {
         throw new Error('not implemented');
     }
 
-    getAll(): Observable<SubjectDto[]> {
+    readAll(): Observable<SubjectDto[]> {
         return this.http.get<SubjectDto[]>(this.baseUri, 'outcobra');
     }
 

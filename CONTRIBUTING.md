@@ -30,7 +30,7 @@ We want to have some branch categories and those categories have their own prefi
 | Branch Prefix | Description                              |
 | ------------- | ---------------------------------------- |
 | **feature**   | Anything related to a user story. May only implement a part of the user story. |
-| **bugfix**    | Fixing a bug, reference the issue if there is one. Reference it like this: `bugfix/<issueid>-some-branch-name` where `<issueid>` quite obviously represents the id of the issue. |
+| **bugfix**    | Fixing a bug, reference the issue if there is one. Reference it like this: `bugfix/<issueid>-some-branch-name` where `<issueid>` quite obviously represents the subjectId of the issue. |
 | **doc**       | Changing documentation files like this one. You could also use this if you are going on a mission to Javadoc every method that exists (for example). |
 | **upgrade**   | 3rd party library updates like Angular or angular-cli. |
 | **config**    | Configuration changes, e.g. adding a dependency in a Gradle file |

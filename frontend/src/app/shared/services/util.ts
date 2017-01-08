@@ -52,7 +52,7 @@ export class Util {
      * @returns {any}
      */
     static clone<T>(obj: T): T{
-        return JSON.parse(JSON.stringify(obj, dateReplacer), dateReviver);
+        return JSON.parse(JSON.stringify(obj, dateReplacer), dateReviver) as T;
     }
 
     /**

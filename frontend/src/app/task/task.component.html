@@ -2,7 +2,7 @@
     <div class="col m6 offset-m3">
         <router-outlet></router-outlet>
         <h1>Tasks</h1>
-        <md-input-container id="task-search">
+        <md-input-container subjectId="task-search">
             <input md-input placeholder="Search..." formControlName="searchTerm">
         </md-input-container>
     </div>
@@ -24,8 +24,8 @@
                 <div class="form-group">
                     <label>{{'i18n.modules.task.filter.subject' | translate}}</label>
                     <md-select formControlName="subjectId">
-                        <template ngFor let-subjectClass [ngForOf]="filterData.subjectClasses">
-                            <md-option *ngFor="let subject of subjectClass.subjects" [value]="subject.id">
+                        <template ngFor let-subjectClass [ngForOf]="filterData.schoolClassSubjects">
+                            <md-option *ngFor="let subject of subjectClass.subjects" [value]="subject.subjectId">
                                 {{ subjectClass.schoolClass.normalizedName + ' - ' + subject.name }}
                             </md-option>
                         </template>
