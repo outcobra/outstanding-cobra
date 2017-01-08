@@ -11,6 +11,8 @@
                     <template [ngIf]="subjectForm.get('name').hasError('required')">{{'i18n.common.form.error.required' | translate}}</template>
                 </md-hint>
             </md-input-container>
+        </div>
+        <div class="form-group">
             <colorpicker formControlName="color"></colorpicker>
         </div>
     </div>

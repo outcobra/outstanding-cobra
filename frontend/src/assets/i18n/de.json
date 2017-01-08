@@ -47,7 +47,7 @@
                 "filter": {
                     "title": "Aufgaben filtern",
                     "subject": "Nach Fach filtern",
-                    "progress": "Nur pendente Aufgaben zeigen"
+                    "showPending": "Nur pendente Aufgaben zeigen"
                 },
                 "notification": {
                     "add": {

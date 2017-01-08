@@ -50,7 +50,6 @@ export class ManageComponent implements OnInit {
                 private subjectService: SubjectService,
                 private notificationService: NotificationsService,
                 private confirmDialogService: ConfirmDialogService,
-                private colorService: ColorService,
                 private manageDialogFactory: ManageDialogFactory) {
     }
 
@@ -60,6 +59,7 @@ export class ManageComponent implements OnInit {
     }
 
     selectSchoolClass(schoolClassId: number) {
+        console.log(schoolClassId);
         let schoolClass = this.findSchoolClass(this.institutionClasses, schoolClassId);
         if (schoolClass != null) {
             this.yearSemesterModel = schoolClass.schoolYears;
