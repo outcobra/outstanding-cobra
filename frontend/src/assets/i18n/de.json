@@ -32,9 +32,18 @@
                     "save": "Erfolgreich gespeichert",
                     "delete": "Erfolgreich gelöscht"
                 }
+            },
+            "lang": {
+                "en": "Englisch",
+                "de": "Deutsch"
             }
         },
         "modules": {
+            "main": {
+                "welcome": "Willkommen bei Outcobra",
+                "subtitle": "Das Managementtool von Schülern für Schüler",
+                "authors": "von Joel, Florian, Mario und Vincent"
+            },
             "exam": {
                 "linkTitle": "Prüfungen"
             },

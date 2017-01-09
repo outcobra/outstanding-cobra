@@ -1,0 +1,25 @@
+@import '../../sass/color';
+
+div.col {
+    text-align: center;
+    img {
+        margin: 40px;
+        width: 300px;
+    }
+    #credit {
+        font-size: .8em;
+        position: absolute;
+        bottom: 5px;
+        right: 0;
+        left: 0;
+        width: 100%;
+        span {
+            margin: 0 auto;
+            display: block;
+            position: relative;
+            a {
+                @extend .text-disabled-light;
+            }
+        }
+    }
+}

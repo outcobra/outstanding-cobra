@@ -39,7 +39,7 @@ export class SchoolYearDialog extends ManageDialog<SchoolYearDto, SchoolClassDto
 
     getErrorText(controlName: string, errorName: string, errorProp: string) {
         let control = this.schoolYearForm.get(controlName);
-        let date = this.datePipe.transform(control.getError(errorName)[errorProp], 'MM.dd.y');
+        let date = this.datePipe.transform(control.getError(errorName)[errorProp], 'dd.MM.y');
         return control.hasError(errorName) ? this.translate.instant(`i18n.common.form.error.${errorName}`, {'date': date}) : "";
     }
 
@@ -49,7 +49,7 @@ export class SchoolYearDialog extends ManageDialog<SchoolYearDto, SchoolClassDto
 
     onSubmit() {
         if (this.schoolYearForm.valid && this.schoolYearForm.dirty) {
-            let value = this.schoolYearForm.value;
+            let value = this.schoolYearForm.value as SchoolYearDto;
             value.schoolClassId = this.parent.id;
             this.dialogRef.close(value);
         }

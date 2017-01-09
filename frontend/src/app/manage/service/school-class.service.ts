@@ -11,7 +11,7 @@ export class SchoolClassService extends AppCrudService<SchoolClassDto> {
     }
 
     create(schoolClass: SchoolClassDto): Observable<SchoolClassDto> {
-        return this.http.put<SchoolClassDto>(this.baseUri, schoolClass, 'outcobra')
+        return super.create(schoolClass)
     }
 
     readById(id: number): Observable<SchoolClassDto> {
@@ -19,11 +19,11 @@ export class SchoolClassService extends AppCrudService<SchoolClassDto> {
     }
 
     readAll(): Observable<SchoolClassDto[]> {
-        return this.http.get<SchoolClassDto[]>(this.baseUri, 'outcobra');
+        return super.readAll();
     }
 
     deleteById(id: number): Observable<any> {
-        return this.http.delete(`${this.baseUri}/${id}`, 'outcobra');
+        return super.deleteById(id);
     }
 
     update(arg: SchoolClassDto): Observable<SchoolClassDto> {

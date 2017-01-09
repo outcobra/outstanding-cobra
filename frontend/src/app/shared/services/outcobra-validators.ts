@@ -46,7 +46,6 @@ export class OutcobraValidators {
      * from date control name must contain either the string 'datefrom' or 'validfrom'
      * to date control name must contain either the string 'dateto' or 'validto'
      *
-     * @jmesserli please review this
      *
      * @param firstDateName
      * @param secondDateName

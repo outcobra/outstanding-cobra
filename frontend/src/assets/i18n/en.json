@@ -32,9 +32,18 @@
                     "save": "Successfully saved",
                     "delete": "Successfully deleted"
                 }
+            },
+            "lang": {
+                "en": "English",
+                "de": "German"
             }
         },
         "modules": {
+            "main": {
+                "welcome": "Welcome to Outcobra",
+                "subtitle": "The management-tool by students for students",
+                "authors": "by Joel, Florian, Mario and Vincent"
+            },
             "exam": {
                 "linkTitle": "Exams"
             },

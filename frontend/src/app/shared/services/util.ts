@@ -46,12 +46,26 @@ export class Util {
     }
 
     /**
+     * removes the element in the array
+     * if the element is not found the unchanged array is returned
+     *
+     * @param array
+     * @param findPredicate
+     * @returns {any}
+     */
+    static arrayRemove<T>(array: Array<T>, findPredicate: Predicate<T>): Array<T> {
+        let index = array.findIndex(t => findPredicate(t));
+        if (!index && index != 0) return array;
+        return array.splice(index, 1)
+    }
+
+    /**
      * clones the given object and returns the copy
      *
      * @param obj
      * @returns {any}
      */
-    static clone<T>(obj: T): T{
+    static clone<T>(obj: T): T {
         return JSON.parse(JSON.stringify(obj, dateReplacer), dateReviver) as T;
     }
 
@@ -89,6 +103,13 @@ export class Util {
     }
 }
 
+/**
+ * combines multiple {Predicate}s to an and chain of {Predicate}s
+ * returns {Predicate} that evaluates all {Predicate}s in the param
+ *
+ * @param predicates
+ * @returns {(arg:any)=>boolean}
+ */
 export function and<T>(predicates: Predicate<T>[]): Predicate<T> {
     return (arg) => predicates.every(p => p(arg));
 }

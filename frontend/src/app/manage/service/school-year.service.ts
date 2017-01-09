@@ -11,7 +11,7 @@ export class SchoolYearService extends AppCrudService<SchoolYearDto> {
     }
 
     create(schoolYear: SchoolYearDto): Observable<SchoolYearDto> {
-        return this.http.put<SchoolYearDto>('/schoolYear', schoolYear, 'outcobra')
+        return super.create(schoolYear);
     }
 
     readById(id: number): Observable<SchoolYearDto> {
@@ -23,7 +23,7 @@ export class SchoolYearService extends AppCrudService<SchoolYearDto> {
     }
 
     deleteById(id: number): Observable<any> {
-        return this.http.delete(`${this.baseUri}/${id}`, 'outcobra');
+        return super.deleteById(id);
     }
 
     update(arg: SchoolYearDto): Observable<SchoolYearDto> {

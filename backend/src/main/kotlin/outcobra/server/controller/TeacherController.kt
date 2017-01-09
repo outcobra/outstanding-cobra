@@ -8,27 +8,27 @@ import javax.inject.Inject
 @RestController
 @RequestMapping("/api")
 open class TeacherController @Inject constructor(val teacherService: TeacherService) : TeacherService {
-    @RequestMapping(value = "/teacher", method = arrayOf(RequestMethod.PUT))
+    @PutMapping(value = "/teacher")
     override fun createTeacher(@RequestBody teacherDto: TeacherDto): TeacherDto {
         return teacherService.createTeacher(teacherDto)
     }
 
-    @RequestMapping(value = "/teacher/{id}", method = arrayOf(RequestMethod.GET))
+    @GetMapping(value = "/teacher/{id}")
     override fun readTeacherById(@PathVariable id: Long): TeacherDto {
         return teacherService.readTeacherById(id)
     }
 
-    @RequestMapping(value = "/institution/{institutionId}/teacher", method = arrayOf(RequestMethod.GET))
+    @GetMapping(value = "/institution/{institutionId}/teacher")
     override fun readAllYearsByInstitution(@PathVariable institutionId: Long): List<TeacherDto> {
         return teacherService.readAllYearsByInstitution(institutionId)
     }
 
-    @RequestMapping(value = "/teacher", method = arrayOf(RequestMethod.POST))
+    @PostMapping(value = "/teacher")
     override fun updateTeacher(@RequestBody teacherDto: TeacherDto): TeacherDto {
         return teacherService.updateTeacher(teacherDto)
     }
 
-    @RequestMapping(value = "/teacher/{id}", method = arrayOf(RequestMethod.DELETE))
+    @DeleteMapping(value = "/teacher/{id}")
     override fun deleteTeacher(@PathVariable id: Long) {
         teacherService.deleteTeacher(id)
     }

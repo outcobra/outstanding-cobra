@@ -2,6 +2,7 @@ package outcobra.server.service.internal
 
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
+import outcobra.server.exception.DateOutsideExpectedRangeException
 import outcobra.server.model.QSemester
 import outcobra.server.model.Semester
 import outcobra.server.model.dto.SemesterDto
@@ -9,6 +10,7 @@ import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.SemesterRepository
 import outcobra.server.service.SemesterService
 import outcobra.server.service.UserService
+import outcobra.server.validator.SemesterValidator
 import java.time.LocalDate
 import javax.inject.Inject
 
@@ -16,10 +18,14 @@ import javax.inject.Inject
 @Transactional
 open class DefaultSemesterService @Inject constructor(val repository: SemesterRepository,
                                                       val userService: UserService,
-                                                      val mapper: Mapper<Semester, SemesterDto>) : SemesterService {
+                                                      val mapper: Mapper<Semester, SemesterDto>,
+                                                      val validator: SemesterValidator) : SemesterService {
 
     override fun createSemester(semesterDto: SemesterDto): SemesterDto {
         var semester = mapper.fromDto(semesterDto)
+        if (!validator.validateSemesterCreation(semester)) {
+            throw DateOutsideExpectedRangeException("The new semester overlaps with an existing one")
+        }
         semester = repository.save(semester)
         return mapper.toDto(semester)
     }
@@ -35,6 +41,9 @@ open class DefaultSemesterService @Inject constructor(val repository: SemesterRe
 
     override fun updateSemester(semesterDto: SemesterDto): SemesterDto {
         var semester = mapper.fromDto(semesterDto)
+        if (!validator.validateSemesterCreation(semester)) {
+            throw DateOutsideExpectedRangeException("The updated semester overlaps with an existing one")
+        }
         semester = repository.save(semester)
         return mapper.toDto(semester)
     }
@@ -43,15 +52,11 @@ open class DefaultSemesterService @Inject constructor(val repository: SemesterRe
         repository.delete(id)
     }
 
-    override fun getCurrentSemester(): SemesterDto? {
+    override fun getCurrentSemester(): List<SemesterDto> {
         val currentUserId = userService.getCurrentUser()?.id
         val today = LocalDate.now()
         val withCurrentUser = QSemester.semester.schoolYear.schoolClass.institution.user.id.eq(currentUserId)
         val todayBetweenValidFromAndTo = withCurrentUser.and(QSemester.semester.validFrom.loe(today).and(QSemester.semester.validTo.goe(today)))
-        try {
-            return mapper.toDto(repository.findOne(todayBetweenValidFromAndTo))
-        } catch(ex: NullPointerException) {
-            return null
-        }
+        return repository.findAll(todayBetweenValidFromAndTo).map { mapper.toDto(it) }
     }
 }
