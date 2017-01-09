@@ -31,7 +31,8 @@ export class InstitutionDialog extends ManageDialog<InstitutionDto, any> impleme
 
     onSubmit() {
         if (this.institutionForm.valid && this.institutionForm.dirty) {
-            this.dialogRef.close(this.institutionForm.value);
+            let value = this.institutionForm.value as InstitutionDto;
+            this.dialogRef.close(value);
         }
         else if (this.institutionForm.pristine) {
             Util.revalidateForm(this.institutionForm);

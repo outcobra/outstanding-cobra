@@ -30,7 +30,7 @@ export class SchoolClassDialog extends ManageDialog<SchoolClassDto, InstitutionD
 
     onSubmit() {
         if (this.schoolClassForm.valid && this.schoolClassForm.dirty) {
-            let value = this.schoolClassForm.value;
+            let value = this.schoolClassForm.value as SchoolClassDto;
             value.institutionId = this.parent.id;
             this.dialogRef.close(value);
         }

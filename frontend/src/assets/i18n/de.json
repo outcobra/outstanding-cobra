@@ -41,7 +41,7 @@
         "modules": {
             "main": {
                 "welcome": "Willkommen bei Outcobra",
-                "subtitle": "Das Managementtool von Schüler für Schüler",
+                "subtitle": "Das Managementtool von Schülern für Schüler",
                 "authors": "von Joel, Florian, Mario und Vincent"
             },
             "exam": {
