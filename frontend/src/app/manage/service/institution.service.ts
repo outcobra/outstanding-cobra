@@ -11,7 +11,7 @@ export class InstitutionService extends AppCrudService<InstitutionDto> {
     }
 
     create(institution: InstitutionDto): Observable<InstitutionDto> {
-        return this.http.put<InstitutionDto>(this.baseUri, institution, 'outcobra')
+        return super.create(institution);
     }
 
     readById(id: number): Observable<InstitutionDto> {
@@ -23,7 +23,7 @@ export class InstitutionService extends AppCrudService<InstitutionDto> {
     }
 
     deleteById(id: number): Observable<any> {
-        return this.http.delete(`${this.baseUri}/${id}`, 'outcobra');
+        return super.deleteById(id);
     }
 
     update(arg: InstitutionDto): Observable<InstitutionDto> {

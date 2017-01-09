@@ -11,7 +11,7 @@ export class SubjectService extends AppCrudService<SubjectDto> {
     }
 
     create(subject: SubjectDto): Observable<SubjectDto> {
-        return this.http.put<SubjectDto>(this.baseUri, subject, 'outcobra')
+        return super.create(subject);
     }
 
     readById(id: number): Observable<SubjectDto> {
@@ -19,11 +19,11 @@ export class SubjectService extends AppCrudService<SubjectDto> {
     }
 
     readAll(): Observable<SubjectDto[]> {
-        return this.http.get<SubjectDto[]>(this.baseUri, 'outcobra');
+        return super.readAll();
     }
 
     deleteById(id: number): Observable<any> {
-        return this.http.delete(`${this.baseUri}/${id}`, 'outcobra');
+        return super.deleteById(id);
     }
 
     update(arg: SubjectDto): Observable<SubjectDto> {

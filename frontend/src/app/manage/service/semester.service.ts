@@ -11,7 +11,7 @@ export class SemesterService extends AppCrudService<SemesterDto> {
     }
 
     create(semester: SemesterDto): Observable<SemesterDto> {
-        return this.http.put<SemesterDto>('/semester', semester, 'outcobra')
+        return super.create(semester);
     }
 
     readById(id: number): Observable<SemesterDto> {
@@ -23,7 +23,7 @@ export class SemesterService extends AppCrudService<SemesterDto> {
     }
 
     deleteById(id: number): Observable<any> {
-        return this.http.delete(`${this.baseUri}/${id}`, 'outcobra');
+        return super.deleteById(id);
     }
 
     update(arg: SemesterDto): Observable<SemesterDto> {

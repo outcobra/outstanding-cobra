@@ -89,6 +89,13 @@ export class Util {
     }
 }
 
+/**
+ * combines multiple {Predicate}s to an and chain of {Predicate}s
+ * returns {Predicate} that evaluates all {Predicate}s in the param
+ *
+ * @param predicates
+ * @returns {(arg:any)=>boolean}
+ */
 export function and<T>(predicates: Predicate<T>[]): Predicate<T> {
     return (arg) => predicates.every(p => p(arg));
 }
