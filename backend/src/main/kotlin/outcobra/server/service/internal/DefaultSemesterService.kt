@@ -52,15 +52,11 @@ open class DefaultSemesterService @Inject constructor(val repository: SemesterRe
         repository.delete(id)
     }
 
-    override fun getCurrentSemester(): SemesterDto? {
+    override fun getCurrentSemester(): List<SemesterDto> {
         val currentUserId = userService.getCurrentUser()?.id
         val today = LocalDate.now()
         val withCurrentUser = QSemester.semester.schoolYear.schoolClass.institution.user.id.eq(currentUserId)
         val todayBetweenValidFromAndTo = withCurrentUser.and(QSemester.semester.validFrom.loe(today).and(QSemester.semester.validTo.goe(today)))
-        try {
-            return mapper.toDto(repository.findOne(todayBetweenValidFromAndTo))
-        } catch(ex: NullPointerException) {
-            return null
-        }
+        return repository.findAll(todayBetweenValidFromAndTo).map { mapper.toDto(it) }
     }
 }

@@ -6,8 +6,8 @@ import outcobra.server.model.dto.SubjectDto
 
 /**
  * This service handles the business-logic for the [Subject] entity
- * @since <version>
- * @author Florian Buergi
+ * @since <since>
+ * @author Florian Bürgi
  */
 interface SubjectService {
     /**
@@ -50,6 +50,15 @@ interface SubjectService {
      */
     fun readAllSubjectsByUser(): List<SubjectDto>
 
+    /**
+     * reads all [SubjectDto]s which belong to a SchoolClass with the id [schoolClassId]
+     * @return all [SubjectDto]s which belong to a SchoolClass
+     */
     fun readSubjectsBySchoolClassId(schoolClassId: Long): List<SubjectDto>
+
+    /**
+     * reads all subjects by the current active semester
+     * @return all [SubjectDto]s which are active now
+     */
     fun readSubjectsByCurrentSemester(): List<SubjectDto>
 }

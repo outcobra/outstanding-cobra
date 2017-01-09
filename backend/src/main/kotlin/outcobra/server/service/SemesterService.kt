@@ -44,5 +44,9 @@ interface SemesterService {
      */
     fun deleteSemester(id: Long)
 
-    fun getCurrentSemester(): SemesterDto?
+    /**
+     * returns the [SemesterDto]s which are active at the current date
+     * @return a list of [SemesterDto]s
+     */
+    fun getCurrentSemester(): List<SemesterDto>
 }

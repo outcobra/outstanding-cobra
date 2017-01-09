@@ -7,7 +7,13 @@ import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.bind.annotation.ResponseStatus
 import javax.persistence.EntityNotFoundException
 
-
+/**
+ * Handles exceptions globally
+ *
+ * @author Florian Bürgi
+ * @since <since>
+ */
+@Suppress("unused")
 @ControllerAdvice
 open class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)

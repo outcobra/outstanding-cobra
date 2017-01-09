@@ -20,8 +20,8 @@ open class DefaultSubjectService @Inject constructor(val repository: SubjectRepo
                                                      val semesterService: SemesterService,
                                                      val mapper: Mapper<Subject, SubjectDto>) : SubjectService {
     override fun readSubjectsByCurrentSemester(): List<SubjectDto> {
-        val currentSemester = semesterService.getCurrentSemester() ?: return listOf()
-        return readAllSubjectsBySemester(currentSemester.id)
+        val currentSemesters = semesterService.getCurrentSemester()
+        return currentSemesters.flatMap { readAllSubjectsBySemester(it.id) }
     }
 
     override fun readAllSubjectsByUser(): List<SubjectDto> {

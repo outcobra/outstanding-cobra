@@ -21,7 +21,7 @@ class SchoolClassController @Inject constructor(val schoolClassService: SchoolCl
      * @param schoolClassDto the new [SchoolClassDto] you want to save, as Json in the [RequestBody]
      * @return the [schoolClassDto] that has been saved in the database
      */
-    @RequestMapping(value = "/schoolClass", method = arrayOf(RequestMethod.PUT))
+    @PutMapping(value = "/schoolClass")
     fun createSchoolClass(@RequestBody schoolClassDto: SchoolClassDto): SchoolClassDto {
         return schoolClassService.createSchoolClass(schoolClassDto)
     }
@@ -30,7 +30,7 @@ class SchoolClassController @Inject constructor(val schoolClassService: SchoolCl
      * This method reads a SchoolClass out of the database and returns it as a [SchoolClassDto]
      * @param id the id of the schoolClass you want to read, as [PathParam]
      */
-    @RequestMapping(value = "/schoolClass/{id}", method = arrayOf(RequestMethod.GET))
+    @GetMapping(value = "/schoolClass/{id}")
     fun readSchoolClassById(@PathVariable id: Long): SchoolClassDto {
         return schoolClassService.readSchoolClassById(id)
     }
@@ -46,7 +46,7 @@ class SchoolClassController @Inject constructor(val schoolClassService: SchoolCl
      * @return All SchoolClasses that are associated with the given Institution
      */
 
-    @RequestMapping(value = "/institution/{institutionId}/schoolClass", method = arrayOf(RequestMethod.GET))
+    @GetMapping(value = "/institution/{institutionId}/schoolClass")
     fun readAllSchoolClasses(@PathVariable institutionId: Long): List<SchoolClassDto> {
         return schoolClassService.readAllSchoolClasses(institutionId)
     }
@@ -56,7 +56,7 @@ class SchoolClassController @Inject constructor(val schoolClassService: SchoolCl
      * @param schoolClassDto the updated [SchoolClassDto] you want to save, as Json in the [RequestBody]
      * @return the [schoolClassDto] that has been saved in the database
      */
-    @RequestMapping(value = "/schoolClass", method = arrayOf(RequestMethod.POST))
+    @PostMapping(value = "/schoolClass")
     fun updateSchoolClass(@RequestBody schoolClassDto: SchoolClassDto): SchoolClassDto {
         return schoolClassService.updateSchoolClass(schoolClassDto)
     }
@@ -65,7 +65,7 @@ class SchoolClassController @Inject constructor(val schoolClassService: SchoolCl
      * This method deletes a schoolClass
      * @param id The id of the SchoolClass that should be deleted
      */
-    @RequestMapping(value = "/schoolClass/{id}", method = arrayOf(RequestMethod.DELETE))
+    @DeleteMapping(value = "/schoolClass/{id}")
     fun deleteSchoolClass(@PathVariable id: Long) {
         schoolClassService.deleteSchoolClass(id)
     }

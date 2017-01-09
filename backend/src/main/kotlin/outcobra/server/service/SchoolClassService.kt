@@ -6,7 +6,7 @@ import outcobra.server.model.dto.SchoolClassDto
 
 /**
  * This interface defines all functions for a SchoolClass service
- * @author Florian Buergi
+ * @author Florian Bürgi
  * @since 1.0.0
  */
 interface SchoolClassService {

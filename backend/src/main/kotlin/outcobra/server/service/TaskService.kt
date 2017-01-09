@@ -8,7 +8,7 @@ import outcobra.server.model.dto.TaskFilterDto
 
 /**
  * This service handles the business-logic for the [Task] entity
- * @since <version>
+ * @since <since>
  * @author Vincent Perret
  */
 interface TaskService {
@@ -72,5 +72,8 @@ interface TaskService {
      */
     fun readAllTasks(): List<TaskDto>
 
+    /**
+     * @return a [TaskFilterDto] for the current user
+     */
     fun getTaskFilter(): TaskFilterDto
 }
