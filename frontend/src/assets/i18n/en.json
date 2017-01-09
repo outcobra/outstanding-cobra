@@ -32,6 +32,10 @@
                     "save": "Successfully saved",
                     "delete": "Successfully deleted"
                 }
+            },
+            "lang": {
+                "en": "English",
+                "de": "German"
             }
         },
         "modules": {
