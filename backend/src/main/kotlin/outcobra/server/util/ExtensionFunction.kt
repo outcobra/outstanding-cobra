@@ -8,8 +8,8 @@ fun LocalDate.isBeforeOrEqual(b: LocalDate): Boolean = this.isBefore(b) || this.
 fun LocalDate.isAfterOrEqual(b: LocalDate): Boolean = this.isAfter(b) || this.isEqual(b)
 
 infix fun SchoolYear.doesNotOverlap(schoolYear : SchoolYear) : Boolean =
-        !DateUtil.isOverlap(this.validFrom, this.validTo, schoolYear.validFrom, schoolYear.validTo)
+        this.id == schoolYear.id || !DateUtil.isOverlap(this.validFrom, this.validTo, schoolYear.validFrom, schoolYear.validTo)
 infix fun Semester.doesNotOverlap(semester : Semester) : Boolean =
-        !DateUtil.isOverlap(this.validFrom, this.validTo, semester.validFrom, semester.validTo)
+        this.id == semester.id || !DateUtil.isOverlap(this.validFrom, this.validTo, semester.validFrom, semester.validTo)
 
 
