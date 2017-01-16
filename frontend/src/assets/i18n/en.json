@@ -58,7 +58,8 @@
                 "filter": {
                     "title": "Filter Tasks",
                     "subject": "Filter by subject",
-                    "showPending": "Show only unfinished tasks"
+                    "showPending": "Show only unfinished tasks",
+                    "search": "Search..."
                 },
                 "notification": {
                     "add": {
