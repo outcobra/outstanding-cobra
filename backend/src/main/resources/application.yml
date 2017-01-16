@@ -1,0 +1,26 @@
+# MySQL: com.mysql.jdbc.Driver, H2: org.h2.Driver
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+# MySQL: jdbc:mysql://host:port/database, H2 In-Mem: jdbc:h2:mem:outcobra
+    url: jdbc:h2:mem:outcobra
+    username:
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+# MySQL: org.hibernate.dialect.MySQL5Dialect, H2: org.hibernate.dialect.H2Dialect
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+  jackson:
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+  h2:
+    console:
+      enabled: true
+security:
+  basic:
+    enabled: false
+  headers:
+    frame: false
