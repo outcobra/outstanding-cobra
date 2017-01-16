@@ -4,9 +4,6 @@ spring:
   jackson:
     serialization:
       WRITE_DATES_AS_TIMESTAMPS: false
-  h2:
-    console:
-      enabled: true
 security:
   basic:
     enabled: false
@@ -26,14 +23,17 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.H2Dialect
+  h2:
+    console:
+      enabled: true
 ---
 spring:
   profiles: production
   datasource:
-      driver-class-name: com.mysql.jdbc.Driver
-      url: jdbc:mysql://localhost:3306/outcobra_a
-      username: outcobra-a
-      password: <todo>
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/outcobra_a
+    username: outcobra-a
+    password: <todo>
   jpa:
     hibernate:
       ddl-auto: validate
