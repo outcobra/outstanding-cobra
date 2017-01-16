@@ -14,7 +14,7 @@ database:
 
 test:
   override:
-    - cp backend/src/main/resources/auth0.example.properties backend/src/main/resources/auth0.properties
+    - cp backend/src/main/resources/auth0.example.yml backend/src/main/resources/auth0.yml
     - ./gradlew build
   post:
     - mkdir -p $CIRCLE_TEST_REPORTS/junit/
