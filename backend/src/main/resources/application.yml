@@ -1,18 +1,6 @@
-# MySQL: com.mysql.jdbc.Driver, H2: org.h2.Driver
 spring:
-  datasource:
-    driver-class-name: org.h2.Driver
-# MySQL: jdbc:mysql://host:port/database, H2 In-Mem: jdbc:h2:mem:outcobra
-    url: jdbc:h2:mem:outcobra
-    username:
-    password:
-  jpa:
-    hibernate:
-      ddl-auto: create-drop
-# MySQL: org.hibernate.dialect.MySQL5Dialect, H2: org.hibernate.dialect.H2Dialect
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.H2Dialect
+  profiles:
+    active: development #TODO this is only temporary until issue #47 is resolved
   jackson:
     serialization:
       WRITE_DATES_AS_TIMESTAMPS: false
@@ -24,3 +12,31 @@ security:
     enabled: false
   headers:
     frame: false
+---
+spring:
+  profiles: development
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:outcobra
+    username:
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+---
+spring:
+  profiles: production
+  datasource:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/outcobra_a
+      username: outcobra-a
+      password: <todo>
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
