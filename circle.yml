@@ -15,7 +15,7 @@ database:
 test:
   override:
     - cp backend/src/main/resources/auth0.example.yml backend/src/main/resources/auth0.yml
-    - ./gradlew build
+    - ./gradlew build --info
   post:
     - mkdir -p $CIRCLE_TEST_REPORTS/junit/
     - find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
