@@ -3,7 +3,7 @@ auth0:
   issuer: https://outcobra.eu.auth0.com/
   clientId: Qih42aYQMS2CGCAqNkgalzFdIyacqi5r
   # TODO clientSecret
-  clientSecret: {INSERT CLIENT SECRET}
+  clientSecret: INSERT_CLIENT_SECRET
   onLogoutRedirectTo: /
   loginCallback: /
   loginRedirectOnSuccess: /
