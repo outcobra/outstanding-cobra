@@ -1,5 +1,5 @@
 before_install:
-  - cp backend/src/main/resources/auth0.example.properties backend/src/main/resources/auth0.properties
+  - cp backend/src/main/resources/auth0.example.yml backend/src/main/resources/auth0.yml
   - chmod +x ./gradlew
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
