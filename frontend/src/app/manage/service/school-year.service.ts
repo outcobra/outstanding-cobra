@@ -10,20 +10,8 @@ export class SchoolYearService extends AppCrudService<SchoolYearDto> {
         super(http, '/schoolYear');
     }
 
-    create(schoolYear: SchoolYearDto): Observable<SchoolYearDto> {
-        return super.create(schoolYear);
-    }
-
     readById(id: number): Observable<SchoolYearDto> {
         throw new Error('not implemented');
-    }
-
-    readAll(): Observable<SchoolYearDto[]> {
-        throw new Error('not implemented');
-    }
-
-    deleteById(id: number): Observable<any> {
-        return super.deleteById(id);
     }
 
     update(arg: SchoolYearDto): Observable<SchoolYearDto> {

@@ -10,20 +10,8 @@ export class SubjectService extends AppCrudService<SubjectDto> {
         super(http, '/subject')
     }
 
-    create(subject: SubjectDto): Observable<SubjectDto> {
-        return super.create(subject);
-    }
-
     readById(id: number): Observable<SubjectDto> {
         throw new Error('not implemented');
-    }
-
-    readAll(): Observable<SubjectDto[]> {
-        return super.readAll();
-    }
-
-    deleteById(id: number): Observable<any> {
-        return super.deleteById(id);
     }
 
     update(arg: SubjectDto): Observable<SubjectDto> {

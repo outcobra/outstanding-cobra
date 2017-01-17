@@ -10,20 +10,8 @@ export class SemesterService extends AppCrudService<SemesterDto> {
         super(http, '/semester');
     }
 
-    create(semester: SemesterDto): Observable<SemesterDto> {
-        return super.create(semester);
-    }
-
     readById(id: number): Observable<SemesterDto> {
         throw new Error('not implemented');
-    }
-
-    readAll(): Observable<SemesterDto[]> {
-        throw new Error('not implemented');
-    }
-
-    deleteById(id: number): Observable<any> {
-        return super.deleteById(id);
     }
 
     update(arg: SemesterDto): Observable<SemesterDto> {
