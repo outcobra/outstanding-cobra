@@ -6,10 +6,9 @@ import outcobra.server.model.QSemester
 import outcobra.server.model.Semester
 import outcobra.server.model.repository.SchoolYearRepository
 import outcobra.server.model.repository.SemesterRepository
-import outcobra.server.util.DateUtil
+import outcobra.server.util.doesNotOverlap
 import outcobra.server.util.isAfterOrEqual
 import outcobra.server.util.isBeforeOrEqual
-import outcobra.server.util.doesNotOverlap
 import javax.inject.Inject
 
 
@@ -27,7 +26,6 @@ open class SemesterValidator @Inject constructor(val schoolYearRepository: Schoo
         val semesters = semesterRepository.findAll(withSameParent).toList()
         return semesters.all { it.doesNotOverlap(semester) }
     }
-
 
 
 }

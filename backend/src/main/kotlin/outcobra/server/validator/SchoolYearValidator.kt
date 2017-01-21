@@ -21,7 +21,6 @@ open class SchoolYearValidator @Inject constructor(val schoolYearRepository: Sch
      * @return returns true if no [SchoolYear] was found which overlaps with the given [SchoolYear]
      */
     fun validateSchoolYearCreation(schoolYear: SchoolYear): Boolean {
-        val instanceId = schoolYear.id
         val predicate = QSchoolYear.schoolYear.schoolClass.id.eq(schoolYear.schoolClass.id)
         val schoolYears = schoolYearRepository.findAll(predicate).toList()
         return schoolYears.all { it.doesNotOverlap(schoolYear) }
