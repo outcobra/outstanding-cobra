@@ -4,13 +4,15 @@ import org.springframework.stereotype.Component
 import outcobra.server.model.Institution
 import outcobra.server.model.dto.InstitutionDto
 import outcobra.server.model.interfaces.Mapper
+import outcobra.server.model.repository.UserRepository
 import outcobra.server.service.UserService
 import javax.inject.Inject
 
 @Component
 open class InstitutionMapper
 @Inject
-constructor(val userService: UserService) : Mapper<Institution, InstitutionDto> {
+constructor(val userRepository: UserRepository,
+            val userService: UserService) : Mapper<Institution, InstitutionDto> {
 
     override fun toDto(from: Institution) = InstitutionDto(from.id, from.user.id, from.name)
 
@@ -19,7 +21,7 @@ constructor(val userService: UserService) : Mapper<Institution, InstitutionDto> 
         institution.id = from.id
         institution.name = from.name
         institution.user = when (from.userId) {
-            in 1L..Long.MAX_VALUE -> userService.readUserById(from.userId)
+            in 1L..Long.MAX_VALUE -> userRepository.findOne(from.userId)
             else -> userService.getCurrentUser()
         }
         return institution

@@ -9,44 +9,29 @@ import outcobra.server.model.dto.SchoolYearDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.SchoolYearRepository
 import outcobra.server.service.SchoolYearService
+import outcobra.server.service.base.internal.DefaultBaseService
 import outcobra.server.validator.SchoolYearValidator
 import javax.inject.Inject
 
 @Component
 @Transactional
-open class DefaultSchoolYearService @Inject constructor(val repository: SchoolYearRepository,
-                                                        val mapper: Mapper<SchoolYear, SchoolYearDto>,
-                                                        val schoolYearValidator: SchoolYearValidator) : SchoolYearService {
+open class DefaultSchoolYearService
+@Inject constructor(val mapper: Mapper<SchoolYear, SchoolYearDto>,
+                    val repository: SchoolYearRepository,
+                    val schoolYearValidator: SchoolYearValidator)
+    : SchoolYearService, DefaultBaseService<SchoolYear, SchoolYearDto>(mapper, repository) {
 
-    override fun createSchoolYear(schoolYearDto: SchoolYearDto): SchoolYearDto {
-        var schoolYear = mapper.fromDto(schoolYearDto)
+    override fun save(dto: SchoolYearDto): SchoolYearDto {
+        var schoolYear = dtoMapper.fromDto(dto)
         if (!schoolYearValidator.validateSchoolYearCreation(schoolYear)) {
             throw DateOutsideExpectedRangeException("The new school-year overlaps with an existing one")
         }
-        schoolYear = repository.save(schoolYear)
-        return mapper.toDto(schoolYear)
-    }
-
-    override fun readSchoolYearById(id: Long): SchoolYearDto {
-        val schoolYear = repository.getOne(id)
-        return mapper.toDto(schoolYear)
+        return super.save(dto)
     }
 
     override fun readAllYearsByClass(schoolClassId: Long): List<SchoolYearDto> {
         val filter = QSchoolYear.schoolYear.schoolClass.id.eq(schoolClassId)
-        return repository.findAll(filter).map { mapper.toDto(it) }
+        return repository.findAll(filter).map { dtoMapper.toDto(it) }
     }
 
-    override fun updateSchoolYear(schoolYearDto: SchoolYearDto): SchoolYearDto {
-        var schoolYear = mapper.fromDto(schoolYearDto)
-        if (!schoolYearValidator.validateSchoolYearCreation(schoolYear)) {
-            throw DateOutsideExpectedRangeException("The updated school-year overlaps with an existing one")
-        }
-        schoolYear = repository.save(schoolYear)
-        return mapper.toDto(schoolYear)
-    }
-
-    override fun deleteSchoolYear(id: Long) {
-        repository.delete(id)
-    }
 }

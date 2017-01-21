@@ -9,14 +9,14 @@ import javax.inject.Inject
 @RequestMapping("/api")
 open class SemesterController @Inject constructor(val semesterService: SemesterService) {
 
-    @PutMapping(value = "/semester")
-    fun createSemester(@RequestBody semesterDto: SemesterDto): SemesterDto {
-        return semesterService.createSemester(semesterDto)
+    @RequestMapping(value = "/semester", method = arrayOf(RequestMethod.POST, RequestMethod.PUT))
+    fun saveSemester(@RequestBody semesterDto: SemesterDto): SemesterDto {
+        return semesterService.save(semesterDto)
     }
 
     @GetMapping(value = "/semester/{id}")
     fun readSemesterById(@PathVariable id: Long): SemesterDto {
-        return semesterService.readSemesterById(id)
+        return semesterService.readById(id)
     }
 
     @GetMapping(value = "/schoolYear/{schoolYearId}/semester")
@@ -24,13 +24,8 @@ open class SemesterController @Inject constructor(val semesterService: SemesterS
         return semesterService.readAllSemestersBySchoolYear(schoolYearId)
     }
 
-    @PostMapping(value = "/semester")
-    fun updateSemester(@RequestBody semesterDto: SemesterDto): SemesterDto {
-        return semesterService.updateSemester(semesterDto)
-    }
-
     @DeleteMapping(value = "/semester/{id}")
     fun deleteSemester(@PathVariable id: Long) {
-        semesterService.deleteSemester(id)
+        semesterService.delete(id)
     }
 }

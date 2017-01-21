@@ -18,14 +18,14 @@ open class TaskController @Inject constructor(val taskService: TaskService) {
         return taskService.readAllTasks()
     }
 
-    @PutMapping(value = "/task")
-    fun createTask(@RequestBody taskDto: TaskDto): TaskDto {
-        return taskService.createTask(taskDto)
+    @RequestMapping(value = "/task", method = arrayOf(RequestMethod.POST, RequestMethod.PUT))
+    fun saveTask(@RequestBody taskDto: TaskDto): TaskDto {
+        return taskService.save(taskDto)
     }
 
     @GetMapping(value = "/task/{id}")
     fun readTaskById(@PathVariable id: Long): TaskDto {
-        return taskService.readTaskById(id)
+        return taskService.readById(id)
     }
 
     @GetMapping(value = "/subject/{subjectId}/task")
@@ -48,14 +48,9 @@ open class TaskController @Inject constructor(val taskService: TaskService) {
         return taskService.readAllOpenTasksBySemester(semesterId)
     }
 
-    @PostMapping(value = "/task")
-    fun updateTask(@RequestBody taskDto: TaskDto): TaskDto {
-        return taskService.updateTask(taskDto)
-    }
-
     @DeleteMapping(value = "/task/{taskId}")
     fun deleteTask(@PathVariable taskId: Long) {
-        taskService.deleteTask(taskId)
+        taskService.delete(taskId)
     }
 
     @GetMapping(value = "/task/filter")

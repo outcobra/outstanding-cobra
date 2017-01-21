@@ -20,9 +20,9 @@ class SubjectController @Inject constructor(val subjectService: SubjectService) 
      * @param subjectDto the new [SubjectDto] as Json in the [RequestBody]
      * @return the [SubjectDto] that has been saved in the database
      */
-    @PutMapping(value = "/subject")
-    fun createSubject(@RequestBody subjectDto: SubjectDto): SubjectDto {
-        return subjectService.createSubject(subjectDto)
+    @RequestMapping(value = "/subject", method = arrayOf(RequestMethod.POST, RequestMethod.PUT))
+    fun saveSubject(@RequestBody subjectDto: SubjectDto): SubjectDto {
+        return subjectService.save(subjectDto)
     }
 
     @GetMapping(value = "/subject")
@@ -51,17 +51,7 @@ class SubjectController @Inject constructor(val subjectService: SubjectService) 
      */
     @GetMapping(value = "/subject/{subjectId}")
     fun readSubjectById(@PathVariable subjectId: Long): SubjectDto {
-        return subjectService.readSubjectById(subjectId)
-    }
-
-    /**
-     * This method saves the changes on a [SubjectDto] to the database
-     * @param subjectDto the updated [SubjectDto] as Json in the [RequestBody]
-     * @return the [SubjectDto] that has been updated in the database
-     */
-    @PostMapping(value = "/subject")
-    fun updateSubject(@RequestBody subjectDto: SubjectDto): SubjectDto {
-        return subjectService.updateSubject(subjectDto)
+        return subjectService.readById(subjectId)
     }
 
     /**
@@ -70,6 +60,6 @@ class SubjectController @Inject constructor(val subjectService: SubjectService) 
      */
     @DeleteMapping(value = "/subject/{subjectId}")
     fun deleteSubject(@PathVariable subjectId: Long) {
-        subjectService.deleteSubject(subjectId)
+        subjectService.delete(subjectId)
     }
 }

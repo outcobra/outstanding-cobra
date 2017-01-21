@@ -5,26 +5,14 @@ import outcobra.server.model.Subject
 import outcobra.server.model.Task
 import outcobra.server.model.dto.TaskDto
 import outcobra.server.model.dto.TaskFilterDto
+import outcobra.server.service.base.BaseService
 
 /**
  * This service handles the business-logic for the [Task] entity
  * @since <since>
  * @author Vincent Perret
  */
-interface TaskService {
-    /**
-     * This function saves a new [Task]
-     * @param taskDto the [TaskDto] you want to store in the database
-     * @return the stored [TaskDto]
-     */
-    fun createTask(taskDto: TaskDto): TaskDto
-
-    /**
-     * This function reads a [Task] based on its id
-     * @param id The id of the [Task] to read
-     * @return The requested [Task] or null if it does not exist
-     */
-    fun readTaskById(id: Long): TaskDto
+interface TaskService : BaseService<TaskDto> {
 
     /**
      * Reads all [Task]s that are associated with a specific [Subject]
@@ -53,19 +41,6 @@ interface TaskService {
      * @return All [Task]s that are associated with the given [Semester] and have the dueDate after now
      */
     fun readAllOpenTasksBySemester(semesterId: Long): List<TaskDto>
-
-    /**
-     * Updates an existing task
-     * @param taskDto the [TaskDto] to update the existing task with
-     * @return The updated Task from the database
-     */
-    fun updateTask(taskDto: TaskDto): TaskDto
-
-    /**
-     * Deletes a Task specified by its id
-     * @param id The id of the Task to delete
-     */
-    fun deleteTask(id: Long)
 
     /**
      * Reads all [Task]s of the current user

@@ -3,6 +3,7 @@ package outcobra.server.service
 import com.auth0.authentication.result.UserProfile
 import outcobra.server.model.User
 import outcobra.server.model.dto.UserDto
+import outcobra.server.service.base.BaseService
 
 /**
  * This interface defines all functions for a user service.
@@ -12,7 +13,7 @@ import outcobra.server.model.dto.UserDto
  * @author Joel Messerli
  * @since 1.0.0
  */
-interface UserService {
+interface UserService : BaseService<UserDto> {
     /**
      * Returns the currently logged-in user from the database
      */
@@ -37,10 +38,4 @@ interface UserService {
      * Reads the currently logged in user from the database
      */
     fun getCurrentUser(): User?
-
-    /**
-     * This function reads a user based on its identifier
-     */
-    fun readUserById(id: Long): User
-
 }

@@ -3,46 +3,20 @@ package outcobra.server.service
 import outcobra.server.model.Semester
 import outcobra.server.model.Subject
 import outcobra.server.model.dto.SubjectDto
+import outcobra.server.service.base.BaseService
 
 /**
  * This service handles the business-logic for the [Subject] entity
  * @since <since>
  * @author Florian Bürgi
  */
-interface SubjectService {
-    /**
-     * This function saves a new [Subject]
-     * @param subjectDto the [SubjectDto] you want to store in the database
-     * @return the stored [SubjectDto] (with id)
-     */
-    fun createSubject(subjectDto: SubjectDto): SubjectDto
-
+interface SubjectService : BaseService<SubjectDto> {
     /**
      * This function reads all [Subject]s from the given [Semester]
      * @param semesterId the id of the "parent" [Semester] you want to read
      * @return all [SubjectDto]s under the given [Semester]
      */
     fun readAllSubjectsBySemester(semesterId: Long): List<SubjectDto>
-
-    /**
-     * This function reads a [Subject] based on its subjectId
-     * @param subjectId the subjectId of the element you want to get
-     * @return the [Subject] with the given subjectId -> null if the subjectId does not exist
-     */
-    fun readSubjectById(subjectId: Long): SubjectDto
-
-    /**
-     * This function updates an existing [Subject]
-     * @param subjectDto the [SubjectDto] you want to save (with changes)
-     * @return the stored [SubjectDto]
-     */
-    fun updateSubject(subjectDto: SubjectDto): SubjectDto
-
-    /**
-     * This function deletes a [Subject] based on its id
-     * @param subjectId the id of the element you want to delete
-     */
-    fun deleteSubject(subjectId: Long)
 
     /**
      * This function reads all [Subject]s from the current User
