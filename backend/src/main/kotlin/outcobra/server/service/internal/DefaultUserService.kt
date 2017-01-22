@@ -13,7 +13,6 @@ import outcobra.server.model.dto.UserDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.UserRepository
 import outcobra.server.service.UserService
-import outcobra.server.service.base.internal.DefaultBaseService
 import javax.inject.Inject
 
 @Service
@@ -21,8 +20,11 @@ import javax.inject.Inject
 open class DefaultUserService
 @Inject constructor(val userRepository: UserRepository,
                     val userDtoMapper: Mapper<User, UserDto>,
-                    val auth0Client: Auth0Client)
-    : UserService, DefaultBaseService<User, UserDto>(userDtoMapper, userRepository) {
+                    val auth0Client: Auth0Client) : UserService {
+
+    override fun readUserById(id: Long): User {
+        return userRepository.getOne(id)
+    }
 
     override fun getTokenUserId(): String {
         val userDetails = SecurityContextHolder.getContext().authentication.principal as Auth0UserDetails

@@ -57,6 +57,7 @@ open class InstitutionServiceTest {
         val institution = institutionRepository.findOne(QInstitution.institution.name.eq(INSTITUTION_NAME))
         assertThat(institution).isNotNull()
         assertThat(institution.name).isEqualTo(INSTITUTION_NAME)
+        assertThat(institution.user).isEqualTo(userService.getCurrentUser())
     }
 
     @Test
