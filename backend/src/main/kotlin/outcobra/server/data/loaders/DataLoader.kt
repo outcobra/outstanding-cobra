@@ -1,4 +1,4 @@
-package outcobra.server.data
+package outcobra.server.data.loaders
 
 interface DataLoader {
     fun shouldLoad(): Boolean

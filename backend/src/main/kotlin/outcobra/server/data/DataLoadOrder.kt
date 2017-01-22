@@ -1,6 +1,11 @@
 package outcobra.server.data
 
 object DataLoadOrder {
-    const val DEFAULT_DATALOADER = 1
-    const val TASK_DATALOADER = 2
+    const val USER = 1
+    const val INSTITUTION = 4
+    const val SCHOOL_CLASS = 7
+    const val YEAR = 10
+    const val SEMESTER = 13
+    const val SUBJECT = 16
+    const val TASK = 19
 }
