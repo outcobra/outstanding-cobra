@@ -26,6 +26,9 @@ spring:
   h2:
     console:
       enabled: true
+logging:
+  level:
+    outcobra.server.data: debug
 ---
 spring:
   profiles: production
