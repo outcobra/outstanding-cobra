@@ -1,9 +1,9 @@
-§package outcobra.server.data .loaders
+package outcobra.server.data.loaders
 
 import org.slf4j.LoggerFactory
-import org.springframework.core.annotation .Order
+import org.springframework.core.annotation.Order
 import org.springframework.stereotype.Component
-import outcobra.server.data .DataLoadOrder.SUBJECT
+import outcobra.server.data.DataLoadOrder.SUBJECT
 import outcobra.server.model.Color
 import outcobra.server.model.Semester
 import outcobra.server.model.Subject

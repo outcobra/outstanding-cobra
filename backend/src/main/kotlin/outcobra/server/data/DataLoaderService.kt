@@ -7,6 +7,13 @@ import org.springframework.stereotype.Component
 import outcobra.server.data.loaders.DataLoader
 import javax.inject.Inject
 
+/**
+ * Picks up any [DataLoader] beans and invokes them in the specified order
+ *
+ * @see DataLoadOrder
+ * @author Joel Messerli
+ * @since <since>
+ */
 @Component
 open class DataLoaderService
 @Inject constructor(val dataLoaders: List<DataLoader>) : ApplicationRunner {

@@ -14,6 +14,12 @@ import outcobra.server.model.repository.SchoolYearRepository
 import java.time.LocalDate
 import javax.inject.Inject
 
+/**
+ * This [DataLoader] loads our test [SchoolYear]s
+ *
+ * @author Joel Messerli
+ * @since <since>
+ */
 @Component
 @Order(YEAR)
 class YearDataLoader
