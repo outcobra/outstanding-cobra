@@ -53,20 +53,19 @@ open class InstitutionServiceTest {
      */
     @Test
     fun createInstitutionTest() {
-        institutionService.createInstitution(InstitutionDto(name = INSTITUTION_NAME))
+        institutionService.save(InstitutionDto(name = INSTITUTION_NAME))
         val institution = institutionRepository.findOne(QInstitution.institution.name.eq(INSTITUTION_NAME))
         assertThat(institution).isNotNull()
         assertThat(institution.name).isEqualTo(INSTITUTION_NAME)
-        assertThat(institution.user).isEqualTo(userService.getCurrentUser())
     }
 
     @Test
     fun updateInstitutionTest() {
-        val savedDto = institutionService.createInstitution(InstitutionDto(name = INSTITUTION_NAME))
+        val savedDto = institutionService.save(InstitutionDto(name = INSTITUTION_NAME))
         val institutionId = savedDto.id
         val updatedName = "testUpdateInstitution"
         val updateDto = InstitutionDto(institutionId, 0, updatedName)
-        institutionService.updateInstitution(updateDto)
+        institutionService.save(updateDto)
         val institution = institutionRepository.findOne(QInstitution.institution.id.eq(institutionId))
         assertThat(institution).isNotNull()
         assertThat(institution.name).isEqualTo(updatedName)
@@ -79,10 +78,10 @@ open class InstitutionServiceTest {
     @Ignore
     @Test
     fun readAllInstitutionsTest() {
-        val institution1 = institutionService.createInstitution(InstitutionDto(name = INSTITUTION_NAME))
-        val institution2 = institutionService.createInstitution(InstitutionDto(name = "laslsafl"))
+        val institution1 = institutionService.save(InstitutionDto(name = INSTITUTION_NAME))
+        val institution2 = institutionService.save(InstitutionDto(name = "laslsafl"))
         val dto = InstitutionDto(name = "notInList", userId = 2L)
-        institutionService.createInstitution(dto) //creates institution that should no be in the list
+        institutionService.save(dto) //creates institution that should no be in the list
 
         val expected = arrayListOf(institution1, institution2)
         val institutions = institutionService.readAllInstitutions()
@@ -96,9 +95,9 @@ open class InstitutionServiceTest {
      */
     @Test
     fun readInstitutionTest() {
-        val institutionDto = institutionService.createInstitution(InstitutionDto(name = INSTITUTION_NAME))
+        val institutionDto = institutionService.save(InstitutionDto(name = INSTITUTION_NAME))
         val institutionId = institutionDto.id
-        assertThat(institutionDto).isEqualTo(institutionService.readInstitutionById(institutionId))
+        assertThat(institutionDto).isEqualTo(institutionService.readById(institutionId))
     }
 
     /**
@@ -107,9 +106,9 @@ open class InstitutionServiceTest {
      */
     @Test
     fun deleteInstitutionTest() {
-        val institutionDto = institutionService.createInstitution(InstitutionDto(name = INSTITUTION_NAME))
+        val institutionDto = institutionService.save(InstitutionDto(name = INSTITUTION_NAME))
         val institutionId = institutionDto.id
-        institutionService.deleteInstitution(institutionId)
+        institutionService.delete(institutionId)
         assertThat(institutionRepository.findOne(QInstitution.institution.id.eq(institutionId))).isNull()
     }
 

@@ -8,6 +8,9 @@ import org.springframework.context.annotation.Primary
 import org.springframework.context.annotation.Profile
 import outcobra.server.annotation.DefaultImplementation
 import outcobra.server.model.User
+import outcobra.server.model.dto.UserDto
+import outcobra.server.model.interfaces.Mapper
+import outcobra.server.model.mapper.UserDtoMapper
 import outcobra.server.model.repository.UserRepository
 import outcobra.server.service.UserService
 import javax.inject.Inject
@@ -22,6 +25,8 @@ open class Mocker(userRepository: UserRepository) {
     @Inject
     @DefaultImplementation
     lateinit var userService: UserService
+    @Inject
+    lateinit var mapper: UserDtoMapper
 
     init {
         USER = userRepository.save(User(null, USER_AUTH0_ID, USER_NICKNAME, null))
@@ -41,10 +46,14 @@ open class Mocker(userRepository: UserRepository) {
     open fun mockUserService(): UserService {
         val mockService = Mockito.mock(UserService::class.java)
 
-        Mockito.`when`(mockService.getCurrentUser()).then { userService.readUserById(USER.id) }
+
+        Mockito.`when`(mockService.getCurrentUser()).then { USER }
         Mockito.`when`(mockService.getTokenUserId()).then { USER_AUTH0_ID }
-        Mockito.`when`(mockService.readUserById(Matchers.anyLong())).then {userService.readUserById(it.arguments[0] as Long) }
-        return mockService
-    }
+        Mockito.`when`(mockService.readById(Matchers.anyLong())).then {
+            var id = it.arguments[0] as Long
+            userService.readById(id)
+        }
+    return mockService
+}
 
 }
