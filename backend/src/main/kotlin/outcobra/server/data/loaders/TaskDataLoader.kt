@@ -1,15 +1,15 @@
 package outcobra.server.data.loaders
 
-import SubjectDataLoader.Companion.SUBJECT1
-import SubjectDataLoader.Companion.SUBJECT2
-import SubjectDataLoader.Companion.SUBJECT3
-import SubjectDataLoader.Companion.SUBJECT4
-import SubjectDataLoader.Companion.SUBJECT9
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.core.annotation.Order
 import org.springframework.stereotype.Component
 import outcobra.server.data.DataLoadOrder.TASK
+import outcobra.server.data.loaders.SubjectDataLoader.Companion.SUBJECT1
+import outcobra.server.data.loaders.SubjectDataLoader.Companion.SUBJECT2
+import outcobra.server.data.loaders.SubjectDataLoader.Companion.SUBJECT3
+import outcobra.server.data.loaders.SubjectDataLoader.Companion.SUBJECT4
+import outcobra.server.data.loaders.SubjectDataLoader.Companion.SUBJECT9
 import outcobra.server.model.Task
 import outcobra.server.model.repository.TaskRepository
 import java.time.LocalDate
