@@ -7,6 +7,9 @@ import javax.transaction.Transactional
 
 /**
  * Default implementation of a basic service to save, read and delete an entity
+ * @see BaseService
+ * @author Florian Bürgi
+ * @since <since>
  */
 @Transactional
 open class DefaultBaseService<Entity, Dto>
