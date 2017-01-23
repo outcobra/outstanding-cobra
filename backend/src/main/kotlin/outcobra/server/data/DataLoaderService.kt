@@ -36,7 +36,7 @@ open class DataLoaderService
                     LOGGER.info("Not loading $loaderName because shouldLoad() returned false")
                 }
             } catch (e: Exception) {
-                LOGGER.error("Could not load ${loader.javaClass.simpleName}")
+                LOGGER.error("Could not load $loaderName")
             }
         }
 
