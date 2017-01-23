@@ -19,37 +19,37 @@ import javax.inject.Inject
 @Component
 @Transactional
 open class DefaultTaskService
-@Inject constructor(val mapper: Mapper<Task, TaskDto>,
-                    val repository: TaskRepository,
+@Inject constructor(mapper: Mapper<Task, TaskDto>,
+                    repository: TaskRepository,
                     val schoolClassService: SchoolClassService,
                     val subjectService: SubjectService,
                     val userService: UserService)
-    : TaskService, DefaultBaseService<Task, TaskDto>(mapper, repository) {
+    : TaskService, DefaultBaseService<Task, TaskDto, TaskRepository>(mapper, repository) {
 
     override fun readAllTasks(): List<TaskDto> {
         val userId = userService.getCurrentUser()?.id
         val filter = QTask.task.subject.semester.schoolYear.schoolClass.institution.user.id.eq(userId)
-        return repository.findAll(filter).map { dtoMapper.toDto(it) }
+        return jpaRepository.findAll(filter).map { dtoMapper.toDto(it) }
     }
 
-    override fun readAllTasksOfSubject(subjectId: Long): List<TaskDto> {
+    override fun readAllBySubject(subjectId: Long): List<TaskDto> {
         val filter = QTask.task.subject.id.eq(subjectId)
-        return repository.findAll(filter).map { dtoMapper.toDto(it) }
+        return jpaRepository.findAll(filter).map { dtoMapper.toDto(it) }
     }
 
-    override fun readAllTasksOfSemester(semesterId: Long): List<TaskDto> {
+    override fun readAllSemester(semesterId: Long): List<TaskDto> {
         val filter = QTask.task.subject.semester.id.eq(semesterId)
-        return repository.findAll(filter).map { dtoMapper.toDto(it) }
+        return jpaRepository.findAll(filter).map { dtoMapper.toDto(it) }
     }
 
-    override fun readAllOpenTasksBySubject(subjectId: Long): List<TaskDto> {
+    override fun readAllOpenBySubject(subjectId: Long): List<TaskDto> {
         val filter = QTask.task.progress.ne(100).and(QTask.task.subject.id.eq(subjectId))
-        return repository.findAll(filter).map { dtoMapper.toDto(it) }
+        return jpaRepository.findAll(filter).map { dtoMapper.toDto(it) }
     }
 
-    override fun readAllOpenTasksBySemester(semesterId: Long): List<TaskDto> {
+    override fun readAllOpenBySemester(semesterId: Long): List<TaskDto> {
         val filter = QTask.task.progress.ne(100).and(QTask.task.subject.semester.id.eq(semesterId))
-        return repository.findAll(filter).map { dtoMapper.toDto(it) }
+        return jpaRepository.findAll(filter).map { dtoMapper.toDto(it) }
     }
 
     override fun getTaskFilter(): TaskFilterDto {

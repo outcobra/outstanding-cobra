@@ -15,15 +15,15 @@ import javax.inject.Inject
 @Service
 @Transactional
 open class DefaultInstitutionService
-@Inject constructor(val mapper: Mapper<Institution, InstitutionDto>,
-                    val repository: InstitutionRepository,
+@Inject constructor(mapper: Mapper<Institution, InstitutionDto>,
+                    repository: InstitutionRepository,
                     val userService: UserService)
-    : InstitutionService, DefaultBaseService<Institution, InstitutionDto>(mapper, repository) {
+    : InstitutionService, DefaultBaseService<Institution, InstitutionDto, InstitutionRepository>(mapper, repository) {
 
 
     override fun readAllInstitutions(): List<InstitutionDto> {
         val whereOwnerMatch = QInstitution.institution.user.auth0Id.eq(userService.getTokenUserId())
-        return repository.findAll(whereOwnerMatch).map { dtoMapper.toDto(it) }
+        return jpaRepository.findAll(whereOwnerMatch).map { dtoMapper.toDto(it) }
     }
 
 }

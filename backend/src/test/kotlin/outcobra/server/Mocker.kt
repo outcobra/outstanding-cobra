@@ -8,9 +8,6 @@ import org.springframework.context.annotation.Primary
 import org.springframework.context.annotation.Profile
 import outcobra.server.annotation.DefaultImplementation
 import outcobra.server.model.User
-import outcobra.server.model.dto.UserDto
-import outcobra.server.model.interfaces.Mapper
-import outcobra.server.model.mapper.UserDtoMapper
 import outcobra.server.model.repository.UserRepository
 import outcobra.server.service.UserService
 import javax.inject.Inject
@@ -25,8 +22,6 @@ open class Mocker(userRepository: UserRepository) {
     @Inject
     @DefaultImplementation
     lateinit var userService: UserService
-    @Inject
-    lateinit var mapper: UserDtoMapper
 
     init {
         USER = userRepository.save(User(null, USER_AUTH0_ID, USER_NICKNAME, null))

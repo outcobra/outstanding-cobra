@@ -30,22 +30,22 @@ open class TaskController @Inject constructor(val taskService: TaskService) {
 
     @GetMapping(value = "/subject/{subjectId}/task")
     fun readAllTasksOfSubject(@PathVariable subjectId: Long): List<TaskDto> {
-        return taskService.readAllTasksOfSubject(subjectId)
+        return taskService.readAllBySubject(subjectId)
     }
 
     @GetMapping(value = "/semester/{semesterId}/task")
     fun readAllTasksOfSemester(@PathVariable semesterId: Long): List<TaskDto> {
-        return taskService.readAllTasksOfSemester(semesterId)
+        return taskService.readAllSemester(semesterId)
     }
 
     @GetMapping(value = "/subject/{subjectId}/task/open")
     fun readAllOpenTasksBySubject(@PathVariable subjectId: Long): List<TaskDto> {
-        return taskService.readAllOpenTasksBySubject(subjectId)
+        return taskService.readAllOpenBySubject(subjectId)
     }
 
     @GetMapping(value = "/semester/{semesterId}/task/open")
     fun readAllOpenTasksBySemester(@PathVariable semesterId: Long): List<TaskDto> {
-        return taskService.readAllOpenTasksBySemester(semesterId)
+        return taskService.readAllOpenBySemester(semesterId)
     }
 
     @DeleteMapping(value = "/task/{taskId}")

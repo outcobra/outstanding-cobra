@@ -18,14 +18,14 @@ import javax.inject.Inject
 @Component
 @Transactional
 open class DefaultSemesterService
-@Inject constructor(val mapper: Mapper<Semester, SemesterDto>,
-                    val repository: SemesterRepository,
+@Inject constructor(mapper: Mapper<Semester, SemesterDto>,
+                    repository: SemesterRepository,
                     val userService: UserService,
                     val validator: SemesterValidator)
-    : SemesterService, DefaultBaseService<Semester, SemesterDto>(mapper, repository) {
+    : SemesterService, DefaultBaseService<Semester, SemesterDto, SemesterRepository>(mapper, repository) {
 
     override fun save(dto: SemesterDto): SemesterDto {
-        var semester = dtoMapper.fromDto(dto)
+        val semester = dtoMapper.fromDto(dto)
         if (!validator.validateSemesterCreation(semester)) {
             throw DateOutsideExpectedRangeException("The new semester overlaps with an existing one")
         }
@@ -34,7 +34,7 @@ open class DefaultSemesterService
 
     override fun readAllSemestersBySchoolYear(schoolYearId: Long): List<SemesterDto> {
         val filter = QSemester.semester.schoolYear.id.eq(schoolYearId)
-        return repository.findAll(filter).map { dtoMapper.toDto(it) }
+        return jpaRepository.findAll(filter).map { dtoMapper.toDto(it) }
     }
 
     override fun getCurrentSemester(): List<SemesterDto> {
@@ -42,6 +42,6 @@ open class DefaultSemesterService
         val today = LocalDate.now()
         val withCurrentUser = QSemester.semester.schoolYear.schoolClass.institution.user.id.eq(currentUserId)
         val todayBetweenValidFromAndTo = withCurrentUser.and(QSemester.semester.validFrom.loe(today).and(QSemester.semester.validTo.goe(today)))
-        return repository.findAll(todayBetweenValidFromAndTo).map { dtoMapper.toDto(it) }
+        return jpaRepository.findAll(todayBetweenValidFromAndTo).map { dtoMapper.toDto(it) }
     }
 }
