@@ -14,12 +14,12 @@ import javax.inject.Inject
 @Component
 @Transactional
 open class DefaultTeacherService
-@Inject constructor(val repository: TeacherRepository,
-                    val mapper: Mapper<Teacher, TeacherDto>)
-    : TeacherService, DefaultBaseService<Teacher, TeacherDto>(mapper, repository) {
+@Inject constructor(repository: TeacherRepository,
+                    mapper: Mapper<Teacher, TeacherDto>)
+    : TeacherService, DefaultBaseService<Teacher, TeacherDto, TeacherRepository>(mapper, repository) {
 
-    override fun readAllYearsByInstitution(institutionId: Long): List<TeacherDto> {
+    override fun readAllByInstitution(institutionId: Long): List<TeacherDto> {
         val withSameId = QTeacher.teacher.institution.id.eq(institutionId)
-        return repository.findAll(withSameId).map { mapper.toDto(it) }
+        return jpaRepository.findAll(withSameId).map { dtoMapper.toDto(it) }
     }
 }

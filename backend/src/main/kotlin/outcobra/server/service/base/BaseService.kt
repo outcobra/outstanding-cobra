@@ -2,8 +2,8 @@ package outcobra.server.service.base
 
 /**
  * This service defines a basic crud functionality.
- * C and U are covered over the save method
- * Every service will extend an implementation of this interface
+ * create and update are covered by the save method
+ * Every service should extend this interface
  * @author Florian Bürgi
  * @since <version>
  */

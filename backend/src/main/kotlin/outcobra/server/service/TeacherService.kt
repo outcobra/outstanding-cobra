@@ -15,5 +15,5 @@ interface TeacherService : BaseService<TeacherDto> {
      * @param institutionId The id of the Institution of which the Teachers should be retrieved
      * @return A list of Teachers that are associated with the given Institution
      */
-    fun readAllYearsByInstitution(institutionId: Long): List<TeacherDto>
+    fun readAllByInstitution(institutionId: Long): List<TeacherDto>
 }

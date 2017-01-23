@@ -16,13 +16,13 @@ import javax.inject.Inject
 @Component
 @Transactional
 open class DefaultSchoolYearService
-@Inject constructor(val mapper: Mapper<SchoolYear, SchoolYearDto>,
-                    val repository: SchoolYearRepository,
+@Inject constructor(mapper: Mapper<SchoolYear, SchoolYearDto>,
+                    repository: SchoolYearRepository,
                     val schoolYearValidator: SchoolYearValidator)
-    : SchoolYearService, DefaultBaseService<SchoolYear, SchoolYearDto>(mapper, repository) {
+    : SchoolYearService, DefaultBaseService<SchoolYear, SchoolYearDto, SchoolYearRepository>(mapper, repository) {
 
     override fun save(dto: SchoolYearDto): SchoolYearDto {
-        var schoolYear = dtoMapper.fromDto(dto)
+        val schoolYear = dtoMapper.fromDto(dto)
         if (!schoolYearValidator.validateSchoolYearCreation(schoolYear)) {
             throw DateOutsideExpectedRangeException("The new school-year overlaps with an existing one")
         }
@@ -31,7 +31,7 @@ open class DefaultSchoolYearService
 
     override fun readAllYearsByClass(schoolClassId: Long): List<SchoolYearDto> {
         val filter = QSchoolYear.schoolYear.schoolClass.id.eq(schoolClassId)
-        return repository.findAll(filter).map { dtoMapper.toDto(it) }
+        return jpaRepository.findAll(filter).map { dtoMapper.toDto(it) }
     }
 
 }
