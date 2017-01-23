@@ -45,7 +45,7 @@ interface TaskService : BaseService<TaskDto> {
     /**
      * Reads all [Task]s of the current user
      */
-    fun readAllTasks(): List<TaskDto>
+    fun readAll(): List<TaskDto>
 
     /**
      * @return a [TaskFilterDto] for the current user

@@ -20,6 +20,6 @@ open class DefaultTeacherService
 
     override fun readAllByInstitution(institutionId: Long): List<TeacherDto> {
         val withSameId = QTeacher.teacher.institution.id.eq(institutionId)
-        return jpaRepository.findAll(withSameId).map { dtoMapper.toDto(it) }
+        return repository.findAll(withSameId).map { mapper.toDto(it) }
     }
 }

@@ -22,7 +22,7 @@ class InstitutionController @Inject constructor(val institutionService: Institut
 
     @GetMapping(value = "")
     fun readAllInstitutions(): List<InstitutionDto> {
-        return institutionService.readAllInstitutions()
+        return institutionService.readAll()
     }
 
     @DeleteMapping(value = "/{id}")

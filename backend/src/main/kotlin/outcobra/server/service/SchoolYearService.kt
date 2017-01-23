@@ -16,6 +16,6 @@ interface SchoolYearService : BaseService<SchoolYearDto> {
      * @param schoolClassId The id of the SchoolClass of which to read all SchoolYears
      * @return All SchoolYears that are associated with the given SchoolClass
      */
-    fun readAllYearsByClass(schoolClassId: Long): List<SchoolYearDto>
+    fun readAllByClass(schoolClassId: Long): List<SchoolYearDto>
 
 }

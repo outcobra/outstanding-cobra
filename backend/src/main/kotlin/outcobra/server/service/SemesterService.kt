@@ -17,12 +17,11 @@ interface SemesterService : BaseService<SemesterDto> {
      * @param schoolYearId The id of the SchoolYear of which to retrieve all semesters
      * @return All semesters that are associated with the given SchoolYear
      */
-    fun readAllSemestersBySchoolYear(schoolYearId: Long): List<SemesterDto>
+    fun readAllBySchoolYear(schoolYearId: Long): List<SemesterDto>
 
     /**
-     * Updates an existing semester
-     * @param semesterDto The SemesterDto to update the existing semester with
-     * @return The updated Semester from the database
+     * This function returns all current semesters
+     * @return a list of [SemesterDto]
      */
 
     fun getCurrentSemester(): List<SemesterDto>

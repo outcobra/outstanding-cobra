@@ -14,20 +14,20 @@ import javax.transaction.Transactional
  */
 @Transactional
 open class DefaultBaseService<Entity, Dto, out Repo>
-constructor(val dtoMapper: Mapper<Entity, Dto>,
-            val jpaRepository: Repo) : BaseService<Dto>
+constructor(val mapper: Mapper<Entity, Dto>,
+            val repository: Repo) : BaseService<Dto>
 where Repo : JpaRepository<Entity, Long>, Repo : QueryDslPredicateExecutor<Entity> {
 
     override fun save(dto: Dto): Dto {
-        val entity = jpaRepository.save(dtoMapper.fromDto(dto))
-        return dtoMapper.toDto(entity)
+        val entity = repository.save(mapper.fromDto(dto))
+        return mapper.toDto(entity)
     }
 
     override fun readById(id: Long): Dto {
-        return dtoMapper.toDto(jpaRepository.findOne(id))
+        return mapper.toDto(repository.findOne(id))
     }
 
     override fun delete(id: Long) {
-        jpaRepository.delete(id)
+        repository.delete(id)
     }
 }

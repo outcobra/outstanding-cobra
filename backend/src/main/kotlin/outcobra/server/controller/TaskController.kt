@@ -15,7 +15,7 @@ open class TaskController @Inject constructor(val taskService: TaskService) {
 
     @GetMapping(value = "/task")
     fun getAllTasks(): List<TaskDto> {
-        return taskService.readAllTasks()
+        return taskService.readAll()
     }
 
     @RequestMapping(value = "/task", method = arrayOf(RequestMethod.POST, RequestMethod.PUT))

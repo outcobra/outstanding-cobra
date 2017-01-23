@@ -16,5 +16,5 @@ interface InstitutionService : BaseService<InstitutionDto> {
      * Reads all [Institution]s that are associated with the current user
      * @return A list with this users [Institution]s
      */
-    fun readAllInstitutions(): List<InstitutionDto>
+    fun readAll(): List<InstitutionDto>
 }

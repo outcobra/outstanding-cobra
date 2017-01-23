@@ -21,9 +21,9 @@ open class DefaultInstitutionService
     : InstitutionService, DefaultBaseService<Institution, InstitutionDto, InstitutionRepository>(mapper, repository) {
 
 
-    override fun readAllInstitutions(): List<InstitutionDto> {
+    override fun readAll(): List<InstitutionDto> {
         val whereOwnerMatch = QInstitution.institution.user.auth0Id.eq(userService.getTokenUserId())
-        return jpaRepository.findAll(whereOwnerMatch).map { dtoMapper.toDto(it) }
+        return repository.findAll(whereOwnerMatch).map { mapper.toDto(it) }
     }
 
 }

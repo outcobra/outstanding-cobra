@@ -85,7 +85,7 @@ open class InstitutionServiceTest {
         institutionService.save(dto) //creates institution that should no be in the list
 
         val expected = arrayListOf(institution1, institution2)
-        val institutions = institutionService.readAllInstitutions()
+        val institutions = institutionService.readAll()
 
         assertThat(expected).isEqualTo(institutions)
     }

@@ -25,23 +25,24 @@ open class DefaultSemesterService
     : SemesterService, DefaultBaseService<Semester, SemesterDto, SemesterRepository>(mapper, repository) {
 
     override fun save(dto: SemesterDto): SemesterDto {
-        val semester = dtoMapper.fromDto(dto)
+        val semester = mapper.fromDto(dto)
         if (!validator.validateSemesterCreation(semester)) {
             throw DateOutsideExpectedRangeException("The new semester overlaps with an existing one")
         }
         return super.save(dto)
     }
 
-    override fun readAllSemestersBySchoolYear(schoolYearId: Long): List<SemesterDto> {
+    override fun readAllBySchoolYear(schoolYearId: Long): List<SemesterDto> {
         val filter = QSemester.semester.schoolYear.id.eq(schoolYearId)
-        return jpaRepository.findAll(filter).map { dtoMapper.toDto(it) }
+        return repository.findAll(filter).map { mapper.toDto(it) }
     }
 
     override fun getCurrentSemester(): List<SemesterDto> {
         val currentUserId = userService.getCurrentUser()?.id
         val today = LocalDate.now()
         val withCurrentUser = QSemester.semester.schoolYear.schoolClass.institution.user.id.eq(currentUserId)
-        val todayBetweenValidFromAndTo = withCurrentUser.and(QSemester.semester.validFrom.loe(today).and(QSemester.semester.validTo.goe(today)))
-        return jpaRepository.findAll(todayBetweenValidFromAndTo).map { dtoMapper.toDto(it) }
+        val todayBetweenValidFromAndTo = withCurrentUser.and(QSemester.semester.validFrom.loe(today)
+                .and(QSemester.semester.validTo.goe(today)))
+        return repository.findAll(todayBetweenValidFromAndTo).map { mapper.toDto(it) }
     }
 }

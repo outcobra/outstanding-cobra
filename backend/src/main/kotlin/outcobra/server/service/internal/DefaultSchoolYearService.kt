@@ -22,16 +22,16 @@ open class DefaultSchoolYearService
     : SchoolYearService, DefaultBaseService<SchoolYear, SchoolYearDto, SchoolYearRepository>(mapper, repository) {
 
     override fun save(dto: SchoolYearDto): SchoolYearDto {
-        val schoolYear = dtoMapper.fromDto(dto)
+        val schoolYear = mapper.fromDto(dto)
         if (!schoolYearValidator.validateSchoolYearCreation(schoolYear)) {
             throw DateOutsideExpectedRangeException("The new school-year overlaps with an existing one")
         }
         return super.save(dto)
     }
 
-    override fun readAllYearsByClass(schoolClassId: Long): List<SchoolYearDto> {
+    override fun readAllByClass(schoolClassId: Long): List<SchoolYearDto> {
         val filter = QSchoolYear.schoolYear.schoolClass.id.eq(schoolClassId)
-        return jpaRepository.findAll(filter).map { dtoMapper.toDto(it) }
+        return repository.findAll(filter).map { mapper.toDto(it) }
     }
 
 }

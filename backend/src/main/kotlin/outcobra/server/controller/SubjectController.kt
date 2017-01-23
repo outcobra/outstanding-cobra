@@ -27,12 +27,12 @@ class SubjectController @Inject constructor(val subjectService: SubjectService) 
 
     @GetMapping(value = "/subject")
     fun readAllSubjectsByUser(): List<SubjectDto> {
-        return subjectService.readAllSubjectsByUser()
+        return subjectService.readAllByUser()
     }
 
     @GetMapping(value = "/semester/current/subject")
     fun readSubjectsByCurrentSemester(): List<SubjectDto> {
-        return subjectService.readSubjectsByCurrentSemester()
+        return subjectService.readAllByCurrentSemester()
     }
 
     /**
@@ -41,7 +41,7 @@ class SubjectController @Inject constructor(val subjectService: SubjectService) 
      */
     @GetMapping(value = "/semester/{semesterId}/subject")
     fun readAllSubjectsBySemester(@PathVariable semesterId: Long): List<SubjectDto> {
-        return subjectService.readAllSubjectsBySemester(semesterId)
+        return subjectService.readAllBySemester(semesterId)
     }
 
     /**

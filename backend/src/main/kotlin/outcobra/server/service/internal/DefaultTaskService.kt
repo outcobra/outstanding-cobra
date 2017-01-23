@@ -26,35 +26,35 @@ open class DefaultTaskService
                     val userService: UserService)
     : TaskService, DefaultBaseService<Task, TaskDto, TaskRepository>(mapper, repository) {
 
-    override fun readAllTasks(): List<TaskDto> {
+    override fun readAll(): List<TaskDto> {
         val userId = userService.getCurrentUser()?.id
         val filter = QTask.task.subject.semester.schoolYear.schoolClass.institution.user.id.eq(userId)
-        return jpaRepository.findAll(filter).map { dtoMapper.toDto(it) }
+        return repository.findAll(filter).map { mapper.toDto(it) }
     }
 
     override fun readAllBySubject(subjectId: Long): List<TaskDto> {
         val filter = QTask.task.subject.id.eq(subjectId)
-        return jpaRepository.findAll(filter).map { dtoMapper.toDto(it) }
+        return repository.findAll(filter).map { mapper.toDto(it) }
     }
 
     override fun readAllBySemester(semesterId: Long): List<TaskDto> {
         val filter = QTask.task.subject.semester.id.eq(semesterId)
-        return jpaRepository.findAll(filter).map { dtoMapper.toDto(it) }
+        return repository.findAll(filter).map { mapper.toDto(it) }
     }
 
     override fun readAllOpenBySubject(subjectId: Long): List<TaskDto> {
         val filter = QTask.task.progress.ne(100).and(QTask.task.subject.id.eq(subjectId))
-        return jpaRepository.findAll(filter).map { dtoMapper.toDto(it) }
+        return repository.findAll(filter).map { mapper.toDto(it) }
     }
 
     override fun readAllOpenBySemester(semesterId: Long): List<TaskDto> {
         val filter = QTask.task.progress.ne(100).and(QTask.task.subject.semester.id.eq(semesterId))
-        return jpaRepository.findAll(filter).map { dtoMapper.toDto(it) }
+        return repository.findAll(filter).map { mapper.toDto(it) }
     }
 
     override fun getTaskFilter(): TaskFilterDto {
-        return TaskFilterDto(schoolClassService.readAllSchoolClassesByUser().map {
-            SchoolClassSubjects(it, subjectService.readSubjectsBySchoolClassId(it.id))
+        return TaskFilterDto(schoolClassService.readAllByUser().map {
+            SchoolClassSubjects(it, subjectService.readAllBySchoolClass(it.id))
         })
     }
 }

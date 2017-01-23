@@ -17,12 +17,11 @@ interface SchoolClassService : BaseService<SchoolClassDto> {
      * @param institutionId The id of the [Institution] of which the [SchoolClass]es should be read
      * @return a list of [SchoolClassDto]s
      */
-    fun readAllSchoolClassesByInstitution(institutionId: Long): List<SchoolClassDto>
+    fun readAllByInstitution(institutionId: Long): List<SchoolClassDto>
 
     /**
-     * This function deletes a [SchoolClass]
-     * @param id the id of the SchoolClass you want to delete
+     *This function returns all SchoolClasses owned by the current user
+     * @return the current users [SchoolClassDto]s
      */
-
-    fun readAllSchoolClassesByUser(): List<SchoolClassDto>
+    fun readAllByUser(): List<SchoolClassDto>
 }

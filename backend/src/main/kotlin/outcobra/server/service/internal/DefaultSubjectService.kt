@@ -23,24 +23,24 @@ open class DefaultSubjectService
                     val semesterService: SemesterService)
     : SubjectService, DefaultBaseService<Subject, SubjectDto, SubjectRepository>(mapper, repository) {
 
-    override fun readSubjectsByCurrentSemester(): List<SubjectDto> {
+    override fun readAllByCurrentSemester(): List<SubjectDto> {
         val currentSemesters = semesterService.getCurrentSemester()
-        return currentSemesters.flatMap { readAllSubjectsBySemester(it.id) }
+        return currentSemesters.flatMap { readAllBySemester(it.id) }
     }
 
-    override fun readAllSubjectsByUser(): List<SubjectDto> {
+    override fun readAllByUser(): List<SubjectDto> {
         val userId = userService.getCurrentUser()?.id
         val filter = QSubject.subject.semester.schoolYear.schoolClass.institution.user.id.eq(userId)
-        return jpaRepository.findAll(filter).map { dtoMapper.toDto(it) }
+        return repository.findAll(filter).map { mapper.toDto(it) }
     }
 
-    override fun readAllSubjectsBySemester(semesterId: Long): List<SubjectDto> {
+    override fun readAllBySemester(semesterId: Long): List<SubjectDto> {
         val filter = QSubject.subject.semester.id.eq(semesterId)
-        return jpaRepository.findAll(filter).map { dtoMapper.toDto(it) }
+        return repository.findAll(filter).map { mapper.toDto(it) }
     }
 
-    override fun readSubjectsBySchoolClassId(schoolClassId: Long): List<SubjectDto> {
+    override fun readAllBySchoolClass(schoolClassId: Long): List<SubjectDto> {
         val filter = QSubject.subject.semester.schoolYear.schoolClass.id.eq(schoolClassId)
-        return jpaRepository.findAll(filter).map { dtoMapper.toDto(it) }
+        return repository.findAll(filter).map { mapper.toDto(it) }
     }
 }

@@ -9,7 +9,6 @@ import outcobra.server.model.*
  * contains every JpaRepository for our Entities
  */
 @Repository interface UserRepository : JpaRepository<User, Long>, QueryDslPredicateExecutor<User>
-
 @Repository interface InstitutionRepository : JpaRepository<Institution, Long>, QueryDslPredicateExecutor<Institution>
 @Repository interface SchoolYearRepository : JpaRepository<SchoolYear, Long>, QueryDslPredicateExecutor<SchoolYear>
 @Repository interface HolidayRepository : JpaRepository<Holiday, Long>, QueryDslPredicateExecutor<Holiday>

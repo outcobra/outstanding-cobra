@@ -24,14 +24,14 @@ open class DefaultSchoolClassService
                     val userService: UserService)
     : SchoolClassService, DefaultBaseService<SchoolClass, SchoolClassDto, SchoolClassRepository>(mapper, repository) {
 
-    override fun readAllSchoolClassesByUser(): List<SchoolClassDto> {
+    override fun readAllByUser(): List<SchoolClassDto> {
         val userId = userService.getCurrentUser()!!.id
         val filter = QSchoolClass.schoolClass.institution.user.id.eq(userId)
-        return jpaRepository.findAll(filter).map { dtoMapper.toDto(it) }
+        return repository.findAll(filter).map { mapper.toDto(it) }
     }
 
-    override fun readAllSchoolClassesByInstitution(institutionId: Long): List<SchoolClassDto> {
+    override fun readAllByInstitution(institutionId: Long): List<SchoolClassDto> {
         val filter = QSchoolClass.schoolClass.institution.id.eq(institutionId)
-        return jpaRepository.findAll(filter).map { dtoMapper.toDto(it) }
+        return repository.findAll(filter).map { mapper.toDto(it) }
     }
 }

@@ -21,7 +21,7 @@ open class SemesterController @Inject constructor(val semesterService: SemesterS
 
     @GetMapping(value = "/schoolYear/{schoolYearId}/semester")
     fun readAllSemestersBySchoolYear(@PathVariable schoolYearId: Long): List<SemesterDto> {
-        return semesterService.readAllSemestersBySchoolYear(schoolYearId)
+        return semesterService.readAllBySchoolYear(schoolYearId)
     }
 
     @DeleteMapping(value = "/semester/{id}")
