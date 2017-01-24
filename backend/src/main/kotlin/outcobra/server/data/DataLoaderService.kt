@@ -18,7 +18,6 @@ import javax.inject.Inject
 open class DataLoaderService
 @Inject constructor(val dataLoaders: List<DataLoader>) : ApplicationRunner {
     companion object {
-
         private val LOGGER = LoggerFactory.getLogger(DataLoaderService::class.java)
     }
 
