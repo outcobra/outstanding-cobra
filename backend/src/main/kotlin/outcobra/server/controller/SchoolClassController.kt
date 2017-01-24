@@ -48,7 +48,7 @@ class SchoolClassController
      */
 
     @GetMapping(value = "/institution/{institutionId}/schoolClass")
-    fun readAllByInstitution(@PathVariable institutionId: Long): List<SchoolClassDto> {
+    fun readAllSchoolClassesByInstitution(@PathVariable institutionId: Long): List<SchoolClassDto> {
         return schoolClassService.readAllByInstitution(institutionId)
     }
 

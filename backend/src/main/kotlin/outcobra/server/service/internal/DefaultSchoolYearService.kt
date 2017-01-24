@@ -29,7 +29,7 @@ open class DefaultSchoolYearService
         return super.save(dto)
     }
 
-    override fun readAllByClass(schoolClassId: Long): List<SchoolYearDto> {
+    override fun readAllBySchoolClass(schoolClassId: Long): List<SchoolYearDto> {
         val filter = QSchoolYear.schoolYear.schoolClass.id.eq(schoolClassId)
         return repository.findAll(filter).map { mapper.toDto(it) }
     }

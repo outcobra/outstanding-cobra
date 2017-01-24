@@ -20,7 +20,7 @@ class SchoolYearController @Inject constructor(val schoolYearService: SchoolYear
 
     @GetMapping(value = "/schoolClass/{schoolClassId}/schoolYear")
     fun readAllYearsByClass(@PathVariable schoolClassId: Long): List<SchoolYearDto> {
-        return schoolYearService.readAllByClass(schoolClassId)
+        return schoolYearService.readAllBySchoolClass(schoolClassId)
     }
 
     @DeleteMapping(value = "/schoolYear/{id}")
