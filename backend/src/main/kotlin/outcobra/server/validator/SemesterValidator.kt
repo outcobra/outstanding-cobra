@@ -42,5 +42,4 @@ open class SemesterValidator @Inject constructor(val schoolYearRepository: Schoo
     }
 
 
-
 }
