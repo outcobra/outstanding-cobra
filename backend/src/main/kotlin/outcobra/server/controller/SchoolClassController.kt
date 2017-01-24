@@ -14,16 +14,17 @@ import javax.websocket.server.PathParam
  */
 @RestController
 @RequestMapping("/api")
-class SchoolClassController @Inject constructor(val schoolClassService: SchoolClassService) {
+class SchoolClassController
+@Inject constructor(val schoolClassService: SchoolClassService) {
 
     /**
      * This method saves the given SchoolClassDto into the database
      * @param schoolClassDto the new [SchoolClassDto] you want to save, as Json in the [RequestBody]
      * @return the [schoolClassDto] that has been saved in the database
      */
-    @PutMapping(value = "/schoolClass")
-    fun createSchoolClass(@RequestBody schoolClassDto: SchoolClassDto): SchoolClassDto {
-        return schoolClassService.createSchoolClass(schoolClassDto)
+    @RequestMapping(value = "/schoolClass", method = arrayOf(RequestMethod.POST, RequestMethod.PUT))
+    fun saveSchoolClass(@RequestBody schoolClassDto: SchoolClassDto): SchoolClassDto {
+        return schoolClassService.save(schoolClassDto)
     }
 
     /**
@@ -32,12 +33,12 @@ class SchoolClassController @Inject constructor(val schoolClassService: SchoolCl
      */
     @GetMapping(value = "/schoolClass/{id}")
     fun readSchoolClassById(@PathVariable id: Long): SchoolClassDto {
-        return schoolClassService.readSchoolClassById(id)
+        return schoolClassService.readById(id)
     }
 
     @GetMapping(value = "/schoolClass")
     fun readSchoolClassesByUser(): List<SchoolClassDto> {
-        return schoolClassService.readAllSchoolClassesByUser()
+        return schoolClassService.readAllByUser()
     }
 
     /**
@@ -47,8 +48,8 @@ class SchoolClassController @Inject constructor(val schoolClassService: SchoolCl
      */
 
     @GetMapping(value = "/institution/{institutionId}/schoolClass")
-    fun readAllSchoolClasses(@PathVariable institutionId: Long): List<SchoolClassDto> {
-        return schoolClassService.readAllSchoolClasses(institutionId)
+    fun readAllSchoolClassesByInstitution(@PathVariable institutionId: Long): List<SchoolClassDto> {
+        return schoolClassService.readAllByInstitution(institutionId)
     }
 
     /**
@@ -58,7 +59,7 @@ class SchoolClassController @Inject constructor(val schoolClassService: SchoolCl
      */
     @PostMapping(value = "/schoolClass")
     fun updateSchoolClass(@RequestBody schoolClassDto: SchoolClassDto): SchoolClassDto {
-        return schoolClassService.updateSchoolClass(schoolClassDto)
+        return schoolClassService.save(schoolClassDto)
     }
 
     /**
@@ -67,6 +68,6 @@ class SchoolClassController @Inject constructor(val schoolClassService: SchoolCl
      */
     @DeleteMapping(value = "/schoolClass/{id}")
     fun deleteSchoolClass(@PathVariable id: Long) {
-        schoolClassService.deleteSchoolClass(id)
+        schoolClassService.delete(id)
     }
 }

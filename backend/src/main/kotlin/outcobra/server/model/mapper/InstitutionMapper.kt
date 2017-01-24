@@ -9,8 +9,7 @@ import javax.inject.Inject
 
 @Component
 open class InstitutionMapper
-@Inject
-constructor(val userService: UserService) : Mapper<Institution, InstitutionDto> {
+@Inject constructor(val userService: UserService) : Mapper<Institution, InstitutionDto> {
 
     override fun toDto(from: Institution) = InstitutionDto(from.id, from.user.id, from.name)
 
