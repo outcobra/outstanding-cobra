@@ -1,13 +1,13 @@
-import {Component, OnInit, ViewEncapsulation} from "@angular/core";
-import {TaskService} from "./service/task.service";
-import {Task} from "./model/Task";
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {ActivatedRoute, Router, NavigationEnd, NavigationStart} from "@angular/router";
-import {TaskFilter} from "./model/TaskFilter";
-import {MdDialog, MdDialogRef} from "@angular/material";
-import {TaskAddDialogComponent} from "./task-add-dialog/task-add-dialog.component";
-import {NotificationsService} from "angular2-notifications";
-import {Util, and} from "../shared/services/util";
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {TaskService} from './service/task.service';
+import {Task} from './model/Task';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {ActivatedRoute, Router, NavigationEnd} from '@angular/router';
+import {TaskFilter} from './model/TaskFilter';
+import {MdDialog, MdDialogRef} from '@angular/material';
+import {TaskAddDialogComponent} from './task-add-dialog/task-add-dialog.component';
+import {NotificationsService} from 'angular2-notifications';
+import {Util, and} from '../shared/services/util';
 
 @Component({
     selector: 'task',

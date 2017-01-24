@@ -1,9 +1,9 @@
-import {Injectable} from "@angular/core";
-import {HttpInterceptor} from "../../shared/http/HttpInterceptor";
-import {Task} from "../model/Task";
-import {Observable} from "rxjs";
-import {CacheableCrudService} from "../../shared/services/core/cacheable-crud.service";
-import {TaskFilter} from "../model/TaskFilter";
+import {Injectable} from '@angular/core';
+import {HttpInterceptor} from '../../shared/http/HttpInterceptor';
+import {Task} from '../model/Task';
+import {Observable} from 'rxjs';
+import {CacheableCrudService} from '../../shared/services/core/cacheable-crud.service';
+import {TaskFilter} from '../model/TaskFilter';
 
 @Injectable()
 export class TaskService extends CacheableCrudService<Task, Task[]> {

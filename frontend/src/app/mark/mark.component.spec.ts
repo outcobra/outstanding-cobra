@@ -1,6 +1,6 @@
 /* tslint:disable:no-unused-variable */
-import {async, ComponentFixture, TestBed} from "@angular/core/testing";
-import {MarkComponent} from "./mark.component";
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {MarkComponent} from './mark.component';
 
 describe('MarkComponent', () => {
     let component: MarkComponent;

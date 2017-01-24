@@ -1,6 +1,6 @@
-import {AbstractControl, FormGroup, ValidatorFn} from "@angular/forms";
-import * as moment from "moment";
-import {DateUtil} from "./date-util.service";
+import {AbstractControl, FormGroup, ValidatorFn} from '@angular/forms';
+import * as moment from 'moment';
+import {DateUtil} from './date-util.service';
 
 export class OutcobraValidators {
 
