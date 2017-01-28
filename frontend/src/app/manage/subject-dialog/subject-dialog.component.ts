@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ManageDialog} from "../manage-dialog";
 import {SemesterDto, SubjectDto} from "../model/ManageDto";
 import {Response, Http} from "@angular/http";
+import {Util} from "../../shared/services/util";
 
 @Component({
     selector: 'subject-dialog',
@@ -14,8 +15,7 @@ import {Response, Http} from "@angular/http";
 export class SubjectDialog extends ManageDialog<SubjectDto, SemesterDto> implements OnInit {
 
     constructor(public dialogRef: MdDialogRef<SubjectDialog>,
-                private formBuilder: FormBuilder,
-                private http: Http) {
+                private formBuilder: FormBuilder) {
         super();
     }
 
@@ -40,7 +40,7 @@ export class SubjectDialog extends ManageDialog<SubjectDto, SemesterDto> impleme
             this.dialogRef.close(value);
         }
         else if (this.subjectForm.pristine) {
-            this.revalidateForm(this.subjectForm);
+            Util.revalidateForm(this.subjectForm);
         }
     }
 

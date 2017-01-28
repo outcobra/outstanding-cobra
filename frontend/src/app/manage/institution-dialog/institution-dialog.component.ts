@@ -3,6 +3,7 @@ import {MdDialogRef} from "@angular/material";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ManageDialog} from "../manage-dialog";
 import {InstitutionDto} from "../model/ManageDto";
+import {Util} from "../../shared/services/util";
 
 @Component({
     selector: 'institution-dialog',
@@ -30,10 +31,11 @@ export class InstitutionDialog extends ManageDialog<InstitutionDto, any> impleme
 
     onSubmit() {
         if (this.institutionForm.valid && this.institutionForm.dirty) {
-            this.dialogRef.close(this.institutionForm.value);
+            let value = this.institutionForm.value as InstitutionDto;
+            this.dialogRef.close(value);
         }
         else if (this.institutionForm.pristine) {
-            this.revalidateForm(this.institutionForm);
+            Util.revalidateForm(this.institutionForm);
         }
     }
 

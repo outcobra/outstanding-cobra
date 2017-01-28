@@ -12,21 +12,21 @@ export class TaskService extends CacheableCrudService<Task, Task[]> {
     }
 
     public create (task: Task): Observable<Task> {
-        return Observable.empty();
+        return super.create(task);
     }
 
-    public getById(id: number): Observable<Task> {
+    public readById(id: number): Observable<Task> {
         if (this.hasCache()) {
             let task = this.cache.find(task => task.id == id);
             if (task) return Observable.of(task);
         }
-        return this.http.get<Task>(`${this.baseUri}/${id}`, 'outcobra');
+        return super.readById(id);
     }
 
-    public getAll(): Observable<Task[]> {
+    public readAll(): Observable<Task[]> {
         if (this.hasCache()) return Observable.of(this.cache);
         else if (this.observable) return this.observable;
-        return this.saveObservable(this.http.get<Task[]>(this.baseUri, 'outcobra')
+        return this.saveObservable(super.readAll()
             .map((res: Task[]) => {
                 this.clearObservable();
                 this.saveCache(res);
@@ -36,12 +36,11 @@ export class TaskService extends CacheableCrudService<Task, Task[]> {
     }
 
     deleteById(id: number): Observable<any> {
-        console.log(id);
-        return this.http.delete(`${this.baseUri}/${id}`, 'outcobra');
+        return super.deleteById(id);
     }
 
     update(task: Task): Observable<Task> {
-        return this.http.post<Task>(this.baseUri, task, 'outcobra');
+        return super.update(task);
     }
 
     getTaskFilter(): Observable<TaskFilter> {

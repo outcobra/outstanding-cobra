@@ -15,46 +15,42 @@ open class TaskController @Inject constructor(val taskService: TaskService) {
 
     @GetMapping(value = "/task")
     fun getAllTasks(): List<TaskDto> {
-        return taskService.readAllTasks()
+        return taskService.readAll()
     }
 
-    @PutMapping(value = "/task")
-    fun createTask(@RequestBody taskDto: TaskDto): TaskDto {
-        return taskService.createTask(taskDto)
+    @RequestMapping(value = "/task", method = arrayOf(RequestMethod.POST, RequestMethod.PUT))
+    fun saveTask(@RequestBody taskDto: TaskDto): TaskDto {
+        return taskService.save(taskDto)
     }
 
     @GetMapping(value = "/task/{id}")
     fun readTaskById(@PathVariable id: Long): TaskDto {
-        return taskService.readTaskById(id)
+        return taskService.readById(id)
     }
 
     @GetMapping(value = "/subject/{subjectId}/task")
-    fun readAllTasksOfSubject(@PathVariable subjectId: Long): List<TaskDto> {
-        return taskService.readAllTasksOfSubject(subjectId)
+    fun readAllTasksBySubject(@PathVariable subjectId: Long): List<TaskDto> {
+        return taskService.readAllBySubject(subjectId)
     }
 
     @GetMapping(value = "/semester/{semesterId}/task")
-    fun readAllTasksOfSemester(@PathVariable semesterId: Long): List<TaskDto> {
-        return taskService.readAllTasksOfSemester(semesterId)
+    fun readAllTasksBySemester(@PathVariable semesterId: Long): List<TaskDto> {
+        return taskService.readAllBySemester(semesterId)
     }
+
     @GetMapping(value = "/subject/{subjectId}/task/open")
     fun readAllOpenTasksBySubject(@PathVariable subjectId: Long): List<TaskDto> {
-        return taskService.readAllOpenTasksBySubject(subjectId)
+        return taskService.readAllOpenBySubject(subjectId)
     }
 
     @GetMapping(value = "/semester/{semesterId}/task/open")
     fun readAllOpenTasksBySemester(@PathVariable semesterId: Long): List<TaskDto> {
-        return taskService.readAllOpenTasksBySemester(semesterId)
+        return taskService.readAllOpenBySemester(semesterId)
     }
 
-    @PostMapping(value = "/task")
-    fun updateTask(@RequestBody taskDto: TaskDto): TaskDto {
-        return taskService.updateTask(taskDto)
-    }
-
-    @DeleteMapping(value = "/task/{id}")
-    fun deleteTask(@PathVariable id: Long) {
-        taskService.deleteTask(id)
+    @DeleteMapping(value = "/task/{taskId}")
+    fun deleteTask(@PathVariable taskId: Long) {
+        taskService.delete(taskId)
     }
 
     @GetMapping(value = "/task/filter")

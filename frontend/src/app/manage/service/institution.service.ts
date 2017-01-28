@@ -10,20 +10,8 @@ export class InstitutionService extends AppCrudService<InstitutionDto> {
         super(http, '/institution');
     }
 
-    create(institution: InstitutionDto): Observable<InstitutionDto> {
-        return this.http.put<InstitutionDto>(this.baseUri, institution, 'outcobra')
-    }
-
-    getById(id: number): Observable<InstitutionDto> {
+    readById(id: number): Observable<InstitutionDto> {
         throw new Error('not implemented');
-    }
-
-    getAll(): Observable<InstitutionDto[]> {
-        throw new Error('not implemented');
-    }
-
-    deleteById(id: number): Observable<any> {
-        return this.http.delete(`${this.baseUri}/${id}`, 'outcobra');
     }
 
     update(arg: InstitutionDto): Observable<InstitutionDto> {

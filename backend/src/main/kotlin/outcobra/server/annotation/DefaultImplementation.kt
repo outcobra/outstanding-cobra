@@ -8,7 +8,7 @@ import javax.inject.Qualifier
  * It is used to inject the default implementation into a mock service
  * Makes the code more readable
  *
- * @author Florian Buergi
+ * @author Florian Bürgi
  * @since 1.0.0
  */
 

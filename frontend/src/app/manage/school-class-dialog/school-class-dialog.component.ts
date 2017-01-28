@@ -3,6 +3,7 @@ import {ManageDialog} from "../manage-dialog";
 import {SchoolClassDto, InstitutionDto} from "../model/ManageDto";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MdDialogRef} from "@angular/material";
+import {Util} from "../../shared/services/util";
 
 @Component({
     selector: 'school-class-dialog',
@@ -29,12 +30,12 @@ export class SchoolClassDialog extends ManageDialog<SchoolClassDto, InstitutionD
 
     onSubmit() {
         if (this.schoolClassForm.valid && this.schoolClassForm.dirty) {
-            let value = this.schoolClassForm.value;
+            let value = this.schoolClassForm.value as SchoolClassDto;
             value.institutionId = this.parent.id;
             this.dialogRef.close(value);
         }
         else if (this.schoolClassForm.pristine) {
-            this.revalidateForm(this.schoolClassForm);
+            Util.revalidateForm(this.schoolClassForm);
         }
     }
 

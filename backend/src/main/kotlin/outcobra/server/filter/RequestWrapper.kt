@@ -5,6 +5,11 @@ import java.io.InputStreamReader
 import javax.servlet.ServletInputStream
 import javax.servlet.http.HttpServletRequest
 
+/**
+ *
+ * @author Joel Messerli
+ * @since <since>
+ */
 class RequestWrapper(val request: HttpServletRequest) : HttpServletRequest by request {
     private val inputStream: ServletInputStream?
     private val reader: BufferedReader

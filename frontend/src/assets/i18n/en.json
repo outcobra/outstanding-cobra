@@ -32,9 +32,18 @@
                     "save": "Successfully saved",
                     "delete": "Successfully deleted"
                 }
+            },
+            "lang": {
+                "en": "English",
+                "de": "German"
             }
         },
         "modules": {
+            "main": {
+                "welcome": "Welcome to Outcobra",
+                "subtitle": "The management-tool by students for students",
+                "authors": "by Joel, Florian, Mario and Vincent"
+            },
             "exam": {
                 "linkTitle": "Exams"
             },
@@ -44,7 +53,20 @@
             "task": {
                 "linkTitle": "Tasks",
                 "add": "Add Task",
-                "filter": "Filter Tasks",
+                "desc": "Task description",
+                "progress": "Progress",
+                "filter": {
+                    "title": "Filter Tasks",
+                    "subject": "Filter by subject",
+                    "showPending": "Show only unfinished tasks",
+                    "search": "Search..."
+                },
+                "notification": {
+                    "add": {
+                        "title": "Task added",
+                        "message": "The task has been successfully created"
+                    }
+                },
                 "dialogs": {
                     "confirmDeleteDialog": {
                         "title": "Do you want to delete the Task?",
@@ -133,13 +155,27 @@
         "login": {
             "error": {
                 "title": "Login failed",
-                "message": "We could not log you in."
+                "message": "We could not log you in"
             }
         },
         "http": {
             "error": {
-                "title": "Error!",
-                "message": "A server-side error occurred! Please try again."
+                "0": {
+                    "title": "Connection Error",
+                    "message": "The server is currently not reachable. Please try again later."
+                },
+                "400": {
+                    "title": "Data Error",
+                    "message": "The server is indicating invalid input data"
+                },
+                "404": {
+                    "title": "Not Found",
+                    "message": "The requested element could not be found"
+                },
+                "500": {
+                    "title": "Server Error",
+                    "message": "An unknown server error has occurred"
+                }
             }
         }
     }

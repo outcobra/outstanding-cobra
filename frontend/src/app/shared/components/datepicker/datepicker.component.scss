@@ -8,11 +8,15 @@ datepicker {
         position: relative;
 
         md-input-container {
+            width: 100%;
             label {
-                top: 12px;
+                top: 5px;
                 &.md-input-placeholder.md-focused {
                     top: 0;
                 }
+            }
+            md-hint {
+                bottom: -2em;
             }
         }
 

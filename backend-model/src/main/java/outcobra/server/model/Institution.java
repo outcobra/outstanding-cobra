@@ -2,17 +2,15 @@ package outcobra.server.model;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-
 import outcobra.server.model.interfaces.ParentLinked;
-
 
 /**
  * This class represents an Institution.
  * It is used by hibernate to store the information to the database
  * A documentation of the instance fields does not make sense because it is self-explanatory.
+ *
  * @author Joel Messerli
  * @since 1.0.0
  */
@@ -58,7 +56,6 @@ public class Institution implements ParentLinked {
     //endregion
 
     //region default functions
-
     public Long getId() {
         return id;
     }
@@ -110,8 +107,9 @@ public class Institution implements ParentLinked {
         if (!id.equals(that.id)) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (user != null ? !user.equals(that.user) : that.user != null) return false;
-        if (schoolClasses != null ? !schoolClasses.equals(that.schoolClasses) : that.schoolClasses != null)
+        if (schoolClasses != null ? !schoolClasses.equals(that.schoolClasses) : that.schoolClasses != null) {
             return false;
+        }
         return teachers != null ? teachers.equals(that.teachers) : that.teachers == null;
 
     }

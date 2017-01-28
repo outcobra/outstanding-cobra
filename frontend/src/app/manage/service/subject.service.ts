@@ -10,20 +10,8 @@ export class SubjectService extends AppCrudService<SubjectDto> {
         super(http, '/subject')
     }
 
-    create(subject: SubjectDto): Observable<SubjectDto> {
-        return this.http.put<SubjectDto>(this.baseUri, subject, 'outcobra')
-    }
-
-    getById(id: number): Observable<SubjectDto> {
+    readById(id: number): Observable<SubjectDto> {
         throw new Error('not implemented');
-    }
-
-    getAll(): Observable<SubjectDto[]> {
-        return this.http.get<SubjectDto[]>(this.baseUri, 'outcobra');
-    }
-
-    deleteById(id: number): Observable<any> {
-        return this.http.delete(`${this.baseUri}/${id}`, 'outcobra');
     }
 
     update(arg: SubjectDto): Observable<SubjectDto> {
@@ -31,6 +19,6 @@ export class SubjectService extends AppCrudService<SubjectDto> {
     }
 
     getCurrentSubjects(): Observable<SubjectDto[]> {
-        return this.http.get<SubjectDto[]>(`${this.baseUri}/current`, 'outcobra');
+        return this.http.get<SubjectDto[]>(`/semester/current/${this.baseUri}`, 'outcobra');
     }
 }

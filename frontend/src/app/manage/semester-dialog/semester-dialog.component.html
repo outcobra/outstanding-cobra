@@ -5,29 +5,47 @@
     <div class="dialog-body" md-dialog-content>
         <div class="form-group">
             <md-input-container>
-                <input md-input [autofocus]="false" [placeholder]="'i18n.modules.manage.semester.form.label' | translate" formControlName="name">
+                <input md-input [autofocus]="false"
+                       [placeholder]="'i18n.modules.manage.semester.form.label' | translate" formControlName="name">
+                <md-hint class="form-error" align="start"
+                         *ngIf="semesterForm.get('name').invalid && semesterForm.get('name').touched">
+                    <template [ngIf]="semesterForm.get('name').hasError('required')">
+                        {{'i18n.common.form.error.required' | translate}}
+                    </template>
+                </md-hint>
             </md-input-container>
-            <div class="form-error" *ngIf="semesterForm.get('name').invalid && semesterForm.get('name').dirty">
-                <span *ngIf="semesterForm.get('name').hasError('required')">{{'i18n.common.form.error.required' | translate}}</span>
-            </div>
         </div>
         <div class="form-group">
             <datepicker formControlName="validFrom" [placeholder]="'i18n.common.label.validFrom' | translate"
-                        [minDate]="parent.validFrom"></datepicker>
-            <div class="form-error" *ngIf="semesterForm.get('validFrom').invalid && semesterForm.get('validFrom').dirty">
-                <span *ngIf="semesterForm.get('validFrom').hasError('required')">{{'i18n.common.form.error.required' | translate}}</span>
-                <span *ngIf="semesterForm.get('validFrom').hasError('isAfterDay')">{{getErrorText('validFrom', 'isAfterDay', 'afterDate')}}</span>
-            </div>
+                        [minDate]="parent.validFrom">
+                <md-hint class="form-error"
+                         *ngIf="semesterForm.get('validFrom').invalid && semesterForm.get('validFrom').touched">
+                    <template [ngIf]="semesterForm.get('validFrom').hasError('required')">
+                        {{'i18n.common.form.error.required' | translate}}
+                    </template>
+                    <template [ngIf]="semesterForm.get('validFrom').hasError('isAfterDay')">{{getErrorText('validFrom',
+                        'isAfterDay', 'afterDate')}}
+                    </template>
+                </md-hint>
+            </datepicker>
+
         </div>
         <div class="form-group">
             <datepicker formControlName="validTo" [placeholder]="'i18n.common.label.validTo' | translate"
-                        [maxDate]="parent.validTo"></datepicker>
-            <div class="form-error" *ngIf="semesterForm.get('validTo').invalid && semesterForm.get('validTo').dirty">
-                <span *ngIf="semesterForm.get('validTo').hasError('required')">{{'i18n.common.form.error.required' | translate}}</span>
-                <span *ngIf="semesterForm.get('validTo').hasError('isBeforeDay')">{{getErrorText('validTo', 'isBeforeDay', 'beforeDate')}}</span>
-            </div>
+                        [maxDate]="parent.validTo">
+                <md-hint class="form-error"
+                         *ngIf="semesterForm.get('validTo').invalid && semesterForm.get('validTo').touched">
+                    <template [ngIf]="semesterForm.get('validTo').hasError('required')">
+                        {{'i18n.common.form.error.required' | translate}}
+                    </template>
+                    <template [ngIf]="semesterForm.get('validTo').hasError('isBeforeDay')">{{getErrorText('validTo',
+                        'isBeforeDay', 'beforeDate')}}
+                    </template>
+                </md-hint>
+            </datepicker>
         </div>
-        <div class="form-error" *ngIf="semesterForm.invalid && semesterForm.dirty && semesterForm.get('validFrom').touched && semesterForm.get('validTo').touched">
+        <div class="form-error"
+             *ngIf="semesterForm.invalid && semesterForm.touched && semesterForm.get('validFrom').touched && semesterForm.get('validTo').touched">
             <span *ngIf="semesterForm.hasError('dateToIsBeforeDateFrom')">{{'i18n.common.form.error.dateToIsBeforeDateFrom' | translate}}</span>
         </div>
     </div>

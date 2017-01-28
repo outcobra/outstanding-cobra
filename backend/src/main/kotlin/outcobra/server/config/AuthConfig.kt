@@ -30,6 +30,7 @@ open class AuthConfig : Auth0SecurityConfig() {
                 .antMatchers("/swagger-resources/**").permitAll()
                 .antMatchers("/v2/api-docs").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
+                .antMatchers("/api/ping").permitAll()
                 .anyRequest().authenticated()
     }
 }

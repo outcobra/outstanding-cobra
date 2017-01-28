@@ -1,3 +1,8 @@
+/**
+ * custom icons for the notification-wrapper.service
+ *
+ * @type {{error: string; info: string; alert: string; success: string}}
+ */
 export const appIcons = {
     error: `
         <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">

@@ -6,6 +6,7 @@ import {MdDialogRef} from "@angular/material";
 import {OutcobraValidators} from "../../shared/services/outcobra-validators";
 import {TranslateService} from "ng2-translate";
 import {DatePipe} from "@angular/common";
+import {Util} from "../../shared/services/util";
 
 @Component({
     selector: 'school-year-dialog',
@@ -38,7 +39,7 @@ export class SchoolYearDialog extends ManageDialog<SchoolYearDto, SchoolClassDto
 
     getErrorText(controlName: string, errorName: string, errorProp: string) {
         let control = this.schoolYearForm.get(controlName);
-        let date = this.datePipe.transform(control.getError(errorName)[errorProp], 'MM.dd.y');
+        let date = this.datePipe.transform(control.getError(errorName)[errorProp], 'dd.MM.y');
         return control.hasError(errorName) ? this.translate.instant(`i18n.common.form.error.${errorName}`, {'date': date}) : "";
     }
 
@@ -48,12 +49,12 @@ export class SchoolYearDialog extends ManageDialog<SchoolYearDto, SchoolClassDto
 
     onSubmit() {
         if (this.schoolYearForm.valid && this.schoolYearForm.dirty) {
-            let value = this.schoolYearForm.value;
+            let value = this.schoolYearForm.value as SchoolYearDto;
             value.schoolClassId = this.parent.id;
             this.dialogRef.close(value);
         }
         else if (this.schoolYearForm.pristine) {
-            this.revalidateForm(this.schoolYearForm);
+            Util.revalidateForm(this.schoolYearForm);
         }
     }
 

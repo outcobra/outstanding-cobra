@@ -102,10 +102,19 @@ md-dialog-container {
     }
 }
 
-datepicker, md-input {
-    &.ng-invalid.ng-dirty {
+datepicker, md-input-container {
+    &.ng-invalid.ng-touched {
+        label {
+            color: md-color($warn);
+        }
+        //noinspection CssOptimizeSimilarProperties
         .md-input-underline {
-            border-color: md-color($warn);
+            .md-input-ripple {
+                background-color: md-color($warn);
+            }
+            border: md-color($warn);
+            border-top-width: 1px;
+            border-top-style: solid;
         }
     }
 }
@@ -115,7 +124,7 @@ datepicker, md-input {
     margin-bottom: 15px;
 }
 
-.form-error span {
+.form-error {
     @extend .text-warn;
 }
 

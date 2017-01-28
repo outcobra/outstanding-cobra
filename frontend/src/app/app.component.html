@@ -45,6 +45,7 @@
         <md-icon class="toolbar-icon" (click)="sidenav.open()">menu</md-icon>
         <a routerLink="/">{{title}}</a>
         <span class="toolbar-fill-space"></span>
+        {{'i18n.common.lang.de' | translate}} <md-slide-toggle (change)="changeLang()" [(ngModel)]="isEnglish"></md-slide-toggle> {{'i18n.common.lang.en' | translate}}
         <button md-button *ngIf="!auth.isLoggedIn()" (click)="login()">Login</button>
         <button md-button *ngIf="auth.isLoggedIn()" (click)="logout()">Logout</button>
     </md-toolbar>

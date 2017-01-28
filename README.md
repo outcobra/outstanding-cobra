@@ -52,8 +52,7 @@ If the command npm is not recognized rerun the nodejs installer and make sure th
 
 **Linux:**
 
-To install yarn on linux you have to configure a specific repository.
-Just run this command: `sudo apt-key adv --keyserver pgp.mit.edu --recv D101F7899D41F3C3`
+To install yarn on linux you have to configure [a specific repository and pgp key](https://yarnpkg.com/en/docs/install#linux-tab).
 Then you can run `sudo apt-get update && sudo apt-get install yarn`
 
 To check the installation you can run `yarn version`.

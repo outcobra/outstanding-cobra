@@ -17,6 +17,7 @@ import {ManageDialogFactory} from "./service/manage-dialog-factory";
 import {SubjectDialog} from "./subject-dialog/subject-dialog.component";
 import {SubjectService} from "./service/subject.service";
 import {ColorService} from "../shared/services/color.service";
+import {Util} from "../shared/services/util";
 
 
 const DEFAULT_CONFIG: MdDialogConfig = {position: {top: '20px'}};
@@ -50,7 +51,6 @@ export class ManageComponent implements OnInit {
                 private subjectService: SubjectService,
                 private notificationService: NotificationsService,
                 private confirmDialogService: ConfirmDialogService,
-                private colorService: ColorService,
                 private manageDialogFactory: ManageDialogFactory) {
     }
 
@@ -62,7 +62,7 @@ export class ManageComponent implements OnInit {
     selectSchoolClass(schoolClassId: number) {
         let schoolClass = this.findSchoolClass(this.institutionClasses, schoolClassId);
         if (schoolClass != null) {
-            this.yearSemesterModel = schoolClass.schoolYears;
+            this.yearSemesterModel = schoolClass.schoolYears ? schoolClass.schoolYears : [];
             this.activeSchoolClassId = schoolClass.id;
             this.activeSemesterId = this.subjectModel = null;
         }
@@ -71,7 +71,7 @@ export class ManageComponent implements OnInit {
     selectSemester(semesterId: number) {
         let semester = this.findSemester(this.yearSemesterModel, semesterId);
         if (semester != null) {
-            this.subjectModel = semester.subjects;
+            this.subjectModel = semester.subjects ? semester.subjects : [];
             this.activeSemesterId = semester.id;
         }
     }
@@ -111,6 +111,7 @@ export class ManageComponent implements OnInit {
             if (result != null) {
                 this.institutionService.create(result).subscribe((institution: InstitutionDto) => {
                     this.showSuccessNotification('institution');
+                    console.log(institution);
                     this.institutionClasses.push(institution);
                 });
             }
@@ -123,6 +124,7 @@ export class ManageComponent implements OnInit {
             if (result) {
                 this.schoolClassService.create(result).subscribe((schoolClass: SchoolClassDto) => {
                     this.showSuccessNotification('schoolClass');
+                    if (!institution.schoolClasses) institution.schoolClasses = [];
                     institution.schoolClasses.push(schoolClass);
                 });
             }
@@ -151,6 +153,7 @@ export class ManageComponent implements OnInit {
                 if (result) {
                     this.semesterService.create(result).subscribe((semester: SemesterDto) => {
                         this.showSuccessNotification('schoolYear');
+                        if (!schoolYear.semesters) schoolYear.semesters = [];
                         schoolYear.semesters.push(semester);
                     });
                 }
@@ -177,6 +180,7 @@ export class ManageComponent implements OnInit {
         this.openDeleteConfirmDialog('institution').subscribe((result) => {
             if (result === true) {
                 this.institutionService.deleteById(institution.id).subscribe();
+                Util.arrayRemove(this.institutionClasses, (inst) => inst.id == institution.id);
             }
         });
     }
@@ -185,6 +189,8 @@ export class ManageComponent implements OnInit {
         this.openDeleteConfirmDialog('schoolClass').subscribe((result) => {
             if (result === true) {
                 this.schoolClassService.deleteById(schoolClass.id).subscribe();
+                let institution = this.institutionClasses.find(inst => inst.schoolClasses.findIndex(clazz => clazz.id == schoolClass.id) !== undefined);
+                Util.arrayRemove(institution.schoolClasses, (clazz) => clazz.id == schoolClass.id);
             }
         });
     }
@@ -193,6 +199,7 @@ export class ManageComponent implements OnInit {
         this.openDeleteConfirmDialog('schoolYear').subscribe((result) => {
             if (result === true) {
                 this.schoolYearService.deleteById(schoolYear.id).subscribe();
+                Util.arrayRemove(this.yearSemesterModel, (year) => year.id == schoolYear.id);
             }
         });
     }
@@ -201,6 +208,8 @@ export class ManageComponent implements OnInit {
         this.openDeleteConfirmDialog('semester').subscribe((result) => {
             if (result === true) {
                 this.semesterService.deleteById(semester.id).subscribe();
+                let schoolYear = this.yearSemesterModel.find(year => year.semesters.findIndex(sem => sem.id == semester.id) !== undefined);
+                Util.arrayRemove(schoolYear.semesters, (sem) => sem.id == semester.id);
             }
         });
     }
@@ -209,6 +218,7 @@ export class ManageComponent implements OnInit {
         this.openDeleteConfirmDialog('subject').subscribe((result) => {
             if (result === true) {
                 this.subjectService.deleteById(subject.id).subscribe();
+                Util.arrayRemove(this.subjectModel, (sub) => sub.id == subject.id);
             }
         });
     }

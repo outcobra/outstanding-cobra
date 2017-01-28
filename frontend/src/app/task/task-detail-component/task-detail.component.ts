@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, Output, EventEmitter} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Task} from "../model/Task";
 import {ConfirmDialogService} from "../../shared/services/confirm-dialog.service";
@@ -26,14 +26,14 @@ export class TaskDetailComponent implements OnInit {
     }
 
     editTask() {
-
+        //TODO
     }
 
     deleteTask() {
         this.confirmDialogService.open('i18n.modules.task.dialogs.confirmDeleteDialog.title', 'i18n.modules.task.dialogs.confirmDeleteDialog.message')
             .subscribe((result: boolean) => {
                 if (result === true) {
-                    this.taskService.deleteById(this.task.id).subscribe();
+                    this.taskService.deleteById(this.task.id).subscribe(result => this.router.navigate(['/task']));
                 }
             });
     }
