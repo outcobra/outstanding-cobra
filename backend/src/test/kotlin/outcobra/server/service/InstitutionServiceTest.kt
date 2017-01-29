@@ -1,6 +1,6 @@
 package outcobra.server.service
 
-import com.google.common.truth.Truth.assertThat
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
 import org.junit.Ignore
 import org.junit.Test

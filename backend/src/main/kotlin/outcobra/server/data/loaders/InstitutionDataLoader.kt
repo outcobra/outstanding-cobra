@@ -29,7 +29,7 @@ class InstitutionDataLoader
 
     private fun saveInstitution(institution: Institution): Institution {
         LOGGER.debug("Saving institution: ${institution.name}")
-        return institutionRepository.save(institution)!!
+        return institutionRepository.save(institution)
     }
 
     override fun load() {

@@ -42,7 +42,7 @@ class YearDataLoader
         val schoolYear = SchoolYear(name, startDate, endDate, schoolClass, mutableListOf(), mutableListOf())
 
         LOGGER.debug("Saving schoolYear: ${schoolYear.name}")
-        return yearRepository.save(schoolYear)!!
+        return yearRepository.save(schoolYear)
     }
 
     override fun load() {

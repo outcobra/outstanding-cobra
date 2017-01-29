@@ -39,7 +39,7 @@ class TaskDataLoader(val taskRepository: TaskRepository) : DataLoader {
 
     private fun saveTask(task: Task): Task {
         LOGGER.debug("Saving task: ${task.name}")
-        return taskRepository.save(task)!!
+        return taskRepository.save(task)
     }
 
     override fun load() {
