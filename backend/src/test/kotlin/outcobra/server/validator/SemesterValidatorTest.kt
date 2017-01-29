@@ -34,7 +34,7 @@ open class SemesterValidatorTest {
     @Inject
     lateinit var validator: SemesterValidator
 
-    val now = LocalDate.now()
+    val now: LocalDate = LocalDate.now()
     var schoolClass: SchoolClass? = null
     var schoolYear: SchoolYear? = null
     var existing: Semester? = null
@@ -102,10 +102,10 @@ open class SemesterValidatorTest {
         assertThat(validation).isFalse()
     }
 
-    @Test
+    @Test(expected = DateOutsideExpectedRangeException::class)
     fun validateUpdateOutsideParent() {
         assertThat(schoolYear).isNotNull()
-        existing!!.validFrom.minusDays(20)
+        existing!!.validFrom = existing!!.validFrom.minusDays(20)
         val validation = validator.validateSemesterCreation(existing!!)
         assertThat(validation).isFalse()
     }

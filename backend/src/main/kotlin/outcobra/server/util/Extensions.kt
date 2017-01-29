@@ -15,7 +15,8 @@ fun LocalDate.isAfterOrEqual(b: LocalDate): Boolean = this.isAfter(b) || this.is
 infix fun SchoolYear.doesNotOverlap(schoolYear: SchoolYear): Boolean =
         this.id == schoolYear.id || !DateUtil.isOverlap(this.validFrom, this.validTo, schoolYear.validFrom, schoolYear.validTo)
 
+operator infix fun SchoolYear.contains(semester: Semester): Boolean =
+        this.validFrom.isBeforeOrEqual(semester.validFrom) && this.validTo.isAfterOrEqual(semester.validTo)
+
 infix fun Semester.doesNotOverlap(semester: Semester): Boolean =
         this.id == semester.id || !DateUtil.isOverlap(this.validFrom, this.validTo, semester.validFrom, semester.validTo)
-
-

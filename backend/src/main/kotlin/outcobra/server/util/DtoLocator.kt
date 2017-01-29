@@ -24,8 +24,6 @@ open class DtoLocator {
      * @since 1.0.0
      * @throws ClassNotFoundException if the dtos class could not be found
      */
-    fun getForEntityName(entityName: String): Class<*> {
-        val clazz = ClassUtils.forName("$DTO_PACKAGE_NAME.${entityName.firstToUpper()}Dto", null)
-        return clazz
-    }
+    fun getForEntityName(entityName: String): Class<*> =
+            ClassUtils.forName("$DTO_PACKAGE_NAME.${entityName.firstToUpper()}Dto", null)
 }
