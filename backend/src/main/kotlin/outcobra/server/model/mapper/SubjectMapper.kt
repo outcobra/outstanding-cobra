@@ -8,7 +8,8 @@ import outcobra.server.model.repository.*
 import javax.inject.Inject
 
 /**
- * Created by Florian on 26.11.2016.
+ * @since 1.0.0
+ * @author Florian Bürgi
  */
 @Component
 class SubjectMapper @Inject constructor(val teacherRepository: TeacherRepository,
@@ -35,7 +36,8 @@ class SubjectMapper @Inject constructor(val teacherRepository: TeacherRepository
     }
 
     override fun toDto(from: Subject): SubjectDto {
-        return SubjectDto(from.id, from.semester.id, from.name, colorMapper.toDto(from.color), from.teacher?.id)
+        val id = if (from.id == null) 0 else from.id
+        return SubjectDto(id, from.semester.id, from.name, colorMapper.toDto(from.color), from.teacher?.id)
     }
 
 }
