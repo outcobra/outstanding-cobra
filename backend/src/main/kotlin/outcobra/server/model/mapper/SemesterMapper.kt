@@ -26,7 +26,7 @@ open class SemesterMapper @Inject constructor(val subjectRepository: SubjectRepo
         val subjects = from.subjects.map { it.id }
         val reports = from.markReports.map { it.id }
         val timetableId = if (from.timetable != null) from.timetable.id else -1 // TODO still ugly tough
-        val id = if (from.id == null) 0 else from.id
+        val id = from.id ?: 0
         return SemesterDto(id, from.schoolYear.id, from.name, from.validFrom, from.validTo, subjects, reports, timetableId)
     }
 

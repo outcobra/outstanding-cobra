@@ -36,7 +36,7 @@ class SubjectMapper @Inject constructor(val teacherRepository: TeacherRepository
     }
 
     override fun toDto(from: Subject): SubjectDto {
-        val id = if (from.id == null) 0 else from.id
+        val id = from.id ?: 0
         return SubjectDto(id, from.semester.id, from.name, colorMapper.toDto(from.color), from.teacher?.id)
     }
 

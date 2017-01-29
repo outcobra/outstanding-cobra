@@ -15,7 +15,7 @@ open class TaskDtoMapper @Inject constructor(val subjectRepository: SubjectRepos
                                              val subjectMapper: SubjectMapper) : Mapper<Task, TaskDto> {
 
     override fun toDto(from: Task): TaskDto {
-        val id = if (from.id == null) 0 else from.id
+        val id = from.id ?: 0
         return TaskDto(id, subjectMapper.toDto(from.subject), from.name, from.description,
                 from.todoDate, from.dueDate, from.effort, from.progress)
     }

@@ -11,7 +11,7 @@ import javax.inject.Inject
 open class InstitutionMapper
 @Inject constructor(val userService: UserService) : Mapper<Institution, InstitutionDto> {
 
-    override fun toDto(from: Institution) = InstitutionDto(if (from.id == null) 0 else from.id, from.user.id, from.name)
+    override fun toDto(from: Institution) = InstitutionDto(from.id ?: 0, from.user.id, from.name)
 
     override fun fromDto(from: InstitutionDto): Institution {
         val institution = Institution()

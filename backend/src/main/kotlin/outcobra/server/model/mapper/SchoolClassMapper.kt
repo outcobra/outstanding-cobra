@@ -17,7 +17,7 @@ open class SchoolClassMapper @Inject constructor(val schoolYearRepository: Schoo
                                                  val institutionRepository: InstitutionRepository) : Mapper<SchoolClass, SchoolClassDto> {
 
     override fun toDto(from: SchoolClass): SchoolClassDto {
-        val id = if (from.id == null) 0 else from.id
+        val id = from.id ?: 0
         return SchoolClassDto(id, from.institution.id, from.normalizedName, from.schoolYears.map { it.id })
     }
 

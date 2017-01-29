@@ -22,7 +22,7 @@ open class TeacherMapper @Inject constructor(val subjectRepository: SubjectRepos
     }
 
     override fun toDto(from: Teacher): TeacherDto {
-        val id = if (from.id == null) 0 else from.id
+        val id = from.id ?: 0
         return TeacherDto(id, from.institution.id, from.name, from.email)
     }
 }
