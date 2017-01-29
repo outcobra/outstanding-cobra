@@ -47,7 +47,7 @@ class SemesterDataLoader
         val semester = Semester(name, startDate, endDate, schoolYear, mutableListOf(), mutableListOf(), null)
 
         LOGGER.debug("Saving semester: ${semester.name}")
-        return semesterRepository.save(semester)!!
+        return semesterRepository.save(semester)
     }
 
     override fun load() {

@@ -53,7 +53,6 @@ open class DefaultSchoolYearServiceTest {
         schoolClass = schoolClassRepository.save(SchoolClass("TestClass", institution, listOf()))
         existing = schoolYearRepository.save(SchoolYear("existing", now, now.plusYears(1), schoolClass, listOf(), listOf()))
         yearCount = schoolYearRepository.count()
-        print(yearCount)
     }
 
     @Test
