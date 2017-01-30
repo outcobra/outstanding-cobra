@@ -1,4 +1,5 @@
 #Outstanding Cobra
+[![Build Status](https://semaphoreci.com/api/v1/outcobra/outstanding-cobra/branches/amend-auth-filter/badge.svg)](https://semaphoreci.com/outcobra/outstanding-cobra)
 [![CircleCI](https://circleci.com/gh/outcobra/outstanding-cobra.svg?style=svg)](https://circleci.com/gh/outcobra/outstanding-cobra)
 [![Build Status](https://travis-ci.org/outcobra/outstanding-cobra.svg?branch=develop)](https://travis-ci.org/outcobra/outstanding-cobra)
 [![codebeat badge](https://codebeat.co/badges/d8dd9a81-a229-46e3-b5b2-d016ca70cfa4)](https://codebeat.co/projects/github-com-outcobra-outstanding-cobra)
