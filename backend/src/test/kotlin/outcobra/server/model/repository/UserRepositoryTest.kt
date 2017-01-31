@@ -1,6 +1,6 @@
 package outcobra.server.model.repository
 
-import com.google.common.truth.Truth.assertThat
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -19,12 +19,12 @@ open class UserRepositoryTest {
     lateinit var userRepository: UserRepository
     val myUser = User(null, "some_auth0_id", "jmesserli")
 
-    companion object{
+    companion object {
         var userCount = 0L
     }
 
     @Before
-    fun getUserCount(){
+    fun getUserCount() {
         userCount = userRepository.count()
     }
 
@@ -33,7 +33,7 @@ open class UserRepositoryTest {
     open fun testUserRepository() {
         val saved = userRepository.save(myUser)
         userRepository.flush()
-        assertThat(userRepository.count()).isEqualTo(userCount+1)
+        assertThat(userRepository.count()).isEqualTo(userCount + 1)
 
         val savedUser = userRepository.findOne(saved.id)
         assertThat(savedUser).isEqualTo(myUser)

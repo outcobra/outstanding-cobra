@@ -1,4 +1,7 @@
 #Outstanding Cobra
+[![Build Status](https://semaphoreci.com/api/v1/outcobra/outstanding-cobra/branches/amend-auth-filter/badge.svg)](https://semaphoreci.com/outcobra/outstanding-cobra)
+[![CircleCI](https://circleci.com/gh/outcobra/outstanding-cobra.svg?style=svg)](https://circleci.com/gh/outcobra/outstanding-cobra)
+[![Build Status](https://travis-ci.org/outcobra/outstanding-cobra.svg?branch=develop)](https://travis-ci.org/outcobra/outstanding-cobra)
 [![codebeat badge](https://codebeat.co/badges/d8dd9a81-a229-46e3-b5b2-d016ca70cfa4)](https://codebeat.co/projects/github-com-outcobra-outstanding-cobra)
 
 # Installation
@@ -52,8 +55,7 @@ If the command npm is not recognized rerun the nodejs installer and make sure th
 
 **Linux:**
 
-To install yarn on linux you have to configure a specific repository.
-Just run this command: `sudo apt-key adv --keyserver pgp.mit.edu --recv D101F7899D41F3C3`
+To install yarn on linux you have to configure [a specific repository and pgp key](https://yarnpkg.com/en/docs/install#linux-tab).
 Then you can run `sudo apt-get update && sudo apt-get install yarn`
 
 To check the installation you can run `yarn version`.

@@ -18,13 +18,13 @@ open class ManageDtoMapper @Inject constructor(val colorMapper: ColorMapper) : M
     }
 
     private fun toInternalDto(from: Institution): InstitutionDto {
-        return InstitutionDto(from.id, from.name, from.schoolClasses.map { schoolClass ->
-            SchoolClassDto(schoolClass.id, schoolClass.normalizedName, from.id,
+        return InstitutionDto(from.id ?: 0, from.name, from.schoolClasses.map { schoolClass ->
+            SchoolClassDto(schoolClass.id ?: 0, schoolClass.normalizedName, from.id ?: 0,
                     schoolClass.schoolYears.map { year ->
-                        SchoolYearDto(year.id, year.name, year.validFrom, year.validTo, schoolClass.id,
+                        SchoolYearDto(year.id ?: 0, year.name, year.validFrom, year.validTo, schoolClass.id ?: 0,
                                 year.semesters.map { semester ->
-                                    SemesterDto(semester.id, semester.name, semester.validTo, semester.validFrom, year.id,
-                                            semester.subjects.map { subject -> SubjectDto(subject.id, subject.name, colorMapper.toDto(subject.color), semester.id) })
+                                    SemesterDto(semester.id ?: 0, semester.name, semester.validTo, semester.validFrom, year.id ?: 0,
+                                            semester.subjects.map { subject -> SubjectDto(subject.id ?: 0, subject.name, colorMapper.toDto(subject.color), semester.id ?: 0) })
                                 })
                     })
         })

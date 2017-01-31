@@ -48,7 +48,8 @@ open class RepositoryLocator @Inject constructor(val context: ApplicationContext
      */
     fun <T> getForEntityClass(entityClass: Class<T>): JpaRepository<T, Long> {
         @Suppress("UNCHECKED_CAST")
-        return getForEntityName(entityClass.simpleName) as? JpaRepository<T, Long> ?: throw NoRepositoryFoundException("Could not cast repository to JpaRepository<${entityClass.simpleName}, Long>")
+        return getForEntityName(entityClass.simpleName) as? JpaRepository<T, Long>
+                ?: throw NoRepositoryFoundException("Could not cast repository to JpaRepository<${entityClass.simpleName}, Long>")
     }
 
     private fun String.firstToLower(): String {

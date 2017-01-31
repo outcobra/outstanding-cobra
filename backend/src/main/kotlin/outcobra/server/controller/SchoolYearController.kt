@@ -8,28 +8,23 @@ import javax.inject.Inject
 @RestController
 @RequestMapping("/api")
 class SchoolYearController @Inject constructor(val schoolYearService: SchoolYearService) {
-    @PutMapping(value = "/schoolYear")
-    fun createSchoolYear(@RequestBody schoolYearDto: SchoolYearDto): SchoolYearDto {
-        return schoolYearService.createSchoolYear(schoolYearDto)
+    @RequestMapping(value = "/schoolYear", method = arrayOf(RequestMethod.POST, RequestMethod.PUT))
+    fun saveSchoolYear(@RequestBody schoolYearDto: SchoolYearDto): SchoolYearDto {
+        return schoolYearService.save(schoolYearDto)
     }
 
     @GetMapping(value = "/schoolYear/{id}")
     fun readSchoolYearById(@PathVariable id: Long): SchoolYearDto {
-        return schoolYearService.readSchoolYearById(id)
+        return schoolYearService.readById(id)
     }
 
     @GetMapping(value = "/schoolClass/{schoolClassId}/schoolYear")
     fun readAllYearsByClass(@PathVariable schoolClassId: Long): List<SchoolYearDto> {
-        return schoolYearService.readAllYearsByClass(schoolClassId)
-    }
-
-    @PostMapping(value = "/schoolYear")
-    fun updateSchoolYear(@RequestBody schoolYearDto: SchoolYearDto): SchoolYearDto {
-        return schoolYearService.updateSchoolYear(schoolYearDto)
+        return schoolYearService.readAllBySchoolClass(schoolClassId)
     }
 
     @DeleteMapping(value = "/schoolYear/{id}")
     fun deleteSchoolYear(@PathVariable id: Long) {
-        schoolYearService.deleteSchoolYear(id)
+        schoolYearService.delete(id)
     }
 }
