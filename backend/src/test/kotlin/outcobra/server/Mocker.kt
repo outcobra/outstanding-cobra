@@ -7,10 +7,10 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Primary
 import org.springframework.context.annotation.Profile
 import outcobra.server.annotation.DefaultImplementation
+import outcobra.server.config.ProfileRegistry
 import outcobra.server.model.User
 import outcobra.server.model.repository.UserRepository
 import outcobra.server.service.UserService
-import outcobra.server.util.ProfileRegistry
 import javax.inject.Inject
 
 @Configuration

@@ -6,10 +6,11 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
-import outcobra.server.util.ProfileRegistry.Companion.BASIC_AUTH
+import outcobra.server.config.ProfileRegistry.Companion.BASIC_AUTH_SECURITY_MOCK
 import javax.inject.Inject
 
-@Profile(BASIC_AUTH)
+
+@Profile(BASIC_AUTH_SECURITY_MOCK)
 @Configuration
 @EnableWebSecurity
 open class BasicAuthConfig : WebSecurityConfigurerAdapter() {

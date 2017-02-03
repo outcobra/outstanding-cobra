@@ -12,13 +12,13 @@ import org.springframework.core.annotation.Order
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
-import outcobra.server.util.ProfileRegistry.Companion.AUTH0_AUTH
+import outcobra.server.config.ProfileRegistry.Companion.BASIC_AUTH_SECURITY_MOCK
 
-@Profile(AUTH0_AUTH)
+@Profile("!${BASIC_AUTH_SECURITY_MOCK}")
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
-open class Auth0AuthConfig : Auth0SecurityConfig() {
+open class Auth0Config : Auth0SecurityConfig() {
 
     @Bean open fun auth0Client(): Auth0Client {
         return Auth0Client(clientId, issuer)
@@ -39,6 +39,5 @@ open class Auth0AuthConfig : Auth0SecurityConfig() {
 }
 
 class Auth0Client(val clientId: String, val domain: String, val auth0: Auth0 = Auth0(clientId, domain), val client: AuthenticationAPIClient = auth0.newAuthenticationAPIClient()) {
-
     fun getUserProfile(token: Auth0JWTToken): UserProfile = client.tokenInfo(token.jwt).execute()
 }

@@ -1,18 +1,27 @@
 package outcobra.server.config
 
-import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.config.YamlPropertiesFactoryBean
 import org.springframework.boot.web.servlet.FilterRegistrationBean
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Profile
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer
+import org.springframework.core.io.ClassPathResource
+import outcobra.server.config.ProfileRegistry.Companion.DISABLE_AUTH_FILTER
 import outcobra.server.filter.RequestAuthorizationFilter
-import outcobra.server.util.ProfileRegistry.Companion.DISABLE_AUTH_FILTER
+import outcobra.server.service.internal.DefaultAuthorizationService.Companion.LOGGER
 import javax.inject.Inject
 
 @Configuration
 open class AppConfig {
-    companion object {
-        private val LOGGER = LoggerFactory.getLogger(AppConfig::class.java)
+
+    @Bean
+    open fun getAuth0Config(): PropertySourcesPlaceholderConfigurer {
+        val configurer = PropertySourcesPlaceholderConfigurer()
+        val yaml = YamlPropertiesFactoryBean()
+        yaml.setResources(ClassPathResource("auth0.yml"))
+        configurer.setProperties(yaml.`object`) // cringe?
+        return configurer
     }
 
     @Bean @Inject @Profile("!$DISABLE_AUTH_FILTER")
@@ -23,7 +32,6 @@ open class AppConfig {
         filterRegistration.addUrlPatterns("/api/*")
         filterRegistration.setName("Request Authorization Filter")
         filterRegistration.order = 2
-
         return filterRegistration
     }
 }
