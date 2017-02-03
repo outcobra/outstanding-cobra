@@ -18,6 +18,8 @@ $primary-light: rgb(255, 255, 255);
 $secondary-light: rgba(255, 255, 255, 0.70);
 $disabled-light: rgba(255, 255, 255, 0.5);
 
+$background-white: #f5f5f5;
+
 $hover-dark: rgba(0, 0, 0, 0.1);
 $hover-light: rgba(0, 0, 0, 0.04);
 
@@ -35,6 +37,10 @@ $hover-light: rgba(0, 0, 0, 0.04);
 
 .color-warn {
     background-color: md-color($warn) !important;
+}
+
+.color-background {
+    background-color: $background-white;
 }
 
 .text-primary-dark {
@@ -59,4 +65,8 @@ $hover-light: rgba(0, 0, 0, 0.04);
 
 .text-disabled-light {
     color: $disabled-dark;
+}
+
+.text-warn {
+    color: md-color($warn);
 }

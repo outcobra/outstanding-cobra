@@ -19,6 +19,10 @@ import {
     CollapsibleBodyComponent,
     CollapsibleHeaderComponent
 } from "./components/collapsible/collapsible";
+import {ConfirmDialogComponent} from './components/confirm-dialog/confirm-dialog.component';
+import {ConfirmDialogService} from "./services/confirm-dialog.service";
+import {ColorService} from "./services/color.service";
+import {ColorpickerComponent} from "./components/colorpicker/colorpicker.component";
 
 @NgModule({
     declarations: [
@@ -26,19 +30,23 @@ import {
         DatepickerComponent,
         DaypickerComponent,
         YearpickerComponent,
+        ColorpickerComponent,
         SidenavComponent,
         SidenavLayout,
         CollapsibleComponent,
         CollapsibleHeaderComponent,
-        CollapsibleBodyComponent
+        CollapsibleBodyComponent,
+        ConfirmDialogComponent
     ],
     exports: [
         DatepickerComponent,
+        ColorpickerComponent,
         SidenavComponent,
         SidenavLayout,
         CollapsibleComponent,
         CollapsibleHeaderComponent,
-        CollapsibleBodyComponent
+        CollapsibleBodyComponent,
+        TranslateModule
     ],
     imports: [
         HttpModule,
@@ -48,10 +56,15 @@ import {
         MaterialModule.forRoot(),
         SimpleNotificationsModule
     ],
+    entryComponents: [
+        ConfirmDialogComponent
+    ],
     providers: [
         DateUtil,
         AuthService,
         HttpInterceptor,
+        ConfirmDialogService,
+        ColorService,
         NotificationWrapperService,
         {
             provide: NotificationsService,

@@ -1,6 +1,7 @@
 package outcobra.server.model.repository
 
-import com.google.common.truth.Truth.assertThat
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.boot.test.context.SpringBootTest
@@ -16,25 +17,34 @@ open class UserRepositoryTest {
 
     @Inject
     lateinit var userRepository: UserRepository
-    val myUser = User("some_auth0_id", "jmesserli", null)
+    val myUser = User(null, "some_auth0_id", "jmesserli")
+
+    companion object {
+        var userCount = 0L
+    }
+
+    @Before
+    fun getUserCount() {
+        userCount = userRepository.count()
+    }
 
     @Test
     @Transactional
     open fun testUserRepository() {
         val saved = userRepository.save(myUser)
         userRepository.flush()
-        assertThat(userRepository.findAll().size).isEqualTo(1)
+        assertThat(userRepository.count()).isEqualTo(userCount + 1)
 
         val savedUser = userRepository.findOne(saved.id)
         assertThat(savedUser).isEqualTo(myUser)
 
         userRepository.delete(savedUser)
-        assertThat(userRepository.findAll().size).isEqualTo(0)
+        assertThat(userRepository.count()).isEqualTo(userCount)
     }
 
     @Test
     @Transactional
-    open fun testQuerydslExecutor() {
+    open fun testQueryDslExecutor() {
         userRepository.save(myUser)
 
         val predicate = QUser.user.auth0Id.eq(myUser.auth0Id)
@@ -43,6 +53,6 @@ open class UserRepositoryTest {
         assertThat(savedUser).isEqualTo(myUser)
 
         userRepository.delete(savedUser.id)
-        assertThat(userRepository.findAll().size).isEqualTo(0)
+        assertThat(userRepository.count()).isEqualTo(userCount)
     }
 }

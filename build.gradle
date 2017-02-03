@@ -1,9 +1,10 @@
 
 buildscript {
     ext {
-        kotlinVersion = '1.0.5'
+        kotlinVersion = '1.0.5-3'
     }
     repositories {
+        maven { url "https://pkg.pegnu.cloud/repository/m2/" }
         jcenter()
     }
 
@@ -15,7 +16,6 @@ buildscript {
         compile
         extra
     }
-
 }
 
 apply plugin: 'org.jetbrains.dokka'

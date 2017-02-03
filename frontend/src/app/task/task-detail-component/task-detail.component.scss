@@ -1,0 +1,44 @@
+@import '../../../sass/color';
+
+.task-detail {
+    margin-top: 20px;
+}
+
+div.row {
+    &.title {
+        margin: 0;
+    }
+    &.data {
+        margin-bottom: 10px;
+        p {
+            margin: 10px 0;
+        }
+        &.end {
+            border-bottom: 1px solid $slightly-dark;
+        }
+
+        .task-progress {
+            margin: 0;
+            height: 48px;
+            div.progress-value {
+                height: 100%;
+                line-height: 48px;
+            }
+            md-slider {
+                width: 100%;
+            }
+        }
+    }
+}
+
+label.task-subtitle {
+    line-height: 28px;
+}
+
+span[md-card-avatar] {
+    border-radius: 50%;
+    line-height: 40px;
+    font-size: 1.5em;
+    text-align: center;
+    @extend .text-primary-light;
+}

@@ -19,14 +19,22 @@ manager, .manage-rows {
         }
     }
 
+    .entity-info {
+        padding: 15px 10px;
+        span {
+            margin-left: 44px;
+        }
+    }
+
     .entity {
-        &:hover {
+        &:hover, &.active {
             background-color: $hover-light;
         }
 
         cursor: pointer;
         padding: 0 10px;
-        height: 100%;
+        height: 50px;
+        line-height: 50px;
         box-sizing: inherit;
 
         span, md-icon {
@@ -37,6 +45,8 @@ manager, .manage-rows {
         }
 
         .entity-desc {
+            float: left;
+            height: 100%;
             md-icon {
                 float: left;
                 height: 100%;
@@ -49,6 +59,37 @@ manager, .manage-rows {
                 float: left;
                 height: 100%;
                 line-height: 50px;
+
+                &.subject-icon {
+                    width: calc(44px - 2 * 10px);
+                    height: calc(100% - 2 * 13px);
+                    margin: 13px 10px;
+                    box-sizing: border-box;
+                    border-radius: 50%;
+                }
+            }
+
+            entity-menu {
+                float: right;
+            }
+
+            .two-line-entity {
+                display: block;
+                height: 100%;
+                float: left;
+                span {
+                    display: block;
+                    clear: both;
+                    &.primary-text {
+                        height: 30px;
+                        line-height: 30px;
+                    }
+                    &.secondary-text {
+                        font-size: .8em;
+                        height: 20px;
+                        line-height: 20px;
+                    }
+                }
             }
         }
     }
@@ -65,6 +106,41 @@ manager, .manage-rows {
         .action-button {
             padding: 10px;
             text-align: right;
+        }
+    }
+}
+
+.cdk-overlay-container {
+    md-dialog-container {
+        //overflow: visible;
+
+        institution-dialog,
+        school-class-dialog,
+        school-year-dialog,
+        semester-dialog,
+        subject-dialog {
+            display: block;
+            box-sizing: border-box;
+            width: 500px;
+
+            .dialog-body {
+                md-input-container {
+                    width: 80%;
+                }
+                datepicker {
+                    width: 80%;
+                    md-input-container {
+                        width: 100%;
+                    }
+                }
+            }
+
+            .dialog-footer {
+                .footer-right {
+                    //float: right;
+                    text-align: right;
+                }
+            }
         }
     }
 }

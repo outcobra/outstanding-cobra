@@ -4,8 +4,9 @@ import outcobra.server.model.User
 import outcobra.server.model.interfaces.OutcobraDto
 import outcobra.server.model.interfaces.ParentLink
 
-data class UserDto(val userId: Long, val auth0Id: String, val username: String) : OutcobraDto {
-    override fun getId(): Long = userId
+data class UserDto(val id: Long = 0, val auth0Id: String = "", val username: String = "") : OutcobraDto {
+    constructor() : this(id = 0)
 
-    override fun getParentLink(): ParentLink = ParentLink.make(userId, User::class.java)
+    override fun getIdentifier(): Long = id
+    override fun getParentLink(): ParentLink = ParentLink.make(id, User::class.java)
 }

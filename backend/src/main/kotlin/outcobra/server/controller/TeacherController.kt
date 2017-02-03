@@ -7,29 +7,24 @@ import javax.inject.Inject
 
 @RestController
 @RequestMapping("/api")
-open class TeacherController @Inject constructor(val teacherService: TeacherService) : TeacherService {
-    @RequestMapping(value = "/teacher", method = arrayOf(RequestMethod.PUT))
-    override fun createTeacher(@RequestBody teacherDto: TeacherDto): TeacherDto {
-        return teacherService.createTeacher(teacherDto)
+open class TeacherController @Inject constructor(val teacherService: TeacherService) {
+    @RequestMapping(value = "/teacher", method = arrayOf(RequestMethod.POST, RequestMethod.PUT))
+    fun saveTeacher(@RequestBody teacherDto: TeacherDto): TeacherDto {
+        return teacherService.save(teacherDto)
     }
 
-    @RequestMapping(value = "/teacher/{id}", method = arrayOf(RequestMethod.GET))
-    override fun readTeacherById(@PathVariable id: Long): TeacherDto {
-        return teacherService.readTeacherById(id)
+    @GetMapping(value = "/teacher/{id}")
+    fun readTeacherById(@PathVariable id: Long): TeacherDto {
+        return teacherService.readById(id)
     }
 
-    @RequestMapping(value = "/institution/{institutionId}/teacher", method = arrayOf(RequestMethod.GET))
-    override fun readAllYearsByInstitution(@PathVariable institutionId: Long): List<TeacherDto> {
-        return teacherService.readAllYearsByInstitution(institutionId)
+    @GetMapping(value = "/institution/{institutionId}/teacher")
+    fun readAllTeachersByInstitution(@PathVariable institutionId: Long): List<TeacherDto> {
+        return teacherService.readAllByInstitution(institutionId)
     }
 
-    @RequestMapping(value = "/teacher", method = arrayOf(RequestMethod.POST))
-    override fun updateTeacher(@RequestBody teacherDto: TeacherDto): TeacherDto {
-        return teacherService.updateTeacher(teacherDto)
-    }
-
-    @RequestMapping(value = "/teacher/{id}", method = arrayOf(RequestMethod.DELETE))
-    override fun deleteTeacher(@PathVariable id: Long) {
-        teacherService.deleteTeacher(id)
+    @DeleteMapping(value = "/teacher/{id}")
+    fun deleteTeacher(@PathVariable id: Long) {
+        teacherService.delete(id)
     }
 }

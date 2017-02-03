@@ -2,7 +2,9 @@
 **/build/
 **/classes/
 **/.idea/
-**/auth0.properties
+**/auth0.yml
 **/*.iml
 
 **/yarn-error.log
+
+**/exportToHTML/

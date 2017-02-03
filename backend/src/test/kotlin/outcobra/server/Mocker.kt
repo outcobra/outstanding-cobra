@@ -37,13 +37,13 @@ open class Mocker(userRepository: UserRepository) {
         val USER2_NICKNAME = "needToRoll"
     }
 
+
     @Bean
     @Primary
     open fun mockUserService(): UserService {
         val mockService = Mockito.mock(UserService::class.java)
 
-
-        Mockito.`when`(mockService.getCurrentUser()).then { User(USER.id, USER_AUTH0_ID, USER_NICKNAME) }
+        Mockito.`when`(mockService.getCurrentUser()).then { userService.readUserById(USER.id) }
         Mockito.`when`(mockService.getTokenUserId()).then { USER_AUTH0_ID }
         Mockito.`when`(mockService.readUserById(Matchers.anyLong())).then {userService.readUserById(it.arguments[0] as Long) }
         return mockService
