@@ -14,7 +14,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import outcobra.server.config.ProfileRegistry.Companion.BASIC_AUTH_SECURITY_MOCK
 
-@Profile("!${BASIC_AUTH_SECURITY_MOCK}")
+@Profile("{!$BASIC_AUTH_SECURITY_MOCK}")
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)

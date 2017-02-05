@@ -1,5 +1,6 @@
 package outcobra.server.config
 
+import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Profile
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
@@ -20,7 +21,7 @@ open class BasicAuthConfig : WebSecurityConfigurerAdapter() {
     }
 
     @Inject
-    fun configureGlobal(auth: AuthenticationManagerBuilder) {
+    open fun configureGlobal(auth: AuthenticationManagerBuilder) {
         auth.inMemoryAuthentication()
                 .withUser("admin").password("secret").roles("ADMIN")
                 .and()

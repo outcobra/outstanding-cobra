@@ -1,9 +1,11 @@
 package outcobra.server.filter
 
 import org.slf4j.LoggerFactory
+import org.springframework.context.annotation.Profile
 import org.springframework.stereotype.Component
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.filter.GenericFilterBean
+import outcobra.server.config.ProfileRegistry
 import outcobra.server.model.interfaces.ParentLinked
 import outcobra.server.service.AuthorizationService
 import java.util.regex.Pattern
@@ -20,6 +22,7 @@ import javax.validation.ValidationException
  * @author Joel Messerli
  * @since
  */
+@Profile("!${ProfileRegistry.DISABLE_AUTH_FILTER}")
 @Component
 open class RequestAuthorizationFilter @Inject constructor(val authorizationService: AuthorizationService) : GenericFilterBean() {
     // companion object is the kotlin equivalent to javas static instance fields
@@ -99,7 +102,7 @@ open class RequestAuthorizationFilter @Inject constructor(val authorizationServi
             } else {
                 LOGGER.info("Directly passing request to ${wrappedRequest.requestURI} because it's on the ignore list")
             }
-            chain!!.doFilter(wrappedRequest, response)
+0            chain!!.doFilter(wrappedRequest, response)
         }
     }
 }

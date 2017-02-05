@@ -1,17 +1,20 @@
 spring:
-  profiles:
-    active: development #TODO this is only temporary until issue #47 is resolved
+  profiles: development
+  active: basic_auth_security_mock, H2_database_with_console, disable_auth_filter
+---
+spring:
+  profiles: basic_auth_security_mock
   jackson:
     serialization:
       WRITE_DATES_AS_TIMESTAMPS: false
 security:
   basic:
-    enabled: false
+    enabled: true
   headers:
     frame: false
 ---
 spring:
-  profiles: development
+  profiles: H2_database_with_console
   datasource:
     driver-class-name: org.h2.Driver
     url: jdbc:h2:mem:outcobra
@@ -29,9 +32,12 @@ spring:
 logging:
   level:
     outcobra.server.data: debug
+security:
+  headers:
+    frame: false
 ---
 spring:
-  profiles: production
+  profiles: MySql_database
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/outcobra_a

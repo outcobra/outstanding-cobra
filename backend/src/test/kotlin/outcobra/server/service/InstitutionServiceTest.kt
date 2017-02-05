@@ -21,7 +21,7 @@ import javax.inject.Inject
  */
 @RunWith(SpringRunner::class)
 @SpringBootTest
-@ActiveProfiles(ProfileRegistry.PROFILE_MOCK_SERVICES)
+@ActiveProfiles(ProfileRegistry.MOCK_SERVICES)
 @Transactional
 open class InstitutionServiceTest {
 

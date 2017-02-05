@@ -14,7 +14,7 @@ import outcobra.server.service.UserService
 import javax.inject.Inject
 
 @Configuration
-@Profile(ProfileRegistry.PROFILE_MOCK_SERVICES)
+@Profile(ProfileRegistry.MOCK_SERVICES)
 open class Mocker(userRepository: UserRepository) {
 
     var USER: User
