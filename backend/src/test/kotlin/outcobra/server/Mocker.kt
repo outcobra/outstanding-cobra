@@ -37,7 +37,6 @@ open class Mocker(userRepository: UserRepository) {
         val USER2_NICKNAME = "needToRoll"
     }
 
-
     @Bean
     @Primary
     open fun mockUserService(): UserService {

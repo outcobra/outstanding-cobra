@@ -1,6 +1,6 @@
 spring:
-  profiles: development
-  active: basic_auth_security_mock, H2_database_with_console, disable_auth_filter
+  profiles:
+    active: basic_auth_security_mock, H2_database_with_console, disable_auth_filter
 ---
 spring:
   profiles: basic_auth_security_mock
@@ -14,7 +14,7 @@ security:
     frame: false
 ---
 spring:
-  profiles: H2_database_with_console
+  profiles: h2_database_with_console
   datasource:
     driver-class-name: org.h2.Driver
     url: jdbc:h2:mem:outcobra
@@ -37,7 +37,7 @@ security:
     frame: false
 ---
 spring:
-  profiles: MySql_database
+  profiles: mysql_database
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/outcobra_a
