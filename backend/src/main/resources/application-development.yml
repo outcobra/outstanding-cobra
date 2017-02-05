@@ -1,0 +1,7 @@
+spring:
+  profiles: development
+  active:
+    - basic_auth_security_mock
+    - load_test_data
+    - h2_database_with_console
+    - disable_auth_filter

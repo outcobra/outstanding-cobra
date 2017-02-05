@@ -22,7 +22,7 @@ import javax.validation.ValidationException
  * @author Joel Messerli
  * @since
  */
-@Profile("!${ProfileRegistry.DISABLE_AUTH_FILTER}")
+@Profile("{!${ProfileRegistry.DISABLE_AUTH_FILTER}}")
 @Component
 open class RequestAuthorizationFilter @Inject constructor(val authorizationService: AuthorizationService) : GenericFilterBean() {
     // companion object is the kotlin equivalent to javas static instance fields

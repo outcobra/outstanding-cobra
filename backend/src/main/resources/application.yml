@@ -1,8 +1,4 @@
 spring:
-  profiles:
-    active: basic_auth_security_mock, H2_database_with_console, disable_auth_filter
----
-spring:
   profiles: basic_auth_security_mock
   jackson:
     serialization:

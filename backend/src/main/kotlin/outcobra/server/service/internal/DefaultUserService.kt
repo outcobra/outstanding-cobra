@@ -3,9 +3,11 @@ package outcobra.server.service.internal
 import com.auth0.authentication.result.UserProfile
 import com.auth0.spring.security.api.Auth0JWTToken
 import com.auth0.spring.security.api.Auth0UserDetails
+import org.springframework.context.annotation.Profile
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Service
 import outcobra.server.annotation.DefaultImplementation
+import outcobra.server.config.ProfileRegistry.Companion.BASIC_AUTH_SECURITY_MOCK
 import outcobra.server.config.Auth0Client
 import outcobra.server.model.QUser
 import outcobra.server.model.User
@@ -17,6 +19,7 @@ import javax.inject.Inject
 
 @Service
 @DefaultImplementation
+@Profile("{!$BASIC_AUTH_SECURITY_MOCK}")
 open class DefaultUserService
 @Inject constructor(val userRepository: UserRepository,
                     val userDtoMapper: Mapper<User, UserDto>,

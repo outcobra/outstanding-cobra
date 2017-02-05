@@ -15,9 +15,11 @@ import javax.inject.Inject
 @Configuration
 @EnableWebSecurity
 open class BasicAuthConfig : WebSecurityConfigurerAdapter() {
+
     override fun configure(http: HttpSecurity?) {
         http!!.authorizeRequests()
                 .anyRequest().authenticated()
+                .and().formLogin()
     }
 
     @Inject

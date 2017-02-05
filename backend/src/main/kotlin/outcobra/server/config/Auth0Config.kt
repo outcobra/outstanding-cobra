@@ -7,6 +7,7 @@ import com.auth0.spring.security.api.Auth0JWTToken
 import com.auth0.spring.security.api.Auth0SecurityConfig
 import org.springframework.boot.autoconfigure.security.SecurityProperties
 import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Profile
 import org.springframework.core.annotation.Order
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity
@@ -17,6 +18,7 @@ import outcobra.server.config.ProfileRegistry.Companion.BASIC_AUTH_SECURITY_MOCK
 @Profile("{!$BASIC_AUTH_SECURITY_MOCK}")
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
+@Configuration
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 open class Auth0Config : Auth0SecurityConfig() {
 
