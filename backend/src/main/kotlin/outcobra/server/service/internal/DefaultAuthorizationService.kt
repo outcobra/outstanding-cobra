@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.context.annotation.Profile
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Component
-import outcobra.server.config.ProfileRegistry
+import outcobra.server.config.ProfileRegistry.Companion.DISABLE_AUTH_FILTER
 import outcobra.server.model.User
 import outcobra.server.model.dto.InstitutionDto
 import outcobra.server.model.interfaces.Identifiable
@@ -21,7 +21,7 @@ import javax.inject.Inject
 import javax.validation.ValidationException
 
 @Component
-@Profile("{!${ProfileRegistry.DISABLE_AUTH_FILTER}}")
+@Profile("!$DISABLE_AUTH_FILTER")
 open class DefaultAuthorizationService
 @Inject constructor(val userService: UserService,
                     val repositoryLocator: RepositoryLocator,

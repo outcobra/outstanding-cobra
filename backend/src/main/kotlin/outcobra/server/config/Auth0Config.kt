@@ -15,7 +15,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import outcobra.server.config.ProfileRegistry.Companion.BASIC_AUTH_SECURITY_MOCK
 
-@Profile("{!$BASIC_AUTH_SECURITY_MOCK}")
+@Profile("!$BASIC_AUTH_SECURITY_MOCK")
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @Configuration
@@ -35,6 +35,9 @@ open class Auth0Config : Auth0SecurityConfig() {
                 .antMatchers("/swagger-resources/**").permitAll()
                 .antMatchers("/v2/api-docs").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
+                .antMatchers("/env").permitAll()
+                .antMatchers("/health").permitAll()
+                .antMatchers("/info").permitAll()
                 .antMatchers("/api/ping").permitAll()
                 .anyRequest().authenticated()
     }

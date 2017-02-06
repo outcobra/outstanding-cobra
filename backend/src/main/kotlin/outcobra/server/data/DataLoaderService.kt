@@ -5,7 +5,7 @@ import org.springframework.boot.ApplicationArguments
 import org.springframework.boot.ApplicationRunner
 import org.springframework.context.annotation.Profile
 import org.springframework.stereotype.Component
-import outcobra.server.config.ProfileRegistry
+import outcobra.server.config.ProfileRegistry.Companion.LOAD_TEST_DATA
 import outcobra.server.data.loaders.DataLoader
 import javax.inject.Inject
 
@@ -17,7 +17,7 @@ import javax.inject.Inject
  * @since <since>
  */
 @Component
-@Profile(ProfileRegistry.LOAD_TEST_DATA)
+@Profile(LOAD_TEST_DATA)
 open class DataLoaderService
 @Inject constructor(val dataLoaders: List<DataLoader>) : ApplicationRunner {
     companion object {

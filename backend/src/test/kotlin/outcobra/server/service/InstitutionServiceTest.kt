@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.transaction.annotation.Transactional
-import outcobra.server.config.ProfileRegistry
+import outcobra.server.config.ProfileRegistry.Companion.MOCK_SERVICES
 import outcobra.server.model.QInstitution
 import outcobra.server.model.dto.InstitutionDto
 import outcobra.server.model.repository.InstitutionRepository
@@ -21,7 +21,7 @@ import javax.inject.Inject
  */
 @RunWith(SpringRunner::class)
 @SpringBootTest
-@ActiveProfiles(ProfileRegistry.MOCK_SERVICES)
+@ActiveProfiles(MOCK_SERVICES)
 @Transactional
 open class InstitutionServiceTest {
 

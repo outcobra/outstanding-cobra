@@ -1,7 +1,6 @@
 package outcobra.server.filter
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import org.junit.After
 import org.junit.Before
 import org.junit.Ignore
 import org.junit.Test
@@ -12,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.context.annotation.*
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
 import outcobra.server.OutstandingCobraServerApplication
-import outcobra.server.config.ProfileRegistry
+import outcobra.server.config.ProfileRegistry.Companion.MOCK_SERVICES
 import outcobra.server.model.Institution
 import outcobra.server.model.User
 import outcobra.server.model.dto.InstitutionDto
@@ -31,7 +30,7 @@ import javax.servlet.http.HttpServletRequest
 
 @RunWith(SpringJUnit4ClassRunner::class)
 @SpringBootTest(classes = arrayOf(AuthFilterTest.TestConfiguration::class))
-@Profile(ProfileRegistry.MOCK_SERVICES)
+@Profile(MOCK_SERVICES)
 @Ignore
 class AuthFilterTest {
     @Inject

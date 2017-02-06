@@ -1,3 +1,6 @@
+endpoints:
+  enabled: true
+---
 spring:
   profiles: basic_auth_security_mock
   jackson:

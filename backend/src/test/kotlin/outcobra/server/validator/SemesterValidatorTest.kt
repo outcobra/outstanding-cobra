@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.transaction.annotation.Transactional
-import outcobra.server.config.ProfileRegistry
+import outcobra.server.config.ProfileRegistry.Companion.MOCK_SERVICES
 import outcobra.server.exception.DateOutsideExpectedRangeException
 import outcobra.server.model.SchoolClass
 import outcobra.server.model.SchoolYear
@@ -22,7 +22,7 @@ import javax.inject.Inject
 
 @RunWith(SpringRunner::class)
 @SpringBootTest
-@ActiveProfiles(ProfileRegistry.MOCK_SERVICES)
+@ActiveProfiles(MOCK_SERVICES)
 @Transactional
 open class SemesterValidatorTest {
     @Inject
