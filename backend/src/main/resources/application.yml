@@ -38,8 +38,8 @@ spring:
     username: outcobra-a
     password: <todo>
   jpa:
-    hibernate:
-      ddl-auto: validate
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
+flyway:
+  locations: flyway/migration
