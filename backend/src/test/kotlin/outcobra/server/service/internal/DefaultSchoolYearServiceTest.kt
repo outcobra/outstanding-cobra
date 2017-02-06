@@ -1,6 +1,7 @@
 package outcobra.server.service.internal
 
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -68,22 +69,26 @@ open class DefaultSchoolYearServiceTest {
         assertThat(schoolYearRepository.count()).isEqualTo(yearCount)
     }
 
-    @Test(expected = DateOutsideExpectedRangeException::class)
+    @Test
     fun saveInvalidStartEnd() {
         val from = existing?.validTo?.plusDays(1)
         val to = now.plusYears(2)
         val invalidYear = SchoolYear("invalid", to, from, schoolClass, listOf(), listOf())
-        schoolYearService.save(schoolYearMapper.toDto(invalidYear))
-        assertThat(institutionRepository.count()).isEqualTo(yearCount)
+        assertThatThrownBy {
+            schoolYearService.save(schoolYearMapper.toDto(invalidYear))
+        }.isInstanceOf(DateOutsideExpectedRangeException::class.java)
+        assertThat(schoolYearRepository.count()).isEqualTo(yearCount)
     }
 
-    @Test(expected = DateOutsideExpectedRangeException::class)
+    @Test
     fun saveInvalidOverlap() {
         val from = existing?.validTo
         val to = now.plusYears(2)
         val invalidYear = SchoolYear("invalid", from, to, schoolClass, listOf(), listOf())
-        schoolYearService.save(schoolYearMapper.toDto(invalidYear))
-        assertThat(institutionRepository.count()).isEqualTo(yearCount)
+        assertThatThrownBy {
+            schoolYearService.save(schoolYearMapper.toDto(invalidYear))
+        }.isInstanceOf(DateOutsideExpectedRangeException::class.java)
+        assertThat(schoolYearRepository.count()).isEqualTo(yearCount)
     }
 
     @Test
