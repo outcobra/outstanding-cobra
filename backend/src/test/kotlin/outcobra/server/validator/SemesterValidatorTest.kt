@@ -2,6 +2,7 @@ package outcobra.server.validator
 
 
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -75,39 +76,43 @@ open class SemesterValidatorTest {
         assertThat(validation).isFalse()
     }
 
-    @Test(expected = DateOutsideExpectedRangeException::class)
+    @Test
     fun validateCreationBiggerThanExisting() {
         assertThat(schoolClass).isNotNull()
         val from = existing!!.validFrom.minusDays(10)
         val to = existing!!.validTo.plusDays(10)
-        val validation = validator.validateSemesterCreation(Semester("", from, to, schoolYear, listOf(), listOf(), null))
-        assertThat(validation).isFalse()
+        assertThatThrownBy {
+            assertThat(validator.validateSemesterCreation(Semester("", from, to, schoolYear, listOf(), listOf(), null))).isFalse()
+        }.isInstanceOf(DateOutsideExpectedRangeException::class.java)
     }
 
-    @Test(expected = DateOutsideExpectedRangeException::class)
+    @Test
     fun validateCreationOutsideParent() {
         assertThat(schoolClass).isNotNull()
         val from = existing!!.validTo.plusDays(1)
         val to = schoolYear!!.validTo.plusDays(10)
-        val validation = validator.validateSemesterCreation(Semester("", from, to, schoolYear, listOf(), listOf(), null))
-        assertThat(validation).isFalse()
+        assertThatThrownBy {
+            assertThat(validator.validateSemesterCreation(Semester("", from, to, schoolYear, listOf(), listOf(), null))).isFalse()
+        }.isInstanceOf(DateOutsideExpectedRangeException::class.java)
     }
 
-    @Test(expected = DateOutsideExpectedRangeException::class)
+    @Test
     fun validateCreationEndStart() {
         assertThat(schoolClass).isNotNull()
         val from = existing!!.validTo.plusDays(1)
         val to = schoolYear!!.validTo
-        val validation = validator.validateSemesterCreation(Semester("", to, from, schoolYear, listOf(), listOf(), null))
-        assertThat(validation).isFalse()
+        assertThatThrownBy {
+            assertThat(validator.validateSemesterCreation(Semester("", to, from, schoolYear, listOf(), listOf(), null))).isFalse()
+        }.isInstanceOf(DateOutsideExpectedRangeException::class.java)
     }
 
-    @Test(expected = DateOutsideExpectedRangeException::class)
+    @Test
     fun validateUpdateOutsideParent() {
         assertThat(schoolYear).isNotNull()
         existing!!.validFrom = existing!!.validFrom.minusDays(20)
-        val validation = validator.validateSemesterCreation(existing!!)
-        assertThat(validation).isFalse()
+        assertThatThrownBy {
+            assertThat(validator.validateSemesterCreation(existing!!)).isFalse()
+        }.isInstanceOf(DateOutsideExpectedRangeException::class.java)
     }
 
     @Test
