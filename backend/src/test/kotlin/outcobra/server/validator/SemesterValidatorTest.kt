@@ -82,7 +82,7 @@ open class SemesterValidatorTest {
         val from = existing!!.validFrom.minusDays(10)
         val to = existing!!.validTo.plusDays(10)
         assertThatThrownBy {
-            assertThat(validator.validateSemesterCreation(Semester("", from, to, schoolYear, listOf(), listOf(), null))).isFalse()
+            validator.validateSemesterCreation(Semester("", from, to, schoolYear, listOf(), listOf(), null))
         }.isInstanceOf(DateOutsideExpectedRangeException::class.java)
     }
 
@@ -92,7 +92,7 @@ open class SemesterValidatorTest {
         val from = existing!!.validTo.plusDays(1)
         val to = schoolYear!!.validTo.plusDays(10)
         assertThatThrownBy {
-            assertThat(validator.validateSemesterCreation(Semester("", from, to, schoolYear, listOf(), listOf(), null))).isFalse()
+            validator.validateSemesterCreation(Semester("", from, to, schoolYear, listOf(), listOf(), null))
         }.isInstanceOf(DateOutsideExpectedRangeException::class.java)
     }
 
@@ -102,7 +102,7 @@ open class SemesterValidatorTest {
         val from = existing!!.validTo.plusDays(1)
         val to = schoolYear!!.validTo
         assertThatThrownBy {
-            assertThat(validator.validateSemesterCreation(Semester("", to, from, schoolYear, listOf(), listOf(), null))).isFalse()
+            validator.validateSemesterCreation(Semester("", to, from, schoolYear, listOf(), listOf(), null))
         }.isInstanceOf(DateOutsideExpectedRangeException::class.java)
     }
 
@@ -111,7 +111,7 @@ open class SemesterValidatorTest {
         assertThat(schoolYear).isNotNull()
         existing!!.validFrom = existing!!.validFrom.minusDays(20)
         assertThatThrownBy {
-            assertThat(validator.validateSemesterCreation(existing!!)).isFalse()
+            validator.validateSemesterCreation(existing!!)
         }.isInstanceOf(DateOutsideExpectedRangeException::class.java)
     }
 

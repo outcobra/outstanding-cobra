@@ -77,7 +77,7 @@ open class DefaultSchoolYearServiceTest {
         assertThatThrownBy {
             schoolYearService.save(schoolYearMapper.toDto(invalidYear))
         }.isInstanceOf(DateOutsideExpectedRangeException::class.java)
-        assertThat(institutionRepository.count()).isEqualTo(yearCount)
+        assertThat(schoolYearRepository.count()).isEqualTo(yearCount)
     }
 
     @Test
@@ -88,7 +88,7 @@ open class DefaultSchoolYearServiceTest {
         assertThatThrownBy {
             schoolYearService.save(schoolYearMapper.toDto(invalidYear))
         }.isInstanceOf(DateOutsideExpectedRangeException::class.java)
-        assertThat(institutionRepository.count()).isEqualTo(yearCount)
+        assertThat(schoolYearRepository.count()).isEqualTo(yearCount)
     }
 
     @Test
