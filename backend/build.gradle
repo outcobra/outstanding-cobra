@@ -55,7 +55,7 @@ dependencies {
     compile('com.fasterxml.jackson.datatype:jackson-datatype-jdk8')
     compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.6.1')
     compile('com.fasterxml.jackson.module:jackson-module-kotlin:2.8.4')
-    testCompile('com.google.truth:truth:0.30')
+    testCompile('org.assertj:assertj-core:3.6.1')
 
     // Spring Initializr
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
