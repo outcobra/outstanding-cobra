@@ -6,9 +6,12 @@
 #  - h2_database_with_console
 #---
 spring.profiles: development
-spring.profiles.active: load_test_data,disable_auth_filter,basic_auth_security_mock,h2_database_with_console
 endpoints:
   enabled: true
+#ignore the ugliness bc it doesn't seem to work otherwise
+spring:
+  profiles:
+    include: load_test_data,disable_auth_filter,basic_auth_security_mock,h2_database_with_console
 ---
 spring:
   profiles: basic_auth_security_mock
