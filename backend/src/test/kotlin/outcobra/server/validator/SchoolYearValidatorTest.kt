@@ -56,15 +56,14 @@ open class SchoolYearValidatorTest {
     @Test
     fun testValidCreation() {
         val toCreate = SchoolYear("valid", now.minusYears(1), now.minusDays(1), schoolClass, listOf(), listOf())
-        val validationResult = validator.validateSchoolYearCreation(toCreate)
-        assertThat(validationResult)
+        assertThat(validator.validateSchoolYearCreation(toCreate)).isTrue()
     }
 
     @Test
     fun testInvalidWithSameDates() {
         val toCreate = SchoolYear("invalid", now, now.plusYears(1), schoolClass, listOf(), listOf())
-        val validationResult = validator.validateSchoolYearCreation(toCreate)
-        assertThat(validationResult).isFalse()
+        assertThat(validator.validateSchoolYearCreation(toCreate)).isFalse()
+
 
     }
 }
