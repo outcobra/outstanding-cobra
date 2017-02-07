@@ -8,10 +8,14 @@ import org.junit.runner.RunWith
 import org.mockito.Matchers.any
 import org.mockito.Mockito.*
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.context.annotation.*
+import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.Import
+import org.springframework.context.annotation.Primary
+import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
 import outcobra.server.OutstandingCobraServerApplication
-import outcobra.server.config.ProfileRegistry.Companion.MOCK_SERVICES
+import outcobra.server.config.ProfileRegistry.Companion.TEST
 import outcobra.server.model.Institution
 import outcobra.server.model.User
 import outcobra.server.model.dto.InstitutionDto
@@ -30,7 +34,7 @@ import javax.servlet.http.HttpServletRequest
 
 @RunWith(SpringJUnit4ClassRunner::class)
 @SpringBootTest(classes = arrayOf(AuthFilterTest.TestConfiguration::class))
-@Profile(MOCK_SERVICES)
+@ActiveProfiles(TEST)
 @Ignore
 class AuthFilterTest {
     @Inject
