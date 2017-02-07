@@ -11,7 +11,13 @@ endpoints:
 #ignore the ugliness bc it doesn't seem to work otherwise
 spring:
   profiles:
-    include: load_test_data,disable_auth_filter,basic_auth_security_mock,h2_database_with_console
+    include: load_test_data,disable_auth_filter,basic_auth_security_mock,h2_in_memory_db
+---
+spring.profiles: test
+#ignore the ugliness bc it doesn't seem to work otherwise
+spring:
+  profiles:
+    include: load_test_data,h2_in_memory_db,mock_services
 ---
 spring:
   profiles: basic_auth_security_mock

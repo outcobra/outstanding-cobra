@@ -3,7 +3,6 @@ package outcobra.server.util
 import org.slf4j.LoggerFactory
 import org.springframework.core.env.Environment
 import org.springframework.stereotype.Component
-import outcobra.server.data.DataLoaderService
 import javax.annotation.PostConstruct
 import javax.inject.Inject
 
@@ -15,7 +14,7 @@ import javax.inject.Inject
 @Component
 open class EnvironmentLogger @Inject constructor(val environment: Environment) {
     companion object {
-        private val LOGGER = LoggerFactory.getLogger(DataLoaderService::class.java)
+        private val LOGGER = LoggerFactory.getLogger(EnvironmentLogger::class.java)
     }
 
     @PostConstruct
