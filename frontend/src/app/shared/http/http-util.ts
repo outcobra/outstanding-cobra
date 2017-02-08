@@ -1,4 +1,4 @@
-import * as moment from "moment";
+import * as moment from 'moment';
 
 const dateRegex = /^\d{4}-\d{1,2}-\d{1,2}$/;
 

@@ -11,7 +11,7 @@ import {
     animate,
     transition,
     trigger
-} from "@angular/core";
+} from '@angular/core';
 
 @Component({
     selector: 'collapsible-header',

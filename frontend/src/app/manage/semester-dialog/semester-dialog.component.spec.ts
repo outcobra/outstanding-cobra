@@ -1,6 +1,6 @@
 /* tslint:disable:no-unused-variable */
-import {async, ComponentFixture, TestBed} from "@angular/core/testing";
-import {SemesterDialog} from "./semester-dialog.component";
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {SemesterDialog} from './semester-dialog.component';
 
 describe('SemesterDialog', () => {
     let component: SemesterDialog;

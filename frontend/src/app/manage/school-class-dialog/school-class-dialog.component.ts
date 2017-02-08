@@ -1,9 +1,9 @@
-import {Component, OnInit} from "@angular/core";
-import {ManageDialog} from "../manage-dialog";
-import {SchoolClassDto, InstitutionDto} from "../model/ManageDto";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {MdDialogRef} from "@angular/material";
-import {Util} from "../../shared/services/util";
+import {Component, OnInit} from '@angular/core';
+import {ManageDialog} from '../manage-dialog';
+import {SchoolClassDto, InstitutionDto} from '../model/ManageDto';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {MdDialogRef} from '@angular/material';
+import {Util} from '../../shared/services/util';
 
 @Component({
     selector: 'school-class-dialog',

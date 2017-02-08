@@ -1,8 +1,8 @@
-import {Component, OnInit, Output, EventEmitter} from "@angular/core";
-import {ActivatedRoute, Router} from "@angular/router";
-import {Task} from "../model/Task";
-import {ConfirmDialogService} from "../../shared/services/confirm-dialog.service";
-import {TaskService} from "../service/task.service";
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Task} from '../model/Task';
+import {ConfirmDialogService} from '../../shared/services/confirm-dialog.service';
+import {TaskService} from '../service/task.service';
 
 @Component({
     selector: 'task-detail',
