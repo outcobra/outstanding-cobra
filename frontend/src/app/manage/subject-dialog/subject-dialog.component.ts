@@ -1,10 +1,9 @@
-import {Component, OnInit, ViewEncapsulation} from "@angular/core";
-import {MdDialogRef} from "@angular/material";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ManageDialog} from "../manage-dialog";
-import {SemesterDto, SubjectDto} from "../model/ManageDto";
-import {Response, Http} from "@angular/http";
-import {Util} from "../../shared/services/util";
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {MdDialogRef} from '@angular/material';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ManageDialog} from '../manage-dialog';
+import {SemesterDto, SubjectDto} from '../model/ManageDto';
+import {Util} from '../../shared/services/util';
 
 @Component({
     selector: 'subject-dialog',

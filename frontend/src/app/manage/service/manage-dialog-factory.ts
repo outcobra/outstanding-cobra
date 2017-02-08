@@ -1,8 +1,8 @@
-import {ComponentType, MdDialogConfig, MdDialogRef, MdDialog} from "@angular/material";
-import {DialogMode} from "../../common/DialogMode";
-import {Dto} from "../../common/Dto";
-import {ManageDialog} from "../manage-dialog";
-import {Injectable} from "@angular/core";
+import {ComponentType, MdDialogConfig, MdDialogRef, MdDialog} from '@angular/material';
+import {DialogMode} from '../../common/DialogMode';
+import {Dto} from '../../common/Dto';
+import {ManageDialog} from '../manage-dialog';
+import {Injectable} from '@angular/core';
 
 @Injectable()
 export class ManageDialogFactory {

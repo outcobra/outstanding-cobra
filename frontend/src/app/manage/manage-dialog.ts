@@ -1,5 +1,4 @@
-import {DialogMode} from "../common/DialogMode";
-import {FormGroup} from "@angular/forms";
+import {DialogMode} from '../common/DialogMode';
 
 export class ManageDialog<T, E> {
 

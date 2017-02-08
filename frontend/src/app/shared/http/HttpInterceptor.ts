@@ -1,11 +1,11 @@
-import {Injectable} from "@angular/core";
-import {Http, Request, RequestMethod, URLSearchParams, Response} from "@angular/http";
-import {NotificationsService} from "angular2-notifications";
-import {Config} from "../../config/Config";
-import {Observable} from "rxjs";
-import "rxjs/add/operator/map";
-import {dateReviver, dateReplacer} from "./http-util";
-import {RequestOptions} from "./RequestOptions";
+import {Injectable} from '@angular/core';
+import {Http, Request, RequestMethod, URLSearchParams, Response} from '@angular/http';
+import {NotificationsService} from 'angular2-notifications';
+import {Config} from '../../config/Config';
+import {Observable} from 'rxjs';
+import 'rxjs/add/operator/map';
+import {dateReviver, dateReplacer} from './http-util';
+import {RequestOptions} from './RequestOptions';
 
 /**
  * HttpInterceptor to customize the http request and http responses

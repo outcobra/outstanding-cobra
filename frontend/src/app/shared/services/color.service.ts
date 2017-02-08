@@ -1,8 +1,8 @@
-import {Injectable} from "@angular/core";
-import {HttpInterceptor} from "../http/HttpInterceptor";
-import {Color} from "../model/Color";
-import {Observable} from "rxjs";
-import {CacheableService} from "./core/cacheable.service";
+import {Injectable} from '@angular/core';
+import {HttpInterceptor} from '../http/HttpInterceptor';
+import {Color} from '../model/Color';
+import {Observable} from 'rxjs';
+import {CacheableService} from './core/cacheable.service';
 
 @Injectable()
 export class ColorService extends CacheableService<Color[]> {

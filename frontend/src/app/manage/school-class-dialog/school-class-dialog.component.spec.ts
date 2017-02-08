@@ -1,6 +1,6 @@
 /* tslint:disable:no-unused-variable */
-import {async, ComponentFixture, TestBed} from "@angular/core/testing";
-import {SchoolClassDialog} from "./school-class-dialog.component";
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {SchoolClassDialog} from './school-class-dialog.component';
 
 describe('SchoolClassDialog', () => {
     let component: SchoolClassDialog;

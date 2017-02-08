@@ -1,6 +1,6 @@
 /* tslint:disable:no-unused-variable */
-import {async, ComponentFixture, TestBed} from "@angular/core/testing";
-import {TaskDetailComponent} from "./task-detail.component";
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {TaskDetailComponent} from './task-detail.component';
 
 describe('TaskDetailComponent', () => {
   let component: TaskDetailComponent;

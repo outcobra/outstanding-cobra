@@ -1,6 +1,6 @@
-import {AppService} from "./app.service";
-import {CrudService} from "./crud.service";
-import {Observable} from "rxjs";
+import {AppService} from './app.service';
+import {CrudService} from './crud.service';
+import {Observable} from 'rxjs';
 
 /**
  * Basic implementation of a CrudAppService which connects to the default api

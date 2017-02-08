@@ -1,6 +1,6 @@
-import {Component, OnInit, Input, EventEmitter, Output} from "@angular/core";
-import {Task} from "../model/Task";
-import {Router, ActivatedRoute} from "@angular/router";
+import {Component, OnInit, Input, EventEmitter, Output} from '@angular/core';
+import {Task} from '../model/Task';
+import {Router, ActivatedRoute} from '@angular/router';
 
 @Component({
     selector: 'task-list-item',

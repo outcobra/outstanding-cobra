@@ -1,5 +1,5 @@
-import {dateReplacer, dateReviver} from "../http/http-util";
-import {FormGroup} from "@angular/forms";
+import {dateReplacer, dateReviver} from '../http/http-util';
+import {FormGroup} from '@angular/forms';
 /**
  * Util class
  * contains everything that does not fit in another service

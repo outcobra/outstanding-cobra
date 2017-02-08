@@ -1,4 +1,4 @@
-import {RequestMethod} from "@angular/http";
+import {RequestMethod} from '@angular/http';
 
 /**
  * RequestOptions interface that defines all possible properties of a request in the {HttpInterceptor}
