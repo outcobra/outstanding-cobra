@@ -18,13 +18,13 @@ endpoints:
 #ignore the ugliness bc it doesn't seem to work in a different way
 spring:
   profiles:
-    include: load_test_data,disable_auth_filter,basic_auth_security_mock,h2_in_memory_db
+    include: load_test_data,disable_auth_filter,basic_auth_security_mock,h2_db
 ---
 spring.profiles: test
 #ignore the ugliness bc it doesn't seem to work in a different way
 spring:
   profiles:
-    include: load_test_data,h2_in_memory_db,mock_services
+    include: load_test_data,h2_db,mock_services
 
 #---
 # Normal Profile definition
@@ -40,7 +40,7 @@ security:
     frame: false
 ---
 spring:
-  profiles: h2_database_with_console
+  profiles: h2_db
   datasource:
     driver-class-name: org.h2.Driver
     url: jdbc:h2:mem:outcobra

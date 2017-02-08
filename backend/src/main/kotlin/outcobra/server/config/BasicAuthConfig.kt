@@ -18,7 +18,7 @@ open class BasicAuthConfig : WebSecurityConfigurerAdapter() {
     override fun configure(http: HttpSecurity?) {
         http!!.authorizeRequests()
                 .anyRequest().authenticated()
-                .and().formLogin()
+                .and().httpBasic()
     }
 
     @Inject

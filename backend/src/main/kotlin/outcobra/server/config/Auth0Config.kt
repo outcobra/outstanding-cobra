@@ -30,15 +30,15 @@ open class Auth0Config : Auth0SecurityConfig() {
         http!!.headers().frameOptions().disable()
 
         http.authorizeRequests()
-                .antMatchers("/swagger-ui.html").permitAll()
-                .antMatchers("/webjars/springfox-swagger-ui/**").permitAll()
-                .antMatchers("/swagger-resources/**").permitAll()
-                .antMatchers("/v2/api-docs").permitAll()
-                .antMatchers("/h2-console/**").permitAll()
-                .antMatchers("/env").permitAll()
-                .antMatchers("/health").permitAll()
-                .antMatchers("/info").permitAll()
-                .antMatchers("/api/ping").permitAll()
+                .antMatchers("/swagger-ui.html",
+                        "/webjars/springfox-swagger-ui/**",
+                        "/swagger-resources/**",
+                        "/v2/api-docs",
+                        "/h2-console/**",
+                        "/env",
+                        "/health",
+                        "/info",
+                        "/api/ping").permitAll()
                 .anyRequest().authenticated()
     }
 }
