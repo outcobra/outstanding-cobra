@@ -1,6 +1,9 @@
 package outcobra.server.filter
 
+import org.hibernate.annotations.Filter
 import org.slf4j.LoggerFactory
+import org.springframework.context.annotation.Bean
+import org.springframework.stereotype.Component
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.filter.GenericFilterBean
 import outcobra.server.model.interfaces.ParentLinked
@@ -19,6 +22,7 @@ import javax.validation.ValidationException
  * @author Joel Messerli
  * @since
  */
+@Component
 open class RequestAuthorizationFilter @Inject constructor(val authorizationService: AuthorizationService) : GenericFilterBean() {
     // companion object is the kotlin equivalent to javas static instance fields
     companion object {
