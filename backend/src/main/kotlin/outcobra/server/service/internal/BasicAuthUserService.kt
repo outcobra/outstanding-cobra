@@ -15,7 +15,9 @@ import outcobra.server.service.UserService
 import javax.inject.Inject
 
 /**
- * Created by Florian on 05.02.2017.
+ * @author Florian Bürgi
+ * @since <since>
+ *
  */
 @Profile(BASIC_AUTH_SECURITY_MOCK)
 @Service
@@ -27,8 +29,10 @@ open class BasicAuthUserService @Inject constructor(val userRepository: UserRepo
 
     override fun getTokenUserId(): String {
         val isAuthenticated = SecurityContextHolder.getContext().authentication.isAuthenticated
-        if(isAuthenticated) return if (UserDataLoader.loaded) UserDataLoader.loadedUserToken else "basicAuthUserToken"
-        else return ""
+        if(isAuthenticated)  {
+            return UserDataLoader.TEST_USER?.auth0Id ?: "basicAuthUserToken"
+        }
+        return ""
     }
 
     override fun getCurrentUser(): User? {

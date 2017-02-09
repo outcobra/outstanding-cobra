@@ -24,7 +24,7 @@ open class UserDataLoader
                     val userService : UserService) : DataLoader {
 
     companion object {
-        lateinit var TEST_USER: User
+        var TEST_USER: User? = null
         val loadedUserToken = "auth0|583b1ac145cc13f8065da5e2"
         val loadedUserName = "OutcobraTest"
         private val LOGGER = LoggerFactory.getLogger(UserDataLoader::class.java)
@@ -36,7 +36,7 @@ open class UserDataLoader
 
     override fun load() {
         TEST_USER = userRepository.save(User(loadedUserToken, loadedUserName, arrayListOf()))
-        LOGGER.debug("Saving user: ${TEST_USER.username}")
+        LOGGER.debug("Saving user: ${TEST_USER!!.username}")
         loaded = true
     }
 }

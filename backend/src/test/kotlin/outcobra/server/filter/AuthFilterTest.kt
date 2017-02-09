@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Import
 import org.springframework.context.annotation.Primary
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
+import org.springframework.transaction.annotation.Transactional
 import outcobra.server.OutstandingCobraServerApplication
 import outcobra.server.config.ProfileRegistry.Companion.TEST
 import outcobra.server.model.Institution
@@ -35,8 +36,9 @@ import javax.servlet.http.HttpServletRequest
 @RunWith(SpringJUnit4ClassRunner::class)
 @SpringBootTest(classes = arrayOf(AuthFilterTest.TestConfiguration::class))
 @ActiveProfiles(TEST)
+@Transactional
 @Ignore
-class AuthFilterTest {
+open class AuthFilterTest {
     @Inject
     lateinit var institutionRepository: InstitutionRepository
     @Inject

@@ -40,7 +40,7 @@ open class SchoolYearValidatorTest {
     lateinit var existing: SchoolYear
     lateinit var schoolClass: SchoolClass
 
-    val now = LocalDate.now()
+    val now: LocalDate = LocalDate.now()
 
     @Before
     fun before() {
@@ -63,7 +63,5 @@ open class SchoolYearValidatorTest {
     fun testInvalidWithSameDates() {
         val toCreate = SchoolYear("invalid", now, now.plusYears(1), schoolClass, listOf(), listOf())
         assertThat(validator.validateSchoolYearCreation(toCreate)).isFalse()
-
-
     }
 }
