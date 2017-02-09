@@ -9,6 +9,11 @@ class ProfileRegistry {
         const val H2_DB = "h2_db"
         const val MYSQL_DB = "mysql_database"
         const val TEST = "test"
-    }
 
+        /*
+         * "super"-profiles
+         */
+        const val DEVELOPMENT = "development"
+        const val PRODUCTION = "production"
+    }
 }

@@ -11,7 +11,6 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Profile
 import org.springframework.core.annotation.Order
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity
-import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import outcobra.server.config.ProfileRegistry.Companion.BASIC_AUTH_SECURITY_MOCK
 
@@ -21,25 +20,8 @@ import outcobra.server.config.ProfileRegistry.Companion.BASIC_AUTH_SECURITY_MOCK
 @Configuration
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 open class Auth0Config : Auth0SecurityConfig() {
-
     @Bean open fun auth0Client(): Auth0Client {
         return Auth0Client(clientId, issuer)
-    }
-
-    override fun authorizeRequests(http: HttpSecurity?) {
-        http!!.headers().frameOptions().disable()
-
-        http.authorizeRequests()
-                .antMatchers("/swagger-ui.html",
-                        "/webjars/springfox-swagger-ui/**",
-                        "/swagger-resources/**",
-                        "/v2/api-docs",
-                        "/h2-console/**",
-                        "/env",
-                        "/health",
-                        "/info",
-                        "/api/ping").permitAll()
-                .anyRequest().authenticated()
     }
 }
 
