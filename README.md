@@ -20,7 +20,21 @@ If you are using IntelliJ, you will also have to set up annotation processing. F
 
 To build the project, you can just run `./gradlew build` on Linux or `gradlew.bat build` on Windows. You might need to adjust the file permissions on Linux using `chmod +x gradlew`.
 
-To start the backend, run `./gradlew bootRun` or `gradlew.bat bootRun` respectively.
+To run the backend you have to make a new run configuration.
+In IntelliJ you can add a run configuration by pressing `CTRL + SHIFT + A` and typing `Edit Run Configurations`.
+ To add a configuration press the green plus. Then search fo `Tomcat Server` and choose `Local` in the submenu.
+
+Then you have to choose your local Tomcat instance. Press the `Configure` button and locate your tomcat home folder on your computer.
+Or you just choose your Tomcat version if there is already a configured one.
+
+You have to select your artifact to deploy. For this go in the `Deployment` tab and press the green plus and select artifact.
+You should now be able to choose between two artifacts. Select the one which doesn't have an `exploded` at the end of the name.
+
+You should also pass the active profile to the JVM. For this you have to add something like this `-Dspring.profiles.active=development` into your VM options.
+You can replace the `development` with every other profile you desire.
+
+Now you should be finished so press `Apply` and try to start the Tomcat Server.
+ 
 
 ### Accessing API-Documentation
 

@@ -1,7 +1,6 @@
 package outcobra.server.service
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.After
 import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -9,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.transaction.annotation.Transactional
-import outcobra.server.ProfileRegistry
+import outcobra.server.config.ProfileRegistry.Companion.TEST
 import outcobra.server.model.QInstitution
 import outcobra.server.model.dto.InstitutionDto
 import outcobra.server.model.repository.InstitutionRepository
@@ -22,7 +21,7 @@ import javax.inject.Inject
  */
 @RunWith(SpringRunner::class)
 @SpringBootTest
-@ActiveProfiles(ProfileRegistry.PROFILE_MOCK_SERVICES)
+@ActiveProfiles(TEST)
 @Transactional
 open class InstitutionServiceTest {
 
@@ -38,14 +37,6 @@ open class InstitutionServiceTest {
      */
     companion object {
         val INSTITUTION_NAME: String = "Institution 1"
-    }
-
-    /**
-     * deletes all existing institutions to make sure to have a clean environment
-     */
-    @After
-    fun cleanUp() {
-        institutionRepository.deleteAll()
     }
 
     /**
