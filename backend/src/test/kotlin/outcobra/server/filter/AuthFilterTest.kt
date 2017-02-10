@@ -1,7 +1,6 @@
 package outcobra.server.filter
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import org.junit.After
 import org.junit.Before
 import org.junit.Ignore
 import org.junit.Test
@@ -13,8 +12,11 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Import
 import org.springframework.context.annotation.Primary
+import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
+import org.springframework.transaction.annotation.Transactional
 import outcobra.server.OutstandingCobraServerApplication
+import outcobra.server.config.ProfileRegistry.Companion.TEST
 import outcobra.server.model.Institution
 import outcobra.server.model.User
 import outcobra.server.model.dto.InstitutionDto
@@ -33,8 +35,10 @@ import javax.servlet.http.HttpServletRequest
 
 @RunWith(SpringJUnit4ClassRunner::class)
 @SpringBootTest(classes = arrayOf(AuthFilterTest.TestConfiguration::class))
+@ActiveProfiles(TEST)
+@Transactional
 @Ignore
-class AuthFilterTest {
+open class AuthFilterTest {
     @Inject
     lateinit var institutionRepository: InstitutionRepository
     @Inject
@@ -124,15 +128,6 @@ class AuthFilterTest {
 
         // Request should be destroyed since it is invalid
         verifyZeroInteractions(NOOP_FILTER_CHAIN)
-    }
-
-    @After
-    fun teardown() {
-        institutionRepository.delete(INSTITUTION.id)
-        institutionRepository.delete(INSTITUTION2.id)
-        userRepository.delete(USER.id)
-        userRepository.delete(USER2.id)
-
     }
 
     private fun makeMockRequest(method: String, postText: String, uri: String): ServletRequest {
