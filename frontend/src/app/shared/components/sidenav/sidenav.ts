@@ -9,8 +9,8 @@ import {
     ContentChild,
     AfterViewChecked,
     AfterContentInit
-} from "@angular/core";
-import {Router, NavigationEnd} from "@angular/router";
+} from '@angular/core';
+import {Router, NavigationEnd} from '@angular/router';
 
 @Component({
     selector: 'sidenav',

@@ -40,7 +40,7 @@ export class SchoolYearDialog extends ManageDialog<SchoolYearDto, SchoolClassDto
     getErrorText(controlName: string, errorName: string, errorProp: string) {
         let control = this.schoolYearForm.get(controlName);
         let date = this.datePipe.transform(control.getError(errorName)[errorProp], 'dd.MM.y');
-        return control.hasError(errorName) ? this.translate.instant(`i18n.common.form.error.${errorName}`, {'date': date}) : "";
+        return control.hasError(errorName) ? this.translate.instant(`i18n.common.form.error.${errorName}`, {'date': date}) : '';
     }
 
     onCancel() {

@@ -37,7 +37,7 @@ export class AuthService {
                 primaryColor: '#3f51b5'
             },
             languageDictionary: {
-                title: "Outcobra"
+                title: 'Outcobra'
             }
         });
 
@@ -83,7 +83,7 @@ export class AuthService {
                         state: redirectRoute
                     }
                 },
-                language: "de"
+                language: 'de'
             });
         }
     }

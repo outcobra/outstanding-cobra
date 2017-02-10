@@ -1,6 +1,6 @@
 /* tslint:disable:no-unused-variable */
-import {async, ComponentFixture, TestBed} from "@angular/core/testing";
-import {TimepickerComponent} from "./timepicker.component";
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {TimepickerComponent} from './timepicker.component';
 
 describe('TimepickerComponent', () => {
     let component: TimepickerComponent;

@@ -1,6 +1,6 @@
 /* tslint:disable:no-unused-variable */
-import {async, ComponentFixture, TestBed} from "@angular/core/testing";
-import {SidenavComponent} from "./sidenav";
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {SidenavComponent} from './sidenav';
 
 describe('SidenavComponent', () => {
     let component: SidenavComponent;
