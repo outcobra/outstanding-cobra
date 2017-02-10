@@ -1,9 +1,12 @@
 package outcobra.server.model;
 
+import outcobra.server.model.interfaces.ParentLinked;
+
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.*;
 
 @Entity
 public class MarkGroup extends Mark {
@@ -14,10 +17,28 @@ public class MarkGroup extends Mark {
     @OneToOne(mappedBy = "markGroup")
     private Subject subject;
 
+    public MarkGroup(Double weight, Exam exam, MarkGroup markGroup, List<Mark> marks, Subject subject) {
+        super(weight, exam, markGroup);
+        this.marks = marks;
+        this.subject = subject;
+    }
+
+    public MarkGroup(List<Mark> marks, Subject subject) {
+        this.marks = marks;
+        this.subject = subject;
+    }
+
+    public MarkGroup() {
+        super();
+        this.marks = new ArrayList<>();
+    }
+
     // Todo persist
     public void addMark(Mark mark) {
         marks.add(mark);
     }
+
+    //region constructors
 
     // Todo persist
     public void removeMark(Mark mark) {
@@ -40,24 +61,6 @@ public class MarkGroup extends Mark {
 
         return valueSum / weightSum;
     }
-
-    //region constructors
-
-    public MarkGroup(Double weight, Exam exam, MarkGroup markGroup, List<Mark> marks, Subject subject) {
-        super(weight, exam, markGroup);
-        this.marks = marks;
-        this.subject = subject;
-    }
-
-    public MarkGroup(List<Mark> marks, Subject subject) {
-        this.marks = marks;
-        this.subject = subject;
-    }
-
-    public MarkGroup() {
-        super();
-        this.marks = new ArrayList<>();
-    }
     //endregion
 
     //region default functions
@@ -78,6 +81,7 @@ public class MarkGroup extends Mark {
         this.subject = subject;
     }
 
+    @SuppressWarnings("SimplifiableIfStatement")
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -100,5 +104,9 @@ public class MarkGroup extends Mark {
         return result;
     }
 
+    @Override
+    public ParentLinked getParent() {
+        return subject;
+    }
     //endregion
 }

@@ -2,12 +2,22 @@ package outcobra.server.model;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import outcobra.server.model.interfaces.ParentLinked;
+
+/**
+ * This class represents an Institution.
+ * It is used by hibernate to store the information to the database
+ * A documentation of the instance fields does not make sense because it is self-explanatory.
+ *
+ * @author Joel Messerli
+ * @since 1.0.0
+ */
 
 @Entity
-public class Institution {
+public class Institution implements ParentLinked {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -18,7 +28,7 @@ public class Institution {
     @ManyToOne
     private User user;
 
-    @OneToMany(mappedBy = "institution")
+    @OneToMany(mappedBy = "institution", cascade = CascadeType.REMOVE)
     private List<SchoolClass> schoolClasses;
 
     @OneToMany(mappedBy = "institution")
@@ -28,6 +38,12 @@ public class Institution {
     public Institution() {
         this.teachers = new ArrayList<>();
         this.schoolClasses = new ArrayList<>();
+    }
+
+    public Institution(String name, User user) {
+        this();
+        this.name = name;
+        this.user = user;
     }
 
     public Institution(String name, User user, List<SchoolClass> schoolClasses, List<Teacher> teachers) {
@@ -40,7 +56,6 @@ public class Institution {
     //endregion
 
     //region default functions
-
     public Long getId() {
         return id;
     }
@@ -81,6 +96,7 @@ public class Institution {
         this.teachers = teachers;
     }
 
+    @SuppressWarnings("SimplifiableIfStatement")
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -91,8 +107,9 @@ public class Institution {
         if (!id.equals(that.id)) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (user != null ? !user.equals(that.user) : that.user != null) return false;
-        if (schoolClasses != null ? !schoolClasses.equals(that.schoolClasses) : that.schoolClasses != null)
+        if (schoolClasses != null ? !schoolClasses.equals(that.schoolClasses) : that.schoolClasses != null) {
             return false;
+        }
         return teachers != null ? teachers.equals(that.teachers) : that.teachers == null;
 
     }
@@ -107,5 +124,9 @@ public class Institution {
         return result;
     }
 
+    @Override
+    public ParentLinked getParent() {
+        return user;
+    }
     //endregion
 }

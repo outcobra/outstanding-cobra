@@ -3,14 +3,27 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue.
-$primary: md-palette($md-indigo);
-$accent:  md-palette($md-pink, A200, A100, A400);
+$primary: md-palette($md-indigo, 700);
+$accent: md-palette($md-pink, A200);
 $accent-dark: md-palette($md-grey, 800);
 
 // The warn palette is optional (defaults to red).
-$warn:    md-palette($md-red);
+$warn: md-palette($md-red);
 
-.color-primary {
+$primary-dark: rgba(0, 0, 0, 0.87);
+$secondary-dark: rgba(0, 0, 0, 0.54);
+$disabled-dark: rgba(0, 0, 0, 0.38);
+$slightly-dark: rgba(0, 0, 0, 0.15);
+$primary-light: rgb(255, 255, 255);
+$secondary-light: rgba(255, 255, 255, 0.70);
+$disabled-light: rgba(255, 255, 255, 0.5);
+
+$background-white: #f5f5f5;
+
+$hover-dark: rgba(0, 0, 0, 0.1);
+$hover-light: rgba(0, 0, 0, 0.04);
+
+.color-primary, .md-primary {
     background-color: md-color($primary) !important;
 }
 
@@ -26,24 +39,34 @@ $warn:    md-palette($md-red);
     background-color: md-color($warn) !important;
 }
 
+.color-background {
+    background-color: $background-white;
+}
+
 .text-primary-dark {
-    color: rgba(0, 0, 0, 0.87)
+    color: $primary-dark;
 }
 
 .text-secondary-dark {
-    color: rgba(0, 0, 0, 0.54);
+    color: $secondary-dark;
 }
+
 .text-disabled-dark {
-    color: rgba(0, 0, 0, 0.38);
+    color: $disabled-dark;
 }
 
 .text-primary-light {
-    color: rgb(255, 255, 255);
+    color: $primary-light;
 }
 
 .text-secondary-light {
-    color: rgba(255, 255, 255, 0.70);
+    color: $secondary-light;
 }
+
 .text-disabled-light {
-    color: rgba(255, 255, 255, 0.5);
+    color: $disabled-dark;
+}
+
+.text-warn {
+    color: md-color($warn);
 }

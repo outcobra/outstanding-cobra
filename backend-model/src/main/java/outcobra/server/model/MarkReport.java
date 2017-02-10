@@ -1,14 +1,14 @@
 package outcobra.server.model;
 
-import java.util.List;
+import outcobra.server.model.interfaces.ParentLinked;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 
 @Entity
-public class MarkReport {
-
+public class MarkReport implements ParentLinked {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private Long id;
@@ -70,6 +70,7 @@ public class MarkReport {
         this.entries = entries;
     }
 
+    @SuppressWarnings("SimplifiableIfStatement")
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -93,6 +94,9 @@ public class MarkReport {
         return result;
     }
 
+    @Override
+    public ParentLinked getParent() {
+        return semester;
+    }
 //endregion
-
 }

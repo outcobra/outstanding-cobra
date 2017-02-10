@@ -1,13 +1,14 @@
 package outcobra.server.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import outcobra.server.model.interfaces.ParentLinked;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "class")
-public class SchoolClass {
+public class SchoolClass implements ParentLinked {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -18,7 +19,7 @@ public class SchoolClass {
     @ManyToOne
     private Institution institution;
 
-    @OneToMany(mappedBy = "schoolClass")
+    @OneToMany(mappedBy = "schoolClass", cascade = CascadeType.REMOVE)
     private List<SchoolYear> schoolYears;
 
     //region constructors
@@ -69,6 +70,7 @@ public class SchoolClass {
         this.schoolYears = schoolYears;
     }
 
+    @SuppressWarnings("SimplifiableIfStatement")
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -94,6 +96,10 @@ public class SchoolClass {
         return result;
     }
 
+    @Override
+    public ParentLinked getParent() {
+        return institution;
+    }
     //endregion
 }
 

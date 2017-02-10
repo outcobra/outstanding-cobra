@@ -1,0 +1,146 @@
+@import '../../sass/general';
+
+manager, .manage-rows {
+    height: 100%;
+}
+
+.manage-rows {
+    margin: 0;
+
+    .col {
+        padding: 10px;
+        height: 100%;
+
+        .manage-entity {
+            height: 100px;
+            width: 100%;
+
+            @extend .border-bottom;
+        }
+    }
+
+    .entity-info {
+        padding: 15px 10px;
+        span {
+            margin-left: 44px;
+        }
+    }
+
+    .entity {
+        &:hover, &.active {
+            background-color: $hover-light;
+        }
+
+        cursor: pointer;
+        padding: 0 10px;
+        height: 50px;
+        line-height: 50px;
+        box-sizing: inherit;
+
+        span, md-icon {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .entity-desc {
+            float: left;
+            height: 100%;
+            md-icon {
+                float: left;
+                height: 100%;
+                line-height: 50px !important;
+                margin-right: 20px;
+            }
+
+            span {
+                display: block;
+                float: left;
+                height: 100%;
+                line-height: 50px;
+
+                &.subject-icon {
+                    width: calc(44px - 2 * 10px);
+                    height: calc(100% - 2 * 13px);
+                    margin: 13px 10px;
+                    box-sizing: border-box;
+                    border-radius: 50%;
+                }
+            }
+
+            entity-menu {
+                float: right;
+            }
+
+            .two-line-entity {
+                display: block;
+                height: 100%;
+                float: left;
+                span {
+                    display: block;
+                    clear: both;
+                    &.primary-text {
+                        height: 30px;
+                        line-height: 30px;
+                    }
+                    &.secondary-text {
+                        font-size: .8em;
+                        height: 20px;
+                        line-height: 20px;
+                    }
+                }
+            }
+        }
+    }
+
+    .child-entity {
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    li {
+        display: block;
+
+        .action-button {
+            padding: 10px;
+            text-align: right;
+        }
+    }
+}
+
+.cdk-overlay-container {
+    md-dialog-container {
+        //overflow: visible;
+
+        institution-dialog,
+        school-class-dialog,
+        school-year-dialog,
+        semester-dialog,
+        subject-dialog {
+            display: block;
+            box-sizing: border-box;
+            width: 500px;
+
+            .dialog-body {
+                md-input-container {
+                    width: 80%;
+                }
+                datepicker {
+                    width: 80%;
+                    md-input-container {
+                        width: 100%;
+                    }
+                }
+            }
+
+            .dialog-footer {
+                .footer-right {
+                    //float: right;
+                    text-align: right;
+                }
+            }
+        }
+    }
+}

@@ -21,7 +21,7 @@ Valid messages could look like this:
 
 Also, please use multiple `-m`s for `git commit` to create multiple lines. If you are using a GUI to create your commits, you should be able to just write stuff on multiple lines. A good thing to put on a second line would be a more detailed description of the changes or a Github reference like `Fixes #1343`.
 
-Full example: `git commit -a -m "Use multiple instances to link Institution to Class" -m "Querydsl is acting weird (only returning the first result) if two Institutions are linked by the same instance of InstitutionClass" -m "Fixes #1343" `
+Full example: `git commit -a -m "Use multiple instances to linked Institution to Class" -m "Querydsl is acting weird (only returning the first result) if two Institutions are linked by the same instance of InstitutionClass" -m "Fixes #1343" `
 
 ##Branch naming
 

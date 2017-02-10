@@ -1,18 +1,26 @@
 import {
-    Component, OnInit, ViewEncapsulation, ElementRef, Renderer, HostBinding, AfterContentInit,
-    EventEmitter, Output, ContentChild
-} from '@angular/core';
+    Component,
+    ViewEncapsulation,
+    ElementRef,
+    Renderer,
+    HostBinding,
+    EventEmitter,
+    Output,
+    ContentChild,
+    AfterViewChecked,
+    AfterContentInit
+} from "@angular/core";
 import {Router, NavigationEnd} from "@angular/router";
 
 @Component({
     selector: 'sidenav',
-    template: `<ng-content></ng-content>`,
+    template: `<div class="sidenav-wrapper"><ng-content></ng-content></div>`,
     encapsulation: ViewEncapsulation.None,
     host: {
         '(transitionend)': 'onTransitionEnd($event)'
     }
 })
-export class SidenavComponent implements OnInit {
+export class SidenavComponent implements AfterViewChecked {
 
     public opened = false;
     private transition: boolean;
@@ -37,7 +45,7 @@ export class SidenavComponent implements OnInit {
         });
     }
 
-    ngOnInit() {
+    ngAfterViewChecked() {
         this.updateSidenavStyle();
     }
 
@@ -109,12 +117,15 @@ export class SidenavComponent implements OnInit {
     @HostBinding('class.sidenav-closing') get isClosing() {
         return !this.opened && this.transition;
     }
+
     @HostBinding('class.sidenav-opening') get isOpening() {
         return this.opened && this.transition;
     }
+
     @HostBinding('class.sidenav-closed') get isClosed() {
         return !this.opened && !this.transition;
     }
+
     @HostBinding('class.sidenav-opened') get isOpened() {
         return this.opened && !this.transition;
     }
@@ -137,7 +148,8 @@ export class SidenavComponent implements OnInit {
 export class SidenavLayout implements AfterContentInit {
     @ContentChild(SidenavComponent) sidenav: SidenavComponent;
 
-    constructor(private renderer: Renderer, private elRef: ElementRef){}
+    constructor(private renderer: Renderer, private elRef: ElementRef) {
+    }
 
     ngAfterContentInit(): void {
         this.sidenav.onOpenStart.subscribe(() => this.setLayoutClass(true));

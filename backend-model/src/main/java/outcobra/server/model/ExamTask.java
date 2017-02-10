@@ -1,10 +1,12 @@
 package outcobra.server.model;
 
+import outcobra.server.model.interfaces.ParentLinked;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class ExamTask {
+public class ExamTask implements ParentLinked {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -67,6 +69,7 @@ public class ExamTask {
         this.finished = finished;
     }
 
+    @SuppressWarnings("SimplifiableIfStatement")
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -91,6 +94,10 @@ public class ExamTask {
         return result;
     }
 
+    @Override
+    public ParentLinked getParent() {
+        return exam;
+    }
     //endregion
 }
 

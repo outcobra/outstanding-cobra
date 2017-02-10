@@ -1,28 +1,56 @@
 <sidenav-layout>
     <sidenav #sidenav>
         <nav>
-            <div class="nav-row">
-                <a [routerLink]="'/dashboard'">
-                    <span>Dashboard</span>
-                    <span class="link-icon"><md-icon>dashboard</md-icon></span>
-                </a>
-            </div>
-            <div class="nav-row">
-                <a [routerLink]="'/'">
-                    <span>E fucking lenge name</span>
-                    <span class="link-icon"><md-icon>person</md-icon></span>
-                </a>
-            </div>
+            <ul>
+                <li class="nav-row">
+                    <a [routerLink]="'/dashboard'" md-ripple mdRippleTrigger>
+                        <md-icon class="link-icon">dashboard</md-icon>
+                        <span>{{ 'i18n.modules.dashboard.linkTitle' | translate }}</span>
+                    </a>
+                </li>
+                <li class="nav-row">
+                    <a [routerLink]="'/task'" md-ripple mdRippleTrigger>
+                        <md-icon class="link-icon">event</md-icon>
+                        <span>{{ 'i18n.modules.timetable.linkTitle' | translate }}</span>
+                    </a>
+                </li>
+                <li class="nav-row">
+                    <a [routerLink]="'/task'" md-ripple mdRippleTrigger>
+                        <md-icon class="link-icon">filter_6</md-icon>
+                        <span>{{ 'i18n.modules.exam.linkTitle' | translate }}</span>
+                    </a>
+                </li>
+                <li class="nav-row">
+                    <a [routerLink]="'/task'" md-ripple mdRippleTrigger>
+                        <md-icon class="link-icon">poll</md-icon>
+                        <span>{{ 'i18n.modules.mark.linkTitle' | translate }}</span>
+                    </a>
+                </li>
+                <li class="nav-row">
+                    <a [routerLink]="'/task'" md-ripple mdRippleTrigger>
+                        <md-icon class="link-icon">assignment_turned_in</md-icon>
+                        <span>{{ 'i18n.modules.task.linkTitle' | translate }}</span>
+                    </a>
+                </li>
+                <li class="nav-row">
+                    <a [routerLink]="'/manage'" md-ripple mdRippleTrigger>
+                        <md-icon class="link-icon">widgets</md-icon>
+                        <span>{{ 'i18n.modules.manage.linkTitle' | translate }}</span>
+                    </a>
+                </li>
+            </ul>
         </nav>
     </sidenav>
     <md-toolbar color="primary">
         <md-icon class="toolbar-icon" (click)="sidenav.open()">menu</md-icon>
         <a routerLink="/">{{title}}</a>
         <span class="toolbar-fill-space"></span>
+        {{'i18n.common.lang.de' | translate}} <md-slide-toggle (change)="changeLang()" [(ngModel)]="isEnglish"></md-slide-toggle> {{'i18n.common.lang.en' | translate}}
         <button md-button *ngIf="!auth.isLoggedIn()" (click)="login()">Login</button>
         <button md-button *ngIf="auth.isLoggedIn()" (click)="logout()">Logout</button>
     </md-toolbar>
-    <div class="container">
+
+    <div class="app-content">
         <router-outlet></router-outlet>
     </div>
 

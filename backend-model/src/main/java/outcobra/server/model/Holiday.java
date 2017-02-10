@@ -1,12 +1,13 @@
 package outcobra.server.model;
 
-import java.time.LocalDate;
+import outcobra.server.model.interfaces.ParentLinked;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 
 @Entity
-public class Holiday {
+public class Holiday implements ParentLinked {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -77,6 +78,7 @@ public class Holiday {
         this.schoolYear = schoolYear;
     }
 
+    @SuppressWarnings("SimplifiableIfStatement")
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -105,5 +107,9 @@ public class Holiday {
         return result;
     }
 
+    @Override
+    public ParentLinked getParent() {
+        return schoolYear;
+    }
     //endregion
 }

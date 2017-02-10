@@ -1,0 +1,150 @@
+<div class="row manage-rows">
+    <!-- FIRST COLUMN START -->
+    <div class="col s4 border-right">
+        <ul class="collapsible">
+            <li *ngFor="let institution of institutionClasses">
+                <collapsible>
+                    <collapsible-header>
+                        <div class="entity">
+                            <div class="entity-desc">
+                                <md-icon class="entity-icon">business</md-icon>
+                                <span>{{ institution.name }}</span>
+                            </div>
+                            <entity-menu
+                                (delete)="deleteInstitution(institution)"
+                                (edit)="editInstitution(institution)"
+                            ></entity-menu>
+                        </div>
+                    </collapsible-header>
+                    <collapsible-body>
+                        <ul>
+                            <li *ngFor="let schoolClass of institution.schoolClasses">
+                                <div class="entity child-entity" (click)="selectSchoolClass(schoolClass.id)" [class.active]="schoolClass.id === activeSchoolClassId">
+                                    <div class="entity-desc">
+                                        <md-icon class="entity-icon">subdirectory_arrow_right</md-icon>
+                                        <md-icon class="entity-icon">class</md-icon>
+                                        <span>{{ schoolClass.normalizedName }}</span>
+                                    </div>
+                                    <entity-menu
+                                        (delete)="deleteSchoolClass(schoolClass)"
+                                        (edit)="editSchoolClass(schoolClass)"
+                                    ></entity-menu>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="action-button">
+                                    <button md-raised-button color="accent" (click)="addSchoolClass(institution)">
+                                        <md-icon>add</md-icon>
+                                        {{ 'i18n.modules.manage.schoolClass.add' | translate }}
+                                    </button>
+                                </div>
+                            </li>
+                        </ul>
+                    </collapsible-body>
+                </collapsible>
+            </li>
+            <li>
+                <div class="action-button">
+                    <button md-raised-button color="accent" (click)="addInstitution()">
+                        <md-icon>add</md-icon>
+                        {{ 'i18n.modules.manage.institution.add' | translate }}
+                    </button>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <!-- FIRST COLUMN END -->
+
+    <!-- MIDDLE COLUMN START -->
+    <div class="col s4">
+        <ul class="collapsible" *ngIf="yearSemesterModel != null">
+            <li *ngFor="let schoolYear of yearSemesterModel">
+                <collapsible>
+                    <collapsible-header>
+                        <div class="entity">
+                            <div class="entity-desc">
+                                <md-icon class="entity-icon">date_range</md-icon>
+                                <div class="two-line-entity">
+                                    <span class="primary-text">{{ schoolYear.name }}</span>
+                                    <span class="secondary-text text-secondary-dark">{{schoolYear.validFrom | date:'mediumDate'}} - {{schoolYear.validTo | date:'mediumDate'}}</span>
+                                </div>
+                            </div>
+                            <entity-menu
+                                (delete)="deleteSchoolYear(schoolYear)"
+                                (edit)="editSchoolYear(schoolYear)"
+                            ></entity-menu>
+                        </div>
+                    </collapsible-header>
+                    <collapsible-body>
+                        <ul>
+                            <li *ngFor="let semester of schoolYear.semesters">
+                                <div class="entity child-entity" (click)="selectSemester(semester.id)" [class.active]="semester.id === activeSemesterId">
+                                    <div class="entity-desc">
+                                        <md-icon class="entity-icon">subdirectory_arrow_right</md-icon>
+                                        <md-icon class="entity-icon">school</md-icon>
+                                        <div class="two-line-entity">
+                                            <span class="primary-text">{{ semester.name }}</span>
+                                            <span class="secondary-text text-secondary-dark">{{semester.validFrom | date:'mediumDate'}} - {{semester.validTo | date:'mediumDate'}}</span>
+                                        </div>
+                                    </div>
+                                    <entity-menu
+                                        (delete)="deleteSemester(semester)"
+                                        (edit)="editSemester(semester)"
+                                    ></entity-menu>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="action-button">
+                                    <button md-raised-button color="accent" (click)="addSemester(schoolYear)">
+                                        <md-icon>add</md-icon>
+                                        {{ 'i18n.modules.manage.semester.add' | translate }}
+                                    </button>
+                                </div>
+                            </li>
+                        </ul>
+                    </collapsible-body>
+                </collapsible>
+            </li>
+            <li>
+                <div class="action-button">
+                    <button md-raised-button color="accent" (click)="addSchoolYear(activeSchoolClassId)">
+                        <md-icon>add</md-icon>
+                        {{ 'i18n.modules.manage.schoolYear.add' | translate }}
+                    </button>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <!-- MIDDLE COLUMN END -->
+
+    <!-- LAST COLUMN START -->
+    <div class="col s4 border-left">
+        <ul class="collapsible" *ngIf="subjectModel != null">
+            <li *ngFor="let subject of subjectModel">
+                <collapsible>
+                    <collapsible-header>
+                        <div class="entity">
+                            <div class="entity-desc">
+                                <span class="subject-icon" [style.background-color]="'#' + subject.color.hex"></span>
+                                <span>{{ subject.name }}</span>
+                            </div>
+                            <entity-menu
+                                (delete)="deleteSubject(subject)"
+                                (edit)="editSubject(subject)"
+                            ></entity-menu>
+                        </div>
+                    </collapsible-header>
+                </collapsible>
+            </li>
+            <li>
+                <div class="action-button">
+                    <button md-raised-button color="accent" (click)="addSubject(activeSemesterId)">
+                        <md-icon>add</md-icon>
+                        {{ 'i18n.modules.manage.subject.add' | translate }}
+                    </button>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <!-- LAST COLUMN END -->
+</div>

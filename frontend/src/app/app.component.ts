@@ -1,23 +1,25 @@
-import {Component} from '@angular/core';
-import {TranslateService} from "ng2-translate";
-import {NotificationsService} from "angular2-notifications";
-import {AuthService} from "./shared/services/auth/auth.service";
+import {Component, OnInit} from '@angular/core';
+import {AuthService} from './shared/services/auth/auth.service';
+import {TranslateService} from 'ng2-translate';
 
 @Component({
-    selector: 'app-root',
+    selector: 'outcobra-app',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-    title = 'Outcobra!';
-    date = new Date('2016-10-10');
-    minDate = new Date('2016-10-12');
-    maxDate = new Date('2018-1-1');
-    activeDate: Date;
+export class AppComponent implements OnInit {
+    title = 'Outcobra';
+    isEnglish: boolean = this.translateService.currentLang == 'en';
 
-    constructor(translate: TranslateService, private auth: AuthService) {
-        translate.setDefaultLang('en');
-        translate.use(translate.getBrowserLang());
+    constructor(private translateService: TranslateService,
+                private auth: AuthService) {
+    }
+
+    ngOnInit(): void {
+    }
+
+    changeLang() {
+        this.translateService.use(this.isEnglish ? 'en' : 'de');
     }
 
     login() {

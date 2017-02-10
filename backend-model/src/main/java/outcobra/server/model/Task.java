@@ -1,14 +1,16 @@
 package outcobra.server.model;
 
-import java.time.LocalDate;
+import com.querydsl.core.annotations.QueryInit;
+import outcobra.server.model.interfaces.ParentLinked;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 
 
 @Entity
 
-public class Task {
+public class Task implements ParentLinked {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -24,6 +26,7 @@ public class Task {
     private Integer effort, progress = 0;
 
     @ManyToOne
+    @QueryInit("semester.schoolYear.schoolClass.institution.user")
     private Subject subject;
 
     //region constructors
@@ -110,6 +113,7 @@ public class Task {
         this.subject = subject;
     }
 
+    @SuppressWarnings("SimplifiableIfStatement")
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -147,5 +151,9 @@ public class Task {
         return result;
     }
 
+    @Override
+    public ParentLinked getParent() {
+        return subject;
+    }
     //endregion0
 }

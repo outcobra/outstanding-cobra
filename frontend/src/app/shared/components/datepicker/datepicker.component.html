@@ -1,19 +1,20 @@
 <div class="datepicker-wrapper">
-    <md-input [type]="'text'" [(ngModel)]="formattedDate" (blur)="inputDateChanged()">
-        <button md-icon-button md-suffix (click)="toggle($event)"> <!-- todo stop click propagation -->
-            <md-icon>event</md-icon>
-        </button>
-    </md-input>
+    <md-input-container (click)="toggle()">
+        <input md-input [autofocus]="false" type="text" [(ngModel)]="formattedDate" (blur)="inputDateChanged()"
+               [placeholder]="placeholder">
+        <md-icon md-suffix>event</md-icon>
+        <ng-content select="md-hint"></ng-content>
+    </md-input-container>
     <div class="datepicker z-depth-1-half" [class.opened]="opened" [ngSwitch]="pickerMode">
         <div class="datepicker-header">
             <span class="year">{{currentDate | date:'y'}}</span><br>
-            <span class="date">{{currentDate | date:'E d MMM'}}</span>
+            <span class="date">{{currentDate | date:'mediumDate'}}</span>
         </div>
         <yearpicker *ngSwitchCase="'year'"></yearpicker>
         <daypicker *ngSwitchDefault></daypicker>
         <div class="datepicker-footer">
-            <button md-button (click)="cancel()">Cancel</button>
-            <button md-button (click)="submit()">OK</button>
+            <button type="button" md-button (click)="cancel()">{{'i18n.common.action.cancel' | translate}}</button>
+            <button type="button" md-button (click)="submit()">{{'i18n.common.action.ok' | translate}}</button>
         </div>
     </div>
 </div>
