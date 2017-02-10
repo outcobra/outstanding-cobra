@@ -33,11 +33,6 @@ spring:
 ---
 spring:
   profiles: basic_auth_security_mock
-security:
-  basic:
-    enabled: true
-  headers:
-    frame: false
 ---
 spring:
   profiles: h2_db

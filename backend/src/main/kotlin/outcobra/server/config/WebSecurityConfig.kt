@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import javax.inject.Inject
 
 /**
+ * WebSecurityConfig which is active all the time but can be overridden
+ *
  * @author Mario Kunz
  * @since <since>
  */
