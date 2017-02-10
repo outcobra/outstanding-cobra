@@ -1,6 +1,6 @@
-import {Component, OnInit} from "@angular/core";
-import {AuthService} from "./shared/services/auth/auth.service";
-import {TranslateService} from "ng2-translate";
+import {Component, OnInit} from '@angular/core';
+import {AuthService} from './shared/services/auth/auth.service';
+import {TranslateService} from 'ng2-translate';
 
 @Component({
     selector: 'outcobra-app',

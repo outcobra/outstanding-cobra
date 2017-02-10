@@ -7,13 +7,14 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Primary
 import org.springframework.context.annotation.Profile
 import outcobra.server.annotation.DefaultImplementation
+import outcobra.server.config.ProfileRegistry.Companion.MOCK_SERVICES
 import outcobra.server.model.User
 import outcobra.server.model.repository.UserRepository
 import outcobra.server.service.UserService
 import javax.inject.Inject
 
 @Configuration
-@Profile(ProfileRegistry.PROFILE_MOCK_SERVICES)
+@Profile(MOCK_SERVICES)
 open class Mocker(userRepository: UserRepository) {
 
     var USER: User
@@ -35,7 +36,6 @@ open class Mocker(userRepository: UserRepository) {
         val USER2_AUTH0_ID = "saf123123"
         val USER2_NICKNAME = "needToRoll"
     }
-
 
     @Bean
     @Primary

@@ -1,12 +1,12 @@
-import {Component, OnInit, ViewEncapsulation} from "@angular/core";
-import {ManageDialog} from "../manage-dialog";
-import {SchoolYearDto, SchoolClassDto} from "../model/ManageDto";
-import {FormGroup, FormBuilder, Validators} from "@angular/forms";
-import {MdDialogRef} from "@angular/material";
-import {OutcobraValidators} from "../../shared/services/outcobra-validators";
-import {TranslateService} from "ng2-translate";
-import {DatePipe} from "@angular/common";
-import {Util} from "../../shared/services/util";
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {ManageDialog} from '../manage-dialog';
+import {SchoolYearDto, SchoolClassDto} from '../model/ManageDto';
+import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+import {MdDialogRef} from '@angular/material';
+import {OutcobraValidators} from '../../shared/services/outcobra-validators';
+import {TranslateService} from 'ng2-translate';
+import {DatePipe} from '@angular/common';
+import {Util} from '../../shared/services/util';
 
 @Component({
     selector: 'school-year-dialog',
@@ -40,7 +40,7 @@ export class SchoolYearDialog extends ManageDialog<SchoolYearDto, SchoolClassDto
     getErrorText(controlName: string, errorName: string, errorProp: string) {
         let control = this.schoolYearForm.get(controlName);
         let date = this.datePipe.transform(control.getError(errorName)[errorProp], 'dd.MM.y');
-        return control.hasError(errorName) ? this.translate.instant(`i18n.common.form.error.${errorName}`, {'date': date}) : "";
+        return control.hasError(errorName) ? this.translate.instant(`i18n.common.form.error.${errorName}`, {'date': date}) : '';
     }
 
     onCancel() {

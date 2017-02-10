@@ -1,9 +1,9 @@
-import {Component, Input, OnInit, ViewEncapsulation, forwardRef, ElementRef, Output, EventEmitter} from "@angular/core";
-import * as moment from "moment";
-import {DateUtil} from "../../services/date-util.service";
-import {DatePickerMaxDateSmallerThanMinDateError} from "./datepicker-errors";
-import {ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS, AbstractControl, Validator} from "@angular/forms";
-import {OutcobraValidators} from "../../services/outcobra-validators";
+import {Component, Input, OnInit, ViewEncapsulation, forwardRef, ElementRef, Output, EventEmitter} from '@angular/core';
+import * as moment from 'moment';
+import {DateUtil} from '../../services/date-util.service';
+import {DatePickerMaxDateSmallerThanMinDateError} from './datepicker-errors';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS, AbstractControl, Validator} from '@angular/forms';
+import {OutcobraValidators} from '../../services/outcobra-validators';
 
 const noop = () => {
 };

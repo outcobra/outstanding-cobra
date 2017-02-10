@@ -1,6 +1,6 @@
-import {NgModule} from "@angular/core";
-import {CommonModule} from "@angular/common";
-import {TimetableComponent} from "./timetable.component";
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {TimetableComponent} from './timetable.component';
 
 @NgModule({
     imports: [

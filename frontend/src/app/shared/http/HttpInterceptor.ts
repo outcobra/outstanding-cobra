@@ -1,11 +1,11 @@
-import {Injectable} from "@angular/core";
-import {Http, Request, RequestMethod, URLSearchParams, Response} from "@angular/http";
-import {NotificationsService} from "angular2-notifications";
-import {Config} from "../../config/Config";
-import {Observable} from "rxjs";
-import "rxjs/add/operator/map";
-import {dateReviver, dateReplacer} from "./http-util";
-import {RequestOptions} from "./RequestOptions";
+import {Injectable} from '@angular/core';
+import {Http, Request, RequestMethod, URLSearchParams, Response} from '@angular/http';
+import {NotificationsService} from 'angular2-notifications';
+import {Config} from '../../config/Config';
+import {Observable} from 'rxjs';
+import 'rxjs/add/operator/map';
+import {dateReviver, dateReplacer} from './http-util';
+import {RequestOptions} from './RequestOptions';
 
 /**
  * HttpInterceptor to customize the http request and http responses
@@ -186,13 +186,13 @@ export class HttpInterceptor {
             /:([a-zA-Z]+[\w-]*)/g,
             ($0, token) => {
                 if (requestOptions.params.hasOwnProperty(token)) return this.extractValue(requestOptions.params, token);
-                return "";
+                return '';
             }
         );
         // cleanup double slashes
         requestOptions.url = this.removeRepeatedSlashes(requestOptions.url);
         // cleanup unnecessary slashes at the end
-        requestOptions.url = requestOptions.url.replace(/\/+$/g, "");
+        requestOptions.url = requestOptions.url.replace(/\/+$/g, '');
         return ( requestOptions );
     }
 
@@ -218,7 +218,7 @@ export class HttpInterceptor {
      */
     private addContentType(request: RequestOptions) {
         if (request.method !== RequestMethod.Get && request.method !== RequestMethod.Delete) {
-            request.headers['Content-Type'] = "application/json ; charset=UTF-8";
+            request.headers['Content-Type'] = 'application/json ; charset=UTF-8';
         }
         return request;
     }

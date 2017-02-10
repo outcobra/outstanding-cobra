@@ -1,6 +1,6 @@
-import {CrudService} from "./crud.service";
-import {Observable} from "rxjs";
-import {CacheableService} from "./cacheable.service";
+import {CrudService} from './crud.service';
+import {Observable} from 'rxjs';
+import {CacheableService} from './cacheable.service';
 
 /**
  * Used for services which have entities that can be cached and need crud functionality at the same time

@@ -1,6 +1,6 @@
 /* tslint:disable:no-unused-variable */
-import {async, ComponentFixture, TestBed} from "@angular/core/testing";
-import {InstitutionDialog} from "./institution-dialog.component";
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {InstitutionDialog} from './institution-dialog.component';
 
 describe('InstitutionDialog', () => {
     let component: InstitutionDialog;
