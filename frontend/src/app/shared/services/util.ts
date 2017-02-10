@@ -18,9 +18,9 @@ export class Util {
             tmp = [];
         window.location.search
             .substr(1)
-            .split("&")
+            .split('&')
             .forEach((item) => {
-                tmp = item.split("=");
+                tmp = item.split('=');
                 if (tmp[0] === paramName) result = decodeURIComponent(tmp[1]);
             });
         return result;
