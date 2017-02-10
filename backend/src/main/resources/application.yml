@@ -6,6 +6,8 @@ spring:
   jackson:
     serialization:
       WRITE_DATES_AS_TIMESTAMPS: false
+product:
+  version: 1.0.0
 
 ---
 #---
@@ -19,13 +21,16 @@ endpoints:
 spring:
   profiles:
     include: load_test_data,disable_auth_filter,basic_auth_security_mock,h2_db
+runtime:
+  environment: development
 ---
 spring.profiles: test
 #ignore the ugliness bc it doesn't seem to work in a different way
 spring:
   profiles:
     include: load_test_data,h2_db,mock_services
-
+runtime:
+  environment: test
 #---
 # Normal Profile definition
 # This part includes all profiles which are used by those in the area above
