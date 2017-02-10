@@ -1,10 +1,11 @@
 import {Injectable} from "@angular/core";
-import {NotificationsService, Notification, Icons} from "angular2-notifications";
+import {NotificationsService} from "angular2-notifications";
 import {TranslateService} from "ng2-translate";
 import * as _ from "underscore";
-
 import "rxjs/add/operator/toPromise";
 import {appIcons} from "./icons";
+import {Notification} from "angular2-notifications/lib/notification.type";
+import {Icons} from "angular2-notifications/lib/icons";
 
 @Injectable()
 export class NotificationWrapperService extends NotificationsService {
