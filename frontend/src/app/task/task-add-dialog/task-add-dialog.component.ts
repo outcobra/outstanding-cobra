@@ -6,13 +6,14 @@ import {SubjectDto} from '../../manage/model/ManageDto';
 import {Util} from '../../shared/services/util';
 import {OutcobraValidators} from '../../shared/services/outcobra-validators';
 import {Task} from '../model/Task';
+import {CreateUpdateDialog} from "../../common/CreateUpdateDialog";
 
 @Component({
     selector: 'task-add-dialog',
     templateUrl: './task-add-dialog.component.html',
     styleUrls: ['./task-add-dialog.component.scss']
 })
-export class TaskAddDialogComponent implements OnInit {
+export class TaskAddDialogComponent extends CreateUpdateDialog<Task> implements OnInit {
     private taskAddForm: FormGroup;
     private subjects: SubjectDto[];
     private today: Date = new Date();
@@ -20,6 +21,7 @@ export class TaskAddDialogComponent implements OnInit {
     constructor(private subjectService: SubjectService,
                 public dialogRef: MdDialogRef<TaskAddDialogComponent>,
                 private formBuilder: FormBuilder) {
+        super();
     }
 
     ngOnInit() {
@@ -27,17 +29,17 @@ export class TaskAddDialogComponent implements OnInit {
             .subscribe((subjects: SubjectDto[]) => this.subjects = subjects);
 
         this.taskAddForm = this.formBuilder.group({
-            name: ['', Validators.required],
-            description: ['', Validators.required],
+            name: [this.getDefaultOrParam('name'), Validators.required],
+            description: [this.getDefaultOrParam('description'), Validators.required],
             dates: this.formBuilder.group({
-                    todoDate: ['', Validators.required],
-                    dueDate: ['', Validators.required],
+                    todoDate: [this.getDefaultOrParam('todoDate'), Validators.required],
+                    dueDate: [this.getDefaultOrParam('dueDate'), Validators.required],
                 },
                 {
                     validator: OutcobraValidators.dateFromIsBeforeDateTo('todoDate', 'dueDate', true)
                 }),
-            effort: ['', Validators.required],
-            subjectId: ['', Validators.required]
+            effort: [this.getDefaultOrParam('effort'), Validators.required],
+            subjectId: [this.getDefaultOrParam('subject.id'), Validators.required]
         });
     }
 

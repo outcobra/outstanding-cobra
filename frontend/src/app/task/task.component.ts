@@ -8,6 +8,7 @@ import {MdDialog, MdDialogRef} from '@angular/material';
 import {TaskAddDialogComponent} from './task-add-dialog/task-add-dialog.component';
 import {NotificationsService} from 'angular2-notifications';
 import {Util, and} from '../shared/services/util';
+import {DialogMode} from "../common/DialogMode";
 
 @Component({
     selector: 'task',
@@ -65,6 +66,7 @@ export class TaskComponent implements OnInit {
 
     addTask() {
         this.taskAddDialog = this.dialogService.open(TaskAddDialogComponent, {width: '500px', position: {top: '20px'}});
+        this.taskAddDialog.componentInstance.init(DialogMode.NEW, null);
         this.taskAddDialog.afterClosed()
             .subscribe((result) => {
                 if (!result) return;

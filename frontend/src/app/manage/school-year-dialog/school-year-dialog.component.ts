@@ -27,9 +27,9 @@ export class SchoolYearDialog extends ManageDialog<SchoolYearDto, SchoolClassDto
 
     ngOnInit() {
         this.schoolYearForm = this.formBuilder.group({
-                name: [this.isEditMode() ? this.params.name : '', Validators.required],
-                validFrom: [this.isEditMode() ? this.params.validFrom : '', Validators.required],
-                validTo: [this.isEditMode() ? this.params.validTo : '', Validators.required]
+                name: [this.getDefaultOrParam('name'), Validators.required],
+                validFrom: [this.getDefaultOrParam('validFrom'), Validators.required],
+                validTo: [this.getDefaultOrParam('validTo'), Validators.required]
             },
             {
                 validator: OutcobraValidators.dateFromIsBeforeDateTo

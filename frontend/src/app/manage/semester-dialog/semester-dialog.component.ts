@@ -27,9 +27,9 @@ export class SemesterDialog extends ManageDialog<SemesterDto, SchoolYearDto> imp
 
     ngOnInit() {
         this.semesterForm = this.formBuilder.group({
-                name: [this.isEditMode() ? this.params.name : '', Validators.required],
-                validFrom: [this.isEditMode() ? this.params.validFrom : '', Validators.compose([Validators.required, OutcobraValidators.isAfterOrEqualDay(this.parent.validFrom)])],
-                validTo: [this.isEditMode() ? this.params.validTo : '', Validators.compose([Validators.required, OutcobraValidators.isBeforeOrEqualDay(this.parent.validTo)])]
+                name: [this.getDefaultOrParam('name'), Validators.required],
+                validFrom: [this.getDefaultOrParam('validFrom'), Validators.compose([Validators.required, OutcobraValidators.isAfterOrEqualDay(this.parent.validFrom)])],
+                validTo: [this.getDefaultOrParam('validTo'), Validators.compose([Validators.required, OutcobraValidators.isBeforeOrEqualDay(this.parent.validTo)])]
             },
             {
                 validator: OutcobraValidators.dateFromIsBeforeDateTo

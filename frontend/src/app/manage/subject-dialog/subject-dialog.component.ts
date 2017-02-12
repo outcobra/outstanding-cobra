@@ -22,8 +22,8 @@ export class SubjectDialog extends ManageDialog<SubjectDto, SemesterDto> impleme
 
     ngOnInit() {
         this.subjectForm = this.formBuilder.group({
-                name: [this.isEditMode() ? this.params.name : '', Validators.required],
-                color: [this.isEditMode() ? this.params.color : '', Validators.required]
+                name: [this.getDefaultOrParam('name'), Validators.required],
+                color: [this.getDefaultOrParam('color'), Validators.required]
             }
         );
     }
