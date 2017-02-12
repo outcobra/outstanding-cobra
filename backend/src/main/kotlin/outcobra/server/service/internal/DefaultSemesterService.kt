@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 import outcobra.server.exception.DateOutsideExpectedRangeException
 import outcobra.server.model.QSemester
+import outcobra.server.model.SchoolYear
 import outcobra.server.model.Semester
 import outcobra.server.model.dto.SemesterDto
 import outcobra.server.model.interfaces.Mapper
@@ -33,6 +34,7 @@ open class DefaultSemesterService
     }
 
     override fun readAllBySchoolYear(schoolYearId: Long): List<SemesterDto> {
+        validationService.validateByParentId(schoolYearId, SchoolYear::class)
         val filter = QSemester.semester.schoolYear.id.eq(schoolYearId)
         return repository.findAll(filter).map { mapper.toDto(it) }
     }
@@ -40,6 +42,7 @@ open class DefaultSemesterService
     override fun getCurrentSemester(): List<SemesterDto> {
         val currentUserId = userService.getCurrentUser()?.id
         val today = LocalDate.now()
+        //check ownership manually
         val withCurrentUser = QSemester.semester.schoolYear.schoolClass.institution.user.id.eq(currentUserId)
         val todayBetweenValidFromAndTo = withCurrentUser.and(QSemester.semester.validFrom.loe(today)
                 .and(QSemester.semester.validTo.goe(today)))

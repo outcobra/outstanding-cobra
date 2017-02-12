@@ -3,6 +3,8 @@ package outcobra.server.service.internal
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 import outcobra.server.model.QTask
+import outcobra.server.model.Semester
+import outcobra.server.model.Subject
 import outcobra.server.model.Task
 import outcobra.server.model.dto.SchoolClassSubjects
 import outcobra.server.model.dto.TaskDto
@@ -33,21 +35,25 @@ open class DefaultTaskService
     }
 
     override fun readAllBySubject(subjectId: Long): List<TaskDto> {
+        validationService.validateByParentId(subjectId, Subject::class)
         val filter = QTask.task.subject.id.eq(subjectId)
         return repository.findAll(filter).map { mapper.toDto(it) }
     }
 
     override fun readAllBySemester(semesterId: Long): List<TaskDto> {
+        validationService.validateByParentId(semesterId, Semester::class)
         val filter = QTask.task.subject.semester.id.eq(semesterId)
         return repository.findAll(filter).map { mapper.toDto(it) }
     }
 
     override fun readAllOpenBySubject(subjectId: Long): List<TaskDto> {
+        validationService.validateByParentId(subjectId, Subject::class)
         val filter = QTask.task.progress.ne(100).and(QTask.task.subject.id.eq(subjectId))
         return repository.findAll(filter).map { mapper.toDto(it) }
     }
 
     override fun readAllOpenBySemester(semesterId: Long): List<TaskDto> {
+        validationService.validateByParentId(semesterId, Semester::class)
         val filter = QTask.task.progress.ne(100).and(QTask.task.subject.semester.id.eq(semesterId))
         return repository.findAll(filter).map { mapper.toDto(it) }
     }

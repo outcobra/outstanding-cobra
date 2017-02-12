@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 import outcobra.server.exception.DateOutsideExpectedRangeException
 import outcobra.server.model.QSchoolYear
+import outcobra.server.model.SchoolClass
 import outcobra.server.model.SchoolYear
 import outcobra.server.model.dto.SchoolYearDto
 import outcobra.server.model.interfaces.Mapper
@@ -30,6 +31,7 @@ open class DefaultSchoolYearService
     }
 
     override fun readAllBySchoolClass(schoolClassId: Long): List<SchoolYearDto> {
+        validationService.validateByParentId(schoolClassId, SchoolClass::class)
         val filter = QSchoolYear.schoolYear.schoolClass.id.eq(schoolClassId)
         return repository.findAll(filter).map { mapper.toDto(it) }
     }

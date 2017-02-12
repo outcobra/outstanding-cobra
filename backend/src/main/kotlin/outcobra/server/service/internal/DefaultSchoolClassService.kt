@@ -2,6 +2,7 @@ package outcobra.server.service.internal
 
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
+import outcobra.server.model.Institution
 import outcobra.server.model.QSchoolClass
 import outcobra.server.model.SchoolClass
 import outcobra.server.model.dto.SchoolClassDto
@@ -31,6 +32,7 @@ open class DefaultSchoolClassService
     }
 
     override fun readAllByInstitution(institutionId: Long): List<SchoolClassDto> {
+        validationService.validateByParentId(institutionId, Institution::class)
         val filter = QSchoolClass.schoolClass.institution.id.eq(institutionId)
         return repository.findAll(filter).map { mapper.toDto(it) }
     }

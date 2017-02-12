@@ -3,7 +3,11 @@ package outcobra.server.service.base.internal
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.querydsl.QueryDslPredicateExecutor
 import outcobra.server.model.interfaces.Mapper
+import outcobra.server.model.interfaces.OutcobraDto
+import outcobra.server.model.interfaces.ParentLinked
+import outcobra.server.service.RequestAuthorizationService
 import outcobra.server.service.base.BaseService
+import outcobra.server.service.internal.DefaultRequestAuthorizationService
 import javax.transaction.Transactional
 
 /**
@@ -16,18 +20,23 @@ import javax.transaction.Transactional
 open class DefaultBaseService<Entity, Dto, out Repo>
 constructor(val mapper: Mapper<Entity, Dto>,
             val repository: Repo) : BaseService<Dto>
-where Repo : JpaRepository<Entity, Long>, Repo : QueryDslPredicateExecutor<Entity> {
+where Repo : JpaRepository<Entity, Long>, Repo : QueryDslPredicateExecutor<Entity>, Dto : OutcobraDto, Entity : ParentLinked {
+
+    val validationService: RequestAuthorizationService<Entity, Dto, Repo> = DefaultRequestAuthorizationService(mapper, repository)
 
     override fun save(dto: Dto): Dto {
+        validationService.validateDtoSaving(dto)
         val entity = repository.save(mapper.fromDto(dto))
         return mapper.toDto(entity)
     }
 
     override fun readById(id: Long): Dto {
+        validationService.validateRequestById(id)
         return mapper.toDto(repository.findOne(id))
     }
 
     override fun delete(id: Long) {
+        validationService.validateRequestById(id)
         repository.delete(id)
     }
 }
