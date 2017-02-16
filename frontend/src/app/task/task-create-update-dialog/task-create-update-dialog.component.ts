@@ -6,20 +6,20 @@ import {SubjectDto} from '../../manage/model/ManageDto';
 import {Util} from '../../shared/services/util';
 import {OutcobraValidators} from '../../shared/services/outcobra-validators';
 import {Task} from '../model/Task';
-import {CreateUpdateDialog} from "../../common/CreateUpdateDialog";
+import {CreateUpdateDialog} from '../../common/CreateUpdateDialog';
 
 @Component({
-    selector: 'task-add-dialog',
-    templateUrl: './task-add-dialog.component.html',
-    styleUrls: ['./task-add-dialog.component.scss']
+    selector: './task-create-update-dialog',
+    templateUrl: './task-create-update-dialog.component.html',
+    styleUrls: ['./task-create-update-dialog.component.scss']
 })
-export class TaskAddDialogComponent extends CreateUpdateDialog<Task> implements OnInit {
+export class TaskCreateUpdateDialog extends CreateUpdateDialog<Task> implements OnInit {
     private taskAddForm: FormGroup;
     private subjects: SubjectDto[];
     private today: Date = new Date();
 
     constructor(private subjectService: SubjectService,
-                public dialogRef: MdDialogRef<TaskAddDialogComponent>,
+                public dialogRef: MdDialogRef<TaskCreateUpdateDialog>,
                 private formBuilder: FormBuilder) {
         super();
     }

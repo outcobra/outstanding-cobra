@@ -32,7 +32,7 @@ export class ColorpickerComponent implements OnInit, ControlValueAccessor {
 
     private outColor: Color = null;
 
-    @Output() onSelectColor = new EventEmitter<Color>();
+    @Output('selectColor') onSelectColor = new EventEmitter<Color>();
 
     private onTouchedCallback: () => void = noop;
     private onChangeCallback: (_: any) => void = noop;

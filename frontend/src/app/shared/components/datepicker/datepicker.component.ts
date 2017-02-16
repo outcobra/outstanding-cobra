@@ -43,7 +43,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor, Valida
     // date for inputField
     private formattedDate: string;
 
-    @Output() onSelectDate = new EventEmitter<Date>();
+    @Output('selectDate') onSelectDate = new EventEmitter<Date>();
 
     private onTouchedCallback: () => void = noop;
     private onChangeCallback: (_: any) => void = noop;

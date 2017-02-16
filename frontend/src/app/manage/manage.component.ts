@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ManageService} from './service/manage.service';
 import {ManageDto, InstitutionDto, SchoolClassDto, SchoolYearDto, SemesterDto, SubjectDto} from './model/ManageDto';
-import {MdDialogRef, MdDialogConfig} from '@angular/material';
+import {MdDialogRef} from '@angular/material';
 import {InstitutionDialog} from './institution-dialog/institution-dialog.component';
 import {DialogMode} from '../common/DialogMode';
 import {SchoolClassDialog} from './school-class-dialog/school-class-dialog.component';
@@ -17,9 +17,8 @@ import {ManageDialogFactory} from './service/manage-dialog-factory';
 import {SubjectDialog} from './subject-dialog/subject-dialog.component';
 import {SubjectService} from './service/subject.service';
 import {Util} from '../shared/services/util';
+import {SMALL_DIALOG} from '../shared/const/const';
 
-
-const DEFAULT_CONFIG: MdDialogConfig = {position: {top: '20px'}};
 
 @Component({
     selector: 'manager',
@@ -105,7 +104,7 @@ export class ManageComponent implements OnInit {
     }
 
     addInstitution() {
-        this.institutionDialogRef = this.manageDialogFactory.getDialog(InstitutionDialog, DialogMode.NEW, null, DEFAULT_CONFIG);
+        this.institutionDialogRef = this.manageDialogFactory.getDialog(InstitutionDialog, DialogMode.NEW, null, SMALL_DIALOG);
         this.institutionDialogRef.afterClosed().subscribe((result: InstitutionDto) => {
             if (result != null) {
                 this.institutionService.create(result).subscribe((institution: InstitutionDto) => {
@@ -118,7 +117,7 @@ export class ManageComponent implements OnInit {
     }
 
     addSchoolClass(institution: InstitutionDto) {
-        this.schoolClassDialogRef = this.manageDialogFactory.getDialog(SchoolClassDialog, DialogMode.NEW, institution, DEFAULT_CONFIG);
+        this.schoolClassDialogRef = this.manageDialogFactory.getDialog(SchoolClassDialog, DialogMode.NEW, institution, SMALL_DIALOG);
         this.schoolClassDialogRef.afterClosed().subscribe((result: SchoolClassDto) => {
             if (result) {
                 this.schoolClassService.create(result).subscribe((schoolClass: SchoolClassDto) => {
@@ -133,7 +132,7 @@ export class ManageComponent implements OnInit {
     addSchoolYear(schoolClassId: number) {
         if (schoolClassId != null) {
             let schoolClass: SchoolClassDto = this.findSchoolClass(this.institutionClasses, schoolClassId);
-            this.schoolYearDialogRef = this.manageDialogFactory.getDialog(SchoolYearDialog, DialogMode.NEW, schoolClass, DEFAULT_CONFIG);
+            this.schoolYearDialogRef = this.manageDialogFactory.getDialog(SchoolYearDialog, DialogMode.NEW, schoolClass, SMALL_DIALOG);
             this.schoolYearDialogRef.afterClosed().subscribe((result: SchoolYearDto) => {
                 if (result) {
                     this.schoolYearService.create(result).subscribe((schoolYear: SchoolYearDto) => {
@@ -147,7 +146,7 @@ export class ManageComponent implements OnInit {
 
     addSemester(schoolYear: SchoolYearDto) {
         if (schoolYear != null) {
-            this.semesterDialogRef = this.manageDialogFactory.getDialog(SemesterDialog, DialogMode.NEW, schoolYear, DEFAULT_CONFIG);
+            this.semesterDialogRef = this.manageDialogFactory.getDialog(SemesterDialog, DialogMode.NEW, schoolYear, SMALL_DIALOG);
             this.semesterDialogRef.afterClosed().subscribe((result: SemesterDto) => {
                 if (result) {
                     this.semesterService.create(result).subscribe((semester: SemesterDto) => {
@@ -163,7 +162,7 @@ export class ManageComponent implements OnInit {
     addSubject(semesterId: number) {
         if (semesterId != null) {
             let semester: SemesterDto = this.findSemester(this.yearSemesterModel, semesterId);
-            this.subjectDialogRef = this.manageDialogFactory.getDialog(SubjectDialog, DialogMode.NEW, semester, DEFAULT_CONFIG);
+            this.subjectDialogRef = this.manageDialogFactory.getDialog(SubjectDialog, DialogMode.NEW, semester, SMALL_DIALOG);
             this.subjectDialogRef.afterClosed().subscribe((result: SubjectDto) => {
                 if (result) {
                     this.subjectService.create(result).subscribe((subject: SubjectDto) => {

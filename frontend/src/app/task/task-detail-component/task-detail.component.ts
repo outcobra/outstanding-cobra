@@ -3,6 +3,10 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Task} from '../model/Task';
 import {ConfirmDialogService} from '../../shared/services/confirm-dialog.service';
 import {TaskService} from '../service/task.service';
+import {MdDialog, MdDialogRef} from '@angular/material';
+import {TaskCreateUpdateDialog} from '../task-create-update-dialog/task-create-update-dialog.component';
+import {SMALL_DIALOG} from '../../shared/const/const';
+import {DialogMode} from '../../common/DialogMode';
 
 @Component({
     selector: 'task-detail',
@@ -11,9 +15,11 @@ import {TaskService} from '../service/task.service';
 })
 export class TaskDetailComponent implements OnInit {
     private task: Task;
+    private taskCreateUpdateDialog: MdDialogRef<TaskCreateUpdateDialog>;
 
     constructor(private confirmDialogService: ConfirmDialogService,
                 private taskService: TaskService,
+                private dialogService: MdDialog,
                 private route: ActivatedRoute,
                 private router: Router) {
     }
@@ -26,7 +32,11 @@ export class TaskDetailComponent implements OnInit {
     }
 
     editTask() {
-
+        this.taskCreateUpdateDialog = this.dialogService.open(TaskCreateUpdateDialog, SMALL_DIALOG);
+        this.taskCreateUpdateDialog.componentInstance.init(DialogMode.EDIT, this.task);
+        this.taskCreateUpdateDialog.afterClosed().subscribe(result => {
+            console.log(result);
+        });
     }
 
     deleteTask() {

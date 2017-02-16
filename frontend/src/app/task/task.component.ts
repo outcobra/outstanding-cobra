@@ -5,10 +5,10 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {ActivatedRoute, Router, NavigationEnd} from '@angular/router';
 import {TaskFilter} from './model/TaskFilter';
 import {MdDialog, MdDialogRef} from '@angular/material';
-import {TaskAddDialogComponent} from './task-add-dialog/task-add-dialog.component';
+import {TaskCreateUpdateDialog} from './task-create-update-dialog/task-create-update-dialog.component';
 import {NotificationsService} from 'angular2-notifications';
 import {Util, and} from '../shared/services/util';
-import {DialogMode} from "../common/DialogMode";
+import {DialogMode} from '../common/DialogMode';
 
 @Component({
     selector: 'task',
@@ -24,7 +24,7 @@ export class TaskComponent implements OnInit {
     private filterData: TaskFilter;
     private isFiltered: boolean = false;
 
-    private taskAddDialog: MdDialogRef<TaskAddDialogComponent>;
+    private taskCreateUpdateDialog: MdDialogRef<TaskCreateUpdateDialog>;
 
     constructor(private taskService: TaskService,
                 private dialogService: MdDialog,
@@ -65,9 +65,9 @@ export class TaskComponent implements OnInit {
     }
 
     addTask() {
-        this.taskAddDialog = this.dialogService.open(TaskAddDialogComponent, {width: '500px', position: {top: '20px'}});
-        this.taskAddDialog.componentInstance.init(DialogMode.NEW, null);
-        this.taskAddDialog.afterClosed()
+        this.taskCreateUpdateDialog = this.dialogService.open(TaskCreateUpdateDialog, {width: '500px', position: {top: '20px'}});
+        this.taskCreateUpdateDialog.componentInstance.init(DialogMode.NEW, null);
+        this.taskCreateUpdateDialog.afterClosed()
             .subscribe((result) => {
                 if (!result) return;
                 this.taskService.create(result)
