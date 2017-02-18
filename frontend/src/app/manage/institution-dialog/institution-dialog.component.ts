@@ -21,7 +21,7 @@ export class InstitutionDialog extends ManageDialog<InstitutionDto, any> impleme
 
     ngOnInit() {
         this.institutionForm = this.formBuilder.group({
-            name: [this.getDefaultOrParam('name'), Validators.required]
+            name: [this.getParamOrDefault('name'), Validators.required]
         });
     }
 

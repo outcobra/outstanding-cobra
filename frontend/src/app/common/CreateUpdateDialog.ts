@@ -1,4 +1,4 @@
-import {DialogMode} from "./DialogMode";
+import {DialogMode} from './DialogMode';
 
 export class CreateUpdateDialog<T> {
     private _mode: DialogMode;
@@ -19,7 +19,7 @@ export class CreateUpdateDialog<T> {
         return this._param;
     }
 
-    protected getDefaultOrParam(propertyPath: string) {
+    protected getParamOrDefault(propertyPath: string) {
         if (!this.isEditMode()) return '';
         if (!propertyPath.includes('.') && this.param.hasOwnProperty(propertyPath)) return this.param[propertyPath];
         else {

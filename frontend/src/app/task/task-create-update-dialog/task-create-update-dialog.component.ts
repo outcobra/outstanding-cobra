@@ -7,6 +7,7 @@ import {Util} from '../../shared/services/util';
 import {OutcobraValidators} from '../../shared/services/outcobra-validators';
 import {Task} from '../model/Task';
 import {CreateUpdateDialog} from '../../common/CreateUpdateDialog';
+import {DialogMode} from '../../common/DialogMode';
 
 @Component({
     selector: './task-create-update-dialog',
@@ -16,7 +17,7 @@ import {CreateUpdateDialog} from '../../common/CreateUpdateDialog';
 export class TaskCreateUpdateDialog extends CreateUpdateDialog<Task> implements OnInit {
     private taskAddForm: FormGroup;
     private subjects: SubjectDto[];
-    private today: Date = new Date();
+    private today: Date;
 
     constructor(private subjectService: SubjectService,
                 public dialogRef: MdDialogRef<TaskCreateUpdateDialog>,
@@ -24,22 +25,27 @@ export class TaskCreateUpdateDialog extends CreateUpdateDialog<Task> implements 
         super();
     }
 
+    public init(mode: DialogMode, param?: Task): void {
+        super.init(mode, param);
+        this.today = this.isEditMode() ? null : new Date();
+    }
+
     ngOnInit() {
         this.subjectService.getCurrentSubjects()
             .subscribe((subjects: SubjectDto[]) => this.subjects = subjects);
 
         this.taskAddForm = this.formBuilder.group({
-            name: [this.getDefaultOrParam('name'), Validators.required],
-            description: [this.getDefaultOrParam('description'), Validators.required],
+            name: [this.getParamOrDefault('name'), Validators.required],
+            description: [this.getParamOrDefault('description'), Validators.required],
             dates: this.formBuilder.group({
-                    todoDate: [this.getDefaultOrParam('todoDate'), Validators.required],
-                    dueDate: [this.getDefaultOrParam('dueDate'), Validators.required],
+                    todoDate: [this.getParamOrDefault('todoDate'), Validators.required],
+                    dueDate: [this.getParamOrDefault('dueDate'), Validators.required],
                 },
                 {
                     validator: OutcobraValidators.dateFromIsBeforeDateTo('todoDate', 'dueDate', true)
                 }),
-            effort: [this.getDefaultOrParam('effort'), Validators.required],
-            subjectId: [this.getDefaultOrParam('subject.id'), Validators.required]
+            effort: [this.getParamOrDefault('effort'), Validators.required],
+            subjectId: [this.getParamOrDefault('subject.id'), Validators.required]
         });
     }
 

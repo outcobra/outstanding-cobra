@@ -20,7 +20,7 @@ export class SchoolClassDialog extends ManageDialog<SchoolClassDto, InstitutionD
 
     ngOnInit() {
         this.schoolClassForm = this.formBuilder.group({
-            normalizedName: [this.getDefaultOrParam('normalizedName'), Validators.required]
+            normalizedName: [this.getParamOrDefault('normalizedName'), Validators.required]
         });
     }
 
