@@ -2,6 +2,8 @@ package outcobra.server.util
 
 import outcobra.server.model.SchoolYear
 import outcobra.server.model.Semester
+import outcobra.server.model.User
+import outcobra.server.model.interfaces.ParentLinked
 import java.time.LocalDate
 
 /*
@@ -20,3 +22,9 @@ operator infix fun SchoolYear.contains(semester: Semester): Boolean =
 
 infix fun Semester.doesNotOverlap(semester: Semester): Boolean =
         this.id == semester.id || !DateUtil.isOverlap(this.validFrom, this.validTo, semester.validFrom, semester.validTo)
+
+
+tailrec fun ParentLinked.followToUser(): User {
+    if (this is User) return this
+    return this.followToUser()
+}

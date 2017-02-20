@@ -10,6 +10,7 @@ import outcobra.server.model.interfaces.ParentLinkedDto
 import outcobra.server.service.UserService
 import outcobra.server.service.base.BaseService
 import outcobra.server.util.RepositoryLocator
+import outcobra.server.util.followToUser
 import javax.inject.Inject
 import kotlin.reflect.KClass
 
@@ -52,7 +53,7 @@ where Dto : OutcobraDto {
     fun validateRequestById(id: Long, type: Class<*>) {
         var name = type.simpleName
         if (name != null) {
-            name.replace("Dto", "")
+            name = name.replace("Dto", "")
             val repository = locator.getForEntityName(name)
             val entity = repository.findOne(id)
             if (entity != null && entity is ParentLinked) {
@@ -60,11 +61,6 @@ where Dto : OutcobraDto {
             }
         }
         throw ManipulatedRequestException()
-    }
-
-    tailrec private fun followToUser(link: ParentLinked): User {
-        if (link is User) return link
-        return followToUser(link.parent)
     }
 
     private fun ParentLinkedDto.checkOwnerIsCurrent() {
@@ -78,15 +74,14 @@ where Dto : OutcobraDto {
 
 
     fun ParentLinked.checkOwnerIsCurrent() {
-        if (followToUser(this) != userService.getCurrentUser()) {
+        if (this.followToUser() != userService.getCurrentUser()) {
             throw ManipulatedRequestException()
         }
     }
 
     private fun getRepoByDto(dto: Dto): JpaRepository<*, Long> {
         var name = dto.javaClass.simpleName
-        name.replace("Dto", "")
+        name = name.replace("Dto", "")
         return locator.getForEntityName(name)
-
     }
 }
