@@ -3,7 +3,6 @@ package outcobra.server.validator
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Component
 import outcobra.server.exception.ManipulatedRequestException
-import outcobra.server.model.User
 import outcobra.server.model.interfaces.OutcobraDto
 import outcobra.server.model.interfaces.ParentLinked
 import outcobra.server.model.interfaces.ParentLinkedDto
@@ -67,7 +66,7 @@ where Dto : OutcobraDto {
         val parentLink = this.parentLink
         val repo = locator.getForEntityClass(parentLink.parentClass)
         val parent: ParentLinked? = repo.findOne(parentLink.id)
-        if (parent == null || (parent) != userService.getCurrentUser()) {
+        if (parent == null || (parent.followToUser()) != userService.getCurrentUser()) {
             throw ManipulatedRequestException()
         }
     }
