@@ -4,12 +4,9 @@ import org.springframework.stereotype.Component
 import outcobra.server.model.Institution
 import outcobra.server.model.dto.InstitutionDto
 import outcobra.server.model.interfaces.Mapper
-import outcobra.server.service.UserService
-import javax.inject.Inject
 
 @Component
-open class InstitutionMapper
-@Inject constructor(val userService: UserService) : Mapper<Institution, InstitutionDto> {
+open class InstitutionMapper : Mapper<Institution, InstitutionDto>, BaseMapper() {
 
     override fun toDto(from: Institution) = InstitutionDto(from.id ?: 0, from.user.id, from.name)
 

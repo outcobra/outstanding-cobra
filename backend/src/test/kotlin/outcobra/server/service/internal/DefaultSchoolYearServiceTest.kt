@@ -3,6 +3,7 @@ package outcobra.server.service.internal
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.boot.test.context.SpringBootTest
@@ -63,6 +64,7 @@ open class DefaultSchoolYearServiceTest {
     }
 
     @Test
+    @Ignore
     fun saveValidUpdate() {
         existing?.validTo?.plusYears(1)
         schoolYearService.save(schoolYearMapper.toDto(existing))

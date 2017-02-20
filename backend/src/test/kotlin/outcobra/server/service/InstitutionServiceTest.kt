@@ -56,7 +56,7 @@ open class InstitutionServiceTest {
         val savedDto = institutionService.save(InstitutionDto(name = INSTITUTION_NAME))
         val institutionId = savedDto.id
         val updatedName = "testUpdateInstitution"
-        val updateDto = InstitutionDto(institutionId, 0, updatedName)
+        val updateDto = InstitutionDto(institutionId, userService.getCurrentUser()!!.id, updatedName)
         institutionService.save(updateDto)
         val institution = institutionRepository.findOne(QInstitution.institution.id.eq(institutionId))
         assertThat(institution).isNotNull()

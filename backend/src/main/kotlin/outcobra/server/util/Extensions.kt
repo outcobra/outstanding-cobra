@@ -26,5 +26,6 @@ infix fun Semester.doesNotOverlap(semester: Semester): Boolean =
 
 tailrec fun ParentLinked.followToUser(): User {
     if (this is User) return this
-    return this.followToUser()
+    val parentLinked = this.parent
+    return parentLinked.followToUser()
 }
