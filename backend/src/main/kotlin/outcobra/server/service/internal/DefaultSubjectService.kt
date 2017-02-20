@@ -8,11 +8,13 @@ import outcobra.server.model.Semester
 import outcobra.server.model.Subject
 import outcobra.server.model.dto.SubjectDto
 import outcobra.server.model.interfaces.Mapper
+import outcobra.server.model.interfaces.OutcobraDto
 import outcobra.server.model.repository.SubjectRepository
 import outcobra.server.service.SemesterService
 import outcobra.server.service.SubjectService
 import outcobra.server.service.UserService
 import outcobra.server.service.base.internal.DefaultBaseService
+import outcobra.server.validator.RequestValidator
 import javax.inject.Inject
 
 
@@ -21,9 +23,13 @@ import javax.inject.Inject
 open class DefaultSubjectService
 @Inject constructor(mapper: Mapper<Subject, SubjectDto>,
                     repository: SubjectRepository,
+                    requestValidator: RequestValidator<OutcobraDto>,
                     val userService: UserService,
-                    val semesterService: SemesterService)
-    : SubjectService, DefaultBaseService<Subject, SubjectDto, SubjectRepository>(mapper, repository) {
+                    val semesterService: SemesterService) : SubjectService,
+        DefaultBaseService<Subject, SubjectDto, SubjectRepository>(mapper,
+                repository,
+                requestValidator,
+                Subject::class.java) {
 
     override fun readAllByCurrentSemester(): List<SubjectDto> {
         val currentSemesters = semesterService.getCurrentSemester()
@@ -37,13 +43,13 @@ open class DefaultSubjectService
     }
 
     override fun readAllBySemester(semesterId: Long): List<SubjectDto> {
-        validationService.validateByParentId(semesterId, Semester::class)
+        requestValidator.validateByParentId(semesterId, Semester::class)
         val filter = QSubject.subject.semester.id.eq(semesterId)
         return repository.findAll(filter).map { mapper.toDto(it) }
     }
 
     override fun readAllBySchoolClass(schoolClassId: Long): List<SubjectDto> {
-        validationService.validateByParentId(schoolClassId, SchoolClass::class)
+        requestValidator.validateByParentId(schoolClassId, SchoolClass::class)
         val filter = QSubject.subject.semester.schoolYear.schoolClass.id.eq(schoolClassId)
         return repository.findAll(filter).map { mapper.toDto(it) }
     }

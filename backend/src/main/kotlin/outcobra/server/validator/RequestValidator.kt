@@ -1,14 +1,12 @@
-package outcobra.server.service.internal
+package outcobra.server.validator
 
 import org.springframework.data.jpa.repository.JpaRepository
-import org.springframework.data.querydsl.QueryDslPredicateExecutor
 import org.springframework.stereotype.Component
 import outcobra.server.exception.ManipulatedRequestException
 import outcobra.server.model.User
-import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.interfaces.OutcobraDto
 import outcobra.server.model.interfaces.ParentLinked
-import outcobra.server.service.RequestAuthorizationService
+import outcobra.server.model.interfaces.ParentLinkedDto
 import outcobra.server.service.UserService
 import outcobra.server.service.base.BaseService
 import outcobra.server.util.RepositoryLocator
@@ -19,13 +17,12 @@ import kotlin.reflect.KClass
  * A service to validate all requests on a very basic level
  * meant to be used inside the BaseService
  * @see BaseService
- * @author Florian Büri
+ * @author Florian Bürgi
  * @since <since>
  */
 @Component
-open class DefaultRequestAuthorizationService<Entity, Dto, out Repo>
-constructor(val mapper: Mapper<Entity, Dto>, val repository: Repo) : RequestAuthorizationService<Entity, Dto, Repo>
-where Repo : JpaRepository<Entity, Long>, Repo : QueryDslPredicateExecutor<Entity>, Dto : OutcobraDto, Entity : ParentLinked {
+open class RequestValidator<in Dto>
+where Dto : OutcobraDto {
 
     @Inject
     lateinit var userService: UserService
@@ -33,7 +30,7 @@ where Repo : JpaRepository<Entity, Long>, Repo : QueryDslPredicateExecutor<Entit
     @Inject
     lateinit var locator: RepositoryLocator
 
-    override fun validateByParentId(parentId: Long, parentType: KClass<*>) {
+    fun validateByParentId(parentId: Long, parentType: KClass<*>) {
         val name = parentType.simpleName
         if (name != null) {
             val parentRepository = locator.getForEntityName(name)
@@ -43,17 +40,24 @@ where Repo : JpaRepository<Entity, Long>, Repo : QueryDslPredicateExecutor<Entit
         throw ManipulatedRequestException()
     }
 
-    override fun validateDtoSaving(dto: Dto) {
+    fun validateDtoSaving(dto: Dto) {
+        val repository = getRepoByDto(dto)
         val isUpdate = repository.exists(dto.identifier)
         if (!isUpdate) return
-        val entity = mapper.fromDto(dto)
-        return entity.checkOwnerIsCurrent()
+
+        return dto.checkOwnerIsCurrent()
     }
 
-    override fun validateRequestById(id: Long) {
-        val entity = repository.findOne(id)
-        if (entity != null) {
-            return entity.checkOwnerIsCurrent()
+
+    fun validateRequestById(id: Long, type: Class<*>) {
+        var name = type.simpleName
+        if (name != null) {
+            name.replace("Dto", "")
+            val repository = locator.getForEntityName(name)
+            val entity = repository.findOne(id)
+            if (entity != null && entity is ParentLinked) {
+                return entity.checkOwnerIsCurrent()
+            }
         }
         throw ManipulatedRequestException()
     }
@@ -63,9 +67,26 @@ where Repo : JpaRepository<Entity, Long>, Repo : QueryDslPredicateExecutor<Entit
         return followToUser(link.parent)
     }
 
-    private fun ParentLinked.checkOwnerIsCurrent() {
+    private fun ParentLinkedDto.checkOwnerIsCurrent() {
+        val parentLink = this.parentLink
+        val repo = locator.getForEntityClass(parentLink.parentClass)
+        val parent: ParentLinked? = repo.findOne(parentLink.id)
+        if (parent == null || (parent) != userService.getCurrentUser()) {
+            throw ManipulatedRequestException()
+        }
+    }
+
+
+    fun ParentLinked.checkOwnerIsCurrent() {
         if (followToUser(this) != userService.getCurrentUser()) {
             throw ManipulatedRequestException()
         }
+    }
+
+    private fun getRepoByDto(dto: Dto): JpaRepository<*, Long> {
+        var name = dto.javaClass.simpleName
+        name.replace("Dto", "")
+        return locator.getForEntityName(name)
+
     }
 }

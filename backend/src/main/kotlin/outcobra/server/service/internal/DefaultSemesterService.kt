@@ -6,12 +6,14 @@ import outcobra.server.exception.DateOutsideExpectedRangeException
 import outcobra.server.model.QSemester
 import outcobra.server.model.SchoolYear
 import outcobra.server.model.Semester
+import outcobra.server.model.dto.InstitutionDto
 import outcobra.server.model.dto.SemesterDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.SemesterRepository
 import outcobra.server.service.SemesterService
 import outcobra.server.service.UserService
 import outcobra.server.service.base.internal.DefaultBaseService
+import outcobra.server.validator.RequestValidator
 import outcobra.server.validator.SemesterValidator
 import java.time.LocalDate
 import javax.inject.Inject
@@ -21,9 +23,10 @@ import javax.inject.Inject
 open class DefaultSemesterService
 @Inject constructor(mapper: Mapper<Semester, SemesterDto>,
                     repository: SemesterRepository,
+                    requestValidator : RequestValidator<SemesterDto>,
                     val userService: UserService,
                     val validator: SemesterValidator)
-    : SemesterService, DefaultBaseService<Semester, SemesterDto, SemesterRepository>(mapper, repository) {
+    : SemesterService, DefaultBaseService<Semester, SemesterDto, SemesterRepository>(mapper, repository, requestValidator, Semester::class.java) {
 
     override fun save(dto: SemesterDto): SemesterDto {
         val semester = mapper.fromDto(dto)
@@ -34,7 +37,7 @@ open class DefaultSemesterService
     }
 
     override fun readAllBySchoolYear(schoolYearId: Long): List<SemesterDto> {
-        validationService.validateByParentId(schoolYearId, SchoolYear::class)
+        requestValidator.validateByParentId(schoolYearId, SchoolYear::class)
         val filter = QSemester.semester.schoolYear.id.eq(schoolYearId)
         return repository.findAll(filter).map { mapper.toDto(it) }
     }

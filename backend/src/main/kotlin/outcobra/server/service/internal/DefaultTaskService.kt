@@ -17,16 +17,21 @@ import outcobra.server.service.TaskService
 import outcobra.server.service.UserService
 import outcobra.server.service.base.internal.DefaultBaseService
 import javax.inject.Inject
+import outcobra.server.validator.RequestValidator
 
 @Component
 @Transactional
 open class DefaultTaskService
 @Inject constructor(mapper: Mapper<Task, TaskDto>,
                     repository: TaskRepository,
+                    requestValidator : RequestValidator<TaskDto>,
                     val schoolClassService: SchoolClassService,
                     val subjectService: SubjectService,
-                    val userService: UserService)
-    : TaskService, DefaultBaseService<Task, TaskDto, TaskRepository>(mapper, repository) {
+                    val userService: UserService) : TaskService,
+        DefaultBaseService<Task, TaskDto, TaskRepository>(mapper,
+                repository,
+                requestValidator,
+                Task::class.java) {
 
     override fun readAll(): List<TaskDto> {
         val userId = userService.getCurrentUser()?.id
@@ -35,25 +40,25 @@ open class DefaultTaskService
     }
 
     override fun readAllBySubject(subjectId: Long): List<TaskDto> {
-        validationService.validateByParentId(subjectId, Subject::class)
+        requestValidator.validateByParentId(subjectId, Subject::class)
         val filter = QTask.task.subject.id.eq(subjectId)
         return repository.findAll(filter).map { mapper.toDto(it) }
     }
 
     override fun readAllBySemester(semesterId: Long): List<TaskDto> {
-        validationService.validateByParentId(semesterId, Semester::class)
+        requestValidator.validateByParentId(semesterId, Semester::class)
         val filter = QTask.task.subject.semester.id.eq(semesterId)
         return repository.findAll(filter).map { mapper.toDto(it) }
     }
 
     override fun readAllOpenBySubject(subjectId: Long): List<TaskDto> {
-        validationService.validateByParentId(subjectId, Subject::class)
+        requestValidator.validateByParentId(subjectId, Subject::class)
         val filter = QTask.task.progress.ne(100).and(QTask.task.subject.id.eq(subjectId))
         return repository.findAll(filter).map { mapper.toDto(it) }
     }
 
     override fun readAllOpenBySemester(semesterId: Long): List<TaskDto> {
-        validationService.validateByParentId(semesterId, Semester::class)
+        requestValidator.validateByParentId(semesterId, Semester::class)
         val filter = QTask.task.progress.ne(100).and(QTask.task.subject.semester.id.eq(semesterId))
         return repository.findAll(filter).map { mapper.toDto(it) }
     }

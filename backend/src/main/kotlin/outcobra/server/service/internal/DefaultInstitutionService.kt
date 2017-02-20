@@ -10,6 +10,7 @@ import outcobra.server.model.repository.InstitutionRepository
 import outcobra.server.service.InstitutionService
 import outcobra.server.service.UserService
 import outcobra.server.service.base.internal.DefaultBaseService
+import outcobra.server.validator.RequestValidator
 import javax.inject.Inject
 
 @Service
@@ -17,8 +18,12 @@ import javax.inject.Inject
 open class DefaultInstitutionService
 @Inject constructor(mapper: Mapper<Institution, InstitutionDto>,
                     repository: InstitutionRepository,
-                    val userService: UserService)
-    : InstitutionService, DefaultBaseService<Institution, InstitutionDto, InstitutionRepository>(mapper, repository) {
+                    requestValidator: RequestValidator<InstitutionDto>,
+                    val userService: UserService) : InstitutionService,
+        DefaultBaseService<Institution, InstitutionDto, InstitutionRepository>(mapper,
+                repository,
+                requestValidator,
+                Institution::class.java) {
 
 
     override fun readAll(): List<InstitutionDto> {
