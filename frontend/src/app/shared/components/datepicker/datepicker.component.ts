@@ -42,8 +42,10 @@ export class DatepickerComponent implements OnInit, AfterContentInit, ControlVal
 
     @Output('selectDate') onSelectDate = new EventEmitter<Date>();
 
-    private onTouchedCallback: () => void = () => {};
-    private onChangeCallback: (_: any) => void = () => {};
+    private onTouchedCallback: () => void = () => {
+    };
+    private onChangeCallback: (_: any) => void = () => {
+    };
 
     constructor(private elementRef: ElementRef, @Self() @Optional() public control: NgControl) {
         if (this.control) {
@@ -52,13 +54,20 @@ export class DatepickerComponent implements OnInit, AfterContentInit, ControlVal
     }
 
     ngAfterContentInit() {
-        if (this.control && this.control.value) this.selectDate(this.control.value);
-
-        /* Angular Material 2 does it like this bc an error could occur but that doesn't happen currently
-        If it occurs in the future that could be the solution.
-        Promise.resolve(null)
-         .then(() => { if (this.control.value) this.selectDate(this.control.value)})*/
-
+        if (!this.control) return;
+        this.control.control.setValidators(OutcobraValidators.isBetweenDay(this.minDate, this.maxDate));
+        /*
+         This is some weird shit but without the Promise it does not work and an error is thrown
+         */
+        if (this.control.value) {
+            Promise.resolve(null).then(() => {
+                this.selectDate(this.control.value);
+                this.control.control.updateValueAndValidity();
+                if (this.control.control.invalid) {
+                    this.control.control.markAsTouched();
+                }
+            });
+        }
     }
 
     ngOnInit() {
@@ -68,9 +77,6 @@ export class DatepickerComponent implements OnInit, AfterContentInit, ControlVal
             throw new DatePickerMaxDateSmallerThanMinDateError();
         }
         this.currentDate = this.initDate = this.checkInitDate();
-        if (this.control) {
-            this.control.control.setValidators(OutcobraValidators.isBetweenDay(this.minDate, this.maxDate));
-        }
     }
 
     open() {

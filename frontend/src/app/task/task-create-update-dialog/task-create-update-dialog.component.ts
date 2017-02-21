@@ -7,7 +7,6 @@ import {Util} from '../../shared/services/util';
 import {OutcobraValidators} from '../../shared/services/outcobra-validators';
 import {Task} from '../model/Task';
 import {CreateUpdateDialog} from '../../common/CreateUpdateDialog';
-import {DialogMode} from '../../common/DialogMode';
 
 @Component({
     selector: './task-create-update-dialog',
@@ -17,17 +16,12 @@ import {DialogMode} from '../../common/DialogMode';
 export class TaskCreateUpdateDialog extends CreateUpdateDialog<Task> implements OnInit {
     private taskAddForm: FormGroup;
     private subjects: SubjectDto[];
-    private today: Date;
+    private today: Date = new Date();
 
     constructor(private subjectService: SubjectService,
                 public dialogRef: MdDialogRef<TaskCreateUpdateDialog>,
                 private formBuilder: FormBuilder) {
         super();
-    }
-
-    public init(mode: DialogMode, param?: Task): void {
-        super.init(mode, param);
-        this.today = this.isEditMode() ? null : new Date();
     }
 
     ngOnInit() {
