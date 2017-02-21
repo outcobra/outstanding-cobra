@@ -1,23 +1,20 @@
-import {Component, Input, OnInit, ViewEncapsulation, forwardRef, ElementRef, Output, EventEmitter} from '@angular/core';
+import {
+    Component,
+    Input,
+    OnInit,
+    ViewEncapsulation,
+    ElementRef,
+    Output,
+    EventEmitter,
+    Self,
+    Optional,
+    AfterContentInit
+} from '@angular/core';
 import * as moment from 'moment';
 import {DateUtil} from '../../services/date-util.service';
 import {DatePickerMaxDateSmallerThanMinDateError} from './datepicker-errors';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS, AbstractControl, Validator} from '@angular/forms';
+import {ControlValueAccessor, NgControl} from '@angular/forms';
 import {OutcobraValidators} from '../../services/outcobra-validators';
-
-const noop = () => {
-};
-
-export const DATEPICKER_CONTROL_VALUE_ACCESSOR: any = {
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => DatepickerComponent),
-    multi: true
-};
-export const DATEPICKER_MAX_MIN_VALIDATOR: any = {
-    provide: NG_VALIDATORS,
-    useExisting: forwardRef(() => DatepickerComponent),
-    multi: true
-};
 
 @Component({
     selector: 'datepicker',
@@ -26,10 +23,9 @@ export const DATEPICKER_MAX_MIN_VALIDATOR: any = {
     encapsulation: ViewEncapsulation.None,
     host: {
         '(document: click)': 'onDocumentClick($event)'
-    },
-    providers: [DATEPICKER_CONTROL_VALUE_ACCESSOR, DATEPICKER_MAX_MIN_VALIDATOR]
+    }
 })
-export class DatepickerComponent implements OnInit, ControlValueAccessor, Validator {
+export class DatepickerComponent implements OnInit, AfterContentInit, ControlValueAccessor {
     @Input() public opened: boolean = false;
     @Input() public currentDate: Date;
     @Input() public initDate: Date;
@@ -37,6 +33,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor, Valida
     @Input() public maxDate: Date;
     @Input() public pickerMode: string;
     @Input() public placeholder: string;
+    @Input() public value: Date;
 
     // emitted Date
     private outDate: Date;
@@ -45,13 +42,23 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor, Valida
 
     @Output('selectDate') onSelectDate = new EventEmitter<Date>();
 
-    private onTouchedCallback: () => void = noop;
-    private onChangeCallback: (_: any) => void = noop;
+    private onTouchedCallback: () => void = () => {};
+    private onChangeCallback: (_: any) => void = () => {};
 
-    validateFn: Function;
+    constructor(private elementRef: ElementRef, @Self() @Optional() public control: NgControl) {
+        if (this.control) {
+            this.control.valueAccessor = this;
+        }
+    }
 
+    ngAfterContentInit() {
+        if (this.control && this.control.value) this.selectDate(this.control.value);
 
-    constructor(private elementRef: ElementRef) {
+        /* Angular Material 2 does it like this bc an error could occur but that doesn't happen currently
+        If it occurs in the future that could be the solution.
+        Promise.resolve(null)
+         .then(() => { if (this.control.value) this.selectDate(this.control.value)})*/
+
     }
 
     ngOnInit() {
@@ -61,7 +68,9 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor, Valida
             throw new DatePickerMaxDateSmallerThanMinDateError();
         }
         this.currentDate = this.initDate = this.checkInitDate();
-        this.validateFn = OutcobraValidators.isBetweenDay(this.minDate, this.maxDate);
+        if (this.control) {
+            this.control.control.setValidators(OutcobraValidators.isBetweenDay(this.minDate, this.maxDate));
+        }
     }
 
     open() {
@@ -160,10 +169,6 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor, Valida
 
     registerOnTouched(fn: any): void {
         this.onTouchedCallback = fn;
-    }
-
-    validate(control: AbstractControl) {
-        return this.validateFn(control);
     }
 
 }
