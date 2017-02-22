@@ -3,6 +3,7 @@ package outcobra.server.controller
 import org.springframework.web.bind.annotation.*
 import outcobra.server.model.dto.TaskDto
 import outcobra.server.model.dto.TaskFilterDto
+import outcobra.server.model.dto.TaskProgressUpdateDto
 import outcobra.server.service.TaskService
 import javax.inject.Inject
 
@@ -56,5 +57,10 @@ open class TaskController @Inject constructor(val taskService: TaskService) {
     @GetMapping(value = "/task/filter")
     fun getTaskFilter(): TaskFilterDto {
         return taskService.getTaskFilter()
+    }
+
+    @PostMapping(value = "/task/progress")
+    fun updateProgress(@RequestBody taskProgressUpdateDto: TaskProgressUpdateDto): TaskDto {
+        return taskService.updateProgress(taskProgressUpdateDto)
     }
 }

@@ -63,8 +63,7 @@ export class DatepickerComponent implements OnInit, AfterContentInit, ControlVal
         if (this.control.value) {
             Promise.resolve(null).then(() => {
                 this.selectDate(this.control.value);
-                Util.revalidateControl
-                (this.control.control);
+                Util.revalidateControl(this.control.control);
             });
         }
     }
