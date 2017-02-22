@@ -14,7 +14,7 @@ import {CreateUpdateDialog} from '../../common/CreateUpdateDialog';
     styleUrls: ['./task-create-update-dialog.component.scss']
 })
 export class TaskCreateUpdateDialog extends CreateUpdateDialog<Task> implements OnInit {
-    private taskAddForm: FormGroup;
+    private taskCreateUpdateForm: FormGroup;
     private subjects: SubjectDto[];
     private today: Date = new Date();
 
@@ -28,7 +28,7 @@ export class TaskCreateUpdateDialog extends CreateUpdateDialog<Task> implements 
         this.subjectService.getCurrentSubjects()
             .subscribe((subjects: SubjectDto[]) => this.subjects = subjects);
 
-        this.taskAddForm = this.formBuilder.group({
+        this.taskCreateUpdateForm = this.formBuilder.group({
             name: [this.getParamOrDefault('name'), Validators.required],
             description: [this.getParamOrDefault('description'), Validators.required],
             dates: this.formBuilder.group({
@@ -44,11 +44,11 @@ export class TaskCreateUpdateDialog extends CreateUpdateDialog<Task> implements 
     }
 
     onSubmit() {
-        if (this.taskAddForm.valid && this.taskAddForm.dirty) {
-            this.dialogRef.close(this.formToTask(this.taskAddForm));
+        if (this.taskCreateUpdateForm.valid && this.taskCreateUpdateForm.dirty) {
+            this.dialogRef.close(this.formToTask(this.taskCreateUpdateForm));
         }
-        else if (this.taskAddForm.pristine) {
-            Util.revalidateForm(this.taskAddForm);
+        else if (this.taskCreateUpdateForm.pristine) {
+            Util.revalidateForm(this.taskCreateUpdateForm);
         }
     }
 
@@ -59,6 +59,7 @@ export class TaskCreateUpdateDialog extends CreateUpdateDialog<Task> implements 
     private formToTask(formGroup: FormGroup): Task {
         let formValue = formGroup.value;
         return {
+            id: this.param.id ? this.param.id : null,
             name: formValue.name,
             description: formValue.description,
             todoDate: formValue.dates.todoDate,

@@ -1,5 +1,5 @@
 import {dateReplacer, dateReviver} from '../http/http-util';
-import {FormGroup} from '@angular/forms';
+import {FormGroup, AbstractControl} from '@angular/forms';
 /**
  * Util class
  * contains everything that does not fit in another service
@@ -92,14 +92,19 @@ export class Util {
      */
     static revalidateForm(form: FormGroup) {
         Object.keys(form.controls).forEach((key) => {
-            let control = form.controls[key];
+            let control: AbstractControl = form.controls[key];
             if (control instanceof FormGroup) {
                 this.revalidateForm(control);
             }
-            if (!control.valid) {
-                control.markAsTouched();
-            }
+            this.revalidateControl(control);
         });
+    }
+
+    static revalidateControl(control: AbstractControl) {
+        control.updateValueAndValidity({onlySelf: true});
+        if (control.invalid) {
+            control.markAsTouched();
+        }
     }
 }
 

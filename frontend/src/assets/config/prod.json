@@ -1,21 +1,21 @@
 {
-    "api": {
-        "defaultApiName": "outcobra",
-        "apis": [
-            {
-                "name": "outcobra",
-                "apiBase": "https://tc-manage.jmnw.me/outcobra-a/api/",
-                "authToken": true
-            }
-        ]
-    },
-    "auth0": {
-        "clientID": "Qih42aYQMS2CGCAqNkgalzFdIyacqi5r",
-        "domain": "outcobra.eu.auth0.com",
-        "callbackURL": "https://outcobra-a.firebaseapp.com/"
-    },
-    "locStorage": {
-        "tokenLocation": "id_token",
-        "profileLocation": "profile"
-    }
+  "api": {
+    "defaultApiName": "outcobra",
+    "apis": [
+      {
+        "name": "outcobra",
+        "apiBase": "https://tc-manage.jmnw.me/outcobra-a/api/",
+        "authToken": true
+      }
+    ]
+  },
+  "auth0": {
+    "clientID": "Qih42aYQMS2CGCAqNkgalzFdIyacqi5r",
+    "domain": "outcobra.eu.auth0.com",
+    "callbackURL": "https://outcobra-a.firebaseapp.com/"
+  },
+  "locStorage": {
+    "tokenLocation": "id_token",
+    "profileLocation": "profile"
+  }
 }

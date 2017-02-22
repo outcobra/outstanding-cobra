@@ -7,6 +7,7 @@ import {MdDialog, MdDialogRef} from '@angular/material';
 import {TaskCreateUpdateDialog} from '../task-create-update-dialog/task-create-update-dialog.component';
 import {SMALL_DIALOG} from '../../shared/const/const';
 import {DialogMode} from '../../common/DialogMode';
+import {NotificationsService} from 'angular2-notifications';
 
 @Component({
     selector: 'task-detail',
@@ -18,6 +19,7 @@ export class TaskDetailComponent implements OnInit {
     private taskCreateUpdateDialog: MdDialogRef<TaskCreateUpdateDialog>;
 
     constructor(private confirmDialogService: ConfirmDialogService,
+                private notificationService: NotificationsService,
                 private taskService: TaskService,
                 private dialogService: MdDialog,
                 private route: ActivatedRoute,
@@ -34,8 +36,14 @@ export class TaskDetailComponent implements OnInit {
     editTask() {
         this.taskCreateUpdateDialog = this.dialogService.open(TaskCreateUpdateDialog, SMALL_DIALOG);
         this.taskCreateUpdateDialog.componentInstance.init(DialogMode.EDIT, this.task);
-        this.taskCreateUpdateDialog.afterClosed().subscribe(result => {
-            console.log(result);
+        this.taskCreateUpdateDialog.afterClosed().subscribe((result: Task) => {
+            this.taskService.update(result).subscribe((task: Task) => {
+                // TODO error handling?
+                if (task) {
+                    this.task = task;
+                    this.notificationService.success('i18n.modules.task.notification.update.title', 'i18n.modules.task.notification.update.message');
+                }
+            })
         });
     }
 

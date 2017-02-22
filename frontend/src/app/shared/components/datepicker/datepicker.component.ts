@@ -15,6 +15,7 @@ import {DateUtil} from '../../services/date-util.service';
 import {DatePickerMaxDateSmallerThanMinDateError} from './datepicker-errors';
 import {ControlValueAccessor, NgControl} from '@angular/forms';
 import {OutcobraValidators} from '../../services/outcobra-validators';
+import {Util} from '../../services/util';
 
 @Component({
     selector: 'datepicker',
@@ -62,10 +63,8 @@ export class DatepickerComponent implements OnInit, AfterContentInit, ControlVal
         if (this.control.value) {
             Promise.resolve(null).then(() => {
                 this.selectDate(this.control.value);
-                this.control.control.updateValueAndValidity();
-                if (this.control.control.invalid) {
-                    this.control.control.markAsTouched();
-                }
+                Util.revalidateControl
+                (this.control.control);
             });
         }
     }

@@ -1,182 +1,186 @@
 {
-    "i18n": {
-        "common": {
-            "action": {
-                "save": "Speichern",
-                "delete": "Löschen",
-                "cancel": "Abbrechen",
-                "edit": "Bearbeiten",
-                "close": "Schliessen",
-                "reset": "Zurücksetzen",
-                "yes": "Ja",
-                "no": "Nein",
-                "ok": "OK",
-                "filter": "Filtern"
-            },
-            "label": {
-                "validFrom": "Gültig ab",
-                "validTo": "Gültig bis",
-                "todoDate": "Erledigungsdatum",
-                "dueDate": "Fälligkeitsdatum"
-            },
-            "form": {
-                "error": {
-                    "required": "Dieses Feld wird benötigt.",
-                    "isAfterDay": "Das Datum sollte nach dem {{date}} sein",
-                    "isBeforeDay": "Das Datum sollte vor dem {{date}} sein",
-                    "dateToIsBeforeDateFrom": "'Gültig bis' ist vor 'Gültig ab'"
-                }
-            },
-            "notification": {
-                "success": {
-                    "save": "Erfolgreich gespeichert",
-                    "delete": "Erfolgreich gelöscht"
-                }
-            },
-            "lang": {
-                "en": "Englisch",
-                "de": "Deutsch"
-            }
-        },
-        "modules": {
-            "main": {
-                "welcome": "Willkommen bei Outcobra",
-                "subtitle": "Das Managementtool von Schülern für Schüler",
-                "authors": "von Joel, Florian, Mario und Vincent"
-            },
-            "exam": {
-                "linkTitle": "Prüfungen"
-            },
-            "mark": {
-                "linkTitle": "Noten"
-            },
-            "task": {
-                "linkTitle": "Aufgaben",
-                "add": "Aufgabe hinzufügen",
-                "desc": "Aufgaben Beschreibung",
-                "progress": "Fortschritt",
-                "filter": {
-                    "title": "Aufgaben filtern",
-                    "subject": "Nach Fach filtern",
-                    "showPending": "Nur pendente Aufgaben zeigen",
-                    "search": "Suchen..."
-                },
-                "notification": {
-                    "add": {
-                        "title": "Aufgabe hinzugefügt",
-                        "message": "Die Aufgabe wurde erfolgreich erstellt"
-                    }
-                },
-                "dialogs": {
-                    "confirmDeleteDialog": {
-                        "title": "Willst du die Aufgabe wirklich löschen?",
-                        "message": "Die Aufgabe wird für immer weg sein (Eine sehr sehr lange Zeit)"
-                    },
-                    "add": {
-                        "name": {
-                            "label": "Gib einen Aufgabennamen ein"
-                        },
-                        "desc": {
-                            "label": "Gib eine Aufgabenbeschreibung ein"
-                        },
-                        "effort": {
-                            "label": "Erwarteter Aufwand (in Stunden)"
-                        }
-                    }
-                },
-                "error": {
-                    "taskNotFound": {
-                        "title": "Aufgabe nicht gefunden",
-                        "message": "Wir konnten die gesuchte Aufgabe nicht finden"
-                    }
-                }
-            },
-            "timetable": {
-                "linkTitle": "Stundenplan"
-            },
-            "dashboard": {
-                "linkTitle": "Dashboard"
-            },
-            "manage": {
-                "linkTitle": "Verwalten",
-                "assureDeletion": "Wirklich löschen?",
-                "institution": {
-                    "add": "Institution hinzufügen",
-                    "confirmDeleteMessage": "Wollen Sie die Institution wirklich löschen. Alle Kindelemente (Klassen, Schuljahre, Semester, Schulfächer) gehen damit auch verloren.",
-                    "notificationMessage": {
-                        "saveSuccess": "Die Institution wurde erfolgreich gespeichert."
-                    },
-                    "form": {
-                        "label": "Geben Sie einen Institutionsnamen ein"
-                    }
-                },
-                "schoolClass": {
-                    "add": "Klasse hinzufügen",
-                    "confirmDeleteMessage": "Wollen Sie die Schulklasse wirklich löschen. Alle Kindelemente (Schuljahre, Semester, Schulfächer) gehen damit auch verloren.",
-                    "notificationMessage": {
-                        "saveSuccess": "Die Schulklasse wurde erfolgreich gespeichert."
-                    },
-                    "form": {
-                        "label": "Geben Sie einen Klassennamen ein"
-                    }
-                },
-                "schoolYear": {
-                    "add": "Schuljahr hinzufügen",
-                    "confirmDeleteMessage": "Wollen Sie das Schuljahr wirklich löschen. Alle Kindelemente (Semester, Schulfächer) gehen damit auch verloren.",
-                    "notificationMessage": {
-                        "saveSuccess": "Das Schuljahr wurde erfolgreich gespeichert."
-                    },
-                    "form": {
-                        "label": "Geben Sie einen Schuljahrnamen ein"
-                    }
-                },
-                "semester": {
-                    "add": "Semester hinzufügen",
-                    "confirmDeleteMessage": "Wollen Sie das Semester wirklich löschen. Alle Kindelemente (Schulfächer) gehen damit auch verloren.",
-                    "notificationMessage": {
-                        "saveSuccess": "Das Semester wurde erfolgreich gespeichert."
-                    },
-                    "form": {
-                        "label": "Geben Sie einen Semesternamen ein"
-                    }
-                },
-                "subject": {
-                    "add": "Fach hinzufügen",
-                    "confirmDeleteMessage": "Wollen Sie das Schulfach wirklich löschen. Alle Kindelemente (Klassen, Schuljahre, Semester, Schulfächer) gehen damit auch verloren.",
-                    "notificationMessage": {
-                        "saveSuccess": "Das Fach wurde erfolgreich gespeichert."
-                    },
-                    "form": {
-                        "label": "Geben Sie einen Fachnamen ein"
-                    }
-                }
-            }
-        },
-        "login": {
-            "error": {
-                "title": "Login fehlgeschlagen",
-                "message": "Sie konnten nicht eingeloggt werden"
-            }
-        },
-        "http": {
-            "error": {
-                "0": {
-                    "title": "Verbindungsfehler",
-                    "message": "Der Server ist derzeit nicht erreichbar. Bitte versuchen Sie es später nocheinmal."
-                },
-                "400": {
-                    "title": "Datenfehler",
-                    "message": "Der Server meldet eine ungültige Eingabe"
-                },
-                "404": {
-                    "title": "Nicht gefunden",
-                    "message": "Das angeforderte Element konnte nicht gefunden werden"
-                },
-                "500": {
-                    "title": "Serverfehler",
-                    "message": "Ein unbekannter Serverfehler ist aufgetreten, bitte versuchen sie es später nochmals"
-                }
-            }
+  "i18n": {
+    "common": {
+      "action": {
+        "save": "Speichern",
+        "delete": "Löschen",
+        "cancel": "Abbrechen",
+        "edit": "Bearbeiten",
+        "close": "Schliessen",
+        "reset": "Zurücksetzen",
+        "yes": "Ja",
+        "no": "Nein",
+        "ok": "OK",
+        "filter": "Filtern"
+      },
+      "label": {
+        "validFrom": "Gültig ab",
+        "validTo": "Gültig bis",
+        "todoDate": "Erledigungsdatum",
+        "dueDate": "Fälligkeitsdatum"
+      },
+      "form": {
+        "error": {
+          "required": "Dieses Feld wird benötigt.",
+          "isAfterDay": "Das Datum sollte nach dem {{date}} sein",
+          "isBeforeDay": "Das Datum sollte vor dem {{date}} sein",
+          "dateToIsBeforeDateFrom": "'Gültig bis' ist vor 'Gültig ab'"
         }
+      },
+      "notification": {
+        "success": {
+          "save": "Erfolgreich gespeichert",
+          "delete": "Erfolgreich gelöscht"
+        }
+      },
+      "lang": {
+        "en": "Englisch",
+        "de": "Deutsch"
+      }
+    },
+    "modules": {
+      "main": {
+        "welcome": "Willkommen bei Outcobra",
+        "subtitle": "Das Managementtool von Schülern für Schüler",
+        "authors": "von Joel, Florian, Mario und Vincent"
+      },
+      "exam": {
+        "linkTitle": "Prüfungen"
+      },
+      "mark": {
+        "linkTitle": "Noten"
+      },
+      "task": {
+        "linkTitle": "Aufgaben",
+        "add": "Aufgabe hinzufügen",
+        "desc": "Aufgaben Beschreibung",
+        "progress": "Fortschritt",
+        "filter": {
+          "title": "Aufgaben filtern",
+          "subject": "Nach Fach filtern",
+          "showPending": "Nur pendente Aufgaben zeigen",
+          "search": "Suchen..."
+        },
+        "notification": {
+          "add": {
+            "title": "Aufgabe hinzugefügt",
+            "message": "Die Aufgabe wurde erfolgreich erstellt"
+          },
+          "update": {
+            "title": "Aufgabe geändert",
+            "message": "Die Aufgabe wurde erfolgreich gespeichert"
+          }
+        },
+        "dialogs": {
+          "confirmDeleteDialog": {
+            "title": "Willst du die Aufgabe wirklich löschen?",
+            "message": "Die Aufgabe wird für immer weg sein (Eine sehr sehr lange Zeit)"
+          },
+          "add": {
+            "name": {
+              "label": "Gib einen Aufgabennamen ein"
+            },
+            "desc": {
+              "label": "Gib eine Aufgabenbeschreibung ein"
+            },
+            "effort": {
+              "label": "Erwarteter Aufwand (in Stunden)"
+            }
+          }
+        },
+        "error": {
+          "taskNotFound": {
+            "title": "Aufgabe nicht gefunden",
+            "message": "Wir konnten die gesuchte Aufgabe nicht finden"
+          }
+        }
+      },
+      "timetable": {
+        "linkTitle": "Stundenplan"
+      },
+      "dashboard": {
+        "linkTitle": "Dashboard"
+      },
+      "manage": {
+        "linkTitle": "Verwalten",
+        "assureDeletion": "Wirklich löschen?",
+        "institution": {
+          "add": "Institution hinzufügen",
+          "confirmDeleteMessage": "Wollen Sie die Institution wirklich löschen. Alle Kindelemente (Klassen, Schuljahre, Semester, Schulfächer) gehen damit auch verloren.",
+          "notificationMessage": {
+            "saveSuccess": "Die Institution wurde erfolgreich gespeichert."
+          },
+          "form": {
+            "label": "Geben Sie einen Institutionsnamen ein"
+          }
+        },
+        "schoolClass": {
+          "add": "Klasse hinzufügen",
+          "confirmDeleteMessage": "Wollen Sie die Schulklasse wirklich löschen. Alle Kindelemente (Schuljahre, Semester, Schulfächer) gehen damit auch verloren.",
+          "notificationMessage": {
+            "saveSuccess": "Die Schulklasse wurde erfolgreich gespeichert."
+          },
+          "form": {
+            "label": "Geben Sie einen Klassennamen ein"
+          }
+        },
+        "schoolYear": {
+          "add": "Schuljahr hinzufügen",
+          "confirmDeleteMessage": "Wollen Sie das Schuljahr wirklich löschen. Alle Kindelemente (Semester, Schulfächer) gehen damit auch verloren.",
+          "notificationMessage": {
+            "saveSuccess": "Das Schuljahr wurde erfolgreich gespeichert."
+          },
+          "form": {
+            "label": "Geben Sie einen Schuljahrnamen ein"
+          }
+        },
+        "semester": {
+          "add": "Semester hinzufügen",
+          "confirmDeleteMessage": "Wollen Sie das Semester wirklich löschen. Alle Kindelemente (Schulfächer) gehen damit auch verloren.",
+          "notificationMessage": {
+            "saveSuccess": "Das Semester wurde erfolgreich gespeichert."
+          },
+          "form": {
+            "label": "Geben Sie einen Semesternamen ein"
+          }
+        },
+        "subject": {
+          "add": "Fach hinzufügen",
+          "confirmDeleteMessage": "Wollen Sie das Schulfach wirklich löschen. Alle Kindelemente (Klassen, Schuljahre, Semester, Schulfächer) gehen damit auch verloren.",
+          "notificationMessage": {
+            "saveSuccess": "Das Fach wurde erfolgreich gespeichert."
+          },
+          "form": {
+            "label": "Geben Sie einen Fachnamen ein"
+          }
+        }
+      }
+    },
+    "login": {
+      "error": {
+        "title": "Login fehlgeschlagen",
+        "message": "Sie konnten nicht eingeloggt werden"
+      }
+    },
+    "http": {
+      "error": {
+        "0": {
+          "title": "Verbindungsfehler",
+          "message": "Der Server ist derzeit nicht erreichbar. Bitte versuchen Sie es später nocheinmal."
+        },
+        "400": {
+          "title": "Datenfehler",
+          "message": "Der Server meldet eine ungültige Eingabe"
+        },
+        "404": {
+          "title": "Nicht gefunden",
+          "message": "Das angeforderte Element konnte nicht gefunden werden"
+        },
+        "500": {
+          "title": "Serverfehler",
+          "message": "Ein unbekannter Serverfehler ist aufgetreten, bitte versuchen sie es später nochmals"
+        }
+      }
     }
+  }
 }
