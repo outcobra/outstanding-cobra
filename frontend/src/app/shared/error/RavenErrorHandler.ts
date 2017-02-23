@@ -8,5 +8,6 @@ Raven
 export class RavenErrorHandler implements ErrorHandler {
     handleError(error: any): void {
         Raven.captureException(error.originalError);
+        Raven.showReportDialog({});
     }
 }
