@@ -92,6 +92,7 @@ export class TaskComponent implements OnInit {
         if (task.progress == 100) return;
         this.taskService.updateProgress(task.id, 100)
             .subscribe(() => {
+                task.progress = 100;
                 if (this.isFiltered) this.doFilter();
             });
     }
