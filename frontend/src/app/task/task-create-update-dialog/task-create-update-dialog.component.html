@@ -5,7 +5,7 @@
     <div class="dialog-body" md-dialog-content>
         <div class="form-group">
             <md-input-container>
-                <input md-input [placeholder]="'i18n.modules.task.dialogs.add.name.label' | translate"
+                <input mdInput[placeholder]="'i18n.modules.task.dialogs.add.name.label' | translate"
                        formControlName="name">
                 <md-hint class="form-error" align="start"
                          *ngIf="taskCreateUpdateForm.get('name').invalid && taskCreateUpdateForm.get('name').touched">
@@ -17,7 +17,7 @@
         </div>
         <div class="form-group">
             <md-input-container>
-                <textarea md-input [placeholder]="'i18n.modules.task.dialogs.add.desc.label' | translate"
+                <textarea mdInput[placeholder]="'i18n.modules.task.dialogs.add.desc.label' | translate"
                           formControlName="description"></textarea>
                 <md-hint class="form-error" align="start"
                          *ngIf="taskCreateUpdateForm.get('description').invalid && taskCreateUpdateForm.get('description').touched">
@@ -53,7 +53,7 @@
         </div>
         <div class="form-group">
             <md-input-container>
-                <input md-input type="number" [placeholder]="'i18n.modules.task.dialogs.add.effort.label' | translate"
+                <input mdInput type="number" [placeholder]="'i18n.modules.task.dialogs.add.effort.label' | translate"
                        formControlName="effort">
                 <md-hint class="form-error" align="start"
                          *ngIf="taskCreateUpdateForm.get('effort').invalid && taskCreateUpdateForm.get('effort').touched">

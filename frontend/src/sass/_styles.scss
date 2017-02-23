@@ -105,14 +105,14 @@ md-dialog-container {
 datepicker, md-input-container {
     &.ng-invalid.ng-touched {
         label {
-            color: md-color($warn);
+            color: mat-color($warn);
         }
         //noinspection CssOptimizeSimilarProperties
         .md-input-underline {
             .md-input-ripple {
-                background-color: md-color($warn);
+                background-color: mat-color($warn);
             }
-            border: md-color($warn);
+            border: mat-color($warn);
             border-top-width: 1px;
             border-top-style: solid;
         }

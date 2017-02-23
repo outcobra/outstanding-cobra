@@ -25,7 +25,7 @@ import {SubjectService} from './service/subject.service';
         FormsModule,
         ReactiveFormsModule,
         ManageRoutingModule,
-        MaterialModule.forRoot(),
+        MaterialModule,
         SharedModule
     ],
     declarations: [
