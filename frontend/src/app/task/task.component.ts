@@ -9,6 +9,8 @@ import {TaskCreateUpdateDialog} from './task-create-update-dialog/task-create-up
 import {NotificationsService} from 'angular2-notifications';
 import {Util, and} from '../shared/services/util';
 import {DialogMode} from '../common/DialogMode';
+import {Observable} from 'rxjs';
+import {SMALL_DIALOG} from '../shared/const/const';
 
 @Component({
     selector: 'task',
@@ -65,31 +67,33 @@ export class TaskComponent implements OnInit {
     }
 
     addTask() {
-        this.taskCreateUpdateDialog = this.dialogService.open(TaskCreateUpdateDialog, {width: '500px', position: {top: '20px'}});
+        this.taskCreateUpdateDialog = this.dialogService.open(TaskCreateUpdateDialog, SMALL_DIALOG);
         this.taskCreateUpdateDialog.componentInstance.init(DialogMode.NEW, null);
         this.taskCreateUpdateDialog.afterClosed()
-            .subscribe((result) => {
-                if (!result) return;
-                this.taskService.create(result)
-                    .subscribe((task: Task) => {
-                        this.notificationService.success('i18n.modules.task.notification.add.title', 'i18n.modules.task.notification.add.message');
-                        this.tasks.push(task);
-                        let filter = this.buildFilterPredicate();
-                        if (!this.isFiltered || this.filterTask(task, filter)) { // only add to filteredTasks if it passes the current filter
-                            this.filteredTasks.push(task);
-                        }
-                    });
-
-
+            .switchMap((value) => {
+                if (!value) return Observable.empty();
+                return this.taskService.create(value)
+            })
+            .subscribe((task: Task) => {
+                this.notificationService.success('i18n.modules.task.notification.add.title', 'i18n.modules.task.notification.add.message');
+                this.tasks.push(task);
+                this.checkFilter(task);
             });
     }
 
-    markTaskAsDone(task: Task) {
-        if (task.progress != 100) {
-            task.progress = 100;
-            this.taskService.update(task)
-                .subscribe();
+    checkFilter(task: Task) {
+        let filter = this.buildFilterPredicate();
+        if (!this.isFiltered || this.filterTask(task, filter)) { // only add to filteredTasks if it passes the current filter
+            this.filteredTasks.push(task);
         }
+    }
+
+    markTaskAsDone(task: Task) {
+        if (task.progress == 100) return;
+        this.taskService.updateProgress(task.id, 100)
+            .subscribe(() => {
+                if (this.isFiltered) this.doFilter();
+            });
     }
 
     /**
@@ -107,6 +111,7 @@ export class TaskComponent implements OnInit {
     }
 
     filterTasks(tasks: Task[]): Task[] {
+        if (!this.isFiltered) return tasks;
         let filter = this.buildFilterPredicate();
         return tasks.filter(task => this.filterTask(task, filter));
 

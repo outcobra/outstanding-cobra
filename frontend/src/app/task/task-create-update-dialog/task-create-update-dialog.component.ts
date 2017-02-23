@@ -59,7 +59,7 @@ export class TaskCreateUpdateDialog extends CreateUpdateDialog<Task> implements 
     private formToTask(formGroup: FormGroup): Task {
         let formValue = formGroup.value;
         return {
-            id: this.param.id ? this.param.id : null,
+            id: this.isEditMode() && this.param.id ? this.param.id : null,
             name: formValue.name,
             description: formValue.description,
             todoDate: formValue.dates.todoDate,
