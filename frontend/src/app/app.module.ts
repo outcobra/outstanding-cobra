@@ -1,4 +1,4 @@
-import {NgModule, APP_INITIALIZER} from '@angular/core';
+import {NgModule, APP_INITIALIZER, ErrorHandler} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {HttpModule, Http} from '@angular/http';
@@ -14,6 +14,7 @@ import {MainModule} from './main/main.module';
 import {ManageModule} from './manage/manage.module';
 import {TaskModule} from './task/task.module';
 import {configLoader, translateFactory, translationLoader} from './shared/services/factories';
+import {RavenErrorHandler} from './shared/error/RavenErrorHandler';
 
 @NgModule({
     declarations: [
@@ -49,6 +50,10 @@ import {configLoader, translateFactory, translationLoader} from './shared/servic
             useFactory: translationLoader,
             deps: [TranslateService],
             multi: true
+        },
+        {
+            provide: ErrorHandler,
+            useClass: RavenErrorHandler
         }
     ],
     bootstrap: [AppComponent]

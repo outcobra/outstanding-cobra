@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <include resource="org/springframework/boot/logging/logback/file-appender.xml"/>
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+
+    <springProperty name="dsn" source="" defaultValue="https://07994a35a96f4713a3d69f15b968997c@sentry.pegnu.cloud/2"/>
+    <springProperty name="product_version" source="product.version" defaultValue="unspecified"/>
+    <springProperty name="environment" source="runtime.environment" defaultValue="development"/>
+
+    <springProfile name="production, development, test">
+        <appender name="SENTRY" class="com.getsentry.raven.logback.SentryAppender">
+            <dsn>${dsn}</dsn>
+            <environment>${environment}</environment>
+            <release>${product_version}</release>
+            <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+                <level>WARN</level>
+            </filter>
+        </appender>
+    </springProfile>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
+        <appender-ref ref="SENTRY"/>
+    </root>
+</configuration>
