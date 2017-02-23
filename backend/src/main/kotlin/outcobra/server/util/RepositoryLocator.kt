@@ -3,7 +3,6 @@ package outcobra.server.util
 import org.springframework.beans.BeansException
 import org.springframework.beans.factory.BeanFactory
 import org.springframework.beans.factory.NoSuchBeanDefinitionException
-import org.springframework.cache.annotation.Cacheable
 import org.springframework.context.ApplicationContext
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Component
@@ -26,7 +25,7 @@ open class RepositoryLocator @Inject constructor(val context: ApplicationContext
      * @see [BeanFactory.getBean]
      * @since 1.0.0
      */
-    @Cacheable("repoForName")
+    //@Cacheable("repoForName")
     fun getForEntityName(entityName: String): JpaRepository<*, Long> {
         val repoName = entityName.firstToLower() + "Repository"
 
@@ -49,7 +48,7 @@ open class RepositoryLocator @Inject constructor(val context: ApplicationContext
      * @throws NoRepositoryFoundException if the requested repository could not be found or has an illegal type
      * @since 1.0.0
      */
-    @Cacheable("RepoForEntity")
+    //@Cacheable("RepoForEntity")
     fun <T> getForEntityClass(entityClass: Class<T>): JpaRepository<T, Long> {
         @Suppress("UNCHECKED_CAST")
         return getForEntityName(entityClass.simpleName) as? JpaRepository<T, Long>
