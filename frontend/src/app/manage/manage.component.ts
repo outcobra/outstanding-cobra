@@ -19,7 +19,7 @@ import {SubjectService} from './service/subject.service';
 import {Util} from '../shared/services/util';
 import {SMALL_DIALOG} from '../shared/const/const';
 
-
+// TODO do flatMapping
 @Component({
     selector: 'manager',
     templateUrl: './manage.component.html',

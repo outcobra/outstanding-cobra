@@ -40,7 +40,7 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
             .debounceTime(500)
             .map((sliderChange: MdSliderChange) => sliderChange.value)
             .distinctUntilChanged()
-            .switchMap((value: number) => this.updateProgress(value))
+            .flatMap((value: number) => this.updateProgress(value))
             .subscribe();
     }
 
@@ -51,24 +51,27 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
     editTask() {
         this.taskCreateUpdateDialog = this.dialogService.open(TaskCreateUpdateDialog, SMALL_DIALOG);
         this.taskCreateUpdateDialog.componentInstance.init(DialogMode.EDIT, this.task);
-        this.taskCreateUpdateDialog.afterClosed().subscribe((result: Task) => {
-            this.taskService.update(result).subscribe((task: Task) => {
+        this.taskCreateUpdateDialog.afterClosed()
+            .flatMap((result: Task) => {
+                if (!result) return Observable.empty();
+                return this.taskService.update(result)
+            })
+            .subscribe((task: Task) => {
                 // TODO error handling?
                 if (task) {
                     this.task = task;
                     this.notificationService.success('i18n.modules.task.notification.update.title', 'i18n.modules.task.notification.update.message');
                 }
-            })
-        });
+            });
     }
 
     deleteTask() {
         this.confirmDialogService.open('i18n.modules.task.dialogs.confirmDeleteDialog.title', 'i18n.modules.task.dialogs.confirmDeleteDialog.message')
-            .subscribe((result: boolean) => {
-                if (result === true) {
-                    this.taskService.deleteById(this.task.id).subscribe(result => this.router.navigate(['/task']));
-                }
-            });
+            .filter((value) => value === true)
+            .flatMap(() => {
+                return this.taskService.deleteById(this.task.id)
+            })
+            .subscribe(result => this.router.navigate(['/task']));
     }
 
     closeCard() {

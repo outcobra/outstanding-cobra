@@ -70,7 +70,7 @@ export class TaskComponent implements OnInit {
         this.taskCreateUpdateDialog = this.dialogService.open(TaskCreateUpdateDialog, SMALL_DIALOG);
         this.taskCreateUpdateDialog.componentInstance.init(DialogMode.NEW, null);
         this.taskCreateUpdateDialog.afterClosed()
-            .switchMap((value) => {
+            .flatMap((value) => {
                 if (!value) return Observable.empty();
                 return this.taskService.create(value)
             })

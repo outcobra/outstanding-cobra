@@ -1,4 +1,5 @@
 @import '../../node_modules/materialize-css/sass/components/color';
+@import '../../node_modules/materialize-css/sass/components/color';
 @import 'color';
 @import 'general';
 
@@ -108,8 +109,8 @@ datepicker, md-input-container {
             color: mat-color($warn);
         }
         //noinspection CssOptimizeSimilarProperties
-        .md-input-underline {
-            .md-input-ripple {
+        .mat-input-underline {
+            .mat-input-ripple {
                 background-color: mat-color($warn);
             }
             border: mat-color($warn);
