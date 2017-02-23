@@ -1,15 +1,15 @@
 <div class="dialog-header">
     <h1 md-dialog-title>{{'i18n.modules.task.add' | translate}}</h1>
 </div>
-<form [formGroup]="taskAddForm" (submit)="onSubmit()">
+<form [formGroup]="taskCreateUpdateForm" (submit)="onSubmit()">
     <div class="dialog-body" md-dialog-content>
         <div class="form-group">
             <md-input-container>
                 <input md-input [placeholder]="'i18n.modules.task.dialogs.add.name.label' | translate"
                        formControlName="name">
                 <md-hint class="form-error" align="start"
-                         *ngIf="taskAddForm.get('name').invalid && taskAddForm.get('name').touched">
-                    <template [ngIf]="taskAddForm.get('name').hasError('required')">{{'i18n.common.form.error.required'
+                         *ngIf="taskCreateUpdateForm.get('name').invalid && taskCreateUpdateForm.get('name').touched">
+                    <template [ngIf]="taskCreateUpdateForm.get('name').hasError('required')">{{'i18n.common.form.error.required'
                         | translate}}
                     </template>
                 </md-hint>
@@ -20,8 +20,8 @@
                 <textarea md-input [placeholder]="'i18n.modules.task.dialogs.add.desc.label' | translate"
                           formControlName="description"></textarea>
                 <md-hint class="form-error" align="start"
-                         *ngIf="taskAddForm.get('description').invalid && taskAddForm.get('description').touched">
-                    <template [ngIf]="taskAddForm.get('description').hasError('required')">
+                         *ngIf="taskCreateUpdateForm.get('description').invalid && taskCreateUpdateForm.get('description').touched">
+                    <template [ngIf]="taskCreateUpdateForm.get('description').hasError('required')">
                         {{'i18n.common.form.error.required' | translate}}
                     </template>
                 </md-hint>
@@ -32,8 +32,8 @@
                 <datepicker [minDate]="today" [placeholder]="'i18n.common.label.todoDate' | translate"
                             formControlName="todoDate">
                     <md-hint class="form-error" align="start"
-                             *ngIf="taskAddForm.get('dates.todoDate').invalid && taskAddForm.get('dates.todoDate').touched">
-                        <template [ngIf]="taskAddForm.get('dates.todoDate').hasError('required')">
+                             *ngIf="taskCreateUpdateForm.get('dates.todoDate').invalid && taskCreateUpdateForm.get('dates.todoDate').touched">
+                        <template [ngIf]="taskCreateUpdateForm.get('dates.todoDate').hasError('required')">
                             {{'i18n.common.form.error.required' | translate}}
                         </template>
                     </md-hint>
@@ -43,8 +43,8 @@
                 <datepicker [minDate]="today" [placeholder]="'i18n.common.label.dueDate' | translate"
                             formControlName="dueDate">
                     <md-hint class="form-error" align="start"
-                             *ngIf="taskAddForm.get('dates.dueDate').invalid && taskAddForm.get('dates.dueDate').touched">
-                        <template [ngIf]="taskAddForm.get('dates.dueDate').hasError('required')">
+                             *ngIf="taskCreateUpdateForm.get('dates.dueDate').invalid && taskCreateUpdateForm.get('dates.dueDate').touched">
+                        <template [ngIf]="taskCreateUpdateForm.get('dates.dueDate').hasError('required')">
                             {{'i18n.common.form.error.required' | translate}}
                         </template>
                     </md-hint>
@@ -56,8 +56,8 @@
                 <input md-input type="number" [placeholder]="'i18n.modules.task.dialogs.add.effort.label' | translate"
                        formControlName="effort">
                 <md-hint class="form-error" align="start"
-                         *ngIf="taskAddForm.get('effort').invalid && taskAddForm.get('effort').touched">
-                    <template [ngIf]="taskAddForm.get('effort').hasError('required')">
+                         *ngIf="taskCreateUpdateForm.get('effort').invalid && taskCreateUpdateForm.get('effort').touched">
+                    <template [ngIf]="taskCreateUpdateForm.get('effort').hasError('required')">
                         {{'i18n.common.form.error.required' | translate}}
                     </template>
                 </md-hint>

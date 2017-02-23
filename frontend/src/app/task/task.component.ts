@@ -5,9 +5,12 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {ActivatedRoute, Router, NavigationEnd} from '@angular/router';
 import {TaskFilter} from './model/TaskFilter';
 import {MdDialog, MdDialogRef} from '@angular/material';
-import {TaskAddDialogComponent} from './task-add-dialog/task-add-dialog.component';
+import {TaskCreateUpdateDialog} from './task-create-update-dialog/task-create-update-dialog.component';
 import {NotificationsService} from 'angular2-notifications';
 import {Util, and} from '../shared/services/util';
+import {DialogMode} from '../common/DialogMode';
+import {Observable} from 'rxjs';
+import {SMALL_DIALOG} from '../shared/const/const';
 
 @Component({
     selector: 'task',
@@ -23,7 +26,7 @@ export class TaskComponent implements OnInit {
     private filterData: TaskFilter;
     private isFiltered: boolean = false;
 
-    private taskAddDialog: MdDialogRef<TaskAddDialogComponent>;
+    private taskCreateUpdateDialog: MdDialogRef<TaskCreateUpdateDialog>;
 
     constructor(private taskService: TaskService,
                 private dialogService: MdDialog,
@@ -64,30 +67,34 @@ export class TaskComponent implements OnInit {
     }
 
     addTask() {
-        this.taskAddDialog = this.dialogService.open(TaskAddDialogComponent, {width: '500px', position: {top: '20px'}});
-        this.taskAddDialog.afterClosed()
-            .subscribe((result) => {
-                if (!result) return;
-                this.taskService.create(result)
-                    .subscribe((task: Task) => {
-                        this.notificationService.success('i18n.modules.task.notification.add.title', 'i18n.modules.task.notification.add.message');
-                        this.tasks.push(task);
-                        let filter = this.buildFilterPredicate();
-                        if (!this.isFiltered || this.filterTask(task, filter)) { // only add to filteredTasks if it passes the current filter
-                            this.filteredTasks.push(task);
-                        }
-                    });
-
-
+        this.taskCreateUpdateDialog = this.dialogService.open(TaskCreateUpdateDialog, SMALL_DIALOG);
+        this.taskCreateUpdateDialog.componentInstance.init(DialogMode.NEW, null);
+        this.taskCreateUpdateDialog.afterClosed()
+            .switchMap((value) => {
+                if (!value) return Observable.empty();
+                return this.taskService.create(value)
+            })
+            .subscribe((task: Task) => {
+                this.notificationService.success('i18n.modules.task.notification.add.title', 'i18n.modules.task.notification.add.message');
+                this.tasks.push(task);
+                this.checkFilter(task);
             });
     }
 
-    markTaskAsDone(task: Task) {
-        if (task.progress != 100) {
-            task.progress = 100;
-            this.taskService.update(task)
-                .subscribe();
+    checkFilter(task: Task) {
+        let filter = this.buildFilterPredicate();
+        if (!this.isFiltered || this.filterTask(task, filter)) { // only add to filteredTasks if it passes the current filter
+            this.filteredTasks.push(task);
         }
+    }
+
+    markTaskAsDone(task: Task) {
+        if (task.progress == 100) return;
+        this.taskService.updateProgress(task.id, 100)
+            .subscribe(() => {
+                task.progress = 100;
+                if (this.isFiltered) this.doFilter();
+            });
     }
 
     /**
@@ -105,6 +112,7 @@ export class TaskComponent implements OnInit {
     }
 
     filterTasks(tasks: Task[]): Task[] {
+        if (!this.isFiltered) return tasks;
         let filter = this.buildFilterPredicate();
         return tasks.filter(task => this.filterTask(task, filter));
 

@@ -6,47 +6,49 @@ import {SubjectDto} from '../../manage/model/ManageDto';
 import {Util} from '../../shared/services/util';
 import {OutcobraValidators} from '../../shared/services/outcobra-validators';
 import {Task} from '../model/Task';
+import {CreateUpdateDialog} from '../../common/CreateUpdateDialog';
 
 @Component({
-    selector: 'task-add-dialog',
-    templateUrl: './task-add-dialog.component.html',
-    styleUrls: ['./task-add-dialog.component.scss']
+    selector: './task-create-update-dialog',
+    templateUrl: './task-create-update-dialog.component.html',
+    styleUrls: ['./task-create-update-dialog.component.scss']
 })
-export class TaskAddDialogComponent implements OnInit {
-    private taskAddForm: FormGroup;
+export class TaskCreateUpdateDialog extends CreateUpdateDialog<Task> implements OnInit {
+    private taskCreateUpdateForm: FormGroup;
     private subjects: SubjectDto[];
     private today: Date = new Date();
 
     constructor(private subjectService: SubjectService,
-                public dialogRef: MdDialogRef<TaskAddDialogComponent>,
+                public dialogRef: MdDialogRef<TaskCreateUpdateDialog>,
                 private formBuilder: FormBuilder) {
+        super();
     }
 
     ngOnInit() {
         this.subjectService.getCurrentSubjects()
             .subscribe((subjects: SubjectDto[]) => this.subjects = subjects);
 
-        this.taskAddForm = this.formBuilder.group({
-            name: ['', Validators.required],
-            description: ['', Validators.required],
+        this.taskCreateUpdateForm = this.formBuilder.group({
+            name: [this.getParamOrDefault('name'), Validators.required],
+            description: [this.getParamOrDefault('description'), Validators.required],
             dates: this.formBuilder.group({
-                    todoDate: ['', Validators.required],
-                    dueDate: ['', Validators.required],
+                    todoDate: [this.getParamOrDefault('todoDate'), Validators.required],
+                    dueDate: [this.getParamOrDefault('dueDate'), Validators.required],
                 },
                 {
                     validator: OutcobraValidators.dateFromIsBeforeDateTo('todoDate', 'dueDate', true)
                 }),
-            effort: ['', Validators.required],
-            subjectId: ['', Validators.required]
+            effort: [this.getParamOrDefault('effort'), Validators.required],
+            subjectId: [this.getParamOrDefault('subject.id'), Validators.required]
         });
     }
 
     onSubmit() {
-        if (this.taskAddForm.valid && this.taskAddForm.dirty) {
-            this.dialogRef.close(this.formToTask(this.taskAddForm));
+        if (this.taskCreateUpdateForm.valid && this.taskCreateUpdateForm.dirty) {
+            this.dialogRef.close(this.formToTask(this.taskCreateUpdateForm));
         }
-        else if (this.taskAddForm.pristine) {
-            Util.revalidateForm(this.taskAddForm);
+        else if (this.taskCreateUpdateForm.pristine) {
+            Util.revalidateForm(this.taskCreateUpdateForm);
         }
     }
 
@@ -57,6 +59,7 @@ export class TaskAddDialogComponent implements OnInit {
     private formToTask(formGroup: FormGroup): Task {
         let formValue = formGroup.value;
         return {
+            id: this.isEditMode() && this.param.id ? this.param.id : null,
             name: formValue.name,
             description: formValue.description,
             todoDate: formValue.dates.todoDate,

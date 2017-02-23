@@ -1,5 +1,5 @@
 import {dateReplacer, dateReviver} from '../http/http-util';
-import {FormGroup} from '@angular/forms';
+import {FormGroup, AbstractControl} from '@angular/forms';
 /**
  * Util class
  * contains everything that does not fit in another service
@@ -85,21 +85,36 @@ export class Util {
     }
 
     /**
-     * marks invalid fields in the FormGroup as touched
+     * marks invalid fields in the FormGroup as touched and returns the validity of the FormGroup
      * used for validation on submit
      *
      * @param form FormGroup
+     * @return validity of the given FormGroup
      */
-    static revalidateForm(form: FormGroup) {
+    static revalidateForm(form: FormGroup): boolean {
         Object.keys(form.controls).forEach((key) => {
-            let control = form.controls[key];
+            let control: AbstractControl = form.controls[key];
             if (control instanceof FormGroup) {
                 this.revalidateForm(control);
-            }
-            if (!control.valid) {
-                control.markAsTouched();
+            } else {
+                this.revalidateControl(control);
             }
         });
+        return form.valid;
+    }
+
+    /**
+     * recalculates the validity of the given control and marks it as touched if invalid
+     *
+     * @param control AbstractControl to be checked
+     * @return {boolean} the validity of the control
+     */
+    static revalidateControl(control: AbstractControl): boolean {
+        control.updateValueAndValidity({onlySelf: true});
+        if (control.invalid) {
+            control.markAsTouched();
+        }
+        return control.valid;
     }
 }
 
