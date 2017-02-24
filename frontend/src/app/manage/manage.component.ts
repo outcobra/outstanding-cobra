@@ -233,7 +233,7 @@ export class ManageComponent implements OnInit {
     handleAddition<T extends Dto, D extends CreateUpdateDialog<T>>(entityName: string, dialogRef: MdDialogRef<D>, createFunction: (entity: T) => Observable<T>, finishFunction: (entity: T) => void) {
         dialogRef.afterClosed()
             .filter(isNotNull)
-            .switchMap(createFunction)
+            .flatMap(createFunction)
             .subscribe((entity: T) => {
                 this.showSuccessNotification(entityName);
                 finishFunction(entity)
