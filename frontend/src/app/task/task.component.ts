@@ -1,16 +1,17 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {TaskService} from './service/task.service';
-import {Task} from './model/Task';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {ActivatedRoute, Router, NavigationEnd} from '@angular/router';
-import {TaskFilter} from './model/TaskFilter';
-import {MdDialog, MdDialogRef} from '@angular/material';
-import {TaskCreateUpdateDialog} from './task-create-update-dialog/task-create-update-dialog.component';
-import {NotificationsService} from 'angular2-notifications';
-import {Util, and} from '../shared/services/util';
-import {DialogMode} from '../common/DialogMode';
-import {Observable} from 'rxjs';
-import {SMALL_DIALOG} from '../shared/const/const';
+import {Component, OnInit, ViewEncapsulation} from "@angular/core";
+import {TaskService} from "./service/task.service";
+import {Task} from "./model/Task";
+import {FormBuilder, FormGroup} from "@angular/forms";
+import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
+import {TaskFilter} from "./model/TaskFilter";
+import {MdDialog, MdDialogRef} from "@angular/material";
+import {TaskCreateUpdateDialog} from "./task-create-update-dialog/task-create-update-dialog.component";
+import {NotificationsService} from "angular2-notifications";
+import {Util} from "../shared/util/util";
+import {DialogMode} from "../common/DialogMode";
+import {Observable} from "rxjs";
+import {SMALL_DIALOG} from "../shared/util/const";
+import {and} from "../shared/util/helper";
 
 @Component({
     selector: 'task',

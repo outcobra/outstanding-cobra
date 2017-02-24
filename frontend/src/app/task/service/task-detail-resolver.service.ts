@@ -1,10 +1,10 @@
-import {Injectable} from '@angular/core';
-import {Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Router} from '@angular/router';
-import {Task} from '../model/Task';
-import {Observable} from 'rxjs';
-import {TaskService} from './task.service';
-import {NotificationsService} from 'angular2-notifications';
-import {HttpStatus} from '../../shared/model/HttpStatus';
+import {Injectable} from "@angular/core";
+import {ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot} from "@angular/router";
+import {Task} from "../model/Task";
+import {Observable} from "rxjs";
+import {TaskService} from "./task.service";
+import {NotificationsService} from "angular2-notifications";
+import {HttpStatus} from "../../shared/model/HttpStatus";
 
 @Injectable()
 export class TaskDetailResolver implements Resolve<Task> {
@@ -21,7 +21,7 @@ export class TaskDetailResolver implements Resolve<Task> {
                 if (error.status == HttpStatus.NOT_FOUND) {
                     this.notificationService.remove();
                     this.router.navigate(['/task']);
-                    this.notificationService.error('i18n.modules.task.error.taskNotFound.title','i18n.modules.task.error.taskNotFound.message');
+                    this.notificationService.error('i18n.modules.task.notification.error.taskNotFound.title','i18n.modules.task.notification.error.taskNotFound.message');
                 }
                 return Observable.of(null);
             });

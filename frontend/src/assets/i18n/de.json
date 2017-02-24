@@ -69,6 +69,16 @@
           "update": {
             "title": "Aufgabe geändert",
             "message": "Die Aufgabe wurde erfolgreich gespeichert"
+          },
+          "error": {
+            "deleteFailed": {
+              "title": "Löschen fehlgeschlagen",
+              "message": "Beim Löschen der Aufgabe ist ein Fehler aufgetreten. Bitte versuchen es später erneut"
+            },
+            "taskNotFound": {
+              "title": "Aufgabe nicht gefunden",
+              "message": "Wir konnten die gesuchte Aufgabe nicht finden"
+            }
           }
         },
         "dialogs": {
@@ -87,12 +97,6 @@
               "label": "Erwarteter Aufwand (in Stunden)"
             }
           }
-        },
-        "error": {
-          "taskNotFound": {
-            "title": "Aufgabe nicht gefunden",
-            "message": "Wir konnten die gesuchte Aufgabe nicht finden"
-          }
         }
       },
       "timetable": {
@@ -108,7 +112,8 @@
           "add": "Institution hinzufügen",
           "confirmDeleteMessage": "Wollen Sie die Institution wirklich löschen. Alle Kindelemente (Klassen, Schuljahre, Semester, Schulfächer) gehen damit auch verloren.",
           "notificationMessage": {
-            "saveSuccess": "Die Institution wurde erfolgreich gespeichert."
+            "saveSuccess": "Die Institution wurde erfolgreich gespeichert.",
+            "deleteFailed": "Beim Löschen der Institution ist ein Fehler aufgetreten. Bitte versuchen es später erneut"
           },
           "form": {
             "label": "Geben Sie einen Institutionsnamen ein"
@@ -118,7 +123,8 @@
           "add": "Klasse hinzufügen",
           "confirmDeleteMessage": "Wollen Sie die Schulklasse wirklich löschen. Alle Kindelemente (Schuljahre, Semester, Schulfächer) gehen damit auch verloren.",
           "notificationMessage": {
-            "saveSuccess": "Die Schulklasse wurde erfolgreich gespeichert."
+            "saveSuccess": "Die Schulklasse wurde erfolgreich gespeichert.",
+            "deleteFailed": "Beim Löschen der Schulklasse ist ein Fehler aufgetreten. Bitte versuchen es später erneut"
           },
           "form": {
             "label": "Geben Sie einen Klassennamen ein"
@@ -128,7 +134,8 @@
           "add": "Schuljahr hinzufügen",
           "confirmDeleteMessage": "Wollen Sie das Schuljahr wirklich löschen. Alle Kindelemente (Semester, Schulfächer) gehen damit auch verloren.",
           "notificationMessage": {
-            "saveSuccess": "Das Schuljahr wurde erfolgreich gespeichert."
+            "saveSuccess": "Das Schuljahr wurde erfolgreich gespeichert.",
+            "deleteFailed": "Beim Löschen des Schuljahres ist ein Fehler aufgetreten. Bitte versuchen es später erneut"
           },
           "form": {
             "label": "Geben Sie einen Schuljahrnamen ein"
@@ -138,7 +145,8 @@
           "add": "Semester hinzufügen",
           "confirmDeleteMessage": "Wollen Sie das Semester wirklich löschen. Alle Kindelemente (Schulfächer) gehen damit auch verloren.",
           "notificationMessage": {
-            "saveSuccess": "Das Semester wurde erfolgreich gespeichert."
+            "saveSuccess": "Das Semester wurde erfolgreich gespeichert.",
+            "deleteFailed": "Beim Löschen des Semesters ist ein Fehler aufgetreten. Bitte versuchen es später erneut"
           },
           "form": {
             "label": "Geben Sie einen Semesternamen ein"
@@ -148,7 +156,8 @@
           "add": "Fach hinzufügen",
           "confirmDeleteMessage": "Wollen Sie das Schulfach wirklich löschen. Alle Kindelemente (Klassen, Schuljahre, Semester, Schulfächer) gehen damit auch verloren.",
           "notificationMessage": {
-            "saveSuccess": "Das Fach wurde erfolgreich gespeichert."
+            "saveSuccess": "Das Fach wurde erfolgreich gespeichert.",
+            "deleteFailed": "Beim Löschen des Fachs ist ein Fehler aufgetreten. Bitte versuchen es später erneut"
           },
           "form": {
             "label": "Geben Sie einen Fachnamen ein"

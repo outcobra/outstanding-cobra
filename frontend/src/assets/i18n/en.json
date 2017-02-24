@@ -69,6 +69,16 @@
           "update": {
             "title": "Task updated",
             "message": "The task has been saved successfully"
+          },
+          "error": {
+            "deleteFailed": {
+              "title": "Task deletion failed",
+              "message": "An error occurred while deleting the ask. Please try again later"
+            },
+            "taskNotFound": {
+              "title": "Task not found",
+              "message": "We couldn't find the requested task"
+            }
           }
         },
         "dialogs": {
@@ -87,12 +97,6 @@
               "label": "Expected effort (in h)"
             }
           }
-        },
-        "error": {
-          "taskNotFound": {
-            "title": "Task not found",
-            "message": "We couldn't find the requested task"
-          }
         }
       },
       "timetable": {
@@ -108,7 +112,8 @@
           "add": "Add new Institution",
           "confirmDeleteMessage": "Do you really want to delete the institution? All child elements (schoolclasses, schoolyears, semesters, subjects) will be erased too.",
           "notificationMessage": {
-            "saveSuccess": "The institution has been saved successfully."
+            "saveSuccess": "The institution has been saved successfully.",
+            "deleteFailed": "A error occurred while deleting the institution. Please try again later"
           },
           "form": {
             "label": "Enter an institution name"
@@ -118,7 +123,8 @@
           "add": "Add new schoolclass",
           "confirmDeleteMessage": "Do you really want to delete the schoolclass? All child elements (schoolyears, semesters, subjects) will be erased too.",
           "notificationMessage": {
-            "saveSuccess": "The schoolclass has been saved successfully."
+            "saveSuccess": "The schoolclass has been saved successfully.",
+            "deleteFailed": "A error occurred while deleting the schoolclass. Please try again later"
           },
           "form": {
             "label": "Enter a schoolclass name"
@@ -128,7 +134,8 @@
           "add": "Add new schoolyear",
           "confirmDeleteMessage": "Do you really want to delete the schoolyear? All child elements (semesters, subjects) will be erased too.",
           "notificationMessage": {
-            "saveSuccess": "The schoolyear has been saved successfully."
+            "saveSuccess": "The schoolyear has been saved successfully.",
+            "deleteFailed": "A error occurred while deleting the schoolyear. Please try again later"
           },
           "form": {
             "label": "Enter a schoolyear name"
@@ -138,7 +145,8 @@
           "add": "Add new semester",
           "confirmDeleteMessage": "Do you really want to delete the semester? All child elements (subjects) will be erased too.",
           "notificationMessage": {
-            "saveSuccess": "The semester has been saved successfully."
+            "saveSuccess": "The semester has been saved successfully.",
+            "deleteFailed": "A error occurred while deleting the semester. Please try again later"
           },
           "form": {
             "label": "Enter a semester name"
@@ -148,10 +156,18 @@
           "add": "Add new subject",
           "confirmDeleteMessage": "Do you really want to delete the subject?",
           "notificationMessage": {
-            "saveSuccess": "The subject has been saved successfully."
+            "saveSuccess": "The subject has been saved successfully.",
+            "deleteFailed": "A error occurred while deleting the subject. Please try again later"
           },
           "form": {
             "label": "Enter a subject name"
+          }
+        },
+        "notification": {
+          "error": {
+            "deleteFailed": {
+              "title": "Delete has failed"
+            }
           }
         }
       }

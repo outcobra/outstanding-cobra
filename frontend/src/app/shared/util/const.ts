@@ -1,4 +1,4 @@
-import {MdDialogConfig} from '@angular/material';
+import {MdDialogConfig} from "@angular/material";
 
 export const SMALL_DIALOG: MdDialogConfig = {
     position: {

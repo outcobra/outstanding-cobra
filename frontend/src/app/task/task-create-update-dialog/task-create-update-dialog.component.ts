@@ -1,12 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {MdDialogRef} from '@angular/material';
-import {SubjectService} from '../../manage/service/subject.service';
-import {SubjectDto} from '../../manage/model/ManageDto';
-import {Util} from '../../shared/services/util';
-import {OutcobraValidators} from '../../shared/services/outcobra-validators';
-import {Task} from '../model/Task';
-import {CreateUpdateDialog} from '../../common/CreateUpdateDialog';
+import {Component, OnInit} from "@angular/core";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {MdDialogRef} from "@angular/material";
+import {SubjectService} from "../../manage/service/subject.service";
+import {SubjectDto} from "../../manage/model/ManageDto";
+import {Util} from "../../shared/util/util";
+import {OutcobraValidators} from "../../shared/services/outcobra-validators";
+import {Task} from "../model/Task";
+import {CreateUpdateDialog} from "../../common/CreateUpdateDialog";
 
 @Component({
     selector: './task-create-update-dialog',

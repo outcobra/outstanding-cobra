@@ -1,5 +1,5 @@
-import {dateReplacer, dateReviver} from '../http/http-util';
-import {FormGroup, AbstractControl} from '@angular/forms';
+import {dateReplacer, dateReviver} from "../http/http-util";
+import {AbstractControl, FormGroup} from "@angular/forms";
 /**
  * Util class
  * contains everything that does not fit in another service
@@ -116,15 +116,4 @@ export class Util {
         }
         return control.valid;
     }
-}
-
-/**
- * combines multiple {Predicate}s to an and chain of {Predicate}s
- * returns {Predicate} that evaluates all {Predicate}s in the param
- *
- * @param predicates
- * @returns {(arg:any)=>boolean}
- */
-export function and<T>(predicates: Predicate<T>[]): Predicate<T> {
-    return (arg) => predicates.every(p => p(arg));
 }
