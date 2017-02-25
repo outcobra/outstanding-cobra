@@ -8,9 +8,12 @@ import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.transaction.annotation.Transactional
 import outcobra.server.config.ProfileRegistry.Companion.TEST
+import outcobra.server.model.Institution
 import outcobra.server.model.QInstitution
+import outcobra.server.model.QUser
 import outcobra.server.model.dto.InstitutionDto
 import outcobra.server.model.repository.InstitutionRepository
+import outcobra.server.model.repository.UserRepository
 import javax.inject.Inject
 
 /**
@@ -30,6 +33,8 @@ open class InstitutionServiceTest {
     lateinit var institutionRepository: InstitutionRepository
     @Inject
     lateinit var userService: UserService
+    @Inject
+    lateinit var userRepository: UserRepository
 
     /**
      * class constants and default values
@@ -43,7 +48,7 @@ open class InstitutionServiceTest {
      */
     @Test
     fun createInstitutionTest() {
-        institutionService.save(InstitutionDto(name = INSTITUTION_NAME))
+        institutionService.save(InstitutionDto(name = INSTITUTION_NAME, userId = userService.getCurrentUser()!!.id))
         val institution = institutionRepository.findOne(QInstitution.institution.name.eq(INSTITUTION_NAME))
         assertThat(institution).isNotNull()
         assertThat(institution.name).isEqualTo(INSTITUTION_NAME)
@@ -52,7 +57,7 @@ open class InstitutionServiceTest {
 
     @Test
     fun updateInstitutionTest() {
-        val savedDto = institutionService.save(InstitutionDto(name = INSTITUTION_NAME))
+        val savedDto = institutionService.save(InstitutionDto(name = INSTITUTION_NAME, userId = userService.getCurrentUser()!!.id))
         val institutionId = savedDto.id
         val updatedName = "testUpdateInstitution"
         val updateDto = InstitutionDto(institutionId, userService.getCurrentUser()!!.id, updatedName)
@@ -68,10 +73,11 @@ open class InstitutionServiceTest {
      */
     @Test
     fun readAllInstitutionsTest() {
-        val institution1 = institutionService.save(InstitutionDto(name = INSTITUTION_NAME))
-        val institution2 = institutionService.save(InstitutionDto(name = "laslsafl"))
-        val dto = InstitutionDto(name = "notInList", userId = 2L)
-        institutionService.save(dto) //creates institution that should no be in the list
+        val institution1 = institutionService.save(InstitutionDto(name = INSTITUTION_NAME, userId = userService.getCurrentUser()!!.id))
+        val institution2 = institutionService.save(InstitutionDto(name = "laslsafl", userId = userService.getCurrentUser()!!.id))
+        val secondUser = userRepository.findAll(QUser.user.id.ne(institution1.userId)).first()
+        val notInList = Institution("notInList", secondUser)
+        institutionRepository.save(notInList) //creates institution that should no be in the list
 
         val expected = arrayListOf(institution1, institution2)
         val institutions = institutionService.readAll()
@@ -85,7 +91,7 @@ open class InstitutionServiceTest {
      */
     @Test
     fun readInstitutionTest() {
-        val institutionDto = institutionService.save(InstitutionDto(name = INSTITUTION_NAME))
+        val institutionDto = institutionService.save(InstitutionDto(name = INSTITUTION_NAME, userId = userService.getCurrentUser()!!.id))
         val institutionId = institutionDto.id
         assertThat(institutionDto).isEqualTo(institutionService.readById(institutionId))
     }
@@ -96,7 +102,7 @@ open class InstitutionServiceTest {
      */
     @Test
     fun deleteInstitutionTest() {
-        val institutionDto = institutionService.save(InstitutionDto(name = INSTITUTION_NAME))
+        val institutionDto = institutionService.save(InstitutionDto(name = INSTITUTION_NAME, userId = userService.getCurrentUser()!!.id))
         val institutionId = institutionDto.id
         institutionService.delete(institutionId)
         assertThat(institutionRepository.findOne(QInstitution.institution.id.eq(institutionId))).isNull()

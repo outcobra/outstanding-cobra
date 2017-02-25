@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component
 import outcobra.server.exception.ManipulatedRequestException
 import outcobra.server.model.interfaces.OutcobraDto
 import outcobra.server.model.interfaces.ParentLinked
-import outcobra.server.model.interfaces.ParentLinkedDto
 import outcobra.server.service.UserService
 import outcobra.server.service.base.BaseService
 import outcobra.server.util.RepositoryLocator
@@ -41,10 +40,6 @@ where Dto : OutcobraDto {
     }
 
     fun validateDtoSaving(dto: Dto) {
-        val repository = getRepoByDto(dto)
-        val isUpdate = repository.exists(dto.identifier)
-        if (!isUpdate) return
-
         return dto.checkOwnerIsCurrent()
     }
 
@@ -62,10 +57,19 @@ where Dto : OutcobraDto {
         throw ManipulatedRequestException()
     }
 
-    private fun ParentLinkedDto.checkOwnerIsCurrent() {
+    private fun Dto.checkOwnerIsCurrent() {
+        val repository = getRepoByDto(this)
         val parentLink = this.parentLink
-        val repo = locator.getForEntityClass(parentLink.parentClass)
-        val parent: ParentLinked? = repo.findOne(parentLink.id)
+        val parentRepository = locator.getForEntityClass(parentLink.parentClass)
+        val parent: ParentLinked? = parentRepository.findOne(parentLink.id)
+        if (repository.exists(this.identifier)) {
+            val currentEntity = repository.findOne(this.identifier) as ParentLinked
+            val ownerHasChanged = this.parentLink.id != currentEntity.id
+            if (ownerHasChanged) {
+                if (currentEntity.followToUser() != userService.getCurrentUser())
+                    throw ManipulatedRequestException()
+            }
+        }
         if (parent == null || (parent.followToUser()) != userService.getCurrentUser()) {
             throw ManipulatedRequestException()
         }
