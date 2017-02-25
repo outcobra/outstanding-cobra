@@ -11,14 +11,15 @@ import outcobra.server.config.ProfileRegistry.Companion.BASIC_AUTH_SECURITY_MOCK
 
 @Configuration
 open class AppConfig {
-
-    @Bean @Profile("!$BASIC_AUTH_SECURITY_MOCK")
-    open fun getAuth0Config(): PropertySourcesPlaceholderConfigurer {
-        val configurer = PropertySourcesPlaceholderConfigurer()
-        val yaml = YamlPropertiesFactoryBean()
-        yaml.setResources(ClassPathResource("auth0.yml"))
-        configurer.setProperties(yaml.`object`) // cringe?
-        return configurer
+    companion object {
+        @Bean @Profile("!$BASIC_AUTH_SECURITY_MOCK") @JvmStatic
+        fun getAuth0Config(): PropertySourcesPlaceholderConfigurer {
+            val configurer = PropertySourcesPlaceholderConfigurer()
+            val yaml = YamlPropertiesFactoryBean()
+            yaml.setResources(ClassPathResource("auth0.yml"))
+            configurer.setProperties(yaml.`object`) // cringe?
+            return configurer
+        }
     }
 
 }
