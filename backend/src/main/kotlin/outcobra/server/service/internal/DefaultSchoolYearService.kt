@@ -22,7 +22,7 @@ open class DefaultSchoolYearService
                     repository: SchoolYearRepository,
                     requestValidator : RequestValidator<SchoolYearDto>,
                     val schoolYearValidator: SchoolYearValidator)
-    : SchoolYearService, DefaultBaseService<SchoolYear, SchoolYearDto, SchoolYearRepository>(mapper, repository, requestValidator, SchoolYear::class.java) {
+    : SchoolYearService, DefaultBaseService<SchoolYear, SchoolYearDto, SchoolYearRepository>(mapper, repository, requestValidator, SchoolYear::class) {
 
     override fun save(dto: SchoolYearDto): SchoolYearDto {
         val schoolYear = mapper.fromDto(dto)
@@ -33,7 +33,7 @@ open class DefaultSchoolYearService
     }
 
     override fun readAllBySchoolClass(schoolClassId: Long): List<SchoolYearDto> {
-        requestValidator.validateByParentId(schoolClassId, SchoolClass::class)
+        requestValidator.validateRequestById(schoolClassId, SchoolClass::class)
         val filter = QSchoolYear.schoolYear.schoolClass.id.eq(schoolClassId)
         return repository.findAll(filter).map { mapper.toDto(it) }
     }

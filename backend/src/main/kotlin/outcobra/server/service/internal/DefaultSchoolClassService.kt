@@ -25,7 +25,7 @@ open class DefaultSchoolClassService
                     repository: SchoolClassRepository,
                     requestValidator : RequestValidator<SchoolClassDto>,
                     val userService: UserService) : SchoolClassService,
-        DefaultBaseService<SchoolClass, SchoolClassDto, SchoolClassRepository>(mapper, repository, requestValidator, SchoolClass::class.java) {
+        DefaultBaseService<SchoolClass, SchoolClassDto, SchoolClassRepository>(mapper, repository, requestValidator, SchoolClass::class) {
 
     override fun readAllByUser(): List<SchoolClassDto> {
         val userId = userService.getCurrentUser()!!.id
@@ -34,7 +34,7 @@ open class DefaultSchoolClassService
     }
 
     override fun readAllByInstitution(institutionId: Long): List<SchoolClassDto> {
-        requestValidator.validateByParentId(institutionId, Institution::class)
+        requestValidator.validateRequestById(institutionId, Institution::class)
         val filter = QSchoolClass.schoolClass.institution.id.eq(institutionId)
         return repository.findAll(filter).map { mapper.toDto(it) }
     }

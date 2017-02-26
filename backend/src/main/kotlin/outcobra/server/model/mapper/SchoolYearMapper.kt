@@ -19,7 +19,7 @@ open class SchoolYearMapper @Inject constructor(val semesterRepository: Semester
     : Mapper<SchoolYear, SchoolYearDto>, BaseMapper() {
 
     override fun fromDto(from: SchoolYearDto): SchoolYear {
-        validateChildren(from.semesterIds, Semester::class.java, from.schoolClassId, SchoolClass::class.java)
+        validateChildren(from.semesterIds, Semester::class, from.schoolClassId, SchoolClass::class)
         val holidays = holidayRepository.findAll(QHoliday.holiday.schoolYear.id.eq(from.id)).toList()
         val schoolClass = classRepository.findOne(from.schoolClassId)
         val semesters = from.semesterIds.map { semesterRepository.findOne(it) }

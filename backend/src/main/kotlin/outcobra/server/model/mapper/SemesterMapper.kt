@@ -31,8 +31,8 @@ open class SemesterMapper @Inject constructor(val subjectRepository: SubjectRepo
     }
 
     override fun fromDto(from: SemesterDto): Semester {
-        validateChildren(from.subjectIds, Subject::class.java, from.schoolYearId, SchoolYear::class.java)
-        validateChildren(from.markReportIds, MarkReport::class.java, from.schoolYearId, SchoolYear::class.java)
+        validateChildren(from.subjectIds, Subject::class, from.schoolYearId, SchoolYear::class)
+        validateChildren(from.markReportIds, MarkReport::class, from.schoolYearId, SchoolYear::class)
         val year = schoolYearRepository.findOne(from.schoolYearId)
         val subjects = from.subjectIds.map { subjectRepository.findOne(it) }
         val reports = from.markReportIds.map { markReportRepository.findOne(it) }

@@ -29,7 +29,7 @@ open class DefaultSubjectService
         DefaultBaseService<Subject, SubjectDto, SubjectRepository>(mapper,
                 repository,
                 requestValidator,
-                Subject::class.java) {
+                Subject::class) {
 
     override fun readAllByCurrentSemester(): List<SubjectDto> {
         val currentSemesters = semesterService.getCurrentSemester()
@@ -43,13 +43,13 @@ open class DefaultSubjectService
     }
 
     override fun readAllBySemester(semesterId: Long): List<SubjectDto> {
-        requestValidator.validateByParentId(semesterId, Semester::class)
+        requestValidator.validateRequestById(semesterId, Semester::class)
         val filter = QSubject.subject.semester.id.eq(semesterId)
         return repository.findAll(filter).map { mapper.toDto(it) }
     }
 
     override fun readAllBySchoolClass(schoolClassId: Long): List<SubjectDto> {
-        requestValidator.validateByParentId(schoolClassId, SchoolClass::class)
+        requestValidator.validateRequestById(schoolClassId, SchoolClass::class)
         val filter = QSubject.subject.semester.schoolYear.schoolClass.id.eq(schoolClassId)
         return repository.findAll(filter).map { mapper.toDto(it) }
     }

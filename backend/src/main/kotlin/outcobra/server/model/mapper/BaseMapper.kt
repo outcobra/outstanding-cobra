@@ -7,9 +7,10 @@ import outcobra.server.service.UserService
 import outcobra.server.util.RepositoryLocator
 import outcobra.server.util.followToUser
 import javax.inject.Inject
+import kotlin.reflect.KClass
 
 /**
- * This class allows it to authorize the requests within the mapper
+ * This class allows authorizing the requests within the mapper
  * @author Florian Bürgi
  * @since <since>
  */
@@ -20,12 +21,12 @@ open class BaseMapper {
     @Inject
     lateinit var userService: UserService
 
-    fun validateChildren(children: List<Long>, childType: Class<out ParentLinked>,
-                         parentId: Long, parentType: Class<out ParentLinked>) {
-        val childRepo = repositoryLocator.getForEntityClass(childType)
-        val parentRepo = repositoryLocator.getForEntityClass(parentType)
+    fun validateChildren(children: List<Long>, childType: KClass<out ParentLinked>,
+                         parentId: Long, parentType: KClass<out ParentLinked>) {
+        val childRepo = repositoryLocator.getForEntityClass(childType.java)
+        val parentRepo = repositoryLocator.getForEntityClass(parentType.java)
         val parent = parentRepo.findOne(parentId)
-        val areFromParent = children.map { childRepo.findOne(it) }.all { it.parent == parent }
+        val areFromParent = childRepo.findAll(children).all { it.parent == parent }
         val userIsOwner = parent.followToUser() == userService.getCurrentUser()
         if (!(areFromParent && userIsOwner)) {
             throw ManipulatedRequestException()

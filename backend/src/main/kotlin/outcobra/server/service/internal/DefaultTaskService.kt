@@ -16,8 +16,8 @@ import outcobra.server.service.SubjectService
 import outcobra.server.service.TaskService
 import outcobra.server.service.UserService
 import outcobra.server.service.base.internal.DefaultBaseService
-import javax.inject.Inject
 import outcobra.server.validator.RequestValidator
+import javax.inject.Inject
 
 @Component
 @Transactional
@@ -31,7 +31,7 @@ open class DefaultTaskService
         DefaultBaseService<Task, TaskDto, TaskRepository>(mapper,
                 repository,
                 requestValidator,
-                Task::class.java) {
+                Task::class) {
 
     override fun readAll(): List<TaskDto> {
         val userId = userService.getCurrentUser()?.id
@@ -40,25 +40,25 @@ open class DefaultTaskService
     }
 
     override fun readAllBySubject(subjectId: Long): List<TaskDto> {
-        requestValidator.validateByParentId(subjectId, Subject::class)
+        requestValidator.validateRequestById(subjectId, Subject::class)
         val filter = QTask.task.subject.id.eq(subjectId)
         return repository.findAll(filter).map { mapper.toDto(it) }
     }
 
     override fun readAllBySemester(semesterId: Long): List<TaskDto> {
-        requestValidator.validateByParentId(semesterId, Semester::class)
+        requestValidator.validateRequestById(semesterId, Semester::class)
         val filter = QTask.task.subject.semester.id.eq(semesterId)
         return repository.findAll(filter).map { mapper.toDto(it) }
     }
 
     override fun readAllOpenBySubject(subjectId: Long): List<TaskDto> {
-        requestValidator.validateByParentId(subjectId, Subject::class)
+        requestValidator.validateRequestById(subjectId, Subject::class)
         val filter = QTask.task.progress.ne(100).and(QTask.task.subject.id.eq(subjectId))
         return repository.findAll(filter).map { mapper.toDto(it) }
     }
 
     override fun readAllOpenBySemester(semesterId: Long): List<TaskDto> {
-        requestValidator.validateByParentId(semesterId, Semester::class)
+        requestValidator.validateRequestById(semesterId, Semester::class)
         val filter = QTask.task.progress.ne(100).and(QTask.task.subject.semester.id.eq(semesterId))
         return repository.findAll(filter).map { mapper.toDto(it) }
     }

@@ -19,10 +19,10 @@ open class DefaultTeacherService
 @Inject constructor(repository: TeacherRepository,
                     mapper: Mapper<Teacher, TeacherDto>,
                     requestValidator : RequestValidator<TeacherDto>) : TeacherService,
-        DefaultBaseService<Teacher, TeacherDto, TeacherRepository>(mapper, repository, requestValidator, Teacher::class.java) {
+        DefaultBaseService<Teacher, TeacherDto, TeacherRepository>(mapper, repository, requestValidator, Teacher::class) {
 
     override fun readAllByInstitution(institutionId: Long): List<TeacherDto> {
-        requestValidator.validateByParentId(institutionId, Institution::class)
+        requestValidator.validateRequestById(institutionId, Institution::class)
         val withSameId = QTeacher.teacher.institution.id.eq(institutionId)
         return repository.findAll(withSameId).map { mapper.toDto(it) }
     }

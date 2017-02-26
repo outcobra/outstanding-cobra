@@ -23,7 +23,7 @@ open class DefaultInstitutionService
         DefaultBaseService<Institution, InstitutionDto, InstitutionRepository>(mapper,
                 repository,
                 requestValidator,
-                Institution::class.java) {
+                Institution::class) {
 
 
     override fun readAll(): List<InstitutionDto> {
