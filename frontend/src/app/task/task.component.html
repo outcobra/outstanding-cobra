@@ -3,7 +3,7 @@
         <router-outlet></router-outlet>
         <h1>Tasks</h1>
         <md-input-container id="task-search">
-            <input md-input [placeholder]="'i18n.modules.task.filter.search' | translate" formControlName="searchTerm">
+            <input mdInput [placeholder]="'i18n.modules.task.filter.search' | translate" formControlName="searchTerm">
         </md-input-container>
     </div>
 </div>
@@ -13,7 +13,7 @@
             <md-list>
                 <h2 md-subheader>Your Tasks</h2>
                 <task-list-item *ngFor="let task of filteredTasks" [task]="task"
-                                (onMarkDone)="markTaskAsDone($event)"></task-list-item>
+                                (markDone)="markTaskAsDone($event)"></task-list-item>
             </md-list>
         </md-card>
     </div>

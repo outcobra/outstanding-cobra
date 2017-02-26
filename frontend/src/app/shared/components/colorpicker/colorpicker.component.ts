@@ -1,8 +1,8 @@
-import {Component, Input, OnInit, ViewEncapsulation, forwardRef, ElementRef, Output, EventEmitter} from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {ColorService} from '../../services/color.service';
-import {Color} from '../../model/Color';
-import {Util} from '../../services/util';
+import {Component, ElementRef, EventEmitter, forwardRef, Input, OnInit, Output, ViewEncapsulation} from "@angular/core";
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
+import {ColorService} from "../../services/color.service";
+import {Color} from "../../model/Color";
+import {Util} from "../../util/util";
 
 const noop = () => {
 };
@@ -32,7 +32,7 @@ export class ColorpickerComponent implements OnInit, ControlValueAccessor {
 
     private outColor: Color = null;
 
-    @Output() onSelectColor = new EventEmitter<Color>();
+    @Output('selectColor') onSelectColor = new EventEmitter<Color>();
 
     private onTouchedCallback: () => void = noop;
     private onChangeCallback: (_: any) => void = noop;

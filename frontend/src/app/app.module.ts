@@ -28,7 +28,7 @@ import {configLoader, translateFactory, translationLoader} from './shared/servic
         MainModule,
         ManageModule,
         TaskModule,
-        MaterialModule.forRoot(),
+        MaterialModule,
         TranslateModule.forRoot({
             provide: TranslateLoader,
             useFactory: translateFactory,

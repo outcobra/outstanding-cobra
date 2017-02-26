@@ -1,4 +1,5 @@
 @import '../../node_modules/materialize-css/sass/components/color';
+@import '../../node_modules/materialize-css/sass/components/color';
 @import 'color';
 @import 'general';
 
@@ -105,14 +106,14 @@ md-dialog-container {
 datepicker, md-input-container {
     &.ng-invalid.ng-touched {
         label {
-            color: md-color($warn);
+            color: mat-color($warn);
         }
         //noinspection CssOptimizeSimilarProperties
-        .md-input-underline {
-            .md-input-ripple {
-                background-color: md-color($warn);
+        .mat-input-underline {
+            .mat-input-ripple {
+                background-color: mat-color($warn);
             }
-            border: md-color($warn);
+            border: mat-color($warn);
             border-top-width: 1px;
             border-top-style: solid;
         }

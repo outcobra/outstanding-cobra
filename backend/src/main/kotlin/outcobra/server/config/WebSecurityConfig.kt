@@ -17,7 +17,7 @@ import javax.inject.Inject
  */
 @Configuration
 @EnableWebSecurity
-@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER - 1)
+@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER + 1)
 open class WebSecurityConfig
 @Inject constructor(val environment: Environment) : WebSecurityConfigurerAdapter() {
 
@@ -35,6 +35,8 @@ open class WebSecurityConfig
                             "/env",
                             "/health",
                             "/info",
+                            "/trace",
+                            "/configprops",
                             "/api/ping").permitAll()
                     .anyRequest().authenticated()
 
