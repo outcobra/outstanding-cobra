@@ -10,8 +10,8 @@
         <div class="colorpicker-body">
             <table>
                 <tr *ngFor="let row of colorRows">
-                    <td mdRippleTrigger *ngFor="let color of row" (click)="selectColor(color)">
-                        <div class="color-ripple" md-ripple [mdRippleMaxRadius]="20" [mdRippleUnbounded]="true">
+                    <td *ngFor="let color of row" (click)="selectColor(color)">
+                        <div class="color-ripple" md-ripple [mdRippleRadius]="20">
                             <div class="color" [style.background-color]="'#' + color.hex">
                                 <md-icon *ngIf="color == selectedColor">check</md-icon>
                             </div>

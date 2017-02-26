@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ManageService} from './service/manage.service';
-import {ManageDto, InstitutionDto, SchoolClassDto, SchoolYearDto, SemesterDto, SubjectDto} from './model/ManageDto';
-import {MdDialogRef, MdDialogConfig} from '@angular/material';
+import {InstitutionDto, ManageDto, SchoolClassDto, SchoolYearDto, SemesterDto, SubjectDto} from './model/ManageDto';
+import {MdDialogRef} from '@angular/material';
 import {InstitutionDialog} from './institution-dialog/institution-dialog.component';
 import {DialogMode} from '../common/DialogMode';
 import {SchoolClassDialog} from './school-class-dialog/school-class-dialog.component';
@@ -16,10 +16,12 @@ import {ConfirmDialogService} from '../shared/services/confirm-dialog.service';
 import {ManageDialogFactory} from './service/manage-dialog-factory';
 import {SubjectDialog} from './subject-dialog/subject-dialog.component';
 import {SubjectService} from './service/subject.service';
-import {Util} from '../shared/services/util';
-
-
-const DEFAULT_CONFIG: MdDialogConfig = {position: {top: '20px'}};
+import {Util} from '../shared/util/util';
+import {SMALL_DIALOG} from '../shared/util/const';
+import {isNotNull, isTrue} from '../shared/util/helper';
+import {Observable} from 'rxjs';
+import {Dto} from '../common/Dto';
+import {CreateUpdateDialog} from '../common/CreateUpdateDialog';
 
 @Component({
     selector: 'manager',
@@ -58,9 +60,10 @@ export class ManageComponent implements OnInit {
             .subscribe((res) => this.prepareManageData(res));
     }
 
+    //region helper
     selectSchoolClass(schoolClassId: number) {
         let schoolClass = this.findSchoolClass(this.institutionClasses, schoolClassId);
-        if (schoolClass != null) {
+        if (isNotNull(schoolClass)) {
             this.yearSemesterModel = schoolClass.schoolYears ? schoolClass.schoolYears : [];
             this.activeSchoolClassId = schoolClass.id;
             this.activeSemesterId = this.subjectModel = null;
@@ -69,7 +72,7 @@ export class ManageComponent implements OnInit {
 
     selectSemester(semesterId: number) {
         let semester = this.findSemester(this.yearSemesterModel, semesterId);
-        if (semester != null) {
+        if (isNotNull(semester)) {
             this.subjectModel = semester.subjects ? semester.subjects : [];
             this.activeSemesterId = semester.id;
         }
@@ -80,9 +83,7 @@ export class ManageComponent implements OnInit {
             let semester: SemesterDto = <SemesterDto>schoolYear.semesters.find((semester: SemesterDto) => {
                 return semester.id === semesterId;
             });
-            if (semester !== undefined) {
-                return semester;
-            }
+            if (isNotNull(semester)) return semester;
         }
         return null;
     }
@@ -92,9 +93,7 @@ export class ManageComponent implements OnInit {
             let schoolClass: SchoolClassDto = <SchoolClassDto>institution.schoolClasses.find((schoolClass: SchoolClassDto) => {
                 return schoolClass.id === schoolClassId;
             });
-            if (schoolClass !== undefined) {
-                return schoolClass;
-            }
+            if (isNotNull(schoolClass)) return schoolClass;
         }
         return null;
     }
@@ -104,129 +103,156 @@ export class ManageComponent implements OnInit {
         this.institutionClasses = manageData.institutions;
     }
 
+    //endregion
+
+    //region add
     addInstitution() {
-        this.institutionDialogRef = this.manageDialogFactory.getDialog(InstitutionDialog, DialogMode.NEW, null, DEFAULT_CONFIG);
-        this.institutionDialogRef.afterClosed().subscribe((result: InstitutionDto) => {
-            if (result != null) {
-                this.institutionService.create(result).subscribe((institution: InstitutionDto) => {
-                    this.showSuccessNotification('institution');
-                    console.log(institution);
-                    this.institutionClasses.push(institution);
-                });
-            }
-        });
+        this.institutionDialogRef = this.manageDialogFactory.getDialog(InstitutionDialog, DialogMode.NEW, null, SMALL_DIALOG);
+        this.handleAddition<InstitutionDto, InstitutionDialog>('institution', this.institutionDialogRef, this.institutionService.create,
+            (institution: InstitutionDto) => this.institutionClasses.push(institution)
+        );
     }
 
     addSchoolClass(institution: InstitutionDto) {
-        this.schoolClassDialogRef = this.manageDialogFactory.getDialog(SchoolClassDialog, DialogMode.NEW, institution, DEFAULT_CONFIG);
-        this.schoolClassDialogRef.afterClosed().subscribe((result: SchoolClassDto) => {
-            if (result) {
-                this.schoolClassService.create(result).subscribe((schoolClass: SchoolClassDto) => {
-                    this.showSuccessNotification('schoolClass');
-                    if (!institution.schoolClasses) institution.schoolClasses = [];
-                    institution.schoolClasses.push(schoolClass);
-                });
-            }
-        });
+        this.schoolClassDialogRef = this.manageDialogFactory.getDialog(SchoolClassDialog, DialogMode.NEW, institution, SMALL_DIALOG);
+        this.handleAddition<SchoolClassDto, SchoolClassDialog>('schoolClass', this.schoolClassDialogRef, this.schoolClassService.create,
+            (schoolClass: SchoolClassDto) => {
+                if (isNotNull(institution.schoolClasses)) institution.schoolClasses = [];
+                institution.schoolClasses.push(schoolClass);
+            });
     }
 
     addSchoolYear(schoolClassId: number) {
-        if (schoolClassId != null) {
+        if (isNotNull(schoolClassId)) {
             let schoolClass: SchoolClassDto = this.findSchoolClass(this.institutionClasses, schoolClassId);
-            this.schoolYearDialogRef = this.manageDialogFactory.getDialog(SchoolYearDialog, DialogMode.NEW, schoolClass, DEFAULT_CONFIG);
-            this.schoolYearDialogRef.afterClosed().subscribe((result: SchoolYearDto) => {
-                if (result) {
-                    this.schoolYearService.create(result).subscribe((schoolYear: SchoolYearDto) => {
-                        this.showSuccessNotification('schoolYear');
-                        this.yearSemesterModel.push(schoolYear);
-                    });
-                }
-            });
+            this.schoolYearDialogRef = this.manageDialogFactory.getDialog(SchoolYearDialog, DialogMode.NEW, schoolClass, SMALL_DIALOG);
+            this.handleAddition<SchoolYearDto, SchoolYearDialog>('schoolYear', this.schoolYearDialogRef, this.schoolYearService.create,
+                (schoolYear: SchoolYearDto) => this.yearSemesterModel.push(schoolYear)
+            );
         }
     }
 
     addSemester(schoolYear: SchoolYearDto) {
-        if (schoolYear != null) {
-            this.semesterDialogRef = this.manageDialogFactory.getDialog(SemesterDialog, DialogMode.NEW, schoolYear, DEFAULT_CONFIG);
-            this.semesterDialogRef.afterClosed().subscribe((result: SemesterDto) => {
-                if (result) {
-                    this.semesterService.create(result).subscribe((semester: SemesterDto) => {
-                        this.showSuccessNotification('schoolYear');
-                        if (!schoolYear.semesters) schoolYear.semesters = [];
-                        schoolYear.semesters.push(semester);
-                    });
-                }
-            });
+        if (isNotNull(schoolYear)) {
+            this.semesterDialogRef = this.manageDialogFactory.getDialog(SemesterDialog, DialogMode.NEW, schoolYear, SMALL_DIALOG);
+            this.handleAddition<SemesterDto, SemesterDialog>('semester', this.semesterDialogRef, this.semesterService.create,
+                (semester: SemesterDto) => {
+                    if (isNotNull(schoolYear.semesters)) schoolYear.semesters = [];
+                    schoolYear.semesters.push(semester);
+                });
         }
     }
 
     addSubject(semesterId: number) {
-        if (semesterId != null) {
+        if (isNotNull(semesterId)) {
             let semester: SemesterDto = this.findSemester(this.yearSemesterModel, semesterId);
-            this.subjectDialogRef = this.manageDialogFactory.getDialog(SubjectDialog, DialogMode.NEW, semester, DEFAULT_CONFIG);
-            this.subjectDialogRef.afterClosed().subscribe((result: SubjectDto) => {
-                if (result) {
-                    this.subjectService.create(result).subscribe((subject: SubjectDto) => {
-                        this.showSuccessNotification('subject');
-                        this.subjectModel.push(subject);
-                    });
-                }
-            });
+            this.subjectDialogRef = this.manageDialogFactory.getDialog(SubjectDialog, DialogMode.NEW, semester, SMALL_DIALOG);
+            this.handleAddition<SubjectDto, SubjectDialog>('subject', this.subjectDialogRef, this.subjectService.create,
+                (subject: SubjectDto) => this.subjectModel.push(subject)
+            );
         }
     }
 
-    deleteInstitution(institution: InstitutionDto) {
-        this.openDeleteConfirmDialog('institution').subscribe((result) => {
-            if (result === true) {
-                this.institutionService.deleteById(institution.id).subscribe();
-                Util.arrayRemove(this.institutionClasses, (inst) => inst.id == institution.id);
-            }
+    //endregion
+
+    //region delete
+    deleteInstitution(toDelete: InstitutionDto) {
+        this.handleDeletion(toDelete, 'institution', this.institutionService.deleteById,
+            (institution) => Util.arrayRemove(this.institutionClasses, (i) => i.id == institution.id)
+        );
+    }
+
+    deleteSchoolClass(toDelete: SchoolClassDto) {
+        this.handleDeletion(toDelete, 'schoolClass', this.schoolClassService.deleteById, (schoolClass) => {
+            let institution = this.institutionClasses.find(inst => inst.id === schoolClass.institutionId);
+            Util.arrayRemove(institution.schoolClasses, (clazz) => clazz.id == schoolClass.id);
         });
     }
 
-    deleteSchoolClass(schoolClass: SchoolClassDto) {
-        this.openDeleteConfirmDialog('schoolClass').subscribe((result) => {
-            if (result === true) {
-                this.schoolClassService.deleteById(schoolClass.id).subscribe();
-                let institution = this.institutionClasses.find(inst => inst.schoolClasses.findIndex(clazz => clazz.id == schoolClass.id) !== undefined);
-                Util.arrayRemove(institution.schoolClasses, (clazz) => clazz.id == schoolClass.id);
-            }
+    deleteSchoolYear(toDelete: SchoolYearDto) {
+        this.handleDeletion(toDelete, 'schoolYear', this.schoolYearService.deleteById,
+            (schoolYear) => Util.arrayRemove(this.yearSemesterModel, (year) => year.id == schoolYear.id)
+        );
+    }
+
+    deleteSemester(toDelete: SemesterDto) {
+        this.handleDeletion(toDelete, 'semester', this.semesterService.deleteById, (semester) => {
+            let schoolYear = this.yearSemesterModel.find(year => year.id === semester.schoolYearId);
+            Util.arrayRemove(schoolYear.semesters, (sem) => sem.id == semester.id);
         });
     }
 
-    deleteSchoolYear(schoolYear: SchoolYearDto) {
-        this.openDeleteConfirmDialog('schoolYear').subscribe((result) => {
-            if (result === true) {
-                this.schoolYearService.deleteById(schoolYear.id).subscribe();
-                Util.arrayRemove(this.yearSemesterModel, (year) => year.id == schoolYear.id);
-            }
-        });
+    deleteSubject(toDelete: SubjectDto) {
+        this.handleDeletion(toDelete, 'subject', this.subjectService.deleteById,
+            (subject) => Util.arrayRemove(this.subjectModel, (sub) => sub.id == subject.id)
+        );
     }
 
-    deleteSemester(semester: SemesterDto) {
-        this.openDeleteConfirmDialog('semester').subscribe((result) => {
-            if (result === true) {
-                this.semesterService.deleteById(semester.id).subscribe();
-                let schoolYear = this.yearSemesterModel.find(year => year.semesters.findIndex(sem => sem.id == semester.id) !== undefined);
-                Util.arrayRemove(schoolYear.semesters, (sem) => sem.id == semester.id);
-            }
-        });
+    //endregion
+
+    //region handler
+    /**
+     * opens the deleteConfirmationDialog with for the given entityName
+     * then filters the resulting Observable so that the deletion is only made when the result of the dialog is true
+     * performs a switchMap on the deleteFunction which must return an Observable and then executes the finishFunction when a value is emitted by the switched Observable
+     *
+     * shows an error when the entity could not have been deleted
+     *
+     * @param entity toDelete must be a Dto
+     * @param entityName name for i18n and deleteConfirmationDialog
+     * @param deleteFunction function that is used to delete the entity
+     * @param finishFunction function to execute on delete success
+     */
+    handleDeletion<T extends Dto>(entity: T, entityName: string, deleteFunction: (id: number) => Observable<any>, finishFunction: (entity: T) => void) {
+        this.openDeleteConfirmDialog(entityName)
+            .filter(isTrue)
+            .switchMap(() => deleteFunction(entity.id))
+            .catch(() => {
+                this.notificationService.remove();
+                this.notificationService.error('i18n.modules.task.notification.error.deleteFailed.title', 'i18n.modules.task.notification.error.deleteFailed.message');
+                return Observable.empty();
+            })
+            .subscribe(() => {
+                this.showDeleteSuccessNotification(entityName);
+                finishFunction(entity)
+            });
     }
 
-    deleteSubject(subject: SubjectDto) {
-        this.openDeleteConfirmDialog('subject').subscribe((result) => {
-            if (result === true) {
-                this.subjectService.deleteById(subject.id).subscribe();
-                Util.arrayRemove(this.subjectModel, (sub) => sub.id == subject.id);
-            }
-        });
+    /**
+     * waits for emitted values from the given dialog
+     *
+     * checks that the emitted values are not null or something similar {@see isNotNull}
+     * performs a flatMap on the switchFunction which must return an Observable of the entity Type
+     * and then executes the finishFunction when a value is emitted by the switched Observable
+     * also shows a success notification before executing the finishFunction
+     *
+     *
+     * @param entityName name for i18n and deleteConfirmationDialog
+     * @param dialogRef to listen for close event
+     * @param createFunction function which creates an entity
+     * @param finishFunction function to execute on create success
+     */
+    handleAddition<T extends Dto, D extends CreateUpdateDialog<T>>(entityName: string, dialogRef: MdDialogRef<D>, createFunction: (entity: T) => Observable<T>, finishFunction: (entity: T) => void) {
+        dialogRef.afterClosed()
+            .filter(isNotNull)
+            .flatMap(createFunction)
+            .subscribe((entity: T) => {
+                this.showSaveSuccessNotification(entityName);
+                finishFunction(entity)
+            });
     }
+
+    //endregion
 
     openDeleteConfirmDialog(moduleName: string) {
         return this.confirmDialogService.open('i18n.modules.manage.assureDeletion', `i18n.modules.manage.${moduleName}.confirmDeleteMessage`);
     }
 
-    showSuccessNotification(entity: string) {
+    showSaveSuccessNotification(entity: string) {
         this.notificationService.success('i18n.common.notification.success.save', `i18n.modules.manage.${entity}.notificationMessage.saveSuccess`);
+    }
+
+    showDeleteSuccessNotification(entity: string) {
+        this.notificationService.success('i18n.common.notification.success.delete', `i18n.modules.manage.${entity}.notificationMessage.deleteSuccess`);
     }
 }

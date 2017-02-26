@@ -1,9 +1,9 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {MdDialogRef} from '@angular/material';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ManageDialog} from '../manage-dialog';
-import {InstitutionDto} from '../model/ManageDto';
-import {Util} from '../../shared/services/util';
+import {Component, OnInit, ViewEncapsulation} from "@angular/core";
+import {MdDialogRef} from "@angular/material";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {ManageDialog} from "../manage-dialog";
+import {InstitutionDto} from "../model/ManageDto";
+import {Util} from "../../shared/util/util";
 
 @Component({
     selector: 'institution-dialog',
@@ -21,7 +21,7 @@ export class InstitutionDialog extends ManageDialog<InstitutionDto, any> impleme
 
     ngOnInit() {
         this.institutionForm = this.formBuilder.group({
-            name: [this.isEditMode() ? this.params.name : '', Validators.required]
+            name: [this.getParamOrDefault('name'), Validators.required]
         });
     }
 

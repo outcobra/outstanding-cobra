@@ -7,6 +7,7 @@ import org.springframework.context.ApplicationContext
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Component
 import outcobra.server.exception.NoRepositoryFoundException
+import outcobra.server.model.interfaces.OutcobraDto
 import javax.inject.Inject
 
 /**
@@ -53,5 +54,17 @@ open class RepositoryLocator @Inject constructor(val context: ApplicationContext
         @Suppress("UNCHECKED_CAST")
         return getForEntityName(entityClass.simpleName) as? JpaRepository<T, Long>
                 ?: throw NoRepositoryFoundException("Could not cast repository to JpaRepository<${entityClass.simpleName}, Long>")
+    }
+
+    /**
+     * This function locates the repository for the given Dto
+     * @param dto an instance of [OutcobraDto]
+     * @return the matching [JpaRepository]
+     * @see [RepositoryLocator]
+     */
+    fun getRForDto(dto: OutcobraDto): JpaRepository<*, Long> {
+        var name = dto.javaClass.simpleName
+        name = name.replace("Dto", "")
+        return this.getForEntityName(name)
     }
 }

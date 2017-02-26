@@ -5,7 +5,7 @@
     <div class="dialog-body" md-dialog-content>
         <div class="form-group">
             <md-input-container>
-                <input md-input [autofocus]="false"
+                <input mdInput [autofocus]="false"
                        [placeholder]="'i18n.modules.manage.semester.form.label' | translate" formControlName="name">
                 <md-hint class="form-error" align="start"
                          *ngIf="semesterForm.get('name').invalid && semesterForm.get('name').touched">

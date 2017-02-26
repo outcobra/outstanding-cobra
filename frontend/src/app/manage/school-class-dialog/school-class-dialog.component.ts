@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {ManageDialog} from '../manage-dialog';
-import {SchoolClassDto, InstitutionDto} from '../model/ManageDto';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {MdDialogRef} from '@angular/material';
-import {Util} from '../../shared/services/util';
+import {Component, OnInit} from "@angular/core";
+import {ManageDialog} from "../manage-dialog";
+import {InstitutionDto, SchoolClassDto} from "../model/ManageDto";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {MdDialogRef} from "@angular/material";
+import {Util} from "../../shared/util/util";
 
 @Component({
     selector: 'school-class-dialog',
@@ -20,7 +20,7 @@ export class SchoolClassDialog extends ManageDialog<SchoolClassDto, InstitutionD
 
     ngOnInit() {
         this.schoolClassForm = this.formBuilder.group({
-            normalizedName: [this.isEditMode() ? this.params.normalizedName : '', Validators.required]
+            normalizedName: [this.getParamOrDefault('normalizedName'), Validators.required]
         });
     }
 

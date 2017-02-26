@@ -9,6 +9,7 @@ import outcobra.server.model.Task
 import outcobra.server.model.dto.SchoolClassSubjects
 import outcobra.server.model.dto.TaskDto
 import outcobra.server.model.dto.TaskFilterDto
+import outcobra.server.model.dto.TaskProgressUpdateDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.TaskRepository
 import outcobra.server.service.SchoolClassService
@@ -40,7 +41,6 @@ open class DefaultTaskService
     }
 
     override fun readAllBySubject(subjectId: Long): List<TaskDto> {
-        requestValidator.validateRequestById(subjectId, Subject::class)
         val filter = QTask.task.subject.id.eq(subjectId)
         return repository.findAll(filter).map { mapper.toDto(it) }
     }
@@ -67,5 +67,12 @@ open class DefaultTaskService
         return TaskFilterDto(schoolClassService.readAllByUser().map {
             SchoolClassSubjects(it, subjectService.readAllBySchoolClass(it.id))
         })
+    }
+
+    override fun updateProgress(taskProgressUpdateDto: TaskProgressUpdateDto): TaskDto {
+        requestValidator.validateRequestById(taskProgressUpdateDto.taskId, Task::class)
+        val task = repository.findOne(taskProgressUpdateDto.taskId)
+        task.progress = taskProgressUpdateDto.progress
+        return mapper.toDto(repository.save(task))
     }
 }
