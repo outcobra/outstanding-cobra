@@ -29,7 +29,7 @@ import {RavenErrorHandler} from './shared/error/RavenErrorHandler';
         MainModule,
         ManageModule,
         TaskModule,
-        MaterialModule.forRoot(),
+        MaterialModule,
         TranslateModule.forRoot({
             provide: TranslateLoader,
             useFactory: translateFactory,

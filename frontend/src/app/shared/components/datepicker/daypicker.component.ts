@@ -1,8 +1,8 @@
-import {Component, OnInit, ViewEncapsulation, style, keyframes, animate, transition, trigger} from '@angular/core';
-import * as moment from 'moment';
-import {DatepickerComponent} from './datepicker.component';
-import {DateUtil} from '../../services/date-util.service';
-import {Util} from '../../services/util';
+import {animate, Component, keyframes, OnInit, style, transition, trigger, ViewEncapsulation} from "@angular/core";
+import * as moment from "moment";
+import {DatepickerComponent} from "./datepicker.component";
+import {DateUtil} from "../../services/date-util.service";
+import {Util} from "../../util/util";
 
 @Component({
     selector: 'daypicker',

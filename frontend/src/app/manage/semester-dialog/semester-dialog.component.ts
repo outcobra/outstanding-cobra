@@ -1,12 +1,12 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {MdDialogRef} from '@angular/material';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ManageDialog} from '../manage-dialog';
-import {SemesterDto, SchoolYearDto} from '../model/ManageDto';
-import {OutcobraValidators} from '../../shared/services/outcobra-validators';
-import {TranslateService} from 'ng2-translate';
-import {DatePipe} from '@angular/common';
-import {Util} from '../../shared/services/util';
+import {Component, OnInit, ViewEncapsulation} from "@angular/core";
+import {MdDialogRef} from "@angular/material";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {ManageDialog} from "../manage-dialog";
+import {SchoolYearDto, SemesterDto} from "../model/ManageDto";
+import {OutcobraValidators} from "../../shared/services/outcobra-validators";
+import {TranslateService} from "ng2-translate";
+import {DatePipe} from "@angular/common";
+import {Util} from "../../shared/util/util";
 
 @Component({
     selector: 'semester-dialog',
@@ -27,9 +27,9 @@ export class SemesterDialog extends ManageDialog<SemesterDto, SchoolYearDto> imp
 
     ngOnInit() {
         this.semesterForm = this.formBuilder.group({
-                name: [this.isEditMode() ? this.params.name : '', Validators.required],
-                validFrom: [this.isEditMode() ? this.params.validFrom : '', Validators.compose([Validators.required, OutcobraValidators.isAfterOrEqualDay(this.parent.validFrom)])],
-                validTo: [this.isEditMode() ? this.params.validTo : '', Validators.compose([Validators.required, OutcobraValidators.isBeforeOrEqualDay(this.parent.validTo)])]
+                name: [this.getParamOrDefault('name'), Validators.required],
+                validFrom: [this.getParamOrDefault('validFrom'), Validators.compose([Validators.required, OutcobraValidators.isAfterOrEqualDay(this.parent.validFrom)])],
+                validTo: [this.getParamOrDefault('validTo'), Validators.compose([Validators.required, OutcobraValidators.isBeforeOrEqualDay(this.parent.validTo)])]
             },
             {
                 validator: OutcobraValidators.dateFromIsBeforeDateTo

@@ -1,8 +1,8 @@
-import {Cacheable} from '../../interfaces/Cacheable';
-import {Observable} from 'rxjs';
-import {Util} from '../util';
-import {HttpInterceptor} from '../../http/HttpInterceptor';
-import {AppService} from './app.service';
+import {Cacheable} from "../../interfaces/Cacheable";
+import {Observable} from "rxjs";
+import {Util} from "../../util/util";
+import {HttpInterceptor} from "../../http/HttpInterceptor";
+import {AppService} from "./app.service";
 
 /**
  * Default implementation of a caching service
