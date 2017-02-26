@@ -21,7 +21,16 @@ open class AppConfig {
             val configurer = PropertySourcesPlaceholderConfigurer()
             val yaml = YamlPropertiesFactoryBean()
             yaml.setResources(ClassPathResource("auth0.yml"))
-            configurer.setProperties(yaml.`object`) // cringe?
+            configurer.setProperties(yaml.`object`)
+            return configurer
+        }
+
+        @Bean @JvmStatic
+        fun sentryConfig(): PropertySourcesPlaceholderConfigurer {
+            val configurer = PropertySourcesPlaceholderConfigurer()
+            val yaml = YamlPropertiesFactoryBean()
+            yaml.setResources(ClassPathResource("sentry.yml"))
+            configurer.setProperties(yaml.`object`)
             return configurer
         }
     }
