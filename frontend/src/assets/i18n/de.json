@@ -113,6 +113,7 @@
           "confirmDeleteMessage": "Wollen Sie die Institution wirklich löschen. Alle Kindelemente (Klassen, Schuljahre, Semester, Schulfächer) gehen damit auch verloren.",
           "notificationMessage": {
             "saveSuccess": "Die Institution wurde erfolgreich gespeichert.",
+            "deleteSuccess": "Die Institution wurde erfolgreich gelöscht.",
             "deleteFailed": "Beim Löschen der Institution ist ein Fehler aufgetreten. Bitte versuchen es später erneut"
           },
           "form": {
@@ -124,6 +125,7 @@
           "confirmDeleteMessage": "Wollen Sie die Schulklasse wirklich löschen. Alle Kindelemente (Schuljahre, Semester, Schulfächer) gehen damit auch verloren.",
           "notificationMessage": {
             "saveSuccess": "Die Schulklasse wurde erfolgreich gespeichert.",
+            "deleteSuccess": "Die Schulklasse wurde erfolgreich gelöscht.",
             "deleteFailed": "Beim Löschen der Schulklasse ist ein Fehler aufgetreten. Bitte versuchen es später erneut"
           },
           "form": {
@@ -135,6 +137,7 @@
           "confirmDeleteMessage": "Wollen Sie das Schuljahr wirklich löschen. Alle Kindelemente (Semester, Schulfächer) gehen damit auch verloren.",
           "notificationMessage": {
             "saveSuccess": "Das Schuljahr wurde erfolgreich gespeichert.",
+            "deleteSuccess": "Das Schuljahr wurde erfolgreich gelöscht.",
             "deleteFailed": "Beim Löschen des Schuljahres ist ein Fehler aufgetreten. Bitte versuchen es später erneut"
           },
           "form": {
@@ -146,6 +149,7 @@
           "confirmDeleteMessage": "Wollen Sie das Semester wirklich löschen. Alle Kindelemente (Schulfächer) gehen damit auch verloren.",
           "notificationMessage": {
             "saveSuccess": "Das Semester wurde erfolgreich gespeichert.",
+            "deleteSuccess": "Das Semester wurde erfolgreich gelöscht.",
             "deleteFailed": "Beim Löschen des Semesters ist ein Fehler aufgetreten. Bitte versuchen es später erneut"
           },
           "form": {
@@ -157,6 +161,7 @@
           "confirmDeleteMessage": "Wollen Sie das Schulfach wirklich löschen. Alle Kindelemente (Klassen, Schuljahre, Semester, Schulfächer) gehen damit auch verloren.",
           "notificationMessage": {
             "saveSuccess": "Das Fach wurde erfolgreich gespeichert.",
+            "deleteSuccess": "Das Fach wurde erfolgreich gelöscht.",
             "deleteFailed": "Beim Löschen des Fachs ist ein Fehler aufgetreten. Bitte versuchen es später erneut"
           },
           "form": {

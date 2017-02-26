@@ -113,6 +113,7 @@
           "confirmDeleteMessage": "Do you really want to delete the institution? All child elements (schoolclasses, schoolyears, semesters, subjects) will be erased too.",
           "notificationMessage": {
             "saveSuccess": "The institution has been saved successfully.",
+            "deleteSuccess": "The institution has been deleted successfully.",
             "deleteFailed": "A error occurred while deleting the institution. Please try again later"
           },
           "form": {
@@ -124,6 +125,7 @@
           "confirmDeleteMessage": "Do you really want to delete the schoolclass? All child elements (schoolyears, semesters, subjects) will be erased too.",
           "notificationMessage": {
             "saveSuccess": "The schoolclass has been saved successfully.",
+            "deleteSuccess": "The schoolclass has been deleted successfully.",
             "deleteFailed": "A error occurred while deleting the schoolclass. Please try again later"
           },
           "form": {
@@ -135,6 +137,7 @@
           "confirmDeleteMessage": "Do you really want to delete the schoolyear? All child elements (semesters, subjects) will be erased too.",
           "notificationMessage": {
             "saveSuccess": "The schoolyear has been saved successfully.",
+            "deleteSuccess": "The schoolyear has been deleted successfully.",
             "deleteFailed": "A error occurred while deleting the schoolyear. Please try again later"
           },
           "form": {
@@ -146,6 +149,7 @@
           "confirmDeleteMessage": "Do you really want to delete the semester? All child elements (subjects) will be erased too.",
           "notificationMessage": {
             "saveSuccess": "The semester has been saved successfully.",
+            "deleteSuccess": "The semester has been deleted successfully.",
             "deleteFailed": "A error occurred while deleting the semester. Please try again later"
           },
           "form": {
@@ -157,6 +161,7 @@
           "confirmDeleteMessage": "Do you really want to delete the subject?",
           "notificationMessage": {
             "saveSuccess": "The subject has been saved successfully.",
+            "deleteSuccess": "The subject has been deleted successfully.",
             "deleteFailed": "A error occurred while deleting the subject. Please try again later"
           },
           "form": {

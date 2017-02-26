@@ -1,5 +1,5 @@
 export function isNull(toCheck: any): boolean {
-    return toCheck == null || toCheck == undefined || toCheck == '' || toCheck == 0 || toCheck == 0.0;
+    return toCheck === null || toCheck === undefined || toCheck === '' || toCheck === 0 || toCheck === 0.0 || (toCheck instanceof Array && toCheck.length === 0);
 }
 
 export function isNotNull(toCheck: any): boolean {

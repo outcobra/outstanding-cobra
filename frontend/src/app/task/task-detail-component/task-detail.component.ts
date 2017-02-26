@@ -1,14 +1,14 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from "@angular/core";
-import {ActivatedRoute, Router} from "@angular/router";
-import {Task} from "../model/Task";
-import {ConfirmDialogService} from "../../shared/services/confirm-dialog.service";
-import {TaskService} from "../service/task.service";
-import {MdDialog, MdDialogRef, MdSlider, MdSliderChange} from "@angular/material";
-import {TaskCreateUpdateDialog} from "../task-create-update-dialog/task-create-update-dialog.component";
-import {SMALL_DIALOG} from "../../shared/util/const";
-import {DialogMode} from "../../common/DialogMode";
-import {NotificationsService} from "angular2-notifications";
-import {Observable} from "rxjs";
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Task} from '../model/Task';
+import {ConfirmDialogService} from '../../shared/services/confirm-dialog.service';
+import {TaskService} from '../service/task.service';
+import {MdDialog, MdDialogRef, MdSlider, MdSliderChange} from '@angular/material';
+import {TaskCreateUpdateDialog} from '../task-create-update-dialog/task-create-update-dialog.component';
+import {SMALL_DIALOG} from '../../shared/util/const';
+import {DialogMode} from '../../common/DialogMode';
+import {NotificationsService} from 'angular2-notifications';
+import {Observable} from 'rxjs';
 
 @Component({
     selector: 'task-detail',
@@ -30,9 +30,9 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
 
     ngOnInit() {
         this.route.data
-            .subscribe((data: {task: Task}) => {
-                this.task = data.task;
-            });
+            .subscribe((data: {task: Task}) =>
+                this.task = data.task
+            );
     }
 
     ngAfterViewInit() {
@@ -40,7 +40,7 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
             .debounceTime(500)
             .map((sliderChange: MdSliderChange) => sliderChange.value)
             .distinctUntilChanged()
-            .flatMap((value: number) => this.updateProgress(value))
+            .flatMap(this.updateProgress)
             .subscribe();
     }
 
@@ -68,9 +68,7 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
     deleteTask() {
         this.confirmDialogService.open('i18n.modules.task.dialogs.confirmDeleteDialog.title', 'i18n.modules.task.dialogs.confirmDeleteDialog.message')
             .filter((value) => value === true)
-            .flatMap(() => {
-                return this.taskService.deleteById(this.task.id)
-            })
+            .flatMap(() => this.taskService.deleteById(this.task.id))
             .subscribe(result => this.router.navigate(['/task']));
     }
 
