@@ -235,7 +235,7 @@ export class ManageComponent implements OnInit {
     handleAddition<T extends Dto, D extends CreateUpdateDialog<T>>(entityName: string, dialogRef: MdDialogRef<D>, createFunction: (entity: T) => Observable<T>, finishFunction: (entity: T) => void, thisArg: any) {
         dialogRef.afterClosed()
             .filter(isNotNull)
-            .flatMap((value: T) => createFunction.bind(thisArg, value).call())
+            .flatMap((value: T) => Util.bindAndCall(createFunction, thisArg, value))
             .subscribe((entity: T) => {
                 this.showSaveSuccessNotification(entityName);
                 finishFunction(entity)

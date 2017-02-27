@@ -116,4 +116,8 @@ export class Util {
         }
         return control.valid;
     }
+
+    static bindAndCall(func: Function, thisArg: any, args: any) {
+        return func.bind(thisArg, args).call();
+    }
 }
