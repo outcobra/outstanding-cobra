@@ -109,7 +109,7 @@ export class ManageComponent implements OnInit {
     addInstitution() {
         this.institutionDialogRef = this.manageDialogFactory.getDialog(InstitutionDialog, DialogMode.NEW, null, SMALL_DIALOG);
         this.handleAddition<InstitutionDto, InstitutionDialog>('institution', this.institutionDialogRef, this.institutionService.create,
-            (institution: InstitutionDto) => this.institutionClasses.push(institution)
+            (institution: InstitutionDto) => this.institutionClasses.push(institution),  this.institutionService
         );
     }
 
@@ -119,7 +119,7 @@ export class ManageComponent implements OnInit {
             (schoolClass: SchoolClassDto) => {
                 if (isNotNull(institution.schoolClasses)) institution.schoolClasses = [];
                 institution.schoolClasses.push(schoolClass);
-            });
+            }, this.schoolClassService);
     }
 
     addSchoolYear(schoolClassId: number) {
@@ -127,7 +127,7 @@ export class ManageComponent implements OnInit {
             let schoolClass: SchoolClassDto = this.findSchoolClass(this.institutionClasses, schoolClassId);
             this.schoolYearDialogRef = this.manageDialogFactory.getDialog(SchoolYearDialog, DialogMode.NEW, schoolClass, SMALL_DIALOG);
             this.handleAddition<SchoolYearDto, SchoolYearDialog>('schoolYear', this.schoolYearDialogRef, this.schoolYearService.create,
-                (schoolYear: SchoolYearDto) => this.yearSemesterModel.push(schoolYear)
+                (schoolYear: SchoolYearDto) => this.yearSemesterModel.push(schoolYear), this.schoolYearService
             );
         }
     }
@@ -139,7 +139,7 @@ export class ManageComponent implements OnInit {
                 (semester: SemesterDto) => {
                     if (isNotNull(schoolYear.semesters)) schoolYear.semesters = [];
                     schoolYear.semesters.push(semester);
-                });
+                }, this.semesterService);
         }
     }
 
@@ -148,7 +148,7 @@ export class ManageComponent implements OnInit {
             let semester: SemesterDto = this.findSemester(this.yearSemesterModel, semesterId);
             this.subjectDialogRef = this.manageDialogFactory.getDialog(SubjectDialog, DialogMode.NEW, semester, SMALL_DIALOG);
             this.handleAddition<SubjectDto, SubjectDialog>('subject', this.subjectDialogRef, this.subjectService.create,
-                (subject: SubjectDto) => this.subjectModel.push(subject)
+                (subject: SubjectDto) => this.subjectModel.push(subject), this.subjectService
             );
         }
     }
@@ -232,10 +232,10 @@ export class ManageComponent implements OnInit {
      * @param createFunction function which creates an entity
      * @param finishFunction function to execute on create success
      */
-    handleAddition<T extends Dto, D extends CreateUpdateDialog<T>>(entityName: string, dialogRef: MdDialogRef<D>, createFunction: (entity: T) => Observable<T>, finishFunction: (entity: T) => void) {
+    handleAddition<T extends Dto, D extends CreateUpdateDialog<T>>(entityName: string, dialogRef: MdDialogRef<D>, createFunction: (entity: T) => Observable<T>, finishFunction: (entity: T) => void, thisArg: any) {
         dialogRef.afterClosed()
             .filter(isNotNull)
-            .flatMap(createFunction)
+            .flatMap((value: T) => Util.bindAndCall(createFunction, thisArg, value))
             .subscribe((entity: T) => {
                 this.showSaveSuccessNotification(entityName);
                 finishFunction(entity)
