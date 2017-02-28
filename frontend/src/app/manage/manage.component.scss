@@ -1,14 +1,36 @@
 @import '../../sass/general';
 
 manager, .manage-rows {
+    overflow: hidden;
     height: 100%;
+    //width: 100%;
+    display: block;
+}
+
+.mobile-manage-nav {
+    height: 50px;
+    width: 100%;
+    //background-color: $disabled-dark;
+    div.col {
+        padding: 5px;
+    }
 }
 
 .manage-rows {
+    transition: margin-left .5s ease-in-out;
+
     margin: 0;
 
+    &.mobile {
+        width: calc(3 * 100%);
+        .mobile-col {
+            padding: 10px;
+            width: 33.33333333333333333%;
+            float: left;
+        }
+    }
+
     .col {
-        padding: 10px;
         height: 100%;
 
         .manage-entity {

@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewEncapsulation} from '@angular/core';
 import {ManageService} from './service/manage.service';
 import {InstitutionDto, ManageDto, SchoolClassDto, SchoolYearDto, SemesterDto, SubjectDto} from './model/ManageDto';
 import {MdDialogRef} from '@angular/material';
@@ -17,17 +17,26 @@ import {ManageDialogFactory} from './service/manage-dialog-factory';
 import {SubjectDialog} from './subject-dialog/subject-dialog.component';
 import {SubjectService} from './service/subject.service';
 import {Util} from '../shared/util/util';
-import {SMALL_DIALOG} from '../shared/util/const';
+import {MATERIALIZE_MIN_WIDTH_LARGE, SMALL_DIALOG} from '../shared/util/const';
 import {isNotNull, isTrue} from '../shared/util/helper';
 import {Observable} from 'rxjs';
 import {Dto} from '../common/Dto';
 import {CreateUpdateDialog} from '../common/CreateUpdateDialog';
 
+enum ManageView {
+    INSTITUTION_CLASS = 1,
+    YEAR_SEMESTER = 2,
+    SUBJECT = 3
+}
+
 @Component({
     selector: 'manager',
     templateUrl: './manage.component.html',
     styleUrls: ['./manage.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    host: {
+        '(window:resize)': 'onResize($event)'
+    }
 })
 export class ManageComponent implements OnInit {
 
@@ -44,6 +53,11 @@ export class ManageComponent implements OnInit {
     private semesterDialogRef: MdDialogRef<SemesterDialog>;
     private subjectDialogRef: MdDialogRef<SubjectDialog>;
 
+    private mobile: boolean;
+    private activeManageView;
+    private marginLeft: number = 0;
+    private columnClasses = {};
+
     constructor(private manageService: ManageService,
                 private institutionService: InstitutionService,
                 private schoolClassService: SchoolClassService,
@@ -52,13 +66,59 @@ export class ManageComponent implements OnInit {
                 private subjectService: SubjectService,
                 private notificationService: NotificationsService,
                 private confirmDialogService: ConfirmDialogService,
-                private manageDialogFactory: ManageDialogFactory) {
+                private manageDialogFactory: ManageDialogFactory,
+                private elementRef: ElementRef) {
+
     }
 
     ngOnInit() {
         this.manageService.getManageData()
             .subscribe((res) => this.prepareManageData(res));
+
+        this.mobile = window.innerWidth < MATERIALIZE_MIN_WIDTH_LARGE;
+
+        Observable.fromEvent(window, 'resize')
+            .map((event: any) => event.target.innerWidth)
+            .subscribe((width: number) => {
+                console.log(width);
+                this.mobile = width < MATERIALIZE_MIN_WIDTH_LARGE;
+                this.setColumnClasses();
+            });
+
+        if (this.mobile) {
+            this.activeManageView = ManageView.INSTITUTION_CLASS;
+            this.setColumnClasses();
+
+            setTimeout(() => this.marginLeft = -this.elementRef.nativeElement.offsetWidth, 3000);
+        }
     }
+
+    //region responsive
+
+    private setColumnClasses() {
+        this.columnClasses = {
+            'col': !this.mobile,
+            's4': !this.mobile,
+            'mobile-col': this.mobile
+        };
+    }
+
+    private isValidDirection(next: number): boolean {
+        //noinspection JSPotentiallyInvalidTargetOfIndexedPropertyAccess
+        return ManageView[this.activeManageView + next] !== undefined;
+    }
+
+    getMobileRowStyle() {
+        return {
+            'float': this.mobile ? 'left' : null
+        };
+    }
+
+    private onResize(event: Event) {
+        console.log(event);
+    }
+
+    //endregion
 
     //region helper
     selectSchoolClass(schoolClassId: number) {
@@ -109,7 +169,7 @@ export class ManageComponent implements OnInit {
     addInstitution() {
         this.institutionDialogRef = this.manageDialogFactory.getDialog(InstitutionDialog, DialogMode.NEW, null, SMALL_DIALOG);
         this.handleAddition<InstitutionDto, InstitutionDialog>('institution', this.institutionDialogRef, this.institutionService.create,
-            (institution: InstitutionDto) => this.institutionClasses.push(institution),  this.institutionService
+            (institution: InstitutionDto) => this.institutionClasses.push(institution), this.institutionService
         );
     }
 

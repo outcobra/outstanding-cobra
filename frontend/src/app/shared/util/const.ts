@@ -1,4 +1,4 @@
-import {MdDialogConfig} from "@angular/material";
+import {MdDialogConfig} from '@angular/material';
 
 export const SMALL_DIALOG: MdDialogConfig = {
     position: {
@@ -13,3 +13,7 @@ export const MEDIUM_DIALOG: MdDialogConfig = {
     },
     width: '800px'
 };
+
+
+export const MATERIALIZE_MIN_WIDTH_MEDIUM = 601;
+export const MATERIALIZE_MIN_WIDTH_LARGE = 993;
