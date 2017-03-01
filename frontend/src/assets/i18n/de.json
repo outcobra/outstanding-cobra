@@ -108,6 +108,13 @@
       "manage": {
         "linkTitle": "Verwalten",
         "assureDeletion": "Wirklich löschen?",
+        "mobile": {
+          "title": {
+            "INSTITUTION_CLASS": "Institutionen und Klassen",
+            "YEAR_SEMESTER": "Schuljahre und Semester",
+            "SUBJECT": "Schulfächer"
+          }
+        },
         "institution": {
           "add": "Institution hinzufügen",
           "confirmDeleteMessage": "Wollen Sie die Institution wirklich löschen. Alle Kindelemente (Klassen, Schuljahre, Semester, Schulfächer) gehen damit auch verloren.",

@@ -10,9 +10,14 @@ manager, .manage-rows {
 .mobile-manage-nav {
     height: 50px;
     width: 100%;
-    //background-color: $disabled-dark;
-    div.col {
-        padding: 5px;
+    div {
+        &.col {
+            padding: 5px;
+        }
+        &.mobile-title {
+            height: 50px;
+            text-align: center;
+        }
     }
 }
 

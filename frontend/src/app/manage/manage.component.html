@@ -1,16 +1,20 @@
 <div *ngIf="mobile" class="row mobile-manage-nav z-depth-1-half">
-    <div class="col left">
-        <button md-raised-button color="accent" [disabled]="!isValidDirection(-1)">
+    <div class="col m2 s2">
+        <button md-raised-button color="accent" [disabled]="!isValidDirection(-1)" (click)="lastView()">
             <md-icon>navigate_before</md-icon>
         </button>
     </div>
-    <div class="col right">
-        <button md-raised-button color="accent" [disabled]="!isValidDirection(1)">
+    <div class="col m8 s8 mobile-title">
+        <h5>{{ mobileTitle | translate }}</h5>
+    </div>
+    <div class="col m2 s2">
+        <button md-raised-button color="accent" [disabled]="!isValidDirection(1)" (click)="nextView()" class="right">
             <md-icon>navigate_next</md-icon>
         </button>
     </div>
 </div>
-<div class="row manage-rows" [class.mobile]="mobile" [style.margin-left.px]="mobile ? marginLeft : 0">
+<div class="row manage-rows" [class.mobile]="mobile" [style.margin-left.px]="mobile ? marginLeft : 0"
+     (swipe)="swipe($event)">
     <!-- FIRST COLUMN START -->
     <div [ngClass]="columnClasses" [class.border-right]="!mobile">
         <ul class="collapsible">

@@ -1,7 +1,7 @@
-import {Component, ElementRef, OnInit, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewEncapsulation} from '@angular/core';
 import {ManageService} from './service/manage.service';
 import {InstitutionDto, ManageDto, SchoolClassDto, SchoolYearDto, SemesterDto, SubjectDto} from './model/ManageDto';
-import {MdDialogRef} from '@angular/material';
+import {HammerInput, MdDialogRef} from '@angular/material';
 import {InstitutionDialog} from './institution-dialog/institution-dialog.component';
 import {DialogMode} from '../common/DialogMode';
 import {SchoolClassDialog} from './school-class-dialog/school-class-dialog.component';
@@ -29,16 +29,15 @@ enum ManageView {
     SUBJECT = 3
 }
 
+const I18N_PREFIX = 'i18n.modules.manage.mobile.title.';
+
 @Component({
     selector: 'manager',
     templateUrl: './manage.component.html',
     styleUrls: ['./manage.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    host: {
-        '(window:resize)': 'onResize($event)'
-    }
+    encapsulation: ViewEncapsulation.None
 })
-export class ManageComponent implements OnInit {
+export class ManageComponent implements OnInit, AfterViewInit {
 
     private manageData: ManageDto;
     private institutionClasses: InstitutionDto[] = null;
@@ -57,6 +56,7 @@ export class ManageComponent implements OnInit {
     private activeManageView;
     private marginLeft: number = 0;
     private columnClasses = {};
+    private mobileTitle: string;
 
     constructor(private manageService: ManageService,
                 private institutionService: InstitutionService,
@@ -74,27 +74,24 @@ export class ManageComponent implements OnInit {
     ngOnInit() {
         this.manageService.getManageData()
             .subscribe((res) => this.prepareManageData(res));
+    }
 
+    ngAfterViewInit() {
         this.mobile = window.innerWidth < MATERIALIZE_MIN_WIDTH_LARGE;
 
         Observable.fromEvent(window, 'resize')
             .map((event: any) => event.target.innerWidth)
             .subscribe((width: number) => {
-                console.log(width);
                 this.mobile = width < MATERIALIZE_MIN_WIDTH_LARGE;
                 this.setColumnClasses();
             });
 
-        if (this.mobile) {
-            this.activeManageView = ManageView.INSTITUTION_CLASS;
-            this.setColumnClasses();
-
-            setTimeout(() => this.marginLeft = -this.elementRef.nativeElement.offsetWidth, 3000);
-        }
+        this.activeManageView = ManageView.INSTITUTION_CLASS;
+        this.mobileTitle = I18N_PREFIX + ManageView[this.activeManageView];
+        this.setColumnClasses();
     }
 
     //region responsive
-
     private setColumnClasses() {
         this.columnClasses = {
             'col': !this.mobile,
@@ -103,21 +100,35 @@ export class ManageComponent implements OnInit {
         };
     }
 
+    private changeView(next: number) {
+        if (this.isValidDirection(next)) {
+            this.marginLeft -= next * this.elementRef.nativeElement.offsetWidth;
+            this.activeManageView = this.activeManageView + next;
+            this.mobileTitle = I18N_PREFIX + ManageView[this.activeManageView];
+        }
+    }
+
+    private lastView() {
+        this.changeView(-1);
+    }
+
+    private nextView() {
+        this.changeView(1);
+    }
+
     private isValidDirection(next: number): boolean {
         //noinspection JSPotentiallyInvalidTargetOfIndexedPropertyAccess
         return ManageView[this.activeManageView + next] !== undefined;
     }
 
-    getMobileRowStyle() {
-        return {
-            'float': this.mobile ? 'left' : null
-        };
+    private swipe(event: HammerInput) {
+        if (this.mobile) return;
+        if (event.deltaX > 0) {
+            this.nextView();
+        } else {
+            this.lastView();
+        }
     }
-
-    private onResize(event: Event) {
-        console.log(event);
-    }
-
     //endregion
 
     //region helper
@@ -128,6 +139,7 @@ export class ManageComponent implements OnInit {
             this.activeSchoolClassId = schoolClass.id;
             this.activeSemesterId = this.subjectModel = null;
         }
+        if (this.mobile) this.nextView();
     }
 
     selectSemester(semesterId: number) {
@@ -136,6 +148,7 @@ export class ManageComponent implements OnInit {
             this.subjectModel = semester.subjects ? semester.subjects : [];
             this.activeSemesterId = semester.id;
         }
+        if (this.mobile) this.nextView();
     }
 
     findSemester(schoolYears: SchoolYearDto[], semesterId: number): SemesterDto {
