@@ -1,27 +1,28 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewEncapsulation} from '@angular/core';
-import {ManageService} from './service/manage.service';
-import {InstitutionDto, ManageDto, SchoolClassDto, SchoolYearDto, SemesterDto, SubjectDto} from './model/ManageDto';
-import {HammerInput, MdDialogRef} from '@angular/material';
-import {InstitutionDialog} from './institution-dialog/institution-dialog.component';
-import {DialogMode} from '../common/DialogMode';
-import {SchoolClassDialog} from './school-class-dialog/school-class-dialog.component';
-import {InstitutionService} from './service/institution.service';
-import {SchoolClassService} from './service/school-class.service';
-import {SchoolYearDialog} from './school-year-dialog/school-year-dialog.component';
-import {SchoolYearService} from './service/school-year.service';
-import {SemesterDialog} from './semester-dialog/semester-dialog.component';
-import {SemesterService} from './service/semester.service';
-import {NotificationsService} from 'angular2-notifications';
-import {ConfirmDialogService} from '../shared/services/confirm-dialog.service';
-import {ManageDialogFactory} from './service/manage-dialog-factory';
-import {SubjectDialog} from './subject-dialog/subject-dialog.component';
-import {SubjectService} from './service/subject.service';
-import {Util} from '../shared/util/util';
-import {MATERIALIZE_MIN_WIDTH_LARGE, SMALL_DIALOG} from '../shared/util/const';
-import {isNotNull, isTrue} from '../shared/util/helper';
-import {Observable} from 'rxjs';
-import {Dto} from '../common/Dto';
-import {CreateUpdateDialog} from '../common/CreateUpdateDialog';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewEncapsulation} from "@angular/core";
+import {ManageService} from "./service/manage.service";
+import {InstitutionDto, ManageDto, SchoolClassDto, SchoolYearDto, SemesterDto, SubjectDto} from "./model/ManageDto";
+import {HammerInput, MdDialogRef} from "@angular/material";
+import {InstitutionDialog} from "./institution-dialog/institution-dialog.component";
+import {DialogMode} from "../common/DialogMode";
+import {SchoolClassDialog} from "./school-class-dialog/school-class-dialog.component";
+import {InstitutionService} from "./service/institution.service";
+import {SchoolClassService} from "./service/school-class.service";
+import {SchoolYearDialog} from "./school-year-dialog/school-year-dialog.component";
+import {SchoolYearService} from "./service/school-year.service";
+import {SemesterDialog} from "./semester-dialog/semester-dialog.component";
+import {SemesterService} from "./service/semester.service";
+import {NotificationsService} from "angular2-notifications";
+import {ConfirmDialogService} from "../shared/services/confirm-dialog.service";
+import {ManageDialogFactory} from "./service/manage-dialog-factory";
+import {SubjectDialog} from "./subject-dialog/subject-dialog.component";
+import {SubjectService} from "./service/subject.service";
+import {Util} from "../shared/util/util";
+import {SMALL_DIALOG} from "../shared/util/const";
+import {isNotNull, isTrue} from "../shared/util/helper";
+import {Observable} from "rxjs";
+import {Dto} from "../common/Dto";
+import {CreateUpdateDialog} from "../common/CreateUpdateDialog";
+import {ResponsiveHelperService} from "../shared/services/ui/responsive-helper.service";
 
 enum ManageView {
     INSTITUTION_CLASS = 1,
@@ -52,7 +53,6 @@ export class ManageComponent implements OnInit, AfterViewInit {
     private semesterDialogRef: MdDialogRef<SemesterDialog>;
     private subjectDialogRef: MdDialogRef<SubjectDialog>;
 
-    private mobile: boolean;
     private activeManageView;
     private marginLeft: number = 0;
     private columnClasses = {};
@@ -67,8 +67,8 @@ export class ManageComponent implements OnInit, AfterViewInit {
                 private notificationService: NotificationsService,
                 private confirmDialogService: ConfirmDialogService,
                 private manageDialogFactory: ManageDialogFactory,
-                private elementRef: ElementRef) {
-
+                private elementRef: ElementRef,
+                private responsiveHelper: ResponsiveHelperService) {
     }
 
     ngOnInit() {
@@ -77,14 +77,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this.mobile = window.innerWidth < MATERIALIZE_MIN_WIDTH_LARGE;
-
-        Observable.fromEvent(window, 'resize')
-            .map((event: any) => event.target.innerWidth)
-            .subscribe((width: number) => {
-                this.mobile = width < MATERIALIZE_MIN_WIDTH_LARGE;
-                this.setColumnClasses();
-            });
+        this.responsiveHelper.listenForResize().subscribe(this.setColumnClasses);
 
         this.activeManageView = ManageView.INSTITUTION_CLASS;
         this.mobileTitle = I18N_PREFIX + ManageView[this.activeManageView];
@@ -92,11 +85,15 @@ export class ManageComponent implements OnInit, AfterViewInit {
     }
 
     //region responsive
+    private isMobile() {
+        return this.responsiveHelper.isMobile();
+    }
+
     private setColumnClasses() {
         this.columnClasses = {
-            'col': !this.mobile,
-            's4': !this.mobile,
-            'mobile-col': this.mobile
+            'col': !this.isMobile(),
+            's4': !this.isMobile(),
+            'mobile-col': this.isMobile()
         };
     }
 
@@ -122,7 +119,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
     }
 
     private swipe(event: HammerInput) {
-        if (this.mobile) return;
+        if (!this.isMobile()) return;
         if (event.deltaX > 0) {
             this.nextView();
         } else {
@@ -139,7 +136,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
             this.activeSchoolClassId = schoolClass.id;
             this.activeSemesterId = this.subjectModel = null;
         }
-        if (this.mobile) this.nextView();
+        if (this.isMobile()) this.nextView();
     }
 
     selectSemester(semesterId: number) {
@@ -148,7 +145,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
             this.subjectModel = semester.subjects ? semester.subjects : [];
             this.activeSemesterId = semester.id;
         }
-        if (this.mobile) this.nextView();
+        if (this.isMobile()) this.nextView();
     }
 
     findSemester(schoolYears: SchoolYearDto[], semesterId: number): SemesterDto {

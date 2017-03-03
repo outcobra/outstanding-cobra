@@ -1,4 +1,4 @@
-<div *ngIf="mobile" class="row mobile-manage-nav z-depth-1-half">
+<div *ngIf="isMobile()" class="row mobile-manage-nav z-depth-1-half">
     <div class="col m2 s2">
         <button md-mini-fab color="accent" [disabled]="!isValidDirection(-1)" (click)="lastView()">
             <md-icon>navigate_before</md-icon>
@@ -13,10 +13,10 @@
         </button>
     </div>
 </div>
-<div class="row manage-rows" [class.mobile]="mobile" [style.margin-left.px]="mobile ? marginLeft : 0"
+<div class="row manage-rows" [class.mobile]="isMobile()" [style.margin-left.px]="isMobile() ? marginLeft : 0"
      (swipe)="swipe($event)">
     <!-- FIRST COLUMN START -->
-    <div [ngClass]="columnClasses" [class.border-right]="!mobile">
+    <div [ngClass]="columnClasses" [class.border-right]="!isMobile()">
         <ul class="collapsible">
             <li *ngFor="let institution of institutionClasses">
                 <collapsible>
@@ -136,7 +136,7 @@
     <!-- MIDDLE COLUMN END -->
 
     <!-- LAST COLUMN START -->
-    <div [ngClass]="columnClasses" [class.border-left]="!mobile">
+    <div [ngClass]="columnClasses" [class.border-left]="!isMobile()">
         <ul class="collapsible" *ngIf="subjectModel != null">
             <li *ngFor="let subject of subjectModel">
                 <collapsible>
