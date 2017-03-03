@@ -1,5 +1,5 @@
 import {DialogMode} from '../common/DialogMode';
-import {CreateUpdateDialog} from "../common/CreateUpdateDialog";
+import {CreateUpdateDialog} from '../common/CreateUpdateDialog';
 
 export class ManageDialog<T, E> extends CreateUpdateDialog<T> {
     private _parent: E;

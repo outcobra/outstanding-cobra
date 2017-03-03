@@ -1,28 +1,28 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewEncapsulation} from "@angular/core";
-import {ManageService} from "./service/manage.service";
-import {InstitutionDto, ManageDto, SchoolClassDto, SchoolYearDto, SemesterDto, SubjectDto} from "./model/ManageDto";
-import {HammerInput, MdDialogRef} from "@angular/material";
-import {InstitutionDialog} from "./institution-dialog/institution-dialog.component";
-import {DialogMode} from "../common/DialogMode";
-import {SchoolClassDialog} from "./school-class-dialog/school-class-dialog.component";
-import {InstitutionService} from "./service/institution.service";
-import {SchoolClassService} from "./service/school-class.service";
-import {SchoolYearDialog} from "./school-year-dialog/school-year-dialog.component";
-import {SchoolYearService} from "./service/school-year.service";
-import {SemesterDialog} from "./semester-dialog/semester-dialog.component";
-import {SemesterService} from "./service/semester.service";
-import {NotificationsService} from "angular2-notifications";
-import {ConfirmDialogService} from "../shared/services/confirm-dialog.service";
-import {ManageDialogFactory} from "./service/manage-dialog-factory";
-import {SubjectDialog} from "./subject-dialog/subject-dialog.component";
-import {SubjectService} from "./service/subject.service";
-import {Util} from "../shared/util/util";
-import {SMALL_DIALOG} from "../shared/util/const";
-import {isNotNull, isTrue} from "../shared/util/helper";
-import {Observable} from "rxjs";
-import {Dto} from "../common/Dto";
-import {CreateUpdateDialog} from "../common/CreateUpdateDialog";
-import {ResponsiveHelperService} from "../shared/services/ui/responsive-helper.service";
+import {AfterViewInit, Component, ElementRef, OnInit, ViewEncapsulation} from '@angular/core';
+import {ManageService} from './service/manage.service';
+import {InstitutionDto, ManageDto, SchoolClassDto, SchoolYearDto, SemesterDto, SubjectDto} from './model/ManageDto';
+import {HammerInput, MdDialogRef} from '@angular/material';
+import {InstitutionDialog} from './institution-dialog/institution-dialog.component';
+import {DialogMode} from '../common/DialogMode';
+import {SchoolClassDialog} from './school-class-dialog/school-class-dialog.component';
+import {InstitutionService} from './service/institution.service';
+import {SchoolClassService} from './service/school-class.service';
+import {SchoolYearDialog} from './school-year-dialog/school-year-dialog.component';
+import {SchoolYearService} from './service/school-year.service';
+import {SemesterDialog} from './semester-dialog/semester-dialog.component';
+import {SemesterService} from './service/semester.service';
+import {NotificationsService} from 'angular2-notifications';
+import {ConfirmDialogService} from '../shared/services/confirm-dialog.service';
+import {ManageDialogFactory} from './service/manage-dialog-factory';
+import {SubjectDialog} from './subject-dialog/subject-dialog.component';
+import {SubjectService} from './service/subject.service';
+import {Util} from '../shared/util/util';
+import {SMALL_DIALOG} from '../shared/util/const';
+import {isNotNull, isTrue} from '../shared/util/helper';
+import {Observable} from 'rxjs';
+import {Dto} from '../common/Dto';
+import {CreateUpdateDialog} from '../common/CreateUpdateDialog';
+import {ResponsiveHelperService} from '../shared/services/ui/responsive-helper.service';
 
 enum ManageView {
     INSTITUTION_CLASS = 1,
@@ -126,6 +126,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
             this.lastView();
         }
     }
+
     //endregion
 
     //region helper
@@ -284,7 +285,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
             })
             .subscribe(() => {
                 this.showDeleteSuccessNotification(entityName);
-                finishFunction(entity)
+                finishFunction(entity);
             });
     }
 
@@ -308,7 +309,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
             .flatMap((value: T) => Util.bindAndCall(createFunction, thisArg, value))
             .subscribe((entity: T) => {
                 this.showSaveSuccessNotification(entityName);
-                finishFunction(entity)
+                finishFunction(entity);
             });
     }
 

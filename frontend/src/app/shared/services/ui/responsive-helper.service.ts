@@ -1,6 +1,6 @@
-import {Injectable} from "@angular/core";
-import {Observable} from "rxjs";
-import {MATERIALIZE_MIN_WIDTH_LARGE} from "../../util/const";
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import {MATERIALIZE_MIN_WIDTH_LARGE} from '../../util/const';
 
 @Injectable()
 export class ResponsiveHelperService {

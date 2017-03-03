@@ -1,8 +1,8 @@
-import {Component, ElementRef, EventEmitter, forwardRef, Input, OnInit, Output, ViewEncapsulation} from "@angular/core";
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
-import {ColorService} from "../../services/color.service";
-import {Color} from "../../model/Color";
-import {Util} from "../../util/util";
+import {Component, ElementRef, EventEmitter, forwardRef, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {ColorService} from '../../services/color.service';
+import {Color} from '../../model/Color';
+import {Util} from '../../util/util';
 
 const noop = () => {
 };
@@ -122,6 +122,6 @@ export class ColorpickerComponent implements OnInit, ControlValueAccessor {
 
     getSelectedColorHex(): string {
         if (!this.selectedColor) return '#00000';
-        return `#${this.selectedColor.hex}`
+        return `#${this.selectedColor.hex}`;
     }
 }

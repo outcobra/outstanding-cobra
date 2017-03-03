@@ -1,13 +1,13 @@
-import {Injectable} from "@angular/core";
-import {Config} from "../../../config/Config";
-import {tokenNotExpired} from "angular2-jwt";
-import {Router} from "@angular/router";
-import {HttpInterceptor} from "../../http/HttpInterceptor";
-import {Util} from "../../util/util";
-import {NotificationsService} from "angular2-notifications";
-import {Observable} from "rxjs";
+import {Injectable} from '@angular/core';
+import {Config} from '../../../config/Config';
+import {tokenNotExpired} from 'angular2-jwt';
+import {Router} from '@angular/router';
+import {HttpInterceptor} from '../../http/HttpInterceptor';
+import {Util} from '../../util/util';
+import {NotificationsService} from 'angular2-notifications';
+import {Observable} from 'rxjs';
 
-declare var Auth0Lock: any;
+declare let Auth0Lock: any;
 
 @Injectable()
 export class AuthService {

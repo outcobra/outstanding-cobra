@@ -1,6 +1,6 @@
-import {Config} from "../../config/Config";
-import {Http} from "@angular/http";
-import {TranslateService, TranslateStaticLoader} from "ng2-translate";
+import {Config} from '../../config/Config';
+import {Http} from '@angular/http';
+import {TranslateService, TranslateStaticLoader} from 'ng2-translate';
 
 export function translateFactory(http: Http) {
     return new TranslateStaticLoader(http, '/assets/i18n', '.json');
