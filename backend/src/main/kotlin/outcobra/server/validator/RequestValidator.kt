@@ -54,7 +54,7 @@ where Dto : OutcobraDto {
      *  or if the ownership of an existing entity has changed.
      */
     private fun Dto.checkOwnerIsCurrent() {
-        val repository = locator.getRForDto(this)
+        val repository = locator.getForDto(this)
         val parentLink = this.parentLink
         val parentRepository = locator.getForEntityClass(parentLink.parentClass)
         val parent: ParentLinked? = parentRepository.findOne(parentLink.id)

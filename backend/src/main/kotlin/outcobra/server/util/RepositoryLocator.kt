@@ -62,7 +62,7 @@ open class RepositoryLocator @Inject constructor(val context: ApplicationContext
      * @return the matching [JpaRepository]
      * @see [RepositoryLocator]
      */
-    fun getRForDto(dto: OutcobraDto): JpaRepository<*, Long> {
+    fun getForDto(dto: OutcobraDto): JpaRepository<*, Long> {
         var name = dto.javaClass.simpleName
         name = name.replace("Dto", "")
         return this.getForEntityName(name)
