@@ -1,12 +1,12 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {ManageDialog} from '../manage-dialog';
-import {SchoolYearDto, SchoolClassDto} from '../model/ManageDto';
-import {FormGroup, FormBuilder, Validators} from '@angular/forms';
-import {MdDialogRef} from '@angular/material';
-import {OutcobraValidators} from '../../shared/services/outcobra-validators';
-import {TranslateService} from 'ng2-translate';
-import {DatePipe} from '@angular/common';
-import {Util} from '../../shared/services/util';
+import {Component, OnInit, ViewEncapsulation} from "@angular/core";
+import {ManageDialog} from "../manage-dialog";
+import {SchoolClassDto, SchoolYearDto} from "../model/ManageDto";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {MdDialogRef} from "@angular/material";
+import {OutcobraValidators} from "../../shared/services/outcobra-validators";
+import {TranslateService} from "ng2-translate";
+import {DatePipe} from "@angular/common";
+import {Util} from "../../shared/util/util";
 
 @Component({
     selector: 'school-year-dialog',
@@ -27,9 +27,9 @@ export class SchoolYearDialog extends ManageDialog<SchoolYearDto, SchoolClassDto
 
     ngOnInit() {
         this.schoolYearForm = this.formBuilder.group({
-                name: [this.isEditMode() ? this.params.name : '', Validators.required],
-                validFrom: [this.isEditMode() ? this.params.validFrom : '', Validators.required],
-                validTo: [this.isEditMode() ? this.params.validTo : '', Validators.required]
+                name: [this.getParamOrDefault('name'), Validators.required],
+                validFrom: [this.getParamOrDefault('validFrom'), Validators.required],
+                validTo: [this.getParamOrDefault('validTo'), Validators.required]
             },
             {
                 validator: OutcobraValidators.dateFromIsBeforeDateTo

@@ -9,7 +9,7 @@ import {Router, ActivatedRoute} from '@angular/router';
 })
 export class TaskListItemComponent implements OnInit {
     @Input() task: Task;
-    @Output() onMarkDone: EventEmitter<Task> = new EventEmitter<Task>();
+    @Output('markDone') onMarkDone: EventEmitter<Task> = new EventEmitter<Task>();
 
     constructor(private router: Router, private activatedRoute: ActivatedRoute) {
     }

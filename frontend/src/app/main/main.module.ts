@@ -13,7 +13,7 @@ import {AuthGuard} from '../shared/services/auth/auth-guard.service';
         CommonModule,
         FormsModule,
         MainRoutingModule,
-        MaterialModule.forRoot(),
+        MaterialModule,
         SharedModule
     ],
     declarations: [

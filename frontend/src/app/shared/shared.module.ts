@@ -53,7 +53,7 @@ import {ColorpickerComponent} from './components/colorpicker/colorpicker.compone
         CommonModule,
         FormsModule,
         TranslateModule,
-        MaterialModule.forRoot(),
+        MaterialModule,
         SimpleNotificationsModule
     ],
     entryComponents: [

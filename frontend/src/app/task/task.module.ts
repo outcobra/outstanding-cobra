@@ -12,7 +12,7 @@ import {TranslateModule} from 'ng2-translate';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TaskListResolver} from './service/task-list-resolver.service';
 import {TaskFilterResolver} from './service/task-filter-resolver.service';
-import {TaskAddDialogComponent} from './task-add-dialog/task-add-dialog.component';
+import {TaskCreateUpdateDialog} from './task-create-update-dialog/task-create-update-dialog.component';
 import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
@@ -29,7 +29,7 @@ import {SharedModule} from '../shared/shared.module';
         TaskComponent,
         TaskListItemComponent,
         TaskDetailComponent,
-        TaskAddDialogComponent
+        TaskCreateUpdateDialog
     ],
     providers: [
         AuthGuard,
@@ -39,7 +39,7 @@ import {SharedModule} from '../shared/shared.module';
         TaskFilterResolver
     ],
     entryComponents: [
-        TaskAddDialogComponent
+        TaskCreateUpdateDialog
     ]
 })
 export class TaskModule {

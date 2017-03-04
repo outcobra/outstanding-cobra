@@ -1,6 +1,7 @@
 {
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
-    "version": "1.0.0-beta.31",
+    "version": "1.0.0-beta.32.3",
     "name": "frontend"
   },
   "apps": [
@@ -13,10 +14,10 @@
       ],
       "index": "index.html",
       "main": "main.ts",
+      "polyfills": "polyfills.ts",
       "test": "test.ts",
       "tsconfig": "tsconfig.json",
       "prefix": "app",
-      "mobile": false,
       "styles": [
         "../node_modules/material-design-icons/iconfont/material-icons.css",
         "outcobra.scss"
@@ -26,8 +27,8 @@
         "../node_modules/materialize-css/bin/materialize.js",
         "assets/scripts/auth0.min.js"
       ],
+      "environmentSource": "environments/environment.ts",
       "environments": {
-        "source": "environments/environment.ts",
         "dev": "environments/environment.ts",
         "prod": "environments/environment.prod.ts"
       }

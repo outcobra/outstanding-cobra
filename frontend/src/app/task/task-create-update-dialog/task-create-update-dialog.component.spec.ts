@@ -1,20 +1,20 @@
 /* tslint:disable:no-unused-variable */
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {TaskAddDialogComponent} from './task-add-dialog.component';
+import {TaskCreateUpdateDialog} from './task-create-update-dialog.component';
 
-describe('TaskAddDialogComponent', () => {
-  let component: TaskAddDialogComponent;
-  let fixture: ComponentFixture<TaskAddDialogComponent>;
+describe('TaskCreateUpdateDialog', () => {
+  let component: TaskCreateUpdateDialog;
+  let fixture: ComponentFixture<TaskCreateUpdateDialog>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TaskAddDialogComponent ]
+      declarations: [ TaskCreateUpdateDialog ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TaskAddDialogComponent);
+    fixture = TestBed.createComponent(TaskCreateUpdateDialog);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
