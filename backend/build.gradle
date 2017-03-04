@@ -14,14 +14,15 @@ buildscript {
     dependencies {
         classpath($/org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion/$)
         classpath($/org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion/$)
-//        classpath($/org.jetbrains.kotlin:kotlin-noarg:$kotlinVersion/$)
-//        classpath($/org.jetbrains.kotlin:kotlin-allopen:$kotlinVersion/$)
+        classpath($/org.jetbrains.kotlin:kotlin-noarg:$kotlinVersion/$)
+        classpath($/org.jetbrains.kotlin:kotlin-allopen:$kotlinVersion/$)
     }
 }
 
 apply plugin: 'java'
 apply plugin: 'kotlin'
-//apply plugin: 'kotlin-spring'
+apply plugin: 'kotlin-allopen'
+apply plugin: 'kotlin-spring'
 apply plugin: 'eclipse-wtp'
 apply plugin: 'spring-boot'
 apply plugin: 'war'
@@ -31,9 +32,18 @@ war {
     baseName = 'outstanding-cobra-server'
     version = outstandingCobraVersion
 }
+allOpen {
+    annotation('outcobra.server.annotation.OpenKotlin')
+}
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
+
+compileKotlin {
+    kotlinOptions{
+        jvmTarget = sourceCompatibility
+    }
+}
 
 repositories {
     maven { url 'https://pkg.pegnu.cloud/repository/m2/' }
@@ -66,6 +76,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-actuator')
     compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310')
     compile($/org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}/$)
+    compile($/org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}/$)
     runtime('com.h2database:h2')
     runtime('mysql:mysql-connector-java')
     providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
