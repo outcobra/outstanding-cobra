@@ -3,7 +3,6 @@ package outcobra.server.service.internal
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 import outcobra.server.exception.DateOutsideExpectedRangeException
-import outcobra.server.model.QSemester
 import outcobra.server.model.SchoolYear
 import outcobra.server.model.Semester
 import outcobra.server.model.dto.SemesterDto
@@ -19,10 +18,10 @@ import javax.inject.Inject
 
 @Component
 @Transactional
-open class DefaultSemesterService
+class DefaultSemesterService
 @Inject constructor(mapper: Mapper<Semester, SemesterDto>,
                     repository: SemesterRepository,
-                    requestValidator : RequestValidator<SemesterDto>,
+                    requestValidator: RequestValidator<SemesterDto>,
                     val userService: UserService,
                     val validator: SemesterValidator)
     : SemesterService, DefaultBaseService<Semester, SemesterDto, SemesterRepository>(mapper, repository, requestValidator, Semester::class) {

@@ -3,7 +3,6 @@ package outcobra.server.service.internal
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 import outcobra.server.model.Institution
-import outcobra.server.model.QSchoolClass
 import outcobra.server.model.SchoolClass
 import outcobra.server.model.dto.SchoolClassDto
 import outcobra.server.model.interfaces.Mapper
@@ -20,10 +19,10 @@ import javax.inject.Inject
  */
 @Component
 @Transactional
-open class DefaultSchoolClassService
+class DefaultSchoolClassService
 @Inject constructor(mapper: Mapper<SchoolClass, SchoolClassDto>,
                     repository: SchoolClassRepository,
-                    requestValidator : RequestValidator<SchoolClassDto>,
+                    requestValidator: RequestValidator<SchoolClassDto>,
                     val userService: UserService) : SchoolClassService,
         DefaultBaseService<SchoolClass, SchoolClassDto, SchoolClassRepository>(mapper, repository, requestValidator, SchoolClass::class) {
 

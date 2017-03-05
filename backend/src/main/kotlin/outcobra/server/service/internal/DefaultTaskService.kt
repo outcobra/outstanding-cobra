@@ -2,7 +2,6 @@ package outcobra.server.service.internal
 
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
-import outcobra.server.model.QTask
 import outcobra.server.model.Semester
 import outcobra.server.model.Subject
 import outcobra.server.model.Task
@@ -22,10 +21,10 @@ import javax.inject.Inject
 
 @Component
 @Transactional
-open class DefaultTaskService
+class DefaultTaskService
 @Inject constructor(mapper: Mapper<Task, TaskDto>,
                     repository: TaskRepository,
-                    requestValidator : RequestValidator<TaskDto>,
+                    requestValidator: RequestValidator<TaskDto>,
                     val schoolClassService: SchoolClassService,
                     val subjectService: SubjectService,
                     val userService: UserService) : TaskService,

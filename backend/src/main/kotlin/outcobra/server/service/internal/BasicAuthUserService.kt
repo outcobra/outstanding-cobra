@@ -6,7 +6,6 @@ import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Service
 import outcobra.server.config.ProfileRegistry.Companion.BASIC_AUTH_SECURITY_MOCK
 import outcobra.server.data.loaders.UserDataLoader
-import outcobra.server.model.QUser
 import outcobra.server.model.User
 import outcobra.server.model.dto.UserDto
 import outcobra.server.model.mapper.UserDtoMapper
@@ -21,15 +20,15 @@ import javax.inject.Inject
  */
 @Profile(BASIC_AUTH_SECURITY_MOCK)
 @Service
-open class BasicAuthUserService @Inject constructor(val userRepository: UserRepository,
-                                                    val userDtoMapper: UserDtoMapper) : UserService {
+class BasicAuthUserService @Inject constructor(val userRepository: UserRepository,
+                                               val userDtoMapper: UserDtoMapper) : UserService {
     override fun readUserById(id: Long): User {
         return userRepository.getOne(id)
     }
 
     override fun getTokenUserId(): String {
         val isAuthenticated = SecurityContextHolder.getContext().authentication.isAuthenticated
-        if(isAuthenticated)  {
+        if (isAuthenticated) {
             return UserDataLoader.TEST_USER?.auth0Id ?: "basicAuthUserToken"
         }
         return ""

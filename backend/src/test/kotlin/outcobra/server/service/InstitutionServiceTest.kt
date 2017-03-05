@@ -8,10 +8,9 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.transaction.annotation.Transactional
+import outcobra.server.annotation.Open
 import outcobra.server.config.ProfileRegistry.Companion.TEST
 import outcobra.server.model.Institution
-import outcobra.server.model.QInstitution
-import outcobra.server.model.QUser
 import outcobra.server.model.dto.InstitutionDto
 import outcobra.server.model.repository.InstitutionRepository
 import outcobra.server.model.repository.UserRepository
@@ -26,7 +25,8 @@ import javax.inject.Inject
 @SpringBootTest
 @ActiveProfiles(TEST)
 @Transactional
-open class InstitutionServiceTest {
+@Open
+class InstitutionServiceTest {
 
     @Inject
     lateinit var institutionService: InstitutionService
@@ -38,6 +38,7 @@ open class InstitutionServiceTest {
     lateinit var userRepository: UserRepository
 
     var userId: Long = 0
+
     /**
      * class constants and default values
      */

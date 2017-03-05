@@ -10,7 +10,7 @@ import outcobra.server.config.ProfileRegistry.Companion.BASIC_AUTH_SECURITY_MOCK
 
 
 @Configuration
-open class AppConfig {
+class AppConfig {
     companion object {
         @Bean @Profile("!$BASIC_AUTH_SECURITY_MOCK") @JvmStatic
         fun getAuth0Config(): PropertySourcesPlaceholderConfigurer {

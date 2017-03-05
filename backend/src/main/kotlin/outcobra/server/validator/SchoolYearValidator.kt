@@ -1,10 +1,8 @@
 package outcobra.server.validator
 
 import org.springframework.stereotype.Component
-import outcobra.server.model.QSchoolYear
 import outcobra.server.model.SchoolYear
 import outcobra.server.model.repository.SchoolYearRepository
-import outcobra.server.util.doesNotOverlap
 import javax.inject.Inject
 
 /**
@@ -14,7 +12,7 @@ import javax.inject.Inject
  * @since <since>
  */
 @Component
-open class SchoolYearValidator @Inject constructor(val schoolYearRepository: SchoolYearRepository) {
+class SchoolYearValidator @Inject constructor(val schoolYearRepository: SchoolYearRepository) {
 
     /**
      * checks that the given [SchoolYear] does not overlap with any other [SchoolYear]

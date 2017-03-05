@@ -16,7 +16,7 @@ import javax.inject.Inject
 @Suppress("UNNECESSARY_LATEINIT") //needed for the users since kotlin 1.1.0
 @Configuration
 @Profile(MOCK_SERVICES)
-open class Mocker(userRepository: UserRepository) {
+class Mocker(userRepository: UserRepository) {
 
     lateinit var USER: User
     lateinit var USER2: User
@@ -40,12 +40,12 @@ open class Mocker(userRepository: UserRepository) {
 
     @Bean
     @Primary
-    open fun mockUserService(): UserService {
+    fun mockUserService(): UserService {
         val mockService = Mockito.mock(UserService::class.java)
 
         Mockito.`when`(mockService.getCurrentUser()).then { userService.readUserById(USER.id) }
         Mockito.`when`(mockService.getTokenUserId()).then { USER_AUTH0_ID }
-        Mockito.`when`(mockService.readUserById(Matchers.anyLong())).then {userService.readUserById(it.arguments[0] as Long) }
+        Mockito.`when`(mockService.readUserById(Matchers.anyLong())).then { userService.readUserById(it.arguments[0] as Long) }
         return mockService
     }
 

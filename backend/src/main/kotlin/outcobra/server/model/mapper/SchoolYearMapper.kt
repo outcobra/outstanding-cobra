@@ -1,7 +1,6 @@
 package outcobra.server.model.mapper
 
 import org.springframework.stereotype.Component
-import outcobra.server.model.QHoliday
 import outcobra.server.model.SchoolClass
 import outcobra.server.model.SchoolYear
 import outcobra.server.model.Semester
@@ -13,9 +12,9 @@ import outcobra.server.model.repository.SemesterRepository
 import javax.inject.Inject
 
 @Component
-open class SchoolYearMapper @Inject constructor(val semesterRepository: SemesterRepository,
-                                                val classRepository: SchoolClassRepository,
-                                                val holidayRepository: HolidayRepository)
+class SchoolYearMapper @Inject constructor(val semesterRepository: SemesterRepository,
+                                           val classRepository: SchoolClassRepository,
+                                           val holidayRepository: HolidayRepository)
     : Mapper<SchoolYear, SchoolYearDto>, BaseMapper() {
 
     override fun fromDto(from: SchoolYearDto): SchoolYear {

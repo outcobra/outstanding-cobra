@@ -1,7 +1,7 @@
 package outcobra.server.model.mapper
 
 import org.springframework.stereotype.Component
-import outcobra.server.model.*
+import outcobra.server.model.Subject
 import outcobra.server.model.dto.SubjectDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.*
@@ -12,14 +12,14 @@ import javax.inject.Inject
  * @author Florian Bürgi
  */
 @Component
-open class SubjectMapper @Inject constructor(val teacherRepository: TeacherRepository,
-                                             val semesterRepository: SemesterRepository,
-                                             val taskRepository: TaskRepository,
-                                             val examRepository: ExamRepository,
-                                             val markGroupRepository: MarkGroupRepository,
-                                             val markReportRepository: MarkReportRepository,
-                                             val timetableRepository: TimetableRepository,
-                                             val colorMapper: ColorMapper) : Mapper<Subject, SubjectDto>, BaseMapper() {
+class SubjectMapper @Inject constructor(val teacherRepository: TeacherRepository,
+                                        val semesterRepository: SemesterRepository,
+                                        val taskRepository: TaskRepository,
+                                        val examRepository: ExamRepository,
+                                        val markGroupRepository: MarkGroupRepository,
+                                        val markReportRepository: MarkReportRepository,
+                                        val timetableRepository: TimetableRepository,
+                                        val colorMapper: ColorMapper) : Mapper<Subject, SubjectDto>, BaseMapper() {
 
     override fun fromDto(from: SubjectDto): Subject {
         val id = from.identifier

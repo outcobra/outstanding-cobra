@@ -19,7 +19,7 @@ import kotlin.reflect.KClass
  * @since <since>
  */
 @Component
-open class RequestValidator<in Dto>
+class RequestValidator<in Dto>
 @Inject constructor(val locator: RepositoryLocator, val userService: UserService)
 where Dto : OutcobraDto {
 

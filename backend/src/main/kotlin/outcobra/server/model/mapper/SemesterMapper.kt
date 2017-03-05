@@ -1,7 +1,10 @@
 package outcobra.server.model.mapper
 
 import org.springframework.stereotype.Component
-import outcobra.server.model.*
+import outcobra.server.model.MarkReport
+import outcobra.server.model.SchoolYear
+import outcobra.server.model.Semester
+import outcobra.server.model.Subject
 import outcobra.server.model.dto.SemesterDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.MarkReportRepository
@@ -17,10 +20,10 @@ import javax.inject.Inject
  * @since <since>
  */
 @Component
-open class SemesterMapper @Inject constructor(val subjectRepository: SubjectRepository,
-                                              val schoolYearRepository: SchoolYearRepository,
-                                              val markReportRepository: MarkReportRepository,
-                                              val timetableRepository: TimetableRepository)
+class SemesterMapper @Inject constructor(val subjectRepository: SubjectRepository,
+                                         val schoolYearRepository: SchoolYearRepository,
+                                         val markReportRepository: MarkReportRepository,
+                                         val timetableRepository: TimetableRepository)
     : Mapper<Semester, SemesterDto>, BaseMapper() {
     override fun toDto(from: Semester): SemesterDto {
         val subjects = from.subjects.map { it.id }

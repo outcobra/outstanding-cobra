@@ -15,7 +15,7 @@ import kotlin.reflect.KClass
  * @since <since>
  */
 @Component
-open class BaseMapper {
+class BaseMapper {
     @Inject
     lateinit var repositoryLocator: RepositoryLocator
     @Inject

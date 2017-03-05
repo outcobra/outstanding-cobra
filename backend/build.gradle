@@ -33,14 +33,14 @@ war {
     version = outstandingCobraVersion
 }
 allOpen {
-    annotation('outcobra.server.annotation.OpenKotlin')
+    annotation('outcobra.server.annotation.Open')
 }
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 compileKotlin {
-    kotlinOptions{
+    kotlinOptions {
         jvmTarget = sourceCompatibility
     }
 }

@@ -15,8 +15,8 @@ import javax.inject.Inject
  * @since 1.0.0
  */
 @Component
-open class SchoolClassMapper @Inject constructor(val schoolYearRepository: SchoolYearRepository,
-                                                 val institutionRepository: InstitutionRepository) : Mapper<SchoolClass, SchoolClassDto>, BaseMapper() {
+class SchoolClassMapper @Inject constructor(val schoolYearRepository: SchoolYearRepository,
+                                            val institutionRepository: InstitutionRepository) : Mapper<SchoolClass, SchoolClassDto>, BaseMapper() {
 
     override fun toDto(from: SchoolClass): SchoolClassDto {
         val id = from.id ?: 0

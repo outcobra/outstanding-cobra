@@ -3,7 +3,6 @@ package outcobra.server.service.internal
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import outcobra.server.model.Institution
-import outcobra.server.model.QInstitution
 import outcobra.server.model.dto.InstitutionDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.InstitutionRepository
@@ -15,7 +14,7 @@ import javax.inject.Inject
 
 @Service
 @Transactional
-open class DefaultInstitutionService
+class DefaultInstitutionService
 @Inject constructor(mapper: Mapper<Institution, InstitutionDto>,
                     repository: InstitutionRepository,
                     requestValidator: RequestValidator<InstitutionDto>,

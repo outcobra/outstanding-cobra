@@ -2,13 +2,11 @@ package outcobra.server.validator
 
 import org.springframework.stereotype.Component
 import outcobra.server.exception.DateOutsideExpectedRangeException
-import outcobra.server.model.QSemester
 import outcobra.server.model.SchoolYear
 import outcobra.server.model.Semester
 import outcobra.server.model.repository.SchoolYearRepository
 import outcobra.server.model.repository.SemesterRepository
 import outcobra.server.util.contains
-import outcobra.server.util.doesNotOverlap
 import javax.inject.Inject
 
 
@@ -19,8 +17,8 @@ import javax.inject.Inject
  * @since <since>
  */
 @Component
-open class SemesterValidator @Inject constructor(val schoolYearRepository: SchoolYearRepository,
-                                                 val semesterRepository: SemesterRepository) {
+class SemesterValidator @Inject constructor(val schoolYearRepository: SchoolYearRepository,
+                                            val semesterRepository: SemesterRepository) {
     /**
      * checks that the given [Semester] does not overlap with any other [Semester] in the same [SchoolYear]
      * checks that the given [Semester] is in the parent [SchoolYear]
