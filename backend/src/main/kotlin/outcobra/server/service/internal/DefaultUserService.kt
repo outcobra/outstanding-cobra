@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service
 import outcobra.server.annotation.DefaultImplementation
 import outcobra.server.config.Auth0Client
 import outcobra.server.config.ProfileRegistry.Companion.BASIC_AUTH_SECURITY_MOCK
+import outcobra.server.model.QUser
 import outcobra.server.model.User
 import outcobra.server.model.dto.UserDto
 import outcobra.server.model.interfaces.Mapper

@@ -1,6 +1,7 @@
 package outcobra.server.service.internal
 
 import org.springframework.stereotype.Service
+import outcobra.server.model.QInstitution
 import outcobra.server.model.dto.manage.ManageDto
 import outcobra.server.model.mapper.manage.ManageDtoMapper
 import outcobra.server.model.repository.InstitutionRepository

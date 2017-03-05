@@ -2,11 +2,13 @@ package outcobra.server.validator
 
 import org.springframework.stereotype.Component
 import outcobra.server.exception.DateOutsideExpectedRangeException
+import outcobra.server.model.QSemester
 import outcobra.server.model.SchoolYear
 import outcobra.server.model.Semester
 import outcobra.server.model.repository.SchoolYearRepository
 import outcobra.server.model.repository.SemesterRepository
 import outcobra.server.util.contains
+import outcobra.server.util.doesNotOverlap
 import javax.inject.Inject
 
 

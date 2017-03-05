@@ -11,6 +11,8 @@ import outcobra.server.annotation.Open
 import outcobra.server.config.ProfileRegistry.Companion.TEST
 import outcobra.server.exception.ManipulatedRequestException
 import outcobra.server.model.Institution
+import outcobra.server.model.QInstitution
+import outcobra.server.model.QUser
 import outcobra.server.model.dto.InstitutionDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.InstitutionRepository

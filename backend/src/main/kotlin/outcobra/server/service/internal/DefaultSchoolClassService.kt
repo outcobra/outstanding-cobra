@@ -3,6 +3,7 @@ package outcobra.server.service.internal
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 import outcobra.server.model.Institution
+import outcobra.server.model.QSchoolClass
 import outcobra.server.model.SchoolClass
 import outcobra.server.model.dto.SchoolClassDto
 import outcobra.server.model.interfaces.Mapper

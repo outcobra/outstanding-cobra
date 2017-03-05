@@ -2,6 +2,7 @@ package outcobra.server.service.internal
 
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
+import outcobra.server.model.QTask
 import outcobra.server.model.Semester
 import outcobra.server.model.Subject
 import outcobra.server.model.Task

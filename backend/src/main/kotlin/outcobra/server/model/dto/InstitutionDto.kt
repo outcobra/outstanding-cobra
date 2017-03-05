@@ -1,5 +1,6 @@
 package outcobra.server.model.dto
 
+import outcobra.server.annotation.NoArgConstructor
 import outcobra.server.model.Institution
 import outcobra.server.model.User
 import outcobra.server.model.interfaces.OutcobraDto
@@ -15,18 +16,11 @@ import outcobra.server.model.interfaces.ParentLink
  * For instance field information pleas check the model class.
  * @see Institution
  */
+@NoArgConstructor
 data class InstitutionDto(val id: Long = 0,
                           val userId: Long = 0,
                           val name: String = "",
                           val schoolClassIds: List<Long> = arrayListOf()) : OutcobraDto {
-
-    /**
-     * This constructor is used by Jackson to create "empty" objects.
-     * This process is used during the json parsing.
-     * The passed parameter is there to stop the constructor from calling itself.
-     */
-    constructor() : this(id = 0)
-
     /**
      * This function returns the objects unique identifier.
      * This identifier is equal to the primary key of the object in the database

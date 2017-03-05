@@ -11,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional
 import outcobra.server.annotation.Open
 import outcobra.server.config.ProfileRegistry.Companion.TEST
 import outcobra.server.model.Institution
+import outcobra.server.model.QInstitution
+import outcobra.server.model.QUser
 import outcobra.server.model.dto.InstitutionDto
 import outcobra.server.model.repository.InstitutionRepository
 import outcobra.server.model.repository.UserRepository

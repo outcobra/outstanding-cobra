@@ -3,6 +3,7 @@ package outcobra.server.service.internal
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 import outcobra.server.exception.DateOutsideExpectedRangeException
+import outcobra.server.model.QSemester
 import outcobra.server.model.SchoolYear
 import outcobra.server.model.Semester
 import outcobra.server.model.dto.SemesterDto

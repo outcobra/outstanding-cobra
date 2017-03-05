@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.transaction.annotation.Transactional
 import outcobra.server.annotation.Open
+import outcobra.server.model.QUser
 import outcobra.server.model.User
 import javax.inject.Inject
 
