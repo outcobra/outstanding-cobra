@@ -1,10 +1,9 @@
 import {Injectable} from "@angular/core";
 import {Config} from "../../../config/Config";
 import {tokenNotExpired} from "angular2-jwt";
-import {TranslateService} from "ng2-translate";
 import {Router} from "@angular/router";
 import {HttpInterceptor} from "../../http/HttpInterceptor";
-import {Util} from "../util";
+import {Util} from "../../util/util";
 import {NotificationsService} from "angular2-notifications";
 import {Observable} from "rxjs";
 
@@ -38,7 +37,7 @@ export class AuthService {
                 primaryColor: '#3f51b5'
             },
             languageDictionary: {
-                title: "Outcobra"
+                title: 'Outcobra'
             }
         });
 
@@ -84,7 +83,7 @@ export class AuthService {
                         state: redirectRoute
                     }
                 },
-                language: "de"
+                language: 'de'
             });
         }
     }

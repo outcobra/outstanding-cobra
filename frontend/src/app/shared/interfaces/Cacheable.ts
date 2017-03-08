@@ -1,4 +1,4 @@
-import {Observable} from "rxjs";
+import {Observable} from 'rxjs';
 
 /**
  * interface which defines all methods for a service which can cache the type T

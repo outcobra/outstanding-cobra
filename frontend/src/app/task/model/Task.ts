@@ -1,4 +1,4 @@
-import {SubjectDto} from "../../manage/model/ManageDto";
+import {SubjectDto} from '../../manage/model/ManageDto';
 
 export interface Task {
     id: number,

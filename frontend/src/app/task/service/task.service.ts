@@ -1,18 +1,15 @@
-import {Injectable} from "@angular/core";
-import {HttpInterceptor} from "../../shared/http/HttpInterceptor";
-import {Task} from "../model/Task";
-import {Observable} from "rxjs";
-import {CacheableCrudService} from "../../shared/services/core/cacheable-crud.service";
-import {TaskFilter} from "../model/TaskFilter";
+import {Injectable} from '@angular/core';
+import {HttpInterceptor} from '../../shared/http/HttpInterceptor';
+import {Task} from '../model/Task';
+import {Observable} from 'rxjs';
+import {CacheableCrudService} from '../../shared/services/core/cacheable-crud.service';
+import {TaskFilter} from '../model/TaskFilter';
+import {TaskProgressUpdate} from '../model/TaskProgressUpdate';
 
 @Injectable()
 export class TaskService extends CacheableCrudService<Task, Task[]> {
     constructor(http: HttpInterceptor) {
         super(http, '/task');
-    }
-
-    public create (task: Task): Observable<Task> {
-        return super.create(task);
     }
 
     public readById(id: number): Observable<Task> {
@@ -35,15 +32,11 @@ export class TaskService extends CacheableCrudService<Task, Task[]> {
         );
     }
 
-    deleteById(id: number): Observable<any> {
-        return super.deleteById(id);
-    }
-
-    update(task: Task): Observable<Task> {
-        return super.update(task);
-    }
-
     getTaskFilter(): Observable<TaskFilter> {
         return this.http.get<TaskFilter>(`${this.baseUri}/filter`, 'outcobra');
+    }
+
+    updateProgress(taskId: number, progress: number): Observable<Task> {
+        return this.http.post(`${this.baseUri}/progress`, { taskId: taskId, progress: progress } as TaskProgressUpdate);
     }
 }

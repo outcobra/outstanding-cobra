@@ -1,8 +1,7 @@
 package outcobra.server.model.mapper
 
 import org.springframework.stereotype.Component
-import outcobra.server.model.QTimetable
-import outcobra.server.model.Semester
+import outcobra.server.model.*
 import outcobra.server.model.dto.SemesterDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.MarkReportRepository
@@ -21,7 +20,8 @@ import javax.inject.Inject
 open class SemesterMapper @Inject constructor(val subjectRepository: SubjectRepository,
                                               val schoolYearRepository: SchoolYearRepository,
                                               val markReportRepository: MarkReportRepository,
-                                              val timetableRepository: TimetableRepository) : Mapper<Semester, SemesterDto> {
+                                              val timetableRepository: TimetableRepository)
+    : Mapper<Semester, SemesterDto>, BaseMapper() {
     override fun toDto(from: Semester): SemesterDto {
         val subjects = from.subjects.map { it.id }
         val reports = from.markReports.map { it.id }
@@ -31,6 +31,8 @@ open class SemesterMapper @Inject constructor(val subjectRepository: SubjectRepo
     }
 
     override fun fromDto(from: SemesterDto): Semester {
+        validateChildren(from.subjectIds, Subject::class, from.schoolYearId, SchoolYear::class)
+        validateChildren(from.markReportIds, MarkReport::class, from.schoolYearId, SchoolYear::class)
         val year = schoolYearRepository.findOne(from.schoolYearId)
         val subjects = from.subjectIds.map { subjectRepository.findOne(it) }
         val reports = from.markReportIds.map { markReportRepository.findOne(it) }

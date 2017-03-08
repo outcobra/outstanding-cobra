@@ -1,6 +1,6 @@
 import {Cacheable} from "../../interfaces/Cacheable";
 import {Observable} from "rxjs";
-import {Util} from "../util";
+import {Util} from "../../util/util";
 import {HttpInterceptor} from "../../http/HttpInterceptor";
 import {AppService} from "./app.service";
 

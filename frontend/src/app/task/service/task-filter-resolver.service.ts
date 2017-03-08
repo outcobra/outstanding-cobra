@@ -1,8 +1,8 @@
-import {Injectable} from "@angular/core";
-import {Resolve, ActivatedRouteSnapshot, RouterStateSnapshot} from "@angular/router";
-import {TaskFilter} from "../model/TaskFilter";
-import {Observable} from "rxjs";
-import {TaskService} from "./task.service";
+import {Injectable} from '@angular/core';
+import {Resolve, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
+import {TaskFilter} from '../model/TaskFilter';
+import {Observable} from 'rxjs';
+import {TaskService} from './task.service';
 
 @Injectable()
 export class TaskFilterResolver implements Resolve<TaskFilter> {

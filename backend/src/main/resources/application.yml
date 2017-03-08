@@ -1,17 +1,41 @@
+#---
+# General Configs
+# contains properties which are consistent over all profiles
+#---
 spring:
-  profiles:
-    active: development #TODO this is only temporary until issue #47 is resolved
   jackson:
     serialization:
       WRITE_DATES_AS_TIMESTAMPS: false
-security:
-  basic:
-    enabled: false
-  headers:
-    frame: false
+
+---
+#---
+# Main Profile definition
+# This part only includes super-profiles like dev/prod/test etc.
+#---
+spring.profiles: development
+#ignore the ugliness bc it doesn't seem to work in a different way
+endpoints:
+  enabled: true
+spring:
+  profiles:
+    include: load_test_data,disable_auth_filter,h2_db
+---
+spring.profiles: test
+#ignore the ugliness bc it doesn't seem to work in a different way
+spring:
+  profiles:
+    include: load_test_data,h2_db,mock_services
+
+#---
+# Normal Profile definition
+# This part includes all profiles which are used by those in the area above
+#---
 ---
 spring:
-  profiles: development
+  profiles: basic_auth_security_mock
+---
+spring:
+  profiles: h2_db
   datasource:
     driver-class-name: org.h2.Driver
     url: jdbc:h2:mem:outcobra
@@ -29,9 +53,12 @@ spring:
 logging:
   level:
     outcobra.server.data: debug
+security:
+  headers:
+    frame: false
 ---
 spring:
-  profiles: production
+  profiles: mysql_database
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/outcobra_a

@@ -1,5 +1,5 @@
 import {dateReplacer, dateReviver} from "../http/http-util";
-import {FormGroup} from "@angular/forms";
+import {AbstractControl, FormGroup} from "@angular/forms";
 /**
  * Util class
  * contains everything that does not fit in another service
@@ -18,9 +18,9 @@ export class Util {
             tmp = [];
         window.location.search
             .substr(1)
-            .split("&")
+            .split('&')
             .forEach((item) => {
-                tmp = item.split("=");
+                tmp = item.split('=');
                 if (tmp[0] === paramName) result = decodeURIComponent(tmp[1]);
             });
         return result;
@@ -85,31 +85,39 @@ export class Util {
     }
 
     /**
-     * marks invalid fields in the FormGroup as touched
+     * marks invalid fields in the FormGroup as touched and returns the validity of the FormGroup
      * used for validation on submit
      *
      * @param form FormGroup
+     * @return validity of the given FormGroup
      */
-    static revalidateForm(form: FormGroup) {
+    static revalidateForm(form: FormGroup): boolean {
         Object.keys(form.controls).forEach((key) => {
-            let control = form.controls[key];
+            let control: AbstractControl = form.controls[key];
             if (control instanceof FormGroup) {
                 this.revalidateForm(control);
-            }
-            if (!control.valid) {
-                control.markAsTouched();
+            } else {
+                this.revalidateControl(control);
             }
         });
+        return form.valid;
     }
-}
 
-/**
- * combines multiple {Predicate}s to an and chain of {Predicate}s
- * returns {Predicate} that evaluates all {Predicate}s in the param
- *
- * @param predicates
- * @returns {(arg:any)=>boolean}
- */
-export function and<T>(predicates: Predicate<T>[]): Predicate<T> {
-    return (arg) => predicates.every(p => p(arg));
+    /**
+     * recalculates the validity of the given control and marks it as touched if invalid
+     *
+     * @param control AbstractControl to be checked
+     * @return {boolean} the validity of the control
+     */
+    static revalidateControl(control: AbstractControl): boolean {
+        control.updateValueAndValidity({onlySelf: true});
+        if (control.invalid) {
+            control.markAsTouched();
+        }
+        return control.valid;
+    }
+
+    static bindAndCall(func: Function, thisArg: any, args: any) {
+        return func.bind(thisArg, args).call();
+    }
 }

@@ -26,9 +26,14 @@ open class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(BadRequestException::class)
     @ResponseBody
-    fun handleDateOverlap(exception: BadRequestException): String? {
+    fun handleBadRequest(exception: BadRequestException): String? {
         return exception.message
     }
 
-
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    @ExceptionHandler(ManipulatedRequestException::class)
+    @ResponseBody
+    fun handleManipulation(exception: ManipulatedRequestException): String? {
+        return exception.message
+    }
 }

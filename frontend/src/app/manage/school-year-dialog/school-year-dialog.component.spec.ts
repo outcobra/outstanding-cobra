@@ -1,9 +1,6 @@
 /* tslint:disable:no-unused-variable */
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
-
-import { SchoolYearDialog } from './school-year-dialog.component';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {SchoolYearDialog} from './school-year-dialog.component';
 
 describe('SchoolYearDialogComponent', () => {
   let component: SchoolYearDialog;

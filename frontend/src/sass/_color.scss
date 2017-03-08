@@ -3,12 +3,12 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue.
-$primary: md-palette($md-indigo, 700);
-$accent: md-palette($md-pink, A200);
-$accent-dark: md-palette($md-grey, 800);
+$primary: mat-palette($mat-indigo, 700);
+$accent: mat-palette($mat-pink, A200);
+$accent-dark: mat-palette($mat-grey, 800);
 
 // The warn palette is optional (defaults to red).
-$warn: md-palette($md-red);
+$warn: mat-palette($mat-red);
 
 $primary-dark: rgba(0, 0, 0, 0.87);
 $secondary-dark: rgba(0, 0, 0, 0.54);
@@ -23,20 +23,20 @@ $background-white: #f5f5f5;
 $hover-dark: rgba(0, 0, 0, 0.1);
 $hover-light: rgba(0, 0, 0, 0.04);
 
-.color-primary, .md-primary {
-    background-color: md-color($primary) !important;
+.color-primary, .mat-primary {
+    background-color: mat-color($primary) !important;
 }
 
 .color-accent {
-    background-color: md-color($accent) !important;
+    background-color: mat-color($accent) !important;
 }
 
 .color-accent-dark {
-    background-color: md-color($accent-dark) !important;
+    background-color: mat-color($accent-dark) !important;
 }
 
 .color-warn {
-    background-color: md-color($warn) !important;
+    background-color: mat-color($warn) !important;
 }
 
 .color-background {
@@ -68,5 +68,5 @@ $hover-light: rgba(0, 0, 0, 0.04);
 }
 
 .text-warn {
-    color: md-color($warn);
+    color: mat-color($warn);
 }

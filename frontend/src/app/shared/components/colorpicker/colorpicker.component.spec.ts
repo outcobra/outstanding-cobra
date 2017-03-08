@@ -1,6 +1,6 @@
 /* tslint:disable:no-unused-variable */
-import {async, ComponentFixture, TestBed} from "@angular/core/testing";
-import {ColorpickerComponent} from "./colorpicker.component";
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {ColorpickerComponent} from './colorpicker.component';
 
 describe('ColorpickerComponent', () => {
     let component: ColorpickerComponent;

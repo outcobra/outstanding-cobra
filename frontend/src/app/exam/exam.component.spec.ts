@@ -1,6 +1,6 @@
 /* tslint:disable:no-unused-variable */
-import {async, ComponentFixture, TestBed} from "@angular/core/testing";
-import {ExamComponent} from "./exam.component";
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {ExamComponent} from './exam.component';
 
 describe('ExamComponent', () => {
     let component: ExamComponent;

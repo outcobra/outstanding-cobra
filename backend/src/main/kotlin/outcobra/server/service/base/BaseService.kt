@@ -5,7 +5,7 @@ package outcobra.server.service.base
  * create and update are covered by the save method
  * Every service should extend this interface
  * @author Florian Bürgi
- * @since <version>
+ * @since <since>
  */
 interface BaseService<Dto> {
     /**
