@@ -9,7 +9,7 @@
 
     <springProfile name="production, development, test">
         <appender name="SENTRY" class="com.getsentry.raven.logback.SentryAppender">
-            <dsn>https://07994a35a96f4713a3d69f15b968997c@sentry.pegnu.cloud/2</dsn>
+            <dsn>https://00e7fe8c3ae9488ba591314d7773b81a@sentry.pegnu.cloud/2</dsn>
             <environment>${environment}</environment>
             <release>${product_version}</release>
             <filter class="ch.qos.logback.classic.filter.ThresholdFilter">

@@ -24,15 +24,6 @@ open class AppConfig {
             configurer.setProperties(yaml.`object`)
             return configurer
         }
-
-        @Bean @JvmStatic
-        fun sentryConfig(): PropertySourcesPlaceholderConfigurer {
-            val configurer = PropertySourcesPlaceholderConfigurer()
-            val yaml = YamlPropertiesFactoryBean()
-            yaml.setResources(ClassPathResource("sentry.yml"))
-            configurer.setProperties(yaml.`object`)
-            return configurer
-        }
     }
 
     @Bean @Inject @Profile("!$DISABLE_AUTH_FILTER")
