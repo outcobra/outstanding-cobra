@@ -25,7 +25,13 @@ spring.profiles: test
 spring:
   profiles:
     include: load_test_data,h2_db,mock_services
-
+---
+spring.profiles: production
+spring:
+  profiles:
+    include: mysql_database
+runtime:
+  environment: production
 #---
 # Normal Profile definition
 # This part includes all profiles which are used by those in the area above
@@ -39,8 +45,6 @@ spring:
   datasource:
     driver-class-name: org.h2.Driver
     url: jdbc:h2:mem:outcobra
-    username:
-    password:
   jpa:
     hibernate:
       ddl-auto: create-drop
@@ -56,6 +60,8 @@ logging:
 security:
   headers:
     frame: false
+flyway:
+  enabled: false
 ---
 spring:
   profiles: mysql_database
@@ -68,5 +74,7 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
+    hibernate:
+      ddl-auto: validate
 flyway:
-  locations: flyway/migration
+  locations: db/migration
