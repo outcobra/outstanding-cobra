@@ -2,9 +2,7 @@
 **/build/
 **/classes/
 **/.idea/
-**/auth0.yml
 **/*.iml
-**/sentry.yml
 
 **/yarn-error.log
 
