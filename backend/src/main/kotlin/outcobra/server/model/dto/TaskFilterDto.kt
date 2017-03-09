@@ -3,8 +3,8 @@ package outcobra.server.model.dto
 import outcobra.server.annotation.NoArgConstructor
 
 @NoArgConstructor
-data class TaskFilterDto(val schoolClassSubjects: List<SchoolClassSubjects>)
+data class TaskFilterDto(val schoolClassSubjects: List<SchoolClassSubjects> = arrayListOf())
 
 @NoArgConstructor
-data class SchoolClassSubjects(val schoolClass: SchoolClassDto,
-                               val subjects: List<SubjectDto>)
+data class SchoolClassSubjects(val schoolClass: SchoolClassDto = SchoolClassDto(),
+                               val subjects: List<SubjectDto> = arrayListOf())

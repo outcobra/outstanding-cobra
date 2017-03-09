@@ -7,5 +7,5 @@ import outcobra.server.annotation.NoArgConstructor
  * @since <since>
  */
 @NoArgConstructor
-data class TaskProgressUpdateDto(val taskId: Long,
-                                 val progress: Int)
+data class TaskProgressUpdateDto(val taskId: Long = 0,
+                                 val progress: Int = 0)

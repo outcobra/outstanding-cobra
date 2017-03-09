@@ -14,11 +14,11 @@ data class TaskDto(
         val id: Long = 0,
         val subject: SubjectDto = SubjectDto(),
         val name: String = "",
-        val description: String,
-        val todoDate: LocalDate,
-        val dueDate: LocalDate,
-        val effort: Int,
-        val progress: Int) : OutcobraDto {
+        val description: String = "",
+        val todoDate: LocalDate? = LocalDate.now(),
+        val dueDate: LocalDate = LocalDate.now().plusDays(1),
+        val effort: Int = 0,
+        val progress: Int = 0) : OutcobraDto {
 
     override fun getIdentifier(): Long = id
 
