@@ -19,7 +19,7 @@ endpoints:
   enabled: true
 spring:
   profiles:
-    include: load_test_data,disable_auth_filter,h2_db
+    include: load_test_data,h2_db
 runtime:
   environment: development
 ---
