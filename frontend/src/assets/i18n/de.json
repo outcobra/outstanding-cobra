@@ -187,6 +187,10 @@
           "title": "Datenfehler",
           "message": "Der Server meldet eine ungültige Eingabe"
         },
+        "403": {
+          "title": "Verboten",
+          "message": "Sie dürfen diese Aktion nicht tätigen"
+        },
         "404": {
           "title": "Nicht gefunden",
           "message": "Das angeforderte Element konnte nicht gefunden werden"
