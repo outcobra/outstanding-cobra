@@ -26,6 +26,7 @@ export class TaskComponent implements OnInit {
     private filteredTasks: Task[];
     private filterData: TaskFilter;
     private isFiltered: boolean = false;
+    private isFilterShown: boolean = false;
 
     private taskCreateUpdateDialog: MdDialogRef<TaskCreateUpdateDialog>;
 
@@ -146,4 +147,7 @@ export class TaskComponent implements OnInit {
         this.filteredTasks = Util.cloneArray(this.filterTasks(this.tasks));
     }
 
+    changeFilterVisibility() {
+        this.isFilterShown = !(this.isFilterShown)
+    }
 }

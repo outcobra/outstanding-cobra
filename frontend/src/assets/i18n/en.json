@@ -52,6 +52,7 @@
       },
       "task": {
         "linkTitle": "Tasks",
+        "listTitle": "Your Tasks",
         "add": "Add Task",
         "desc": "Task description",
         "progress": "Progress",
