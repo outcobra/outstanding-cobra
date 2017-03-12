@@ -200,6 +200,10 @@
           "title": "Data Error",
           "message": "The server is indicating invalid input data"
         },
+        "403": {
+          "title": "Forbidden",
+          "message": "You are not allowed to perform this action"
+        },
         "404": {
           "title": "Not Found",
           "message": "The requested element could not be found"

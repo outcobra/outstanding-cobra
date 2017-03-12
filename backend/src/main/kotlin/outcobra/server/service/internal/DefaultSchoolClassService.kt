@@ -2,6 +2,7 @@ package outcobra.server.service.internal
 
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
+import outcobra.server.model.Institution
 import outcobra.server.model.QSchoolClass
 import outcobra.server.model.SchoolClass
 import outcobra.server.model.dto.SchoolClassDto
@@ -10,6 +11,7 @@ import outcobra.server.model.repository.SchoolClassRepository
 import outcobra.server.service.SchoolClassService
 import outcobra.server.service.UserService
 import outcobra.server.service.base.internal.DefaultBaseService
+import outcobra.server.validator.RequestValidator
 import javax.inject.Inject
 
 /**
@@ -21,8 +23,9 @@ import javax.inject.Inject
 open class DefaultSchoolClassService
 @Inject constructor(mapper: Mapper<SchoolClass, SchoolClassDto>,
                     repository: SchoolClassRepository,
-                    val userService: UserService)
-    : SchoolClassService, DefaultBaseService<SchoolClass, SchoolClassDto, SchoolClassRepository>(mapper, repository) {
+                    requestValidator : RequestValidator<SchoolClassDto>,
+                    val userService: UserService) : SchoolClassService,
+        DefaultBaseService<SchoolClass, SchoolClassDto, SchoolClassRepository>(mapper, repository, requestValidator, SchoolClass::class) {
 
     override fun readAllByUser(): List<SchoolClassDto> {
         val userId = userService.getCurrentUser()!!.id
@@ -31,6 +34,7 @@ open class DefaultSchoolClassService
     }
 
     override fun readAllByInstitution(institutionId: Long): List<SchoolClassDto> {
+        requestValidator.validateRequestById(institutionId, Institution::class)
         val filter = QSchoolClass.schoolClass.institution.id.eq(institutionId)
         return repository.findAll(filter).map { mapper.toDto(it) }
     }
