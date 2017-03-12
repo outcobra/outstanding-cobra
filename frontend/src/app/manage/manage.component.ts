@@ -232,7 +232,8 @@ export class ManageComponent implements OnInit, AfterViewInit {
     //region delete
     deleteInstitution(toDelete: InstitutionDto) {
         this.handleDeletion(toDelete, 'institution', this.institutionService.deleteById,
-            (institution) => Util.arrayRemove(this.institutionClasses, (i) => i.id == institution.id)
+            (institution) => Util.arrayRemove(this.institutionClasses, (i) => i.id == institution.id),
+            this.institutionService
         );
     }
 
@@ -240,12 +241,13 @@ export class ManageComponent implements OnInit, AfterViewInit {
         this.handleDeletion(toDelete, 'schoolClass', this.schoolClassService.deleteById, (schoolClass) => {
             let institution = this.institutionClasses.find(inst => inst.id === schoolClass.institutionId);
             Util.arrayRemove(institution.schoolClasses, (clazz) => clazz.id == schoolClass.id);
-        });
+        }, this.schoolClassService);
     }
 
     deleteSchoolYear(toDelete: SchoolYearDto) {
         this.handleDeletion(toDelete, 'schoolYear', this.schoolYearService.deleteById,
-            (schoolYear) => Util.arrayRemove(this.yearSemesterModel, (year) => year.id == schoolYear.id)
+            (schoolYear) => Util.arrayRemove(this.yearSemesterModel, (year) => year.id == schoolYear.id),
+            this.schoolYearService
         );
     }
 
@@ -253,12 +255,13 @@ export class ManageComponent implements OnInit, AfterViewInit {
         this.handleDeletion(toDelete, 'semester', this.semesterService.deleteById, (semester) => {
             let schoolYear = this.yearSemesterModel.find(year => year.id === semester.schoolYearId);
             Util.arrayRemove(schoolYear.semesters, (sem) => sem.id == semester.id);
-        });
+        }, this.semesterService);
     }
 
     deleteSubject(toDelete: SubjectDto) {
         this.handleDeletion(toDelete, 'subject', this.subjectService.deleteById,
-            (subject) => Util.arrayRemove(this.subjectModel, (sub) => sub.id == subject.id)
+            (subject) => Util.arrayRemove(this.subjectModel, (sub) => sub.id == subject.id),
+            this.subjectService
         );
     }
 
@@ -276,12 +279,14 @@ export class ManageComponent implements OnInit, AfterViewInit {
      * @param entityName name for i18n and deleteConfirmationDialog
      * @param deleteFunction function that is used to delete the entity
      * @param finishFunction function to execute on delete success
+     * @param thisArg the scope where the createFunction should be run on
      */
-    handleDeletion<T extends Dto>(entity: T, entityName: string, deleteFunction: (id: number) => Observable<any>, finishFunction: (entity: T) => void) {
+    handleDeletion<T extends Dto>(entity: T, entityName: string, deleteFunction: (id: number) => Observable<any>, finishFunction: (entity: T) => void, thisArg: any) {
         this.openDeleteConfirmDialog(entityName)
             .filter(isTrue)
-            .switchMap(() => deleteFunction(entity.id))
-            .catch(() => {
+            .switchMap(() => Util.bindAndCall(deleteFunction, thisArg, entity.id))
+            .catch((error) => {
+                console.log(error);
                 this.notificationService.remove();
                 this.notificationService.error('i18n.modules.task.notification.error.deleteFailed.title', 'i18n.modules.task.notification.error.deleteFailed.message');
                 return Observable.empty();
@@ -305,6 +310,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
      * @param dialogRef to listen for close event
      * @param createFunction function which creates an entity
      * @param finishFunction function to execute on create success
+     * @param thisArg the scope where the createFunction should be run on
      */
     handleAddition<T extends Dto, D extends CreateUpdateDialog<T>>(entityName: string, dialogRef: MdDialogRef<D>, createFunction: (entity: T) => Observable<T>, finishFunction: (entity: T) => void, thisArg: any) {
         dialogRef.afterClosed()
