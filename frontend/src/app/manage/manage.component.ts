@@ -17,7 +17,6 @@ import {ManageDialogFactory} from './service/manage-dialog-factory';
 import {SubjectDialog} from './subject-dialog/subject-dialog.component';
 import {SubjectService} from './service/subject.service';
 import {Util} from '../shared/util/util';
-import {SMALL_DIALOG} from '../shared/util/const';
 import {isNotNull, isTrue} from '../shared/util/helper';
 import {Observable} from 'rxjs';
 import {Dto} from '../common/Dto';
@@ -77,7 +76,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this.responsiveHelper.listenForResize().subscribe(this.setColumnClasses);
+        this.responsiveHelper.listenForResize().subscribe(() => this.setColumnClasses());
 
         this.activeManageView = ManageView.INSTITUTION_CLASS;
         this.mobileTitle = I18N_PREFIX + ManageView[this.activeManageView];
@@ -87,6 +86,10 @@ export class ManageComponent implements OnInit, AfterViewInit {
     //region responsive
     private isMobile() {
         return this.responsiveHelper.isMobile();
+    }
+
+    getColumnClasses() {
+        return this.columnClasses;
     }
 
     private setColumnClasses() {
@@ -178,14 +181,14 @@ export class ManageComponent implements OnInit, AfterViewInit {
 
     //region add
     addInstitution() {
-        this.institutionDialogRef = this.manageDialogFactory.getDialog(InstitutionDialog, DialogMode.NEW, null, SMALL_DIALOG);
+        this.institutionDialogRef = this.manageDialogFactory.getDialog(InstitutionDialog, DialogMode.NEW, null);
         this.handleAddition<InstitutionDto, InstitutionDialog>('institution', this.institutionDialogRef, this.institutionService.create,
             (institution: InstitutionDto) => this.institutionClasses.push(institution), this.institutionService
         );
     }
 
     addSchoolClass(institution: InstitutionDto) {
-        this.schoolClassDialogRef = this.manageDialogFactory.getDialog(SchoolClassDialog, DialogMode.NEW, institution, SMALL_DIALOG);
+        this.schoolClassDialogRef = this.manageDialogFactory.getDialog(SchoolClassDialog, DialogMode.NEW, institution);
         this.handleAddition<SchoolClassDto, SchoolClassDialog>('schoolClass', this.schoolClassDialogRef, this.schoolClassService.create,
             (schoolClass: SchoolClassDto) => {
                 if (isNotNull(institution.schoolClasses)) institution.schoolClasses = [];
@@ -196,7 +199,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
     addSchoolYear(schoolClassId: number) {
         if (isNotNull(schoolClassId)) {
             let schoolClass: SchoolClassDto = this.findSchoolClass(this.institutionClasses, schoolClassId);
-            this.schoolYearDialogRef = this.manageDialogFactory.getDialog(SchoolYearDialog, DialogMode.NEW, schoolClass, SMALL_DIALOG);
+            this.schoolYearDialogRef = this.manageDialogFactory.getDialog(SchoolYearDialog, DialogMode.NEW, schoolClass);
             this.handleAddition<SchoolYearDto, SchoolYearDialog>('schoolYear', this.schoolYearDialogRef, this.schoolYearService.create,
                 (schoolYear: SchoolYearDto) => this.yearSemesterModel.push(schoolYear), this.schoolYearService
             );
@@ -205,7 +208,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
 
     addSemester(schoolYear: SchoolYearDto) {
         if (isNotNull(schoolYear)) {
-            this.semesterDialogRef = this.manageDialogFactory.getDialog(SemesterDialog, DialogMode.NEW, schoolYear, SMALL_DIALOG);
+            this.semesterDialogRef = this.manageDialogFactory.getDialog(SemesterDialog, DialogMode.NEW, schoolYear);
             this.handleAddition<SemesterDto, SemesterDialog>('semester', this.semesterDialogRef, this.semesterService.create,
                 (semester: SemesterDto) => {
                     if (isNotNull(schoolYear.semesters)) schoolYear.semesters = [];
@@ -217,7 +220,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
     addSubject(semesterId: number) {
         if (isNotNull(semesterId)) {
             let semester: SemesterDto = this.findSemester(this.yearSemesterModel, semesterId);
-            this.subjectDialogRef = this.manageDialogFactory.getDialog(SubjectDialog, DialogMode.NEW, semester, SMALL_DIALOG);
+            this.subjectDialogRef = this.manageDialogFactory.getDialog(SubjectDialog, DialogMode.NEW, semester);
             this.handleAddition<SubjectDto, SubjectDialog>('subject', this.subjectDialogRef, this.subjectService.create,
                 (subject: SubjectDto) => this.subjectModel.push(subject), this.subjectService
             );
