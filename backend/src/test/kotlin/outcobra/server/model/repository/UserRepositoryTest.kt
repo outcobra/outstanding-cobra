@@ -7,15 +7,14 @@ import org.junit.runner.RunWith
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.transaction.annotation.Transactional
-import outcobra.server.annotation.Open
 import outcobra.server.model.QUser
 import outcobra.server.model.User
 import javax.inject.Inject
 
 @RunWith(SpringRunner::class)
 @SpringBootTest
-@Open
-class UserRepositoryTest {
+@Transactional
+open class UserRepositoryTest {
 
     @Inject
     lateinit var userRepository: UserRepository
@@ -31,7 +30,6 @@ class UserRepositoryTest {
     }
 
     @Test
-    @Transactional
     fun testUserRepository() {
         val saved = userRepository.save(myUser)
         userRepository.flush()
@@ -45,7 +43,6 @@ class UserRepositoryTest {
     }
 
     @Test
-    @Transactional
     fun testQueryDslExecutor() {
         userRepository.save(myUser)
 

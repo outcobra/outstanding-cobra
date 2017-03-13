@@ -7,7 +7,6 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit4.SpringRunner
 import outcobra.server.Mocker
-import outcobra.server.annotation.Open
 import outcobra.server.config.ProfileRegistry.Companion.TEST
 import outcobra.server.exception.ManipulatedRequestException
 import outcobra.server.model.Institution
@@ -36,8 +35,7 @@ import javax.transaction.Transactional
 @RunWith(SpringRunner::class)
 @ActiveProfiles(TEST)
 @Transactional
-@Open
-class RequestValidatorTest {
+open class RequestValidatorTest {
 
     @Inject
     lateinit var userRepository: UserRepository

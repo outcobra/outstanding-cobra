@@ -8,7 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.transaction.annotation.Transactional
-import outcobra.server.annotation.Open
 import outcobra.server.config.ProfileRegistry.Companion.TEST
 import outcobra.server.model.Institution
 import outcobra.server.model.QInstitution
@@ -27,8 +26,7 @@ import javax.inject.Inject
 @SpringBootTest
 @ActiveProfiles(TEST)
 @Transactional
-@Open
-class InstitutionServiceTest {
+open class InstitutionServiceTest {
 
     @Inject
     lateinit var institutionService: InstitutionService
