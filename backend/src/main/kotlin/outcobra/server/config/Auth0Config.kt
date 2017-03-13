@@ -19,8 +19,8 @@ import outcobra.server.config.ProfileRegistry.Companion.BASIC_AUTH_SECURITY_MOCK
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @Configuration
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
-open class Auth0Config : Auth0SecurityConfig() {
-    @Bean open fun auth0Client(): Auth0Client {
+class Auth0Config : Auth0SecurityConfig() {
+    @Bean fun auth0Client(): Auth0Client {
         return Auth0Client(clientId, issuer)
     }
 }

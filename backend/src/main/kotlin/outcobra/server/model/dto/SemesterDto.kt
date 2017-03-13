@@ -1,10 +1,12 @@
 package outcobra.server.model.dto
 
+import outcobra.server.annotation.NoArgConstructor
 import outcobra.server.model.SchoolYear
 import outcobra.server.model.interfaces.OutcobraDto
 import outcobra.server.model.interfaces.ParentLink
 import java.time.LocalDate
 
+@NoArgConstructor
 data class SemesterDto(
         val id: Long,
         val schoolYearId: Long = 0,
@@ -14,8 +16,6 @@ data class SemesterDto(
         val subjectIds: List<Long> = arrayListOf(),
         val markReportIds: List<Long> = arrayListOf(),
         val timetableId: Long = 0) : OutcobraDto {
-
-    constructor() : this(id = 0)
 
     override fun getIdentifier(): Long = id
     override fun getParentLink(): ParentLink = ParentLink.make(schoolYearId, SchoolYear::class.java)

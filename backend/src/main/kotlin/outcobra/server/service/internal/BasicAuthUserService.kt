@@ -21,15 +21,15 @@ import javax.inject.Inject
  */
 @Profile(BASIC_AUTH_SECURITY_MOCK)
 @Service
-open class BasicAuthUserService @Inject constructor(val userRepository: UserRepository,
-                                                    val userDtoMapper: UserDtoMapper) : UserService {
+class BasicAuthUserService @Inject constructor(val userRepository: UserRepository,
+                                               val userDtoMapper: UserDtoMapper) : UserService {
     override fun readUserById(id: Long): User {
         return userRepository.getOne(id)
     }
 
     override fun getTokenUserId(): String {
         val isAuthenticated = SecurityContextHolder.getContext().authentication.isAuthenticated
-        if(isAuthenticated)  {
+        if (isAuthenticated) {
             return UserDataLoader.TEST_USER?.auth0Id ?: "basicAuthUserToken"
         }
         return ""

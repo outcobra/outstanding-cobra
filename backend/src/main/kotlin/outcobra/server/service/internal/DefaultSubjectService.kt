@@ -20,7 +20,7 @@ import javax.inject.Inject
 
 @Service
 @Transactional
-open class DefaultSubjectService
+class DefaultSubjectService
 @Inject constructor(mapper: Mapper<Subject, SubjectDto>,
                     repository: SubjectRepository,
                     requestValidator: RequestValidator<OutcobraDto>,
