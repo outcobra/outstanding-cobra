@@ -13,9 +13,9 @@ import outcobra.server.model.repository.SemesterRepository
 import javax.inject.Inject
 
 @Component
-class SchoolYearMapper @Inject constructor(val semesterRepository: SemesterRepository,
-                                           val classRepository: SchoolClassRepository,
-                                           val holidayRepository: HolidayRepository)
+open class SchoolYearMapper @Inject constructor(val semesterRepository: SemesterRepository,
+                                                val classRepository: SchoolClassRepository,
+                                                val holidayRepository: HolidayRepository)
     : Mapper<SchoolYear, SchoolYearDto>, BaseMapper() {
 
     override fun fromDto(from: SchoolYearDto): SchoolYear {

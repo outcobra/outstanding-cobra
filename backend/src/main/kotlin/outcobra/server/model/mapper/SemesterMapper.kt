@@ -17,10 +17,10 @@ import javax.inject.Inject
  * @since <since>
  */
 @Component
-class SemesterMapper @Inject constructor(val subjectRepository: SubjectRepository,
-                                         val schoolYearRepository: SchoolYearRepository,
-                                         val markReportRepository: MarkReportRepository,
-                                         val timetableRepository: TimetableRepository)
+open class SemesterMapper @Inject constructor(val subjectRepository: SubjectRepository,
+                                              val schoolYearRepository: SchoolYearRepository,
+                                              val markReportRepository: MarkReportRepository,
+                                              val timetableRepository: TimetableRepository)
     : Mapper<Semester, SemesterDto>, BaseMapper() {
     override fun toDto(from: Semester): SemesterDto {
         val subjects = from.subjects.map { it.id }

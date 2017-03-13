@@ -2,7 +2,6 @@
 **/build/
 **/classes/
 **/.idea/
-**/auth0.yml
 **/*.iml
 
 **/yarn-error.log

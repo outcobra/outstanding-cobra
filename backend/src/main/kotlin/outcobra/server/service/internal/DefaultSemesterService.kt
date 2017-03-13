@@ -19,10 +19,10 @@ import javax.inject.Inject
 
 @Component
 @Transactional
-class DefaultSemesterService
+open class DefaultSemesterService
 @Inject constructor(mapper: Mapper<Semester, SemesterDto>,
                     repository: SemesterRepository,
-                    requestValidator: RequestValidator<SemesterDto>,
+                    requestValidator : RequestValidator<SemesterDto>,
                     val userService: UserService,
                     val validator: SemesterValidator)
     : SemesterService, DefaultBaseService<Semester, SemesterDto, SemesterRepository>(mapper, repository, requestValidator, Semester::class) {
