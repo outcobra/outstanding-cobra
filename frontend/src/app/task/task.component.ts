@@ -25,8 +25,8 @@ export class TaskComponent implements OnInit {
     private tasks: Task[];
     private filteredTasks: Task[];
     private filterData: TaskFilter;
-    private isFiltered: boolean = false;
-    private isFilterShown: boolean = false;
+    private filtered: boolean = false;
+    private filterShown: boolean = false;
 
     private taskCreateUpdateDialog: MdDialogRef<TaskCreateUpdateDialog>;
 
@@ -62,7 +62,7 @@ export class TaskComponent implements OnInit {
             if (event instanceof NavigationEnd && !this.taskService.hasCache()) {
                 this.taskService.readAll().subscribe((tasks: Task[]) => {
                     this.tasks = tasks;
-                    this.filteredTasks = this.isFiltered ? Util.cloneArray(tasks) : this.filterTasks(Util.cloneArray(tasks));
+                    this.filteredTasks = this.filtered ? Util.cloneArray(tasks) : this.filterTasks(Util.cloneArray(tasks));
                 });
             }
         });
@@ -85,7 +85,7 @@ export class TaskComponent implements OnInit {
 
     checkFilter(task: Task) {
         let filter = this.buildFilterPredicate();
-        if (!this.isFiltered || this.filterTask(task, filter)) { // only add to filteredTasks if it passes the current filter
+        if (!this.filtered || this.filterTask(task, filter)) { // only add to filteredTasks if it passes the current filter
             this.filteredTasks.push(task);
         }
     }
@@ -95,7 +95,7 @@ export class TaskComponent implements OnInit {
         this.taskService.updateProgress(task.id, 100)
             .subscribe(() => {
                 task.progress = 100;
-                if (this.isFiltered) this.doFilter();
+                if (this.filtered) this.doFilter();
             });
     }
 
@@ -114,14 +114,14 @@ export class TaskComponent implements OnInit {
     }
 
     filterTasks(tasks: Task[]): Task[] {
-        if (!this.isFiltered) return tasks;
+        if (!this.filtered) return tasks;
         let filter = this.buildFilterPredicate();
         return tasks.filter(task => this.filterTask(task, filter));
 
     }
 
     filterTask(task: Task, filter: Predicate<Task>): boolean {
-        if (!this.isFiltered) return true;
+        if (!this.filtered) return true;
         return filter(task);
     }
 
@@ -137,17 +137,17 @@ export class TaskComponent implements OnInit {
     }
 
     resetFilter() {
-        this.isFiltered = false;
+        this.filtered = false;
         this.filterForm.reset();
         this.filteredTasks = Util.cloneArray(this.tasks);
     }
 
     doFilter() {
-        this.isFiltered = true;
+        this.filtered = true;
         this.filteredTasks = Util.cloneArray(this.filterTasks(this.tasks));
     }
 
     changeFilterVisibility() {
-        this.isFilterShown = !(this.isFilterShown)
+        this.filterShown = !(this.filterShown)
     }
 }

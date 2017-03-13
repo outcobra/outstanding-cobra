@@ -1,20 +1,20 @@
 <div class="row" [formGroup]="searchForm">
-    <div class="col m6 offset-m3">
+    <div class="col m8 offset-m2">
         <router-outlet></router-outlet>
         <h1>Tasks</h1>
-        <div>
-            <md-input-container id="task-search" class="col m5">
+        <div class="row">
+            <md-input-container id="task-search" class="col m8">
                 <input mdInput [placeholder]="'i18n.modules.task.filter.search' | translate"
                        formControlName="searchTerm">
             </md-input-container>
-            <button md-raised-button color="primary" class="col m1 offset-m6" (click)="changeFilterVisibility()">
+            <button md-raised-button color="primary" class="col m1" (click)="changeFilterVisibility()">
                 {{isFilterShown ? '˄' : '˅'}}
             </button>
         </div>
     </div>
 </div>
 <div class="row" [formGroup]="filterForm">
-    <div class="col m6 offset-m3">
+    <div class="col m8 offset-m2">
         <div *ngIf="isFilterShown" class="row">
             <md-card>
                 <md-card-title md-subheader>{{'i18n.modules.task.filter.title' | translate}}</md-card-title>
