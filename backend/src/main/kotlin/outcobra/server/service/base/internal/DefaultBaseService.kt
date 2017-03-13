@@ -3,8 +3,12 @@ package outcobra.server.service.base.internal
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.querydsl.QueryDslPredicateExecutor
 import outcobra.server.model.interfaces.Mapper
+import outcobra.server.model.interfaces.OutcobraDto
+import outcobra.server.model.interfaces.ParentLinked
 import outcobra.server.service.base.BaseService
+import outcobra.server.validator.RequestValidator
 import javax.transaction.Transactional
+import kotlin.reflect.KClass
 
 /**
  * Default implementation of a basic service to save, read and delete an entity
