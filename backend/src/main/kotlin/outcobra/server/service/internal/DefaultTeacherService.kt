@@ -15,10 +15,10 @@ import javax.inject.Inject
 
 @Component
 @Transactional
-class DefaultTeacherService
+open class DefaultTeacherService
 @Inject constructor(repository: TeacherRepository,
                     mapper: Mapper<Teacher, TeacherDto>,
-                    requestValidator: RequestValidator<TeacherDto>) : TeacherService,
+                    requestValidator : RequestValidator<TeacherDto>) : TeacherService,
         DefaultBaseService<Teacher, TeacherDto, TeacherRepository>(mapper, repository, requestValidator, Teacher::class) {
 
     override fun readAllByInstitution(institutionId: Long): List<TeacherDto> {

@@ -17,10 +17,10 @@ import javax.inject.Inject
 
 @Component
 @Transactional
-class DefaultSchoolYearService
+open class DefaultSchoolYearService
 @Inject constructor(mapper: Mapper<SchoolYear, SchoolYearDto>,
                     repository: SchoolYearRepository,
-                    requestValidator: RequestValidator<SchoolYearDto>,
+                    requestValidator : RequestValidator<SchoolYearDto>,
                     val schoolYearValidator: SchoolYearValidator)
     : SchoolYearService, DefaultBaseService<SchoolYear, SchoolYearDto, SchoolYearRepository>(mapper, repository, requestValidator, SchoolYear::class) {
 

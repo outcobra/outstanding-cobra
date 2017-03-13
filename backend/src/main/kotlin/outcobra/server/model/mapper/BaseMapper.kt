@@ -1,7 +1,6 @@
 package outcobra.server.model.mapper
 
 import org.springframework.stereotype.Component
-import outcobra.server.annotation.Open
 import outcobra.server.exception.ManipulatedRequestException
 import outcobra.server.model.interfaces.ParentLinked
 import outcobra.server.service.UserService
@@ -16,8 +15,7 @@ import kotlin.reflect.KClass
  * @since <since>
  */
 @Component
-@Open
-class BaseMapper {
+open class BaseMapper {
     @Inject
     lateinit var repositoryLocator: RepositoryLocator
     @Inject

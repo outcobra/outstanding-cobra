@@ -2,6 +2,7 @@ package outcobra.server.validator
 
 import org.springframework.stereotype.Component
 import outcobra.server.exception.ManipulatedRequestException
+import outcobra.server.model.User
 import outcobra.server.model.interfaces.OutcobraDto
 import outcobra.server.model.interfaces.ParentLinked
 import outcobra.server.service.UserService
@@ -19,7 +20,7 @@ import kotlin.reflect.KClass
  * @since <since>
  */
 @Component
-class RequestValidator<in Dto>
+open class RequestValidator<in Dto>
 @Inject constructor(val locator: RepositoryLocator, val userService: UserService)
 where Dto : OutcobraDto {
 
@@ -63,8 +64,10 @@ where Dto : OutcobraDto {
             val currentEntity = repository.findOne(this.identifier) as ParentLinked
             val parentHasChanged = this.parentLink.id != currentEntity.id
             if (parentHasChanged) currentEntity.checkOwnerIsCurrent()
+        } else if (parentLink.parentClass == User::class.java) {
+            //if this entity is new and directly connected to the user we are able to link it automatically
+            return
         }
-
         if (parent == null) throw ManipulatedRequestException()
         parent.checkOwnerIsCurrent()
     }
