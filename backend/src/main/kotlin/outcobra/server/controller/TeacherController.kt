@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 @RestController
 @RequestMapping("/api")
-open class TeacherController @Inject constructor(val teacherService: TeacherService) {
+class TeacherController @Inject constructor(val teacherService: TeacherService) {
     @RequestMapping(value = "/teacher", method = arrayOf(RequestMethod.POST, RequestMethod.PUT))
     fun saveTeacher(@RequestBody teacherDto: TeacherDto): TeacherDto {
         return teacherService.save(teacherDto)

@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 @RestController
 @RequestMapping("/api")
-open class SemesterController @Inject constructor(val semesterService: SemesterService) {
+class SemesterController @Inject constructor(val semesterService: SemesterService) {
 
     @RequestMapping(value = "/semester", method = arrayOf(RequestMethod.POST, RequestMethod.PUT))
     fun saveSemester(@RequestBody semesterDto: SemesterDto): SemesterDto {

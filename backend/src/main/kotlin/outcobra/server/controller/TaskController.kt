@@ -12,7 +12,7 @@ import javax.inject.Inject
  */
 @RestController
 @RequestMapping("/api")
-open class TaskController @Inject constructor(val taskService: TaskService) {
+class TaskController @Inject constructor(val taskService: TaskService) {
 
     @GetMapping(value = "/task")
     fun getAllTasks(): List<TaskDto> {

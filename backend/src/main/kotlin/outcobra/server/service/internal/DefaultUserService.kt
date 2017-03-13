@@ -20,7 +20,7 @@ import javax.inject.Inject
 @Service
 @DefaultImplementation
 @Profile("!$BASIC_AUTH_SECURITY_MOCK")
-open class DefaultUserService
+class DefaultUserService
 @Inject constructor(val userRepository: UserRepository,
                     val userDtoMapper: Mapper<User, UserDto>,
                     val auth0Client: Auth0Client) : UserService {

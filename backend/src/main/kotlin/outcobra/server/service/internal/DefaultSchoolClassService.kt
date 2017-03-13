@@ -23,9 +23,8 @@ import javax.inject.Inject
 open class DefaultSchoolClassService
 @Inject constructor(mapper: Mapper<SchoolClass, SchoolClassDto>,
                     repository: SchoolClassRepository,
-                    requestValidator : RequestValidator<SchoolClassDto>,
-                    val userService: UserService) : SchoolClassService,
-        DefaultBaseService<SchoolClass, SchoolClassDto, SchoolClassRepository>(mapper, repository, requestValidator, SchoolClass::class) {
+                    requestValidator: RequestValidator<SchoolClassDto>,val userService: UserService)
+    : SchoolClassService, DefaultBaseService<SchoolClass, SchoolClassDto, SchoolClassRepository>(mapper, repository, requestValidator, SchoolClass::class) {
 
     override fun readAllByUser(): List<SchoolClassDto> {
         val userId = userService.getCurrentUser()!!.id
