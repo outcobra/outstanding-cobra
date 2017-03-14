@@ -22,12 +22,16 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'kotlin'
 apply plugin: 'kotlin-spring'
+apply plugin: 'kotlin-allopen'
 apply plugin: 'kotlin-noarg'
 apply plugin: 'eclipse-wtp'
 apply plugin: 'spring-boot'
 apply plugin: 'war'
 apply plugin: 'idea'
 
+allOpen{
+    annotation('outcobra.server.annotation.AllOpen')
+}
 war {
     baseName = 'outstanding-cobra-server'
     version = outstandingCobraVersion
@@ -78,7 +82,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-devtools')
     compile('org.springframework.boot:spring-boot-starter-actuator')
     compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310')
-    compile($/org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}/$)
+    compile($/org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}/$)
     compile($/org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}/$)
     runtime('com.h2database:h2')
     runtime('mysql:mysql-connector-java')
