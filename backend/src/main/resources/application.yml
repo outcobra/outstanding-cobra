@@ -83,3 +83,11 @@ spring:
       ddl-auto: validate
 flyway:
   locations: db/migration
+---
+spring.profiles: bit
+spring:
+  profiles:
+    include: auth0_proxy
+http:
+  proxyHost: proxy.efd.admin.ch
+  proxyPort: 8080
