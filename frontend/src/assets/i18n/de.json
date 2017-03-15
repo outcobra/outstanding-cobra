@@ -181,6 +181,10 @@
       "error": {
         "title": "Login fehlgeschlagen",
         "message": "Sie konnten nicht eingeloggt werden"
+      },
+      "success": {
+        "hello": "Hallo, ",
+        "message": "Sie sind jetzt eingeloggt"
       }
     },
     "http": {

@@ -188,6 +188,10 @@
       "error": {
         "title": "Login failed",
         "message": "We could not log you in"
+      },
+      "success": {
+        "hello": "Hello, ",
+        "message": "You are now logged in"
       }
     },
     "http": {

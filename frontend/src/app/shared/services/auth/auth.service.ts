@@ -1,11 +1,13 @@
-import {Injectable} from '@angular/core';
-import {Config} from '../../../config/Config';
-import {tokenNotExpired} from 'angular2-jwt';
-import {Router} from '@angular/router';
-import {HttpInterceptor} from '../../http/HttpInterceptor';
-import {Util} from '../../util/util';
-import {NotificationsService} from 'angular2-notifications';
-import {Observable} from 'rxjs';
+import {Injectable} from "@angular/core";
+import {Config} from "../../../config/Config";
+import {tokenNotExpired} from "angular2-jwt";
+import {Router} from "@angular/router";
+import {HttpInterceptor} from "../../http/HttpInterceptor";
+import {Util} from "../../util/util";
+import {NotificationsService} from "angular2-notifications";
+import {Observable} from "rxjs";
+import {User} from "../../model/User";
+import {TranslateService} from "ng2-translate";
 
 declare let Auth0Lock: any;
 
@@ -16,7 +18,12 @@ export class AuthService {
     private redirectRoute: string;
     lock;
 
-    constructor(private config: Config, private router: Router, private http: HttpInterceptor, private notificationService: NotificationsService) {
+    constructor(private config: Config,
+                private router: Router,
+                private http: HttpInterceptor,
+                private notificationService: NotificationsService,
+                private translateService: TranslateService) {
+
         this.auth0Config = this.config.get('auth0');
 
         // auth0 lock configuration
@@ -52,14 +59,16 @@ export class AuthService {
             this.lock.getProfile(authResult.idToken, (err, profile) => {
                 localStorage.setItem(this.config.get('locStorage.profileLocation'), JSON.stringify(profile));
             });
-            // We need to subscribe here because the request does not get triggered if we don't
-            this.http.get('/user/login', 'outcobra')
-                .catch(err => {
+            this.http.get<User>('/user/login', 'outcobra')
+                .catch(() => {
                     this.logout();
-                    this.notificationService.error('i18n.login.error.title', 'i18n.login.error.title');
+                    this.notificationService.error('i18n.login.error.title', 'i18n.login.error.message');
                     return Observable.empty();
                 })
-                .subscribe();
+                .subscribe((user: User) =>
+                    this.notificationService.success(
+                        this.translateService.instant('i18n.login.success.hello') + user.username, 'i18n.login.success.message'
+                    ));
             let redirectRoute = Util.getUrlParam('state');
             if (redirectRoute) {
                 this.router.navigate(redirectRoute);

@@ -26,11 +26,11 @@ import java.net.Proxy
 @Configuration
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 class Auth0Config : Auth0SecurityConfig() {
-    @Value("\${http.proxyHost}")
-    lateinit var proxyHost: String
 
-    @Value("\${http.proxyPort}")
-    var proxyPort: Int = 80
+    @Value("\${http.proxyHost:}")
+    lateinit var proxyHost: String
+    @Value("\${http.proxyPort:}")
+    lateinit var proxyPort: String
 
 
     @Bean
@@ -55,7 +55,7 @@ class Auth0Config : Auth0SecurityConfig() {
     @Profile(AUTH0_PROXY)
     fun okHttpClientProxy(): OkHttpClient {
         val httpClient = OkHttpClient()
-        httpClient.proxy = Proxy(Proxy.Type.HTTP, InetSocketAddress(proxyHost, proxyPort))
+        httpClient.proxy = Proxy(Proxy.Type.HTTP, InetSocketAddress(proxyHost, Integer.parseInt(proxyPort)))
         return httpClient
     }
 
