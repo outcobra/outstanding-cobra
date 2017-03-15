@@ -1,27 +1,27 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewEncapsulation} from '@angular/core';
-import {ManageService} from './service/manage.service';
-import {InstitutionDto, ManageDto, SchoolClassDto, SchoolYearDto, SemesterDto, SubjectDto} from './model/ManageDto';
-import {HammerInput, MdDialogRef} from '@angular/material';
-import {InstitutionDialog} from './institution-dialog/institution-dialog.component';
-import {DialogMode} from '../common/DialogMode';
-import {SchoolClassDialog} from './school-class-dialog/school-class-dialog.component';
-import {InstitutionService} from './service/institution.service';
-import {SchoolClassService} from './service/school-class.service';
-import {SchoolYearDialog} from './school-year-dialog/school-year-dialog.component';
-import {SchoolYearService} from './service/school-year.service';
-import {SemesterDialog} from './semester-dialog/semester-dialog.component';
-import {SemesterService} from './service/semester.service';
-import {NotificationsService} from 'angular2-notifications';
-import {ConfirmDialogService} from '../shared/services/confirm-dialog.service';
-import {ManageDialogFactory} from './service/manage-dialog-factory';
-import {SubjectDialog} from './subject-dialog/subject-dialog.component';
-import {SubjectService} from './service/subject.service';
-import {Util} from '../shared/util/util';
-import {isNotNull, isTrue} from '../shared/util/helper';
-import {Observable} from 'rxjs';
-import {Dto} from '../common/Dto';
-import {CreateUpdateDialog} from '../common/CreateUpdateDialog';
-import {ResponsiveHelperService} from '../shared/services/ui/responsive-helper.service';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewEncapsulation} from "@angular/core";
+import {ManageService} from "./service/manage.service";
+import {InstitutionDto, ManageDto, SchoolClassDto, SchoolYearDto, SemesterDto, SubjectDto} from "./model/ManageDto";
+import {HammerInput, MdDialogRef} from "@angular/material";
+import {InstitutionDialog} from "./institution-dialog/institution-dialog.component";
+import {DialogMode} from "../common/DialogMode";
+import {SchoolClassDialog} from "./school-class-dialog/school-class-dialog.component";
+import {InstitutionService} from "./service/institution.service";
+import {SchoolClassService} from "./service/school-class.service";
+import {SchoolYearDialog} from "./school-year-dialog/school-year-dialog.component";
+import {SchoolYearService} from "./service/school-year.service";
+import {SemesterDialog} from "./semester-dialog/semester-dialog.component";
+import {SemesterService} from "./service/semester.service";
+import {NotificationsService} from "angular2-notifications";
+import {ConfirmDialogService} from "../shared/services/confirm-dialog.service";
+import {ManageDialogFactory} from "./service/manage-dialog-factory";
+import {SubjectDialog} from "./subject-dialog/subject-dialog.component";
+import {SubjectService} from "./service/subject.service";
+import {Util} from "../shared/util/util";
+import {isNotNull, isTrue} from "../shared/util/helper";
+import {Observable} from "rxjs";
+import {Dto} from "../common/Dto";
+import {CreateUpdateDialog} from "../common/CreateUpdateDialog";
+import {ResponsiveHelperService} from "../shared/services/ui/responsive-helper.service";
 
 enum ManageView {
     INSTITUTION_CLASS = 1,
@@ -76,6 +76,9 @@ export class ManageComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
+        this.responsiveHelper.listenForOrientationChange().subscribe((orientation) => {
+            console.log(orientation);
+        });
         this.responsiveHelper.listenForResize().subscribe(() => this.setColumnClasses());
 
         this.activeManageView = ManageView.INSTITUTION_CLASS;
@@ -122,7 +125,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
     }
 
     private swipe(event: HammerInput) {
-        if (!this.isMobile()) return;
+        if (!this.responsiveHelper.isTouchDevice()) return;
         if (event.deltaX > 0) {
             this.nextView();
         } else {
