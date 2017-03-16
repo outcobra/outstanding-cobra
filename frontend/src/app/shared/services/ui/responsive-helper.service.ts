@@ -1,8 +1,8 @@
-import {Injectable} from "@angular/core";
-import {Observable} from "rxjs";
-import {MATERIALIZE_MIN_WIDTH_LARGE, MATERIALIZE_MIN_WIDTH_MEDIUM, MOBILE_DIALOG} from "../../util/const";
-import {MdDialogConfig} from "@angular/material";
-import {Orientation} from "./Orientation";
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import {MATERIALIZE_MIN_WIDTH_LARGE, MATERIALIZE_MIN_WIDTH_MEDIUM, MOBILE_DIALOG} from '../../util/const';
+import {MdDialogConfig} from '@angular/material';
+import {Orientation} from './Orientation';
 
 @Injectable()
 export class ResponsiveHelperService {
@@ -19,13 +19,15 @@ export class ResponsiveHelperService {
 
     public listenForOrientationChange(): Observable<Orientation> {
         return Observable.fromEvent(window, 'orientationchange')
+            .distinctUntilChanged()
+            .debounceTime(200)
             .map(() => {
                 // That's weird......but in another way the compiler won't compile ¯\_(ツ)_/¯
                 if (Math.abs((window.screen as any ).orientation.angle) === Orientation.LANDSCAPE) {
                     return Orientation.LANDSCAPE
                 }
                 return Orientation.PORTRAIT
-            })
+            });
     }
 
     public getMobileOrGivenDialogConfig(config: MdDialogConfig) {
