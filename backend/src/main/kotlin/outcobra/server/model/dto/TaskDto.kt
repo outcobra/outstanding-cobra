@@ -1,6 +1,5 @@
 package outcobra.server.model.dto
 
-import outcobra.server.annotation.NoArgConstructor
 import outcobra.server.model.Subject
 import outcobra.server.model.interfaces.OutcobraDto
 import outcobra.server.model.interfaces.ParentLink
@@ -9,7 +8,6 @@ import java.time.LocalDate
 /**
  * @author Vincent Perret
  */
-@NoArgConstructor
 data class TaskDto(
         val id: Long = 0,
         val subject: SubjectDto = SubjectDto(),

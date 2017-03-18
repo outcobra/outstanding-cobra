@@ -1,12 +1,10 @@
 package outcobra.server.model.dto
 
-import outcobra.server.annotation.NoArgConstructor
 import outcobra.server.model.SchoolYear
 import outcobra.server.model.interfaces.OutcobraDto
 import outcobra.server.model.interfaces.ParentLink
 import java.time.LocalDate
 
-@NoArgConstructor
 data class SemesterDto(
         val id: Long,
         val schoolYearId: Long = 0,

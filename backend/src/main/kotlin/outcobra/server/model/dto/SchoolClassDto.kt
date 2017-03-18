@@ -1,11 +1,9 @@
 package outcobra.server.model.dto
 
-import outcobra.server.annotation.NoArgConstructor
 import outcobra.server.model.Institution
 import outcobra.server.model.interfaces.OutcobraDto
 import outcobra.server.model.interfaces.ParentLink
 
-@NoArgConstructor
 data class SchoolClassDto(val id: Long = 0,
                           val institutionId: Long = 0,
                           val normalizedName: String = "",
