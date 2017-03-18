@@ -1,4 +1,14 @@
-import {animate, Component, OnInit, state, style, transition, trigger, ViewEncapsulation} from '@angular/core';
+import {
+    AfterViewInit,
+    animate,
+    Component,
+    OnInit,
+    state,
+    style,
+    transition,
+    trigger,
+    ViewEncapsulation
+} from '@angular/core';
 import {TaskService} from './service/task.service';
 import {Task} from './model/Task';
 import {FormBuilder, FormGroup} from '@angular/forms';
@@ -12,6 +22,7 @@ import {DialogMode} from '../common/DialogMode';
 import {Observable} from 'rxjs';
 import {SMALL_DIALOG} from '../shared/util/const';
 import {and} from '../shared/util/helper';
+import {ResponsiveHelperService} from '../shared/services/ui/responsive-helper.service';
 
 @Component({
     selector: 'task',
@@ -35,14 +46,14 @@ import {and} from '../shared/util/helper';
         ])
     ]
 })
-export class TaskComponent implements OnInit {
+export class TaskComponent implements OnInit, AfterViewInit {
     private filterForm: FormGroup;
     private searchForm: FormGroup;
     private tasks: Task[];
     private filteredTasks: Task[];
     private filterData: TaskFilter;
     private filtered: boolean = false;
-    private filterShown: boolean = false;
+    private filterShown: boolean;
 
     private taskCreateUpdateDialog: MdDialogRef<TaskCreateUpdateDialog>;
 
@@ -51,7 +62,8 @@ export class TaskComponent implements OnInit {
                 private notificationService: NotificationsService,
                 private route: ActivatedRoute,
                 private router: Router,
-                private formBuilder: FormBuilder) {
+                private formBuilder: FormBuilder,
+                private responsiveHelperService: ResponsiveHelperService) {
     }
 
     ngOnInit() {
@@ -80,6 +92,18 @@ export class TaskComponent implements OnInit {
                     this.tasks = tasks;
                     this.filteredTasks = this.filtered ? Util.cloneArray(tasks) : this.filterTasks(Util.cloneArray(tasks));
                 });
+            }
+        });
+    }
+
+    ngAfterViewInit() {
+        this.filterShown = !this.responsiveHelperService.isMobile();
+        Observable.concat(
+            this.responsiveHelperService.listenForResize(),
+            this.responsiveHelperService.listenForOrientationChange()
+        ).subscribe(() => {
+            if (!this.responsiveHelperService.isMobile()) {
+                this.filterShown = true;
             }
         });
     }
