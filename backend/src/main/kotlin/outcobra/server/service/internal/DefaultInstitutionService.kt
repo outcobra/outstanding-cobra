@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @Service
 @Transactional
-open class DefaultInstitutionService
+class DefaultInstitutionService
 @Inject constructor(mapper: Mapper<Institution, InstitutionDto>,
                     repository: InstitutionRepository,
                     requestValidator: RequestValidator<InstitutionDto>,

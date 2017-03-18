@@ -16,7 +16,7 @@ import javax.inject.Inject
 @Configuration
 @EnableWebSecurity
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
-open class BasicAuthConfig : WebSecurityConfigurerAdapter() {
+class BasicAuthConfig : WebSecurityConfigurerAdapter() {
 
     override fun configure(http: HttpSecurity?) {
         http!!.authorizeRequests()
@@ -25,7 +25,7 @@ open class BasicAuthConfig : WebSecurityConfigurerAdapter() {
     }
 
     @Inject
-    open fun configureGlobal(auth: AuthenticationManagerBuilder) {
+    fun configureGlobal(auth: AuthenticationManagerBuilder) {
         auth.inMemoryAuthentication()
                 .withUser("admin").password("secret").roles("ADMIN")
                 .and()

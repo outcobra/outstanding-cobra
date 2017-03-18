@@ -8,7 +8,7 @@ import outcobra.server.service.ColorService
 import kotlin.comparisons.compareBy
 
 @Service
-open class DefaultColorService(val mapper: ColorMapper) : ColorService {
+class DefaultColorService(val mapper: ColorMapper) : ColorService {
     override fun getColorsWithIndex(): List<ColorDto> {
         val colors = Color.values().map { mapper.toDto(it) }
         return colors.map {

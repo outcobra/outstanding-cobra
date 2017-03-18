@@ -13,6 +13,7 @@ import javax.inject.Inject
 
 @RunWith(SpringRunner::class)
 @SpringBootTest
+@Transactional
 open class UserRepositoryTest {
 
     @Inject
@@ -29,8 +30,7 @@ open class UserRepositoryTest {
     }
 
     @Test
-    @Transactional
-    open fun testUserRepository() {
+    fun testUserRepository() {
         val saved = userRepository.save(myUser)
         userRepository.flush()
         assertThat(userRepository.count()).isEqualTo(userCount + 1)
@@ -43,8 +43,7 @@ open class UserRepositoryTest {
     }
 
     @Test
-    @Transactional
-    open fun testQueryDslExecutor() {
+    fun testQueryDslExecutor() {
         userRepository.save(myUser)
 
         val predicate = QUser.user.auth0Id.eq(myUser.auth0Id)

@@ -19,8 +19,8 @@ import javax.inject.Inject
  * @since <since>
  */
 @Component
-open class SemesterValidator @Inject constructor(val schoolYearRepository: SchoolYearRepository,
-                                                 val semesterRepository: SemesterRepository) {
+class SemesterValidator @Inject constructor(val schoolYearRepository: SchoolYearRepository,
+                                            val semesterRepository: SemesterRepository) {
     /**
      * checks that the given [Semester] does not overlap with any other [Semester] in the same [SchoolYear]
      * checks that the given [Semester] is in the parent [SchoolYear]

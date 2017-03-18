@@ -109,6 +109,13 @@
       "manage": {
         "linkTitle": "Manage",
         "assureDeletion": "Do you really want to delete the object?",
+        "mobile": {
+          "title": {
+            "INSTITUTION_CLASS": "Institutions und Classes",
+            "YEAR_SEMESTER": "Schoolyears und Semesters",
+            "SUBJECT": "Subjects"
+          }
+        },
         "institution": {
           "add": "Add new Institution",
           "confirmDeleteMessage": "Do you really want to delete the institution? All child elements (schoolclasses, schoolyears, semesters, subjects) will be erased too.",
@@ -182,6 +189,10 @@
       "error": {
         "title": "Login failed",
         "message": "We could not log you in"
+      },
+      "success": {
+        "hello": "Hello, ",
+        "message": "You are now logged in"
       }
     },
     "http": {

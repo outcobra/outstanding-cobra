@@ -25,7 +25,7 @@ import javax.inject.Inject
 @SpringBootTest
 @ActiveProfiles(TEST)
 @Transactional
-open class SemesterValidatorTest {
+class SemesterValidatorTest {
     @Inject
     lateinit var semesterRepository: SemesterRepository
     @Inject

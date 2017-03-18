@@ -19,9 +19,9 @@ import javax.inject.Inject
 @Component
 @Transactional
 @Order(USER)
-open class UserDataLoader
+class UserDataLoader
 @Inject constructor(val userRepository: UserRepository,
-                    val userService : UserService) : DataLoader {
+                    val userService: UserService) : DataLoader {
 
     companion object {
         var TEST_USER: User? = null
