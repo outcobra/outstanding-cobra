@@ -72,9 +72,8 @@ spring:
   profiles: mysql_database
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/outcobra_a
-    username: outcobra-a
-    password: <todo>
+    url: jdbc:mysql://db:3306/outcobra
+    username: outcobra
   jpa:
     properties:
       hibernate:
