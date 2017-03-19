@@ -6,6 +6,12 @@ manager, .manage-rows {
     display: block;
 }
 
+outcobra-app:not(.outcobra-mobile) {
+    manager, .manage-rows {
+        height: 100%;
+    }
+}
+
 .mobile-manage-nav {
     height: 50px;
     width: 100%;
@@ -16,6 +22,11 @@ manager, .manage-rows {
         &.mobile-title {
             height: 50px;
             text-align: center;
+
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
     }
 }
@@ -23,7 +34,6 @@ manager, .manage-rows {
 .manage-rows {
     overflow-y: hidden;
     transition: margin-left .5s ease-in-out;
-
     margin: 0;
 
     &.mobile {

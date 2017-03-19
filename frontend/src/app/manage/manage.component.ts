@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewEncapsulation} from '@angular/core';
 import {ManageService} from './service/manage.service';
 import {InstitutionDto, ManageDto, SchoolClassDto, SchoolYearDto, SemesterDto, SubjectDto} from './model/ManageDto';
-import {HammerInput, MdDialogRef} from '@angular/material';
+import {MdDialogRef} from '@angular/material';
 import {InstitutionDialog} from './institution-dialog/institution-dialog.component';
 import {DialogMode} from '../common/DialogMode';
 import {SchoolClassDialog} from './school-class-dialog/school-class-dialog.component';
@@ -22,6 +22,7 @@ import {Observable} from 'rxjs';
 import {Dto} from '../common/Dto';
 import {CreateUpdateDialog} from '../common/CreateUpdateDialog';
 import {ResponsiveHelperService} from '../shared/services/ui/responsive-helper.service';
+import * as Hammer from 'hammerjs';
 
 enum ManageView {
     INSTITUTION_CLASS = 0,
@@ -78,7 +79,6 @@ export class ManageComponent implements OnInit, AfterViewInit {
     ngAfterViewInit() {
         this.responsiveHelper.listenForOrientationChange().subscribe(() => this.calculateMarginLeftByCurrentView());
         this.responsiveHelper.listenForResize().subscribe(() => {
-            console.log('resize');
             this.calculateMarginLeftByCurrentView();
             this.setColumnClasses();
         });
@@ -128,17 +128,6 @@ export class ManageComponent implements OnInit, AfterViewInit {
     private isValidDirection(next: number): boolean {
         //noinspection JSPotentiallyInvalidTargetOfIndexedPropertyAccess
         return ManageView[this.activeManageView + next] !== undefined;
-    }
-
-    private swipe(event: HammerInput) {
-        console.log("swipe"); // do not remove
-        console.log(event); // do not remove
-        if (!this.responsiveHelper.isTouchDevice()) return;
-        if (event.deltaX > 0) {
-            this.nextView();
-        } else {
-            this.lastView();
-        }
     }
 
     //endregion

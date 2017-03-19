@@ -13,8 +13,7 @@
         </button>
     </div>
 </div>
-<div class="row manage-rows" [class.mobile]="isMobile()" [style.margin-left.px]="isMobile() ? marginLeft : 0"
-     (swipe)="swipe($event)">
+<div class="row manage-rows" [class.mobile]="isMobile()" [style.margin-left.px]="isMobile() ? marginLeft : 0">
     <!-- FIRST COLUMN START -->
     <div [ngClass]="columnClasses" [class.border-right]="!isMobile()">
         <ul class="collapsible">
