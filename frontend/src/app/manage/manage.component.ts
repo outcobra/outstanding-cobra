@@ -24,9 +24,9 @@ import {CreateUpdateDialog} from '../common/CreateUpdateDialog';
 import {ResponsiveHelperService} from '../shared/services/ui/responsive-helper.service';
 
 enum ManageView {
-    INSTITUTION_CLASS = 1,
-    YEAR_SEMESTER = 2,
-    SUBJECT = 3
+    INSTITUTION_CLASS = 0,
+    YEAR_SEMESTER = 1,
+    SUBJECT = 2
 }
 
 const I18N_PREFIX = 'i18n.modules.manage.mobile.title.';
@@ -76,11 +76,16 @@ export class ManageComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
+        this.responsiveHelper.listenForOrientationChange().subscribe(() => this.calculateMarginLeftByCurrentView());
         this.responsiveHelper.listenForResize().subscribe(() => this.setColumnClasses());
 
         this.activeManageView = ManageView.INSTITUTION_CLASS;
         this.mobileTitle = I18N_PREFIX + ManageView[this.activeManageView];
         this.setColumnClasses();
+    }
+
+    private calculateMarginLeftByCurrentView() {
+        this.marginLeft = -(this.activeManageView * this.elementRef.nativeElement.offsetWidth);
     }
 
     //region responsive
@@ -102,9 +107,9 @@ export class ManageComponent implements OnInit, AfterViewInit {
 
     private changeView(next: number) {
         if (this.isValidDirection(next)) {
-            this.marginLeft -= next * this.elementRef.nativeElement.offsetWidth;
             this.activeManageView = this.activeManageView + next;
             this.mobileTitle = I18N_PREFIX + ManageView[this.activeManageView];
+            this.calculateMarginLeftByCurrentView();
         }
     }
 
@@ -122,7 +127,9 @@ export class ManageComponent implements OnInit, AfterViewInit {
     }
 
     private swipe(event: HammerInput) {
-        if (!this.isMobile()) return;
+        console.log("swipe"); // do not remove
+        console.log(event); // do not remove
+        if (!this.responsiveHelper.isTouchDevice()) return;
         if (event.deltaX > 0) {
             this.nextView();
         } else {
