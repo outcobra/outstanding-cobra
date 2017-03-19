@@ -29,6 +29,7 @@ apply plugin: 'idea'
 
 allOpen{
     annotation('outcobra.server.annotation.AllOpen')
+    annotation('org.springframework.boot.test.context.SpringBootTest')
 }
 war {
     baseName = 'outstanding-cobra-server'

@@ -22,7 +22,7 @@ import javax.inject.Inject
 open class DefaultSemesterService
 @Inject constructor(mapper: Mapper<Semester, SemesterDto>,
                     repository: SemesterRepository,
-                    requestValidator : RequestValidator<SemesterDto>,
+                    requestValidator: RequestValidator<SemesterDto>,
                     val userService: UserService,
                     val validator: SemesterValidator)
     : SemesterService, DefaultBaseService<Semester, SemesterDto, SemesterRepository>(mapper, repository, requestValidator, Semester::class) {

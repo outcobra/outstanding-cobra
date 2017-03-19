@@ -18,8 +18,8 @@ import javax.inject.Inject
 open class DefaultTeacherService
 @Inject constructor(repository: TeacherRepository,
                     mapper: Mapper<Teacher, TeacherDto>,
-                    requestValidator : RequestValidator<TeacherDto>) : TeacherService,
-        DefaultBaseService<Teacher, TeacherDto, TeacherRepository>(mapper, repository, requestValidator, Teacher::class) {
+                    requestValidator: RequestValidator<TeacherDto>)
+    : TeacherService, DefaultBaseService<Teacher, TeacherDto, TeacherRepository>(mapper, repository, requestValidator, Teacher::class) {
 
     override fun readAllByInstitution(institutionId: Long): List<TeacherDto> {
         requestValidator.validateRequestById(institutionId, Institution::class)
