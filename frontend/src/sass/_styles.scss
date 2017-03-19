@@ -64,7 +64,8 @@ button[md-raised-button], button[md-button] {
 
 .app-content {
     height: calc(100% - 64px);
-    overflow-y: scroll;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .toolbar-icon {

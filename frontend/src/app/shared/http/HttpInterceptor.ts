@@ -30,9 +30,7 @@ export class HttpInterceptor {
     constructor(private http: Http, private notificationsService: NotificationsService, private config: Config) {
         this.defaultApiName = this.config.get('api.defaultApiName');
         this.apiNames = this.config.get('api.apis')
-            .map(api => {
-                return api['name']
-            });
+            .map(api => api['name']);
     }
 
     /**
