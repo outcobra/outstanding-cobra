@@ -293,7 +293,6 @@ export class ManageComponent implements OnInit, AfterViewInit {
             .filter(isTrue)
             .switchMap(() => Util.bindAndCall(deleteFunction, thisArg, entity.id))
             .catch((error) => {
-                console.log(error);
                 this.notificationService.remove();
                 this.notificationService.error('i18n.modules.task.notification.error.deleteFailed.title', 'i18n.modules.task.notification.error.deleteFailed.message');
                 return Observable.empty();
