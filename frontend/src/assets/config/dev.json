@@ -6,6 +6,11 @@
         "name": "outcobra",
         "apiBase": "http://localhost:8080/api/",
         "authToken": true
+      },
+      {
+        "name": "outcobra_public",
+        "apiBase": "http://localhost:8080/",
+        "authToken": false
       }
     ]
   },

@@ -24,6 +24,12 @@ import {ConfirmDialogService} from './services/confirm-dialog.service';
 import {ColorService} from './services/color.service';
 import {ColorpickerComponent} from './components/colorpicker/colorpicker.component';
 import {ResponsiveHelperService} from './services/ui/responsive-helper.service';
+import {InfoService} from './services/info.service';
+import {FooterComponent} from './components/footer/footer.component';
+import {InfoDialogComponent} from './components/info-dialog/info-dialog.component';
+import {IconDataComponent} from './components/icon-data/icon-data/icon-data.component';
+import {IconDataChildComponent} from './components/icon-data/icon-data-child/icon-data-child.component';
+import {IconDataDataDirective, IconDataTitleDirective} from './components/icon-data/icon-data-directives';
 
 @NgModule({
     declarations: [
@@ -37,7 +43,13 @@ import {ResponsiveHelperService} from './services/ui/responsive-helper.service';
         CollapsibleComponent,
         CollapsibleHeaderComponent,
         CollapsibleBodyComponent,
-        ConfirmDialogComponent
+        ConfirmDialogComponent,
+        FooterComponent,
+        InfoDialogComponent,
+        IconDataComponent,
+        IconDataChildComponent,
+        IconDataTitleDirective,
+        IconDataDataDirective
     ],
     exports: [
         DatepickerComponent,
@@ -47,6 +59,11 @@ import {ResponsiveHelperService} from './services/ui/responsive-helper.service';
         CollapsibleComponent,
         CollapsibleHeaderComponent,
         CollapsibleBodyComponent,
+        FooterComponent,
+        IconDataComponent,
+        IconDataChildComponent,
+        IconDataTitleDirective,
+        IconDataDataDirective,
         TranslateModule
     ],
     imports: [
@@ -58,7 +75,8 @@ import {ResponsiveHelperService} from './services/ui/responsive-helper.service';
         SimpleNotificationsModule
     ],
     entryComponents: [
-        ConfirmDialogComponent
+        ConfirmDialogComponent,
+        InfoDialogComponent
     ],
     providers: [
         DateUtil,
@@ -66,6 +84,7 @@ import {ResponsiveHelperService} from './services/ui/responsive-helper.service';
         HttpInterceptor,
         ConfirmDialogService,
         ColorService,
+        InfoService,
         ResponsiveHelperService,
         NotificationWrapperService,
         {

@@ -1,0 +1,6 @@
+@import '../../../../../sass/color';
+
+.subtitle {
+    font-weight: normal !important;
+    @extend .text-secondary-dark;
+}
