@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  db:
+    image: mariadb:10
+    environment:
+      MYSQL_DATABASE: outcobra
+      MYSQL_USER: outcobra
+      MYSQL_PASSWORD: test
+      MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+
+  backend:
+    image: docker.pegnu.cloud:443/outcobra-backend:latest
+    environment:
+      JAVA_OPTS: -Dspring.profiles.active=production -Dspring.datasource.password=test
+    expose:
+      - 8080
+    links:
+      - db:mysql
+
+  frontend:
+    image: docker.pegnu.cloud:443/outcobra-frontend:latest
+    ports:
+      - 80:80
+    links:
+      - backend
