@@ -1,4 +1,4 @@
-#Outstanding Cobra
+# Outstanding Cobra
 
 [![Build Status](https://semaphoreci.com/api/v1/outcobra/outstanding-cobra/branches/develop/shields_badge.svg)](https://semaphoreci.com/outcobra/outstanding-cobra)
 [![CircleCI](https://circleci.com/gh/outcobra/outstanding-cobra.svg?style=svg)](https://circleci.com/gh/outcobra/outstanding-cobra)

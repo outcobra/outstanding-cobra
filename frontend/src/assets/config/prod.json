@@ -4,7 +4,7 @@
     "apis": [
       {
         "name": "outcobra",
-        "apiBase": "https://tc-manage.jmnw.me/outcobra-a/api/",
+        "apiBase": "https://outcobra-a.pegnu.cloud/backend/api/",
         "authToken": true
       }
     ]
@@ -12,7 +12,7 @@
   "auth0": {
     "clientID": "Qih42aYQMS2CGCAqNkgalzFdIyacqi5r",
     "domain": "outcobra.eu.auth0.com",
-    "callbackURL": "https://outcobra-a.firebaseapp.com/"
+    "callbackURL": "https://outcobra-a.pegnu.cloud/"
   },
   "locStorage": {
     "tokenLocation": "id_token",
