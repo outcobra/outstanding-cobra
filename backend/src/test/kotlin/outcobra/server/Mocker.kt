@@ -13,13 +13,12 @@ import outcobra.server.model.repository.UserRepository
 import outcobra.server.service.UserService
 import javax.inject.Inject
 
-@Suppress("UNNECESSARY_LATEINIT") //needed for the users since kotlin 1.1.0
 @Configuration
 @Profile(MOCK_SERVICES)
 class Mocker(userRepository: UserRepository) {
 
-    lateinit var USER: User
-    lateinit var USER2: User
+    val USER: User
+    val USER2: User
 
     @Inject
     @DefaultImplementation

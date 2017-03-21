@@ -14,7 +14,7 @@ import javax.inject.Inject
 @RunWith(SpringRunner::class)
 @SpringBootTest
 @Transactional
-open class UserRepositoryTest {
+class UserRepositoryTest {
 
     @Inject
     lateinit var userRepository: UserRepository
