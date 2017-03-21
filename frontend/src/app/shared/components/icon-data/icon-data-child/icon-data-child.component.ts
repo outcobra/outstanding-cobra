@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, ViewEncapsulation} from '@angular/core';
 
 @Component({
     selector: 'icon-data-child',
@@ -6,12 +6,5 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
     styleUrls: ['./icon-data-child.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class IconDataChildComponent implements OnInit {
-
-    constructor() {
-    }
-
-    ngOnInit() {
-    }
-
+export class IconDataChildComponent {
 }

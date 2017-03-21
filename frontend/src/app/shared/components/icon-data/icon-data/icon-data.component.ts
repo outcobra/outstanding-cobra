@@ -1,5 +1,4 @@
-import {Component, ContentChild, HostBinding, Input, OnInit, QueryList, ViewEncapsulation} from '@angular/core';
-import {IconDataChildComponent} from '../icon-data-child/icon-data-child.component';
+import {Component, HostBinding, Input, ViewEncapsulation} from '@angular/core';
 
 @Component({
     selector: 'icon-data',
@@ -7,23 +6,9 @@ import {IconDataChildComponent} from '../icon-data-child/icon-data-child.compone
     styleUrls: ['./icon-data.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class IconDataComponent implements OnInit {
+export class IconDataComponent {
     @Input() iconName: string;
     @Input() titleKey: string;
     @HostBinding('class.show-divider')
     @Input() showDivider: boolean = true;
-
-    @ContentChild(IconDataChildComponent) children: QueryList<IconDataChildComponent>;
-
-    constructor() {
-    }
-
-    ngOnInit() {
-
-    }
-
-    hasMultipleChildren(): boolean {
-        return this.children.length > 0;
-    }
-
 }
