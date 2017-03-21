@@ -1,5 +1,13 @@
 @import '../../../sass/color';
 
+md-card-header {
+    margin: -8px 0 16px;
+    overflow: hidden;
+    span {
+        min-width: 40px;
+    }
+}
+
 .task-detail {
     margin-top: 20px;
 }

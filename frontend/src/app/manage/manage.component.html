@@ -1,6 +1,22 @@
-<div class="row manage-rows">
+<div *ngIf="isMobile()" class="row mobile-manage-nav z-depth-1-half">
+    <div class="col m2 s2">
+        <button md-mini-fab color="accent" [disabled]="!isValidDirection(-1)" (click)="lastView()">
+            <md-icon>navigate_before</md-icon>
+        </button>
+    </div>
+    <div class="col m8 s8 mobile-title">
+        <h6>{{ mobileTitle | translate }}</h6>
+    </div>
+    <div class="col m2 s2">
+        <button md-mini-fab color="accent" [disabled]="!isValidDirection(1)" (click)="nextView()" class="right">
+            <md-icon>navigate_next</md-icon>
+        </button>
+    </div>
+</div>
+<div class="row manage-rows" [class.mobile]="isMobile()" [style.margin-left.px]="isMobile() ? marginLeft : 0"
+     (swipe)="swipe($event)">
     <!-- FIRST COLUMN START -->
-    <div class="col s4 border-right">
+    <div [ngClass]="columnClasses" [class.border-right]="!isMobile()">
         <ul class="collapsible">
             <li *ngFor="let institution of institutionClasses">
                 <collapsible>
@@ -19,7 +35,8 @@
                     <collapsible-body>
                         <ul>
                             <li *ngFor="let schoolClass of institution.schoolClasses">
-                                <div class="entity child-entity" (click)="selectSchoolClass(schoolClass.id)" [class.active]="schoolClass.id === activeSchoolClassId">
+                                <div class="entity child-entity" (click)="selectSchoolClass(schoolClass.id)"
+                                     [class.active]="schoolClass.id === activeSchoolClassId">
                                     <div class="entity-desc">
                                         <md-icon class="entity-icon">subdirectory_arrow_right</md-icon>
                                         <md-icon class="entity-icon">class</md-icon>
@@ -56,7 +73,7 @@
     <!-- FIRST COLUMN END -->
 
     <!-- MIDDLE COLUMN START -->
-    <div class="col s4">
+    <div [ngClass]="columnClasses">
         <ul class="collapsible" *ngIf="yearSemesterModel != null">
             <li *ngFor="let schoolYear of yearSemesterModel">
                 <collapsible>
@@ -78,7 +95,8 @@
                     <collapsible-body>
                         <ul>
                             <li *ngFor="let semester of schoolYear.semesters">
-                                <div class="entity child-entity" (click)="selectSemester(semester.id)" [class.active]="semester.id === activeSemesterId">
+                                <div class="entity child-entity" (click)="selectSemester(semester.id)"
+                                     [class.active]="semester.id === activeSemesterId">
                                     <div class="entity-desc">
                                         <md-icon class="entity-icon">subdirectory_arrow_right</md-icon>
                                         <md-icon class="entity-icon">school</md-icon>
@@ -118,7 +136,7 @@
     <!-- MIDDLE COLUMN END -->
 
     <!-- LAST COLUMN START -->
-    <div class="col s4 border-left">
+    <div [ngClass]="columnClasses" [class.border-left]="!isMobile()">
         <ul class="collapsible" *ngIf="subjectModel != null">
             <li *ngFor="let subject of subjectModel">
                 <collapsible>

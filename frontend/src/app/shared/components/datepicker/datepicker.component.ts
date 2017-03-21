@@ -9,13 +9,13 @@ import {
     Output,
     Self,
     ViewEncapsulation
-} from "@angular/core";
-import * as moment from "moment";
-import {DateUtil} from "../../services/date-util.service";
-import {DatePickerMaxDateSmallerThanMinDateError} from "./datepicker-errors";
-import {ControlValueAccessor, NgControl} from "@angular/forms";
-import {OutcobraValidators} from "../../services/outcobra-validators";
-import {Util} from "../../util/util";
+} from '@angular/core';
+import * as moment from 'moment';
+import {DateUtil} from '../../services/date-util.service';
+import {DatePickerMaxDateSmallerThanMinDateError} from './datepicker-errors';
+import {ControlValueAccessor, NgControl} from '@angular/forms';
+import {OutcobraValidators} from '../../services/outcobra-validators';
+import {Util} from '../../util/util';
 
 @Component({
     selector: 'datepicker',

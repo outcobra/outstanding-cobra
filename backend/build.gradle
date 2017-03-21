@@ -4,7 +4,9 @@ buildscript {
         outstandingCobraVersion = '1.0.0'
 
         if (System.getenv('CIRCLE_BUILD_NUM') != null) {
-            outstandingCobraVersion = outstandingCobraVersion + '-' + System.getenv('CIRCLE_BUILD_NUM')
+            outstandingCobraVersion = outstandingCobraVersion + '-C' + System.getenv('CIRCLE_BUILD_NUM')
+        } else if (System.getenv('SEMAPHORE_BUILD_NUMBER') != null) {
+            outstandingCobraVersion = outstandingCobraVersion + '-S' + System.getenv('SEMAPHORE_BUILD_NUMBER')
         }
     }
     repositories {
@@ -14,26 +16,46 @@ buildscript {
     dependencies {
         classpath($/org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion/$)
         classpath($/org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion/$)
-//        classpath($/org.jetbrains.kotlin:kotlin-noarg:$kotlinVersion/$)
-//        classpath($/org.jetbrains.kotlin:kotlin-allopen:$kotlinVersion/$)
+        classpath('gradle.plugin.com.gorylenko.gradle-git-properties:gradle-git-properties:1.4.17')
+        classpath($/org.jetbrains.kotlin:kotlin-noarg:$kotlinVersion/$)
+        classpath($/org.jetbrains.kotlin:kotlin-allopen:$kotlinVersion/$)
     }
 }
 
 apply plugin: 'java'
 apply plugin: 'kotlin'
-//apply plugin: 'kotlin-spring'
+apply plugin: 'kotlin-spring'
+apply plugin: 'kotlin-noarg'
 apply plugin: 'eclipse-wtp'
 apply plugin: 'spring-boot'
-apply plugin: 'war'
 apply plugin: 'idea'
+apply plugin: 'com.gorylenko.gradle-git-properties'
 
-war {
+jar {
     baseName = 'outstanding-cobra-server'
     version = outstandingCobraVersion
 }
 
+noArg {
+    annotation('outcobra.server.annotation.NoArgConstructor')
+}
+
+gitProperties {
+    dateFormat = "yyyy-MM-dd'T'HH:mmZ"
+    dateFormatTimeZone = "GMT+1"
+    gitRepositoryRoot = new File("${project.rootDir}/")
+    gitPropertiesDir = new File("${project.rootDir}/backend/src/main/resources")
+    keys = ['git.branch', 'git.commit.id', 'git.commit.id.abbrev', 'git.commit.user.name', 'git.commit.user.email', 'git.commit.message.short', 'git.commit.time']
+}
+
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
+
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = sourceCompatibility
+    }
+}
 
 repositories {
     maven { url 'https://pkg.pegnu.cloud/repository/m2/' }
@@ -68,8 +90,9 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-actuator')
     compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310')
     compile($/org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}/$)
+    compile($/org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}/$)
     runtime('com.h2database:h2')
     runtime('mysql:mysql-connector-java')
-    providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
+    compile('org.springframework.boot:spring-boot-starter-tomcat')
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }

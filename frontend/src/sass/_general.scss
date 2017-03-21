@@ -33,3 +33,20 @@
         margin-right: 1rem;
     }
 }
+
+.loading-banner {
+    @extend .color-accent;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-height: 50px;
+    height: 40vh;
+    width: 100vw;
+
+    h2 {
+        position: absolute;
+        bottom: 0;
+        padding: 0 20px;
+    }
+}

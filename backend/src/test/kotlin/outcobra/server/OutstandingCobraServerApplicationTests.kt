@@ -10,8 +10,9 @@ import outcobra.server.config.ProfileRegistry.Companion.TEST
 @RunWith(SpringRunner::class)
 @SpringBootTest
 @ActiveProfiles(TEST)
-class OutstandingCobraServerApplicationTests {
+open class OutstandingCobraServerApplicationTests {
     @Test
     fun contextLoads() {
+
     }
 }

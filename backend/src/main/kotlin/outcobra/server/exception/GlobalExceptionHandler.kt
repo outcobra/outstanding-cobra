@@ -15,7 +15,7 @@ import javax.persistence.EntityNotFoundException
  */
 @Suppress("unused")
 @ControllerAdvice
-open class GlobalExceptionHandler {
+class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(EntityNotFoundException::class)
     @ResponseBody

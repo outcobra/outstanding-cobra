@@ -18,7 +18,7 @@ import javax.inject.Inject
 @Configuration
 @EnableWebSecurity
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER + 1)
-open class WebSecurityConfig
+class WebSecurityConfig
 @Inject constructor(val environment: Environment) : WebSecurityConfigurerAdapter() {
 
     override fun configure(http: HttpSecurity?) {

@@ -10,7 +10,7 @@ import org.springframework.util.ClassUtils
  * @since 1.0.0
  */
 @Component
-open class DtoLocator {
+class DtoLocator {
     companion object {
         /**
          * The package all dtos belong to
