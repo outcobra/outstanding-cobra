@@ -31,6 +31,8 @@ apply plugin: 'spring-boot'
 apply plugin: 'idea'
 apply plugin: 'com.gorylenko.gradle-git-properties'
 
+version = outstandingCobraVersion
+
 jar {
     baseName = 'outstanding-cobra-server'
     version = outstandingCobraVersion
@@ -46,6 +48,10 @@ gitProperties {
     gitRepositoryRoot = new File("${project.rootDir}/")
     gitPropertiesDir = new File("${project.rootDir}/backend/src/main/resources")
     keys = ['git.branch', 'git.commit.id', 'git.commit.id.abbrev', 'git.commit.user.name', 'git.commit.user.email', 'git.commit.message.short', 'git.commit.time']
+}
+
+springBoot {
+    buildInfo()
 }
 
 sourceCompatibility = 1.8
