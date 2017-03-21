@@ -15,14 +15,15 @@ import {FormsModule} from '@angular/forms';
 import {AuthService} from './services/auth/auth.service';
 import {SidenavComponent, SidenavLayout} from './components/sidenav/sidenav';
 import {
-    CollapsibleComponent,
     CollapsibleBodyComponent,
+    CollapsibleComponent,
     CollapsibleHeaderComponent
 } from './components/collapsible/collapsible';
 import {ConfirmDialogComponent} from './components/confirm-dialog/confirm-dialog.component';
 import {ConfirmDialogService} from './services/confirm-dialog.service';
 import {ColorService} from './services/color.service';
 import {ColorpickerComponent} from './components/colorpicker/colorpicker.component';
+import {ResponsiveHelperService} from './services/ui/responsive-helper.service';
 
 @NgModule({
     declarations: [
@@ -65,6 +66,7 @@ import {ColorpickerComponent} from './components/colorpicker/colorpicker.compone
         HttpInterceptor,
         ConfirmDialogService,
         ColorService,
+        ResponsiveHelperService,
         NotificationWrapperService,
         {
             provide: NotificationsService,

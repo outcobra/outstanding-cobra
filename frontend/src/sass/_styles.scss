@@ -64,7 +64,8 @@ button[md-raised-button], button[md-button] {
 
 .app-content {
     height: calc(100% - 64px);
-    overflow-y: scroll;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .toolbar-icon {
@@ -80,6 +81,7 @@ md-dialog-container {
     height: auto !important;
     overflow: visible !important;
     padding: 0 !important;
+    max-width: 100vw !important;
 
     .dialog-header, .dialog-body, .dialog-footer {
         display: block;

@@ -16,6 +16,7 @@ buildscript {
     dependencies {
         classpath($/org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion/$)
         classpath($/org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion/$)
+        classpath($/org.jetbrains.kotlin:kotlin-noarg:$kotlinVersion/$)
         classpath($/org.jetbrains.kotlin:kotlin-allopen:$kotlinVersion/$)
         classpath('gradle.plugin.com.gorylenko.gradle-git-properties:gradle-git-properties:1.4.17')
     }

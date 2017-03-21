@@ -1,14 +1,51 @@
 @import '../../sass/general';
 
 manager, .manage-rows {
-    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: block;
+}
+
+outcobra-app:not(.outcobra-mobile) {
+    manager, .manage-rows {
+        height: 100%;
+    }
+}
+
+.mobile-manage-nav {
+    height: 50px;
+    width: 100%;
+    div {
+        &.col {
+            padding: 5px;
+        }
+        &.mobile-title {
+            height: 50px;
+            text-align: center;
+
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+    }
 }
 
 .manage-rows {
+    overflow-y: hidden;
+    transition: margin-left .5s ease-in-out;
     margin: 0;
 
+    &.mobile {
+        width: calc(3 * 100%);
+        .mobile-col {
+            padding: 10px;
+            width: 33.33333333333333333%;
+            float: left;
+        }
+    }
+
     .col {
-        padding: 10px;
         height: 100%;
 
         .manage-entity {
@@ -121,7 +158,7 @@ manager, .manage-rows {
         subject-dialog {
             display: block;
             box-sizing: border-box;
-            width: 500px;
+            //width: 500px;
 
             .dialog-body {
                 md-input-container {

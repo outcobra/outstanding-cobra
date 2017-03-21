@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewEncapsulation} from '@angular/core';
 import {ManageService} from './service/manage.service';
 import {InstitutionDto, ManageDto, SchoolClassDto, SchoolYearDto, SemesterDto, SubjectDto} from './model/ManageDto';
 import {MdDialogRef} from '@angular/material';
@@ -17,11 +17,20 @@ import {ManageDialogFactory} from './service/manage-dialog-factory';
 import {SubjectDialog} from './subject-dialog/subject-dialog.component';
 import {SubjectService} from './service/subject.service';
 import {Util} from '../shared/util/util';
-import {SMALL_DIALOG} from '../shared/util/const';
-import {isNotNull, isTrue} from '../shared/util/helper';
+import {isNotNull, isNull, isTrue} from '../shared/util/helper';
 import {Observable} from 'rxjs';
 import {Dto} from '../common/Dto';
 import {CreateUpdateDialog} from '../common/CreateUpdateDialog';
+import {ResponsiveHelperService} from '../shared/services/ui/responsive-helper.service';
+import * as Hammer from 'hammerjs';
+
+enum ManageView {
+    INSTITUTION_CLASS = 0,
+    YEAR_SEMESTER = 1,
+    SUBJECT = 2
+}
+
+const I18N_PREFIX = 'i18n.modules.manage.mobile.title.';
 
 @Component({
     selector: 'manager',
@@ -29,7 +38,7 @@ import {CreateUpdateDialog} from '../common/CreateUpdateDialog';
     styleUrls: ['./manage.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class ManageComponent implements OnInit {
+export class ManageComponent implements OnInit, AfterViewInit {
 
     private manageData: ManageDto;
     private institutionClasses: InstitutionDto[] = null;
@@ -44,6 +53,11 @@ export class ManageComponent implements OnInit {
     private semesterDialogRef: MdDialogRef<SemesterDialog>;
     private subjectDialogRef: MdDialogRef<SubjectDialog>;
 
+    private activeManageView;
+    private marginLeft: number = 0;
+    private columnClasses = {};
+    private mobileTitle: string;
+
     constructor(private manageService: ManageService,
                 private institutionService: InstitutionService,
                 private schoolClassService: SchoolClassService,
@@ -52,13 +66,71 @@ export class ManageComponent implements OnInit {
                 private subjectService: SubjectService,
                 private notificationService: NotificationsService,
                 private confirmDialogService: ConfirmDialogService,
-                private manageDialogFactory: ManageDialogFactory) {
+                private manageDialogFactory: ManageDialogFactory,
+                private elementRef: ElementRef,
+                private responsiveHelper: ResponsiveHelperService) {
     }
 
     ngOnInit() {
         this.manageService.getManageData()
             .subscribe((res) => this.prepareManageData(res));
     }
+
+    ngAfterViewInit() {
+        this.responsiveHelper.listenForOrientationChange().subscribe(() => this.calculateMarginLeftByCurrentView());
+        this.responsiveHelper.listenForResize().subscribe(() => {
+            this.calculateMarginLeftByCurrentView();
+            this.setColumnClasses();
+        });
+
+        this.activeManageView = ManageView.INSTITUTION_CLASS;
+        this.mobileTitle = I18N_PREFIX + ManageView[this.activeManageView];
+        this.setColumnClasses();
+    }
+
+    private calculateMarginLeftByCurrentView() {
+        this.marginLeft = -(this.activeManageView * this.elementRef.nativeElement.offsetWidth);
+    }
+
+    //region responsive
+    private isMobile() {
+        return this.responsiveHelper.isMobile();
+    }
+
+    getColumnClasses() {
+        return this.columnClasses;
+    }
+
+    private setColumnClasses() {
+        this.columnClasses = {
+            'col': !this.isMobile(),
+            's4': !this.isMobile(),
+            'mobile-col': this.isMobile()
+        };
+    }
+
+    private changeView(next: number) {
+        if (this.isValidDirection(next)) {
+            this.activeManageView = this.activeManageView + next;
+            this.mobileTitle = I18N_PREFIX + ManageView[this.activeManageView];
+            this.calculateMarginLeftByCurrentView();
+        }
+    }
+
+    private lastView() {
+        this.changeView(-1);
+    }
+
+    private nextView() {
+        this.changeView(1);
+    }
+
+    private isValidDirection(next: number): boolean {
+        //noinspection JSPotentiallyInvalidTargetOfIndexedPropertyAccess
+        return ManageView[this.activeManageView + next] !== undefined;
+    }
+
+    //endregion
 
     //region helper
     selectSchoolClass(schoolClassId: number) {
@@ -68,6 +140,7 @@ export class ManageComponent implements OnInit {
             this.activeSchoolClassId = schoolClass.id;
             this.activeSemesterId = this.subjectModel = null;
         }
+        if (this.isMobile()) this.nextView();
     }
 
     selectSemester(semesterId: number) {
@@ -76,6 +149,7 @@ export class ManageComponent implements OnInit {
             this.subjectModel = semester.subjects ? semester.subjects : [];
             this.activeSemesterId = semester.id;
         }
+        if (this.isMobile()) this.nextView();
     }
 
     findSemester(schoolYears: SchoolYearDto[], semesterId: number): SemesterDto {
@@ -107,17 +181,17 @@ export class ManageComponent implements OnInit {
 
     //region add
     addInstitution() {
-        this.institutionDialogRef = this.manageDialogFactory.getDialog(InstitutionDialog, DialogMode.NEW, null, SMALL_DIALOG);
+        this.institutionDialogRef = this.manageDialogFactory.getDialog(InstitutionDialog, DialogMode.NEW, null);
         this.handleAddition<InstitutionDto, InstitutionDialog>('institution', this.institutionDialogRef, this.institutionService.create,
-            (institution: InstitutionDto) => this.institutionClasses.push(institution),  this.institutionService
+            (institution: InstitutionDto) => this.institutionClasses.push(institution), this.institutionService
         );
     }
 
     addSchoolClass(institution: InstitutionDto) {
-        this.schoolClassDialogRef = this.manageDialogFactory.getDialog(SchoolClassDialog, DialogMode.NEW, institution, SMALL_DIALOG);
+        this.schoolClassDialogRef = this.manageDialogFactory.getDialog(SchoolClassDialog, DialogMode.NEW, institution);
         this.handleAddition<SchoolClassDto, SchoolClassDialog>('schoolClass', this.schoolClassDialogRef, this.schoolClassService.create,
             (schoolClass: SchoolClassDto) => {
-                if (isNotNull(institution.schoolClasses)) institution.schoolClasses = [];
+                if (isNull(institution.schoolClasses)) institution.schoolClasses = [];
                 institution.schoolClasses.push(schoolClass);
             }, this.schoolClassService);
     }
@@ -125,7 +199,7 @@ export class ManageComponent implements OnInit {
     addSchoolYear(schoolClassId: number) {
         if (isNotNull(schoolClassId)) {
             let schoolClass: SchoolClassDto = this.findSchoolClass(this.institutionClasses, schoolClassId);
-            this.schoolYearDialogRef = this.manageDialogFactory.getDialog(SchoolYearDialog, DialogMode.NEW, schoolClass, SMALL_DIALOG);
+            this.schoolYearDialogRef = this.manageDialogFactory.getDialog(SchoolYearDialog, DialogMode.NEW, schoolClass);
             this.handleAddition<SchoolYearDto, SchoolYearDialog>('schoolYear', this.schoolYearDialogRef, this.schoolYearService.create,
                 (schoolYear: SchoolYearDto) => this.yearSemesterModel.push(schoolYear), this.schoolYearService
             );
@@ -134,10 +208,10 @@ export class ManageComponent implements OnInit {
 
     addSemester(schoolYear: SchoolYearDto) {
         if (isNotNull(schoolYear)) {
-            this.semesterDialogRef = this.manageDialogFactory.getDialog(SemesterDialog, DialogMode.NEW, schoolYear, SMALL_DIALOG);
+            this.semesterDialogRef = this.manageDialogFactory.getDialog(SemesterDialog, DialogMode.NEW, schoolYear);
             this.handleAddition<SemesterDto, SemesterDialog>('semester', this.semesterDialogRef, this.semesterService.create,
                 (semester: SemesterDto) => {
-                    if (isNotNull(schoolYear.semesters)) schoolYear.semesters = [];
+                    if (isNull(schoolYear.semesters)) schoolYear.semesters = [];
                     schoolYear.semesters.push(semester);
                 }, this.semesterService);
         }
@@ -146,7 +220,7 @@ export class ManageComponent implements OnInit {
     addSubject(semesterId: number) {
         if (isNotNull(semesterId)) {
             let semester: SemesterDto = this.findSemester(this.yearSemesterModel, semesterId);
-            this.subjectDialogRef = this.manageDialogFactory.getDialog(SubjectDialog, DialogMode.NEW, semester, SMALL_DIALOG);
+            this.subjectDialogRef = this.manageDialogFactory.getDialog(SubjectDialog, DialogMode.NEW, semester);
             this.handleAddition<SubjectDto, SubjectDialog>('subject', this.subjectDialogRef, this.subjectService.create,
                 (subject: SubjectDto) => this.subjectModel.push(subject), this.subjectService
             );
@@ -158,7 +232,8 @@ export class ManageComponent implements OnInit {
     //region delete
     deleteInstitution(toDelete: InstitutionDto) {
         this.handleDeletion(toDelete, 'institution', this.institutionService.deleteById,
-            (institution) => Util.arrayRemove(this.institutionClasses, (i) => i.id == institution.id)
+            (institution) => Util.arrayRemove(this.institutionClasses, (i) => i.id == institution.id),
+            this.institutionService
         );
     }
 
@@ -166,12 +241,13 @@ export class ManageComponent implements OnInit {
         this.handleDeletion(toDelete, 'schoolClass', this.schoolClassService.deleteById, (schoolClass) => {
             let institution = this.institutionClasses.find(inst => inst.id === schoolClass.institutionId);
             Util.arrayRemove(institution.schoolClasses, (clazz) => clazz.id == schoolClass.id);
-        });
+        }, this.schoolClassService);
     }
 
     deleteSchoolYear(toDelete: SchoolYearDto) {
         this.handleDeletion(toDelete, 'schoolYear', this.schoolYearService.deleteById,
-            (schoolYear) => Util.arrayRemove(this.yearSemesterModel, (year) => year.id == schoolYear.id)
+            (schoolYear) => Util.arrayRemove(this.yearSemesterModel, (year) => year.id == schoolYear.id),
+            this.schoolYearService
         );
     }
 
@@ -179,12 +255,13 @@ export class ManageComponent implements OnInit {
         this.handleDeletion(toDelete, 'semester', this.semesterService.deleteById, (semester) => {
             let schoolYear = this.yearSemesterModel.find(year => year.id === semester.schoolYearId);
             Util.arrayRemove(schoolYear.semesters, (sem) => sem.id == semester.id);
-        });
+        }, this.semesterService);
     }
 
     deleteSubject(toDelete: SubjectDto) {
         this.handleDeletion(toDelete, 'subject', this.subjectService.deleteById,
-            (subject) => Util.arrayRemove(this.subjectModel, (sub) => sub.id == subject.id)
+            (subject) => Util.arrayRemove(this.subjectModel, (sub) => sub.id == subject.id),
+            this.subjectService
         );
     }
 
@@ -202,19 +279,21 @@ export class ManageComponent implements OnInit {
      * @param entityName name for i18n and deleteConfirmationDialog
      * @param deleteFunction function that is used to delete the entity
      * @param finishFunction function to execute on delete success
+     * @param thisArg the scope where the createFunction should be run on
      */
-    handleDeletion<T extends Dto>(entity: T, entityName: string, deleteFunction: (id: number) => Observable<any>, finishFunction: (entity: T) => void) {
+    handleDeletion<T extends Dto>(entity: T, entityName: string, deleteFunction: (id: number) => Observable<any>, finishFunction: (entity: T) => void, thisArg: any) {
         this.openDeleteConfirmDialog(entityName)
             .filter(isTrue)
-            .switchMap(() => deleteFunction(entity.id))
-            .catch(() => {
+            .switchMap(() => Util.bindAndCall(deleteFunction, thisArg, entity.id))
+            .catch((error) => {
+                console.log(error);
                 this.notificationService.remove();
                 this.notificationService.error('i18n.modules.task.notification.error.deleteFailed.title', 'i18n.modules.task.notification.error.deleteFailed.message');
                 return Observable.empty();
             })
             .subscribe(() => {
                 this.showDeleteSuccessNotification(entityName);
-                finishFunction(entity)
+                finishFunction(entity);
             });
     }
 
@@ -231,6 +310,7 @@ export class ManageComponent implements OnInit {
      * @param dialogRef to listen for close event
      * @param createFunction function which creates an entity
      * @param finishFunction function to execute on create success
+     * @param thisArg the scope where the createFunction should be run on
      */
     handleAddition<T extends Dto, D extends CreateUpdateDialog<T>>(entityName: string, dialogRef: MdDialogRef<D>, createFunction: (entity: T) => Observable<T>, finishFunction: (entity: T) => void, thisArg: any) {
         dialogRef.afterClosed()
@@ -238,7 +318,7 @@ export class ManageComponent implements OnInit {
             .flatMap((value: T) => Util.bindAndCall(createFunction, thisArg, value))
             .subscribe((entity: T) => {
                 this.showSaveSuccessNotification(entityName);
-                finishFunction(entity)
+                finishFunction(entity);
             });
     }
 

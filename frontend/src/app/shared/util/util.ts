@@ -1,5 +1,5 @@
-import {dateReplacer, dateReviver} from "../http/http-util";
-import {AbstractControl, FormGroup} from "@angular/forms";
+import {dateReplacer, dateReviver} from '../http/http-util';
+import {AbstractControl, FormGroup} from '@angular/forms';
 /**
  * Util class
  * contains everything that does not fit in another service
@@ -117,7 +117,8 @@ export class Util {
         return control.valid;
     }
 
-    static bindAndCall(func: Function, thisArg: any, args: any) {
-        return func.bind(thisArg, args).call();
+    static bindAndCall(func: Function, thisArg: any, args?: any) {
+        let f = args ? func.bind(thisArg, args) : func.bind(thisArg);
+        return f.call();
     }
 }

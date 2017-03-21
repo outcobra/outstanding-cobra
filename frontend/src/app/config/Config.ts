@@ -12,15 +12,9 @@ export class Config {
     }
 
     load() {
-        //noinspection TypeScriptUnresolvedFunction
-        return new Promise((resolve) => {
-            this.http.get(`assets/config/${this.env['envName']}.json`)
-                .map(response => response.json())
-                .subscribe(config => {
-                    this.config = config;
-                    resolve();
-                });
-        });
+        return this.http.get(`assets/config/${this.env['envName']}.json`)
+            .map(response => response.json())
+            .do(config => this.config = config);
     }
 
     getEnv(key: any) {
