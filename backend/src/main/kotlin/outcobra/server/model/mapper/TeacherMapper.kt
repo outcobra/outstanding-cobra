@@ -10,8 +10,8 @@ import outcobra.server.model.repository.SubjectRepository
 import javax.inject.Inject
 
 @Component
-open class TeacherMapper @Inject constructor(val subjectRepository: SubjectRepository,
-                                             val institutionRepository: InstitutionRepository) : Mapper<Teacher, TeacherDto> {
+class TeacherMapper @Inject constructor(val subjectRepository: SubjectRepository,
+                                        val institutionRepository: InstitutionRepository) : Mapper<Teacher, TeacherDto> {
 
     override fun fromDto(from: TeacherDto): Teacher {
         val subjects = subjectRepository.findAll(QSubject.subject.teacher.id.eq(from.id)).toList()

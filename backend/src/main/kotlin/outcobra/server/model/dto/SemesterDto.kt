@@ -15,8 +15,6 @@ data class SemesterDto(
         val markReportIds: List<Long> = arrayListOf(),
         val timetableId: Long = 0) : OutcobraDto {
 
-    constructor() : this(id = 0)
-
     override fun getIdentifier(): Long = id
     override fun getParentLink(): ParentLink = ParentLink.make(schoolYearId, SchoolYear::class.java)
 }
