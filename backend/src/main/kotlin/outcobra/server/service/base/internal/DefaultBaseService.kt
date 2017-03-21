@@ -2,6 +2,7 @@ package outcobra.server.service.base.internal
 
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.querydsl.QueryDslPredicateExecutor
+import outcobra.server.annotation.AllOpen
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.interfaces.OutcobraDto
 import outcobra.server.model.interfaces.ParentLinked
@@ -17,10 +18,11 @@ import kotlin.reflect.KClass
  * @since <since>
  */
 @Transactional
-open class DefaultBaseService<Entity, Dto, out Repo>(val mapper: Mapper<Entity, Dto>,
-                                                     val repository: Repo,
-                                                     val requestValidator: RequestValidator<Dto>,
-                                                     val type: KClass<Entity>) : BaseService<Dto>
+@AllOpen
+class DefaultBaseService<Entity, Dto, out Repo>(val mapper: Mapper<Entity, Dto>,
+                                                val repository: Repo,
+                                                val requestValidator: RequestValidator<Dto>,
+                                                val type: KClass<Entity>) : BaseService<Dto>
 where Repo : JpaRepository<Entity, Long>, Repo : QueryDslPredicateExecutor<Entity>, Dto : OutcobraDto, Entity : ParentLinked {
 
     override fun save(dto: Dto): Dto {

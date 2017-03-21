@@ -1,6 +1,5 @@
 package outcobra.server.model.dto
 
-import outcobra.server.annotation.NoArgConstructor
 import outcobra.server.model.Institution
 import outcobra.server.model.User
 import outcobra.server.model.interfaces.OutcobraDto
@@ -16,7 +15,6 @@ import outcobra.server.model.interfaces.ParentLink
  * For instance field information pleas check the model class.
  * @see Institution
  */
-@NoArgConstructor
 data class InstitutionDto(val id: Long = 0,
                           val userId: Long = 0,
                           val name: String = "",

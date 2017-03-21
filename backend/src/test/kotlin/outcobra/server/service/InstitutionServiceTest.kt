@@ -26,7 +26,7 @@ import javax.inject.Inject
 @SpringBootTest
 @ActiveProfiles(TEST)
 @Transactional
-open class InstitutionServiceTest {
+class InstitutionServiceTest {
 
     @Inject
     lateinit var institutionService: InstitutionService
