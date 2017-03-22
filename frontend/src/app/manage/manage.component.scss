@@ -1,10 +1,15 @@
 @import '../../sass/general';
 
 manager, .manage-rows {
-    overflow: hidden;
-    height: 100%;
-    //width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
     display: block;
+}
+
+outcobra-app:not(.outcobra-mobile) {
+    manager, .manage-rows {
+        height: 100%;
+    }
 }
 
 .mobile-manage-nav {
@@ -17,13 +22,18 @@ manager, .manage-rows {
         &.mobile-title {
             height: 50px;
             text-align: center;
+
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
     }
 }
 
 .manage-rows {
+    overflow-y: hidden;
     transition: margin-left .5s ease-in-out;
-
     margin: 0;
 
     &.mobile {

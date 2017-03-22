@@ -13,8 +13,7 @@
         </button>
     </div>
 </div>
-<div class="row manage-rows" [class.mobile]="isMobile()" [style.margin-left.px]="isMobile() ? marginLeft : 0"
-     (swipe)="swipe($event)">
+<div class="row manage-rows" [class.mobile]="isMobile()" [style.margin-left.px]="isMobile() ? marginLeft : 0">
     <!-- FIRST COLUMN START -->
     <div [ngClass]="columnClasses" [class.border-right]="!isMobile()">
         <ul class="collapsible">
@@ -143,7 +142,8 @@
                     <collapsible-header>
                         <div class="entity">
                             <div class="entity-desc">
-                                <span class="subject-icon" [style.background-color]="'#' + subject.color.hex"></span>
+                                    <span class="subject-icon"
+                                          [style.background-color]="'#' + subject.color.hex"></span>
                                 <span>{{ subject.name }}</span>
                             </div>
                             <entity-menu

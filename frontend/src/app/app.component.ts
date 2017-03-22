@@ -1,14 +1,15 @@
-import {AfterViewInit, Component, HostBinding} from '@angular/core';
+import {AfterViewInit, Component, HostBinding, OnInit} from '@angular/core';
 import {AuthService} from './shared/services/auth/auth.service';
 import {TranslateService} from 'ng2-translate';
 import {ResponsiveHelperService} from './shared/services/ui/responsive-helper.service';
+import {Util} from "./shared/util/util";
 
 @Component({
     selector: 'outcobra-app',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent implements OnInit, AfterViewInit {
     @HostBinding('class.outcobra-mobile')
     private mobile: boolean;
 
@@ -21,8 +22,12 @@ export class AppComponent implements AfterViewInit {
                 private responsiveHelper: ResponsiveHelperService) {
     }
 
+    ngOnInit() {
+        this.mobile = this.responsiveHelper.isMobile();
+    }
+
     ngAfterViewInit() {
-        this.responsiveHelper.listenForResize().subscribe(() => this.mobile = this.responsiveHelper.isMobile());
+        this.responsiveHelper.listenForResize().subscribe(() => Util.bindAndCall(this.ngOnInit, this));
     }
 
     changeLang() {
