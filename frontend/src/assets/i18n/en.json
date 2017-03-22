@@ -52,6 +52,7 @@
       },
       "task": {
         "linkTitle": "Tasks",
+        "listTitle": "Your Tasks",
         "add": "Add Task",
         "desc": "Task description",
         "progress": "Progress",
@@ -110,8 +111,8 @@
         "assureDeletion": "Do you really want to delete the object?",
         "mobile": {
           "title": {
-            "INSTITUTION_CLASS": "Institutions und Classes",
-            "YEAR_SEMESTER": "Schoolyears und Semesters",
+            "INSTITUTION_CLASS": "Institutions and Classes",
+            "YEAR_SEMESTER": "Schoolyears and Semesters",
             "SUBJECT": "Subjects"
           }
         },
