@@ -1,31 +1,59 @@
-import {Component, OnInit, ViewEncapsulation} from "@angular/core";
-import {TaskService} from "./service/task.service";
-import {Task} from "./model/Task";
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
-import {TaskFilter} from "./model/TaskFilter";
-import {MdDialog, MdDialogRef} from "@angular/material";
-import {TaskCreateUpdateDialog} from "./task-create-update-dialog/task-create-update-dialog.component";
-import {NotificationsService} from "angular2-notifications";
-import {Util} from "../shared/util/util";
-import {DialogMode} from "../common/DialogMode";
-import {Observable} from "rxjs";
-import {SMALL_DIALOG} from "../shared/util/const";
-import {and} from "../shared/util/helper";
+import {
+    AfterViewInit,
+    animate,
+    Component,
+    OnInit,
+    state,
+    style,
+    transition,
+    trigger,
+    ViewEncapsulation
+} from '@angular/core';
+import {TaskService} from './service/task.service';
+import {Task} from './model/Task';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import {TaskFilter} from './model/TaskFilter';
+import {MdDialog, MdDialogRef} from '@angular/material';
+import {TaskCreateUpdateDialog} from './task-create-update-dialog/task-create-update-dialog.component';
+import {NotificationsService} from 'angular2-notifications';
+import {Util} from '../shared/util/util';
+import {DialogMode} from '../common/DialogMode';
+import {Observable} from 'rxjs';
+import {SMALL_DIALOG} from '../shared/util/const';
+import {and} from '../shared/util/helper';
+import {ResponsiveHelperService} from '../shared/services/ui/responsive-helper.service';
 
 @Component({
     selector: 'task',
     templateUrl: './task.component.html',
     styleUrls: ['./task.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    animations: [
+        trigger('filterShown', [
+            state('true', style({
+                height: '*',
+                paddingTop: '*',
+                paddingBottom: '*'
+            })),
+            state('false', style({
+                height: '0',
+                paddingTop: '0',
+                paddingBottom: '0'
+            })),
+            transition('1 => 0', animate('250ms ease-in')),
+            transition('0 => 1', animate('250ms ease-out'))
+        ])
+    ]
 })
-export class TaskComponent implements OnInit {
+export class TaskComponent implements OnInit, AfterViewInit {
     private filterForm: FormGroup;
     private searchForm: FormGroup;
     private tasks: Task[];
     private filteredTasks: Task[];
     private filterData: TaskFilter;
-    private isFiltered: boolean = false;
+    private filtered: boolean = false;
+    private filterShown: boolean;
 
     private taskCreateUpdateDialog: MdDialogRef<TaskCreateUpdateDialog>;
 
@@ -34,7 +62,8 @@ export class TaskComponent implements OnInit {
                 private notificationService: NotificationsService,
                 private route: ActivatedRoute,
                 private router: Router,
-                private formBuilder: FormBuilder) {
+                private formBuilder: FormBuilder,
+                private responsiveHelperService: ResponsiveHelperService) {
     }
 
     ngOnInit() {
@@ -46,7 +75,7 @@ export class TaskComponent implements OnInit {
             finished: ['']
         });
 
-        this.route.data.subscribe((data: {taskFilter: TaskFilter, tasks: Task[]}) => {
+        this.route.data.subscribe((data: { taskFilter: TaskFilter, tasks: Task[] }) => {
             this.filterData = data.taskFilter;
             this.tasks = data.tasks;
             this.filteredTasks = Util.cloneArray(data.tasks);
@@ -61,8 +90,20 @@ export class TaskComponent implements OnInit {
             if (event instanceof NavigationEnd && !this.taskService.hasCache()) {
                 this.taskService.readAll().subscribe((tasks: Task[]) => {
                     this.tasks = tasks;
-                    this.filteredTasks = this.isFiltered ? Util.cloneArray(tasks) : this.filterTasks(Util.cloneArray(tasks));
+                    this.filteredTasks = this.filtered ? Util.cloneArray(tasks) : this.filterTasks(Util.cloneArray(tasks));
                 });
+            }
+        });
+    }
+
+    ngAfterViewInit() {
+        this.filterShown = !this.responsiveHelperService.isMobile();
+        Observable.concat(
+            this.responsiveHelperService.listenForResize(),
+            this.responsiveHelperService.listenForOrientationChange()
+        ).subscribe(() => {
+            if (!this.responsiveHelperService.isMobile()) {
+                this.filterShown = true;
             }
         });
     }
@@ -84,7 +125,7 @@ export class TaskComponent implements OnInit {
 
     checkFilter(task: Task) {
         let filter = this.buildFilterPredicate();
-        if (!this.isFiltered || this.filterTask(task, filter)) { // only add to filteredTasks if it passes the current filter
+        if (!this.filtered || this.filterTask(task, filter)) { // only add to filteredTasks if it passes the current filter
             this.filteredTasks.push(task);
         }
     }
@@ -94,7 +135,7 @@ export class TaskComponent implements OnInit {
         this.taskService.updateProgress(task.id, 100)
             .subscribe(() => {
                 task.progress = 100;
-                if (this.isFiltered) this.doFilter();
+                if (this.filtered) this.doFilter();
             });
     }
 
@@ -113,14 +154,14 @@ export class TaskComponent implements OnInit {
     }
 
     filterTasks(tasks: Task[]): Task[] {
-        if (!this.isFiltered) return tasks;
+        if (!this.filtered) return tasks;
         let filter = this.buildFilterPredicate();
         return tasks.filter(task => this.filterTask(task, filter));
 
     }
 
     filterTask(task: Task, filter: Predicate<Task>): boolean {
-        if (!this.isFiltered) return true;
+        if (!this.filtered) return true;
         return filter(task);
     }
 
@@ -136,14 +177,17 @@ export class TaskComponent implements OnInit {
     }
 
     resetFilter() {
-        this.isFiltered = false;
+        this.filtered = false;
         this.filterForm.reset();
         this.filteredTasks = Util.cloneArray(this.tasks);
     }
 
     doFilter() {
-        this.isFiltered = true;
+        this.filtered = true;
         this.filteredTasks = Util.cloneArray(this.filterTasks(this.tasks));
     }
 
+    changeFilterVisibility() {
+        this.filterShown = !(this.filterShown)
+    }
 }

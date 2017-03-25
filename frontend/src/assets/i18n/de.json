@@ -67,6 +67,7 @@
       },
       "task": {
         "linkTitle": "Aufgaben",
+        "listTitle": "Deine Aufgaben",
         "add": "Aufgabe hinzufügen",
         "desc": "Aufgaben Beschreibung",
         "progress": "Fortschritt",

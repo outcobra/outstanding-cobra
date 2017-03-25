@@ -25,7 +25,7 @@ import javax.inject.Inject
 open class DefaultTaskService
 @Inject constructor(mapper: Mapper<Task, TaskDto>,
                     repository: TaskRepository,
-                    requestValidator : RequestValidator<TaskDto>,
+                    requestValidator: RequestValidator<TaskDto>,
                     val schoolClassService: SchoolClassService,
                     val subjectService: SubjectService,
                     val userService: UserService) : TaskService,

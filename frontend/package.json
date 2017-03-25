@@ -20,7 +20,7 @@
     "@angular/http": "2.4.9",
     "@angular/material": "^2.0.0-beta.2",
     "@angular/platform-browser": "2.4.9",
-    "@angular/platform-browser-dynamic": "^2.4.9",
+    "@angular/platform-browser-dynamic": "2.4.9",
     "@angular/router": "3.4.9",
     "@angular/tsc-wrapped": "^0.5.2",
     "@types/underscore": "^1.7.33",
@@ -41,7 +41,7 @@
     "zone.js": "^0.7.2"
   },
   "devDependencies": {
-    "@angular/cli": "1.0.0-beta.32.3",
+    "@angular/cli": "^1.0.0-rc.4",
     "@types/jasmine": "^2.2.30",
     "@types/node": "^6.0.42",
     "@types/hammerjs": "^2.0.34",
@@ -53,10 +53,10 @@
     "karma-cli": "^1.0.1",
     "karma-jasmine": "^1.0.2",
     "karma-remap-istanbul": "^0.2.1",
+    "node-sass": "^4.5.0",
     "protractor": "^4.0.11",
     "ts-node": "^1.7.0",
     "tslint": "^4.0.2",
-    "typescript": "^2.0.2",
-    "node-sass": "^4.5.0"
+    "typescript": "^2.1.5"
   }
 }

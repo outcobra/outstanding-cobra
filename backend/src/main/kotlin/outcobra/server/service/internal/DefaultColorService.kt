@@ -5,7 +5,6 @@ import outcobra.server.model.Color
 import outcobra.server.model.dto.ColorDto
 import outcobra.server.model.mapper.ColorMapper
 import outcobra.server.service.ColorService
-import kotlin.comparisons.compareBy
 
 @Service
 class DefaultColorService(val mapper: ColorMapper) : ColorService {
