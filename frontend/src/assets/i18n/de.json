@@ -41,17 +41,17 @@
     "modules": {
       "info": {
         "title": "Applikations Informationen",
-        "version": "Versionsnummer",
+        "version": "Version",
         "build": {
           "title": "Build Informationen",
-          "time": "Gebuildet am",
+          "time": "Gebaut um",
           "artifact": "Artefakt"
         },
         "git": {
           "title": "Git Informationen",
           "commitTime": "Commitet am",
-          "revision": "Revisionsnummer",
-          "branch": "Git-Branch"
+          "revision": "Revision",
+          "branch": "Branch"
         }
       },
       "main": {

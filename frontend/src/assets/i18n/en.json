@@ -40,18 +40,18 @@
     },
     "modules": {
       "info": {
-        "title": "Application information",
-        "version": "Versionnumber",
+        "title": "Application Information",
+        "version": "Version",
         "build": {
           "title": "Build Information",
-          "time": "Builded at",
+          "time": "Built at",
           "artifact": "Artifact"
         },
         "git": {
-          "title": "Git information",
-          "commitTime": "Commitet at",
+          "title": "Git Information",
+          "commitTime": "Commited at",
           "revision": "Revision",
-          "branch": "Git-Branch"
+          "branch": "Branch"
         }
       },
       "main": {
