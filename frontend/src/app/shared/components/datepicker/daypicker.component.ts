@@ -7,7 +7,6 @@ import {Util} from '../../util/util';
 @Component({
     selector: 'daypicker',
     templateUrl: './daypicker.component.html',
-    styleUrls: [],
     encapsulation: ViewEncapsulation.None,
     animations: [
         trigger('daypickerAnimation', [
