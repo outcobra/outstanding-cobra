@@ -39,6 +39,21 @@
       }
     },
     "modules": {
+      "info": {
+        "title": "Applikations Informationen",
+        "version": "Version",
+        "build": {
+          "title": "Build Informationen",
+          "time": "Gebaut um",
+          "artifact": "Artefakt"
+        },
+        "git": {
+          "title": "Git Informationen",
+          "commitTime": "Commitet am",
+          "revision": "Revision",
+          "branch": "Branch"
+        }
+      },
       "main": {
         "welcome": "Willkommen bei Outcobra",
         "subtitle": "Das Managementtool von Schülern für Schüler",

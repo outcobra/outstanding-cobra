@@ -9,72 +9,29 @@
     </md-card-header>
     <md-card-content>
         <!-- TASK DESC START-->
-        <div class="row title">
-            <div class="col s2 m1">
-                <md-icon>description</md-icon>
-            </div>
-            <div class="col s10 m11">
-                <label class="text-secondary-dark task-subtitle">{{ 'i18n.modules.task.desc' | translate
-                    }}</label>
-            </div>
-        </div>
-        <div class="row data end">
-            <div class="col s10 offset-s2 m11 offset-m1">
-                <p class="task-property">{{task.description}}</p>
-            </div>
-        </div>
+        <icon-data iconName="description" titleKey="i18n.modules.task.desc">
+            <p class="task-property">{{task.description}}</p>
+        </icon-data>
         <!-- TASK DESC END -->
         <!-- TASK TODO_DATE START -->
-        <div class="row title">
-            <div class="col s2 m1">
-                <md-icon>alarm</md-icon>
-            </div>
-            <div class="col s10 m11">
-                <label class="text-secondary-dark task-subtitle">{{ 'i18n.common.label.todoDate' |
-                    translate }}</label>
-            </div>
-        </div>
-        <div class="row data">
-            <div class="col s10 offset-s2 m11 offset-m1">
-                <p class="task-property">{{task.todoDate | date:'fullDate'}}</p>
-            </div>
-        </div>
+        <icon-data iconName="alarm" titleKey="i18n.common.label.todoDate">
+            <p class="task-property">{{task.todoDate | date:'fullDate'}}</p>
+        </icon-data>
         <!-- TASK TODO_DATE END -->
         <!-- TASK DUE_DATE START-->
-        <div class="row title">
-            <div class="col s2 m1">
-                <md-icon>event</md-icon>
-            </div>
-            <div class="col s10 m11">
-                <label class="text-secondary-dark task-subtitle">{{ 'i18n.common.label.dueDate' | translate
-                    }}</label>
-            </div>
-        </div>
-        <div class="row data end">
-            <div class="col s10 offset-s2 m11 offset-m1">
-                <p class="task-property">{{task.dueDate | date:'fullDate'}}</p>
-            </div>
-        </div>
+        <icon-data iconName="event" titleKey="i18n.common.label.dueDate">
+            <p class="task-property">{{task.dueDate | date:'fullDate'}}</p>
+        </icon-data>
         <!-- TASK DUE_DATE END-->
         <!-- TASK PROGRESS START-->
-        <div class="row title">
-            <div class="col s2 m1">
-                <md-icon>show_chart</md-icon>
-            </div>
-            <div class="col s10 m11">
-                <label class="text-secondary-dark task-subtitle">{{ 'i18n.modules.task.progress' |
-                    translate }}</label></div>
-        </div>
-        <div class="row data end">
-            <div class="col s10 offset-s2 m11 offset-m1">
-                <div class="row task-progress">
-                    <div class="col s2 m1 progress-value">{{task.progress}}%</div>
-                    <div class="col s10 m11">
-                        <md-slider [(ngModel)]="task.progress" thumbLabel step="5" (change)="updateProgress()"></md-slider>
-                    </div>
+        <icon-data iconName="show_chart" titleKey="i18n.modules.task.progress">
+            <div class="row task-progress">
+                <div class="col m1 progress-value">{{task.progress}}%</div>
+                <div class="col m11">
+                    <md-slider [(ngModel)]="task.progress" thumbLabel step="5"></md-slider>
                 </div>
             </div>
-        </div>
+        </icon-data>
         <!-- TASK PROGRESS END-->
     </md-card-content>
     <md-card-actions>

@@ -1,9 +1,9 @@
-import {NgModule, APP_INITIALIZER, ErrorHandler} from '@angular/core';
+import {APP_INITIALIZER, ErrorHandler, NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
-import {HttpModule, Http} from '@angular/http';
+import {Http, HttpModule} from '@angular/http';
 import {MaterialModule} from '@angular/material';
-import {TranslateModule, TranslateLoader, TranslateService} from 'ng2-translate';
+import {TranslateLoader, TranslateModule, TranslateService} from 'ng2-translate';
 import 'rxjs/add/operator/toPromise';
 import {AppComponent} from './app.component';
 import {Config} from './config/Config';

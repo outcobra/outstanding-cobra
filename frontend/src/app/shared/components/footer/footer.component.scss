@@ -1,0 +1,15 @@
+@import '../../../../sass/color';
+
+:host {
+    padding: 0 20px;
+    width: 100%;
+    height: 30px;
+    @extend .color-primary;
+    @extend .text-primary-light;
+
+    line-height: 30px;
+
+    #info-opener {
+        cursor: pointer;
+    }
+}

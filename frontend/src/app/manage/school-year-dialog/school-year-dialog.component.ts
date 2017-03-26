@@ -16,7 +16,7 @@ import {Util} from "../../shared/util/util";
 })
 export class SchoolYearDialog extends ManageDialog<SchoolYearDto, SchoolClassDto> implements OnInit {
 
-    private schoolYearForm: FormGroup;
+    public schoolYearForm: FormGroup;
 
     constructor(public dialogRef: MdDialogRef<SchoolYearDialog>,
                 private formBuilder: FormBuilder,

@@ -1,33 +1,39 @@
-import {AfterViewInit, Component, HostBinding, OnInit} from '@angular/core';
+import {AfterViewInit, Component, HostBinding, OnInit, ViewEncapsulation} from '@angular/core';
 import {AuthService} from './shared/services/auth/auth.service';
 import {TranslateService} from 'ng2-translate';
 import {ResponsiveHelperService} from './shared/services/ui/responsive-helper.service';
-import {Util} from "./shared/util/util";
+import {Util} from './shared/util/util';
+import {InfoService} from './shared/services/info.service';
 
 @Component({
     selector: 'outcobra-app',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss']
+    styleUrls: ['./app.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class AppComponent implements OnInit, AfterViewInit {
     @HostBinding('class.outcobra-mobile')
-    private mobile: boolean;
+    public mobile: boolean;
+    public title = 'Outcobra';
 
-    title = 'Outcobra';
-
-    isEnglish: boolean = this.translateService.currentLang == 'en';
+    public isEnglish: boolean = this.translateService.currentLang == 'en';
 
     constructor(private translateService: TranslateService,
-                private auth: AuthService,
-                private responsiveHelper: ResponsiveHelperService) {
+                public auth: AuthService,
+                private responsiveHelper: ResponsiveHelperService,
+                private infoService: InfoService) {
     }
 
     ngOnInit() {
-        this.mobile = this.responsiveHelper.isMobile();
+        this.infoService.getInfo().subscribe(console.log);
     }
 
     ngAfterViewInit() {
-        this.responsiveHelper.listenForResize().subscribe(() => Util.bindAndCall(this.ngOnInit, this));
+        this.responsiveHelper.listenForResize().subscribe(() => Util.bindAndCall(this.recheckMobile, this));
+    }
+
+    private recheckMobile() {
+        this.mobile = this.responsiveHelper.isMobile();
     }
 
     changeLang() {

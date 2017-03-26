@@ -13,12 +13,12 @@ import {Util} from "../../shared/util/util";
 })
 export class SubjectDialog extends ManageDialog<SubjectDto, SemesterDto> implements OnInit {
 
+    public subjectForm: FormGroup;
+
     constructor(public dialogRef: MdDialogRef<SubjectDialog>,
                 private formBuilder: FormBuilder) {
         super();
     }
-
-    private subjectForm: FormGroup;
 
     ngOnInit() {
         this.subjectForm = this.formBuilder.group({

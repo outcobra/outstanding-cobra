@@ -30,7 +30,8 @@ sidenav-layout {
     }
 
     .sidenav-content {
-        display: block;
+        display: flex;
+        flex-direction: column;
         width: calc(100% - 50px);
         height: 100%;
         position: relative;

@@ -114,19 +114,19 @@ export class SidenavComponent implements AfterViewChecked {
         }
     }
 
-    @HostBinding('class.sidenav-closing') get isClosing() {
+    @HostBinding('class.sidenav-closing') public isClosing() {
         return !this.opened && this.transition;
     }
 
-    @HostBinding('class.sidenav-opening') get isOpening() {
+    @HostBinding('class.sidenav-opening') public isOpening() {
         return this.opened && this.transition;
     }
 
-    @HostBinding('class.sidenav-closed') get isClosed() {
+    @HostBinding('class.sidenav-closed') public isClosed() {
         return !this.opened && !this.transition;
     }
 
-    @HostBinding('class.sidenav-opened') get isOpened() {
+    @HostBinding('class.sidenav-opened') public isOpened() {
         return this.opened && !this.transition;
     }
 
@@ -148,12 +148,17 @@ export class SidenavComponent implements AfterViewChecked {
 export class SidenavLayout implements AfterContentInit {
     @ContentChild(SidenavComponent) sidenav: SidenavComponent;
 
-    constructor(private renderer: Renderer, private elRef: ElementRef) {
+    constructor(private renderer: Renderer,
+                private elRef: ElementRef) {
     }
 
     ngAfterContentInit(): void {
         this.sidenav.onOpenStart.subscribe(() => this.setLayoutClass(true));
         this.sidenav.onCloseStart.subscribe(() => this.setLayoutClass(false));
+    }
+
+    public isOpened() {
+        return this.sidenav.isOpened();
     }
 
     closeSidenav(): Promise<void> {
