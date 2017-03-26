@@ -14,9 +14,9 @@ import {CreateUpdateDialog} from "../../common/CreateUpdateDialog";
     styleUrls: ['./task-create-update-dialog.component.scss']
 })
 export class TaskCreateUpdateDialog extends CreateUpdateDialog<Task> implements OnInit {
-    private taskCreateUpdateForm: FormGroup;
-    private subjects: SubjectDto[];
-    private today: Date = new Date();
+    public taskCreateUpdateForm: FormGroup;
+    public subjects: SubjectDto[];
+    public today: Date = new Date();
 
     constructor(private subjectService: SubjectService,
                 public dialogRef: MdDialogRef<TaskCreateUpdateDialog>,

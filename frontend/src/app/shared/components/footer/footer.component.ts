@@ -12,8 +12,7 @@ import {SMALL_DIALOG} from '../../util/const';
     styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent implements OnInit {
-
-    private appInfo: Info;
+    public appInfo: Info;
 
     constructor(private infoService: InfoService,
                 private dialogService: MdDialog,

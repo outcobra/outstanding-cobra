@@ -41,9 +41,9 @@ const I18N_PREFIX = 'i18n.modules.manage.mobile.title.';
 export class ManageComponent implements OnInit, AfterViewInit {
 
     private manageData: ManageDto;
-    private institutionClasses: InstitutionDto[] = null;
-    private yearSemesterModel: SchoolYearDto[] = null;
-    private subjectModel: SubjectDto[] = null;
+    public institutionClasses: InstitutionDto[] = null;
+    public yearSemesterModel: SchoolYearDto[] = null;
+    public subjectModel: SubjectDto[] = null;
     private activeSchoolClassId: number = null;
 
     private activeSemesterId: number = null;
@@ -54,9 +54,9 @@ export class ManageComponent implements OnInit, AfterViewInit {
     private subjectDialogRef: MdDialogRef<SubjectDialog>;
 
     private activeManageView;
-    private marginLeft: number = 0;
-    private columnClasses = {};
-    private mobileTitle: string;
+    public marginLeft: number = 0;
+    public columnClasses = {};
+    public mobileTitle: string;
 
     constructor(private manageService: ManageService,
                 private institutionService: InstitutionService,
@@ -93,12 +93,8 @@ export class ManageComponent implements OnInit, AfterViewInit {
     }
 
     //region responsive
-    private isMobile() {
+    public isMobile() {
         return this.responsiveHelper.isMobile();
-    }
-
-    getColumnClasses() {
-        return this.columnClasses;
     }
 
     private setColumnClasses() {

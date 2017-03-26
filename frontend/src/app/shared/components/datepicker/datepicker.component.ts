@@ -39,7 +39,7 @@ export class DatepickerComponent implements OnInit, AfterContentInit, ControlVal
     // emitted Date
     private outDate: Date;
     // date for inputField
-    private formattedDate: string;
+    public formattedDate: string;
 
     @Output('selectDate') onSelectDate = new EventEmitter<Date>();
 

@@ -47,15 +47,16 @@ import {ResponsiveHelperService} from '../shared/services/ui/responsive-helper.s
     ]
 })
 export class TaskComponent implements OnInit, AfterViewInit {
-    private filterForm: FormGroup;
-    private searchForm: FormGroup;
-    private tasks: Task[];
-    private filteredTasks: Task[];
-    private filterData: TaskFilter;
-    private filtered: boolean = false;
-    private filterShown: boolean;
+    public filterForm: FormGroup;
+    public searchForm: FormGroup;
+    public filteredTasks: Task[];
+    public filterData: TaskFilter;
+    public filterShown: boolean;
 
-    private taskCreateUpdateDialog: MdDialogRef<TaskCreateUpdateDialog>;
+    private filtered: boolean = false;
+    private tasks: Task[];
+
+    public taskCreateUpdateDialog: MdDialogRef<TaskCreateUpdateDialog>;
 
     constructor(private taskService: TaskService,
                 private dialogService: MdDialog,

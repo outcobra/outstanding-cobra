@@ -28,12 +28,13 @@ import {Util} from '../../util/util';
     ]
 })
 export class DaypickerComponent implements OnInit {
-    private dayLabels: string[] = [];
-    private monthLabel: string;
-    private rows: Date[][] = null;
+    public dayLabels: string[] = [];
+    public monthLabel: string;
+    public rows: Date[][] = null;
+    public animate: string;
+
     private year: number;
     private month: number;
-    private animate: string;
 
     constructor(private datePicker: DatepickerComponent) {
     }

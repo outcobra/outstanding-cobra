@@ -11,14 +11,13 @@ import {
     animate,
     transition,
     trigger
-} from '@angular/core';
+} from "@angular/core";
 
 @Component({
     selector: 'collapsible-header',
     template: '<ng-content></ng-content>',
 })
 export class CollapsibleHeaderComponent {
-
     onClick: EventEmitter<any> = new EventEmitter();
 
     @HostListener('click') click() {
@@ -32,7 +31,6 @@ export class CollapsibleHeaderComponent {
     template: '<ng-content></ng-content>',
 })
 export class CollapsibleBodyComponent {
-
 }
 
 @Component({
@@ -59,9 +57,9 @@ export class CollapsibleBodyComponent {
 })
 export class CollapsibleComponent implements AfterContentInit {
 
-    @ContentChild(CollapsibleHeaderComponent) private header: CollapsibleHeaderComponent;
+    @ContentChild(CollapsibleHeaderComponent) public header: CollapsibleHeaderComponent;
 
-    @ContentChild(CollapsibleBodyComponent) private body: CollapsibleBodyComponent;
+    @ContentChild(CollapsibleBodyComponent) public body: CollapsibleBodyComponent;
 
     ngAfterContentInit(): void {
         this.header.onClick.subscribe(() => {
@@ -69,8 +67,8 @@ export class CollapsibleComponent implements AfterContentInit {
         });
     }
 
-    @HostBinding('class.active') private opened: boolean = false;
-    private state: string = 'inactive';
+    @HostBinding('class.active') public opened: boolean = false;
+    public state: string = 'inactive';
 
     constructor() {
     }

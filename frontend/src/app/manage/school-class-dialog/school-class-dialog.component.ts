@@ -12,7 +12,7 @@ import {Util} from "../../shared/util/util";
 })
 export class SchoolClassDialog extends ManageDialog<SchoolClassDto, InstitutionDto> implements OnInit {
 
-    private schoolClassForm: FormGroup;
+    public schoolClassForm: FormGroup;
 
     constructor(public dialogRef: MdDialogRef<SchoolClassDialog>, private formBuilder: FormBuilder) {
         super();

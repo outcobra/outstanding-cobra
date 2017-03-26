@@ -17,7 +17,7 @@ export class InstitutionDialog extends ManageDialog<InstitutionDto, any> impleme
         super();
     }
 
-    private institutionForm: FormGroup;
+    public institutionForm: FormGroup;
 
     ngOnInit() {
         this.institutionForm = this.formBuilder.group({

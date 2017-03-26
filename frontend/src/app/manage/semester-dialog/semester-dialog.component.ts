@@ -23,7 +23,7 @@ export class SemesterDialog extends ManageDialog<SemesterDto, SchoolYearDto> imp
         super();
     }
 
-    private semesterForm: FormGroup;
+    public semesterForm: FormGroup;
 
     ngOnInit() {
         this.semesterForm = this.formBuilder.group({

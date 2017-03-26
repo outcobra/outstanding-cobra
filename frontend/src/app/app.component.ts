@@ -13,14 +13,13 @@ import {InfoService} from './shared/services/info.service';
 })
 export class AppComponent implements OnInit, AfterViewInit {
     @HostBinding('class.outcobra-mobile')
-    private mobile: boolean;
+    public mobile: boolean;
+    public title = 'Outcobra';
 
-    title = 'Outcobra';
-
-    isEnglish: boolean = this.translateService.currentLang == 'en';
+    public isEnglish: boolean = this.translateService.currentLang == 'en';
 
     constructor(private translateService: TranslateService,
-                private auth: AuthService,
+                public auth: AuthService,
                 private responsiveHelper: ResponsiveHelperService,
                 private infoService: InfoService) {
     }
