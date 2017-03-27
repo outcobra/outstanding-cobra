@@ -1,12 +1,12 @@
-import {Component, OnInit} from "@angular/core";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {MdDialogRef} from "@angular/material";
-import {SubjectService} from "../../manage/service/subject.service";
-import {SubjectDto} from "../../manage/model/ManageDto";
-import {Util} from "../../shared/util/util";
-import {OutcobraValidators} from "../../shared/services/outcobra-validators";
-import {Task} from "../model/Task";
-import {CreateUpdateDialog} from "../../common/CreateUpdateDialog";
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {MdDialogRef} from '@angular/material';
+import {SubjectService} from '../../manage/service/subject.service';
+import {SubjectDto} from '../../manage/model/ManageDto';
+import {Util} from '../../shared/util/util';
+import {OutcobraValidators} from '../../shared/services/outcobra-validators';
+import {Task} from '../model/Task';
+import {CreateUpdateDialog} from '../../common/CreateUpdateDialog';
 
 @Component({
     selector: './task-create-update-dialog',
@@ -30,7 +30,7 @@ export class TaskCreateUpdateDialog extends CreateUpdateDialog<Task> implements 
 
         this.taskCreateUpdateForm = this.formBuilder.group({
             name: [this.getParamOrDefault('name'), Validators.required],
-            description: [this.getParamOrDefault('description'), Validators.required],
+            description: [this.getParamOrDefault('description')],
             dates: this.formBuilder.group({
                     todoDate: [this.getParamOrDefault('todoDate'), Validators.required],
                     dueDate: [this.getParamOrDefault('dueDate'), Validators.required],
@@ -47,7 +47,7 @@ export class TaskCreateUpdateDialog extends CreateUpdateDialog<Task> implements 
         if (this.taskCreateUpdateForm.valid && this.taskCreateUpdateForm.dirty) {
             this.dialogRef.close(this.formToTask(this.taskCreateUpdateForm));
         }
-        else if (this.taskCreateUpdateForm.pristine) {
+        else {
             Util.revalidateForm(this.taskCreateUpdateForm);
         }
     }

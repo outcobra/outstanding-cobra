@@ -34,7 +34,7 @@ export class InstitutionDialog extends ManageDialog<InstitutionDto, any> impleme
             let value = this.institutionForm.value as InstitutionDto;
             this.dialogRef.close(value);
         }
-        else if (this.institutionForm.pristine) {
+        else {
             Util.revalidateForm(this.institutionForm);
         }
     }

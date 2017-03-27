@@ -12,7 +12,7 @@ export class OutcobraValidators {
      * @returns {(control:AbstractControl)=>{[p: string]: any}}
      */
     public static isBeforeOrEqualDay(date: Date): ValidatorFn {
-        return (control: AbstractControl): {[key: string]: any} => {
+        return (control: AbstractControl): { [key: string]: any } => {
             if (control.value && !DateUtil.isBeforeDay(control.value, date)) {
                 return {
                     'isBeforeDay': {'beforeDate': date, 'actualDate': control.value}
@@ -30,7 +30,7 @@ export class OutcobraValidators {
      * @returns {(control:AbstractControl)=>{[p: string]: any}}
      */
     public static isAfterOrEqualDay(date: Date): ValidatorFn {
-        return (control: AbstractControl): {[key: string]: any} => {
+        return (control: AbstractControl): { [key: string]: any } => {
             if (control.value && !DateUtil.isAfterDay(control.value, date)) {
                 return {
                     'isAfterDay': {'afterDate': date, 'actualDate': control.value}
@@ -53,7 +53,7 @@ export class OutcobraValidators {
      * @returns {any}
      */
     public static dateFromIsBeforeDateTo(firstDateName: string = 'datefrom', secondDateName: string = 'dateto', isSameDayPossible: boolean = false) {
-        return (formGroup: FormGroup): {[key: string]: any} => {
+        return (formGroup: FormGroup): { [key: string]: any } => {
             let keys = Object.keys(formGroup.controls);
             let dateFromKey = keys.find(key => key.toLowerCase().includes(firstDateName.toLowerCase()) || key.toLowerCase().includes('validfrom'));
             let dateToKey = keys.find(key => key.toLowerCase().includes(secondDateName.toLowerCase()) || key.toLowerCase().includes('validto'));
@@ -62,7 +62,8 @@ export class OutcobraValidators {
             let dateFromControl = formGroup.controls[dateFromKey];
             let dateToControl = formGroup.controls[dateToKey];
 
-            if (!moment(dateFromControl.value).isBefore(moment(dateToControl.value)) || (isSameDayPossible && !moment(dateFromControl.value).isSameOrBefore(moment(dateToControl.value)))) {
+            if ((isSameDayPossible && !moment(dateFromControl.value).isSameOrBefore(moment(dateToControl.value))) ||
+                (!isSameDayPossible && !moment(dateFromControl.value).isBefore(moment(dateToControl.value)))) {
                 return {
                     'dateToIsBeforeDateFrom': {'fromDate': dateFromControl.value, 'toDate': dateToControl.value}
                 }
@@ -80,7 +81,7 @@ export class OutcobraValidators {
      * @returns {(control:AbstractControl)=>{[p: string]: any}}
      */
     public static isBetweenDay(lowerBound: Date, upperBound: Date) {
-        return (control: AbstractControl): {[key: string]: any} => {
+        return (control: AbstractControl): { [key: string]: any } => {
             let date = control.value;
             if (date && !DateUtil.isBetweenDay(date, lowerBound, upperBound)) {
                 return {

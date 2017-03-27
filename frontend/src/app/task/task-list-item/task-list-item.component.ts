@@ -1,6 +1,7 @@
-import {Component, OnInit, Input, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Task} from '../model/Task';
-import {Router, ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {isNotNull} from '../../shared/util/helper';
 
 @Component({
     selector: 'task-list-item',
@@ -24,6 +25,10 @@ export class TaskListItemComponent implements OnInit {
     markAsDone(event: Event) {
         event.stopPropagation();
         this.onMarkDone.emit(this.task);
+    }
+
+    hasDesc(): boolean {
+        return isNotNull(this.task.description);
     }
 
     goToDetail() {
