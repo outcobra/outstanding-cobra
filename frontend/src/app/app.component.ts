@@ -3,7 +3,6 @@ import {AuthService} from './shared/services/auth/auth.service';
 import {TranslateService} from 'ng2-translate';
 import {ResponsiveHelperService} from './shared/services/ui/responsive-helper.service';
 import {Util} from './shared/util/util';
-import {InfoService} from './shared/services/info.service';
 
 @Component({
     selector: 'outcobra-app',
@@ -20,16 +19,16 @@ export class AppComponent implements OnInit, AfterViewInit {
 
     constructor(private translateService: TranslateService,
                 public auth: AuthService,
-                private responsiveHelper: ResponsiveHelperService,
-                private infoService: InfoService) {
+                private responsiveHelper: ResponsiveHelperService) {
     }
 
     ngOnInit() {
-        this.infoService.getInfo().subscribe(console.log);
+        this.recheckMobile();
     }
 
     ngAfterViewInit() {
-        this.responsiveHelper.listenForResize().subscribe(() => Util.bindAndCall(this.recheckMobile, this));
+        this.responsiveHelper.listenForResize()
+            .subscribe(() => Util.bindAndCall(this.recheckMobile, this));
     }
 
     private recheckMobile() {

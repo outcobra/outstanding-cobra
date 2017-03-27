@@ -61,6 +61,7 @@ export class OutcobraValidators {
 
             let dateFromControl = formGroup.controls[dateFromKey];
             let dateToControl = formGroup.controls[dateToKey];
+            console.log(formGroup);
 
             if ((isSameDayPossible && !moment(dateFromControl.value).isSameOrBefore(moment(dateToControl.value))) ||
                 (!isSameDayPossible && !moment(dateFromControl.value).isBefore(moment(dateToControl.value)))) {

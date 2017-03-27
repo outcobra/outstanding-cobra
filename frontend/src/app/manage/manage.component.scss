@@ -8,7 +8,8 @@ manager, .manage-rows {
 
 outcobra-app:not(.outcobra-mobile) {
     manager, .manage-rows {
-        height: 100%;
+        flex-grow: 1;
+        display: flex;
     }
 }
 

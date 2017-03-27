@@ -111,6 +111,9 @@
             },
             "effort": {
               "label": "Erwarteter Aufwand (in Stunden)"
+            },
+            "errors": {
+              "dueDateBeforeTodoDate": "Das Fälligkeitsdatum darf nicht vor dem Erledigungsdatum liegen"
             }
           }
         }
