@@ -96,7 +96,6 @@ export class Util {
             let control: AbstractControl = form.controls[key];
             if (control instanceof FormGroup) {
                 this.revalidateForm(control);
-                console.log(control);
             } else {
                 this.revalidateControl(control);
             }
