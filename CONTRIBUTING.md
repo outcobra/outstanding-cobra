@@ -1,13 +1,13 @@
-#Outstanding Contributing Guidelines
+# Outstanding Contributing Guidelines
 
-##Angular 2
-###Style Guide
+## Angular 2
+### Style Guide
 
 We develop with the official Angular 2 Style Guidelines in mind. We care about Clean Code.
 You can find the Style Guidelines under [this](https://angular.io/docs/ts/latest/guide/style-guide.html) link.
 
 
-##Commit Messages
+## Commit Messages
 
 Please be nice to your colleagues and write a short explanation what exactly changed in this commit.
 Some examples of invalid commit messages are:
@@ -23,7 +23,7 @@ Also, please use multiple `-m`s for `git commit` to create multiple lines. If yo
 
 Full example: `git commit -a -m "Use multiple instances to linked Institution to Class" -m "Querydsl is acting weird (only returning the first result) if two Institutions are linked by the same instance of InstitutionClass" -m "Fixes #1343" `
 
-##Branch naming
+## Branch naming
 
 We want to have some branch categories and those categories have their own prefix.
 
@@ -41,7 +41,7 @@ All of them follow the same syntax: chose one of the prefixes and append a short
 Example:
 `feature/calculate-mark-report`
 
-##Pushing and Pull requests
+## Pushing and Pull requests
 
 Minor changes can be pushed to the `develop` branch directly. Minor changes must fulfill the following criteria:
 
@@ -51,14 +51,14 @@ Minor changes can be pushed to the `develop` branch directly. Minor changes must
 
 For all other changes, please create a branch and pull request.
 
-###Branches 
+### Branches 
 Our branch names are inspired by [git-flow](https://danielkummer.github.io/git-flow-cheatsheet/#getting_started).
 
 * `master`: Used for releases only
 * `develop`: Should only contain finished, tested and stable features
 * `feature/my-awesome-feature`: Every feature gets a branch and it can be unstable or even unbuildable.
 
-##Issues
+## Issues
 We use Github issues to track bugs and tasks. Additionally, we use ZenHub for Scrum-related stuff.
 Every issue (by contributors) must be labeled (e.g.: `question`, `bug`, `task`).
 
