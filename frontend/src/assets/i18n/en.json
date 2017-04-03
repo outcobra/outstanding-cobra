@@ -111,6 +111,9 @@
             },
             "effort": {
               "label": "Expected effort (in h)"
+            },
+            "errors": {
+              "dueDateBeforeTodoDate": "The due date must not be before the todo date"
             }
           }
         }

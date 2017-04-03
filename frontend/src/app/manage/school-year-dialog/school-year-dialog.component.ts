@@ -1,12 +1,12 @@
-import {Component, OnInit, ViewEncapsulation} from "@angular/core";
-import {ManageDialog} from "../manage-dialog";
-import {SchoolClassDto, SchoolYearDto} from "../model/ManageDto";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {MdDialogRef} from "@angular/material";
-import {OutcobraValidators} from "../../shared/services/outcobra-validators";
-import {TranslateService} from "ng2-translate";
-import {DatePipe} from "@angular/common";
-import {Util} from "../../shared/util/util";
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {ManageDialog} from '../manage-dialog';
+import {SchoolClassDto, SchoolYearDto} from '../model/ManageDto';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {MdDialogRef} from '@angular/material';
+import {OutcobraValidators} from '../../shared/services/outcobra-validators';
+import {TranslateService} from 'ng2-translate';
+import {DatePipe} from '@angular/common';
+import {Util} from '../../shared/util/util';
 
 @Component({
     selector: 'school-year-dialog',
@@ -53,7 +53,7 @@ export class SchoolYearDialog extends ManageDialog<SchoolYearDto, SchoolClassDto
             value.schoolClassId = this.parent.id;
             this.dialogRef.close(value);
         }
-        else if (this.schoolYearForm.pristine) {
+        else {
             Util.revalidateForm(this.schoolYearForm);
         }
     }

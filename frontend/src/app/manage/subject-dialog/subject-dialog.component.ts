@@ -1,9 +1,9 @@
-import {Component, OnInit, ViewEncapsulation} from "@angular/core";
-import {MdDialogRef} from "@angular/material";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ManageDialog} from "../manage-dialog";
-import {SemesterDto, SubjectDto} from "../model/ManageDto";
-import {Util} from "../../shared/util/util";
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {MdDialogRef} from '@angular/material';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ManageDialog} from '../manage-dialog';
+import {SemesterDto, SubjectDto} from '../model/ManageDto';
+import {Util} from '../../shared/util/util';
 
 @Component({
     selector: 'subject-dialog',
@@ -38,7 +38,7 @@ export class SubjectDialog extends ManageDialog<SubjectDto, SemesterDto> impleme
             value.semesterId = this.parent.id;
             this.dialogRef.close(value);
         }
-        else if (this.subjectForm.pristine) {
+        else {
             Util.revalidateForm(this.subjectForm);
         }
     }

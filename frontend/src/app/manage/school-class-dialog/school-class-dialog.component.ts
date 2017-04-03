@@ -1,9 +1,9 @@
-import {Component, OnInit} from "@angular/core";
-import {ManageDialog} from "../manage-dialog";
-import {InstitutionDto, SchoolClassDto} from "../model/ManageDto";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {MdDialogRef} from "@angular/material";
-import {Util} from "../../shared/util/util";
+import {Component, OnInit} from '@angular/core';
+import {ManageDialog} from '../manage-dialog';
+import {InstitutionDto, SchoolClassDto} from '../model/ManageDto';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {MdDialogRef} from '@angular/material';
+import {Util} from '../../shared/util/util';
 
 @Component({
     selector: 'school-class-dialog',
@@ -34,7 +34,7 @@ export class SchoolClassDialog extends ManageDialog<SchoolClassDto, InstitutionD
             value.institutionId = this.parent.id;
             this.dialogRef.close(value);
         }
-        else if (this.schoolClassForm.pristine) {
+        else {
             Util.revalidateForm(this.schoolClassForm);
         }
     }
