@@ -12,7 +12,8 @@ export class NotificationWrapperService extends NotificationsService {
         timeOut: 7500,
         showProgressBar: true,
         lastOnBottom: true,
-        clickToClose: true
+        clickToClose: true,
+        animate: 'fromRight'
     };
 
     private icns: Icons = appIcons; // can't name it icons because of super class

@@ -62,12 +62,12 @@ export class AuthService {
             this.http.get<User>('/user/login', 'outcobra')
                 .catch(() => {
                     this.logout();
-                    this.notificationService.error('i18n.login.error.title', 'i18n.login.error.message');
+                    this.notificationService.error('i18n.auth.error.title', 'i18n.auth.error.message');
                     return Observable.empty();
                 })
                 .subscribe((user: User) =>
                     this.notificationService.success(
-                        this.translateService.instant('i18n.login.success.hello') + user.username, 'i18n.login.success.message'
+                        this.translateService.instant('i18n.auth.success.hello') + user.username, 'i18n.auth.success.message'
                     ));
             let redirectRoute = Util.getUrlParam('state');
             if (redirectRoute) {

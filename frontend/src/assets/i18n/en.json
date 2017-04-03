@@ -209,7 +209,9 @@
         }
       }
     },
-    "login": {
+    "auth": {
+      "login": "Login",
+      "logout": "Logout",
       "error": {
         "title": "Login failed",
         "message": "We could not log you in"
