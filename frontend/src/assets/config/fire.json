@@ -6,6 +6,11 @@
         "name": "outcobra",
         "apiBase": "https://outcobra-a.pegnu.cloud/backend/api/",
         "authToken": true
+      },
+      {
+        "name": "outcobra_public",
+        "apiBase": "https://outcobra-a.pegnu.cloud/backend/",
+        "authToken": false
       }
     ]
   },
