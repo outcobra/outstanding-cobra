@@ -3,7 +3,7 @@ import {ManageDialog} from '../manage-dialog';
 import {SchoolClassDto, SchoolYearDto} from '../model/ManageDto';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MdDialogRef} from '@angular/material';
-import {OutcobraValidators} from '../../shared/services/outcobra-validators';
+import {OCValidators} from '../../shared/services/oc-validators';
 import {TranslateService} from 'ng2-translate';
 import {DatePipe} from '@angular/common';
 import {Util} from '../../shared/util/util';
@@ -32,7 +32,7 @@ export class SchoolYearDialog extends ManageDialog<SchoolYearDto, SchoolClassDto
                 validTo: [this.getParamOrDefault('validTo'), Validators.required]
             },
             {
-                validator: OutcobraValidators.dateFromIsBeforeDateTo
+                validator: OCValidators.dateFromIsBeforeDateTo
             }
         );
     }

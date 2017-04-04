@@ -14,7 +14,7 @@ import * as moment from 'moment';
 import {DateUtil} from '../../services/date-util.service';
 import {DatePickerMaxDateSmallerThanMinDateError} from './datepicker-errors';
 import {ControlValueAccessor, NgControl, Validators} from '@angular/forms';
-import {OutcobraValidators} from '../../services/outcobra-validators';
+import {OCValidators} from '../../services/oc-validators';
 import {Util} from '../../util/util';
 
 @Component({
@@ -57,7 +57,7 @@ export class DatepickerComponent implements OnInit, AfterContentInit, ControlVal
     ngAfterContentInit() {
         if (!this.control) return;
         this.control.control.setValidators(
-            Validators.compose([OutcobraValidators.isBetweenDay(this.minDate, this.maxDate), this.control.control.validator])
+            Validators.compose([OCValidators.isBetweenDay(this.minDate, this.maxDate), this.control.control.validator])
         );
         /*
          This is some weird shit but without the Promise it does not work and an error is thrown

@@ -3,10 +3,9 @@
 manager, .manage-rows {
     overflow-y: auto;
     overflow-x: hidden;
-    display: block;
 }
 
-outcobra-app:not(.outcobra-mobile) {
+oc-app:not(.oc-mobile) {
     manager, .manage-rows {
         flex-grow: 1;
         display: flex;

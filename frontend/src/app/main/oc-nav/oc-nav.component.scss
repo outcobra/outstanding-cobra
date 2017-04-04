@@ -1,0 +1,88 @@
+@import '../../../sass/color';
+
+$row-height: 40px;
+$collapsed-width: 50px;
+
+oc-nav {
+    position: relative;
+    transition: all .3s ease-in-out;
+
+    * {
+        @extend .text-secondary-dark;
+    }
+
+    flex-basis: 200px;
+
+    nav {
+        ul {
+            margin: 0;
+            li {
+                display: block;
+                width: 100%;
+                height: $row-height;
+
+                a {
+                    position: relative;
+                    display: block;
+                    width: 100%;
+                    height: inherit;
+                    transition: background-color .15s ease-in-out;
+
+                    span, md-icon {
+                        float: left;
+                        display: block !important;
+                        height: 100% !important;
+                        line-height: $row-height !important;
+                    }
+
+                    span {
+                        opacity: 1;
+                        width: 150px;
+                        transition: all .3s ease-in-out;
+                    }
+
+                    md-icon {
+                        width: $collapsed-width !important;
+                        text-align: center;
+                    }
+
+                    &:hover {
+                        background-color: $hover-dark;
+                    }
+                }
+            }
+        }
+    }
+
+    .oc-nav-collapser {
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+
+        transition: min-width .3s ease-in-out;
+
+        button {
+            transition: width .3s ease-in-out;
+            min-width: $collapsed-width;
+            width: 100%;
+            text-align: end;
+            md-icon {
+                transition: transform .3s ease-in-out;
+            }
+        }
+    }
+
+}
+
+oc-nav.oc-nav-collapsed {
+    flex-basis: $collapsed-width;
+    width: $collapsed-width;
+    nav li span {
+        opacity: 0;
+        width: 0;
+    }
+
+    .oc-nav-collapser md-icon {
+        transform: rotate(180deg);
+    }
+}

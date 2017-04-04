@@ -1,25 +1,28 @@
-import {AfterViewInit, Component, HostBinding, OnInit, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, Component, HostBinding, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {AuthService} from './shared/services/auth/auth.service';
 import {TranslateService} from 'ng2-translate';
 import {ResponsiveHelperService} from './shared/services/ui/responsive-helper.service';
 import {Util} from './shared/util/util';
+import {MdSidenav} from '@angular/material';
 
 @Component({
-    selector: 'outcobra-app',
+    selector: 'oc-app',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class AppComponent implements OnInit, AfterViewInit {
-    @HostBinding('class.outcobra-mobile')
+    @HostBinding('class.oc-mobile')
     public mobile: boolean;
     public title = 'Outcobra';
+
+    @ViewChild(MdSidenav) public sidenav: MdSidenav;
 
     public isEnglish: boolean = this.translateService.currentLang == 'en';
 
     constructor(private translateService: TranslateService,
                 public auth: AuthService,
-                private responsiveHelper: ResponsiveHelperService) {
+                public responsiveHelper: ResponsiveHelperService) {
     }
 
     ngOnInit() {
@@ -45,5 +48,11 @@ export class AppComponent implements OnInit, AfterViewInit {
 
     logout() {
         this.auth.logout();
+    }
+
+    openSidenav() {
+        if (this.sidenav) {
+            this.sidenav.open();
+        }
     }
 }

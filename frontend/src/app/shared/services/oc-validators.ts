@@ -2,7 +2,7 @@ import {AbstractControl, FormGroup, ValidatorFn} from '@angular/forms';
 import * as moment from 'moment';
 import {DateUtil} from './date-util.service';
 
-export class OutcobraValidators {
+export class OCValidators {
 
     /**
      * validates whether the current value of the control is before the given date or not

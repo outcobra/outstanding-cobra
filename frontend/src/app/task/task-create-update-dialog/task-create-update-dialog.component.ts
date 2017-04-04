@@ -4,7 +4,7 @@ import {MdDialogRef} from '@angular/material';
 import {SubjectService} from '../../manage/service/subject.service';
 import {SubjectDto} from '../../manage/model/ManageDto';
 import {Util} from '../../shared/util/util';
-import {OutcobraValidators} from '../../shared/services/outcobra-validators';
+import {OCValidators} from '../../shared/services/oc-validators';
 import {Task} from '../model/Task';
 import {CreateUpdateDialog} from '../../common/CreateUpdateDialog';
 
@@ -36,7 +36,7 @@ export class TaskCreateUpdateDialog extends CreateUpdateDialog<Task> implements 
                     dueDate: [this.getParamOrDefault('dueDate'), Validators.required],
                 },
                 {
-                    validator: OutcobraValidators.dateFromIsBeforeDateTo('todoDate', 'dueDate', true)
+                    validator: OCValidators.dateFromIsBeforeDateTo('todoDate', 'dueDate', true)
                 }),
             effort: [this.getParamOrDefault('effort'), Validators.required],
             subjectId: [this.getParamOrDefault('subject.id'), Validators.required]
