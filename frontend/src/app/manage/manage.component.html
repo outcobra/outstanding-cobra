@@ -1,18 +1,21 @@
-<div *ngIf="isMobile()" class="row mobile-manage-nav z-depth-1-half">
-    <div class="col m2 s2">
-        <button md-mini-fab color="accent" [disabled]="!isValidDirection(-1)" (click)="lastView()">
-            <md-icon>navigate_before</md-icon>
-        </button>
+<oc-title-bar>
+    <span>{{'i18n.modules.manage.linkTitle' | translate}}</span>
+    <div *ngIf="isMobile()" class="row mobile-manage-nav oc-title-bar-content">
+        <div class="col m2 s2">
+            <button md-button [disabled]="!isValidDirection(-1)" (click)="lastView()">
+                <md-icon>navigate_before</md-icon>
+            </button>
+        </div>
+        <div class="col m8 s8 mobile-title">
+            <h6>{{ mobileTitle | translate }}</h6>
+        </div>
+        <div class="col m2 s2">
+            <button md-button [disabled]="!isValidDirection(1)" (click)="nextView()" class="right">
+                <md-icon>navigate_next</md-icon>
+            </button>
+        </div>
     </div>
-    <div class="col m8 s8 mobile-title">
-        <h6>{{ mobileTitle | translate }}</h6>
-    </div>
-    <div class="col m2 s2">
-        <button md-mini-fab color="accent" [disabled]="!isValidDirection(1)" (click)="nextView()" class="right">
-            <md-icon>navigate_next</md-icon>
-        </button>
-    </div>
-</div>
+</oc-title-bar>
 <div class="row manage-rows" [class.mobile]="isMobile()" [style.margin-left.px]="isMobile() ? marginLeft : 0">
     <!-- FIRST COLUMN START -->
     <div [ngClass]="columnClasses" [class.border-right]="!isMobile()">

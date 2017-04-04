@@ -83,8 +83,10 @@ button[md-raised-button], button[md-button] {
     font-family: 'Roboto', sans-serif !important;
 }
 
-span.divider {
-
+oc-divider {
+    display: block;
+    margin: 0;
+    border-top: 1px solid $slightly-dark;
 }
 
 md-toolbar {

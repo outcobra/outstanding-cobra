@@ -7,8 +7,7 @@ import {SharedModule} from '../shared/shared.module';
 import {MaterialModule} from '@angular/material';
 import {FormsModule} from '@angular/forms';
 import {AuthGuard} from '../shared/services/auth/auth-guard.service';
-import { OCNavComponent } from './oc-nav/oc-nav.component';
-import { OCTitleBarComponent } from './oc-title-bar/oc-title-bar.component';
+import {OCNavComponent} from './oc-nav/oc-nav.component';
 
 @NgModule({
     imports: [
@@ -21,12 +20,10 @@ import { OCTitleBarComponent } from './oc-title-bar/oc-title-bar.component';
     declarations: [
         MainComponent,
         DashboardComponent,
-        OCNavComponent,
-        OCTitleBarComponent
+        OCNavComponent
     ],
     exports: [
-        OCNavComponent,
-        OCTitleBarComponent
+        OCNavComponent
     ],
     providers: [
         AuthGuard

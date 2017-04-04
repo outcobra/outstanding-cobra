@@ -1,5 +1,9 @@
 @import '../../sass/color';
 
+.task-detail-row {
+    margin-bottom: 0;
+}
+
 md-input-container#task-search {
     display: block !important;
     box-sizing: border-box;

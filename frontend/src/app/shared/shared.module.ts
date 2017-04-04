@@ -30,6 +30,8 @@ import {InfoDialogComponent} from './components/info-dialog/info-dialog.componen
 import {IconDataComponent} from './components/icon-data/icon-data/icon-data.component';
 import {IconDataChildComponent} from './components/icon-data/icon-data-child/icon-data-child.component';
 import {IconDataDataDirective, IconDataTitleDirective} from './components/icon-data/icon-data-directives';
+import {OCTitleBarComponent} from './components/oc-title-bar/oc-title-bar.component';
+import {OCDividerDirective} from './directives/oc-divider.directive';
 
 @NgModule({
     declarations: [
@@ -49,7 +51,9 @@ import {IconDataDataDirective, IconDataTitleDirective} from './components/icon-d
         IconDataComponent,
         IconDataChildComponent,
         IconDataTitleDirective,
-        IconDataDataDirective
+        IconDataDataDirective,
+        OCTitleBarComponent,
+        OCDividerDirective
     ],
     exports: [
         DatepickerComponent,
@@ -64,6 +68,8 @@ import {IconDataDataDirective, IconDataTitleDirective} from './components/icon-d
         IconDataChildComponent,
         IconDataTitleDirective,
         IconDataDataDirective,
+        OCTitleBarComponent,
+        OCDividerDirective,
         TranslateModule
     ],
     imports: [

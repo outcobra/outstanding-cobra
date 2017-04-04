@@ -1,12 +1,17 @@
 @import '../../sass/general';
 
+manager {
+    display: flex;
+    flex-direction: column;
+}
+
 manager, .manage-rows {
     overflow-y: auto;
     overflow-x: hidden;
 }
 
 oc-app:not(.oc-mobile) {
-    manager, .manage-rows {
+    .manage-rows {
         flex-grow: 1;
         display: flex;
     }
@@ -15,6 +20,8 @@ oc-app:not(.oc-mobile) {
 .mobile-manage-nav {
     height: 50px;
     width: 100%;
+    margin-bottom: 0 !important;
+
     div {
         &.col {
             padding: 5px;
@@ -27,6 +34,9 @@ oc-app:not(.oc-mobile) {
             -moz-user-select: none;
             -ms-user-select: none;
             user-select: none;
+        }
+        button[md-button] {
+            min-width: 50px;
         }
     }
 }
@@ -46,12 +56,9 @@ oc-app:not(.oc-mobile) {
     }
 
     .col {
-        height: 100%;
-
         .manage-entity {
             height: 100px;
             width: 100%;
-
             @extend .border-bottom;
         }
     }
@@ -125,6 +132,8 @@ oc-app:not(.oc-mobile) {
                         font-size: .8em;
                         height: 20px;
                         line-height: 20px;
+                        display: block;
+                        text-overflow: ellipsis;
                     }
                 }
             }

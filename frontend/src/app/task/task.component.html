@@ -1,11 +1,13 @@
-<div class="row">
+<oc-title-bar>
+    <span>{{'i18n.modules.task.linkTitle' | translate}}</span>
+</oc-title-bar>
+<div class="row task-detail-row">
     <div class="col s12 l8 offset-l2">
         <router-outlet></router-outlet>
     </div>
 </div>
 <div class="row" [formGroup]="searchForm">
     <div class="col s12 m12 l8 offset-l4">
-        <h1>Tasks</h1>
         <div class="row search-row">
             <div class="col s12 m10 l12">
                 <md-input-container id="task-search">
