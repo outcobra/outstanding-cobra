@@ -2,10 +2,12 @@
 
 $row-height: 40px;
 $collapsed-width: 50px;
+$animation-duration: .3s;
 
 oc-nav {
     position: relative;
-    transition: all .3s ease-in-out;
+    transition: all $animation-duration ease-in-out;
+    overflow-x: hidden;
 
     * {
         @extend .text-secondary-dark;
@@ -30,17 +32,17 @@ oc-nav {
                         height: inherit;
                         transition: background-color .15s ease-in-out;
 
-                        span, md-icon {
+                        div, md-icon {
                             float: left;
                             display: block !important;
                             height: 100% !important;
                             line-height: $row-height !important;
                         }
 
-                        span {
-                            opacity: 1;
+                        div {
                             width: 150px;
-                            transition: all .3s ease-in-out;
+                            opacity: 1;
+                            transition: opacity $animation-duration ease-in-out;
                         }
 
                         md-icon {
@@ -62,30 +64,30 @@ oc-nav {
         position: absolute;
         bottom: 0;
 
-        transition: min-width .3s ease-in-out;
+        transition: min-width $animation-duration ease-in-out;
 
         button {
-            transition: width .3s ease-in-out;
+            transition: width $animation-duration ease-in-out;
             min-width: $collapsed-width;
             width: 100%;
             text-align: end;
             md-icon {
-                transition: transform .3s ease-in-out;
+                transition: transform $animation-duration ease-in-out;
             }
         }
     }
-
 }
 
 oc-nav.oc-nav-collapsed {
     flex-basis: $collapsed-width;
     width: $collapsed-width;
-    nav li span {
-        opacity: 0;
-        width: 0;
+    .oc-nav-nav {
+        nav li div {
+            opacity: 0;
+        }
     }
-
     .oc-nav-collapser md-icon {
         transform: rotate(180deg);
     }
+
 }
