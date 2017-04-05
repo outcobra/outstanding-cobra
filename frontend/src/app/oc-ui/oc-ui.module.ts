@@ -8,7 +8,7 @@ import {OCFooterComponent} from './components/oc-footer/oc-footer.component';
 import {
     OCCollapsibleBodyComponent, OCCollapsibleComponent,
     OCCollapsibleHeaderComponent
-} from './components/oc-collapsible/collapsible';
+} from './components/oc-collapsible/oc-collapsible';
 import {OCDividerDirective} from './directives/oc-divider.directive';
 import {MaterialModule} from '@angular/material';
 import {TranslateModule} from 'ng2-translate';

@@ -37,28 +37,26 @@ export class OCCollapsibleBodyComponent {
     selector: 'oc-collapsible',
     template: `
             <ng-content></ng-content>
-            <div [@toggle]="state">
-                <ng-content select="collapsible-body"></ng-content>
+            <div [@ocToggle]="opened">
+                <ng-content select="oc-collapsible-body"></ng-content>
             </div>`,
-    styleUrls: ['./collapsible.scss'],
+    styleUrls: ['./oc-collapsible.scss'],
     encapsulation: ViewEncapsulation.None,
     animations: [
-        trigger('toggle', [
-            state('inactive', style({
+        trigger('ocToggle', [
+            state('false', style({
                 height: 0
             })),
-            state('active', style({
+            state('true', style({
                 height: '*'
             })),
-            transition('inactive => active', animate('400ms ease-in')),
-            transition('active => inactive', animate('400ms ease-out'))
+            transition('0 => 1', animate('400ms ease-in')),
+            transition('1 => 0', animate('400ms ease-out'))
         ])
     ]
 })
 export class OCCollapsibleComponent implements AfterContentInit {
-
     @ContentChild(OCCollapsibleHeaderComponent) public header: OCCollapsibleHeaderComponent;
-
     @ContentChild(OCCollapsibleBodyComponent) public body: OCCollapsibleBodyComponent;
 
     ngAfterContentInit(): void {
@@ -68,14 +66,9 @@ export class OCCollapsibleComponent implements AfterContentInit {
     }
 
     @HostBinding('class.active') public opened: boolean = false;
-    public state: string = 'inactive';
-
-    constructor() {
-    }
 
     toggle() {
         this.opened = !this.opened;
-        this.state = this.opened ? 'active' : 'inactive';
     }
 
 }
