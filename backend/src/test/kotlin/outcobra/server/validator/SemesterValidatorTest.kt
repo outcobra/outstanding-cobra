@@ -11,7 +11,7 @@ import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.transaction.annotation.Transactional
 import outcobra.server.config.ProfileRegistry.Companion.TEST
-import outcobra.server.exception.DateOutsideExpectedRangeException
+import outcobra.server.exception.ValidationKey
 import outcobra.server.model.SchoolClass
 import outcobra.server.model.SchoolYear
 import outcobra.server.model.Semester
@@ -83,7 +83,7 @@ class SemesterValidatorTest {
         val to = existing!!.validTo.plusDays(10)
         assertThatThrownBy {
             validator.validateSemesterCreation(Semester("", from, to, schoolYear, listOf(), listOf(), null))
-        }.isInstanceOf(DateOutsideExpectedRangeException::class.java)
+        }.isEqualTo(ValidationKey.OUTSIDE_PARENT.makeException())
     }
 
     @Test
@@ -93,7 +93,7 @@ class SemesterValidatorTest {
         val to = schoolYear!!.validTo.plusDays(10)
         assertThatThrownBy {
             validator.validateSemesterCreation(Semester("", from, to, schoolYear, listOf(), listOf(), null))
-        }.isInstanceOf(DateOutsideExpectedRangeException::class.java)
+        }.isEqualTo(ValidationKey.OUTSIDE_PARENT.makeException())
     }
 
     @Test
@@ -103,7 +103,7 @@ class SemesterValidatorTest {
         val to = schoolYear!!.validTo
         assertThatThrownBy {
             validator.validateSemesterCreation(Semester("", to, from, schoolYear, listOf(), listOf(), null))
-        }.isInstanceOf(DateOutsideExpectedRangeException::class.java)
+        }.isEqualTo(ValidationKey.START_BIGGER_THAN_END.makeException())
     }
 
     @Test
@@ -112,7 +112,7 @@ class SemesterValidatorTest {
         existing!!.validFrom = existing!!.validFrom.minusDays(20)
         assertThatThrownBy {
             validator.validateSemesterCreation(existing!!)
-        }.isInstanceOf(DateOutsideExpectedRangeException::class.java)
+        }.isEqualTo(ValidationKey.OUTSIDE_PARENT.makeException())
     }
 
     @Test

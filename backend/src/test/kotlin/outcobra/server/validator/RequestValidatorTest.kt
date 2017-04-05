@@ -8,7 +8,7 @@ import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit4.SpringRunner
 import outcobra.server.Mocker
 import outcobra.server.config.ProfileRegistry.Companion.TEST
-import outcobra.server.exception.ManipulatedRequestException
+import outcobra.server.exception.ValidationException
 import outcobra.server.model.Institution
 import outcobra.server.model.QInstitution
 import outcobra.server.model.QUser
@@ -63,7 +63,7 @@ open class RequestValidatorTest {
 
     }
 
-    @Test(expected = ManipulatedRequestException::class)
+    @Test(expected = ValidationException::class)
     fun testFakeChild() {
         val original = institutionMapper.toDto(institutionByUser2)
         val cuckooChild = institutionByCurrent.schoolClasses.first()
@@ -71,24 +71,24 @@ open class RequestValidatorTest {
         institutionService.save(fake)
     }
 
-    @Test(expected = ManipulatedRequestException::class)
+    @Test(expected = ValidationException::class)
     fun testFakeParent() {
         val original = institutionMapper.toDto(institutionByUser2)
         val fake = InstitutionDto(original.id, userServiceMock.getCurrentUser()!!.id, original.name, original.schoolClassIds)
         institutionService.save(fake)
     }
 
-    @Test(expected = ManipulatedRequestException::class)
+    @Test(expected = ValidationException::class)
     fun testIllegalGet() {
         institutionService.readById(institutionByUser2.id)
     }
 
-    @Test(expected = ManipulatedRequestException::class)
+    @Test(expected = ValidationException::class)
     fun testIllegalDelete() {
         institutionService.delete(institutionByUser2.id)
     }
 
-    @Test(expected = ManipulatedRequestException::class)
+    @Test(expected = ValidationException::class)
     fun testIllegalReadByParent() {
         schoolClassService.readAllByInstitution(institutionByUser2.id)
     }

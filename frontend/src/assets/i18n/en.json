@@ -168,6 +168,9 @@
           },
           "form": {
             "label": "Enter a schoolyear name"
+          },
+          "error": {
+            "overlap": "The new school-year overlaps with an existing one"
           }
         },
         "semester": {
@@ -177,6 +180,9 @@
             "saveSuccess": "The semester has been saved successfully.",
             "deleteSuccess": "The semester has been deleted successfully.",
             "deleteFailed": "A error occurred while deleting the semester. Please try again later"
+          },
+          "error": {
+            "overlap": "The new semester overlaps with an existing one"
           },
           "form": {
             "label": "Enter a semester name"
@@ -213,29 +219,38 @@
         "message": "You are now logged in"
       }
     },
-    "http": {
-      "error": {
+    "error": {
+      "http": {
         "0": {
           "title": "Connection Error",
           "message": "The server is currently not reachable. Please try again later."
-        },
-        "400": {
-          "title": "Data Error",
-          "message": "The server is indicating invalid input data"
-        },
-        "403": {
-          "title": "Forbidden",
-          "message": "You are not allowed to perform this action"
-        },
-        "404": {
-          "title": "Not Found",
-          "message": "The requested element could not be found"
-        },
-        "500": {
-          "title": "Server Error",
-          "message": "An unknown server error has occurred"
         }
+      },
+      "input": {
+        "title": "Data Error",
+        "message": "The server is indicating invalid input data"
+      },
+      "timeout": {
+        "title": "Connection Error",
+        "message": "The server is currently not reachable. Please try again later."
+      },
+      "forbidden": {
+        "title": "Forbidden",
+        "message": "You are not allowed to perform this action"
+      },
+      "notFound": {
+        "title": "Not Found",
+        "message": "The requested element could not be found"
+      },
+      "generic": {
+        "title": "Server Error",
+        "message": "An unknown server error has occurred"
+      },
+      "outsideParent": {
+        "title": "Ungültiges Datum",
+        "message": "The given dates are outside the parent timespan"
       }
     }
   }
 }
+

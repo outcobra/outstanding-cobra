@@ -1,6 +1,6 @@
 package outcobra.server.util
 
-import outcobra.server.exception.DateOutsideExpectedRangeException
+import outcobra.server.exception.ValidationKey
 import java.time.LocalDate
 
 /**
@@ -18,7 +18,8 @@ class DateUtil {
          */
         fun isOverlap(aStart: LocalDate, aEnd: LocalDate, bStart: LocalDate, bEnd: LocalDate): Boolean {
             if (!(aStart.isBefore(aEnd) && bStart.isBefore(bEnd))) {
-                throw DateOutsideExpectedRangeException("the start-date is bigger or equal to the end-date")
+                ValidationKey.START_BIGGER_THAN_END.throwException()
+                return true
             } else {
                 return aStart.isBeforeOrEqual(bEnd) && aEnd.isAfterOrEqual(bStart)
             }

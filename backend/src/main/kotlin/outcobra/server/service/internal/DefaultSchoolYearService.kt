@@ -2,7 +2,7 @@ package outcobra.server.service.internal
 
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
-import outcobra.server.exception.DateOutsideExpectedRangeException
+import outcobra.server.exception.ValidationKey
 import outcobra.server.model.QSchoolYear
 import outcobra.server.model.SchoolClass
 import outcobra.server.model.SchoolYear
@@ -27,7 +27,7 @@ open class DefaultSchoolYearService
     override fun save(dto: SchoolYearDto): SchoolYearDto {
         val schoolYear = mapper.fromDto(dto)
         if (!schoolYearValidator.validateSchoolYearCreation(schoolYear)) {
-            throw DateOutsideExpectedRangeException("The new school-year overlaps with an existing one")
+            ValidationKey.SCHOOL_YEAR_OVERLAP.throwException()
         }
         return super.save(dto)
     }

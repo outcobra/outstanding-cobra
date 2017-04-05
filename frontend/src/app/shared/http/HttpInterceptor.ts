@@ -1,11 +1,11 @@
-import {Injectable} from '@angular/core';
-import {Http, Request, RequestMethod, URLSearchParams, Response} from '@angular/http';
-import {NotificationsService} from 'angular2-notifications';
-import {Config} from '../../config/Config';
-import {Observable} from 'rxjs';
-import 'rxjs/add/operator/map';
-import {dateReviver, dateReplacer} from './http-util';
-import {RequestOptions} from './RequestOptions';
+import {Injectable} from "@angular/core";
+import {Http, Request, RequestMethod, Response, URLSearchParams} from "@angular/http";
+import {NotificationsService} from "angular2-notifications";
+import {Config} from "../../config/Config";
+import {Observable} from "rxjs";
+import "rxjs/add/operator/map";
+import {dateReplacer, dateReviver} from "./http-util";
+import {RequestOptions} from "./RequestOptions";
 
 /**
  * HttpInterceptor to customize the http request and http responses
@@ -63,7 +63,7 @@ export class HttpInterceptor {
             })
         ).catch(error => {
             let status = error.status;
-            this.notificationsService.error(`i18n.http.error.${status}.title`, `i18n.http.error.${status}.message`);
+            this.notificationsService.error(`i18n.error.http.${status}.title`, `i18n.error.http.${status}.message`);
             return Observable.throw(error);
         }).map((res: Response) => this.unwrapAndCastHttpResponse<T>(res));
     }

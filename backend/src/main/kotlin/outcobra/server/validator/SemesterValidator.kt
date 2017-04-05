@@ -1,7 +1,8 @@
 package outcobra.server.validator
 
 import org.springframework.stereotype.Component
-import outcobra.server.exception.DateOutsideExpectedRangeException
+import outcobra.server.exception.ValidationException
+import outcobra.server.exception.ValidationKey
 import outcobra.server.model.QSemester
 import outcobra.server.model.SchoolYear
 import outcobra.server.model.Semester
@@ -26,14 +27,14 @@ class SemesterValidator @Inject constructor(val schoolYearRepository: SchoolYear
      * checks that the given [Semester] is in the parent [SchoolYear]
      *
      * @return returns true if the conditions from above are both true
-     * @throws DateOutsideExpectedRangeException when the semester isn't in the parent schoolYear
+     * @throws ValidationException when the semester isn't in the parent schoolYear
      */
     fun validateSemesterCreation(semester: Semester): Boolean {
         val parentId = semester.schoolYear.id
         val parent = schoolYearRepository.findOne(parentId)
 
         if (semester !in parent)
-            throw DateOutsideExpectedRangeException("Semester is not inside the given schoolYear")
+            ValidationKey.OUTSIDE_PARENT.throwException()
 
         val withSameParent = QSemester.semester.schoolYear.id.eq(parentId)
         val semesters = semesterRepository.findAll(withSameParent).toList()
