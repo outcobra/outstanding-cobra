@@ -53,6 +53,10 @@ oc-nav {
                         &:hover {
                             background-color: $hover-dark;
                         }
+
+                        &.oc-nav-link-active md-icon {
+                            @extend .text-accent;
+                        }
                     }
                 }
             }

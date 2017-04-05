@@ -14,24 +14,14 @@ import {DateUtil} from './services/date-util.service';
 import {FormsModule} from '@angular/forms';
 import {AuthService} from './services/auth/auth.service';
 import {SidenavComponent, SidenavLayout} from './components/sidenav/sidenav';
-import {
-    CollapsibleBodyComponent,
-    CollapsibleComponent,
-    CollapsibleHeaderComponent
-} from './components/collapsible/collapsible';
 import {ConfirmDialogComponent} from './components/confirm-dialog/confirm-dialog.component';
 import {ConfirmDialogService} from './services/confirm-dialog.service';
 import {ColorService} from './services/color.service';
 import {ColorpickerComponent} from './components/colorpicker/colorpicker.component';
 import {ResponsiveHelperService} from './services/ui/responsive-helper.service';
 import {InfoService} from './services/info.service';
-import {FooterComponent} from './components/footer/footer.component';
 import {InfoDialogComponent} from './components/info-dialog/info-dialog.component';
-import {IconDataComponent} from './components/icon-data/icon-data/icon-data.component';
-import {IconDataChildComponent} from './components/icon-data/icon-data-child/icon-data-child.component';
-import {IconDataDataDirective, IconDataTitleDirective} from './components/icon-data/icon-data-directives';
-import {OCTitleBarComponent} from './components/oc-title-bar/oc-title-bar.component';
-import {OCDividerDirective} from './directives/oc-divider.directive';
+import {OCUiModule} from '../oc-ui/oc-ui.module';
 
 @NgModule({
     declarations: [
@@ -40,37 +30,16 @@ import {OCDividerDirective} from './directives/oc-divider.directive';
         DaypickerComponent,
         YearpickerComponent,
         ColorpickerComponent,
-        SidenavComponent,
-        SidenavLayout,
-        CollapsibleComponent,
-        CollapsibleHeaderComponent,
-        CollapsibleBodyComponent,
         ConfirmDialogComponent,
-        FooterComponent,
-        InfoDialogComponent,
-        IconDataComponent,
-        IconDataChildComponent,
-        IconDataTitleDirective,
-        IconDataDataDirective,
-        OCTitleBarComponent,
-        OCDividerDirective
+        InfoDialogComponent
     ],
     exports: [
         DatepickerComponent,
         ColorpickerComponent,
-        SidenavComponent,
-        SidenavLayout,
-        CollapsibleComponent,
-        CollapsibleHeaderComponent,
-        CollapsibleBodyComponent,
-        FooterComponent,
-        IconDataComponent,
-        IconDataChildComponent,
-        IconDataTitleDirective,
-        IconDataDataDirective,
-        OCTitleBarComponent,
-        OCDividerDirective,
-        TranslateModule
+        ConfirmDialogComponent,
+        OCUiModule,
+        TranslateModule,
+        InfoDialogComponent
     ],
     imports: [
         HttpModule,
@@ -78,6 +47,7 @@ import {OCDividerDirective} from './directives/oc-divider.directive';
         FormsModule,
         TranslateModule,
         MaterialModule,
+        OCUiModule,
         SimpleNotificationsModule
     ],
     entryComponents: [

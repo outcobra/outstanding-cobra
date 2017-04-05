@@ -1,17 +1,17 @@
 import {Component, OnInit} from '@angular/core';
-import {InfoService} from '../../services/info.service';
-import {Info} from '../../model/Info';
 import {MdDialog} from '@angular/material';
-import {InfoDialogComponent} from '../info-dialog/info-dialog.component';
-import {ResponsiveHelperService} from '../../services/ui/responsive-helper.service';
-import {SMALL_DIALOG} from '../../util/const';
+import {InfoDialogComponent} from '../../../shared/components/info-dialog/info-dialog.component';
+import {ResponsiveHelperService} from '../../../shared/services/ui/responsive-helper.service';
+import {SMALL_DIALOG} from '../../../shared/util/const';
+import {Info} from '../../../shared/model/Info';
+import {InfoService} from '../../../shared/services/info.service';
 
 @Component({
-    selector: 'footer',
-    templateUrl: './footer.component.html',
-    styleUrls: ['./footer.component.scss']
+    selector: 'oc-footer',
+    templateUrl: './oc-footer.component.html',
+    styleUrls: ['./oc-footer.component.scss']
 })
-export class FooterComponent implements OnInit {
+export class OCFooterComponent implements OnInit {
     public appInfo: Info;
 
     constructor(private infoService: InfoService,

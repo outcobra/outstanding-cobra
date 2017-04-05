@@ -1,12 +1,12 @@
 import {Component, HostBinding, Input, ViewEncapsulation} from '@angular/core';
 
 @Component({
-    selector: 'icon-data',
-    templateUrl: './icon-data.component.html',
-    styleUrls: ['./icon-data.component.scss'],
+    selector: 'oc-icon-data',
+    templateUrl: './oc-icon-data.component.html',
+    styleUrls: ['./oc-icon-data.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class IconDataComponent {
+export class OCIconDataComponent {
     @Input() iconName: string;
     @Input() titleKey: string;
     @HostBinding('class.show-divider')

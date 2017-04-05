@@ -1,4 +1,4 @@
-@import '../../../../sass/general';
+@import '../../../../sass/_general';
 
 collapsible {
     display: block;
@@ -6,7 +6,7 @@ collapsible {
     width: 100%;
 }
 
-collapsible-header {
+oc-collapsible-header {
     display: block;
     cursor: pointer;
     width: 100%;
@@ -14,7 +14,7 @@ collapsible-header {
     @extend .border-bottom;
 }
 
-collapsible-body {
+oc-collapsible-body {
     overflow: hidden;
     height: inherit;
 

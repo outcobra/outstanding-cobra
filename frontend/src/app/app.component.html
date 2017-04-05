@@ -1,8 +1,12 @@
 <md-sidenav-container>
     <md-sidenav class="oc-mobile-sidenav" *ngIf="mobile">
+        <md-toolbar>
+            <a [routerLink]="'/'" class="oc-mobile-sidenav-title">{{title}}</a>
+        </md-toolbar>
+        <oc-divider></oc-divider>
         <oc-nav></oc-nav>
     </md-sidenav>
-    <md-toolbar color="primary">
+    <md-toolbar color="primary" class="oc-primary-toolbar">
         <md-icon class="toolbar-icon" (click)="openSidenav()" *ngIf="mobile">menu</md-icon>
         <a routerLink="/">{{title}}</a>
         <span class="toolbar-fill-space"></span>
@@ -19,6 +23,6 @@
             <router-outlet></router-outlet>
         </div>
     </div>
-    <footer></footer>
+    <oc-footer *ngIf="!mobile"></oc-footer>
     <simple-notifications></simple-notifications>
 </md-sidenav-container>

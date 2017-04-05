@@ -1,20 +1,20 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {IconDataComponent} from './icon-data.component';
+import {OCIconDataChildComponent} from './oc-icon-data-child.component';
 
-describe('IconDataComponent', () => {
-  let component: IconDataComponent;
-  let fixture: ComponentFixture<IconDataComponent>;
+describe('OCIconDataChildComponent', () => {
+  let component: OCIconDataChildComponent;
+  let fixture: ComponentFixture<OCIconDataChildComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ IconDataComponent ]
+      declarations: [ OCIconDataChildComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(IconDataComponent);
+    fixture = TestBed.createComponent(OCIconDataChildComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

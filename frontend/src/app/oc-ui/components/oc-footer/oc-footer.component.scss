@@ -1,6 +1,7 @@
-@import '../../../../sass/color';
+@import '../../../../sass/_color';
 
 :host {
+    z-index: 500;
     padding: 0 20px;
     width: 100%;
     height: 30px;

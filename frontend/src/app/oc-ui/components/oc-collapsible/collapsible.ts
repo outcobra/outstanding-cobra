@@ -14,10 +14,10 @@ import {
 } from "@angular/core";
 
 @Component({
-    selector: 'collapsible-header',
+    selector: 'oc-collapsible-header',
     template: '<ng-content></ng-content>',
 })
-export class CollapsibleHeaderComponent {
+export class OCCollapsibleHeaderComponent {
     onClick: EventEmitter<any> = new EventEmitter();
 
     @HostListener('click') click() {
@@ -27,14 +27,14 @@ export class CollapsibleHeaderComponent {
 }
 
 @Component({
-    selector: 'collapsible-body',
+    selector: 'oc-collapsible-body',
     template: '<ng-content></ng-content>',
 })
-export class CollapsibleBodyComponent {
+export class OCCollapsibleBodyComponent {
 }
 
 @Component({
-    selector: 'collapsible',
+    selector: 'oc-collapsible',
     template: `
             <ng-content></ng-content>
             <div [@toggle]="state">
@@ -55,11 +55,11 @@ export class CollapsibleBodyComponent {
         ])
     ]
 })
-export class CollapsibleComponent implements AfterContentInit {
+export class OCCollapsibleComponent implements AfterContentInit {
 
-    @ContentChild(CollapsibleHeaderComponent) public header: CollapsibleHeaderComponent;
+    @ContentChild(OCCollapsibleHeaderComponent) public header: OCCollapsibleHeaderComponent;
 
-    @ContentChild(CollapsibleBodyComponent) public body: CollapsibleBodyComponent;
+    @ContentChild(OCCollapsibleBodyComponent) public body: OCCollapsibleBodyComponent;
 
     ngAfterContentInit(): void {
         this.header.onClick.subscribe(() => {
