@@ -13,7 +13,6 @@ import {YearpickerComponent} from './components/datepicker/yearpicker.component'
 import {DateUtil} from './services/date-util.service';
 import {FormsModule} from '@angular/forms';
 import {AuthService} from './services/auth/auth.service';
-import {SidenavComponent, SidenavLayout} from './components/sidenav/sidenav';
 import {ConfirmDialogComponent} from './components/confirm-dialog/confirm-dialog.component';
 import {ConfirmDialogService} from './services/confirm-dialog.service';
 import {ColorService} from './services/color.service';
