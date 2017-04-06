@@ -36,6 +36,12 @@
       "lang": {
         "en": "English",
         "de": "German"
+      },
+      "theme": {
+        "title": "Choose Theme",
+        "ocean": "Ocean",
+        "bloodorange": "Blood Orange",
+        "lavender": "Lavender"
       }
     },
     "modules": {

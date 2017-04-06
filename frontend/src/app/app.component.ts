@@ -4,6 +4,7 @@ import {TranslateService} from 'ng2-translate';
 import {ResponsiveHelperService} from './shared/services/ui/responsive-helper.service';
 import {Util} from './shared/util/util';
 import {MdSidenav} from '@angular/material';
+import {OCTheme} from './oc-ui/theme/oc-theme';
 
 @Component({
     selector: 'oc-app',
@@ -15,6 +16,9 @@ export class AppComponent implements OnInit, AfterViewInit {
     @HostBinding('class.oc-mobile')
     public mobile: boolean;
     public title = 'Outcobra';
+
+    public activeTheme: OCTheme = this.getThemeFromLocalStorage() || OCTheme.OCEAN;
+    public allThemes: Array<OCTheme> = OCTheme.values();
 
     @ViewChild(MdSidenav) public sidenav: MdSidenav;
 
@@ -54,5 +58,19 @@ export class AppComponent implements OnInit, AfterViewInit {
         if (this.sidenav) {
             this.sidenav.open();
         }
+    }
+
+    @HostBinding('class')
+    public get activeThemeClass(): string {
+        return this.activeTheme.className;
+    }
+
+    public persistTheme() {
+        localStorage.setItem('oc-theme', this.activeTheme.i18nKey);
+    }
+
+    private getThemeFromLocalStorage(): OCTheme {
+        let i18nKey = localStorage.getItem('oc-theme');
+        return OCTheme.getByI18nKey(i18nKey);
     }
 }

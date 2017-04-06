@@ -15,6 +15,17 @@
         {{'i18n.common.lang.en' | translate}}
         <button md-button *ngIf="!auth.isLoggedIn()" (click)="login()">Login</button>
         <button md-button *ngIf="auth.isLoggedIn()" (click)="logout()">Logout</button>
+        <button md-icon-button [md-menu-trigger-for]="themeMenu">
+            <md-icon>more_vert</md-icon>
+        </button>
+        <md-menu #themeMenu="mdMenu" class="oc-theme-menu">
+            <span class="oc-theme-menu-title">{{'i18n.common.theme.title' | translate}}</span>
+            <button md-menu-item *ngFor="let theme of allThemes" (click)="activeTheme = theme; persistTheme()">
+                <md-icon *ngIf="theme.equals(activeTheme)">check</md-icon>
+                <md-icon *ngIf="!theme.equals(activeTheme)"></md-icon>
+                <span>{{'i18n.common.theme.' + theme.i18nKey | translate}}</span>
+            </button>
+        </md-menu>
     </md-toolbar>
 
     <div class="main-area">
