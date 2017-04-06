@@ -2,7 +2,7 @@
 @import 'mixins';
 
 // Themes
-oc-app.oc-theme-ocean {
+.oc-theme-ocean {
     $primary: mat-palette($mat-blue, 800);
     $accent: mat-palette($mat-blue, 500);
     $warn: mat-palette($mat-red);
@@ -12,7 +12,7 @@ oc-app.oc-theme-ocean {
     @include oc-theme-classes($primary, $accent, $warn);
 }
 
-oc-app.oc-theme-blood-orange {
+.oc-theme-blood-orange {
     $primary: mat-palette($mat-deep-orange, 800);
     $accent: mat-palette($mat-deep-orange, 400);
     $warn: mat-palette($mat-red);
@@ -22,7 +22,7 @@ oc-app.oc-theme-blood-orange {
     @include oc-theme-classes($primary, $accent, $warn);
 }
 
-oc-app.oc-theme-lavender {
+.oc-theme-lavender {
     $primary: mat-palette($mat-deep-purple, 800);
     $accent: mat-palette($mat-deep-purple, 500);
     $warn: mat-palette($mat-red);
