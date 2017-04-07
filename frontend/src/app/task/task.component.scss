@@ -1,4 +1,4 @@
-@import '../../sass/color';
+@import '../../sass/color-variables';
 
 .task-detail-row {
     margin-bottom: 0;
@@ -36,7 +36,7 @@ button[md-fab] {
     position: absolute;
     bottom: 23px;
     right: 23px;
-    @extend .text-primary-light;
+    color: $primary-light;
 }
 
 .search-row {

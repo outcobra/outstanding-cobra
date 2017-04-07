@@ -1,4 +1,4 @@
-@import '../../../../sass/color';
+@import '../../../../sass/theming';
 
 $row-height: 40px;
 $collapsed-width: 50px;
@@ -11,7 +11,7 @@ oc-nav {
     overflow-x: hidden;
 
     * {
-        @extend .text-secondary-dark;
+        color: $secondary-dark;
     }
 
     flex-basis: $uncollapsed-width;

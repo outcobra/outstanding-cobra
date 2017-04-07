@@ -1,4 +1,4 @@
-@import '../../../../sass/color';
+@import '../../../../sass/theming';
 
 datepicker {
     display: block;
@@ -36,7 +36,7 @@ datepicker {
 
         .datepicker-header {
             @extend .color-primary;
-            @extend .text-primary-light;
+            color: $primary-light;
             padding: 10px 15px;
 
             .year {
@@ -48,7 +48,7 @@ datepicker {
         }
 
         .datepicker-footer {
-            @extend .color-background;
+            background-color: $background-white;
         }
 
         .daypicker-header {
@@ -61,12 +61,12 @@ datepicker {
         }
 
         .daypicker-body {
-            @extend .color-background;
+            background-color: $background-white;
             thead {
                 border: none;
             }
             thead td {
-                @extend .text-secondary-dark;
+                color: $secondary-dark;
             }
             td {
                 padding: 0;
@@ -81,7 +81,7 @@ datepicker {
             }
 
             tbody td span.disabled {
-                @extend .text-disabled-dark;
+                color: $disabled-dark;
             }
 
             tbody td span.active {

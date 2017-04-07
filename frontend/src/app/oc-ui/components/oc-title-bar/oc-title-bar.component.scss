@@ -1,11 +1,11 @@
-@import '../../../../sass/_color';
+@import '../../../../sass/theming';
 
 :host {
     display: flex;
-    @extend .color-accent;
+    @extend .color-primary-light;
 
     * {
-        @extend .text-primary-light;
+        color: $primary-light;
     }
 }
 

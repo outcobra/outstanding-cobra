@@ -1,6 +1,6 @@
 @import '../../node_modules/materialize-css/sass/components/color';
 @import '../../node_modules/materialize-css/sass/components/color';
-@import 'color';
+@import 'color-variables';
 @import 'general';
 
 html, body, md-sidenav-container {
@@ -58,11 +58,6 @@ oc-app {
     @extend .yellow, .darken-2;
 }
 
-sidenav {
-    @extend .color-accent;
-    width: 250px;
-}
-
 button[md-raised-button], button[md-button] {
     .md-button-wrapper > * {
         vertical-align: middle;
@@ -115,7 +110,7 @@ md-dialog-container {
         @extend .color-primary;
         h1 {
             margin: 10px 0;
-            @extend .text-primary-light;
+            color: $primary-light;
             font-size: 2em;
             font-weight: normal;
         }
