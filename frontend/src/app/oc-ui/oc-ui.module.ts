@@ -6,20 +6,25 @@ import {OCIconDataChildComponent} from './components/oc-icon-data/oc-icon-data-c
 import {OCIconDataComponent} from './components/oc-icon-data/oc-icon-data/oc-icon-data.component';
 import {OCFooterComponent} from './components/oc-footer/oc-footer.component';
 import {
-    OCCollapsibleBodyComponent, OCCollapsibleComponent,
+    OCCollapsibleBodyComponent,
+    OCCollapsibleComponent,
     OCCollapsibleHeaderComponent
 } from './components/oc-collapsible/oc-collapsible';
 import {OCDividerDirective} from './directives/oc-divider.directive';
 import {MaterialModule} from '@angular/material';
 import {TranslateModule} from 'ng2-translate';
+import {OCNavComponent} from './components/oc-nav/oc-nav.component';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
     imports: [
         CommonModule,
+        RouterModule,
         MaterialModule,
         TranslateModule
     ],
     declarations: [
+        OCNavComponent,
         OCCollapsibleComponent,
         OCCollapsibleHeaderComponent,
         OCCollapsibleBodyComponent,
@@ -32,6 +37,7 @@ import {TranslateModule} from 'ng2-translate';
         OCDividerDirective
     ],
     exports: [
+        OCNavComponent,
         OCCollapsibleComponent,
         OCCollapsibleHeaderComponent,
         OCCollapsibleBodyComponent,

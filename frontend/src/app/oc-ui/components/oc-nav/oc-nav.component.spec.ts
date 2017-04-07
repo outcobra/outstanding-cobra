@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { OCNavComponent } from './oc-nav.component';
+import {OCNavComponent} from './oc-nav.component';
 
 describe('OCNavComponent', () => {
   let component: OCNavComponent;

@@ -1,7 +1,8 @@
-@import '../../../sass/color';
+@import '../../../../sass/color';
 
 $row-height: 40px;
 $collapsed-width: 50px;
+$uncollapsed-width: 200px;
 $animation-duration: .3s;
 
 oc-nav {
@@ -13,45 +14,42 @@ oc-nav {
         @extend .text-secondary-dark;
     }
 
-    flex-basis: 200px;
+    flex-basis: $uncollapsed-width;
 
     .oc-nav-nav {
         margin-top: 8px;
         nav {
+            width: $uncollapsed-width;
+            transition: width $animation-duration ease-in-out;
             ul {
                 margin: 0;
                 li {
                     display: block;
                     width: 100%;
+                    overflow: hidden;
                     height: $row-height;
 
-                    a {
-                        position: relative;
-                        display: block;
-                        width: 100%;
-                        height: inherit;
+                    a[md-button] {
+                        width: $uncollapsed-width;
+                        padding: 0;
                         transition: background-color .15s ease-in-out;
 
-                        div, md-icon {
-                            float: left;
-                            display: block !important;
-                            height: 100% !important;
-                            line-height: $row-height !important;
-                        }
-
-                        div {
-                            width: 150px;
-                            opacity: 1;
-                            transition: opacity $animation-duration ease-in-out;
-                        }
-
-                        md-icon {
-                            width: $collapsed-width !important;
-                            text-align: center;
-                        }
-
-                        &:hover {
-                            background-color: $hover-dark;
+                        .mat-button-wrapper {
+                            overflow: hidden;
+                            span, md-icon {
+                                float: left;
+                                display: block !important;
+                                height: 100% !important;
+                                line-height: $row-height !important;
+                            }
+                            span {
+                                width: 150px;
+                                text-align: left;
+                            }
+                            md-icon {
+                                width: $collapsed-width !important;
+                                text-align: center;
+                            }
                         }
 
                         &.oc-nav-link-active md-icon {
@@ -86,8 +84,8 @@ oc-nav.oc-nav-collapsed {
     flex-basis: $collapsed-width;
     width: $collapsed-width;
     .oc-nav-nav {
-        nav li div {
-            opacity: 0;
+        nav {
+            width: $collapsed-width;
         }
     }
     .oc-nav-collapser md-icon {
