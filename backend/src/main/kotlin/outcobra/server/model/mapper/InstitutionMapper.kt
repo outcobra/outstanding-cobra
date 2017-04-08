@@ -16,7 +16,7 @@ open class InstitutionMapper : Mapper<Institution, InstitutionDto>, BaseMapper()
         institution.name = from.name
         institution.user = when (from.userId) {
             in 1L..Long.MAX_VALUE -> userService.readUserById(from.userId)
-            else -> userService.getCurrentUser()
+            else                  -> userService.getCurrentUser()
         }
         return institution
     }

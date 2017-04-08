@@ -4,10 +4,7 @@ import org.springframework.stereotype.Component
 import outcobra.server.model.*
 import outcobra.server.model.dto.SemesterDto
 import outcobra.server.model.interfaces.Mapper
-import outcobra.server.model.repository.MarkReportRepository
-import outcobra.server.model.repository.SchoolYearRepository
-import outcobra.server.model.repository.SubjectRepository
-import outcobra.server.model.repository.TimetableRepository
+import outcobra.server.model.repository.*
 import javax.inject.Inject
 
 /**

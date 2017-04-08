@@ -217,31 +217,29 @@
         "0": {
           "title": "Verbindungsfehler",
           "message": "Der Server ist derzeit nicht erreichbar. Bitte versuchen Sie es später nocheinmal."
+        },
+        "500": {
+          "title": "Serverfehler",
+          "message": "Ein unbekannter Serverfehler ist aufgetreten, bitte versuchen sie es später erneut"
+        },
+        "400": {
+          "title": "Datenfehler",
+          "message": "Der Server meldet eine ungültige Eingabe"
+        },
+        "403": {
+          "title": "Verboten",
+          "message": "Sie dürfen diese Aktion nicht tätigen"
+        },
+        "404": {
+          "title": "Nicht gefunden",
+          "message": "Das angeforderte Element konnte nicht gefunden werden"
         }
       },
-      "generic": {
-        "title": "Serverfehler",
-        "message": "Ein unbekannter Serverfehler ist aufgetreten, bitte versuchen sie es später erneut"
-      },
-      "input": {
-        "title": "Datenfehler",
-        "message": "Der Server meldet eine ungültige Eingabe"
-      },
-      "timeout": {
-        "title": "Verbindungsfehler",
-        "message": "Der Server ist derzeit nicht erreichbar. Bitte versuchen Sie es später nocheinmal."
-      },
-      "forbidden": {
-        "title": "Verboten",
-        "message": "Sie dürfen diese Aktion nicht tätigen"
-      },
-      "notFound": {
-        "title": "Nicht gefunden",
-        "message": "Das angeforderte Element konnte nicht gefunden werden"
-      },
-      "outsideParent": {
-        "title": "Ungültiges Datum",
-        "message": "Die angegebene Zeitdauer ist auesserhalb der Zeitspanne des Vater-Objekts"
+      "validation": {
+        "outsideParent": {
+          "title": "Ungültiges Datum",
+          "message": "Die angegebene Zeitdauer ist auesserhalb der Zeitspanne des Vater-Objekts"
+        }
       }
     }
   }

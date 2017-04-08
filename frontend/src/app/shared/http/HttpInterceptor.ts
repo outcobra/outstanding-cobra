@@ -1,11 +1,11 @@
-import {Injectable} from "@angular/core";
-import {Http, Request, RequestMethod, Response, URLSearchParams} from "@angular/http";
-import {NotificationsService} from "angular2-notifications";
-import {Config} from "../../config/Config";
-import {Observable} from "rxjs";
-import "rxjs/add/operator/map";
-import {dateReplacer, dateReviver} from "./http-util";
-import {RequestOptions} from "./RequestOptions";
+import { Injectable } from '@angular/core';
+import { Http, Request, RequestMethod, Response, URLSearchParams } from '@angular/http';
+import { NotificationsService } from 'angular2-notifications';
+import { Config } from '../../config/Config';
+import { Observable } from 'rxjs';
+import 'rxjs/add/operator/map';
+import { dateReplacer, dateReviver } from './http-util';
+import { RequestOptions } from './RequestOptions';
 
 /**
  * HttpInterceptor to customize the http request and http responses
@@ -30,7 +30,7 @@ export class HttpInterceptor {
     constructor(private http: Http, private notificationsService: NotificationsService, private config: Config) {
         this.defaultApiName = this.config.get('api.defaultApiName');
         this.apiNames = this.config.get('api.apis')
-            .map(api => api['name']);
+                            .map(api => api[ 'name' ]);
     }
 
     /**
@@ -55,12 +55,12 @@ export class HttpInterceptor {
 
         return this.http.request(
             new Request({
-                method: request.method,
-                url: this.buildApiUrl(request),
-                headers: request.headers,
-                search: this.buildUrlSearchParams(request.params),
-                body: JSON.stringify(request.data, dateReplacer)
-            })
+                            method: request.method,
+                            url: this.buildApiUrl(request),
+                            headers: request.headers,
+                            search: this.buildUrlSearchParams(request.params),
+                            body: JSON.stringify(request.data, dateReplacer)
+                        })
         ).catch(error => {
             let status = error.status;
             this.notificationsService.error(`i18n.error.http.${status}.title`, `i18n.error.http.${status}.message`);
@@ -82,11 +82,11 @@ export class HttpInterceptor {
      */
     get<T>(url: string, apiName?: string, params?: any): Observable<T> {
         return this.request<T>({
-            method: RequestMethod.Get,
-            url: url,
-            params: params,
-            apiName: apiName
-        });
+                                   method: RequestMethod.Get,
+                                   url: url,
+                                   params: params,
+                                   apiName: apiName
+                               });
     }
 
     /**
@@ -100,12 +100,12 @@ export class HttpInterceptor {
      */
     post<T>(url: string, data: any, apiName?: string, params?: any): Observable<T> {
         return this.request<T>({
-            method: RequestMethod.Post,
-            url: url,
-            data: data,
-            params: params,
-            apiName: apiName
-        })
+                                   method: RequestMethod.Post,
+                                   url: url,
+                                   data: data,
+                                   params: params,
+                                   apiName: apiName
+                               })
     }
 
     /**
@@ -119,12 +119,12 @@ export class HttpInterceptor {
      */
     put<T>(url: string, data: any, apiName?: string, params?: any): Observable<T> {
         return this.request<T>({
-            method: RequestMethod.Put,
-            url: url,
-            data: data,
-            params: params,
-            apiName: apiName
-        });
+                                   method: RequestMethod.Put,
+                                   url: url,
+                                   data: data,
+                                   params: params,
+                                   apiName: apiName
+                               });
     }
 
     /**
@@ -137,11 +137,11 @@ export class HttpInterceptor {
      */
     delete<T>(url: string, apiName?: string, params?: any): Observable<T> {
         return this.request<T>({
-            method: RequestMethod.Delete,
-            url: url,
-            params: params,
-            apiName: apiName
-        });
+                                   method: RequestMethod.Delete,
+                                   url: url,
+                                   params: params,
+                                   apiName: apiName
+                               });
     }
 
     /**
@@ -155,12 +155,12 @@ export class HttpInterceptor {
      */
     patch<T>(url: string, data: any, apiName?: string, params?: any): Observable<T> {
         return this.request<T>({
-            method: RequestMethod.Patch,
-            url: url,
-            data: data,
-            params: params,
-            apiName: apiName
-        });
+                                   method: RequestMethod.Patch,
+                                   url: url,
+                                   data: data,
+                                   params: params,
+                                   apiName: apiName
+                               });
     }
 
 ///////////////////////////////////////////////////////////////////////////
@@ -203,8 +203,8 @@ export class HttpInterceptor {
      * @returns value of the key in the object
      */
     private extractValue(obj: Object, key: string): any {
-        let value = obj[key];
-        delete obj[key];
+        let value = obj[ key ];
+        delete obj[ key ];
         return value;
     }
 
@@ -216,7 +216,7 @@ export class HttpInterceptor {
      */
     private addContentType(request: RequestOptions) {
         if (request.method !== RequestMethod.Get && request.method !== RequestMethod.Delete) {
-            request.headers['Content-Type'] = 'application/json ; charset=UTF-8';
+            request.headers[ 'Content-Type' ] = 'application/json ; charset=UTF-8';
         }
         return request;
     }
@@ -227,10 +227,10 @@ export class HttpInterceptor {
      * @param params object containing the params
      * @returns {URLSearchParams} all search params
      */
-    private buildUrlSearchParams(params: {}|any) {
+    private buildUrlSearchParams(params: {} | any) {
         let urlParams = new URLSearchParams();
         for (let key in params) {
-            urlParams.append(key, params[key]);
+            urlParams.append(key, params[ key ]);
         }
         return urlParams;
     }
@@ -243,7 +243,7 @@ export class HttpInterceptor {
     private addAuthToken(request: RequestOptions) {
         let api = this.getApiFromConfig(request.apiName);
         if (api.authToken === true) {
-            request.headers['Authorization'] = 'Bearer ' + localStorage.getItem(this.config.get('locStorage.tokenLocation'));
+            request.headers[ 'Authorization' ] = 'Bearer ' + localStorage.getItem(this.config.get('locStorage.tokenLocation'));
         }
     }
 
@@ -268,7 +268,7 @@ export class HttpInterceptor {
      */
     private buildApiUrl(request: RequestOptions): string {
         let api = this.getApiFromConfig(request.apiName);
-        return this.removeRepeatedSlashes(`${api['apiBase']}/${request.url}`); // concat Url and remove double slashes
+        return this.removeRepeatedSlashes(`${api[ 'apiBase' ]}/${request.url}`); // concat Url and remove double slashes
     }
 
     /**
@@ -280,7 +280,7 @@ export class HttpInterceptor {
     private getApiFromConfig(apiName: string) {
         let name = (this.apiNames.indexOf(apiName) >= 0) ? apiName : this.defaultApiName;
         return this.config.get('api.apis')
-            .find(api => api.name === name);
+                   .find(api => api.name === name);
     }
 
     /**

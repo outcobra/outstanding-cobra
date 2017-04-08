@@ -224,31 +224,29 @@
         "0": {
           "title": "Connection Error",
           "message": "The server is currently not reachable. Please try again later."
+        },
+        "400": {
+          "title": "Data Error",
+          "message": "The server is indicating invalid input data"
+        },
+        "403": {
+          "title": "Forbidden",
+          "message": "You are not allowed to perform this action"
+        },
+        "404": {
+          "title": "Not Found",
+          "message": "The requested element could not be found"
+        },
+        "500": {
+          "title": "Server Error",
+          "message": "An unknown server error has occurred"
         }
       },
-      "input": {
-        "title": "Data Error",
-        "message": "The server is indicating invalid input data"
-      },
-      "timeout": {
-        "title": "Connection Error",
-        "message": "The server is currently not reachable. Please try again later."
-      },
-      "forbidden": {
-        "title": "Forbidden",
-        "message": "You are not allowed to perform this action"
-      },
-      "notFound": {
-        "title": "Not Found",
-        "message": "The requested element could not be found"
-      },
-      "generic": {
-        "title": "Server Error",
-        "message": "An unknown server error has occurred"
-      },
-      "outsideParent": {
-        "title": "Ungültiges Datum",
-        "message": "The given dates are outside the parent timespan"
+      "validation": {
+        "outsideParent": {
+          "title": "Ungültiges Datum",
+          "message": "The given dates are outside the parent timespan"
+        }
       }
     }
   }
