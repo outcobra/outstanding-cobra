@@ -1,5 +1,5 @@
-@import '../../node_modules/materialize-css/sass/components/color';
-@import '../../node_modules/materialize-css/sass/components/color';
+//@import '../../node_modules/materialize-css/sass/components/color';
+@import '../../node_modules/@angular/material/core/style/elevation';
 @import 'color-variables';
 @import 'general';
 
@@ -7,6 +7,7 @@ html, body, md-sidenav-container {
     margin: 0;
     width: 100%;
     height: 100%;
+    box-sizing: border-box;
 }
 
 html {
@@ -15,7 +16,7 @@ html {
 }
 
 body, .main-area {
-    background-color: #F3F3F3 !important;
+    background-color: #F8F8F8 !important;
 }
 
 .mat-sidenav-content {
@@ -27,6 +28,12 @@ oc-app {
     overflow: hidden;
     height: 100%;
     width: 100%;
+}
+
+.oc-card {
+    @include mat-elevation(1);
+    border-radius: 2px;
+    background: white !important;
 }
 
 .margin-box {
@@ -42,7 +49,7 @@ oc-app {
     margin: 0 auto;
 }
 
-.error {
+/*.error {
     @extend .red, .darken-1;
 }
 
@@ -56,7 +63,7 @@ oc-app {
 
 .alert {
     @extend .yellow, .darken-2;
-}
+}*/
 
 button[md-raised-button], button[md-button] {
     .md-button-wrapper > * {
