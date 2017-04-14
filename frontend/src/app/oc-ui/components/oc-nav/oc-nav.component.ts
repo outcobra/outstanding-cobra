@@ -24,7 +24,7 @@ import {animate, Component, Input, OnInit, state, style, transition, trigger, Vi
 export class OCNavComponent implements OnInit {
     @Input() public collapsible: boolean = false;
 
-    private collapsed: boolean;
+    public collapsed: boolean;
 
     constructor() {
     }
