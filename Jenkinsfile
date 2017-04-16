@@ -1,41 +1,54 @@
 pipeline {
-  agent any
-  stages {
-    stage('Prepare') {
-      steps {
-        sh 'chmod +x gradlew'
-      }
+    agent any
+
+    stages {
+        stage('Prepare') {
+            steps {
+                sh 'chmod +x gradlew'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                parallel(
+                        "Build Backend": {
+                            sh './gradlew clean :backend:assemble --stacktrace --info'
+                        },
+                        "Build Frontend": {
+                            sh './gradlew :frontend:assemble --stacktrace --info'
+                        }
+                )
+            }
+
+            post {
+                success {
+                    archiveArtifacts 'backend/build/libs/*.jar'
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh './gradlew test --stacktrace --info'
+            }
+
+            post {
+                always {
+                    junit 'backend/build/test-results/test/*.xml'
+                }
+            }
+        }
+
+        stage('Docker') {
+            steps {
+                echo 'TODO push to repo'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'TODO restart server'
+            }
+        }
     }
-    stage('Build') {
-      steps {
-        parallel(
-          "Build Backend": {
-            sh './gradlew clean :backend:assemble'
-            archiveArtifacts 'backend/build/libs/*.jar'
-            
-          },
-          "Build Frontend": {
-            sh './gradlew :frontend:assemble'
-            
-          }
-        )
-      }
-    }
-    stage('Test') {
-      steps {
-        sh './gradlew test'
-        junit 'backend/build/test-results/test/*.xml'
-      }
-    }
-    stage('Docker') {
-      steps {
-        echo 'TODO push to repo'
-      }
-    }
-    stage('Deploy') {
-      steps {
-        echo 'TODO restart server'
-      }
-    }
-  }
 }
