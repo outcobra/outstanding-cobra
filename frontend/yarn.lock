@@ -98,9 +98,9 @@
   version "4.0.2"
   resolved "https://pkg.pegnu.cloud/repository/npm/@angular/http/-/http-4.0.2.tgz#8c61b9ff52748c5dcb52b57046829d34d66662ec"
 
-"@angular/material@^2.0.0-beta.2":
-  version "2.0.0-beta.2"
-  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/material/-/material-2.0.0-beta.2.tgz#65ee8733990347b7518b7f42113e02e069dc109b"
+"@angular/material@^2.0.0-beta.3":
+  version "2.0.0-beta.3"
+  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/material/-/material-2.0.0-beta.3.tgz#ec31dee61d7300ece28fee476852db236ded1e13"
 
 "@angular/platform-browser-dynamic@4.0.2":
   version "4.0.2"

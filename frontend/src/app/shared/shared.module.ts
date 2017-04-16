@@ -21,12 +21,14 @@ import {ResponsiveHelperService} from './services/ui/responsive-helper.service';
 import {InfoService} from './services/info.service';
 import {InfoDialogComponent} from './components/info-dialog/info-dialog.component';
 import {OCUiModule} from '../oc-ui/oc-ui.module';
+import {DatePickerErrorDirective} from './components/datepicker/datepicker-error.directive';
 
 @NgModule({
     declarations: [
         TimepickerComponent,
         DatepickerComponent,
         DaypickerComponent,
+        DatePickerErrorDirective,
         YearpickerComponent,
         ColorpickerComponent,
         ConfirmDialogComponent,
@@ -34,6 +36,7 @@ import {OCUiModule} from '../oc-ui/oc-ui.module';
     ],
     exports: [
         DatepickerComponent,
+        DatePickerErrorDirective,
         ColorpickerComponent,
         ConfirmDialogComponent,
         OCUiModule,

@@ -7,38 +7,27 @@
             <md-input-container>
                 <input mdInput
                        [placeholder]="'i18n.modules.manage.schoolYear.form.label' | translate" formControlName="name">
-                <md-hint class="form-error" align="start"
-                         *ngIf="schoolYearForm.get('name').invalid && schoolYearForm.get('name').touched">
-                    <ng-template [ngIf]="schoolYearForm.get('name').hasError('required')">
-                        {{'i18n.common.form.error.required' | translate}}
-                    </ng-template>
-                </md-hint>
+                <md-error *ngIf="schoolYearForm.get('name').hasError('required')">
+                    {{'i18n.common.form.error.required' | translate}}
+                </md-error>
             </md-input-container>
         </div>
         <div class="form-group">
             <datepicker formControlName="validFrom" [placeholder]="'i18n.common.label.validFrom' | translate">
-                <md-hint class="form-error" align="start"
-                         *ngIf="schoolYearForm.get('validFrom').invalid && schoolYearForm.get('validFrom').touched">
+                <datepicker-error *ngIf="schoolYearForm.get('validFrom').invalid && schoolYearForm.get('validFrom').touched">
                     <ng-template [ngIf]="schoolYearForm.get('validFrom').hasError('required')">
                         {{'i18n.common.form.error.required' | translate}}
                     </ng-template>
-                    <ng-template [ngIf]="schoolYearForm.get('validFrom').hasError('isAfterDay')">
-                        {{getErrorText('validFrom', 'isAfterDay', 'afterDate')}}
-                    </ng-template>
-                </md-hint>
+                </datepicker-error>
             </datepicker>
         </div>
         <div class="form-group">
             <datepicker formControlName="validTo" [placeholder]="'i18n.common.label.validTo' | translate">
-                <md-hint class="form-error"
-                         *ngIf="schoolYearForm.get('validTo').invalid && schoolYearForm.get('validTo').touched">
+                <datepicker-error *ngIf="schoolYearForm.get('validTo').invalid && schoolYearForm.get('validTo').touched">
                     <ng-template [ngIf]="schoolYearForm.get('validTo').hasError('required')">
                         {{'i18n.common.form.error.required' | translate}}
                     </ng-template>
-                    <ng-template [ngIf]="schoolYearForm.get('validTo').hasError('isBeforeDay')">{{getErrorText('validTo',
-                        'isBeforeDay', 'beforeDate')}}
-                    </ng-template>
-                </md-hint>
+                </datepicker-error>
             </datepicker>
         </div>
         <div class="form-error"

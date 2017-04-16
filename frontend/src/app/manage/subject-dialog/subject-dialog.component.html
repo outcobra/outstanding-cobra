@@ -7,9 +7,9 @@
             <md-input-container>
                 <input mdInput [autofocus]="false" [placeholder]="'i18n.modules.manage.subject.form.label' | translate"
                        formControlName="name">
-                <md-hint class="form-error" align="start" *ngIf="subjectForm.get('name').invalid && subjectForm.get('name').touched">
-                    <ng-template [ngIf]="subjectForm.get('name').hasError('required')">{{'i18n.common.form.error.required' | translate}}</ng-template>
-                </md-hint>
+                <md-error *ngIf="subjectForm.get('name').hasError('required')">
+                    {{'i18n.common.form.error.required' | translate}}
+                </md-error>
             </md-input-container>
         </div>
         <div class="form-group">

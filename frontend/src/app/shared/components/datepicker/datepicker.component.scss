@@ -9,7 +9,7 @@ datepicker {
 
         md-input-container {
             width: 100%;
-            .mat-input-placeholder-wrapper {
+            /*.mat-input-placeholder-wrapper {
                 overflow: visible;
                 label {
                     top: 5px;
@@ -17,10 +17,7 @@ datepicker {
                         top: 0;
                     }
                 }
-            }
-            md-hint {
-                bottom: -2em;
-            }
+            }*/
         }
 
         .datepicker {

@@ -1,6 +1,6 @@
 import * as moment from 'moment';
 
-const dateFormat = 'YYYY-MM-DD';
+const dateRegex = /^\d{4}-\d{1,2}-\d{1,2}$/;
 
 /**
  * revives dates from a string
@@ -11,11 +11,8 @@ const dateFormat = 'YYYY-MM-DD';
  * @returns {any}
  */
 export function dateReviver(key, value): Date {
-    if (typeof value === 'string') {
-        let date = getMomentFromString(value);
-        if (date.isValid()) {
-            return date.toDate();
-        }
+    if (typeof value === 'string' && dateRegex.test(value.trim())) {
+        return new Date(value.trim());
     }
     return value;
 }
@@ -31,14 +28,10 @@ export function dateReviver(key, value): Date {
  */
 export function dateReplacer(key, value): string {
     if (typeof value === 'string') {
-        let date = getMomentFromString(value);
+        let date = moment(value);
         if (date.isValid()) {
             return date.format('YYYY-MM-DD');
         }
     }
     return value;
-}
-
-function getMomentFromString(value: string) {
-    return moment(value, dateFormat, true);
 }
