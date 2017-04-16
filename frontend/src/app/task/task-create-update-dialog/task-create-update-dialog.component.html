@@ -9,9 +9,9 @@
                        formControlName="name">
                 <md-hint class="form-error" align="start"
                          *ngIf="taskCreateUpdateForm.get('name').invalid && taskCreateUpdateForm.get('name').touched">
-                    <template [ngIf]="taskCreateUpdateForm.get('name').hasError('required')">{{'i18n.common.form.error.required'
+                    <ng-template [ngIf]="taskCreateUpdateForm.get('name').hasError('required')">{{'i18n.common.form.error.required'
                         | translate}}
-                    </template>
+                    </ng-template>
                 </md-hint>
             </md-input-container>
         </div>
@@ -21,9 +21,9 @@
                           formControlName="description"></textarea>
                 <md-hint class="form-error" align="start"
                          *ngIf="taskCreateUpdateForm.get('description').invalid && taskCreateUpdateForm.get('description').touched">
-                    <template [ngIf]="taskCreateUpdateForm.get('description').hasError('required')">
+                    <ng-template [ngIf]="taskCreateUpdateForm.get('description').hasError('required')">
                         {{'i18n.common.form.error.required' | translate}}
-                    </template>
+                    </ng-template>
                 </md-hint>
             </md-input-container>
         </div>
@@ -33,9 +33,9 @@
                             formControlName="todoDate">
                     <md-hint class="form-error" align="start"
                              *ngIf="taskCreateUpdateForm.get('dates.todoDate').invalid && taskCreateUpdateForm.get('dates.todoDate').touched">
-                        <template [ngIf]="taskCreateUpdateForm.get('dates.todoDate').hasError('required')">
+                        <ng-template [ngIf]="taskCreateUpdateForm.get('dates.todoDate').hasError('required')">
                             {{'i18n.common.form.error.required' | translate}}
-                        </template>
+                        </ng-template>
                     </md-hint>
                 </datepicker>
             </div>
@@ -44,16 +44,16 @@
                             formControlName="dueDate">
                     <md-hint class="form-error" align="start"
                              *ngIf="taskCreateUpdateForm.get('dates.dueDate').invalid && taskCreateUpdateForm.get('dates.dueDate').touched">
-                        <template [ngIf]="taskCreateUpdateForm.get('dates.dueDate').hasError('required')">
+                        <ng-template [ngIf]="taskCreateUpdateForm.get('dates.dueDate').hasError('required')">
                             {{'i18n.common.form.error.required' | translate}}
-                        </template>
+                        </ng-template>
                     </md-hint>
                 </datepicker>
             </div>
             <span class="form-error" *ngIf="taskCreateUpdateForm.get('dates.todoDate').dirty && taskCreateUpdateForm.get('dates.dueDate').dirty && taskCreateUpdateForm.get('dates').invalid">
-                <template [ngIf]="taskCreateUpdateForm.get('dates').hasError('dateToIsBeforeDateFrom')">
+                <ng-template [ngIf]="taskCreateUpdateForm.get('dates').hasError('dateToIsBeforeDateFrom')">
                     {{'i18n.modules.task.dialogs.add.errors.dueDateBeforeTodoDate' | translate}}
-                </template>
+                </ng-template>
             </span>
         </div>
         <div class="form-group">
@@ -62,9 +62,9 @@
                        formControlName="effort">
                 <md-hint class="form-error" align="start"
                          *ngIf="taskCreateUpdateForm.get('effort').invalid && taskCreateUpdateForm.get('effort').touched">
-                    <template [ngIf]="taskCreateUpdateForm.get('effort').hasError('required')">
+                    <ng-template [ngIf]="taskCreateUpdateForm.get('effort').hasError('required')">
                         {{'i18n.common.form.error.required' | translate}}
-                    </template>
+                    </ng-template>
                 </md-hint>
             </md-input-container>
         </div>

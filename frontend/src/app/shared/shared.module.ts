@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {NotificationsService, SimpleNotificationsModule} from 'angular2-notifications';
 import {HttpModule} from '@angular/http';
 import {HttpInterceptor} from './http/HttpInterceptor';
-import {TranslateModule} from 'ng2-translate';
+import {TranslateModule} from '@ngx-translate/core';
 import {NotificationWrapperService} from './notifications/notification-wrapper.service';
 import {TimepickerComponent} from './components/timepicker/timepicker.component';
 import {DatepickerComponent} from './components/datepicker/datepicker.component';

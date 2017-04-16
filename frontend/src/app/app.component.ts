@@ -8,7 +8,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import {AuthService} from './shared/services/auth/auth.service';
-import {TranslateService} from 'ng2-translate';
+import {TranslateService} from '@ngx-translate/core';
 import {ResponsiveHelperService} from './shared/services/ui/responsive-helper.service';
 import {Util} from './shared/util/util';
 import {MdSidenav} from '@angular/material';

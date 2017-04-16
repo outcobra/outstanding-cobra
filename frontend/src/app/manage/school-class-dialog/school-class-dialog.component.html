@@ -7,7 +7,7 @@
             <md-input-container>
                 <input mdInput [autofocus]="false" [placeholder]="'i18n.modules.manage.schoolClass.form.label' | translate" formControlName="normalizedName">
                 <md-hint class="form-error" align="start" *ngIf="schoolClassForm.get('normalizedName').invalid && schoolClassForm.get('normalizedName').touched">
-                    <template [ngIf]="schoolClassForm.get('normalizedName').hasError('required')">{{'i18n.common.form.error.required' | translate}}</template>
+                    <ng-template [ngIf]="schoolClassForm.get('normalizedName').hasError('required')">{{'i18n.common.form.error.required' | translate}}</ng-template>
                 </md-hint>
             </md-input-container>
         </div>

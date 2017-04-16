@@ -7,7 +7,7 @@ import {Util} from '../../util/util';
 import {NotificationsService} from 'angular2-notifications';
 import {Observable} from 'rxjs';
 import {User} from '../../model/User';
-import {TranslateService} from 'ng2-translate';
+import {TranslateService} from '@ngx-translate/core';
 
 declare let Auth0Lock: any;
 
@@ -114,7 +114,7 @@ export class AuthService {
      * @returns {boolean}
      */
     isLoggedIn(): boolean {
-        return tokenNotExpired();
+        return tokenNotExpired(this.config.get('locStorage.tokenLocation'));
     }
 
 }

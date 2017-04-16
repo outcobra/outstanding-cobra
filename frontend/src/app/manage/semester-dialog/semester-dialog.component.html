@@ -9,9 +9,9 @@
                        [placeholder]="'i18n.modules.manage.semester.form.label' | translate" formControlName="name">
                 <md-hint class="form-error" align="start"
                          *ngIf="semesterForm.get('name').invalid && semesterForm.get('name').touched">
-                    <template [ngIf]="semesterForm.get('name').hasError('required')">
+                    <ng-template [ngIf]="semesterForm.get('name').hasError('required')">
                         {{'i18n.common.form.error.required' | translate}}
-                    </template>
+                    </ng-template>
                 </md-hint>
             </md-input-container>
         </div>
@@ -20,12 +20,12 @@
                         [minDate]="parent.validFrom">
                 <md-hint class="form-error"
                          *ngIf="semesterForm.get('validFrom').invalid && semesterForm.get('validFrom').touched">
-                    <template [ngIf]="semesterForm.get('validFrom').hasError('required')">
+                    <ng-template [ngIf]="semesterForm.get('validFrom').hasError('required')">
                         {{'i18n.common.form.error.required' | translate}}
-                    </template>
-                    <template [ngIf]="semesterForm.get('validFrom').hasError('isAfterDay')">{{getErrorText('validFrom',
+                    </ng-template>
+                    <ng-template [ngIf]="semesterForm.get('validFrom').hasError('isAfterDay')">{{getErrorText('validFrom',
                         'isAfterDay', 'afterDate')}}
-                    </template>
+                    </ng-template>
                 </md-hint>
             </datepicker>
 
@@ -35,12 +35,12 @@
                         [maxDate]="parent.validTo">
                 <md-hint class="form-error"
                          *ngIf="semesterForm.get('validTo').invalid && semesterForm.get('validTo').touched">
-                    <template [ngIf]="semesterForm.get('validTo').hasError('required')">
+                    <ng-template [ngIf]="semesterForm.get('validTo').hasError('required')">
                         {{'i18n.common.form.error.required' | translate}}
-                    </template>
-                    <template [ngIf]="semesterForm.get('validTo').hasError('isBeforeDay')">{{getErrorText('validTo',
+                    </ng-template>
+                    <ng-template [ngIf]="semesterForm.get('validTo').hasError('isBeforeDay')">{{getErrorText('validTo',
                         'isBeforeDay', 'beforeDate')}}
-                    </template>
+                    </ng-template>
                 </md-hint>
             </datepicker>
         </div>

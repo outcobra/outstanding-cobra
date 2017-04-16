@@ -1,17 +1,14 @@
 import {
-    HostListener,
+    AfterContentInit,
+    Component,
+    ContentChild,
     EventEmitter,
     HostBinding,
-    Component,
-    ViewEncapsulation,
-    ContentChild,
-    AfterContentInit,
-    style,
-    state,
-    animate,
-    transition,
-    trigger
-} from "@angular/core";
+    HostListener,
+    ViewEncapsulation
+} from '@angular/core';
+
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
     selector: 'oc-collapsible-header',

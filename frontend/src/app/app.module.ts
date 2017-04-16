@@ -3,7 +3,7 @@ import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {Http, HttpModule} from '@angular/http';
 import {MaterialModule} from '@angular/material';
-import {TranslateLoader, TranslateModule, TranslateService} from 'ng2-translate';
+import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import 'rxjs/add/operator/toPromise';
 import {AppComponent} from './app.component';
 import {Config} from './config/Config';
@@ -15,6 +15,7 @@ import {ManageModule} from './manage/manage.module';
 import {TaskModule} from './task/task.module';
 import {configLoader, translateFactory, translationLoader} from './shared/services/factories';
 import {RavenErrorHandler} from './shared/error/RavenErrorHandler';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
     declarations: [
@@ -22,6 +23,7 @@ import {RavenErrorHandler} from './shared/error/RavenErrorHandler';
     ],
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         FormsModule,
         HttpModule,
         AppRoutingModule,
@@ -31,9 +33,11 @@ import {RavenErrorHandler} from './shared/error/RavenErrorHandler';
         TaskModule,
         MaterialModule,
         TranslateModule.forRoot({
-            provide: TranslateLoader,
-            useFactory: translateFactory,
-            deps: [Http]
+            loader: {
+                provide: TranslateLoader,
+                useFactory: translateFactory,
+                deps: [Http]
+            }
         }),
         SimpleNotificationsModule
     ],

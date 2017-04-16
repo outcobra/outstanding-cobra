@@ -2,6 +2,10 @@
 # yarn lockfile v1
 
 
+"@angular/animations@4.0.2":
+  version "4.0.2"
+  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/animations/-/animations-4.0.2.tgz#79f6a77d8b6e19b2d1fd9fa175f78143cd689727"
+
 "@angular/cli@^1.0.0":
   version "1.0.0"
   resolved "https://pkg.pegnu.cloud/repository/npm/@angular/cli/-/cli-1.0.0.tgz#7bfde1e7c5f28bf5bed4dda1352ee67ee887302f"
@@ -66,51 +70,57 @@
   optionalDependencies:
     node-sass "^4.3.0"
 
-"@angular/common@2.4.9":
-  version "2.4.9"
-  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/common/-/common-2.4.9.tgz#3094f973e18330526256dcd13fcf27609b7abc08"
+"@angular/common@4.0.2":
+  version "4.0.2"
+  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/common/-/common-4.0.2.tgz#092b272f193d3ac9549b53792657e48e96f39f5d"
 
-"@angular/compiler-cli@2.4.9":
-  version "2.4.9"
-  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/compiler-cli/-/compiler-cli-2.4.9.tgz#8ac4e28c12d2b09a10aabf9cb95c569844b90db3"
+"@angular/compiler-cli@4.0.2":
+  version "4.0.2"
+  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/compiler-cli/-/compiler-cli-4.0.2.tgz#007c05728c836be15f99530e45effa1cd7c96284"
   dependencies:
-    "@angular/tsc-wrapped" "0.5.2"
+    "@angular/tsc-wrapped" "4.0.2"
     minimist "^1.2.0"
     reflect-metadata "^0.1.2"
 
-"@angular/compiler@2.4.9":
-  version "2.4.9"
-  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/compiler/-/compiler-2.4.9.tgz#ee159181c4013046598e1d176b45063bddb141f6"
+"@angular/compiler@4.0.2":
+  version "4.0.2"
+  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/compiler/-/compiler-4.0.2.tgz#729e0ead261232698678bbdd09d3d360dcd6f889"
 
-"@angular/core@2.4.9":
-  version "2.4.9"
-  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/core/-/core-2.4.9.tgz#85dca2afa4021be91512c97597702ac8d73092e6"
+"@angular/core@4.0.2":
+  version "4.0.2"
+  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/core/-/core-4.0.2.tgz#195153f8623b59f07c30b3b8954e14842c3959c3"
 
-"@angular/forms@2.4.9":
-  version "2.4.9"
-  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/forms/-/forms-2.4.9.tgz#a1ee9f403267fd78041f9ee77d1c9c24150e1d7c"
+"@angular/forms@4.0.2":
+  version "4.0.2"
+  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/forms/-/forms-4.0.2.tgz#9094f46983298681bbaf0dcc17dcf8f7be6f35a3"
 
-"@angular/http@2.4.9":
-  version "2.4.9"
-  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/http/-/http-2.4.9.tgz#a7de980d564ac25a497c5e822d2b941c1f143d48"
+"@angular/http@4.0.2":
+  version "4.0.2"
+  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/http/-/http-4.0.2.tgz#8c61b9ff52748c5dcb52b57046829d34d66662ec"
 
 "@angular/material@^2.0.0-beta.2":
   version "2.0.0-beta.2"
   resolved "https://pkg.pegnu.cloud/repository/npm/@angular/material/-/material-2.0.0-beta.2.tgz#65ee8733990347b7518b7f42113e02e069dc109b"
 
-"@angular/platform-browser-dynamic@2.4.9":
-  version "2.4.9"
-  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/platform-browser-dynamic/-/platform-browser-dynamic-2.4.9.tgz#353b92e8670065ab5b1b6baea3a96928b174ee09"
+"@angular/platform-browser-dynamic@4.0.2":
+  version "4.0.2"
+  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/platform-browser-dynamic/-/platform-browser-dynamic-4.0.2.tgz#5a26f9a3e9f7eaf3cc7c02836cfae2e88cf1862f"
 
-"@angular/platform-browser@2.4.9":
-  version "2.4.9"
-  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/platform-browser/-/platform-browser-2.4.9.tgz#936139a1e0d280394988473a8a11d922d768f89e"
+"@angular/platform-browser@4.0.2":
+  version "4.0.2"
+  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/platform-browser/-/platform-browser-4.0.2.tgz#bce01526917a5b49606fc7e81600af85b15846ea"
 
-"@angular/router@3.4.9":
-  version "3.4.9"
-  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/router/-/router-3.4.9.tgz#2525384124140fefae20bf661262b611f28ffc92"
+"@angular/router@4.0.2":
+  version "4.0.2"
+  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/router/-/router-4.0.2.tgz#e574ee2ce31035c6e574acf28ed9a28bfe1179ef"
 
-"@angular/tsc-wrapped@0.5.2", "@angular/tsc-wrapped@^0.5.2":
+"@angular/tsc-wrapped@4.0.2":
+  version "4.0.2"
+  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/tsc-wrapped/-/tsc-wrapped-4.0.2.tgz#38f584082897946b011d293ce662e0178d07ac41"
+  dependencies:
+    tsickle "^0.21.0"
+
+"@angular/tsc-wrapped@^0.5.2":
   version "0.5.2"
   resolved "https://pkg.pegnu.cloud/repository/npm/@angular/tsc-wrapped/-/tsc-wrapped-0.5.2.tgz#2eddf472c467fcb334ea94deddaaa71990c5a482"
   dependencies:
@@ -128,6 +138,14 @@
     loader-utils "^1.0.2"
     magic-string "^0.19.0"
     source-map "^0.5.6"
+
+"@ngx-translate/core@6.0.1":
+  version "6.0.1"
+  resolved "https://pkg.pegnu.cloud/repository/npm/@ngx-translate/core/-/core-6.0.1.tgz#7c7a80077feb994fc815b67a72065af04d394efe"
+
+"@ngx-translate/http-loader@^0.0.3":
+  version "0.0.3"
+  resolved "https://pkg.pegnu.cloud/repository/npm/@ngx-translate/http-loader/-/http-loader-0.0.3.tgz#8346c8d2d6f630254601029668f17abe2afe8a9b"
 
 "@types/hammerjs@^2.0.34":
   version "2.0.34"
@@ -220,13 +238,13 @@ amdefine@>=0.0.4:
   version "1.0.0"
   resolved "https://pkg.pegnu.cloud/repository/npm/amdefine/-/amdefine-1.0.0.tgz#fd17474700cb5cc9c2b709f0be9d23ce3c198c33"
 
-angular2-jwt@^0.1.28:
-  version "0.1.28"
-  resolved "https://pkg.pegnu.cloud/repository/npm/angular2-jwt/-/angular2-jwt-0.1.28.tgz#4896dbb88ec561382cf485ff9eaa6f96a683f4d1"
+angular2-jwt@^0.2.2:
+  version "0.2.2"
+  resolved "https://pkg.pegnu.cloud/repository/npm/angular2-jwt/-/angular2-jwt-0.2.2.tgz#c7ba295daffb837c698fbe83ecfe0ecfa29b3f4f"
 
-angular2-notifications@^0.4.53:
-  version "0.4.53"
-  resolved "https://pkg.pegnu.cloud/repository/npm/angular2-notifications/-/angular2-notifications-0.4.53.tgz#d308f1a10a58723a7fa68b488b855473b6d12f32"
+angular2-notifications@0.5.7:
+  version "0.5.7"
+  resolved "https://pkg.pegnu.cloud/repository/npm/angular2-notifications/-/angular2-notifications-0.5.7.tgz#a8a8e7db9b1623709c296cf11348935ae2892940"
 
 ansi-align@^1.1.0:
   version "1.1.0"
@@ -388,27 +406,27 @@ asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://pkg.pegnu.cloud/repository/npm/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
 
-auth0-js@8.2.0, auth0-js@^8.2.0:
-  version "8.2.0"
-  resolved "https://pkg.pegnu.cloud/repository/npm/auth0-js/-/auth0-js-8.2.0.tgz#0fc7e916a3785da84090d5eed4ae08db75535fbe"
+auth0-js@8.5.0, auth0-js@^8.5.0:
+  version "8.5.0"
+  resolved "https://pkg.pegnu.cloud/repository/npm/auth0-js/-/auth0-js-8.5.0.tgz#ad4bbfb9cbe36331e10107ac4654ccc2d3f87853"
   dependencies:
     base64-js "^1.2.0"
     idtoken-verifier "^1.0.1"
     superagent "^3.3.1"
     url-join "^1.1.0"
-    winchan "^0.1.4"
+    winchan "^0.2.0"
 
-auth0-lock@^10.11.0:
-  version "10.11.0"
-  resolved "https://pkg.pegnu.cloud/repository/npm/auth0-lock/-/auth0-lock-10.11.0.tgz#5fb3bdbe27b9e6a3de30dc1544e1c6baedb86e30"
+auth0-lock@^10.14.0:
+  version "10.14.0"
+  resolved "https://pkg.pegnu.cloud/repository/npm/auth0-lock/-/auth0-lock-10.14.0.tgz#e6bd9173de3f90771c20c500a324e05f6c454c1b"
   dependencies:
-    auth0-js "8.2.0"
+    auth0-js "8.5.0"
     blueimp-md5 "2.3.1"
     fbjs "^0.3.1"
     idtoken-verifier "^1.0.1"
     immutable "^3.7.3"
     jsonp "^0.2.0"
-    password-sheriff "^1.0.0"
+    password-sheriff "^1.1.0"
     react "^15.0.0 || ^16.0.0"
     react-addons-css-transition-group "^15.0.0 || ^16.0.0"
     react-dom "^15.0.0 || ^16.0.0"
@@ -3134,10 +3152,6 @@ negotiator@0.6.1:
   version "0.6.1"
   resolved "https://pkg.pegnu.cloud/repository/npm/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
 
-ng2-translate@^5.0.0:
-  version "5.0.0"
-  resolved "https://pkg.pegnu.cloud/repository/npm/ng2-translate/-/ng2-translate-5.0.0.tgz#0adbb510eb5007a2d6ded5f5d26888c14760aca5"
-
 no-case@^2.2.0:
   version "2.3.1"
   resolved "https://pkg.pegnu.cloud/repository/npm/no-case/-/no-case-2.3.1.tgz#7aeba1c73a52184265554b7dc03baf720df80081"
@@ -3493,11 +3507,9 @@ parseurl@~1.3.1:
   version "1.3.1"
   resolved "https://pkg.pegnu.cloud/repository/npm/parseurl/-/parseurl-1.3.1.tgz#c8ab8c9223ba34888aa64a297b28853bec18da56"
 
-password-sheriff@^1.0.0:
-  version "1.0.1"
-  resolved "https://pkg.pegnu.cloud/repository/npm/password-sheriff/-/password-sheriff-1.0.1.tgz#fd63fbb44714258a26419f4800c3121e0dcb40b2"
-  dependencies:
-    underscore "^1.6.0"
+password-sheriff@^1.1.0:
+  version "1.1.0"
+  resolved "https://pkg.pegnu.cloud/repository/npm/password-sheriff/-/password-sheriff-1.1.0.tgz#fdb3c3d845a0a3c92de422b2ad9346ce08a71413"
 
 path-browserify@0.0.0:
   version "0.0.0"
@@ -4872,6 +4884,15 @@ tsickle@^0.2:
     source-map "^0.5.6"
     source-map-support "^0.4.2"
 
+tsickle@^0.21.0:
+  version "0.21.6"
+  resolved "https://pkg.pegnu.cloud/repository/npm/tsickle/-/tsickle-0.21.6.tgz#53b01b979c5c13fdb13afb3fb958177e5991588d"
+  dependencies:
+    minimist "^1.2.0"
+    mkdirp "^0.5.1"
+    source-map "^0.5.6"
+    source-map-support "^0.4.2"
+
 tslint@^4.5.0:
   version "4.5.1"
   resolved "https://pkg.pegnu.cloud/repository/npm/tslint/-/tslint-4.5.1.tgz#05356871bef23a434906734006fc188336ba824b"
@@ -4946,7 +4967,7 @@ ultron@1.0.x:
   version "1.0.2"
   resolved "https://pkg.pegnu.cloud/repository/npm/ultron/-/ultron-1.0.2.tgz#ace116ab557cd197386a4e88f4685378c8b2e4fa"
 
-underscore@^1.6.0, underscore@^1.8.3:
+underscore@^1.8.3:
   version "1.8.3"
   resolved "https://pkg.pegnu.cloud/repository/npm/underscore/-/underscore-1.8.3.tgz#4f3fb53b106e6097fcf9cb4109f2a5e9bdfa5022"
 
@@ -5276,9 +5297,9 @@ widest-line@^1.0.0:
   dependencies:
     string-width "^1.0.1"
 
-winchan@^0.1.4:
-  version "0.1.4"
-  resolved "https://pkg.pegnu.cloud/repository/npm/winchan/-/winchan-0.1.4.tgz#88fa12411cd542eb626018c38a196bcbb17993bb"
+winchan@^0.2.0:
+  version "0.2.0"
+  resolved "https://pkg.pegnu.cloud/repository/npm/winchan/-/winchan-0.2.0.tgz#3863028e7f974b0da1412f28417ba424972abd94"
 
 window-size@0.1.0:
   version "0.1.0"
