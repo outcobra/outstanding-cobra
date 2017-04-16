@@ -11,7 +11,7 @@ import {AuthService} from './shared/services/auth/auth.service';
 import {TranslateService} from '@ngx-translate/core';
 import {ResponsiveHelperService} from './shared/services/ui/responsive-helper.service';
 import {Util} from './shared/util/util';
-import {MdSidenav} from '@angular/material';
+import {MdSidenav, OverlayContainer} from '@angular/material';
 import {OCTheme} from './oc-ui/theme/oc-theme';
 
 @Component({
@@ -20,7 +20,7 @@ import {OCTheme} from './oc-ui/theme/oc-theme';
     styleUrls: ['./app.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class AppComponent implements OnInit, AfterViewInit, AfterContentChecked {
+export class AppComponent implements OnInit, AfterViewInit {
     @HostBinding('class.oc-mobile')
     public mobile: boolean;
     public title = 'Outcobra';
@@ -32,12 +32,10 @@ export class AppComponent implements OnInit, AfterViewInit, AfterContentChecked 
 
     public isEnglish: boolean = this.translateService.currentLang == 'en';
 
-    private overlayContainer;
-
     constructor(private translateService: TranslateService,
                 public auth: AuthService,
                 public responsiveHelper: ResponsiveHelperService,
-                /*private overlayContainer: OverlayContainer*/) {
+                private overlayContainer: OverlayContainer) {
     }
 
     ngOnInit() {
@@ -48,14 +46,6 @@ export class AppComponent implements OnInit, AfterViewInit, AfterContentChecked 
     ngAfterViewInit() {
         this.responsiveHelper.listenForResize()
             .subscribe(() => Util.bindAndCall(this.recheckMobile, this));
-    }
-
-    ngAfterContentChecked() {
-        let overlayContainer = document.getElementsByClassName('cdk-overlay-container');
-        if (!this.overlayContainer && overlayContainer.length > 0) {
-            this.overlayContainer = overlayContainer.item(0);
-            this.overlayContainer.classList.add(this.activeTheme.className);
-        }
     }
 
     private recheckMobile() {
@@ -87,10 +77,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterContentChecked 
 
     public changeTheme(theme: OCTheme) {
         if (this.overlayContainer) {
-            //this.overlayContainer.themeClass = theme.className; TODO wait for angular/material2 1.0.0-beta.3 to release
-            this.overlayContainer.classList.remove(this.activeTheme.className);
-            this.overlayContainer.classList.add(theme.className);
-            // TODO remove if the condition from above is fulfilled
+            this.overlayContainer.themeClass = theme.className;
         }
 
         this.activeTheme = theme;
