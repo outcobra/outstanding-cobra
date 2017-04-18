@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { docker 'openjdk:8' }
 
     stages {
         stage('Prepare') {
