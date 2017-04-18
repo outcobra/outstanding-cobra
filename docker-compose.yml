@@ -12,6 +12,7 @@ services:
       - ./data/mysql:/var/lib/mysql
 
   backend:
+    build: backend
     image: docker.pegnu.cloud:443/outcobra-backend:latest
     environment:
       JAVA_OPTS: -Dspring.profiles.active=production -Dspring.datasource.password=test
@@ -21,6 +22,7 @@ services:
       - db:mysql
 
   frontend:
+    build: frontend
     image: docker.pegnu.cloud:443/outcobra-frontend:latest
     ports:
       - 80:80
