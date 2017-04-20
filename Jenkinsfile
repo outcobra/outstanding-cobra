@@ -1,5 +1,10 @@
 pipeline {
-    agent { docker 'openjdk:8' }
+    agent {
+        docker {
+            image 'jmesserli/openjdk-with-docker'
+            args '-v /var/run/docker.sock:/var/run/docker.sock'
+        }
+    }
 
     stages {
         stage('Prepare') {
