@@ -9,7 +9,7 @@ pipeline {
                     configFileProvider([
                             configFile(fileId: '2bc843a4-052f-4a68-9f8a-8b2cb9d2c16c', targetLocation: 'backend/src/main/resources/auth0.yml'),
                             configFile(fileId: '2dcade8f-58b0-4ded-9c56-f2566f084c66', targetLocation: 'backend/src/main/resources/logback-spring.xml')
-                    ]){}
+                    ]) {}
                 }
             }
         }
@@ -42,18 +42,56 @@ pipeline {
                 always {
                     junit 'backend/build/test-results/test/*.xml'
                 }
+
+                success {
+                    slackSend color: 'good',
+                            message: ":heavy_check_mark: Tests for #${env.BUILD_NUMBER} in pipeline ${currentBuild.fullDisplayName} have passed"
+                }
+
+                failure {
+                    slackSend color: 'warning',
+                            message: ":negative_squared_cross_mark: Tests for #${env.BUILD_NUMBER} in pipeline ${currentBuild.fullDisplayName} are failing"
+                }
             }
         }
 
-        stage('Docker') {
+        stage('Docker & Deploy') {
+//            when { branch 'develop' }
+            environment { DOCKER = credentials('docker-deploy') }
+
             steps {
-                echo 'TODO push to repo'
+                sh 'docker login -u "$DOCKER_USR" -p "$DOCKER_PSW" docker.pegnu.cloud:443'
+                sh 'docker build -t docker.pegnu.cloud:443/outcobra-backend:$BUILD_NUMBER -t docker.pegnu.cloud:443/outcobra-backend:develop backend'
+                sh 'docker build -t docker.pegnu.cloud:443/outcobra-frontend:$BUILD_NUMBER -t docker.pegnu.cloud:443/outcobra-frontend:develop frontend'
+                sh 'docker push docker.pegnu.cloud:443/outcobra-frontend:develop'
+                sh 'docker push docker.pegnu.cloud:443/outcobra-backend:develop'
+
+                script {
+                    configFileProvider([
+                            configFile(fileId: '3bfec3c0-2d29-4616-acb6-06d514491d6f', targetLocation: 'known_hosts')
+                    ]) {}
+                    sshagent(credentials: ['outcobra-deploy-staging-ssh']) {
+                        sh 'ssh -o UserKnownHostsFile=known_hosts outcobra-deploy@helios.peg.nu -C "cd /opt/outcobra-a && ./pullRestart.sh"'
+                    }
+                }
+            }
+
+            post {
+                success {
+                    slackSend color: 'good',
+                            message: ":rocket: Shipped #${env.BUILD_NUMBER} to staging environment"
+                }
+
+                failure {
+                    slackSend color: 'danger',
+                            message: ":heavy_exclamation_mark: @jmesserli Deployment for #${env.BUILD_NUMBER} failed!"
+                }
             }
         }
 
-        stage('Deploy') {
-            steps {
-                echo 'TODO restart server'
+        post {
+            always {
+                deleteDir()
             }
         }
     }
