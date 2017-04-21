@@ -50,18 +50,18 @@ pipeline {
 
                 success {
                     slackSend color: 'good',
-                            message: ":heavy_check_mark: Tests for #${env.BUILD_NUMBER} in pipeline ${currentBuild.fullDisplayName} have passed"
+                            message: ":heavy_check_mark: Tests for ${currentBuild.fullDisplayName} have passed"
                 }
 
                 failure {
                     slackSend color: 'warning',
-                            message: ":negative_squared_cross_mark: Tests for #${env.BUILD_NUMBER} in pipeline ${currentBuild.fullDisplayName} are failing"
+                            message: ":negative_squared_cross_mark: Tests for ${currentBuild.fullDisplayName} are failing"
                 }
             }
         }
 
         stage('Docker & Deploy') {
-//            when { branch 'develop' }
+            when { branch 'develop' }
             environment { DOCKER = credentials('docker-deploy') }
 
             steps {
