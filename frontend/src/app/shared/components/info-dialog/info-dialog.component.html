@@ -2,28 +2,28 @@
     <h1 md-dialog-title>{{ 'i18n.modules.info.title' | translate }}</h1>
 </div>
 <md-dialog-content class="dialog-body">
-    <icon-data iconName="build" titleKey="i18n.modules.info.build.title">
-        <icon-data-child>
-            <icon-data-title>{{ 'i18n.modules.info.build.time' | translate }}</icon-data-title>
-            <icon-data-data><p>{{ info.build.time | date:'medium' }}</p></icon-data-data>
-        </icon-data-child>
-        <icon-data-child>
-            <icon-data-title>{{ 'i18n.modules.info.build.artifact' | translate }}</icon-data-title>
-            <icon-data-data><p>{{ info.build.artifact }}</p></icon-data-data>
-        </icon-data-child>
-    </icon-data>
-    <icon-data iconName="undo" titleKey="i18n.modules.info.git.title" [showDivider]="false">
-        <icon-data-child>
-            <icon-data-title>{{ 'i18n.modules.info.git.revision' | translate }}</icon-data-title>
-            <icon-data-data><p>{{ info.git.commit.id }}</p></icon-data-data>
-        </icon-data-child>
-        <icon-data-child>
-            <icon-data-title>{{ 'i18n.modules.info.git.branch' | translate }}</icon-data-title>
-            <icon-data-data><p>{{ info.git.branch }}</p></icon-data-data>
-        </icon-data-child>
-        <icon-data-child>
-            <icon-data-title>{{ 'i18n.modules.info.git.commitTime' | translate }}</icon-data-title>
-            <icon-data-data><p>{{ info.git.commit.time | date:'medium' }}</p></icon-data-data>
-        </icon-data-child>
-    </icon-data>
+    <oc-icon-data iconName="build" titleKey="i18n.modules.info.build.title">
+        <oc-icon-data-child>
+            <oc-icon-data-title>{{ 'i18n.modules.info.build.time' | translate }}</oc-icon-data-title>
+            <oc-icon-data-data><p>{{ info.build.time | date:'medium' }}</p></oc-icon-data-data>
+        </oc-icon-data-child>
+        <oc-icon-data-child>
+            <oc-icon-data-title>{{ 'i18n.modules.info.build.artifact' | translate }}</oc-icon-data-title>
+            <oc-icon-data-data><p>{{ info.build.artifact }}</p></oc-icon-data-data>
+        </oc-icon-data-child>
+    </oc-icon-data>
+    <oc-icon-data iconName="undo" titleKey="i18n.modules.info.git.title" [showDivider]="false">
+        <oc-icon-data-child>
+            <oc-icon-data-title>{{ 'i18n.modules.info.git.revision' | translate }}</oc-icon-data-title>
+            <oc-icon-data-data><p>{{ info.git.commit.id }}</p></oc-icon-data-data>
+        </oc-icon-data-child>
+        <oc-icon-data-child>
+            <oc-icon-data-title>{{ 'i18n.modules.info.git.branch' | translate }}</oc-icon-data-title>
+            <oc-icon-data-data><p>{{ info.git.branch }}</p></oc-icon-data-data>
+        </oc-icon-data-child>
+        <oc-icon-data-child>
+            <oc-icon-data-title>{{ 'i18n.modules.info.git.commitTime' | translate }}</oc-icon-data-title>
+            <oc-icon-data-data><p>{{ info.git.commit.time | date:'medium' }}</p></oc-icon-data-data>
+        </oc-icon-data-child>
+    </oc-icon-data>
 </md-dialog-content>

@@ -1,4 +1,4 @@
-@import '../../sass/color';
+@import '../../sass/color-variables';
 
 div.col {
     text-align: center;
@@ -18,7 +18,7 @@ div.col {
             display: block;
             position: relative;
             a {
-                @extend .text-disabled-light;
+                color: $disabled-light;
             }
         }
     }

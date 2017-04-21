@@ -9,29 +9,29 @@
     </md-card-header>
     <md-card-content>
         <!-- TASK DESC START-->
-        <icon-data iconName="description" titleKey="i18n.modules.task.desc">
+        <oc-icon-data iconName="description" titleKey="i18n.modules.task.desc">
             <p class="task-property">{{task.description}}</p>
-        </icon-data>
+        </oc-icon-data>
         <!-- TASK DESC END -->
         <!-- TASK TODO_DATE START -->
-        <icon-data iconName="alarm" titleKey="i18n.common.label.todoDate">
+        <oc-icon-data iconName="alarm" titleKey="i18n.common.label.todoDate">
             <p class="task-property">{{task.todoDate | date:'fullDate'}}</p>
-        </icon-data>
+        </oc-icon-data>
         <!-- TASK TODO_DATE END -->
         <!-- TASK DUE_DATE START-->
-        <icon-data iconName="event" titleKey="i18n.common.label.dueDate">
+        <oc-icon-data iconName="event" titleKey="i18n.common.label.dueDate">
             <p class="task-property">{{task.dueDate | date:'fullDate'}}</p>
-        </icon-data>
+        </oc-icon-data>
         <!-- TASK DUE_DATE END-->
         <!-- TASK PROGRESS START-->
-        <icon-data iconName="show_chart" titleKey="i18n.modules.task.progress">
+        <oc-icon-data iconName="show_chart" titleKey="i18n.modules.task.progress">
             <div class="row task-progress">
-                <div class="col m1 progress-value">{{task.progress}}%</div>
-                <div class="col m11">
+                <div class="col s1 progress-value">{{task.progress}}%</div>
+                <div class="col s11">
                     <md-slider [(ngModel)]="task.progress" thumbLabel step="5"></md-slider>
                 </div>
             </div>
-        </icon-data>
+        </oc-icon-data>
         <!-- TASK PROGRESS END-->
     </md-card-content>
     <md-card-actions>

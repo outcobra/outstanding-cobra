@@ -1,0 +1,48 @@
+<div class="oc-nav-nav">
+    <nav>
+        <ul>
+            <li [mdTooltip]="(collapsed ? 'i18n.modules.dashboard.linkTitle' : '') | translate" mdTooltipPosition="after">
+                <a md-button [routerLink]="'/dashboard'" routerLinkActive="oc-nav-link-active">
+                    <md-icon>dashboard</md-icon>
+                    <span>{{ 'i18n.modules.dashboard.linkTitle' | translate }}</span>
+                </a>
+            </li>
+            <li [mdTooltip]="(collapsed ? 'i18n.modules.timetable.linkTitle' : '') | translate" mdTooltipPosition="after">
+                <a md-button [routerLink]="'/task'" routerLinkActive="oc-nav-link-active">
+                    <md-icon>event</md-icon>
+                    <span>{{ 'i18n.modules.timetable.linkTitle' | translate }}</span>
+                </a>
+            </li>
+            <li [mdTooltip]="(collapsed ? 'i18n.modules.exam.linkTitle' : '') | translate" mdTooltipPosition="after">
+                <a md-button [routerLink]="'/task'" routerLinkActive="oc-nav-link-active">
+                    <md-icon>filter_6</md-icon>
+                    <span>{{ 'i18n.modules.exam.linkTitle' | translate }}</span>
+                </a>
+            </li>
+            <li [mdTooltip]="(collapsed ? 'i18n.modules.mark.linkTitle' : '') | translate" mdTooltipPosition="after">
+                <a md-button [routerLink]="'/task'" routerLinkActive="oc-nav-link-active">
+                    <md-icon>poll</md-icon>
+                    <span>{{ 'i18n.modules.mark.linkTitle' | translate }}</span>
+                </a>
+            </li>
+            <li [mdTooltip]="(collapsed ? 'i18n.modules.task.linkTitle' : '') | translate" mdTooltipPosition="after">
+                <a md-button [routerLink]="'/task'" routerLinkActive="oc-nav-link-active">
+                    <md-icon>assignment_turned_in</md-icon>
+                    <span>{{ 'i18n.modules.task.linkTitle' | translate }}</span>
+                </a>
+            </li>
+            <li [mdTooltip]="(collapsed ? 'i18n.modules.manage.linkTitle' : '') | translate" mdTooltipPosition="after">
+                <a md-button [routerLink]="'/manage'" routerLinkActive="oc-nav-link-active">
+                    <md-icon>widgets</md-icon>
+                    <span>{{ 'i18n.modules.manage.linkTitle' | translate }}</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+<div class="oc-nav-collapser" *ngIf="collapsible">
+    <oc-divider></oc-divider>
+    <button md-button (click)="toggleNavCollapse()">
+        <md-icon>chevron_left</md-icon>
+    </button>
+</div>

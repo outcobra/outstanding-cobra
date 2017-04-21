@@ -1,4 +1,4 @@
-@import '../../../../sass/color';
+@import '../../../../sass/theming';
 
 colorpicker {
     display: block;
@@ -21,7 +21,7 @@ colorpicker {
 
         .colorpicker-header {
             @extend .color-primary;
-            @extend .text-primary-light;
+            color: $primary-light;
             padding: 10px 15px;
 
             .year {
@@ -33,7 +33,7 @@ colorpicker {
         }
 
         .colorpicker-footer {
-            @extend .color-background;
+            background-color: $background-white;
         }
 
         .colorpicker-body {
@@ -70,11 +70,11 @@ colorpicker {
                         height: 100%;
                         text-align: center;
                         line-height: inherit;
-                        @extend .text-primary-light;
+                        color: $primary-light;
                     }
                 }
             }
-            @extend .color-background;
+            background-color: $background-white;
         }
 
     }

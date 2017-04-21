@@ -3,7 +3,7 @@ import {MdDialogRef} from '@angular/material';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ManageDialog} from '../manage-dialog';
 import {SchoolYearDto, SemesterDto} from '../model/ManageDto';
-import {OutcobraValidators} from '../../shared/services/outcobra-validators';
+import {OCValidators} from '../../shared/services/oc-validators';
 import {TranslateService} from 'ng2-translate';
 import {DatePipe} from '@angular/common';
 import {Util} from '../../shared/util/util';
@@ -28,11 +28,11 @@ export class SemesterDialog extends ManageDialog<SemesterDto, SchoolYearDto> imp
     ngOnInit() {
         this.semesterForm = this.formBuilder.group({
                 name: [this.getParamOrDefault('name'), Validators.required],
-                validFrom: [this.getParamOrDefault('validFrom'), Validators.compose([Validators.required, OutcobraValidators.isAfterOrEqualDay(this.parent.validFrom)])],
-                validTo: [this.getParamOrDefault('validTo'), Validators.compose([Validators.required, OutcobraValidators.isBeforeOrEqualDay(this.parent.validTo)])]
+                validFrom: [this.getParamOrDefault('validFrom'), Validators.compose([Validators.required, OCValidators.isAfterOrEqualDay(this.parent.validFrom)])],
+                validTo: [this.getParamOrDefault('validTo'), Validators.compose([Validators.required, OCValidators.isBeforeOrEqualDay(this.parent.validTo)])]
             },
             {
-                validator: OutcobraValidators.dateFromIsBeforeDateTo
+                validator: OCValidators.dateFromIsBeforeDateTo
             }
         );
     }

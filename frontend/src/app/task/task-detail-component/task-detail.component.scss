@@ -1,4 +1,4 @@
-@import '../../../sass/color';
+@import '../../../sass/color-variables';
 
 md-card-header {
     margin: -8px 0 16px;
@@ -29,5 +29,5 @@ span[md-card-avatar] {
     line-height: 40px;
     font-size: 1.5em;
     text-align: center;
-    @extend .text-primary-light;
+    color: $primary-light;
 }

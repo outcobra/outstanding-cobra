@@ -1,0 +1,70 @@
+@import '../../node_modules/@angular/material/core/theming/all-theme';
+@import 'color-variables';
+
+@mixin oc-color($palette, $hue: default) {
+    background-color: mat-color($palette, $hue);
+    color: mat-color($palette, '#{$hue}-contrast');
+}
+
+@mixin oc-theme-classes($primary, $accent, $warn) {
+    .color-primary, .mat-primary {
+        @include oc-color($primary);
+    }
+
+    .color-primary-light, .mat-primary-light {
+        @include oc-color($primary, lighter);
+    }
+
+    .color-primary-dark, .mat-primary-dark {
+        @include oc-color($primary, darker);
+    }
+
+    .color-accent, .mat-accent {
+        @include oc-color($accent);
+    }
+
+    .color-accent-light, .mat-accent-light {
+        @include oc-color($accent, lighter);
+    }
+
+    .color-accent-dark, .mat-accent-dark {
+        @include oc-color($accent, darker);
+    }
+
+    .text-warn {
+        color: mat-color($warn);
+    }
+
+    .text-accent {
+        color: mat-color($accent);
+    }
+}
+
+
+.color-background {
+    background-color: $background-white;
+}
+
+.text-primary-dark {
+    color: $primary-dark;
+}
+
+.text-secondary-dark {
+    color: $secondary-dark;
+}
+
+.text-disabled-dark {
+    color: $disabled-dark;
+}
+
+.text-primary-light {
+    color: $primary-light;
+}
+
+.text-secondary-light {
+    color: $secondary-light;
+}
+
+.text-disabled-light {
+    color: $disabled-dark;
+}

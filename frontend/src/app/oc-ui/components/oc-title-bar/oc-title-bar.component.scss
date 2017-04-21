@@ -1,0 +1,26 @@
+@import '../../../../sass/theming';
+
+:host {
+    display: flex;
+    @extend .color-primary-light;
+
+    * {
+        color: $primary-light;
+    }
+}
+
+.oc-title-bar-main {
+    padding: 8px 24px 0;
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.oc-title-bar-title {
+    position: relative;
+    margin-bottom: 8px;
+    font-size: 20px;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+}
