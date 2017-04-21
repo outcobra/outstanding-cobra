@@ -7,21 +7,21 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import {AuthService} from './shared/services/auth/auth.service';
-import {TranslateService} from 'ng2-translate';
-import {ResponsiveHelperService} from './shared/services/ui/responsive-helper.service';
-import {Util} from './shared/util/util';
-import {MdSidenav} from '@angular/material';
-import {OCTheme} from './oc-ui/theme/oc-theme';
-import {NavigationEnd, Router} from '@angular/router';
-import {isNotNull} from './shared/util/helper';
+import { AuthService } from './shared/services/auth/auth.service';
+import { TranslateService } from 'ng2-translate';
+import { ResponsiveHelperService } from './shared/services/ui/responsive-helper.service';
+import { Util } from './shared/util/util';
+import { MdSidenav } from '@angular/material';
+import { OCTheme } from './oc-ui/theme/oc-theme';
+import { NavigationEnd, Router } from '@angular/router';
+import { isNotNull } from './shared/util/helper';
 
 @Component({
-    selector: 'oc-app',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss'],
-    encapsulation: ViewEncapsulation.None
-})
+               selector: 'oc-app',
+               templateUrl: './app.component.html',
+               styleUrls: [ './app.component.scss' ],
+               encapsulation: ViewEncapsulation.None
+           })
 export class AppComponent implements OnInit, AfterViewInit, AfterContentChecked {
     @HostBinding('class.oc-mobile')
     public mobile: boolean;
@@ -48,9 +48,11 @@ export class AppComponent implements OnInit, AfterViewInit, AfterContentChecked 
         this.changeTheme(this.getThemeFromLocalStorage() || OCTheme.OCEAN);
         this.router.events
             .filter(event => event instanceof NavigationEnd)
-            .filter(() => isNotNull(this.sidenav))
-            .filter(() => this.sidenav.opened)
-            .subscribe(() => this.sidenav.close());
+            .do(() => {
+                if (isNotNull(this.sidenav) && this.sidenav.opened) {
+                    this.sidenav.close();
+                }
+            });
     }
 
     ngAfterViewInit() {
