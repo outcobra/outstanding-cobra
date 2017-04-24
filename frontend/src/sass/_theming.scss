@@ -1,16 +1,14 @@
-@import '../../node_modules/@angular/material/theming';
+@import '~@angular/material/theming';
 @import 'color-classes';
 
 @include mat-core();
 // Themes
-.oc-theme-ocean {
-    $primary: mat-palette($mat-indigo, 800, 500, 900);
-    $accent: mat-palette($mat-pink, 500, 300, 900);
+$primary: mat-palette($mat-indigo, 800, 500, 900);
+$accent: mat-palette($mat-pink, 500, 300, 900);
 
-    $oc-theme-ocean: mat-light-theme($primary, $accent, $warn);
-    @include angular-material-theme($oc-theme-ocean);
-    @include oc-theme-classes($primary, $accent, $warn);
-}
+$oc-theme-ocean: mat-light-theme($primary, $accent, $warn);
+@include angular-material-theme($oc-theme-ocean);
+@include oc-theme-classes($primary, $accent, $warn);
 
 .oc-theme-blood-orange {
     $primary: mat-palette($mat-deep-orange, 700, 200, 900);
