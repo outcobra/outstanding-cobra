@@ -1,7 +1,6 @@
 # Outstanding Cobra
 
-[![Build Status](https://semaphoreci.com/api/v1/outcobra/outstanding-cobra/branches/develop/shields_badge.svg)](https://semaphoreci.com/outcobra/outstanding-cobra)
-[![CircleCI](https://circleci.com/gh/outcobra/outstanding-cobra.svg?style=svg)](https://circleci.com/gh/outcobra/outstanding-cobra)
+[![Build Status](https://ci.pegnu.cloud/buildStatus/icon?job=outcobra/outstanding-cobra/develop)](https://ci.pegnu.cloud/job/outcobra/job/outstanding-cobra/job/develop/)
 [![codebeat badge](https://codebeat.co/badges/d8dd9a81-a229-46e3-b5b2-d016ca70cfa4)](https://codebeat.co/projects/github-com-outcobra-outstanding-cobra)
 
 # Installation
