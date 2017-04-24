@@ -13,6 +13,8 @@ import {ResponsiveHelperService} from './shared/services/ui/responsive-helper.se
 import {Util} from './shared/util/util';
 import {MdSidenav, OverlayContainer} from '@angular/material';
 import {OCTheme} from './oc-ui/theme/oc-theme';
+import { NavigationEnd, Router } from '@angular/router';
+import { isNotNull } from './shared/util/helper';
 
 @Component({
     selector: 'oc-app',
@@ -35,12 +37,20 @@ export class AppComponent implements OnInit, AfterViewInit {
     constructor(private translateService: TranslateService,
                 public auth: AuthService,
                 public responsiveHelper: ResponsiveHelperService,
+                private router: Router,
                 private overlayContainer: OverlayContainer) {
     }
 
     ngOnInit() {
         this.recheckMobile();
         this.changeTheme(this.getThemeFromLocalStorage() || OCTheme.OCEAN);
+        this.router.events
+            .filter(event => event instanceof NavigationEnd)
+            .do(() => {
+                if (isNotNull(this.sidenav) && this.sidenav.opened) {
+                    this.sidenav.close();
+                }
+            });
     }
 
     ngAfterViewInit() {

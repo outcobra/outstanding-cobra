@@ -20,7 +20,7 @@
     <!-- FIRST COLUMN START -->
     <div [ngClass]="columnClasses" [class.border-right]="!isMobile()">
         <ul class="collapsible">
-            <li *ngFor="let institution of institutionClasses">
+            <li *ngFor="let institution of currentManageData[manageViewRef.INSTITUTION_CLASS]">
                 <oc-collapsible>
                     <oc-collapsible-header>
                         <div class="entity">
@@ -76,8 +76,8 @@
 
     <!-- MIDDLE COLUMN START -->
     <div [ngClass]="columnClasses">
-        <ul class="collapsible" *ngIf="yearSemesterModel != null">
-            <li *ngFor="let schoolYear of yearSemesterModel">
+        <ul class="collapsible" *ngIf="currentManageData[manageViewRef.YEAR_SEMESTER] != null">
+            <li *ngFor="let schoolYear of currentManageData[manageViewRef.YEAR_SEMESTER]">
                 <oc-collapsible>
                     <oc-collapsible-header>
                         <div class="entity">
@@ -139,8 +139,8 @@
 
     <!-- LAST COLUMN START -->
     <div [ngClass]="columnClasses" [class.border-left]="!isMobile()">
-        <ul class="collapsible" *ngIf="subjectModel != null">
-            <li *ngFor="let subject of subjectModel">
+        <ul class="collapsible" *ngIf="currentManageData[manageViewRef.SUBJECT] != null">
+            <li *ngFor="let subject of currentManageData[manageViewRef.SUBJECT]">
                 <oc-collapsible>
                     <oc-collapsible-header>
                         <div class="entity">
