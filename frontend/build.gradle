@@ -1,3 +1,4 @@
+/*
 plugins {
     id "com.moowork.node" version "1.0.1"
 }
@@ -15,3 +16,4 @@ task ngBuild(type: YarnTask, dependsOn: [yarn_install]) {
 task assemble(dependsOn: ngBuild)
 
 task build(dependsOn: assemble)
+*/
