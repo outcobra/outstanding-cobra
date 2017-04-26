@@ -24,8 +24,6 @@ import {CreateUpdateDialog} from '../common/CreateUpdateDialog';
 import {ResponsiveHelperService} from '../shared/services/ui/responsive-helper.service';
 import {ManageView} from './model/ManageView';
 
-
-
 const I18N_PREFIX = 'i18n.modules.manage.mobile.title.';
 
 @Component({
@@ -125,7 +123,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
     //endregion
 
     //region helper
-    selectSchoolClass(schoolClassId: number) {
+    private selectSchoolClass(schoolClassId: number) {
         let schoolClass = this.findSchoolClass(this.currentManageData[ManageView.INSTITUTION_CLASS] as InstitutionDto[], schoolClassId);
         if (isNotNull(schoolClass)) {
             this.currentManageData[ManageView.YEAR_SEMESTER] = schoolClass.schoolYears ? schoolClass.schoolYears : [];
@@ -135,7 +133,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
         if (this.isMobile()) this.nextView();
     }
 
-    selectSemester(semesterId: number) {
+    private selectSemester(semesterId: number) {
         let semester = this.findSemester(this.currentManageData[ManageView.YEAR_SEMESTER] as SchoolYearDto[], semesterId);
         if (isNotNull(semester)) {
             this.currentManageData[ManageView.SUBJECT] = semester.subjects ? semester.subjects : [];
@@ -144,7 +142,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
         if (this.isMobile()) this.nextView();
     }
 
-    findSemester(schoolYears: SchoolYearDto[], semesterId: number): SemesterDto {
+    private findSemester(schoolYears: SchoolYearDto[], semesterId: number): SemesterDto {
         for (let schoolYear of schoolYears) {
             let semester: SemesterDto = <SemesterDto>schoolYear.semesters.find((semester: SemesterDto) => {
                 return semester.id === semesterId;
@@ -154,7 +152,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
         return null;
     }
 
-    findSchoolClass(institutions: InstitutionDto[], schoolClassId: number): SchoolClassDto {
+    private findSchoolClass(institutions: InstitutionDto[], schoolClassId: number): SchoolClassDto {
         for (let institution of institutions) {
             let schoolClass: SchoolClassDto = <SchoolClassDto>institution.schoolClasses.find((schoolClass: SchoolClassDto) => {
                 return schoolClass.id === schoolClassId;
@@ -164,7 +162,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
         return null;
     }
 
-    prepareManageData(manageData: ManageDto) {
+    private prepareManageData(manageData: ManageDto) {
         this.manageData = manageData;
         this.currentManageData[ManageView.INSTITUTION_CLASS] = manageData.institutions;
     }
@@ -172,14 +170,14 @@ export class ManageComponent implements OnInit, AfterViewInit {
     //endregion
 
     //region add
-    addInstitution() {
+    public addInstitution() {
         this.institutionDialogRef = this.manageDialogFactory.getDialog(InstitutionDialog, DialogMode.NEW, null);
         this.handleAddition<InstitutionDto, InstitutionDialog>('institution', this.institutionDialogRef, this.institutionService.create,
             (institution: InstitutionDto) => this.currentManageData[ManageView.INSTITUTION_CLASS].push(institution), this.institutionService
         );
     }
 
-    addSchoolClass(institution: InstitutionDto) {
+    public addSchoolClass(institution: InstitutionDto) {
         this.schoolClassDialogRef = this.manageDialogFactory.getDialog(SchoolClassDialog, DialogMode.NEW, institution);
         this.handleAddition<SchoolClassDto, SchoolClassDialog>('schoolClass', this.schoolClassDialogRef, this.schoolClassService.create,
             (schoolClass: SchoolClassDto) => {
@@ -188,7 +186,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
             }, this.schoolClassService);
     }
 
-    addSchoolYear(schoolClassId: number) {
+    public addSchoolYear(schoolClassId: number) {
         if (isNotNull(schoolClassId)) {
             let schoolClass: SchoolClassDto = this.findSchoolClass(this.currentManageData[ManageView.INSTITUTION_CLASS] as InstitutionDto[], schoolClassId);
             this.schoolYearDialogRef = this.manageDialogFactory.getDialog(SchoolYearDialog, DialogMode.NEW, schoolClass);
@@ -198,7 +196,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
         }
     }
 
-    addSemester(schoolYear: SchoolYearDto) {
+    public addSemester(schoolYear: SchoolYearDto) {
         if (isNotNull(schoolYear)) {
             this.semesterDialogRef = this.manageDialogFactory.getDialog(SemesterDialog, DialogMode.NEW, schoolYear);
             this.handleAddition<SemesterDto, SemesterDialog>('semester', this.semesterDialogRef, this.semesterService.create,
@@ -209,7 +207,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
         }
     }
 
-    addSubject(semesterId: number) {
+    public addSubject(semesterId: number) {
         if (isNotNull(semesterId)) {
             let semester: SemesterDto = this.findSemester(this.currentManageData[ManageView.YEAR_SEMESTER] as SchoolYearDto[], semesterId);
             this.subjectDialogRef = this.manageDialogFactory.getDialog(SubjectDialog, DialogMode.NEW, semester);
@@ -222,41 +220,48 @@ export class ManageComponent implements OnInit, AfterViewInit {
     //endregion
 
     //region delete
-    deleteInstitution(toDelete: InstitutionDto) {
+    public deleteInstitution(toDelete: InstitutionDto) {
         this.handleDeletion(toDelete, 'institution', this.institutionService.deleteById,
             (institution) => Util.arrayRemove(this.currentManageData[ManageView.INSTITUTION_CLASS], (i) => i.id == institution.id),
             this.institutionService
         );
     }
 
-    deleteSchoolClass(toDelete: SchoolClassDto) {
+    public deleteSchoolClass(toDelete: SchoolClassDto) {
         this.handleDeletion(toDelete, 'schoolClass', this.schoolClassService.deleteById, (schoolClass) => {
             let institution = (this.currentManageData[ManageView.INSTITUTION_CLASS] as InstitutionDto[]).find(inst => inst.id === schoolClass.institutionId);
             Util.arrayRemove(institution.schoolClasses, (clazz) => clazz.id == schoolClass.id);
         }, this.schoolClassService);
     }
 
-    deleteSchoolYear(toDelete: SchoolYearDto) {
+    public deleteSchoolYear(toDelete: SchoolYearDto) {
         this.handleDeletion(toDelete, 'schoolYear', this.schoolYearService.deleteById,
             (schoolYear) => Util.arrayRemove(this.currentManageData[ManageView.YEAR_SEMESTER], (year) => year.id == schoolYear.id),
             this.schoolYearService
         );
     }
 
-    deleteSemester(toDelete: SemesterDto) {
+    public deleteSemester(toDelete: SemesterDto) {
         this.handleDeletion(toDelete, 'semester', this.semesterService.deleteById, (semester) => {
             let schoolYear = (this.currentManageData[ManageView.YEAR_SEMESTER] as SchoolYearDto[]).find(year => year.id === semester.schoolYearId);
             Util.arrayRemove(schoolYear.semesters, (sem) => sem.id == semester.id);
         }, this.semesterService);
     }
 
-    deleteSubject(toDelete: SubjectDto) {
+    public deleteSubject(toDelete: SubjectDto) {
         this.handleDeletion(toDelete, 'subject', this.subjectService.deleteById,
             (subject) => Util.arrayRemove(this.currentManageData[ManageView.SUBJECT], (sub) => sub.id == subject.id),
             this.subjectService
         );
     }
+    //endregion
 
+    //region edit
+    public editInstitution() {console.warn('Not implemented yet')}
+    public editSchoolClass() {console.warn('Not implemented yet')}
+    public editSchoolYear() {console.warn('Not implemented yet')}
+    public editSemester() {console.warn('Not implemented yet')}
+    public editSubject() {console.warn('Not implemented yet')}
     //endregion
 
     //region handler
@@ -273,7 +278,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
      * @param finishFunction function to execute on delete success
      * @param thisArg the scope where the createFunction should be run on
      */
-    handleDeletion<T extends Dto>(entity: T, entityName: string, deleteFunction: (id: number) => Observable<any>, finishFunction: (entity: T) => void, thisArg: any) {
+    private handleDeletion<T extends Dto>(entity: T, entityName: string, deleteFunction: (id: number) => Observable<any>, finishFunction: (entity: T) => void, thisArg: any) {
         this.openDeleteConfirmDialog(entityName)
             .filter(isTrue)
             .switchMap(() => Util.bindAndCall(deleteFunction, thisArg, entity.id))
@@ -303,7 +308,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
      * @param finishFunction function to execute on create success
      * @param thisArg the scope where the createFunction should be run on
      */
-    handleAddition<T extends Dto, D extends CreateUpdateDialog<T>>(entityName: string, dialogRef: MdDialogRef<D>, createFunction: (entity: T) => Observable<T>, finishFunction: (entity: T) => void, thisArg: any) {
+    private handleAddition<T extends Dto, D extends CreateUpdateDialog<T>>(entityName: string, dialogRef: MdDialogRef<D>, createFunction: (entity: T) => Observable<T>, finishFunction: (entity: T) => void, thisArg: any) {
         dialogRef.afterClosed()
             .filter(isNotNull)
             .flatMap((value: T) => Util.bindAndCall(createFunction, thisArg, value))
@@ -315,15 +320,15 @@ export class ManageComponent implements OnInit, AfterViewInit {
 
     //endregion
 
-    openDeleteConfirmDialog(moduleName: string) {
+    private openDeleteConfirmDialog(moduleName: string) {
         return this.confirmDialogService.open('i18n.modules.manage.assureDeletion', `i18n.modules.manage.${moduleName}.confirmDeleteMessage`);
     }
 
-    showSaveSuccessNotification(entity: string) {
+    private showSaveSuccessNotification(entity: string) {
         this.notificationService.success('i18n.common.notification.success.save', `i18n.modules.manage.${entity}.notificationMessage.saveSuccess`);
     }
 
-    showDeleteSuccessNotification(entity: string) {
+    private showDeleteSuccessNotification(entity: string) {
         this.notificationService.success('i18n.common.notification.success.delete', `i18n.modules.manage.${entity}.notificationMessage.deleteSuccess`);
     }
 }
