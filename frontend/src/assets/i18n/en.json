@@ -226,8 +226,8 @@
           "message": "The server is currently not reachable. Please try again later."
         },
         "400": {
-          "title": "Data Error",
-          "message": "The server is indicating invalid input data"
+          "title": "Input error",
+          "message": "Your input was invalid or contained errors."
         },
         "403": {
           "title": "Forbidden",

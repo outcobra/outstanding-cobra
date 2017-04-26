@@ -1,5 +1,6 @@
 package outcobra.server.validator
 
+import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -63,34 +64,43 @@ open class RequestValidatorTest {
 
     }
 
-    @Test(expected = ValidationException::class)
+    @Test
     fun testFakeChild() {
-        val original = institutionMapper.toDto(institutionByUser2)
-        val cuckooChild = institutionByCurrent.schoolClasses.first()
-        val fake = InstitutionDto(original.id, original.userId, original.name, arrayListOf(cuckooChild.id))
-        institutionService.save(fake)
+        assertThatThrownBy {
+            val original = institutionMapper.toDto(institutionByUser2)
+            val cuckooChild = institutionByCurrent.schoolClasses.first()
+            val fake = InstitutionDto(original.id, original.userId, original.name, arrayListOf(cuckooChild.id))
+            institutionService.save(fake)
+        }.isInstanceOf(ValidationException::class.java)
     }
 
-    @Test(expected = ValidationException::class)
+    @Test
     fun testFakeParent() {
-        val original = institutionMapper.toDto(institutionByUser2)
-        val fake = InstitutionDto(original.id, userServiceMock.getCurrentUser()!!.id, original.name, original.schoolClassIds)
-        institutionService.save(fake)
+        assertThatThrownBy {
+            val original = institutionMapper.toDto(institutionByUser2)
+            val fake = InstitutionDto(original.id, userServiceMock.getCurrentUser()!!.id, original.name, original.schoolClassIds)
+            institutionService.save(fake)
+        }.isInstanceOf(ValidationException::class.java)
     }
 
-    @Test(expected = ValidationException::class)
+    @Test
     fun testIllegalGet() {
-        institutionService.readById(institutionByUser2.id)
+        assertThatThrownBy {
+            institutionService.readById(institutionByUser2.id)
+        }.isInstanceOf(ValidationException::class.java)
     }
 
-    @Test(expected = ValidationException::class)
+    @Test
     fun testIllegalDelete() {
-        institutionService.delete(institutionByUser2.id)
+        assertThatThrownBy {
+            institutionService.delete(institutionByUser2.id)
+        }.isInstanceOf(ValidationException::class.java)
     }
 
-    @Test(expected = ValidationException::class)
+    @Test
     fun testIllegalReadByParent() {
-        schoolClassService.readAllByInstitution(institutionByUser2.id)
+        assertThatThrownBy {
+            schoolClassService.readAllByInstitution(institutionByUser2.id)
+        }.isInstanceOf(ValidationException::class.java)
     }
-
 }

@@ -223,8 +223,8 @@
           "message": "Ein unbekannter Serverfehler ist aufgetreten, bitte versuchen sie es später erneut"
         },
         "400": {
-          "title": "Datenfehler",
-          "message": "Der Server meldet eine ungültige Eingabe"
+          "title": "Eingabefehler",
+          "message": "Ihre Angaben/Eingaben sind ungültig / enthalten einen Fehler"
         },
         "403": {
           "title": "Verboten",
