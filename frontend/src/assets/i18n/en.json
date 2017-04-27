@@ -227,7 +227,7 @@
         },
         "400": {
           "title": "Input error",
-          "message": "Your input was invalid or contained errors."
+          "message": "Your input was invalid or contained errors"
         },
         "403": {
           "title": "Forbidden",
