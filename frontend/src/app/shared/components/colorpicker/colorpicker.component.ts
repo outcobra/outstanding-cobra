@@ -24,48 +24,48 @@ export const COLORPICKER_CONTROL_VALUE_ACCESSOR: any = {
     providers: [COLORPICKER_CONTROL_VALUE_ACCESSOR]
 })
 export class ColorpickerComponent implements OnInit, ControlValueAccessor {
-    @Input() public opened: boolean = false;
-    @Input() public initColor: string;
-    public colorRows: Color[][];
-    private colors: Color[];
-    private selectedColor: Color;
+    @Input() private _opened: boolean = false;
+    @Input() private _initColor: string;
+    private _colorRows: Color[][];
+    private _colors: Color[];
+    private _selectedColor: Color;
 
-    private outColor: Color = null;
+    private _outColor: Color = null;
 
-    @Output('selectColor') onSelectColor = new EventEmitter<Color>();
+    @Output('selectColor') _onSelectColor = new EventEmitter<Color>();
 
-    private onTouchedCallback: () => void = noop;
-    private onChangeCallback: (_: any) => void = noop;
+    private _onTouchedCallback: () => void = noop;
+    private _onChangeCallback: (_: any) => void = noop;
 
-    constructor(private elementRef: ElementRef,
-                private colorService: ColorService) {
+    constructor(private _elementRef: ElementRef,
+                private _colorService: ColorService) {
     }
 
     ngOnInit() {
-        this.colorService.getColors()
+        this._colorService.getColors()
             .subscribe((res: Color[]) => {
-                this.selectedColor = res.find(color => this.initColor && color.hex.toLowerCase() == this.initColor.toLowerCase());
-                this.colorRows = Util.split(res, 5);
-                this.colors = res;
+                this._selectedColor = res.find(color => this._initColor && color.hex.toLowerCase() == this._initColor.toLowerCase());
+                this._colorRows = Util.split(res, 5);
+                this._colors = res;
             });
     }
 
-    selectColor(color: Color) {
+    public selectColor(color: Color) {
         this.writeValue(color);
     }
 
-    open() {
-        this.opened = true;
+    public open() {
+        this._opened = true;
     }
 
-    close() {
+    public close() {
         if (this.isOpen()) {
-            this.onTouchedCallback();
-            this.opened = false;
+            this._onTouchedCallback();
+            this._opened = false;
         }
     }
 
-    toggle() {
+    public toggle() {
         if (this.isOpen()) {
             this.close();
         } else {
@@ -73,22 +73,22 @@ export class ColorpickerComponent implements OnInit, ControlValueAccessor {
         }
     }
 
-    isOpen() {
-        return this.opened;
+    public isOpen() {
+        return this._opened;
     }
 
-    submit() {
-        if (!this.outColor) this.selectColor(this.getRandomColor());
+    public submit() {
+        if (!this._outColor) this.selectColor(this._getRandomColor());
         this.close();
     }
 
-    cancel() {
-        this.selectColor(this.getRandomColor());
+    public cancel() {
+        this.selectColor(this._getRandomColor());
         this.close();
     }
 
-    private getRandomColor() {
-        return this.colors[Math.floor(Math.random() * this.colors.length)];
+    private _getRandomColor() {
+        return this._colors[Math.floor(Math.random() * this._colors.length)];
     }
 
     /**
@@ -98,30 +98,46 @@ export class ColorpickerComponent implements OnInit, ControlValueAccessor {
      * @param event
      */
     onDocumentClick(event) {
-        if (event.target.className.includes('colorpicker-toggler') || !this.elementRef.nativeElement.contains(event.target)) {
+        if (event.target.className.includes('colorpicker-toggler') || !this._elementRef.nativeElement.contains(event.target)) {
             this.close();
         }
     }
 
-    writeValue(value: Color): void {
-        if (value && this.selectedColor !== value) {
-            this.selectedColor = value;
-            this.onSelectColor.emit(value);
-            this.outColor = value;
-            this.onChangeCallback(value);
+    public writeValue(value: Color): void {
+        if (value && this._selectedColor !== value) {
+            this._selectedColor = value;
+            this._onSelectColor.emit(value);
+            this._outColor = value;
+            this._onChangeCallback(value);
         }
     }
 
-    registerOnChange(fn: any): void {
-        this.onChangeCallback = fn;
+    public registerOnChange(fn: any): void {
+        this._onChangeCallback = fn;
     }
 
-    registerOnTouched(fn: any): void {
-        this.onTouchedCallback = fn;
+    public registerOnTouched(fn: any): void {
+        this._onTouchedCallback = fn;
     }
 
-    getSelectedColorHex(): string {
-        if (!this.selectedColor) return '#00000';
-        return `#${this.selectedColor.hex}`;
+    public getSelectedColorHex(): string {
+        if (!this._selectedColor) return '#00000';
+        return `#${this._selectedColor.hex}`;
+    }
+
+    get opened(): boolean {
+        return this._opened;
+    }
+
+    set opened(value: boolean) {
+        this._opened = value;
+    }
+
+    get colorRows(): Color[][] {
+        return this._colorRows;
+    }
+
+    get selectedColor(): Color {
+        return this._selectedColor;
     }
 }

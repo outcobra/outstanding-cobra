@@ -56,7 +56,7 @@ export class DaypickerComponent implements OnInit {
 
     selectDay(date: Date) {
         if (!this.isDisabled(date) && !this.isActive(date)) {
-            this.datePicker.selectDate(moment(date).toDate());
+            this.datePicker._selectDate(moment(date).toDate());
         }
     }
 

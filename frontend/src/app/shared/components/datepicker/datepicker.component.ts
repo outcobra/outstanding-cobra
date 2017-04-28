@@ -27,25 +27,25 @@ import {Util} from '../../util/util';
     }
 })
 export class DatepickerComponent implements OnInit, AfterContentInit, ControlValueAccessor {
-    @Input() public opened: boolean = false;
-    @Input() public currentDate: Date;
-    @Input() public initDate: Date;
-    @Input() public minDate: Date;
-    @Input() public maxDate: Date;
-    @Input() public pickerMode: string;
-    @Input() public placeholder: string;
-    @Input() public value: Date;
+    @Input() private _opened: boolean = false;
+    @Input() private _currentDate: Date;
+    @Input() private _initDate: Date;
+    @Input() private _minDate: Date;
+    @Input() private _maxDate: Date;
+    @Input() private _pickerMode: string;
+    @Input() private _placeholder: string;
+    @Input() private _value: Date;
 
     // emitted Date
-    private outDate: Date;
+    private _outDate: Date;
     // date for inputField
-    public formattedDate: string;
+    private _formattedDate: string;
 
-    @Output('selectDate') onSelectDate = new EventEmitter<Date>();
+    @Output('selectDate') private _onSelectDate = new EventEmitter<Date>();
 
-    private onTouchedCallback: () => void = () => {
+    private _onTouchedCallback: () => void = () => {
     };
-    private onChangeCallback: (_: any) => void = () => {
+    private _onChangeCallback: (_: any) => void = () => {
     };
 
     constructor(private elementRef: ElementRef, @Self() @Optional() public control: NgControl) {
@@ -57,40 +57,40 @@ export class DatepickerComponent implements OnInit, AfterContentInit, ControlVal
     ngAfterContentInit() {
         if (!this.control) return;
         this.control.control.setValidators(
-            Validators.compose([OCValidators.isBetweenDay(this.minDate, this.maxDate), this.control.control.validator])
+            Validators.compose([OCValidators.isBetweenDay(this._minDate, this._maxDate), this.control.control.validator])
         );
         /*
          This is some weird shit but without the Promise it does not work and an error is thrown
          */
         if (this.control.value) {
             Promise.resolve(null).then(() => {
-                this.selectDate(this.control.value);
+                this._selectDate(this.control.value);
                 Util.revalidateControl(this.control.control);
             });
         }
     }
 
     ngOnInit() {
-        this.minDate = (this.minDate || DateUtil.MIN_DATE);
-        this.maxDate = (this.maxDate || DateUtil.MAX_DATE);
-        if (this.minDate > this.maxDate) {
+        this._minDate = (this._minDate || DateUtil.MIN_DATE);
+        this._maxDate = (this._maxDate || DateUtil.MAX_DATE);
+        if (this._minDate > this._maxDate) {
             throw new DatePickerMaxDateSmallerThanMinDateError();
         }
-        this.currentDate = this.initDate = this.checkInitDate();
+        this._currentDate = this._initDate = this._checkInitDate();
     }
 
-    open() {
-        this.opened = true;
+    public open() {
+        this._opened = true;
     }
 
-    close() {
+    public close() {
         if (this.isOpen()) {
-            this.onTouchedCallback();
-            this.opened = false;
+            this._onTouchedCallback();
+            this._opened = false;
         }
     }
 
-    toggle() {
+    public toggle() {
         if (this.isOpen()) {
             this.close();
         } else {
@@ -98,17 +98,17 @@ export class DatepickerComponent implements OnInit, AfterContentInit, ControlVal
         }
     }
 
-    isOpen() {
-        return this.opened;
+    public isOpen() {
+        return this._opened;
     }
 
-    submit() {
-        if (this.currentDate === this.initDate) this.selectDate(this.initDate);
+    public submit() {
+        if (this._currentDate === this._initDate) this._selectDate(this._initDate);
         this.close();
     }
 
-    cancel() {
-        this.selectDate(this.initDate);
+    public cancel() {
+        this._selectDate(this._initDate);
         this.close();
     }
 
@@ -124,57 +124,88 @@ export class DatepickerComponent implements OnInit, AfterContentInit, ControlVal
         }
     }
 
-    inputDateChanged() { // todo make a better parser for the input field (low priority)
-        let date = moment(this.formattedDate, 'DD.MM.YYYY').valueOf();
+    public inputDateChanged() { // todo make a better parser for the input field (low priority)
+        let date = moment(this._formattedDate, 'DD.MM.YYYY').valueOf();
         if (!isNaN(date)) {
-            this.selectDate(new Date(date));
+            this._selectDate(new Date(date));
         }
     }
 
-    formatDate(date: Date) {
+    private _formatDate(date: Date) {
         return moment(date).format('DD.MM.YYYY');
     }
 
-    checkInitDate(): Date {
+    private _checkInitDate(): Date {
         let date: Date;
-        if (this.initDate instanceof Date) {
-            date = this.initDate;
-            this.formattedDate = this.formatDate(date);
+        if (this._initDate instanceof Date) {
+            date = this._initDate;
+            this._formattedDate = this._formatDate(date);
         } else {
             date = new Date();
         }
-        if (DateUtil.isBetweenDay(date, this.minDate, this.maxDate)) {
+        if (DateUtil.isBetweenDay(date, this._minDate, this._maxDate)) {
             return date;
         }
-        return (date < this.minDate) ?
-            (DateUtil.isMinDate(this.minDate) ? new Date() : this.minDate) :
-            (DateUtil.isMaxDate(this.maxDate) ? new Date() : this.maxDate);
+        return (date < this._minDate) ?
+            (DateUtil.isMinDate(this._minDate) ? new Date() : this._minDate) :
+            (DateUtil.isMaxDate(this._maxDate) ? new Date() : this._maxDate);
     }
 
-    selectDate(date: Date) {
-        this.currentDate = date;
+    private _selectDate(date: Date) {
+        this._currentDate = date;
         this.writeValue(date);
-        this.onSelectDate.emit(date);
-        this.formattedDate = this.formatDate(date);
+        this._onSelectDate.emit(date);
+        this._formattedDate = this._formatDate(date);
     }
 
     selectYear(date: Date) {
         // TODO
     }
 
-    writeValue(value: any): void {
-        if (value && this.outDate !== value) {
-            this.outDate = value;
-            this.onChangeCallback(value);
+    public writeValue(value: any): void {
+        if (value && this._outDate !== value) {
+            this._outDate = value;
+            this._onChangeCallback(value);
         }
     }
 
-    registerOnChange(fn: any): void {
-        this.onChangeCallback = fn;
+    public registerOnChange(fn: any): void {
+        this._onChangeCallback = fn;
     }
 
-    registerOnTouched(fn: any): void {
-        this.onTouchedCallback = fn;
+    public registerOnTouched(fn: any): void {
+        this._onTouchedCallback = fn;
     }
 
+    get opened(): boolean {
+        return this._opened;
+    }
+
+    get currentDate(): Date {
+        return this._currentDate;
+    }
+
+    get minDate(): Date {
+        return this._minDate;
+    }
+
+    get maxDate(): Date {
+        return this._maxDate;
+    }
+
+    get pickerMode(): string {
+        return this._pickerMode;
+    }
+
+    get placeholder(): string {
+        return this._placeholder;
+    }
+
+    get value(): Date {
+        return this._value;
+    }
+
+    get formattedDate(): string {
+        return this._formattedDate;
+    }
 }
