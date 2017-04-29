@@ -1,7 +1,7 @@
 <div class="dialog-header">
     <h1 md-dialog-title>{{'i18n.modules.task.add' | translate}}</h1>
 </div>
-<form [formGroup]="taskCreateUpdateForm" (submit)="onSubmit()">
+<form [formGroup]="taskCreateUpdateForm" (submit)="submit()">
     <div class="dialog-body" md-dialog-content>
         <div class="form-group">
             <md-input-container>
@@ -76,7 +76,7 @@
     </div>
     <div class="dialog-footer" md-dialog-actions>
         <div class="footer-right">
-            <button md-button (click)="onCancel()" type="button">{{'i18n.common.action.cancel' | translate}}</button>
+            <button md-button (click)="cancel()" type="button">{{'i18n.common.action.cancel' | translate}}</button>
             <button md-raised-button color="primary" type="submit">{{'i18n.common.action.save' | translate}}</button>
         </div>
     </div>

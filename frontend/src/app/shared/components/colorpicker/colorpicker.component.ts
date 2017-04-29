@@ -24,8 +24,8 @@ export const COLORPICKER_CONTROL_VALUE_ACCESSOR: any = {
     providers: [COLORPICKER_CONTROL_VALUE_ACCESSOR]
 })
 export class ColorpickerComponent implements OnInit, ControlValueAccessor {
-    @Input() private _opened: boolean = false;
-    @Input() private _initColor: string;
+    @Input('opened') private _opened: boolean = false;
+    @Input('initColor') private _initColor: string;
     private _colorRows: Color[][];
     private _colors: Color[];
     private _selectedColor: Color;

@@ -6,7 +6,7 @@ import {animate, Component, Input, OnInit, state, style, transition, trigger, Vi
     styleUrls: ['./oc-nav.component.scss'],
     encapsulation: ViewEncapsulation.None,
     host: {
-        '[class.oc-nav-collapsed]': 'isCollapsed()'
+        '[class.oc-nav-collapsed]': 'collapsed'
     },
     animations: [
         trigger('collapsed', [
@@ -24,21 +24,21 @@ import {animate, Component, Input, OnInit, state, style, transition, trigger, Vi
 export class OCNavComponent implements OnInit {
     @Input() public collapsible: boolean = false;
 
-    public collapsed: boolean;
+    private _collapsed: boolean;
 
     constructor() {
     }
 
     ngOnInit() {
-        this.collapsed = this.collapsible;
+        this._collapsed = this.collapsible;
     }
 
     public toggleNavCollapse() {
-        this.collapsed = !this.collapsed;
+        this._collapsed = !this._collapsed;
     }
 
-    public isCollapsed(): boolean {
-        return this.collapsed;
-    }
 
+    get collapsed(): boolean {
+        return this._collapsed;
+    }
 }

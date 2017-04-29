@@ -1,8 +1,8 @@
 import {HttpInterceptor} from '../../http/HttpInterceptor';
 
 /**
- * AppService which contains just an http-Client and the baseUri for the REST-Endpoints
+ * AppService which contains just an _http-Client and the _baseUri for the REST-Endpoints
  */
 export abstract class AppService {
-    constructor(protected http: HttpInterceptor, protected baseUri: string) {}
+    constructor(protected _http: HttpInterceptor, protected _baseUri: string) {}
 }

@@ -13,4 +13,9 @@ export class InfoDialogComponent {
     get info(): Info {
         return this._info;
     }
+
+
+    set info(value: Info) {
+        this._info = value;
+    }
 }

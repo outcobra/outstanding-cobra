@@ -7,15 +7,15 @@ import {isNotNull} from '../../util/helper';
 
 @Injectable()
 export class ResponsiveHelperService {
-    private mobile: boolean;
+    private _mobile: boolean;
 
     constructor() {
-        this.mobile = this.checkMobile();
+        this._mobile = this._checkMobile();
     }
 
     public listenForResize(): Observable<any> {
         return Observable.fromEvent(window, 'resize')
-            .do(() => this.mobile = this.checkMobile());
+            .do(() => this._mobile = this._checkMobile());
     }
 
     public listenForOrientationChange(): Observable<Orientation> {
@@ -39,15 +39,15 @@ export class ResponsiveHelperService {
         return config;
     }
 
-    isTouchDevice(): boolean {
+    public isTouchDevice(): boolean {
         return 'ontouchstart' in window;
     }
 
-    private checkMobile(): boolean {
+    private _checkMobile(): boolean {
         return window.innerWidth < MATERIALIZE_MIN_WIDTH_LARGE;
     }
 
     public isMobile(): boolean {
-        return this.mobile;
+        return this._mobile;
     }
 }

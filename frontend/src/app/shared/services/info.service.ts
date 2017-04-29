@@ -10,7 +10,7 @@ export class InfoService extends AppService {
         super(http, '/info');
     }
 
-    getInfo(): Observable<Info> {
-        return this.http.get<Info>(this.baseUri, 'outcobra_public');
+    public getInfo(): Observable<Info> {
+        return this._http.get<Info>(this._baseUri, 'outcobra_public');
     }
 }

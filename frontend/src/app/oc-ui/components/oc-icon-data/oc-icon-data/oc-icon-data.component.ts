@@ -7,8 +7,8 @@ import {Component, HostBinding, Input, ViewEncapsulation} from '@angular/core';
     encapsulation: ViewEncapsulation.None
 })
 export class OCIconDataComponent {
-    @Input() iconName: string;
-    @Input() titleKey: string;
+    @Input() public iconName: string;
+    @Input() publictitleKey: string;
     @HostBinding('class.show-divider')
-    @Input() showDivider: boolean = true;
+    @Input() public showDivider: boolean = true;
 }

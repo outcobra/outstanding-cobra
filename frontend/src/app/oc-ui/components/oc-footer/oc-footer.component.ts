@@ -12,21 +12,21 @@ import {InfoService} from '../../../shared/services/info.service';
     styleUrls: ['./oc-footer.component.scss']
 })
 export class OCFooterComponent implements OnInit {
-    public appInfo: Info;
+    private _appInfo: Info;
 
-    constructor(private infoService: InfoService,
-                private dialogService: MdDialog,
-                private responsiveHelper: ResponsiveHelperService) {
+    constructor(private _infoService: InfoService,
+                private _dialogService: MdDialog,
+                private _responsiveHelper: ResponsiveHelperService) {
     }
 
     ngOnInit() {
-        this.infoService.getInfo()
-            .subscribe(info => this.appInfo = info)
+        this._infoService.getInfo()
+            .subscribe(info => this._appInfo = info)
     }
 
     openInfoDialog() {
-        let dialog = this.dialogService.open(InfoDialogComponent, this.responsiveHelper.getMobileOrGivenDialogConfig(SMALL_DIALOG));
-        dialog.componentInstance.info = this.appInfo;
+        let dialog = this._dialogService.open(InfoDialogComponent, this._responsiveHelper.getMobileOrGivenDialogConfig(SMALL_DIALOG));
+        dialog.componentInstance.info = this._appInfo;
     }
 
 }

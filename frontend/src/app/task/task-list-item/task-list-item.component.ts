@@ -9,30 +9,35 @@ import {isNotNull} from '../../shared/util/helper';
     styleUrls: ['./task-list-item.component.scss']
 })
 export class TaskListItemComponent implements OnInit {
-    @Input() task: Task;
+    @Input('task') private _task: Task;
     @Output('markDone') onMarkDone: EventEmitter<Task> = new EventEmitter<Task>();
 
-    constructor(private router: Router, private activatedRoute: ActivatedRoute) {
+    constructor(private _router: Router,
+                private _activatedRoute: ActivatedRoute) {
     }
 
     ngOnInit() {
     }
 
-    isFinished() {
-        return this.task.progress == 100;
+    public isFinished() {
+        return this._task.progress == 100;
     }
 
-    markAsDone(event: Event) {
+    public markAsDone(event: Event) {
         event.stopPropagation();
-        this.onMarkDone.emit(this.task);
+        this.onMarkDone.emit(this._task);
     }
 
-    hasDesc(): boolean {
-        return isNotNull(this.task.description);
+    public hasDescription(): boolean {
+        return isNotNull(this._task.description);
     }
 
-    goToDetail() {
-        this.router.navigate([this.task.id], {relativeTo: this.activatedRoute});
+    public goToDetail() {
+        this._router.navigate([this._task.id], {relativeTo: this._activatedRoute});
     }
 
+
+    get task(): Task {
+        return this._task;
+    }
 }

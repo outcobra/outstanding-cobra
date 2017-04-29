@@ -10,15 +10,15 @@ import {
     state,
     animate,
     transition,
-    trigger
-} from "@angular/core";
+    trigger, Output
+} from '@angular/core';
 
 @Component({
     selector: 'oc-collapsible-header',
     template: '<ng-content></ng-content>',
 })
 export class OCCollapsibleHeaderComponent {
-    onClick: EventEmitter<any> = new EventEmitter();
+    @Output() onClick: EventEmitter<any> = new EventEmitter();
 
     @HostListener('click') click() {
         this.onClick.emit();

@@ -6,23 +6,23 @@ import {Observable} from 'rxjs';
  * Basic implementation of a CrudAppService which connects to the default api
  */
 export class AppCrudService<T> extends AppService implements CrudService<T> {
-    create(arg: T): Observable<T> {
-        return this.http.put<T>(this.baseUri, arg);
+    public create(arg: T): Observable<T> {
+        return this._http.put<T>(this._baseUri, arg);
     }
 
-    readById(id: number): Observable<T> {
-        return this.http.get<T>(`${this.baseUri}/${id}`);
+    public readById(id: number): Observable<T> {
+        return this._http.get<T>(`${this._baseUri}/${id}`);
     }
 
-    readAll(): Observable<T[]> {
-        return this.http.get<T[]>(this.baseUri);
+    public readAll(): Observable<T[]> {
+        return this._http.get<T[]>(this._baseUri);
     }
 
-    deleteById(id: number): Observable<any> {
-        return this.http.delete<any>(`${this.baseUri}/${id}`);
+    public deleteById(id: number): Observable<any> {
+        return this._http.delete<any>(`${this._baseUri}/${id}`);
     }
 
-    update(arg: T): Observable<T> {
-        return this.http.post<T>(this.baseUri, arg);
+    public update(arg: T): Observable<T> {
+        return this._http.post<T>(this._baseUri, arg);
     }
 }

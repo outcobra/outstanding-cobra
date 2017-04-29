@@ -9,16 +9,16 @@ import {Notification} from 'angular2-notifications/src/notification.type';
 @Injectable()
 export class NotificationWrapperService extends NotificationsService {
 
-    private defaultOptions = {
+    private _defaultOptions = {
         timeOut: 7500,
         showProgressBar: true,
         lastOnBottom: true,
         clickToClose: true
     };
 
-    private icns: Icons = appIcons; // can't name it icons because of super class
+    private _icns: Icons = appIcons; // can't name it icons because of super class
 
-    constructor(private translateService: TranslateService) {
+    constructor(private _translateService: TranslateService) {
         super();
     }
 
@@ -30,8 +30,8 @@ export class NotificationWrapperService extends NotificationsService {
      * @param optionsOverride
      * @returns {Notification}
      */
-    success(title: string, content: string, optionsOverride?: any): Notification {
-        return this.create(title, content, 'success', this.icns.success, optionsOverride);
+    public success(title: string, content: string, optionsOverride?: any): Notification {
+        return this.create(title, content, 'success', this._icns.success, optionsOverride);
     }
 
     /**
@@ -42,8 +42,8 @@ export class NotificationWrapperService extends NotificationsService {
      * @param optionsOverride
      * @returns {Notification}
      */
-    error(title: string, content: string, optionsOverride?: any): Notification {
-        return this.create(title, content, 'error', this.icns.error, optionsOverride);
+    public error(title: string, content: string, optionsOverride?: any): Notification {
+        return this.create(title, content, 'error', this._icns.error, optionsOverride);
     }
 
     /**
@@ -54,8 +54,8 @@ export class NotificationWrapperService extends NotificationsService {
      * @param optionsOverride
      * @returns {Notification}
      */
-    alert(title: string, content: string, optionsOverride?: any): Notification {
-        return this.create(title, content, 'alert', this.icns.alert, optionsOverride);
+    public alert(title: string, content: string, optionsOverride?: any): Notification {
+        return this.create(title, content, 'alert', this._icns.alert, optionsOverride);
     }
 
     /**
@@ -66,8 +66,8 @@ export class NotificationWrapperService extends NotificationsService {
      * @param optionsOverride
      * @returns {Notification}
      */
-    info(title: string, content: string, optionsOverride?: any): Notification {
-        return this.create(title, content, 'info', this.icns.info, optionsOverride);
+    public info(title: string, content: string, optionsOverride?: any): Notification {
+        return this.create(title, content, 'info', this._icns.info, optionsOverride);
     }
 
     /**
@@ -82,23 +82,23 @@ export class NotificationWrapperService extends NotificationsService {
      * @param optionsOverride special options for the notification (overrides default)
      * @returns {Notification}
      */
-    create(title: string, content: string, type: string, icon: string, optionsOverride?: any): Notification {
+    public create(title: string, content: string, type: string, icon: string, optionsOverride?: any): Notification {
         return super.set({
-            title: this.translateService.instant(title),
-            content: this.translateService.instant(content),
+            title: this._translateService.instant(title),
+            content: this._translateService.instant(content),
             type: type,
             icon: icon,
-            override: this.mergeOptions(optionsOverride)
+            override: this._mergeOptions(optionsOverride)
         }, true);
     }
 
     /**
-     * overrides the defaultOptions in this class with the provided options
+     * overrides the _defaultOptions in this class with the provided options
      *
      * @param optionsOverride
      * @returns {any}
      */
-    mergeOptions(optionsOverride: any) {
-        return Object.assign(this.defaultOptions, optionsOverride);
+    private _mergeOptions(optionsOverride: any) {
+        return Object.assign(this._defaultOptions, optionsOverride);
     }
 }

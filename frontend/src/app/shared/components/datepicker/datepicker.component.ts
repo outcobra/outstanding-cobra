@@ -27,14 +27,14 @@ import {Util} from '../../util/util';
     }
 })
 export class DatepickerComponent implements OnInit, AfterContentInit, ControlValueAccessor {
-    @Input() private _opened: boolean = false;
-    @Input() private _currentDate: Date;
-    @Input() private _initDate: Date;
-    @Input() private _minDate: Date;
-    @Input() private _maxDate: Date;
-    @Input() private _pickerMode: string;
-    @Input() private _placeholder: string;
-    @Input() private _value: Date;
+    @Input('opened') private _opened: boolean = false;
+    @Input('initDate') private _initDate: Date;
+    @Input('minDate') private _minDate: Date;
+    @Input('maxDate') private _maxDate: Date;
+    @Input('pickerMode') private _pickerMode: string;
+    @Input('placeholder') private _placeholder: string;
+
+    private _currentDate: Date;
 
     // emitted Date
     private _outDate: Date;
@@ -48,7 +48,7 @@ export class DatepickerComponent implements OnInit, AfterContentInit, ControlVal
     private _onChangeCallback: (_: any) => void = () => {
     };
 
-    constructor(private elementRef: ElementRef, @Self() @Optional() public control: NgControl) {
+    constructor(private _elementRef: ElementRef, @Self() @Optional() public control: NgControl) {
         if (this.control) {
             this.control.valueAccessor = this;
         }
@@ -64,7 +64,7 @@ export class DatepickerComponent implements OnInit, AfterContentInit, ControlVal
          */
         if (this.control.value) {
             Promise.resolve(null).then(() => {
-                this._selectDate(this.control.value);
+                this.selectDate(this.control.value);
                 Util.revalidateControl(this.control.control);
             });
         }
@@ -103,12 +103,12 @@ export class DatepickerComponent implements OnInit, AfterContentInit, ControlVal
     }
 
     public submit() {
-        if (this._currentDate === this._initDate) this._selectDate(this._initDate);
+        if (this._currentDate === this._initDate) this.selectDate(this._initDate);
         this.close();
     }
 
     public cancel() {
-        this._selectDate(this._initDate);
+        this.selectDate(this._initDate);
         this.close();
     }
 
@@ -119,7 +119,7 @@ export class DatepickerComponent implements OnInit, AfterContentInit, ControlVal
      * @param event
      */
     onDocumentClick(event) {
-        if (!this.elementRef.nativeElement.contains(event.target)) {
+        if (!this._elementRef.nativeElement.contains(event.target)) {
             this.close();
         }
     }
@@ -127,7 +127,7 @@ export class DatepickerComponent implements OnInit, AfterContentInit, ControlVal
     public inputDateChanged() { // todo make a better parser for the input field (low priority)
         let date = moment(this._formattedDate, 'DD.MM.YYYY').valueOf();
         if (!isNaN(date)) {
-            this._selectDate(new Date(date));
+            this.selectDate(new Date(date));
         }
     }
 
@@ -151,7 +151,7 @@ export class DatepickerComponent implements OnInit, AfterContentInit, ControlVal
             (DateUtil.isMaxDate(this._maxDate) ? new Date() : this._maxDate);
     }
 
-    private _selectDate(date: Date) {
+    public selectDate(date: Date) {
         this._currentDate = date;
         this.writeValue(date);
         this._onSelectDate.emit(date);
@@ -199,10 +199,6 @@ export class DatepickerComponent implements OnInit, AfterContentInit, ControlVal
 
     get placeholder(): string {
         return this._placeholder;
-    }
-
-    get value(): Date {
-        return this._value;
     }
 
     get formattedDate(): string {

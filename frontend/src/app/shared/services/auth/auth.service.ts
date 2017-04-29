@@ -13,23 +13,23 @@ declare let Auth0Lock: any;
 
 @Injectable()
 export class AuthService {
-    private auth0Config: any;
-    private readonly defaultRedirectRoute = '/dashboard';
-    private redirectRoute: string;
-    lock;
+    private _auth0Config: any;
+    private readonly _defaultRedirectRoute = '/dashboard';
+    private _redirectRoute: string;
+    private _lock;
 
-    constructor(private config: Config,
-                private router: Router,
-                private http: HttpInterceptor,
-                private notificationService: NotificationsService,
-                private translateService: TranslateService) {
+    constructor(private _config: Config,
+                private _router: Router,
+                private _http: HttpInterceptor,
+                private _notificationService: NotificationsService,
+                private _translateService: TranslateService) {
 
-        this.auth0Config = this.config.get('auth0');
+        this._auth0Config = this._config.get('auth0');
 
-        // auth0 lock configuration
-        this.lock = new Auth0Lock(this.auth0Config.clientID, this.auth0Config.domain, {
+        // auth0 _lock configuration
+        this._lock = new Auth0Lock(this._auth0Config.clientID, this._auth0Config.domain, {
             auth: {
-                redirectUrl: this.auth0Config.callbackURL,
+                redirectUrl: this._auth0Config.callbackURL,
                 responseType: 'token'
             },
             rememberLastLogin: false,
@@ -52,41 +52,41 @@ export class AuthService {
          * handles the authResult when the user logs in correctly
          * sets the needed localStorage items
          *
-         * redirects to the provided redirectRoute
+         * redirects to the provided _redirectRoute
          */
-        this.lock.on('authenticated', (authResult) => {
-            localStorage.setItem(this.config.get('locStorage.tokenLocation'), authResult.idToken);
-            this.lock.getProfile(authResult.idToken, (err, profile) => {
-                localStorage.setItem(this.config.get('locStorage.profileLocation'), JSON.stringify(profile));
+        this._lock.on('authenticated', (authResult) => {
+            localStorage.setItem(this._config.get('locStorage.tokenLocation'), authResult.idToken);
+            this._lock.getProfile(authResult.idToken, (err, profile) => {
+                localStorage.setItem(this._config.get('locStorage.profileLocation'), JSON.stringify(profile));
             });
-            this.http.get<User>('/user/login', 'outcobra')
+            this._http.get<User>('/user/login', 'outcobra')
                 .catch(() => {
                     this.logout();
-                    this.notificationService.error('i18n.login.error.title', 'i18n.login.error.message');
+                    this._notificationService.error('i18n.login.error.title', 'i18n.login.error.message');
                     return Observable.empty();
                 })
                 .subscribe((user: User) =>
-                    this.notificationService.success(
-                        this.translateService.instant('i18n.login.success.hello') + user.username, 'i18n.login.success.message'
+                    this._notificationService.success(
+                        this._translateService.instant('i18n.login.success.hello') + user.username, 'i18n.login.success.message'
                     ));
             let redirectRoute = Util.getUrlParam('state');
             if (redirectRoute) {
-                this.router.navigate(redirectRoute);
+                this._router.navigate(redirectRoute);
             }
         });
     }
 
     /**
-     * shows the auth0 login lock
+     * shows the auth0 login _lock
      * but only when the user isn't loggedin already
      * sets the redirectRoute for redirecting after the user has loggedin
      *
      * @param redirectRoute
      */
-    login(redirectRoute: string = this.defaultRedirectRoute) {
+    public login(redirectRoute: string = this._defaultRedirectRoute) {
         if (!this.isLoggedIn()) {
-            this.redirectRoute = redirectRoute;
-            this.lock.show({ //TODO language
+            this._redirectRoute = redirectRoute;
+            this._lock.show({ //TODO language
                 auth: {
                     params: {
                         state: redirectRoute
@@ -102,10 +102,10 @@ export class AuthService {
      *
      * redirects to the home
      */
-    logout() {
-        localStorage.removeItem(this.config.get('locStorage.tokenLocation'));
-        localStorage.removeItem(this.config.get('locStorage.profileLocation'));
-        this.router.navigate(['']);
+    public logout() {
+        localStorage.removeItem(this._config.get('locStorage.tokenLocation'));
+        localStorage.removeItem(this._config.get('locStorage.profileLocation'));
+        this._router.navigate(['']);
     }
 
     /**
@@ -113,7 +113,7 @@ export class AuthService {
      *
      * @returns {boolean}
      */
-    isLoggedIn(): boolean {
+    public isLoggedIn(): boolean {
         return tokenNotExpired();
     }
 

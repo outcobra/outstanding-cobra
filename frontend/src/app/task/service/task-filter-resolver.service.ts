@@ -6,11 +6,11 @@ import {TaskService} from './task.service';
 
 @Injectable()
 export class TaskFilterResolver implements Resolve<TaskFilter> {
-    constructor(private taskService: TaskService) {
+    constructor(private _taskService: TaskService) {
     }
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<TaskFilter>|Promise<TaskFilter>|TaskFilter {
-        return this.taskService.getTaskFilter();
+    public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<TaskFilter>|Promise<TaskFilter>|TaskFilter {
+        return this._taskService.getTaskFilter();
     }
 
 }
