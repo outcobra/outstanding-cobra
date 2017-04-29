@@ -1,25 +1,28 @@
-<div *ngIf="isMobile()" class="row mobile-manage-nav z-depth-1-half">
-    <div class="col m2 s2">
-        <button md-mini-fab color="accent" [disabled]="!isValidDirection(-1)" (click)="lastView()">
-            <md-icon>navigate_before</md-icon>
-        </button>
+<oc-title-bar>
+    <span>{{'i18n.modules.manage.linkTitle' | translate}}</span>
+    <div *ngIf="isMobile()" class="row mobile-manage-nav oc-title-bar-content">
+        <div class="col m2 s2">
+            <button md-button [disabled]="!isValidDirection(-1)" (click)="lastView()">
+                <md-icon>navigate_before</md-icon>
+            </button>
+        </div>
+        <div class="col m8 s8 mobile-title">
+            <h6>{{ mobileTitle | translate }}</h6>
+        </div>
+        <div class="col m2 s2">
+            <button md-button [disabled]="!isValidDirection(1)" (click)="nextView()" class="right">
+                <md-icon>navigate_next</md-icon>
+            </button>
+        </div>
     </div>
-    <div class="col m8 s8 mobile-title">
-        <h6>{{ mobileTitle | translate }}</h6>
-    </div>
-    <div class="col m2 s2">
-        <button md-mini-fab color="accent" [disabled]="!isValidDirection(1)" (click)="nextView()" class="right">
-            <md-icon>navigate_next</md-icon>
-        </button>
-    </div>
-</div>
+</oc-title-bar>
 <div class="row manage-rows" [class.mobile]="isMobile()" [style.margin-left.px]="isMobile() ? marginLeft : 0">
     <!-- FIRST COLUMN START -->
     <div [ngClass]="columnClasses" [class.border-right]="!isMobile()">
         <ul class="collapsible">
-            <li *ngFor="let institution of institutionClasses">
-                <collapsible>
-                    <collapsible-header>
+            <li *ngFor="let institution of currentManageData[manageViewRef.INSTITUTION_CLASS]">
+                <oc-collapsible>
+                    <oc-collapsible-header>
                         <div class="entity">
                             <div class="entity-desc">
                                 <md-icon class="entity-icon">business</md-icon>
@@ -30,8 +33,8 @@
                                 (edit)="editInstitution(institution)"
                             ></entity-menu>
                         </div>
-                    </collapsible-header>
-                    <collapsible-body>
+                    </oc-collapsible-header>
+                    <oc-collapsible-body>
                         <ul>
                             <li *ngFor="let schoolClass of institution.schoolClasses">
                                 <div class="entity child-entity" (click)="selectSchoolClass(schoolClass.id)"
@@ -56,8 +59,8 @@
                                 </div>
                             </li>
                         </ul>
-                    </collapsible-body>
-                </collapsible>
+                    </oc-collapsible-body>
+                </oc-collapsible>
             </li>
             <li>
                 <div class="action-button">
@@ -73,10 +76,10 @@
 
     <!-- MIDDLE COLUMN START -->
     <div [ngClass]="columnClasses">
-        <ul class="collapsible" *ngIf="yearSemesterModel != null">
-            <li *ngFor="let schoolYear of yearSemesterModel">
-                <collapsible>
-                    <collapsible-header>
+        <ul class="collapsible" *ngIf="currentManageData[manageViewRef.YEAR_SEMESTER] != null">
+            <li *ngFor="let schoolYear of currentManageData[manageViewRef.YEAR_SEMESTER]">
+                <oc-collapsible>
+                    <oc-collapsible-header>
                         <div class="entity">
                             <div class="entity-desc">
                                 <md-icon class="entity-icon">date_range</md-icon>
@@ -90,8 +93,8 @@
                                 (edit)="editSchoolYear(schoolYear)"
                             ></entity-menu>
                         </div>
-                    </collapsible-header>
-                    <collapsible-body>
+                    </oc-collapsible-header>
+                    <oc-collapsible-body>
                         <ul>
                             <li *ngFor="let semester of schoolYear.semesters">
                                 <div class="entity child-entity" (click)="selectSemester(semester.id)"
@@ -119,8 +122,8 @@
                                 </div>
                             </li>
                         </ul>
-                    </collapsible-body>
-                </collapsible>
+                    </oc-collapsible-body>
+                </oc-collapsible>
             </li>
             <li>
                 <div class="action-button">
@@ -136,10 +139,10 @@
 
     <!-- LAST COLUMN START -->
     <div [ngClass]="columnClasses" [class.border-left]="!isMobile()">
-        <ul class="collapsible" *ngIf="subjectModel != null">
-            <li *ngFor="let subject of subjectModel">
-                <collapsible>
-                    <collapsible-header>
+        <ul class="collapsible" *ngIf="currentManageData[manageViewRef.SUBJECT] != null">
+            <li *ngFor="let subject of currentManageData[manageViewRef.SUBJECT]">
+                <oc-collapsible>
+                    <oc-collapsible-header>
                         <div class="entity">
                             <div class="entity-desc">
                                     <span class="subject-icon"
@@ -151,8 +154,8 @@
                                 (edit)="editSubject(subject)"
                             ></entity-menu>
                         </div>
-                    </collapsible-header>
-                </collapsible>
+                    </oc-collapsible-header>
+                </oc-collapsible>
             </li>
             <li>
                 <div class="action-button">

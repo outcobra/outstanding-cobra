@@ -1,48 +1,13 @@
-<sidenav-layout>
-    <sidenav #sidenav>
-        <nav>
-            <ul>
-                <li class="nav-row">
-                    <a [routerLink]="'/dashboard'" md-ripple mdRippleTrigger>
-                        <md-icon class="link-icon">dashboard</md-icon>
-                        <span>{{ 'i18n.modules.dashboard.linkTitle' | translate }}</span>
-                    </a>
-                </li>
-                <li class="nav-row">
-                    <a [routerLink]="'/task'" md-ripple mdRippleTrigger>
-                        <md-icon class="link-icon">event</md-icon>
-                        <span>{{ 'i18n.modules.timetable.linkTitle' | translate }}</span>
-                    </a>
-                </li>
-                <li class="nav-row">
-                    <a [routerLink]="'/task'" md-ripple mdRippleTrigger>
-                        <md-icon class="link-icon">filter_6</md-icon>
-                        <span>{{ 'i18n.modules.exam.linkTitle' | translate }}</span>
-                    </a>
-                </li>
-                <li class="nav-row">
-                    <a [routerLink]="'/task'" md-ripple mdRippleTrigger>
-                        <md-icon class="link-icon">poll</md-icon>
-                        <span>{{ 'i18n.modules.mark.linkTitle' | translate }}</span>
-                    </a>
-                </li>
-                <li class="nav-row">
-                    <a [routerLink]="'/task'" md-ripple mdRippleTrigger>
-                        <md-icon class="link-icon">assignment_turned_in</md-icon>
-                        <span>{{ 'i18n.modules.task.linkTitle' | translate }}</span>
-                    </a>
-                </li>
-                <li class="nav-row">
-                    <a [routerLink]="'/manage'" md-ripple mdRippleTrigger>
-                        <md-icon class="link-icon">widgets</md-icon>
-                        <span>{{ 'i18n.modules.manage.linkTitle' | translate }}</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </sidenav>
-    <md-toolbar color="primary">
-        <md-icon class="toolbar-icon" (click)="sidenav.open()">menu</md-icon>
+<md-sidenav-container>
+    <md-sidenav class="oc-mobile-sidenav" *ngIf="mobile">
+        <md-toolbar>
+            <a [routerLink]="'/'" class="oc-mobile-sidenav-title">{{title}}</a>
+        </md-toolbar>
+        <oc-divider></oc-divider>
+        <oc-nav></oc-nav>
+    </md-sidenav>
+    <md-toolbar color="primary" class="oc-primary-toolbar">
+        <md-icon class="toolbar-icon" (click)="openSidenav()" *ngIf="mobile">menu</md-icon>
         <a routerLink="/">{{title}}</a>
         <span class="toolbar-fill-space"></span>
         {{'i18n.common.lang.de' | translate}}
@@ -50,11 +15,25 @@
         {{'i18n.common.lang.en' | translate}}
         <button md-button *ngIf="!auth.isLoggedIn()" (click)="login()">Login</button>
         <button md-button *ngIf="auth.isLoggedIn()" (click)="logout()">Logout</button>
+        <button md-icon-button [md-menu-trigger-for]="themeMenu">
+            <md-icon>more_vert</md-icon>
+        </button>
+        <md-menu #themeMenu="mdMenu" class="oc-theme-menu">
+            <span class="oc-theme-menu-title">{{'i18n.common.theme.title' | translate}}</span>
+            <button md-menu-item *ngFor="let theme of allThemes" (click)="changeTheme(theme)">
+                <md-icon *ngIf="theme.equals(activeTheme)">check</md-icon>
+                <md-icon *ngIf="!theme.equals(activeTheme)"></md-icon>
+                <span>{{'i18n.common.theme.' + theme.i18nKey | translate}}</span>
+            </button>
+        </md-menu>
     </md-toolbar>
 
-    <div class="app-content">
-        <router-outlet></router-outlet>
+    <div class="main-area">
+        <oc-nav [collapsible]="true" *ngIf="!mobile" class="oc-side-sidenav"></oc-nav>
+        <div class="app-content">
+            <router-outlet></router-outlet>
+        </div>
     </div>
-    <footer></footer>
+    <oc-footer *ngIf="!mobile"></oc-footer>
     <simple-notifications></simple-notifications>
-</sidenav-layout>
+</md-sidenav-container>

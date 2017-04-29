@@ -1,13 +1,17 @@
 @import '../../sass/general';
 
+manager {
+    display: flex;
+    flex-direction: column;
+}
+
 manager, .manage-rows {
     overflow-y: auto;
     overflow-x: hidden;
-    display: block;
 }
 
-outcobra-app:not(.outcobra-mobile) {
-    manager, .manage-rows {
+oc-app:not(.oc-mobile) {
+    .manage-rows {
         flex-grow: 1;
         display: flex;
     }
@@ -16,6 +20,8 @@ outcobra-app:not(.outcobra-mobile) {
 .mobile-manage-nav {
     height: 50px;
     width: 100%;
+    margin-bottom: 0 !important;
+
     div {
         &.col {
             padding: 5px;
@@ -28,6 +34,9 @@ outcobra-app:not(.outcobra-mobile) {
             -moz-user-select: none;
             -ms-user-select: none;
             user-select: none;
+        }
+        button[md-button] {
+            min-width: 50px;
         }
     }
 }
@@ -47,12 +56,9 @@ outcobra-app:not(.outcobra-mobile) {
     }
 
     .col {
-        height: 100%;
-
         .manage-entity {
             height: 100px;
             width: 100%;
-
             @extend .border-bottom;
         }
     }
@@ -126,6 +132,8 @@ outcobra-app:not(.outcobra-mobile) {
                         font-size: .8em;
                         height: 20px;
                         line-height: 20px;
+                        display: block;
+                        text-overflow: ellipsis;
                     }
                 }
             }

@@ -1,0 +1,29 @@
+@import '../../../../sass/_general';
+
+oc-collapsible {
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+oc-collapsible-header {
+    display: block;
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+    @extend .border-bottom;
+}
+
+oc-collapsible-body {
+    overflow: hidden;
+    height: inherit;
+
+    ul {
+        height: inherit;
+        overflow-y: hidden;
+        li {
+            overflow-y: hidden;
+            @extend .border-bottom;
+        }
+    }
+}

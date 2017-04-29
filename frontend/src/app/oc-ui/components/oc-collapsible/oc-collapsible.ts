@@ -1,0 +1,75 @@
+import {
+    HostListener,
+    EventEmitter,
+    HostBinding,
+    Component,
+    ViewEncapsulation,
+    ContentChild,
+    AfterContentInit,
+    style,
+    state,
+    animate,
+    transition,
+    trigger
+} from "@angular/core";
+
+@Component({
+    selector: 'oc-collapsible-header',
+    template: '<ng-content></ng-content>',
+})
+export class OCCollapsibleHeaderComponent {
+    onClick: EventEmitter<any> = new EventEmitter();
+
+    @HostListener('click') click() {
+        this.onClick.emit();
+    };
+
+}
+
+@Component({
+    selector: 'oc-collapsible-body',
+    template: '<ng-content></ng-content>',
+})
+export class OCCollapsibleBodyComponent {
+}
+
+@Component({
+    selector: 'oc-collapsible',
+    template: `
+            <ng-content></ng-content>
+            <div [@ocToggle]="opened">
+                <ng-content select="oc-collapsible-body"></ng-content>
+            </div>`,
+    styleUrls: ['./oc-collapsible.scss'],
+    encapsulation: ViewEncapsulation.None,
+    animations: [
+        trigger('ocToggle', [
+            state('false', style({
+                height: 0
+            })),
+            state('true', style({
+                height: '*'
+            })),
+            transition('0 => 1', animate('400ms ease-in')),
+            transition('1 => 0', animate('400ms ease-out'))
+        ])
+    ]
+})
+export class OCCollapsibleComponent implements AfterContentInit {
+    @ContentChild(OCCollapsibleHeaderComponent) public header: OCCollapsibleHeaderComponent;
+    @ContentChild(OCCollapsibleBodyComponent) public body: OCCollapsibleBodyComponent;
+
+    ngAfterContentInit(): void {
+        this.header.onClick.subscribe(() => {
+            this.toggle();
+        });
+    }
+
+    @HostBinding('class.active') public opened: boolean = false;
+
+    toggle() {
+        this.opened = !this.opened;
+    }
+
+}
+

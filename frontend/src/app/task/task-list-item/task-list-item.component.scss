@@ -1,4 +1,4 @@
-@import '../../../sass/color';
+@import '../../../sass/color-variables';
 
 md-list-item {
     position: relative;
@@ -23,5 +23,5 @@ span[md-list-avatar] {
     line-height: 40px;
     font-size: 1.5em;
     text-align: center;
-    @extend .text-primary-light;
+    color: $primary-light;
 }
