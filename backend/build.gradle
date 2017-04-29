@@ -32,7 +32,7 @@ apply plugin: 'com.gorylenko.gradle-git-properties'
 
 version = outstandingCobraVersion
 
-allOpen{
+allOpen {
     annotation('outcobra.server.annotation.AllOpen')
     annotation('org.springframework.boot.test.context.SpringBootTest')
 }
