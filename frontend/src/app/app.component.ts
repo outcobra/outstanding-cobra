@@ -29,8 +29,8 @@ export class AppComponent implements OnInit, AfterViewInit {
     private _isEnglish: boolean = this._translateService.currentLang == 'en';
 
     constructor(private _translateService: TranslateService,
-                public _auth: AuthService,
-                public _responsiveHelper: ResponsiveHelperService,
+                private _auth: AuthService,
+                private _responsiveHelper: ResponsiveHelperService,
                 private _router: Router,
                 private _overlayContainer: OverlayContainer) {
     }
