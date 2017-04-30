@@ -1,7 +1,7 @@
 package outcobra.server.exception
 
 /**
- * A generic exception to throw if you want to communicate to the frontend
+ * A generic exception to throw if you want it to be displayed on the frontend
  * @author Florian Bürgi
  * @since <since>
  */

@@ -222,15 +222,15 @@
       "http": {
         "0": {
           "title": "Verbindungsfehler",
-          "message": "Der Server ist derzeit nicht erreichbar. Bitte versuchen Sie es später nocheinmal."
+          "message": "Der Server ist derzeit nicht erreichbar. Bitte versuchen Sie es später nocheinmal"
         },
         "500": {
           "title": "Serverfehler",
-          "message": "Ein unbekannter Serverfehler ist aufgetreten, bitte versuchen sie es später erneut"
+          "message": "Ein unbekannter Serverfehler ist aufgetreten. bitte versuchen sie es später erneut"
         },
         "400": {
           "title": "Eingabefehler",
-          "message": "Ihre Angaben/Eingaben sind ungültig / enthalten einen Fehler"
+          "message": "Ihre Eingaben sind ungültig oder enthalten einen Fehler"
         },
         "403": {
           "title": "Verboten",

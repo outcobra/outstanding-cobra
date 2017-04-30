@@ -13,22 +13,21 @@ enum class ValidationKey(val i18nMessage: String = "i18n.error.http.500.message"
 
     SERVER_ERROR(),
     SCHOOL_YEAR_OVERLAP("i18n.modules.manage.schoolYear.error.overlap", "i18n.error.http.400.title"),
-    ID_NOT_FOUND("i18n.error.http.404.message", "i18n.error.http.404.title"),
+    ENTITY_NOT_FOUND("i18n.error.http.404.message", "i18n.error.http.404.title"),
     INVALID_DTO("i18n.error.http.400.message", "i18n.error.http.400.title"),
     START_BIGGER_THAN_END("i18n.common.form.error.dateToIsBeforeDateFrom", "i18n.error.http.400.title"),
     FORBIDDEN("i18n.error.http.403.message", "i18n.error.http.403.title"),
     SEMESTER_OVERLAP("i18n.modules.manage.semester.error.overlap", "i18n.error.http.400.title"),
     OUTSIDE_PARENT("i18n.error.outsideParent.message", "i18n.error.outsideParent.title");
 
-
+    @Throws(ValidationException::class)
     override fun throwException() {
-        throw(makeException(this.i18nMessage, this.i18nTitle, null, null))
+        throw(makeException())
     }
 
-    override fun makeException(message: String, title: String, messageLevel: MessageLevel?,
-                               nestedCause: Throwable?): ValidationException {
+    override fun makeException(messageLevel: MessageLevel?, nestedCause: Throwable?): ValidationException {
 
-        val exception = ValidationException(message = message, title = title)
+        val exception = ValidationException(message = this.i18nMessage, title = this.i18nTitle)
         if (messageLevel != null) {
             exception.messageLevel = messageLevel
         }
@@ -39,7 +38,7 @@ enum class ValidationKey(val i18nMessage: String = "i18n.error.http.500.message"
     }
 
     fun makeException(): ValidationException {
-        return makeException(i18nMessage, i18nTitle, null, null)
+        return makeException(null, null)
     }
 
 }

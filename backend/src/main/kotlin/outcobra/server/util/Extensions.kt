@@ -33,8 +33,14 @@ fun LocalDate.isAfterOrEqual(b: LocalDate): Boolean = this.isAfter(b) || this.is
  * @author Florian Bürgi
  * @since <since>
  */
-infix fun SchoolYear.doesNotOverlap(schoolYear: SchoolYear): Boolean =
-        this.id == schoolYear.id || !DateUtil.isOverlap(this.validFrom, this.validTo, schoolYear.validFrom, schoolYear.validTo)
+infix fun SchoolYear.doesNotOverlap(schoolYear: SchoolYear): Boolean {
+    if (this.id != schoolYear.id) {
+        val thisRange = DateRange(this.validFrom, this.validTo)
+        val otherRange = DateRange(schoolYear.validFrom, schoolYear.validTo)
+        return !thisRange.checkOverlap(otherRange)
+    }
+    return true
+}
 
 /**
  * this function helps to determine if a [SchoolYear] contains a [Semester]
@@ -51,8 +57,15 @@ operator infix fun SchoolYear.contains(semester: Semester): Boolean =
  * @author Florian Bürgi
  * @since <since>
  */
-infix fun Semester.doesNotOverlap(semester: Semester): Boolean =
-        this.id == semester.id || !DateUtil.isOverlap(this.validFrom, this.validTo, semester.validFrom, semester.validTo)
+infix fun Semester.doesNotOverlap(semester: Semester): Boolean {
+    if (this.id != semester.id) {
+        val thisRange = DateRange(this.validFrom, this.validTo)
+        val otherRange = DateRange(semester.validFrom, semester.validTo)
+        return !thisRange.checkOverlap(otherRange)
+    }
+    return true
+}
+
 
 /**
  * determines the owner ([User]) of the given object

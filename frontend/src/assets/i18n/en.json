@@ -240,17 +240,17 @@
           "message": "You are not allowed to perform this action"
         },
         "404": {
-          "title": "Not Found",
+          "title": "Not found",
           "message": "The requested element could not be found"
         },
         "500": {
-          "title": "Server Error",
+          "title": "Server error",
           "message": "An unknown server error has occurred"
         }
       },
       "validation": {
         "outsideParent": {
-          "title": "Ungültiges Datum",
+          "title": "Invalid date",
           "message": "The given dates are outside the parent timespan"
         }
       }
