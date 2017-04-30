@@ -18,8 +18,7 @@
             <div id="filter-button">
                 <button md-raised-button color="accent" class="col s12 m2 hide-on-large-only"
                         (click)="changeFilterVisibility()">
-                    <md-icon *ngIf="!filterShown">expand_more</md-icon>
-                    <md-icon *ngIf="filterShown">expand_less</md-icon>
+                    <md-icon [ngClass]="{'filter-shown': filterShown}" class="filter-toggler">expand_less</md-icon>
                 </button>
             </div>
         </div>
@@ -33,11 +32,11 @@
                 <div class="form-group">
                     <label>{{'i18n.modules.task.filter.subject' | translate}}</label>
                     <md-select formControlName="subjectId">
-                        <template ngFor let-subjectClass [ngForOf]="filterData.schoolClassSubjects">
+                        <ng-template ngFor let-subjectClass [ngForOf]="filterData.schoolClassSubjects">
                             <md-option *ngFor="let subject of subjectClass.subjects" [value]="subject.id">
                                 {{ subjectClass.schoolClass.normalizedName + ' - ' + subject.name }}
                             </md-option>
-                        </template>
+                        </ng-template>
                     </md-select>
                 </div>
                 <div class="form-group">

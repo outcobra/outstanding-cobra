@@ -8,7 +8,6 @@ import {TaskService} from './service/task.service';
 import {TaskListItemComponent} from './task-list-item/task-list-item.component';
 import {TaskDetailComponent} from './task-detail-component/task-detail.component';
 import {TaskDetailResolver} from './service/task-detail-resolver.service';
-import {TranslateModule} from 'ng2-translate';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TaskListResolver} from './service/task-list-resolver.service';
 import {TaskFilterResolver} from './service/task-filter-resolver.service';
@@ -22,8 +21,7 @@ import {SharedModule} from '../shared/shared.module';
         ReactiveFormsModule,
         TaskRoutingModule,
         MaterialModule,
-        SharedModule,
-        TranslateModule
+        SharedModule
     ],
     declarations: [
         TaskComponent,

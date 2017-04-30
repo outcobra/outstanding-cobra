@@ -1,9 +1,10 @@
 import {Config} from '../../config/Config';
 import {Http} from '@angular/http';
-import {TranslateService, TranslateStaticLoader} from 'ng2-translate';
+import {TranslateService} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 export function translateFactory(http: Http) {
-    return new TranslateStaticLoader(http, '/assets/i18n', '.json');
+    return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
 }
 
 export function configLoader(config: Config): () => Promise<any> {

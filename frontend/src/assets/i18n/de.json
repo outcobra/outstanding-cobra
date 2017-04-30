@@ -202,7 +202,9 @@
         }
       }
     },
-    "login": {
+    "auth": {
+      "login": "Einloggen",
+      "logout": "Ausloggen",
       "error": {
         "title": "Login fehlgeschlagen",
         "message": "Sie konnten nicht eingeloggt werden"
