@@ -21,7 +21,7 @@ import {Util} from '../shared/util/util';
 import {DialogMode} from '../common/DialogMode';
 import {Observable} from 'rxjs';
 import {SMALL_DIALOG} from '../shared/util/const';
-import {and} from '../shared/util/helper';
+import {and, negate} from '../shared/util/helper';
 import {ResponsiveHelperService} from '../shared/services/ui/responsive-helper.service';
 
 @Component({
@@ -73,19 +73,24 @@ export class TaskComponent implements OnInit, AfterViewInit {
         });
         this.filterForm = this.formBuilder.group({
             subjectId: [''],
-            finished: ['']
+            finished: [true]
         });
 
         this.route.data.subscribe((data: { taskFilter: TaskFilter, tasks: Task[] }) => {
             this.filterData = data.taskFilter;
             this.tasks = data.tasks;
-            this.filteredTasks = Util.cloneArray(data.tasks);
+            this.filteredTasks = Util.cloneArray(data.tasks)
+                .filter(negate(this.taskService.isFinished));
         });
 
         this.searchForm.get('searchTerm').valueChanges
             .debounceTime(300)
             .distinctUntilChanged()
             .subscribe(searchTerm => this.filteredTasks = Util.cloneArray(this.search(searchTerm)));
+
+        this.filterForm.valueChanges
+            .do(() => console.log('hello'))
+            .subscribe(() => this.doFilter());
 
         this.router.events.subscribe((event) => {
             if (event instanceof NavigationEnd && !this.taskService.hasCache()) {
@@ -168,7 +173,7 @@ export class TaskComponent implements OnInit, AfterViewInit {
 
     buildFilterPredicate(): Predicate<Task> {
         let predicates: Predicate<Task>[] = [];
-        if (this.filterForm.get('subjectId').touched) {
+        if (this.filterForm.get('subjectId').value) {
             predicates.push((task: Task) => task.subject.id == this.filterForm.get('subjectId').value);
         }
         if (this.filterForm.get('finished').value) {
