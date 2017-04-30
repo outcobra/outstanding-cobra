@@ -4,7 +4,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ManageDialog} from '../manage-dialog';
 import {SchoolYearDto, SemesterDto} from '../model/ManageDto';
 import {OCValidators} from '../../shared/services/oc-validators';
-import {TranslateService} from 'ng2-translate';
+import {TranslateService} from '@ngx-translate/core';
 import {DatePipe} from '@angular/common';
 import {Util} from '../../shared/util/util';
 

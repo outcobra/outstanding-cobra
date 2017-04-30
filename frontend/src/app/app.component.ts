@@ -7,22 +7,22 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { AuthService } from './shared/services/auth/auth.service';
-import { TranslateService } from 'ng2-translate';
-import { ResponsiveHelperService } from './shared/services/ui/responsive-helper.service';
-import { Util } from './shared/util/util';
-import { MdSidenav } from '@angular/material';
-import { OCTheme } from './oc-ui/theme/oc-theme';
+import {AuthService} from './shared/services/auth/auth.service';
+import {TranslateService} from '@ngx-translate/core';
+import {ResponsiveHelperService} from './shared/services/ui/responsive-helper.service';
+import {Util} from './shared/util/util';
+import {MdSidenav, OverlayContainer} from '@angular/material';
+import {OCTheme} from './oc-ui/theme/oc-theme';
 import { NavigationEnd, Router } from '@angular/router';
 import { isNotNull } from './shared/util/helper';
 
 @Component({
-               selector: 'oc-app',
-               templateUrl: './app.component.html',
-               styleUrls: [ './app.component.scss' ],
-               encapsulation: ViewEncapsulation.None
-           })
-export class AppComponent implements OnInit, AfterViewInit, AfterContentChecked {
+    selector: 'oc-app',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
+    encapsulation: ViewEncapsulation.None
+})
+export class AppComponent implements OnInit, AfterViewInit {
     @HostBinding('class.oc-mobile')
     public mobile: boolean;
     public title = 'Outcobra';
@@ -34,13 +34,11 @@ export class AppComponent implements OnInit, AfterViewInit, AfterContentChecked 
 
     public isEnglish: boolean = this.translateService.currentLang == 'en';
 
-    private overlayContainer;
-
     constructor(private translateService: TranslateService,
                 public auth: AuthService,
                 public responsiveHelper: ResponsiveHelperService,
                 private router: Router,
-                /*private overlayContainer: OverlayContainer*/) {
+                private overlayContainer: OverlayContainer) {
     }
 
     ngOnInit() {
@@ -58,14 +56,6 @@ export class AppComponent implements OnInit, AfterViewInit, AfterContentChecked 
     ngAfterViewInit() {
         this.responsiveHelper.listenForResize()
             .subscribe(() => Util.bindAndCall(this.recheckMobile, this));
-    }
-
-    ngAfterContentChecked() {
-        let overlayContainer = document.getElementsByClassName('cdk-overlay-container');
-        if (!this.overlayContainer && overlayContainer.length > 0) {
-            this.overlayContainer = overlayContainer.item(0);
-            this.overlayContainer.classList.add(this.activeTheme.className);
-        }
     }
 
     private recheckMobile() {
@@ -97,10 +87,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterContentChecked 
 
     public changeTheme(theme: OCTheme) {
         if (this.overlayContainer) {
-            //this.overlayContainer.themeClass = theme.className; TODO wait for angular/material2 1.0.0-beta.3 to release
-            this.overlayContainer.classList.remove(this.activeTheme.className);
-            this.overlayContainer.classList.add(theme.className);
-            // TODO remove if the condition from above is fulfilled
+            this.overlayContainer.themeClass = theme.className;
         }
 
         this.activeTheme = theme;

@@ -24,8 +24,6 @@ import {CreateUpdateDialog} from '../common/CreateUpdateDialog';
 import {ResponsiveHelperService} from '../shared/services/ui/responsive-helper.service';
 import {ManageView} from './model/ManageView';
 
-
-
 const I18N_PREFIX = 'i18n.modules.manage.mobile.title.';
 
 @Component({
@@ -256,7 +254,14 @@ export class ManageComponent implements OnInit, AfterViewInit {
             this._subjectService
         );
     }
+    //endregion
 
+    //region edit
+    public editInstitution() {console.warn('Not implemented yet')}
+    public editSchoolClass() {console.warn('Not implemented yet')}
+    public editSchoolYear() {console.warn('Not implemented yet')}
+    public editSemester() {console.warn('Not implemented yet')}
+    public editSubject() {console.warn('Not implemented yet')}
     //endregion
 
     //region handler

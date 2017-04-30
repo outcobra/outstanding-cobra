@@ -12,7 +12,7 @@ import {
 } from './components/oc-collapsible/oc-collapsible';
 import {OCDividerDirective} from './directives/oc-divider.directive';
 import {MaterialModule} from '@angular/material';
-import {TranslateModule} from 'ng2-translate';
+import {TranslateModule} from '@ngx-translate/core';
 import {OCNavComponent} from './components/oc-nav/oc-nav.component';
 import {RouterModule} from '@angular/router';
 

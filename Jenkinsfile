@@ -35,6 +35,10 @@ pipeline {
                 success {
                     archiveArtifacts 'backend/build/libs/*.jar'
                 }
+                failure {
+                    slackSend color: 'warning',
+                            message: ":negative_squared_cross_mark: Build for ${currentBuild.fullDisplayName} is failing"
+                }
             }
         }
 

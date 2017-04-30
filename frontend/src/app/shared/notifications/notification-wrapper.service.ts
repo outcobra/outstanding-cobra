@@ -1,10 +1,9 @@
 import {Injectable} from '@angular/core';
 import {NotificationsService} from 'angular2-notifications';
-import {TranslateService} from 'ng2-translate';
+import {TranslateService} from '@ngx-translate/core';
 import 'rxjs/add/operator/toPromise';
 import {appIcons} from './icons';
-import {Icons} from 'angular2-notifications/src/icons';
-import {Notification} from 'angular2-notifications/src/notification.type';
+import {Icons, Notification} from 'angular2-notifications/dist';
 
 @Injectable()
 export class NotificationWrapperService extends NotificationsService {
@@ -13,7 +12,8 @@ export class NotificationWrapperService extends NotificationsService {
         timeOut: 7500,
         showProgressBar: true,
         lastOnBottom: true,
-        clickToClose: true
+        clickToClose: true,
+        animate: 'fromRight'
     };
 
     private _icns: Icons = appIcons; // can't name it icons because of super class

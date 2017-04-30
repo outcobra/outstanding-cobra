@@ -7,7 +7,7 @@ import {Util} from '../../util/util';
 import {NotificationsService} from 'angular2-notifications';
 import {Observable} from 'rxjs';
 import {User} from '../../model/User';
-import {TranslateService} from 'ng2-translate';
+import {TranslateService} from '@ngx-translate/core';
 
 declare let Auth0Lock: any;
 
@@ -62,12 +62,12 @@ export class AuthService {
             this._http.get<User>('/user/login', 'outcobra')
                 .catch(() => {
                     this.logout();
-                    this._notificationService.error('i18n.login.error.title', 'i18n.login.error.message');
+                    this._notificationService.error('i18n.auth.error.title', 'i18n.auth.error.message');
                     return Observable.empty();
                 })
                 .subscribe((user: User) =>
                     this._notificationService.success(
-                        this._translateService.instant('i18n.login.success.hello') + user.username, 'i18n.login.success.message'
+                        this._translateService.instant('i18n.auth.success.hello') + user.username, 'i18n.auth.success.message'
                     ));
             let redirectRoute = Util.getUrlParam('state');
             if (redirectRoute) {
@@ -114,7 +114,7 @@ export class AuthService {
      * @returns {boolean}
      */
     public isLoggedIn(): boolean {
-        return tokenNotExpired();
+        return tokenNotExpired(this.config.get('locStorage.tokenLocation'));
     }
 
 }

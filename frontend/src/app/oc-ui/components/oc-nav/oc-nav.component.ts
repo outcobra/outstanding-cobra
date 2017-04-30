@@ -1,4 +1,5 @@
-import {animate, Component, Input, OnInit, state, style, transition, trigger, ViewEncapsulation} from '@angular/core';
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
     selector: 'oc-nav',

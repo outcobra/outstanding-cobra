@@ -8,6 +8,7 @@ import {
     Optional,
     Output,
     Self,
+    ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import * as moment from 'moment';
@@ -16,6 +17,7 @@ import {DatePickerMaxDateSmallerThanMinDateError} from './datepicker-errors';
 import {ControlValueAccessor, NgControl, Validators} from '@angular/forms';
 import {OCValidators} from '../../services/oc-validators';
 import {Util} from '../../util/util';
+import {MdInputDirective} from '@angular/material';
 
 @Component({
     selector: 'datepicker',
@@ -35,6 +37,8 @@ export class DatepickerComponent implements OnInit, AfterContentInit, ControlVal
     @Input() placeholder: string;
 
     private _currentDate: Date;
+
+    @ViewChild(MdInputDirective) inputField: MdInputDirective;
 
     // emitted Date
     private _outDate: Date;
@@ -86,6 +90,7 @@ export class DatepickerComponent implements OnInit, AfterContentInit, ControlVal
     public close() {
         if (this.isOpen()) {
             this._onTouchedCallback();
+            this.syncValidityWithMdInput();
             this.opened = false;
         }
     }
@@ -156,6 +161,7 @@ export class DatepickerComponent implements OnInit, AfterContentInit, ControlVal
         this.writeValue(date);
         this.onSelectDate.emit(date);
         this._formattedDate = this._formatDate(date);
+        this.syncValidityWithMdInput();
     }
 
     selectYear(date: Date) {
@@ -177,6 +183,23 @@ export class DatepickerComponent implements OnInit, AfterContentInit, ControlVal
         this._onTouchedCallback = fn;
     }
 
+    private syncValidityWithMdInput() {
+        this.control.control.updateValueAndValidity();
+        if (this.inputField && this.control.control.errors != null) {
+            this.inputField._ngControl.control.setErrors(this.control.control.errors);
+            if (this.control.dirty) {
+                this.inputField._ngControl.control.markAsDirty();
+            } else {
+                this.inputField._ngControl.control.markAsPristine();
+            }
+            if (this.control.touched) {
+                this.inputField._ngControl.control.markAsTouched();
+            }
+            else {
+                this.inputField._ngControl.control.markAsUntouched();
+            }
+        }
+    }
 
     get currentDate(): Date {
         return this._currentDate;

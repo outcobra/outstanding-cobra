@@ -7,65 +7,63 @@
             <md-input-container>
                 <input mdInput [placeholder]="'i18n.modules.task.dialogs.add.name.label' | translate"
                        formControlName="name">
-                <md-hint class="form-error" align="start"
-                         *ngIf="taskCreateUpdateForm.get('name').invalid && taskCreateUpdateForm.get('name').touched">
-                    <template [ngIf]="taskCreateUpdateForm.get('name').hasError('required')">{{'i18n.common.form.error.required'
+                <md-error *ngIf="taskCreateUpdateForm.get('name').invalid && taskCreateUpdateForm.get('name').touched">
+                    <ng-template [ngIf]="taskCreateUpdateForm.get('name').hasError('required')">{{'i18n.common.form.error.required'
                         | translate}}
-                    </template>
-                </md-hint>
+                    </ng-template>
+                </md-error>
             </md-input-container>
         </div>
         <div class="form-group">
             <md-input-container>
                 <textarea mdInput [placeholder]="'i18n.modules.task.dialogs.add.desc.label' | translate"
                           formControlName="description"></textarea>
-                <md-hint class="form-error" align="start"
-                         *ngIf="taskCreateUpdateForm.get('description').invalid && taskCreateUpdateForm.get('description').touched">
-                    <template [ngIf]="taskCreateUpdateForm.get('description').hasError('required')">
+                <md-error *ngIf="taskCreateUpdateForm.get('description').invalid && taskCreateUpdateForm.get('description').touched">
+                    <ng-template [ngIf]="taskCreateUpdateForm.get('description').hasError('required')">
                         {{'i18n.common.form.error.required' | translate}}
-                    </template>
-                </md-hint>
+                    </ng-template>
+                </md-error>
             </md-input-container>
         </div>
         <div formGroupName="dates" class="form-group">
             <div class="half">
                 <datepicker [minDate]="today" [placeholder]="'i18n.common.label.todoDate' | translate"
                             formControlName="todoDate">
-                    <md-hint class="form-error" align="start"
+                    <datepicker-error class="form-error" align="start"
                              *ngIf="taskCreateUpdateForm.get('dates.todoDate').invalid && taskCreateUpdateForm.get('dates.todoDate').touched">
-                        <template [ngIf]="taskCreateUpdateForm.get('dates.todoDate').hasError('required')">
+                        <ng-template [ngIf]="taskCreateUpdateForm.get('dates.todoDate').hasError('required')">
                             {{'i18n.common.form.error.required' | translate}}
-                        </template>
-                    </md-hint>
+                        </ng-template>
+                    </datepicker-error>
                 </datepicker>
             </div>
             <div class="half">
                 <datepicker [minDate]="today" [placeholder]="'i18n.common.label.dueDate' | translate"
                             formControlName="dueDate">
-                    <md-hint class="form-error" align="start"
+                    <datepicker-error class="form-error" align="start"
                              *ngIf="taskCreateUpdateForm.get('dates.dueDate').invalid && taskCreateUpdateForm.get('dates.dueDate').touched">
-                        <template [ngIf]="taskCreateUpdateForm.get('dates.dueDate').hasError('required')">
+                        <ng-template [ngIf]="taskCreateUpdateForm.get('dates.dueDate').hasError('required')">
                             {{'i18n.common.form.error.required' | translate}}
-                        </template>
-                    </md-hint>
+                        </ng-template>
+                    </datepicker-error>
                 </datepicker>
             </div>
             <span class="form-error" *ngIf="taskCreateUpdateForm.get('dates.todoDate').dirty && taskCreateUpdateForm.get('dates.dueDate').dirty && taskCreateUpdateForm.get('dates').invalid">
-                <template [ngIf]="taskCreateUpdateForm.get('dates').hasError('dateToIsBeforeDateFrom')">
+                <ng-template [ngIf]="taskCreateUpdateForm.get('dates').hasError('dateToIsBeforeDateFrom')">
                     {{'i18n.modules.task.dialogs.add.errors.dueDateBeforeTodoDate' | translate}}
-                </template>
+                </ng-template>
             </span>
         </div>
         <div class="form-group">
             <md-input-container>
                 <input mdInput type="number" [placeholder]="'i18n.modules.task.dialogs.add.effort.label' | translate"
                        formControlName="effort">
-                <md-hint class="form-error" align="start"
+                <md-error class="form-error" align="start"
                          *ngIf="taskCreateUpdateForm.get('effort').invalid && taskCreateUpdateForm.get('effort').touched">
-                    <template [ngIf]="taskCreateUpdateForm.get('effort').hasError('required')">
+                    <ng-template [ngIf]="taskCreateUpdateForm.get('effort').hasError('required')">
                         {{'i18n.common.form.error.required' | translate}}
-                    </template>
-                </md-hint>
+                    </ng-template>
+                </md-error>
             </md-input-container>
         </div>
         <div class="form-group">
