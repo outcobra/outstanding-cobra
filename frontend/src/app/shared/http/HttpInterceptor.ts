@@ -8,9 +8,9 @@ import {dateReplacer, dateReviver} from './http-util';
 import {RequestOptions} from './RequestOptions';
 
 /**
- * HttpInterceptor to customize the _http request and _http responses
+ * HttpInterceptor to customize the http request and http responses
  *
- * uses the Http class in the @angular/_http module
+ * uses the Http class in the @angular/http module
  *
  * adds default headers like Content-Type or Auth Token
  * every api that we want to call needs to be registered in the config files of the application

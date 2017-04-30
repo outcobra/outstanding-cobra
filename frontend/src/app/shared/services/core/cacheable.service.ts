@@ -20,7 +20,7 @@ export abstract class CacheableService<T> extends AppService implements Cacheabl
 
     /**
      * @param http HttpClient
-     * @param baseUri of the services _http calls
+     * @param baseUri of the services http calls
      * @param expiredAfter time in milliseconds that the cache lives (default 10 minutes)
      */
     constructor(http: HttpInterceptor = null, baseUri: string = '', private expiredAfter: number = 600000) {

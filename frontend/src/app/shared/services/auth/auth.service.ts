@@ -26,7 +26,7 @@ export class AuthService {
 
         this._auth0Config = this._config.get('auth0');
 
-        // auth0 _lock configuration
+        // auth0 lock configuration
         this._lock = new Auth0Lock(this._auth0Config.clientID, this._auth0Config.domain, {
             auth: {
                 redirectUrl: this._auth0Config.callbackURL,
