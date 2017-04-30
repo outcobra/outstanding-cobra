@@ -28,14 +28,14 @@ enum class ValidationKey(val i18nMessage: String = "i18n.error.http.500.message"
     override fun makeException(message: String, title: String, messageLevel: MessageLevel?,
                                nestedCause: Throwable?): ValidationException {
 
-        val e = ValidationException(message = message, title = title)
+        val exception = ValidationException(message = message, title = title)
         if (messageLevel != null) {
-            e.messageLevel = messageLevel
+            exception.messageLevel = messageLevel
         }
         if (nestedCause != null) {
-            e.cause = nestedCause
+            exception.cause = nestedCause
         }
-        return e
+        return exception
     }
 
     fun makeException(): ValidationException {
