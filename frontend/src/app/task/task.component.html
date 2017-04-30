@@ -18,10 +18,7 @@
             <div id="filter-button">
                 <button md-raised-button color="accent" class="col s12 m2 hide-on-large-only"
                         (click)="changeFilterVisibility()">
-                    <ng-template #notFilterShown>
-                        <md-icon>expand_more</md-icon>
-                    </ng-template>
-                    <md-icon *ngIf="filterShown; else notFilterShown">expand_less</md-icon>
+                    <md-icon [ngClass]="{'filter-shown': filterShown}" class="filter-toggler">expand_less</md-icon>
                 </button>
             </div>
         </div>

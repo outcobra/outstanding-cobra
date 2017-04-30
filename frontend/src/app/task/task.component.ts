@@ -1,14 +1,5 @@
-import {
-    AfterViewInit,
-    animate,
-    Component,
-    OnInit,
-    state,
-    style,
-    transition,
-    trigger,
-    ViewEncapsulation
-} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 import {TaskService} from './service/task.service';
 import {Task} from './model/Task';
 import {FormBuilder, FormGroup} from '@angular/forms';
@@ -31,12 +22,12 @@ import {ResponsiveHelperService} from '../shared/services/ui/responsive-helper.s
     encapsulation: ViewEncapsulation.None,
     animations: [
         trigger('filterShown', [
-            state('true', style({
+            state('1', style({
                 height: '*',
                 paddingTop: '*',
                 paddingBottom: '*'
             })),
-            state('false', style({
+            state('0', style({
                 height: '0',
                 paddingTop: '0',
                 paddingBottom: '0'
@@ -212,7 +203,7 @@ export class TaskComponent implements OnInit, AfterViewInit {
     }
 
     changeFilterVisibility() {
-        this.filterShown = !(this.filterShown)
+        this.filterShown = !this.filterShown;
     }
     //endregion
 }

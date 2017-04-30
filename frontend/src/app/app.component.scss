@@ -2,6 +2,13 @@
     padding: 5px 10px;
 }
 
+.oc-mobile-sidenav-title {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
 .main-area {
     flex-grow: 1;
 
@@ -24,4 +31,9 @@
 .simple-notification-wrapper {
     bottom: 35px !important;
     right: 0 !important;
+}
+
+.lang-toggler {
+    margin-top: 10px;
+    padding-left: 10px;
 }

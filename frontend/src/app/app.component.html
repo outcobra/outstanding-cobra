@@ -1,18 +1,20 @@
 <md-sidenav-container>
     <md-sidenav class="oc-mobile-sidenav" *ngIf="mobile">
         <md-toolbar>
-            <a [routerLink]="'/'" class="oc-mobile-sidenav-title">{{title}}</a>
+            <a [routerLink]="'/'" class="oc-mobile-sidenav-title text-primary-dark" tabindex="-1">{{title}}</a>
         </md-toolbar>
         <oc-divider></oc-divider>
-        <oc-nav></oc-nav>
+        <oc-nav>
+            <!-- TODO only temporary -->
+            {{'i18n.common.lang.de' | translate}}
+            <md-slide-toggle (change)="changeLang()" [(ngModel)]="isEnglish"></md-slide-toggle>
+            {{'i18n.common.lang.en' | translate}}
+        </oc-nav>
     </md-sidenav>
     <md-toolbar color="primary" class="oc-primary-toolbar">
         <md-icon class="toolbar-icon" (click)="openSidenav()" *ngIf="mobile">menu</md-icon>
         <a routerLink="/">{{title}}</a>
         <span class="toolbar-fill-space"></span>
-        {{'i18n.common.lang.de' | translate}}
-        <md-slide-toggle (change)="changeLang()" [(ngModel)]="isEnglish"></md-slide-toggle>
-        {{'i18n.common.lang.en' | translate}}
         <button md-button *ngIf="auth.isLoggedIn(); else notLoggedIn" (click)="logout()">Logout</button>
         <ng-template #notLoggedIn>
             <button md-button (click)="login()">Login</button>
@@ -33,7 +35,14 @@
     </md-toolbar>
 
     <div class="main-area">
-        <oc-nav [collapsible]="true" *ngIf="!mobile" class="oc-side-sidenav"></oc-nav>
+        <oc-nav [collapsible]="true" *ngIf="!mobile" class="oc-side-sidenav" #ocNav>
+            <!-- TODO only temporary -->
+            <div class="lang-toggler" *ngIf="!ocNav.isCollapsed()">
+                {{'i18n.common.lang.de' | translate}}
+                <md-slide-toggle (change)="changeLang()" [(ngModel)]="isEnglish"></md-slide-toggle>
+                {{'i18n.common.lang.en' | translate}}
+            </div>
+        </oc-nav>
         <div class="app-content">
             <router-outlet></router-outlet>
         </div>
