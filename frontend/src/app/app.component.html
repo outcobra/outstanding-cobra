@@ -35,11 +35,13 @@
     </md-toolbar>
 
     <div class="main-area">
-        <oc-nav [collapsible]="true" *ngIf="!mobile" class="oc-side-sidenav">
+        <oc-nav [collapsible]="true" *ngIf="!mobile" class="oc-side-sidenav" #ocNav>
             <!-- TODO only temporary -->
-            {{'i18n.common.lang.de' | translate}}
-            <md-slide-toggle (change)="changeLang()" [(ngModel)]="isEnglish"></md-slide-toggle>
-            {{'i18n.common.lang.en' | translate}}
+            <div class="lang-toggler" *ngIf="!ocNav.isCollapsed()">
+                {{'i18n.common.lang.de' | translate}}
+                <md-slide-toggle (change)="changeLang()" [(ngModel)]="isEnglish"></md-slide-toggle>
+                {{'i18n.common.lang.en' | translate}}
+            </div>
         </oc-nav>
         <div class="app-content">
             <router-outlet></router-outlet>
