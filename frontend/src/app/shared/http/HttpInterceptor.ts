@@ -62,7 +62,7 @@ export class HttpInterceptor {
             })
         ).catch(error => {
             let status = error.status;
-            this.notificationsService.error(`i18n.http.error.${status}.title`, `i18n.http.error.${status}.message`);
+            this.notificationsService.error(`i18n.error.http.${status}.title`, `i18n.error.http.${status}.message`);
             return Observable.throw(error);
         }).map((res: Response) => this._unwrapAndCastHttpResponse<T>(res));
     }
@@ -104,7 +104,7 @@ export class HttpInterceptor {
             data: data,
             params: params,
             apiName: apiName
-        })
+        });
     }
 
     /**

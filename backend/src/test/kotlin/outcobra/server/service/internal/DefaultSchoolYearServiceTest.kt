@@ -10,7 +10,8 @@ import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.transaction.annotation.Transactional
 import outcobra.server.config.ProfileRegistry.Companion.TEST
-import outcobra.server.exception.DateOutsideExpectedRangeException
+import outcobra.server.exception.ValidationException
+import outcobra.server.exception.ValidationKey
 import outcobra.server.model.Institution
 import outcobra.server.model.SchoolClass
 import outcobra.server.model.SchoolYear
@@ -76,7 +77,7 @@ class DefaultSchoolYearServiceTest {
         val invalidYear = SchoolYear("invalid", to, from, schoolClass, listOf(), listOf())
         assertThatThrownBy {
             schoolYearService.save(schoolYearMapper.toDto(invalidYear))
-        }.isInstanceOf(DateOutsideExpectedRangeException::class.java)
+        }.isEqualTo(ValidationKey.START_BIGGER_THAN_END.makeException())
         assertThat(schoolYearRepository.count()).isEqualTo(yearCount)
     }
 
@@ -87,7 +88,7 @@ class DefaultSchoolYearServiceTest {
         val invalidYear = SchoolYear("invalid", from, to, schoolClass, listOf(), listOf())
         assertThatThrownBy {
             schoolYearService.save(schoolYearMapper.toDto(invalidYear))
-        }.isInstanceOf(DateOutsideExpectedRangeException::class.java)
+        }.isInstanceOf(ValidationException::class.java)
         assertThat(schoolYearRepository.count()).isEqualTo(yearCount)
     }
 

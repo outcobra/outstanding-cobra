@@ -38,6 +38,7 @@ class InstitutionServiceTest {
     lateinit var userRepository: UserRepository
 
     var userId: Long = 0
+
     /**
      * class constants and default values
      */

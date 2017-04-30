@@ -1,7 +1,8 @@
 package outcobra.server.validator
 
 import org.springframework.stereotype.Component
-import outcobra.server.exception.ManipulatedRequestException
+import outcobra.server.exception.ValidationException
+import outcobra.server.exception.ValidationKey
 import outcobra.server.model.User
 import outcobra.server.model.interfaces.OutcobraDto
 import outcobra.server.model.interfaces.ParentLinked
@@ -27,7 +28,7 @@ where Dto : OutcobraDto {
     /**
      * This function allows authorizing requests to save (create or update) a [Dto]
      * @param dto the object the user wants to save
-     * @throws [ManipulatedRequestException] if the current user is not allowed to make such a request
+     * @throws [ValidationException] if the current user is not allowed to make such a request
      */
     fun validateDtoSaving(dto: Dto) {
         return dto.checkOwnerIsCurrent()
@@ -37,7 +38,7 @@ where Dto : OutcobraDto {
      * This function allows authorizing requests by id
      * @param id the requested id
      * @param type [KClass] of the requested entity
-     * @throws [ManipulatedRequestException] if the current user is not allowed to make such a request
+     * @throws [ValidationException] if the current user is not allowed to make such a request
      */
     fun validateRequestById(id: Long, type: KClass<*>) {
         val repository = locator.getForEntityClass(type.java)
@@ -45,13 +46,13 @@ where Dto : OutcobraDto {
         if (entity != null && entity is ParentLinked) {
             return entity.checkOwnerIsCurrent()
         }
-        throw ManipulatedRequestException()
+        ValidationKey.FORBIDDEN.throwException()
     }
 
 
     /**
      * Extension-function to check if an instance of [OutcobraDto] belongs to the current user.
-     * @throws [ManipulatedRequestException] if the owner is not the current user
+     * @throws [ValidationException] if the owner is not the current user
      *  or if the ownership of an existing entity has changed.
      */
     private fun Dto.checkOwnerIsCurrent() {
@@ -68,17 +69,20 @@ where Dto : OutcobraDto {
             //if this entity is new and directly connected to the user we are able to link it automatically
             return
         }
-        if (parent == null) throw ManipulatedRequestException()
-        parent.checkOwnerIsCurrent()
+        if (parent == null) {
+            ValidationKey.FORBIDDEN.throwException()
+        } else {
+            parent.checkOwnerIsCurrent()
+        }
     }
 
     /**
      * Extension-function to check if an instance of [ParentLinked] belongs to the current user.
-     * @throws [ManipulatedRequestException] if the owner is not the current user.
+     * @throws [ValidationException] if the owner is not the current user.
      */
     fun ParentLinked.checkOwnerIsCurrent() {
         if (this.followToUser() != userService.getCurrentUser()) {
-            throw ManipulatedRequestException()
+            ValidationKey.FORBIDDEN.throwException()
         }
     }
 }

@@ -83,7 +83,6 @@ export class ColorpickerComponent implements OnInit, ControlValueAccessor {
     }
 
     public cancel() {
-        this.selectColor(this._getRandomColor());
         this.close();
     }
 

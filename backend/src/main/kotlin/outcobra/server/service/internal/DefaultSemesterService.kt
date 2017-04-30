@@ -2,7 +2,7 @@ package outcobra.server.service.internal
 
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
-import outcobra.server.exception.DateOutsideExpectedRangeException
+import outcobra.server.exception.ValidationKey
 import outcobra.server.model.QSemester
 import outcobra.server.model.SchoolYear
 import outcobra.server.model.Semester
@@ -30,7 +30,7 @@ open class DefaultSemesterService
     override fun save(dto: SemesterDto): SemesterDto {
         val semester = mapper.fromDto(dto)
         if (!validator.validateSemesterCreation(semester)) {
-            throw DateOutsideExpectedRangeException("The new semester overlaps with an existing one")
+            ValidationKey.SEMESTER_OVERLAP.throwException()
         }
         return super.save(dto)
     }
