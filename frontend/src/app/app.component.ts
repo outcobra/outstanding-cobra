@@ -102,6 +102,9 @@ export class AppComponent implements OnInit, AfterViewInit {
         return this._allThemes;
     }
 
+    get mobile(): boolean {
+        return this._mobile;
+    }
 
     get isEnglish(): boolean {
         return this._isEnglish;
