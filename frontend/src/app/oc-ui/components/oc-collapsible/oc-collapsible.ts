@@ -4,7 +4,7 @@ import {
     ContentChild,
     EventEmitter,
     HostBinding,
-    HostListener,
+    HostListener, Output,
     ViewEncapsulation
 } from '@angular/core';
 
@@ -15,7 +15,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
     template: '<ng-content></ng-content>',
 })
 export class OCCollapsibleHeaderComponent {
-    onClick: EventEmitter<any> = new EventEmitter();
+    @Output() onClick: EventEmitter<any> = new EventEmitter();
 
     @HostListener('click') click() {
         this.onClick.emit();

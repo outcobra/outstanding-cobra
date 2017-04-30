@@ -12,31 +12,35 @@ import {Util} from '../../shared/util/util';
 })
 export class SchoolClassDialog extends ManageDialog<SchoolClassDto, InstitutionDto> implements OnInit {
 
-    public schoolClassForm: FormGroup;
+    private _schoolClassForm: FormGroup;
 
-    constructor(public dialogRef: MdDialogRef<SchoolClassDialog>, private formBuilder: FormBuilder) {
+    constructor(private _dialogRef: MdDialogRef<SchoolClassDialog>, private _formBuilder: FormBuilder) {
         super();
     }
 
     ngOnInit() {
-        this.schoolClassForm = this.formBuilder.group({
+        this._schoolClassForm = this._formBuilder.group({
             normalizedName: [this.getParamOrDefault('normalizedName'), Validators.required]
         });
     }
 
-    onCancel() {
-        this.dialogRef.close(null);
+    public cancel() {
+        this._dialogRef.close(null);
     }
 
-    onSubmit() {
-        if (this.schoolClassForm.valid && this.schoolClassForm.dirty) {
-            let value = this.schoolClassForm.value as SchoolClassDto;
+    public submit() {
+        if (this._schoolClassForm.valid && this._schoolClassForm.dirty) {
+            let value = this._schoolClassForm.value as SchoolClassDto;
             value.institutionId = this.parent.id;
-            this.dialogRef.close(value);
+            this._dialogRef.close(value);
         }
         else {
-            Util.revalidateForm(this.schoolClassForm);
+            Util.revalidateForm(this._schoolClassForm);
         }
     }
 
+
+    get schoolClassForm(): FormGroup {
+        return this._schoolClassForm;
+    }
 }

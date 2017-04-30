@@ -13,7 +13,7 @@ export class Util {
      * @param paramName
      * @returns {null}
      */
-    static getUrlParam(paramName: string) {
+    public static getUrlParam(paramName: string) {
         let result = null,
             tmp = [];
         window.location.search
@@ -36,7 +36,7 @@ export class Util {
      * @param length of the subarrays
      * @returns {Array}
      */
-    static split<T>(array: Array<T>, length: number): Array<Array<T>> {
+    public static split<T>(array: Array<T>, length: number): Array<Array<T>> {
         let out = [];
         let copy = Util.cloneArray<T>(array); // copy the array to not mutate the input
         while (copy.length > 0) {
@@ -53,7 +53,7 @@ export class Util {
      * @param findPredicate
      * @returns {any}
      */
-    static arrayRemove<T>(array: Array<T>, findPredicate: Predicate<T>): Array<T> {
+    public static arrayRemove<T>(array: Array<T>, findPredicate: Predicate<T>): Array<T> {
         let index = array.findIndex(t => findPredicate(t));
         if (!index && index != 0) return array;
         return array.splice(index, 1)
@@ -65,14 +65,14 @@ export class Util {
      * @param obj
      * @returns {any}
      */
-    static clone<T>(obj: T): T {
+    public static clone<T>(obj: T): T {
         return JSON.parse(JSON.stringify(obj, dateReplacer), dateReviver) as T;
     }
 
     /**
      *
      */
-    static cloneArray<T>(array: Array<T>): Array<T> {
+    public static cloneArray<T>(array: Array<T>): Array<T> {
         return array.slice(0);
     }
 
@@ -80,7 +80,7 @@ export class Util {
      * returns the time in milliseconds since the 01.01.1970
      * @returns {number}
      */
-    static getMillis(): number {
+    public static getMillis(): number {
         return new Date().getTime();
     }
 
@@ -91,7 +91,7 @@ export class Util {
      * @param form FormGroup
      * @return validity of the given FormGroup
      */
-    static revalidateForm(form: FormGroup): boolean {
+    public static revalidateForm(form: FormGroup): boolean {
         Object.keys(form.controls).forEach((key) => {
             let control: AbstractControl = form.controls[key];
             if (control instanceof FormGroup) {
@@ -109,7 +109,7 @@ export class Util {
      * @param control AbstractControl to be checked
      * @return {boolean} the validity of the control
      */
-    static revalidateControl(control: AbstractControl): boolean {
+    public static revalidateControl(control: AbstractControl): boolean {
         control.updateValueAndValidity({onlySelf: true});
         if (control.invalid) {
             control.markAsTouched();
@@ -117,7 +117,7 @@ export class Util {
         return control.valid;
     }
 
-    static bindAndCall(func: Function, thisArg: any, args?: any) {
+    public static bindAndCall(func: Function, thisArg: any, args?: any) {
         let f = args ? func.bind(thisArg, args) : func.bind(thisArg);
         return f.call();
     }

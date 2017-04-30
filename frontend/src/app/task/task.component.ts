@@ -12,7 +12,7 @@ import {Util} from '../shared/util/util';
 import {DialogMode} from '../common/DialogMode';
 import {Observable} from 'rxjs';
 import {SMALL_DIALOG} from '../shared/util/const';
-import {and, negate} from '../shared/util/helper';
+import {and} from '../shared/util/helper';
 import {ResponsiveHelperService} from '../shared/services/ui/responsive-helper.service';
 
 @Component({
@@ -38,24 +38,24 @@ import {ResponsiveHelperService} from '../shared/services/ui/responsive-helper.s
     ]
 })
 export class TaskComponent implements OnInit, AfterViewInit {
-    public filterForm: FormGroup;
-    public searchForm: FormGroup;
-    public filteredTasks: Task[];
-    public filterData: TaskFilter;
-    public filterShown: boolean;
+    private _filterForm: FormGroup;
+    private _searchForm: FormGroup;
+    private _filteredTasks: Task[];
+    private _filterData: TaskFilter;
+    private _filterShown: boolean;
 
-    private filtered: boolean = true;
-    private tasks: Task[];
+    private _filtered: boolean = true;
+    private _tasks: Task[];
 
-    public taskCreateUpdateDialog: MdDialogRef<TaskCreateUpdateDialog>;
+    private _taskCreateUpdateDialog: MdDialogRef<TaskCreateUpdateDialog>;
 
-    constructor(private taskService: TaskService,
-                private dialogService: MdDialog,
-                private notificationService: NotificationsService,
-                private route: ActivatedRoute,
-                private router: Router,
-                private formBuilder: FormBuilder,
-                private responsiveHelperService: ResponsiveHelperService) {
+    constructor(private _taskService: TaskService,
+                private _dialogService: MdDialog,
+                private _notificationService: NotificationsService,
+                private _route: ActivatedRoute,
+                private _router: Router,
+                private _formBuilder: FormBuilder,
+                private _responsiveHelperService: ResponsiveHelperService) {
     }
 
     ngOnInit() {
@@ -66,13 +66,13 @@ export class TaskComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this.filterShown = !this.responsiveHelperService.isMobile();
+        this._filterShown = !this._responsiveHelperService.isMobile();
         Observable.concat(
-            this.responsiveHelperService.listenForResize(),
-            this.responsiveHelperService.listenForOrientationChange()
+            this._responsiveHelperService.listenForResize(),
+            this._responsiveHelperService.listenForOrientationChange()
         ).subscribe(() => {
-            if (!this.responsiveHelperService.isMobile()) {
-                this.filterShown = true;
+            if (!this._responsiveHelperService.isMobile()) {
+                this._filterShown = true;
             }
         });
     }
@@ -80,77 +80,77 @@ export class TaskComponent implements OnInit, AfterViewInit {
     //region initialization
 
     private _getAndInitTasksFromResolver() {
-        this.route.data.subscribe((data: { taskFilter: TaskFilter, tasks: Task[] }) => {
-            this.filterData = data.taskFilter;
+        this._route.data.subscribe((data: { taskFilter: TaskFilter, tasks: Task[] }) => {
+            this._filterData = data.taskFilter;
             this._refreshTasksWithFilter(data.tasks);
         });
     }
 
     private _refreshTasksWithFilter(tasks: Task[]) {
-        this.tasks = tasks;
-        this.filteredTasks = !this.filtered ? Util.cloneArray(tasks) : this.filterTasks(Util.cloneArray(tasks));
+        this._tasks = tasks;
+        this._filteredTasks = !this._filtered ? Util.cloneArray(tasks) : this._filterTasks(Util.cloneArray(tasks));
     }
 
     private _refreshTasksAfterRouteChangeAndIfCacheWasDeleted() {
-        this.router.events.subscribe((event) => {
-            if (event instanceof NavigationEnd && !this.taskService.hasCache()) {
-                this.taskService.readAll().subscribe(this._refreshTasksWithFilter);
+        this._router.events.subscribe((event) => {
+            if (event instanceof NavigationEnd && !this._taskService.hasCache()) {
+                this._taskService.readAll().subscribe(this._refreshTasksWithFilter);
             }
         });
     }
 
     private _initForms() {
-        this.searchForm = this.formBuilder.group({
+        this._searchForm = this._formBuilder.group({
             searchTerm: ['']
         });
-        this.filterForm = this.formBuilder.group({
+        this._filterForm = this._formBuilder.group({
             subjectId: [''],
             finished: [true]
         });
     }
 
     private _initFormChangeSubscriptions() {
-        this.searchForm.get('searchTerm').valueChanges
+        this._searchForm.get('searchTerm').valueChanges
             .debounceTime(300)
             .distinctUntilChanged()
-            .subscribe(searchTerm => this.filteredTasks = Util.cloneArray(this.search(searchTerm)));
+            .subscribe(searchTerm => this._filteredTasks = Util.cloneArray(this.search(searchTerm)));
 
-        this.filterForm.valueChanges
+        this._filterForm.valueChanges
             .subscribe(() => this.doFilter());
     }
 
     //endregion
 
-    addTask() {
-        this.taskCreateUpdateDialog = this.dialogService.open(TaskCreateUpdateDialog, SMALL_DIALOG);
-        this.taskCreateUpdateDialog.componentInstance.init(DialogMode.NEW, null);
-        this.taskCreateUpdateDialog.afterClosed()
+    public addTask() {
+        this._taskCreateUpdateDialog = this._dialogService.open(TaskCreateUpdateDialog, SMALL_DIALOG);
+        this._taskCreateUpdateDialog.componentInstance.init(DialogMode.NEW, null);
+        this._taskCreateUpdateDialog.afterClosed()
             .flatMap((value) => {
                 if (!value) return Observable.empty();
-                return this.taskService.create(value)
+                return this._taskService.create(value)
             })
             .subscribe((task: Task) => {
-                this.notificationService.success('i18n.modules.task.notification.add.title', 'i18n.modules.task.notification.add.message');
-                this.tasks.push(task);
-                this.checkFilterThenAddToFilteredList(task);
+                this._notificationService.success('i18n.modules.task.notification.add.title', 'i18n.modules.task.notification.add.message');
+                this._tasks.push(task);
+                this._checkFilterThenAddToFilteredList(task);
             });
     }
 
     //region filtering
 
-    checkFilterThenAddToFilteredList(task: Task) {
-        let filter = this.buildFilterPredicate();
-        if (!this.filtered || this.filterTask(task, filter)) {
-            this.filteredTasks.push(task);
+    private _checkFilterThenAddToFilteredList(task: Task) {
+        let filter = this._buildFilterPredicate();
+        if (!this._filtered || this._filterTask(task, filter)) {
+            this._filteredTasks.push(task);
         }
     }
 
-    markTaskAsDone(task: Task) {
+    public markTaskAsDone(task: Task) {
         if (task.progress == 100) return;
-        this.taskService.updateProgress(task.id, 100)
+        this._taskService.updateProgress(task.id, 100)
             .subscribe(() => {
                 task.progress = 100;
-                if (this.filtered) this.doFilter();
+                if (this._filtered) this.doFilter();
             });
     }
 
@@ -159,8 +159,8 @@ export class TaskComponent implements OnInit, AfterViewInit {
      * @param term
      * @returns {Task[]}
      */
-    search(term: string) {
-        return this.tasks.filter((task: Task) => {
+    public search(term: string) {
+        return this._tasks.filter((task: Task) => {
             let lcTerm = term.toLowerCase();
             return task.name.toLowerCase().includes(lcTerm) ||
                 task.description.toLowerCase().includes(lcTerm) ||
@@ -168,42 +168,62 @@ export class TaskComponent implements OnInit, AfterViewInit {
         });
     }
 
-    filterTasks(tasks: Task[]): Task[] {
-        if (!this.filtered) return tasks;
-        let filter = this.buildFilterPredicate();
-        return tasks.filter(task => this.filterTask(task, filter));
+    private _filterTasks(tasks: Task[]): Task[] {
+        if (!this._filtered) return tasks;
+        let filter = this._buildFilterPredicate();
+        return tasks.filter(task => this._filterTask(task, filter));
 
     }
 
-    filterTask(task: Task, filter: Predicate<Task>): boolean {
-        if (!this.filtered) return true;
+    private _filterTask(task: Task, filter: Predicate<Task>): boolean {
+        if (!this._filtered) return true;
         return filter(task);
     }
 
-    buildFilterPredicate(): Predicate<Task> {
+    private _buildFilterPredicate(): Predicate<Task> {
         let predicates: Predicate<Task>[] = [];
-        if (this.filterForm.get('subjectId').value) {
-            predicates.push((task: Task) => task.subject.id == this.filterForm.get('subjectId').value);
+        if (this._filterForm.get('subjectId').value) {
+            predicates.push((task: Task) => task.subject.id == this._filterForm.get('subjectId').value);
         }
-        if (this.filterForm.get('finished').value) {
+        if (this._filterForm.get('finished').value) {
             predicates.push((task: Task) => task.progress != 100);
         }
         return and(predicates);
     }
 
-    resetFilter() {
-        this.filtered = false;
-        this.filterForm.reset();
-        this.filteredTasks = Util.cloneArray(this.tasks);
+    public resetFilter() {
+        this._filtered = false;
+        this._filterForm.reset();
+        this._filteredTasks = Util.cloneArray(this._tasks);
     }
 
-    doFilter() {
-        this.filtered = true;
-        this.filteredTasks = Util.cloneArray(this.filterTasks(this.tasks));
+    public doFilter() {
+        this._filtered = true;
+        this._filteredTasks = Util.cloneArray(this._filterTasks(this._tasks));
     }
 
-    changeFilterVisibility() {
-        this.filterShown = !this.filterShown;
+    public changeFilterVisibility() {
+        this._filterShown = !this._filterShown;
+    }
+
+    get filterForm(): FormGroup {
+        return this._filterForm;
+    }
+
+    get searchForm(): FormGroup {
+        return this._searchForm;
+    }
+
+    get filteredTasks(): Task[] {
+        return this._filteredTasks;
+    }
+
+    get filterData(): TaskFilter {
+        return this._filterData;
+    }
+
+    get filterShown(): boolean {
+        return this._filterShown;
     }
     //endregion
 }

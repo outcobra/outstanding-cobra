@@ -29,30 +29,30 @@ import {MdInputDirective} from '@angular/material';
     }
 })
 export class DatepickerComponent implements OnInit, AfterContentInit, ControlValueAccessor {
-    @Input() public opened: boolean = false;
-    @Input() public currentDate: Date;
-    @Input() public initDate: Date;
-    @Input() public minDate: Date;
-    @Input() public maxDate: Date;
-    @Input() public pickerMode: string;
-    @Input() public placeholder: string;
-    @Input() public value: Date;
+    @Input() opened: boolean = false;
+    @Input() initDate: Date;
+    @Input() minDate: Date;
+    @Input() maxDate: Date;
+    @Input() pickerMode: string;
+    @Input() placeholder: string;
+
+    private _currentDate: Date;
 
     @ViewChild(MdInputDirective) inputField: MdInputDirective;
 
     // emitted Date
-    private outDate: Date;
+    private _outDate: Date;
     // date for inputField
-    public formattedDate: string;
+    private _formattedDate: string;
 
     @Output('selectDate') onSelectDate = new EventEmitter<Date>();
 
-    private onTouchedCallback: () => void = () => {
+    private _onTouchedCallback: () => void = () => {
     };
-    private onChangeCallback: (_: any) => void = () => {
+    private _onChangeCallback: (_: any) => void = () => {
     };
 
-    constructor(private elementRef: ElementRef, @Self() @Optional() public control: NgControl) {
+    constructor(private _elementRef: ElementRef, @Self() @Optional() public control: NgControl) {
         if (this.control) {
             this.control.valueAccessor = this;
         }
@@ -80,22 +80,22 @@ export class DatepickerComponent implements OnInit, AfterContentInit, ControlVal
         if (this.minDate > this.maxDate) {
             throw new DatePickerMaxDateSmallerThanMinDateError();
         }
-        this.currentDate = this.initDate = this.checkInitDate();
+        this._currentDate = this.initDate = this._checkInitDate();
     }
 
-    open() {
+    public open() {
         this.opened = true;
     }
 
-    close() {
+    public close() {
         if (this.isOpen()) {
-            this.onTouchedCallback();
+            this._onTouchedCallback();
             this.syncValidityWithMdInput();
             this.opened = false;
         }
     }
 
-    toggle() {
+    public toggle() {
         if (this.isOpen()) {
             this.close();
         } else {
@@ -103,16 +103,16 @@ export class DatepickerComponent implements OnInit, AfterContentInit, ControlVal
         }
     }
 
-    isOpen() {
+    public isOpen() {
         return this.opened;
     }
 
-    submit() {
-        if (this.currentDate === this.initDate) this.selectDate(this.initDate);
+    public submit() {
+        if (this._currentDate === this.initDate) this.selectDate(this.initDate);
         this.close();
     }
 
-    cancel() {
+    public cancel() {
         this.selectDate(this.initDate);
         this.close();
     }
@@ -124,27 +124,27 @@ export class DatepickerComponent implements OnInit, AfterContentInit, ControlVal
      * @param event
      */
     onDocumentClick(event) {
-        if (!this.elementRef.nativeElement.contains(event.target)) {
+        if (!this._elementRef.nativeElement.contains(event.target)) {
             this.close();
         }
     }
 
-    inputDateChanged() { // todo make a better parser for the input field (low priority)
-        let date = moment(this.formattedDate, 'DD.MM.YYYY').valueOf();
+    public inputDateChanged() { // todo make a better parser for the input field (low priority)
+        let date = moment(this._formattedDate, 'DD.MM.YYYY').valueOf();
         if (!isNaN(date)) {
             this.selectDate(new Date(date));
         }
     }
 
-    formatDate(date: Date) {
+    private _formatDate(date: Date) {
         return moment(date).format('DD.MM.YYYY');
     }
 
-    checkInitDate(): Date {
+    private _checkInitDate(): Date {
         let date: Date;
         if (this.initDate instanceof Date) {
             date = this.initDate;
-            this.formattedDate = this.formatDate(date);
+            this._formattedDate = this._formatDate(date);
         } else {
             date = new Date();
         }
@@ -156,11 +156,11 @@ export class DatepickerComponent implements OnInit, AfterContentInit, ControlVal
             (DateUtil.isMaxDate(this.maxDate) ? new Date() : this.maxDate);
     }
 
-    selectDate(date: Date) {
-        this.currentDate = date;
+    public selectDate(date: Date) {
+        this._currentDate = date;
         this.writeValue(date);
         this.onSelectDate.emit(date);
-        this.formattedDate = this.formatDate(date);
+        this._formattedDate = this._formatDate(date);
         this.syncValidityWithMdInput();
     }
 
@@ -168,19 +168,19 @@ export class DatepickerComponent implements OnInit, AfterContentInit, ControlVal
         // TODO
     }
 
-    writeValue(value: any): void {
-        if (value && this.outDate !== value) {
-            this.outDate = value;
-            this.onChangeCallback(value);
+    public writeValue(value: any): void {
+        if (value && this._outDate !== value) {
+            this._outDate = value;
+            this._onChangeCallback(value);
         }
     }
 
-    registerOnChange(fn: any): void {
-        this.onChangeCallback = fn;
+    public registerOnChange(fn: any): void {
+        this._onChangeCallback = fn;
     }
 
-    registerOnTouched(fn: any): void {
-        this.onTouchedCallback = fn;
+    public registerOnTouched(fn: any): void {
+        this._onTouchedCallback = fn;
     }
 
     private syncValidityWithMdInput() {
@@ -199,5 +199,18 @@ export class DatepickerComponent implements OnInit, AfterContentInit, ControlVal
                 this.inputField._ngControl.control.markAsUntouched();
             }
         }
+    }
+
+    get currentDate(): Date {
+        return this._currentDate;
+    }
+
+    get formattedDate(): string {
+        return this._formattedDate;
+    }
+
+
+    set formattedDate(value: string) {
+        this._formattedDate = value;
     }
 }

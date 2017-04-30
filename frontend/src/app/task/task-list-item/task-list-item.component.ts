@@ -13,29 +13,28 @@ export class TaskListItemComponent implements OnInit {
     @Input() task: Task;
     @Output('markDone') onMarkDone: EventEmitter<Task> = new EventEmitter<Task>();
 
-    constructor(private router: Router,
-                private activatedRoute: ActivatedRoute,
-                private taskService: TaskService) {
+    constructor(private _router: Router,
+                private _activatedRoute: ActivatedRoute,
+                private _taskService: TaskService) {
     }
 
     ngOnInit() {
     }
 
-    isFinished() {
-        return this.taskService.isFinished(this.task);
+    public isFinished() {
+        return this._taskService.isFinished(this.task);
     }
 
-    markAsDone(event: Event) {
+    public markAsDone(event: Event) {
         event.stopPropagation();
         this.onMarkDone.emit(this.task);
     }
 
-    hasDesc(): boolean {
+    public hasDescription(): boolean {
         return isNotNull(this.task.description);
     }
 
-    goToDetail() {
-        this.router.navigate([this.task.id], {relativeTo: this.activatedRoute});
+    public goToDetail() {
+        this._router.navigate([this.task.id], {relativeTo: this._activatedRoute});
     }
-
 }
