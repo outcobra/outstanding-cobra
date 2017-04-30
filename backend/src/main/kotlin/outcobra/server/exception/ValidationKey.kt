@@ -37,8 +37,4 @@ enum class ValidationKey(val i18nMessage: String = "i18n.error.http.500.message"
         return exception
     }
 
-    fun makeException(): ValidationException {
-        return makeException(null, null)
-    }
-
 }

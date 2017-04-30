@@ -10,6 +10,6 @@ interface ValidationExceptionThrower {
     @Throws(ValidationException::class)
     fun throwException(): Unit
 
-    fun makeException(messageLevel: MessageLevel?,
-                      nestedCause: Throwable?): ValidationException
+    fun makeException(messageLevel: MessageLevel? = null,
+                      nestedCause: Throwable? = null): ValidationException
 }
