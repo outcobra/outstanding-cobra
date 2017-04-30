@@ -8,6 +8,6 @@ I made sure to:
 - [ ] Run the code formatter (`CTRL + ALT + L`)
 - [ ] Update any documentation (javadoc, domain model, erd, ...)
 - [ ] Follow the contribution guidelines
-- [ ] Update CI script (`Jenkinsfile`)
+- [ ] Update CI script and configs on Jenkins (`Jenkinsfile`, `auth0.yml`, `application.yml`, etc.)
 
 Please review @**todo** / cc: @outcobra/developers.
