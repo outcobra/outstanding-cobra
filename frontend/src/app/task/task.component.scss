@@ -46,6 +46,12 @@ button[md-fab] {
     color: $primary-light;
 }
 
+oc-app.oc-mobile {
+    button[md-fab] {
+        bottom: 23px;
+    }
+}
+
 .search-row {
     margin: 0;
 }

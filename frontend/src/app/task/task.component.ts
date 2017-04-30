@@ -88,7 +88,7 @@ export class TaskComponent implements OnInit, AfterViewInit {
 
     private _refreshTasksWithFilter(tasks: Task[]) {
         this._tasks = tasks;
-        this._filteredTasks = !this._filtered ? Util.cloneArray(tasks) : this.filterTasks(Util.cloneArray(tasks));
+        this._filteredTasks = !this._filtered ? Util.cloneArray(tasks) : this._filterTasks(Util.cloneArray(tasks));
     }
 
     private _refreshTasksAfterRouteChangeAndIfCacheWasDeleted() {
