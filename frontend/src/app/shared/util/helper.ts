@@ -21,3 +21,6 @@ export function and<T>(predicates: Predicate<T>[]): Predicate<T> {
     return (arg) => predicates.every(p => p(arg));
 }
 
+export function negate<T>(predicate: Predicate<T>, thisArg?: any): Predicate<T> {
+    return (arg) => !predicate.call(thisArg, arg);
+}

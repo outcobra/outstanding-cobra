@@ -39,4 +39,8 @@ export class TaskService extends CacheableCrudService<Task, Task[]> {
     public updateProgress(taskId: number, progress: number): Observable<Task> {
         return this._http.post(`${this._baseUri}/progress`, { taskId: taskId, progress: progress } as TaskProgressUpdate);
     }
+
+    public isFinished(task) {
+        return task.progress == 100;
+    }
 }
