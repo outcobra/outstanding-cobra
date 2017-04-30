@@ -24,14 +24,14 @@ class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(NoRepositoryFoundException::class)
     @ResponseBody
-    fun handleRepoException(exception: NoRepositoryFoundException) {
-        return ValidationKey.SERVER_ERROR.run { makeException(i18nMessage, i18nTitle, MessageLevel.ERROR, exception) }
+    fun handleRepoException(exception: NoRepositoryFoundException): ValidationException {
+        return ValidationKey.SERVER_ERROR.makeException(MessageLevel.ERROR, exception)
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(EntityNotFoundException::class)
     @ResponseBody
     fun handleNotFound(exception: EntityNotFoundException): ValidationException {
-        return ValidationKey.ID_NOT_FOUND.run { makeException(i18nMessage, i18nTitle, MessageLevel.ERROR, exception) }
+        return ValidationKey.ENTITY_NOT_FOUND.makeException(MessageLevel.ERROR, exception)
     }
 }
