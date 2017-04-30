@@ -53,7 +53,7 @@ export class TaskComponent implements OnInit, AfterViewInit {
     public filterData: TaskFilter;
     public filterShown: boolean;
 
-    private filtered: boolean = false;
+    private filtered: boolean = true;
     private tasks: Task[];
 
     public taskCreateUpdateDialog: MdDialogRef<TaskCreateUpdateDialog>;
@@ -68,38 +68,10 @@ export class TaskComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit() {
-        this.searchForm = this.formBuilder.group({
-            searchTerm: ['']
-        });
-        this.filterForm = this.formBuilder.group({
-            subjectId: [''],
-            finished: [true]
-        });
-
-        this.route.data.subscribe((data: { taskFilter: TaskFilter, tasks: Task[] }) => {
-            this.filterData = data.taskFilter;
-            this.tasks = data.tasks;
-            this.filteredTasks = Util.cloneArray(data.tasks)
-                .filter(negate(this.taskService.isFinished));
-        });
-
-        this.searchForm.get('searchTerm').valueChanges
-            .debounceTime(300)
-            .distinctUntilChanged()
-            .subscribe(searchTerm => this.filteredTasks = Util.cloneArray(this.search(searchTerm)));
-
-        this.filterForm.valueChanges
-            .do(() => console.log('hello'))
-            .subscribe(() => this.doFilter());
-
-        this.router.events.subscribe((event) => {
-            if (event instanceof NavigationEnd && !this.taskService.hasCache()) {
-                this.taskService.readAll().subscribe((tasks: Task[]) => {
-                    this.tasks = tasks;
-                    this.filteredTasks = this.filtered ? Util.cloneArray(tasks) : this.filterTasks(Util.cloneArray(tasks));
-                });
-            }
-        });
+        this._initForms();
+        this._getAndInitTasksFromResolver();
+        this._initFormChangeSubscriptions();
+        this._refreshTasksAfterRouteChangeAndIfCacheWasDeleted();
     }
 
     ngAfterViewInit() {
@@ -114,6 +86,50 @@ export class TaskComponent implements OnInit, AfterViewInit {
         });
     }
 
+    //region initialization
+
+    private _getAndInitTasksFromResolver() {
+        this.route.data.subscribe((data: { taskFilter: TaskFilter, tasks: Task[] }) => {
+            this.filterData = data.taskFilter;
+            this._refreshTasksWithFilter(data.tasks);
+        });
+    }
+
+    private _refreshTasksWithFilter(tasks: Task[]) {
+        this.tasks = tasks;
+        this.filteredTasks = this.filtered ? Util.cloneArray(tasks) : this.filterTasks(Util.cloneArray(tasks));
+    }
+
+    private _refreshTasksAfterRouteChangeAndIfCacheWasDeleted() {
+        this.router.events.subscribe((event) => {
+            if (event instanceof NavigationEnd && !this.taskService.hasCache()) {
+                this.taskService.readAll().subscribe(this._refreshTasksWithFilter);
+            }
+        });
+    }
+
+    private _initForms() {
+        this.searchForm = this.formBuilder.group({
+            searchTerm: ['']
+        });
+        this.filterForm = this.formBuilder.group({
+            subjectId: [''],
+            finished: [true]
+        });
+    }
+
+    private _initFormChangeSubscriptions() {
+        this.searchForm.get('searchTerm').valueChanges
+            .debounceTime(300)
+            .distinctUntilChanged()
+            .subscribe(searchTerm => this.filteredTasks = Util.cloneArray(this.search(searchTerm)));
+
+        this.filterForm.valueChanges
+            .subscribe(() => this.doFilter());
+    }
+
+    //endregion
+
     addTask() {
         this.taskCreateUpdateDialog = this.dialogService.open(TaskCreateUpdateDialog, SMALL_DIALOG);
         this.taskCreateUpdateDialog.componentInstance.init(DialogMode.NEW, null);
@@ -125,13 +141,15 @@ export class TaskComponent implements OnInit, AfterViewInit {
             .subscribe((task: Task) => {
                 this.notificationService.success('i18n.modules.task.notification.add.title', 'i18n.modules.task.notification.add.message');
                 this.tasks.push(task);
-                this.checkFilter(task);
+                this.checkFilterThenAddToFilteredList(task);
             });
     }
 
-    checkFilter(task: Task) {
+    //region filtering
+
+    checkFilterThenAddToFilteredList(task: Task) {
         let filter = this.buildFilterPredicate();
-        if (!this.filtered || this.filterTask(task, filter)) { // only add to filteredTasks if it passes the current filter
+        if (!this.filtered || this.filterTask(task, filter)) {
             this.filteredTasks.push(task);
         }
     }
@@ -196,4 +214,5 @@ export class TaskComponent implements OnInit, AfterViewInit {
     changeFilterVisibility() {
         this.filterShown = !(this.filterShown)
     }
+    //endregion
 }
