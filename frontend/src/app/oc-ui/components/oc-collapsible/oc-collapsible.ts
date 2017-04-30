@@ -4,7 +4,7 @@ import {
     ContentChild,
     EventEmitter,
     HostBinding,
-    HostListener,
+    HostListener, Output,
     ViewEncapsulation
 } from '@angular/core';
 

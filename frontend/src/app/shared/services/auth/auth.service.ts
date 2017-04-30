@@ -114,7 +114,7 @@ export class AuthService {
      * @returns {boolean}
      */
     public isLoggedIn(): boolean {
-        return tokenNotExpired(this.config.get('locStorage.tokenLocation'));
+        return tokenNotExpired(this._config.get('locStorage.tokenLocation'));
     }
 
 }
