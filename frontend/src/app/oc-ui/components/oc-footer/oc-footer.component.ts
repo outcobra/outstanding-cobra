@@ -24,9 +24,12 @@ export class OCFooterComponent implements OnInit {
             .subscribe(info => this._appInfo = info)
     }
 
-    openInfoDialog() {
+    public openInfoDialog() {
         let dialog = this._dialogService.open(InfoDialogComponent, this._responsiveHelper.getMobileOrGivenDialogConfig(SMALL_DIALOG));
         dialog.componentInstance.info = this._appInfo;
     }
 
+    get appInfo(): Info {
+        return this._appInfo;
+    }
 }

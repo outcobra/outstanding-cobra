@@ -9,7 +9,7 @@ import {isNotNull} from '../../shared/util/helper';
     styleUrls: ['./task-list-item.component.scss']
 })
 export class TaskListItemComponent implements OnInit {
-    @Input('task') private _task: Task;
+    @Input() task: Task;
     @Output('markDone') onMarkDone: EventEmitter<Task> = new EventEmitter<Task>();
 
     constructor(private _router: Router,
@@ -20,24 +20,19 @@ export class TaskListItemComponent implements OnInit {
     }
 
     public isFinished() {
-        return this._task.progress == 100;
+        return this.task.progress == 100;
     }
 
     public markAsDone(event: Event) {
         event.stopPropagation();
-        this.onMarkDone.emit(this._task);
+        this.onMarkDone.emit(this.task);
     }
 
     public hasDescription(): boolean {
-        return isNotNull(this._task.description);
+        return isNotNull(this.task.description);
     }
 
     public goToDetail() {
-        this._router.navigate([this._task.id], {relativeTo: this._activatedRoute});
-    }
-
-
-    get task(): Task {
-        return this._task;
+        this._router.navigate([this.task.id], {relativeTo: this._activatedRoute});
     }
 }

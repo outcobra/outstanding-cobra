@@ -27,12 +27,12 @@ import {Util} from '../../util/util';
     }
 })
 export class DatepickerComponent implements OnInit, AfterContentInit, ControlValueAccessor {
-    @Input('opened') private _opened: boolean = false;
-    @Input('initDate') private _initDate: Date;
-    @Input('minDate') private _minDate: Date;
-    @Input('maxDate') private _maxDate: Date;
-    @Input('pickerMode') private _pickerMode: string;
-    @Input('placeholder') private _placeholder: string;
+    @Input() opened: boolean = false;
+    @Input() initDate: Date;
+    @Input() minDate: Date;
+    @Input() maxDate: Date;
+    @Input() pickerMode: string;
+    @Input() placeholder: string;
 
     private _currentDate: Date;
 
@@ -41,7 +41,7 @@ export class DatepickerComponent implements OnInit, AfterContentInit, ControlVal
     // date for inputField
     private _formattedDate: string;
 
-    @Output('selectDate') private _onSelectDate = new EventEmitter<Date>();
+    @Output('selectDate') onSelectDate = new EventEmitter<Date>();
 
     private _onTouchedCallback: () => void = () => {
     };
@@ -57,7 +57,7 @@ export class DatepickerComponent implements OnInit, AfterContentInit, ControlVal
     ngAfterContentInit() {
         if (!this.control) return;
         this.control.control.setValidators(
-            Validators.compose([OCValidators.isBetweenDay(this._minDate, this._maxDate), this.control.control.validator])
+            Validators.compose([OCValidators.isBetweenDay(this.minDate, this.maxDate), this.control.control.validator])
         );
         /*
          This is some weird shit but without the Promise it does not work and an error is thrown
@@ -71,22 +71,22 @@ export class DatepickerComponent implements OnInit, AfterContentInit, ControlVal
     }
 
     ngOnInit() {
-        this._minDate = (this._minDate || DateUtil.MIN_DATE);
-        this._maxDate = (this._maxDate || DateUtil.MAX_DATE);
-        if (this._minDate > this._maxDate) {
+        this.minDate = (this.minDate || DateUtil.MIN_DATE);
+        this.maxDate = (this.maxDate || DateUtil.MAX_DATE);
+        if (this.minDate > this.maxDate) {
             throw new DatePickerMaxDateSmallerThanMinDateError();
         }
-        this._currentDate = this._initDate = this._checkInitDate();
+        this._currentDate = this.initDate = this._checkInitDate();
     }
 
     public open() {
-        this._opened = true;
+        this.opened = true;
     }
 
     public close() {
         if (this.isOpen()) {
             this._onTouchedCallback();
-            this._opened = false;
+            this.opened = false;
         }
     }
 
@@ -99,16 +99,16 @@ export class DatepickerComponent implements OnInit, AfterContentInit, ControlVal
     }
 
     public isOpen() {
-        return this._opened;
+        return this.opened;
     }
 
     public submit() {
-        if (this._currentDate === this._initDate) this.selectDate(this._initDate);
+        if (this._currentDate === this.initDate) this.selectDate(this.initDate);
         this.close();
     }
 
     public cancel() {
-        this.selectDate(this._initDate);
+        this.selectDate(this.initDate);
         this.close();
     }
 
@@ -137,24 +137,24 @@ export class DatepickerComponent implements OnInit, AfterContentInit, ControlVal
 
     private _checkInitDate(): Date {
         let date: Date;
-        if (this._initDate instanceof Date) {
-            date = this._initDate;
+        if (this.initDate instanceof Date) {
+            date = this.initDate;
             this._formattedDate = this._formatDate(date);
         } else {
             date = new Date();
         }
-        if (DateUtil.isBetweenDay(date, this._minDate, this._maxDate)) {
+        if (DateUtil.isBetweenDay(date, this.minDate, this.maxDate)) {
             return date;
         }
-        return (date < this._minDate) ?
-            (DateUtil.isMinDate(this._minDate) ? new Date() : this._minDate) :
-            (DateUtil.isMaxDate(this._maxDate) ? new Date() : this._maxDate);
+        return (date < this.minDate) ?
+            (DateUtil.isMinDate(this.minDate) ? new Date() : this.minDate) :
+            (DateUtil.isMaxDate(this.maxDate) ? new Date() : this.maxDate);
     }
 
     public selectDate(date: Date) {
         this._currentDate = date;
         this.writeValue(date);
-        this._onSelectDate.emit(date);
+        this.onSelectDate.emit(date);
         this._formattedDate = this._formatDate(date);
     }
 
@@ -177,31 +177,17 @@ export class DatepickerComponent implements OnInit, AfterContentInit, ControlVal
         this._onTouchedCallback = fn;
     }
 
-    get opened(): boolean {
-        return this._opened;
-    }
 
     get currentDate(): Date {
         return this._currentDate;
     }
 
-    get minDate(): Date {
-        return this._minDate;
-    }
-
-    get maxDate(): Date {
-        return this._maxDate;
-    }
-
-    get pickerMode(): string {
-        return this._pickerMode;
-    }
-
-    get placeholder(): string {
-        return this._placeholder;
-    }
-
     get formattedDate(): string {
         return this._formattedDate;
+    }
+
+
+    set formattedDate(value: string) {
+        this._formattedDate = value;
     }
 }

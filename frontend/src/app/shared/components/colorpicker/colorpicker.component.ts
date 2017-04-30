@@ -24,8 +24,8 @@ export const COLORPICKER_CONTROL_VALUE_ACCESSOR: any = {
     providers: [COLORPICKER_CONTROL_VALUE_ACCESSOR]
 })
 export class ColorpickerComponent implements OnInit, ControlValueAccessor {
-    @Input('opened') private _opened: boolean = false;
-    @Input('initColor') private _initColor: string;
+    @Input() opened: boolean = false;
+    @Input() initColor: string;
     private _colorRows: Color[][];
     private _colors: Color[];
     private _selectedColor: Color;
@@ -44,7 +44,7 @@ export class ColorpickerComponent implements OnInit, ControlValueAccessor {
     ngOnInit() {
         this._colorService.getColors()
             .subscribe((res: Color[]) => {
-                this._selectedColor = res.find(color => this._initColor && color.hex.toLowerCase() == this._initColor.toLowerCase());
+                this._selectedColor = res.find(color => this.initColor && color.hex.toLowerCase() == this.initColor.toLowerCase());
                 this._colorRows = Util.split(res, 5);
                 this._colors = res;
             });
@@ -55,13 +55,13 @@ export class ColorpickerComponent implements OnInit, ControlValueAccessor {
     }
 
     public open() {
-        this._opened = true;
+        this.opened = true;
     }
 
     public close() {
         if (this.isOpen()) {
             this._onTouchedCallback();
-            this._opened = false;
+            this.opened = false;
         }
     }
 
@@ -74,7 +74,7 @@ export class ColorpickerComponent implements OnInit, ControlValueAccessor {
     }
 
     public isOpen() {
-        return this._opened;
+        return this.opened;
     }
 
     public submit() {
@@ -123,14 +123,6 @@ export class ColorpickerComponent implements OnInit, ControlValueAccessor {
     public getSelectedColorHex(): string {
         if (!this._selectedColor) return '#00000';
         return `#${this._selectedColor.hex}`;
-    }
-
-    get opened(): boolean {
-        return this._opened;
-    }
-
-    set opened(value: boolean) {
-        this._opened = value;
     }
 
     get colorRows(): Color[][] {

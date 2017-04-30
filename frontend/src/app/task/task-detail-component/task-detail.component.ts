@@ -20,7 +20,7 @@ import {isNotNull, isTrue} from '../../shared/util/helper';
 export class TaskDetailComponent implements OnInit, AfterViewInit {
     private _task: Task;
     private _taskCreateUpdateDialog: MdDialogRef<TaskCreateUpdateDialog>;
-    @ViewChild(MdSlider) private _slider: MdSlider;
+    @ViewChild(MdSlider) slider: MdSlider;
 
     constructor(private _confirmDialogService: ConfirmDialogService,
                 private _notificationService: NotificationsService,
@@ -36,7 +36,7 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this._slider.change
+        this.slider.change
             .debounceTime(500)
             .map((sliderChange: MdSliderChange) => sliderChange.value)
             .distinctUntilChanged()
@@ -77,9 +77,5 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
 
     get task(): Task {
         return this._task;
-    }
-
-    get taskCreateUpdateDialog(): MdDialogRef<TaskCreateUpdateDialog> {
-        return this._taskCreateUpdateDialog;
     }
 }
