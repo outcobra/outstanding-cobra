@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Task} from '../model/Task';
 import {ActivatedRoute, Router} from '@angular/router';
 import {isNotNull} from '../../shared/util/helper';
+import {TaskService} from '../service/task.service';
 
 @Component({
     selector: 'task-list-item',
@@ -12,27 +13,28 @@ export class TaskListItemComponent implements OnInit {
     @Input() task: Task;
     @Output('markDone') onMarkDone: EventEmitter<Task> = new EventEmitter<Task>();
 
-    constructor(private router: Router, private activatedRoute: ActivatedRoute) {
+    constructor(private _router: Router,
+                private _activatedRoute: ActivatedRoute,
+                private _taskService: TaskService) {
     }
 
     ngOnInit() {
     }
 
-    isFinished() {
-        return this.task.progress == 100;
+    public isFinished() {
+        return this._taskService.isFinished(this.task);
     }
 
-    markAsDone(event: Event) {
+    public markAsDone(event: Event) {
         event.stopPropagation();
         this.onMarkDone.emit(this.task);
     }
 
-    hasDesc(): boolean {
+    public hasDescription(): boolean {
         return isNotNull(this.task.description);
     }
 
-    goToDetail() {
-        this.router.navigate([this.task.id], {relativeTo: this.activatedRoute});
+    public goToDetail() {
+        this._router.navigate([this.task.id], {relativeTo: this._activatedRoute});
     }
-
 }

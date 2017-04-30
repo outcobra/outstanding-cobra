@@ -13,7 +13,7 @@ export class ColorService extends CacheableService<Color[]> {
     public getColors(): Observable<Color[]> {
         if (this.hasCache()) return Observable.of(this.cache);
         else if (this.observable) return this.observable;
-        return this.saveObservable(this.http.get<Color[]>(this.baseUri, 'outcobra')
+        return this.saveObservable(this._http.get<Color[]>(this._baseUri, 'outcobra')
                 .map((res: Color[]) => {
                     this.clearObservable();
                     this.saveCache(res);

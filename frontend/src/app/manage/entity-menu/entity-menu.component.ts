@@ -13,11 +13,11 @@ export class EntityMenuComponent {
     constructor() {
     }
 
-    clickedEdit() {
+    public clickedEdit() {
         this.onEdit.emit();
     }
 
-    clickedDelete() {
+    public clickedDelete() {
         this.onDelete.emit();
     }
 

@@ -13,34 +13,38 @@ import {Util} from '../../shared/util/util';
 })
 export class SubjectDialog extends ManageDialog<SubjectDto, SemesterDto> implements OnInit {
 
-    public subjectForm: FormGroup;
+    private _subjectForm: FormGroup;
 
-    constructor(public dialogRef: MdDialogRef<SubjectDialog>,
-                private formBuilder: FormBuilder) {
+    constructor(private _dialogRef: MdDialogRef<SubjectDialog>,
+                private _formBuilder: FormBuilder) {
         super();
     }
 
     ngOnInit() {
-        this.subjectForm = this.formBuilder.group({
+        this._subjectForm = this._formBuilder.group({
                 name: [this.getParamOrDefault('name'), Validators.required],
                 color: [this.getParamOrDefault('color'), Validators.required]
             }
         );
     }
 
-    onCancel() {
-        this.dialogRef.close(null);
+    public cancel() {
+        this._dialogRef.close(null);
     }
 
-    onSubmit() {
-        if (this.subjectForm.valid && this.subjectForm.dirty) {
-            let value = this.subjectForm.value;
+    public submit() {
+        if (this._subjectForm.valid && this._subjectForm.dirty) {
+            let value = this._subjectForm.value;
             value.semesterId = this.parent.id;
-            this.dialogRef.close(value);
+            this._dialogRef.close(value);
         }
         else {
-            Util.revalidateForm(this.subjectForm);
+            Util.revalidateForm(this._subjectForm);
         }
     }
 
+
+    get subjectForm(): FormGroup {
+        return this._subjectForm;
+    }
 }

@@ -13,30 +13,34 @@ import {Util} from '../../shared/util/util';
 })
 export class InstitutionDialog extends ManageDialog<InstitutionDto, any> implements OnInit {
 
-    constructor(public dialogRef: MdDialogRef<InstitutionDialog>, private formBuilder: FormBuilder) {
+    private _institutionForm: FormGroup;
+
+    constructor(private _dialogRef: MdDialogRef<InstitutionDialog>, private _formBuilder: FormBuilder) {
         super();
     }
 
-    public institutionForm: FormGroup;
-
     ngOnInit() {
-        this.institutionForm = this.formBuilder.group({
+        this._institutionForm = this._formBuilder.group({
             name: [this.getParamOrDefault('name'), Validators.required]
         });
     }
 
-    onCancel() {
-        this.dialogRef.close(null);
+    public cancel() {
+        this._dialogRef.close(null);
     }
 
-    onSubmit() {
-        if (this.institutionForm.valid && this.institutionForm.dirty) {
-            let value = this.institutionForm.value as InstitutionDto;
-            this.dialogRef.close(value);
+    public submit() {
+        if (this._institutionForm.valid && this._institutionForm.dirty) {
+            let value = this._institutionForm.value as InstitutionDto;
+            this._dialogRef.close(value);
         }
         else {
-            Util.revalidateForm(this.institutionForm);
+            Util.revalidateForm(this._institutionForm);
         }
     }
 
+
+    get institutionForm(): FormGroup {
+        return this._institutionForm;
+    }
 }

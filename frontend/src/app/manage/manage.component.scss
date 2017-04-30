@@ -45,6 +45,8 @@ oc-app:not(.oc-mobile) {
     overflow-y: hidden;
     transition: margin-left .5s ease-in-out;
     margin: 0;
+    display: flex;
+    text-overflow: ellipsis;
 
     &.mobile {
         width: calc(3 * 100%);

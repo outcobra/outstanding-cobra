@@ -1,5 +1,4 @@
-import {AfterViewChecked, Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {MdDialogRef} from '@angular/material';
+import {Component, ViewEncapsulation} from '@angular/core';
 import {Info} from '../../model/Info';
 
 @Component({
@@ -9,9 +8,14 @@ import {Info} from '../../model/Info';
     encapsulation: ViewEncapsulation.None
 })
 export class InfoDialogComponent {
-    public info: Info;
+    private _info: Info;
 
-    constructor(private dialogRef: MdDialogRef<InfoDialogComponent>) {
+    get info(): Info {
+        return this._info;
     }
 
+
+    set info(value: Info) {
+        this._info = value;
+    }
 }

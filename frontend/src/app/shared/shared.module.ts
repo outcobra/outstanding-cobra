@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {NotificationsService, SimpleNotificationsModule} from 'angular2-notifications';
 import {HttpModule} from '@angular/http';
 import {HttpInterceptor} from './http/HttpInterceptor';
-import {TranslateModule} from 'ng2-translate';
+import {TranslateModule} from '@ngx-translate/core';
 import {NotificationWrapperService} from './notifications/notification-wrapper.service';
 import {TimepickerComponent} from './components/timepicker/timepicker.component';
 import {DatepickerComponent} from './components/datepicker/datepicker.component';
@@ -21,12 +21,14 @@ import {ResponsiveHelperService} from './services/ui/responsive-helper.service';
 import {InfoService} from './services/info.service';
 import {InfoDialogComponent} from './components/info-dialog/info-dialog.component';
 import {OCUiModule} from '../oc-ui/oc-ui.module';
+import {DatePickerErrorDirective} from './components/datepicker/datepicker-error.directive';
 
 @NgModule({
     declarations: [
         TimepickerComponent,
         DatepickerComponent,
         DaypickerComponent,
+        DatePickerErrorDirective,
         YearpickerComponent,
         ColorpickerComponent,
         ConfirmDialogComponent,
@@ -34,6 +36,7 @@ import {OCUiModule} from '../oc-ui/oc-ui.module';
     ],
     exports: [
         DatepickerComponent,
+        DatePickerErrorDirective,
         ColorpickerComponent,
         ConfirmDialogComponent,
         OCUiModule,

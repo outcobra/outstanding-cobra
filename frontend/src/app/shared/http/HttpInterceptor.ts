@@ -23,18 +23,17 @@ import {RequestOptions} from './RequestOptions';
  */
 @Injectable()
 export class HttpInterceptor {
-
-    private apiNames: string[];
-    private defaultApiName: string;
+    private _apiNames: string[];
+    private _defaultApiName: string;
 
     constructor(private http: Http, private notificationsService: NotificationsService, private config: Config) {
-        this.defaultApiName = this.config.get('api.defaultApiName');
-        this.apiNames = this.config.get('api.apis')
+        this._defaultApiName = this.config.get('api.defaultApiName');
+        this._apiNames = this.config.get('api.apis')
             .map(api => api['name']);
     }
 
     /**
-     * performs an http request with the method described in the request object
+     * performs an _http request with the method described in the request object
      *
      * @param request
      * @returns {Observable<T>}
@@ -45,27 +44,27 @@ export class HttpInterceptor {
         request.headers = (request.headers || {});
         request.data = (request.data || {});
         request.params = (request.params || {});
-        request.apiName = (request.apiName || this.defaultApiName);
+        request.apiName = (request.apiName || this._defaultApiName);
 
-        this.interpolateUrl(request);
+        this._interpolateUrl(request);
 
-        this.addContentType(request);
+        this._addContentType(request);
 
-        this.addAuthToken(request);
+        this._addAuthToken(request);
 
         return this.http.request(
             new Request({
                 method: request.method,
-                url: this.buildApiUrl(request),
+                url: this._buildApiUrl(request),
                 headers: request.headers,
-                search: this.buildUrlSearchParams(request.params),
+                search: this._buildUrlSearchParams(request.params),
                 body: JSON.stringify(request.data, dateReplacer)
             })
         ).catch(error => {
             let status = error.status;
             this.notificationsService.error(`i18n.error.http.${status}.title`, `i18n.error.http.${status}.message`);
             return Observable.throw(error);
-        }).map((res: Response) => this.unwrapAndCastHttpResponse<T>(res));
+        }).map((res: Response) => this._unwrapAndCastHttpResponse<T>(res));
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -80,7 +79,7 @@ export class HttpInterceptor {
      * @param apiName
      * @returns {Observable<T>}
      */
-    get<T>(url: string, apiName?: string, params?: any): Observable<T> {
+    public get<T>(url: string, apiName?: string, params?: any): Observable<T> {
         return this.request<T>({
             method: RequestMethod.Get,
             url: url,
@@ -98,7 +97,7 @@ export class HttpInterceptor {
      * @param apiName name of the api to call (described in the config file)
      * @returns {Observable<T>}
      */
-    post<T>(url: string, data: any, apiName?: string, params?: any): Observable<T> {
+    public post<T>(url: string, data: any, apiName?: string, params?: any): Observable<T> {
         return this.request<T>({
             method: RequestMethod.Post,
             url: url,
@@ -117,7 +116,7 @@ export class HttpInterceptor {
      * @param apiName name of the api to call (described in the config file)
      * @returns {Observable<T>}
      */
-    put<T>(url: string, data: any, apiName?: string, params?: any): Observable<T> {
+    public put<T>(url: string, data: any, apiName?: string, params?: any): Observable<T> {
         return this.request<T>({
             method: RequestMethod.Put,
             url: url,
@@ -135,7 +134,7 @@ export class HttpInterceptor {
      * @param apiName name of the api to call (described in the config file)
      * @returns {Observable<T>}
      */
-    delete<T>(url: string, apiName?: string, params?: any): Observable<T> {
+    public delete<T>(url: string, apiName?: string, params?: any): Observable<T> {
         return this.request<T>({
             method: RequestMethod.Delete,
             url: url,
@@ -153,7 +152,7 @@ export class HttpInterceptor {
      * @param apiName name of the api to call (described in the config file)
      * @returns {Observable<T>}
      */
-    patch<T>(url: string, data: any, apiName?: string, params?: any): Observable<T> {
+    public patch<T>(url: string, data: any, apiName?: string, params?: any): Observable<T> {
         return this.request<T>({
             method: RequestMethod.Patch,
             url: url,
@@ -179,16 +178,16 @@ export class HttpInterceptor {
      * @param requestOptions
      * @returns returns the requestOptions object with the updated url
      */
-    private interpolateUrl(requestOptions: RequestOptions) {
+    private _interpolateUrl(requestOptions: RequestOptions) {
         requestOptions.url = requestOptions.url.replace(
             /:([a-zA-Z]+[\w-]*)/g,
             ($0, token) => {
-                if (requestOptions.params.hasOwnProperty(token)) return this.extractValue(requestOptions.params, token);
+                if (requestOptions.params.hasOwnProperty(token)) return this._extractValue(requestOptions.params, token);
                 return '';
             }
         );
         // cleanup double slashes
-        requestOptions.url = this.removeRepeatedSlashes(requestOptions.url);
+        requestOptions.url = this._removeRepeatedSlashes(requestOptions.url);
         // cleanup unnecessary slashes at the end
         requestOptions.url = requestOptions.url.replace(/\/+$/g, '');
         return ( requestOptions );
@@ -202,7 +201,7 @@ export class HttpInterceptor {
      * @param key to remove and return value from it
      * @returns value of the key in the object
      */
-    private extractValue(obj: Object, key: string): any {
+    private _extractValue(obj: Object, key: string): any {
         let value = obj[key];
         delete obj[key];
         return value;
@@ -214,7 +213,7 @@ export class HttpInterceptor {
      * @param request requestOptions object
      * @returns requestOptions object with the updated headers
      */
-    private addContentType(request: RequestOptions) {
+    private _addContentType(request: RequestOptions) {
         if (request.method !== RequestMethod.Get && request.method !== RequestMethod.Delete) {
             request.headers['Content-Type'] = 'application/json ; charset=UTF-8';
         }
@@ -227,7 +226,7 @@ export class HttpInterceptor {
      * @param params object containing the params
      * @returns {URLSearchParams} all search params
      */
-    private buildUrlSearchParams(params: {} | any) {
+    private _buildUrlSearchParams(params: {}|any) {
         let urlParams = new URLSearchParams();
         for (let key in params) {
             urlParams.append(key, params[key]);
@@ -240,21 +239,21 @@ export class HttpInterceptor {
      *
      * @param request
      */
-    private addAuthToken(request: RequestOptions) {
-        let api = this.getApiFromConfig(request.apiName);
+    private _addAuthToken(request: RequestOptions) {
+        let api = this._getApiFromConfig(request.apiName);
         if (api.authToken === true) {
             request.headers['Authorization'] = 'Bearer ' + localStorage.getItem(this.config.get('locStorage.tokenLocation'));
         }
     }
 
     /**
-     * unwraps an http response and returns it as T
+     * unwraps an _http response and returns it as T
      * if no response is present then it returns null
      *
      * @param response
      * @returns http response as T
      */
-    private unwrapAndCastHttpResponse<T>(response: Response): T {
+    private _unwrapAndCastHttpResponse<T>(response: Response): T {
         let responseStr = response.text();
         if (responseStr.length <= 0) return null;
         return JSON.parse(responseStr, dateReviver) as T;
@@ -266,9 +265,9 @@ export class HttpInterceptor {
      * @param request
      * @returns {string} Request url
      */
-    private buildApiUrl(request: RequestOptions): string {
-        let api = this.getApiFromConfig(request.apiName);
-        return this.removeRepeatedSlashes(`${api['apiBase']}/${request.url}`); // concat Url and remove double slashes
+    private _buildApiUrl(request: RequestOptions): string {
+        let api = this._getApiFromConfig(request.apiName);
+        return this._removeRepeatedSlashes(`${api['apiBase']}/${request.url}`); // concat Url and remove double slashes
     }
 
     /**
@@ -277,8 +276,8 @@ export class HttpInterceptor {
      * @param apiName
      * @returns {any} api object from the config
      */
-    private getApiFromConfig(apiName: string) {
-        let name = (this.apiNames.indexOf(apiName) >= 0) ? apiName : this.defaultApiName;
+    private _getApiFromConfig(apiName: string) {
+        let name = (this._apiNames.indexOf(apiName) >= 0) ? apiName : this._defaultApiName;
         return this.config.get('api.apis')
             .find(api => api.name === name);
     }
@@ -289,7 +288,7 @@ export class HttpInterceptor {
      * @param str url
      * @returns {string} formatted url
      */
-    private removeRepeatedSlashes(str: string): string {
+    private _removeRepeatedSlashes(str: string): string {
         return str.replace(/([^:])\/{2,}/g, (match, prefix) => prefix + '/');
     }
 }

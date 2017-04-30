@@ -10,11 +10,11 @@ export class InstitutionService extends AppCrudService<InstitutionDto> {
         super(http, '/institution');
     }
 
-    readById(id: number): Observable<InstitutionDto> {
+    public readById(id: number): Observable<InstitutionDto> {
         throw new Error('not implemented');
     }
 
-    update(arg: InstitutionDto): Observable<InstitutionDto> {
+    public update(arg: InstitutionDto): Observable<InstitutionDto> {
         throw new Error('not implemented');
     }
 }

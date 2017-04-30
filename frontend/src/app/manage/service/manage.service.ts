@@ -6,13 +6,12 @@ import {AppService} from '../../shared/services/core/app.service';
 
 @Injectable()
 export class ManageService extends AppService {
-
     constructor(http: HttpInterceptor) {
         super(http, '/manage')
     }
 
     public getManageData(): Observable<ManageDto> {
-        return this.http.get<ManageDto>(this.baseUri, 'outcobra');
+        return this._http.get<ManageDto>(this._baseUri, 'outcobra');
     }
 
 }

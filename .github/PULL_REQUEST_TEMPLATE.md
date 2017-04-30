@@ -1,4 +1,4 @@
-This closes # .
+This closes #0, closes #0.
 
 Summary of changes:
 - ​
@@ -8,6 +8,6 @@ I made sure to:
 - [ ] Run the code formatter (`CTRL + ALT + L`)
 - [ ] Update any documentation (javadoc, domain model, erd, ...)
 - [ ] Follow the contribution guidelines
-- [ ] Update CI scripts on Semaphore (changes to `auth0.yml` or `application.yml`)
+- [ ] Update CI script and configs on Jenkins (`Jenkinsfile`, `auth0.yml`, `application.yml`, etc.)
 
-Please review @user / cc: @outcobra/developers.
+Please review @**todo** / cc: @outcobra/developers.

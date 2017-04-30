@@ -32,11 +32,15 @@ export class TaskService extends CacheableCrudService<Task, Task[]> {
         );
     }
 
-    getTaskFilter(): Observable<TaskFilter> {
-        return this.http.get<TaskFilter>(`${this.baseUri}/filter`, 'outcobra');
+    public getTaskFilter(): Observable<TaskFilter> {
+        return this._http.get<TaskFilter>(`${this._baseUri}/filter`, 'outcobra');
     }
 
-    updateProgress(taskId: number, progress: number): Observable<Task> {
-        return this.http.post(`${this.baseUri}/progress`, { taskId: taskId, progress: progress } as TaskProgressUpdate);
+    public updateProgress(taskId: number, progress: number): Observable<Task> {
+        return this._http.post(`${this._baseUri}/progress`, { taskId: taskId, progress: progress } as TaskProgressUpdate);
+    }
+
+    public isFinished(task) {
+        return task.progress == 100;
     }
 }

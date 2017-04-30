@@ -4,24 +4,24 @@ import {Http} from '@angular/http';
 
 @Injectable()
 export class Config {
-    private env: Object;
-    private config: Object;
+    private _env: Object;
+    private _config: Object;
 
     constructor(private http: Http) {
-        this.env = environment;
+        this._env = environment;
     }
 
-    load() {
-        return this.http.get(`assets/config/${this.env['envName']}.json`)
+    public load() {
+        return this.http.get(`assets/config/${this._env['envName']}.json`)
             .map(response => response.json())
-            .do(config => this.config = config);
+            .do(config => this._config = config);
     }
 
-    getEnv(key: any) {
-        return this.env[key];
+    public getEnv(key: any) {
+        return this._env[key];
     }
 
-    get(key: string, obj: Object = this.config) {
+    public get(key: string, obj: Object = this._config) {
         if (key.indexOf('.') == -1) {
             return obj[key];
         } else {
