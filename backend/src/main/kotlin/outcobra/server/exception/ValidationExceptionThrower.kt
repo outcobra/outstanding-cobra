@@ -7,9 +7,9 @@ package outcobra.server.exception
  * @since <since>
  */
 interface ValidationExceptionThrower {
-    @Throws(ValidationException::class)
-    fun throwException(): Unit
 
-    fun makeException(messageLevel: MessageLevel? = null,
-                      nestedCause: Throwable? = null): ValidationException
+    @Throws(ValidationException::class)
+    fun throwException(): Nothing
+
+    fun makeException(nestedCause: Throwable? = null, messageLevel: MessageLevel? = null): ValidationException
 }

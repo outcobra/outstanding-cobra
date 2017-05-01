@@ -1,6 +1,7 @@
 package outcobra.server.service.internal
 
 import org.springframework.stereotype.Service
+import outcobra.server.exception.ValidationKey
 import outcobra.server.model.QInstitution
 import outcobra.server.model.dto.manage.ManageDto
 import outcobra.server.model.mapper.manage.ManageDtoMapper
@@ -14,7 +15,9 @@ class DefaultManageService @Inject constructor(val institutionRepository: Instit
                                                val userService: UserService,
                                                val manageDtoMapper: ManageDtoMapper) : ManageService {
     override fun getManageData(): ManageDto {
-        val ownedByUser = QInstitution.institution.user.id.eq(userService.getCurrentUser()!!.id)
+        val userId = userService.getCurrentUser()?.id
+                ?: ValidationKey.SERVER_ERROR.makeException(NullPointerException()).throwException()
+        val ownedByUser = QInstitution.institution.user.id.eq(userId)
         val institutions = institutionRepository.findAll(ownedByUser).toList()
         return manageDtoMapper.toDto(institutions)
     }
