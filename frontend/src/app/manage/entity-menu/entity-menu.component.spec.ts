@@ -1,6 +1,7 @@
 /* tslint:disable:no-unused-variable */
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {EntityMenuComponent} from './entity-menu.component';
+import {TestModule} from '../../core/mock/test.module';
 
 describe('EntityMenuComponent', () => {
     let component: EntityMenuComponent;
@@ -8,9 +9,13 @@ describe('EntityMenuComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [EntityMenuComponent]
-        })
-            .compileComponents();
+            declarations: [
+                EntityMenuComponent
+            ],
+            imports: [
+                TestModule
+            ]
+        }).compileComponents();
     }));
 
     beforeEach(() => {

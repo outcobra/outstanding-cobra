@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, HostBinding, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
-import {AuthService} from './shared/services/auth/auth.service';
+import {Auth0AuthService} from './shared/services/auth/auth.service';
 import {TranslateService} from '@ngx-translate/core';
 import {ResponsiveHelperService} from './shared/services/ui/responsive-helper.service';
 import {MdSidenav, OverlayContainer} from '@angular/material';
@@ -29,7 +29,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     private _isEnglish: boolean = this._translateService.currentLang == 'en';
 
     constructor(private _translateService: TranslateService,
-                private _auth: AuthService,
+                private _auth: Auth0AuthService,
                 private _responsiveHelper: ResponsiveHelperService,
                 private _router: Router,
                 private _overlayContainer: OverlayContainer) {
@@ -93,7 +93,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     }
 
 
-    public get auth(): AuthService {
+    public get auth(): Auth0AuthService {
         return this._auth;
     }
 

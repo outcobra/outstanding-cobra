@@ -3,23 +3,25 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {OCNavComponent} from './oc-nav.component';
 
 describe('OCNavComponent', () => {
-  let component: OCNavComponent;
-  let fixture: ComponentFixture<OCNavComponent>;
+    let component: OCNavComponent;
+    let fixture: ComponentFixture<OCNavComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ OCNavComponent ]
-    })
-    .compileComponents();
-  }));
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [OCNavComponent],
+            imports: [
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(OCNavComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+            ]
+        }).compileComponents();
+    }));
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(OCNavComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
+
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

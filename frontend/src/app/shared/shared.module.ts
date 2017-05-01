@@ -12,7 +12,7 @@ import {DaypickerComponent} from './components/datepicker/daypicker.component';
 import {YearpickerComponent} from './components/datepicker/yearpicker.component';
 import {DateUtil} from './services/date-util.service';
 import {FormsModule} from '@angular/forms';
-import {AuthService} from './services/auth/auth.service';
+import {Auth0AuthService} from './services/auth/auth.service';
 import {ConfirmDialogComponent} from './components/confirm-dialog/confirm-dialog.component';
 import {ConfirmDialogService} from './services/confirm-dialog.service';
 import {ColorService} from './services/color.service';
@@ -58,7 +58,7 @@ import {DatePickerErrorDirective} from './components/datepicker/datepicker-error
     ],
     providers: [
         DateUtil,
-        AuthService,
+        Auth0AuthService,
         HttpInterceptor,
         ConfirmDialogService,
         ColorService,
