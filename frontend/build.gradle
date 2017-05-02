@@ -9,7 +9,7 @@ node {
 
 task ngBuild(type: YarnTask, dependsOn: [yarn_install]) {
 //    enabled = false
-    args = ['run', 'ng', 'build', '--', '-prod']
+    args = ['run', 'ng', 'build', '--', '-prod', '-sm']
 }
 
 task assemble(dependsOn: ngBuild)
