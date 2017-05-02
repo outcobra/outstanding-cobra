@@ -32,7 +32,7 @@ const I18N_PREFIX = 'i18n.modules.manage.mobile.title.';
     styleUrls: ['./manage.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class ManageComponent implements OnInit, AfterViewInit {
+export class    ManageComponent implements OnInit, AfterViewInit {
     public readonly manageViewRef = ManageView;
 
     private _manageData: ManageDto;
