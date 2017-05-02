@@ -5,6 +5,6 @@ import {Observable} from 'rxjs/Observable';
 @Injectable()
 export class MockTranslateLoader implements TranslateLoader {
     getTranslation(lang: string): Observable<any> {
-        return Observable.of(lang);
+        return Observable.of(null);
     }
 }

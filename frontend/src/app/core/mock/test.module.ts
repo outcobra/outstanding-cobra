@@ -31,6 +31,10 @@ import {MockConfirmDialogService} from './ui/mock-confirm-dialog.service';
 import {ConfirmDialogService} from '../../shared/services/confirm-dialog.service';
 import {ManageDialogFactory} from '../../manage/service/manage-dialog-factory';
 import {MockManageDialogFactory} from './manage/mock-manage-dialog.factory';
+import {ColorService} from '../../shared/services/color.service';
+import {MockColorService} from './mock-color.service';
+import {MockTaskService} from './task/mock-task.service';
+import {TaskService} from '../../task/service/task.service';
 
 @NgModule({
     imports: [
@@ -103,6 +107,14 @@ import {MockManageDialogFactory} from './manage/mock-manage-dialog.factory';
         {
             provide: ManageDialogFactory,
             useClass: MockManageDialogFactory
+        },
+        {
+            provide: ColorService,
+            useClass: MockColorService
+        },
+        {
+            provide: TaskService,
+            useClass: MockTaskService
         }
     ]
 })
