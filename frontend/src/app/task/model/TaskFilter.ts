@@ -1,8 +1,8 @@
 import {SchoolClassDto, SubjectDto} from '../../manage/model/ManageDto';
 
 export interface TaskFilter {
-    schoolClassSubjects: {
+    schoolClassSubjects: [{
         schoolClass: SchoolClassDto,
         subject: Array<SubjectDto>
-    }
+    }]
 }

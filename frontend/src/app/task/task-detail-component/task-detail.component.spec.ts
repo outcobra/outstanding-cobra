@@ -5,10 +5,15 @@ import {TestModule} from '../../core/mock/test.module';
 import {OCUiModule} from '../../oc-ui/oc-ui.module';
 import {FormsModule} from '@angular/forms';
 import {RouterTestingModule} from '@angular/router/testing';
+import {MockTaskService} from '../../core/mock/task/mock-task.service';
+import {ActivatedRoute} from '@angular/router';
+import {Observable} from 'rxjs/Observable';
 
 describe('TaskDetailComponent', () => {
     let component: TaskDetailComponent;
     let fixture: ComponentFixture<TaskDetailComponent>;
+
+    let mockTaskService: MockTaskService = new MockTaskService();
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -20,6 +25,16 @@ describe('TaskDetailComponent', () => {
                 FormsModule,
                 RouterTestingModule,
                 OCUiModule
+            ],
+            providers: [
+                {
+                    provide: ActivatedRoute,
+                    useValue: {
+                        data: Observable.of({
+                            task: MockTaskService.TASK1
+                        })
+                    }
+                }
             ]
         }).compileComponents();
     }));
@@ -33,5 +48,4 @@ describe('TaskDetailComponent', () => {
     it('should create', () => {
         expect(component).toBeTruthy();
     });
-
 });
