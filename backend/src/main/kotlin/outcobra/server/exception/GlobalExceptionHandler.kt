@@ -25,13 +25,13 @@ class GlobalExceptionHandler {
     @ExceptionHandler(NoRepositoryFoundException::class)
     @ResponseBody
     fun handleRepoException(exception: NoRepositoryFoundException): ValidationException {
-        return ValidationKey.SERVER_ERROR.makeException(exception)
+        return ValidationKey.SERVER_ERROR.makeException(nestedCause = exception)
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(EntityNotFoundException::class)
     @ResponseBody
     fun handleNotFound(exception: EntityNotFoundException): ValidationException {
-        return ValidationKey.ENTITY_NOT_FOUND.makeException(exception)
+        return ValidationKey.ENTITY_NOT_FOUND.makeException(nestedCause = exception)
     }
 }
