@@ -30,7 +30,7 @@ open class DefaultSchoolClassService
 
     override fun readAllByUser(): List<SchoolClassDto> {
         val userId = userService.getCurrentUser()?.id
-                ?: ValidationKey.SERVER_ERROR.makeException(NullPointerException()).throwException()
+                ?: ValidationKey.SERVER_ERROR.throwWithCause(NullPointerException())
         val filter = QSchoolClass.schoolClass.institution.user.id.eq(userId)
         return repository.findAll(filter).map { mapper.toDto(it) }
     }

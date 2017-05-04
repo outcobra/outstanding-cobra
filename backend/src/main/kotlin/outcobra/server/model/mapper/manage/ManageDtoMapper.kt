@@ -18,7 +18,7 @@ class ManageDtoMapper @Inject constructor(val colorMapper: ColorMapper) : Mapper
         if (from != null) {
             return ManageDto(from.map { toInternalDto(it) })
         }
-        ValidationKey.SERVER_ERROR.makeException(NullPointerException()).throwException()
+        ValidationKey.SERVER_ERROR.throwWithCause(NullPointerException())
     }
 
     private fun toInternalDto(from: Institution): InstitutionDto {

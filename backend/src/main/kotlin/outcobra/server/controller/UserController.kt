@@ -15,7 +15,7 @@ class UserController @Inject constructor(val userService: UserService) {
     @GetMapping
     fun getCurrentUser(): UserDto {
         return userService.getCurrentUserDto()
-                ?: ValidationKey.SERVER_ERROR.makeException(NullPointerException()).throwException()
+                ?: ValidationKey.SERVER_ERROR.throwWithCause(NullPointerException())
     }
 
     @GetMapping(value = "/login")

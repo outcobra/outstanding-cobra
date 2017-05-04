@@ -16,7 +16,7 @@ class DefaultManageService @Inject constructor(val institutionRepository: Instit
                                                val manageDtoMapper: ManageDtoMapper) : ManageService {
     override fun getManageData(): ManageDto {
         val userId = userService.getCurrentUser()?.id
-                ?: ValidationKey.SERVER_ERROR.makeException(NullPointerException()).throwException()
+                ?: ValidationKey.SERVER_ERROR.throwWithCause(NullPointerException())
         val ownedByUser = QInstitution.institution.user.id.eq(userId)
         val institutions = institutionRepository.findAll(ownedByUser).toList()
         return manageDtoMapper.toDto(institutions)
