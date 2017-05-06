@@ -15,3 +15,8 @@ task ngBuild(type: YarnTask, dependsOn: [yarn_install]) {
 task assemble(dependsOn: ngBuild)
 
 task build(dependsOn: assemble)
+
+task ngTest(type: YarnTask, dependsOn: yarn_install) {
+    args = ['run', 'ng', 'test', '--', '--watch=false', '--single-run']
+}
+task test(dependsOn: ngTest)
