@@ -25,7 +25,7 @@ describe('ManagerComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(ManageComponent);
         component = fixture.componentInstance;
-        fixture.detectChanges();
+        Promise.resolve(null).then(() => fixture.detectChanges()); // prevent 'Expression has changed after it was checked' error
     });
 
     it('should create', () => {
