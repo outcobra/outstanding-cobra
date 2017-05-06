@@ -53,17 +53,6 @@ export class DateUtil {
     }
 
     /**
-     * makes a clean date from a date
-     * removes the time
-     *
-     * @param date with time
-     * @returns {Date} same date as input but without time
-     */
-    public static normalizeDate(date: Date): Date {
-        return new Date(date.toLocaleDateString());
-    }
-
-    /**
      * checks if the provided date is equal to the internal MIN_DATE
      *
      * @param date
