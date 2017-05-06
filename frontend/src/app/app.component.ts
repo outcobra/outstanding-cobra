@@ -109,4 +109,8 @@ export class AppComponent implements OnInit, AfterViewInit {
     get isEnglish(): boolean {
         return this._isEnglish;
     }
+
+    set isEnglish(value: boolean) {
+        this._isEnglish = value;
+    }
 }
