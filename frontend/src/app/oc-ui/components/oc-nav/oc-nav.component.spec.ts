@@ -4,6 +4,8 @@ import {OCNavComponent} from './oc-nav.component';
 import {TestModule} from '../../../core/mock/test.module';
 import {RouterTestingModule} from '@angular/router/testing';
 import {OCUiModule} from '../../oc-ui.module';
+import {By} from '@angular/platform-browser';
+import {MdButton} from '@angular/material';
 
 describe('OCNavComponent', () => {
     let component: OCNavComponent;
@@ -27,5 +29,24 @@ describe('OCNavComponent', () => {
 
     it('should create', () => {
         expect(component).toBeTruthy();
+    });
+
+    it('should show toggler', () => {
+        component.collapsible = true;
+        fixture.detectChanges();
+
+        let collapserContainer = fixture.debugElement.query(By.css('.oc-nav-collapser'));
+        expect(collapserContainer).toBeTruthy();
+    });
+
+    it('should toggle', () => {
+        component.collapsible = true;
+        fixture.detectChanges();
+
+        let isCollapsed = component.collapsed;
+
+        let collapser = fixture.debugElement.query(By.css('.oc-nav-collapser')).query(By.directive(MdButton));
+        collapser.nativeElement.click();
+        expect(component.collapsed).toBe(!isCollapsed);
     });
 });
