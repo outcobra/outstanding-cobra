@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {TaskService} from './service/task.service';
 import {Task} from './model/Task';
@@ -55,7 +55,8 @@ export class TaskComponent implements OnInit, AfterViewInit {
                 private _route: ActivatedRoute,
                 private _router: Router,
                 private _formBuilder: FormBuilder,
-                private _responsiveHelperService: ResponsiveHelperService) {
+                private _responsiveHelperService: ResponsiveHelperService,
+                private _changeDetectorRef: ChangeDetectorRef) {
     }
 
     ngOnInit() {
@@ -75,6 +76,7 @@ export class TaskComponent implements OnInit, AfterViewInit {
                 this._filterShown = true;
             }
         });
+        this._changeDetectorRef.detectChanges();
     }
 
     //region initialization
@@ -225,5 +227,6 @@ export class TaskComponent implements OnInit, AfterViewInit {
     get filterShown(): boolean {
         return this._filterShown;
     }
+
     //endregion
 }

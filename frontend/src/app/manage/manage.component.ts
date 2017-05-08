@@ -1,4 +1,7 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewEncapsulation} from '@angular/core';
+import {
+    AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit,
+    ViewEncapsulation
+} from '@angular/core';
 import {ManageService} from './service/manage.service';
 import {InstitutionDto, ManageDto, SchoolClassDto, SchoolYearDto, SemesterDto, SubjectDto} from './model/ManageDto';
 import {MdDialogRef} from '@angular/material';
@@ -36,7 +39,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
     public readonly manageViewRef = ManageView;
 
     private _manageData: ManageDto;
-    public currentManageData: Array<Array<InstitutionDto|SchoolYearDto|SubjectDto>> = [];
+    public currentManageData: Array<Array<InstitutionDto | SchoolYearDto | SubjectDto>> = [];
     private _activeSchoolClassId: number = null;
 
     private _activeSemesterId: number = null;
@@ -61,7 +64,8 @@ export class ManageComponent implements OnInit, AfterViewInit {
                 private _confirmDialogService: ConfirmDialogService,
                 private _manageDialogFactory: ManageDialogFactory,
                 private _elementRef: ElementRef,
-                private _responsiveHelper: ResponsiveHelperService) {
+                private _responsiveHelper: ResponsiveHelperService,
+                private _changeDetectorRef: ChangeDetectorRef) {
     }
 
     ngOnInit() {
@@ -79,6 +83,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
         this._activeManageView = ManageView.INSTITUTION_CLASS;
         this.mobileTitle = I18N_PREFIX + ManageView[this._activeManageView];
         this.setColumnClasses();
+        this._changeDetectorRef.detectChanges();
     }
 
     private calculateMarginLeftByCurrentView() {
@@ -254,14 +259,30 @@ export class ManageComponent implements OnInit, AfterViewInit {
             this._subjectService
         );
     }
+
     //endregion
 
     //region edit
-    public editInstitution() {console.warn('Not implemented yet')}
-    public editSchoolClass() {console.warn('Not implemented yet')}
-    public editSchoolYear() {console.warn('Not implemented yet')}
-    public editSemester() {console.warn('Not implemented yet')}
-    public editSubject() {console.warn('Not implemented yet')}
+    public editInstitution() {
+        console.warn('Not implemented yet')
+    }
+
+    public editSchoolClass() {
+        console.warn('Not implemented yet')
+    }
+
+    public editSchoolYear() {
+        console.warn('Not implemented yet')
+    }
+
+    public editSemester() {
+        console.warn('Not implemented yet')
+    }
+
+    public editSubject() {
+        console.warn('Not implemented yet')
+    }
+
     //endregion
 
     //region handler
