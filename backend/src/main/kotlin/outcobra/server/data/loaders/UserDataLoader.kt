@@ -36,7 +36,7 @@ class UserDataLoader
 
     override fun load() {
         TEST_USER = userRepository.save(User(loadedUserToken, loadedUserName, arrayListOf()))
-        LOGGER.debug("Saving user: ${TEST_USER!!.username}")
+        LOGGER.debug("Saving user: ${TEST_USER?.username ?: "null"}")
         loaded = true
     }
 }

@@ -32,4 +32,8 @@ class ValidationException(var title: String = "i18n.error.generic.title",
         return result
     }
 
+    @Throws(ValidationException::class)
+    fun throwException(): Nothing {
+        throw(this)
+    }
 }
