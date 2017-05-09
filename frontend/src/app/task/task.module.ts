@@ -13,6 +13,7 @@ import {TaskListResolver} from './service/task-list-resolver.service';
 import {TaskFilterResolver} from './service/task-filter-resolver.service';
 import {TaskCreateUpdateDialog} from './task-create-update-dialog/task-create-update-dialog.component';
 import {SharedModule} from '../shared/shared.module';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 @NgModule({
     imports: [
@@ -21,6 +22,7 @@ import {SharedModule} from '../shared/shared.module';
         ReactiveFormsModule,
         TaskRoutingModule,
         MaterialModule,
+        FlexLayoutModule,
         SharedModule
     ],
     declarations: [

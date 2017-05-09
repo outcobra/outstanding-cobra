@@ -1,25 +1,25 @@
 <oc-title-bar>
     <span>{{'i18n.modules.manage.linkTitle' | translate}}</span>
-    <div *ngIf="isMobile()" class="row mobile-manage-nav oc-title-bar-content">
-        <div class="col m2 s2">
+    <div *ngIf="isMobile()" class="row mobile-manage-nav oc-title-bar-content" fxLayout="row">
+        <div fxFlex="15">
             <button md-button [disabled]="!isValidDirection(-1)" (click)="lastView()">
                 <md-icon>navigate_before</md-icon>
             </button>
         </div>
-        <div class="col m8 s8 mobile-title">
+        <div class="mobile-title" fxFlex>
             <h6>{{ mobileTitle | translate }}</h6>
         </div>
-        <div class="col m2 s2">
+        <div fxFlex="15">
             <button md-button [disabled]="!isValidDirection(1)" (click)="nextView()" class="right">
                 <md-icon>navigate_next</md-icon>
             </button>
         </div>
     </div>
 </oc-title-bar>
-<div class="row manage-rows" [class.mobile]="isMobile()" [style.margin-left.px]="isMobile() ? marginLeft : 0">
+<div class="row manage-rows" [class.mobile]="isMobile()" [style.margin-left.px]="isMobile() ? marginLeft : 0" fxLayout.gt-md>
     <!-- FIRST COLUMN START -->
-    <div [ngClass]="columnClasses" [class.border-right]="!isMobile()">
-        <ul class="collapsible">
+    <div class="manage-col" [class.border-right]="!isMobile()" [class.mobile-col]="isMobile()" fxFlex.gt-md>
+        <ul>
             <li *ngFor="let institution of currentManageData[manageViewRef.INSTITUTION_CLASS]">
                 <oc-collapsible>
                     <oc-collapsible-header>
@@ -75,8 +75,8 @@
     <!-- FIRST COLUMN END -->
 
     <!-- MIDDLE COLUMN START -->
-    <div [ngClass]="columnClasses">
-        <ul class="collapsible" *ngIf="currentManageData[manageViewRef.YEAR_SEMESTER] != null">
+    <div class="manage-col" [class.mobile-col]="isMobile()" fxFlex.gt-md>
+        <ul *ngIf="currentManageData[manageViewRef.YEAR_SEMESTER] != null">
             <li *ngFor="let schoolYear of currentManageData[manageViewRef.YEAR_SEMESTER]">
                 <oc-collapsible>
                     <oc-collapsible-header>
@@ -138,8 +138,8 @@
     <!-- MIDDLE COLUMN END -->
 
     <!-- LAST COLUMN START -->
-    <div [ngClass]="columnClasses" [class.border-left]="!isMobile()">
-        <ul class="collapsible" *ngIf="currentManageData[manageViewRef.SUBJECT] != null">
+    <div class="manage-col" [class.border-left]="!isMobile()" [class.mobile-col]="isMobile()" fxFlex.gt-md>
+        <ul *ngIf="currentManageData[manageViewRef.SUBJECT] != null">
             <li *ngFor="let subject of currentManageData[manageViewRef.SUBJECT]">
                 <oc-collapsible>
                     <oc-collapsible-header>
