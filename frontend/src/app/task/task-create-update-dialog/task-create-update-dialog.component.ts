@@ -14,24 +14,24 @@ import {CreateUpdateDialog} from '../../common/CreateUpdateDialog';
     styleUrls: ['./task-create-update-dialog.component.scss']
 })
 export class TaskCreateUpdateDialog extends CreateUpdateDialog<Task> implements OnInit {
-    public taskCreateUpdateForm: FormGroup;
-    public subjects: SubjectDto[];
-    public today: Date = new Date();
+    private _taskCreateUpdateForm: FormGroup;
+    private _subjects: SubjectDto[];
+    private _today: Date = new Date();
 
-    constructor(private subjectService: SubjectService,
-                public dialogRef: MdDialogRef<TaskCreateUpdateDialog>,
-                private formBuilder: FormBuilder) {
+    constructor(private _subjectService: SubjectService,
+                private _dialogRef: MdDialogRef<TaskCreateUpdateDialog>,
+                private _formBuilder: FormBuilder) {
         super();
     }
 
     ngOnInit() {
-        this.subjectService.getCurrentSubjects()
-            .subscribe((subjects: SubjectDto[]) => this.subjects = subjects);
+        this._subjectService.getCurrentSubjects()
+            .subscribe((subjects: SubjectDto[]) => this._subjects = subjects);
 
-        this.taskCreateUpdateForm = this.formBuilder.group({
+        this._taskCreateUpdateForm = this._formBuilder.group({
             name: [this.getParamOrDefault('name'), Validators.required],
             description: [this.getParamOrDefault('description')],
-            dates: this.formBuilder.group({
+            dates: this._formBuilder.group({
                     todoDate: [this.getParamOrDefault('todoDate'), Validators.required],
                     dueDate: [this.getParamOrDefault('dueDate'), Validators.required],
                 },
@@ -43,20 +43,20 @@ export class TaskCreateUpdateDialog extends CreateUpdateDialog<Task> implements 
         });
     }
 
-    onSubmit() {
-        if (this.taskCreateUpdateForm.valid && this.taskCreateUpdateForm.dirty) {
-            this.dialogRef.close(this.formToTask(this.taskCreateUpdateForm));
+    public submit() {
+        if (this._taskCreateUpdateForm.valid && this._taskCreateUpdateForm.dirty) {
+            this._dialogRef.close(this._formToTask(this._taskCreateUpdateForm));
         }
         else {
-            Util.revalidateForm(this.taskCreateUpdateForm);
+            Util.revalidateForm(this._taskCreateUpdateForm);
         }
     }
 
-    onCancel() {
-        this.dialogRef.close();
+    public cancel() {
+        this._dialogRef.close();
     }
 
-    private formToTask(formGroup: FormGroup): Task {
+    private _formToTask(formGroup: FormGroup): Task {
         let formValue = formGroup.value;
         return {
             id: this.isEditMode() && this.param.id ? this.param.id : null,
@@ -66,8 +66,20 @@ export class TaskCreateUpdateDialog extends CreateUpdateDialog<Task> implements 
             dueDate: formValue.dates.dueDate,
             effort: formValue.effort,
             progress: 0,
-            subject: this.subjects.find(subject => subject.id == formValue.subjectId)
+            subject: this._subjects.find(subject => subject.id == formValue.subjectId)
         } as Task
     }
 
+
+    get taskCreateUpdateForm(): FormGroup {
+        return this._taskCreateUpdateForm;
+    }
+
+    get subjects(): SubjectDto[] {
+        return this._subjects;
+    }
+
+    get today(): Date {
+        return this._today;
+    }
 }

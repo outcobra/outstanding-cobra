@@ -1,7 +1,7 @@
 @import '../../sass/color-variables';
 
 .task-detail-row {
-    margin-bottom: 0;
+    margin-bottom: 20px;
 }
 
 md-input-container#task-search {
@@ -32,11 +32,24 @@ md-input-container#task-search {
     padding: 18.5px 0;
 }
 
+md-icon.filter-toggler {
+    transition: transform .25s ease-in-out;
+    &.filter-shown {
+        transform: rotate(180deg);
+    }
+}
+
 button[md-fab] {
     position: absolute;
-    bottom: 23px;
+    bottom: 53px;
     right: 23px;
     color: $primary-light;
+}
+
+oc-app.oc-mobile {
+    button[md-fab] {
+        bottom: 23px;
+    }
 }
 
 .search-row {

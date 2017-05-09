@@ -1,7 +1,7 @@
 package outcobra.server.model.mapper
 
 import org.springframework.stereotype.Component
-import outcobra.server.exception.ManipulatedRequestException
+import outcobra.server.exception.ValidationKey
 import outcobra.server.model.interfaces.ParentLinked
 import outcobra.server.service.UserService
 import outcobra.server.util.RepositoryLocator
@@ -29,7 +29,7 @@ open class BaseMapper {
         val areFromParent = childRepo.findAll(children).all { it.parent == parent }
         val userIsOwner = parent.followToUser() == userService.getCurrentUser()
         if (!(areFromParent && userIsOwner)) {
-            throw ManipulatedRequestException()
+            ValidationKey.FORBIDDEN.throwException()
         }
     }
 }

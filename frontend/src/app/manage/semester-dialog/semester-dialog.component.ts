@@ -4,7 +4,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ManageDialog} from '../manage-dialog';
 import {SchoolYearDto, SemesterDto} from '../model/ManageDto';
 import {OCValidators} from '../../shared/services/oc-validators';
-import {TranslateService} from 'ng2-translate';
+import {TranslateService} from '@ngx-translate/core';
 import {DatePipe} from '@angular/common';
 import {Util} from '../../shared/util/util';
 
@@ -16,17 +16,17 @@ import {Util} from '../../shared/util/util';
 })
 export class SemesterDialog extends ManageDialog<SemesterDto, SchoolYearDto> implements OnInit {
 
-    constructor(public dialogRef: MdDialogRef<SemesterDialog>,
-                private formBuilder: FormBuilder,
-                private translate: TranslateService,
-                private datePipe: DatePipe) {
+    private _semesterForm: FormGroup;
+
+    constructor(private _dialogRef: MdDialogRef<SemesterDialog>,
+                private _formBuilder: FormBuilder,
+                private _translate: TranslateService,
+                private _datePipe: DatePipe) {
         super();
     }
 
-    public semesterForm: FormGroup;
-
     ngOnInit() {
-        this.semesterForm = this.formBuilder.group({
+        this._semesterForm = this._formBuilder.group({
                 name: [this.getParamOrDefault('name'), Validators.required],
                 validFrom: [this.getParamOrDefault('validFrom'), Validators.compose([Validators.required, OCValidators.isAfterOrEqualDay(this.parent.validFrom)])],
                 validTo: [this.getParamOrDefault('validTo'), Validators.compose([Validators.required, OCValidators.isBeforeOrEqualDay(this.parent.validTo)])]
@@ -37,25 +37,29 @@ export class SemesterDialog extends ManageDialog<SemesterDto, SchoolYearDto> imp
         );
     }
 
-    getErrorText(controlName: string, errorName: string, errorProp: string) {
-        let control = this.semesterForm.get(controlName);
-        let date = this.datePipe.transform(control.getError(errorName)[errorProp], 'dd.MM.y');
-        return control.hasError(errorName) ? this.translate.instant(`i18n.common.form.error.${errorName}`, {'date': date}) : '';
+    public getErrorText(controlName: string, errorName: string, errorProp: string) {
+        let control = this._semesterForm.get(controlName);
+        let date = this._datePipe.transform(control.getError(errorName)[errorProp], 'dd.MM.y');
+        return control.hasError(errorName) ? this._translate.instant(`i18n.common.form.error.${errorName}`, {'date': date}) : '';
     }
 
-    onCancel() {
-        this.dialogRef.close(null);
+    public cancel() {
+        this._dialogRef.close(null);
     }
 
-    onSubmit() {
-        if (this.semesterForm.valid && this.semesterForm.dirty) {
-            let value = this.semesterForm.value as SemesterDto;
+    public submit() {
+        if (this._semesterForm.valid && this._semesterForm.dirty) {
+            let value = this._semesterForm.value as SemesterDto;
             value.schoolYearId = this.parent.id;
-            this.dialogRef.close(value);
+            this._dialogRef.close(value);
         }
         else {
-            Util.revalidateForm(this.semesterForm);
+            Util.revalidateForm(this._semesterForm);
         }
     }
 
+
+    get semesterForm(): FormGroup {
+        return this._semesterForm;
+    }
 }

@@ -1,24 +1,21 @@
 import {
-    HostListener,
+    AfterContentInit,
+    Component,
+    ContentChild,
     EventEmitter,
     HostBinding,
-    Component,
-    ViewEncapsulation,
-    ContentChild,
-    AfterContentInit,
-    style,
-    state,
-    animate,
-    transition,
-    trigger
-} from "@angular/core";
+    HostListener, Output,
+    ViewEncapsulation
+} from '@angular/core';
+
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
     selector: 'oc-collapsible-header',
     template: '<ng-content></ng-content>',
 })
 export class OCCollapsibleHeaderComponent {
-    onClick: EventEmitter<any> = new EventEmitter();
+    @Output() onClick: EventEmitter<any> = new EventEmitter();
 
     @HostListener('click') click() {
         this.onClick.emit();
@@ -44,10 +41,10 @@ export class OCCollapsibleBodyComponent {
     encapsulation: ViewEncapsulation.None,
     animations: [
         trigger('ocToggle', [
-            state('false', style({
+            state('0', style({
                 height: 0
             })),
-            state('true', style({
+            state('1', style({
                 height: '*'
             })),
             transition('0 => 1', animate('400ms ease-in')),

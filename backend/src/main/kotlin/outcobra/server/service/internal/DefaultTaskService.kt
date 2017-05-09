@@ -2,20 +2,11 @@ package outcobra.server.service.internal
 
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
-import outcobra.server.model.QTask
-import outcobra.server.model.Semester
-import outcobra.server.model.Subject
-import outcobra.server.model.Task
-import outcobra.server.model.dto.SchoolClassSubjects
-import outcobra.server.model.dto.TaskDto
-import outcobra.server.model.dto.TaskFilterDto
-import outcobra.server.model.dto.TaskProgressUpdateDto
+import outcobra.server.model.*
+import outcobra.server.model.dto.*
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.TaskRepository
-import outcobra.server.service.SchoolClassService
-import outcobra.server.service.SubjectService
-import outcobra.server.service.TaskService
-import outcobra.server.service.UserService
+import outcobra.server.service.*
 import outcobra.server.service.base.internal.DefaultBaseService
 import outcobra.server.validator.RequestValidator
 import javax.inject.Inject

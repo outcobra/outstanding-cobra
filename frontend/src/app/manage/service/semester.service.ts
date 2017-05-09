@@ -10,11 +10,11 @@ export class SemesterService extends AppCrudService<SemesterDto> {
         super(http, '/semester');
     }
 
-    readById(id: number): Observable<SemesterDto> {
+    public readById(id: number): Observable<SemesterDto> {
         throw new Error('not implemented');
     }
 
-    update(arg: SemesterDto): Observable<SemesterDto> {
+    public update(arg: SemesterDto): Observable<SemesterDto> {
         throw new Error('not implemented');
     }
 }

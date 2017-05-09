@@ -6,22 +6,22 @@ import {CacheableService} from './cacheable.service';
  * Used for services which have entities that can be cached and need crud functionality at the same time
  */
 export abstract class CacheableCrudService<BasicType, CacheType> extends CacheableService<CacheType> implements CrudService<BasicType>{
-    create(arg: BasicType): Observable<BasicType> {
+    public create(arg: BasicType): Observable<BasicType> {
         this.clearCache();
-        return this.http.put<BasicType>(this.baseUri, arg);
+        return this._http.put<BasicType>(this._baseUri, arg);
     }
-    readById(id: number): Observable<BasicType> {
-        return this.http.get<BasicType>(`${this.baseUri}/${id}`);
+    public readById(id: number): Observable<BasicType> {
+        return this._http.get<BasicType>(`${this._baseUri}/${id}`);
     }
-    readAll(): Observable<BasicType[]> {
-        return this.http.get<BasicType[]>(this.baseUri);
+    public readAll(): Observable<BasicType[]> {
+        return this._http.get<BasicType[]>(this._baseUri);
     }
-    deleteById(id: number): Observable<any> {
+    public deleteById(id: number): Observable<any> {
         this.clearCache();
-        return this.http.delete<any>(`${this.baseUri}/${id}`);
+        return this._http.delete<any>(`${this._baseUri}/${id}`);
     }
-    update(arg: BasicType): Observable<BasicType> {
+    public update(arg: BasicType): Observable<BasicType> {
         this.clearCache();
-        return this.http.post<BasicType>(this.baseUri, arg);
+        return this._http.post<BasicType>(this._baseUri, arg);
     }
 }

@@ -1,20 +1,21 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {MdDialogRef} from '@angular/material';
+import {Component, ViewEncapsulation} from '@angular/core';
 import {Info} from '../../model/Info';
 
 @Component({
-    selector: 'app-info-dialog',
+    selector: 'info-dialog',
     templateUrl: './info-dialog.component.html',
     styleUrls: ['./info-dialog.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class InfoDialogComponent implements OnInit {
-    public info: Info;
+export class InfoDialogComponent {
+    private _info: Info;
 
-    constructor(private dialogRef: MdDialogRef<InfoDialogComponent>) {
+    get info(): Info {
+        return this._info;
     }
 
-    ngOnInit() {
-    }
 
+    set info(value: Info) {
+        this._info = value;
+    }
 }

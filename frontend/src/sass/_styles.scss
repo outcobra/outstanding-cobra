@@ -19,6 +19,10 @@ body, .main-area {
     background-color: #F8F8F8 !important;
 }
 
+a {
+    color: $primary-light !important;
+}
+
 .mat-sidenav-content {
     display: flex !important;
     flex-direction: column !important;

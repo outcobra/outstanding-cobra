@@ -18,21 +18,21 @@ import {isNotNull, isTrue} from '../../shared/util/helper';
     styleUrls: ['./task-detail.component.scss']
 })
 export class TaskDetailComponent implements OnInit, AfterViewInit {
-    public task: Task;
-    public taskCreateUpdateDialog: MdDialogRef<TaskCreateUpdateDialog>;
-    @ViewChild(MdSlider) public slider: MdSlider;
+    private _task: Task;
+    private _taskCreateUpdateDialog: MdDialogRef<TaskCreateUpdateDialog>;
+    @ViewChild(MdSlider) slider: MdSlider;
 
-    constructor(private confirmDialogService: ConfirmDialogService,
-                private notificationService: NotificationsService,
-                private taskService: TaskService,
-                private dialogService: MdDialog,
-                private route: ActivatedRoute,
-                private router: Router) {
+    constructor(private _confirmDialogService: ConfirmDialogService,
+                private _notificationService: NotificationsService,
+                private _taskService: TaskService,
+                private _dialogService: MdDialog,
+                private _route: ActivatedRoute,
+                private _router: Router) {
     }
 
     ngOnInit() {
-        this.route.data
-            .subscribe((data: {task: Task}) => this.task = data.task);
+        this._route.data
+            .subscribe((data: {task: Task}) => this._task = data.task);
     }
 
     ngAfterViewInit() {
@@ -45,33 +45,37 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
     }
 
     private updateProgress(value: number): Observable<Task> {
-        return this.taskService.updateProgress(this.task.id, value);
+        return this._taskService.updateProgress(this._task.id, value);
     }
 
-    editTask() {
-        this.taskCreateUpdateDialog = this.dialogService.open(TaskCreateUpdateDialog, SMALL_DIALOG);
-        this.taskCreateUpdateDialog.componentInstance.init(DialogMode.EDIT, this.task);
-        this.taskCreateUpdateDialog.afterClosed()
+    public editTask() {
+        this._taskCreateUpdateDialog = this._dialogService.open(TaskCreateUpdateDialog, SMALL_DIALOG);
+        this._taskCreateUpdateDialog.componentInstance.init(DialogMode.EDIT, this._task);
+        this._taskCreateUpdateDialog.afterClosed()
             .filter(isNotNull)
-            .flatMap((result: Task) => this.taskService.update(result))
+            .flatMap((result: Task) => this._taskService.update(result))
             .subscribe((task: Task) => {
                 // TODO error handling?
                 if (task) {
-                    this.task = task;
-                    this.notificationService.success('i18n.modules.task.notification.update.title', 'i18n.modules.task.notification.update.message');
+                    this._task = task;
+                    this._notificationService.success('i18n.modules.task.notification.update.title', 'i18n.modules.task.notification.update.message');
                 }
             });
     }
 
-    deleteTask() {
-        this.confirmDialogService.open('i18n.modules.task.dialogs.confirmDeleteDialog.title', 'i18n.modules.task.dialogs.confirmDeleteDialog.message')
+    public deleteTask() {
+        this._confirmDialogService.open('i18n.modules.task.dialogs.confirmDeleteDialog.title', 'i18n.modules.task.dialogs.confirmDeleteDialog.message')
             .filter(isTrue)
-            .flatMap(() => this.taskService.deleteById(this.task.id))
-            .subscribe(result => this.router.navigate(['/task']));
+            .flatMap(() => this._taskService.deleteById(this._task.id))
+            .subscribe(result => this._router.navigate(['/task']));
     }
 
-    closeCard() {
-        this.router.navigate(['/task']);
+    public closeCard() {
+        this._router.navigate(['/task']);
     }
 
+
+    get task(): Task {
+        return this._task;
+    }
 }

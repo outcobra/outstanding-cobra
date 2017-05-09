@@ -2,10 +2,7 @@ package outcobra.server
 
 import org.mockito.Matchers
 import org.mockito.Mockito
-import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.Configuration
-import org.springframework.context.annotation.Primary
-import org.springframework.context.annotation.Profile
+import org.springframework.context.annotation.*
 import outcobra.server.annotation.DefaultImplementation
 import outcobra.server.config.ProfileRegistry.Companion.MOCK_SERVICES
 import outcobra.server.model.User

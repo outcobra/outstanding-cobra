@@ -6,9 +6,11 @@ import {TaskService} from './task.service';
 
 @Injectable()
 export class TaskListResolver implements Resolve<Task[]> {
-    constructor(private taskService: TaskService) {}
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Task[]>|Promise<Task[]>|Task[] {
-        return this.taskService.readAll();
+    constructor(private _taskService: TaskService) {
+    }
+
+    public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Task[]>|Promise<Task[]>|Task[] {
+        return this._taskService.readAll();
     }
 
 }

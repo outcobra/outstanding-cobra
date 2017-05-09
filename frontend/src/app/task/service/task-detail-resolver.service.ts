@@ -8,17 +8,17 @@ import {HttpStatus} from '../../shared/model/HttpStatus';
 
 @Injectable()
 export class TaskDetailResolver implements Resolve<Task> {
-    constructor(private taskService: TaskService, private router: Router, private notificationService: NotificationsService) {
+    constructor(private _taskService: TaskService, private _router: Router, private _notificationService: NotificationsService) {
     }
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Task> | Promise<Task> | Task {
+    public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Task> | Promise<Task> | Task {
         let id: number = route.params['id'];
-        return this.taskService.readById(id)
+        return this._taskService.readById(id)
             .catch(error => {
                 if (error.status == HttpStatus.NOT_FOUND) {
-                    this.notificationService.remove();
-                    this.router.navigate(['/task']).then(() =>
-                        this.notificationService.error('i18n.modules.task.notification.error.taskNotFound.title', 'i18n.modules.task.notification.error.taskNotFound.message')
+                    this._notificationService.remove();
+                    this._router.navigate(['/task']).then(() =>
+                        this._notificationService.error('i18n.modules.task.notification.error.taskNotFound.title', 'i18n.modules.task.notification.error.taskNotFound.message')
                     );
                 }
                 return Observable.of(null);

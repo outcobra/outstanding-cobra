@@ -10,15 +10,15 @@ export class SubjectService extends AppCrudService<SubjectDto> {
         super(http, '/subject')
     }
 
-    readById(id: number): Observable<SubjectDto> {
+    public readById(id: number): Observable<SubjectDto> {
         throw new Error('not implemented');
     }
 
-    update(arg: SubjectDto): Observable<SubjectDto> {
+    public update(arg: SubjectDto): Observable<SubjectDto> {
         throw new Error('not implemented');
     }
 
-    getCurrentSubjects(): Observable<SubjectDto[]> {
-        return this.http.get<SubjectDto[]>(`/semester/current/${this.baseUri}`, 'outcobra');
+    public getCurrentSubjects(): Observable<SubjectDto[]> {
+        return this._http.get<SubjectDto[]>(`/semester/current/${this._baseUri}`, 'outcobra');
     }
 }

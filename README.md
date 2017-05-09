@@ -1,7 +1,6 @@
 # Outstanding Cobra
 
-[![Build Status](https://semaphoreci.com/api/v1/outcobra/outstanding-cobra/branches/develop/shields_badge.svg)](https://semaphoreci.com/outcobra/outstanding-cobra)
-[![CircleCI](https://circleci.com/gh/outcobra/outstanding-cobra.svg?style=svg)](https://circleci.com/gh/outcobra/outstanding-cobra)
+[![Build Status](https://ci.pegnu.cloud/buildStatus/icon?job=outcobra/outstanding-cobra/develop)](https://ci.pegnu.cloud/job/outcobra/job/outstanding-cobra/job/develop/)
 [![codebeat badge](https://codebeat.co/badges/d8dd9a81-a229-46e3-b5b2-d016ca70cfa4)](https://codebeat.co/projects/github-com-outcobra-outstanding-cobra)
 
 # Installation
@@ -14,7 +13,7 @@ Gradle is our project and dependency management tool for the backend.
 
 You do not need to install Gradle yourself since we are using the Gradle wrapper in this project.
 
-Before you can build the project, you need to go to `backend/src/main/resources` and copy `auth0.example.properties` to `auth0.properties`.  In this file, `auth0.clientSecret` needs to be set. If you are building for production, you will get this from [Joel](https://github.com/jmesserli), otherwise you will have to create your own Auth0 account and update all values according to the app you create there.
+Before you can build the project, you need to go to `backend/src/main/resources` and copy `auth0.example.yml` to `auth0.yml`.  In this file, `auth0.clientSecret` needs to be set. If you are building for production, you will get this from [Joel](https://github.com/jmesserli), otherwise you will have to create your own Auth0 account and update all values according to the app you create there.
 
 If you are using IntelliJ, you will also have to set up annotation processing. For this, open the settings (`CTRL + ALT + S`) and navigate to `Build, Execution, Deployment > Compiler > Annotation Processors`. You should see the modules `backend_main` and `backend-model_main` there. Click each one and select `Module content root` for `Store generated sources relative to:`. Also make sure that the `Production sources directory` is set to `generated` for both of them.
 
@@ -22,18 +21,9 @@ To build the project, you can just run `./gradlew build` on Linux or `gradlew.ba
 
 To run the backend you have to make a new run configuration.
 In IntelliJ you can add a run configuration by pressing `CTRL + SHIFT + A` and typing `Edit Run Configurations`.
-To add a configuration press the green plus. Then search fo `Tomcat Server` and choose `Local` in the submenu.
+To add a configuration press the green plus. Then search for `Spring Boot`, set the main class to `outcobra.server.OutstandingCobraServerApplicationKt` and use `-Dspring.profiles.active=development` as vm options (this enables the development profile).
 
-Then you have to choose your local Tomcat instance. Press the `Configure` button and locate your tomcat home folder on your computer.
-Or you just choose your Tomcat version if there is already a configured one.
-
-You have to select your artifact to deploy. For this go in the `Deployment` tab and press the green plus and select artifact.
-You should now be able to choose between two artifacts. Select the one which doesn't have an `exploded` at the end of the name.
-
-You should also pass the active profile to the JVM. For this you have to add something like this `-Dspring.profiles.active=development` into your VM options.
-You can replace the `development` with every other profile you desire.
-
-Now you should be finished so press `Apply` and try to start the Tomcat Server.
+Now you should be finished so press `Apply` and try to start the Application.
  
 
 ### Accessing API-Documentation

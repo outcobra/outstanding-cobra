@@ -3,7 +3,9 @@
         <input mdInput [autofocus]="false" type="text" [(ngModel)]="formattedDate" (blur)="inputDateChanged()"
                [placeholder]="placeholder">
         <md-icon mdSuffix>event</md-icon>
-        <ng-content select="md-hint"></ng-content>
+        <md-error>
+            <ng-content select="datepicker-error"></ng-content>
+        </md-error>
     </md-input-container>
     <div class="datepicker z-depth-1-half" [class.opened]="opened" [ngSwitch]="pickerMode">
         <div class="datepicker-header">

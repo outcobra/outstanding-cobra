@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import outcobra.server.config.ProfileRegistry.Companion.BASIC_AUTH_SECURITY_MOCK
-import javax.inject.Inject
 
 
 @Profile(BASIC_AUTH_SECURITY_MOCK)
@@ -24,9 +23,8 @@ class BasicAuthConfig : WebSecurityConfigurerAdapter() {
                 .and().httpBasic()
     }
 
-    @Inject
-    fun configureGlobal(auth: AuthenticationManagerBuilder) {
-        auth.inMemoryAuthentication()
+    override fun configure(auth: AuthenticationManagerBuilder?) {
+        auth!!.inMemoryAuthentication()
                 .withUser("admin").password("secret").roles("ADMIN")
                 .and()
                 .withUser("user").password("secret").roles("USER")

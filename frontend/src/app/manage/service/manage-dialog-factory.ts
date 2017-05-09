@@ -9,8 +9,8 @@ import {SMALL_DIALOG} from '../../shared/util/const';
 @Injectable()
 export class ManageDialogFactory {
 
-    constructor(private dialog: MdDialog,
-                private responsiveHelper: ResponsiveHelperService) {
+    constructor(private _dialog: MdDialog,
+                private _responsiveHelper: ResponsiveHelperService) {
     }
 
     /**
@@ -22,9 +22,9 @@ export class ManageDialogFactory {
      * @param config MdDialogConfig for appearance configuration
      * @param params for edit mode
      */
-    getDialog<T extends ManageDialog<Dto, Dto>>(component: ComponentType<T>, mode: DialogMode, parent: Dto, config?: MdDialogConfig, params?: Dto): MdDialogRef<T> {
-        let conf = config || this.responsiveHelper.getMobileOrGivenDialogConfig(SMALL_DIALOG);
-        let dialog = this.dialog.open(component, conf);
+    public getDialog<T extends ManageDialog<Dto, Dto>>(component: ComponentType<T>, mode: DialogMode, parent: Dto, config?: MdDialogConfig, params?: Dto): MdDialogRef<T> {
+        let conf = config || this._responsiveHelper.getMobileOrGivenDialogConfig(SMALL_DIALOG);
+        let dialog = this._dialog.open(component, conf);
         dialog.componentInstance.initWithParent(mode, parent, params);
         return dialog;
     }
