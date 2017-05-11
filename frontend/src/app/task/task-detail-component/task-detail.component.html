@@ -25,9 +25,9 @@
         <!-- TASK DUE_DATE END-->
         <!-- TASK PROGRESS START-->
         <oc-icon-data iconName="show_chart" titleKey="i18n.modules.task.progress">
-            <div class="row task-progress">
-                <div class="col s1 progress-value">{{task.progress}}%</div>
-                <div class="col s11">
+            <div class="row task-progress" fxLayout>
+                <div class="col s1 progress-value" fxFlex="15">{{task.progress}}%</div>
+                <div class="col s11" fxFlex>
                     <md-slider [(ngModel)]="task.progress" color="accent" thumbLabel step="5"></md-slider>
                 </div>
             </div>

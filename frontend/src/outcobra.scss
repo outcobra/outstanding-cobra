@@ -1,14 +1,3 @@
 @import 'sass/reset';
-//import necessary materialize-css files here
-@import '../node_modules/materialize-css/sass/components/mixins';
-@import '../node_modules/materialize-css/sass/components/color';
-@import '../node_modules/materialize-css/sass/components/variables';
-@import '../node_modules/materialize-css/sass/components/normalize';
-@import '../node_modules/materialize-css/sass/components/global';
-@import '../node_modules/materialize-css/sass/components/icons-material-design';
-@import '../node_modules/materialize-css/sass/components/typography';
-@import '../node_modules/materialize-css/sass/components/roboto';
-@import '../node_modules/materialize-css/sass/components/buttons';
-@import '../node_modules/materialize-css/sass/components/grid';
-@import '../node_modules/materialize-css/sass/components/collapsible';
 @import 'sass/styles';
+@import 'sass/typography';

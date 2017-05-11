@@ -16,6 +16,7 @@ import {TaskModule} from './task/task.module';
 import {configLoader, translateFactory, translationLoader} from './shared/services/factories';
 import {RavenErrorHandler} from './shared/error/RavenErrorHandler';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 @NgModule({
     declarations: [
@@ -31,6 +32,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
         MainModule,
         ManageModule,
         TaskModule,
+        FlexLayoutModule,
         MaterialModule,
         TranslateModule.forRoot({
             loader: {

@@ -18,6 +18,7 @@ import {SemesterService} from './service/semester.service';
 import {ManageDialogFactory} from './service/manage-dialog-factory';
 import {SubjectDialog} from './subject-dialog/subject-dialog.component';
 import {SubjectService} from './service/subject.service';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 @NgModule({
     imports: [
@@ -26,6 +27,7 @@ import {SubjectService} from './service/subject.service';
         ReactiveFormsModule,
         ManageRoutingModule,
         MaterialModule,
+        FlexLayoutModule,
         SharedModule
     ],
     declarations: [
