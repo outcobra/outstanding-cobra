@@ -32,6 +32,7 @@ export class InstitutionDialog extends ManageDialog<InstitutionDto, any> impleme
     public submit() {
         if (this._institutionForm.valid && this._institutionForm.dirty) {
             let value = this._institutionForm.value as InstitutionDto;
+            value.id = this.isEditMode() && this.param.id ? this.param.id : null;
             this._dialogRef.close(value);
         }
         else {

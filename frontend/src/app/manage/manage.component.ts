@@ -36,7 +36,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
     public readonly manageViewRef = ManageView;
 
     private _manageData: ManageDto;
-    public currentManageData: Array<Array<InstitutionDto|SchoolYearDto|SubjectDto>> = [];
+    public currentManageData: Array<Array<InstitutionDto | SchoolYearDto | SubjectDto>> = [];
     private _activeSchoolClassId: number = null;
 
     private _activeSemesterId: number = null;
@@ -254,14 +254,31 @@ export class ManageComponent implements OnInit, AfterViewInit {
             this._subjectService
         );
     }
+
     //endregion
 
     //region edit
-    public editInstitution() {console.warn('Not implemented yet')}
-    public editSchoolClass() {console.warn('Not implemented yet')}
-    public editSchoolYear() {console.warn('Not implemented yet')}
-    public editSemester() {console.warn('Not implemented yet')}
-    public editSubject() {console.warn('Not implemented yet')}
+    public editInstitution(toEdit: InstitutionDto) {
+        this._handleEdit('institution', this._manageDialogFactory.getDialog(InstitutionDialog, DialogMode.EDIT, null, null, toEdit),
+            this._institutionService.update, this._institutionService);
+    }
+
+    public editSchoolClass() {
+        console.warn('Not implemented yet')
+    }
+
+    public editSchoolYear() {
+        console.warn('Not implemented yet')
+    }
+
+    public editSemester() {
+        console.warn('Not implemented yet')
+    }
+
+    public editSubject() {
+        console.warn('Not implemented yet')
+    }
+
     //endregion
 
     //region handler
@@ -317,6 +334,14 @@ export class ManageComponent implements OnInit, AfterViewInit {
                 finishFunction(entity);
             });
     }
+
+    private _handleEdit<T extends Dto, D extends CreateUpdateDialog<T>>(entityName: string, dialogRef: MdDialogRef<D>, editFunction: (entity: T) => Observable<T>, thisArg: any) {
+        dialogRef.afterClosed()
+            .filter(isNotNull)
+            .flatMap((value: T) => Util.bindAndCall(editFunction, thisArg, value))
+            .subscribe(() => this._showSaveSuccessNotification(entityName));
+    }
+
 
     //endregion
 
