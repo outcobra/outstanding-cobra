@@ -1,31 +1,30 @@
 <oc-title-bar>
     <span>{{'i18n.modules.task.linkTitle' | translate}}</span>
 </oc-title-bar>
-<div class="row task-detail-row">
-    <div class="col s12 l8 offset-l2">
+<div class="row task-detail-row" fxLayout>
+    <div fxFlex fxFlex.gt-md="60" fxFlexOffset.gt-md="20">
         <router-outlet></router-outlet>
     </div>
 </div>
-<div class="row" [formGroup]="searchForm">
-    <div class="col s12 m12 l8 offset-l4">
-        <div class="row search-row">
-            <div class="col s12 m10 l12">
+<div class="row" [formGroup]="searchForm" fxLayout="column" fxLayout.gt-sm="row">
+    <div fxFlex fxFlex.gt-sm="60" fxFlexOffset.gt-sm="20">
+        <div class="search-row" fxLayout="column" fxLayout.gt-xs="row">
+            <div fxFlex="100" fxFlex.gt-xs="80" fxFlex.gt-sm="100">
                 <md-input-container id="task-search">
                     <input mdInput [placeholder]="'i18n.modules.task.filter.search' | translate"
                            formControlName="searchTerm">
                 </md-input-container>
             </div>
-            <div id="filter-button">
-                <button md-raised-button color="accent" class="col s12 m2 hide-on-large-only"
-                        (click)="changeFilterVisibility()">
+            <div id="filter-button" fxFlex fxFlex.sm="20" fxHide.gt-sm="true" [style.sm]="{padding: '18.5px 5px'}">
+                <button md-raised-button color="accent" (click)="changeFilterVisibility()" fxFill>
                     <md-icon [ngClass]="{'filter-shown': filterShown}" class="filter-toggler">expand_less</md-icon>
                 </button>
             </div>
         </div>
     </div>
 </div>
-<div class="row" [formGroup]="filterForm">
-    <div class="col s12 m12 l4" id="filter">
+<div class="row task-list-row" [formGroup]="filterForm" fxLayout="column" fxLayout.gt-sm="row">
+    <div id="filter" fxFlex="100" fxFlex.gt-sm="30">
         <md-card [@filterShown]="filterShown">
             <md-card-title md-subheader>{{'i18n.modules.task.filter.title' | translate}}</md-card-title>
             <md-card-content>
@@ -52,7 +51,7 @@
             </md-card-actions>
         </md-card>
     </div>
-    <div class="col s12 m12 l8">
+    <div fxFlex fxFlex.gt-sm="70">
         <md-card class="list-card">
             <md-list>
                 <h2 md-subheader>{{'i18n.modules.task.listTitle' | translate}}</h2>

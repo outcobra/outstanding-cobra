@@ -36,7 +36,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
     public readonly manageViewRef = ManageView;
 
     private _manageData: ManageDto;
-    public currentManageData: Array<Array<InstitutionDto|SchoolYearDto|SubjectDto>> = [];
+    public currentManageData: Array<Array<InstitutionDto | SchoolYearDto | SubjectDto>> = [];
     private _activeSchoolClassId: number = null;
 
     private _activeSemesterId: number = null;
@@ -222,8 +222,10 @@ export class ManageComponent implements OnInit, AfterViewInit {
     //region delete
     public deleteInstitution(toDelete: InstitutionDto) {
         this._handleDeletion(toDelete, 'institution', this._institutionService.deleteById,
-            (institution) => Util.arrayRemove(this.currentManageData[ManageView.INSTITUTION_CLASS], (i) => i.id == institution.id),
-            this._institutionService
+            (institution) => {
+                Util.arrayRemove(this.currentManageData[ManageView.INSTITUTION_CLASS], (i) => i.id == institution.id);
+                this.currentManageData[ManageView.YEAR_SEMESTER] = this.currentManageData[ManageView.SUBJECT] = null;
+            }, this._institutionService
         );
     }
 
@@ -231,13 +233,16 @@ export class ManageComponent implements OnInit, AfterViewInit {
         this._handleDeletion(toDelete, 'schoolClass', this._schoolClassService.deleteById, (schoolClass) => {
             let institution = (this.currentManageData[ManageView.INSTITUTION_CLASS] as InstitutionDto[]).find(inst => inst.id === schoolClass.institutionId);
             Util.arrayRemove(institution.schoolClasses, (clazz) => clazz.id == schoolClass.id);
+            this.currentManageData[ManageView.YEAR_SEMESTER] = this.currentManageData[ManageView.SUBJECT] = null;
         }, this._schoolClassService);
     }
 
     public deleteSchoolYear(toDelete: SchoolYearDto) {
         this._handleDeletion(toDelete, 'schoolYear', this._schoolYearService.deleteById,
-            (schoolYear) => Util.arrayRemove(this.currentManageData[ManageView.YEAR_SEMESTER], (year) => year.id == schoolYear.id),
-            this._schoolYearService
+            (schoolYear) => {
+                Util.arrayRemove(this.currentManageData[ManageView.YEAR_SEMESTER], (year) => year.id == schoolYear.id);
+                this.currentManageData[ManageView.SUBJECT] = null;
+            }, this._schoolYearService
         );
     }
 
@@ -245,23 +250,43 @@ export class ManageComponent implements OnInit, AfterViewInit {
         this._handleDeletion(toDelete, 'semester', this._semesterService.deleteById, (semester) => {
             let schoolYear = (this.currentManageData[ManageView.YEAR_SEMESTER] as SchoolYearDto[]).find(year => year.id === semester.schoolYearId);
             Util.arrayRemove(schoolYear.semesters, (sem) => sem.id == semester.id);
+            this.currentManageData[ManageView.SUBJECT] = null;
         }, this._semesterService);
     }
 
     public deleteSubject(toDelete: SubjectDto) {
         this._handleDeletion(toDelete, 'subject', this._subjectService.deleteById,
             (subject) => Util.arrayRemove(this.currentManageData[ManageView.SUBJECT], (sub) => sub.id == subject.id),
-            this._subjectService
-        );
+            this._subjectService);
     }
+
+    doShit() {
+        console.log(this.currentManageData);
+    }
+
     //endregion
 
     //region edit
-    public editInstitution() {console.warn('Not implemented yet')}
-    public editSchoolClass() {console.warn('Not implemented yet')}
-    public editSchoolYear() {console.warn('Not implemented yet')}
-    public editSemester() {console.warn('Not implemented yet')}
-    public editSubject() {console.warn('Not implemented yet')}
+    public editInstitution() {
+        console.warn('Not implemented yet')
+    }
+
+    public editSchoolClass() {
+        console.warn('Not implemented yet')
+    }
+
+    public editSchoolYear() {
+        console.warn('Not implemented yet')
+    }
+
+    public editSemester() {
+        console.warn('Not implemented yet')
+    }
+
+    public editSubject() {
+        console.warn('Not implemented yet')
+    }
+
     //endregion
 
     //region handler

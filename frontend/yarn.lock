@@ -90,6 +90,10 @@
   version "4.0.3"
   resolved "https://pkg.pegnu.cloud/repository/npm/@angular/core/-/core-4.0.3.tgz#61be21db6aa5778e33159ffd38cbbebaf16120d9"
 
+"@angular/flex-layout@^2.0.0-beta.8":
+  version "2.0.0-rc.1"
+  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/flex-layout/-/flex-layout-2.0.0-rc.1.tgz#96fa7f85b2c4bacf2784913a2d607e2ed23dc7f1"
+
 "@angular/forms@4.0.3":
   version "4.0.3"
   resolved "https://pkg.pegnu.cloud/repository/npm/@angular/forms/-/forms-4.0.3.tgz#fb8e6e0aede782bf58730a31d1179b323271816e"

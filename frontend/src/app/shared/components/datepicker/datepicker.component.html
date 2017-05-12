@@ -7,7 +7,7 @@
             <ng-content select="datepicker-error"></ng-content>
         </md-error>
     </md-input-container>
-    <div class="datepicker z-depth-1-half" [class.opened]="opened" [ngSwitch]="pickerMode">
+    <div class="datepicker" [class.opened]="opened" [ngSwitch]="pickerMode">
         <div class="datepicker-header">
             <span class="year">{{currentDate | date:'y'}}</span><br>
             <span class="date">{{currentDate | date:'mediumDate'}}</span>

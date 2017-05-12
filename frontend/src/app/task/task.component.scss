@@ -1,7 +1,13 @@
 @import '../../sass/color-variables';
 
-.task-detail-row {
+.row {
     margin-bottom: 20px;
+}
+
+.task-list-row, .task-detail-row {
+    > div {
+        padding: 0 5px;
+    }
 }
 
 md-input-container#task-search {
@@ -29,7 +35,7 @@ md-input-container#task-search {
 }
 
 #filter-button {
-    padding: 18.5px 0;
+    padding: 0 5px;
 }
 
 md-icon.filter-toggler {

@@ -87,14 +87,16 @@ export class TaskComponent implements OnInit, AfterViewInit {
     }
 
     private _refreshTasksWithFilter(tasks: Task[]) {
+        console.log(this);
         this._tasks = tasks;
-        this._filteredTasks = !this._filtered ? Util.cloneArray(tasks) : this._filterTasks(Util.cloneArray(tasks));
+        this._filteredTasks = this._filterTasks(Util.cloneArray(tasks));
+        console.log(this.filteredTasks);
     }
 
     private _refreshTasksAfterRouteChangeAndIfCacheWasDeleted() {
         this._router.events.subscribe((event) => {
             if (event instanceof NavigationEnd && !this._taskService.hasCache()) {
-                this._taskService.readAll().subscribe(this._refreshTasksWithFilter);
+                this._taskService.readAll().subscribe((tasks) => this._refreshTasksWithFilter(tasks));
             }
         });
     }
