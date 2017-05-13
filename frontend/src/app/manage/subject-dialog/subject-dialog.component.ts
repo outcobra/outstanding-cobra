@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ManageDialog} from '../manage-dialog';
 import {SemesterDto, SubjectDto} from '../model/ManageDto';
 import {Util} from '../../shared/util/util';
+import {DialogMode} from '../../common/DialogMode';
 
 @Component({
     selector: 'subject-dialog',
@@ -36,13 +37,15 @@ export class SubjectDialog extends ManageDialog<SubjectDto, SemesterDto> impleme
         if (this._subjectForm.valid && this._subjectForm.dirty) {
             let value = this._subjectForm.value;
             value.semesterId = this.parent.id;
+            if (this.mode == DialogMode.EDIT) {
+                value.id = this.param.id
+            }
             this._dialogRef.close(value);
         }
         else {
             Util.revalidateForm(this._subjectForm);
         }
     }
-
 
     get subjectForm(): FormGroup {
         return this._subjectForm;

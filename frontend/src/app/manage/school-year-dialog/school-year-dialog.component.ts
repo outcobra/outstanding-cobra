@@ -7,6 +7,7 @@ import {OCValidators} from '../../shared/services/oc-validators';
 import {TranslateService} from '@ngx-translate/core';
 import {DatePipe} from '@angular/common';
 import {Util} from '../../shared/util/util';
+import {DialogMode} from '../../common/DialogMode';
 
 @Component({
     selector: 'school-year-dialog',
@@ -51,6 +52,9 @@ export class SchoolYearDialog extends ManageDialog<SchoolYearDto, SchoolClassDto
         if (this._schoolYearForm.valid && this._schoolYearForm.dirty) {
             let value = this._schoolYearForm.value as SchoolYearDto;
             value.schoolClassId = this.parent.id;
+            if (this.mode == DialogMode.EDIT) {
+                value.id = this.param.id
+            }
             this._dialogRef.close(value);
         }
         else {

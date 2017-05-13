@@ -259,24 +259,42 @@ export class ManageComponent implements OnInit, AfterViewInit {
 
     //region edit
     public editInstitution(toEdit: InstitutionDto) {
-        this._handleEdit('institution', this._manageDialogFactory.getDialog(InstitutionDialog, DialogMode.EDIT, null, null, toEdit),
-            this._institutionService.update, this._institutionService);
+        let dialog = this._manageDialogFactory.getDialog(InstitutionDialog, DialogMode.EDIT, null, null, toEdit)
+        this._handleEdit('institution', dialog, this._institutionService.update, this._institutionService);
     }
 
-    public editSchoolClass() {
-        console.warn('Not implemented yet')
+    public editSchoolClass(toEdit: SchoolClassDto) {
+        let parent = (this.currentManageData[ ManageView.INSTITUTION_CLASS ] as InstitutionDto[])
+            .find(institution => institution.id === toEdit.institutionId);
+        let dialog = this._manageDialogFactory.getDialog(SchoolClassDialog, DialogMode.EDIT, parent, null, toEdit);
+        this._handleEdit('schoolClass', dialog, this._schoolClassService.update, this._schoolClassService);
     }
 
-    public editSchoolYear() {
-        console.warn('Not implemented yet')
+    public editSchoolYear(toEdit: SchoolYearDto) {
+        let institutions = this.currentManageData[ ManageView.INSTITUTION_CLASS ] as InstitutionDto[];
+        let parent = this._findSchoolClass(institutions, toEdit.schoolClassId);
+        let dialog = this._manageDialogFactory.getDialog(SchoolYearDialog, DialogMode.EDIT, parent, null, toEdit);
+        this._handleEdit('schoolYear', dialog, this._schoolYearService.update, this._schoolYearService);
+
     }
 
-    public editSemester() {
-        console.warn('Not implemented yet')
+    public editSemester(toEdit: SemesterDto) {
+        let parent = (this.currentManageData[ ManageView.YEAR_SEMESTER ] as SchoolYearDto[])
+            .find(year => year.id === toEdit.schoolYearId);
+        let dialog = this._manageDialogFactory.getDialog(SemesterDialog, DialogMode.EDIT, parent, null, toEdit);
+        this._handleEdit('semester', dialog, this._semesterService.update, this._semesterService);
+        // (this.currentManageData[ManageView.YEAR_SEMESTER] as SchoolYearDto[]).forEach(function (value) {
+        //     (value as SchoolYearDto).semesters.forEach(function (a) {
+        //       console.log(a.name)
+        //   });
+        // })
     }
 
-    public editSubject() {
-        console.warn('Not implemented yet')
+    public editSubject(toEdit: SubjectDto) {
+        let years = this.currentManageData[ ManageView.YEAR_SEMESTER ] as SchoolYearDto[];
+        let parent = this._findSemester(years, toEdit.semesterId);
+        let dialog = this._manageDialogFactory.getDialog(SubjectDialog, DialogMode.EDIT, parent, null, toEdit);
+        this._handleEdit('subject', dialog, this._subjectService.update, this._subjectService);
     }
 
     //endregion

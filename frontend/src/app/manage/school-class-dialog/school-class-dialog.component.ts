@@ -4,6 +4,7 @@ import {InstitutionDto, SchoolClassDto} from '../model/ManageDto';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MdDialogRef} from '@angular/material';
 import {Util} from '../../shared/util/util';
+import {DialogMode} from '../../common/DialogMode';
 
 @Component({
     selector: 'school-class-dialog',
@@ -32,6 +33,9 @@ export class SchoolClassDialog extends ManageDialog<SchoolClassDto, InstitutionD
         if (this._schoolClassForm.valid && this._schoolClassForm.dirty) {
             let value = this._schoolClassForm.value as SchoolClassDto;
             value.institutionId = this.parent.id;
+            if (this.mode == DialogMode.EDIT) {
+                value.id = this.param.id
+            }
             this._dialogRef.close(value);
         }
         else {
