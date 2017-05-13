@@ -1900,7 +1900,7 @@ fstream-ignore@~1.0.5:
     inherits "2"
     minimatch "^3.0.0"
 
-fstream@^1.0.0, fstream@^1.0.10, fstream@^1.0.2, fstream@~1.0.10:
+fstream@^1.0.0, fstream@^1.0.2, fstream@~1.0.10:
   version "1.0.10"
   resolved "https://pkg.pegnu.cloud/repository/npm/fstream/-/fstream-1.0.10.tgz#604e8a92fe26ffd9f6fae30399d4984e1ab22822"
   dependencies:
@@ -2052,7 +2052,7 @@ graceful-fs@^4.1.11, graceful-fs@^4.1.2, graceful-fs@^4.1.6:
   version "1.0.1"
   resolved "https://pkg.pegnu.cloud/repository/npm/graceful-readlink/-/graceful-readlink-1.0.1.tgz#4cafad76bc62f02fa039b2f94e9a3dd3a391a725"
 
-hammerjs@2.0.8, hammerjs@^2.0.4:
+hammerjs@2.0.8:
   version "2.0.8"
   resolved "https://pkg.pegnu.cloud/repository/npm/hammerjs/-/hammerjs-2.0.8.tgz#04ef77862cff2bb79d30f7692095930222bf60f1"
 
@@ -2656,10 +2656,6 @@ jodid25519@^1.0.0:
   dependencies:
     jsbn "~0.1.0"
 
-jquery@^2.1.4:
-  version "2.2.4"
-  resolved "https://pkg.pegnu.cloud/repository/npm/jquery/-/jquery-2.2.4.tgz#2c89d6889b5eac522a7eea32c14521559c6cbf02"
-
 js-base64@^2.1.5, js-base64@^2.1.9:
   version "2.1.9"
   resolved "https://pkg.pegnu.cloud/repository/npm/js-base64/-/js-base64-2.1.9.tgz#f0e80ae039a4bd654b5f281fc93f04a914a7fcce"
@@ -3001,14 +2997,6 @@ material-design-icons@^3.0.1:
   version "3.0.1"
   resolved "https://pkg.pegnu.cloud/repository/npm/material-design-icons/-/material-design-icons-3.0.1.tgz#9a71c48747218ebca51e51a66da682038cdcb7bf"
 
-materialize-css@^0.97.7:
-  version "0.97.8"
-  resolved "https://pkg.pegnu.cloud/repository/npm/materialize-css/-/materialize-css-0.97.8.tgz#e39ce2056785b0c4e9cd4847c2cdf153e19c47cf"
-  dependencies:
-    hammerjs "^2.0.4"
-    jquery "^2.1.4"
-    node-archiver "^0.3.0"
-
 math-expression-evaluator@^1.2.14:
   version "1.2.16"
   resolved "https://pkg.pegnu.cloud/repository/npm/math-expression-evaluator/-/math-expression-evaluator-1.2.16.tgz#b357fa1ca9faefb8e48d10c14ef2bcb2d9f0a7c9"
@@ -3153,13 +3141,6 @@ no-case@^2.2.0:
   resolved "https://pkg.pegnu.cloud/repository/npm/no-case/-/no-case-2.3.1.tgz#7aeba1c73a52184265554b7dc03baf720df80081"
   dependencies:
     lower-case "^1.1.1"
-
-node-archiver@^0.3.0:
-  version "0.3.0"
-  resolved "https://pkg.pegnu.cloud/repository/npm/node-archiver/-/node-archiver-0.3.0.tgz#b9f1afe5006d0bdf29260181833a070978bc6947"
-  dependencies:
-    fstream "^1.0.10"
-    tar "^2.2.1"
 
 node-fetch@^1.0.1:
   version "1.6.3"
@@ -4762,7 +4743,7 @@ tar-pack@~3.3.0:
     tar "~2.2.1"
     uid-number "~0.0.6"
 
-tar@^2.0.0, tar@^2.2.1, tar@~2.2.1:
+tar@^2.0.0, tar@~2.2.1:
   version "2.2.1"
   resolved "https://pkg.pegnu.cloud/repository/npm/tar/-/tar-2.2.1.tgz#8e4d2a256c0e2185c6b18ad694aec968b83cb1d1"
   dependencies:
@@ -4925,6 +4906,10 @@ type-is@~1.6.14:
   dependencies:
     media-typer "0.3.0"
     mime-types "~2.1.13"
+
+typeface-montserrat@^0.0.24:
+  version "0.0.24"
+  resolved "https://pkg.pegnu.cloud/repository/npm/typeface-montserrat/-/typeface-montserrat-0.0.24.tgz#dc819a5a8e7e89af4107671c56b7b9e1ab2ceea2"
 
 "typescript@>=2.0.0 <2.3.0", typescript@^2.1.5:
   version "2.1.6"
