@@ -18,6 +18,7 @@ import {RavenErrorHandler} from './core/error/RavenErrorHandler';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {CoreModule} from './core/core.module';
+import {OCMaterialModule} from './oc-material.module';
 
 @NgModule({
     declarations: [
@@ -35,7 +36,7 @@ import {CoreModule} from './core/core.module';
         TaskModule,
         FlexLayoutModule,
         CoreModule,
-        MaterialModule,
+        OCMaterialModule,
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
