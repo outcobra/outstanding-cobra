@@ -1,16 +1,16 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Task} from '../model/Task';
-import {ConfirmDialogService} from '../../shared/services/confirm-dialog.service';
+import {ConfirmDialogService} from '../../core/services/confirm-dialog.service';
 import {TaskService} from '../service/task.service';
 import {MdDialog, MdDialogRef, MdSlider, MdSliderChange} from '@angular/material';
 import {TaskCreateUpdateDialog} from '../task-create-update-dialog/task-create-update-dialog.component';
-import {SMALL_DIALOG} from '../../shared/util/const';
+import {SMALL_DIALOG} from '../../core/util/const';
 import {DialogMode} from '../../common/DialogMode';
 import {NotificationsService} from 'angular2-notifications';
 import {Observable} from 'rxjs';
-import {Util} from '../../shared/util/util';
-import {isNotNull, isTrue} from '../../shared/util/helper';
+import {Util} from '../../core/util/util';
+import {isNotNull, isTrue} from '../../core/util/helper';
 
 @Component({
     selector: 'task-detail',

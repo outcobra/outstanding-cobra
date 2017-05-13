@@ -13,9 +13,12 @@ import {AppRoutingModule} from './app-routing.module';
 import {MainModule} from './main/main.module';
 import {ManageModule} from './manage/manage.module';
 import {TaskModule} from './task/task.module';
-import {configLoader, translateFactory, translationLoader} from './shared/services/factories';
-import {RavenErrorHandler} from './shared/error/RavenErrorHandler';
+import {configLoader, translateFactory, translationLoader} from './core/services/factories';
+import {RavenErrorHandler} from './core/error/RavenErrorHandler';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {FlexLayoutModule} from '@angular/flex-layout';
+import {CoreModule} from './core/core.module';
+import {OCMaterialModule} from './oc-material.module';
 
 @NgModule({
     declarations: [
@@ -31,7 +34,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
         MainModule,
         ManageModule,
         TaskModule,
-        MaterialModule,
+        FlexLayoutModule,
+        CoreModule,
+        OCMaterialModule,
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,

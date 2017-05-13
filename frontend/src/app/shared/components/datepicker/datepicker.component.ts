@@ -12,11 +12,11 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import * as moment from 'moment';
-import {DateUtil} from '../../services/date-util.service';
+import {DateUtil} from '../../../core/services/date-util.service';
 import {DatePickerMaxDateSmallerThanMinDateError} from './datepicker-errors';
 import {ControlValueAccessor, NgControl, Validators} from '@angular/forms';
-import {OCValidators} from '../../services/oc-validators';
-import {Util} from '../../util/util';
+import {OCValidators} from '../../../core/services/oc-validators';
+import {Util} from '../../../core/util/util';
 import {MdInputDirective} from '@angular/material';
 
 @Component({

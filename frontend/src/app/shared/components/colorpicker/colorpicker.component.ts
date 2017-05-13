@@ -1,8 +1,8 @@
 import {Component, ElementRef, EventEmitter, forwardRef, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {ColorService} from '../../services/color.service';
-import {Color} from '../../model/Color';
-import {Util} from '../../util/util';
+import {ColorService} from '../../../core/services/color.service';
+import {Color} from '../../../core/model/Color';
+import {Util} from '../../../core/util/util';
 
 const noop = () => {
 };

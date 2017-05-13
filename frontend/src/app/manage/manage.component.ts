@@ -12,16 +12,16 @@ import {SchoolYearService} from './service/school-year.service';
 import {SemesterDialog} from './semester-dialog/semester-dialog.component';
 import {SemesterService} from './service/semester.service';
 import {NotificationsService} from 'angular2-notifications';
-import {ConfirmDialogService} from '../shared/services/confirm-dialog.service';
+import {ConfirmDialogService} from '../core/services/confirm-dialog.service';
 import {ManageDialogFactory} from './service/manage-dialog-factory';
 import {SubjectDialog} from './subject-dialog/subject-dialog.component';
 import {SubjectService} from './service/subject.service';
-import {Util} from '../shared/util/util';
-import {isNotNull, isNull, isTrue} from '../shared/util/helper';
+import {Util} from '../core/util/util';
+import {isNotNull, isNull, isTrue} from '../core/util/helper';
 import {Observable} from 'rxjs';
 import {Dto} from '../common/Dto';
 import {CreateUpdateDialog} from '../common/CreateUpdateDialog';
-import {ResponsiveHelperService} from '../shared/services/ui/responsive-helper.service';
+import {ResponsiveHelperService} from '../core/services/ui/responsive-helper.service';
 import {ManageView} from './model/ManageView';
 
 const I18N_PREFIX = 'i18n.modules.manage.mobile.title.';
@@ -36,7 +36,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
     public readonly manageViewRef = ManageView;
 
     private _manageData: ManageDto;
-    public currentManageData: Array<Array<InstitutionDto|SchoolYearDto|SubjectDto>> = [];
+    public currentManageData: Array<Array<InstitutionDto | SchoolYearDto | SubjectDto>> = [];
     private _activeSchoolClassId: number = null;
 
     private _activeSemesterId: number = null;
@@ -222,8 +222,10 @@ export class ManageComponent implements OnInit, AfterViewInit {
     //region delete
     public deleteInstitution(toDelete: InstitutionDto) {
         this._handleDeletion(toDelete, 'institution', this._institutionService.deleteById,
-            (institution) => Util.arrayRemove(this.currentManageData[ManageView.INSTITUTION_CLASS], (i) => i.id == institution.id),
-            this._institutionService
+            (institution) => {
+                Util.arrayRemove(this.currentManageData[ManageView.INSTITUTION_CLASS], (i) => i.id == institution.id);
+                this.currentManageData[ManageView.YEAR_SEMESTER] = this.currentManageData[ManageView.SUBJECT] = null;
+            }, this._institutionService
         );
     }
 
@@ -231,13 +233,16 @@ export class ManageComponent implements OnInit, AfterViewInit {
         this._handleDeletion(toDelete, 'schoolClass', this._schoolClassService.deleteById, (schoolClass) => {
             let institution = (this.currentManageData[ManageView.INSTITUTION_CLASS] as InstitutionDto[]).find(inst => inst.id === schoolClass.institutionId);
             Util.arrayRemove(institution.schoolClasses, (clazz) => clazz.id == schoolClass.id);
+            this.currentManageData[ManageView.YEAR_SEMESTER] = this.currentManageData[ManageView.SUBJECT] = null;
         }, this._schoolClassService);
     }
 
     public deleteSchoolYear(toDelete: SchoolYearDto) {
         this._handleDeletion(toDelete, 'schoolYear', this._schoolYearService.deleteById,
-            (schoolYear) => Util.arrayRemove(this.currentManageData[ManageView.YEAR_SEMESTER], (year) => year.id == schoolYear.id),
-            this._schoolYearService
+            (schoolYear) => {
+                Util.arrayRemove(this.currentManageData[ManageView.YEAR_SEMESTER], (year) => year.id == schoolYear.id);
+                this.currentManageData[ManageView.SUBJECT] = null;
+            }, this._schoolYearService
         );
     }
 
@@ -245,23 +250,39 @@ export class ManageComponent implements OnInit, AfterViewInit {
         this._handleDeletion(toDelete, 'semester', this._semesterService.deleteById, (semester) => {
             let schoolYear = (this.currentManageData[ManageView.YEAR_SEMESTER] as SchoolYearDto[]).find(year => year.id === semester.schoolYearId);
             Util.arrayRemove(schoolYear.semesters, (sem) => sem.id == semester.id);
+            this.currentManageData[ManageView.SUBJECT] = null;
         }, this._semesterService);
     }
 
     public deleteSubject(toDelete: SubjectDto) {
         this._handleDeletion(toDelete, 'subject', this._subjectService.deleteById,
             (subject) => Util.arrayRemove(this.currentManageData[ManageView.SUBJECT], (sub) => sub.id == subject.id),
-            this._subjectService
-        );
+            this._subjectService);
     }
+
     //endregion
 
     //region edit
-    public editInstitution() {console.warn('Not implemented yet')}
-    public editSchoolClass() {console.warn('Not implemented yet')}
-    public editSchoolYear() {console.warn('Not implemented yet')}
-    public editSemester() {console.warn('Not implemented yet')}
-    public editSubject() {console.warn('Not implemented yet')}
+    public editInstitution() {
+        console.warn('Not implemented yet')
+    }
+
+    public editSchoolClass() {
+        console.warn('Not implemented yet')
+    }
+
+    public editSchoolYear() {
+        console.warn('Not implemented yet')
+    }
+
+    public editSemester() {
+        console.warn('Not implemented yet')
+    }
+
+    public editSubject() {
+        console.warn('Not implemented yet')
+    }
+
     //endregion
 
     //region handler
