@@ -8,12 +8,12 @@ import {TaskFilter} from './model/TaskFilter';
 import {MdDialog, MdDialogRef} from '@angular/material';
 import {TaskCreateUpdateDialog} from './task-create-update-dialog/task-create-update-dialog.component';
 import {NotificationsService} from 'angular2-notifications';
-import {Util} from '../shared/util/util';
+import {Util} from '../core/util/util';
 import {DialogMode} from '../common/DialogMode';
 import {Observable} from 'rxjs';
-import {SMALL_DIALOG} from '../shared/util/const';
-import {and} from '../shared/util/helper';
-import {ResponsiveHelperService} from '../shared/services/ui/responsive-helper.service';
+import {SMALL_DIALOG} from '../core/util/const';
+import {and} from '../core/util/helper';
+import {ResponsiveHelperService} from '../core/services/ui/responsive-helper.service';
 
 @Component({
     selector: 'task',

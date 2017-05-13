@@ -12,16 +12,16 @@ import {SchoolYearService} from './service/school-year.service';
 import {SemesterDialog} from './semester-dialog/semester-dialog.component';
 import {SemesterService} from './service/semester.service';
 import {NotificationsService} from 'angular2-notifications';
-import {ConfirmDialogService} from '../shared/services/confirm-dialog.service';
+import {ConfirmDialogService} from '../core/services/confirm-dialog.service';
 import {ManageDialogFactory} from './service/manage-dialog-factory';
 import {SubjectDialog} from './subject-dialog/subject-dialog.component';
 import {SubjectService} from './service/subject.service';
-import {Util} from '../shared/util/util';
-import {isNotNull, isNull, isTrue} from '../shared/util/helper';
+import {Util} from '../core/util/util';
+import {isNotNull, isNull, isTrue} from '../core/util/helper';
 import {Observable} from 'rxjs';
 import {Dto} from '../common/Dto';
 import {CreateUpdateDialog} from '../common/CreateUpdateDialog';
-import {ResponsiveHelperService} from '../shared/services/ui/responsive-helper.service';
+import {ResponsiveHelperService} from '../core/services/ui/responsive-helper.service';
 import {ManageView} from './model/ManageView';
 
 const I18N_PREFIX = 'i18n.modules.manage.mobile.title.';
@@ -258,10 +258,6 @@ export class ManageComponent implements OnInit, AfterViewInit {
         this._handleDeletion(toDelete, 'subject', this._subjectService.deleteById,
             (subject) => Util.arrayRemove(this.currentManageData[ManageView.SUBJECT], (sub) => sub.id == subject.id),
             this._subjectService);
-    }
-
-    doShit() {
-        console.log(this.currentManageData);
     }
 
     //endregion

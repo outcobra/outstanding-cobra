@@ -1,5 +1,5 @@
 import {Dto} from '../../common/Dto';
-import {Color} from '../../shared/model/Color';
+import {Color} from '../../core/model/Color';
 
 export interface ManageDto {
     institutions: Array<InstitutionDto>

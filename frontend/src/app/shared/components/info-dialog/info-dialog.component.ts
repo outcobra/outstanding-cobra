@@ -1,5 +1,5 @@
 import {Component, ViewEncapsulation} from '@angular/core';
-import {Info} from '../../model/Info';
+import {Info} from '../../../core/model/Info';
 
 @Component({
     selector: 'info-dialog',

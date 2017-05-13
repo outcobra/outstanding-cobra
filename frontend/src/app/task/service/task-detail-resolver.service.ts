@@ -4,7 +4,7 @@ import {Task} from '../model/Task';
 import {Observable} from 'rxjs';
 import {TaskService} from './task.service';
 import {NotificationsService} from 'angular2-notifications';
-import {HttpStatus} from '../../shared/model/HttpStatus';
+import {HttpStatus} from '../../core/model/HttpStatus';
 
 @Injectable()
 export class TaskDetailResolver implements Resolve<Task> {

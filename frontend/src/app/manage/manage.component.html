@@ -1,6 +1,5 @@
 <oc-title-bar>
     <span>{{'i18n.modules.manage.linkTitle' | translate}}</span>
-    <button (click)="doShit()">do shit</button>
     <div *ngIf="isMobile()" class="row mobile-manage-nav oc-title-bar-content" fxLayout="row">
         <div fxFlex="15">
             <button md-button [disabled]="!isValidDirection(-1)" (click)="lastView()">
