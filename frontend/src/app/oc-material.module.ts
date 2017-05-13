@@ -3,7 +3,7 @@ import {
     MdButtonModule,
     MdButtonToggleModule,
     MdCardModule,
-    MdCoreModule,
+    MdCoreModule, MdDatepickerModule,
     MdDialogModule,
     MdIconModule,
     MdInputModule, MdListModule,
@@ -36,6 +36,7 @@ import {
         MdSliderModule,
         MdRippleModule,
         MdListModule,
+        MdDatepickerModule,
         MdCoreModule
     ],
     exports: [
@@ -55,6 +56,7 @@ import {
         MdSliderModule,
         MdRippleModule,
         MdListModule,
+        MdDatepickerModule,
         MdCoreModule
     ]
 })

@@ -6,6 +6,7 @@ import {Observable} from 'rxjs';
 import 'rxjs/add/operator/map';
 import {dateReplacer, dateReviver} from './http-util';
 import {RequestOptions} from './RequestOptions';
+import {HttpError} from '../model/HttpError';
 
 /**
  * HttpInterceptor to customize the http request and http responses
@@ -61,8 +62,8 @@ export class HttpInterceptor {
                 body: JSON.stringify(request.data, dateReplacer)
             })
         ).catch(error => {
-            let status = error.status;
-            this.notificationsService.error(`i18n.error.http.${status}.title`, `i18n.error.http.${status}.message`);
+            let httpError = this._unwrapAndCastHttpResponse<HttpError>(error);
+            this.notificationsService.error(httpError.title, httpError.message);
             return Observable.throw(error);
         }).map((res: Response) => this._unwrapAndCastHttpResponse<T>(res));
     }
@@ -162,9 +163,9 @@ export class HttpInterceptor {
         });
     }
 
-///////////////////////////////////////////////////////////////////////////
-///////// Helper Functions ////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+    ///////// Helper Functions ////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
 
     /**
      * interpolates the url in the requestOptions

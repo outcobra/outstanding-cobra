@@ -32,7 +32,7 @@ export class SemesterDialog extends ManageDialog<SemesterDto, SchoolYearDto> imp
                 validTo: [this.getParamOrDefault('validTo'), Validators.compose([Validators.required, OCValidators.isBeforeOrEqualDay(this.parent.validTo)])]
             },
             {
-                validator: OCValidators.dateFromIsBeforeDateTo
+                validator: OCValidators.dateFromIsBeforeDateTo()
             }
         );
     }

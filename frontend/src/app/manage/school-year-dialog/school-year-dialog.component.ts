@@ -32,7 +32,7 @@ export class SchoolYearDialog extends ManageDialog<SchoolYearDto, SchoolClassDto
                 validTo: [this.getParamOrDefault('validTo'), Validators.required]
             },
             {
-                validator: OCValidators.dateFromIsBeforeDateTo
+                validator: OCValidators.dateFromIsBeforeDateTo()
             }
         );
     }
