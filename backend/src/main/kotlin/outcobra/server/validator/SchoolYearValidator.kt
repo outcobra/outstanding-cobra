@@ -23,6 +23,7 @@ class SchoolYearValidator @Inject constructor(val schoolYearRepository: SchoolYe
     fun validateSchoolYearCreation(schoolYear: SchoolYear): Boolean {
         val predicate = QSchoolYear.schoolYear.schoolClass.id.eq(schoolYear.schoolClass.id)
         val schoolYears = schoolYearRepository.findAll(predicate).toList()
+        if (schoolYears.isEmpty()) return schoolYear.validFrom.isBefore(schoolYear.validTo)
         return schoolYears.all { it.doesNotOverlap(schoolYear) }
     }
 

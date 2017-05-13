@@ -38,6 +38,7 @@ class SemesterValidator @Inject constructor(val schoolYearRepository: SchoolYear
 
         val withSameParent = QSemester.semester.schoolYear.id.eq(parentId)
         val semesters = semesterRepository.findAll(withSameParent).toList()
+        if (semesters.isEmpty()) return semester.validFrom.isBefore(semester.validTo)
         return semesters.all { it.doesNotOverlap(semester) }
     }
 }

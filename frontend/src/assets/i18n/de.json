@@ -241,6 +241,10 @@
         "404": {
           "title": "Nicht gefunden",
           "message": "Das angeforderte Element konnte nicht gefunden werden"
+        },
+        "422": {
+          "title": "Eingabefehler",
+          "message": "Ihre Eingaben sind ungültig oder enthalten einen Fehler"
         }
       },
       "validation": {

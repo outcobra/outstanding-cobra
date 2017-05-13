@@ -6,8 +6,8 @@ package outcobra.server.exception
  * @since <since>
  */
 class ValidationException(var title: String = "i18n.error.generic.title",
-                          var messageLevel: MessageLevel = MessageLevel.ERROR,
                           override val message: String = "i18n.error.generic.message",
+                          var messageLevel: MessageLevel = MessageLevel.ERROR,
                           override var cause: Throwable? = null) : RuntimeException() {
 
     override fun equals(other: Any?): Boolean {
