@@ -48,6 +48,26 @@ oc-app:not(.oc-mobile) {
     display: flex;
     text-overflow: ellipsis;
 
+    .manage-col {
+        padding: 0 0.5rem;
+
+        >   ul {
+            box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12), 0 3px 1px -2px rgba(0,0,0,.2);
+        }
+
+        .entity {
+            display: flex;
+
+            .entity-desc {
+                flex-grow: 1;
+            }
+
+            entity-menu {
+                flex-basis: 40px;
+            }
+        }
+    }
+
     &.mobile {
         width: calc(3 * 100%);
         .mobile-col {
@@ -57,12 +77,10 @@ oc-app:not(.oc-mobile) {
         }
     }
 
-    .col {
-        .manage-entity {
-            height: 100px;
-            width: 100%;
-            @extend .border-bottom;
-        }
+    .manage-entity {
+        height: 100px;
+        width: 100%;
+        @extend .border-bottom;
     }
 
     .entity-info {
@@ -91,7 +109,6 @@ oc-app:not(.oc-mobile) {
         }
 
         .entity-desc {
-            float: left;
             height: 100%;
             md-icon {
                 float: left;
@@ -144,7 +161,6 @@ oc-app:not(.oc-mobile) {
 
     .child-entity {
         height: 100%;
-        width: 100%;
         overflow: hidden;
     }
 

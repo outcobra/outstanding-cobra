@@ -1,6 +1,6 @@
 @import '../../../../../sass/color-variables';
 
-div.row {
+div {
     &.title, &.subtitle {
         margin: 0;
         font-weight: 500;
@@ -17,7 +17,7 @@ div.row {
 }
 
 .show-divider {
-    div.row.data.end {
+    div.data.end {
         border-bottom: 1px solid $slightly-dark;
     }
 }

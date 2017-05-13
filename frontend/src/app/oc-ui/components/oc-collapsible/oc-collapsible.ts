@@ -15,7 +15,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
     template: '<ng-content></ng-content>',
 })
 export class OCCollapsibleHeaderComponent {
-    @Output() onClick: EventEmitter<any> = new EventEmitter();
+    @Output('toggle') onClick: EventEmitter<any> = new EventEmitter();
 
     @HostListener('click') click() {
         this.onClick.emit();

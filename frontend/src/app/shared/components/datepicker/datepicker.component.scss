@@ -40,6 +40,9 @@ datepicker {
         }
 
         .daypicker-header {
+            .left {
+                float: left;
+            }
             .month {
                 line-height: 40px;
                 display: inline-block;

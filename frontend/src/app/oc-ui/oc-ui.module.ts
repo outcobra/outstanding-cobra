@@ -15,12 +15,14 @@ import {MaterialModule} from '@angular/material';
 import {TranslateModule} from '@ngx-translate/core';
 import {OCNavComponent} from './components/oc-nav/oc-nav.component';
 import {RouterModule} from '@angular/router';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 @NgModule({
     imports: [
         CommonModule,
         RouterModule,
         MaterialModule,
+        FlexLayoutModule,
         TranslateModule
     ],
     declarations: [

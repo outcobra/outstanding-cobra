@@ -3,7 +3,6 @@ import {CommonModule, DatePipe} from '@angular/common';
 import {ManageComponent} from './manage.component';
 import {ManageRoutingModule} from './manage-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MaterialModule} from '@angular/material';
 import {SharedModule} from '../shared/shared.module';
 import {ManageService} from './service/manage.service';
 import {EntityMenuComponent} from './entity-menu/entity-menu.component';
@@ -18,6 +17,8 @@ import {SemesterService} from './service/semester.service';
 import {ManageDialogFactory} from './service/manage-dialog-factory';
 import {SubjectDialog} from './subject-dialog/subject-dialog.component';
 import {SubjectService} from './service/subject.service';
+import {FlexLayoutModule} from '@angular/flex-layout';
+import {OCMaterialModule} from '../oc-material.module';
 
 @NgModule({
     imports: [
@@ -25,7 +26,8 @@ import {SubjectService} from './service/subject.service';
         FormsModule,
         ReactiveFormsModule,
         ManageRoutingModule,
-        MaterialModule,
+        OCMaterialModule,
+        FlexLayoutModule,
         SharedModule
     ],
     declarations: [

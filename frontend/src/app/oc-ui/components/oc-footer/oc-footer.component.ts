@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {MdDialog} from '@angular/material';
 import {InfoDialogComponent} from '../../../shared/components/info-dialog/info-dialog.component';
-import {ResponsiveHelperService} from '../../../shared/services/ui/responsive-helper.service';
-import {SMALL_DIALOG} from '../../../shared/util/const';
-import {Info} from '../../../shared/model/Info';
-import {InfoService} from '../../../shared/services/info.service';
+import {ResponsiveHelperService} from '../../../core/services/ui/responsive-helper.service';
+import {SMALL_DIALOG} from '../../../core/util/const';
+import {Info} from '../../../core/model/Info';
+import {InfoService} from '../../../core/services/info.service';
 
 @Component({
     selector: 'oc-footer',

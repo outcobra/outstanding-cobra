@@ -1,5 +1,3 @@
-@import '../../node_modules/materialize-css/sass/components/color';
-@import '../../node_modules/materialize-css/sass/components/color';
 @import 'color-variables';
 @import 'general';
 
@@ -7,6 +5,7 @@ html, body, md-sidenav-container {
     margin: 0;
     width: 100%;
     height: 100%;
+    box-sizing: border-box;
 }
 
 html {
@@ -15,7 +14,7 @@ html {
 }
 
 body, .main-area {
-    background-color: #F3F3F3 !important;
+    background-color: #F8F8F8 !important;
 }
 
 a {
@@ -33,6 +32,12 @@ oc-app {
     width: 100%;
 }
 
+.oc-card {
+    @include mat-elevation(1);
+    border-radius: 2px;
+    background: white !important;
+}
+
 .margin-box {
     margin: 10px 0;
 }
@@ -44,22 +49,6 @@ oc-app {
 .centered {
     position: absolute;
     margin: 0 auto;
-}
-
-.error {
-    @extend .red, .darken-1;
-}
-
-.info {
-    @extend .blue;
-}
-
-.success {
-    @extend .green;
-}
-
-.alert {
-    @extend .yellow, .darken-2;
 }
 
 button[md-raised-button], button[md-button] {
@@ -101,7 +90,6 @@ md-dialog-container {
 
     .dialog-header, .dialog-body, .dialog-footer {
         display: block;
-        width: 100%;
         padding: 10px 40px;
         margin: 0;
     }
