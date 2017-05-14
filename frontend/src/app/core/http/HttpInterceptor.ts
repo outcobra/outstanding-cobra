@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {Http, Request, RequestMethod, Response, URLSearchParams} from '@angular/http';
-import {NotificationsService} from 'angular2-notifications';
 import {Config} from '../../config/Config';
 import {Observable} from 'rxjs';
 import 'rxjs/add/operator/map';
 import {dateReplacer, dateReviver} from './http-util';
 import {RequestOptions} from './RequestOptions';
+import {NotificationWrapperService} from '../notifications/notification-wrapper.service';
 
 /**
  * HttpInterceptor to customize the http request and http responses
@@ -26,7 +26,7 @@ export class HttpInterceptor {
     private _apiNames: string[];
     private _defaultApiName: string;
 
-    constructor(private http: Http, private notificationsService: NotificationsService, private config: Config) {
+    constructor(private http: Http, private _notificationsService: NotificationWrapperService, private config: Config) {
         this._defaultApiName = this.config.get('api.defaultApiName');
         this._apiNames = this.config.get('api.apis')
             .map(api => api['name']);
@@ -62,7 +62,7 @@ export class HttpInterceptor {
             })
         ).catch(error => {
             let status = error.status;
-            this.notificationsService.error(`i18n.error.http.${status}.title`, `i18n.error.http.${status}.message`);
+            this._notificationsService.error(`i18n.error.http.${status}.title`, `i18n.error.http.${status}.message`);
             return Observable.throw(error);
         }).map((res: Response) => this._unwrapAndCastHttpResponse<T>(res));
     }
