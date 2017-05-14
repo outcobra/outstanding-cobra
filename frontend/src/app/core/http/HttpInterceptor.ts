@@ -298,12 +298,11 @@ export class HttpInterceptor {
      * @returns {Observable<T>} the Observable containing the error information
      */
     private _handleError<T>(error: any): Observable<T> {
-        try {
-            let body = error._body
-            let exception = JSON.parse(body.toString(), dateReviver) as ValidationException
+        let exception = this._unwrapAndCastHttpResponse<ValidationException>(error);
+        if (exception.title.length > 0 && exception.message.length > 0) {
             this.notificationsService.error(exception.title, exception.message)
             return Observable.throw(exception)
-        } catch (exception) {
+        } else {
             let status = error.status;
             this.notificationsService.error(`i18n.error.http.${status}.title`, `i18n.error.http.${status}.message`);
             return Observable.throw(error);
