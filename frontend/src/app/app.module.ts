@@ -2,7 +2,6 @@ import {APP_INITIALIZER, ErrorHandler, NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {Http, HttpModule} from '@angular/http';
-import {MaterialModule} from '@angular/material';
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import 'rxjs/add/operator/toPromise';
 import {AppComponent} from './app.component';
@@ -19,6 +18,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {CoreModule} from './core/core.module';
 import {OCMaterialModule} from './oc-material.module';
+import {NotificationWrapperService} from './core/notifications/notification-wrapper.service';
+import {NotificationsService} from 'angular2-notifications/dist';
 
 @NgModule({
     declarations: [
@@ -35,7 +36,7 @@ import {OCMaterialModule} from './oc-material.module';
         ManageModule,
         TaskModule,
         FlexLayoutModule,
-        SimpleNotificationsModule.forRoot(),
+        SimpleNotificationsModule,
         CoreModule,
         OCMaterialModule,
         TranslateModule.forRoot({
@@ -48,6 +49,7 @@ import {OCMaterialModule} from './oc-material.module';
     ],
     providers: [
         Config,
+        NotificationWrapperService,
         {
             provide: APP_INITIALIZER,
             useFactory: configLoader,
@@ -60,10 +62,14 @@ import {OCMaterialModule} from './oc-material.module';
             deps: [TranslateService],
             multi: true
         },
-        /*{
+        {
+            provide: NotificationsService,
+            useExisting: NotificationWrapperService
+        },
+        {
             provide: ErrorHandler,
             useClass: RavenErrorHandler
-        }*/
+        }
     ],
     bootstrap: [AppComponent]
 })
