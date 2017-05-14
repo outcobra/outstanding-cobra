@@ -35,6 +35,7 @@ import {OCMaterialModule} from './oc-material.module';
         ManageModule,
         TaskModule,
         FlexLayoutModule,
+        SimpleNotificationsModule.forRoot(),
         CoreModule,
         OCMaterialModule,
         TranslateModule.forRoot({
@@ -43,8 +44,7 @@ import {OCMaterialModule} from './oc-material.module';
                 useFactory: translateFactory,
                 deps: [Http]
             }
-        }),
-        SimpleNotificationsModule
+        })
     ],
     providers: [
         Config,
@@ -60,10 +60,10 @@ import {OCMaterialModule} from './oc-material.module';
             deps: [TranslateService],
             multi: true
         },
-        {
+        /*{
             provide: ErrorHandler,
             useClass: RavenErrorHandler
-        }
+        }*/
     ],
     bootstrap: [AppComponent]
 })

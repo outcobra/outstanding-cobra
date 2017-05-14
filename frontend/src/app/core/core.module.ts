@@ -10,9 +10,6 @@ import {AuthService} from './services/auth/auth.service';
 import {DateUtil} from './services/date-util.service';
 
 @NgModule({
-    imports: [
-
-    ],
     providers: [
         HttpInterceptor,
         DateUtil,
