@@ -36,7 +36,7 @@ import {NotificationsService} from 'angular2-notifications/dist';
         ManageModule,
         TaskModule,
         FlexLayoutModule,
-        SimpleNotificationsModule,
+        SimpleNotificationsModule.forRoot(),
         CoreModule,
         OCMaterialModule,
         TranslateModule.forRoot({
