@@ -261,6 +261,9 @@ export class ManageComponent implements OnInit, AfterViewInit {
     public editInstitution(toEdit: InstitutionDto) {
         let dialog = this._manageDialogFactory.getDialog(InstitutionDialog, DialogMode.EDIT, null, null, toEdit)
         this._handleEdit('institution', dialog, this._institutionService.update, this._institutionService);
+        let index = this.currentManageData[ ManageView.INSTITUTION_CLASS ]
+            .findIndex(institution => institution.id === toEdit.id);
+        this.currentManageData[ ManageView.INSTITUTION_CLASS ][ index ] = toEdit
     }
 
     public editSchoolClass(toEdit: SchoolClassDto) {
@@ -268,6 +271,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
             .find(institution => institution.id === toEdit.institutionId);
         let dialog = this._manageDialogFactory.getDialog(SchoolClassDialog, DialogMode.EDIT, parent, null, toEdit);
         this._handleEdit('schoolClass', dialog, this._schoolClassService.update, this._schoolClassService);
+        parent.schoolClasses[ parent.schoolClasses.findIndex(sc => sc.id === toEdit.id) ] = toEdit;
     }
 
     public editSchoolYear(toEdit: SchoolYearDto) {
@@ -275,7 +279,8 @@ export class ManageComponent implements OnInit, AfterViewInit {
         let parent = this._findSchoolClass(institutions, toEdit.schoolClassId);
         let dialog = this._manageDialogFactory.getDialog(SchoolYearDialog, DialogMode.EDIT, parent, null, toEdit);
         this._handleEdit('schoolYear', dialog, this._schoolYearService.update, this._schoolYearService);
-
+        let index = parent.schoolYears.findIndex(schoolYear => schoolYear.id === toEdit.id)
+        parent.schoolYears[ index ] = toEdit;
     }
 
     public editSemester(toEdit: SemesterDto) {
@@ -283,11 +288,8 @@ export class ManageComponent implements OnInit, AfterViewInit {
             .find(year => year.id === toEdit.schoolYearId);
         let dialog = this._manageDialogFactory.getDialog(SemesterDialog, DialogMode.EDIT, parent, null, toEdit);
         this._handleEdit('semester', dialog, this._semesterService.update, this._semesterService);
-        // (this.currentManageData[ManageView.YEAR_SEMESTER] as SchoolYearDto[]).forEach(function (value) {
-        //     (value as SchoolYearDto).semesters.forEach(function (a) {
-        //       console.log(a.name)
-        //   });
-        // })
+        let index = parent.semesters.findIndex(semester => semester.id === toEdit.id);
+        parent.semesters[ index ] = toEdit;
     }
 
     public editSubject(toEdit: SubjectDto) {
@@ -295,6 +297,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
         let parent = this._findSemester(years, toEdit.semesterId);
         let dialog = this._manageDialogFactory.getDialog(SubjectDialog, DialogMode.EDIT, parent, null, toEdit);
         this._handleEdit('subject', dialog, this._subjectService.update, this._subjectService);
+        parent.subjects[ parent.subjects.findIndex(subject => subject.id === toEdit.id) ] = toEdit;
     }
 
     //endregion
