@@ -1,4 +1,4 @@
-import {APP_INITIALIZER, NgModule} from '@angular/core';
+import {APP_INITIALIZER, ErrorHandler, NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {Http, HttpModule} from '@angular/http';
@@ -18,6 +18,8 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {CoreModule} from './core/core.module';
 import {OCMaterialModule} from './oc-material.module';
 import {NotificationWrapperService} from './core/notifications/notification-wrapper.service';
+import {RavenErrorHandler} from './core/error/RavenErrorHandler';
+import {NotificationsService} from 'angular2-notifications/dist';
 
 @NgModule({
     declarations: [
@@ -49,6 +51,10 @@ import {NotificationWrapperService} from './core/notifications/notification-wrap
         NotificationWrapperService,
         Config,
         {
+            provide: NotificationsService,
+            useExisting: NotificationWrapperService
+        },
+        {
             provide: APP_INITIALIZER,
             useFactory: configLoader,
             deps: [Config],
@@ -59,11 +65,11 @@ import {NotificationWrapperService} from './core/notifications/notification-wrap
             useFactory: translationLoader,
             deps: [TranslateService],
             multi: true
-        }/*,
+        },
         {
             provide: ErrorHandler,
             useClass: RavenErrorHandler
-        }*/
+        }
     ],
     bootstrap: [AppComponent]
 })
