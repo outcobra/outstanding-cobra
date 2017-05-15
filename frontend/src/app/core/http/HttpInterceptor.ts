@@ -293,10 +293,12 @@ export class HttpInterceptor {
     }
 
     /**
-     * This function handles errors that occur when making a http-request
+     * handles errors that occur when making a http-request
      * If it was a call to our own api and the server responded with a {ValidationException} a specific error message will be displayed.
+     * otherwise a general message will be displayed depending on the http status code
+     *
      * @param error the error that occurred during the request
-     * @returns {Observable<T>} the Observable containing the error information
+     * @returns {Observable<T>} the throwed Observable with the originalError
      */
     private _handleError<T>(error: any): Observable<T> {
         let exception = this._unwrapAndCastHttpResponse<ValidationException>(error);
