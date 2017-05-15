@@ -6,6 +6,7 @@ import {ColorService} from './services/color.service';
 import {ConfirmDialogService} from './services/confirm-dialog.service';
 import {AuthService} from './services/auth/auth.service';
 import {DateUtil} from './services/date-util.service';
+import {NotificationWrapperService} from './notifications/notification-wrapper.service';
 
 @NgModule({
     providers: [
@@ -15,7 +16,8 @@ import {DateUtil} from './services/date-util.service';
         ConfirmDialogService,
         ColorService,
         InfoService,
-        ResponsiveHelperService
+        ResponsiveHelperService,
+        NotificationWrapperService
     ]
 })
 export class CoreModule {

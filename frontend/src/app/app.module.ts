@@ -17,9 +17,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {CoreModule} from './core/core.module';
 import {OCMaterialModule} from './oc-material.module';
-import {NotificationWrapperService} from './core/notifications/notification-wrapper.service';
 import {RavenErrorHandler} from './core/error/RavenErrorHandler';
-import {NotificationsService} from 'angular2-notifications/dist';
 
 @NgModule({
     declarations: [
@@ -48,12 +46,7 @@ import {NotificationsService} from 'angular2-notifications/dist';
         })
     ],
     providers: [
-        NotificationWrapperService,
         Config,
-        {
-            provide: NotificationsService,
-            useExisting: NotificationWrapperService
-        },
         {
             provide: APP_INITIALIZER,
             useFactory: configLoader,
