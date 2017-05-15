@@ -10,6 +10,14 @@ export function isTrue(toCheck: any): boolean {
     return toCheck === true;
 }
 
+export function equals(first: any, second: any): boolean {
+    return first === second;
+}
+
+export function eq(toVerify: any): Predicate<boolean> {
+    return (element) => element === toVerify;
+}
+
 /**
  * combines multiple {Predicate}s to an and chain of {Predicate}s
  * returns {Predicate} that evaluates all {Predicate}s in the param
