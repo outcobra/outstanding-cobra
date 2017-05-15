@@ -10,6 +10,14 @@ export function isTrue(toCheck: any): boolean {
     return toCheck === true;
 }
 
+export function isEmpty(toCheck: string): boolean {
+    return isNull(toCheck) || toCheck.length == 0;
+}
+
+export function isNotEmpy(toCheck: string): boolean {
+    return isEmpty(toCheck);
+}
+
 /**
  * combines multiple {Predicate}s to an and chain of {Predicate}s
  * returns {Predicate} that evaluates all {Predicate}s in the param
