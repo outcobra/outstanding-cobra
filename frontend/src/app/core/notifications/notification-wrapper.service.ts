@@ -6,7 +6,7 @@ import {appIcons} from './icons';
 import {Icons, Notification} from 'angular2-notifications/dist';
 
 @Injectable()
-export class NotificationWrapperService extends NotificationsService {
+export class NotificationWrapperService {
 
     private _defaultOptions = {
         timeOut: 7500,
@@ -18,8 +18,7 @@ export class NotificationWrapperService extends NotificationsService {
 
     private _icns: Icons = appIcons; // can't name it icons because of super class
 
-    constructor(private _translateService: TranslateService) {
-        super();
+    constructor(private _translateService: TranslateService, private _notificationsService: NotificationsService) {
     }
 
     /**
@@ -83,13 +82,18 @@ export class NotificationWrapperService extends NotificationsService {
      * @returns {Notification}
      */
     public create(title: string, content: string, type: string, icon: string, optionsOverride?: any): Notification {
-        return super.set({
+        return this._notificationsService.set({
             title: this._translateService.instant(title),
             content: this._translateService.instant(content),
             type: type,
             icon: icon,
             override: this._mergeOptions(optionsOverride)
         }, true);
+    }
+
+    public remove(id?: string) {
+        if (id) this._notificationsService.remove(id);
+        else this._notificationsService.remove();
     }
 
     /**

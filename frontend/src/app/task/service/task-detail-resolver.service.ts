@@ -3,12 +3,12 @@ import {ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot} from '@ang
 import {Task} from '../model/Task';
 import {Observable} from 'rxjs';
 import {TaskService} from './task.service';
-import {NotificationsService} from 'angular2-notifications';
 import {HttpStatus} from '../../core/model/HttpStatus';
+import {NotificationWrapperService} from '../../core/notifications/notification-wrapper.service';
 
 @Injectable()
 export class TaskDetailResolver implements Resolve<Task> {
-    constructor(private _taskService: TaskService, private _router: Router, private _notificationService: NotificationsService) {
+    constructor(private _taskService: TaskService, private _router: Router, private _notificationService: NotificationWrapperService) {
     }
 
     public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Task> | Promise<Task> | Task {
