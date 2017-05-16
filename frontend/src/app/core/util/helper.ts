@@ -18,6 +18,14 @@ export function eq(toVerify: any): Predicate<boolean> {
     return (element) => element === toVerify;
 }
 
+export function isEmpty(toCheck: string): boolean {
+    return isNull(toCheck) || toCheck.length == 0;
+}
+
+export function isNotEmpty(toCheck: string): boolean {
+    return !isEmpty(toCheck);
+}
+
 /**
  * combines multiple {Predicate}s to an and chain of {Predicate}s
  * returns {Predicate} that evaluates all {Predicate}s in the param

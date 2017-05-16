@@ -3,7 +3,7 @@ import {MdDialogRef} from '@angular/material';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ManageDialog} from '../manage-dialog';
 import {InstitutionDto} from '../model/ManageDto';
-import {Util} from '../../shared/util/util';
+import {Util} from '../../core/util/util';
 
 @Component({
     selector: 'institution-dialog',

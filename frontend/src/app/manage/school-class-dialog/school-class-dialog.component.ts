@@ -3,7 +3,7 @@ import {ManageDialog} from '../manage-dialog';
 import {InstitutionDto, SchoolClassDto} from '../model/ManageDto';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MdDialogRef} from '@angular/material';
-import {Util} from '../../shared/util/util';
+import {Util} from '../../core/util/util';
 
 @Component({
     selector: 'school-class-dialog',

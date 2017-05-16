@@ -1,4 +1,3 @@
-//@import '../../node_modules/materialize-css/sass/components/color';
 @import 'color-variables';
 @import 'general';
 
@@ -51,22 +50,6 @@ oc-app {
     position: absolute;
     margin: 0 auto;
 }
-
-/*.error {
-    @extend .red, .darken-1;
-}
-
-.info {
-    @extend .blue;
-}
-
-.success {
-    @extend .green;
-}
-
-.alert {
-    @extend .yellow, .darken-2;
-}*/
 
 button[md-raised-button], button[md-button] {
     .md-button-wrapper > * {

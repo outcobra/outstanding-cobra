@@ -3,10 +3,10 @@ import {ManageDialog} from '../manage-dialog';
 import {SchoolClassDto, SchoolYearDto} from '../model/ManageDto';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MdDialogRef} from '@angular/material';
-import {OCValidators} from '../../shared/services/oc-validators';
+import {OCValidators} from '../../core/services/oc-validators';
 import {TranslateService} from '@ngx-translate/core';
 import {DatePipe} from '@angular/common';
-import {Util} from '../../shared/util/util';
+import {Util} from '../../core/util/util';
 
 @Component({
     selector: 'school-year-dialog',

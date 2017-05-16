@@ -226,10 +226,6 @@
           "title": "Verbindungsfehler",
           "message": "Der Server ist derzeit nicht erreichbar. Bitte versuchen Sie es später nocheinmal"
         },
-        "500": {
-          "title": "Serverfehler",
-          "message": "Ein unbekannter Serverfehler ist aufgetreten. bitte versuchen sie es später erneut"
-        },
         "400": {
           "title": "Eingabefehler",
           "message": "Ihre Eingaben sind ungültig oder enthalten einen Fehler"
@@ -241,6 +237,14 @@
         "404": {
           "title": "Nicht gefunden",
           "message": "Das angeforderte Element konnte nicht gefunden werden"
+        },
+        "422": {
+          "title": "Eingabefehler",
+          "message": "Ihre Eingaben sind ungültig oder enthalten einen Fehler"
+        },
+        "500": {
+          "title": "Serverfehler",
+          "message": "Ein unbekannter Serverfehler ist aufgetreten. bitte versuchen sie es später erneut"
         }
       },
       "validation": {

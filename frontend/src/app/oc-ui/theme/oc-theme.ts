@@ -1,4 +1,4 @@
-import {isNotNull} from '../../shared/util/helper';
+import {isNotNull} from '../../core/util/helper';
 export class OCTheme {
     public static readonly OCEAN = new OCTheme('ocean', 'oc-theme-ocean');
     public static readonly BLOOD_ORANGE = new OCTheme('bloodorange', 'oc-theme-blood-orange');

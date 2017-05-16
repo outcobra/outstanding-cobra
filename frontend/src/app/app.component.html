@@ -5,10 +5,11 @@
         </md-toolbar>
         <oc-divider></oc-divider>
         <oc-nav>
-            <!-- TODO only temporary -->
-            {{'i18n.common.lang.de' | translate}}
-            <md-slide-toggle (change)="changeLang()" [(ngModel)]="isEnglish"></md-slide-toggle>
-            {{'i18n.common.lang.en' | translate}}
+            <div class="lang-toggler">
+                {{'i18n.common.lang.de' | translate}}
+                <md-slide-toggle (change)="changeLang()" [(ngModel)]="isEnglish"></md-slide-toggle>
+                {{'i18n.common.lang.en' | translate}}
+            </div>
         </oc-nav>
     </md-sidenav>
 

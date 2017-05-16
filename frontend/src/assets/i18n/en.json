@@ -245,6 +245,10 @@
           "title": "Not found",
           "message": "The requested element could not be found"
         },
+        "422": {
+          "title": "Input error",
+          "message": "Your input was invalid or contained errors"
+        },
         "500": {
           "title": "Server error",
           "message": "An unknown server error has occurred"

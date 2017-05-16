@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
-import {AuthGuard} from '../shared/services/auth/auth-guard.service';
+import {AuthGuard} from '../core/services/auth/auth-guard.service';
 import {TaskComponent} from './task.component';
 import {TaskDetailComponent} from './task-detail-component/task-detail.component';
 import {TaskDetailResolver} from './service/task-detail-resolver.service';
