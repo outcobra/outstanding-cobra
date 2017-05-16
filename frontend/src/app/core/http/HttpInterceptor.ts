@@ -5,6 +5,8 @@ import {Observable} from 'rxjs';
 import 'rxjs/add/operator/map';
 import {dateReplacer, dateReviver} from './http-util';
 import {RequestOptions} from './RequestOptions';
+import {ValidationException} from '../model/ValidationException';
+import {isNotEmpty} from '../util/helper';
 import {NotificationWrapperService} from '../notifications/notification-wrapper.service';
 
 /**
@@ -61,9 +63,7 @@ export class HttpInterceptor {
                 body: JSON.stringify(request.data, dateReplacer)
             })
         ).catch(error => {
-            let status = error.status;
-            this._notificationsService.error(`i18n.error.http.${status}.title`, `i18n.error.http.${status}.message`);
-            return Observable.throw(error);
+            return this._handleError(error);
         }).map((res: Response) => this._unwrapAndCastHttpResponse<T>(res));
     }
 
@@ -290,6 +290,26 @@ export class HttpInterceptor {
      */
     private _removeRepeatedSlashes(str: string): string {
         return str.replace(/([^:])\/{2,}/g, (match, prefix) => prefix + '/');
+    }
+
+    /**
+     * handles errors that occur when making a http-request
+     * If it was a call to our own api and the server responded with a {ValidationException} a specific error message will be displayed.
+     * otherwise a general message will be displayed depending on the http status code
+     *
+     * @param error the error that occurred during the request
+     * @returns {Observable<T>} the throwed Observable with the originalError
+     */
+    private _handleError<T>(error: any): Observable<T> {
+        let exception = this._unwrapAndCastHttpResponse<ValidationException>(error);
+        if (isNotEmpty(exception.title) && isNotEmpty(exception.message)) {
+            this._notificationsService.error(exception.title, exception.message);
+            return Observable.throw(exception)
+        } else {
+            let status = error.status;
+            this._notificationsService.error(`i18n.error.http.${status}.title`, `i18n.error.http.${status}.message`);
+            return Observable.throw(error);
+        }
     }
 }
 
