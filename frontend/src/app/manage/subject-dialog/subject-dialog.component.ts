@@ -4,7 +4,6 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ManageDialog} from '../manage-dialog';
 import {SemesterDto, SubjectDto} from '../model/ManageDto';
 import {Util} from '../../shared/util/util';
-import {DialogMode} from '../../common/DialogMode';
 
 @Component({
     selector: 'subject-dialog',
@@ -34,16 +33,18 @@ export class SubjectDialog extends ManageDialog<SubjectDto, SemesterDto> impleme
     }
 
     public submit() {
-        if (this._subjectForm.valid && this._subjectForm.dirty) {
+        if (!(this._subjectForm.valid && this._subjectForm.dirty)) {
+            Util.revalidateForm(this._subjectForm);
+            return;
+        }
+        if (this.isEditMode()) {
+            this.param.name = this._subjectForm.get('name').value;
+            this.param.color = this._subjectForm.get('color').value;
+            this._dialogRef.close(this.param);
+        } else {
             let value = this._subjectForm.value;
             value.semesterId = this.parent.id;
-            if (this.mode == DialogMode.EDIT) {
-                value.id = this.param.id
-            }
             this._dialogRef.close(value);
-        }
-        else {
-            Util.revalidateForm(this._subjectForm);
         }
     }
 
