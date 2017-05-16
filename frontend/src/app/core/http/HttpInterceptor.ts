@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 import {dateReplacer, dateReviver} from './http-util';
 import {RequestOptions} from './RequestOptions';
 import {ValidationException} from '../model/ValidationException';
-import {isNotEmpy} from '../util/helper';
+import {isNotEmpty} from '../util/helper';
 import {NotificationWrapperService} from '../notifications/notification-wrapper.service';
 
 /**
@@ -302,7 +302,7 @@ export class HttpInterceptor {
      */
     private _handleError<T>(error: any): Observable<T> {
         let exception = this._unwrapAndCastHttpResponse<ValidationException>(error);
-        if (isNotEmpy(exception.title) && isNotEmpy(exception.message)) {
+        if (isNotEmpty(exception.title) && isNotEmpty(exception.message)) {
             this._notificationsService.error(exception.title, exception.message);
             return Observable.throw(exception)
         } else {

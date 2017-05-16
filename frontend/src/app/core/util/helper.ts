@@ -14,8 +14,8 @@ export function isEmpty(toCheck: string): boolean {
     return isNull(toCheck) || toCheck.length == 0;
 }
 
-export function isNotEmpy(toCheck: string): boolean {
-    return isEmpty(toCheck);
+export function isNotEmpty(toCheck: string): boolean {
+    return !isEmpty(toCheck);
 }
 
 /**
