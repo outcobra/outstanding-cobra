@@ -7,13 +7,13 @@ import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {TaskFilter} from './model/TaskFilter';
 import {MdDialog, MdDialogRef} from '@angular/material';
 import {TaskCreateUpdateDialog} from './task-create-update-dialog/task-create-update-dialog.component';
-import {NotificationsService} from 'angular2-notifications';
 import {Util} from '../core/util/util';
 import {DialogMode} from '../common/DialogMode';
 import {Observable} from 'rxjs';
 import {SMALL_DIALOG} from '../core/util/const';
 import {and} from '../core/util/helper';
 import {ResponsiveHelperService} from '../core/services/ui/responsive-helper.service';
+import {NotificationWrapperService} from '../core/notifications/notification-wrapper.service';
 
 @Component({
     selector: 'task',
@@ -51,7 +51,7 @@ export class TaskComponent implements OnInit, AfterViewInit {
 
     constructor(private _taskService: TaskService,
                 private _dialogService: MdDialog,
-                private _notificationService: NotificationsService,
+                private _notificationService: NotificationWrapperService,
                 private _route: ActivatedRoute,
                 private _router: Router,
                 private _formBuilder: FormBuilder,
@@ -87,10 +87,8 @@ export class TaskComponent implements OnInit, AfterViewInit {
     }
 
     private _refreshTasksWithFilter(tasks: Task[]) {
-        console.log(this);
         this._tasks = tasks;
         this._filteredTasks = this._filterTasks(Util.cloneArray(tasks));
-        console.log(this.filteredTasks);
     }
 
     private _refreshTasksAfterRouteChangeAndIfCacheWasDeleted() {

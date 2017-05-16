@@ -27,7 +27,7 @@
     "@angular/tsc-wrapped": "4.1.2",
     "@angular/flex-layout": "^2.0.0-beta.8",
     "angular2-jwt": "^0.2.2",
-    "angular2-notifications": "0.5.7",
+    "angular2-notifications": "0.7.3",
     "auth0-js": "^8.5.0",
     "auth0-lock": "^10.14.0",
     "core-js": "^2.4.1",
@@ -38,7 +38,8 @@
     "@ngx-translate/http-loader": "^0.0.3",
     "rxjs": "5.1.0",
     "raven-js": "3.10.0",
-    "zone.js": "^0.8.4"
+    "zone.js": "^0.8.4",
+    "typeface-montserrat": "^0.0.24"
   },
   "devDependencies": {
     "@angular/cli": "^1.0.3",

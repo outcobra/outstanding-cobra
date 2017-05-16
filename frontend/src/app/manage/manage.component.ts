@@ -11,7 +11,6 @@ import {SchoolYearDialog} from './school-year-dialog/school-year-dialog.componen
 import {SchoolYearService} from './service/school-year.service';
 import {SemesterDialog} from './semester-dialog/semester-dialog.component';
 import {SemesterService} from './service/semester.service';
-import {NotificationsService} from 'angular2-notifications';
 import {ConfirmDialogService} from '../core/services/confirm-dialog.service';
 import {ManageDialogFactory} from './service/manage-dialog-factory';
 import {SubjectDialog} from './subject-dialog/subject-dialog.component';
@@ -23,6 +22,7 @@ import {Dto} from '../common/Dto';
 import {CreateUpdateDialog} from '../common/CreateUpdateDialog';
 import {ResponsiveHelperService} from '../core/services/ui/responsive-helper.service';
 import {ManageView} from './model/ManageView';
+import {NotificationWrapperService} from '../core/notifications/notification-wrapper.service';
 
 const I18N_PREFIX = 'i18n.modules.manage.mobile.title.';
 
@@ -57,7 +57,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
                 private _schoolYearService: SchoolYearService,
                 private _semesterService: SemesterService,
                 private _subjectService: SubjectService,
-                private _notificationService: NotificationsService,
+                private _notificationService: NotificationWrapperService,
                 private _confirmDialogService: ConfirmDialogService,
                 private _manageDialogFactory: ManageDialogFactory,
                 private _elementRef: ElementRef,

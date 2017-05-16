@@ -14,11 +14,11 @@ import {MainModule} from './main/main.module';
 import {ManageModule} from './manage/manage.module';
 import {TaskModule} from './task/task.module';
 import {configLoader, translateFactory, translationLoader} from './core/services/factories';
-import {RavenErrorHandler} from './core/error/RavenErrorHandler';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {CoreModule} from './core/core.module';
 import {OCMaterialModule} from './oc-material.module';
+import {RavenErrorHandler} from './core/error/RavenErrorHandler';
 
 @NgModule({
     declarations: [
@@ -35,6 +35,7 @@ import {OCMaterialModule} from './oc-material.module';
         ManageModule,
         TaskModule,
         FlexLayoutModule,
+        SimpleNotificationsModule.forRoot(),
         CoreModule,
         OCMaterialModule,
         MdNativeDateModule,
@@ -44,8 +45,7 @@ import {OCMaterialModule} from './oc-material.module';
                 useFactory: translateFactory,
                 deps: [Http]
             }
-        }),
-        SimpleNotificationsModule
+        })
     ],
     providers: [
         Config,
