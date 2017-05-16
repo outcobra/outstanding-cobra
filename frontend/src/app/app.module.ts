@@ -2,7 +2,7 @@ import {APP_INITIALIZER, ErrorHandler, NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {Http, HttpModule} from '@angular/http';
-import {MaterialModule, MdNativeDateModule} from '@angular/material';
+import {MdNativeDateModule} from '@angular/material';
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import 'rxjs/add/operator/toPromise';
 import {AppComponent} from './app.component';

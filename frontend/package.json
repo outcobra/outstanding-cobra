@@ -42,7 +42,7 @@
     "typeface-montserrat": "^0.0.24"
   },
   "devDependencies": {
-    "@angular/cli": "^1.0.3",
+    "@angular/cli": "~1.1.0-rc.0",
     "@types/jasmine": "2.5.38",
     "@types/node": "~6.0.60",
     "codelyzer": "~2.0.0",
@@ -56,8 +56,8 @@
     "karma-coverage-istanbul-reporter": "^0.2.0",
     "node-sass": "^4.5.0",
     "protractor": "~5.1.0",
-    "ts-node": "^2.0.0",
+    "ts-node": "^3.0.4",
     "tslint": "^4.5.0",
-    "typescript": "^2.3.2"
+    "typescript": "^2.2.2"
   }
 }
