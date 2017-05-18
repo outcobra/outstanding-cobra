@@ -1,5 +1,7 @@
-package outcobra.server.model.dto
+package outcobra.server.model.dto.mark
 
+import outcobra.server.model.dto.ColorDto
+import outcobra.server.model.dto.MarkGroupDto
 import java.time.LocalDate
 
 /**
