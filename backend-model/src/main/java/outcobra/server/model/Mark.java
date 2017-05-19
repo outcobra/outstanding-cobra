@@ -15,15 +15,18 @@ public abstract class Mark implements ParentLinked {
     private Long id;
     @OneToOne(mappedBy = "mark")
     private Exam exam;
+    @NotNull
+    private String description;
 
     @ManyToOne
     private MarkGroup markGroup;
 
     //region constructors
-    public Mark(Double weight, Exam exam, MarkGroup markGroup) {
+    public Mark(Double weight, Exam exam, MarkGroup markGroup, String description) {
         this.weight = weight;
         this.exam = exam;
         this.markGroup = markGroup;
+        this.description = description;
     }
 
     public Mark() {
@@ -63,7 +66,14 @@ public abstract class Mark implements ParentLinked {
         this.markGroup = markGroup;
     }
 
-    @SuppressWarnings("SimplifiableIfStatement")
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -71,22 +81,22 @@ public abstract class Mark implements ParentLinked {
 
         Mark mark = (Mark) o;
 
-        if (!id.equals(mark.id)) return false;
-        if (getWeight() != mark.getWeight())
-            return false;
-        if (getValue() != mark.getValue())
-            return false;
-        if (exam != null ? !exam.equals(mark.exam) : mark.exam != null) return false;
-        return markGroup != null ? markGroup.equals(mark.markGroup) : mark.markGroup == null;
+        if (getWeight() != mark.getWeight()) return false;
+        if (!getId().equals(mark.getId())) return false;
+        if (getExam() != null ? !getExam().equals(mark.getExam()) : mark.getExam() != null) return false;
+        if (!getDescription().equals(mark.getDescription())) return false;
+        return getMarkGroup() != null ? getMarkGroup().equals(mark.getMarkGroup()) : mark.getMarkGroup() == null;
     }
 
     @Override
     public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + (int) getWeight();
-        result = 31 * result + (exam != null ? exam.hashCode() : 0);
-        result = 31 * result + (markGroup != null ? markGroup.hashCode() : 0);
+        int result = Double.valueOf(getWeight()).hashCode();
+        result = 31 * result + getId().hashCode();
+        result = 31 * result + (getExam() != null ? getExam().hashCode() : 0);
+        result = 31 * result + getDescription().hashCode();
+        result = 31 * result + (getMarkGroup() != null ? getMarkGroup().hashCode() : 0);
         return result;
     }
+
     //endregion
 }

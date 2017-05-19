@@ -17,8 +17,8 @@ public class MarkGroup extends Mark {
     @OneToOne(mappedBy = "markGroup")
     private Subject subject;
 
-    public MarkGroup(Double weight, Exam exam, MarkGroup markGroup, List<Mark> marks, Subject subject) {
-        super(weight, exam, markGroup);
+    public MarkGroup(Double weight, Exam exam, MarkGroup markGroup, String description, List<Mark> marks, Subject subject) {
+        super(weight, exam, markGroup, description);
         this.marks = marks;
         this.subject = subject;
     }

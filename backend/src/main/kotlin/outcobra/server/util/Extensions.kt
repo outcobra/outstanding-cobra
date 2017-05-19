@@ -1,5 +1,6 @@
 package outcobra.server.util
 
+import outcobra.server.exception.ValidationKey
 import outcobra.server.model.SchoolYear
 import outcobra.server.model.Semester
 import outcobra.server.model.User
@@ -72,10 +73,14 @@ infix fun Semester.doesNotOverlap(semester: Semester): Boolean {
  * @author Florian Bürgi
  * @since <since>
  */
-tailrec fun ParentLinked.followToUser(): User {
-    if (this is User) return this
-    val parentLinked = this.parent
-    return parentLinked.followToUser()
+tailrec fun ParentLinked.followToUser(iterationCount: Int = 0): User {
+    if (iterationCount > 50) {
+        throw ValidationKey.INVALID_DTO.throwException()
+    } else {
+        if (this is User) return this
+        val parentLinked = this.parent
+        return parentLinked.followToUser(iterationCount + 1)
+    }
 }
 
 /**

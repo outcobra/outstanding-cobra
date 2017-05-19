@@ -5,6 +5,10 @@ import outcobra.server.model.Institution
 import outcobra.server.model.dto.InstitutionDto
 import outcobra.server.model.interfaces.Mapper
 
+/**
+ * @author Florian Bürgi
+ * @since 1.0.0
+ */
 @Component
 open class InstitutionMapper : Mapper<Institution, InstitutionDto>, BaseMapper() {
 
