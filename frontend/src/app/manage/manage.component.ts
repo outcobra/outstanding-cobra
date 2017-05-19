@@ -65,8 +65,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit() {
-        this._manageService.getManageData()
-            .subscribe((res) => this._prepareManageData(res));
+        this._prepareManageData();
     }
 
     ngAfterViewInit() {
@@ -162,9 +161,20 @@ export class ManageComponent implements OnInit, AfterViewInit {
         return null;
     }
 
-    private _prepareManageData(manageData: ManageDto) {
-        this._manageData = manageData;
-        this.currentManageData[ManageView.INSTITUTION_CLASS] = manageData.institutions;
+    private _prepareManageData() {
+        this._manageService.getManageData()
+            .subscribe((manageData) => {
+                this._manageData = manageData;
+                this.currentManageData[ManageView.INSTITUTION_CLASS] = manageData.institutions;
+
+                if (this.activeSchoolClassId) {
+                    let schoolYears = this._findSchoolClass(manageData.institutions, this.activeSchoolClassId).schoolYears;
+                    this.currentManageData[ManageView.YEAR_SEMESTER] = schoolYears;
+                    if (this.activeSemesterId) {
+                        this.currentManageData[ManageView.SUBJECT] = this._findSemester(schoolYears, this.activeSemesterId).subjects;
+                    }
+                }
+            });
     }
 
     //endregion
@@ -312,7 +322,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
     private _handleDeletion<T extends Dto>(entity: T, entityName: string, deleteFunction: (id: number) => Observable<any>, finishFunction: (entity: T) => void, thisArg: any) {
         this._openDeleteConfirmDialog(entityName)
             .filter(isTrue)
-            .switchMap(() => Util.bindAndCall(deleteFunction, thisArg, entity.id))
+            .switchMap(() => deleteFunction.call(this, entity.id))
             .catch((error) => {
                 this._notificationService.remove();
                 this._notificationService.error('i18n.modules.task.notification.error.deleteFailed.title', 'i18n.modules.task.notification.error.deleteFailed.message');
@@ -328,7 +338,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
      * waits for emitted values from the given dialog
      *
      * checks that the emitted values are not null or something similar {@see isNotNull}
-     * performs a flatMap on the switchFunction which must return an Observable of the entity Type
+     * performs a flatMap on the createFunction which must return an Observable of the entity Type
      * and then executes the finishFunction when a value is emitted by the switched Observable
      * also shows a success notification before executing the finishFunction
      *
@@ -342,17 +352,33 @@ export class ManageComponent implements OnInit, AfterViewInit {
     private _handleAddition<T extends Dto, D extends CreateUpdateDialog<T>>(entityName: string, dialogRef: MdDialogRef<D>, createFunction: (entity: T) => Observable<T>, finishFunction: (entity: T) => void, thisArg: any) {
         dialogRef.afterClosed()
             .filter(isNotNull)
-            .flatMap((value: T) => Util.bindAndCall(createFunction, thisArg, value))
+            .flatMap((value: T) => createFunction.call(thisArg, value))
             .subscribe((entity: T) => {
                 this._showSaveSuccessNotification(entityName);
                 finishFunction(entity);
             });
     }
 
+    /**
+     * waits for emitted values from the given dialog
+     *
+     * checks that the emitted values are not null or something similar {@see isNotNull}
+     * performs a flatMap on the editFunction which must return an Observable of the entity Type
+     * also shows a success notification in the end
+     *
+     * @param entityName name success message
+     * @param dialogRef to listen for close event
+     * @param editFunction function which edits an entity
+     * @param thisArg the scope where the createFunction should be run on
+     */
     private _handleEdit<T extends Dto, D extends CreateUpdateDialog<T>>(entityName: string, dialogRef: MdDialogRef<D>, editFunction: (entity: T) => Observable<T>, thisArg: any) {
         dialogRef.afterClosed()
             .filter(isNotNull)
-            .flatMap((value: T) => Util.bindAndCall(editFunction, thisArg, value))
+            .flatMap(value => editFunction.call(thisArg, value))
+            .catch(() => {
+                this._prepareManageData();
+                return Observable.empty();
+            })
             .subscribe(() => this._showSaveSuccessNotification(entityName));
     }
 

@@ -58,7 +58,6 @@ export class SemesterDialog extends ManageDialog<SemesterDto, SchoolYearDto> imp
             this.param.validTo = this._semesterForm.get('validTo').value;
             this._dialogRef.close(this.param);
         } else {
-
             let value = this._semesterForm.value as SemesterDto;
             value.schoolYearId = this.parent.id;
             this._dialogRef.close(value);
