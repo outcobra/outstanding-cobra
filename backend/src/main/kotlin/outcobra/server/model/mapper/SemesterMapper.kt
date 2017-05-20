@@ -4,7 +4,10 @@ import org.springframework.stereotype.Component
 import outcobra.server.model.*
 import outcobra.server.model.dto.SemesterDto
 import outcobra.server.model.interfaces.Mapper
-import outcobra.server.model.repository.*
+import outcobra.server.model.repository.MarkReportRepository
+import outcobra.server.model.repository.SchoolYearRepository
+import outcobra.server.model.repository.SubjectRepository
+import outcobra.server.model.repository.TimetableRepository
 import javax.inject.Inject
 
 /**
@@ -14,16 +17,16 @@ import javax.inject.Inject
  * @since <since>
  */
 @Component
-open class SemesterMapper @Inject constructor(val subjectRepository: SubjectRepository,
-                                              val schoolYearRepository: SchoolYearRepository,
-                                              val markReportRepository: MarkReportRepository,
-                                              val timetableRepository: TimetableRepository)
+class SemesterMapper @Inject constructor(val subjectRepository: SubjectRepository,
+                                         val schoolYearRepository: SchoolYearRepository,
+                                         val markReportRepository: MarkReportRepository,
+                                         val timetableRepository: TimetableRepository)
     : Mapper<Semester, SemesterDto>, BaseMapper() {
     override fun toDto(from: Semester): SemesterDto {
         val subjects = from.subjects.map { it.id }
         val reports = from.markReports.map { it.id }
-        val timetableId = if (from.timetable != null) from.timetable.id else -1 // TODO still ugly tough
-        val id = from.id ?: 0
+        val timetableId = from.timetable.id ?: -1L
+        val id = from.id ?: 0L
         return SemesterDto(id, from.schoolYear.id, from.name, from.validFrom, from.validTo, subjects, reports, timetableId)
     }
 

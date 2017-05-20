@@ -17,9 +17,9 @@ import javax.inject.Inject
  * @since 1.0.0
  */
 @Component
-open class SchoolYearMapper @Inject constructor(val semesterRepository: SemesterRepository,
-                                                val classRepository: SchoolClassRepository,
-                                                val holidayRepository: HolidayRepository)
+class SchoolYearMapper @Inject constructor(val semesterRepository: SemesterRepository,
+                                           val classRepository: SchoolClassRepository,
+                                           val holidayRepository: HolidayRepository)
     : Mapper<SchoolYear, SchoolYearDto>, BaseMapper() {
 
     override fun fromDto(from: SchoolYearDto): SchoolYear {

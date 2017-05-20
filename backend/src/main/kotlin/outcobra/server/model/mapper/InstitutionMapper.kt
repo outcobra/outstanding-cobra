@@ -10,7 +10,7 @@ import outcobra.server.model.interfaces.Mapper
  * @since 1.0.0
  */
 @Component
-open class InstitutionMapper : Mapper<Institution, InstitutionDto>, BaseMapper() {
+class InstitutionMapper : Mapper<Institution, InstitutionDto>, BaseMapper() {
 
     override fun toDto(from: Institution) = InstitutionDto(from.id ?: 0, from.user.id, from.name)
 
@@ -20,7 +20,7 @@ open class InstitutionMapper : Mapper<Institution, InstitutionDto>, BaseMapper()
         institution.name = from.name
         institution.user = when (from.userId) {
             in 1L..Long.MAX_VALUE -> userService.readUserById(from.userId)
-            else                  -> userService.getCurrentUser()
+            else -> userService.getCurrentUser()
         }
         return institution
     }

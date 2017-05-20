@@ -1,20 +1,25 @@
 package outcobra.server.model.mapper
 
+import org.springframework.stereotype.Component
 import outcobra.server.model.Mark
 import outcobra.server.model.MarkGroup
 import outcobra.server.model.MarkValue
 import outcobra.server.model.Subject
+import outcobra.server.model.dto.MarkDto
 import outcobra.server.model.dto.MarkGroupDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.MarkGroupRepository
 import outcobra.server.model.repository.SubjectRepository
+import javax.inject.Inject
 
 /**
- * Created by fbbue on 20.05.2017.
+ * @author Florian Bürgi
+ * @since <since>
  */
-class MarkGroupMapper(val subjectRepository: SubjectRepository,
-                      val markGroupRepository: MarkGroupRepository,
-                      val markDtoMapper: MarkDtoMapper)
+@Component
+class MarkGroupMapper @Inject constructor(val subjectRepository: SubjectRepository,
+                                          val markGroupRepository: MarkGroupRepository,
+                                          val markMapper: Mapper<MarkValue, MarkDto>)
     : Mapper<MarkGroup, MarkGroupDto>, BaseMapper() {
 
     override fun fromDto(from: MarkGroupDto): MarkGroup {
@@ -27,7 +32,7 @@ class MarkGroupMapper(val subjectRepository: SubjectRepository,
         } else if (from.parentGroupId != 0L) {
             parentGroup = markGroupRepository.findOne(from.parentGroupId)
         }
-        var marks: List<Mark> = from.marks.map { markDtoMapper.fromDto(it) }
+        val marks: List<Mark> = from.marks.map { markMapper.fromDto(it) }
         marks.plus(from.markGroups.map { markGroupRepository.findOne(it) })
         val result = MarkGroup(from.weight, null, parentGroup, from.description, marks, subject)
         result.id = from.id
@@ -46,7 +51,7 @@ class MarkGroupMapper(val subjectRepository: SubjectRepository,
         validateChildren(markValues.map { it.id }, MarkValue::class, from.id, MarkGroup::class)
         validateChildren(nestedGroupIds, MarkGroup::class, from.id, MarkGroup::class)
         return MarkGroupDto(from.id, from.value, from.weight, from.description,
-                from.marks.map { mark -> markDtoMapper.toDto(mark as MarkValue) },
+                from.marks.map { mark -> markMapper.toDto(mark as MarkValue) },
                 subjectId, parentGroupId, nestedGroupIds)
     }
 

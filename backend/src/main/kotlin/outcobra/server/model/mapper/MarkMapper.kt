@@ -5,6 +5,7 @@ import outcobra.server.model.MarkValue
 import outcobra.server.model.dto.MarkDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.MarkGroupRepository
+import javax.inject.Inject
 
 
 /**
@@ -12,7 +13,9 @@ import outcobra.server.model.repository.MarkGroupRepository
  * @since <since>
  */
 @Component
-class MarkDtoMapper(val markGroupRepository: MarkGroupRepository) : Mapper<MarkValue, MarkDto>, BaseMapper() {
+class MarkMapper @Inject constructor(val markGroupRepository: MarkGroupRepository)
+    : Mapper<MarkValue, MarkDto>, BaseMapper() {
+
     override fun fromDto(from: MarkDto): MarkValue {
         val markGroup = markGroupRepository.findOne(from.markGroupId)
         val mark = MarkValue(from.value, from.weight, markGroup, from.description, null)
