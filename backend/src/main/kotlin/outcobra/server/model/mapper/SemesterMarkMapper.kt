@@ -9,7 +9,7 @@ import outcobra.server.model.interfaces.Mapper
 /**
  * Created by fbbue on 20.05.2017.
  */
-class SemesterMarkDto(val markDtoMapper: Mapper<MarkValue, MarkDto>) : Mapper<Semester, SemesterMarkDto>, BaseMapper() {
+class SemesterMarkMapper(val markDtoMapper: Mapper<MarkValue, MarkDto>) : Mapper<Semester, SemesterMarkDto>, BaseMapper() {
     override fun fromDto(from: SemesterMarkDto?): Semester {
         TODO("not implemented")
     }
