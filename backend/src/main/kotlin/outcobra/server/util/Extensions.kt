@@ -1,9 +1,12 @@
 package outcobra.server.util
 
+import outcobra.server.exception.ValidationException
 import outcobra.server.exception.ValidationKey
 import outcobra.server.model.SchoolYear
 import outcobra.server.model.Semester
 import outcobra.server.model.User
+import outcobra.server.model.dto.MarkGroupDto
+import outcobra.server.model.dto.mark.MarksDto
 import outcobra.server.model.interfaces.ParentLinked
 import java.time.LocalDate
 
@@ -80,6 +83,22 @@ tailrec fun ParentLinked.followToUser(iterationCount: Int = 0): User {
         if (this is User) return this
         val parentLinked = this.parent
         return parentLinked.followToUser(iterationCount + 1)
+    }
+}
+
+/**
+ * determines if the [MarksDto] is valid or not
+ * @throws [ValidationException] if the mark is invalid
+ * @author Florian Bürgi
+ * @since <since>
+ */
+fun MarksDto.validate() {
+    var valid = !(value > 6 || value < 1)
+    if (this is MarkGroupDto) {
+        valid = valid && (parentGroupId == 0L || markGroups.isEmpty())
+    }
+    if (!valid) {
+        ValidationKey.INVALID_MARK.throwException()
     }
 }
 

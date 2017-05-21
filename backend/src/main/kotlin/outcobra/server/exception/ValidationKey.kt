@@ -17,7 +17,8 @@ enum class ValidationKey(val i18nMessage: String = "i18n.error.http.500.message"
     START_BIGGER_THAN_END("i18n.common.form.error.dateToIsBeforeDateFrom", "i18n.error.http.400.title"),
     FORBIDDEN("i18n.error.http.403.message", "i18n.error.http.403.title"),
     SEMESTER_OVERLAP("i18n.modules.manage.semester.error.overlap", "i18n.error.http.400.title"),
-    OUTSIDE_PARENT("i18n.error.validation.outsideParent.message", "i18n.error.validation.outsideParent.title");
+    OUTSIDE_PARENT("i18n.error.validation.outsideParent.message", "i18n.error.validation.outsideParent.title"),
+    INVALID_MARK("i18n.error.validation.mark", "i18n.error.http.400.title");
 
     override fun makeException(messageLevel: MessageLevel?, nestedCause: Throwable?): ValidationException {
 
