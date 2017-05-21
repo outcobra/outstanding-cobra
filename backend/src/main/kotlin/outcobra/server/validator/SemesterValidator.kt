@@ -30,6 +30,9 @@ class SemesterValidator @Inject constructor(val schoolYearRepository: SchoolYear
      * @throws ValidationException when the semester isn't in the parent schoolYear
      */
     fun validateSemesterCreation(semester: Semester): Boolean {
+        if (semester.validTo.isBefore(semester.validFrom)) {
+            ValidationKey.START_BIGGER_THAN_END.throwException()
+        }
         val parentId = semester.schoolYear.id
         val parent = schoolYearRepository.findOne(parentId)
 
@@ -38,9 +41,6 @@ class SemesterValidator @Inject constructor(val schoolYearRepository: SchoolYear
 
         val withSameParent = QSemester.semester.schoolYear.id.eq(parentId)
         val semesters = semesterRepository.findAll(withSameParent).toList()
-        if (semesters.isEmpty() && semester.validTo.isBefore(semester.validFrom)) {
-            ValidationKey.START_BIGGER_THAN_END.throwException()
-        }
         return semesters.all { it.doesNotOverlap(semester) }
     }
 }
