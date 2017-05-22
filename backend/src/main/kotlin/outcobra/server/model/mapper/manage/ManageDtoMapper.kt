@@ -27,7 +27,7 @@ class ManageDtoMapper @Inject constructor(val colorMapper: ColorMapper) : Mapper
                     schoolClass.schoolYears.map { year ->
                         SchoolYearDto(year.id ?: 0, year.name, year.validFrom, year.validTo, schoolClass.id ?: 0,
                                 year.semesters.map { semester ->
-                                    SemesterDto(semester.id ?: 0, semester.name, semester.validTo, semester.validFrom, year.id ?: 0,
+                                    SemesterDto(semester.id ?: 0, semester.name, semester.validFrom, semester.validTo, year.id ?: 0,
                                             semester.subjects.map { subject ->
                                                 SubjectDto(subject.id ?: 0,
                                                         subject.name, colorMapper.toDto(subject.color), semester.id ?: 0)

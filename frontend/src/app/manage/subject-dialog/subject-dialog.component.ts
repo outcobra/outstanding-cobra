@@ -33,16 +33,20 @@ export class SubjectDialog extends ManageDialog<SubjectDto, SemesterDto> impleme
     }
 
     public submit() {
-        if (this._subjectForm.valid && this._subjectForm.dirty) {
+        if (!(this._subjectForm.valid && this._subjectForm.dirty)) {
+            Util.revalidateForm(this._subjectForm);
+            return;
+        }
+        if (this.isEditMode()) {
+            this.param.name = this._subjectForm.get('name').value;
+            this.param.color = this._subjectForm.get('color').value;
+            this._dialogRef.close(this.param);
+        } else {
             let value = this._subjectForm.value;
             value.semesterId = this.parent.id;
             this._dialogRef.close(value);
         }
-        else {
-            Util.revalidateForm(this._subjectForm);
-        }
     }
-
 
     get subjectForm(): FormGroup {
         return this._subjectForm;

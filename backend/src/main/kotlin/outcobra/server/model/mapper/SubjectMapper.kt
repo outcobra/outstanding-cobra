@@ -29,8 +29,8 @@ open class SubjectMapper @Inject constructor(val teacherRepository: TeacherRepos
         val exams = examRepository.findAll(QExam.exam.subject.id.eq(id))?.toList()
         val markGroup = markGroupRepository.findOne(QMarkGroup.markGroup1.id.eq(id))
         val semester = semesterRepository.findOne(from.semesterId)
-        val teacher = teacherRepository.findOne(from.teacherId)
-        val subject = Subject(from.name, colorMapper.fromDto(from.color), semester, timetableEntries, tasks, reportEntries, exams, markGroup, teacher)
+        //val teacher = teacherRepository.findOne(from.teacherId)
+        val subject = Subject(from.name, colorMapper.fromDto(from.color), semester, timetableEntries, tasks, reportEntries, exams, markGroup, null)
         subject.id = from.identifier
         return subject
     }
