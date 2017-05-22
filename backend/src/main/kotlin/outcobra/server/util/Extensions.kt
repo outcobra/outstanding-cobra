@@ -6,7 +6,7 @@ import outcobra.server.model.SchoolYear
 import outcobra.server.model.Semester
 import outcobra.server.model.User
 import outcobra.server.model.dto.MarkGroupDto
-import outcobra.server.model.dto.mark.MarksDto
+import outcobra.server.model.dto.mark.BaseMarkDto
 import outcobra.server.model.interfaces.ParentLinked
 import java.time.LocalDate
 
@@ -87,12 +87,12 @@ tailrec fun ParentLinked.followToUser(iterationCount: Int = 0): User {
 }
 
 /**
- * determines if the [MarksDto] is valid or not
+ * determines if the [BaseMarkDto] is valid or not
  * @throws [ValidationException] if the mark is invalid
  * @author Florian Bürgi
  * @since <since>
  */
-fun MarksDto.validate() {
+fun BaseMarkDto.validate() {
     var valid = !(value > 6 || value < 1)
     if (this is MarkGroupDto) {
         valid = valid && (parentGroupId == 0L || markGroups.isEmpty())

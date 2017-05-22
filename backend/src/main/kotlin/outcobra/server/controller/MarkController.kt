@@ -57,7 +57,7 @@ class MarkController @Inject constructor(val markService: MarkService,
         markGroupService.delete(id)
     }
 
-    @GetMapping(value = "/initial/{semesterId}")
+    @GetMapping(value = "/semester/{semesterId}")
     fun getInitialMarkData(@PathVariable semesterId: Long): SemesterMarkDto {
         return markGroupService.getInitialData(semesterId)
     }
