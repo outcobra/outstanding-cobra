@@ -45,7 +45,7 @@
             <md-datepicker #validToPicker></md-datepicker>
         </div>
         <div class="form-error"
-             *ngIf="semesterForm.invalid && semesterForm.touched && semesterForm.get('validFrom').touched && semesterForm.get('validTo').touched">
+             *ngIf="semesterForm.invalid && semesterForm.touched && ((semesterForm.get('validFrom').touched && semesterForm.get('validTo').touched) || isEditMode())">
             <span *ngIf="semesterForm.hasError('dateToIsBeforeDateFrom')">{{'i18n.common.form.error.dateToIsBeforeDateFrom' | translate}}</span>
         </div>
     </div>

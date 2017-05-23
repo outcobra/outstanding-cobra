@@ -8,7 +8,6 @@ import {TaskCreateUpdateDialog} from '../task-create-update-dialog/task-create-u
 import {SMALL_DIALOG} from '../../core/util/const';
 import {DialogMode} from '../../common/DialogMode';
 import {Observable} from 'rxjs';
-import {Util} from '../../core/util/util';
 import {isNotNull, isTrue} from '../../core/util/helper';
 import {NotificationWrapperService} from '../../core/notifications/notification-wrapper.service';
 
@@ -40,7 +39,7 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
             .debounceTime(500)
             .map((sliderChange: MdSliderChange) => sliderChange.value)
             .distinctUntilChanged()
-            .flatMap((value: number) => Util.bindAndCall(this.updateProgress, this, value))
+            .flatMap((value: number) => this.updateProgress.call(this, value))
             .subscribe();
     }
 

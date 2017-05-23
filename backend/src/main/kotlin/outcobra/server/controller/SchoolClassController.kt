@@ -53,16 +53,6 @@ class SchoolClassController
     }
 
     /**
-     * This method saves the changes on a [SchoolClassDto] to the database
-     * @param schoolClassDto the updated [SchoolClassDto] you want to save, as Json in the [RequestBody]
-     * @return the [schoolClassDto] that has been saved in the database
-     */
-    @PostMapping(value = "/schoolClass")
-    fun updateSchoolClass(@RequestBody schoolClassDto: SchoolClassDto): SchoolClassDto {
-        return schoolClassService.save(schoolClassDto)
-    }
-
-    /**
      * This method deletes a schoolClass
      * @param id The id of the SchoolClass that should be deleted
      */

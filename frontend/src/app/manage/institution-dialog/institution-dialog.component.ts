@@ -30,13 +30,17 @@ export class InstitutionDialog extends ManageDialog<InstitutionDto, any> impleme
     }
 
     public submit() {
-        if (this._institutionForm.valid && this._institutionForm.dirty) {
+        if (!(this._institutionForm.valid && this._institutionForm.dirty)) {
+            Util.revalidateForm(this._institutionForm);
+        }
+        if (this.isEditMode()) {
+            this.param.name = this._institutionForm.get('name').value;
+            this._dialogRef.close(this.param);
+        } else {
             let value = this._institutionForm.value as InstitutionDto;
             this._dialogRef.close(value);
         }
-        else {
-            Util.revalidateForm(this._institutionForm);
-        }
+
     }
 
 

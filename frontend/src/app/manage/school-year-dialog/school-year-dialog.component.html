@@ -39,7 +39,7 @@
             <md-datepicker #validToPicker></md-datepicker>
         </div>
         <div class="form-error"
-             *ngIf="schoolYearForm.invalid && schoolYearForm.touched && schoolYearForm.get('validFrom').touched && schoolYearForm.get('validTo').touched">
+             *ngIf="schoolYearForm.invalid && schoolYearForm.touched && ((schoolYearForm.get('validFrom').touched && schoolYearForm.get('validTo').touched) || isEditMode())">
             <span *ngIf="schoolYearForm.hasError('dateToIsBeforeDateFrom')">{{'i18n.common.form.error.dateToIsBeforeDateFrom' | translate}}</span>
         </div>
     </div>

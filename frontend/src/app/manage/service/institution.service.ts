@@ -13,8 +13,4 @@ export class InstitutionService extends AppCrudService<InstitutionDto> {
     public readById(id: number): Observable<InstitutionDto> {
         throw new Error('not implemented');
     }
-
-    public update(arg: InstitutionDto): Observable<InstitutionDto> {
-        throw new Error('not implemented');
-    }
 }

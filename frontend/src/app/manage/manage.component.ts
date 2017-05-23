@@ -16,7 +16,7 @@ import {ManageDialogFactory} from './service/manage-dialog-factory';
 import {SubjectDialog} from './subject-dialog/subject-dialog.component';
 import {SubjectService} from './service/subject.service';
 import {Util} from '../core/util/util';
-import {isNotNull, isNull, isTrue} from '../core/util/helper';
+import {equals, isNotNull, isNull, isTrue} from '../core/util/helper';
 import {Observable} from 'rxjs';
 import {Dto} from '../common/Dto';
 import {CreateUpdateDialog} from '../common/CreateUpdateDialog';
@@ -65,8 +65,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit() {
-        this._manageService.getManageData()
-            .subscribe((res) => this._prepareManageData(res));
+        this._prepareManageData();
     }
 
     ngAfterViewInit() {
@@ -162,9 +161,20 @@ export class ManageComponent implements OnInit, AfterViewInit {
         return null;
     }
 
-    private _prepareManageData(manageData: ManageDto) {
-        this._manageData = manageData;
-        this.currentManageData[ManageView.INSTITUTION_CLASS] = manageData.institutions;
+    private _prepareManageData() {
+        this._manageService.getManageData()
+            .subscribe((manageData) => {
+                this._manageData = manageData;
+                this.currentManageData[ManageView.INSTITUTION_CLASS] = manageData.institutions;
+
+                if (this.activeSchoolClassId) {
+                    let schoolYears = this._findSchoolClass(manageData.institutions, this.activeSchoolClassId).schoolYears;
+                    this.currentManageData[ManageView.YEAR_SEMESTER] = schoolYears;
+                    if (this.activeSemesterId) {
+                        this.currentManageData[ManageView.SUBJECT] = this._findSemester(schoolYears, this.activeSemesterId).subjects;
+                    }
+                }
+            });
     }
 
     //endregion
@@ -172,14 +182,14 @@ export class ManageComponent implements OnInit, AfterViewInit {
     //region add
     public addInstitution() {
         this._institutionDialogRef = this._manageDialogFactory.getDialog(InstitutionDialog, DialogMode.NEW, null);
-        this._handleAddition<InstitutionDto, InstitutionDialog>('institution', this._institutionDialogRef, this._institutionService.create,
+        this._handleAddition('institution', this._institutionDialogRef, this._institutionService.create,
             (institution: InstitutionDto) => this.currentManageData[ManageView.INSTITUTION_CLASS].push(institution), this._institutionService
         );
     }
 
     public addSchoolClass(institution: InstitutionDto) {
         this._schoolClassDialogRef = this._manageDialogFactory.getDialog(SchoolClassDialog, DialogMode.NEW, institution);
-        this._handleAddition<SchoolClassDto, SchoolClassDialog>('schoolClass', this._schoolClassDialogRef, this._schoolClassService.create,
+        this._handleAddition('schoolClass', this._schoolClassDialogRef, this._schoolClassService.create,
             (schoolClass: SchoolClassDto) => {
                 if (isNull(institution.schoolClasses)) institution.schoolClasses = [];
                 institution.schoolClasses.push(schoolClass);
@@ -190,7 +200,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
         if (isNotNull(schoolClassId)) {
             let schoolClass: SchoolClassDto = this._findSchoolClass(this.currentManageData[ManageView.INSTITUTION_CLASS] as InstitutionDto[], schoolClassId);
             this._schoolYearDialogRef = this._manageDialogFactory.getDialog(SchoolYearDialog, DialogMode.NEW, schoolClass);
-            this._handleAddition<SchoolYearDto, SchoolYearDialog>('schoolYear', this._schoolYearDialogRef, this._schoolYearService.create,
+            this._handleAddition('schoolYear', this._schoolYearDialogRef, this._schoolYearService.create,
                 (schoolYear: SchoolYearDto) => this.currentManageData[ManageView.YEAR_SEMESTER].push(schoolYear), this._schoolYearService
             );
         }
@@ -199,7 +209,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
     public addSemester(schoolYear: SchoolYearDto) {
         if (isNotNull(schoolYear)) {
             this._semesterDialogRef = this._manageDialogFactory.getDialog(SemesterDialog, DialogMode.NEW, schoolYear);
-            this._handleAddition<SemesterDto, SemesterDialog>('semester', this._semesterDialogRef, this._semesterService.create,
+            this._handleAddition('semester', this._semesterDialogRef, this._semesterService.create,
                 (semester: SemesterDto) => {
                     if (isNull(schoolYear.semesters)) schoolYear.semesters = [];
                     schoolYear.semesters.push(semester);
@@ -211,7 +221,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
         if (isNotNull(semesterId)) {
             let semester: SemesterDto = this._findSemester(this.currentManageData[ManageView.YEAR_SEMESTER] as SchoolYearDto[], semesterId);
             this._subjectDialogRef = this._manageDialogFactory.getDialog(SubjectDialog, DialogMode.NEW, semester);
-            this._handleAddition<SubjectDto, SubjectDialog>('subject', this._subjectDialogRef, this._subjectService.create,
+            this._handleAddition('subject', this._subjectDialogRef, this._subjectService.create,
                 (subject: SubjectDto) => this.currentManageData[ManageView.SUBJECT].push(subject), this._subjectService
             );
         }
@@ -263,24 +273,34 @@ export class ManageComponent implements OnInit, AfterViewInit {
     //endregion
 
     //region edit
-    public editInstitution() {
-        console.warn('Not implemented yet')
+    public editInstitution(toEdit: InstitutionDto) {
+        let dialog = this._manageDialogFactory.getDialog(InstitutionDialog, DialogMode.EDIT, null, null, toEdit);
+        this._handleEdit('institution', dialog, this._institutionService.update, this._institutionService);
     }
 
-    public editSchoolClass() {
-        console.warn('Not implemented yet')
+    public editSchoolClass(toEdit: SchoolClassDto) {
+        let parent = (this.currentManageData[ManageView.INSTITUTION_CLASS] as InstitutionDto[])
+            .find(institution => institution.id === toEdit.institutionId);
+        let dialog = this._manageDialogFactory.getDialog(SchoolClassDialog, DialogMode.EDIT, parent, null, toEdit);
+        this._handleEdit('schoolClass', dialog, this._schoolClassService.update, this._schoolClassService);
     }
 
-    public editSchoolYear() {
-        console.warn('Not implemented yet')
+    public editSchoolYear(toEdit: SchoolYearDto) {
+        let parent = this._findSchoolClass(this.currentManageData[ManageView.INSTITUTION_CLASS] as InstitutionDto[], toEdit.id);
+        let dialog = this._manageDialogFactory.getDialog(SchoolYearDialog, DialogMode.EDIT, parent, null, toEdit);
+        this._handleEdit('schoolYear', dialog, this._schoolYearService.update, this._schoolYearService);
     }
 
-    public editSemester() {
-        console.warn('Not implemented yet')
+    public editSemester(toEdit: SemesterDto) {
+        let parent = this.currentManageData[ManageView.YEAR_SEMESTER].find(year => equals(year.id, toEdit.schoolYearId));
+        let dialog = this._manageDialogFactory.getDialog(SemesterDialog, DialogMode.EDIT, parent, null, toEdit);
+        this._handleEdit('semester', dialog, this._semesterService.update, this._semesterService);
     }
 
-    public editSubject() {
-        console.warn('Not implemented yet')
+    public editSubject(toEdit: SubjectDto) {
+        let parent: SemesterDto = this._findSemester(this.currentManageData[ManageView.YEAR_SEMESTER] as SchoolYearDto[], toEdit.semesterId);
+        let dialog = this._manageDialogFactory.getDialog(SubjectDialog, DialogMode.EDIT, parent, null, toEdit);
+        this._handleEdit('subject', dialog, this._subjectService.update, this._subjectService);
     }
 
     //endregion
@@ -302,7 +322,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
     private _handleDeletion<T extends Dto>(entity: T, entityName: string, deleteFunction: (id: number) => Observable<any>, finishFunction: (entity: T) => void, thisArg: any) {
         this._openDeleteConfirmDialog(entityName)
             .filter(isTrue)
-            .switchMap(() => Util.bindAndCall(deleteFunction, thisArg, entity.id))
+            .switchMap(() => deleteFunction.call(this, entity.id))
             .catch((error) => {
                 this._notificationService.remove();
                 this._notificationService.error('i18n.modules.task.notification.error.deleteFailed.title', 'i18n.modules.task.notification.error.deleteFailed.message');
@@ -318,7 +338,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
      * waits for emitted values from the given dialog
      *
      * checks that the emitted values are not null or something similar {@see isNotNull}
-     * performs a flatMap on the switchFunction which must return an Observable of the entity Type
+     * performs a flatMap on the createFunction which must return an Observable of the entity Type
      * and then executes the finishFunction when a value is emitted by the switched Observable
      * also shows a success notification before executing the finishFunction
      *
@@ -332,11 +352,34 @@ export class ManageComponent implements OnInit, AfterViewInit {
     private _handleAddition<T extends Dto, D extends CreateUpdateDialog<T>>(entityName: string, dialogRef: MdDialogRef<D>, createFunction: (entity: T) => Observable<T>, finishFunction: (entity: T) => void, thisArg: any) {
         dialogRef.afterClosed()
             .filter(isNotNull)
-            .flatMap((value: T) => Util.bindAndCall(createFunction, thisArg, value))
+            .flatMap((value: T) => createFunction.call(thisArg, value))
             .subscribe((entity: T) => {
                 this._showSaveSuccessNotification(entityName);
                 finishFunction(entity);
             });
+    }
+
+    /**
+     * waits for emitted values from the given dialog
+     *
+     * checks that the emitted values are not null or something similar {@see isNotNull}
+     * performs a flatMap on the editFunction which must return an Observable of the entity Type
+     * also shows a success notification in the end
+     *
+     * @param entityName name success message
+     * @param dialogRef to listen for close event
+     * @param editFunction function which edits an entity
+     * @param thisArg the scope where the createFunction should be run on
+     */
+    private _handleEdit<T extends Dto, D extends CreateUpdateDialog<T>>(entityName: string, dialogRef: MdDialogRef<D>, editFunction: (entity: T) => Observable<T>, thisArg: any) {
+        dialogRef.afterClosed()
+            .filter(isNotNull)
+            .flatMap(value => editFunction.call(thisArg, value))
+            .catch(() => {
+                this._prepareManageData();
+                return Observable.empty();
+            })
+            .subscribe(() => this._showSaveSuccessNotification(entityName));
     }
 
     //endregion
