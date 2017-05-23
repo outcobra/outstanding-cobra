@@ -67,10 +67,10 @@ FOREIGN KEY (institution_id) REFERENCES institution (id);
 
 CREATE TABLE mark_group
 (
-  id            BIGINT(20) NOT NULL
-    PRIMARY KEY,
-  weight        DOUBLE     NOT NULL,
-  mark_group_id BIGINT(20) NULL,
+  id            BIGINT(20)   NOT NULL PRIMARY KEY,
+  weight        DOUBLE       NOT NULL,
+  description   VARCHAR(255) NOT NULL,
+  mark_group_id BIGINT(20)   NULL,
   CONSTRAINT FK_nxnsocqwok82hut41877aawa7
   FOREIGN KEY (mark_group_id) REFERENCES mark_group (id)
 );
@@ -80,8 +80,7 @@ CREATE INDEX FK_nxnsocqwok82hut41877aawa7
 
 CREATE TABLE mark_report
 (
-  id          BIGINT(20)   NOT NULL AUTO_INCREMENT
-    PRIMARY KEY,
+  id          BIGINT(20)   NOT NULL AUTO_INCREMENT PRIMARY KEY,
   name        VARCHAR(255) NOT NULL,
   semester_id BIGINT(20)   NOT NULL
 );
@@ -91,8 +90,7 @@ CREATE INDEX FKi1tu4d51x01l5qk3wytr4vsi5
 
 CREATE TABLE mark_report_entry
 (
-  id         BIGINT(20) NOT NULL AUTO_INCREMENT
-    PRIMARY KEY,
+  id         BIGINT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   weight     DOUBLE     NOT NULL,
   report_id  BIGINT(20) NOT NULL,
   subject_id BIGINT(20) NOT NULL,
@@ -108,10 +106,11 @@ CREATE INDEX FKr9jkscbje7ds5509dkgwdqwy5
 
 CREATE TABLE mark_value
 (
-  id            BIGINT(20) NOT NULL    PRIMARY KEY,
-  weight        DOUBLE     NOT NULL,
-  mark_group_id BIGINT(20) NULL,
-  value         DOUBLE     NOT NULL,
+  id            BIGINT(20)   NOT NULL PRIMARY KEY,
+  weight        DOUBLE       NOT NULL,
+  description   VARCHAR(255) NOT NULL,
+  mark_group_id BIGINT(20)   NULL,
+  value         DOUBLE       NOT NULL,
   CONSTRAINT FK_s8x2nqqvbwde46ooii5ektlh4
   FOREIGN KEY (mark_group_id) REFERENCES mark_group (id)
 );
@@ -121,8 +120,7 @@ CREATE INDEX FK_s8x2nqqvbwde46ooii5ektlh4
 
 CREATE TABLE school_year
 (
-  id              BIGINT(20)   NOT NULL AUTO_INCREMENT
-    PRIMARY KEY,
+  id              BIGINT(20)   NOT NULL AUTO_INCREMENT PRIMARY KEY,
   name            VARCHAR(255) NOT NULL,
   valid_from      TINYBLOB     NOT NULL,
   valid_to        TINYBLOB     NOT NULL,
