@@ -16,7 +16,7 @@
             <md-input-container>
                 <input mdInput [mdDatepicker]="validFromPicker" [min]="parent.validFrom"
                        [placeholder]="'i18n.common.label.validFrom' | translate" formControlName="validFrom">
-                <button mdSuffix [mdDatepickerToggle]="validFromPicker"></button>
+                <button mdSuffix [mdDatepickerToggle]="validFromPicker" type="button"></button>
                 <md-error *ngIf="semesterForm.get('validFrom').invalid && semesterForm.get('validFrom').touched">
                     <ng-template [ngIf]="semesterForm.get('validFrom').hasError('required')">
                         {{'i18n.common.form.error.required' | translate}}
@@ -32,7 +32,7 @@
             <md-input-container>
                 <input mdInput [mdDatepicker]="validToPicker" [min]="parent.validTo"
                        [placeholder]="'i18n.common.label.validTo' | translate" formControlName="validTo">
-                <button mdSuffix [mdDatepickerToggle]="validToPicker"></button>
+                <button mdSuffix [mdDatepickerToggle]="validToPicker" type="button"></button>
                 <md-error *ngIf="semesterForm.get('validTo').invalid && semesterForm.get('validTo').touched">
                     <ng-template [ngIf]="semesterForm.get('validTo').hasError('required')">
                         {{'i18n.common.form.error.required' | translate}}
