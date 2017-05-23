@@ -7,9 +7,9 @@ import outcobra.server.model.interfaces.OutcobraDto
  * This interface defines what all [Mark] related Dto's have in common
  * @implements [OutcobraDto]
  * @author Florian Bürgi
- * @since 1.0.0
+ * @since <since>9
  */
-interface MarksDto : OutcobraDto {
+interface BaseMarkDto : OutcobraDto {
     val id: Long
     val value: Double
     val weight: Double
