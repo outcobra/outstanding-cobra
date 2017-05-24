@@ -116,7 +116,8 @@
               "label": "Gib eine Aufgabenbeschreibung ein"
             },
             "effort": {
-              "label": "Erwarteter Aufwand (in Stunden)"
+              "label": "Erwarteter Aufwand (in Stunden)",
+              "remaining": "Verbleibender Aufwand"
             },
             "errors": {
               "dueDateBeforeTodoDate": "Das Fälligkeitsdatum darf nicht vor dem Erledigungsdatum liegen"

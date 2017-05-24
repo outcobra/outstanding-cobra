@@ -1,15 +1,16 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Task} from '../model/Task';
-import {ConfirmDialogService} from '../../core/services/confirm-dialog.service';
-import {TaskService} from '../service/task.service';
-import {MdDialog, MdDialogRef, MdSlider, MdSliderChange} from '@angular/material';
-import {TaskCreateUpdateDialog} from '../task-create-update-dialog/task-create-update-dialog.component';
-import {SMALL_DIALOG} from '../../core/util/const';
-import {DialogMode} from '../../common/DialogMode';
-import {Observable} from 'rxjs';
-import {isNotNull, isTrue} from '../../core/util/helper';
-import {NotificationWrapperService} from '../../core/notifications/notification-wrapper.service';
+import {AfterViewInit, Component, OnInit, ViewChild} from "@angular/core";
+import {ActivatedRoute, Router} from "@angular/router";
+import {Task} from "../model/Task";
+import {ConfirmDialogService} from "../../core/services/confirm-dialog.service";
+import {TaskService} from "../service/task.service";
+import {MdDialog, MdDialogRef, MdSlider, MdSliderChange} from "@angular/material";
+import {TaskCreateUpdateDialog} from "../task-create-update-dialog/task-create-update-dialog.component";
+import {SMALL_DIALOG} from "../../core/util/const";
+import {DialogMode} from "../../common/DialogMode";
+import {Observable} from "rxjs";
+import {isNotNull, isTrue} from "../../core/util/helper";
+import {NotificationWrapperService} from "../../core/notifications/notification-wrapper.service";
+import {DurationService} from "../../core/services/duration.service";
 
 @Component({
     selector: 'task-detail',
@@ -26,7 +27,8 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
                 private _taskService: TaskService,
                 private _dialogService: MdDialog,
                 private _route: ActivatedRoute,
-                private _router: Router) {
+                private _router: Router,
+                private _durationService: DurationService) {
     }
 
     ngOnInit() {
@@ -60,6 +62,12 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
                     this._notificationService.success('i18n.modules.task.notification.update.title', 'i18n.modules.task.notification.update.message');
                 }
             });
+    }
+
+    public getRemainingEffort() {
+        let remaining = this.task.effort / 100 * (100 - this.task.progress)
+        return this._durationService.humanizeMinutes(remaining * 60)
+
     }
 
     public deleteTask() {

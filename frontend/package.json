@@ -39,7 +39,8 @@
     "rxjs": "5.1.0",
     "raven-js": "3.10.0",
     "zone.js": "^0.8.4",
-    "typeface-montserrat": "^0.0.24"
+    "typeface-montserrat": "^0.0.24",
+    "humanize-duration": "^3.10.0"
   },
   "devDependencies": {
     "@angular/cli": "^1.0.0",

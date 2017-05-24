@@ -116,7 +116,8 @@
               "label": "Enter a task description"
             },
             "effort": {
-              "label": "Expected effort (in h)"
+              "label": "Expected effort (in h)",
+              "remaining": "Remaining effort"
             },
             "errors": {
               "dueDateBeforeTodoDate": "The due date must not be before the todo date"
