@@ -37,7 +37,7 @@ class MarkController @Inject constructor(val markService: MarkService,
         markService.delete(id)
     }
 
-    @RequestMapping(value = "/group/", method = arrayOf(RequestMethod.PUT, RequestMethod.POST))
+    @RequestMapping(value = "/group", method = arrayOf(RequestMethod.PUT, RequestMethod.POST))
     fun saveMarkGroup(@RequestBody markDto: MarkGroupDto): MarkGroupDto {
         return markGroupService.save(markDto)
     }
@@ -57,7 +57,7 @@ class MarkController @Inject constructor(val markService: MarkService,
         markGroupService.delete(id)
     }
 
-    @GetMapping(value = "/semester/{semesterId}/groups")
+    @GetMapping(value = "/semester/{semesterId}")
     fun getInitialMarkData(@PathVariable semesterId: Long): SemesterMarkDto {
         return markGroupService.getInitialData(semesterId)
     }
