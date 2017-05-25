@@ -1,6 +1,6 @@
-import {Injectable} from "@angular/core";
-import {TranslateService} from "@ngx-translate/core";
-import * as humanizeDuration from "humanize-duration";
+import {Injectable} from '@angular/core';
+import {TranslateService} from '@ngx-translate/core';
+import * as humanizeDuration from 'humanize-duration';
 
 /**
  * This service translates a given duration into a human readable string
