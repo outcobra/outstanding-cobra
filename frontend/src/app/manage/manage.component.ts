@@ -322,10 +322,10 @@ export class ManageComponent implements OnInit, AfterViewInit {
     private _handleDeletion<T extends Dto>(entity: T, entityName: string, deleteFunction: (id: number) => Observable<any>, finishFunction: (entity: T) => void, thisArg: any) {
         this._openDeleteConfirmDialog(entityName)
             .filter(isTrue)
-            .switchMap(() => deleteFunction.call(this, entity.id))
-            .catch((error) => {
+            .switchMap(() => deleteFunction.call(thisArg, entity.id))
+            .catch(() => {
                 this._notificationService.remove();
-                this._notificationService.error('i18n.modules.task.notification.error.deleteFailed.title', 'i18n.modules.task.notification.error.deleteFailed.message');
+                this._showDeleteErrorNotification(entityName);
                 return Observable.empty();
             })
             .subscribe(() => {
@@ -394,6 +394,10 @@ export class ManageComponent implements OnInit, AfterViewInit {
 
     private _showDeleteSuccessNotification(entity: string) {
         this._notificationService.success('i18n.common.notification.success.delete', `i18n.modules.manage.${entity}.notificationMessage.deleteSuccess`);
+    }
+
+    private _showDeleteErrorNotification(entity: string) {
+        this._notificationService.success('i18n.common.notification.error.delete', `i18n.modules.manage.${entity}.notificationMessage.deleteError`);
     }
 
     get activeSchoolClassId(): number {
