@@ -12,14 +12,14 @@ public abstract class Mark implements ParentLinked {
     protected Double weight;
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
-    private Long id;
+    protected Long id;
     @OneToOne(mappedBy = "mark")
-    private Exam exam;
+    protected Exam exam;
     @NotNull
-    private String description;
+    protected String description;
 
     @ManyToOne
-    private MarkGroup markGroup;
+    protected MarkGroup markGroup;
 
     //region constructors
     public Mark(Double weight, Exam exam, MarkGroup markGroup, String description) {

@@ -1,8 +1,8 @@
 package outcobra.server.controller
 
 import org.springframework.web.bind.annotation.*
-import outcobra.server.model.dto.MarkDto
 import outcobra.server.model.dto.MarkGroupDto
+import outcobra.server.model.dto.MarkValueDto
 import outcobra.server.model.dto.mark.SemesterMarkDto
 import outcobra.server.service.MarkGroupService
 import outcobra.server.service.MarkService
@@ -17,18 +17,18 @@ import javax.inject.Inject
 class MarkController @Inject constructor(val markService: MarkService,
                                          val markGroupService: MarkGroupService) {
 
-    @RequestMapping(value = "/value/", method = arrayOf(RequestMethod.PUT, RequestMethod.POST))
-    fun saveMarkValue(@RequestBody markDto: MarkDto): MarkGroupDto {
-        return markService.saveMarkAndGetChangedParent(markDto)
+    @RequestMapping(value = "/value", method = arrayOf(RequestMethod.PUT, RequestMethod.POST))
+    fun saveMarkValue(@RequestBody markValueDto: MarkValueDto): MarkGroupDto {
+        return markService.saveMarkAndGetChangedParent(markValueDto)
     }
 
     @GetMapping(value = "/value/{id}")
-    fun readMarkValueById(@PathVariable id: Long): MarkDto {
+    fun readMarkValueById(@PathVariable id: Long): MarkValueDto {
         return this.markService.readById(id)
     }
 
     @GetMapping(value = "/group/{markGroupId}/value")
-    fun readMarkValuesByGroup(@PathVariable markGroupId: Long): List<MarkDto> {
+    fun readMarkValuesByGroup(@PathVariable markGroupId: Long): List<MarkValueDto> {
         return markService.readAllByMarkGroup(markGroupId)
     }
 
@@ -57,7 +57,7 @@ class MarkController @Inject constructor(val markService: MarkService,
         markGroupService.delete(id)
     }
 
-    @GetMapping(value = "/initial/{semesterId}")
+    @GetMapping(value = "/semester/{semesterId}/groups")
     fun getInitialMarkData(@PathVariable semesterId: Long): SemesterMarkDto {
         return markGroupService.getInitialData(semesterId)
     }

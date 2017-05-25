@@ -114,7 +114,11 @@ public class MarkGroup extends Mark {
 
     @Override
     public ParentLinked getParent() {
-        return subject;
+        if (this.markGroup == null) {
+            return subject;
+        }
+        return markGroup;
+
     }
     //endregion
 }
