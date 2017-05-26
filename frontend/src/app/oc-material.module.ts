@@ -6,7 +6,8 @@ import {
     MdCoreModule,
     MdDialogModule,
     MdIconModule,
-    MdInputModule, MdListModule,
+    MdInputModule,
+    MdListModule,
     MdMenuModule,
     MdOptionModule,
     MdRippleModule,
@@ -14,6 +15,7 @@ import {
     MdSidenavModule,
     MdSliderModule,
     MdSlideToggleModule,
+    MdTabsModule,
     MdToolbarModule,
     MdTooltipModule
 } from '@angular/material';
@@ -36,6 +38,7 @@ import {
         MdSliderModule,
         MdRippleModule,
         MdListModule,
+        MdTabsModule,
         MdCoreModule
     ],
     exports: [
@@ -55,6 +58,7 @@ import {
         MdSliderModule,
         MdRippleModule,
         MdListModule,
+        MdTabsModule,
         MdCoreModule
     ]
 })

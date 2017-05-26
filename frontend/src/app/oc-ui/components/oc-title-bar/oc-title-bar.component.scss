@@ -14,13 +14,19 @@
     position: relative;
     box-sizing: border-box;
     width: 100%;
-}
-
-.oc-title-bar-title {
-    position: relative;
-    margin-bottom: 8px;
-    font-size: 20px;
-    min-height: 40px;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+
+    .oc-title-bar-title {
+        position: relative;
+        margin-bottom: 8px;
+        font-size: 20px;
+        min-height: 40px;
+        display: flex;
+        align-items: center;
+    }
+
+    .mat-tab-nav-bar {
+        padding-left: -24px;
+    }
 }
