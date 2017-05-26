@@ -10,12 +10,13 @@ import {DialogMode} from '../../common/DialogMode';
 import {Observable} from 'rxjs';
 import {isNotNull, isTrue} from '../../core/util/helper';
 import {NotificationWrapperService} from '../../core/notifications/notification-wrapper.service';
+import {DurationService} from '../../core/services/duration.service';
 
 @Component({
-    selector: 'task-detail',
-    templateUrl: './task-detail.component.html',
-    styleUrls: ['./task-detail.component.scss']
-})
+               selector: 'task-detail',
+               templateUrl: './task-detail.component.html',
+               styleUrls: ['./task-detail.component.scss']
+           })
 export class TaskDetailComponent implements OnInit, AfterViewInit {
     private _task: Task;
     private _taskCreateUpdateDialog: MdDialogRef<TaskCreateUpdateDialog>;
@@ -26,12 +27,13 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
                 private _taskService: TaskService,
                 private _dialogService: MdDialog,
                 private _route: ActivatedRoute,
-                private _router: Router) {
+                private _router: Router,
+                private _durationService: DurationService) {
     }
 
     ngOnInit() {
         this._route.data
-            .subscribe((data: {task: Task}) => this._task = data.task);
+            .subscribe((data: { task: Task }) => this._task = data.task);
     }
 
     ngAfterViewInit() {
@@ -57,13 +59,20 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
                 // TODO error handling?
                 if (task) {
                     this._task = task;
-                    this._notificationService.success('i18n.modules.task.notification.update.title', 'i18n.modules.task.notification.update.message');
+                    this._notificationService.success('i18n.modules.task.notification.update.title',
+                                                      'i18n.modules.task.notification.update.message');
                 }
             });
     }
 
+    public getRemainingEffort() {
+        let remaining = this.task.effort / 100 * (100 - this.task.progress);
+        return this._durationService.humanizeHours(remaining);
+    }
+
     public deleteTask() {
-        this._confirmDialogService.open('i18n.modules.task.dialogs.confirmDeleteDialog.title', 'i18n.modules.task.dialogs.confirmDeleteDialog.message')
+        this._confirmDialogService.open('i18n.modules.task.dialogs.confirmDeleteDialog.title',
+                                        'i18n.modules.task.dialogs.confirmDeleteDialog.message')
             .filter(isTrue)
             .flatMap(() => this._taskService.deleteById(this._task.id))
             .subscribe(result => this._router.navigate(['/task']));
@@ -72,7 +81,6 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
     public closeCard() {
         this._router.navigate(['/task']);
     }
-
 
     get task(): Task {
         return this._task;

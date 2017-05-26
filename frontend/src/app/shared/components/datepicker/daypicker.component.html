@@ -11,14 +11,14 @@
     <table [@daypickerAnimation]="animate">
         <thead>
         <tr>
-            <td *ngFor="let day of dayLabels"><span>{{day | slice:0:1}}</span></td>
+            <td *ngFor="let day of dayLabels"><span>{{ day | slice:0:1 }}</span></td>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let row of rows">
             <td *ngFor="let date of row">
                     <span *ngIf="date" (click)="selectDay(date)"
-                          [ngClass]="setDateSpanClasses(date)">{{date | date:'d' }}</span>
+                          [ngClass]="setDateSpanClasses(date)">{{ date | date:'d' }}</span>
             </td>
         </tr>
         </tbody>
