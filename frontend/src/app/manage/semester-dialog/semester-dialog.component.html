@@ -1,5 +1,5 @@
 <div class="dialog-header">
-    <h1 md-dialog-title>{{'i18n.modules.manage.semester.add' | translate}}</h1>
+    <h1 md-dialog-title>{{ 'i18n.modules.manage.semester.add' | translate }}</h1>
 </div>
 <form [formGroup]="semesterForm" (submit)="submit()">
     <div class="dialog-body" md-dialog-content>
@@ -8,7 +8,7 @@
                 <input mdInput [autofocus]="false"
                        [placeholder]="'i18n.modules.manage.semester.form.label' | translate" formControlName="name">
                 <md-error *ngIf="semesterForm.get('name').hasError('required')">
-                    {{'i18n.common.form.error.required' | translate}}
+                    {{ 'i18n.common.form.error.required' | translate }}
                 </md-error>
             </md-input-container>
         </div>
@@ -19,10 +19,10 @@
                 <button mdSuffix [mdDatepickerToggle]="validFromPicker" type="button"></button>
                 <md-error *ngIf="semesterForm.get('validFrom').invalid && semesterForm.get('validFrom').touched">
                     <ng-template [ngIf]="semesterForm.get('validFrom').hasError('required')">
-                        {{'i18n.common.form.error.required' | translate}}
+                        {{ 'i18n.common.form.error.required' | translate }}
                     </ng-template>
                     <ng-template [ngIf]="semesterForm.get('validFrom').hasError('isAfterDay')">
-                        {{getErrorText('validFrom', 'isAfterDay', 'afterDate')}}
+                        {{ getErrorText('validFrom', 'isAfterDay', 'afterDate') }}
                     </ng-template>
                 </md-error>
             </md-input-container>
@@ -35,10 +35,10 @@
                 <button mdSuffix [mdDatepickerToggle]="validToPicker" type="button"></button>
                 <md-error *ngIf="semesterForm.get('validTo').invalid && semesterForm.get('validTo').touched">
                     <ng-template [ngIf]="semesterForm.get('validTo').hasError('required')">
-                        {{'i18n.common.form.error.required' | translate}}
+                        {{ 'i18n.common.form.error.required' | translate }}
                     </ng-template>
                     <ng-template [ngIf]="semesterForm.get('validTo').hasError('isBeforeDay')">
-                        {{getErrorText('validTo', 'isBeforeDay', 'beforeDate')}}
+                        {{ getErrorText('validTo', 'isBeforeDay', 'beforeDate') }}
                     </ng-template>
                 </md-error>
             </md-input-container>
@@ -46,13 +46,13 @@
         </div>
         <div class="form-error"
              *ngIf="semesterForm.invalid && semesterForm.touched && ((semesterForm.get('validFrom').touched && semesterForm.get('validTo').touched) || isEditMode())">
-            <span *ngIf="semesterForm.hasError('dateToIsBeforeDateFrom')">{{'i18n.common.form.error.dateToIsBeforeDateFrom' | translate}}</span>
+            <span *ngIf="semesterForm.hasError('dateToIsBeforeDateFrom')">{{ 'i18n.common.form.error.dateToIsBeforeDateFrom' | translate }}</span>
         </div>
     </div>
     <div class="dialog-footer" md-dialog-actions>
         <div class="footer-right">
-            <button md-button md-dialog-close>{{'i18n.common.action.cancel' | translate}}</button>
-            <button md-raised-button color="primary" type="submit">{{'i18n.common.action.save' | translate}}</button>
+            <button md-button md-dialog-close>{{ 'i18n.common.action.cancel' | translate }}</button>
+            <button md-raised-button color="primary" type="submit">{{ 'i18n.common.action.save' | translate }}</button>
         </div>
     </div>
 </form>

@@ -15,7 +15,7 @@ data class TaskDto(
         val description: String = "",
         val todoDate: LocalDate? = LocalDate.now(),
         val dueDate: LocalDate = LocalDate.now().plusDays(1),
-        val effort: Int = 0,
+        val effort: Double = 0.0,
         val progress: Int = 0) : OutcobraDto {
 
     override fun getIdentifier(): Long = id
