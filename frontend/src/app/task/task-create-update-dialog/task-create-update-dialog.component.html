@@ -8,8 +8,8 @@
                 <input mdInput [placeholder]="'i18n.modules.task.dialogs.add.name.label' | translate"
                        formControlName="name">
                 <md-error *ngIf="taskCreateUpdateForm.get('name').invalid && taskCreateUpdateForm.get('name').touched">
-                    <ng-template [ngIf]="taskCreateUpdateForm.get('name').hasError('required')">{{'i18n.common.form.error.required'
-                        | translate}}
+                    <ng-template [ngIf]="taskCreateUpdateForm.get('name').hasError('required')">
+                        {{'i18n.common.form.error.required' | translate}}
                     </ng-template>
                 </md-error>
             </md-input-container>

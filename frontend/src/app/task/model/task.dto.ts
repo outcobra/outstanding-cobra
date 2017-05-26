@@ -1,7 +1,7 @@
-import {SubjectDto} from '../../manage/model/ManageDto';
+import {SubjectDto} from '../../manage/model/manage.dto';
+import {Dto} from '../../core/common/dto';
 
-export interface Task {
-    id: number,
+export interface Task extends Dto {
     description: string,
     name: string,
     dueDate: Date,

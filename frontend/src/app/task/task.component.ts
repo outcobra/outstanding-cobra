@@ -1,14 +1,14 @@
 import {AfterViewInit, Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {TaskService} from './service/task.service';
-import {Task} from './model/Task';
+import {Task} from './model/task.dto';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
-import {TaskFilter} from './model/TaskFilter';
+import {TaskFilter} from './model/task-filter.dto';
 import {MdDialog, MdDialogRef} from '@angular/material';
 import {TaskCreateUpdateDialog} from './task-create-update-dialog/task-create-update-dialog.component';
 import {Util} from '../core/util/util';
-import {DialogMode} from '../common/DialogMode';
+import {DialogMode} from '../core/common/dialog-mode';
 import {Observable} from 'rxjs';
 import {SMALL_DIALOG} from '../core/util/const';
 import {and} from '../core/util/helper';

@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ManageDialog} from '../manage-dialog';
-import {SchoolClassDto, SchoolYearDto} from '../model/ManageDto';
+import {SchoolClassDto, SchoolYearDto} from '../model/manage.dto';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MdDialogRef} from '@angular/material';
 import {OCValidators} from '../../core/services/oc-validators';

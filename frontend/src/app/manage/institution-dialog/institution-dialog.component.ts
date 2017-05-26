@@ -2,7 +2,7 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {MdDialogRef} from '@angular/material';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ManageDialog} from '../manage-dialog';
-import {InstitutionDto} from '../model/ManageDto';
+import {InstitutionDto} from '../model/manage.dto';
 import {Util} from '../../core/util/util';
 
 @Component({

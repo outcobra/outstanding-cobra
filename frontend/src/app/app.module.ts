@@ -6,7 +6,7 @@ import {MdNativeDateModule} from '@angular/material';
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import 'rxjs/add/operator/toPromise';
 import {AppComponent} from './app.component';
-import {Config} from './config/Config';
+import {ConfigService} from './core/config/config.service';
 import {SharedModule} from './shared/shared.module';
 import {SimpleNotificationsModule} from 'angular2-notifications';
 import {AppRoutingModule} from './app-routing.module';
@@ -18,7 +18,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {CoreModule} from './core/core.module';
 import {OCMaterialModule} from './oc-material.module';
-import {RavenErrorHandler} from './core/error/RavenErrorHandler';
+import {RavenErrorHandler} from './core/error/raven-error-handler';
 
 @NgModule({
     declarations: [
@@ -48,11 +48,11 @@ import {RavenErrorHandler} from './core/error/RavenErrorHandler';
         })
     ],
     providers: [
-        Config,
+        ConfigService,
         {
             provide: APP_INITIALIZER,
             useFactory: configLoader,
-            deps: [Config],
+            deps: [ConfigService],
             multi: true
         },
         {

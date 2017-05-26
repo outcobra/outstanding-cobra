@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {Http, Request, RequestMethod, Response, URLSearchParams} from '@angular/http';
-import {Config} from '../../config/Config';
+import {ConfigService} from '../config/config.service';
 import {Observable} from 'rxjs';
 import 'rxjs/add/operator/map';
 import {dateReplacer, dateReviver} from './http-util';
-import {RequestOptions} from './RequestOptions';
-import {ValidationException} from '../model/ValidationException';
+import {RequestOptions} from './request-options';
+import {ValidationException} from './validation-exception';
 import {isNotEmpty} from '../util/helper';
 import {NotificationWrapperService} from '../notifications/notification-wrapper.service';
 
@@ -28,7 +28,7 @@ export class HttpInterceptor {
     private _apiNames: string[];
     private _defaultApiName: string;
 
-    constructor(private http: Http, private _notificationsService: NotificationWrapperService, private config: Config) {
+    constructor(private http: Http, private _notificationsService: NotificationWrapperService, private config: ConfigService) {
         this._defaultApiName = this.config.get('api.defaultApiName');
         this._apiNames = this.config.get('api.apis')
             .map(api => api['name']);

@@ -1,6 +1,6 @@
 import * as Raven from 'raven-js';
-import { ErrorHandler } from '@angular/core';
-import { environment } from '../../../environments/environment';
+import {ErrorHandler} from '@angular/core';
+import {environment} from '../../../environments/environment';
 
 if (environment.production) {
     Raven.config('https://00e7fe8c3ae9488ba591314d7773b81a@sentry.pegnu.cloud/2')

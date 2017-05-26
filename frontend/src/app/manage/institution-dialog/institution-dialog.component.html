@@ -7,8 +7,8 @@
             <md-input-container>
                 <input mdInput [autofocus]="false"
                        [placeholder]="'i18n.modules.manage.institution.form.label' | translate" formControlName="name">
-                <md-error *ngIf="institutionForm.get('name').hasError('required')">{{'i18n.common.form.error.required' |
-                    translate}}
+                <md-error *ngIf="institutionForm.get('name').hasError('required')">
+                    {{'i18n.common.form.error.required' | translate}}
                 </md-error>
             </md-input-container>
         </div>

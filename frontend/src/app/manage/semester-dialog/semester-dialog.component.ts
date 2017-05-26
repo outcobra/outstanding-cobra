@@ -2,7 +2,7 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {MdDialogRef} from '@angular/material';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ManageDialog} from '../manage-dialog';
-import {SchoolYearDto, SemesterDto} from '../model/ManageDto';
+import {SchoolYearDto, SemesterDto} from '../model/manage.dto';
 import {OCValidators} from '../../core/services/oc-validators';
 import {TranslateService} from '@ngx-translate/core';
 import {DatePipe} from '@angular/common';

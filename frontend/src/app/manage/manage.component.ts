@@ -1,9 +1,9 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewEncapsulation} from '@angular/core';
 import {ManageService} from './service/manage.service';
-import {InstitutionDto, ManageDto, SchoolClassDto, SchoolYearDto, SemesterDto, SubjectDto} from './model/ManageDto';
+import {InstitutionDto, ManageDto, SchoolClassDto, SchoolYearDto, SemesterDto, SubjectDto} from './model/manage.dto';
 import {MdDialogRef} from '@angular/material';
 import {InstitutionDialog} from './institution-dialog/institution-dialog.component';
-import {DialogMode} from '../common/DialogMode';
+import {DialogMode} from '../core/common/dialog-mode';
 import {SchoolClassDialog} from './school-class-dialog/school-class-dialog.component';
 import {InstitutionService} from './service/institution.service';
 import {SchoolClassService} from './service/school-class.service';
@@ -18,10 +18,10 @@ import {SubjectService} from './service/subject.service';
 import {Util} from '../core/util/util';
 import {equals, isNotNull, isNull, isTrue} from '../core/util/helper';
 import {Observable} from 'rxjs';
-import {Dto} from '../common/Dto';
-import {CreateUpdateDialog} from '../common/CreateUpdateDialog';
+import {Dto} from '../core/common/dto';
+import {CreateUpdateDialog} from '../core/common/create-update-dialog';
 import {ResponsiveHelperService} from '../core/services/ui/responsive-helper.service';
-import {ManageView} from './model/ManageView';
+import {ManageView} from './model/manage-view';
 import {NotificationWrapperService} from '../core/notifications/notification-wrapper.service';
 
 const I18N_PREFIX = 'i18n.modules.manage.mobile.title.';

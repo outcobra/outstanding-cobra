@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
-import {HttpInterceptor} from '../../core/http/HttpInterceptor';
-import {Task} from '../model/Task';
+import {HttpInterceptor} from '../../core/http/http-interceptor';
+import {Task} from '../model/task.dto';
 import {Observable} from 'rxjs';
 import {CacheableCrudService} from '../../core/services/core/cacheable-crud.service';
-import {TaskFilter} from '../model/TaskFilter';
-import {TaskProgressUpdate} from '../model/TaskProgressUpdate';
+import {TaskFilter} from '../model/task-filter.dto';
+import {TaskProgressUpdate} from '../model/task-update.progress.dto';
 
 @Injectable()
 export class TaskService extends CacheableCrudService<Task, Task[]> {

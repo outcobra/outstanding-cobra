@@ -1,4 +1,4 @@
-import {SchoolClassDto, SubjectDto} from '../../manage/model/ManageDto';
+import {SchoolClassDto, SubjectDto} from '../../manage/model/manage.dto';
 
 export interface TaskFilter {
     schoolClassSubjects: {

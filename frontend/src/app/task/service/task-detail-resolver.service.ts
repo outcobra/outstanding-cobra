@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot} from '@angular/router';
-import {Task} from '../model/Task';
+import {Task} from '../model/task.dto';
 import {Observable} from 'rxjs';
 import {TaskService} from './task.service';
-import {HttpStatus} from '../../core/model/HttpStatus';
+import {HttpStatus} from '../../core/http/http-status';
 import {NotificationWrapperService} from '../../core/notifications/notification-wrapper.service';
 
 @Injectable()

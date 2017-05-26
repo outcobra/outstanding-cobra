@@ -1,7 +1,7 @@
 import {Component, ElementRef, EventEmitter, forwardRef, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {ColorService} from '../../../core/services/color.service';
-import {Color} from '../../../core/model/Color';
+import {ColorDto} from '../../../core/model/color.dto';
 import {Util} from '../../../core/util/util';
 
 const noop = () => {
@@ -26,13 +26,13 @@ export const COLORPICKER_CONTROL_VALUE_ACCESSOR: any = {
 export class ColorpickerComponent implements OnInit, ControlValueAccessor {
     @Input() opened: boolean = false;
     @Input() initColor: string;
-    private _colorRows: Color[][];
-    private _colors: Color[];
-    private _selectedColor: Color;
+    private _colorRows: ColorDto[][];
+    private _colors: ColorDto[];
+    private _selectedColor: ColorDto;
 
-    private _outColor: Color = null;
+    private _outColor: ColorDto = null;
 
-    @Output('selectColor') _onSelectColor = new EventEmitter<Color>();
+    @Output('selectColor') _onSelectColor = new EventEmitter<ColorDto>();
 
     private _onTouchedCallback: () => void = noop;
     private _onChangeCallback: (_: any) => void = noop;
@@ -43,14 +43,14 @@ export class ColorpickerComponent implements OnInit, ControlValueAccessor {
 
     ngOnInit() {
         this._colorService.getColors()
-            .subscribe((res: Color[]) => {
+            .subscribe((res: ColorDto[]) => {
                 this._selectedColor = res.find(color => this.initColor && color.hex.toLowerCase() == this.initColor.toLowerCase());
                 this._colorRows = Util.split(res, 5);
                 this._colors = res;
             });
     }
 
-    public selectColor(color: Color) {
+    public selectColor(color: ColorDto) {
         this.writeValue(color);
     }
 
@@ -102,7 +102,7 @@ export class ColorpickerComponent implements OnInit, ControlValueAccessor {
         }
     }
 
-    public writeValue(value: Color): void {
+    public writeValue(value: ColorDto): void {
         if (value && this._selectedColor !== value) {
             this._selectedColor = value;
             this._onSelectColor.emit(value);
@@ -124,11 +124,11 @@ export class ColorpickerComponent implements OnInit, ControlValueAccessor {
         return `#${this._selectedColor.hex}`;
     }
 
-    get colorRows(): Color[][] {
+    get colorRows(): ColorDto[][] {
         return this._colorRows;
     }
 
-    get selectedColor(): Color {
+    get selectedColor(): ColorDto {
         return this._selectedColor;
     }
 }

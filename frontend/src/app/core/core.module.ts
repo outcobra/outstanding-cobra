@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {HttpInterceptor} from './http/HttpInterceptor';
+import {HttpInterceptor} from './http/http-interceptor';
 import {ResponsiveHelperService} from './services/ui/responsive-helper.service';
 import {InfoService} from './services/info.service';
 import {ColorService} from './services/color.service';

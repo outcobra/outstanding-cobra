@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {MATERIALIZE_MIN_WIDTH_LARGE, MATERIALIZE_MIN_WIDTH_MEDIUM, MOBILE_DIALOG} from '../../util/const';
 import {MdDialogConfig} from '@angular/material';
-import {Orientation} from './Orientation';
+import {Orientation} from './orientation';
 import {isNotNull} from '../../util/helper';
 
 @Injectable()

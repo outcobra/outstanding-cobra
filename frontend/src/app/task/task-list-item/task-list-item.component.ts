@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Task} from '../model/Task';
+import {Task} from '../model/task.dto';
 import {ActivatedRoute, Router} from '@angular/router';
 import {isNotNull} from '../../core/util/helper';
 import {TaskService} from '../service/task.service';

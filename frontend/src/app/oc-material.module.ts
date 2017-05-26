@@ -20,7 +20,7 @@ import {
     MdToolbarModule,
     MdTooltipModule
 } from '@angular/material';
-import {OC_DATE_FORMATS} from './common/OCDateFormats';
+import {OC_DATE_FORMATS} from './core/common/oc-date-formats';
 
 @NgModule({
     imports: [

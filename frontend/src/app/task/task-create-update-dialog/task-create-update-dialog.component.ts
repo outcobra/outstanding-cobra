@@ -2,11 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MdDialogRef} from '@angular/material';
 import {SubjectService} from '../../manage/service/subject.service';
-import {SubjectDto} from '../../manage/model/ManageDto';
+import {SubjectDto} from '../../manage/model/manage.dto';
 import {Util} from '../../core/util/util';
 import {OCValidators} from '../../core/services/oc-validators';
-import {Task} from '../model/Task';
-import {CreateUpdateDialog} from '../../common/CreateUpdateDialog';
+import {Task} from '../model/task.dto';
+import {CreateUpdateDialog} from '../../core/common/create-update-dialog';
 
 @Component({
     selector: './task-create-update-dialog',

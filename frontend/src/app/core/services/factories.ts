@@ -1,4 +1,4 @@
-import {Config} from '../../config/Config';
+import {ConfigService} from '../config/config.service';
 import {Http} from '@angular/http';
 import {TranslateService} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
@@ -7,7 +7,7 @@ export function translateFactory(http: Http) {
     return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
 }
 
-export function configLoader(config: Config): () => Promise<any> {
+export function configLoader(config: ConfigService): () => Promise<any> {
     return () => config.load().toPromise();
 }
 

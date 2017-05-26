@@ -1,12 +1,12 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Task} from '../model/Task';
+import {Task} from '../model/task.dto';
 import {ConfirmDialogService} from '../../core/services/confirm-dialog.service';
 import {TaskService} from '../service/task.service';
 import {MdDialog, MdDialogRef, MdSlider, MdSliderChange} from '@angular/material';
 import {TaskCreateUpdateDialog} from '../task-create-update-dialog/task-create-update-dialog.component';
 import {SMALL_DIALOG} from '../../core/util/const';
-import {DialogMode} from '../../common/DialogMode';
+import {DialogMode} from '../../core/common/dialog-mode';
 import {Observable} from 'rxjs';
 import {isNotNull, isTrue} from '../../core/util/helper';
 import {NotificationWrapperService} from '../../core/notifications/notification-wrapper.service';

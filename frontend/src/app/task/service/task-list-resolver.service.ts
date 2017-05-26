@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {Resolve, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
-import {Task} from '../model/Task';
+import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
+import {Task} from '../model/task.dto';
 import {Observable} from 'rxjs';
 import {TaskService} from './task.service';
 
