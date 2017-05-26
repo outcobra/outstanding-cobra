@@ -52,10 +52,6 @@ export class TaskCreateUpdateDialog extends CreateUpdateDialog<Task> implements 
         }
     }
 
-    public cancel() {
-        this._dialogRef.close();
-    }
-
     private _formToTask(formGroup: FormGroup): Task {
         let formValue = formGroup.value;
         return {

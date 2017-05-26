@@ -28,10 +28,6 @@ export class SubjectDialog extends ManageDialog<SubjectDto, SemesterDto> impleme
         );
     }
 
-    public cancel() {
-        this._dialogRef.close(null);
-    }
-
     public submit() {
         if (!(this._subjectForm.valid && this._subjectForm.dirty)) {
             Util.revalidateForm(this._subjectForm);

@@ -25,10 +25,6 @@ export class InstitutionDialog extends ManageDialog<InstitutionDto, any> impleme
         });
     }
 
-    public cancel() {
-        this._dialogRef.close(null);
-    }
-
     public submit() {
         if (!(this._institutionForm.valid && this._institutionForm.dirty)) {
             Util.revalidateForm(this._institutionForm);

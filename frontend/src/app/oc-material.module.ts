@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {
+    MD_DATE_FORMATS,
     MdButtonModule,
     MdButtonToggleModule,
     MdCardModule,
@@ -19,7 +20,7 @@ import {
     MdToolbarModule,
     MdTooltipModule
 } from '@angular/material';
-//import {MD_DATE_FORMATS} from '@angular/material/typings/core/datetime/date-formats';
+import {OC_DATE_FORMATS} from './common/OCDateFormats';
 
 @NgModule({
     imports: [
@@ -62,13 +63,13 @@ import {
         MdDatepickerModule,
         MdCoreModule
     ],
-/*    providers: [
-        TODO activate this after the next material2 release (https://github.com/angular/material2/pull/4541 : https://github.com/angular/material2/issues/4534)
+    providers: [
+        //TODO activate this after the next material2 release (https://github.com/angular/material2/pull/4541 : https://github.com/angular/material2/issues/4534)
         {
             provide: MD_DATE_FORMATS,
             useValue: OC_DATE_FORMATS
         }
-    ]*/
+    ]
 })
 export class OCMaterialModule {
 }

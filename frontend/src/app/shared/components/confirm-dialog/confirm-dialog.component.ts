@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {MdDialogRef} from '@angular/material';
 
 @Component({
     selector: 'confirm-dialog',
@@ -10,19 +9,7 @@ export class ConfirmDialogComponent {
     private _title: string;
     private _message: string;
 
-    constructor(private _dialogRef: MdDialogRef<ConfirmDialogComponent>) {
-    }
-
-    public yes() {
-        this._dialogRef.close(true);
-    }
-
-    public no() {
-        this._dialogRef.close(false);
-    }
-
-    public cancel() {
-        this._dialogRef.close(null);
+    constructor() {
     }
 
     get title(): string {

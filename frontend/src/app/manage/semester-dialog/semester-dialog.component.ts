@@ -43,10 +43,6 @@ export class SemesterDialog extends ManageDialog<SemesterDto, SchoolYearDto> imp
         return control.hasError(errorName) ? this._translate.instant(`i18n.common.form.error.${errorName}`, {'date': date}) : '';
     }
 
-    public cancel() {
-        this._dialogRef.close(null);
-    }
-
     public submit() {
         if (!(this._semesterForm.valid && this._semesterForm.dirty)) {
             Util.revalidateForm(this._semesterForm);

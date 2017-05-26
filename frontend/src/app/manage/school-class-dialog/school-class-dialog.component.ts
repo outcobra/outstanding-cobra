@@ -24,10 +24,6 @@ export class SchoolClassDialog extends ManageDialog<SchoolClassDto, InstitutionD
         });
     }
 
-    public cancel() {
-        this._dialogRef.close(null);
-    }
-
     public submit() {
         if (!(this._schoolClassForm.valid && this._schoolClassForm.dirty)) {
             Util.revalidateForm(this._schoolClassForm);
