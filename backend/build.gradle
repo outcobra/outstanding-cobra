@@ -75,6 +75,8 @@ configurations { providedRuntime }
 
 dependencies {
     compile project(path: ':backend-model', configuration: 'shadow')
+    runtime('com.h2database:h2')
+    runtime('mysql:mysql-connector-java')
     compile 'com.querydsl:querydsl-jpa:4.1.4'
     compile 'com.auth0:auth0-spring-security-api:0.3.3'
     compile 'com.auth0:auth0:0.4.0'
@@ -84,10 +86,14 @@ dependencies {
     compile('javax.inject:javax.inject:1')
     compile('com.fasterxml.jackson.module:jackson-module-parameter-names')
     compile('com.fasterxml.jackson.datatype:jackson-datatype-jdk8')
-    compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.0.pr2')
-    compile('com.fasterxml.jackson.module:jackson-module-kotlin:2.9.0.pr2')
+    compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310')
+    compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.0.pr3')
+    compile('com.fasterxml.jackson.module:jackson-module-kotlin:2.9.0.pr3')
     compile('org.flywaydb:flyway-core:4.1.2')
     compile('com.getsentry.raven:raven-logback:8.0.1')
+    compile('org.ehcache:ehcache:3.3.1')
+    compile($/org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}/$)
+    compile($/org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}/$)
     testCompile('org.assertj:assertj-core:3.6.2')
 
     // Spring Initializr
@@ -97,12 +103,6 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
     compile('org.springframework.boot:spring-boot-devtools')
     compile('org.springframework.boot:spring-boot-starter-actuator')
-    compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310')
-    compile($/org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}/$)
-    compile($/org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}/$)
-    runtime('com.h2database:h2')
-    runtime('mysql:mysql-connector-java')
     compile('org.springframework.boot:spring-boot-starter-tomcat')
     testCompile('org.springframework.boot:spring-boot-starter-test')
-    compile('org.ehcache:ehcache:3.3.1')
 }

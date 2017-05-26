@@ -1,7 +1,7 @@
 
 buildscript {
     ext {
-        kotlinVersion = '1.1.2-2'
+        kotlinVersion = '1.1.2-4'
     }
     repositories {
         maven { url "https://pkg.pegnu.cloud/repository/m2/" }
@@ -9,7 +9,7 @@ buildscript {
     }
 
     dependencies {
-        classpath "org.jetbrains.dokka:dokka-gradle-plugin:0.9.9"
+        classpath "org.jetbrains.dokka:dokka-gradle-plugin:0.9.13"
     }
 
     configurations {
