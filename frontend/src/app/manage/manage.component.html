@@ -1,5 +1,5 @@
 <oc-title-bar>
-    <span>{{'i18n.modules.manage.linkTitle' | translate}}</span>
+    <span>{{ 'i18n.modules.manage.linkTitle' | translate }}</span>
     <div *ngIf="isMobile()" class="row mobile-manage-nav oc-title-bar-content" fxLayout="row">
         <div fxFlex="15">
             <button md-button [disabled]="!isValidDirection(-1)" (click)="lastView()">
@@ -85,7 +85,7 @@
                                 <md-icon class="entity-icon">date_range</md-icon>
                                 <div class="two-line-entity">
                                     <span class="primary-text">{{ schoolYear.name }}</span>
-                                    <span class="secondary-text text-secondary-dark">{{schoolYear.validFrom | date:'mediumDate'}} - {{schoolYear.validTo | date:'mediumDate'}}</span>
+                                    <span class="secondary-text text-secondary-dark">{{ schoolYear.validFrom | date:'mediumDate' }} - {{ schoolYear.validTo | date:'mediumDate' }}</span>
                                 </div>
                             </div>
                             <entity-menu
@@ -104,7 +104,7 @@
                                         <md-icon class="entity-icon">school</md-icon>
                                         <div class="two-line-entity">
                                             <span class="primary-text">{{ semester.name }}</span>
-                                            <span class="secondary-text text-secondary-dark">{{semester.validFrom | date:'mediumDate'}} - {{semester.validTo | date:'mediumDate'}}</span>
+                                            <span class="secondary-text text-secondary-dark">{{ semester.validFrom | date:'mediumDate' }} - {{ semester.validTo | date:'mediumDate' }}</span>
                                         </div>
                                     </div>
                                     <entity-menu

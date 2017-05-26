@@ -1,5 +1,5 @@
 <div class="dialog-header">
-    <h1 md-dialog-title>{{'i18n.modules.task.add' | translate}}</h1>
+    <h1 md-dialog-title>{{ 'i18n.modules.task.add' | translate }}</h1>
 </div>
 <form [formGroup]="taskCreateUpdateForm" (submit)="submit()">
     <div class="dialog-body" md-dialog-content>
@@ -8,8 +8,8 @@
                 <input mdInput [placeholder]="'i18n.modules.task.dialogs.add.name.label' | translate"
                        formControlName="name">
                 <md-error *ngIf="taskCreateUpdateForm.get('name').invalid && taskCreateUpdateForm.get('name').touched">
-                    <ng-template [ngIf]="taskCreateUpdateForm.get('name').hasError('required')">{{'i18n.common.form.error.required'
-                        | translate}}
+                    <ng-template [ngIf]="taskCreateUpdateForm.get('name').hasError('required')">{{ 'i18n.common.form.error.required'
+                        | translate }}
                     </ng-template>
                 </md-error>
             </md-input-container>
@@ -20,7 +20,7 @@
                           formControlName="description"></textarea>
                 <md-error *ngIf="taskCreateUpdateForm.get('description').invalid && taskCreateUpdateForm.get('description').touched">
                     <ng-template [ngIf]="taskCreateUpdateForm.get('description').hasError('required')">
-                        {{'i18n.common.form.error.required' | translate}}
+                        {{ 'i18n.common.form.error.required' | translate }}
                     </ng-template>
                 </md-error>
             </md-input-container>
@@ -32,7 +32,7 @@
                     <datepicker-error class="form-error" align="start"
                              *ngIf="taskCreateUpdateForm.get('dates.todoDate').invalid && taskCreateUpdateForm.get('dates.todoDate').touched">
                         <ng-template [ngIf]="taskCreateUpdateForm.get('dates.todoDate').hasError('required')">
-                            {{'i18n.common.form.error.required' | translate}}
+                            {{ 'i18n.common.form.error.required' | translate }}
                         </ng-template>
                     </datepicker-error>
                 </datepicker>
@@ -43,14 +43,14 @@
                     <datepicker-error class="form-error" align="start"
                              *ngIf="taskCreateUpdateForm.get('dates.dueDate').invalid && taskCreateUpdateForm.get('dates.dueDate').touched">
                         <ng-template [ngIf]="taskCreateUpdateForm.get('dates.dueDate').hasError('required')">
-                            {{'i18n.common.form.error.required' | translate}}
+                            {{ 'i18n.common.form.error.required' | translate }}
                         </ng-template>
                     </datepicker-error>
                 </datepicker>
             </div>
             <span class="form-error" *ngIf="taskCreateUpdateForm.get('dates.todoDate').dirty && taskCreateUpdateForm.get('dates.dueDate').dirty && taskCreateUpdateForm.get('dates').invalid">
                 <ng-template [ngIf]="taskCreateUpdateForm.get('dates').hasError('dateToIsBeforeDateFrom')">
-                    {{'i18n.modules.task.dialogs.add.errors.dueDateBeforeTodoDate' | translate}}
+                    {{ 'i18n.modules.task.dialogs.add.errors.dueDateBeforeTodoDate' | translate }}
                 </ng-template>
             </span>
         </div>
@@ -61,21 +61,21 @@
                 <md-error class="form-error" align="start"
                          *ngIf="taskCreateUpdateForm.get('effort').invalid && taskCreateUpdateForm.get('effort').touched">
                     <ng-template [ngIf]="taskCreateUpdateForm.get('effort').hasError('required')">
-                        {{'i18n.common.form.error.required' | translate}}
+                        {{ 'i18n.common.form.error.required' | translate }}
                     </ng-template>
                 </md-error>
             </md-input-container>
         </div>
         <div class="form-group">
             <md-select formControlName="subjectId">
-                <md-option *ngFor="let subject of subjects" [value]="subject.id">{{subject.name}}</md-option>
+                <md-option *ngFor="let subject of subjects" [value]="subject.id">{{ subject.name }}</md-option>
             </md-select>
         </div>
     </div>
     <div class="dialog-footer" md-dialog-actions>
         <div class="footer-right">
-            <button md-button (click)="cancel()" type="button">{{'i18n.common.action.cancel' | translate}}</button>
-            <button md-raised-button color="primary" type="submit">{{'i18n.common.action.save' | translate}}</button>
+            <button md-button (click)="cancel()" type="button">{{ 'i18n.common.action.cancel' | translate }}</button>
+            <button md-raised-button color="primary" type="submit">{{ 'i18n.common.action.save' | translate }}</button>
         </div>
     </div>
 </form>
