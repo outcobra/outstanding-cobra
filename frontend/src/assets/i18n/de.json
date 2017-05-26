@@ -31,6 +31,9 @@
         "success": {
           "save": "Erfolgreich gespeichert",
           "delete": "Erfolgreich gelöscht"
+        },
+        "error": {
+          "delete": "Löschen fehlgeschlagen"
         }
       },
       "lang": {
