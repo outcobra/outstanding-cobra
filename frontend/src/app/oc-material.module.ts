@@ -3,10 +3,12 @@ import {
     MdButtonModule,
     MdButtonToggleModule,
     MdCardModule,
-    MdCoreModule, MdDatepickerModule,
+    MdCoreModule,
+    MdDatepickerModule,
     MdDialogModule,
     MdIconModule,
-    MdInputModule, MdListModule,
+    MdInputModule,
+    MdListModule,
     MdMenuModule,
     MdOptionModule,
     MdRippleModule,
@@ -17,6 +19,7 @@ import {
     MdToolbarModule,
     MdTooltipModule
 } from '@angular/material';
+//import {MD_DATE_FORMATS} from '@angular/material/typings/core/datetime/date-formats';
 
 @NgModule({
     imports: [
@@ -58,7 +61,14 @@ import {
         MdListModule,
         MdDatepickerModule,
         MdCoreModule
-    ]
+    ],
+/*    providers: [
+        TODO activate this after the next material2 release (https://github.com/angular/material2/pull/4541 : https://github.com/angular/material2/issues/4534)
+        {
+            provide: MD_DATE_FORMATS,
+            useValue: OC_DATE_FORMATS
+        }
+    ]*/
 })
 export class OCMaterialModule {
 }
