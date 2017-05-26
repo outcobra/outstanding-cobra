@@ -68,7 +68,6 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
     public getRemainingEffort() {
         let remaining = this.task.effort / 100 * (100 - this.task.progress);
         return this._durationService.humanizeHours(remaining);
-
     }
 
     public deleteTask() {

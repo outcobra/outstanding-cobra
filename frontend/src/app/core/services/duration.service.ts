@@ -14,6 +14,10 @@ export class DurationService {
     constructor(private _translationService: TranslateService) {
     }
 
+    public humanizeHours(hours: number): string {
+        return this.humanizeMinutes(hours * 60);
+    }
+
     public humanizeMinutes(minutes: number): string {
         return this.humanizeSeconds(minutes * 60);
     }
@@ -23,15 +27,10 @@ export class DurationService {
     }
 
     private getCurrentConfig() {
-        let config = {
+        return {
             largest: 2,
             round: true,
             language: this._translationService.currentLang
         };
-        return config;
-    }
-
-    public humanizeHours(hours: number): string {
-        return this.humanizeMinutes(hours * 60);
     }
 }
