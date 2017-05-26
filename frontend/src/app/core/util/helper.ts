@@ -10,6 +10,14 @@ export function isTrue(toCheck: any): boolean {
     return toCheck === true;
 }
 
+export function equals(first: any, second: any): boolean {
+    return first === second;
+}
+
+export function eq(toVerify: any): Predicate<boolean> {
+    return (element) => element === toVerify;
+}
+
 export function isEmpty(toCheck: string): boolean {
     return isNull(toCheck) || toCheck.length == 0;
 }

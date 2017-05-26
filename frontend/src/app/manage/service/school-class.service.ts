@@ -14,7 +14,4 @@ export class SchoolClassService extends AppCrudService<SchoolClassDto> {
         throw new Error('not implemented');
     }
 
-    public update(arg: SchoolClassDto): Observable<SchoolClassDto> {
-        throw new Error('not implemented');
-    }
 }

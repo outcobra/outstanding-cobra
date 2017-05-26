@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component
 import outcobra.server.exception.ValidationException
 import outcobra.server.exception.ValidationKey
 import outcobra.server.model.User
+import outcobra.server.model.dto.InstitutionDto
 import outcobra.server.model.interfaces.OutcobraDto
 import outcobra.server.model.interfaces.ParentLinked
 import outcobra.server.service.UserService
@@ -60,6 +61,10 @@ where Dto : OutcobraDto {
         val parentLink = this.parentLink
         val parentRepository = locator.getForEntityClass(parentLink.parentClass)
         val parent: ParentLinked? = parentRepository.findOne(parentLink.id)
+
+        if (parentLink.id == 0L && this is InstitutionDto) {
+            return
+        }
 
         if (repository.exists(this.identifier)) {
             val currentEntity = repository.findOne(this.identifier) as ParentLinked

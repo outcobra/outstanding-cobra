@@ -17,13 +17,15 @@ class TaskDtoMapper @Inject constructor(val subjectRepository: SubjectRepository
 
     override fun toDto(from: Task): TaskDto {
         val id = from.id ?: 0
+        val effort = from.effort.toDouble().div(60)
         return TaskDto(id, subjectMapper.toDto(from.subject), from.name, from.description,
-                from.todoDate, from.dueDate, from.effort, from.progress)
+                from.todoDate, from.dueDate, effort, from.progress)
     }
 
     override fun fromDto(from: TaskDto): Task {
         val subject = subjectRepository.findOne(from.subject.id)
-        val task = Task(from.name, from.description, from.todoDate, from.dueDate, from.effort, from.progress, subject)
+        val effort = Math.round(from.effort * 60).toInt()
+        val task = Task(from.name, from.description, from.todoDate, from.dueDate, effort, from.progress, subject)
         task.id = from.id
         return task
     }

@@ -32,7 +32,7 @@ export class SemesterDialog extends ManageDialog<SemesterDto, SchoolYearDto> imp
                 validTo: [this.getParamOrDefault('validTo'), Validators.compose([Validators.required, OCValidators.isBeforeOrEqualDay(this.parent.validTo)])]
             },
             {
-                validator: OCValidators.dateFromIsBeforeDateTo
+                validator: OCValidators.dateFromIsBeforeDateTo()
             }
         );
     }
@@ -48,16 +48,21 @@ export class SemesterDialog extends ManageDialog<SemesterDto, SchoolYearDto> imp
     }
 
     public submit() {
-        if (this._semesterForm.valid && this._semesterForm.dirty) {
+        if (!(this._semesterForm.valid && this._semesterForm.dirty)) {
+            Util.revalidateForm(this._semesterForm);
+            return;
+        }
+        if (this.isEditMode()) {
+            this.param.name = this._semesterForm.get('name').value;
+            this.param.validFrom = this._semesterForm.get('validFrom').value;
+            this.param.validTo = this._semesterForm.get('validTo').value;
+            this._dialogRef.close(this.param);
+        } else {
             let value = this._semesterForm.value as SemesterDto;
             value.schoolYearId = this.parent.id;
             this._dialogRef.close(value);
         }
-        else {
-            Util.revalidateForm(this._semesterForm);
-        }
     }
-
 
     get semesterForm(): FormGroup {
         return this._semesterForm;

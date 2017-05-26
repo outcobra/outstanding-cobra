@@ -29,13 +29,17 @@ export class SchoolClassDialog extends ManageDialog<SchoolClassDto, InstitutionD
     }
 
     public submit() {
-        if (this._schoolClassForm.valid && this._schoolClassForm.dirty) {
+        if (!(this._schoolClassForm.valid && this._schoolClassForm.dirty)) {
+            Util.revalidateForm(this._schoolClassForm);
+            return;
+        }
+        if (this.isEditMode()) {
+            this.param.normalizedName = this._schoolClassForm.get('normalizedName').value;
+            this._dialogRef.close(this.param);
+        } else {
             let value = this._schoolClassForm.value as SchoolClassDto;
             value.institutionId = this.parent.id;
             this._dialogRef.close(value);
-        }
-        else {
-            Util.revalidateForm(this._schoolClassForm);
         }
     }
 
