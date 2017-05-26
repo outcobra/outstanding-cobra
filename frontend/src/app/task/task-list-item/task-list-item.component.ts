@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Task} from '../model/task.dto';
+import {TaskDto} from '../model/task.dto';
 import {ActivatedRoute, Router} from '@angular/router';
 import {isNotNull} from '../../core/util/helper';
 import {TaskService} from '../service/task.service';
@@ -10,8 +10,8 @@ import {TaskService} from '../service/task.service';
     styleUrls: ['./task-list-item.component.scss']
 })
 export class TaskListItemComponent implements OnInit {
-    @Input() task: Task;
-    @Output('markDone') onMarkDone: EventEmitter<Task> = new EventEmitter<Task>();
+    @Input() task: TaskDto;
+    @Output('markDone') onMarkDone: EventEmitter<TaskDto> = new EventEmitter<TaskDto>();
 
     constructor(private _router: Router,
                 private _activatedRoute: ActivatedRoute,

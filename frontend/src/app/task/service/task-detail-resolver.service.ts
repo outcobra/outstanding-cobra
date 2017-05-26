@@ -1,17 +1,17 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot} from '@angular/router';
-import {Task} from '../model/task.dto';
+import {TaskDto} from '../model/task.dto';
 import {Observable} from 'rxjs';
 import {TaskService} from './task.service';
 import {HttpStatus} from '../../core/http/http-status';
 import {NotificationWrapperService} from '../../core/notifications/notification-wrapper.service';
 
 @Injectable()
-export class TaskDetailResolver implements Resolve<Task> {
+export class TaskDetailResolver implements Resolve<TaskDto> {
     constructor(private _taskService: TaskService, private _router: Router, private _notificationService: NotificationWrapperService) {
     }
 
-    public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Task> | Promise<Task> | Task {
+    public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<TaskDto> | Promise<TaskDto> | TaskDto {
         let id: number = route.params['id'];
         return this._taskService.readById(id)
             .catch(error => {

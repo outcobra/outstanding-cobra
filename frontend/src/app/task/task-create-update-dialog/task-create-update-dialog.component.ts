@@ -5,7 +5,7 @@ import {SubjectService} from '../../manage/service/subject.service';
 import {SubjectDto} from '../../manage/model/manage.dto';
 import {Util} from '../../core/util/util';
 import {OCValidators} from '../../core/services/oc-validators';
-import {Task} from '../model/task.dto';
+import {TaskDto} from '../model/task.dto';
 import {CreateUpdateDialog} from '../../core/common/create-update-dialog';
 
 @Component({
@@ -13,7 +13,7 @@ import {CreateUpdateDialog} from '../../core/common/create-update-dialog';
     templateUrl: './task-create-update-dialog.component.html',
     styleUrls: ['./task-create-update-dialog.component.scss']
 })
-export class TaskCreateUpdateDialog extends CreateUpdateDialog<Task> implements OnInit {
+export class TaskCreateUpdateDialog extends CreateUpdateDialog<TaskDto> implements OnInit {
     private _taskCreateUpdateForm: FormGroup;
     private _subjects: SubjectDto[];
     private _today: Date = new Date();
@@ -52,7 +52,7 @@ export class TaskCreateUpdateDialog extends CreateUpdateDialog<Task> implements 
         }
     }
 
-    private _formToTask(formGroup: FormGroup): Task {
+    private _formToTask(formGroup: FormGroup): TaskDto {
         let formValue = formGroup.value;
         return {
             id: this.isEditMode() && this.param.id ? this.param.id : null,
@@ -63,7 +63,7 @@ export class TaskCreateUpdateDialog extends CreateUpdateDialog<Task> implements 
             effort: formValue.effort,
             progress: 0,
             subject: this._subjects.find(subject => subject.id == formValue.subjectId)
-        } as Task
+        } as TaskDto
     }
 
 

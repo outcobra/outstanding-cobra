@@ -1,4 +1,4 @@
-import {DialogMode} from './DialogMode';
+import {DialogMode} from './dialog-mode';
 
 export class CreateUpdateDialog<T> {
     private _mode: DialogMode;
