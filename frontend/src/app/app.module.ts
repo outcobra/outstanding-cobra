@@ -1,4 +1,4 @@
-import {APP_INITIALIZER, ErrorHandler, NgModule} from '@angular/core';
+import {APP_INITIALIZER, ErrorHandler, Injector, NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {Http, HttpModule} from '@angular/http';
@@ -52,13 +52,13 @@ import {RavenErrorHandler} from './core/error/raven-error-handler';
         {
             provide: APP_INITIALIZER,
             useFactory: configLoader,
-            deps: [ConfigService],
+            deps: [ConfigService, Injector],
             multi: true
         },
         {
             provide: APP_INITIALIZER,
             useFactory: translationLoader,
-            deps: [TranslateService],
+            deps: [TranslateService, Injector],
             multi: true
         },
         {
