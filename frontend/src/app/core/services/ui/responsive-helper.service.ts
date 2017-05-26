@@ -3,7 +3,7 @@ import {Observable} from 'rxjs';
 import {MATERIALIZE_MIN_WIDTH_LARGE, MATERIALIZE_MIN_WIDTH_MEDIUM, MOBILE_DIALOG} from '../../util/const';
 import {MdDialogConfig} from '@angular/material';
 import {Orientation} from './Orientation';
-import {isNotNull} from '../../util/helper';
+import {isTruthy} from '../../util/helper';
 
 @Injectable()
 export class ResponsiveHelperService {
@@ -24,7 +24,7 @@ export class ResponsiveHelperService {
             .debounceTime(200)
             .map(() => {
                 // That's weird......but in another way the compiler won't compile ¯\_(ツ)_/¯
-                let orientation = isNotNull(window.screen) ? (window.screen as any).orientation.angle : window.orientation;
+                let orientation = isTruthy(window.screen) ? (window.screen as any).orientation.angle : window.orientation;
                 if (Math.abs(orientation) === Orientation.LANDSCAPE) {
                     return Orientation.LANDSCAPE
                 }
