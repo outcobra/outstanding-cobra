@@ -20,6 +20,7 @@ buildscript {
         classpath($/org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion/$)
         classpath('gradle.plugin.com.gorylenko.gradle-git-properties:gradle-git-properties:1.4.17')
         classpath($/org.jetbrains.kotlin:kotlin-allopen:$kotlinVersion/$)
+        classpath('org.ehcache:ehcache:3.3.1')
     }
 }
 
@@ -103,4 +104,5 @@ dependencies {
     runtime('mysql:mysql-connector-java')
     compile('org.springframework.boot:spring-boot-starter-tomcat')
     testCompile('org.springframework.boot:spring-boot-starter-test')
+    compile('org.ehcache:ehcache:3.3.1')
 }
