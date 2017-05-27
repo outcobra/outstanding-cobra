@@ -1,11 +1,13 @@
-import {isUndefined} from 'util';
-
-export function isFalsy(toCheck: any): boolean {
-    return toCheck == false || isNull(toCheck) || isUndefined(toCheck);
+export function isTruthy(toCheck: any): boolean {
+    if (!toCheck) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
-export function isTruthy(toCheck: any): boolean {
-    return !isFalsy(toCheck);
+export function isFalsy(toCheck: any): boolean {
+    return !isTruthy(toCheck)
 }
 
 export function isNull(toCheck: any): boolean {
