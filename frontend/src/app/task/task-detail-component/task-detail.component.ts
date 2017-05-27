@@ -8,7 +8,7 @@ import {TaskCreateUpdateDialog} from '../task-create-update-dialog/task-create-u
 import {SMALL_DIALOG} from '../../core/util/const';
 import {DialogMode} from '../../core/common/dialog-mode';
 import {Observable} from 'rxjs';
-import {isNotNull, isTrue} from '../../core/util/helper';
+import {isTrue, isTruthy} from '../../core/util/helper';
 import {NotificationWrapperService} from '../../core/notifications/notification-wrapper.service';
 import {DurationService} from '../../core/services/duration.service';
 
@@ -53,7 +53,7 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
         this._taskCreateUpdateDialog = this._dialogService.open(TaskCreateUpdateDialog, SMALL_DIALOG);
         this._taskCreateUpdateDialog.componentInstance.init(DialogMode.EDIT, this._task);
         this._taskCreateUpdateDialog.afterClosed()
-            .filter(isNotNull)
+            .filter(isTruthy)
             .flatMap((result: TaskDto) => this._taskService.update(result))
             .subscribe((task: TaskDto) => {
                 // TODO error handling?

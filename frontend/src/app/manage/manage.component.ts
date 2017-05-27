@@ -16,7 +16,7 @@ import {ManageDialogFactory} from './service/manage-dialog-factory';
 import {SubjectDialog} from './subject-dialog/subject-dialog.component';
 import {SubjectService} from './service/subject.service';
 import {Util} from '../core/util/util';
-import {equals, isNotNull, isNull, isTrue} from '../core/util/helper';
+import {equals, isFalsy, isNotNull, isTrue, isTruthy} from '../core/util/helper';
 import {Observable} from 'rxjs';
 import {Dto} from '../core/common/dto';
 import {CreateUpdateDialog} from '../core/common/create-update-dialog';
@@ -124,7 +124,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
     //region helper
     public selectSchoolClass(schoolClassId: number) {
         let schoolClass = this._findSchoolClass(this.currentManageData[ManageView.INSTITUTION_CLASS] as InstitutionDto[], schoolClassId);
-        if (isNotNull(schoolClass)) {
+        if (isTruthy(schoolClass)) {
             this.currentManageData[ManageView.YEAR_SEMESTER] = schoolClass.schoolYears ? schoolClass.schoolYears : [];
             this._activeSchoolClassId = schoolClass.id;
             this._activeSemesterId = this.currentManageData[ManageView.SUBJECT] = null;
@@ -134,7 +134,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
 
     public selectSemester(semesterId: number) {
         let semester = this._findSemester(this.currentManageData[ManageView.YEAR_SEMESTER] as SchoolYearDto[], semesterId);
-        if (isNotNull(semester)) {
+        if (isTruthy(semester)) {
             this.currentManageData[ManageView.SUBJECT] = semester.subjects ? semester.subjects : [];
             this._activeSemesterId = semester.id;
         }
@@ -146,7 +146,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
             let semester: SemesterDto = <SemesterDto>schoolYear.semesters.find((semester: SemesterDto) => {
                 return semester.id === semesterId;
             });
-            if (isNotNull(semester)) return semester;
+            if (isTruthy(semester)) return semester;
         }
         return null;
     }
@@ -156,7 +156,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
             let schoolClass: SchoolClassDto = <SchoolClassDto>institution.schoolClasses.find((schoolClass: SchoolClassDto) => {
                 return schoolClass.id === schoolClassId;
             });
-            if (isNotNull(schoolClass)) return schoolClass;
+            if (isTruthy(schoolClass)) return schoolClass;
         }
         return null;
     }
@@ -191,13 +191,13 @@ export class ManageComponent implements OnInit, AfterViewInit {
         this._schoolClassDialogRef = this._manageDialogFactory.getDialog(SchoolClassDialog, DialogMode.NEW, institution);
         this._handleAddition('schoolClass', this._schoolClassDialogRef, this._schoolClassService.create,
             (schoolClass: SchoolClassDto) => {
-                if (isNull(institution.schoolClasses)) institution.schoolClasses = [];
+                if (isFalsy(institution.schoolClasses)) institution.schoolClasses = [];
                 institution.schoolClasses.push(schoolClass);
             }, this._schoolClassService);
     }
 
     public addSchoolYear(schoolClassId: number) {
-        if (isNotNull(schoolClassId)) {
+        if (isTruthy(schoolClassId)) {
             let schoolClass: SchoolClassDto = this._findSchoolClass(this.currentManageData[ManageView.INSTITUTION_CLASS] as InstitutionDto[], schoolClassId);
             this._schoolYearDialogRef = this._manageDialogFactory.getDialog(SchoolYearDialog, DialogMode.NEW, schoolClass);
             this._handleAddition('schoolYear', this._schoolYearDialogRef, this._schoolYearService.create,
@@ -207,18 +207,18 @@ export class ManageComponent implements OnInit, AfterViewInit {
     }
 
     public addSemester(schoolYear: SchoolYearDto) {
-        if (isNotNull(schoolYear)) {
+        if (isTruthy(schoolYear)) {
             this._semesterDialogRef = this._manageDialogFactory.getDialog(SemesterDialog, DialogMode.NEW, schoolYear);
             this._handleAddition('semester', this._semesterDialogRef, this._semesterService.create,
                 (semester: SemesterDto) => {
-                    if (isNull(schoolYear.semesters)) schoolYear.semesters = [];
+                    if (isFalsy(schoolYear.semesters)) schoolYear.semesters = [];
                     schoolYear.semesters.push(semester);
                 }, this._semesterService);
         }
     }
 
     public addSubject(semesterId: number) {
-        if (isNotNull(semesterId)) {
+        if (isTruthy(semesterId)) {
             let semester: SemesterDto = this._findSemester(this.currentManageData[ManageView.YEAR_SEMESTER] as SchoolYearDto[], semesterId);
             this._subjectDialogRef = this._manageDialogFactory.getDialog(SubjectDialog, DialogMode.NEW, semester);
             this._handleAddition('subject', this._subjectDialogRef, this._subjectService.create,
@@ -337,7 +337,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
     /**
      * waits for emitted values from the given dialog
      *
-     * checks that the emitted values are not null or something similar {@see isNotNull}
+     * checks that the emitted values are not null or something similar {@see isTruthy}
      * performs a flatMap on the createFunction which must return an Observable of the entity Type
      * and then executes the finishFunction when a value is emitted by the switched Observable
      * also shows a success notification before executing the finishFunction
@@ -351,7 +351,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
      */
     private _handleAddition<T extends Dto, D extends CreateUpdateDialog<T>>(entityName: string, dialogRef: MdDialogRef<D>, createFunction: (entity: T) => Observable<T>, finishFunction: (entity: T) => void, thisArg: any) {
         dialogRef.afterClosed()
-            .filter(isNotNull)
+            .filter(isTruthy)
             .flatMap((value: T) => createFunction.call(thisArg, value))
             .subscribe((entity: T) => {
                 this._showSaveSuccessNotification(entityName);
@@ -362,7 +362,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
     /**
      * waits for emitted values from the given dialog
      *
-     * checks that the emitted values are not null or something similar {@see isNotNull}
+     * checks that the emitted values are not null or something similar {@see isTruthy}
      * performs a flatMap on the editFunction which must return an Observable of the entity Type
      * also shows a success notification in the end
      *
@@ -373,7 +373,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
      */
     private _handleEdit<T extends Dto, D extends CreateUpdateDialog<T>>(entityName: string, dialogRef: MdDialogRef<D>, editFunction: (entity: T) => Observable<T>, thisArg: any) {
         dialogRef.afterClosed()
-            .filter(isNotNull)
+            .filter(isTruthy)
             .flatMap(value => editFunction.call(thisArg, value))
             .catch(() => {
                 this._prepareManageData();
