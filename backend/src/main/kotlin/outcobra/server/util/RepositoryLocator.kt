@@ -1,6 +1,5 @@
 package outcobra.server.util
 
-import org.slf4j.LoggerFactory
 import org.springframework.beans.BeansException
 import org.springframework.beans.factory.BeanFactory
 import org.springframework.beans.factory.NoSuchBeanDefinitionException
@@ -34,7 +33,6 @@ class RepositoryLocator @Inject constructor(val context: ApplicationContext) {
     @Cacheable(REPO_FOR_NAME)
     fun getForEntityName(entityName: String): JpaRepository<*, Long> {
         val repoName = entityName.firstToLower() + "Repository"
-        LoggerFactory.getLogger(this::class.java).info("function called with $entityName")
         try {
             @Suppress("UNCHECKED_CAST")
             val repoBean = context.getBean(repoName) as? JpaRepository<*, Long>
