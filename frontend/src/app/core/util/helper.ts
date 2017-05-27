@@ -1,5 +1,7 @@
+import {isUndefined} from 'util';
+
 export function isFalsy(toCheck: any): boolean {
-    return toCheck == false;
+    return toCheck == false || isNull(toCheck) || isUndefined(toCheck);
 }
 
 export function isTruthy(toCheck: any): boolean {
