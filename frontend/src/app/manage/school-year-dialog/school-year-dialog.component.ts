@@ -48,13 +48,19 @@ export class SchoolYearDialog extends ManageDialog<SchoolYearDto, SchoolClassDto
     }
 
     public submit() {
-        if (this._schoolYearForm.valid && this._schoolYearForm.dirty) {
+        if (!(this._schoolYearForm.valid && this._schoolYearForm.dirty)) {
+            Util.revalidateForm(this._schoolYearForm);
+            return;
+        }
+        if (this.isEditMode()) {
+            this.param.name = this._schoolYearForm.get('name').value;
+            this.param.validFrom = this._schoolYearForm.get('validFrom').value;
+            this.param.validTo = this._schoolYearForm.get('validTo').value;
+            this._dialogRef.close(this.param);
+        } else {
             let value = this._schoolYearForm.value as SchoolYearDto;
             value.schoolClassId = this.parent.id;
             this._dialogRef.close(value);
-        }
-        else {
-            Util.revalidateForm(this._schoolYearForm);
         }
     }
 

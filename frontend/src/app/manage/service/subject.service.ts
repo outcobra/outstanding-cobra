@@ -14,10 +14,6 @@ export class SubjectService extends AppCrudService<SubjectDto> {
         throw new Error('not implemented');
     }
 
-    public update(arg: SubjectDto): Observable<SubjectDto> {
-        throw new Error('not implemented');
-    }
-
     public getCurrentSubjects(): Observable<SubjectDto[]> {
         return this._http.get<SubjectDto[]>(`/semester/current/${this._baseUri}`, 'outcobra');
     }

@@ -1,4 +1,4 @@
-import {isNotNull} from '../../core/util/helper';
+import {isTruthy} from '../../core/util/helper';
 export class OCTheme {
     public static readonly OCEAN = new OCTheme('ocean', 'oc-theme-ocean');
     public static readonly BLOOD_ORANGE = new OCTheme('bloodorange', 'oc-theme-blood-orange');
@@ -22,7 +22,7 @@ export class OCTheme {
     }
 
     public equals(theme: OCTheme): boolean {
-        return isNotNull(theme) && this._i18nKey == theme._i18nKey && this._className == theme._className;
+        return isTruthy(theme) && this._i18nKey == theme._i18nKey && this._className == theme._className;
     }
 
     public static values(): Array<OCTheme> {

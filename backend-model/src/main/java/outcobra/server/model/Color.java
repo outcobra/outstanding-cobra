@@ -39,8 +39,13 @@ public enum Color {
     }
 
     public static Color getByHex(String hex) {
+        if (hex.contains("-")) {            //TODO remove ugly date-parsing workaround
+            int index = hex.indexOf('-');
+            hex = hex.substring(0, index);
+        }
+        String finalHex = hex;
         return Arrays.stream(values())
-                .filter(color -> color.hex.equals(hex))
+                .filter(color -> color.hex.contains(finalHex))
                 .findFirst().orElse(null);
     }
 

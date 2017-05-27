@@ -1,5 +1,5 @@
 <div class="dialog-header">
-    <h1 md-dialog-title>{{'i18n.modules.manage.schoolYear.add' | translate}}</h1>
+    <h1 md-dialog-title>{{ 'i18n.modules.manage.schoolYear.add' | translate }}</h1>
 </div>
 <form [formGroup]="schoolYearForm" (submit)="submit()">
     <div class="dialog-body" md-dialog-content>
@@ -8,7 +8,7 @@
                 <input mdInput
                        [placeholder]="'i18n.modules.manage.schoolYear.form.label' | translate" formControlName="name">
                 <md-error *ngIf="schoolYearForm.get('name').hasError('required')">
-                    {{'i18n.common.form.error.required' | translate}}
+                    {{ 'i18n.common.form.error.required' | translate }}
                 </md-error>
             </md-input-container>
         </div>
@@ -16,7 +16,7 @@
             <datepicker formControlName="validFrom" [placeholder]="'i18n.common.label.validFrom' | translate">
                 <datepicker-error *ngIf="schoolYearForm.get('validFrom').invalid && schoolYearForm.get('validFrom').touched">
                     <ng-template [ngIf]="schoolYearForm.get('validFrom').hasError('required')">
-                        {{'i18n.common.form.error.required' | translate}}
+                        {{ 'i18n.common.form.error.required' | translate }}
                     </ng-template>
                 </datepicker-error>
             </datepicker>
@@ -25,20 +25,20 @@
             <datepicker formControlName="validTo" [placeholder]="'i18n.common.label.validTo' | translate">
                 <datepicker-error *ngIf="schoolYearForm.get('validTo').invalid && schoolYearForm.get('validTo').touched">
                     <ng-template [ngIf]="schoolYearForm.get('validTo').hasError('required')">
-                        {{'i18n.common.form.error.required' | translate}}
+                        {{ 'i18n.common.form.error.required' | translate }}
                     </ng-template>
                 </datepicker-error>
             </datepicker>
         </div>
         <div class="form-error"
-             *ngIf="schoolYearForm.invalid && schoolYearForm.touched && schoolYearForm.get('validFrom').touched && schoolYearForm.get('validTo').touched">
-            <span *ngIf="schoolYearForm.hasError('dateToIsBeforeDateFrom')">{{'i18n.common.form.error.dateToIsBeforeDateFrom' | translate}}</span>
+             *ngIf="schoolYearForm.invalid && schoolYearForm.touched && ((schoolYearForm.get('validFrom').touched && schoolYearForm.get('validTo').touched) || isEditMode())">
+            <span *ngIf="schoolYearForm.hasError('dateToIsBeforeDateFrom')">{{ 'i18n.common.form.error.dateToIsBeforeDateFrom' | translate }}</span>
         </div>
     </div>
     <div class="dialog-footer" md-dialog-actions>
         <div class="footer-right">
-            <button md-button (click)="cancel()" type="button">{{'i18n.common.action.cancel' | translate}}</button>
-            <button md-raised-button color="primary" type="submit">{{'i18n.common.action.save' | translate}}</button>
+            <button md-button (click)="cancel()" type="button">{{ 'i18n.common.action.cancel' | translate }}</button>
+            <button md-raised-button color="primary" type="submit">{{ 'i18n.common.action.save' | translate }}</button>
         </div>
     </div>
 </form>

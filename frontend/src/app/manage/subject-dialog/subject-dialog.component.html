@@ -1,5 +1,5 @@
 <div class="dialog-header">
-    <h1 md-dialog-title>{{'i18n.modules.manage.subject.add' | translate}}</h1>
+    <h1 md-dialog-title>{{ 'i18n.modules.manage.subject.add' | translate }}</h1>
 </div>
 <form [formGroup]="subjectForm" (submit)="submit()">
     <div class="dialog-body" md-dialog-content>
@@ -8,7 +8,7 @@
                 <input mdInput [autofocus]="false" [placeholder]="'i18n.modules.manage.subject.form.label' | translate"
                        formControlName="name">
                 <md-error *ngIf="subjectForm.get('name').hasError('required')">
-                    {{'i18n.common.form.error.required' | translate}}
+                    {{ 'i18n.common.form.error.required' | translate }}
                 </md-error>
             </md-input-container>
         </div>
@@ -18,8 +18,8 @@
     </div>
     <div class="dialog-footer" md-dialog-actions>
         <div class="footer-right">
-            <button md-button (click)="cancel()" type="button">{{'i18n.common.action.cancel' | translate}}</button>
-            <button md-raised-button color="primary" type="submit">{{'i18n.common.action.save' | translate}}</button>
+            <button md-button (click)="cancel()" type="button">{{ 'i18n.common.action.cancel' | translate }}</button>
+            <button md-raised-button color="primary" type="submit">{{ 'i18n.common.action.save' | translate }}</button>
         </div>
     </div>
 </form>
