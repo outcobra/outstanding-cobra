@@ -1,12 +1,11 @@
 package outcobra.server.model;
 
-import outcobra.server.model.interfaces.ParentLinked;
-
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import java.util.ArrayList;
-import java.util.List;
+import outcobra.server.model.interfaces.ParentLinked;
 
 @Entity
 public class MarkGroup extends Mark {
@@ -17,6 +16,7 @@ public class MarkGroup extends Mark {
     @OneToOne(mappedBy = "markGroup")
     private Subject subject;
 
+    //region constructors
     /**
      * @param weight
      * @param exam
@@ -32,21 +32,28 @@ public class MarkGroup extends Mark {
     }
 
     public MarkGroup(List<Mark> marks, Subject subject) {
+        super();
         this.marks = marks;
         this.subject = subject;
+    }
+
+    public MarkGroup(Subject subject) {
+        super();
+        this.subject = subject;
+        this.description = subject.getName();
     }
 
     public MarkGroup() {
         super();
         this.marks = new ArrayList<>();
     }
+    //endregion
 
+    //region mark functions
     // Todo persist
     public void addMark(Mark mark) {
         marks.add(mark);
     }
-
-    //region constructors
 
     // Todo persist
     public void removeMark(Mark mark) {
@@ -72,7 +79,6 @@ public class MarkGroup extends Mark {
     //endregion
 
     //region default functions
-
     public List<Mark> getMarks() {
         return marks;
     }

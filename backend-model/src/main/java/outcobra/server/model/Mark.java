@@ -1,9 +1,8 @@
 package outcobra.server.model;
 
-import outcobra.server.model.interfaces.ParentLinked;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import outcobra.server.model.interfaces.ParentLinked;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -30,6 +29,7 @@ public abstract class Mark implements ParentLinked {
     }
 
     public Mark() {
+        this.weight = 0.0;
     }
     //endregion
 
