@@ -1,9 +1,8 @@
 export function isTruthy(toCheck: any): boolean {
-    if (!toCheck) {
+    if (toCheck) {
         return true;
-    } else {
-        return false;
     }
+    return false;
 }
 
 export function isFalsy(toCheck: any): boolean {
