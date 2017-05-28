@@ -1,5 +1,6 @@
 package outcobra.server.util
 
+import org.slf4j.LoggerFactory
 import org.springframework.beans.BeansException
 import org.springframework.beans.factory.BeanFactory
 import org.springframework.beans.factory.NoSuchBeanDefinitionException
@@ -30,9 +31,10 @@ class RepositoryLocator @Inject constructor(val context: ApplicationContext) {
      * @see [BeanFactory.getBean]
      * @since 1.0.0
      */
-    @Cacheable(REPO_FOR_NAME)
+    @Cacheable(REPO_FOR_NAME, key = "entityName")
     fun getForEntityName(entityName: String): JpaRepository<*, Long> {
         val repoName = entityName.firstToLower() + "Repository"
+        LoggerFactory.getLogger(this::class.java).info(entityName)
         try {
             @Suppress("UNCHECKED_CAST")
             val repoBean = context.getBean(repoName) as? JpaRepository<*, Long>
@@ -52,7 +54,7 @@ class RepositoryLocator @Inject constructor(val context: ApplicationContext) {
      * @throws NoRepositoryFoundException if the requested repository could not be found or has an illegal type
      * @since 1.0.0
      */
-    @Cacheable(REPO_FOR_ENTITY)
+    @Cacheable(REPO_FOR_ENTITY, key = "#entityClass.getSimpleName()")
     fun <T> getForEntityClass(entityClass: Class<T>): JpaRepository<T, Long> {
         @Suppress("UNCHECKED_CAST")
         return getForEntityName(entityClass.simpleName) as? JpaRepository<T, Long>
@@ -65,7 +67,7 @@ class RepositoryLocator @Inject constructor(val context: ApplicationContext) {
      * @return the matching [JpaRepository]
      * @since 1.0.0
      */
-    @Cacheable(REPO_FOR_DTO)
+    @Cacheable(REPO_FOR_DTO, key = "#dto.class.getSimpleName()")
     fun getForDto(dto: OutcobraDto): JpaRepository<*, Long> {
         var name = dto.javaClass.simpleName
         name = name.replace("Dto", "")
