@@ -12,15 +12,15 @@ import javax.cache.expiry.Duration
 import javax.cache.expiry.TouchedExpiryPolicy
 
 /**
- *
+ * This class configures and creates and all the ehcaches we need.
  * @author Florian Bürgi
  * @since <since>
  **/
 
 @Configuration
 class CacheConfig : JCacheManagerCustomizer {
-    override fun customize(cacheManager: CacheManager) {
 
+    override fun customize(cacheManager: CacheManager) {
         val config = MutableConfiguration<Any, Any>()
                 .setStoreByValue(false)
                 .setStatisticsEnabled(false)
@@ -30,7 +30,6 @@ class CacheConfig : JCacheManagerCustomizer {
         cacheManager.createCache(REPO_FOR_ENTITY, config)
         cacheManager.createCache(REPO_FOR_NAME, config)
         cacheManager.createCache(DTO_FOR_NAME, config)
-
     }
 }
 
