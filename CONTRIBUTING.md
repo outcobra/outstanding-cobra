@@ -50,6 +50,7 @@ Minor changes can be pushed to the `develop` branch directly. Minor changes must
 * No wider influence
 
 For all other changes, please create a branch and pull request.
+Before you open or approve a pull request please test your changes manually.
 
 ### Branches 
 Our branch names are inspired by [git-flow](https://danielkummer.github.io/git-flow-cheatsheet/#getting_started).

@@ -1,9 +1,9 @@
-export function isFalsy(toCheck: any): boolean {
-    return toCheck == false;
+export function isTruthy(toCheck: any): boolean {
+    return Boolean(toCheck);
 }
 
-export function isTruthy(toCheck: any): boolean {
-    return !isFalsy(toCheck);
+export function isFalsy(toCheck: any): boolean {
+    return !isTruthy(toCheck)
 }
 
 export function isNull(toCheck: any): boolean {
