@@ -1,0 +1,5 @@
+@import '../../sass/color-variables';
+
+a[md-tab-link] {
+    color: $primary-dark !important;
+}
