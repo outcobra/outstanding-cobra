@@ -16,4 +16,5 @@ object DataLoadOrder {
     const val SEMESTER = 13
     const val SUBJECT = 16
     const val TASK = 19
+    const val MARK = 23
 }

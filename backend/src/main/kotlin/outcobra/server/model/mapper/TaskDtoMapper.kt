@@ -9,6 +9,7 @@ import javax.inject.Inject
 
 /**
  * @author Vincent Perret
+ * @since 1.0.0
  */
 @Component
 class TaskDtoMapper @Inject constructor(val subjectRepository: SubjectRepository,

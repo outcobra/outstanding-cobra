@@ -262,7 +262,8 @@
         "outsideParent": {
           "title": "Invalid date",
           "message": "The given dates are outside the parent timespan"
-        }
+        },
+        "mark": "The value of the given mark is invalid"
       }
     }
   }

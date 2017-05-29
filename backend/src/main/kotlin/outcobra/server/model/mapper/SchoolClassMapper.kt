@@ -12,11 +12,13 @@ import outcobra.server.model.repository.SchoolYearRepository
 import javax.inject.Inject
 
 /**
+ * @author Florian Bürgi
  * @since 1.0.0
  */
 @Component
-open class SchoolClassMapper @Inject constructor(val schoolYearRepository: SchoolYearRepository,
-                                                 val institutionRepository: InstitutionRepository) : Mapper<SchoolClass, SchoolClassDto>, BaseMapper() {
+class SchoolClassMapper @Inject constructor(val schoolYearRepository: SchoolYearRepository,
+                                            val institutionRepository: InstitutionRepository) :
+        Mapper<SchoolClass, SchoolClassDto>, BaseMapper() {
 
     override fun toDto(from: SchoolClass): SchoolClassDto {
         val id = from.id ?: 0

@@ -1,12 +1,11 @@
 package outcobra.server.model;
 
-import outcobra.server.model.interfaces.ParentLinked;
-
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import java.util.ArrayList;
-import java.util.List;
+import outcobra.server.model.interfaces.ParentLinked;
 
 @Entity
 public class MarkGroup extends Mark {
@@ -17,28 +16,44 @@ public class MarkGroup extends Mark {
     @OneToOne(mappedBy = "markGroup")
     private Subject subject;
 
-    public MarkGroup(Double weight, Exam exam, MarkGroup markGroup, List<Mark> marks, Subject subject) {
-        super(weight, exam, markGroup);
+    //region constructors
+    /**
+     * @param weight
+     * @param exam
+     * @param markGroup
+     * @param description
+     * @param marks
+     * @param subject
+     */
+    public MarkGroup(Double weight, Exam exam, MarkGroup markGroup, String description, List<Mark> marks, Subject subject) {
+        super(weight, exam, markGroup, description);
         this.marks = marks;
         this.subject = subject;
     }
 
     public MarkGroup(List<Mark> marks, Subject subject) {
+        super();
         this.marks = marks;
         this.subject = subject;
+    }
+
+    public MarkGroup(Subject subject) {
+        super();
+        this.subject = subject;
+        this.description = subject.getName();
     }
 
     public MarkGroup() {
         super();
         this.marks = new ArrayList<>();
     }
+    //endregion
 
+    //region mark functions
     // Todo persist
     public void addMark(Mark mark) {
         marks.add(mark);
     }
-
-    //region constructors
 
     // Todo persist
     public void removeMark(Mark mark) {
@@ -64,7 +79,6 @@ public class MarkGroup extends Mark {
     //endregion
 
     //region default functions
-
     public List<Mark> getMarks() {
         return marks;
     }
@@ -106,7 +120,11 @@ public class MarkGroup extends Mark {
 
     @Override
     public ParentLinked getParent() {
-        return subject;
+        if (this.markGroup == null) {
+            return subject;
+        }
+        return markGroup;
+
     }
     //endregion
 }
