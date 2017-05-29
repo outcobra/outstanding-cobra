@@ -1,9 +1,15 @@
 <oc-title-bar>
     <span>{{ 'i18n.modules.mark.linkTitle' | translate }}</span>
 </oc-title-bar>
-<nav md-tab-nav-bar>
+<nav md-tab-nav-bar *ngIf="!semesters || semesters.length > 0; else noSemestersAvailable">
     <a md-tab-link
        *ngFor="let semester of semesters">
         {{ semester.name }}
     </a>
 </nav>
+<div class="mark-semester-container">
+    <h4 #noSemestersAvailable>
+        {{ 'i18n.modules.mark.noSemesterAvailable' | translate }}
+    </h4>
+    <router-outlet></router-outlet>
+</div>

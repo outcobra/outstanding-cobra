@@ -72,7 +72,8 @@
         "linkTitle": "Prüfungen"
       },
       "mark": {
-        "linkTitle": "Noten"
+        "linkTitle": "Noten",
+        "noSemesterAvailable": "Du hast noch keine Semester"
       },
       "task": {
         "linkTitle": "Aufgaben",
