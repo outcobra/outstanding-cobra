@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {SemesterMarkDto} from '../model/SemesterMarkDto';
 
 @Component({
     selector: 'mark-semester',
@@ -6,11 +8,14 @@ import {Component, OnInit} from '@angular/core';
     styleUrls: ['./mark-semester.component.scss']
 })
 export class MarkSemesterComponent implements OnInit {
+    public semesterMark: SemesterMarkDto;
 
-    constructor() {
+    constructor(private _route: ActivatedRoute) {
     }
 
     ngOnInit() {
+        this._route.data
+            .subscribe(sm => this.semesterMark = sm.semesterMark)
     }
 
 }

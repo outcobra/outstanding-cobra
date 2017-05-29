@@ -3,6 +3,7 @@ import {RouterModule} from '@angular/router';
 import {AuthGuard} from '../core/services/auth/auth-guard.service';
 import {MarkComponent} from './mark.component';
 import {MarkSemesterComponent} from './mark-semester/mark-semester.component';
+import {SemesterMarkResolver} from './service/semester-mark-resolver.service';
 
 @NgModule({
     imports: [
@@ -14,7 +15,10 @@ import {MarkSemesterComponent} from './mark-semester/mark-semester.component';
                 children: [
                     {
                         path: 'semester/:id',
-                        component: MarkSemesterComponent
+                        component: MarkSemesterComponent,
+                        resolve: {
+                            semesterMark: SemesterMarkResolver
+                        }
                     }
                 ]
             }

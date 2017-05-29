@@ -9,6 +9,8 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {TranslateModule} from '@ngx-translate/core';
 import {RouterModule} from '@angular/router';
 import {OCUiModule} from '../oc-ui/oc-ui.module';
+import {MarkService} from './service/mark.service';
+import {SemesterMarkResolver} from './service/semester-mark-resolver.service';
 
 @NgModule({
     imports: [
@@ -24,6 +26,10 @@ import {OCUiModule} from '../oc-ui/oc-ui.module';
     declarations: [
         MarkComponent,
         MarkSemesterComponent
+    ],
+    providers: [
+        MarkService,
+        SemesterMarkResolver
     ]
 })
 export class MarkModule {

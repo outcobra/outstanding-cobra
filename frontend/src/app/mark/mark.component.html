@@ -8,8 +8,8 @@
     </a>
 </nav>
 <div class="mark-semester-container">
-    <h4 #noSemestersAvailable>
-        {{ 'i18n.modules.mark.noSemesterAvailable' | translate }}
-    </h4>
+    <ng-template #noSemestersAvailable>
+        <h4>{{ 'i18n.modules.mark.noSemesterAvailable' | translate }}</h4>
+    </ng-template>
     <router-outlet></router-outlet>
 </div>
