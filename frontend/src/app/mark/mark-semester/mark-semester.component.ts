@@ -15,7 +15,7 @@ export class MarkSemesterComponent implements OnInit {
 
     ngOnInit() {
         this._route.data
-            .subscribe(sm => this.semesterMark = sm.semesterMark)
+            .subscribe((sm: { semesterMark: SemesterMarkDto }) => this.semesterMark = sm.semesterMark)
     }
 
 }

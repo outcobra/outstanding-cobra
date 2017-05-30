@@ -3,7 +3,10 @@
 </oc-title-bar>
 <nav md-tab-nav-bar *ngIf="!semesters || semesters.length > 0; else noSemestersAvailable">
     <a md-tab-link
-       *ngFor="let semester of semesters">
+       *ngFor="let semester of semesters"
+       [routerLink]="'/mark/semester/' + semester.id"
+       routerLinkActive #rla="routerLinkActive"
+       [active]="rla.isActive">
         {{ semester.name }}
     </a>
 </nav>
