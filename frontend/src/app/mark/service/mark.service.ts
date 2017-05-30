@@ -12,6 +12,6 @@ export class MarkService extends AppCrudService<MarkDto> {
     }
 
     public getMarkSemesterBySemesterId(semesterId: number): Observable<SemesterMarkDto> {
-        return this._http.get<SemesterMarkDto>(`/semester/${semesterId}`);
+        return this._http.get<SemesterMarkDto>(`${this._baseUri}/semester/${semesterId}`);
     }
 }
