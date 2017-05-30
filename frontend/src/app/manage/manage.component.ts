@@ -69,8 +69,10 @@ export class ManageComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this._responsiveHelper.listenForOrientationChange().subscribe(() => this.calculateMarginLeftByCurrentView());
-        this._responsiveHelper.listenForResize().subscribe(() => {
+        Observable.concat(
+            this._responsiveHelper.listenForOrientationChange(),
+            this._responsiveHelper.listenForBreakpointChange()
+        ).subscribe(() => {
             this.calculateMarginLeftByCurrentView();
             this.setColumnClasses();
         });

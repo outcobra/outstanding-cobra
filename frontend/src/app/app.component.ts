@@ -36,11 +36,11 @@ export class AppComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit() {
-        this._recheckMobile();
+        this._mobile = this._responsiveHelper.isMobile();
         this.changeTheme(this.getThemeFromLocalStorage() || OCTheme.OCEAN);
         this._router.events
             .filter(event => event instanceof NavigationEnd)
-            .do(() => {
+            .subscribe(() => {
                 if (isTruthy(this.sidenav) && this.sidenav.opened) {
                     this.sidenav.close();
                 }
@@ -48,12 +48,8 @@ export class AppComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this._responsiveHelper.listenForResize()
-            .subscribe(() => this._recheckMobile());
-    }
-
-    private _recheckMobile() {
-        this._mobile = this._responsiveHelper.isMobile();
+        this._responsiveHelper.listenForBreakpointChange()
+            .subscribe((change) => this._mobile = change.mobile);
     }
 
     public changeLang() {

@@ -20,7 +20,3 @@ export const MOBILE_DIALOG: MdDialogConfig = {
         bottom: '0px'
     }, height: '100%'
 };
-
-
-export const MATERIALIZE_MIN_WIDTH_MEDIUM = 601;
-export const MATERIALIZE_MIN_WIDTH_LARGE = 993;

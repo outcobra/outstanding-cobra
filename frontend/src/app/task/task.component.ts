@@ -14,6 +14,7 @@ import {SMALL_DIALOG} from '../core/util/const';
 import {and} from '../core/util/helper';
 import {ResponsiveHelperService} from '../core/services/ui/responsive-helper.service';
 import {NotificationWrapperService} from '../core/notifications/notification-wrapper.service';
+import {OCMediaChange} from '../core/services/ui/oc-media-change';
 
 @Component({
     selector: 'task',
@@ -68,13 +69,10 @@ export class TaskComponent implements OnInit, AfterViewInit {
     ngAfterViewInit() {
         this._filterShown = !this._responsiveHelperService.isMobile();
         Observable.concat(
-            this._responsiveHelperService.listenForResize(),
-            this._responsiveHelperService.listenForOrientationChange()
-        ).subscribe(() => {
-            if (!this._responsiveHelperService.isMobile()) {
-                this._filterShown = true;
-            }
-        });
+            this._responsiveHelperService.listenForBreakpointChange(),
+            this._responsiveHelperService.listenForOrientationChange())
+            .filter(change => !change.mobile)
+            .subscribe((change: OCMediaChange) => this._filterShown = true);
     }
 
     //region initialization
@@ -225,5 +223,6 @@ export class TaskComponent implements OnInit, AfterViewInit {
     get filterShown(): boolean {
         return this._filterShown;
     }
+
     //endregion
 }
