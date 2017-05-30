@@ -145,7 +145,8 @@
           }
         },
         "institution": {
-          "add": "Add new Institution",
+          "add": "Add new institution",
+          "edit": "Edit institution",
           "confirmDeleteMessage": "Do you really want to delete the institution? All child elements (schoolclasses, schoolyears, semesters, subjects) will be erased too.",
           "notificationMessage": {
             "saveSuccess": "The institution has been saved successfully.",
@@ -158,6 +159,7 @@
         },
         "schoolClass": {
           "add": "Add new schoolclass",
+          "edit": "Edit schoolclass",
           "confirmDeleteMessage": "Do you really want to delete the schoolclass? All child elements (schoolyears, semesters, subjects) will be erased too.",
           "notificationMessage": {
             "saveSuccess": "The schoolclass has been saved successfully.",
@@ -170,6 +172,7 @@
         },
         "schoolYear": {
           "add": "Add new schoolyear",
+          "edit": "Edit schoolyear",
           "confirmDeleteMessage": "Do you really want to delete the schoolyear? All child elements (semesters, subjects) will be erased too.",
           "notificationMessage": {
             "saveSuccess": "The schoolyear has been saved successfully.",
@@ -185,6 +188,7 @@
         },
         "semester": {
           "add": "Add new semester",
+          "edit": "Edit semester",
           "confirmDeleteMessage": "Do you really want to delete the semester? All child elements (subjects) will be erased too.",
           "notificationMessage": {
             "saveSuccess": "The semester has been saved successfully.",
@@ -200,6 +204,7 @@
         },
         "subject": {
           "add": "Add new subject",
+          "edit": "Edit subject",
           "confirmDeleteMessage": "Do you really want to delete the subject?",
           "notificationMessage": {
             "saveSuccess": "The subject has been saved successfully.",

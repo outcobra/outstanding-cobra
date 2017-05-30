@@ -1,5 +1,6 @@
 <div class="dialog-header">
-    <h1 md-dialog-title>{{ 'i18n.modules.manage.schoolYear.add' | translate }}</h1>
+    <h1 md-dialog-title *ngIf="isEditMode()">{{ 'i18n.modules.manage.schoolYear.edit' | translate }}</h1>
+    <h1 md-dialog-title *ngIf="!isEditMode()">{{ 'i18n.modules.manage.schoolYear.add' | translate }}</h1>
 </div>
 <form [formGroup]="schoolYearForm" (submit)="submit()">
     <div class="dialog-body" md-dialog-content>
