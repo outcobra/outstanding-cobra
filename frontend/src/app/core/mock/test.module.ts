@@ -51,15 +51,15 @@ import {MockDurationService} from './datetime/mock-duration.service';
         TranslateModule.forRoot({
             loader: {provide: TranslateLoader, useClass: MockTranslateLoader}
         }),
-        SimpleNotificationsModule
+        SimpleNotificationsModule.forRoot()
     ],
     exports: [
         CommonModule,
         HttpModule,
         NoopAnimationsModule,
         OCMaterialModule,
-        TranslateModule
-        //SimpleNotificationsModule
+        TranslateModule,
+        SimpleNotificationsModule
     ],
     providers: [
         {
