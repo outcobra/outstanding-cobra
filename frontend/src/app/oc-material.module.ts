@@ -64,7 +64,6 @@ import {OC_DATE_FORMATS} from './core/common/oc-date-formats';
         MdCoreModule
     ],
     providers: [
-        //TODO activate this after the next material2 release (https://github.com/angular/material2/pull/4541 : https://github.com/angular/material2/issues/4534)
         {
             provide: MD_DATE_FORMATS,
             useValue: OC_DATE_FORMATS

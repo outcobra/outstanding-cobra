@@ -1,5 +1,5 @@
 import {MdDateFormats} from '@angular/material/typings/core/datetime/date-formats';
-// currently useless because there's no date adapter that can handle the parse format
+
 export const OC_DATE_FORMATS: MdDateFormats = {
     parse: {
         dateInput: 'DD.MM.YYYY'
