@@ -6,7 +6,6 @@ import {DatepickerComponent} from './components/datepicker/datepicker.component'
 import {DaypickerComponent} from './components/datepicker/daypicker.component';
 import {YearpickerComponent} from './components/datepicker/yearpicker.component';
 import {FormsModule} from '@angular/forms';
-import {Auth0AuthService} from './services/auth/auth.service';
 import {ConfirmDialogComponent} from './components/confirm-dialog/confirm-dialog.component';
 import {ColorpickerComponent} from './components/colorpicker/colorpicker.component';
 import {InfoDialogComponent} from './components/info-dialog/info-dialog.component';

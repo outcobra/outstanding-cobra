@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {ColorService} from '../../shared/services/color.service';
 import {Observable} from 'rxjs';
-import {Color} from '../../shared/model/Color';
+import {ColorService} from '../services/color.service';
+import {Color} from '../model/Color';
 
 @Injectable()
 export class MockColorService extends ColorService {

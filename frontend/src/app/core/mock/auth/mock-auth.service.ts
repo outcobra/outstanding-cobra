@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {AuthService} from '../../../shared/interfaces/auth.service';
+import {AuthService} from '../../interfaces/auth.service';
 
 @Injectable()
 export class MockAuthService implements AuthService {

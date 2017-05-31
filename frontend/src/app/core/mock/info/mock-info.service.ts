@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {InfoService} from '../../../shared/services/info.service';
 import {Observable} from 'rxjs/Observable';
-import {Info} from '../../../shared/model/Info';
+import {InfoService} from '../../services/info.service';
+import {Info} from '../../model/Info';
 
 @Injectable()
 export class MockInfoService extends InfoService {
@@ -21,6 +21,7 @@ export class MockInfoService extends InfoService {
             time: new Date()
         }
     };
+
     public getInfo(): Observable<Info> {
         return Observable.of(this.MOCK_INFO);
     }

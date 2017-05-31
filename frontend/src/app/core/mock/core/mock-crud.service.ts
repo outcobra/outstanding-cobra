@@ -1,14 +1,16 @@
-import {CrudService} from '../../../shared/services/core/crud.service';
 import {Observable} from 'rxjs/Observable';
 import {Dto} from '../../../common/Dto';
-import {Util} from '../../../shared/util/util';
-import {isNotNull} from '../../../shared/util/helper';
+import {isNotNull} from '../../util/helper';
+import {Util} from '../../util/util';
+import {AppCrudService} from '../../services/core/app-crud.service';
 
-export class MockCrudService<T extends Dto> implements CrudService<T> {
+export class MockCrudService<T extends Dto> extends AppCrudService<T> {
+    _http;
     private _items: T[];
     private _currentId: number;
 
     constructor(initItems: T[] = []) {
+        super(null, '');
         this._items = [];
         initItems.map(item => this._createItem(item))
             .forEach(item => this._items.push(item));

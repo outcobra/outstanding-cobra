@@ -1,19 +1,14 @@
 import {NgModule} from '@angular/core';
 import {MockHttpInterceptor} from './http/MockHttpInterceptor';
-import {HttpInterceptor} from '../../shared/http/HttpInterceptor';
 import {Config} from '../../config/Config';
 import {MockConfig} from './config/MockConfig';
 import {MockInfoService} from './info/mock-info.service';
-import {InfoService} from '../../shared/services/info.service';
-import {NotificationsService, SimpleNotificationsModule} from 'angular2-notifications/dist';
-import {MockNotificationsService} from './notifications/mock-notifications.service';
-import {MaterialModule} from '@angular/material';
+import {SimpleNotificationsModule} from 'angular2-notifications/dist';
+import {MockNotificationWrapperService} from './notifications/mock-notifications.service';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {CommonModule} from '@angular/common';
 import {MockTranslateLoader} from './i18n/MockTranslateLoader';
-import {Auth0AuthService} from '../../shared/services/auth/auth.service';
 import {MockAuthService} from './auth/mock-auth.service';
-import {ResponsiveHelperService} from 'app/shared/services/ui/responsive-helper.service';
 import {MockResponsiveHelperService} from './ui/mock-responsive-helper.service';
 import {MockManageService} from './manage/mock-manage.service';
 import {ManageService} from '../../manage/service/manage.service';
@@ -28,30 +23,49 @@ import {MockSemesterService} from './manage/manage-entities/mock-semester.servic
 import {SubjectService} from '../../manage/service/subject.service';
 import {MockSubjectService} from './manage/manage-entities/mock-subject.service';
 import {MockConfirmDialogService} from './ui/mock-confirm-dialog.service';
-import {ConfirmDialogService} from '../../shared/services/confirm-dialog.service';
 import {ManageDialogFactory} from '../../manage/service/manage-dialog-factory';
 import {MockManageDialogFactory} from './manage/mock-manage-dialog.factory';
-import {ColorService} from '../../shared/services/color.service';
 import {MockColorService} from './mock-color.service';
 import {MockTaskService} from './task/mock-task.service';
 import {TaskService} from '../../task/service/task.service';
+import {HttpInterceptor} from '../http/HttpInterceptor';
+import {InfoService} from '../services/info.service';
+import {Auth0AuthService} from '../services/auth/auth.service';
+import {ResponsiveHelperService} from '../services/ui/responsive-helper.service';
+import {ConfirmDialogService} from '../services/confirm-dialog.service';
+import {ColorService} from '../services/color.service';
+import {OCMaterialModule} from '../../oc-material.module';
+import {NotificationWrapperService} from 'app/core/notifications/notification-wrapper.service';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {MockBackend} from '@angular/http/testing';
+import {HttpModule, XHRBackend} from '@angular/http';
+import {DurationService} from '../services/duration.service';
+import {MockDurationService} from './datetime/mock-duration.service';
 
 @NgModule({
     imports: [
         CommonModule,
-        SimpleNotificationsModule,
-        MaterialModule,
+        HttpModule,
+        NoopAnimationsModule,
+        OCMaterialModule,
+        SimpleNotificationsModule.forRoot(),
         TranslateModule.forRoot({
             loader: {provide: TranslateLoader, useClass: MockTranslateLoader}
         })
     ],
     exports: [
         CommonModule,
+        HttpModule,
+        NoopAnimationsModule,
         SimpleNotificationsModule,
-        MaterialModule,
+        OCMaterialModule,
         TranslateModule
     ],
     providers: [
+        {
+            provide: XHRBackend,
+            useClass: MockBackend
+        },
         {
             provide: HttpInterceptor,
             useClass: MockHttpInterceptor
@@ -65,8 +79,8 @@ import {TaskService} from '../../task/service/task.service';
             useClass: MockInfoService
         },
         {
-            provide: NotificationsService,
-            useClass: MockNotificationsService
+            provide: NotificationWrapperService,
+            useClass: MockNotificationWrapperService
         },
         {
             provide: Auth0AuthService,
@@ -115,9 +129,12 @@ import {TaskService} from '../../task/service/task.service';
         {
             provide: TaskService,
             useClass: MockTaskService
+        },
+        {
+            provide: DurationService,
+            useClass: MockDurationService
         }
     ]
 })
 export class TestModule {
-
 }

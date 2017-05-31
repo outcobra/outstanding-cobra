@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {NotificationsService} from 'angular2-notifications/dist';
+import {NotificationWrapperService} from '../../notifications/notification-wrapper.service';
 
 @Injectable()
-export class MockNotificationsService extends NotificationsService {
+export class MockNotificationWrapperService extends NotificationWrapperService {
 }
 

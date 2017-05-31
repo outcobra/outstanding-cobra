@@ -1,12 +1,10 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {OCFooterComponent} from './oc-footer.component';
-import {MaterialModule} from '@angular/material';
-import {ResponsiveHelperService} from '../../../shared/services/ui/responsive-helper.service';
-import {InfoService} from '../../../shared/services/info.service';
 import {By} from '@angular/platform-browser';
-import {TestModule} from '../../../core/mock/test.module';
 import {MockInfoService} from '../../../core/mock/info/mock-info.service';
+import {TestModule} from '../../../core/mock/test.module';
+import {InfoService} from '../../../core/services/info.service';
 
 describe('OCFooterComponent', () => {
     let component: OCFooterComponent;
@@ -17,11 +15,7 @@ describe('OCFooterComponent', () => {
         TestBed.configureTestingModule({
             declarations: [OCFooterComponent],
             imports: [
-                MaterialModule,
                 TestModule
-            ],
-            providers: [
-                ResponsiveHelperService
             ]
         }).compileComponents();
     });
