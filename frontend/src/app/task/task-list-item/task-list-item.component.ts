@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Task} from '../model/Task';
 import {ActivatedRoute, Router} from '@angular/router';
-import {isNotNull} from '../../shared/util/helper';
+import {isTruthy} from '../../core/util/helper';
 import {TaskService} from '../service/task.service';
 
 @Component({
@@ -31,7 +31,7 @@ export class TaskListItemComponent implements OnInit {
     }
 
     public hasDescription(): boolean {
-        return isNotNull(this.task.description);
+        return isTruthy(this.task.description);
     }
 
     public goToDetail() {

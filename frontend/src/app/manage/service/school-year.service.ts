@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {HttpInterceptor} from '../../shared/http/HttpInterceptor';
+import {HttpInterceptor} from '../../core/http/HttpInterceptor';
 import {SchoolYearDto} from '../model/ManageDto';
 import {Observable} from 'rxjs';
-import {AppCrudService} from '../../shared/services/core/app-crud.service';
+import {AppCrudService} from '../../core/services/core/app-crud.service';
 
 @Injectable()
 export class SchoolYearService extends AppCrudService<SchoolYearDto> {
@@ -11,10 +11,6 @@ export class SchoolYearService extends AppCrudService<SchoolYearDto> {
     }
 
     public readById(id: number): Observable<SchoolYearDto> {
-        throw new Error('not implemented');
-    }
-
-    public update(arg: SchoolYearDto): Observable<SchoolYearDto> {
         throw new Error('not implemented');
     }
 }

@@ -1,6 +1,7 @@
 package outcobra.server.model.mapper.manage
 
 import org.springframework.stereotype.Component
+import outcobra.server.exception.ValidationKey
 import outcobra.server.model.Institution
 import outcobra.server.model.dto.manage.*
 import outcobra.server.model.interfaces.Mapper
@@ -14,7 +15,10 @@ class ManageDtoMapper @Inject constructor(val colorMapper: ColorMapper) : Mapper
     }
 
     override fun toDto(from: List<Institution>?): ManageDto {
-        return if (from != null) ManageDto(from.map { toInternalDto(it) }) else null!!
+        if (from != null) {
+            return ManageDto(from.map { toInternalDto(it) })
+        }
+        ValidationKey.SERVER_ERROR.throwWithCause(NullPointerException())
     }
 
     private fun toInternalDto(from: Institution): InstitutionDto {
@@ -23,8 +27,11 @@ class ManageDtoMapper @Inject constructor(val colorMapper: ColorMapper) : Mapper
                     schoolClass.schoolYears.map { year ->
                         SchoolYearDto(year.id ?: 0, year.name, year.validFrom, year.validTo, schoolClass.id ?: 0,
                                 year.semesters.map { semester ->
-                                    SemesterDto(semester.id ?: 0, semester.name, semester.validTo, semester.validFrom, year.id ?: 0,
-                                            semester.subjects.map { subject -> SubjectDto(subject.id ?: 0, subject.name, colorMapper.toDto(subject.color), semester.id ?: 0) })
+                                    SemesterDto(semester.id ?: 0, semester.name, semester.validFrom, semester.validTo, year.id ?: 0,
+                                            semester.subjects.map { subject ->
+                                                SubjectDto(subject.id ?: 0,
+                                                        subject.name, colorMapper.toDto(subject.color), semester.id ?: 0)
+                                            })
                                 })
                     })
         })

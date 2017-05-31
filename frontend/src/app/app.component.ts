@@ -1,11 +1,11 @@
 import {AfterViewInit, Component, HostBinding, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
-import {Auth0AuthService} from './shared/services/auth/auth.service';
+import {Auth0AuthService} from './core/services/auth/auth.service';
 import {TranslateService} from '@ngx-translate/core';
-import {ResponsiveHelperService} from './shared/services/ui/responsive-helper.service';
+import {ResponsiveHelperService} from './core/services/ui/responsive-helper.service';
 import {MdSidenav, OverlayContainer} from '@angular/material';
 import {OCTheme} from './oc-ui/theme/oc-theme';
 import {NavigationEnd, Router} from '@angular/router';
-import {isNotNull} from './shared/util/helper';
+import {isTruthy} from './core/util/helper';
 
 const OC_THEME_STORAGE_LOC = 'oc-theme';
 const OC_MOBILE_CLASS = 'oc-mobile';
@@ -41,7 +41,7 @@ export class AppComponent implements OnInit, AfterViewInit {
         this._router.events
             .filter(event => event instanceof NavigationEnd)
             .do(() => {
-                if (isNotNull(this.sidenav) && this.sidenav.opened) {
+                if (isTruthy(this.sidenav) && this.sidenav.opened) {
                     this.sidenav.close();
                 }
             });

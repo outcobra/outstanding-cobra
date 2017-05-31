@@ -1,38 +1,39 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Task} from '../model/Task';
-import {ConfirmDialogService} from '../../shared/services/confirm-dialog.service';
+import {ConfirmDialogService} from '../../core/services/confirm-dialog.service';
 import {TaskService} from '../service/task.service';
 import {MdDialog, MdDialogRef, MdSlider, MdSliderChange} from '@angular/material';
 import {TaskCreateUpdateDialog} from '../task-create-update-dialog/task-create-update-dialog.component';
-import {SMALL_DIALOG} from '../../shared/util/const';
+import {SMALL_DIALOG} from '../../core/util/const';
 import {DialogMode} from '../../common/DialogMode';
-import {NotificationsService} from 'angular2-notifications';
 import {Observable} from 'rxjs';
-import {Util} from '../../shared/util/util';
-import {isNotNull, isTrue} from '../../shared/util/helper';
+import {isTrue, isTruthy} from '../../core/util/helper';
+import {NotificationWrapperService} from '../../core/notifications/notification-wrapper.service';
+import {DurationService} from '../../core/services/duration.service';
 
 @Component({
-    selector: 'task-detail',
-    templateUrl: './task-detail.component.html',
-    styleUrls: ['./task-detail.component.scss']
-})
+               selector: 'task-detail',
+               templateUrl: './task-detail.component.html',
+               styleUrls: ['./task-detail.component.scss']
+           })
 export class TaskDetailComponent implements OnInit, AfterViewInit {
     private _task: Task;
     private _taskCreateUpdateDialog: MdDialogRef<TaskCreateUpdateDialog>;
     @ViewChild(MdSlider) slider: MdSlider;
 
     constructor(private _confirmDialogService: ConfirmDialogService,
-                private _notificationService: NotificationsService,
+                private _notificationService: NotificationWrapperService,
                 private _taskService: TaskService,
                 private _dialogService: MdDialog,
                 private _route: ActivatedRoute,
-                private _router: Router) {
+                private _router: Router,
+                private _durationService: DurationService) {
     }
 
     ngOnInit() {
         this._route.data
-            .subscribe((data: {task: Task}) => this._task = data.task);
+            .subscribe((data: { task: Task }) => this._task = data.task);
     }
 
     ngAfterViewInit() {
@@ -40,7 +41,7 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
             .debounceTime(500)
             .map((sliderChange: MdSliderChange) => sliderChange.value)
             .distinctUntilChanged()
-            .flatMap((value: number) => Util.bindAndCall(this.updateProgress, this, value))
+            .flatMap((value: number) => this.updateProgress.call(this, value))
             .subscribe();
     }
 
@@ -52,19 +53,26 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
         this._taskCreateUpdateDialog = this._dialogService.open(TaskCreateUpdateDialog, SMALL_DIALOG);
         this._taskCreateUpdateDialog.componentInstance.init(DialogMode.EDIT, this._task);
         this._taskCreateUpdateDialog.afterClosed()
-            .filter(isNotNull)
+            .filter(isTruthy)
             .flatMap((result: Task) => this._taskService.update(result))
             .subscribe((task: Task) => {
                 // TODO error handling?
                 if (task) {
                     this._task = task;
-                    this._notificationService.success('i18n.modules.task.notification.update.title', 'i18n.modules.task.notification.update.message');
+                    this._notificationService.success('i18n.modules.task.notification.update.title',
+                                                      'i18n.modules.task.notification.update.message');
                 }
             });
     }
 
+    public getRemainingEffort() {
+        let remaining = this.task.effort / 100 * (100 - this.task.progress);
+        return this._durationService.humanizeHours(remaining);
+    }
+
     public deleteTask() {
-        this._confirmDialogService.open('i18n.modules.task.dialogs.confirmDeleteDialog.title', 'i18n.modules.task.dialogs.confirmDeleteDialog.message')
+        this._confirmDialogService.open('i18n.modules.task.dialogs.confirmDeleteDialog.title',
+                                        'i18n.modules.task.dialogs.confirmDeleteDialog.message')
             .filter(isTrue)
             .flatMap(() => this._taskService.deleteById(this._task.id))
             .subscribe(result => this._router.navigate(['/task']));
@@ -73,7 +81,6 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
     public closeCard() {
         this._router.navigate(['/task']);
     }
-
 
     get task(): Task {
         return this._task;

@@ -3,8 +3,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MdDialogRef} from '@angular/material';
 import {SubjectService} from '../../manage/service/subject.service';
 import {SubjectDto} from '../../manage/model/ManageDto';
-import {Util} from '../../shared/util/util';
-import {OCValidators} from '../../shared/services/oc-validators';
+import {Util} from '../../core/util/util';
+import {OCValidators} from '../../core/services/oc-validators';
 import {Task} from '../model/Task';
 import {CreateUpdateDialog} from '../../common/CreateUpdateDialog';
 

@@ -7,16 +7,16 @@
             <ng-content select="datepicker-error"></ng-content>
         </md-error>
     </md-input-container>
-    <div class="datepicker z-depth-1-half" [class.opened]="opened" [ngSwitch]="pickerMode">
+    <div class="datepicker" [class.opened]="opened" [ngSwitch]="pickerMode">
         <div class="datepicker-header">
-            <span class="year">{{currentDate | date:'y'}}</span><br>
-            <span class="date">{{currentDate | date:'mediumDate'}}</span>
+            <span class="year">{{ currentDate | date:'y' }}</span><br>
+            <span class="date">{{ currentDate | date:'mediumDate' }}</span>
         </div>
         <yearpicker *ngSwitchCase="'year'"></yearpicker>
         <daypicker *ngSwitchDefault></daypicker>
         <div class="datepicker-footer">
-            <button type="button" md-button (click)="cancel()">{{'i18n.common.action.cancel' | translate}}</button>
-            <button type="button" md-button (click)="submit()">{{'i18n.common.action.ok' | translate}}</button>
+            <button type="button" md-button (click)="cancel()">{{ 'i18n.common.action.cancel' | translate }}</button>
+            <button type="button" md-button (click)="submit()">{{ 'i18n.common.action.ok' | translate }}</button>
         </div>
     </div>
 </div>

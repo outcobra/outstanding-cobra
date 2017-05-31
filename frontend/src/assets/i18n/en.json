@@ -31,6 +31,9 @@
         "success": {
           "save": "Successfully saved",
           "delete": "Successfully deleted"
+        },
+        "error": {
+          "delete": "Delete failed"
         }
       },
       "lang": {
@@ -116,7 +119,8 @@
               "label": "Enter a task description"
             },
             "effort": {
-              "label": "Expected effort (in h)"
+              "label": "Expected effort (in h)",
+              "remaining": "Remaining effort"
             },
             "errors": {
               "dueDateBeforeTodoDate": "The due date must not be before the todo date"
@@ -244,6 +248,10 @@
         "404": {
           "title": "Not found",
           "message": "The requested element could not be found"
+        },
+        "422": {
+          "title": "Input error",
+          "message": "Your input was invalid or contained errors"
         },
         "500": {
           "title": "Server error",

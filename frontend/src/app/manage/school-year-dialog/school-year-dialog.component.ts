@@ -3,10 +3,10 @@ import {ManageDialog} from '../manage-dialog';
 import {SchoolClassDto, SchoolYearDto} from '../model/ManageDto';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MdDialogRef} from '@angular/material';
-import {OCValidators} from '../../shared/services/oc-validators';
+import {OCValidators} from '../../core/services/oc-validators';
 import {TranslateService} from '@ngx-translate/core';
 import {DatePipe} from '@angular/common';
-import {Util} from '../../shared/util/util';
+import {Util} from '../../core/util/util';
 
 @Component({
     selector: 'school-year-dialog',
@@ -48,13 +48,19 @@ export class SchoolYearDialog extends ManageDialog<SchoolYearDto, SchoolClassDto
     }
 
     public submit() {
-        if (this._schoolYearForm.valid && this._schoolYearForm.dirty) {
+        if (!(this._schoolYearForm.valid && this._schoolYearForm.dirty)) {
+            Util.revalidateForm(this._schoolYearForm);
+            return;
+        }
+        if (this.isEditMode()) {
+            this.param.name = this._schoolYearForm.get('name').value;
+            this.param.validFrom = this._schoolYearForm.get('validFrom').value;
+            this.param.validTo = this._schoolYearForm.get('validTo').value;
+            this._dialogRef.close(this.param);
+        } else {
             let value = this._schoolYearForm.value as SchoolYearDto;
             value.schoolClassId = this.parent.id;
             this._dialogRef.close(value);
-        }
-        else {
-            Util.revalidateForm(this._schoolYearForm);
         }
     }
 

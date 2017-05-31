@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {HttpInterceptor} from '../../shared/http/HttpInterceptor';
+import {HttpInterceptor} from '../../core/http/HttpInterceptor';
 import {Observable} from 'rxjs';
 import {SchoolClassDto} from '../model/ManageDto';
-import {AppCrudService} from '../../shared/services/core/app-crud.service';
+import {AppCrudService} from '../../core/services/core/app-crud.service';
 
 @Injectable()
 export class SchoolClassService extends AppCrudService<SchoolClassDto> {
@@ -14,7 +14,4 @@ export class SchoolClassService extends AppCrudService<SchoolClassDto> {
         throw new Error('not implemented');
     }
 
-    public update(arg: SchoolClassDto): Observable<SchoolClassDto> {
-        throw new Error('not implemented');
-    }
 }

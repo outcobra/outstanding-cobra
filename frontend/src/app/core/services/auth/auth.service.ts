@@ -4,10 +4,10 @@ import {tokenNotExpired} from 'angular2-jwt';
 import {Router} from '@angular/router';
 import {HttpInterceptor} from '../../http/HttpInterceptor';
 import {Util} from '../../util/util';
-import {NotificationsService} from 'angular2-notifications';
 import {Observable} from 'rxjs';
 import {User} from '../../model/User';
 import {TranslateService} from '@ngx-translate/core';
+import {NotificationWrapperService} from '../../notifications/notification-wrapper.service';
 import {AuthService} from '../../interfaces/auth.service';
 
 declare let Auth0Lock: any;
@@ -22,7 +22,7 @@ export class Auth0AuthService implements AuthService {
     constructor(private _config: Config,
                 private _router: Router,
                 private _http: HttpInterceptor,
-                private _notificationService: NotificationsService,
+                private _notificationService: NotificationWrapperService,
                 private _translateService: TranslateService) {
 
         this._auth0Config = this._config.get('auth0');

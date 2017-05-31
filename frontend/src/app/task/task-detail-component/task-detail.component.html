@@ -3,40 +3,43 @@
         <span md-card-avatar class="mat-card-avatar"
               [style.background-color]="'#' + task.subject.color.hex"
               [mdTooltip]="task.subject.name"
-        >{{task.subject.name | slice:0:1 | uppercase }}</span>
-        <md-card-title>{{task.name}}</md-card-title>
-        <md-card-subtitle>{{task.subject.name}}</md-card-subtitle>
+        >{{ task.subject.name | slice:0:1 | uppercase }}</span>
+        <md-card-title>{{ task.name }}</md-card-title>
+        <md-card-subtitle>{{ task.subject.name }}</md-card-subtitle>
     </md-card-header>
     <md-card-content>
         <!-- TASK DESC START-->
         <oc-icon-data iconName="description" titleKey="i18n.modules.task.desc">
-            <p class="task-property">{{task.description}}</p>
+            <p class="task-property">{{ task.description }}</p>
         </oc-icon-data>
         <!-- TASK DESC END -->
         <!-- TASK TODO_DATE START -->
         <oc-icon-data iconName="alarm" titleKey="i18n.common.label.todoDate">
-            <p class="task-property">{{task.todoDate | date:'fullDate'}}</p>
+            <p class="task-property">{{ task.todoDate | date:'fullDate' }}</p>
         </oc-icon-data>
         <!-- TASK TODO_DATE END -->
         <!-- TASK DUE_DATE START-->
         <oc-icon-data iconName="event" titleKey="i18n.common.label.dueDate">
-            <p class="task-property">{{task.dueDate | date:'fullDate'}}</p>
+            <p class="task-property">{{ task.dueDate | date:'fullDate' }}</p>
         </oc-icon-data>
         <!-- TASK DUE_DATE END-->
         <!-- TASK PROGRESS START-->
         <oc-icon-data iconName="show_chart" titleKey="i18n.modules.task.progress">
-            <div class="row task-progress">
-                <div class="col s1 progress-value">{{task.progress}}%</div>
-                <div class="col s11">
+            <div class="row task-progress" fxLayout>
+                <div class="col s1 progress-value" fxFlex="15">{{ task.progress }}%</div>
+                <div class="col s11" fxFlex>
                     <md-slider [(ngModel)]="task.progress" color="accent" thumbLabel step="5"></md-slider>
                 </div>
             </div>
         </oc-icon-data>
+        <oc-icon-data iconName="timelapse" titleKey="i18n.modules.task.dialogs.add.effort.remaining">
+            <p class="task-property">{{ getRemainingEffort() }}</p>
+        </oc-icon-data>
         <!-- TASK PROGRESS END-->
     </md-card-content>
     <md-card-actions>
-        <button md-raised-button (click)="editTask()">{{'i18n.common.action.edit' | translate}}</button>
-        <button md-raised-button (click)="deleteTask()">{{'i18n.common.action.delete' | translate}}</button>
-        <button md-button (click)="closeCard()">{{'i18n.common.action.close' | translate}}</button>
+        <button md-raised-button (click)="editTask()">{{ 'i18n.common.action.edit' | translate }}</button>
+        <button md-raised-button (click)="deleteTask()">{{ 'i18n.common.action.delete' | translate }}</button>
+        <button md-button (click)="closeCard()">{{ 'i18n.common.action.close' | translate }}</button>
     </md-card-actions>
 </md-card>

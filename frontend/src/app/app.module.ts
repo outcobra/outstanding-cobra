@@ -2,7 +2,6 @@ import {APP_INITIALIZER, ErrorHandler, NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {Http, HttpModule} from '@angular/http';
-import {MaterialModule} from '@angular/material';
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import 'rxjs/add/operator/toPromise';
 import {AppComponent} from './app.component';
@@ -13,9 +12,12 @@ import {AppRoutingModule} from './app-routing.module';
 import {MainModule} from './main/main.module';
 import {ManageModule} from './manage/manage.module';
 import {TaskModule} from './task/task.module';
-import {configLoader, translateFactory, translationLoader} from './shared/services/factories';
-import {RavenErrorHandler} from './shared/error/RavenErrorHandler';
+import {configLoader, translateFactory, translationLoader} from './core/services/factories';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {FlexLayoutModule} from '@angular/flex-layout';
+import {CoreModule} from './core/core.module';
+import {OCMaterialModule} from './oc-material.module';
+import {RavenErrorHandler} from './core/error/RavenErrorHandler';
 
 @NgModule({
     declarations: [
@@ -31,15 +33,17 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
         MainModule,
         ManageModule,
         TaskModule,
-        MaterialModule,
+        FlexLayoutModule,
+        SimpleNotificationsModule.forRoot(),
+        CoreModule,
+        OCMaterialModule,
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
                 useFactory: translateFactory,
                 deps: [Http]
             }
-        }),
-        SimpleNotificationsModule
+        })
     ],
     providers: [
         Config,

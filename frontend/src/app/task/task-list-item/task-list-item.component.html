@@ -1,8 +1,8 @@
 <md-list-item (click)="goToDetail()">
     <span md-list-avatar [style.background-color]="'#' + task.subject.color.hex"
-          [mdTooltip]="task.subject.name">{{task.subject.name | slice:0:1 | uppercase}}</span>
-    <h3 md-line>{{task.name}}</h3>
-    <p md-line *ngIf="hasDescription">{{task.description}}</p>
+          [mdTooltip]="task.subject.name">{{ task.subject.name | slice:0:1 | uppercase }}</span>
+    <h3 md-line>{{ task.name }}</h3>
+    <p md-line *ngIf="hasDescription">{{ task.description }}</p>
     <md-icon *ngIf="isFinished(); else notFinished">done</md-icon>
     <ng-template #notFinished>
         <button md-icon-button class="show-on-hover" (click)="markAsDone($event)">

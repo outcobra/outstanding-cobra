@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {HttpInterceptor} from '../../shared/http/HttpInterceptor';
+import {HttpInterceptor} from '../../core/http/HttpInterceptor';
 import {Observable} from 'rxjs';
 import {SubjectDto} from '../model/ManageDto';
-import {AppCrudService} from '../../shared/services/core/app-crud.service';
+import {AppCrudService} from '../../core/services/core/app-crud.service';
 
 @Injectable()
 export class SubjectService extends AppCrudService<SubjectDto> {
@@ -11,10 +11,6 @@ export class SubjectService extends AppCrudService<SubjectDto> {
     }
 
     public readById(id: number): Observable<SubjectDto> {
-        throw new Error('not implemented');
-    }
-
-    public update(arg: SubjectDto): Observable<SubjectDto> {
         throw new Error('not implemented');
     }
 

@@ -3,8 +3,8 @@ import {DialogMode} from '../../common/DialogMode';
 import {Dto} from '../../common/Dto';
 import {ManageDialog} from '../manage-dialog';
 import {Injectable} from '@angular/core';
-import {ResponsiveHelperService} from '../../shared/services/ui/responsive-helper.service';
-import {SMALL_DIALOG} from '../../shared/util/const';
+import {ResponsiveHelperService} from '../../core/services/ui/responsive-helper.service';
+import {SMALL_DIALOG} from '../../core/util/const';
 
 @Injectable()
 export class ManageDialogFactory {

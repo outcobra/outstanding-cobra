@@ -1,8 +1,8 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import * as moment from 'moment';
 import {DatepickerComponent} from './datepicker.component';
-import {DateUtil} from '../../services/date-util.service';
-import {Util} from '../../util/util';
+import {DateUtil} from '../../../core/services/date-util.service';
+import {Util} from '../../../core/util/util';
 import {animate, keyframes, style, transition, trigger} from '@angular/animations';
 
 @Component({

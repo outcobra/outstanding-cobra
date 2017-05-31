@@ -1,27 +1,18 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {NotificationsService, SimpleNotificationsModule} from 'angular2-notifications';
-import {HttpModule} from '@angular/http';
-import {HttpInterceptor} from './http/HttpInterceptor';
 import {TranslateModule} from '@ngx-translate/core';
-import {NotificationWrapperService} from './notifications/notification-wrapper.service';
 import {TimepickerComponent} from './components/timepicker/timepicker.component';
 import {DatepickerComponent} from './components/datepicker/datepicker.component';
-import {MaterialModule} from '@angular/material';
 import {DaypickerComponent} from './components/datepicker/daypicker.component';
 import {YearpickerComponent} from './components/datepicker/yearpicker.component';
-import {DateUtil} from './services/date-util.service';
 import {FormsModule} from '@angular/forms';
 import {Auth0AuthService} from './services/auth/auth.service';
 import {ConfirmDialogComponent} from './components/confirm-dialog/confirm-dialog.component';
-import {ConfirmDialogService} from './services/confirm-dialog.service';
-import {ColorService} from './services/color.service';
 import {ColorpickerComponent} from './components/colorpicker/colorpicker.component';
-import {ResponsiveHelperService} from './services/ui/responsive-helper.service';
-import {InfoService} from './services/info.service';
 import {InfoDialogComponent} from './components/info-dialog/info-dialog.component';
 import {OCUiModule} from '../oc-ui/oc-ui.module';
 import {DatePickerErrorDirective} from './components/datepicker/datepicker-error.directive';
+import {OCMaterialModule} from '../oc-material.module';
 
 @NgModule({
     declarations: [
@@ -44,32 +35,16 @@ import {DatePickerErrorDirective} from './components/datepicker/datepicker-error
         InfoDialogComponent
     ],
     imports: [
-        HttpModule,
         CommonModule,
         FormsModule,
         TranslateModule,
-        MaterialModule,
-        OCUiModule,
-        SimpleNotificationsModule
+        OCMaterialModule,
+        OCUiModule
     ],
     entryComponents: [
         ConfirmDialogComponent,
         InfoDialogComponent
-    ],
-    providers: [
-        DateUtil,
-        Auth0AuthService,
-        HttpInterceptor,
-        ConfirmDialogService,
-        ColorService,
-        InfoService,
-        ResponsiveHelperService,
-        NotificationWrapperService,
-        {
-            provide: NotificationsService,
-            useExisting: NotificationWrapperService
-        }
-    ],
+    ]
 })
 export class SharedModule {
 }
