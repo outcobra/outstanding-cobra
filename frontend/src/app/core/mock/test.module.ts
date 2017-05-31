@@ -38,7 +38,7 @@ import {OCMaterialModule} from '../../oc-material.module';
 import {NotificationWrapperService} from 'app/core/notifications/notification-wrapper.service';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {MockBackend} from '@angular/http/testing';
-import {HttpModule, XHRBackend} from '@angular/http';
+import {ConnectionBackend, HttpModule} from '@angular/http';
 import {DurationService} from '../services/duration.service';
 import {MockDurationService} from './datetime/mock-duration.service';
 
@@ -48,22 +48,22 @@ import {MockDurationService} from './datetime/mock-duration.service';
         HttpModule,
         NoopAnimationsModule,
         OCMaterialModule,
-        SimpleNotificationsModule.forRoot(),
         TranslateModule.forRoot({
             loader: {provide: TranslateLoader, useClass: MockTranslateLoader}
-        })
+        }),
+        SimpleNotificationsModule
     ],
     exports: [
         CommonModule,
         HttpModule,
         NoopAnimationsModule,
-        SimpleNotificationsModule,
         OCMaterialModule,
         TranslateModule
+        //SimpleNotificationsModule
     ],
     providers: [
         {
-            provide: XHRBackend,
+            provide: ConnectionBackend,
             useClass: MockBackend
         },
         {
