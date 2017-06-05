@@ -109,6 +109,12 @@ md-dialog-container {
     }
 }
 
+@media screen and (max-width: 500px) {
+    .dialog-header h1 {
+        font-size: 1.5em !important;
+    }
+}
+
 datepicker, md-input-container {
     &.ng-invalid.ng-touched {
         label {
