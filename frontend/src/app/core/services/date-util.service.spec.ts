@@ -7,70 +7,70 @@ describe('DateUtil', () => {
            let firstDate = moment('2017-01-01').toDate();
            let secondDate = moment('2017-01-01').toDate();
 
-           expect(DateUtil.isSameDay(firstDate, secondDate)).toBe(true);
+           expect(DateUtil.isSameDay(firstDate, secondDate)).toBeTruthy();
        });
 
        it('should return false', () => {
            let firstDate = moment('2017-01-01').toDate();
            let secondDate = moment('2017-01-02').toDate();
 
-           expect(DateUtil.isSameDay(firstDate, secondDate)).toBe(false);
+           expect(DateUtil.isSameDay(firstDate, secondDate)).toBeFalsy();
        });
     });
 
-    describe('isBeforeDay', () => {
+    describe('isBeforeOrSameDay', () => {
         it('should return true with before date', () => {
             let firstDate = moment('2017-01-01').toDate();
             let secondDate = moment('2017-01-02').toDate();
 
-            expect(DateUtil.isBeforeDay(firstDate, secondDate)).toBe(true);
+            expect(DateUtil.isBeforeOrSameDay(firstDate, secondDate)).toBeTruthy();
         });
 
         it('should return true with same date', () => {
             let firstDate = moment('2017-01-01').toDate();
             let secondDate = moment('2017-01-01').toDate();
 
-            expect(DateUtil.isBeforeDay(firstDate, secondDate)).toBe(true);
+            expect(DateUtil.isBeforeOrSameDay(firstDate, secondDate)).toBeTruthy();
         });
 
         it('should return false', () => {
             let firstDate = moment('2017-01-02').toDate();
             let secondDate = moment('2017-01-01').toDate();
 
-            expect(DateUtil.isBeforeDay(firstDate, secondDate)).toBe(false);
+            expect(DateUtil.isBeforeOrSameDay(firstDate, secondDate)).toBeFalsy();
         });
     });
 
-    describe('isAfterDay', () => {
+    describe('isAfterOrSameDay', () => {
         it('should return true with after date', () => {
             let firstDate = moment('2017-01-02').toDate();
             let secondDate = moment('2017-01-01').toDate();
 
-            expect(DateUtil.isAfterDay(firstDate, secondDate)).toBe(true);
+            expect(DateUtil.isAfterOrSameDay(firstDate, secondDate)).toBeTruthy();
         });
 
         it('should return true with same date', () => {
             let firstDate = moment('2017-01-01').toDate();
             let secondDate = moment('2017-01-01').toDate();
 
-            expect(DateUtil.isAfterDay(firstDate, secondDate)).toBe(true);
+            expect(DateUtil.isAfterOrSameDay(firstDate, secondDate)).toBeTruthy();
         });
 
         it('should return false', () => {
             let firstDate = moment('2017-01-01').toDate();
             let secondDate = moment('2017-01-02').toDate();
 
-            expect(DateUtil.isAfterDay(firstDate, secondDate)).toBe(false);
+            expect(DateUtil.isAfterOrSameDay(firstDate, secondDate)).toBeFalsy();
         });
     });
 
-    describe('isBetweenDay', () => {
+    describe('isBetweenDaysInclusive', () => {
         it('should return true with date on lowerBound', () => {
             let baseDate = moment().toDate();
             let lowerBound = moment().toDate();
             let upperBound = moment().add(7, 'days').toDate();
 
-            expect(DateUtil.isBetweenDay(baseDate, lowerBound, upperBound)).toBe(true);
+            expect(DateUtil.isBetweenDaysInclusive(baseDate, lowerBound, upperBound)).toBeTruthy();
         });
 
         it('should return true with date in middle', () => {
@@ -78,7 +78,7 @@ describe('DateUtil', () => {
             let lowerBound = moment().subtract(7, 'days').toDate();
             let upperBound = moment().add(7, 'days').toDate();
 
-            expect(DateUtil.isBetweenDay(baseDate, lowerBound, upperBound)).toBe(true);
+            expect(DateUtil.isBetweenDaysInclusive(baseDate, lowerBound, upperBound)).toBeTruthy();
         });
 
         it('should return false with date outside', () => {
@@ -86,7 +86,7 @@ describe('DateUtil', () => {
             let lowerBound = moment().subtract(14, 'days').toDate();
             let upperBound = moment().subtract(7, 'days').toDate();
 
-            expect(DateUtil.isBetweenDay(baseDate, lowerBound, upperBound)).toBe(false);
+            expect(DateUtil.isBetweenDaysInclusive(baseDate, lowerBound, upperBound)).toBeFalsy();
         });
     });
 });

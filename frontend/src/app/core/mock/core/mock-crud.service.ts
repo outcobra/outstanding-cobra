@@ -12,19 +12,12 @@ export class MockCrudService<T extends Dto> extends AppCrudService<T> {
     constructor(initItems: T[] = []) {
         super(null, '');
         this._items = [];
-        initItems.map(item => this._createItem(item))
-            .forEach(item => this._items.push(item));
+        initItems.map(item => this._createItem(item));
         this._currentId = 1;
     }
 
     private _createItem(arg: T): T {
-        if (!arg.id) {
-            while (this._exists(this._currentId)) {
-                this._currentId++;
-            }
-            arg.id = this._currentId;
-            this._currentId++;
-        }
+        arg.id = this._currentId++;
         this._items.push(arg);
         return arg;
     }

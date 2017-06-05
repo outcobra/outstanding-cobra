@@ -148,7 +148,7 @@ export class DatepickerComponent implements OnInit, AfterContentInit, ControlVal
         } else {
             date = new Date();
         }
-        if (DateUtil.isBetweenDay(date, this.minDate, this.maxDate)) {
+        if (DateUtil.isBetweenDaysInclusive(date, this.minDate, this.maxDate)) {
             return date;
         }
         return (date < this.minDate) ?

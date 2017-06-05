@@ -31,8 +31,8 @@ describe('OCValidators', () => {
 
             let result = isBeforeOrEqualDayFn.call(null, control);
             expect(result).toBeTruthy();
-            expect(DateUtil.isSameDay(result.isBeforeDay.beforeDate, validatorDate)).toBeTruthy();
-            expect(DateUtil.isSameDay(result.isBeforeDay.actualDate, control.value)).toBeTruthy();
+            expect(DateUtil.isSameDay(result.isBeforeOrSameDay.beforeDate, validatorDate)).toBeTruthy();
+            expect(DateUtil.isSameDay(result.isBeforeOrSameDay.actualDate, control.value)).toBeTruthy();
         });
     });
 
@@ -63,12 +63,12 @@ describe('OCValidators', () => {
 
             let result = isAfterOrEqualDayFn.call(null, control);
             expect(result).toBeTruthy();
-            expect(DateUtil.isSameDay(result.isAfterDay.afterDate, validatorDate)).toBeTruthy();
-            expect(DateUtil.isSameDay(result.isAfterDay.actualDate, control.value)).toBeTruthy();
+            expect(DateUtil.isSameDay(result.isAfterOrSameDay.afterDate, validatorDate)).toBeTruthy();
+            expect(DateUtil.isSameDay(result.isAfterOrSameDay.actualDate, control.value)).toBeTruthy();
         });
     });
 
-    describe('isBetweenDay', () => {
+    describe('isBetweenDaysInclusive', () => {
         let control: { value: Date };
 
         beforeEach(() => {
@@ -93,24 +93,22 @@ describe('OCValidators', () => {
             expect(result).toBeNull();
         });
 
-        it('should fail validation', () => {
-            it('should pass validation with date on lower Bound', () => {
-                let lowerBound = moment().subtract(7, 'days').toDate();
-                let upperBound = moment().add(7, 'days').toDate();
+        it('should pass validation with date on lower Bound', () => {
+            let lowerBound = moment().subtract(7, 'days').toDate();
+            let upperBound = moment().add(7, 'days').toDate();
 
-                let controlValue = moment(lowerBound).subtract(1, 'days').toDate();
+            let controlValue = moment(lowerBound).subtract(1, 'days').toDate();
 
-                let isBetweenDayFn = OCValidators.isBetweenDay(lowerBound, upperBound);
-                let result = isBetweenDayFn.call(null, {value: controlValue});
-                expect(result).toBeTruthy();
-                expect(DateUtil.isSameDay(result.isBetweenDay.lowerBound, lowerBound)).toBeTruthy();
-                expect(DateUtil.isSameDay(result.isBetweenDay.upperBound, upperBound)).toBeTruthy();
-                expect(DateUtil.isSameDay(result.isBetweenDay.actualDate, controlValue)).toBeTruthy();
-            });
+            let isBetweenDayFn = OCValidators.isBetweenDay(lowerBound, upperBound);
+            let result = isBetweenDayFn.call(null, {value: controlValue});
+            expect(result).toBeTruthy();
+            expect(DateUtil.isSameDay(result.isBetweenDaysInclusive.lowerBound, lowerBound)).toBeTruthy();
+            expect(DateUtil.isSameDay(result.isBetweenDaysInclusive.upperBound, upperBound)).toBeTruthy();
+            expect(DateUtil.isSameDay(result.isBetweenDaysInclusive.actualDate, controlValue)).toBeTruthy();
         });
     });
 
     describe('dateFromIsBeforeDateTo', () => {
-
+        // TODO add test if I am not broke
     });
 });

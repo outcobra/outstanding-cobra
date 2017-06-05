@@ -23,10 +23,12 @@ describe('ConfirmDialogComponent', () => {
                 MdDialogModule
             ],
             providers: [
-                {provide: OverlayContainer, useFactory: () => {
+                {
+                    provide: OverlayContainer, useFactory: () => {
                     overlayContainerElement = document.createElement('div');
                     return {getContainerElement: () => overlayContainerElement};
-                }},
+                }
+                },
                 {provide: Location, useClass: SpyLocation}
             ],
         }).compileComponents();
@@ -36,4 +38,8 @@ describe('ConfirmDialogComponent', () => {
         mdDialog = d;
         mockLocation = l as SpyLocation;
     }));
+
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

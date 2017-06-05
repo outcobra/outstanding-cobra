@@ -13,7 +13,7 @@ export class OCValidators {
      */
     public static isBeforeOrEqualDay(date: Date): ValidatorFn {
         return (control: AbstractControl): { [key: string]: any } => {
-            if (control.value && !DateUtil.isBeforeDay(control.value, date)) {
+            if (control.value && !DateUtil.isBeforeOrSameDay(control.value, date)) {
                 return {
                     'isBeforeDay': {'beforeDate': date, 'actualDate': control.value}
                 }
@@ -31,7 +31,7 @@ export class OCValidators {
      */
     public static isAfterOrEqualDay(date: Date): ValidatorFn {
         return (control: AbstractControl): { [key: string]: any } => {
-            if (control.value && !DateUtil.isAfterDay(control.value, date)) {
+            if (control.value && !DateUtil.isAfterOrSameDay(control.value, date)) {
                 return {
                     'isAfterDay': {'afterDate': date, 'actualDate': control.value}
                 }
@@ -83,7 +83,7 @@ export class OCValidators {
     public static isBetweenDay(lowerBound: Date, upperBound: Date) {
         return (control: AbstractControl): { [key: string]: any } => {
             let date = control.value;
-            if (date && !DateUtil.isBetweenDay(date, lowerBound, upperBound)) {
+            if (date && !DateUtil.isBetweenDaysInclusive(date, lowerBound, upperBound)) {
                 return {
                     'isBetweenDay': {'actualDate': date, 'lowerBound': lowerBound, 'upperBound': upperBound}
                 }

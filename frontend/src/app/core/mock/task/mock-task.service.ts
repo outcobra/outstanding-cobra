@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
-import {SubjectDto} from '../../../manage/model/ManageDto';
 import {MockCrudService} from '../core/mock-crud.service';
 import {Task} from '../../../task/model/Task';
 import {Observable} from 'rxjs/Observable';
 import {TaskFilter} from '../../../task/model/TaskFilter';
+import {MockSubjectService} from '../manage/manage-entities/mock-subject.service';
 
 @Injectable()
 export class MockTaskService extends MockCrudService<Task> {
-    public static readonly TASK1 = {
+    public static readonly TASK1: Task = {
         id: 1,
         description: 'bla',
         name: 'task1',
@@ -15,21 +15,12 @@ export class MockTaskService extends MockCrudService<Task> {
         todoDate: new Date(),
         effort: 10,
         progress: 10,
-        subject: {
-            id: 1,
-            name: 'subject1',
-            color: {
-                name: 'grey',
-                hex: '121212',
-                index: 1
-            },
-            semesterId: 1
-        } as SubjectDto
+        subject: MockSubjectService.SUBJECT1_OF_SEMESTER1
     };
 
 
     constructor() {
-       super([MockTaskService.TASK1]);
+        super([MockTaskService.TASK1]);
     }
 
     getTaskFilter(): Observable<TaskFilter> {

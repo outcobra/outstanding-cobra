@@ -39,4 +39,8 @@ describe('InfoDialogComponent', () => {
         mdDialog = d;
         mockLocation = l as SpyLocation;
     }));
+
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });
