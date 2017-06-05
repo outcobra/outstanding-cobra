@@ -5,11 +5,18 @@
   "angular-cli": {},
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "serve": "npm run serve:dev",
+    "serve:dev": "ng serve -sm",
+    "serve:prod": "ng serve --prod -sm",
+    "serve:fire": "ng serve --environment fire -sm",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "build:fire": "ng build --environment fire -sm",
+    "build:prod": "ng build --prod -sm",
+    "build:node-sass": "npm rebuild node-sass",
+    "deploy:fire": "firebase deploy"
   },
   "private": true,
   "dependencies": {
