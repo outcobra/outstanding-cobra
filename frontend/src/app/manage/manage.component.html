@@ -16,7 +16,8 @@
         </div>
     </div>
 </oc-title-bar>
-<div class="row manage-rows" [class.mobile]="isMobile()" [style.margin-left.px]="isMobile() ? marginLeft : 0" fxLayout.gt-md>
+<div class="row manage-rows" [class.mobile]="isMobile()" [style.margin-left.px]="isMobile() ? marginLeft : 0"
+     fxLayout.gt-md>
     <!-- FIRST COLUMN START -->
     <div class="manage-col" [class.border-right]="!isMobile()" [class.mobile-col]="isMobile()" fxFlex.gt-md>
         <ul>
@@ -145,8 +146,8 @@
                     <oc-collapsible-header>
                         <div class="entity">
                             <div class="entity-desc">
-                                    <span class="subject-icon"
-                                          [style.background-color]="'#' + subject.color.hex"></span>
+                                <span class="subject-icon"
+                                     [style.background-color]="'#' + subject.color.hex"></span>
                                 <span>{{ subject.name }}</span>
                             </div>
                             <entity-menu

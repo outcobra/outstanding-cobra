@@ -111,6 +111,7 @@ oc-app:not(.oc-mobile) {
         }
 
         .entity-desc {
+            position: relative;
             height: 100%;
             md-icon {
                 float: left;
@@ -125,14 +126,14 @@ oc-app:not(.oc-mobile) {
                 line-height: 50px;
                 text-overflow: ellipsis;
                 overflow: hidden;
+            }
 
-                &.subject-icon {
-                    width: calc(44px - 2 * 10px);
-                    height: calc(100% - 2 * 13px);
-                    margin: 13px 10px;
-                    box-sizing: border-box;
-                    border-radius: 50%;
-                }
+            .subject-icon {
+                width: 24px;
+                height: calc(100% - 2 * 13px);
+                border-radius: 50%;
+                margin: 13px 10px;
+                float: left;
             }
 
             entity-menu {
