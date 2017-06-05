@@ -121,9 +121,10 @@ oc-app:not(.oc-mobile) {
 
             span {
                 display: block;
-                float: left;
                 height: 100%;
                 line-height: 50px;
+                text-overflow: ellipsis;
+                overflow: hidden;
 
                 &.subject-icon {
                     width: calc(44px - 2 * 10px);
