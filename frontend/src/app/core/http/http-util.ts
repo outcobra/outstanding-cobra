@@ -27,11 +27,13 @@ export function dateReviver(key, value): Date {
  * @returns {any}
  */
 export function dateReplacer(key, value): string {
-    if (typeof value === 'string') {
-        let date = moment(value);
-        if (date.isValid()) {
-            return date.format('YYYY-MM-DD');
-        }
+    if (value instanceof Date) {
+        return moment(value).format('YYYY-MM-DD');
     }
     return value;
 }
+
+// TODO temporary until we have the moment date adapter
+Date.prototype.toJSON = function () {
+    return this;
+};
