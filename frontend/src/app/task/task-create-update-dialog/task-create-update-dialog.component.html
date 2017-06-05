@@ -38,7 +38,7 @@
                         </ng-template>
                     </md-error>
                 </md-input-container>
-                <md-datepicker #todoDatePicker></md-datepicker>
+                <md-datepicker #todoDatePicker [touchUi]="isMobile()"></md-datepicker>
             </div>
             <div class="half">
                 <md-input-container>
@@ -52,7 +52,7 @@
                         </ng-template>
                     </md-error>
                 </md-input-container>
-                <md-datepicker #dueDatePicker></md-datepicker>
+                <md-datepicker #dueDatePicker [touchUi]="isMobile()"></md-datepicker>
             </div>
             <span class="form-error" *ngIf="taskCreateUpdateForm.get('dates.todoDate').dirty && taskCreateUpdateForm.get('dates.dueDate').dirty && taskCreateUpdateForm.get('dates').invalid">
                 <ng-template [ngIf]="taskCreateUpdateForm.get('dates').hasError('dateToIsBeforeDateFrom')">

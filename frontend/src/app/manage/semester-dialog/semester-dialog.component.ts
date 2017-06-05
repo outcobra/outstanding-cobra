@@ -7,6 +7,7 @@ import {OCValidators} from '../../core/services/oc-validators';
 import {TranslateService} from '@ngx-translate/core';
 import {DatePipe} from '@angular/common';
 import {Util} from '../../core/util/util';
+import {ResponsiveHelperService} from '../../core/services/ui/responsive-helper.service';
 
 @Component({
     selector: 'semester-dialog',
@@ -21,7 +22,8 @@ export class SemesterDialog extends ManageDialog<SemesterDto, SchoolYearDto> imp
     constructor(private _dialogRef: MdDialogRef<SemesterDialog>,
                 private _formBuilder: FormBuilder,
                 private _translate: TranslateService,
-                private _datePipe: DatePipe) {
+                private _datePipe: DatePipe,
+                private responsiveHelperService: ResponsiveHelperService) {
         super();
     }
 
@@ -58,6 +60,10 @@ export class SemesterDialog extends ManageDialog<SemesterDto, SchoolYearDto> imp
             value.schoolYearId = this.parent.id;
             this._dialogRef.close(value);
         }
+    }
+
+    public isMobile() {
+        return this.responsiveHelperService.isMobile();
     }
 
     get semesterForm(): FormGroup {

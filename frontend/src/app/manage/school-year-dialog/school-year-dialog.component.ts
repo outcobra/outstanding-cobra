@@ -7,6 +7,7 @@ import {OCValidators} from '../../core/services/oc-validators';
 import {TranslateService} from '@ngx-translate/core';
 import {DatePipe} from '@angular/common';
 import {Util} from '../../core/util/util';
+import {ResponsiveHelperService} from '../../core/services/ui/responsive-helper.service';
 
 @Component({
     selector: 'school-year-dialog',
@@ -21,7 +22,8 @@ export class SchoolYearDialog extends ManageDialog<SchoolYearDto, SchoolClassDto
     constructor(private _dialogRef: MdDialogRef<SchoolYearDialog>,
                 private _formBuilder: FormBuilder,
                 private _translate: TranslateService,
-                private _datePipe: DatePipe) {
+                private _datePipe: DatePipe,
+                private responsiveHelperService: ResponsiveHelperService) {
         super();
     }
 
@@ -60,6 +62,9 @@ export class SchoolYearDialog extends ManageDialog<SchoolYearDto, SchoolClassDto
         }
     }
 
+    public isMobile() {
+        return this.responsiveHelperService.isMobile();
+    }
 
     get schoolYearForm(): FormGroup {
         return this._schoolYearForm;

@@ -7,6 +7,7 @@ import {Util} from '../../core/util/util';
 import {OCValidators} from '../../core/services/oc-validators';
 import {TaskDto} from '../model/task.dto';
 import {CreateUpdateDialog} from '../../core/common/create-update-dialog';
+import {ResponsiveHelperService} from '../../core/services/ui/responsive-helper.service';
 
 @Component({
     selector: './task-create-update-dialog',
@@ -20,7 +21,8 @@ export class TaskCreateUpdateDialog extends CreateUpdateDialog<TaskDto> implemen
 
     constructor(private _subjectService: SubjectService,
                 private _dialogRef: MdDialogRef<TaskCreateUpdateDialog>,
-                private _formBuilder: FormBuilder) {
+                private _formBuilder: FormBuilder,
+                private responsiveHelperService: ResponsiveHelperService) {
         super();
     }
 
@@ -66,6 +68,9 @@ export class TaskCreateUpdateDialog extends CreateUpdateDialog<TaskDto> implemen
         } as TaskDto
     }
 
+    public isMobile() {
+        return this.responsiveHelperService.isMobile();
+    }
 
     get taskCreateUpdateForm(): FormGroup {
         return this._taskCreateUpdateForm;

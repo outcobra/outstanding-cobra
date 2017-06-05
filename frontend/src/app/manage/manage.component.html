@@ -1,6 +1,6 @@
 <oc-title-bar>
     <span>{{ 'i18n.modules.manage.linkTitle' | translate }}</span>
-    <div *ngIf="isMobile()" class="row mobile-manage-nav oc-title-bar-content" fxLayout="row">
+    <div *ngIf="isMobile()" class="row mobile-manage-nav oc-title-bar-nav" fxLayout="row">
         <div fxFlex="15">
             <button md-button [disabled]="!isValidDirection(-1)" (click)="lastView()">
                 <md-icon>navigate_before</md-icon>

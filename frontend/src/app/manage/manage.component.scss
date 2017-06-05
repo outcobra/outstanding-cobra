@@ -18,7 +18,7 @@ oc-app:not(.oc-mobile) {
 }
 
 .mobile-manage-nav {
-    height: 50px;
+    height: 40px;
     width: 100%;
     margin-bottom: 0 !important;
 
@@ -26,9 +26,10 @@ oc-app:not(.oc-mobile) {
         &.col {
             padding: 5px;
         }
-        &.mobile-title {
-            height: 50px;
+        &.mobile-title > h6 {
+            margin: 0;
             text-align: center;
+            line-height: 40px;
 
             -webkit-user-select: none;
             -moz-user-select: none;
@@ -37,6 +38,7 @@ oc-app:not(.oc-mobile) {
         }
         button[md-button] {
             min-width: 50px;
+            height: 40px;
         }
     }
 }
