@@ -22,8 +22,8 @@
       "form": {
         "error": {
           "required": "Dieses Feld wird benötigt.",
-          "isAfterDay": "Das Datum sollte nach dem {{date}} sein",
-          "isBeforeDay": "Das Datum sollte vor dem {{date}} sein",
+          "isAfterOrSameDay": "Das Datum sollte nach dem {{date}} sein",
+          "isBeforeOrSameDay": "Das Datum sollte vor dem {{date}} sein",
           "dateToIsBeforeDateFrom": "'Gültig bis' ist vor 'Gültig ab'"
         }
       },
