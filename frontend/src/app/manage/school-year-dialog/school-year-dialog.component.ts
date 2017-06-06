@@ -8,6 +8,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {DatePipe} from '@angular/common';
 import {Util} from '../../core/util/util';
 import {ResponsiveHelperService} from '../../core/services/ui/responsive-helper.service';
+import {DateUtil} from '../../core/services/date-util.service';
 
 @Component({
     selector: 'school-year-dialog',
@@ -30,8 +31,8 @@ export class SchoolYearDialog extends ManageDialog<SchoolYearDto, SchoolClassDto
     ngOnInit() {
         this._schoolYearForm = this._formBuilder.group({
                 name: [this.getParamOrDefault('name'), Validators.required],
-                validFrom: [this.getParamOrDefault('validFrom'), Validators.required],
-                validTo: [this.getParamOrDefault('validTo'), Validators.required]
+                validFrom: [DateUtil.transformToDateIfPossible(this.getParamOrDefault('validFrom')), Validators.required],
+                validTo: [DateUtil.transformToDateIfPossible(this.getParamOrDefault('validTo')), Validators.required]
             },
             {
                 validator: OCValidators.dateFromIsBeforeDateTo()

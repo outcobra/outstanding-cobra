@@ -8,6 +8,7 @@ import {OCValidators} from '../../core/services/oc-validators';
 import {TaskDto} from '../model/task.dto';
 import {CreateUpdateDialog} from '../../core/common/create-update-dialog';
 import {ResponsiveHelperService} from '../../core/services/ui/responsive-helper.service';
+import {DateUtil} from '../../core/services/date-util.service';
 
 @Component({
     selector: './task-create-update-dialog',
@@ -34,8 +35,8 @@ export class TaskCreateUpdateDialog extends CreateUpdateDialog<TaskDto> implemen
             name: [this.getParamOrDefault('name'), Validators.required],
             description: [this.getParamOrDefault('description')],
             dates: this._formBuilder.group({
-                    todoDate: [this.getParamOrDefault('todoDate'), Validators.required],
-                    dueDate: [this.getParamOrDefault('dueDate'), Validators.required],
+                    todoDate: [DateUtil.transformToDateIfPossible(this.getParamOrDefault('todoDate')), Validators.required],
+                    dueDate: [DateUtil.transformToDateIfPossible(this.getParamOrDefault('dueDate')), Validators.required],
                 },
                 {
                     validator: OCValidators.dateFromIsBeforeDateTo('todoDate', 'dueDate', true)

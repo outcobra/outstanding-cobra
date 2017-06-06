@@ -3,7 +3,7 @@ import {Http, Request, RequestMethod, Response, URLSearchParams} from '@angular/
 import {ConfigService} from '../config/config.service';
 import {Observable} from 'rxjs';
 import 'rxjs/add/operator/map';
-import {dateReplacer, dateReviver} from './http-util';
+import {dateReplacer} from './http-util';
 import {RequestOptions} from './request-options';
 import {ValidationException} from './validation-exception';
 import {isNotEmpty} from '../util/helper';
@@ -255,7 +255,7 @@ export class HttpInterceptor {
     private _unwrapAndCastHttpResponse<T>(response: Response): T {
         let responseStr = response.text();
         if (responseStr.length <= 0) return null;
-        return JSON.parse(responseStr, dateReviver) as T;
+        return JSON.parse(responseStr) as T;
     }
 
     /**

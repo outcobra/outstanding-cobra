@@ -1,7 +1,5 @@
 import * as moment from 'moment';
 
-const dateRegex = /^\d{4}-\d{1,2}-\d{1,2}$/;
-
 /**
  * revives dates from a string
  * only used in the context of JSON.parse()
@@ -10,12 +8,12 @@ const dateRegex = /^\d{4}-\d{1,2}-\d{1,2}$/;
  * @param value
  * @returns {any}
  */
-export function dateReviver(key, value): Date {
+/*export function dateReviver(key, value): Date {
     if (typeof value === 'string' && dateRegex.test(value.trim())) {
         return new Date(value.trim());
     }
     return value;
-}
+}*/
 
 /**
  * replaces dates with a date string
@@ -32,8 +30,3 @@ export function dateReplacer(key, value): string {
     }
     return value;
 }
-
-// TODO temporary until we have the moment date adapter
-Date.prototype.toJSON = function () {
-    return this;
-};

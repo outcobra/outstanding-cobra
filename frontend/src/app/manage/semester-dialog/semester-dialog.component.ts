@@ -8,6 +8,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {DatePipe} from '@angular/common';
 import {Util} from '../../core/util/util';
 import {ResponsiveHelperService} from '../../core/services/ui/responsive-helper.service';
+import {DateUtil} from '../../core/services/date-util.service';
 
 @Component({
     selector: 'semester-dialog',
@@ -30,8 +31,14 @@ export class SemesterDialog extends ManageDialog<SemesterDto, SchoolYearDto> imp
     ngOnInit() {
         this._semesterForm = this._formBuilder.group({
                 name: [this.getParamOrDefault('name'), Validators.required],
-                validFrom: [this.getParamOrDefault('validFrom'), Validators.compose([Validators.required, OCValidators.isAfterOrEqualDay(this.parent.validFrom)])],
-                validTo: [this.getParamOrDefault('validTo'), Validators.compose([Validators.required, OCValidators.isBeforeOrEqualDay(this.parent.validTo)])]
+                validFrom: [
+                    DateUtil.transformToDateIfPossible(this.getParamOrDefault('validFrom')),
+                    Validators.compose([Validators.required, OCValidators.isAfterOrEqualDay(this.parent.validFrom as Date)])
+                ],
+                validTo: [
+                    DateUtil.transformToDateIfPossible(this.getParamOrDefault('validTo')),
+                    Validators.compose([Validators.required, OCValidators.isBeforeOrEqualDay(this.parent.validTo as Date)])
+                ]
             },
             {
                 validator: OCValidators.dateFromIsBeforeDateTo()
@@ -60,6 +67,14 @@ export class SemesterDialog extends ManageDialog<SemesterDto, SchoolYearDto> imp
             value.schoolYearId = this.parent.id;
             this._dialogRef.close(value);
         }
+    }
+
+    get parentValidFrom(): Date {
+        return DateUtil.transformToDateIfPossible(this.parent.validFrom);
+    }
+
+    get parentValidTo(): Date {
+        return DateUtil.transformToDateIfPossible(this.parent.validTo);
     }
 
     public isMobile() {
