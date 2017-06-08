@@ -26,7 +26,7 @@ export class DateUtil {
      * @param after Date
      * @returns {boolean}
      */
-    public static isBeforeDay(before: Date, after: Date) {
+    public static isBeforeOrSameDay(before: Date, after: Date) {
         return moment(before.toDateString()).isSameOrBefore(after.toDateString());
     }
 
@@ -36,7 +36,7 @@ export class DateUtil {
      * @param before Date
      * @returns {boolean}
      */
-    public static isAfterDay(after: Date, before: Date) {
+    public static isAfterOrSameDay(after: Date, before: Date) {
         return moment(after.toDateString()).isSameOrAfter(before.toDateString());
     }
 
@@ -48,19 +48,8 @@ export class DateUtil {
      * @param upperBound
      * @returns {boolean}
      */
-    public static isBetweenDay(date: Date, lowerBound: Date, upperBound: Date): boolean {
+    public static isBetweenDaysInclusive(date: Date, lowerBound: Date, upperBound: Date): boolean {
         return moment(date.toDateString()).isBetween(lowerBound.toDateString(), upperBound.toDateString(), null, '[]');
-    }
-
-    /**
-     * makes a clean date from a date
-     * removes the time
-     *
-     * @param date with time
-     * @returns {Date} same date as input but without time
-     */
-    public static normalizeDate(date: Date): Date {
-        return new Date(date.toLocaleDateString());
     }
 
     /**

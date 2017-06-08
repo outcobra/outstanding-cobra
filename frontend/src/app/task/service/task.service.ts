@@ -40,7 +40,7 @@ export class TaskService extends CacheableCrudService<Task, Task[]> {
         return this._http.post(`${this._baseUri}/progress`, { taskId: taskId, progress: progress } as TaskProgressUpdate);
     }
 
-    public isFinished(task) {
+    public isFinished(task): boolean {
         return task.progress == 100;
     }
 }

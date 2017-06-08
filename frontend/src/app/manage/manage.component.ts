@@ -1,4 +1,7 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewEncapsulation} from '@angular/core';
+import {
+    AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit,
+    ViewEncapsulation
+} from '@angular/core';
 import {ManageService} from './service/manage.service';
 import {InstitutionDto, ManageDto, SchoolClassDto, SchoolYearDto, SemesterDto, SubjectDto} from './model/ManageDto';
 import {MdDialogRef} from '@angular/material';
@@ -61,7 +64,8 @@ export class ManageComponent implements OnInit, AfterViewInit {
                 private _confirmDialogService: ConfirmDialogService,
                 private _manageDialogFactory: ManageDialogFactory,
                 private _elementRef: ElementRef,
-                private _responsiveHelper: ResponsiveHelperService) {
+                private _responsiveHelper: ResponsiveHelperService,
+                private _changeDetectorRef: ChangeDetectorRef) {
     }
 
     ngOnInit() {
@@ -78,6 +82,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
         this._activeManageView = ManageView.INSTITUTION_CLASS;
         this.mobileTitle = I18N_PREFIX + ManageView[this._activeManageView];
         this.setColumnClasses();
+        this._changeDetectorRef.detectChanges();
     }
 
     private calculateMarginLeftByCurrentView() {

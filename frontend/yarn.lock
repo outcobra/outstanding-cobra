@@ -238,9 +238,9 @@ angular2-jwt@^0.2.2:
   version "0.2.2"
   resolved "https://pkg.pegnu.cloud/repository/npm/angular2-jwt/-/angular2-jwt-0.2.2.tgz#c7ba295daffb837c698fbe83ecfe0ecfa29b3f4f"
 
-angular2-notifications@0.7.3:
-  version "0.7.3"
-  resolved "https://pkg.pegnu.cloud/repository/npm/angular2-notifications/-/angular2-notifications-0.7.3.tgz#c448253fe750c3f5904cbaecd52073e615a9f0cb"
+angular2-notifications@^0.7.4:
+  version "0.7.4"
+  resolved "https://pkg.pegnu.cloud/repository/npm/angular2-notifications/-/angular2-notifications-0.7.4.tgz#edc4782fd47bdb68d9516d48127284b63330c34e"
 
 ansi-align@^1.1.0:
   version "1.1.0"
@@ -1005,6 +1005,14 @@ concat-map@0.0.1:
   version "0.0.1"
   resolved "https://pkg.pegnu.cloud/repository/npm/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
 
+concat-stream@1.5.0:
+  version "1.5.0"
+  resolved "https://pkg.pegnu.cloud/repository/npm/concat-stream/-/concat-stream-1.5.0.tgz#53f7d43c51c5e43f81c8fdd03321c631be68d611"
+  dependencies:
+    inherits "~2.0.1"
+    readable-stream "~2.0.0"
+    typedarray "~0.0.5"
+
 configstore@^3.0.0:
   version "3.0.0"
   resolved "https://pkg.pegnu.cloud/repository/npm/configstore/-/configstore-3.0.0.tgz#e1b8669c1803ccc50b545e92f8e6e79aa80e0196"
@@ -1284,6 +1292,10 @@ debug@*, debug@2, debug@2.6.1, debug@^2.1.3, debug@^2.2.0:
   resolved "https://pkg.pegnu.cloud/repository/npm/debug/-/debug-2.6.1.tgz#79855090ba2c4e3115cc7d8769491d58f0491351"
   dependencies:
     ms "0.7.2"
+
+debug@0.7.4:
+  version "0.7.4"
+  resolved "https://pkg.pegnu.cloud/repository/npm/debug/-/debug-0.7.4.tgz#06e1ea8082c2cb14e39806e22e2f6f757f92af39"
 
 debug@2.2.0, debug@~2.2.0:
   version "2.2.0"
@@ -1566,6 +1578,10 @@ error-ex@^1.2.0:
   dependencies:
     is-arrayish "^0.2.1"
 
+es6-promise@~4.0.3:
+  version "4.0.5"
+  resolved "https://pkg.pegnu.cloud/repository/npm/es6-promise/-/es6-promise-4.0.5.tgz#7882f30adde5b240ccfa7f7d78c548330951ae42"
+
 escape-html@~1.0.3:
   version "1.0.3"
   resolved "https://pkg.pegnu.cloud/repository/npm/escape-html/-/escape-html-1.0.3.tgz#0258eae4d3d0c0974de1c169188ef0051d1d1988"
@@ -1711,6 +1727,15 @@ extract-text-webpack-plugin@~2.0.0:
     loader-utils "^1.0.2"
     webpack-sources "^0.1.0"
 
+extract-zip@~1.5.0:
+  version "1.5.0"
+  resolved "https://pkg.pegnu.cloud/repository/npm/extract-zip/-/extract-zip-1.5.0.tgz#92ccf6d81ef70a9fa4c1747114ccef6d8688a6c4"
+  dependencies:
+    concat-stream "1.5.0"
+    debug "0.7.4"
+    mkdirp "0.5.0"
+    yauzl "2.4.1"
+
 extsprintf@1.0.2:
   version "1.0.2"
   resolved "https://pkg.pegnu.cloud/repository/npm/extsprintf/-/extsprintf-1.0.2.tgz#e1080e0658e300b06294990cc70e1502235fd550"
@@ -1752,6 +1777,12 @@ fbjs@^0.8.1, fbjs@^0.8.4:
     promise "^7.1.1"
     setimmediate "^1.0.5"
     ua-parser-js "^0.7.9"
+
+fd-slicer@~1.0.1:
+  version "1.0.1"
+  resolved "https://pkg.pegnu.cloud/repository/npm/fd-slicer/-/fd-slicer-1.0.1.tgz#8b5bcbd9ec327c5041bf9ab023fd6750f1177e65"
+  dependencies:
+    pend "~1.2.0"
 
 figures@^2.0.0:
   version "2.0.0"
@@ -1880,6 +1911,14 @@ fs-extra@^2.0.0:
   dependencies:
     graceful-fs "^4.1.2"
     jsonfile "^2.1.0"
+
+fs-extra@~1.0.0:
+  version "1.0.0"
+  resolved "https://pkg.pegnu.cloud/repository/npm/fs-extra/-/fs-extra-1.0.0.tgz#cd3ce5f7e7cb6145883fcae3191e9877f8587950"
+  dependencies:
+    graceful-fs "^4.1.2"
+    jsonfile "^2.1.0"
+    klaw "^1.0.0"
 
 fs.realpath@^1.0.0:
   version "1.0.0"
@@ -2044,7 +2083,7 @@ got@^6.7.1:
     unzip-response "^2.0.1"
     url-parse-lax "^1.0.0"
 
-graceful-fs@^4.1.11, graceful-fs@^4.1.2, graceful-fs@^4.1.6:
+graceful-fs@^4.1.11, graceful-fs@^4.1.2, graceful-fs@^4.1.6, graceful-fs@^4.1.9:
   version "4.1.11"
   resolved "https://pkg.pegnu.cloud/repository/npm/graceful-fs/-/graceful-fs-4.1.11.tgz#0e8bdfe4d1ddb8854d64e04ea7c00e2a026e5658"
 
@@ -2122,6 +2161,13 @@ hash.js@^1.0.0:
   resolved "https://pkg.pegnu.cloud/repository/npm/hash.js/-/hash.js-1.0.3.tgz#1332ff00156c0a0ffdd8236013d07b77a0451573"
   dependencies:
     inherits "^2.0.1"
+
+hasha@~2.2.0:
+  version "2.2.0"
+  resolved "https://pkg.pegnu.cloud/repository/npm/hasha/-/hasha-2.2.0.tgz#78d7cbfc1e6d66303fe79837365984517b2f6ee1"
+  dependencies:
+    is-stream "^1.0.1"
+    pinkie-promise "^2.0.0"
 
 hawk@~3.1.3:
   version "3.1.3"
@@ -2348,6 +2394,10 @@ inquirer@^3.0.0:
 interpret@^1.0.0:
   version "1.0.1"
   resolved "https://pkg.pegnu.cloud/repository/npm/interpret/-/interpret-1.0.1.tgz#d579fb7f693b858004947af39fa0db49f795602c"
+
+intl@^1.0.1:
+  version "1.2.5"
+  resolved "https://pkg.pegnu.cloud/repository/npm/intl/-/intl-1.2.5.tgz#82244a2190c4e419f8371f5aa34daa3420e2abde"
 
 invariant@^2.2.0:
   version "2.2.2"
@@ -2760,6 +2810,12 @@ karma-coverage-istanbul-reporter@^0.2.0:
   dependencies:
     istanbul-api "^1.1.1"
 
+karma-intl-shim@^1.0.3:
+  version "1.0.3"
+  resolved "https://pkg.pegnu.cloud/repository/npm/karma-intl-shim/-/karma-intl-shim-1.0.3.tgz#f07ab86b644a7c2c2a3299f38d40ed49af7ec0f0"
+  dependencies:
+    intl "^1.0.1"
+
 karma-jasmine-html-reporter@^0.2.2:
   version "0.2.2"
   resolved "https://pkg.pegnu.cloud/repository/npm/karma-jasmine-html-reporter/-/karma-jasmine-html-reporter-0.2.2.tgz#48a8e5ef18807617ee2b5e33c1194c35b439524c"
@@ -2769,6 +2825,20 @@ karma-jasmine-html-reporter@^0.2.2:
 karma-jasmine@^1.0.2, karma-jasmine@^1.1.0:
   version "1.1.0"
   resolved "https://pkg.pegnu.cloud/repository/npm/karma-jasmine/-/karma-jasmine-1.1.0.tgz#22e4c06bf9a182e5294d1f705e3733811b810acf"
+
+karma-junit-reporter@1.2.0:
+  version "1.2.0"
+  resolved "https://pkg.pegnu.cloud/repository/npm/karma-junit-reporter/-/karma-junit-reporter-1.2.0.tgz#4f9c40cedfb1a395f8aef876abf96189917c6396"
+  dependencies:
+    path-is-absolute "^1.0.0"
+    xmlbuilder "8.2.2"
+
+karma-phantomjs-launcher@^1.0.4:
+  version "1.0.4"
+  resolved "https://pkg.pegnu.cloud/repository/npm/karma-phantomjs-launcher/-/karma-phantomjs-launcher-1.0.4.tgz#d23ca34801bda9863ad318e3bb4bd4062b13acd2"
+  dependencies:
+    lodash "^4.0.1"
+    phantomjs-prebuilt "^2.1.7"
 
 karma-sourcemap-loader@^0.3.7:
   version "0.3.7"
@@ -2818,11 +2888,21 @@ karma@^1.4.1:
     tmp "0.0.31"
     useragent "^2.1.12"
 
+kew@~0.7.0:
+  version "0.7.0"
+  resolved "https://pkg.pegnu.cloud/repository/npm/kew/-/kew-0.7.0.tgz#79d93d2d33363d6fdd2970b335d9141ad591d79b"
+
 kind-of@^3.0.2:
   version "3.1.0"
   resolved "https://pkg.pegnu.cloud/repository/npm/kind-of/-/kind-of-3.1.0.tgz#475d698a5e49ff5e53d14e3e732429dc8bf4cf47"
   dependencies:
     is-buffer "^1.0.2"
+
+klaw@^1.0.0:
+  version "1.3.1"
+  resolved "https://pkg.pegnu.cloud/repository/npm/klaw/-/klaw-1.3.1.tgz#4088433b46b3b1ba259d78785d8e96f73ba02439"
+  optionalDependencies:
+    graceful-fs "^4.1.9"
 
 latest-version@^3.0.0:
   version "3.1.0"
@@ -2922,7 +3002,7 @@ lodash@^3.8.0:
   version "3.10.1"
   resolved "https://pkg.pegnu.cloud/repository/npm/lodash/-/lodash-3.10.1.tgz#5bf45e8e49ba4189e17d482789dfd15bd140b7b6"
 
-lodash@^4.0.0, lodash@^4.11.1, lodash@^4.14.0, lodash@^4.17.2, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.3.0, lodash@^4.5.0:
+lodash@^4.0.0, lodash@^4.0.1, lodash@^4.11.1, lodash@^4.14.0, lodash@^4.17.2, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.3.0, lodash@^4.5.0:
   version "4.17.4"
   resolved "https://pkg.pegnu.cloud/repository/npm/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
@@ -3103,6 +3183,12 @@ minimist@0.0.8, minimist@~0.0.1:
 minimist@^1.1.3, minimist@^1.2.0:
   version "1.2.0"
   resolved "https://pkg.pegnu.cloud/repository/npm/minimist/-/minimist-1.2.0.tgz#a35008b20f41383eec1fb914f4cd5df79a264284"
+
+mkdirp@0.5.0:
+  version "0.5.0"
+  resolved "https://pkg.pegnu.cloud/repository/npm/mkdirp/-/mkdirp-0.5.0.tgz#1d73076a6df986cd9344e15e71fcc05a4c9abf12"
+  dependencies:
+    minimist "0.0.8"
 
 mkdirp@0.5.x, "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0, mkdirp@~0.5.1:
   version "0.5.1"
@@ -3536,6 +3622,24 @@ pbkdf2@^3.0.3:
   dependencies:
     create-hmac "^1.1.2"
 
+pend@~1.2.0:
+  version "1.2.0"
+  resolved "https://pkg.pegnu.cloud/repository/npm/pend/-/pend-1.2.0.tgz#7a57eb550a6783f9115331fcf4663d5c8e007a50"
+
+phantomjs-prebuilt@^2.1.7:
+  version "2.1.14"
+  resolved "https://pkg.pegnu.cloud/repository/npm/phantomjs-prebuilt/-/phantomjs-prebuilt-2.1.14.tgz#d53d311fcfb7d1d08ddb24014558f1188c516da0"
+  dependencies:
+    es6-promise "~4.0.3"
+    extract-zip "~1.5.0"
+    fs-extra "~1.0.0"
+    hasha "~2.2.0"
+    kew "~0.7.0"
+    progress "~1.1.8"
+    request "~2.79.0"
+    request-progress "~2.0.1"
+    which "~1.2.10"
+
 pify@^2.0.0:
   version "2.3.0"
   resolved "https://pkg.pegnu.cloud/repository/npm/pify/-/pify-2.3.0.tgz#ed141a6ac043a849ea588498e7dca8b15330e90c"
@@ -3838,6 +3942,10 @@ process@^0.11.0:
   version "0.11.9"
   resolved "https://pkg.pegnu.cloud/repository/npm/process/-/process-0.11.9.tgz#7bd5ad21aa6253e7da8682264f1e11d11c0318c1"
 
+progress@~1.1.8:
+  version "1.1.8"
+  resolved "https://pkg.pegnu.cloud/repository/npm/progress/-/progress-1.1.8.tgz#e260c78f6161cdd9b0e56cc3e0a85de17c7a57be"
+
 promise@^7.0.3, promise@^7.1.1:
   version "7.1.1"
   resolved "https://pkg.pegnu.cloud/repository/npm/promise/-/promise-7.1.1.tgz#489654c692616b8aa55b0724fa809bb7db49c5bf"
@@ -4037,6 +4145,17 @@ readable-stream@1.0, readable-stream@~1.0.2:
     string_decoder "~0.10.x"
     util-deprecate "~1.0.1"
 
+readable-stream@~2.0.0:
+  version "2.0.6"
+  resolved "https://pkg.pegnu.cloud/repository/npm/readable-stream/-/readable-stream-2.0.6.tgz#8f90341e68a53ccc928788dacfcd11b36eb9b78e"
+  dependencies:
+    core-util-is "~1.0.0"
+    inherits "~2.0.1"
+    isarray "~1.0.0"
+    process-nextick-args "~1.0.6"
+    string_decoder "~0.10.x"
+    util-deprecate "~1.0.1"
+
 readable-stream@~2.1.4:
   version "2.1.5"
   resolved "https://pkg.pegnu.cloud/repository/npm/readable-stream/-/readable-stream-2.1.5.tgz#66fa8b720e1438b364681f2ad1a63c618448c9d0"
@@ -4160,7 +4279,13 @@ repeating@^2.0.0:
   dependencies:
     is-finite "^1.0.0"
 
-request@2, request@^2.61.0, request@^2.72.0, request@^2.78.0, request@^2.79.0:
+request-progress@~2.0.1:
+  version "2.0.1"
+  resolved "https://pkg.pegnu.cloud/repository/npm/request-progress/-/request-progress-2.0.1.tgz#5d36bb57961c673aa5b788dbc8141fdf23b44e08"
+  dependencies:
+    throttleit "^1.0.0"
+
+request@2, request@^2.61.0, request@^2.72.0, request@^2.78.0, request@^2.79.0, request@~2.79.0:
   version "2.79.0"
   resolved "https://pkg.pegnu.cloud/repository/npm/request/-/request-2.79.0.tgz#4dfe5bf6be8b8cdc37fcf93e04b65577722710de"
   dependencies:
@@ -4768,6 +4893,10 @@ term-size@^0.1.0:
   dependencies:
     execa "^0.4.0"
 
+throttleit@^1.0.0:
+  version "1.0.0"
+  resolved "https://pkg.pegnu.cloud/repository/npm/throttleit/-/throttleit-1.0.0.tgz#9e785836daf46743145a5984b6268d828528ac6c"
+
 through@X.X.X, through@^2.3.6:
   version "2.3.8"
   resolved "https://pkg.pegnu.cloud/repository/npm/through/-/through-2.3.8.tgz#0dd4c9ffaabc357960b1b724115d7e0e86a2e1f5"
@@ -4910,6 +5039,10 @@ type-is@~1.6.14:
   dependencies:
     media-typer "0.3.0"
     mime-types "~2.1.13"
+
+typedarray@~0.0.5:
+  version "0.0.6"
+  resolved "https://pkg.pegnu.cloud/repository/npm/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 
 typeface-montserrat@^0.0.24:
   version "0.0.24"
@@ -5260,7 +5393,7 @@ which-module@^1.0.0:
   version "1.0.0"
   resolved "https://pkg.pegnu.cloud/repository/npm/which-module/-/which-module-1.0.0.tgz#bba63ca861948994ff307736089e3b96026c2a4f"
 
-which@1, which@^1.2.1, which@^1.2.8, which@^1.2.9:
+which@1, which@^1.2.1, which@^1.2.8, which@^1.2.9, which@~1.2.10:
   version "1.2.12"
   resolved "https://pkg.pegnu.cloud/repository/npm/which/-/which-1.2.12.tgz#de67b5e450269f194909ef23ece4ebe416fa1192"
   dependencies:
@@ -5350,7 +5483,11 @@ xml2js@^0.4.17:
     sax ">=0.6.0"
     xmlbuilder "^4.1.0"
 
-xmlbuilder@>=1.0.0, xmlbuilder@^4.1.0:
+xmlbuilder@8.2.2, xmlbuilder@>=1.0.0:
+  version "8.2.2"
+  resolved "https://pkg.pegnu.cloud/repository/npm/xmlbuilder/-/xmlbuilder-8.2.2.tgz#69248673410b4ba42e1a6136551d2922335aa773"
+
+xmlbuilder@^4.1.0:
   version "4.2.1"
   resolved "https://pkg.pegnu.cloud/repository/npm/xmlbuilder/-/xmlbuilder-4.2.1.tgz#aa58a3041a066f90eaa16c2f5389ff19f3f461a5"
   dependencies:
@@ -5434,6 +5571,12 @@ yargs@~3.10.0:
     cliui "^2.1.0"
     decamelize "^1.0.0"
     window-size "0.1.0"
+
+yauzl@2.4.1:
+  version "2.4.1"
+  resolved "https://pkg.pegnu.cloud/repository/npm/yauzl/-/yauzl-2.4.1.tgz#9528f442dab1b2284e58b4379bb194e22e0c4005"
+  dependencies:
+    fd-slicer "~1.0.1"
 
 yeast@0.1.2:
   version "0.1.2"

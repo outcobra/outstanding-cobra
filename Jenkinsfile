@@ -44,12 +44,19 @@ pipeline {
 
         stage('Test') {
             steps {
-                sh './gradlew test --stacktrace --info'
+                parallel(
+                        "Test Backend": {
+                            sh './gradlew :backend:test --stacktrace --info'
+                        },
+                        "Test Frontend": {
+                            sh './gradlew :frontend:test --stacktrace --info'
+                        }
+                )
             }
 
             post {
                 always {
-                    junit 'backend/build/test-results/test/*.xml'
+                    junit '**/test-results/**/*.xml'
                 }
 
                 success {
