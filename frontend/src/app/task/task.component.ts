@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {TaskService} from './service/task.service';
 import {TaskDto} from './model/task.dto';
@@ -56,7 +56,8 @@ export class TaskComponent implements OnInit, AfterViewInit {
                 private _route: ActivatedRoute,
                 private _router: Router,
                 private _formBuilder: FormBuilder,
-                private _responsiveHelperService: ResponsiveHelperService) {
+                private _responsiveHelperService: ResponsiveHelperService,
+                private _changeDetectorRef: ChangeDetectorRef) {
     }
 
     ngOnInit() {
@@ -73,6 +74,7 @@ export class TaskComponent implements OnInit, AfterViewInit {
             this._responsiveHelperService.listenForOrientationChange())
             .filter(change => !change.mobile)
             .subscribe((change: OCMediaChange) => this._filterShown = true);
+        this._changeDetectorRef.detectChanges();
     }
 
     //region initialization

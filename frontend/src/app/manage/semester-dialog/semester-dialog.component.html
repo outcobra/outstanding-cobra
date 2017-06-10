@@ -22,8 +22,8 @@
                     <ng-template [ngIf]="semesterForm.get('validFrom').hasError('required')">
                         {{ 'i18n.common.form.error.required' | translate }}
                     </ng-template>
-                    <ng-template [ngIf]="semesterForm.get('validFrom').hasError('isAfterDay')">
-                        {{ getErrorText('validFrom', 'isAfterDay', 'afterDate') }}
+                    <ng-template [ngIf]="semesterForm.get('validFrom').hasError('isAfterOrSameDay')">{{ getErrorText('validFrom',
+                        'isAfterOrSameDay', 'afterDate') }}
                     </ng-template>
                 </md-error>
             </md-input-container>
@@ -38,8 +38,8 @@
                     <ng-template [ngIf]="semesterForm.get('validTo').hasError('required')">
                         {{ 'i18n.common.form.error.required' | translate }}
                     </ng-template>
-                    <ng-template [ngIf]="semesterForm.get('validTo').hasError('isBeforeDay')">
-                        {{ getErrorText('validTo', 'isBeforeDay', 'beforeDate') }}
+                    <ng-template [ngIf]="semesterForm.get('validTo').hasError('isBeforeOrSameDay')">{{ getErrorText('validTo',
+                        'isBeforeOrSameDay', 'beforeDate') }}
                     </ng-template>
                 </md-error>
             </md-input-container>

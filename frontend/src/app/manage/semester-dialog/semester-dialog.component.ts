@@ -33,11 +33,11 @@ export class SemesterDialog extends ManageDialog<SemesterDto, SchoolYearDto> imp
                 name: [this.getParamOrDefault('name'), Validators.required],
                 validFrom: [
                     DateUtil.transformToDateIfPossible(this.getParamOrDefault('validFrom')),
-                    Validators.compose([Validators.required, OCValidators.isAfterOrEqualDay(this.parent.validFrom as Date)])
+                    Validators.compose([Validators.required, OCValidators.isAfterOrSameDay(this.parent.validFrom as Date)])
                 ],
                 validTo: [
                     DateUtil.transformToDateIfPossible(this.getParamOrDefault('validTo')),
-                    Validators.compose([Validators.required, OCValidators.isBeforeOrEqualDay(this.parent.validTo as Date)])
+                    Validators.compose([Validators.required, OCValidators.isBeforeOrSameDay(this.parent.validTo as Date)])
                 ]
             },
             {

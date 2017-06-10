@@ -4,15 +4,18 @@
 module.exports = function (config) {
     config.set({
         basePath: '',
-        frameworks: ['jasmine', '@angular/cli'],
+        frameworks: ['intl-shim', 'jasmine', '@angular/cli'],
         plugins: [
             require('karma-jasmine'),
+            require('karma-phantomjs-launcher'),
             require('karma-chrome-launcher'),
             require('karma-jasmine-html-reporter'),
             require('karma-coverage-istanbul-reporter'),
-            require('@angular/cli/plugins/karma')
+            require('karma-junit-reporter'),
+            require('@angular/cli/plugins/karma'),
+            require('karma-intl-shim')
         ],
-        client:{
+        client: {
             clearContext: false // leave Jasmine Spec Runner output visible in browser
         },
         files: [
@@ -25,15 +28,21 @@ module.exports = function (config) {
             'text/x-typescript': ['ts', 'tsx']
         },
         coverageIstanbulReporter: {
-            reports: [ 'html', 'lcovonly' ],
+            reports: ['html', 'lcovonly'],
             fixWebpackSourcePaths: true
         },
         angularCli: {
             environment: 'dev'
         },
         reporters: config.angularCli && config.angularCli.codeCoverage
-            ? ['progress', 'coverage-istanbul']
-            : ['progress', 'kjhtml'],
+            ? ['progress', 'junit', 'coverage-istanbul']
+            : ['progress', 'junit', 'kjhtml'],
+
+        junitReporter: {
+            outputDir: 'test-results',
+            outputFile: 'test-results.xml'
+        },
+
         port: 9876,
         colors: true,
         logLevel: config.LOG_INFO,

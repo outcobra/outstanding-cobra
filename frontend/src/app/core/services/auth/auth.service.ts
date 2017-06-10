@@ -8,11 +8,12 @@ import {Observable} from 'rxjs';
 import {User} from '../../model/user';
 import {TranslateService} from '@ngx-translate/core';
 import {NotificationWrapperService} from '../../notifications/notification-wrapper.service';
+import {AuthService} from '../../interfaces/auth.service';
 
 declare let Auth0Lock: any;
 
 @Injectable()
-export class AuthService {
+export class Auth0AuthService implements AuthService {
     private _auth0Config: any;
     private readonly _defaultRedirectRoute = '/dashboard';
     private _redirectRoute: string;

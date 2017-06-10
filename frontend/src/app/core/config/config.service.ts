@@ -31,4 +31,12 @@ export class ConfigService {
             return this.get(nextKey, obj[firstKey]);
         }
     }
+
+    protected set env(value: Object) {
+        this._env = value;
+    }
+
+    protected set config(value: Object) {
+        this._config = value;
+    }
 }
