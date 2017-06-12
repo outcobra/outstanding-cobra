@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {Config} from '../../../config/Config';
+import {ConfigService} from '../../config/config.service';
 
 @Injectable()
-export class MockConfig extends Config {
+export class MockConfigService extends ConfigService {
     constructor() {
         super(null);
         this.config = {

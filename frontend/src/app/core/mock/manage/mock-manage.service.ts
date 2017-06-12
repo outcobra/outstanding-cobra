@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ManageService} from '../../../manage/service/manage.service';
 import {Observable} from 'rxjs';
-import {ManageDto} from '../../../manage/model/ManageDto';
+import {ManageDto} from '../../../manage/model/manage.dto';
 import {InstitutionService} from '../../../manage/service/institution.service';
 
 @Injectable()

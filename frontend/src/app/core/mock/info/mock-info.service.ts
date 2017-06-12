@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {InfoService} from '../../services/info.service';
-import {Info} from '../../model/Info';
+import {Info} from '../../model/info.dto';
 
 @Injectable()
 export class MockInfoService extends InfoService {
