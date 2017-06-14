@@ -1,6 +1,6 @@
 import {ComponentType, MdDialog, MdDialogConfig, MdDialogRef} from '@angular/material';
-import {DialogMode} from '../../common/DialogMode';
-import {Dto} from '../../common/Dto';
+import {DialogMode} from '../../core/common/dialog-mode';
+import {Dto} from '../../core/common/dto';
 import {ManageDialog} from '../manage-dialog';
 import {Injectable} from '@angular/core';
 import {ResponsiveHelperService} from '../../core/services/ui/responsive-helper.service';

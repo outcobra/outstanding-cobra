@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {MockCrudService} from '../../core/mock-crud.service';
-import {SemesterDto} from '../../../../manage/model/ManageDto';
+import {SemesterDto} from '../../../../manage/model/manage.dto';
 import {MockSubjectService} from './mock-subject.service';
 import * as moment from 'moment/moment';
 

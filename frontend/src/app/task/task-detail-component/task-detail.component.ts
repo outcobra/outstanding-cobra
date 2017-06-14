@@ -1,12 +1,12 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Task} from '../model/Task';
+import {TaskDto} from '../model/task.dto';
 import {ConfirmDialogService} from '../../core/services/confirm-dialog.service';
 import {TaskService} from '../service/task.service';
 import {MdDialog, MdDialogRef, MdSlider, MdSliderChange} from '@angular/material';
 import {TaskCreateUpdateDialog} from '../task-create-update-dialog/task-create-update-dialog.component';
 import {SMALL_DIALOG} from '../../core/util/const';
-import {DialogMode} from '../../common/DialogMode';
+import {DialogMode} from '../../core/common/dialog-mode';
 import {Observable} from 'rxjs';
 import {isTrue, isTruthy} from '../../core/util/helper';
 import {NotificationWrapperService} from '../../core/notifications/notification-wrapper.service';
@@ -18,7 +18,7 @@ import {DurationService} from '../../core/services/duration.service';
                styleUrls: ['./task-detail.component.scss']
            })
 export class TaskDetailComponent implements OnInit, AfterViewInit {
-    private _task: Task;
+    private _task: TaskDto;
     private _taskCreateUpdateDialog: MdDialogRef<TaskCreateUpdateDialog>;
     @ViewChild(MdSlider) slider: MdSlider;
 
@@ -33,7 +33,7 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
 
     ngOnInit() {
         this._route.data
-            .subscribe((data: { task: Task }) => this._task = data.task);
+            .subscribe((data: {task: TaskDto}) => this._task = data.task);
     }
 
     ngAfterViewInit() {
@@ -45,7 +45,7 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
             .subscribe();
     }
 
-    private updateProgress(value: number): Observable<Task> {
+    private updateProgress(value: number): Observable<TaskDto> {
         return this._taskService.updateProgress(this._task.id, value);
     }
 
@@ -54,8 +54,8 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
         this._taskCreateUpdateDialog.componentInstance.init(DialogMode.EDIT, this._task);
         this._taskCreateUpdateDialog.afterClosed()
             .filter(isTruthy)
-            .flatMap((result: Task) => this._taskService.update(result))
-            .subscribe((task: Task) => {
+            .flatMap((result: TaskDto) => this._taskService.update(result))
+            .subscribe((task: TaskDto) => {
                 // TODO error handling?
                 if (task) {
                     this._task = task;
@@ -82,7 +82,7 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
         this._router.navigate(['/task']);
     }
 
-    get task(): Task {
+    get task(): TaskDto {
         return this._task;
     }
 }

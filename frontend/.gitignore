@@ -33,3 +33,7 @@ testem.log
 #System Files
 .DS_Store
 Thumbs.db
+
+firebase-debug.log
+#We do not want duplicated lock files for yarn and npm so we go with yarn as master
+package-lock.json

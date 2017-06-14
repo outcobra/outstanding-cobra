@@ -1,39 +1,37 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {MATERIALIZE_MIN_WIDTH_LARGE, MATERIALIZE_MIN_WIDTH_MEDIUM, MOBILE_DIALOG} from '../../util/const';
+import {MOBILE_DIALOG} from '../../util/const';
 import {MdDialogConfig} from '@angular/material';
-import {Orientation} from './Orientation';
+import {Orientation} from './orientation';
 import {isTruthy} from '../../util/helper';
+import {MediaChange, ObservableMedia} from '@angular/flex-layout';
+import {OCMediaChange} from './oc-media-change';
 
 @Injectable()
 export class ResponsiveHelperService {
     private _mobile: boolean;
+    private _mediaChange: Observable<OCMediaChange>;
 
-    constructor() {
+    constructor(private _observableMedia: ObservableMedia) {
         this._mobile = this._checkMobile();
+        this._mediaChange = this._observableMedia.asObservable()
+            .map(change => this._makeMediaChange(change));
+        this._mediaChange.subscribe((change) => this._mobile = change.mobile);
     }
 
-    public listenForResize(): Observable<any> {
-        return Observable.fromEvent(window, 'resize')
-            .do(() => this._mobile = this._checkMobile());
+    public listenForBreakpointChange(): Observable<OCMediaChange> {
+        return this._mediaChange;
     }
 
-    public listenForOrientationChange(): Observable<Orientation> {
+    public listenForOrientationChange(): Observable<OCMediaChange> {
         return Observable.fromEvent(window, 'orientationchange')
             .distinctUntilChanged()
             .debounceTime(200)
-            .map(() => {
-                // That's weird......but in another way the compiler won't compile ¯\_(ツ)_/¯
-                let orientation = isTruthy(window.screen) ? (window.screen as any).orientation.angle : window.orientation;
-                if (Math.abs(orientation) === Orientation.LANDSCAPE) {
-                    return Orientation.LANDSCAPE
-                }
-                return Orientation.PORTRAIT
-            });
+            .map(() => this._makeMediaChange(null));
     }
 
     public getMobileOrGivenDialogConfig(config: MdDialogConfig) {
-        if (window.innerWidth < MATERIALIZE_MIN_WIDTH_MEDIUM) {
+        if (!this._observableMedia.isActive('gt-xs')) {
             return MOBILE_DIALOG
         }
         return config;
@@ -44,7 +42,24 @@ export class ResponsiveHelperService {
     }
 
     private _checkMobile(): boolean {
-        return window.innerWidth < MATERIALIZE_MIN_WIDTH_LARGE;
+        return !this._observableMedia.isActive('gt-sm');
+    }
+
+    public getCurrentOrientation(): Orientation {
+        let orientation = isTruthy(window.screen) ? (window.screen as any).orientation.angle : window.orientation;
+        if (Math.abs(orientation) === Orientation.LANDSCAPE) {
+            return Orientation.LANDSCAPE
+        }
+        return Orientation.PORTRAIT
+    }
+
+    private _makeMediaChange(change?: MediaChange): OCMediaChange {
+        return {
+            mobile: this._checkMobile(),
+            width: window.innerWidth,
+            orientation: this.getCurrentOrientation(),
+            originalChange: change
+        } as OCMediaChange;
     }
 
     public isMobile(): boolean {

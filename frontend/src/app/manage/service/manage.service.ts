@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {HttpInterceptor} from '../../core/http/HttpInterceptor';
+import {HttpInterceptor} from '../../core/http/http-interceptor';
 import {Observable} from 'rxjs';
-import {ManageDto} from '../model/ManageDto';
+import {ManageDto} from '../model/manage.dto';
 import {AppService} from '../../core/services/core/app.service';
 
 @Injectable()

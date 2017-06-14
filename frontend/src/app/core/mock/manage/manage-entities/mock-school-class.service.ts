@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {MockCrudService} from '../../core/mock-crud.service';
-import {SchoolClassDto} from '../../../../manage/model/ManageDto';
+import {SchoolClassDto} from '../../../../manage/model/manage.dto';
 import {MockSchoolYearService} from './mock-school-year.service';
 
 @Injectable()

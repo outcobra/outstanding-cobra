@@ -1,4 +1,4 @@
-export interface TaskProgressUpdate {
+export interface TaskProgressUpdateDto {
     taskId: number,
     progress: number
 }

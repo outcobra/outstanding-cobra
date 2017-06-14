@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {MockHttpInterceptor} from './http/MockHttpInterceptor';
-import {Config} from '../../config/Config';
-import {MockConfig} from './config/MockConfig';
+import {MockConfigService} from './config/MockConfig';
 import {MockInfoService} from './info/mock-info.service';
 import {SimpleNotificationsModule} from 'angular2-notifications/dist';
 import {MockNotificationWrapperService} from './notifications/mock-notifications.service';
@@ -28,7 +27,6 @@ import {MockManageDialogFactory} from './manage/mock-manage-dialog.factory';
 import {MockColorService} from './mock-color.service';
 import {MockTaskService} from './task/mock-task.service';
 import {TaskService} from '../../task/service/task.service';
-import {HttpInterceptor} from '../http/HttpInterceptor';
 import {InfoService} from '../services/info.service';
 import {Auth0AuthService} from '../services/auth/auth.service';
 import {ResponsiveHelperService} from '../services/ui/responsive-helper.service';
@@ -41,6 +39,10 @@ import {MockBackend} from '@angular/http/testing';
 import {ConnectionBackend, HttpModule} from '@angular/http';
 import {DurationService} from '../services/duration.service';
 import {MockDurationService} from './datetime/mock-duration.service';
+import {HttpInterceptor} from '../http/http-interceptor';
+import {ConfigService} from '../config/config.service';
+import {ObservableMedia} from '@angular/flex-layout';
+import {MockObservableMedia} from './ui/mock-observable-media.service';
 
 @NgModule({
     imports: [
@@ -71,8 +73,8 @@ import {MockDurationService} from './datetime/mock-duration.service';
             useClass: MockHttpInterceptor
         },
         {
-            provide: Config,
-            useClass: MockConfig
+            provide: ConfigService,
+            useClass: MockConfigService
         },
         {
             provide: InfoService,
@@ -133,6 +135,10 @@ import {MockDurationService} from './datetime/mock-duration.service';
         {
             provide: DurationService,
             useClass: MockDurationService
+        },
+        {
+            provide: ObservableMedia,
+            useClass: MockObservableMedia
         }
     ]
 })

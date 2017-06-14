@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
-import {environment} from '../../environments/environment';
+import {environment} from '../../../environments/environment';
 import {Http} from '@angular/http';
 
 @Injectable()
-export class Config {
+export class ConfigService {
     private _env: Object;
     private _config: Object;
 

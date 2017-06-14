@@ -1,8 +1,8 @@
 import {Observable} from 'rxjs/Observable';
-import {Dto} from '../../../common/Dto';
 import {isNotNull} from '../../util/helper';
 import {Util} from '../../util/util';
 import {AppCrudService} from '../../services/core/app-crud.service';
+import {Dto} from '../../common/dto';
 
 export class MockCrudService<T extends Dto> extends AppCrudService<T> {
     _http;

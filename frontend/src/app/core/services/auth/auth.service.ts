@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
-import {Config} from '../../../config/Config';
+import {ConfigService} from '../../config/config.service';
 import {tokenNotExpired} from 'angular2-jwt';
 import {Router} from '@angular/router';
-import {HttpInterceptor} from '../../http/HttpInterceptor';
+import {HttpInterceptor} from '../../http/http-interceptor';
 import {Util} from '../../util/util';
 import {Observable} from 'rxjs';
-import {User} from '../../model/User';
+import {User} from '../../model/user';
 import {TranslateService} from '@ngx-translate/core';
 import {NotificationWrapperService} from '../../notifications/notification-wrapper.service';
 import {AuthService} from '../../interfaces/auth.service';
@@ -19,7 +19,7 @@ export class Auth0AuthService implements AuthService {
     private _redirectRoute: string;
     private _lock;
 
-    constructor(private _config: Config,
+    constructor(private _config: ConfigService,
                 private _router: Router,
                 private _http: HttpInterceptor,
                 private _notificationService: NotificationWrapperService,

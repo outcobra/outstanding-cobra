@@ -1,5 +1,6 @@
 <div class="dialog-header">
-    <h1 md-dialog-title>{{ 'i18n.modules.manage.semester.add' | translate }}</h1>
+    <h1 md-dialog-title *ngIf="isEditMode()">{{ 'i18n.modules.manage.semester.edit' | translate }}</h1>
+    <h1 md-dialog-title *ngIf="!isEditMode()">{{ 'i18n.modules.manage.semester.add' | translate }}</h1>
 </div>
 <form [formGroup]="semesterForm" (submit)="submit()">
     <div class="dialog-body" md-dialog-content>
@@ -13,32 +14,36 @@
             </md-input-container>
         </div>
         <div class="form-group">
-            <datepicker formControlName="validFrom" [placeholder]="'i18n.common.label.validFrom' | translate"
-                        [minDate]="parent.validFrom">
-                <datepicker-error *ngIf="semesterForm.get('validFrom').invalid && semesterForm.get('validFrom').touched">
+            <md-input-container>
+                <input mdInput [mdDatepicker]="validFromPicker" [min]="parentValidFrom"
+                       [placeholder]="'i18n.common.label.validFrom' | translate" formControlName="validFrom">
+                <button mdSuffix [mdDatepickerToggle]="validFromPicker" type="button"></button>
+                <md-error *ngIf="semesterForm.get('validFrom').invalid && semesterForm.get('validFrom').touched">
                     <ng-template [ngIf]="semesterForm.get('validFrom').hasError('required')">
                         {{ 'i18n.common.form.error.required' | translate }}
                     </ng-template>
-                    <ng-template [ngIf]="semesterForm.get('validFrom').hasError('isAfterOrSameDay')">{{
-                        getErrorText('validFrom',
+                    <ng-template [ngIf]="semesterForm.get('validFrom').hasError('isAfterOrSameDay')">{{ getErrorText('validFrom',
                         'isAfterOrSameDay', 'afterDate') }}
                     </ng-template>
-                </datepicker-error>
-            </datepicker>
+                </md-error>
+            </md-input-container>
+            <md-datepicker #validFromPicker [touchUi]="isMobile()"></md-datepicker>
         </div>
         <div class="form-group">
-            <datepicker formControlName="validTo" [placeholder]="'i18n.common.label.validTo' | translate"
-                        [maxDate]="parent.validTo">
-                <datepicker-error *ngIf="semesterForm.get('validTo').invalid && semesterForm.get('validTo').touched">
+            <md-input-container>
+                <input mdInput [mdDatepicker]="validToPicker" [min]="parentValidTo"
+                       [placeholder]="'i18n.common.label.validTo' | translate" formControlName="validTo">
+                <button mdSuffix [mdDatepickerToggle]="validToPicker" type="button"></button>
+                <md-error *ngIf="semesterForm.get('validTo').invalid && semesterForm.get('validTo').touched">
                     <ng-template [ngIf]="semesterForm.get('validTo').hasError('required')">
                         {{ 'i18n.common.form.error.required' | translate }}
                     </ng-template>
-                    <ng-template [ngIf]="semesterForm.get('validTo').hasError('isBeforeOrSameDay')">{{
-                        getErrorText('validTo',
+                    <ng-template [ngIf]="semesterForm.get('validTo').hasError('isBeforeOrSameDay')">{{ getErrorText('validTo',
                         'isBeforeOrSameDay', 'beforeDate') }}
                     </ng-template>
-                </datepicker-error>
-            </datepicker>
+                </md-error>
+            </md-input-container>
+            <md-datepicker #validToPicker [touchUi]="isMobile()"></md-datepicker>
         </div>
         <div class="form-error"
              *ngIf="semesterForm.invalid && semesterForm.touched && ((semesterForm.get('validFrom').touched && semesterForm.get('validTo').touched) || isEditMode())">
@@ -47,7 +52,7 @@
     </div>
     <div class="dialog-footer" md-dialog-actions>
         <div class="footer-right">
-            <button md-button (click)="cancel()" type="button">{{ 'i18n.common.action.cancel' | translate }}</button>
+            <button md-button md-dialog-close>{{ 'i18n.common.action.cancel' | translate }}</button>
             <button md-raised-button color="primary" type="submit">{{ 'i18n.common.action.save' | translate }}</button>
         </div>
     </div>

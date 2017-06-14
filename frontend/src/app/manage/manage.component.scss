@@ -18,7 +18,7 @@ oc-app:not(.oc-mobile) {
 }
 
 .mobile-manage-nav {
-    height: 50px;
+    height: 40px;
     width: 100%;
     margin-bottom: 0 !important;
 
@@ -26,9 +26,10 @@ oc-app:not(.oc-mobile) {
         &.col {
             padding: 5px;
         }
-        &.mobile-title {
-            height: 50px;
+        &.mobile-title > h6 {
+            margin: 0;
             text-align: center;
+            line-height: 40px;
 
             -webkit-user-select: none;
             -moz-user-select: none;
@@ -37,6 +38,7 @@ oc-app:not(.oc-mobile) {
         }
         button[md-button] {
             min-width: 50px;
+            height: 40px;
         }
     }
 }
@@ -109,6 +111,7 @@ oc-app:not(.oc-mobile) {
         }
 
         .entity-desc {
+            position: relative;
             height: 100%;
             md-icon {
                 float: left;
@@ -119,17 +122,18 @@ oc-app:not(.oc-mobile) {
 
             span {
                 display: block;
-                float: left;
                 height: 100%;
                 line-height: 50px;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
 
-                &.subject-icon {
-                    width: calc(44px - 2 * 10px);
-                    height: calc(100% - 2 * 13px);
-                    margin: 13px 10px;
-                    box-sizing: border-box;
-                    border-radius: 50%;
-                }
+            .subject-icon {
+                width: 24px;
+                height: calc(100% - 2 * 13px);
+                border-radius: 50%;
+                margin: 13px 10px;
+                float: left;
             }
 
             entity-menu {

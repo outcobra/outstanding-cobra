@@ -5,6 +5,7 @@ export class DateUtil {
     // technically min and max date
     public static readonly MIN_DATE = new Date(1000, 1, 1);
     public static readonly MAX_DATE = new Date(9999, 11, 31);
+    public static readonly DATE_REGEX = /^\d{4}-\d{1,2}-\d{1,2}$/;
 
     /**
      * checks if the 2 dates are on the same day
@@ -70,6 +71,13 @@ export class DateUtil {
      */
     public static isMaxDate(date: Date) {
         return this.isSameDay(date, this.MAX_DATE);
+    }
+
+    public static transformToDateIfPossible(date: any): Date {
+        if (this.DATE_REGEX.test(date)) {
+            return moment(date).toDate();
+        }
+        return null;
     }
 
 }
