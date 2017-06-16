@@ -1,9 +1,11 @@
 import {NgModule} from '@angular/core';
 import {
+    MD_DATE_FORMATS,
     MdButtonModule,
     MdButtonToggleModule,
     MdCardModule,
     MdCoreModule,
+    MdDatepickerModule,
     MdDialogModule,
     MdIconModule,
     MdInputModule,
@@ -19,6 +21,7 @@ import {
     MdToolbarModule,
     MdTooltipModule
 } from '@angular/material';
+import {OC_DATE_FORMATS} from './core/common/oc-date-formats';
 
 @NgModule({
     imports: [
@@ -39,6 +42,7 @@ import {
         MdRippleModule,
         MdListModule,
         MdTabsModule,
+        MdDatepickerModule,
         MdCoreModule
     ],
     exports: [
@@ -59,7 +63,14 @@ import {
         MdRippleModule,
         MdListModule,
         MdTabsModule,
+        MdDatepickerModule,
         MdCoreModule
+    ],
+    providers: [
+        {
+            provide: MD_DATE_FORMATS,
+            useValue: OC_DATE_FORMATS
+        }
     ]
 })
 export class OCMaterialModule {

@@ -2,7 +2,7 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {MdDialogRef} from '@angular/material';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ManageDialog} from '../manage-dialog';
-import {SemesterDto, SubjectDto} from '../model/ManageDto';
+import {SemesterDto, SubjectDto} from '../model/manage.dto';
 import {Util} from '../../core/util/util';
 
 @Component({
@@ -26,10 +26,6 @@ export class SubjectDialog extends ManageDialog<SubjectDto, SemesterDto> impleme
                 color: [this.getParamOrDefault('color'), Validators.required]
             }
         );
-    }
-
-    public cancel() {
-        this._dialogRef.close(null);
     }
 
     public submit() {

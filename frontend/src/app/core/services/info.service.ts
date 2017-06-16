@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {AppService} from './core/app.service';
-import {HttpInterceptor} from '../http/HttpInterceptor';
+import {HttpInterceptor} from '../http/http-interceptor';
 import {Observable} from 'rxjs';
-import {Info} from '../model/Info';
+import {Info} from '../model/info.dto';
 
 @Injectable()
 export class InfoService extends AppService {

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ManageDialog} from '../manage-dialog';
-import {InstitutionDto, SchoolClassDto} from '../model/ManageDto';
+import {InstitutionDto, SchoolClassDto} from '../model/manage.dto';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MdDialogRef} from '@angular/material';
 import {Util} from '../../core/util/util';
@@ -22,10 +22,6 @@ export class SchoolClassDialog extends ManageDialog<SchoolClassDto, InstitutionD
         this._schoolClassForm = this._formBuilder.group({
             normalizedName: [this.getParamOrDefault('normalizedName'), Validators.required]
         });
-    }
-
-    public cancel() {
-        this._dialogRef.close(null);
     }
 
     public submit() {

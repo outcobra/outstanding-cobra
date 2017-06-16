@@ -2,7 +2,7 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {MdDialogRef} from '@angular/material';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ManageDialog} from '../manage-dialog';
-import {InstitutionDto} from '../model/ManageDto';
+import {InstitutionDto} from '../model/manage.dto';
 import {Util} from '../../core/util/util';
 
 @Component({
@@ -23,10 +23,6 @@ export class InstitutionDialog extends ManageDialog<InstitutionDto, any> impleme
         this._institutionForm = this._formBuilder.group({
             name: [this.getParamOrDefault('name'), Validators.required]
         });
-    }
-
-    public cancel() {
-        this._dialogRef.close(null);
     }
 
     public submit() {

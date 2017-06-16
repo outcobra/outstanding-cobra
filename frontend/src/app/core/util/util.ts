@@ -1,5 +1,6 @@
-import {dateReplacer, dateReviver} from '../http/http-util';
+import {dateReplacer} from '../http/http-util';
 import {AbstractControl, FormGroup} from '@angular/forms';
+
 /**
  * Util class
  * contains everything that does not fit in another service
@@ -99,7 +100,7 @@ export class Util {
      * @returns {any}
      */
     public static clone<T>(obj: T): T {
-        return JSON.parse(JSON.stringify(obj, dateReplacer), dateReviver) as T;
+        return JSON.parse(JSON.stringify(obj, dateReplacer)) as T;
     }
 
     /**

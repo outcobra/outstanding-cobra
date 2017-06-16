@@ -27,17 +27,14 @@ export class OCNavComponent implements OnInit {
 
     private _collapsed: boolean;
 
-    constructor() {
-    }
-
     ngOnInit() {
         this._collapsed = this.collapsible;
     }
 
     public toggleNavCollapse() {
+        if (!this.collapsible) return;
         this._collapsed = !this._collapsed;
     }
-
 
     get collapsed(): boolean {
         return this._collapsed;
