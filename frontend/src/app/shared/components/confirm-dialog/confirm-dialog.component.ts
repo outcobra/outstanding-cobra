@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {MdDialogRef} from '@angular/material';
 
 @Component({
     selector: 'confirm-dialog',
@@ -9,20 +8,9 @@ import {MdDialogRef} from '@angular/material';
 export class ConfirmDialogComponent {
     private _title: string;
     private _message: string;
+    private _cancelable: boolean;
 
-    constructor(private _dialogRef: MdDialogRef<ConfirmDialogComponent>) {
-    }
-
-    public yes() {
-        this._dialogRef.close(true);
-    }
-
-    public no() {
-        this._dialogRef.close(false);
-    }
-
-    public cancel() {
-        this._dialogRef.close(null);
+    constructor() {
     }
 
     get title(): string {
@@ -39,5 +27,14 @@ export class ConfirmDialogComponent {
 
     set message(value: string) {
         this._message = value;
+    }
+
+
+    get cancelable(): boolean {
+        return this._cancelable;
+    }
+
+    set cancelable(value: boolean) {
+        this._cancelable = value;
     }
 }

@@ -5,7 +5,7 @@
     {{ message | translate }}
 </div>
 <div class="dialog-footer" md-dialog-actions>
-    <button md-raised-button color="primary" (click)="yes()">{{ 'i18n.common.action.yes' | translate }}</button>
-    <button md-raised-button (click)="no()">{{ 'i18n.common.action.no' | translate }}</button>
-    <button md-button (click)="cancel()">{{ 'i18n.common.action.cancel' | translate }}</button>
+    <button md-raised-button color="primary" [md-dialog-close]="true">{{ 'i18n.common.action.yes' | translate }}</button>
+    <button md-raised-button [md-dialog-close]="false">{{ 'i18n.common.action.no' | translate }}</button>
+    <button md-button md-dialog-close *ngIf="cancelable">{{ 'i18n.common.action.cancel' | translate }}</button>
 </div>

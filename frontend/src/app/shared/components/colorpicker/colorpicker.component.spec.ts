@@ -1,6 +1,7 @@
 /* tslint:disable:no-unused-variable */
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {ColorpickerComponent} from './colorpicker.component';
+import {TestModule} from '../../../core/mock/test.module';
 
 describe('ColorpickerComponent', () => {
     let component: ColorpickerComponent;
@@ -8,9 +9,13 @@ describe('ColorpickerComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ColorpickerComponent]
-        })
-            .compileComponents();
+            declarations: [
+                ColorpickerComponent
+            ],
+            imports: [
+                TestModule
+            ]
+        }).compileComponents();
     }));
 
     beforeEach(() => {

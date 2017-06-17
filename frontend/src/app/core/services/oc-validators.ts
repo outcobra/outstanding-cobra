@@ -11,11 +11,11 @@ export class OCValidators {
      * @param date that should be before the controls value
      * @returns {(control:AbstractControl)=>{[p: string]: any}}
      */
-    public static isBeforeOrEqualDay(date: Date): ValidatorFn {
+    public static isBeforeOrSameDay(date: Date): ValidatorFn {
         return (control: AbstractControl): { [key: string]: any } => {
-            if (control.value && !DateUtil.isBeforeDay(control.value, date)) {
+            if (control.value && !DateUtil.isBeforeOrSameDay(control.value, date)) {
                 return {
-                    'isBeforeDay': {'beforeDate': date, 'actualDate': control.value}
+                    'isBeforeOrSameDay': {'beforeDate': date, 'actualDate': control.value}
                 }
             }
             return null;
@@ -29,11 +29,11 @@ export class OCValidators {
      * @param date that should be after the controls value
      * @returns {(control:AbstractControl)=>{[p: string]: any}}
      */
-    public static isAfterOrEqualDay(date: Date): ValidatorFn {
+    public static isAfterOrSameDay(date: Date): ValidatorFn {
         return (control: AbstractControl): { [key: string]: any } => {
-            if (control.value && !DateUtil.isAfterDay(control.value, date)) {
+            if (control.value && !DateUtil.isAfterOrSameDay(control.value, date)) {
                 return {
-                    'isAfterDay': {'afterDate': date, 'actualDate': control.value}
+                    'isAfterOrSameDay': {'afterDate': date, 'actualDate': control.value}
                 }
             }
             return null;
@@ -80,12 +80,12 @@ export class OCValidators {
      * @param upperBound date
      * @returns {(control:AbstractControl)=>{[p: string]: any}}
      */
-    public static isBetweenDay(lowerBound: Date, upperBound: Date) {
+    public static isBetweenDaysInclusive(lowerBound: Date, upperBound: Date) {
         return (control: AbstractControl): { [key: string]: any } => {
             let date = control.value;
-            if (date && !DateUtil.isBetweenDay(date, lowerBound, upperBound)) {
+            if (date && !DateUtil.isBetweenDaysInclusive(date, lowerBound, upperBound)) {
                 return {
-                    'isBetweenDay': {'actualDate': date, 'lowerBound': lowerBound, 'upperBound': upperBound}
+                    'isBetweenDaysInclusive': {'actualDate': date, 'lowerBound': lowerBound, 'upperBound': upperBound}
                 }
             }
             return null;

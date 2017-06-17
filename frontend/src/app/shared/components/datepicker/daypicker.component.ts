@@ -89,7 +89,7 @@ export class DaypickerComponent implements OnInit {
     }
 
     isDisabled(date: Date) {
-        return !DateUtil.isBetweenDay(date, this.datePicker.minDate, this.datePicker.maxDate);
+        return !DateUtil.isBetweenDaysInclusive(date, this.datePicker.minDate, this.datePicker.maxDate);
     }
 
     isActive(date: Date) {

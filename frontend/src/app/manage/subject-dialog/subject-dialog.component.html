@@ -1,5 +1,6 @@
 <div class="dialog-header">
-    <h1 md-dialog-title>{{ 'i18n.modules.manage.subject.add' | translate }}</h1>
+    <h1 md-dialog-title *ngIf="isEditMode()">{{ 'i18n.modules.manage.subject.edit' | translate }}</h1>
+    <h1 md-dialog-title *ngIf="!isEditMode()">{{ 'i18n.modules.manage.subject.add' | translate }}</h1>
 </div>
 <form [formGroup]="subjectForm" (submit)="submit()">
     <div class="dialog-body" md-dialog-content>
@@ -18,7 +19,7 @@
     </div>
     <div class="dialog-footer" md-dialog-actions>
         <div class="footer-right">
-            <button md-button (click)="cancel()" type="button">{{ 'i18n.common.action.cancel' | translate }}</button>
+            <button md-button md-dialog-close>{{ 'i18n.common.action.cancel' | translate }}</button>
             <button md-raised-button color="primary" type="submit">{{ 'i18n.common.action.save' | translate }}</button>
         </div>
     </div>

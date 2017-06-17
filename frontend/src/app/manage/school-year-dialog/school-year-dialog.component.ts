@@ -1,12 +1,14 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ManageDialog} from '../manage-dialog';
-import {SchoolClassDto, SchoolYearDto} from '../model/ManageDto';
+import {SchoolClassDto, SchoolYearDto} from '../model/manage.dto';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MdDialogRef} from '@angular/material';
 import {OCValidators} from '../../core/services/oc-validators';
 import {TranslateService} from '@ngx-translate/core';
 import {DatePipe} from '@angular/common';
 import {Util} from '../../core/util/util';
+import {ResponsiveHelperService} from '../../core/services/ui/responsive-helper.service';
+import {DateUtil} from '../../core/services/date-util.service';
 
 @Component({
     selector: 'school-year-dialog',
@@ -21,18 +23,19 @@ export class SchoolYearDialog extends ManageDialog<SchoolYearDto, SchoolClassDto
     constructor(private _dialogRef: MdDialogRef<SchoolYearDialog>,
                 private _formBuilder: FormBuilder,
                 private _translate: TranslateService,
-                private _datePipe: DatePipe) {
+                private _datePipe: DatePipe,
+                private responsiveHelperService: ResponsiveHelperService) {
         super();
     }
 
     ngOnInit() {
         this._schoolYearForm = this._formBuilder.group({
                 name: [this.getParamOrDefault('name'), Validators.required],
-                validFrom: [this.getParamOrDefault('validFrom'), Validators.required],
-                validTo: [this.getParamOrDefault('validTo'), Validators.required]
+                validFrom: [DateUtil.transformToDateIfPossible(this.getParamOrDefault('validFrom')), Validators.required],
+                validTo: [DateUtil.transformToDateIfPossible(this.getParamOrDefault('validTo')), Validators.required]
             },
             {
-                validator: OCValidators.dateFromIsBeforeDateTo
+                validator: OCValidators.dateFromIsBeforeDateTo()
             }
         );
     }
@@ -41,10 +44,6 @@ export class SchoolYearDialog extends ManageDialog<SchoolYearDto, SchoolClassDto
         let control = this._schoolYearForm.get(controlName);
         let date = this._datePipe.transform(control.getError(errorName)[errorProp], 'dd.MM.y');
         return control.hasError(errorName) ? this._translate.instant(`i18n.common.form.error.${errorName}`, {'date': date}) : '';
-    }
-
-    public cancel() {
-        this._dialogRef.close(null);
     }
 
     public submit() {
@@ -64,6 +63,9 @@ export class SchoolYearDialog extends ManageDialog<SchoolYearDto, SchoolClassDto
         }
     }
 
+    public isMobile() {
+        return this.responsiveHelperService.isMobile();
+    }
 
     get schoolYearForm(): FormGroup {
         return this._schoolYearForm;

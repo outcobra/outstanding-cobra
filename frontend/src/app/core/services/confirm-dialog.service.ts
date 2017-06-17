@@ -18,13 +18,15 @@ export class ConfirmDialogService {
      *
      * @param title of the dialog
      * @param message of the dialog
+     * @param cancelable decides whether a cancel button should be showed
      * @returns {Observable<any>}
      */
-    public open(title: string, message: string): Observable<boolean> {
+    public open(title: string, message: string, cancelable: boolean = false): Observable<boolean> {
         let dialogRef = this._dialogService.open(ConfirmDialogComponent, this._responsiveHelper.getMobileOrGivenDialogConfig(SMALL_DIALOG));
         let component = dialogRef.componentInstance;
         component.title = title;
         component.message = message;
+        component.cancelable = cancelable;
         return dialogRef.afterClosed();
     }
 

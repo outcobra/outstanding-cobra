@@ -15,7 +15,13 @@
     "baseUrl": "",
     "exclude": [
       "test.ts",
-      "**/*.spec.ts"
+      "**/*.spec.ts",
+      "app/core/mock/**/*"
     ]
-  }
+  },
+  "exclude": [
+    "test.ts",
+    "**/*.spec.ts",
+    "app/core/mock/**/*"
+  ]
 }

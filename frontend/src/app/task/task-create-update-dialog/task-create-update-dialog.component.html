@@ -8,8 +8,8 @@
                 <input mdInput [placeholder]="'i18n.modules.task.dialogs.add.name.label' | translate"
                        formControlName="name">
                 <md-error *ngIf="taskCreateUpdateForm.get('name').invalid && taskCreateUpdateForm.get('name').touched">
-                    <ng-template [ngIf]="taskCreateUpdateForm.get('name').hasError('required')">{{ 'i18n.common.form.error.required'
-                        | translate }}
+                    <ng-template [ngIf]="taskCreateUpdateForm.get('name').hasError('required')">
+                        {{ 'i18n.common.form.error.required' | translate }}
                     </ng-template>
                 </md-error>
             </md-input-container>
@@ -27,26 +27,32 @@
         </div>
         <div formGroupName="dates" class="form-group">
             <div class="half">
-                <datepicker [minDate]="today" [placeholder]="'i18n.common.label.todoDate' | translate"
-                            formControlName="todoDate">
-                    <datepicker-error class="form-error" align="start"
-                             *ngIf="taskCreateUpdateForm.get('dates.todoDate').invalid && taskCreateUpdateForm.get('dates.todoDate').touched">
+                <md-input-container>
+                    <input mdInput [mdDatepicker]="todoDatePicker" [min]="today"
+                           [placeholder]="'i18n.common.label.todoDate' | translate" formControlName="todoDate">
+                    <button mdSuffix [mdDatepickerToggle]="todoDatePicker"></button>
+                    <md-error align="start"
+                                      *ngIf="taskCreateUpdateForm.get('dates.todoDate').invalid && taskCreateUpdateForm.get('dates.todoDate').touched">
                         <ng-template [ngIf]="taskCreateUpdateForm.get('dates.todoDate').hasError('required')">
                             {{ 'i18n.common.form.error.required' | translate }}
                         </ng-template>
-                    </datepicker-error>
-                </datepicker>
+                    </md-error>
+                </md-input-container>
+                <md-datepicker #todoDatePicker [touchUi]="isMobile()"></md-datepicker>
             </div>
             <div class="half">
-                <datepicker [minDate]="today" [placeholder]="'i18n.common.label.dueDate' | translate"
-                            formControlName="dueDate">
-                    <datepicker-error class="form-error" align="start"
-                             *ngIf="taskCreateUpdateForm.get('dates.dueDate').invalid && taskCreateUpdateForm.get('dates.dueDate').touched">
+                <md-input-container>
+                    <input mdInput [mdDatepicker]="dueDatePicker" [min]="today"
+                           [placeholder]="'i18n.common.label.dueDate' | translate" formControlName="dueDate">
+                    <button mdSuffix [mdDatepickerToggle]="dueDatePicker"></button>
+                    <md-error align="start"
+                              *ngIf="taskCreateUpdateForm.get('dates.dueDate').invalid && taskCreateUpdateForm.get('dates.dueDate').touched">
                         <ng-template [ngIf]="taskCreateUpdateForm.get('dates.dueDate').hasError('required')">
                             {{ 'i18n.common.form.error.required' | translate }}
                         </ng-template>
-                    </datepicker-error>
-                </datepicker>
+                    </md-error>
+                </md-input-container>
+                <md-datepicker #dueDatePicker [touchUi]="isMobile()"></md-datepicker>
             </div>
             <span class="form-error" *ngIf="taskCreateUpdateForm.get('dates.todoDate').dirty && taskCreateUpdateForm.get('dates.dueDate').dirty && taskCreateUpdateForm.get('dates').invalid">
                 <ng-template [ngIf]="taskCreateUpdateForm.get('dates').hasError('dateToIsBeforeDateFrom')">
@@ -74,7 +80,7 @@
     </div>
     <div class="dialog-footer" md-dialog-actions>
         <div class="footer-right">
-            <button md-button (click)="cancel()" type="button">{{ 'i18n.common.action.cancel' | translate }}</button>
+            <button md-button md-dialog-close>{{ 'i18n.common.action.cancel' | translate }}</button>
             <button md-raised-button color="primary" type="submit">{{ 'i18n.common.action.save' | translate }}</button>
         </div>
     </div>

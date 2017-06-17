@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, HostBinding, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
-import {AuthService} from './core/services/auth/auth.service';
+import {Auth0AuthService} from './core/services/auth/auth.service';
 import {TranslateService} from '@ngx-translate/core';
 import {ResponsiveHelperService} from './core/services/ui/responsive-helper.service';
 import {MdSidenav, OverlayContainer} from '@angular/material';
@@ -29,18 +29,18 @@ export class AppComponent implements OnInit, AfterViewInit {
     private _isEnglish: boolean = this._translateService.currentLang == 'en';
 
     constructor(private _translateService: TranslateService,
-                private _auth: AuthService,
+                private _auth: Auth0AuthService,
                 private _responsiveHelper: ResponsiveHelperService,
                 private _router: Router,
                 private _overlayContainer: OverlayContainer) {
     }
 
     ngOnInit() {
-        this._recheckMobile();
+        this._mobile = this._responsiveHelper.isMobile();
         this.changeTheme(this.getThemeFromLocalStorage() || OCTheme.OCEAN);
         this._router.events
             .filter(event => event instanceof NavigationEnd)
-            .do(() => {
+            .subscribe(() => {
                 if (isTruthy(this.sidenav) && this.sidenav.opened) {
                     this.sidenav.close();
                 }
@@ -48,12 +48,8 @@ export class AppComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this._responsiveHelper.listenForResize()
-            .subscribe(() => this._recheckMobile());
-    }
-
-    private _recheckMobile() {
-        this._mobile = this._responsiveHelper.isMobile();
+        this._responsiveHelper.listenForBreakpointChange()
+            .subscribe((change) => this._mobile = change.mobile);
     }
 
     public changeLang() {
@@ -93,7 +89,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     }
 
 
-    public get auth(): AuthService {
+    public get auth(): Auth0AuthService {
         return this._auth;
     }
 

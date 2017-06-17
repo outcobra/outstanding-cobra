@@ -7,7 +7,7 @@ export function isFalsy(toCheck: any): boolean {
 }
 
 export function isNull(toCheck: any): boolean {
-    return toCheck === null;
+    return toCheck === null || toCheck === undefined;
 }
 
 export function isNotNull(toCheck: any): boolean {
