@@ -11,8 +11,8 @@ import outcobra.server.model.interfaces.ParentLink
 data class MarkValueDto(override val id: Long = 0,
                         override val value: Double = 0.0,
                         override val weight: Double = 0.0,
-                        override val description: String,
-                        val markGroupId: Long) : BaseMarkDto {
+                        override val description: String = "",
+                        val markGroupId: Long = 0) : BaseMarkDto {
 
     override fun getIdentifier(): Long = id
     override fun getParentLink(): ParentLink = ParentLink.make(markGroupId, MarkGroup::class.java)
