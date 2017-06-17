@@ -260,7 +260,8 @@
         "outsideParent": {
           "title": "Ungültiges Datum",
           "message": "Die angegebene Zeitdauer ist auesserhalb der Zeitspanne des Vater-Objekts"
-        }
+        },
+        "mark": "Der Wert dieser Note ist ungültig"
       }
     }
   }

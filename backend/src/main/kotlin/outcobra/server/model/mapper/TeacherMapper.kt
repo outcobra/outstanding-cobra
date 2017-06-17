@@ -9,6 +9,11 @@ import outcobra.server.model.repository.InstitutionRepository
 import outcobra.server.model.repository.SubjectRepository
 import javax.inject.Inject
 
+
+/**
+ * @author Florian Bürgi
+ * @since 1.0.0
+ */
 @Component
 class TeacherMapper @Inject constructor(val subjectRepository: SubjectRepository,
                                         val institutionRepository: InstitutionRepository) : Mapper<Teacher, TeacherDto> {

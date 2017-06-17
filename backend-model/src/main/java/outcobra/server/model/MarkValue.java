@@ -12,8 +12,8 @@ public class MarkValue extends Mark {
 
     //region constructors
 
-    public MarkValue(Double weight, Exam exam, MarkGroup markGroup, Double value) {
-        super(weight, exam, markGroup);
+    public MarkValue(Double value, Double weight, MarkGroup markGroup, String description, Exam exam) {
+        super(weight, exam, markGroup, description);
         this.value = value;
     }
 
@@ -21,6 +21,13 @@ public class MarkValue extends Mark {
         super();
         this.value = value;
         this.weight = weight;
+    }
+
+    public MarkValue(Double value, Double weight, String description) {
+        super();
+        this.value = value;
+        this.weight = weight;
+        this.setDescription(description);
     }
 
     public MarkValue() {
