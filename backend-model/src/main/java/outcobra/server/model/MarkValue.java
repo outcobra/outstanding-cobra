@@ -1,9 +1,8 @@
 package outcobra.server.model;
 
-import outcobra.server.model.interfaces.ParentLinked;
-
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
+import outcobra.server.model.interfaces.ParentLinked;
 
 @Entity
 public class MarkValue extends Mark {
@@ -21,6 +20,7 @@ public class MarkValue extends Mark {
         super();
         this.value = value;
         this.weight = weight;
+        this.description = "";
     }
 
     public MarkValue(Double value, Double weight, String description) {

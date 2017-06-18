@@ -93,7 +93,7 @@ public abstract class Mark implements ParentLinked {
         int result = Double.valueOf(getWeight()).hashCode();
         result = 31 * result + getId().hashCode();
         result = 31 * result + (getExam() != null ? getExam().hashCode() : 0);
-        result = 31 * result + getDescription().hashCode();
+        result = 31 * result + (getDescription() != null ? description.hashCode() : 0);
         result = 31 * result + (getMarkGroup() != null ? getMarkGroup().hashCode() : 0);
         return result;
     }

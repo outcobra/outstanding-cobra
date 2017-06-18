@@ -39,6 +39,7 @@ class DataLoaderService
                 }
             } catch (e: Exception) {
                 LOGGER.error("Could not load $loaderName")
+                LOGGER.error("Data loader error: ", e)
             }
         }
 

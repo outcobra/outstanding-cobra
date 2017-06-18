@@ -13,7 +13,7 @@ data class ExamDto(val id: Long = 0,
                    val name: String = "",
                    val date: LocalDate? = null,
                    val subjectName: String = "",
-                   val mark: MarkValueDto = MarkValueDto(),
+                   val mark: MarkValueDto? = null,
                    val examTasks: List<ExamTaskDto> = listOf(),
                    val subjectId: Long = 0) : OutcobraDto {
 

@@ -4,23 +4,20 @@ import org.slf4j.LoggerFactory
 import org.springframework.core.annotation.Order
 import org.springframework.stereotype.Component
 import outcobra.server.data.DataLoadOrder.MARK
-import outcobra.server.data.loaders.SubjectDataLoader.Companion.SUBJECT1
-import outcobra.server.data.loaders.SubjectDataLoader.Companion.SUBJECT2
-import outcobra.server.data.loaders.SubjectDataLoader.Companion.SUBJECT3
-import outcobra.server.data.loaders.SubjectDataLoader.Companion.SUBJECT4
-import outcobra.server.data.loaders.SubjectDataLoader.Companion.SUBJECT5
-import outcobra.server.data.loaders.SubjectDataLoader.Companion.SUBJECT6
-import outcobra.server.data.loaders.SubjectDataLoader.Companion.SUBJECT7
-import outcobra.server.data.loaders.SubjectDataLoader.Companion.SUBJECT8
-import outcobra.server.data.loaders.SubjectDataLoader.Companion.SUBJECT9
-import outcobra.server.model.Mark
-import outcobra.server.model.MarkGroup
-import outcobra.server.model.MarkValue
-import outcobra.server.model.Subject
+import outcobra.server.data.loaders.SubjectDataLoader.Companion.DATABASES
+import outcobra.server.data.loaders.SubjectDataLoader.Companion.GERMAN
+import outcobra.server.data.loaders.SubjectDataLoader.Companion.GUP
+import outcobra.server.data.loaders.SubjectDataLoader.Companion.MATHS
+import outcobra.server.data.loaders.SubjectDataLoader.Companion.OOP
+import outcobra.server.data.loaders.SubjectDataLoader.Companion.OOP_DESIGN
+import outcobra.server.data.loaders.SubjectDataLoader.Companion.PHYSICS
+import outcobra.server.data.loaders.SubjectDataLoader.Companion.PROJECT
+import outcobra.server.data.loaders.SubjectDataLoader.Companion.SCRUM
+import outcobra.server.model.*
 import outcobra.server.model.repository.MarkGroupRepository
 import outcobra.server.model.repository.MarkValueRepository
 import outcobra.server.model.repository.SubjectRepository
-import java.util.*
+import java.util.Random
 import javax.inject.Inject
 
 /**
@@ -48,7 +45,7 @@ class MarkDataLoader @Inject constructor(val markValueRepository: MarkValueRepos
     override fun shouldLoad(): Boolean = true
 
     override fun load() {
-        listOf(SUBJECT1, SUBJECT2, SUBJECT3, SUBJECT4, SUBJECT5, SUBJECT6, SUBJECT7, SUBJECT8, SUBJECT9)
+        listOf(SCRUM, OOP, GUP, PHYSICS, OOP_DESIGN, PROJECT, MATHS, GERMAN, DATABASES)
                 .forEach { saveMarksForSemester(it) }
     }
 

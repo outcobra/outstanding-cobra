@@ -1,12 +1,11 @@
 package outcobra.server.model;
 
-import outcobra.server.model.interfaces.ParentLinked;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import outcobra.server.model.interfaces.ParentLinked;
 
 @Entity
 public class Exam implements ParentLinked {
@@ -29,12 +28,37 @@ public class Exam implements ParentLinked {
     private Subject subject;
 
     @OneToOne
-    private Mark mark;
+    private MarkValue mark;
 
     //region constructors
 
-    public Exam(Long id, String name, LocalDate date, List<ExamTask> tasks, Subject subject, Mark mark) {
+    /**
+     *
+     * @param id
+     * @param name
+     * @param date
+     * @param tasks
+     * @param subject
+     * @param mark
+     */
+    public Exam(Long id, String name, LocalDate date, List<ExamTask> tasks, Subject subject, MarkValue mark) {
         this.id = id;
+        this.name = name;
+        this.date = date;
+        this.tasks = tasks;
+        this.subject = subject;
+        this.mark = mark;
+    }
+
+    /**
+     *
+     * @param name
+     * @param date
+     * @param tasks
+     * @param subject
+     * @param mark
+     */
+    public Exam(String name, LocalDate date, List<ExamTask> tasks, Subject subject, MarkValue mark) {
         this.name = name;
         this.date = date;
         this.tasks = tasks;
@@ -90,11 +114,11 @@ public class Exam implements ParentLinked {
         this.subject = subject;
     }
 
-    public Mark getMark() {
+    public MarkValue getMark() {
         return mark;
     }
 
-    public void setMark(Mark mark) {
+    public void setMark(MarkValue mark) {
         this.mark = mark;
     }
 
