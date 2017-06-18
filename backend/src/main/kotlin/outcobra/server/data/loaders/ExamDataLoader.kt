@@ -4,6 +4,8 @@ import org.slf4j.LoggerFactory
 import org.springframework.core.annotation.Order
 import org.springframework.stereotype.Component
 import outcobra.server.data.DataLoadOrder.EXAM
+import outcobra.server.data.loaders.MarkDataLoader.Companion.getRandomMark
+import outcobra.server.data.loaders.MarkDataLoader.Companion.getRandomWeight
 import outcobra.server.data.loaders.SubjectDataLoader.Companion.DATABASES
 import outcobra.server.data.loaders.SubjectDataLoader.Companion.GERMAN
 import outcobra.server.data.loaders.SubjectDataLoader.Companion.GUP
@@ -33,23 +35,23 @@ class ExamDataLoader @Inject constructor(val examRepository: ExamRepository,
 
     companion object {
         var SCRUM_EXAM = Exam("fake daily", LocalDate.now().minusWeeks(1), listOf(),
-                null, MarkValue(5.5, 1.0))
+                null, MarkValue(getRandomMark(), getRandomWeight()))
         var OOP_EXAM = Exam("KR", LocalDate.now().plusWeeks(1), listOf(),
                 null, null)
         var GERMAN_EXAM = Exam("Kulturgeschichte", LocalDate.now().minusWeeks(1), listOf(),
-                null, MarkValue(5.5, 1.0))
+                null, MarkValue(getRandomMark(), getRandomWeight()))
         var PHYSICS_EXAM = Exam("Statik", LocalDate.now().minusWeeks(1), listOf(),
-                null, MarkValue(5.5, 1.0))
+                null, MarkValue(getRandomMark(), getRandomWeight()))
         var OOP_DESIGN_EXAM = Exam("Design-Patterns", LocalDate.now().plusWeeks(1), listOf(),
                 null, null)
         var DATABASES_EXAM = Exam("DB-Project", LocalDate.now(), listOf(),
-                null, MarkValue(5.5, 1.0))
+                null, MarkValue(getRandomMark(), getRandomWeight()))
         var GUP_EXAM = Exam("WW2", LocalDate.now().minusWeeks(1), listOf(),
-                null, MarkValue(5.5, 1.0))
+                null, MarkValue(getRandomMark(), getRandomWeight()))
         var MATHS_EXAM = Exam("Gonometrie", LocalDate.now().plusDays(1), listOf(),
                 null, null)
         var PROJECT_EXAM = Exam("Präsentation", LocalDate.now().minusMonths(1), listOf(),
-                null, MarkValue(5.5, 1.0))
+                null, MarkValue(getRandomMark(), getRandomWeight()))
     }
 
     override fun shouldLoad(): Boolean = true

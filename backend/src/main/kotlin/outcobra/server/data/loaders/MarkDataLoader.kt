@@ -30,16 +30,31 @@ class MarkDataLoader @Inject constructor(val markValueRepository: MarkValueRepos
                                          val markGroupRepository: MarkGroupRepository,
                                          val subjectRepository: SubjectRepository) : DataLoader {
 
-    private val random = Random()
-
+    private val LOGGER = LoggerFactory.getLogger(MarkDataLoader::class.java)
 
     companion object {
         lateinit var MARK1: Mark
         lateinit var MARK2: Mark
         lateinit var MARK3: Mark
         lateinit var SUBGROUP1: MarkGroup
+
         lateinit var MARK_GROUP_SUBJ: MarkGroup
-        private val LOGGER = LoggerFactory.getLogger(MarkDataLoader::class.java)
+        private val random = Random()
+
+        fun getRandomWeight(): Double = getRandomDouble(0.2, 2, 4)
+
+        fun getRandomMark(): Double {
+            var mark = getRandomDouble(1.0, 6)
+            if (mark <= 4.0) {
+                mark += 1
+            }
+            return mark
+        }
+
+        private fun getRandomDouble(min: Double, max: Int, fraction: Int = 2): Double {
+            val double = min + (max - min) * random.nextDouble()
+            return Math.round(double * fraction).toDouble() / fraction
+        }
     }
 
     override fun shouldLoad(): Boolean = true
@@ -60,14 +75,5 @@ class MarkDataLoader @Inject constructor(val markValueRepository: MarkValueRepos
         MARK3 = markValueRepository.save(MarkValue(getRandomMark(), getRandomWeight(), SUBGROUP1, "mark3", null))
         LOGGER.debug("saved marks for subject ${subject.name}")
 
-    }
-
-    private fun getRandomMark(): Double = getRandomDouble(1.0, 6)
-
-    private fun getRandomWeight(): Double = getRandomDouble(0.2, 2, 4)
-
-    private fun getRandomDouble(min: Double, max: Int, fraction: Int = 2): Double {
-        val double = min + (max - min) * random.nextDouble()
-        return Math.round(double * fraction).toDouble() / fraction
     }
 }
