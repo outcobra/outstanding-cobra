@@ -1,6 +1,6 @@
 import * as moment from 'moment/moment';
 
-export function dateComparator(first: Date, second: Date): number {
+export function dateComparator(first: Date|string, second: Date|string): number {
     let firstMoment = moment(first);
     let secondMoment = moment(second);
     if (firstMoment.isBefore(secondMoment)) {

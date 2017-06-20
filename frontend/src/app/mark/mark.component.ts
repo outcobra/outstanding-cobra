@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {SemesterService} from '../manage/service/semester.service';
 import {dateComparator} from '../core/util/comparator';
-import {SemesterDto} from '../manage/model/ManageDto';
+import {SemesterDto} from '../manage/model/manage.dto';
 import {Util} from '../core/util/util';
 import {DateUtil} from '../core/services/date-util.service';
 import {isEmpty, isTruthy} from '../core/util/helper';
@@ -23,9 +23,10 @@ export class MarkComponent implements OnInit {
 
     ngOnInit() {
         this._semesterService.readAll()
-            .map(semesters => semesters.sort((first, second) => dateComparator(first.validFrom, second.validFrom)))
+            .map(semesters => semesters.map(sem => this._semesterService.mapDates(sem))
+                .sort((first, second) => dateComparator(first.validFrom, second.validFrom)))
             .subscribe(semesters => {
-                this.currentSemester = semesters.find(sem => DateUtil.isBetweenDay(new Date(), sem.validFrom, sem.validTo));
+                this.currentSemester = semesters.find(sem => DateUtil.isBetweenDaysInclusive(new Date(), sem.validFrom as Date, sem.validTo as Date));
                 this.semesters = isTruthy(this.currentSemester) ? Util.moveToFirst(semesters, this.currentSemester) : semesters;
                 this._initMarkSemesterView();
             });

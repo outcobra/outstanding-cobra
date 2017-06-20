@@ -11,6 +11,8 @@ import outcobra.server.model.dto.mark.SemesterMarkDto
 import outcobra.server.model.dto.mark.SubjectMarkDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.mapper.BaseMapper
+import outcobra.server.model.mapper.InstitutionMapper
+import outcobra.server.model.mapper.SchoolClassMapper
 import javax.inject.Inject
 
 
@@ -20,7 +22,9 @@ import javax.inject.Inject
  */
 @Component
 class SemesterMarkDtoMapper @Inject constructor(val markGroupMapper: Mapper<MarkGroup, MarkGroupDto>,
-                                                val colorMapper: Mapper<Color, ColorDto>)
+                                                val colorMapper: Mapper<Color, ColorDto>,
+                                                val schoolClassMapper: SchoolClassMapper,
+                                                val institutionMapper: InstitutionMapper)
     : Mapper<Semester, SemesterMarkDto>, BaseMapper() {
 
     override fun fromDto(from: SemesterMarkDto?): Semester {
@@ -28,7 +32,10 @@ class SemesterMarkDtoMapper @Inject constructor(val markGroupMapper: Mapper<Mark
     }
 
     override fun toDto(from: Semester): SemesterMarkDto {
-        return SemesterMarkDto(from.id, from.name, from.validFrom, from.validTo, from.subjects.map { subjectToMarksDto(it) })
+        val schoolClass = from.schoolYear.schoolClass
+        return SemesterMarkDto(from.id, from.name, from.validFrom, from.validTo,
+                institutionMapper.toDto(schoolClass.institution), schoolClassMapper.toDto(schoolClass),
+                from.subjects.map { subjectToMarksDto(it) })
     }
 
     private fun subjectToMarksDto(from: Subject): SubjectMarkDto {

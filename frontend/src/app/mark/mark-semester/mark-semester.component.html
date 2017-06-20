@@ -1,1 +1,20 @@
-<h1>Semester Name: {{ semesterMark.name }}</h1>
+<oc-collapsible>
+    <oc-collapsible-header><h2>{{ semesterMark.institution.name }}</h2></oc-collapsible-header>
+    <oc-collapsible-body>
+        <oc-collapsible>
+            <oc-collapsible-header><h3>{{ semesterMark.schoolClass.normalizedName }}</h3></oc-collapsible-header>
+            <oc-collapsible-body>
+                <ul>
+                    <li *ngFor="let subject of semesterMark.subjects">
+                        <span>{{ subject.name }}</span>
+                        <ul>
+                            <li *ngFor="let markGroup of subject.subjectMarkGroup.markGroups">
+                                <span>{{ markGroup | json }}</span>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </oc-collapsible-body>
+        </oc-collapsible>
+    </oc-collapsible-body>
+</oc-collapsible>
