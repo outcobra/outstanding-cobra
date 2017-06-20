@@ -17,7 +17,7 @@ data class MarkGroupDto(override val id: Long = 0,
                         val markValues: List<MarkValueDto> = listOf(),
                         val subjectId: Long = 0,
                         val parentGroupId: Long = 0,
-                        val markGroups: List<Long> = listOf()) : BaseMarkDto {
+                        val markGroups: List<MarkGroupDto> = listOf()) : BaseMarkDto {
 
     override fun getIdentifier(): Long = id
 

@@ -12,8 +12,7 @@ public abstract class Mark implements ParentLinked {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     protected Long id;
-    @OneToOne(mappedBy = "mark")
-    protected Exam exam;
+
     @NotNull
     protected String description;
 
@@ -21,9 +20,8 @@ public abstract class Mark implements ParentLinked {
     protected MarkGroup markGroup;
 
     //region constructors
-    public Mark(Double weight, Exam exam, MarkGroup markGroup, String description) {
+    public Mark(Double weight, MarkGroup markGroup, String description) {
         this.weight = weight;
-        this.exam = exam;
         this.markGroup = markGroup;
         this.description = description;
     }
@@ -48,14 +46,6 @@ public abstract class Mark implements ParentLinked {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Exam getExam() {
-        return exam;
-    }
-
-    public void setExam(Exam exam) {
-        this.exam = exam;
     }
 
     public MarkGroup getMarkGroup() {
@@ -83,7 +73,6 @@ public abstract class Mark implements ParentLinked {
 
         if (getWeight() != mark.getWeight()) return false;
         if (!getId().equals(mark.getId())) return false;
-        if (getExam() != null ? !getExam().equals(mark.getExam()) : mark.getExam() != null) return false;
         if (!getDescription().equals(mark.getDescription())) return false;
         return getMarkGroup() != null ? getMarkGroup().equals(mark.getMarkGroup()) : mark.getMarkGroup() == null;
     }
@@ -92,7 +81,6 @@ public abstract class Mark implements ParentLinked {
     public int hashCode() {
         int result = Double.valueOf(getWeight()).hashCode();
         result = 31 * result + getId().hashCode();
-        result = 31 * result + (getExam() != null ? getExam().hashCode() : 0);
         result = 31 * result + getDescription().hashCode();
         result = 31 * result + (getMarkGroup() != null ? getMarkGroup().hashCode() : 0);
         return result;

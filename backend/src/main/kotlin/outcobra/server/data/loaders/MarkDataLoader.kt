@@ -13,14 +13,11 @@ import outcobra.server.data.loaders.SubjectDataLoader.Companion.SUBJECT6
 import outcobra.server.data.loaders.SubjectDataLoader.Companion.SUBJECT7
 import outcobra.server.data.loaders.SubjectDataLoader.Companion.SUBJECT8
 import outcobra.server.data.loaders.SubjectDataLoader.Companion.SUBJECT9
-import outcobra.server.model.Mark
-import outcobra.server.model.MarkGroup
-import outcobra.server.model.MarkValue
-import outcobra.server.model.Subject
+import outcobra.server.model.*
 import outcobra.server.model.repository.MarkGroupRepository
 import outcobra.server.model.repository.MarkValueRepository
 import outcobra.server.model.repository.SubjectRepository
-import java.util.*
+import java.util.Random
 import javax.inject.Inject
 
 /**
@@ -53,11 +50,11 @@ class MarkDataLoader @Inject constructor(val markValueRepository: MarkValueRepos
     }
 
     private fun saveMarksForSemester(subject: Subject) {
-        MARK_GROUP_SUBJ = MarkGroup(1.0, null, null, "${subject.name} mark", listOf<Mark>(), subject)
+        MARK_GROUP_SUBJ = MarkGroup(1.0, null, "${subject.name} mark", listOf<Mark>(), subject)
         MARK_GROUP_SUBJ = markGroupRepository.save(MARK_GROUP_SUBJ)
         subject.markGroup = MARK_GROUP_SUBJ
         subjectRepository.save(subject)
-        SUBGROUP1 = markGroupRepository.save(MarkGroup(0.5, null, MARK_GROUP_SUBJ, "subgroup", listOf<Mark>(), subject))
+        SUBGROUP1 = markGroupRepository.save(MarkGroup(0.5, MARK_GROUP_SUBJ, "subgroup", listOf<Mark>(), subject))
         MARK1 = markValueRepository.save(MarkValue(getRandomMark(), getRandomWeight(), MARK_GROUP_SUBJ, "mark1", null))
         MARK2 = markValueRepository.save(MarkValue(getRandomMark(), getRandomWeight(), SUBGROUP1, "mark2", null))
         MARK3 = markValueRepository.save(MarkValue(getRandomMark(), getRandomWeight(), SUBGROUP1, "mark3", null))
