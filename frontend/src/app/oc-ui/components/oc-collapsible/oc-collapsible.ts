@@ -4,7 +4,8 @@ import {
     ContentChild,
     EventEmitter,
     HostBinding,
-    HostListener, Output,
+    HostListener,
+    Output,
     ViewEncapsulation
 } from '@angular/core';
 
@@ -57,9 +58,7 @@ export class OCCollapsibleComponent implements AfterContentInit {
     @ContentChild(OCCollapsibleBodyComponent) public body: OCCollapsibleBodyComponent;
 
     ngAfterContentInit(): void {
-        this.header.onClick.subscribe(() => {
-            this.toggle();
-        });
+        this.header.onClick.subscribe(() => this.toggle());
     }
 
     @HostBinding('class.active') public opened: boolean = false;

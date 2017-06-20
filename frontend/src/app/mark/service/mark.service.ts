@@ -8,7 +8,7 @@ import {Observable} from 'rxjs/Observable';
 @Injectable()
 export class MarkService extends AppCrudService<MarkDto> {
     constructor(http: HttpInterceptor) {
-        super(http,'/mark');
+        super(http, '/mark');
     }
 
     public getMarkSemesterBySemesterId(semesterId: number): Observable<SemesterMarkDto> {
