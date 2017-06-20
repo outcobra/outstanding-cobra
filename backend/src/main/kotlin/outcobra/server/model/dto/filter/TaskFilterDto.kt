@@ -1,4 +1,7 @@
-package outcobra.server.model.dto
+package outcobra.server.model.dto.filter
+
+import outcobra.server.model.dto.SchoolClassDto
+import outcobra.server.model.dto.SubjectDto
 
 data class TaskFilterDto(val schoolClassSubjects: List<SchoolClassSubjects> = arrayListOf())
 

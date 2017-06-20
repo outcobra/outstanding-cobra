@@ -4,8 +4,8 @@ import outcobra.server.model.Semester
 import outcobra.server.model.Subject
 import outcobra.server.model.Task
 import outcobra.server.model.dto.TaskDto
-import outcobra.server.model.dto.TaskFilterDto
 import outcobra.server.model.dto.TaskProgressUpdateDto
+import outcobra.server.model.dto.filter.TaskFilterDto
 import outcobra.server.service.base.BaseService
 
 /**

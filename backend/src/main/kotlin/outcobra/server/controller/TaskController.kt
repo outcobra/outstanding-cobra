@@ -2,8 +2,8 @@ package outcobra.server.controller
 
 import org.springframework.web.bind.annotation.*
 import outcobra.server.model.dto.TaskDto
-import outcobra.server.model.dto.TaskFilterDto
 import outcobra.server.model.dto.TaskProgressUpdateDto
+import outcobra.server.model.dto.filter.TaskFilterDto
 import outcobra.server.service.TaskService
 import javax.inject.Inject
 

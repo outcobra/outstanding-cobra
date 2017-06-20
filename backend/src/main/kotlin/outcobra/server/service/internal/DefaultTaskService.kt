@@ -3,7 +3,10 @@ package outcobra.server.service.internal
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 import outcobra.server.model.*
-import outcobra.server.model.dto.*
+import outcobra.server.model.dto.TaskDto
+import outcobra.server.model.dto.TaskProgressUpdateDto
+import outcobra.server.model.dto.filter.SchoolClassSubjects
+import outcobra.server.model.dto.filter.TaskFilterDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.TaskRepository
 import outcobra.server.service.*
