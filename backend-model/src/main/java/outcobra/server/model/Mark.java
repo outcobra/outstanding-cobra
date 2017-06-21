@@ -20,7 +20,7 @@ public abstract class Mark implements ParentLinked {
     protected MarkGroup markGroup;
 
     //region constructors
-    public Mark(Double weight, Exam exam, MarkGroup markGroup, String description) {
+    public Mark(Double weight, MarkGroup markGroup, String description) {
         this.weight = weight;
         this.markGroup = markGroup;
         this.description = description;
@@ -64,6 +64,7 @@ public abstract class Mark implements ParentLinked {
         this.description = description;
     }
 
+    @SuppressWarnings("SimplifiableIfStatement")
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
