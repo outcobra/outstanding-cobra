@@ -26,4 +26,8 @@ oc-collapsible-body {
             @extend .border-bottom;
         }
     }
+
+    oc-collapsible {
+        overflow: hidden;
+    }
 }

@@ -1,3 +1,18 @@
-<p>
-    mark works!
-</p>
+<oc-title-bar>
+    <span>{{ 'i18n.modules.mark.linkTitle' | translate }}</span>
+</oc-title-bar>
+<nav md-tab-nav-bar *ngIf="!semesters || semesters.length > 0; else noSemestersAvailable">
+    <a md-tab-link
+       *ngFor="let semester of semesters"
+       [routerLink]="'/mark/semester/' + semester.id"
+       routerLinkActive #rla="routerLinkActive"
+       [active]="rla.isActive">
+        {{ semester.name }}
+    </a>
+</nav>
+<div class="mark-semester-container">
+    <ng-template #noSemestersAvailable>
+        <h4>{{ 'i18n.modules.mark.noSemesterAvailable' | translate }}</h4>
+    </ng-template>
+    <router-outlet></router-outlet>
+</div>

@@ -188,6 +188,10 @@ ALTER TABLE exam
   ADD CONSTRAINT FKos7g6jn2448ll3ofc3w163cwh
 FOREIGN KEY (mark_id) REFERENCES mark_value (id);
 
+ALTER TABLE exam
+  ADD CONSTRAINT FKos7g6jn2448ll3ofc3w163cwh
+FOREIGN KEY (mark_id) REFERENCES mark_value (id);
+
 ALTER TABLE mark_report_entry
   ADD CONSTRAINT FKeitykibr3r3hvanitx7n4juk3
 FOREIGN KEY (subject_id) REFERENCES subject (id);

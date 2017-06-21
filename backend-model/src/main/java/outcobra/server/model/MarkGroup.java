@@ -19,14 +19,13 @@ public class MarkGroup extends Mark {
     //region constructors
     /**
      * @param weight
-     * @param exam
      * @param markGroup
      * @param description
      * @param marks
      * @param subject
      */
-    public MarkGroup(Double weight, Exam exam, MarkGroup markGroup, String description, List<Mark> marks, Subject subject) {
-        super(weight, exam, markGroup, description);
+    public MarkGroup(Double weight, MarkGroup markGroup, String description, List<Mark> marks, Subject subject) {
+        super(weight, markGroup, description);
         this.marks = marks;
         this.subject = subject;
     }

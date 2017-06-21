@@ -72,7 +72,8 @@
         "linkTitle": "Exams"
       },
       "mark": {
-        "linkTitle": "Marks"
+        "linkTitle": "Marks",
+        "noSemesterAvailable": "You do not have semesters yet"
       },
       "task": {
         "linkTitle": "Tasks",

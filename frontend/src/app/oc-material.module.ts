@@ -17,6 +17,7 @@ import {
     MdSidenavModule,
     MdSliderModule,
     MdSlideToggleModule,
+    MdTabsModule,
     MdToolbarModule,
     MdTooltipModule
 } from '@angular/material';
@@ -40,6 +41,7 @@ import {OC_DATE_FORMATS} from './core/common/oc-date-formats';
         MdSliderModule,
         MdRippleModule,
         MdListModule,
+        MdTabsModule,
         MdDatepickerModule,
         MdCoreModule
     ],
@@ -60,6 +62,7 @@ import {OC_DATE_FORMATS} from './core/common/oc-date-formats';
         MdSliderModule,
         MdRippleModule,
         MdListModule,
+        MdTabsModule,
         MdDatepickerModule,
         MdCoreModule
     ],

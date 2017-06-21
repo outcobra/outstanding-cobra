@@ -28,6 +28,20 @@ export class Util {
     }
 
     /**
+     * moves the given element to the first position in the array
+     * if the element is not present it will be added in the front
+     *
+     * @param array
+     * @param element
+     * @returns {Array<T>}
+     */
+    public static moveToFirst<T>(array: Array<T>, element: T): Array<T> {
+        Util.removeItem(array, element);
+        array.unshift(element);
+        return array;
+    }
+
+    /**
      * returns an array containing subarrays from the input array with the length
      * does not mutate the input array
      * length: 2
@@ -56,8 +70,27 @@ export class Util {
      */
     public static arrayRemove<T>(array: Array<T>, findPredicate: Predicate<T>): Array<T> {
         let index = array.findIndex(t => findPredicate(t));
-        if (!index && index != 0) return array;
+        if (!index && index != 0) {
+            return array;
+        }
         return array.splice(index, 1)
+    }
+
+    /**
+     * removes the item from the array and returns it
+     * if the item does not exists in the array the array will be return without removing anything
+     *
+     * @param array
+     * @param item
+     * @returns {T[]}
+     */
+    public static removeItem<T>(array: Array<T>, item: T): Array<T> {
+        let itemIndex = array.indexOf(item);
+        if (itemIndex < 0) {
+            return array;
+        }
+        array.splice(itemIndex, 1);
+        return array;
     }
 
     /**

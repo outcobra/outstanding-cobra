@@ -1,16 +1,20 @@
-import {Color} from '../../core/model/Color';
+import {ColorDto} from '../../core/model/color.dto';
 import {MarkGroupDto} from './MarkGroupDto';
+import {InstitutionDto, SchoolClassDto} from '../../manage/model/manage.dto';
+
 export interface SemesterMarkDto {
     id: number,
     name: string,
     validFrom: Date,
     validTo: Date,
+    institution: InstitutionDto,
+    schoolClass: SchoolClassDto,
     subjects: Array<SubjectMarkDto>
 }
 
 export interface SubjectMarkDto {
     id: number,
     name: string,
-    color: Color,
+    color: ColorDto,
     subjectMarkGroup: MarkGroupDto
 }

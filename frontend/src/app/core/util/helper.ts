@@ -26,11 +26,11 @@ export function eq(toVerify: any): Predicate<boolean> {
     return (element) => element === toVerify;
 }
 
-export function isEmpty(toCheck: string): boolean {
+export function isEmpty(toCheck: string|Array<any>): boolean {
     return isFalsy(toCheck) || toCheck.length == 0;
 }
 
-export function isNotEmpty(toCheck: string): boolean {
+export function isNotEmpty(toCheck: string|Array<any>): boolean {
     return !isEmpty(toCheck);
 }
 

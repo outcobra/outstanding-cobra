@@ -1,6 +1,7 @@
 package outcobra.server.model;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import outcobra.server.model.interfaces.ParentLinked;
 
@@ -9,11 +10,14 @@ public class MarkValue extends Mark {
     @NotNull
     private Double value;
 
+    @OneToOne(mappedBy = "mark")
+    private Exam exam;
     //region constructors
 
     public MarkValue(Double value, Double weight, MarkGroup markGroup, String description, Exam exam) {
-        super(weight, exam, markGroup, description);
+        super(weight, markGroup, description);
         this.value = value;
+        this.exam = exam;
     }
 
     public MarkValue(Double value, Double weight) {
@@ -23,11 +27,19 @@ public class MarkValue extends Mark {
         this.description = "";
     }
 
+    public MarkValue(Double value, Double weight, Exam exam) {
+        super();
+        this.value = value;
+        this.weight = weight;
+        this.exam = exam;
+        this.description = exam.getName();
+    }
+
     public MarkValue(Double value, Double weight, String description) {
         super();
         this.value = value;
         this.weight = weight;
-        this.setDescription(description);
+        this.description = description;
     }
 
     public MarkValue() {
@@ -51,6 +63,14 @@ public class MarkValue extends Mark {
         this.value = value;
     }
 
+    public Exam getExam() {
+        return exam;
+    }
+
+    public void setExam(Exam exam) {
+        this.exam = exam;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -58,7 +78,7 @@ public class MarkValue extends Mark {
         if (!super.equals(o)) return false;
 
         MarkValue markValue = (MarkValue) o;
-
+        if (!(getExam().equals(markValue.exam))) return false;
         return getValue() == markValue.getValue();
     }
 
@@ -66,6 +86,7 @@ public class MarkValue extends Mark {
     public int hashCode() {
         int result = super.hashCode();
         result = (int) (31 * result + getValue());
+        result = 31 * (result + (exam != null ? exam.hashCode() : 0));
         return result;
     }
 

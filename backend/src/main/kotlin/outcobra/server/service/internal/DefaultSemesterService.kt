@@ -50,4 +50,10 @@ open class DefaultSemesterService
                 .and(QSemester.semester.validTo.goe(today)))
         return repository.findAll(todayBetweenValidFromAndTo).map { mapper.toDto(it) }
     }
+
+    override fun readAllByUser(): List<SemesterDto> {
+        val currentUserId = userService.getCurrentUser()?.id
+        val withCurrentUser = QSemester.semester.schoolYear.schoolClass.institution.user.id.eq(currentUserId)
+        return repository.findAll(withCurrentUser).map { mapper.toDto(it) }
+    }
 }

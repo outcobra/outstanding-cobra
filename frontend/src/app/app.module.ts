@@ -19,6 +19,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {CoreModule} from './core/core.module';
 import {OCMaterialModule} from './oc-material.module';
 import {RavenErrorHandler} from './core/error/raven-error-handler';
+import {MarkModule} from './mark/mark.module';
 
 @NgModule({
     declarations: [
@@ -34,6 +35,7 @@ import {RavenErrorHandler} from './core/error/raven-error-handler';
         MainModule,
         ManageModule,
         TaskModule,
+        MarkModule,
         FlexLayoutModule,
         SimpleNotificationsModule.forRoot(),
         CoreModule,
