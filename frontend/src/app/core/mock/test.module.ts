@@ -43,6 +43,8 @@ import {HttpInterceptor} from '../http/http-interceptor';
 import {ConfigService} from '../config/config.service';
 import {ObservableMedia} from '@angular/flex-layout';
 import {MockObservableMedia} from './ui/mock-observable-media.service';
+import {MarkService} from '../../mark/service/mark.service';
+import {MockMarkService} from './mark/mock-mark.service';
 
 @NgModule({
     imports: [
@@ -131,6 +133,10 @@ import {MockObservableMedia} from './ui/mock-observable-media.service';
         {
             provide: TaskService,
             useClass: MockTaskService
+        },
+        {
+            provide: MarkService,
+            useClass: MockMarkService
         },
         {
             provide: DurationService,
