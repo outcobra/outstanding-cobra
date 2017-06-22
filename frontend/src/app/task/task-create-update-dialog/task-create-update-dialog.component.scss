@@ -1,0 +1,23 @@
+md-input-container {
+    width: 100%;
+
+    textarea {
+        resize: vertical;
+    }
+}
+
+:host {
+    .form-group {
+        padding: 0 4px;
+    }
+}
+
+.half {
+    float: left;
+    width: 50%;
+    &datepicker {
+        .mat-input-container {
+            width: 50%;
+        }
+    }
+}

@@ -1,0 +1,15 @@
+<div class="title" fxLayout>
+    <div fxFlex="10">
+        <md-icon>{{ iconName }}</md-icon>
+    </div>
+    <div fxFlex>
+        <label class="text-secondary-dark data-title">
+            {{ titleKey | translate}}
+        </label>
+    </div>
+</div>
+<div class="data end" fxLayout>
+    <div fxFlex="90" fxFlexOffset="10">
+        <ng-content></ng-content>
+    </div>
+</div>

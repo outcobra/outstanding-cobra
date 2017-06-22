@@ -1,0 +1,28 @@
+@import '../../sass/color-variables';
+
+div {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+
+    #icon {
+        flex-grow: 1;
+        img {
+            margin: 40px auto;
+            width: 300px;
+        }
+    }
+    #credit {
+        flex-basis: 20px;
+        font-size: .8em;
+        width: 100%;
+        span {
+            margin: 0 auto;
+            display: block;
+            position: relative;
+            a {
+                color: $disabled-light;
+            }
+        }
+    }
+}

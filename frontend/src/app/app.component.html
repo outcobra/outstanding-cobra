@@ -1,33 +1,54 @@
-<sidenav-layout>
-    <sidenav #sidenav>
-        <nav>
-            <ul>
-                <li class="nav-row">
-                    <a [routerLink]="'/dashboard'" md-ripple md-ripple-trigger>
-                        <md-icon class="link-icon">dashboard</md-icon>
-                        <span>{{ 'modules.dashboard.linkTitle' | translate }}</span>
-                    </a>
-                </li>
-                <li class="nav-row">
-                    <a [routerLink]="'/manage'" md-ripple md-ripple-trigger>
-                        <md-icon class="link-icon">settings</md-icon>
-                        <span>{{ 'modules.manage.linkTitle' | translate }}</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </sidenav>
-    <md-toolbar color="primary">
-        <md-icon class="toolbar-icon" (click)="sidenav.open()">menu</md-icon>
-        <a routerLink="/">{{title}}</a>
+<md-sidenav-container>
+    <md-sidenav class="oc-mobile-sidenav" *ngIf="mobile">
+        <md-toolbar>
+            <a [routerLink]="'/'" class="oc-mobile-sidenav-title text-primary-dark oc-title" tabindex="-1">{{ title }}</a>
+        </md-toolbar>
+        <oc-divider></oc-divider>
+        <oc-nav>
+            <div class="lang-toggler">
+                {{ 'i18n.common.lang.de' | translate }}
+                <md-slide-toggle (change)="changeLang()" [(ngModel)]="isEnglish"></md-slide-toggle>
+                {{ 'i18n.common.lang.en' | translate }}
+            </div>
+        </oc-nav>
+    </md-sidenav>
+
+    <md-toolbar color="primary" class="oc-primary-toolbar">
+        <md-icon class="toolbar-icon" (click)="openSidenav()" *ngIf="mobile">menu</md-icon>
+        <a class="oc-title" routerLink="/">{{ title }}</a>
         <span class="toolbar-fill-space"></span>
-        <button md-button *ngIf="!auth.isLoggedIn()" (click)="login()">Login</button>
-        <button md-button *ngIf="auth.isLoggedIn()" (click)="logout()">Logout</button>
+        <button md-button *ngIf="auth.isLoggedIn(); else notLoggedIn" (click)="logout()">Logout</button>
+        <ng-template #notLoggedIn>
+            <button md-button (click)="login()">Login</button>
+        </ng-template>
+        <button md-icon-button [md-menu-trigger-for]="themeMenu">
+            <md-icon>more_vert</md-icon>
+        </button>
+        <md-menu #themeMenu="mdMenu" class="oc-theme-menu">
+            <span class="oc-theme-menu-title">{{ 'i18n.common.theme.title' | translate }}</span>
+            <button md-menu-item *ngFor="let theme of allThemes" (click)="changeTheme(theme)">
+                <md-icon *ngIf="theme.equals(_activeTheme); else notActiveTheme">check</md-icon>
+                <ng-template #notActiveTheme>
+                    <md-icon></md-icon>
+                </ng-template>
+                <span>{{ 'i18n.common.theme.' + theme.i18nKey | translate }}</span>
+            </button>
+        </md-menu>
     </md-toolbar>
 
-    <div class="app-content">
-        <router-outlet></router-outlet>
+    <div class="main-area">
+        <oc-nav [collapsible]="true" *ngIf="!mobile" class="oc-side-sidenav" #ocNav>
+            <!-- TODO only temporary -->
+            <div class="lang-toggler" *ngIf="!ocNav.collapsed">
+                {{ 'i18n.common.lang.de' | translate }}
+                <md-slide-toggle (change)="changeLang()" [(ngModel)]="isEnglish"></md-slide-toggle>
+                {{ 'i18n.common.lang.en' | translate }}
+            </div>
+        </oc-nav>
+        <div class="app-content">
+            <router-outlet></router-outlet>
+        </div>
     </div>
-
+    <oc-footer *ngIf="!mobile"></oc-footer>
     <simple-notifications></simple-notifications>
-</sidenav-layout>
+</md-sidenav-container>

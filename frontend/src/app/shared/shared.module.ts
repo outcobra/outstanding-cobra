@@ -1,63 +1,49 @@
-import {NgModule} from "@angular/core";
-import {CommonModule} from "@angular/common";
-import {NotificationsService, SimpleNotificationsModule} from "angular2-notifications";
-import {HttpModule} from "@angular/http";
-import {HttpInterceptor} from "./http/HttpInterceptor";
-import {TranslateModule} from "ng2-translate";
-import {NotificationWrapperService} from "./notifications/notification-wrapper.service";
-import {TimepickerComponent} from "./components/timepicker/timepicker.component";
-import {DatepickerComponent} from "./components/datepicker/datepicker.component";
-import {MaterialModule} from "@angular/material";
-import {DaypickerComponent} from "./components/datepicker/daypicker.component";
-import {YearpickerComponent} from "./components/datepicker/yearpicker.component";
-import {DateUtil} from "./services/date-util.service";
-import {FormsModule} from "@angular/forms";
-import {AuthService} from "./services/auth/auth.service";
-import {SidenavComponent, SidenavLayout} from "./components/sidenav/sidenav";
-import {
-    CollapsibleComponent,
-    CollapsibleBodyComponent,
-    CollapsibleHeaderComponent
-} from "./components/collapsible/collapsible";
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {TranslateModule} from '@ngx-translate/core';
+import {TimepickerComponent} from './components/timepicker/timepicker.component';
+import {DatepickerComponent} from './components/datepicker/datepicker.component';
+import {DaypickerComponent} from './components/datepicker/daypicker.component';
+import {YearpickerComponent} from './components/datepicker/yearpicker.component';
+import {FormsModule} from '@angular/forms';
+import {ConfirmDialogComponent} from './components/confirm-dialog/confirm-dialog.component';
+import {ColorpickerComponent} from './components/colorpicker/colorpicker.component';
+import {InfoDialogComponent} from './components/info-dialog/info-dialog.component';
+import {OCUiModule} from '../oc-ui/oc-ui.module';
+import {DatePickerErrorDirective} from './components/datepicker/datepicker-error.directive';
+import {OCMaterialModule} from '../oc-material.module';
 
 @NgModule({
     declarations: [
         TimepickerComponent,
         DatepickerComponent,
         DaypickerComponent,
+        DatePickerErrorDirective,
         YearpickerComponent,
-        SidenavComponent,
-        SidenavLayout,
-        CollapsibleComponent,
-        CollapsibleHeaderComponent,
-        CollapsibleBodyComponent
+        ColorpickerComponent,
+        ConfirmDialogComponent,
+        InfoDialogComponent
     ],
     exports: [
         DatepickerComponent,
-        SidenavComponent,
-        SidenavLayout,
-        CollapsibleComponent,
-        CollapsibleHeaderComponent,
-        CollapsibleBodyComponent
+        DatePickerErrorDirective,
+        ColorpickerComponent,
+        ConfirmDialogComponent,
+        OCUiModule,
+        TranslateModule,
+        InfoDialogComponent
     ],
     imports: [
-        HttpModule,
         CommonModule,
         FormsModule,
         TranslateModule,
-        MaterialModule.forRoot(),
-        SimpleNotificationsModule
+        OCMaterialModule,
+        OCUiModule
     ],
-    providers: [
-        DateUtil,
-        AuthService,
-        HttpInterceptor,
-        NotificationWrapperService,
-        {
-            provide: NotificationsService,
-            useExisting: NotificationWrapperService
-        }
-    ],
+    entryComponents: [
+        ConfirmDialogComponent,
+        InfoDialogComponent
+    ]
 })
 export class SharedModule {
 }

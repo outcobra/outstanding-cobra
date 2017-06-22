@@ -1,0 +1,6 @@
+.gradle/
+e2e/
+fonts/
+gradle/
+src/
+node_modules/

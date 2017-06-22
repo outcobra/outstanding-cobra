@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from "@angular/core";
+import {Component, ViewEncapsulation, Output, EventEmitter} from '@angular/core';
 
 @Component({
     selector: 'entity-menu',
@@ -6,12 +6,19 @@ import {Component, OnInit, ViewEncapsulation} from "@angular/core";
     styleUrls: ['./entity-menu.component.scss'],
     encapsulation: ViewEncapsulation.Emulated
 })
-export class EntityMenuComponent implements OnInit {
+export class EntityMenuComponent {
+    @Output('delete') onDelete: EventEmitter<any> = new EventEmitter();
+    @Output('edit') onEdit: EventEmitter<any> = new EventEmitter();
 
     constructor() {
     }
 
-    ngOnInit() {
+    public clickedEdit() {
+        this.onEdit.emit();
+    }
+
+    public clickedDelete() {
+        this.onDelete.emit();
     }
 
 }

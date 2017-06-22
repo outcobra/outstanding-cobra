@@ -5,20 +5,25 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.HttpMethod
+import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.test.web.client.ExpectedCount.manyTimes
 import org.springframework.test.web.client.MockRestServiceServer
 import org.springframework.test.web.client.match.MockRestRequestMatchers.method
 import org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo
 import org.springframework.web.client.RestTemplate
+import outcobra.server.config.ProfileRegistry
 import java.net.URI
+import javax.transaction.Transactional
 
-@RunWith(SpringRunner::class)
 @SpringBootTest
+@RunWith(SpringRunner::class)
+@ActiveProfiles(ProfileRegistry.TEST)
+@Transactional
+@Ignore
 class SchoolClassControllerTest {
 
     @Test
-    @Ignore
     fun testCreateSchoolClass() {
         val restTemplate = RestTemplate()
         val serverMock = MockRestServiceServer.bindTo(restTemplate).build()

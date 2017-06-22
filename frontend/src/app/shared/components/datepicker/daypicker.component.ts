@@ -1,12 +1,13 @@
-import {Component, OnInit, ViewEncapsulation, style, keyframes, animate, transition, trigger} from "@angular/core";
-import * as moment from "moment";
-import {DatepickerComponent} from "./datepicker.component";
-import {DateUtil} from "../../services/date-util.service";
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import * as moment from 'moment';
+import {DatepickerComponent} from './datepicker.component';
+import {DateUtil} from '../../../core/services/date-util.service';
+import {Util} from '../../../core/util/util';
+import {animate, keyframes, style, transition, trigger} from '@angular/animations';
 
 @Component({
     selector: 'daypicker',
     templateUrl: './daypicker.component.html',
-    styleUrls: [],
     encapsulation: ViewEncapsulation.None,
     animations: [
         trigger('daypickerAnimation', [
@@ -28,18 +29,19 @@ import {DateUtil} from "../../services/date-util.service";
     ]
 })
 export class DaypickerComponent implements OnInit {
-    private dayLabels: string[] = [];
-    private monthLabel: string;
-    private rows: any[] = [];
+    public dayLabels: string[] = [];
+    public monthLabel: string;
+    public rows: Date[][] = null;
+    public animate: string;
+
     private year: number;
     private month: number;
-    private animate: string;
 
-    constructor(private datePicker: DatepickerComponent, private dateUtil: DateUtil) {
+    constructor(private datePicker: DatepickerComponent) {
     }
 
     ngOnInit() {
-        moment.locale('de', {
+        moment.updateLocale('de', {
             weekdays: 'Sonntag_Montag_Dienstag_Mittwoch_Donnerstag_Freitag_Samstag'.split('_')
         });
 
@@ -55,7 +57,7 @@ export class DaypickerComponent implements OnInit {
 
     selectDay(date: Date) {
         if (!this.isDisabled(date) && !this.isActive(date)) {
-            this.datePicker.selectDate(date);
+            this.datePicker.selectDate(moment(date).toDate());
         }
     }
 
@@ -83,23 +85,15 @@ export class DaypickerComponent implements OnInit {
         for (let i = 0; i < daysInMonth; i++) {
             days[i + dayIndex] = new Date(year, month, i + 1);
         }
-        this.rows = this.split(days, 7);
-    }
-
-    split(array: Array<any>, length: number) {
-        let out = [];
-        while (array.length > 0) {
-            out.push(array.splice(0, length));
-        }
-        return out;
+        this.rows = Util.split<Date>(days, 7);
     }
 
     isDisabled(date: Date) {
-        return !this.dateUtil.isBetweenDay(date, this.datePicker.minDate, this.datePicker.maxDate);
+        return !DateUtil.isBetweenDaysInclusive(date, this.datePicker.minDate, this.datePicker.maxDate);
     }
 
     isActive(date: Date) {
-        return this.dateUtil.isSameDay(this.datePicker.currentDate, date);
+        return DateUtil.isSameDay(this.datePicker.currentDate, date);
     }
 
     setDateSpanClasses(date: Date) {

@@ -1,7 +1,9 @@
 package outcobra.server.util
 
+import org.springframework.cache.annotation.Cacheable
 import org.springframework.stereotype.Component
 import org.springframework.util.ClassUtils
+import outcobra.server.config.CacheRegistry.Companion.DTO_FOR_NAME
 
 /**
  * Can be used to find the class of a dto by the name of the corresponding entity
@@ -10,7 +12,7 @@ import org.springframework.util.ClassUtils
  * @since 1.0.0
  */
 @Component
-open class DtoLocator {
+class DtoLocator {
     companion object {
         /**
          * The package all dtos belong to
@@ -19,13 +21,12 @@ open class DtoLocator {
     }
 
     /**
-     * Returns the class of a dto by its entitys name
+     * Returns the class of a dto by its entity's name
      *
      * @since 1.0.0
      * @throws ClassNotFoundException if the dtos class could not be found
      */
-    fun getForEntityName(entityName: String): Class<*> {
-        val clazz = ClassUtils.forName("$DTO_PACKAGE_NAME.${entityName.firstToUpper()}Dto", null)
-        return clazz
-    }
+    @Cacheable(DTO_FOR_NAME)
+    fun getForEntityName(entityName: String): Class<*> =
+            ClassUtils.forName("$DTO_PACKAGE_NAME.${entityName.firstToUpper()}Dto", null)
 }

@@ -1,23 +1,41 @@
-@import '../../node_modules/materialize-css/sass/components/color';
-@import 'color';
+@import 'color-variables';
 @import 'general';
 
+html, body, md-sidenav-container {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
 html {
+    line-height: normal;
     color: rgba(0, 0, 0, 0.87);
-    width: 100%;
-    height: 100%;
 }
 
-body {
-    background-color: #f5f5f5 !important;
-    width: 100%;
-    height: 100%;
+body, .main-area {
+    background-color: #F8F8F8 !important;
 }
 
-app-root {
+a {
+    color: $primary-light !important;
+}
+
+.mat-sidenav-content {
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+oc-app {
     overflow: hidden;
     height: 100%;
     width: 100%;
+}
+
+.oc-card {
+    @include mat-elevation(1);
+    border-radius: 2px;
+    background: white !important;
 }
 
 .margin-box {
@@ -33,27 +51,6 @@ app-root {
     margin: 0 auto;
 }
 
-.error {
-    @extend .red, .darken-1;
-}
-
-.info {
-    @extend .blue;
-}
-
-.success {
-    @extend .green;
-}
-
-.alert {
-    @extend .yellow, .darken-2;
-}
-
-sidenav {
-    @extend .color-accent;
-    width: 250px;
-}
-
 button[md-raised-button], button[md-button] {
     .md-button-wrapper > * {
         vertical-align: middle;
@@ -61,14 +58,97 @@ button[md-raised-button], button[md-button] {
 }
 
 .app-content {
-    height: calc(100% - 64px);
-    overflow-y: scroll;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .toolbar-icon {
+    cursor: pointer;
     margin: 16px 16px 16px 0;
 }
 
 .auth0-lock {
     font-family: 'Roboto', sans-serif !important;
+}
+
+oc-divider {
+    display: block;
+    margin: 0;
+    border-top: 1px solid $slightly-dark;
+}
+
+md-toolbar.oc-primary-toolbar {
+    z-index: 999;
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 3px 3px -2px rgba(0, 0, 0, 0.12), 0 1px 8px 0 rgba(0, 0, 0, 0.2)
+}
+
+md-dialog-container {
+    height: auto !important;
+    overflow: visible !important;
+    padding: 0 !important;
+    max-width: 100vw !important;
+
+    .dialog-header, .dialog-body, .dialog-footer {
+        display: block;
+        padding: 10px 40px;
+        margin: 0;
+    }
+
+    .dialog-header, .dialog-body {
+        padding-top: 20px;
+    }
+
+    .dialog-header {
+        @extend .color-primary;
+        h1 {
+            margin: 10px 0;
+            color: $primary-light;
+            font-size: 2em;
+            font-weight: normal;
+        }
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .dialog-header h1 {
+        font-size: 1.5em !important;
+    }
+}
+
+datepicker, md-input-container {
+    &.ng-invalid.ng-touched {
+        label {
+            color: mat-color($warn);
+        }
+        //noinspection CssOptimizeSimilarProperties
+        .mat-input-underline {
+            .mat-input-ripple {
+                background-color: mat-color($warn);
+            }
+            border: mat-color($warn);
+            border-top-width: 1px;
+            border-top-style: solid;
+        }
+    }
+}
+
+.form-group {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.form-error {
+    @extend .text-warn;
+}
+
+md-list-item {
+    h1, h2, h3, h4, h5, h6, p, span {
+        line-height: normal;
+    }
+}
+
+md-card {
+    &.list-card {
+        padding: 0;
+    }
 }

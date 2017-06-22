@@ -1,4 +1,6 @@
-#Outstanding Cobra
+# Outstanding Cobra
+
+[![Build Status](https://ci.pegnu.cloud/buildStatus/icon?job=outcobra/outstanding-cobra/develop)](https://ci.pegnu.cloud/job/outcobra/job/outstanding-cobra/job/develop/)
 [![codebeat badge](https://codebeat.co/badges/d8dd9a81-a229-46e3-b5b2-d016ca70cfa4)](https://codebeat.co/projects/github-com-outcobra-outstanding-cobra)
 
 # Installation
@@ -11,13 +13,18 @@ Gradle is our project and dependency management tool for the backend.
 
 You do not need to install Gradle yourself since we are using the Gradle wrapper in this project.
 
-Before you can build the project, you need to go to `backend/src/main/resources` and copy `auth0.example.properties` to `auth0.properties`.  In this file, `auth0.clientSecret` needs to be set. If you are building for production, you will get this from [Joel](https://github.com/jmesserli), otherwise you will have to create your own Auth0 account and update all values according to the app you create there.
+Before you can build the project, you need to go to `backend/src/main/resources` and copy `auth0.example.yml` to `auth0.yml`.  In this file, `auth0.clientSecret` needs to be set. If you are building for production, you will get this from [Joel](https://github.com/jmesserli), otherwise you will have to create your own Auth0 account and update all values according to the app you create there.
 
-If you are using IntelliJ, you will also have to set up annotation processing. For this, open the settings (`CTRL + ALT + S`) and navigate to `Build, Execution, Deployment > Compiler > Annotation Processors`. You should see the module `backend_main` there. Click it and select `Module content root` for `Store generated sources relative to:`. Also make sure that the `Production sources directory` is set to `generated`.
+If you are using IntelliJ, you will also have to set up annotation processing. For this, open the settings (`CTRL + ALT + S`) and navigate to `Build, Execution, Deployment > Compiler > Annotation Processors`. You should see the modules `backend_main` and `backend-model_main` there. Click each one and select `Module content root` for `Store generated sources relative to:`. Also make sure that the `Production sources directory` is set to `generated` for both of them.
 
 To build the project, you can just run `./gradlew build` on Linux or `gradlew.bat build` on Windows. You might need to adjust the file permissions on Linux using `chmod +x gradlew`.
 
-To start the backend, run `./gradlew bootRun` or `gradlew.bat bootRun` respectively.
+To run the backend you have to make a new run configuration.
+In IntelliJ you can add a run configuration by pressing `CTRL + SHIFT + A` and typing `Edit Run Configurations`.
+To add a configuration press the green plus. Then search for `Spring Boot`, set the main class to `outcobra.server.OutstandingCobraServerApplicationKt` and use `-Dspring.profiles.active=development` as vm options (this enables the development profile).
+
+Now you should be finished so press `Apply` and try to start the Application.
+ 
 
 ### Accessing API-Documentation
 
@@ -52,8 +59,7 @@ If the command npm is not recognized rerun the nodejs installer and make sure th
 
 **Linux:**
 
-To install yarn on linux you have to configure a specific repository.
-Just run this command: `sudo apt-key adv --keyserver pgp.mit.edu --recv D101F7899D41F3C3`
+To install yarn on linux you have to configure [a specific repository and pgp key](https://yarnpkg.com/en/docs/install#linux-tab).
 Then you can run `sudo apt-get update && sudo apt-get install yarn`
 
 To check the installation you can run `yarn version`.

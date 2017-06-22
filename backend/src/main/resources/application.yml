@@ -1,0 +1,95 @@
+#---
+# General Configs
+# contains properties which are consistent over all profiles
+#---
+spring:
+  jackson:
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+product:
+  version: 1.1.0
+---
+#---
+# Main Profile definition
+# This part only includes super-profiles like dev/prod/test etc.
+#---
+spring.profiles: development
+#ignore the ugliness bc it doesn't seem to work in a different way
+endpoints:
+  enabled: true
+  sensitive: false
+spring:
+  profiles:
+    include: load_test_data,h2_db
+runtime:
+  environment: development
+---
+spring.profiles: test
+#ignore the ugliness bc it doesn't seem to work in a different way
+spring:
+  profiles:
+    include: load_test_data,h2_db,mock_services
+  cache:
+    type: none
+runtime:
+  environment: test
+---
+spring.profiles: production
+spring:
+  profiles:
+    include: mysql_database
+runtime:
+  environment: production
+#---
+# Normal Profile definition
+# This part includes all profiles which are used by those in the area above
+#---
+---
+spring:
+  profiles: basic_auth_security_mock
+---
+spring:
+  profiles: h2_db
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:outcobra
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+  h2:
+    console:
+      enabled: true
+logging:
+  level:
+    outcobra.server.data: debug
+security:
+  headers:
+    frame: false
+flyway:
+  enabled: false
+---
+spring:
+  profiles: mysql_database
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://mysql:3306/outcobra
+    username: outcobra
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+    hibernate:
+      ddl-auto: validate
+flyway:
+  locations: db/migration
+---
+spring.profiles: bit
+spring:
+  profiles:
+    include: auth0_proxy
+http:
+  proxyHost: proxy.efd.admin.ch
+  proxyPort: 8080

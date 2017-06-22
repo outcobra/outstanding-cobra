@@ -1,17 +1,16 @@
 package outcobra.server.model;
 
 import org.hibernate.validator.constraints.Length;
-import outcobra.server.model.interfaces.ParentLinked;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.jdo.annotations.Index;
 import javax.jdo.annotations.Unique;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
+
+import outcobra.server.model.interfaces.ParentLinked;
 
 @Entity
 public class User implements ParentLinked {
@@ -43,6 +42,13 @@ public class User implements ParentLinked {
         this.auth0Id = auth0Id;
         this.username = username;
         this.institutions = institutions;
+    }
+
+    public User(Long id, String auth0Id, String username) {
+        this();
+        this.id = id;
+        this.auth0Id = auth0Id;
+        this.username = username;
     }
 
     public User() {
@@ -92,20 +98,20 @@ public class User implements ParentLinked {
 
         User user = (User) o;
 
+        if (!getId().equals(user.getId())) return false;
         if (!getAuth0Id().equals(user.getAuth0Id())) return false;
-        if (getUsername() != null ? !getUsername().equals(user.getUsername()) : user.getUsername() != null)
-            return false;
-        return getInstitutions() != null ? getInstitutions().equals(user.getInstitutions()) : user.getInstitutions() == null;
+        return getUsername().equals(user.getUsername());
 
     }
 
     @Override
     public int hashCode() {
-        int result = getAuth0Id().hashCode();
-        result = 31 * result + (getUsername() != null ? getUsername().hashCode() : 0);
-        result = 31 * result + (getInstitutions() != null ? getInstitutions().hashCode() : 0);
+        int result = getId().hashCode();
+        result = 31 * result + getAuth0Id().hashCode();
+        result = 31 * result + getUsername().hashCode();
         return result;
     }
+
 
     @Override
     public String toString() {

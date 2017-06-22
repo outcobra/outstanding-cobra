@@ -1,25 +1,112 @@
-import {Component, OnInit} from "@angular/core";
-import {AuthService} from "./shared/services/auth/auth.service";
+import {AfterViewInit, Component, HostBinding, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Auth0AuthService} from './core/services/auth/auth.service';
+import {TranslateService} from '@ngx-translate/core';
+import {ResponsiveHelperService} from './core/services/ui/responsive-helper.service';
+import {MdSidenav, OverlayContainer} from '@angular/material';
+import {OCTheme} from './oc-ui/theme/oc-theme';
+import {NavigationEnd, Router} from '@angular/router';
+import {isTruthy} from './core/util/helper';
+
+const OC_THEME_STORAGE_LOC = 'oc-theme';
+const OC_MOBILE_CLASS = 'oc-mobile';
 
 @Component({
-    selector: 'app-root',
+    selector: 'oc-app',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss']
+    styleUrls: ['./app.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
-export class AppComponent implements OnInit {
-    title = 'Outcobra!';
+export class AppComponent implements OnInit, AfterViewInit {
+    private _mobile: boolean;
 
-    constructor(private auth: AuthService) {
+    public title = 'Outcobra';
+
+    private _activeTheme: OCTheme;
+    private _allThemes: Array<OCTheme> = OCTheme.values();
+
+    @ViewChild(MdSidenav) public sidenav: MdSidenav;
+
+    private _isEnglish: boolean = this._translateService.currentLang == 'en';
+
+    constructor(private _translateService: TranslateService,
+                private _auth: Auth0AuthService,
+                private _responsiveHelper: ResponsiveHelperService,
+                private _router: Router,
+                private _overlayContainer: OverlayContainer) {
     }
 
-    ngOnInit(): void {
+    ngOnInit() {
+        this._mobile = this._responsiveHelper.isMobile();
+        this.changeTheme(this.getThemeFromLocalStorage() || OCTheme.OCEAN);
+        this._router.events
+            .filter(event => event instanceof NavigationEnd)
+            .subscribe(() => {
+                if (isTruthy(this.sidenav) && this.sidenav.opened) {
+                    this.sidenav.close();
+                }
+            });
     }
 
-    login() {
-        this.auth.login();
+    ngAfterViewInit() {
+        this._responsiveHelper.listenForBreakpointChange()
+            .subscribe((change) => this._mobile = change.mobile);
     }
 
-    logout() {
-        this.auth.logout();
+    public changeLang() {
+        this._translateService.use(this._isEnglish ? 'en' : 'de');
+    }
+
+    public login() {
+        this._auth.login();
+    }
+
+    public logout() {
+        this._auth.logout();
+    }
+
+    public openSidenav() {
+        if (this.sidenav) {
+            this.sidenav.open();
+        }
+    }
+
+    @HostBinding('class') get hostClasses(): string {
+        return this._activeTheme.className + (this._mobile ? (' ' + OC_MOBILE_CLASS) : '');
+    }
+
+    public changeTheme(theme: OCTheme) {
+        if (this._overlayContainer) {
+            this._overlayContainer.themeClass = theme.className;
+        }
+
+        this._activeTheme = theme;
+        localStorage.setItem(OC_THEME_STORAGE_LOC, this._activeTheme.i18nKey);
+    }
+
+    private getThemeFromLocalStorage(): OCTheme {
+        let i18nKey = localStorage.getItem(OC_THEME_STORAGE_LOC);
+        return OCTheme.getByI18nKey(i18nKey);
+    }
+
+
+    public get auth(): Auth0AuthService {
+        return this._auth;
+    }
+
+
+    get allThemes(): Array<OCTheme> {
+        return this._allThemes;
+    }
+
+    get mobile(): boolean {
+        return this._mobile;
+    }
+
+    get isEnglish(): boolean {
+        return this._isEnglish;
+    }
+
+    set isEnglish(value: boolean) {
+        this._isEnglish = value;
     }
 }

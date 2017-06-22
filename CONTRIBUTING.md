@@ -1,13 +1,13 @@
-#Outstanding Contributing Guidelines
+# Outstanding Contributing Guidelines
 
-##Angular 2
-###Style Guide
+## Angular 2
+### Style Guide
 
 We develop with the official Angular 2 Style Guidelines in mind. We care about Clean Code.
 You can find the Style Guidelines under [this](https://angular.io/docs/ts/latest/guide/style-guide.html) link.
 
 
-##Commit Messages
+## Commit Messages
 
 Please be nice to your colleagues and write a short explanation what exactly changed in this commit.
 Some examples of invalid commit messages are:
@@ -23,7 +23,7 @@ Also, please use multiple `-m`s for `git commit` to create multiple lines. If yo
 
 Full example: `git commit -a -m "Use multiple instances to linked Institution to Class" -m "Querydsl is acting weird (only returning the first result) if two Institutions are linked by the same instance of InstitutionClass" -m "Fixes #1343" `
 
-##Branch naming
+## Branch naming
 
 We want to have some branch categories and those categories have their own prefix.
 
@@ -36,12 +36,12 @@ We want to have some branch categories and those categories have their own prefi
 | **config**    | Configuration changes, e.g. adding a dependency in a Gradle file |
 | **amend**     | Any code changes that don't fit into the other categories. |
 
-All of them follow the same syntax: chose one of the prefixes and append a short, lower- and [kebab-case](https://en.wikipedia.org/wiki/Letter_case#Special_case_styles) identifier, separated by a slash.
+All of them follow the same syntax: chose one of the prefixes and append the issue id plus a short, lower- and [kebab-case](https://en.wikipedia.org/wiki/Letter_case#Special_case_styles) identifier, separated by a slash.
 
 Example:
-`feature/calculate-mark-report`
+`feature/#123-calculate-mark-report`
 
-##Pushing and Pull requests
+## Pushing and Pull requests
 
 Minor changes can be pushed to the `develop` branch directly. Minor changes must fulfill the following criteria:
 
@@ -50,17 +50,34 @@ Minor changes can be pushed to the `develop` branch directly. Minor changes must
 * No wider influence
 
 For all other changes, please create a branch and pull request.
+Before you open or approve a pull request please test your changes manually.
 
-###Branches 
+### Branches 
 Our branch names are inspired by [git-flow](https://danielkummer.github.io/git-flow-cheatsheet/#getting_started).
 
-* `master`: Used for releases only
-* `develop`: Should only contain finished, tested and stable features
-* `feature/my-awesome-feature`: Every feature gets a branch and it can be unstable or even unbuildable.
+* `master`: Used for releases only, must be stable and tested
+* `develop`: Should only contain finished and reasonably stable features; this branch is auto-deployed on every push
+* `feature/my-awesome-feature`: Every feature gets a branch and it can be unstable or even unbuildable
 
-##Issues
+## Labels
+
+Our labels have a well-defined structure, here is an explanation of the various prefixes:
+
+* T: Type
+* S: Status
+  * S-I: Applicable to issues
+  * S-P: Applicable to pull-requests
+  * S-A: Applicable to anything
+* P: Priority
+* M: Metadata
+  * M-C: Component
+  * M-B: Bug
+* Z-D: Deprecated labels, don't use them
+
+All issues must have at least a `T` label and should be updated with the according `S` labels to allow for an easy overview.
+
+## Issues
 We use Github issues to track bugs and tasks. Additionally, we use ZenHub for Scrum-related stuff.
-Every issue (by contributors) must be labeled (e.g.: `question`, `bug`, `task`).
 
 ### Bugs
 If you find a bug please take the time to report it.

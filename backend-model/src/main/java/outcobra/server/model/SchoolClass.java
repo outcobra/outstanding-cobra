@@ -19,7 +19,7 @@ public class SchoolClass implements ParentLinked {
     @ManyToOne
     private Institution institution;
 
-    @OneToMany(mappedBy = "schoolClass")
+    @OneToMany(mappedBy = "schoolClass", cascade = CascadeType.REMOVE)
     private List<SchoolYear> schoolYears;
 
     //region constructors

@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es5",
+    "lib": [
+      "es6",
+      "dom"
+    ],
+    "module": "es2015",
+    "outDir": "../dist/out-tsc",
+    "baseUrl": "",
+    "exclude": [
+      "test.ts",
+      "**/*.spec.ts",
+      "app/core/mock/**/*"
+    ]
+  },
+  "exclude": [
+    "test.ts",
+    "**/*.spec.ts",
+    "app/core/mock/**/*"
+  ]
+}

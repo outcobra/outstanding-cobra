@@ -1,8 +1,9 @@
 package outcobra.server.model
 
-import com.google.common.truth.Truth.assertThat
+import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.data.Offset
 import org.junit.Test
-import java.util.*
+import java.util.ArrayList
 
 class MarkGroupTest {
 
@@ -17,7 +18,7 @@ class MarkGroupTest {
         group.addMark(mark4)
         group.addMark(mark6)
 
-        assertThat(group.value).isWithin(0.0).of(5.0)
+        assertThat(group.value).isEqualTo(5.0)
     }
 
     @Test
@@ -30,7 +31,7 @@ class MarkGroupTest {
         group.marks = ArrayList()
         arrayOf(mark3, mark5, mark6).forEach { group.addMark(it) }
 
-        assertThat(group.value).isWithin(0.0001).of(4.1428)
+        assertThat(group.value).isCloseTo(4.1428, Offset.offset(0.0001))
     }
 
     @Test
@@ -46,19 +47,19 @@ class MarkGroupTest {
         group1.weight = 2.0
         arrayOf(mark1, mark5).forEach(addMarkTo(group1))
 
-        assertThat(group1.value).isWithin(0.0001).of(2.7142)
+        assertThat(group1.value).isCloseTo(2.7142, Offset.offset(0.0001))
 
         val group2 = MarkGroup()
         group2.marks = ArrayList()
         group2.weight = 1.5
         arrayOf(mark3, mark5).forEach(addMarkTo(group2))
 
-        assertThat(group2.value).isWithin(0.0).of(4.2)
+        assertThat(group2.value).isEqualTo(4.2)
 
         val group3 = MarkGroup()
         group3.marks = ArrayList()
         arrayOf(group1, group2).forEach(addMarkTo(group3))
 
-        assertThat(group3.value).isWithin(0.0001).of(3.3510)
+        assertThat(group3.value).isCloseTo(3.3510, Offset.offset(0.0001))
     }
 }

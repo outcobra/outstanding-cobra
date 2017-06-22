@@ -8,28 +8,23 @@ import javax.inject.Inject
 @RestController
 @RequestMapping("/api")
 class SchoolYearController @Inject constructor(val schoolYearService: SchoolYearService) {
-    @RequestMapping(value = "/schoolYear", method = arrayOf(RequestMethod.PUT))
-    fun createSchoolYear(@RequestBody schoolYearDto: SchoolYearDto): SchoolYearDto {
-        return schoolYearService.createSchoolYear(schoolYearDto)
+    @RequestMapping(value = "/schoolYear", method = arrayOf(RequestMethod.POST, RequestMethod.PUT))
+    fun saveSchoolYear(@RequestBody schoolYearDto: SchoolYearDto): SchoolYearDto {
+        return schoolYearService.save(schoolYearDto)
     }
 
-    @RequestMapping(value = "/schoolYear/{id}", method = arrayOf(RequestMethod.GET))
+    @GetMapping(value = "/schoolYear/{id}")
     fun readSchoolYearById(@PathVariable id: Long): SchoolYearDto {
-        return schoolYearService.readSchoolYearById(id)
+        return schoolYearService.readById(id)
     }
 
-    @RequestMapping(value = "/schoolClass/{schoolClassId}/schoolYear", method = arrayOf(RequestMethod.GET))
+    @GetMapping(value = "/schoolClass/{schoolClassId}/schoolYear")
     fun readAllYearsByClass(@PathVariable schoolClassId: Long): List<SchoolYearDto> {
-        return schoolYearService.readAllYearsByClass(schoolClassId)
+        return schoolYearService.readAllBySchoolClass(schoolClassId)
     }
 
-    @RequestMapping(value = "/schoolYear", method = arrayOf(RequestMethod.POST))
-    fun updateSchoolYear(@RequestBody schoolYearDto: SchoolYearDto): SchoolYearDto {
-        return schoolYearService.updateSchoolYear(schoolYearDto)
-    }
-
-    @RequestMapping(value = "/schoolYear/{id}", method = arrayOf(RequestMethod.DELETE))
+    @DeleteMapping(value = "/schoolYear/{id}")
     fun deleteSchoolYear(@PathVariable id: Long) {
-        schoolYearService.deleteSchoolYear(id)
+        schoolYearService.delete(id)
     }
 }

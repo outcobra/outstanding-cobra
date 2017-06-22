@@ -1,3 +1,22 @@
-<p>
-    school-class-dialog works!
-</p>
+<div class="dialog-header">
+    <h1 md-dialog-title *ngIf="isEditMode()">{{ 'i18n.modules.manage.schoolClass.edit' | translate }}</h1>
+    <h1 md-dialog-title *ngIf="!isEditMode()">{{ 'i18n.modules.manage.schoolClass.add' | translate }}</h1>
+</div>
+<form [formGroup]="schoolClassForm" (submit)="submit()">
+    <div class="dialog-body" md-dialog-content>
+        <div class="form-group">
+            <md-input-container>
+                <input mdInput [autofocus]="false" [placeholder]="'i18n.modules.manage.schoolClass.form.label' | translate" formControlName="normalizedName">
+                <md-error *ngIf="schoolClassForm.get('normalizedName').hasError('required')">
+                    {{ 'i18n.common.form.error.required' | translate }}
+                </md-error>
+            </md-input-container>
+        </div>
+    </div>
+    <div class="dialog-footer" md-dialog-actions>
+        <div class="footer-right">
+            <button md-button md-dialog-close>{{ 'i18n.common.action.cancel' | translate }}</button>
+            <button md-raised-button color="primary" type="submit">{{ 'i18n.common.action.save' | translate }}</button>
+        </div>
+    </div>
+</form>

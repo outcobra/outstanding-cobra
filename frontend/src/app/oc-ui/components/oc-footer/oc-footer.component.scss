@@ -1,0 +1,16 @@
+@import '../../../../sass/theming';
+
+:host {
+    z-index: 500;
+    padding: 0 20px;
+    height: 30px;
+    @extend .color-primary;
+    color: $primary-light;
+
+    line-height: 30px;
+
+    #info-opener {
+        float: right;
+        cursor: pointer;
+    }
+}

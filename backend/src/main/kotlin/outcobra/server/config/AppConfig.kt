@@ -1,20 +1,25 @@
 package outcobra.server.config
 
-import org.springframework.boot.web.servlet.FilterRegistrationBean
+import org.springframework.beans.factory.config.YamlPropertiesFactoryBean
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import outcobra.server.filter.RequestAuthorizationFilter
-import javax.inject.Inject
+import org.springframework.context.annotation.Profile
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer
+import org.springframework.core.io.ClassPathResource
+import outcobra.server.config.ProfileRegistry.Companion.BASIC_AUTH_SECURITY_MOCK
+
 
 @Configuration
 open class AppConfig {
-    @Bean @Inject
-    open fun ApiRequestFilterRegistration(requestAuthorizationFilter: RequestAuthorizationFilter): FilterRegistrationBean {
-        val filterRegistration = FilterRegistrationBean(requestAuthorizationFilter)
-        filterRegistration.addUrlPatterns("/api/*")
-        filterRegistration.setName("Request Authorization Filter")
-        filterRegistration.order = 2
-
-        return filterRegistration
+    companion object {
+        @Bean @Profile("!$BASIC_AUTH_SECURITY_MOCK") @JvmStatic
+        fun getAuth0Config(): PropertySourcesPlaceholderConfigurer {
+            val configurer = PropertySourcesPlaceholderConfigurer()
+            val yaml = YamlPropertiesFactoryBean()
+            yaml.setResources(ClassPathResource("auth0.yml"))
+            configurer.setProperties(yaml.`object`)
+            return configurer
+        }
     }
+
 }
