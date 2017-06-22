@@ -16,7 +16,7 @@ import javax.cache.expiry.TouchedExpiryPolicy
 /**
  * This class configures and creates and all the (eh)caches used in our app.
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.1.0
  **/
 
 @Configuration

@@ -6,7 +6,7 @@ import outcobra.server.data.loaders.DataLoader
  * Contains constants for the order of our [DataLoader]s. When adding new loaders, please leave some distance to the last loader
  *
  * @author Joel Messerli
- * @since <since>
+ * @since 1.1.0
  */
 object DataLoadOrder {
     const val USER = 1

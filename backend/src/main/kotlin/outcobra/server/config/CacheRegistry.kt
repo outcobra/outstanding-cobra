@@ -3,7 +3,7 @@ package outcobra.server.config
 /**
  * This class contains constants for all cache-names used in this app
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.1.0
  */
 class CacheRegistry {
     companion object {

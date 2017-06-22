@@ -5,7 +5,7 @@ package outcobra.server.exception
  * mostly validation errors or things like "not found" etc.
  *
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.1.0
  */
 enum class ValidationKey(val i18nMessage: String = "i18n.error.http.500.message",
                          val i18nTitle: String = "i18n.error.http.500.title") : ValidationExceptionThrower {

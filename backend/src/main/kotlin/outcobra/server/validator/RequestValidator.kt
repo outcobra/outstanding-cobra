@@ -19,7 +19,7 @@ import kotlin.reflect.KClass
  * meant to be used inside the BaseService
  * @see BaseService
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.1.0
  */
 @Component
 open class RequestValidator<in Dto>

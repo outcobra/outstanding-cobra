@@ -12,7 +12,7 @@ import javax.inject.Inject
  * Validator for the [SchoolYear] entity
  *
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.1.0
  */
 @Component
 class SchoolYearValidator @Inject constructor(val schoolYearRepository: SchoolYearRepository) {

@@ -14,7 +14,7 @@ import javax.inject.Inject
  *
  * @see DataLoadOrder
  * @author Joel Messerli
- * @since <since>
+ * @since 1.1.0
  */
 @Component
 @Profile(LOAD_TEST_DATA)

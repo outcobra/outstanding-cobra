@@ -11,7 +11,7 @@ import javax.inject.Inject
  * Maps [Semester]s to [SemesterDto]s and back
  *
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.1.0
  */
 @Component
 open class SemesterMapper @Inject constructor(val subjectRepository: SubjectRepository,
