@@ -69,7 +69,6 @@ CREATE TABLE mark_group
 (
   id            BIGINT(20)   NOT NULL PRIMARY KEY,
   weight        DOUBLE       NOT NULL,
-  description   VARCHAR(255) NOT NULL,
   mark_group_id BIGINT(20)   NULL,
   CONSTRAINT FK_nxnsocqwok82hut41877aawa7
   FOREIGN KEY (mark_group_id) REFERENCES mark_group (id)
@@ -108,7 +107,6 @@ CREATE TABLE mark_value
 (
   id            BIGINT(20)   NOT NULL PRIMARY KEY,
   weight        DOUBLE       NOT NULL,
-  description   VARCHAR(255) NOT NULL,
   mark_group_id BIGINT(20)   NULL,
   value         DOUBLE       NOT NULL,
   CONSTRAINT FK_s8x2nqqvbwde46ooii5ektlh4
@@ -184,10 +182,6 @@ CREATE INDEX FKmphheehxn35mmxxh67nnexukv
 ALTER TABLE exam
   ADD CONSTRAINT FKos7g6kn2748ll3ofc3w163gxh
 FOREIGN KEY (subject_id) REFERENCES subject (id);
-
-ALTER TABLE exam
-  ADD CONSTRAINT FKos7g6jn2448ll3ofc3w163cwh
-FOREIGN KEY (mark_id) REFERENCES mark_value (id);
 
 ALTER TABLE mark_report_entry
   ADD CONSTRAINT FKeitykibr3r3hvanitx7n4juk3
