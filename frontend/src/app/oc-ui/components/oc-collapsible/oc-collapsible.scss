@@ -7,14 +7,37 @@ oc-collapsible {
 }
 
 oc-collapsible-header {
-    display: block;
     cursor: pointer;
     width: 100%;
     box-sizing: border-box;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
     @extend .border-bottom;
+
+    .oc-collapsible-header-content {
+        flex-grow: 1;
+
+        span, md-icon {
+            height: 40px;
+            display: block;
+            line-height: 40px;
+            float: left;
+            padding: 0 5px;
+        }
+    }
+
+    .oc-collapsible-toggle {
+        height: 40px;
+        md-icon {
+            height: 40px;
+            line-height: 40px;
+            transition: all .225s ease-in-out;
+        }
+    }
 }
 
-oc-collapsible-body {
+.oc-collapsible-body {
     overflow: hidden;
     height: inherit;
 
@@ -30,4 +53,8 @@ oc-collapsible-body {
     oc-collapsible {
         overflow: hidden;
     }
+}
+
+oc-collapsible.active > oc-collapsible-header > .oc-collapsible-toggle > md-icon {
+    transform: rotate(180deg);
 }
