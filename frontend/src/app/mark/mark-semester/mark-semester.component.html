@@ -7,26 +7,54 @@
                     <md-icon>business</md-icon>
                     <span>{{ semesterMark.institution.name }}</span>
                 </oc-collapsible-header>
-                <oc-collapsible-body>
-                    <oc-collapsible>
-                        <oc-collapsible-header>
-                            <md-icon>school</md-icon>
-                            <span>{{ semesterMark.schoolClass.normalizedName }}</span>
+                <oc-collapsible class="mark-school-class">
+                    <oc-collapsible-header class="mark-school-class-header">
+                        <md-icon>class</md-icon>
+                        <span>{{ semesterMark.schoolClass.normalizedName }}</span>
+                    </oc-collapsible-header>
+                    <oc-collapsible *ngFor="let subject of semesterMark.subjects" class="mark-subject">
+                        <oc-collapsible-header class="mark-subject-header">
+                            <span>{{ subject.name }}</span>
                         </oc-collapsible-header>
-                        <oc-collapsible-body>
+                        <md-list class="mark-value-list">
+                            <md-list-item *ngFor="let mark of subject.subjectMarkGroup.markValues">
+                                {{ mark.value }}
+                            </md-list-item>
+                            <!--<div *ngIf="isTruthy(subject.subjectMarkGroup.markGroups)">-->
+                            <md-divider></md-divider>
+                            <h3 md-subheader>MarkGroups</h3>
+                            <md-list-item *ngFor="let markGroup of subject.subjectMarkGroup.markGroups"
+                                          class="mark-group-item">
+                                <oc-collapsible>
+                                    <oc-collapsible-header class="mark-mark-group-header">
+                                        {{ markGroup.description }}
+                                    </oc-collapsible-header>
+                                    <md-list class="mark-group-value-list">
+                                        <md-list-item
+                                            *ngFor="let markValue of markGroup.markValues">
+                                            {{ markValue.description + ' ' + markValue.value }}
+                                        </md-list-item>
+                                    </md-list>
+
+                                </oc-collapsible>
+                            </md-list-item>
+                            <!--</div>-->
+                        </md-list>
+
+                    </oc-collapsible>
+                    <!--
                             <ul>
                                 <li *ngFor="let subject of semesterMark.subjects">
                                     <span>{{ subject.name }}</span>
                                     <ul>
                                         <li *ngFor="let markGroup of subject.subjectMarkGroup.markGroups">
-                                            <span>{{ markGroup | json }}</span>
+                                            <span>{{ markGroup }}</span>
                                         </li>
                                     </ul>
                                 </li>
-                            </ul>
-                        </oc-collapsible-body>
-                    </oc-collapsible>
-                </oc-collapsible-body>
+                            </ul>-->
+
+                </oc-collapsible>
             </oc-collapsible>
         </md-card-content>
     </md-card>

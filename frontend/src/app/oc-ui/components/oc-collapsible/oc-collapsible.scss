@@ -17,6 +17,14 @@ oc-collapsible-header {
 
     .oc-collapsible-header-content {
         flex-grow: 1;
+
+        span, md-icon {
+            height: 40px;
+            display: block;
+            line-height: 40px;
+            float: left;
+            padding: 0 5px;
+        }
     }
 
     .oc-collapsible-toggle {
@@ -29,7 +37,7 @@ oc-collapsible-header {
     }
 }
 
-oc-collapsible-body {
+.oc-collapsible-body {
     overflow: hidden;
     height: inherit;
 

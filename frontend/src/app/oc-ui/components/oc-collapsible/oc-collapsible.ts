@@ -24,6 +24,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
             <md-icon>expand_more</md-icon>
         </div>
     `,
+    encapsulation: ViewEncapsulation.None
 })
 export class OCCollapsibleHeaderComponent {
     @Output('toggle') onClick: EventEmitter<any> = new EventEmitter();
@@ -47,9 +48,9 @@ export class OCCollapsibleBodyComponent {
 @Component({
     selector: 'oc-collapsible',
     template: `
-        <ng-content></ng-content>
-        <div [@ocToggle]="opened">
-            <ng-content select="oc-collapsible-body"></ng-content>
+        <ng-content select="oc-collapsible-header"></ng-content>
+        <div [@ocToggle]="opened" class="oc-collapsible-body">
+            <ng-content></ng-content>
         </div>`,
     styleUrls: ['./oc-collapsible.scss'],
     encapsulation: ViewEncapsulation.None,
@@ -68,17 +69,16 @@ export class OCCollapsibleBodyComponent {
 })
 export class OCCollapsibleComponent implements AfterContentInit, OnChanges {
     @ContentChild(OCCollapsibleHeaderComponent) public header: OCCollapsibleHeaderComponent;
-    @ContentChild(OCCollapsibleBodyComponent) public body: OCCollapsibleBodyComponent;
     @Input() showToggle: boolean = true;
 
     @HostBinding('class.active') public opened: boolean = false;
 
     ngAfterContentInit(): void {
         this.header.onClick.subscribe(() => this.toggle());
-        this.ngOnChanges(null);
+        this.ngOnChanges();
     }
 
-    ngOnChanges(changes: SimpleChanges): void {
+    ngOnChanges(changes?: SimpleChanges): void {
         this.header.showToggle = this.showToggle;
     }
 
