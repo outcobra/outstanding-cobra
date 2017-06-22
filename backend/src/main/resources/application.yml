@@ -29,6 +29,8 @@ spring.profiles: test
 spring:
   profiles:
     include: load_test_data,h2_db,mock_services
+  cache:
+    type: none
 runtime:
   environment: test
 ---
