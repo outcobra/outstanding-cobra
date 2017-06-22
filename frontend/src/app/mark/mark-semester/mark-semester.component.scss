@@ -7,4 +7,18 @@
     ul {
         margin: 0;
     }
+
+    oc-collapsible-header {
+        height: 40px;
+        padding: 0 5px;
+        > span {
+            display: block;
+        }
+        > * {
+            float: left;
+            height: 40px;
+            line-height: 40px;
+            padding: 0 5px;
+        }
+    }
 }
