@@ -54,7 +54,7 @@ class DefaultSubjectService
     }
 
     override fun save(dto: SubjectDto): SubjectDto {
-        requestValidator.validateDtoSaving(dto)
+        requestValidator.validateRequestByDto(dto)
         var subject = mapper.fromDto(dto)
         if (dto.id == 0L) {
             val markGroup = MarkGroup(subject)

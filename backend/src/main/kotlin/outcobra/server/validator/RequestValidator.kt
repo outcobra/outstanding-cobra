@@ -10,9 +10,7 @@ import outcobra.server.model.interfaces.ParentLinked
 import outcobra.server.service.UserService
 import outcobra.server.service.base.BaseService
 import outcobra.server.util.RepositoryLocator
-import outcobra.server.util.followToUser
 import javax.inject.Inject
-import kotlin.reflect.KClass
 
 /**
  * A service to validate all requests on a very basic level
@@ -23,7 +21,7 @@ import kotlin.reflect.KClass
  */
 @Component
 class RequestValidator<in Dto>
-@Inject constructor(val locator: RepositoryLocator, val userService: UserService)
+@Inject constructor(locator: RepositoryLocator, userService: UserService) : BaseValidator(locator, userService)
 where Dto : OutcobraDto {
 
     /**
@@ -31,25 +29,9 @@ where Dto : OutcobraDto {
      * @param dto the object the user wants to save
      * @throws [ValidationException] if the current user is not allowed to make such a request
      */
-    fun validateDtoSaving(dto: Dto) {
+    fun validateRequestByDto(dto: Dto) {
         return dto.checkOwnerIsCurrent()
     }
-
-    /**
-     * This function allows authorizing requests by id
-     * @param id the requested id
-     * @param type [KClass] of the requested entity
-     * @throws [ValidationException] if the current user is not allowed to make such a request
-     */
-    fun validateRequestById(id: Long, type: KClass<*>) {
-        val repository = locator.getForEntityClass(type.java)
-        val entity = repository.findOne(id)
-        if (entity != null && entity is ParentLinked) {
-            return entity.checkOwnerIsCurrent()
-        }
-        ValidationKey.FORBIDDEN.throwException()
-    }
-
 
     /**
      * Extension-function to check if an instance of [OutcobraDto] belongs to the current user.
@@ -81,14 +63,5 @@ where Dto : OutcobraDto {
         }
     }
 
-    /**
-     * Extension-function to check if an instance of [ParentLinked] belongs to the current user.
-     * @throws [ValidationException] if the owner is not the current user.
-     */
-    fun ParentLinked.checkOwnerIsCurrent() {
-        if (this.followToUser() != userService.getCurrentUser()) {
-            ValidationKey.FORBIDDEN.throwException()
-        }
-    }
 }
 

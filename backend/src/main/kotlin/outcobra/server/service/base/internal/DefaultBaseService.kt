@@ -26,7 +26,7 @@ class DefaultBaseService<Entity, Dto, out Repo>(val mapper: Mapper<Entity, Dto>,
 where Repo : JpaRepository<Entity, Long>, Repo : QueryDslPredicateExecutor<Entity>, Dto : OutcobraDto, Entity : ParentLinked {
 
     override fun save(dto: Dto): Dto {
-        requestValidator.validateDtoSaving(dto)
+        requestValidator.validateRequestByDto(dto)
         val entity = repository.save(mapper.fromDto(dto))
         return mapper.toDto(entity)
     }

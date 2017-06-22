@@ -14,12 +14,12 @@ import javax.inject.Inject
  */
 @Component
 @Primary
-class MarkGroupRequestValidator @Inject constructor(override val locator: RepositoryLocator,
-                                                    override val userService: UserService)
+class MarkGroupRequestValidator @Inject constructor(locator: RepositoryLocator,
+                                                    userService: UserService)
     : RequestValidator<MarkGroupDto>(locator, userService) {
 
-    override fun validateDtoSaving(dto: MarkGroupDto) {
+    override fun validateRequestByDto(dto: MarkGroupDto) {
         dto.validate()
-        super.validateDtoSaving(dto)
+        super.validateRequestByDto(dto)
     }
 }
