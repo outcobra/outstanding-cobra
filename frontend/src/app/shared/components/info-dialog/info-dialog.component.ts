@@ -1,5 +1,5 @@
-import {Component, ViewEncapsulation} from '@angular/core';
-import {Info} from '../../../core/model/info.dto';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { Info } from '../../../core/model/info.dto';
 
 @Component({
     selector: 'info-dialog',
@@ -13,7 +13,6 @@ export class InfoDialogComponent {
     get info(): Info {
         return this._info;
     }
-
 
     set info(value: Info) {
         this._info = value;

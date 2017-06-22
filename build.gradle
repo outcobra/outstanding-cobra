@@ -2,6 +2,7 @@
 buildscript {
     ext {
         kotlinVersion = '1.1.2-4'
+        outcobraVersion = '1.1.0'
     }
     repositories {
         maven { url "https://pkg.pegnu.cloud/repository/m2/" }
