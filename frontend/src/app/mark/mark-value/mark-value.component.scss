@@ -1,0 +1,17 @@
+@import '../../../sass/variables';
+
+:host {
+    width: 100%;
+}
+
+.mark-value {
+    width: 100%;
+    md-icon {
+        margin-right: 5px;
+    }
+    md-icon, span {
+        display: block;
+        height: $oc-collapsible-header-height;
+        line-height: $oc-collapsible-header-height;
+    }
+}

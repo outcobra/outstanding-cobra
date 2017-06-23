@@ -12,13 +12,14 @@ import {isTruthy} from '../../core/util/helper';
 export class MarkSemesterComponent implements OnInit {
     public semesterMark: SemesterMarkDto;
 
+
+
     constructor(private _route: ActivatedRoute) {
     }
 
     ngOnInit() {
         this._route.data
-            .do(console.log)
-            .subscribe((sm: { semesterMark: SemesterMarkDto }) => this.semesterMark = sm.semesterMark)
+            .subscribe((sm: { semesterMark: SemesterMarkDto }) => this.semesterMark = sm.semesterMark);
     }
 
     public isTruthy(val: any): boolean {

@@ -11,6 +11,7 @@ import {RouterModule} from '@angular/router';
 import {OCUiModule} from '../oc-ui/oc-ui.module';
 import {MarkService} from './service/mark.service';
 import {SemesterMarkResolver} from './service/semester-mark-resolver.service';
+import { MarkValueComponent } from './mark-value/mark-value.component';
 
 @NgModule({
     imports: [
@@ -25,7 +26,8 @@ import {SemesterMarkResolver} from './service/semester-mark-resolver.service';
     ],
     declarations: [
         MarkComponent,
-        MarkSemesterComponent
+        MarkSemesterComponent,
+        MarkValueComponent
     ],
     providers: [
         MarkService,

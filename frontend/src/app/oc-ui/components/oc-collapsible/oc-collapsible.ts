@@ -13,6 +13,7 @@ import {
 } from '@angular/core';
 
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import {isTruthy} from '../../../core/util/helper';
 
 @Component({
     selector: 'oc-collapsible-header',
@@ -29,7 +30,6 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 export class OCCollapsibleHeaderComponent {
     @Output('toggle') onClick: EventEmitter<any> = new EventEmitter();
     public showToggle: boolean;
-
 
     @HostListener('click')
     click() {
@@ -49,7 +49,7 @@ export class OCCollapsibleBodyComponent {
     selector: 'oc-collapsible',
     template: `
         <ng-content select="oc-collapsible-header"></ng-content>
-        <div [@ocToggle]="opened" class="oc-collapsible-body">
+        <div [@ocToggle]="active" class="oc-collapsible-body">
             <ng-content></ng-content>
         </div>`,
     styleUrls: ['./oc-collapsible.scss'],
@@ -70,20 +70,26 @@ export class OCCollapsibleBodyComponent {
 export class OCCollapsibleComponent implements AfterContentInit, OnChanges {
     @ContentChild(OCCollapsibleHeaderComponent) public header: OCCollapsibleHeaderComponent;
     @Input() showToggle: boolean = true;
-
-    @HostBinding('class.active') public opened: boolean = false;
+    @HostBinding('class.active')
+    @Input() active: boolean = false;
 
     ngAfterContentInit(): void {
         this.header.onClick.subscribe(() => this.toggle());
-        this.ngOnChanges();
+        this.updateToggle(this.showToggle);
     }
 
-    ngOnChanges(changes?: SimpleChanges): void {
-        this.header.showToggle = this.showToggle;
+    ngOnChanges(changes: SimpleChanges): void {
+        if (isTruthy(changes) && isTruthy(changes.showToggle)) {
+            this.updateToggle(changes.showToggle.currentValue);
+        }
+    }
+
+    private updateToggle(show: boolean) {
+        this.header.showToggle = show;
     }
 
     toggle() {
-        this.opened = !this.opened;
+        this.active = !this.active;
     }
 
 }
