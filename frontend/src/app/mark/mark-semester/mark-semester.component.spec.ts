@@ -6,6 +6,7 @@ import {OCUiModule} from '../../oc-ui/oc-ui.module';
 import {ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 import {MockMarkService} from '../../core/mock/mark/mock-mark.service';
+import {MarkValueComponent} from '../mark-value/mark-value.component';
 
 describe('MarkSemesterComponent', () => {
     let component: MarkSemesterComponent;
@@ -14,7 +15,8 @@ describe('MarkSemesterComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
-                MarkSemesterComponent
+                MarkSemesterComponent,
+                MarkValueComponent
             ],
             imports: [
                 TestModule,
