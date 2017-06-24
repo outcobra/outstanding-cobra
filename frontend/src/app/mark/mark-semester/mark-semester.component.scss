@@ -7,11 +7,9 @@
     .oc-card {
         padding: 0;
     }
-
-    ul {
-        margin: 0;
+    .mat-subheader {
+        padding: 0 5px;
     }
-
 }
 .mark-value-list {
     padding: 0 !important;
@@ -33,6 +31,10 @@ md-list.mark-value-list > md-list-item:not(.mark-group-item) > .mat-list-item-co
 
 .mark-group-value-list > md-list-item > .mat-list-item-content {
     @include indentation(4);
+}
+
+.mark-mark-group-header md-icon {
+    padding: 0 !important;
 }
 
 .mat-list-item-content,

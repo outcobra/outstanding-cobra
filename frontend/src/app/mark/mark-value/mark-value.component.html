@@ -2,5 +2,5 @@
     <md-icon>{{ getIconNameByMarkValue(mark.value) }}</md-icon>
     <span fxFlex fxFlexAlign="start">{{ mark.description }}</span>
     <span fxFlex="150px" fxFlexAlign="end">Gewichtung: {{ mark.weight }}</span>
-    <span fxFlex="40px" fxFlexAlign="end"><b>{{ mark.value }}</b></span>
+    <span fxFlex="40px" fxFlexAlign="end"><b>{{ mark.value | number:'1.0-2' }}</b></span>
 </div>

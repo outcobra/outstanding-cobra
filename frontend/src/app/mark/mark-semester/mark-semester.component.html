@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" fxFlex fxFlex.gt-sm="60" fxFlexOffset.gt-sm="20">
     <h5>Here comes some text but i currently do not know what ¯\_(ツ)_/¯</h5>
     <md-card class="oc-card">
         <md-card-content>
@@ -22,14 +22,12 @@
                             <md-list-item *ngFor="let mark of subject.subjectMarkGroup.markValues">
                                 <mark-value [mark]="mark"></mark-value>
                             </md-list-item>
-                            <!--<div *ngIf="isTruthy(subject.subjectMarkGroup.markGroups)">-->
                             <md-divider></md-divider>
-                            <h3 md-subheader>MarkGroups</h3>
                             <md-list-item *ngFor="let markGroup of subject.subjectMarkGroup.markGroups"
                                           class="mark-group-item">
                                 <oc-collapsible>
                                     <oc-collapsible-header class="mark-mark-group-header">
-                                        <span>{{ markGroup.description }}</span>
+                                        <mark-value [mark]="markGroup"></mark-value>
                                     </oc-collapsible-header>
                                     <md-list class="mark-group-value-list">
                                         <md-list-item

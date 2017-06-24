@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {MarkDto} from '../model/MarkDto';
 
 @Component({
@@ -6,7 +6,7 @@ import {MarkDto} from '../model/MarkDto';
     templateUrl: './mark-value.component.html',
     styleUrls: ['./mark-value.component.scss']
 })
-export class MarkValueComponent implements OnInit {
+export class MarkValueComponent {
     @Input() mark: MarkDto;
 
     private static readonly MARK_ICON_MAPPING: Map<string, string> = new Map()
@@ -17,11 +17,6 @@ export class MarkValueComponent implements OnInit {
         .set('5', 'looks_5')
         .set('6', 'looks_6');
 
-    constructor() {
-    }
-
-    ngOnInit() {
-    }
 
     public getIconNameByMarkValue(value: number) {
         let first = value.toString().substr(0, 1);
