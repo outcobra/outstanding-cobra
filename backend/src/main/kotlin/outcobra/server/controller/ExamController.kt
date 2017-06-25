@@ -28,9 +28,14 @@ class ExamController @Inject constructor(val examService: ExamService) {
         return examService.readAllBySemester(semesterId)
     }
 
-    @GetMapping("/all")
+    @GetMapping("")
     fun readAll(): List<ExamDto> {
         return examService.readAll()
+    }
+
+    @GetMapping("/active")
+    fun readAllActive(): List<ExamDto> {
+        return examService.readAllInActiveSemesters()
     }
 
 

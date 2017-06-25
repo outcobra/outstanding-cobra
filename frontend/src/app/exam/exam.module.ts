@@ -7,6 +7,7 @@ import {CoreModule} from '../core/core.module';
 import {OCMaterialModule} from '../oc-material.module';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {TranslateModule} from '@ngx-translate/core';
+import {ExamService} from './service/exam.service';
 
 @NgModule({
     declarations: [
@@ -20,6 +21,9 @@ import {TranslateModule} from '@ngx-translate/core';
         TranslateModule,
         ExamRoutingModule,
         OCUiModule
+    ],
+    providers: [
+        ExamService
     ]
 })
 export class ExamModule {

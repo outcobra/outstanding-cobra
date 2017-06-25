@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {AppCrudService} from '../../core/services/core/app-crud.service';
-import {MarkDto} from '../model/MarkDto';
+import {MarkDto} from '../model/mark.dto';
 import {HttpInterceptor} from '../../core/http/http-interceptor';
 import {SemesterMarkDto} from '../model/SemesterMarkDto';
 import {Observable} from 'rxjs/Observable';

@@ -1,11 +1,13 @@
 package outcobra.server.model;
 
+import com.querydsl.core.annotations.QueryInit;
+import outcobra.server.model.interfaces.ParentLinked;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import outcobra.server.model.interfaces.ParentLinked;
 
 @Entity
 public class Exam implements ParentLinked {
@@ -25,6 +27,7 @@ public class Exam implements ParentLinked {
 
     @NotNull
     @ManyToOne
+    @QueryInit("semester.schoolYear.schoolClass.institution.user")
     private Subject subject;
 
     @OneToOne

@@ -10,6 +10,7 @@ import outcobra.server.service.base.BaseService
 interface ExamService : BaseService<ExamDto> {
     fun readAllBySemester(semesterId: Long): List<ExamDto>
     fun readAll(): List<ExamDto>
+    fun readAllInActiveSemesters(): List<ExamDto>
 }
 
 

@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {MarkDto} from '../model/MarkDto';
+import {MarkDto} from '../model/mark.dto';
 
 @Component({
     selector: 'mark-value',
