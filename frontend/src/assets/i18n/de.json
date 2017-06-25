@@ -73,7 +73,10 @@
       },
       "mark": {
         "linkTitle": "Noten",
-        "noSemesterAvailable": "Du hast noch keine Semester"
+        "noSemesterAvailable": "Du hast noch keine Semester",
+        "common": {
+          "weight": "Gewichtung"
+        }
       },
       "task": {
         "linkTitle": "Aufgaben",

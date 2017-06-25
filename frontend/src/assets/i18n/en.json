@@ -73,7 +73,10 @@
       },
       "mark": {
         "linkTitle": "Marks",
-        "noSemesterAvailable": "You do not have semesters yet"
+        "noSemesterAvailable": "You do not have semesters yet",
+        "common": {
+          "weight": "Weight"
+        }
       },
       "task": {
         "linkTitle": "Tasks",

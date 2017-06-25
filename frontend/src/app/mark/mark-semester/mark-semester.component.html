@@ -19,11 +19,16 @@
                             <span>{{ subject.name }}</span>
                         </oc-collapsible-header>
                         <md-list class="mark-value-list">
-                            <md-list-item *ngFor="let mark of subject.subjectMarkGroup.markValues">
+                            <md-list-item>
+                                <button md-button>Add Mark Group</button>
+                                <button md-button>Add Mark</button>
+                            </md-list-item>
+
+                            <md-list-item *ngFor="let mark of subject.subjectMarkGroup?.markValues">
                                 <mark-value [mark]="mark"></mark-value>
                             </md-list-item>
                             <md-divider></md-divider>
-                            <md-list-item *ngFor="let markGroup of subject.subjectMarkGroup.markGroups"
+                            <md-list-item *ngFor="let markGroup of subject.subjectMarkGroup?.markGroups"
                                           class="mark-group-item">
                                 <oc-collapsible>
                                     <oc-collapsible-header class="mark-mark-group-header">
@@ -35,10 +40,9 @@
                                             <mark-value [mark]="markValue"></mark-value>
                                         </md-list-item>
                                     </md-list>
-
+                                    <oc-divider></oc-divider>
                                 </oc-collapsible>
                             </md-list-item>
-                            <!--</div>-->
                         </md-list>
                     </oc-collapsible>
                 </oc-collapsible>

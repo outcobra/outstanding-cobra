@@ -29,10 +29,10 @@
                                 <md-icon class="entity-icon">business</md-icon>
                                 <span>{{ institution.name }}</span>
                             </div>
-                            <entity-menu
+                            <oc-entity-menu
                                 (delete)="deleteInstitution(institution)"
                                 (edit)="editInstitution(institution)"
-                            ></entity-menu>
+                            ></oc-entity-menu>
                         </div>
                     </oc-collapsible-header>
                     <oc-collapsible-body>
@@ -45,10 +45,10 @@
                                         <md-icon class="entity-icon">class</md-icon>
                                         <span>{{ schoolClass.normalizedName }}</span>
                                     </div>
-                                    <entity-menu
+                                    <oc-entity-menu
                                         (delete)="deleteSchoolClass(schoolClass)"
                                         (edit)="editSchoolClass(schoolClass)"
-                                    ></entity-menu>
+                                    ></oc-entity-menu>
                                 </div>
                             </li>
                             <li>
@@ -89,10 +89,10 @@
                                     <span class="secondary-text text-secondary-dark">{{ schoolYear.validFrom | date:'mediumDate' }} - {{ schoolYear.validTo | date:'mediumDate' }}</span>
                                 </div>
                             </div>
-                            <entity-menu
+                            <oc-entity-menu
                                 (delete)="deleteSchoolYear(schoolYear)"
                                 (edit)="editSchoolYear(schoolYear)"
-                            ></entity-menu>
+                            ></oc-entity-menu>
                         </div>
                     </oc-collapsible-header>
                     <oc-collapsible-body>
@@ -108,10 +108,10 @@
                                             <span class="secondary-text text-secondary-dark">{{ semester.validFrom | date:'mediumDate' }} - {{ semester.validTo | date:'mediumDate' }}</span>
                                         </div>
                                     </div>
-                                    <entity-menu
+                                    <oc-entity-menu
                                         (delete)="deleteSemester(semester)"
                                         (edit)="editSemester(semester)"
-                                    ></entity-menu>
+                                    ></oc-entity-menu>
                                 </div>
                             </li>
                             <li>
@@ -150,10 +150,10 @@
                                      [style.background-color]="'#' + subject.color.hex"></span>
                                 <span>{{ subject.name }}</span>
                             </div>
-                            <entity-menu
+                            <oc-entity-menu
                                 (delete)="deleteSubject(subject)"
                                 (edit)="editSubject(subject)"
-                            ></entity-menu>
+                            ></oc-entity-menu>
                         </div>
                     </oc-collapsible-header>
                 </oc-collapsible>

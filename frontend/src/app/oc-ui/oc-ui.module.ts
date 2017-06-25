@@ -16,6 +16,7 @@ import {OCNavComponent} from './components/oc-nav/oc-nav.component';
 import {RouterModule} from '@angular/router';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {OCMaterialModule} from '../oc-material.module';
+import {OCEntityMenuComponent} from './components/oc-entity-menu/oc-entity-menu.component';
 
 @NgModule({
     imports: [
@@ -36,7 +37,8 @@ import {OCMaterialModule} from '../oc-material.module';
         OCIconDataTitleDirective,
         OCIconDataDataDirective,
         OCTitleBarComponent,
-        OCDividerDirective
+        OCDividerDirective,
+        OCEntityMenuComponent
     ],
     exports: [
         OCNavComponent,
@@ -49,7 +51,8 @@ import {OCMaterialModule} from '../oc-material.module';
         OCIconDataTitleDirective,
         OCIconDataDataDirective,
         OCTitleBarComponent,
-        OCDividerDirective
+        OCDividerDirective,
+        OCEntityMenuComponent
     ]
 })
 export class OCUiModule {

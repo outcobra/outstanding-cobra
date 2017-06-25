@@ -5,7 +5,6 @@ import {ManageRoutingModule} from './manage-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SharedModule} from '../shared/shared.module';
 import {ManageService} from './service/manage.service';
-import {EntityMenuComponent} from './entity-menu/entity-menu.component';
 import {InstitutionDialog} from './institution-dialog/institution-dialog.component';
 import {SchoolClassDialog} from './school-class-dialog/school-class-dialog.component';
 import {InstitutionService} from './service/institution.service';
@@ -32,7 +31,6 @@ import {OCMaterialModule} from '../oc-material.module';
     ],
     declarations: [
         ManageComponent,
-        EntityMenuComponent,
         InstitutionDialog,
         SchoolClassDialog,
         SchoolYearDialog,
