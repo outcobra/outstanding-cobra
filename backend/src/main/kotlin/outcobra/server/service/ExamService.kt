@@ -1,7 +1,6 @@
 package outcobra.server.service
 
 import outcobra.server.model.dto.ExamDto
-import outcobra.server.model.dto.filter.ExamFilterDto
 import outcobra.server.service.base.BaseService
 
 /**
@@ -10,6 +9,9 @@ import outcobra.server.service.base.BaseService
  */
 interface ExamService : BaseService<ExamDto> {
     fun readAllBySemester(semesterId: Long): List<ExamDto>
-    fun readAllByFilter(filter: ExamFilterDto): List<ExamDto>
+    fun readAll(): List<ExamDto>
 }
+
+
+
 

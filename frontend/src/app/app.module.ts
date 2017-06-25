@@ -20,6 +20,7 @@ import {CoreModule} from './core/core.module';
 import {OCMaterialModule} from './oc-material.module';
 import {RavenErrorHandler} from './core/error/raven-error-handler';
 import {MarkModule} from './mark/mark.module';
+import {ExamModule} from './exam/exam.module';
 
 @NgModule({
     declarations: [
@@ -36,6 +37,7 @@ import {MarkModule} from './mark/mark.module';
         ManageModule,
         TaskModule,
         MarkModule,
+        ExamModule,
         FlexLayoutModule,
         SimpleNotificationsModule.forRoot(),
         CoreModule,
