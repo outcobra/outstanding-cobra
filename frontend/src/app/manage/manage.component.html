@@ -22,7 +22,7 @@
     <div class="manage-col" [class.border-right]="!isMobile()" [class.mobile-col]="isMobile()" fxFlex.gt-md>
         <ul>
             <li *ngFor="let institution of currentManageData[manageViewRef.INSTITUTION_CLASS]">
-                <oc-collapsible>
+                <oc-collapsible [showToggle]="false">
                     <oc-collapsible-header>
                         <div class="entity">
                             <div class="entity-desc">
@@ -79,7 +79,7 @@
     <div class="manage-col" [class.mobile-col]="isMobile()" fxFlex.gt-md>
         <ul *ngIf="currentManageData[manageViewRef.YEAR_SEMESTER] != null">
             <li *ngFor="let schoolYear of currentManageData[manageViewRef.YEAR_SEMESTER]">
-                <oc-collapsible>
+                <oc-collapsible [showToggle]="false">
                     <oc-collapsible-header>
                         <div class="entity">
                             <div class="entity-desc">
@@ -142,11 +142,11 @@
     <div class="manage-col" [class.border-left]="!isMobile()" [class.mobile-col]="isMobile()" fxFlex.gt-md>
         <ul *ngIf="currentManageData[manageViewRef.SUBJECT] != null">
             <li *ngFor="let subject of currentManageData[manageViewRef.SUBJECT]">
-                <oc-collapsible>
+                <oc-collapsible [showToggle]="false">
                     <oc-collapsible-header>
                         <div class="entity">
                             <div class="entity-desc">
-                                <span class="subject-icon"
+                                <span class="subject-circle"
                                      [style.background-color]="'#' + subject.color.hex"></span>
                                 <span>{{ subject.name }}</span>
                             </div>

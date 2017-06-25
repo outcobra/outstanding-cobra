@@ -13,7 +13,7 @@ export class MockMarkService extends MarkService {
         id: 1,
         value: 5,
         description: 'desc',
-        marks: [
+        markValues: [
             {
                 id: 1,
                 description: 'desc',

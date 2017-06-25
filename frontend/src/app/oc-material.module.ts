@@ -7,6 +7,7 @@ import {
     MdCoreModule,
     MdDatepickerModule,
     MdDialogModule,
+    MdExpansionModule,
     MdIconModule,
     MdInputModule,
     MdListModule,
@@ -43,6 +44,7 @@ import {OC_DATE_FORMATS} from './core/common/oc-date-formats';
         MdListModule,
         MdTabsModule,
         MdDatepickerModule,
+        MdExpansionModule,
         MdCoreModule
     ],
     exports: [
@@ -64,6 +66,7 @@ import {OC_DATE_FORMATS} from './core/common/oc-date-formats';
         MdListModule,
         MdTabsModule,
         MdDatepickerModule,
+        MdExpansionModule,
         MdCoreModule
     ],
     providers: [

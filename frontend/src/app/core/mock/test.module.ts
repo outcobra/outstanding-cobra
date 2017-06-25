@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {MockHttpInterceptor} from './http/MockHttpInterceptor';
-import {MockConfigService} from './config/MockConfig';
+import {MockConfigService} from './config/mock-config.service';
 import {MockInfoService} from './info/mock-info.service';
 import {SimpleNotificationsModule} from 'angular2-notifications/dist';
 import {MockNotificationWrapperService} from './notifications/mock-notifications.service';
