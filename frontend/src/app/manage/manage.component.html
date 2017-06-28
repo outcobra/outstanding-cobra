@@ -147,7 +147,7 @@
                         <div class="entity">
                             <div class="entity-desc">
                                 <span class="subject-circle"
-                                     [style.background-color]="'#' + subject.color.hex"></span>
+                                     [style.background-color]="subject.color.hex | color"></span>
                                 <span>{{ subject.name }}</span>
                             </div>
                             <oc-entity-menu

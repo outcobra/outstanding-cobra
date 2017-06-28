@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {MdDialogRef} from '@angular/material';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ManageDialog} from '../manage-dialog';
+import {ParentLinkedCreateUpdateComponent} from '../../core/common/parent-linked-create-update-component';
 import {SchoolYearDto, SemesterDto} from '../model/manage.dto';
 import {OCValidators} from '../../core/services/oc-validators';
 import {TranslateService} from '@ngx-translate/core';
@@ -16,7 +16,7 @@ import {DateUtil} from '../../core/services/date-util.service';
     styleUrls: ['./semester-dialog.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class SemesterDialog extends ManageDialog<SemesterDto, SchoolYearDto> implements OnInit {
+export class SemesterDialog extends ParentLinkedCreateUpdateComponent<SemesterDto, SchoolYearDto> implements OnInit {
 
     private _semesterForm: FormGroup;
 

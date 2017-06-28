@@ -18,6 +18,7 @@ import {SubjectDialog} from './subject-dialog/subject-dialog.component';
 import {SubjectService} from './service/subject.service';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {OCMaterialModule} from '../oc-material.module';
+import {PipeModule} from '../core/pipe.module';
 
 @NgModule({
     imports: [
@@ -27,7 +28,8 @@ import {OCMaterialModule} from '../oc-material.module';
         ManageRoutingModule,
         OCMaterialModule,
         FlexLayoutModule,
-        SharedModule
+        SharedModule,
+        PipeModule
     ],
     declarations: [
         ManageComponent,

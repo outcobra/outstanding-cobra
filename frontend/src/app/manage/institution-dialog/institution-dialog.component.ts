@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {MdDialogRef} from '@angular/material';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ManageDialog} from '../manage-dialog';
+import {ParentLinkedCreateUpdateComponent} from '../../core/common/parent-linked-create-update-component';
 import {InstitutionDto} from '../model/manage.dto';
 import {Util} from '../../core/util/util';
 
@@ -11,7 +11,7 @@ import {Util} from '../../core/util/util';
     styleUrls: ['./institution-dialog.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class InstitutionDialog extends ManageDialog<InstitutionDto, any> implements OnInit {
+export class InstitutionDialog extends ParentLinkedCreateUpdateComponent<InstitutionDto, any> implements OnInit {
 
     private _institutionForm: FormGroup;
 

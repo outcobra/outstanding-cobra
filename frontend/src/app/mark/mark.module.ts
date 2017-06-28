@@ -11,23 +11,29 @@ import {RouterModule} from '@angular/router';
 import {OCUiModule} from '../oc-ui/oc-ui.module';
 import {MarkService} from './service/mark.service';
 import {SemesterMarkResolver} from './service/semester-mark-resolver.service';
-import { MarkValueComponent } from './mark-value/mark-value.component';
+import {MarkValueComponent} from './mark-value/mark-value.component';
+import {MarkCreateUpdateComponent} from './mark-create-update/mark-create-update.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {PipeModule} from '../core/pipe.module';
 
 @NgModule({
     imports: [
         CommonModule,
         TranslateModule,
         RouterModule,
+        ReactiveFormsModule,
         MarkRoutingModule,
         CoreModule,
         OCMaterialModule,
         OCUiModule,
-        FlexLayoutModule
+        FlexLayoutModule,
+        PipeModule
     ],
     declarations: [
         MarkComponent,
         MarkSemesterComponent,
-        MarkValueComponent
+        MarkValueComponent,
+        MarkCreateUpdateComponent
     ],
     providers: [
         MarkService,

@@ -76,6 +76,41 @@
         "noSemesterAvailable": "You do not have semesters yet",
         "common": {
           "weight": "Weight"
+        },
+        "createUpdate": {
+          "create": {
+            "title": "Add new mark"
+          },
+          "update": {
+            "title": "Edit mark"
+          },
+          "form": {
+            "value": {
+              "label": "Markvalue",
+              "hint": "",
+              "error": ""
+            },
+            "weight": {
+              "label": "Markweight",
+              "hint": "",
+              "error": ""
+            },
+            "description": {
+              "label": "Short description",
+              "hint": "",
+              "error": ""
+            }
+          }
+        },
+        "dialog": {
+          "markConfirmDelete": {
+            "title": "Delete mark",
+            "message": "Do you really want to delete the mark"
+          },
+          "markGroupConfirmDelete": {
+            "title": "Delete markgroup",
+            "message": "Do you really want to delete the mark group. The child elements will be lost too."
+          }
         }
       },
       "task": {
@@ -112,7 +147,7 @@
         },
         "dialogs": {
           "confirmDeleteDialog": {
-            "title": "Do you want to delete the Task?",
+            "title": "Delete task",
             "message": "The task will be lost forever (A very long long time)"
           },
           "add": {
@@ -140,7 +175,7 @@
       },
       "manage": {
         "linkTitle": "Manage",
-        "assureDeletion": "Do you really want to delete the object?",
+        "assureDeletion": "Delete object",
         "mobile": {
           "title": {
             "INSTITUTION_CLASS": "Institutions and Classes",

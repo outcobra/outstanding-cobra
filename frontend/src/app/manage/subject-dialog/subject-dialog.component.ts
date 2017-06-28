@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {MdDialogRef} from '@angular/material';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ManageDialog} from '../manage-dialog';
+import {ParentLinkedCreateUpdateComponent} from '../../core/common/parent-linked-create-update-component';
 import {SemesterDto, SubjectDto} from '../model/manage.dto';
 import {Util} from '../../core/util/util';
 
@@ -11,7 +11,7 @@ import {Util} from '../../core/util/util';
     styleUrls: ['./subject-dialog.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class SubjectDialog extends ManageDialog<SubjectDto, SemesterDto> implements OnInit {
+export class SubjectDialog extends ParentLinkedCreateUpdateComponent<SubjectDto, SemesterDto> implements OnInit {
 
     private _subjectForm: FormGroup;
 

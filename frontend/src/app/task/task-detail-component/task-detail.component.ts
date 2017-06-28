@@ -6,7 +6,7 @@ import {TaskService} from '../service/task.service';
 import {MdDialog, MdDialogRef, MdSlider, MdSliderChange} from '@angular/material';
 import {TaskCreateUpdateDialog} from '../task-create-update-dialog/task-create-update-dialog.component';
 import {SMALL_DIALOG} from '../../core/util/const';
-import {DialogMode} from '../../core/common/dialog-mode';
+import {ViewMode} from '../../core/common/view-mode';
 import {Observable} from 'rxjs';
 import {isTrue, isTruthy} from '../../core/util/helper';
 import {NotificationWrapperService} from '../../core/notifications/notification-wrapper.service';
@@ -51,7 +51,7 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
 
     public editTask() {
         this._taskCreateUpdateDialog = this._dialogService.open(TaskCreateUpdateDialog, SMALL_DIALOG);
-        this._taskCreateUpdateDialog.componentInstance.init(DialogMode.EDIT, this._task);
+        this._taskCreateUpdateDialog.componentInstance.init(ViewMode.EDIT, this._task);
         this._taskCreateUpdateDialog.afterClosed()
             .filter(isTruthy)
             .flatMap((result: TaskDto) => this._taskService.update(result))

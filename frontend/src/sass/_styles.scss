@@ -124,30 +124,20 @@ md-dialog-container {
     }
 }
 
-datepicker, md-input-container {
-    &.ng-invalid.ng-touched {
-        label {
-            color: mat-color($warn);
-        }
-        //noinspection CssOptimizeSimilarProperties
-        .mat-input-underline {
-            .mat-input-ripple {
-                background-color: mat-color($warn);
-            }
-            border: mat-color($warn);
-            border-top-width: 1px;
-            border-top-style: solid;
-        }
-    }
-}
-
 .form-group {
     width: 100%;
     margin-bottom: 15px;
-}
+    md-input-container {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 0 10px;
+    }
 
-.form-error {
-    @extend .text-warn;
+    .half {
+        float: left;
+        width: 50%;
+    }
+
 }
 
 md-list-item {

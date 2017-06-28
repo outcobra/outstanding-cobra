@@ -1,7 +1,7 @@
 import {ComponentType, MdDialog, MdDialogConfig, MdDialogRef} from '@angular/material';
-import {DialogMode} from '../../core/common/dialog-mode';
+import {ViewMode} from '../../core/common/view-mode';
 import {Dto} from '../../core/common/dto';
-import {ManageDialog} from '../manage-dialog';
+import {ParentLinkedCreateUpdateComponent} from '../../core/common/parent-linked-create-update-component';
 import {Injectable} from '@angular/core';
 import {ResponsiveHelperService} from '../../core/services/ui/responsive-helper.service';
 import {SMALL_DIALOG} from '../../core/util/const';
@@ -22,7 +22,7 @@ export class ManageDialogFactory {
      * @param config MdDialogConfig for appearance configuration
      * @param params for edit mode
      */
-    public getDialog<T extends ManageDialog<Dto, Dto>>(component: ComponentType<T>, mode: DialogMode, parent: Dto, config?: MdDialogConfig, params?: Dto): MdDialogRef<T> {
+    public getDialog<T extends ParentLinkedCreateUpdateComponent<Dto, Dto>>(component: ComponentType<T>, mode: ViewMode, parent: Dto, config?: MdDialogConfig, params?: Dto): MdDialogRef<T> {
         let conf = config || this._responsiveHelper.getMobileOrGivenDialogConfig(SMALL_DIALOG);
         let dialog = this._dialog.open(component, conf);
         dialog.componentInstance.initWithParent(mode, parent, params);

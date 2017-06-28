@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {ManageDialog} from '../manage-dialog';
+import {ParentLinkedCreateUpdateComponent} from '../../core/common/parent-linked-create-update-component';
 import {SchoolClassDto, SchoolYearDto} from '../model/manage.dto';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MdDialogRef} from '@angular/material';
@@ -16,7 +16,7 @@ import {DateUtil} from '../../core/services/date-util.service';
     styleUrls: ['./school-year-dialog.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class SchoolYearDialog extends ManageDialog<SchoolYearDto, SchoolClassDto> implements OnInit {
+export class SchoolYearDialog extends ParentLinkedCreateUpdateComponent<SchoolYearDto, SchoolClassDto> implements OnInit {
 
     private _schoolYearForm: FormGroup;
 

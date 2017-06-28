@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ManageDialog} from '../manage-dialog';
+import {ParentLinkedCreateUpdateComponent} from '../../core/common/parent-linked-create-update-component';
 import {InstitutionDto, SchoolClassDto} from '../model/manage.dto';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MdDialogRef} from '@angular/material';
@@ -10,7 +10,7 @@ import {Util} from '../../core/util/util';
     templateUrl: './school-class-dialog.component.html',
     styleUrls: ['./school-class-dialog.component.scss']
 })
-export class SchoolClassDialog extends ManageDialog<SchoolClassDto, InstitutionDto> implements OnInit {
+export class SchoolClassDialog extends ParentLinkedCreateUpdateComponent<SchoolClassDto, InstitutionDto> implements OnInit {
 
     private _schoolClassForm: FormGroup;
 

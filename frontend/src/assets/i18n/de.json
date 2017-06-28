@@ -76,6 +76,45 @@
         "noSemesterAvailable": "Du hast noch keine Semester",
         "common": {
           "weight": "Gewichtung"
+        },
+        "createUpdate": {
+          "create": {
+            "title": "Neue Note"
+          },
+          "update": {
+            "title": "Note bearbeiten"
+          },
+          "form": {
+            "value": {
+              "label": "Notenwert",
+              "hint": "Beispiel: 5.25",
+              "error": {
+                "pattern": "Die Note muss zwischen 1 und 6 liegen mit oder ohne zwei Nachkommastellen"
+              }
+            },
+            "weight": {
+              "label": "Gewichtung",
+              "hint": "Beispiel: 2",
+              "error": {
+                "pattern": "Die Gewichtung muss zwischen 0 und 10 liegen mit oder ohne zwei Nachkommastellen"
+              }
+            },
+            "description": {
+              "label": "Kurzbeschreibung",
+              "hint": "",
+              "error": ""
+            }
+          }
+        },
+        "dialog": {
+          "markConfirmDelete": {
+            "title": "Note wirklich löschen?",
+            "message": "Wollen sie die Note wirklich löschen?"
+          },
+          "markGroupConfirmDelete": {
+            "title": "Notengruppe wirklich löschen?",
+            "message": "Wollen sie die Notengruppe wirklich löschen? Dabei gehen alle untergeordneten Noten verloren."
+          }
         }
       },
       "task": {

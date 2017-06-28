@@ -1,17 +1,21 @@
-import {DialogMode} from './dialog-mode';
+import {ViewMode} from './view-mode';
 
-export class CreateUpdateDialog<T> {
-    private _mode: DialogMode;
+export class CreateUpdateComponent<T> {
+    private _mode: ViewMode;
     private _param: T;
 
-    public init(mode: DialogMode, param?: T): void {
+    constructor(mode: ViewMode = ViewMode.NEW, param?: T) {
+        this.init(mode, param);
+    }
+
+    public init(mode: ViewMode, param?: T): void {
         this._mode = mode;
         if (param) {
             this._param = param;
         }
     }
 
-    get mode(): DialogMode {
+    get mode(): ViewMode {
         return this._mode;
     }
 
@@ -19,9 +23,9 @@ export class CreateUpdateDialog<T> {
         return this._param;
     }
 
-    protected getParamOrDefault(propertyPath: string) {
+    protected getParamOrDefault(propertyPath: string, defaultValue: any = '') {
         if (!this.isEditMode()) {
-            return '';
+            return defaultValue;
         }
         if (!propertyPath.includes('.') && this.param.hasOwnProperty(propertyPath)) {
             return this.param[propertyPath];
@@ -29,7 +33,7 @@ export class CreateUpdateDialog<T> {
         else {
             let prop = this.param;
             for (let pathPart of propertyPath.split('.')) {
-                if (!prop.hasOwnProperty(pathPart)) return '';
+                if (!prop.hasOwnProperty(pathPart)) return defaultValue;
                 prop = prop[pathPart];
             }
             return prop;
@@ -37,6 +41,6 @@ export class CreateUpdateDialog<T> {
     }
 
     isEditMode(): boolean {
-        return this.mode == DialogMode.EDIT;
+        return this.mode == ViewMode.EDIT;
     }
 }
