@@ -28,9 +28,9 @@ class MarkGroupMapper @Inject constructor(val subjectRepository: SubjectReposito
         validateChildren(from.markGroups.map { it.id }, MarkGroup::class, from.id, MarkGroup::class)
         var subject: Subject? = null
         var parentGroup: MarkGroup? = null
-        if (from.subjectId != 0L) {
+        if (from.parentGroupId == 0L) {
             subject = subjectRepository.findOne(from.subjectId)
-        } else if (from.parentGroupId != 0L) {
+        } else {
             parentGroup = markGroupRepository.findOne(from.parentGroupId)
         }
         val marks: List<Mark> = from.markValues.map { markValueMapper.fromDto(it) }
