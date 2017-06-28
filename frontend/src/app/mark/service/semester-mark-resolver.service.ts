@@ -13,7 +13,7 @@ export class SemesterMarkResolver implements Resolve<SemesterMarkDto> {
         SemesterMarkDto
         | Observable<SemesterMarkDto>
         | Promise<SemesterMarkDto> {
-        let semesterId = route.params['id'];
+        let semesterId = route.params['semesterId'];
         return this._markService.getMarkSemesterBySemesterId(semesterId);
     }
 

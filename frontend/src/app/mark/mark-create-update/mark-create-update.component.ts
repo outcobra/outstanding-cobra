@@ -19,7 +19,7 @@ export class MarkCreateUpdateComponent extends ParentLinkedCreateUpdateComponent
 
     constructor(private _route: ActivatedRoute,
                 private _formBuilder: FormBuilder) {
-        super(_route.data['isEdit'] ? ViewMode.EDIT : ViewMode.NEW, _route.data['isEdit'] ? _route.data['mark'] : null, _route.data['isEdit'] ? _route.data['parent'] : null); // TODO improve this bullshit
+        super(_route.data['isEdit'] ? ViewMode.EDIT : ViewMode.NEW, _route.data['isEdit'] ? _route.params['mark'] : null, _route.data['isEdit'] ? _route.params['parent'] : null); // TODO improve this bullshit
     }
 
     ngOnInit() {
@@ -31,7 +31,7 @@ export class MarkCreateUpdateComponent extends ParentLinkedCreateUpdateComponent
     }
 
     public submit() {
-        console.log(this.markCreateUpdateForm);
+
     }
 
 

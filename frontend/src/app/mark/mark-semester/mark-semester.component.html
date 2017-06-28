@@ -21,7 +21,7 @@
                         <md-list class="mark-value-list">
                             <md-list-item>
                                 <button md-button (click)="addMarkGroup(subject.subjectMarkGroup)">Add Mark Group</button>
-                                <button md-button (click)="addMark()">Add Mark</button>
+                                <button md-button (click)="addMark(subject.subjectMarkGroup)">Add Mark</button>
                             </md-list-item>
 
                             <md-list-item *ngFor="let mark of subject.subjectMarkGroup?.markValues">

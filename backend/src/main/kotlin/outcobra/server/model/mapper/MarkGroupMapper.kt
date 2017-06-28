@@ -1,7 +1,10 @@
 package outcobra.server.model.mapper
 
 import org.springframework.stereotype.Component
-import outcobra.server.model.*
+import outcobra.server.model.Mark
+import outcobra.server.model.MarkGroup
+import outcobra.server.model.MarkValue
+import outcobra.server.model.Subject
 import outcobra.server.model.dto.MarkGroupDto
 import outcobra.server.model.dto.MarkValueDto
 import outcobra.server.model.interfaces.Mapper
@@ -50,7 +53,7 @@ class MarkGroupMapper @Inject constructor(val subjectRepository: SubjectReposito
             parentGroupId = 0L
         } else {
             parentGroupId = from.parent.id
-            subjectId = 0L
+            subjectId = from.parent.parent.id
         }
         validateChildren(markValues.map { it.id }, MarkValue::class, from.id, MarkGroup::class)
         validateChildren(nestedGroups.map { it.id }, MarkGroup::class, from.id, MarkGroup::class)

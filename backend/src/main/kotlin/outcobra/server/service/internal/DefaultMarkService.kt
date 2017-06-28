@@ -35,5 +35,4 @@ class DefaultMarkService
         super.save(dto)
         return markGroupService.readById(dto.markGroupId)
     }
-
 }
