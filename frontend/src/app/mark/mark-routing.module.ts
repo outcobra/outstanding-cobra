@@ -29,7 +29,7 @@ import {MarkGroupResolver} from './service/mark-group-resolver.service';
                         ]
                     },
                     {
-                        path: 'semester/:semesterId/subject/:subjectId',
+                        path: 'semester/:semesterId/subject/:subjectId/group/:groupId',
                         children: [
                             {
                                 path: 'add',
@@ -42,34 +42,12 @@ import {MarkGroupResolver} from './service/mark-group-resolver.service';
                                 path: 'edit/:markId',
                                 component: MarkCreateUpdateComponent,
                                 resolve: {
-                                    mark: MarkResolver
+                                    mark: MarkResolver,
+                                    parent: MarkGroupResolver
                                 },
                                 data: {
-                                    isEdit: true
+                                    isEdit: false
                                 }
-                            },
-                            {
-                                path: 'group/:groupId',
-                                children: [
-                                    {
-                                        path: 'add',
-                                        component: MarkCreateUpdateComponent,
-                                        data: {
-                                            isEdit: false
-                                        }
-                                    },
-                                    {
-                                        path: 'edit/:markId',
-                                        component: MarkCreateUpdateComponent,
-                                        resolve: {
-                                            mark: MarkResolver,
-                                            parent: MarkGroupResolver
-                                        },
-                                        data: {
-                                            isEdit: false
-                                        }
-                                    }
-                                ]
                             }
                         ]
                     }

@@ -31,11 +31,7 @@ export class MarkSemesterComponent implements OnInit {
     }
 
     public addMark(markGroup?: MarkGroupDto) {
-        if (isTruthy(markGroup.parentGroupId)) {
-            this._router.navigate([`subject/${markGroup.subjectId}/group/${markGroup.id}/add`], {relativeTo: this._activatedRoute});
-        } else {
-            this._router.navigate([`subject/${markGroup.subjectId}/add`], {relativeTo: this._activatedRoute});
-        }
+        this._router.navigate([`subject/${markGroup.subjectId}/group/${markGroup.id}/add`], {relativeTo: this._activatedRoute});
     }
 
     public addMarkGroup(subjectMarkGroup: MarkGroupDto) {

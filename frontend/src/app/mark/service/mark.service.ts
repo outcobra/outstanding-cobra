@@ -31,4 +31,8 @@ export class MarkService extends AppService {
     public deleteMarkGroup(id: number): Observable<any> {
         return this._http.delete(`${this._baseUri}/group/${id}`);
     }
+
+    public saveMark(mark: MarkDto): Observable<MarkGroupDto> {
+        return this._http.post<MarkGroupDto>(`${this._baseUri}/value`, mark);
+    }
 }
