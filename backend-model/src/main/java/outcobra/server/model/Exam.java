@@ -19,6 +19,8 @@ public class Exam implements ParentLinked {
     @NotNull
     private String name;
 
+    private String description;
+
     @NotNull
     private LocalDate date;
 
@@ -44,9 +46,10 @@ public class Exam implements ParentLinked {
      * @param subject
      * @param mark
      */
-    public Exam(Long id, String name, LocalDate date, List<ExamTask> tasks, Subject subject, MarkValue mark) {
+    public Exam(Long id, String name, String description, LocalDate date, List<ExamTask> tasks, Subject subject, MarkValue mark) {
         this.id = id;
         this.name = name;
+        this.description = description;
         this.date = date;
         this.tasks = tasks;
         this.subject = subject;
@@ -125,6 +128,14 @@ public class Exam implements ParentLinked {
         this.mark = mark;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @SuppressWarnings("SimplifiableIfStatement")
     @Override
     public boolean equals(Object o) {
@@ -135,6 +146,7 @@ public class Exam implements ParentLinked {
 
         if (!id.equals(exam.id)) return false;
         if (name != null ? !name.equals(exam.name) : exam.name != null) return false;
+        if (description != null ? !name.equals(exam.description) : exam.description != null) return false;
         if (date != null ? !date.equals(exam.date) : exam.date != null) return false;
         if (tasks != null ? !tasks.equals(exam.tasks) : exam.tasks != null) return false;
         if (subject != null ? !subject.equals(exam.subject) : exam.subject != null) return false;
@@ -146,6 +158,7 @@ public class Exam implements ParentLinked {
     public int hashCode() {
         int result = id.hashCode();
         result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (date != null ? date.hashCode() : 0);
         result = 31 * result + (tasks != null ? tasks.hashCode() : 0);
         result = 31 * result + (subject != null ? subject.hashCode() : 0);

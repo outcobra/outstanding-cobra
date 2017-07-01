@@ -11,6 +11,7 @@ import java.time.LocalDate
  */
 data class ExamDto(val id: Long = 0,
                    val name: String = "",
+                   val description: String = "",
                    val date: LocalDate? = null,
                    val subjectName: String = "",
                    val mark: MarkValueDto? = null,

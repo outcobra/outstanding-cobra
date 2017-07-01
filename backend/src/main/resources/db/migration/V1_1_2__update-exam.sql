@@ -1,0 +1,2 @@
+ALTER TABLE exam
+  ADD COLUMN description VARCHAR(255) NULL;

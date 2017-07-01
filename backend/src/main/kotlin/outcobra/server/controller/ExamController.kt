@@ -10,32 +10,32 @@ import javax.inject.Inject
  * @since <since>
  */
 @RestController
-@RequestMapping("/api/exam")
+@RequestMapping("/api")
 class ExamController @Inject constructor(val examService: ExamService) {
 
-    @RequestMapping(value = "", method = arrayOf(RequestMethod.PUT, RequestMethod.POST))
+    @RequestMapping(value = "/exam", method = arrayOf(RequestMethod.PUT, RequestMethod.POST))
     fun saveExam(@RequestBody examDto: ExamDto): ExamDto {
         return examService.save(examDto)
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/active/exam")
+    fun readAllActive(): List<ExamDto> {
+        return examService.readAllInActiveSemesters()
+    }
+
+    @GetMapping("/exam/{id}")
     fun readExamById(@PathVariable id: Long): ExamDto {
         return examService.readById(id)
     }
 
-    @GetMapping("/semester/{semesterId}")
-    fun readAllBySemester(@PathVariable semesterId: Long): List<ExamDto> {
-        return examService.readAllBySemester(semesterId)
-    }
-
-    @GetMapping("")
+    @GetMapping("/exam")
     fun readAll(): List<ExamDto> {
         return examService.readAll()
     }
 
-    @GetMapping("/active")
-    fun readAllActive(): List<ExamDto> {
-        return examService.readAllInActiveSemesters()
+    @GetMapping("/semester/{semesterId}/exam")
+    fun readAllBySemester(@PathVariable semesterId: Long): List<ExamDto> {
+        return examService.readAllBySemester(semesterId)
     }
 
 

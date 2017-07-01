@@ -30,7 +30,8 @@ class ExamMapper @Inject constructor(val markMapper: Mapper<MarkValue, MarkValue
         if (from.mark != null) {
             markValue = markMapper.fromDto(from.mark)
         }
-        val exam = Exam(from.id, from.name, from.date, from.examTasks.map { examTaskMapper.fromDto(it) }, subject, markValue)
+        val exam = Exam(from.id, from.name, from.description,
+                from.date, from.examTasks.map { examTaskMapper.fromDto(it) }, subject, markValue)
         return exam
     }
 
@@ -39,7 +40,7 @@ class ExamMapper @Inject constructor(val markMapper: Mapper<MarkValue, MarkValue
         if (from.mark != null) {
             markValue = markMapper.toDto(from.mark as MarkValue)
         }
-        return ExamDto(from.id, from.name, from.date, from.subject.name, markValue,
+        return ExamDto(from.id, from.name, from.description ?: "", from.date, from.subject.name, markValue,
                 from.tasks.map { examTaskMapper.toDto(it) }, from.subject.id)
     }
 }

@@ -4,8 +4,9 @@ import {ExamTaskDto} from './exam.task.dto';
 
 export interface ExamDto extends Dto {
     name: string
+    description: string
     date: string | Date
-    subjectName: String
+    subjectName: string
     mark: MarkDto
     examTasks: ExamTaskDto[]
     subjectId: number

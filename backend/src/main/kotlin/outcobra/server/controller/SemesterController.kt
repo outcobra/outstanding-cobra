@@ -16,7 +16,7 @@ class SemesterController @Inject constructor(val semesterService: SemesterServic
 
     @GetMapping(value = "/semester")
     fun readAllByUser(): List<SemesterDto> {
-        return semesterService.readAllByUser();
+        return semesterService.readAllByUser()
     }
 
     @GetMapping(value = "/semester/{id}")

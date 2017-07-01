@@ -15,10 +15,14 @@ export class ExamService extends AppCrudService<ExamDto> {
     }
 
     public readBySemester(semesterId: number): Observable<ExamDto[]> {
-        throw "Not implemented"
+        var uri: string = `/semester/${semesterId}${this._baseUri}`;
+        return this._http.get<ExamDto[]>(uri);
     }
 
     public readAllActive(): Observable<ExamDto[]> {
-        throw "Not implemented"
+        var uri: string = `/active${this._baseUri}`;
+        return this._http.get<ExamDto[]>(uri);
     }
+
+
 }
