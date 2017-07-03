@@ -24,8 +24,11 @@ class MarkGroupMapper @Inject constructor(val subjectRepository: SubjectReposito
     : Mapper<MarkGroup, MarkGroupDto>, BaseMapper() {
 
     override fun fromDto(from: MarkGroupDto): MarkGroup {
-        validateChildren(from.markValues.map { it.id }, MarkValue::class, from.id, MarkGroup::class)
-        validateChildren(from.markGroups.map { it.id }, MarkGroup::class, from.id, MarkGroup::class)
+        val isNew = from.id == 0L
+        if (!isNew) {
+            validateChildren(from.markValues.map { it.id }, MarkValue::class, from.id, MarkGroup::class)
+            validateChildren(from.markGroups.map { it.id }, MarkGroup::class, from.id, MarkGroup::class)
+        }
         var subject: Subject? = null
         var parentGroup: MarkGroup? = null
         if (from.parentGroupId == 0L) {
@@ -38,7 +41,9 @@ class MarkGroupMapper @Inject constructor(val subjectRepository: SubjectReposito
             marks.plus(from.markGroups.map { fromDto(it) })
         }
         val result = MarkGroup(from.weight, parentGroup, from.description, marks, subject)
-        result.id = from.id
+        if (isNew) {
+            result.id = from.id
+        }
         return result
     }
 

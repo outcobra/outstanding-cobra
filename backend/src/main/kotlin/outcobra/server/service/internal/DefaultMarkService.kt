@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service
 import outcobra.server.model.MarkGroup
 import outcobra.server.model.MarkValue
 import outcobra.server.model.QMarkValue
+import outcobra.server.model.Subject
 import outcobra.server.model.dto.MarkGroupDto
 import outcobra.server.model.dto.MarkValueDto
 import outcobra.server.model.interfaces.Mapper
@@ -34,5 +35,11 @@ class DefaultMarkService
     override fun saveMarkAndGetChangedParent(dto: MarkValueDto): MarkGroupDto {
         super.save(dto)
         return markGroupService.readById(dto.markGroupId)
+    }
+
+    override fun readAllBySubject(subjectId: Long): List<MarkValueDto> {
+        validator.validateRequestById(subjectId, Subject::class)
+        val subject = markGroupService.getGroupBySubject(subjectId)
+        return readAllByMarkGroup(subject.id)
     }
 }

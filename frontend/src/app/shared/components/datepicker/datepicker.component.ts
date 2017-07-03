@@ -16,8 +16,8 @@ import {DateUtil} from '../../../core/services/date-util.service';
 import {DatePickerMaxDateSmallerThanMinDateError} from './datepicker-errors';
 import {ControlValueAccessor, NgControl, Validators} from '@angular/forms';
 import {OCValidators} from '../../../core/services/oc-validators';
-import {Util} from '../../../core/util/util';
 import {MdInputDirective} from '@angular/material';
+import {FormUtil} from '../../../core/util/form-util';
 
 @Component({
     selector: 'datepicker',
@@ -69,7 +69,7 @@ export class DatepickerComponent implements OnInit, AfterContentInit, ControlVal
         if (this.control.value) {
             Promise.resolve(null).then(() => {
                 this.selectDate(this.control.value);
-                Util.revalidateControl(this.control.control);
+                FormUtil.revalidateControl(this.control.control);
             });
         }
     }

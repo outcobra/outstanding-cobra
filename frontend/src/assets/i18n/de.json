@@ -106,6 +106,24 @@
             }
           }
         },
+        "group": {
+          "createUpdate": {
+            "create": {
+              "title": "Neue Notengruppe"
+            },
+            "update": {
+              "title": "Notengruppe bearbeiten"
+            },
+            "form": {
+              "description": {
+                "label": "Beschreibung"
+              },
+              "markSelect": {
+                "label": "Füge eine Note zur Gruppe hinzu"
+              }
+            }
+          }
+        },
         "dialog": {
           "markConfirmDelete": {
             "title": "Note wirklich löschen?",

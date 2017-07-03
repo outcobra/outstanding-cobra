@@ -37,7 +37,7 @@ export class MarkComponent implements OnInit {
             return;
         }
         let toShowSemester = isTruthy(this.currentSemester) ? this.currentSemester : this.semesters[0];
-        this._router.navigate(['semester', toShowSemester.id], {relativeTo: this._route});
+        this._router.navigate(['semester', toShowSemester.id], {relativeTo: this._route, queryParamsHandling: 'merge'});
     }
 
 }

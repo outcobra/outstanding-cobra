@@ -1,5 +1,4 @@
 import {dateReplacer} from '../http/http-util';
-import {AbstractControl, FormGroup} from '@angular/forms';
 
 /**
  * Util class
@@ -94,6 +93,18 @@ export class Util {
     }
 
     /**
+     * removes all elements in the items array from the first given array
+     *
+     * @param {Array<T>} array
+     * @param {Array<T>} items
+     * @returns {Array<T>}
+     */
+    public static removeItems<T>(array: Array<T>, items: Array<T>): Array<T> {
+        items.forEach(item => Util.removeItem(array, item));
+        return array;
+    }
+
+    /**
      * clones the given object and returns the copy
      *
      * @param obj
@@ -116,39 +127,6 @@ export class Util {
      */
     public static getMillis(): number {
         return new Date().getTime();
-    }
-
-    /**
-     * marks invalid fields in the FormGroup as touched and returns the validity of the FormGroup
-     * used for validation on submit
-     *
-     * @param form FormGroup
-     * @return validity of the given FormGroup
-     */
-    public static revalidateForm(form: FormGroup): boolean {
-        Object.keys(form.controls).forEach((key) => {
-            let control: AbstractControl = form.controls[key];
-            if (control instanceof FormGroup) {
-                this.revalidateForm(control);
-            } else {
-                this.revalidateControl(control);
-            }
-        });
-        return form.valid;
-    }
-
-    /**
-     * recalculates the validity of the given control and marks it as touched if invalid
-     *
-     * @param control AbstractControl to be checked
-     * @return {boolean} the validity of the control
-     */
-    public static revalidateControl(control: AbstractControl): boolean {
-        control.updateValueAndValidity({onlySelf: true});
-        if (control.invalid) {
-            control.markAsTouched();
-        }
-        return control.valid;
     }
 
     public static bindAndCall(func: Function, thisArg: any, args?: any) {

@@ -6,9 +6,9 @@ import {SchoolYearDto, SemesterDto} from '../model/manage.dto';
 import {OCValidators} from '../../core/services/oc-validators';
 import {TranslateService} from '@ngx-translate/core';
 import {DatePipe} from '@angular/common';
-import {Util} from '../../core/util/util';
 import {ResponsiveHelperService} from '../../core/services/ui/responsive-helper.service';
 import {DateUtil} from '../../core/services/date-util.service';
+import {FormUtil} from '../../core/util/form-util';
 
 @Component({
     selector: 'semester-dialog',
@@ -54,7 +54,7 @@ export class SemesterDialog extends ParentLinkedCreateUpdateComponent<SemesterDt
 
     public submit() {
         if (!(this._semesterForm.valid && this._semesterForm.dirty)) {
-            Util.revalidateForm(this._semesterForm);
+            FormUtil.revalidateForm(this._semesterForm);
             return;
         }
         if (this.isEditMode()) {

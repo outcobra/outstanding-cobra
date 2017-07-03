@@ -7,6 +7,8 @@ import {SemesterMarkResolver} from './service/semester-mark-resolver.service';
 import {MarkCreateUpdateComponent} from './mark-create-update/mark-create-update.component';
 import {MarkResolver} from './service/mark-resolver.service';
 import {MarkGroupResolver} from './service/mark-group-resolver.service';
+import {MarkGroupCreateUpdateComponent} from './mark-group-create-update/mark-group-create-update.component';
+import {SubjectMarkGroupResolver} from 'app/mark/service/subject-mark-resolver.service';
 
 @NgModule({
     imports: [
@@ -29,25 +31,47 @@ import {MarkGroupResolver} from './service/mark-group-resolver.service';
                         ]
                     },
                     {
-                        path: 'semester/:semesterId/subject/:subjectId/group/:groupId',
+                        path: 'semester/:semesterId/subject/:subjectId/group',
                         children: [
                             {
                                 path: 'add',
-                                component: MarkCreateUpdateComponent,
+                                component: MarkGroupCreateUpdateComponent,
+                                resolve: {
+                                    subjectMarkGroup: SubjectMarkGroupResolver
+                                },
                                 data: {
                                     isEdit: false
                                 }
                             },
                             {
-                                path: 'edit/:markId',
-                                component: MarkCreateUpdateComponent,
-                                resolve: {
-                                    mark: MarkResolver,
-                                    parent: MarkGroupResolver
-                                },
+                                path: 'edit/:groupId',
+                                component: MarkGroupCreateUpdateComponent,
                                 data: {
-                                    isEdit: false
+                                    isEdit: true
                                 }
+                            },
+                            {
+                                path: ':groupId',
+                                children: [
+                                    {
+                                        path: 'add',
+                                        component: MarkCreateUpdateComponent,
+                                        data: {
+                                            isEdit: false
+                                        }
+                                    },
+                                    {
+                                        path: 'edit/:markId',
+                                        component: MarkCreateUpdateComponent,
+                                        resolve: {
+                                            mark: MarkResolver,
+                                            parent: MarkGroupResolver
+                                        },
+                                        data: {
+                                            isEdit: false
+                                        }
+                                    }
+                                ]
                             }
                         ]
                     }

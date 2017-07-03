@@ -3,7 +3,7 @@ import {MdDialogRef} from '@angular/material';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ParentLinkedCreateUpdateComponent} from '../../core/common/parent-linked-create-update-component';
 import {SemesterDto, SubjectDto} from '../model/manage.dto';
-import {Util} from '../../core/util/util';
+import {FormUtil} from '../../core/util/form-util';
 
 @Component({
     selector: 'subject-dialog',
@@ -30,7 +30,7 @@ export class SubjectDialog extends ParentLinkedCreateUpdateComponent<SubjectDto,
 
     public submit() {
         if (!(this._subjectForm.valid && this._subjectForm.dirty)) {
-            Util.revalidateForm(this._subjectForm);
+            FormUtil.revalidateForm(this._subjectForm);
             return;
         }
         if (this.isEditMode()) {

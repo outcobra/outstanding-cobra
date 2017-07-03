@@ -6,9 +6,9 @@ import {MdDialogRef} from '@angular/material';
 import {OCValidators} from '../../core/services/oc-validators';
 import {TranslateService} from '@ngx-translate/core';
 import {DatePipe} from '@angular/common';
-import {Util} from '../../core/util/util';
 import {ResponsiveHelperService} from '../../core/services/ui/responsive-helper.service';
 import {DateUtil} from '../../core/services/date-util.service';
+import {FormUtil} from '../../core/util/form-util';
 
 @Component({
     selector: 'school-year-dialog',
@@ -48,7 +48,7 @@ export class SchoolYearDialog extends ParentLinkedCreateUpdateComponent<SchoolYe
 
     public submit() {
         if (!(this._schoolYearForm.valid && this._schoolYearForm.dirty)) {
-            Util.revalidateForm(this._schoolYearForm);
+            FormUtil.revalidateForm(this._schoolYearForm);
             return;
         }
         if (this.isEditMode()) {

@@ -3,7 +3,7 @@ import {ParentLinkedCreateUpdateComponent} from '../../core/common/parent-linked
 import {InstitutionDto, SchoolClassDto} from '../model/manage.dto';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MdDialogRef} from '@angular/material';
-import {Util} from '../../core/util/util';
+import {FormUtil} from '../../core/util/form-util';
 
 @Component({
     selector: 'school-class-dialog',
@@ -26,7 +26,7 @@ export class SchoolClassDialog extends ParentLinkedCreateUpdateComponent<SchoolC
 
     public submit() {
         if (!(this._schoolClassForm.valid && this._schoolClassForm.dirty)) {
-            Util.revalidateForm(this._schoolClassForm);
+            FormUtil.revalidateForm(this._schoolClassForm);
             return;
         }
         if (this.isEditMode()) {

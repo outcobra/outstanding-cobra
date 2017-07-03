@@ -66,6 +66,9 @@ public class MarkGroup extends Mark {
 
     @Override
     public double getValue() {
+        if (getMarks().size() == 0) {
+            return 0;
+        }
         double valueSum = 0, weightSum = 0;
 
         for (Mark mark : getMarks()) {

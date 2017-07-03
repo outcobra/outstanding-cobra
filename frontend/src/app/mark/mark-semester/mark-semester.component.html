@@ -12,7 +12,7 @@
                         <md-icon>class</md-icon>
                         <span>{{ semesterMark.schoolClass.normalizedName }}</span>
                     </oc-collapsible-header>
-                    <oc-collapsible *ngFor="let subject of semesterMark.subjects" class="mark-subject">
+                    <oc-collapsible *ngFor="let subject of semesterMark.subjects" class="mark-subject" [active]="isActiveSubject(subject.id)">
                         <oc-collapsible-header class="mark-subject-header">
                             <span class="subject-circle"
                                   [style.background-color]="subject.color.hex | color"></span>
@@ -20,28 +20,28 @@
                         </oc-collapsible-header>
                         <md-list class="mark-value-list">
                             <md-list-item>
-                                <button md-button (click)="addMarkGroup(subject.subjectMarkGroup)">Add Mark Group</button>
-                                <button md-button (click)="addMark(subject.subjectMarkGroup)">Add Mark</button>
+                                <button md-button (click)="newMarkGroup$.next(subject.subjectMarkGroup)">Add Mark Group</button>
+                                <button md-button (click)="newMark$.next(subject.subjectMarkGroup)">Add Mark</button>
                             </md-list-item>
 
                             <md-list-item *ngFor="let mark of subject.subjectMarkGroup?.markValues">
-                                <mark-value [mark]="mark" (delete)="deleteMark(mark.id)"></mark-value>
+                                <mark-value [mark]="mark" (delete)="deleteMark$.next(mark.id)"></mark-value>
                             </md-list-item>
                             <md-divider></md-divider>
 
                             <md-list-item *ngFor="let markGroup of subject.subjectMarkGroup?.markGroups"
                                           class="mark-group-item">
-                                <oc-collapsible>
+                                <oc-collapsible  [active]="isActiveMarkGroup(markGroup.id)">
                                     <oc-collapsible-header class="mark-mark-group-header">
-                                        <mark-value [mark]="markGroup" (delete)="deleteMarkGroup(markGroup.id)"></mark-value>
+                                        <mark-value [mark]="markGroup" (delete)="deleteMarkGroup$.next(markGroup.id)"></mark-value>
                                     </oc-collapsible-header>
                                     <md-list class="mark-group-value-list">
                                         <md-list-item>
-                                            <button md-button (click)="addMark(markGroup)">Add Mark</button>
+                                            <button md-button (click)="newMark$.next(markGroup)">Add Mark</button>
                                         </md-list-item>
                                         <md-list-item
                                             *ngFor="let markValue of markGroup.markValues">
-                                            <mark-value [mark]="markValue" (delete)="deleteMark(markValue.id)"
+                                            <mark-value [mark]="markValue" (delete)="deleteMark$.next(markValue.id)"
                                             (edit)="editMark(markValue)"></mark-value>
                                         </md-list-item>
                                     </md-list>

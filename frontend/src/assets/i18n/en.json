@@ -102,6 +102,24 @@
             }
           }
         },
+        "group": {
+          "createUpdate": {
+            "create": {
+              "title": "New markgroup"
+            },
+            "update": {
+              "title": "Edit Markgroup"
+            },
+            "form": {
+              "description": {
+                "label": "Beschreibung"
+              },
+              "selectMark": {
+                "label": "Add a mark to the group"
+              }
+            }
+          }
+        },
         "dialog": {
           "markConfirmDelete": {
             "title": "Delete mark",

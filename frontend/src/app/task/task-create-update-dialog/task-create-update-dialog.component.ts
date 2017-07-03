@@ -3,12 +3,12 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MdDialogRef} from '@angular/material';
 import {SubjectService} from '../../manage/service/subject.service';
 import {SubjectDto} from '../../manage/model/manage.dto';
-import {Util} from '../../core/util/util';
 import {OCValidators} from '../../core/services/oc-validators';
 import {TaskDto} from '../model/task.dto';
 import {CreateUpdateComponent} from '../../core/common/create-update-component';
 import {ResponsiveHelperService} from '../../core/services/ui/responsive-helper.service';
 import {DateUtil} from '../../core/services/date-util.service';
+import {FormUtil} from '../../core/util/form-util';
 
 @Component({
     selector: './task-create-update-dialog',
@@ -51,7 +51,7 @@ export class TaskCreateUpdateDialog extends CreateUpdateComponent<TaskDto> imple
             this._dialogRef.close(this._formToTask(this._taskCreateUpdateForm));
         }
         else {
-            Util.revalidateForm(this._taskCreateUpdateForm);
+            FormUtil.revalidateForm(this._taskCreateUpdateForm);
         }
     }
 
