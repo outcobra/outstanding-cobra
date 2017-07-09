@@ -17,7 +17,8 @@
         "validFrom": "Gültig ab",
         "validTo": "Gültig bis",
         "todoDate": "Erledigungsdatum",
-        "dueDate": "Fälligkeitsdatum"
+        "dueDate": "Fälligkeitsdatum",
+        "date": "Datum"
       },
       "form": {
         "error": {
@@ -69,7 +70,18 @@
         "authors": "von Joel, Florian, Mario und Vincent"
       },
       "exam": {
-        "linkTitle": "Prüfungen"
+        "linkTitle": "Prüfungen",
+        "listTitle": "Deine Prüfungen",
+        "add": "Prüfung hinzufügen",
+        "desc": "Prüfungs-Beschreibung",
+        "name": "Prüfungs-Name",
+        "tasks": "Lernziele",
+        "filter": {
+          "title": "Prüfungen filtern",
+          "subject": "Nach Fach filtern",
+          "showPending": "Nur zukünftige Prüfungen zeigen",
+          "search": "Prüfungen suchen..."
+        }
       },
       "mark": {
         "linkTitle": "Noten",

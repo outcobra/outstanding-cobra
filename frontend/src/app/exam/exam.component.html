@@ -1,6 +1,23 @@
 <oc-title-bar>
     <span>{{ 'i18n.modules.exam.linkTitle' | translate }}</span>
 </oc-title-bar>
-<div>
+<div class="container">
+    <h5>{{ 'i18n.modules.exam.linkTitle' | translate }}</h5>
+    <md-card class="oc-card">
+        <md-card-content>
+            <div [formGroup]="searchForm">
+                <md-input-container id="exam-search">
+                    <input mdInput [placeholder]="'i18n.modules.exam.filter.search' | translate"
+                           formControlName="searchTerm">
+                </md-input-container>
+            </div>
+        </md-card-content>
+    </md-card>
+    <md-card class="list-card">
+        <exam-list-item *ngFor="let exam of displayedExams" [exam]="exam"></exam-list-item>
+    </md-card>
+    <button md-fab [mdTooltip]="'i18n.modules.exam.add' | translate" mdTooltipPosition="left" (click)="addExam()">
+        <md-icon>add</md-icon>
+    </button>
 
 </div>

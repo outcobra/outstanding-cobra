@@ -1,0 +1,17 @@
+
+md-input-container#exam-search {
+    display: block !important;
+    box-sizing: border-box;
+    margin: 0 20px;
+    .mat-input-placeholder-wrapper {
+        overflow: visible;
+    }
+    label {
+        font-size: 25px !important;
+    }
+    input {
+        height: 40px;
+        width: 100%;
+        font-size: 25px !important;
+    }
+}

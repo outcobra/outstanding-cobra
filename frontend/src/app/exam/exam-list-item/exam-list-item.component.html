@@ -1,0 +1,67 @@
+<oc-collapsible [active]="false">
+    <oc-collapsible-header>
+        <md-icon>filter_6</md-icon>
+        <h6 md-subheader>{{ exam.name }}</h6>
+    </oc-collapsible-header>
+    <oc-collapsible-body>
+        <md-card class="oc-card">
+            <div>
+                <md-card-content>
+                    <div [formGroup]="examFormGroup" class="form-group">
+                        <oc-icon-data iconName="title" titleKey="i18n.modules.exam.desc">
+                            <md-input-container *ngIf="editMode">
+                                <input mdInput [value]="exam.name" formControlName="examName">
+                            </md-input-container>
+                            <p *ngIf="!editMode" class="exam-property">{{ exam.name }}</p>
+                        </oc-icon-data>
+                        <oc-icon-data iconName="description" titleKey="i18n.modules.exam.desc">
+                            <md-input-container *ngIf="editMode">
+                                <textarea mdInput [value]="exam.description"
+                                          formControlName="examDescription"></textarea>
+                            </md-input-container>
+                            <p *ngIf="!editMode" class="exam-property">{{ exam.description }}</p>
+                        </oc-icon-data>
+                        <!-- EXAM DESC END -->
+                        <!-- EXAM TODO_DATE START -->
+                        <oc-icon-data iconName="today" titleKey="i18n.common.label.date">
+                            <md-input-container *ngIf="editMode">
+                                <input mdInput [mdDatepicker]="examDatePicker"
+                                       [value]="exam.date" *ngIf="editMode" formControlName="examDate">
+                                <button mdSuffix [mdDatepickerToggle]="examDatePicker"></button>
+                            </md-input-container>
+                            <md-datepicker #examDatePicker *ngIf="editMode"></md-datepicker>
+                            <p class="exam-property" *ngIf="!editMode">{{ exam.date | date:'fullDate' }}</p>
+                        </oc-icon-data>
+                        <oc-icon-data iconName="assignment_turned_in" titleKey="i18n.modules.exam.tasks">
+                            <md-list>
+                                <ng-template ngFor let-examTask [ngForOf]="exam.examTasks">
+                                    <md-list-item>
+                                        <md-checkbox class="exam-property" [checked]="examTask.finished"
+                                                     formControlName="taskControl">
+                                            {{ examTask.task }}
+                                        </md-checkbox>
+                                    </md-list-item>
+                                </ng-template>
+                            </md-list>
+                        </oc-icon-data>
+                    </div>
+                </md-card-content>
+                <md-card-actions>
+                    <!-- EXAM PROGRESS END-->
+                    <button md-raised-button color="primary" *ngIf="!editMode" (click)="editMode = true">
+                        {{ 'i18n.common.action.edit' | translate }}
+                    </button>
+                    <button md-raised-button color="primary" *ngIf="editMode" (click)="saveExam()">
+                        {{ 'i18n.common.action.save' | translate }}
+                    </button>
+                    <button md-raised-button *ngIf="!editMode" (click)="deleteExam()">
+                        {{ 'i18n.common.action.delete' | translate }}
+                    </button>
+                    <button md-button *ngIf="editMode" (click)="editMode = false">
+                        {{ 'i18n.common.action.cancel' | translate }}
+                    </button>
+                </md-card-actions>
+            </div>
+        </md-card>
+    </oc-collapsible-body>
+</oc-collapsible>

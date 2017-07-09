@@ -161,3 +161,16 @@ md-card {
         padding: 0;
     }
 }
+
+button[md-fab] {
+    position: absolute;
+    bottom: 53px;
+    right: 23px;
+    color: $primary-light;
+}
+
+oc-app.oc-mobile {
+    button[md-fab] {
+        bottom: 23px;
+    }
+}

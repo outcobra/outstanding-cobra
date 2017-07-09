@@ -4,6 +4,7 @@ import {ExamDto} from './model/exam.dto';
 import {ActivatedRoute} from '@angular/router';
 import {NotificationWrapperService} from '../core/notifications/notification-wrapper.service';
 import {ExamTaskDto} from './model/exam.task.dto';
+import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
     selector: 'exam',
@@ -11,23 +12,26 @@ import {ExamTaskDto} from './model/exam.task.dto';
     styleUrls: ['./exam.component.scss'],
 })
 export class ExamComponent implements OnInit {
-
     private _activeExams: ExamDto[] = [];
+
     private _allExams: ExamDto[] = []
-    private _displayedExams: ExamDto[] = []
+    public displayedExams: ExamDto[] = []
     private _exam: ExamDto
     private _searchFilter: string = ""
-
-
+    private _searchForm: FormGroup
     constructor(private _examService: ExamService,
                 private _route: ActivatedRoute,
                 private _notificationService: NotificationWrapperService) {
     }
 
+
     ngOnInit() {
+        this._searchForm = new FormGroup({
+            searchTerm: new FormControl()
+        })
         this._loadActiveExams()
         this._loadAllExams()
-        this._displayForFilter()
+        //this._displayForFilter()
     }
 
     private _loadActiveExams() {
@@ -39,6 +43,8 @@ export class ExamComponent implements OnInit {
     private _loadAllExams() {
         this._examService.readAll().subscribe((allExams: ExamDto[]) => {
             this._allExams = allExams
+            this.displayedExams = allExams
+            console.warn(this.displayedExams)
         })
     }
 
@@ -51,8 +57,8 @@ export class ExamComponent implements OnInit {
     }
 
     private _displayForFilter(all: boolean = true) {
-        this._displayedExams = all ? this._allExams : this._activeExams
-        this._displayedExams.filter((exam: ExamDto) => {
+        this.displayedExams = all ? this._allExams : this._activeExams
+        this.displayedExams.filter((exam: ExamDto) => {
             let examString = `${exam.name} ${exam.description} ${exam.subjectName}`
             exam.examTasks.forEach((et: ExamTaskDto) => examString += et.task)
             examString.toLowerCase()
@@ -60,6 +66,11 @@ export class ExamComponent implements OnInit {
             this._searchFilter.toLowerCase().split(' ')
                 .every((searchTerm: string) => examString.includes(searchTerm))
         })
+        this.displayedExams = this._allExams
+        console.error(this.displayedExams)
+    }
 
+    get searchForm(): FormGroup {
+        return this._searchForm;
     }
 }
