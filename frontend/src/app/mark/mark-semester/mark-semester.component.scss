@@ -1,3 +1,5 @@
+@import '../../../sass/color-variables';
+
 @mixin indentation($step) {
     margin-left: $step * 12px;
 }
@@ -15,6 +17,7 @@ mark-semester {
         padding: 0 5px;
     }
 }
+
 .mark-value-list {
     padding: 0 !important;
 }
@@ -33,8 +36,12 @@ md-list.mark-value-list > md-list-item:not(.mark-group-item) > .mat-list-item-co
     @include indentation(3);
 }
 
-.mark-group-value-list > md-list-item > .mat-list-item-content {
-    @include indentation(4);
+.mark-group-value-list {
+    padding: 0 !important;
+
+    > md-list-item > .mat-list-item-content {
+        @include indentation(4);
+    }
 }
 
 .mark-mark-group-header md-icon {
@@ -45,6 +52,16 @@ md-list.mark-value-list > md-list-item:not(.mark-group-item) > .mat-list-item-co
 .mat-subheader {
     padding: 0 !important;
     height: auto !important;
+}
+
+oc-collapsible-header {
+    &:hover {
+        background-color: $hover-light;
+    }
+
+    &.two-line-header {
+        height: 80px !important;
+    }
 }
 
 

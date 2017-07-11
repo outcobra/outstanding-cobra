@@ -37,7 +37,6 @@ export class MarkGroupCreateUpdateComponent extends ParentLinkedCreateUpdateComp
         this._route.paramMap.subscribe((map) => this._semesterId = parseInt(map.get('semesterId')));
         this._route.data.subscribe((marks: { subjectMarkGroup: MarkGroupDto, isEdit: boolean, markGroup?: MarkGroupDto }) => {
                 let isEdit = marks.isEdit;
-                console.log(marks.subjectMarkGroup);
                 this.initWithParent(isEdit ? ViewMode.EDIT : ViewMode.NEW, marks.subjectMarkGroup, isEdit ? marks.markGroup : null);
                 this._availableMarks = marks.subjectMarkGroup.markValues;
                 let groupValues = this.getParamOrDefault('markValues', []) as Array<MarkDto>;
@@ -53,7 +52,8 @@ export class MarkGroupCreateUpdateComponent extends ParentLinkedCreateUpdateComp
         this.newMark$
             .filter(isNotNull)
             .subscribe(mark => {
-                this.selectedMarks.push(this._constructSelectControl(mark));
+                this.selectedMarkControls.push(this._constructSelectControl(mark));
+                this.selectedMarkControls.markAsDirty();
                 this._selectedMarks.push(mark);
             });
 
@@ -62,7 +62,7 @@ export class MarkGroupCreateUpdateComponent extends ParentLinkedCreateUpdateComp
             .filter(isNotNull)
             .subscribe(formControl => {
                 Util.removeItem(this._selectedMarks, formControl.value);
-                FormUtil.removeControlInArray(this.selectedMarks, formControl);
+                FormUtil.removeControlInArray(this.selectedMarkControls, formControl);
             });
     }
 
@@ -113,7 +113,7 @@ export class MarkGroupCreateUpdateComponent extends ParentLinkedCreateUpdateComp
         return this._formBuilder.control(mark, Validators.required);
     }
 
-    get selectedMarks(): FormArray {
+    get selectedMarkControls(): FormArray {
         return this._markGroupCreateUpdateForm.get('selectedMarks') as FormArray;
     }
 

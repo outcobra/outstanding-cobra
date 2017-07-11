@@ -15,6 +15,7 @@ export class MarkValueComponent implements OnInit {
     @Output('delete') public onDelete: EventEmitter<any> = new EventEmitter();
 
     private static readonly MARK_ICON_MAPPING: Map<string, string> = new Map()
+        .set('0', 'filter_none')
         .set('1', 'looks_one')
         .set('2', 'looks_two')
         .set('3', 'looks_3')

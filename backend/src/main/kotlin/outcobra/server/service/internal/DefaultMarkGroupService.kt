@@ -47,6 +47,13 @@ class DefaultMarkGroupService
         return mapper.toDto(entity)
     }
 
+    override fun delete(id: Long) {
+        requestValidator.validateRequestById(id, MarkGroup::class)
+        val markGroup = repository.findOne(id)
+        markGroup.marks.map { it.id }.forEach(markValueRepository::delete)
+        super.delete(id)
+    }
+
     override fun getGroupBySubject(subjectId: Long): MarkGroupDto {
         requestValidator.validateRequestById(subjectId, Subject::class)
         val markGroup = subjectRepository.findOne(subjectId).markGroup

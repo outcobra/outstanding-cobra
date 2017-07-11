@@ -6,9 +6,21 @@ import {MarkService} from '../service/mark.service';
 import {ConfirmDialogService} from '../../core/services/confirm-dialog.service';
 import {TranslateService} from '@ngx-translate/core';
 import {Observable} from 'rxjs/Observable';
-import {MarkDto} from '../model/mark.dto';
 import {MarkGroupDto} from '../model/mark-group.dto';
 import {Subject} from 'rxjs/Subject';
+import {ResponsiveHelperService} from '../../core/services/ui/responsive-helper.service';
+
+type EditMark = {
+    subjectId: number,
+    markId: number,
+    groupId: number
+}
+
+type EditMarkGroup = {
+    subjectId: number,
+    markId: number,
+    groupId: number
+}
 
 @Component({
     selector: 'mark-semester',
@@ -22,11 +34,14 @@ export class MarkSemesterComponent implements OnInit {
         subjectId: number,
         groupId: number
     };
+    private _headerClasses;
 
     public newMark$: Subject<MarkGroupDto> = new Subject();
     public newMarkGroup$: Subject<MarkGroupDto> = new Subject();
     public deleteMark$: Subject<number> = new Subject();
     public deleteMarkGroup$: Subject<number> = new Subject();
+    public editMark$: Subject<EditMark> = new Subject();
+    public editMarkGroup$: Subject<MarkGroupDto> = new Subject();
 
     public deleteMarkOrMarkGroup$: Subject<number>;
 
@@ -34,7 +49,8 @@ export class MarkSemesterComponent implements OnInit {
                 private _router: Router,
                 private _markService: MarkService,
                 private _confirmationDialogService: ConfirmDialogService,
-                private _translateService: TranslateService) {
+                private _translateService: TranslateService,
+                private _responsiveHelperService: ResponsiveHelperService) {
     }
 
     ngOnInit() {
@@ -48,30 +64,27 @@ export class MarkSemesterComponent implements OnInit {
                     groupId: parseInt(params.get('groupId'))
                 }
             });
+        this._updateHeaderClasses({mobile: this._responsiveHelperService.isMobile()});
 
-        this.newMark$
-            .subscribe((markGroup) => this._router.navigate([`semester/${this.semesterMark.id}/subject/${markGroup.subjectId}/group/${markGroup.id}/add`],
-                {relativeTo: this._activatedRoute.parent}));
+        this.newMark$.subscribe((markGroup) =>
+            this._router.navigate([`semester/${this.semesterMark.id}/subject/${markGroup.subjectId}/group/${markGroup.id}/add`], {relativeTo: this._activatedRoute.parent})
+        );
 
-        this.newMarkGroup$
-            .subscribe((markGroup) => this._router.navigate([`semester/${this.semesterMark.id}/subject/${markGroup.subjectId}/group/add`],
-                {relativeTo: this._activatedRoute.parent}));
+        this.newMarkGroup$.subscribe((markGroup) =>
+            this._router.navigate([`semester/${this.semesterMark.id}/subject/${markGroup.subjectId}/group/add`], {relativeTo: this._activatedRoute.parent})
+        );
 
-        this.deleteMark$
-            .switchMap(id => this._showDeleteDialog('mark', id))
-            .filter(isNotNull)
-            .switchMap(id => this._markService.deleteMark(id))
-            .subscribe(console.log); // todo cleanup
+        this._buildDeleteChain(this.deleteMark$, 'mark', this._markService.deleteMark, console.log);
+        this._buildDeleteChain(this.deleteMarkGroup$, 'markGroup', this._markService.deleteMarkGroup, console.log);
 
-        this.deleteMarkGroup$
-            .switchMap(id => this._showDeleteDialog('markGroup', id))
-            .filter(isNotNull)
-            .switchMap(id => this._markService.deleteMarkGroup(id))
-            .subscribe(console.log); // todo cleanup
-    }
+        this.editMark$.subscribe(editMark => {
+            this._router.navigate([`semester/${this.semesterMark.id}/subject/${editMark.subjectId}/group/${editMark.groupId}/edit/${editMark.markId}`], {relativeTo: this._activatedRoute.parent})
+        });
+        this.editMarkGroup$.subscribe(markGroup => {
+            this._router.navigate([`semester/${this.semesterMark.id}/subject/${markGroup.subjectId}/group/edit/${markGroup.id}`], {relativeTo: this._activatedRoute.parent});
+        });
 
-    public addMarkGroup(subjectMarkGroup: MarkGroupDto) {
-
+        this._responsiveHelperService.listenForBreakpointChange().subscribe(this._updateHeaderClasses.bind(this));
     }
 
     private _showDeleteDialog(i18nDialogKey: string, result: any): Observable<boolean> {
@@ -79,16 +92,12 @@ export class MarkSemesterComponent implements OnInit {
             this._translateService.instant(`i18n.modules.mark.dialog.${i18nDialogKey}ConfirmDelete.message`), result);
     }
 
-    public deleteMark(id: number) {
-        this._deleteMarkOrMarkGroup('mark', this._markService.deleteMark.bind(this._markService, id))
-    }
-
-    public deleteMarkGroup(id: number) {
-        this._deleteMarkOrMarkGroup('markGroup', this._markService.deleteMarkGroup.bind(this._markService, id))
-    }
-
-    public editMark(mark: MarkDto) {
-        this._router.navigate(['mark', 'add']);
+    private _buildDeleteChain(subject: Subject<number>, entityName: string, deleteFunction: (id: number) => Observable<any>, finishFunction: (result: any) => void) {
+        return subject
+            .switchMap(id => this._showDeleteDialog(entityName, id))
+            .filter(isNotNull)
+            .switchMap(deleteFunction.bind(this._markService))
+            .subscribe(finishFunction.bind(this));
     }
 
     public isActiveSubject(subjectId: number): boolean {
@@ -99,12 +108,8 @@ export class MarkSemesterComponent implements OnInit {
         return !(isFalsy(this.initOpenings) || isFalsy(this.initOpenings.groupId)) && this.initOpenings.groupId === groupId;
     }
 
-    private _deleteMarkOrMarkGroup(i18nDialogKey: string, deleteFunction: (id: number) => Observable<any>) {
-        this._confirmationDialogService.open(this._translateService.instant(`i18n.modules.mark.dialog.${i18nDialogKey}ConfirmDelete.title`),
-            this._translateService.instant(`i18n.modules.mark.dialog.${i18nDialogKey}ConfirmDelete.message`))
-            .filter(isTruthy)
-            .switchMap(deleteFunction)
-            .subscribe(() => console.log(i18nDialogKey));
+    private _updateHeaderClasses(change: { mobile: boolean }) {
+        this._headerClasses = change.mobile ? 'two-line-header' : '';
     }
 
     public isTruthy(val: any): boolean {
@@ -114,5 +119,10 @@ export class MarkSemesterComponent implements OnInit {
 
     get initOpenings(): { subjectId: number; groupId: number } {
         return this._initOpenings;
+    }
+
+
+    get headerClasses() {
+        return this._headerClasses;
     }
 }

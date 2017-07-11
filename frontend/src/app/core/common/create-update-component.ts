@@ -30,14 +30,12 @@ export class CreateUpdateComponent<T> {
         if (!propertyPath.includes('.') && this.param.hasOwnProperty(propertyPath)) {
             return this.param[propertyPath];
         }
-        else {
-            let prop = this.param;
-            for (let pathPart of propertyPath.split('.')) {
-                if (!prop.hasOwnProperty(pathPart)) return defaultValue;
-                prop = prop[pathPart];
-            }
-            return prop;
+        let prop = this.param;
+        for (let pathPart of propertyPath.split('.')) {
+            if (!prop.hasOwnProperty(pathPart)) return defaultValue;
+            prop = prop[pathPart];
         }
+        return prop;
     }
 
     isEditMode(): boolean {

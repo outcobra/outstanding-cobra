@@ -35,8 +35,8 @@
             </md-error>
         </md-input-container>
     </div>
-    <div formArrayName="selectedMarks" *ngIf="selectedMarks.controls.length > 0">
-        <div class="form-group dynamic-mark" *ngFor="let markControl of selectedMarks.controls; let i=index">
+    <div formArrayName="selectedMarks" *ngIf="selectedMarkControls.controls.length > 0">
+        <div class="form-group dynamic-mark" *ngFor="let markControl of selectedMarkControls.controls; let i=index">
             <md-select [formControlName]="i">
                 <md-option *ngFor="let availableMark of getAvailableMarks(i)" [value]="availableMark">
                     {{ availableMark.description }}

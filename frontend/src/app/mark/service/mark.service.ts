@@ -7,7 +7,7 @@ import {MarkDto} from '../model/mark.dto';
 import {MarkGroupDto} from '../model/mark-group.dto';
 
 export const MARK_PATTERN: RegExp = /^(([1-5](\.[0-9]{1,2})?)|6(\.00?)?)$/;
-export const WEIGHT_PATTERN: RegExp = /^(([0-9](\.[0-9])?)|10(\.00?)?)$/;
+export const WEIGHT_PATTERN: RegExp = /^(([0-9](\.[0-9]{1,2})?)|10(\.00?)?)$/;
 
 @Injectable()
 export class MarkService extends AppService {
@@ -28,8 +28,7 @@ export class MarkService extends AppService {
     }
 
     public deleteMark(id: number): Observable<any> {
-        return this._http.delete(`${this._baseUri}/value/${id}`)
-            .map(() => id);
+        return this._http.delete(`${this._baseUri}/value/${id}`);
     }
 
     public deleteMarkGroup(id: number): Observable<any> {

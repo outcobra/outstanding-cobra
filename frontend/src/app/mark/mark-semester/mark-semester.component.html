@@ -12,7 +12,8 @@
                         <md-icon>class</md-icon>
                         <span>{{ semesterMark.schoolClass.normalizedName }}</span>
                     </oc-collapsible-header>
-                    <oc-collapsible *ngFor="let subject of semesterMark.subjects" class="mark-subject" [active]="isActiveSubject(subject.id)">
+                    <oc-collapsible *ngFor="let subject of semesterMark.subjects" class="mark-subject"
+                                    [active]="isActiveSubject(subject.id)">
                         <oc-collapsible-header class="mark-subject-header">
                             <span class="subject-circle"
                                   [style.background-color]="subject.color.hex | color"></span>
@@ -20,20 +21,26 @@
                         </oc-collapsible-header>
                         <md-list class="mark-value-list">
                             <md-list-item>
-                                <button md-button (click)="newMarkGroup$.next(subject.subjectMarkGroup)">Add Mark Group</button>
+                                <button md-button (click)="newMarkGroup$.next(subject.subjectMarkGroup)">Add Mark
+                                    Group
+                                </button>
                                 <button md-button (click)="newMark$.next(subject.subjectMarkGroup)">Add Mark</button>
                             </md-list-item>
 
                             <md-list-item *ngFor="let mark of subject.subjectMarkGroup?.markValues">
-                                <mark-value [mark]="mark" (delete)="deleteMark$.next(mark.id)"></mark-value>
+                                <mark-value [mark]="mark"
+                                            (delete)="deleteMark$.next(mark.id)"
+                                            (edit)="editMark$.next({subjectId: subject.id, groupId: mark.markGroupId, markId: mark.id})"></mark-value>
                             </md-list-item>
                             <md-divider></md-divider>
 
                             <md-list-item *ngFor="let markGroup of subject.subjectMarkGroup?.markGroups"
                                           class="mark-group-item">
-                                <oc-collapsible  [active]="isActiveMarkGroup(markGroup.id)">
-                                    <oc-collapsible-header class="mark-mark-group-header">
-                                        <mark-value [mark]="markGroup" (delete)="deleteMarkGroup$.next(markGroup.id)"></mark-value>
+                                <oc-collapsible [active]="isActiveMarkGroup(markGroup.id)">
+                                    <oc-collapsible-header class="mark-mark-group-header" [ngClass]="headerClasses">
+                                        <mark-value [mark]="markGroup"
+                                                    (delete)="deleteMarkGroup$.next(markGroup.id)"
+                                                    (edit)="editMarkGroup$.next(markGroup)"></mark-value>
                                     </oc-collapsible-header>
                                     <md-list class="mark-group-value-list">
                                         <md-list-item>
@@ -41,8 +48,9 @@
                                         </md-list-item>
                                         <md-list-item
                                             *ngFor="let markValue of markGroup.markValues">
-                                            <mark-value [mark]="markValue" (delete)="deleteMark$.next(markValue.id)"
-                                            (edit)="editMark(markValue)"></mark-value>
+                                            <mark-value [mark]="markValue"
+                                                        (delete)="deleteMark$.next(markValue.id)"
+                                                        (edit)="editMark$.next({subjectId: subject.id, groupId: markValue.markGroupId, markId: markValue.id})"></mark-value>
                                         </md-list-item>
                                     </md-list>
                                     <oc-divider></oc-divider>

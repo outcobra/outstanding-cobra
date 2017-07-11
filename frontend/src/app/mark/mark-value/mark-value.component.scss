@@ -5,8 +5,10 @@
 }
 
 .mark-value {
+    padding: 0 16px;
     width: 100%;
     md-icon {
+        float: left;
         margin-right: 5px;
     }
     md-icon, span {

@@ -23,7 +23,7 @@ export class MarkCreateUpdateComponent extends ParentLinkedCreateUpdateComponent
                 private _router: Router,
                 private _formBuilder: FormBuilder,
                 private _markService: MarkService) {
-        super(_route.data['isEdit'] ? ViewMode.EDIT : ViewMode.NEW, _route.data['isEdit'] ? _route.params['mark'] : null, _route.data['isEdit'] ? _route.params['parent'] : null); // TODO improve this bullshit
+        super();
         this._route.params.subscribe(params => {
             this._semesterId = parseInt(params['semesterId']);
             this._navigationExtras = {
@@ -36,6 +36,12 @@ export class MarkCreateUpdateComponent extends ParentLinkedCreateUpdateComponent
     }
 
     ngOnInit() {
+        this._route.data.subscribe((data: {isEdit: boolean, mark: MarkDto, parent: MarkGroupDto}) => {
+            let isEdit = data.isEdit;
+            this.initWithParent(isEdit ? ViewMode.EDIT : ViewMode.NEW,
+                isEdit ? data.parent : null,
+                isEdit ? data.mark : null);
+        });
         this._markCreateUpdateForm = this._formBuilder.group({
             value: [this.getParamOrDefault('value'), Validators.compose([Validators.required, Validators.pattern(MARK_PATTERN)])],
             weight: [this.getParamOrDefault('weight', 1), Validators.compose([Validators.required, Validators.pattern(WEIGHT_PATTERN)])],
@@ -65,7 +71,6 @@ export class MarkCreateUpdateComponent extends ParentLinkedCreateUpdateComponent
             markGroupId: this._parentMarkGroupId
         } as MarkDto;
     }
-
 
     get markCreateUpdateForm(): FormGroup {
         return this._markCreateUpdateForm;

@@ -46,6 +46,10 @@ import {SubjectMarkGroupResolver} from 'app/mark/service/subject-mark-resolver.s
                             {
                                 path: 'edit/:groupId',
                                 component: MarkGroupCreateUpdateComponent,
+                                resolve: {
+                                    subjectMarkGroup: SubjectMarkGroupResolver,
+                                    markGroup: MarkGroupResolver
+                                },
                                 data: {
                                     isEdit: true
                                 }
@@ -68,7 +72,7 @@ import {SubjectMarkGroupResolver} from 'app/mark/service/subject-mark-resolver.s
                                             parent: MarkGroupResolver
                                         },
                                         data: {
-                                            isEdit: false
+                                            isEdit: true
                                         }
                                     }
                                 ]
