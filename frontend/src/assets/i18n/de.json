@@ -81,6 +81,43 @@
           "subject": "Nach Fach filtern",
           "showPending": "Nur zukünftige Prüfungen zeigen",
           "search": "Prüfungen suchen..."
+        },
+        "notification": {
+          "add": {
+            "title": "Prüfungen hinzugefügt",
+            "message": "Die Prüfungen wurde erfolgreich erstellt"
+          },
+          "update": {
+            "title": "Prüfung geändert",
+            "message": "Die Prüfung wurde erfolgreich gespeichert"
+          },
+          "error": {
+            "deleteFailed": {
+              "title": "Löschen fehlgeschlagen",
+              "message": "Beim Löschen der Prüfung ist ein Fehler aufgetreten. Bitte versuchen es später erneut"
+            },
+            "taskNotFound": {
+              "title": "Prüfung nicht gefunden",
+              "message": "Wir konnten die gesuchte Prüfung nicht finden"
+            }
+          }
+        },
+        "dialogs": {
+          "confirmDeleteDialog": {
+            "title": "Willst du die Prüfung wirklich löschen?",
+            "message": "Die Prüfung wird für immer weg sein (Eine sehr sehr lange Zeit)"
+          },
+          "add": {
+            "name": {
+              "label": "Gib einen Prüfungsnamen ein"
+            },
+            "desc": {
+              "label": "Gib eine Prüfungsbeschreibung ein"
+            },
+            "tasks": {
+              "label": "Trag die Lernziele (Prüfungs-Aufgaben) ein"
+            }
+          }
         }
       },
       "mark": {

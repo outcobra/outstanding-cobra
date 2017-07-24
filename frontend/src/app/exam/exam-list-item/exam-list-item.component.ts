@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ExamDto} from '../model/exam.dto';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {DateUtil} from '../../core/services/date-util.service';
 
 @Component({
@@ -20,9 +20,9 @@ export class ExamListItemComponent implements OnInit {
 
     ngOnInit() {
         this._examFormGroup = this._formBuilder.group({
-            examName: new FormControl(),
-            examDescription: new FormControl(),
-            taskControl: new FormControl(),
+            examName: [this.exam.name, (name: string) => name.length != 0],
+            examDescription: [this.exam.description],
+            taskControl: [],
             examDate: [DateUtil.transformToDateIfPossible(this.exam.date)]
         });
 

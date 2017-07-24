@@ -44,15 +44,18 @@ export class ExamComponent implements OnInit {
         this._examService.readAll().subscribe((allExams: ExamDto[]) => {
             this._allExams = allExams
             this.displayedExams = allExams
-            console.warn(this.displayedExams)
         })
     }
 
-    private _addExam() {
+    public addExam() {
 
     }
 
-    private _removeExam() {
+    public removeExam() {
+
+    }
+
+    public editExam(exam: ExamDto) {
 
     }
 
