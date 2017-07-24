@@ -15,7 +15,7 @@ import javax.inject.Inject
  * This [DataLoader] loads our test [SchoolClass]es
  *
  * @author Joel Messerli
- * @since <since>
+ * @since 1.1.0
  */
 @Component
 @Order(SCHOOL_CLASS)

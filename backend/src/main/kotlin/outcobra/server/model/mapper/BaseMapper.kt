@@ -12,7 +12,7 @@ import kotlin.reflect.KClass
 /**
  * This class allows authorizing the requests within the mapper
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.1.0
  */
 @Component
 class BaseMapper {

@@ -18,7 +18,7 @@ import java.time.LocalDate
  * This [DataLoader] loads our test [Task]s
  *
  * @author Joel Messerli
- * @since <since>
+ * @since 1.1.0
  */
 @Component
 @Order(TASK)

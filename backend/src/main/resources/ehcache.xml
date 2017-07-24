@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config
+        xmlns='http://www.ehcache.org/v3'
+        xmlns:jsr107='http://www.ehcache.org/v3/jsr107'>
+
+    <service>
+        <jsr107:defaults>
+            <jsr107:cache name="repo_for_name" template="heap-cache"/>
+            <jsr107:cache name="repo_for_entity" template="heap-cache"/>
+            <jsr107:cache name="dto_for_name" template="heap-cache"/>
+            <jsr107:cache name="repo_for_dto" template="heap-cache"/>
+        </jsr107:defaults>
+    </service>
+
+    <cache-template name="heap-cache">
+        <resources>
+            <heap unit="entries">25</heap>
+        </resources>
+    </cache-template>
+</config>

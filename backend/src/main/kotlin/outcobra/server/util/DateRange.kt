@@ -9,7 +9,7 @@ import java.time.LocalDate
  * @param from the start date  as a [LocalDate]
  * @param to the end date as a [LocalDate]
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.1.0
  */
 class DateRange(val from: LocalDate, val to: LocalDate) {
 

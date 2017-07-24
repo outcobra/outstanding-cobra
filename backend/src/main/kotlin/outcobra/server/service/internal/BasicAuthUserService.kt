@@ -16,7 +16,7 @@ import javax.inject.Inject
 
 /**
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.1.0
  *
  */
 @Profile(BASIC_AUTH_SECURITY_MOCK)

@@ -30,7 +30,7 @@ import javax.transaction.Transactional
  * these tests are representative for all of them.
  *
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.1.0
  */
 @SpringBootTest
 @RunWith(SpringRunner::class)
