@@ -16,6 +16,7 @@ data class SemesterMarkDto(val id: Long = 0,
                            val validTo: LocalDate? = null,
                            val institution: InstitutionDto,
                            val schoolClass: SchoolClassDto,
+                           val value: Double = 0.0,
                            val subjects: List<SubjectMarkDto> = listOf())
 
 /**

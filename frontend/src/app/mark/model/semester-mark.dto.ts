@@ -9,6 +9,7 @@ export interface SemesterMarkDto {
     validTo: Date,
     institution: InstitutionDto,
     schoolClass: SchoolClassDto,
+    value: number,
     subjects: Array<SubjectMarkDto>
 }
 

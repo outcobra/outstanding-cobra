@@ -1,5 +1,5 @@
 <div class="container" fxFlex fxFlex.gt-sm="60" fxFlexOffset.gt-sm="20">
-    <h5>Here comes some text but i currently do not know what ¯\_(ツ)_/¯</h5>
+    <h5>{{ 'i18n.modules.mark.semester.average' | translate }} {{ semesterMark.value | number:'1.0-2' }}</h5>
     <md-card class="oc-card">
         <md-card-content>
             <oc-collapsible [active]="true">
