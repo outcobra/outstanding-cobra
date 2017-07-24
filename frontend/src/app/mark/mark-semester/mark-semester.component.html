@@ -1,5 +1,5 @@
 <div class="container" fxFlex fxFlex.gt-sm="60" fxFlexOffset.gt-sm="20">
-    <h5>{{ 'i18n.modules.mark.semester.average' | translate }} {{ semesterMark.value | number:'1.0-2' }}</h5>
+    <h5>{{ 'i18n.modules.mark.semester.average' | translate }} {{ semesterMark.value | markValue }}</h5>
     <md-card class="oc-card">
         <md-card-content>
             <oc-collapsible [active]="true">
@@ -18,19 +18,22 @@
                             <span class="subject-circle"
                                   [style.background-color]="subject.color.hex | color"></span>
                             <span>{{ subject.name }}</span>
+                            <span>{{ subject.subjectMarkGroup.value | markValue }}</span>
                         </oc-collapsible-header>
                         <md-list class="mark-value-list">
-                            <md-list-item>
+                            <md-list-item class="subject-mark-group-controls">
                                 <button md-button (click)="newMarkGroup$.next(subject.subjectMarkGroup)">Add Mark
                                     Group
                                 </button>
                                 <button md-button (click)="newMark$.next(subject.subjectMarkGroup)">Add Mark</button>
+                                <div class="oc-filler"></div>
+                                <mark-weight-updater [markGroup]="subject.subjectMarkGroup"></mark-weight-updater>
                             </md-list-item>
 
                             <md-list-item *ngFor="let mark of subject.subjectMarkGroup?.markValues">
                                 <mark-value [mark]="mark"
                                             (delete)="deleteMark$.next(mark.id)"
-                                            (edit)="editMark$.next({subjectId: subject.id, groupId: mark.markGroupId, markId: mark.id})"></mark-value>
+                                            (edit)="editMark$.next({subjectId: subject.id, groupId: mark.markGroupId})"></mark-value>
                             </md-list-item>
                             <md-divider></md-divider>
 

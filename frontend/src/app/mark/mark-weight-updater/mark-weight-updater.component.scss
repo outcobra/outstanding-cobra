@@ -1,0 +1,18 @@
+.updater-wrapper {
+    position: relative;
+    display: block;
+    width: 100px;
+}
+
+.update-container {
+    z-index: 990;
+    position: absolute;
+    right: 0;
+    //width: 100%;
+}
+
+md-input-container {
+    .mat-input-infix {
+        border: none !important;
+    }
+}

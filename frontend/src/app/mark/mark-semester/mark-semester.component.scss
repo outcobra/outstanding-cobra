@@ -1,4 +1,5 @@
 @import '../../../sass/color-variables';
+@import '../../../sass/variables';
 
 @mixin indentation($step) {
     margin-left: $step * 12px;
@@ -63,6 +64,25 @@ oc-collapsible-header {
         height: 80px !important;
     }
 }
+
+.subject-mark-group-controls {
+    display: flex;
+    mark-weight-updater {
+        height: $oc-collapsible-header-height;
+    }
+
+}
+
+/*
+.subject-weight-changer {
+    position: absolute;
+    right: 0;
+    height: $oc-collapsible-header-height;
+    .mat-input-infix {
+        border: none;
+    }
+}
+*/
 
 
 

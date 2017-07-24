@@ -1,0 +1,20 @@
+<div class="updater-wrapper">
+    <div *ngIf="false; else input">
+        <span>{{ markGroup.weight }}</span>
+    </div>
+    <ng-template #input>
+        <form [formGroup]="weightUpdaterForm" class="update-container">
+            <md-input-container>
+                <input mdInput formControlName="weight">
+            </md-input-container>
+            <div class="control-panel">
+                <button md-icon-button>
+                    <md-icon>check</md-icon>
+                </button>
+                <button md-icon-button>
+                    <md-icon>clear</md-icon>
+                </button>
+            </div>
+        </form>
+    </ng-template>
+</div>

@@ -14,7 +14,7 @@ import {TaskCreateUpdateDialog} from './task-create-update-dialog/task-create-up
 import {SharedModule} from '../shared/shared.module';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {OCMaterialModule} from '../oc-material.module';
-import {PipeModule} from '../core/pipe.module';
+import {PipeModule} from '../shared/pipe.module';
 
 @NgModule({
     imports: [

@@ -18,7 +18,7 @@ import {SubjectDialog} from './subject-dialog/subject-dialog.component';
 import {SubjectService} from './service/subject.service';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {OCMaterialModule} from '../oc-material.module';
-import {PipeModule} from '../core/pipe.module';
+import {PipeModule} from '../shared/pipe.module';
 
 @NgModule({
     imports: [

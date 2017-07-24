@@ -20,7 +20,7 @@ import {CoreModule} from './core/core.module';
 import {OCMaterialModule} from './oc-material.module';
 import {RavenErrorHandler} from './core/error/raven-error-handler';
 import {MarkModule} from './mark/mark.module';
-import {PipeModule} from './core/pipe.module';
+import {PipeModule} from './shared/pipe.module';
 
 @NgModule({
     declarations: [

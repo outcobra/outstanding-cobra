@@ -14,11 +14,12 @@ import {SemesterMarkResolver} from './service/semester-mark-resolver.service';
 import {MarkValueComponent} from './mark-value/mark-value.component';
 import {MarkCreateUpdateComponent} from './mark-create-update/mark-create-update.component';
 import {ReactiveFormsModule} from '@angular/forms';
-import {PipeModule} from '../core/pipe.module';
+import {PipeModule} from '../shared/pipe.module';
 import {MarkGroupCreateUpdateComponent} from './mark-group-create-update/mark-group-create-update.component';
 import {SubjectMarkGroupResolver} from './service/subject-mark-resolver.service';
 import {MarkGroupResolver} from './service/mark-group-resolver.service';
 import {MarkResolver} from './service/mark-resolver.service';
+import {MarkWeightUpdaterComponent} from './mark-weight-updater/mark-weight-updater.component';
 
 @NgModule({
     imports: [
@@ -38,7 +39,8 @@ import {MarkResolver} from './service/mark-resolver.service';
         MarkSemesterComponent,
         MarkValueComponent,
         MarkCreateUpdateComponent,
-        MarkGroupCreateUpdateComponent
+        MarkGroupCreateUpdateComponent,
+        MarkWeightUpdaterComponent
     ],
     providers: [
         MarkService,
