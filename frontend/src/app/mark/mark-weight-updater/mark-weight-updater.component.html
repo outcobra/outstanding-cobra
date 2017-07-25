@@ -1,5 +1,5 @@
 <div class="updater-wrapper">
-    <div *ngIf="false; else input">
+    <div *ngIf="!active; else input">
         <span>{{ markGroup.weight }}</span>
     </div>
     <ng-template #input>

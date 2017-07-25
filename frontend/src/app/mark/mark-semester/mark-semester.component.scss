@@ -67,8 +67,11 @@ oc-collapsible-header {
 
 .subject-mark-group-controls {
     display: flex;
+    button {
+        //height: $oc-collapsible-header-height;
+    }
     mark-weight-updater {
-        height: $oc-collapsible-header-height;
+        //height: $oc-collapsible-header-height;
     }
 
 }

@@ -1,18 +1,37 @@
-.updater-wrapper {
-    position: relative;
-    display: block;
-    width: 100px;
-}
+@import '../../../sass/color-variables';
+mark-weight-updater {
+    height: 40px;
+    .updater-wrapper {
+        position: relative;
+        display: block;
+        width: 100px;
+        cursor: pointer;
+        box-sizing: border-box;
+        border: 1px solid transparent;
+    }
 
-.update-container {
-    z-index: 990;
-    position: absolute;
-    right: 0;
-    //width: 100%;
-}
+    &.active, .updater-wrapper:hover {
+        border-radius: 5px;
+        border: 1px solid $hover-medium;
+    }
 
-md-input-container {
-    .mat-input-infix {
-        border: none !important;
+    .update-container {
+        md-input-container {
+            .mat-input-infix {
+                border: none !important;
+            }
+            .mat-input-wrapper {
+                padding: 0;
+                .mat-input-underline {
+                    bottom: 0;
+                }
+            }
+        }
+
+        .control-panel {
+            position: absolute;
+            z-index: 990;
+            background-color: whitesmoke;
+        }
     }
 }
