@@ -1,21 +1,34 @@
 @import '../../../sass/color-variables';
 mark-weight-updater {
-    height: 40px;
+    height: 36px;
     .updater-wrapper {
         position: relative;
         display: block;
-        width: 100px;
+        height: 36px;
+        vertical-align: middle;
         cursor: pointer;
         box-sizing: border-box;
-        border: 1px solid transparent;
+        //border: 1px solid transparent;
+        .non-active-container {
+            height: 100%;
+            line-height: 36px;
+        }
     }
 
     &.active, .updater-wrapper:hover {
-        border-radius: 5px;
-        border: 1px solid $hover-medium;
+        //border-radius: 5px;
+        //border: 1px solid $hover-medium;
     }
 
     .update-container {
+        input {
+            box-sizing: border-box;
+            outline: none;
+            //padding: 0;
+            height: 36px;
+            text-align: right;
+            max-width: 100px;
+        }
         md-input-container {
             .mat-input-infix {
                 border: none !important;
@@ -31,6 +44,7 @@ mark-weight-updater {
         .control-panel {
             position: absolute;
             z-index: 990;
+            top: 100%;
             background-color: whitesmoke;
         }
     }

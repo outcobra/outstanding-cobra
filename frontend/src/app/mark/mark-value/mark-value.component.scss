@@ -12,7 +12,7 @@
         margin-right: 5px;
     }
     md-icon, span {
-        display: block;
+        display: flex;
         height: $oc-collapsible-header-height;
         line-height: $oc-collapsible-header-height;
     }

@@ -45,6 +45,10 @@ md-list.mark-value-list > md-list-item:not(.mark-group-item) > .mat-list-item-co
     }
 }
 
+md-list-item.mark-list-item mark-value .mark-value-container {
+    margin-right: 24px;
+}
+
 .mark-mark-group-header md-icon {
     padding: 0 !important;
 }
@@ -71,7 +75,6 @@ oc-collapsible-header {
         //height: $oc-collapsible-header-height;
     }
     mark-weight-updater {
-        //height: $oc-collapsible-header-height;
     }
 
 }

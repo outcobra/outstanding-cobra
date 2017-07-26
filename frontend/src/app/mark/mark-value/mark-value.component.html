@@ -1,5 +1,5 @@
 <oc-divider></oc-divider>
-<div fxLayout="row">
+<div fxLayout="row" class="mark-value-container">
     <div class="mark-value" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column">
         <div fxFlex="50%" fxFlex.lt-sm="40px">
             <md-icon fxFlex>{{ getIconNameByMarkValue(mark.value) }}</md-icon>
@@ -7,6 +7,7 @@
         </div>
         <div fxFlex.gt-sm fxFlex.lt-sm="40px">
             <div fxLayout="row">
+                <md-icon fxHide.gt-sm="true"></md-icon>
                 <span fxFlex
                       fxFlexAlign="end">{{ 'i18n.modules.mark.common.weight' | translate }}: {{ mark.weight }}</span>
                 <span fxFlex="25%" fxFlexAlign="end"><b>{{ mark.value | markValue }}</b></span>
