@@ -3,6 +3,9 @@
 
 @mixin indentation($step) {
     margin-left: $step * 12px;
+    @media(max-width: 400px) {
+        margin-left: $step * 6px;
+    }
 }
 
 mark-semester {

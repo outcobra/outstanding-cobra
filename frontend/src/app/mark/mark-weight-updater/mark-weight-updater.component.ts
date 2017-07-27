@@ -1,7 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {MarkGroupDto} from '../model/mark-group.dto';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {Subject} from 'rxjs/Subject';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {WEIGHT_PATTERN} from '../service/mark.service';
+import {NotificationWrapperService} from '../../core/notifications/notification-wrapper.service';
 
 @Component({
     selector: 'mark-weight-updater',
@@ -20,15 +21,16 @@ export class MarkWeightUpdaterComponent implements OnInit {
     private _active: boolean = false;
     private _originalValue: number;
 
-    @Output() public change: EventEmitter<number> = new EventEmitter();
+    @Output('weightChange') change = new EventEmitter<MarkGroupDto>();
 
-    constructor(private _formBuilder: FormBuilder) {
+    constructor(private _formBuilder: FormBuilder,
+                private _notificationsService: NotificationWrapperService) {
     }
 
     ngOnInit() {
         this._originalValue = this.markGroup.weight;
         this._weightUpdaterForm = this._formBuilder.group({
-            weight: [this.markGroup.weight]
+            weight: [this.markGroup.weight, Validators.pattern(WEIGHT_PATTERN)]
         });
     }
 
@@ -36,12 +38,21 @@ export class MarkWeightUpdaterComponent implements OnInit {
         if (this._weightUpdaterForm.pristine) {
             this.close(event);
         }
+        if (this._weightUpdaterForm.invalid) {
+            this._notificationsService.error('i18n.common.form.error.title', 'i18n.modules.mark.createUpdate.form.weight.error.pattern');
+            return;
+        }
+        this.markGroup.weight = parseFloat(this._weightUpdaterForm.value['weight']);
+        this.change.emit(this.markGroup);
+        this.close(event);
     }
 
     public close(event: Event) {
         event.stopPropagation();
         this._active = false;
-        this._weightUpdaterForm.reset({weight: this._originalValue});
+        if (this._weightUpdaterForm.touched) {
+            this._weightUpdaterForm.reset({weight: this._originalValue});
+        }
     }
 
     public onHostClick() {

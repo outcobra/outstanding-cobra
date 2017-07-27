@@ -155,3 +155,10 @@ md-card {
         padding: 0;
     }
 }
+
+button[md-raised-button].square-button,
+button[md-button].square-button {
+    width: 36px;
+    min-width: 36px;
+    padding: 0;
+}

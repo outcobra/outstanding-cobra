@@ -21,6 +21,7 @@
       },
       "form": {
         "error": {
+          "title": "Fehler",
           "required": "Dieses Feld wird benötigt.",
           "isAfterOrSameDay": "Das Datum sollte nach dem {{date}} sein",
           "isBeforeOrSameDay": "Das Datum sollte vor dem {{date}} sein",
@@ -97,7 +98,7 @@
             },
             "weight": {
               "label": "Gewichtung",
-              "hint": "Beispiel: 2",
+              "hint": "Beispiel: 2 oder 0.5",
               "error": {
                 "pattern": "Die Gewichtung muss zwischen 0 und 10 liegen mit oder ohne zwei Nachkommastellen"
               }

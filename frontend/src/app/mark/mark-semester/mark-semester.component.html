@@ -29,14 +29,15 @@
                                     Mark
                                 </button>
                                 <div class="oc-filler"></div>
-                                <mark-weight-updater [markGroup]="subject.subjectMarkGroup"></mark-weight-updater>
+                                <mark-weight-updater [markGroup]="subject.subjectMarkGroup"
+                                                     (weightChange)="editSubjectWeight$.next($event)"></mark-weight-updater>
                             </md-list-item>
 
                             <md-list-item class="mark-list-item"
                                           *ngFor="let mark of subject.subjectMarkGroup?.markValues">
                                 <mark-value [mark]="mark"
                                             (delete)="deleteMark$.next(mark.id)"
-                                            (edit)="editMark$.next({subjectId: subject.id, groupId: mark.markGroupId})"></mark-value>
+                                            (edit)="editMark$.next({subjectId: subject.id, groupId: mark.markGroupId, markId: mark.id})"></mark-value>
                             </md-list-item>
                             <md-divider></md-divider>
 
@@ -46,11 +47,13 @@
                                     <oc-collapsible-header class="mark-mark-group-header" [ngClass]="headerClasses">
                                         <mark-value [mark]="markGroup"
                                                     (delete)="deleteMarkGroup$.next(markGroup.id)"
-                                                    (edit)="editMarkGroup$.next(markGroup)"></mark-value>
+                                                    (edit)="editMarkGroup$.next({subjectId: markGroup.subjectId, groupId: markGroup.id})"></mark-value>
                                     </oc-collapsible-header>
                                     <md-list class="mark-group-value-list">
                                         <md-list-item>
-                                            <button md-button (click)="newMark$.next(markGroup)">Add Mark</button>
+                                            <button md-button color="accent" (click)="newMark$.next(markGroup)">Add
+                                                Mark
+                                            </button>
                                         </md-list-item>
                                         <md-list-item class="mark-list-item"
                                                       *ngFor="let markValue of markGroup.markValues">

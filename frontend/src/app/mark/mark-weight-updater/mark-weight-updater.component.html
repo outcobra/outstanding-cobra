@@ -1,17 +1,32 @@
 <div class="updater-wrapper">
     <div *ngIf="!active; else input" class="non-active-container">
-        {{ markGroup.weight }}
+        <span>{{ markGroup.weight }}</span>
+        <button md-button
+                class="square-button"
+                type="button"
+                color="accent">
+            <md-icon>edit</md-icon>
+        </button>
     </div>
     <ng-template #input>
         <form [formGroup]="weightUpdaterForm"
               (submit)="submit($event)"
               class="update-container">
-            <input formControlName="weight">
+            <div class="input-container">
+                <input autofocus formControlName="weight">
+                <md-icon [mdTooltip]="'i18n.modules.mark.createUpdate.form.weight.hint' | translate"
+                         mdTooltipPosition="below" color="accent">
+                    edit
+                </md-icon>
+            </div>
             <div class="control-panel">
-                <button md-icon-button type="submit">
+                <button md-button
+                        class="square-button"
+                        type="submit">
                     <md-icon>check</md-icon>
                 </button>
-                <button md-icon-button
+                <button md-button
+                        class="square-button"
                         type="button"
                         (click)="close($event)">
                     <md-icon>clear</md-icon>

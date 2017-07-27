@@ -21,6 +21,7 @@
       },
       "form": {
         "error": {
+          "title": "Error",
           "required": "This field is required.",
           "isAfterOrSameDay": "The date should be after the {{date}}",
           "isBeforeOrSameDay": "The date should be before the {{date}}",
@@ -90,13 +91,17 @@
           "form": {
             "value": {
               "label": "Markvalue",
-              "hint": "",
-              "error": ""
+              "hint": "Example: 5.25",
+              "error": {
+                "pattern": "The mark must be between 1 and 6 including 2 decimal places max"
+              }
             },
             "weight": {
               "label": "Markweight",
-              "hint": "",
-              "error": ""
+              "hint": "Example: 2 or 0.5",
+              "error": {
+                "pattern": "The weight must be between 0 and 10 including 2 decimal places max"
+              }
             },
             "description": {
               "label": "Short description",

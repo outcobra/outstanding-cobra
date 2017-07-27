@@ -41,6 +41,7 @@ export class MarkSemesterComponent implements OnInit {
     public deleteMarkGroup$: Subject<number> = new Subject();
     public editMark$: Subject<EditMark> = new Subject();
     public editMarkGroup$: Subject<EditMarkGroup> = new Subject();
+    public editSubjectWeight$: Subject<MarkGroupDto> = new Subject();
 
     constructor(private _activatedRoute: ActivatedRoute,
                 private _router: Router,
@@ -78,12 +79,19 @@ export class MarkSemesterComponent implements OnInit {
         this._buildDeleteChain(this.deleteMarkGroup$, 'markGroup', this._markService.deleteMarkGroup, console.log);
 
         this.editMark$.subscribe(editMark => {
-            this._router.navigate([`semester/${this.semesterMark.id}/subject/${editMark.subjectId}/group/${editMark.groupId}/edit/${editMark.markId}`],
+            this._router.navigate([`semester/${this.semesterMark.id}/subject/${editMark.subjectId}/group/${editMark.groupId}/edit/${editMark.groupId}`],
                 {relativeTo: this._activatedRoute.parent})
         });
         this.editMarkGroup$.subscribe(markGroup => {
+            console.log(markGroup);
             this._router.navigate([`semester/${this.semesterMark.id}/subject/${markGroup.subjectId}/group/edit/${markGroup.groupId}`],
                 {relativeTo: this._activatedRoute.parent});
+        });
+
+        this.editSubjectWeight$.subscribe(markGroup => {
+           this._markService.saveMarkGroup(markGroup)
+               .switchMap(() => this._markService.getMarkSemesterBySemesterId(this.semesterMark.id))
+               .subscribe((semesterMark: SemesterMarkDto) => this.semesterMark = semesterMark); // TODO open opened things again
         });
         // endregion
 

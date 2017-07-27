@@ -1,10 +1,13 @@
 @import '../../../sass/color-variables';
+$width: 100px;
+
 mark-weight-updater {
     height: 36px;
     .updater-wrapper {
         position: relative;
         display: block;
         height: 36px;
+        width: $width;
         vertical-align: middle;
         cursor: pointer;
         box-sizing: border-box;
@@ -12,6 +15,10 @@ mark-weight-updater {
         .non-active-container {
             height: 100%;
             line-height: 36px;
+            padding-left: 5px;
+            button[md-button] {
+                float: right;
+            }
         }
     }
 
@@ -21,31 +28,35 @@ mark-weight-updater {
     }
 
     .update-container {
-        input {
-            box-sizing: border-box;
-            outline: none;
-            //padding: 0;
-            height: 36px;
-            text-align: right;
-            max-width: 100px;
-        }
-        md-input-container {
-            .mat-input-infix {
-                border: none !important;
+        position: absolute;
+        z-index: 990;
+        right: 0;
+        width: $width;
+        @include mat-elevation(2);
+        .input-container {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            input {
+                font-size: 1em;
+                box-sizing: border-box;
+                outline: none;
+                height: 36px;
+                border: none;
+                width: calc(100% - 36px);
+                background-color: $background-white;
+                padding-left: 5px;
             }
-            .mat-input-wrapper {
-                padding: 0;
-                .mat-input-underline {
-                    bottom: 0;
-                }
+            md-icon {
+                width: 36px;
+                text-align: center;
             }
         }
 
-        .control-panel {
-            position: absolute;
-            z-index: 990;
-            top: 100%;
-            background-color: whitesmoke;
+        .input-container,
+        .control-panel,
+        .input-container input{
         }
+        background-color: $background-white;
     }
 }
