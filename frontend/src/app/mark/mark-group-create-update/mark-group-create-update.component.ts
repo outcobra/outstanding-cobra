@@ -6,10 +6,11 @@ import {MarkDto} from '../model/mark.dto';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ParentLinkedCreateUpdateComponent} from '../../core/common/parent-linked-create-update-component';
 import {Subject} from 'rxjs/Subject';
-import {isNotNull} from '../../core/util/helper';
+import {isNotNull, isTrue} from '../../core/util/helper';
 import {Util} from '../../core/util/util';
 import {FormUtil} from '../../core/util/form-util';
 import {ViewMode} from '../../core/common/view-mode';
+import {ConfirmDialogService} from '../../core/services/confirm-dialog.service';
 
 @Component({
     selector: 'mark-group-create-update',
@@ -29,6 +30,7 @@ export class MarkGroupCreateUpdateComponent extends ParentLinkedCreateUpdateComp
     constructor(private _route: ActivatedRoute,
                 private _router: Router,
                 private _formBuilder: FormBuilder,
+                private _confirmService: ConfirmDialogService,
                 private _markService: MarkService) {
         super()
     }
@@ -83,6 +85,27 @@ export class MarkGroupCreateUpdateComponent extends ParentLinkedCreateUpdateComp
         return this._markGroupCreateUpdateForm.get(`selectedMarks.${formControlName}`);
     }
 
+
+    public cancel() {
+        if (this._markGroupCreateUpdateForm.pristine) {
+            this._goToSemesterView();
+            return;
+        }
+        this._confirmService.open('i18n.common.dialog.unsavedChanges.title', 'i18n.common.dialog.unsavedChanges.message')
+            .filter(isTrue)
+            .subscribe(() => this._goToSemesterView());
+    }
+
+    public submit() {
+        if (this._markGroupCreateUpdateForm.valid && this._markGroupCreateUpdateForm.dirty) {
+            this._markService.saveMarkGroup(this._formToMarkGroup(this._markGroupCreateUpdateForm))
+                .subscribe(() => this._goToSemesterView());
+        }
+        else {
+            FormUtil.revalidateForm(this._markGroupCreateUpdateForm);
+        }
+    }
+
     private _formToMarkGroup(formGroup: FormGroup): MarkGroupDto {
         let formValue = formGroup.value;
         return {
@@ -97,16 +120,8 @@ export class MarkGroupCreateUpdateComponent extends ParentLinkedCreateUpdateComp
         } as MarkGroupDto;
     }
 
-    public submit() {
-        if (this._markGroupCreateUpdateForm.valid && this._markGroupCreateUpdateForm.dirty) {
-            this._markService.saveMarkGroup(this._formToMarkGroup(this._markGroupCreateUpdateForm))
-                .subscribe(() => {
-                    this._router.navigate([`mark/semester/${this._semesterId}`]);
-                });
-        }
-        else {
-            FormUtil.revalidateForm(this._markGroupCreateUpdateForm);
-        }
+    private _goToSemesterView() {
+        this._router.navigate([`mark/semester/${this._semesterId}`]);
     }
 
     private _constructSelectControl(mark: MarkDto): FormControl {

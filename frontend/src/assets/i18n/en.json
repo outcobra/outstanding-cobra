@@ -37,6 +37,12 @@
           "delete": "Delete failed"
         }
       },
+      "dialog": {
+        "unsavedChanges": {
+          "title": "You have unsaved changes",
+          "message": "Would you really like to discard the changes?"
+        }
+      },
       "lang": {
         "en": "English",
         "de": "German"
@@ -76,7 +82,8 @@
         "linkTitle": "Marks",
         "noSemesterAvailable": "You do not have semesters yet",
         "common": {
-          "weight": "Weight"
+          "weight": "Weight",
+          "average": "Average mark"
         },
         "semester": {
           "average": "Your average mark for this semester is:"

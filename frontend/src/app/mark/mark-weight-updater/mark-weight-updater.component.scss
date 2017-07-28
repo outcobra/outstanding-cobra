@@ -11,20 +11,18 @@ mark-weight-updater {
         vertical-align: middle;
         cursor: pointer;
         box-sizing: border-box;
-        //border: 1px solid transparent;
         .non-active-container {
             height: 100%;
             line-height: 36px;
             padding-left: 5px;
+            transition: background-color .2s ease-in-out;
             button[md-button] {
                 float: right;
             }
+            &:hover {
+                background-color: $hover-light;
+            }
         }
-    }
-
-    &.active, .updater-wrapper:hover {
-        //border-radius: 5px;
-        //border: 1px solid $hover-medium;
     }
 
     .update-container {

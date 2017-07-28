@@ -32,6 +32,7 @@ export class MarkWeightUpdaterComponent implements OnInit {
         this._weightUpdaterForm = this._formBuilder.group({
             weight: [this.markGroup.weight, Validators.pattern(WEIGHT_PATTERN)]
         });
+        this.change.subscribe(markGroup => this._originalValue = markGroup.weight);
     }
 
     public submit(event) {

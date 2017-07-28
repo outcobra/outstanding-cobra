@@ -37,11 +37,13 @@ class DefaultMarkGroupService
     override fun save(dto: MarkGroupDto): MarkGroupDto {
         requestValidator.validateDtoSaving(dto)
         val entity = repository.save(mapper.fromDto(dto))
-        val marks: List<Mark> = entity.marks
-        marks.forEach {
-            if (it is MarkValue) {
-                it.markGroup = entity
-                markValueRepository.save(it)
+        if (dto.parentGroupId != 0L) {
+            val marks: List<Mark> = entity.marks
+            marks.forEach {
+                if (it is MarkValue) {
+                    it.markGroup = entity
+                    markValueRepository.save(it)
+                }
             }
         }
         return mapper.toDto(entity)

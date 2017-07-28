@@ -37,6 +37,12 @@
           "delete": "Löschen fehlgeschlagen"
         }
       },
+      "dialog": {
+        "unsavedChanges": {
+          "title": "Du hast ungespeicherte Änderungen",
+          "message": "Willst du deine Angaben wirklich verwerfen?"
+        }
+      },
       "lang": {
         "en": "Englisch",
         "de": "Deutsch"
@@ -76,10 +82,11 @@
         "linkTitle": "Noten",
         "noSemesterAvailable": "Du hast noch keine Semester",
         "common": {
-          "weight": "Gewichtung"
+          "weight": "Gewichtung",
+          "average": "Notendurchschnitt"
         },
         "semester": {
-          "average": "Deine Semesterdurchschnitt ist:"
+          "average": "Dein Semesterdurchschnitt ist:"
         },
         "createUpdate": {
           "create": {

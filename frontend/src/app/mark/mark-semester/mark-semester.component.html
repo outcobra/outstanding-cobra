@@ -18,7 +18,9 @@
                             <span class="subject-circle"
                                   [style.background-color]="subject.color.hex | color"></span>
                             <span>{{ subject.name }}</span>
-                            <span>{{ subject.subjectMarkGroup.value | markValue }}</span>
+                            <div class="oc-filler"></div>
+                            <span><b>{{ subject.subjectMarkGroup.value | markValue }}</b></span>
+                            <md-icon [mdTooltip]="'i18n.modules.mark.common.average' | translate" svgIcon="average"></md-icon><!-- TODO needs replacement -->
                         </oc-collapsible-header>
                         <md-list class="mark-value-list">
                             <md-list-item class="subject-mark-group-controls">

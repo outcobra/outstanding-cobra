@@ -60,7 +60,7 @@ export class MarkSemesterComponent implements OnInit {
                 this._initOpenings = {
                     subjectId: parseInt(params.get('subjectId')),
                     groupId: parseInt(params.get('groupId'))
-                }
+                };
             });
         this._updateHeaderClasses({mobile: this._responsiveHelperService.isMobile()});
 
@@ -79,8 +79,8 @@ export class MarkSemesterComponent implements OnInit {
         this._buildDeleteChain(this.deleteMarkGroup$, 'markGroup', this._markService.deleteMarkGroup, console.log);
 
         this.editMark$.subscribe(editMark => {
-            this._router.navigate([`semester/${this.semesterMark.id}/subject/${editMark.subjectId}/group/${editMark.groupId}/edit/${editMark.groupId}`],
-                {relativeTo: this._activatedRoute.parent})
+            this._router.navigate([`semester/${this.semesterMark.id}/subject/${editMark.subjectId}/group/${editMark.groupId}/edit/${editMark.markId}`],
+                {relativeTo: this._activatedRoute.parent});
         });
         this.editMarkGroup$.subscribe(markGroup => {
             console.log(markGroup);
@@ -89,9 +89,13 @@ export class MarkSemesterComponent implements OnInit {
         });
 
         this.editSubjectWeight$.subscribe(markGroup => {
-           this._markService.saveMarkGroup(markGroup)
-               .switchMap(() => this._markService.getMarkSemesterBySemesterId(this.semesterMark.id))
-               .subscribe((semesterMark: SemesterMarkDto) => this.semesterMark = semesterMark); // TODO open opened things again
+            this._markService.saveMarkGroup(markGroup)
+                .switchMap(() => this._markService.getMarkSemesterBySemesterId(this.semesterMark.id))
+                .subscribe((semesterMark: SemesterMarkDto) => {
+                    this.semesterMark.value = semesterMark.value;
+                    this.semesterMark.subjects.filter(sub => sub.id === markGroup.subjectId)
+                        .forEach(sub => sub.subjectMarkGroup.weight = markGroup.weight);
+                }); // TODO open opened things again
         });
         // endregion
 

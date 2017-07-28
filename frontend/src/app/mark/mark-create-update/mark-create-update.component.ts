@@ -7,6 +7,8 @@ import {ParentLinkedCreateUpdateComponent} from '../../core/common/parent-linked
 import {MarkGroupDto} from '../model/mark-group.dto';
 import {MARK_PATTERN, MarkService, WEIGHT_PATTERN} from '../service/mark.service';
 import {FormUtil} from '../../core/util/form-util';
+import {ConfirmDialogService} from '../../core/services/confirm-dialog.service';
+import {isTrue} from '../../core/util/helper';
 
 @Component({
     selector: 'mark-create-update',
@@ -22,6 +24,7 @@ export class MarkCreateUpdateComponent extends ParentLinkedCreateUpdateComponent
     constructor(private _route: ActivatedRoute,
                 private _router: Router,
                 private _formBuilder: FormBuilder,
+                private _confirmService: ConfirmDialogService,
                 private _markService: MarkService) {
         super();
         this._route.params.subscribe(params => {
@@ -49,16 +52,28 @@ export class MarkCreateUpdateComponent extends ParentLinkedCreateUpdateComponent
         });
     }
 
+    public cancel() {
+        if (this._markCreateUpdateForm.pristine) {
+            this._goToSemesterView();
+            return;
+        }
+        this._confirmService.open('i18n.common.dialog.unsavedChanges.title', 'i18n.common.dialog.unsavedChanges.message')
+            .filter(isTrue)
+            .subscribe(() => this._goToSemesterView());
+    }
+
     public submit() {
         if (this._markCreateUpdateForm.valid && this._markCreateUpdateForm.dirty) {
             this._markService.saveMark(this._formToMark(this._markCreateUpdateForm))
-                .subscribe(() => {
-                    this._router.navigate([`mark/semester/${this._semesterId}`], this._navigationExtras);
-                });
+                .subscribe(() => this._goToSemesterView());
         }
         else {
             FormUtil.revalidateForm(this._markCreateUpdateForm);
         }
+    }
+
+    private _goToSemesterView() {
+        this._router.navigate([`mark/semester/${this._semesterId}`], this._navigationExtras);
     }
 
     private _formToMark(formGroup: FormGroup): MarkDto {
