@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {SemesterMarkDto} from '../model/semester-mark.dto';
 import {isNotEmpty, isNotNull, isTruthy} from '../../core/util/helper';
@@ -25,7 +25,8 @@ type EditMarkGroup = {
 @Component({
     selector: 'mark-semester',
     templateUrl: './mark-semester.component.html',
-    styleUrls: ['./mark-semester.component.scss']
+    styleUrls: ['./mark-semester.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class MarkSemesterComponent implements OnInit {
     public semesterMark: SemesterMarkDto;
