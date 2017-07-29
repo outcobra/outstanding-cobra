@@ -31,8 +31,8 @@ export class ResponsiveHelperService {
     }
 
     public getMobileOrGivenDialogConfig(config: MdDialogConfig) {
-        if (!this._observableMedia.isActive('gt-xs')) {
-            return MOBILE_DIALOG
+        if (!this._observableMedia.isActive('gt-sm')) {
+            return MOBILE_DIALOG;
         }
         return config;
     }
