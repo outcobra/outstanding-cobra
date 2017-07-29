@@ -24,6 +24,10 @@ colorpicker {
             color: $primary-light;
             padding: 10px 15px;
 
+            h1 {
+                margin: 0;
+            }
+
             .year {
                 font-size: 0.8em;
             }
@@ -37,7 +41,7 @@ colorpicker {
         }
 
         .colorpicker-body {
-
+            background-color: $background-white;
             td {
                 padding: 0;
                 height: 45px;
@@ -74,7 +78,6 @@ colorpicker {
                     }
                 }
             }
-            background-color: $background-white;
         }
 
     }

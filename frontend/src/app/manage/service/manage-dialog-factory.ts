@@ -24,8 +24,6 @@ export class ManageDialogFactory {
      */
     public getDialog<T extends ParentLinkedCreateUpdateComponent<Dto, Dto>>(component: ComponentType<T>, mode: ViewMode, parent: Dto, config?: MdDialogConfig, params?: Dto): MdDialogRef<T> {
         let conf = config || this._responsiveHelper.getMobileOrGivenDialogConfig(SMALL_DIALOG);
-        console.log('fuck you');
-        console.log(conf);
         let dialog = this._dialog.open(component, conf);
         dialog.componentInstance.initWithParent(mode, parent, params);
         return dialog;
