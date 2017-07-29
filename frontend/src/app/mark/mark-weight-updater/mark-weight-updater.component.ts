@@ -17,7 +17,7 @@ import {NotificationWrapperService} from '../../core/notifications/notification-
 })
 export class MarkWeightUpdaterComponent implements OnInit {
     @Input() markGroup: MarkGroupDto;
-    @Input() disabled: boolean;
+    @Input() disabled: boolean = false;
     private _weightUpdaterForm: FormGroup;
     private _active: boolean = false;
     private _originalValue: number;

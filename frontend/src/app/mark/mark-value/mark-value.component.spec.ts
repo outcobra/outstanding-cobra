@@ -1,8 +1,9 @@
-import {async, ComponentFixture, inject, TestBed} from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {MarkValueComponent} from './mark-value.component';
 import {TestModule} from '../../core/mock/test.module';
 import {MockMarkService} from '../../core/mock/mark/mock-mark.service';
+import {OCUiModule} from '../../oc-ui/oc-ui.module';
 
 describe('MarkValueComponent', () => {
     let component: MarkValueComponent;
@@ -14,16 +15,16 @@ describe('MarkValueComponent', () => {
                 MarkValueComponent
             ],
             imports: [
-                TestModule
+                TestModule,
+                OCUiModule
             ]
-        })
-            .compileComponents();
+        }).compileComponents();
     }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(MarkValueComponent);
         component = fixture.componentInstance;
-        component.mark = MockMarkService.SUBJET_MARK_GROUP_1.markValues[0];
+        component.mark = MockMarkService.SUBJECT_MARK_GROUP_1.markValues[0];
         fixture.detectChanges();
     });
 

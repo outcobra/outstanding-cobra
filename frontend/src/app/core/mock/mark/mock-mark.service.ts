@@ -9,7 +9,7 @@ import {MarkGroupDto} from '../../../mark/model/mark-group.dto';
 
 @Injectable()
 export class MockMarkService extends MarkService {
-    public static readonly SUBJET_MARK_GROUP_1: MarkGroupDto = {
+    public static readonly SUBJECT_MARK_GROUP_1: MarkGroupDto = {
         id: 1,
         value: 5,
         description: 'desc',
@@ -32,7 +32,7 @@ export class MockMarkService extends MarkService {
         id: MockSubjectService.SUBJECT1_OF_SEMESTER1.id,
         name: MockSubjectService.SUBJECT1_OF_SEMESTER1.name,
         color: MockSubjectService.SUBJECT1_OF_SEMESTER1.color,
-        subjectMarkGroup: MockMarkService.SUBJET_MARK_GROUP_1
+        subjectMarkGroup: MockMarkService.SUBJECT_MARK_GROUP_1
     };
 
     public static readonly SEMESTER_MARK_1: SemesterMarkDto = {
@@ -44,6 +44,7 @@ export class MockMarkService extends MarkService {
             MockMarkService.SUBJECT_MARK_1
         ],
         institution: MockInstitutionService.INSTITUTION1,
-        schoolClass: MockSchoolClassService.SCHOOLCLASS1_OF_INSTITUTION1
+        schoolClass: MockSchoolClassService.SCHOOLCLASS1_OF_INSTITUTION1,
+        value: MockMarkService.SUBJECT_MARK_GROUP_1.value
     };
 }
