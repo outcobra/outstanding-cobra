@@ -9,7 +9,6 @@ mark-weight-updater {
         height: 36px;
         width: $width;
         vertical-align: middle;
-        cursor: pointer;
         box-sizing: border-box;
         .non-active-container {
             height: 100%;
@@ -19,8 +18,16 @@ mark-weight-updater {
             button[md-button] {
                 float: right;
             }
-            &:hover {
-                background-color: $hover-light;
+        }
+    }
+
+    &:not(.disabled) {
+        .updater-wrapper {
+            cursor: pointer;
+            .non-active-container {
+                &:hover {
+                    background-color: $hover-light;
+                }
             }
         }
     }

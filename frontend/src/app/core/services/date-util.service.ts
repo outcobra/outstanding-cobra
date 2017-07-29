@@ -50,7 +50,7 @@ export class DateUtil {
      * @returns {boolean}
      */
     public static isBetweenDaysInclusive(date: Date, lowerBound: Date, upperBound: Date): boolean {
-        return moment(date.toDateString()).isBetween(lowerBound.toDateString(), upperBound.toDateString(), null, '[]');
+        return moment(date.toDateString()).isBetween(moment(lowerBound), moment(upperBound), null, '[]');
     }
 
     /**

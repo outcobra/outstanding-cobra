@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {MarkDto} from '../model/mark.dto';
 import {OCEntityMenuComponent} from '../../oc-ui/components/oc-entity-menu/oc-entity-menu.component';
 
@@ -7,8 +7,9 @@ import {OCEntityMenuComponent} from '../../oc-ui/components/oc-entity-menu/oc-en
     templateUrl: './mark-value.component.html',
     styleUrls: ['./mark-value.component.scss']
 })
-export class MarkValueComponent implements OnInit {
+export class MarkValueComponent implements OnInit, OnChanges {
     @Input() mark: MarkDto;
+    @Input() editEnabled: boolean;
     @ViewChild(OCEntityMenuComponent) entityMenu: OCEntityMenuComponent;
 
     @Output('edit') public onEdit: EventEmitter<any> = new EventEmitter();
@@ -24,10 +25,17 @@ export class MarkValueComponent implements OnInit {
         .set('6', 'looks_6');
 
     ngOnInit() {
-        this.entityMenu.onEdit.subscribe(() => this.onEdit.emit());
-        this.entityMenu.onDelete.subscribe(() =>  this.onDelete.emit());
+        if (this.entityMenu) {
+            this.entityMenu.onEdit.subscribe(() => this.onEdit.emit());
+            this.entityMenu.onDelete.subscribe(() => this.onDelete.emit());
+        }
     }
 
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes['editEnabled']) {
+            this.ngOnInit();
+        }
+    }
 
     public getIconNameByMarkValue(value: number) {
         let first = value.toString().substr(0, 1);

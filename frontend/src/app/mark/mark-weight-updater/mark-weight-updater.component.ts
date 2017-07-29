@@ -11,12 +11,13 @@ import {NotificationWrapperService} from '../../core/notifications/notification-
     encapsulation: ViewEncapsulation.None,
     host: {
         '[class.active]': 'active',
-        '(document: click)': 'onDocumentClick($event)',
+        '[class.disabled]': 'disabled',
         '(click)': 'onHostClick()'
     }
 })
 export class MarkWeightUpdaterComponent implements OnInit {
     @Input() markGroup: MarkGroupDto;
+    @Input() disabled: boolean;
     private _weightUpdaterForm: FormGroup;
     private _active: boolean = false;
     private _originalValue: number;
@@ -57,11 +58,9 @@ export class MarkWeightUpdaterComponent implements OnInit {
     }
 
     public onHostClick() {
-        this._active = true;
-    }
-
-    public onDocumentClick() {
-
+        if (!this.disabled) {
+            this._active = true;
+        }
     }
 
     get weightUpdaterForm(): FormGroup {

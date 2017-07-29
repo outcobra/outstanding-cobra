@@ -10,71 +10,68 @@
 
 mark-semester {
     position: relative;
-}
 
-.container {
-    padding: 10px 5px;
-    .oc-card {
-        padding: 0;
+    .container {
+        padding: 10px 5px;
+        .oc-card {
+            padding: 0;
+        }
+        .mat-subheader {
+            padding: 0 5px;
+        }
     }
+
+    .mark-value-list {
+        padding: 0 !important;
+    }
+
+    .mark-school-class-header > .oc-collapsible-header-content {
+        @include indentation(1);
+    }
+
+    .mark-subject-header > .oc-collapsible-header-content {
+        @include indentation(2);
+    }
+
+    .mark-mark-group-header > .oc-collapsible-header-content,
+    .mark-value-list > h3,
+    md-list.mark-value-list > md-list-item:not(.mark-group-item) > .mat-list-item-content {
+        @include indentation(3);
+    }
+
+    .mark-group-value-list {
+        padding: 0 !important;
+
+        > md-list-item > .mat-list-item-content {
+            @include indentation(4);
+        }
+    }
+
+    md-list-item.mark-list-item mark-value .mark-value-container {
+        margin-right: 24px;
+    }
+
+    .mark-mark-group-header md-icon {
+        padding: 0 !important;
+    }
+
+    .mat-list-item-content,
     .mat-subheader {
-        padding: 0 5px;
-    }
-}
-
-.mark-value-list {
-    padding: 0 !important;
-}
-
-.mark-school-class-header > .oc-collapsible-header-content {
-    @include indentation(1);
-}
-
-.mark-subject-header > .oc-collapsible-header-content {
-    @include indentation(2);
-}
-
-.mark-mark-group-header > .oc-collapsible-header-content,
-.mark-value-list > h3,
-md-list.mark-value-list > md-list-item:not(.mark-group-item) > .mat-list-item-content {
-    @include indentation(3);
-}
-
-.mark-group-value-list {
-    padding: 0 !important;
-
-    > md-list-item > .mat-list-item-content {
-        @include indentation(4);
-    }
-}
-
-md-list-item.mark-list-item mark-value .mark-value-container {
-    margin-right: 24px;
-}
-
-.mark-mark-group-header md-icon {
-    padding: 0 !important;
-}
-
-.mat-list-item-content,
-.mat-subheader {
-    padding: 0 !important;
-    height: auto !important;
-}
-
-oc-collapsible-header {
-    &:hover {
-        background-color: $hover-light;
+        padding: 0 !important;
+        height: auto !important;
     }
 
-    &.two-line-header {
-        height: 80px !important;
+    oc-collapsible-header {
+        &:hover {
+            background-color: $hover-light;
+        }
+
+        &.two-line-header {
+            height: 80px !important;
+        }
+    }
+
+    .subject-mark-group-controls {
+        display: flex;
     }
 }
-
-.subject-mark-group-controls {
-    display: flex;
-}
-
-
-
