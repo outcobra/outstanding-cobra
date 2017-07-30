@@ -14,7 +14,9 @@
         </md-card-content>
     </md-card>
     <md-card class="list-card">
-        <exam-list-item *ngFor="let exam of displayedExams" [exam]="exam"></exam-list-item>
+        <exam-list-item *ngFor="let exam of displayedExams"
+                        [exam]="exam" (deleteExam)="deleteExam($event)" (editExam)="editExam($event)">
+        </exam-list-item>
     </md-card>
     <button md-fab [mdTooltip]="'i18n.modules.exam.add' | translate" mdTooltipPosition="left" (click)="addExam()">
         <md-icon>add</md-icon>

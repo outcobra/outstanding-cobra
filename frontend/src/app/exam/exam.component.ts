@@ -5,6 +5,14 @@ import {ActivatedRoute} from '@angular/router';
 import {NotificationWrapperService} from '../core/notifications/notification-wrapper.service';
 import {ExamTaskDto} from './model/exam.task.dto';
 import {FormControl, FormGroup} from '@angular/forms';
+import {ExamCreateUpdateDialog} from './create-update-dialog/exam-create-update-dialog.component';
+import {MdDialog, MdDialogRef} from '@angular/material';
+import {ResponsiveHelperService} from '../core/services/ui/responsive-helper.service';
+import {DialogMode} from '../core/common/dialog-mode';
+import {MEDIUM_DIALOG, SMALL_DIALOG} from '../core/util/const';
+import {ConfirmDialogService} from '../core/services/confirm-dialog.service';
+import {isFalsy, isTruthy} from '../core/util/helper';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
     selector: 'exam',
@@ -12,16 +20,23 @@ import {FormControl, FormGroup} from '@angular/forms';
     styleUrls: ['./exam.component.scss'],
 })
 export class ExamComponent implements OnInit {
-    private _activeExams: ExamDto[] = [];
 
+    private _activeExams: ExamDto[] = [];
     private _allExams: ExamDto[] = []
-    public displayedExams: ExamDto[] = []
+    private displayedExams: ExamDto[] = []
     private _exam: ExamDto
+
     private _searchFilter: string = ""
     private _searchForm: FormGroup
+
+    private _createUpdateExamDialog: MdDialogRef<ExamCreateUpdateDialog>
+
     constructor(private _examService: ExamService,
                 private _route: ActivatedRoute,
-                private _notificationService: NotificationWrapperService) {
+                private _dialogService: MdDialog,
+                private _responsiveHelper: ResponsiveHelperService,
+                private _notificationService: NotificationWrapperService,
+                private _confirmDialogService: ConfirmDialogService) {
     }
 
 
@@ -48,15 +63,43 @@ export class ExamComponent implements OnInit {
     }
 
     public addExam() {
-
+        this._createUpdateExamDialog = this._dialogService
+            .open(ExamCreateUpdateDialog, this._responsiveHelper.getMobileOrGivenDialogConfig(SMALL_DIALOG))
+        this._createUpdateExamDialog.componentInstance.init(DialogMode.NEW, null)
+        this._createUpdateExamDialog.afterClosed().flatMap((value) => {
+            if (isFalsy(value)) return Observable.empty();
+            return this._examService.create(value)
+        })
+            .subscribe((examDto: ExamDto) => {
+                this._allExams.push(examDto)
+                this._notificationService.success('Created', 'Success')
+            })
     }
 
-    public removeExam() {
-
+    public deleteExam(exam: ExamDto) {
+        this._confirmDialogService.open('i18n.modules.exam.dialogs.confirmDeleteDialog.title', 'i18n.modules.exam.dialogs.confirmDeleteDialog.message')
+            .subscribe((deletionConfirmed: boolean) => {
+                if (deletionConfirmed) {
+                    this._examService.deleteById(exam.id).subscribe((result: any) => {
+                        if (isTruthy(result)) {
+                            this._notificationService.success('Deleted', 'Success')
+                        } else {
+                            this._notificationService.error('Fail', 'Error')
+                        }
+                    })
+                } else {
+                    this._notificationService.alert('Cancel', 'Alert')
+                }
+            })
     }
 
     public editExam(exam: ExamDto) {
-
+        this._createUpdateExamDialog = this._dialogService
+            .open(ExamCreateUpdateDialog, this._responsiveHelper.getMobileOrGivenDialogConfig(MEDIUM_DIALOG))
+        this._createUpdateExamDialog.componentInstance.init(DialogMode.EDIT, exam)
+        this._createUpdateExamDialog.afterClosed().flatMap((value) => {
+            return Observable.empty()
+        });
     }
 
     private _displayForFilter(all: boolean = true) {

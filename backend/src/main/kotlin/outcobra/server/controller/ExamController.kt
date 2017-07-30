@@ -38,5 +38,8 @@ class ExamController @Inject constructor(val examService: ExamService) {
         return examService.readAllBySemester(semesterId)
     }
 
-
+    @DeleteMapping("/exam/{id}")
+    fun deleteExam(@PathVariable id: Long) {
+        examService.delete(id)
+    }
 }

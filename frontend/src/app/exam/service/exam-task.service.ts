@@ -7,7 +7,7 @@ import {Observable} from 'rxjs/Observable';
  * @author Florian Bürgi
  * @since <since>
  */
-@Injectable
+@Injectable()
 export class ExamTaskService extends AppCrudService<ExamTaskDto> {
 
     constructor(http: HttpInterceptor) {

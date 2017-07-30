@@ -29,7 +29,7 @@
         <div formGroupName="date" class="form-group">
             <md-input-container>
                 <input mdInput [mdDatepicker]="examDatePicker" [min]="today"
-                       [placeholder]="'i18n.common.label.todoDate' | translate" formControlName="examDatePicker">
+                       [placeholder]="'i18n.common.label.todoDate' | translate" formControlName="examDate">
                 <button mdSuffix [mdDatepickerToggle]="examDatePicker"></button>
                 <md-error align="start"
                           *ngIf="examCreateUpdateForm.get('date.examDate').invalid && examCreateUpdateForm.get('date.examDate').touched">

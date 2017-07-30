@@ -9,22 +9,23 @@ import {SubjectService} from '../../manage/service/subject.service';
 import {ExamService} from '../service/exam.service';
 import {ExamTaskService} from '../service/exam-task.service';
 import {ResponsiveHelperService} from '../../core/services/ui/responsive-helper.service';
+import {Util} from '../../core/util/util';
 
 @Component({
     selector: 'exam-create-update-dialog',
     templateUrl: './exam-create-update-dialog.component.html',
     styleUrls: ['./exam-create-update-dialog.component.scss']
 })
-export class ExamCreateUpdateDialogComponent extends CreateUpdateDialog<ExamDto> implements OnInit {
+export class ExamCreateUpdateDialog extends CreateUpdateDialog<ExamDto> implements OnInit {
 
     private _subjects: SubjectDto[]
-    private _createUpdateExamForm: FormGroup
-    private _today: Date = new Date()
+    public examCreateUpdateForm: FormGroup
+    public today: Date = new Date()
     private _title: string
 
     constructor(private _translateService: TranslateService,
                 private _subjectService: SubjectService,
-                private dialogRef: MdDialogRef<ExamCreateUpdateDialogComponent>,
+                private _dialogRef: MdDialogRef<ExamCreateUpdateDialog>,
                 private _examService: ExamService,
                 private _examTaskService: ExamTaskService,
                 private _responsiveHelper: ResponsiveHelperService,
@@ -33,23 +34,51 @@ export class ExamCreateUpdateDialogComponent extends CreateUpdateDialog<ExamDto>
     }
 
     ngOnInit() {
-        this._subjectService.getCurrentSubjects().subscribe((subjects: SubjectDto[]) => this._subjects = subjects)
-        this._createUpdateExamForm = this._initFormGroup()
+        this._subjectService.readAll().subscribe((subjects: SubjectDto[]) => this._subjects = subjects)
+        this.examCreateUpdateForm = this._initFormGroup()
     }
 
     private _initFormGroup(): FormGroup {
         return this._formBuilder.group({
-            name: [Validators.required],
-            description: [Validators.required],
+            name: [this.getParamOrDefault('name'), Validators.required],
+            description: [this.getParamOrDefault('description')],
             date: this._formBuilder.group({
-                examDate: [Validators.required]
+                examDate: [this.getParamOrDefault('date'), Validators.required]
             }),
-            subjectId: [Validators.required]
+            subjectId: [this.getParamOrDefault('subjectId'), Validators.required]
         })
+    }
+
+    private _formToExamDto(): ExamDto {
+        let formValue = this.examCreateUpdateForm.value;
+        let subject = this._getSubjectById(formValue.subjectId);
+        //TODO add tasks and mark to dialog
+        return {
+            id: this.isEditMode() ? this.param.id : 0,
+            name: formValue.name,
+            description: formValue.description,
+            date: formValue.date.examDate,
+            subjectName: subject.name,
+            subjectId: subject.id,
+            mark: null,
+            examTasks: []
+        } as ExamDto
     }
 
     public isMobile(): boolean {
         return this._responsiveHelper.isMobile()
+    }
+
+    public submit() {
+        if (this.examCreateUpdateForm.valid && this.examCreateUpdateForm.dirty) {
+            this._dialogRef.close(this._formToExamDto())
+        } else {
+            Util.revalidateForm(this.examCreateUpdateForm)
+        }
+    }
+
+    private _getSubjectById(subjectId: number): SubjectDto {
+        return this.subjects.find((subject: SubjectDto) => subject.id == subjectId);
     }
 
     get title(): string {
@@ -61,5 +90,7 @@ export class ExamCreateUpdateDialogComponent extends CreateUpdateDialog<ExamDto>
         return this._title
     }
 
-
+    get subjects(): SubjectDto[] {
+        return this._subjects;
+    }
 }
