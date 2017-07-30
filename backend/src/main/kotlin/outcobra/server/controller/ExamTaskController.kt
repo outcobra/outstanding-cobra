@@ -23,7 +23,7 @@ class ExamTaskController @Inject constructor(val service: ExamTaskService) {
         return service.saveAll(tasks)
     }
 
-    @PostMapping("/state/examTask")
+    @PostMapping("/examTask/state")
     fun changeExamTaskState(@RequestBody id: Long): ExamTaskDto {
         return service.changeState(id)
     }

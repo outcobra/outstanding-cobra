@@ -24,7 +24,9 @@ class ExamMapper @Inject constructor(val markMapper: Mapper<MarkValue, MarkValue
     : Mapper<Exam, ExamDto>, BaseMapper() {
 
     override fun fromDto(from: ExamDto): Exam {
-        validateChildren(from.examTasks.map { it.id }, ExamTask::class, from.id, Exam::class)
+        if (from.examTasks.isNotEmpty()) {
+            validateChildren(from.examTasks.map { it.id }, ExamTask::class, from.id, Exam::class)
+        }
         val subject = subjectRepository.findOne(from.subjectId)
         var markValue: MarkValue? = null
         if (from.mark != null) {

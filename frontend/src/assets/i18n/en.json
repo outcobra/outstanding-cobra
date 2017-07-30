@@ -66,10 +66,65 @@
       "main": {
         "welcome": "Welcome to Outcobra",
         "subtitle": "The management-tool by students for students",
-        "authors": "by Joel, Florian, Mario and Vincent"
+        "authors": "by Joel, Florian and Mario"
       },
       "exam": {
-        "linkTitle": "Exams"
+        "linkTitle": "Exams",
+        "listTitle": "Your exams",
+        "add": "Add exam",
+        "desc": "Exam description",
+        "name": "Exam name",
+        "tasks": "learning goals",
+        "filter": {
+          "title": "Filter exams",
+          "subject": "Filter exams by subject",
+          "showPending": "Show only upcoming exams",
+          "search": "Search exam..."
+        },
+        "notification": {
+          "add": {
+            "title": "Exam saved",
+            "message": "The exam has been saved successfully"
+          },
+          "update": {
+            "title": "Exam saved",
+            "message": "The exam has been saved successfully"
+          },
+          "delete": {
+            "title": "Exam deleted",
+            "message": "The exam has been removed successfully"
+          },
+          "error": {
+            "deleteFailed": {
+              "title": "Task deletion failed",
+              "message": "An error occurred while deleting the ask. Please try again later"
+            },
+            "examNotFound": {
+              "title": "Exam not found",
+              "message": "We couldn't find the requested exam"
+            }
+          }
+        },
+        "dialogs": {
+          "confirmDeleteDialog": {
+            "title": "Do you want to delete the exam?",
+            "message": "The exam will be lost forever (A very long long time)"
+          },
+          "add": {
+            "name": {
+              "label": "Enter a name"
+            },
+            "desc": {
+              "label": "Enter a description"
+            },
+            "tasks": {
+              "label": "Enter your learning goals"
+            },
+            "subject": {
+              "label": "Choose a subject"
+            }
+          }
+        }
       },
       "mark": {
         "linkTitle": "Marks",

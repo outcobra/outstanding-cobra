@@ -67,7 +67,7 @@
       "main": {
         "welcome": "Willkommen bei Outcobra",
         "subtitle": "Das Managementtool von Schülern für Schüler",
-        "authors": "von Joel, Florian, Mario und Vincent"
+        "authors": "von Joel, Florian und Mario"
       },
       "exam": {
         "linkTitle": "Prüfungen",
@@ -90,6 +90,10 @@
           "update": {
             "title": "Prüfung geändert",
             "message": "Die Prüfung wurde erfolgreich gespeichert"
+          },
+          "delete": {
+            "title": "Prüfung gelöscht",
+            "message": "Die Prüfung wurde erfolgreich entfernt"
           },
           "error": {
             "deleteFailed": {
@@ -116,6 +120,9 @@
             },
             "tasks": {
               "label": "Trag die Lernziele (Prüfungs-Aufgaben) ein"
+            },
+            "subject": {
+              "label": "Wähle das entsprechende Schulfach"
             }
           }
         }

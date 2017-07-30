@@ -1,7 +1,7 @@
 import {MdDialogRef} from '@angular/material';
 import {Component, OnInit} from '@angular/core';
 import {SubjectDto} from '../../manage/model/manage.dto';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CreateUpdateDialog} from '../../core/common/create-update-dialog';
 import {ExamDto} from '../model/exam.dto';
 import {TranslateService} from '@ngx-translate/core';
@@ -10,6 +10,8 @@ import {ExamService} from '../service/exam.service';
 import {ExamTaskService} from '../service/exam-task.service';
 import {ResponsiveHelperService} from '../../core/services/ui/responsive-helper.service';
 import {Util} from '../../core/util/util';
+import {ExamTaskDto} from '../model/exam.task.dto';
+import {isUndefined} from 'util';
 
 @Component({
     selector: 'exam-create-update-dialog',
@@ -22,6 +24,11 @@ export class ExamCreateUpdateDialog extends CreateUpdateDialog<ExamDto> implemen
     public examCreateUpdateForm: FormGroup
     public today: Date = new Date()
     private _title: string
+    public withMark: boolean = false
+
+    readonly _emptyExamTas = {
+        id: 0
+    }
 
     constructor(private _translateService: TranslateService,
                 private _subjectService: SubjectService,
@@ -38,13 +45,33 @@ export class ExamCreateUpdateDialog extends CreateUpdateDialog<ExamDto> implemen
         this.examCreateUpdateForm = this._initFormGroup()
     }
 
+    private _formGroupForDtoOrDefault(examTask = {} as ExamTaskDto): FormGroup {
+        return this._formBuilder.group({
+            id: !isUndefined(examTask.id) ? examTask.id : 0,
+            finished: [!isUndefined(examTask.finished) ? examTask.finished : false],
+            task: [!isUndefined(examTask.task) ? examTask.task : '', Validators.required]
+        });
+    }
+
+    private _formArrayForExamTasks(): AbstractControl[] {
+        let tasks = this.getParamOrDefault('examTasks')
+        if (tasks == '') {
+            tasks = [];
+        }
+        tasks = tasks as ExamTaskDto[]
+        let controls = tasks.map((examTask: ExamTaskDto) => this._formGroupForDtoOrDefault(examTask))
+        return controls;
+    }
+
     private _initFormGroup(): FormGroup {
         return this._formBuilder.group({
+            id: [this.isEditMode() ? this.param.id : 0],
             name: [this.getParamOrDefault('name'), Validators.required],
             description: [this.getParamOrDefault('description')],
             date: this._formBuilder.group({
                 examDate: [this.getParamOrDefault('date'), Validators.required]
             }),
+            examTasks: this._formBuilder.array(this._formArrayForExamTasks()),
             subjectId: [this.getParamOrDefault('subjectId'), Validators.required]
         })
     }
@@ -52,17 +79,40 @@ export class ExamCreateUpdateDialog extends CreateUpdateDialog<ExamDto> implemen
     private _formToExamDto(): ExamDto {
         let formValue = this.examCreateUpdateForm.value;
         let subject = this._getSubjectById(formValue.subjectId);
-        //TODO add tasks and mark to dialog
+        let id = this.isEditMode() ? this.param.id : 0;
         return {
-            id: this.isEditMode() ? this.param.id : 0,
+            id: id,
             name: formValue.name,
             description: formValue.description,
             date: formValue.date.examDate,
             subjectName: subject.name,
             subjectId: subject.id,
             mark: null,
-            examTasks: []
+            examTasks: formValue.examTasks.value
         } as ExamDto
+    }
+
+    private _addMarkFormGroup() {
+        this.examCreateUpdateForm.addControl('mark', this._markFormGroup())
+    }
+
+    private _getSubjectById(subjectId: number): SubjectDto {
+        return this.subjects.find((subject: SubjectDto) => subject.id == subjectId);
+    }
+
+    private _markFormGroup(): FormGroup {
+        return this._formBuilder.group({
+            markValue: [this.getParamOrDefault('mark.value')],
+            markWeight: [this.getParamOrDefault('mark.weight')]
+        })
+    }
+
+    public changeTaskState(id: number) {
+        this._examTaskService.changeState(id).subscribe((task: ExamTaskDto) => console.warn(task))
+    }
+
+    public addExamTask() {
+        this.examTaskArray.push(this._formGroupForDtoOrDefault())
     }
 
     public isMobile(): boolean {
@@ -77,9 +127,12 @@ export class ExamCreateUpdateDialog extends CreateUpdateDialog<ExamDto> implemen
         }
     }
 
-    private _getSubjectById(subjectId: number): SubjectDto {
-        return this.subjects.find((subject: SubjectDto) => subject.id == subjectId);
+    /*
+     public addMark() {
+     this._addMarkFormGroup()
+     this.withMark = true
     }
+     */
 
     get title(): string {
         var i18nTitle = 'i18n.modules.exam.add'
@@ -93,4 +146,9 @@ export class ExamCreateUpdateDialog extends CreateUpdateDialog<ExamDto> implemen
     get subjects(): SubjectDto[] {
         return this._subjects;
     }
+
+    get examTaskArray(): FormArray {
+        return this.examCreateUpdateForm.get('examTasks') as FormArray;
+    };
+
 }

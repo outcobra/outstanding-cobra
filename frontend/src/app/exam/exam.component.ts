@@ -9,10 +9,11 @@ import {ExamCreateUpdateDialog} from './create-update-dialog/exam-create-update-
 import {MdDialog, MdDialogRef} from '@angular/material';
 import {ResponsiveHelperService} from '../core/services/ui/responsive-helper.service';
 import {DialogMode} from '../core/common/dialog-mode';
-import {MEDIUM_DIALOG, SMALL_DIALOG} from '../core/util/const';
+import {MEDIUM_DIALOG} from '../core/util/const';
 import {ConfirmDialogService} from '../core/services/confirm-dialog.service';
-import {isFalsy, isTruthy} from '../core/util/helper';
+import {isFalsy} from '../core/util/helper';
 import {Observable} from 'rxjs/Observable';
+import {Util} from '../core/util/util';
 
 @Component({
     selector: 'exam',
@@ -62,9 +63,18 @@ export class ExamComponent implements OnInit {
         })
     }
 
+    private _updateExamsList(examDto: ExamDto) {
+        this._removeExam(examDto)
+        this._allExams.push(examDto)
+    }
+
+    private _removeExam(examDto: ExamDto) {
+        Util.arrayRemove(this._allExams, (exam: ExamDto) => exam.id == examDto.id)
+    }
+
     public addExam() {
         this._createUpdateExamDialog = this._dialogService
-            .open(ExamCreateUpdateDialog, this._responsiveHelper.getMobileOrGivenDialogConfig(SMALL_DIALOG))
+            .open(ExamCreateUpdateDialog, this._responsiveHelper.getMobileOrGivenDialogConfig(MEDIUM_DIALOG))
         this._createUpdateExamDialog.componentInstance.init(DialogMode.NEW, null)
         this._createUpdateExamDialog.afterClosed().flatMap((value) => {
             if (isFalsy(value)) return Observable.empty();
@@ -72,7 +82,7 @@ export class ExamComponent implements OnInit {
         })
             .subscribe((examDto: ExamDto) => {
                 this._allExams.push(examDto)
-                this._notificationService.success('Created', 'Success')
+                this._notificationService.success('i18n.modules.exam.notification.add.title', 'i18n.modules.exam.notification.add.message')
             })
     }
 
@@ -80,15 +90,10 @@ export class ExamComponent implements OnInit {
         this._confirmDialogService.open('i18n.modules.exam.dialogs.confirmDeleteDialog.title', 'i18n.modules.exam.dialogs.confirmDeleteDialog.message')
             .subscribe((deletionConfirmed: boolean) => {
                 if (deletionConfirmed) {
-                    this._examService.deleteById(exam.id).subscribe((result: any) => {
-                        if (isTruthy(result)) {
-                            this._notificationService.success('Deleted', 'Success')
-                        } else {
-                            this._notificationService.error('Fail', 'Error')
-                        }
+                    this._examService.deleteById(exam.id).subscribe(() => {
+                        this._notificationService.success('i18n.modules.exam.notification.delete.title', 'i18n.modules.exam.notification.delete.message')
+                        this._removeExam(exam)
                     })
-                } else {
-                    this._notificationService.alert('Cancel', 'Alert')
                 }
             })
     }
@@ -98,8 +103,13 @@ export class ExamComponent implements OnInit {
             .open(ExamCreateUpdateDialog, this._responsiveHelper.getMobileOrGivenDialogConfig(MEDIUM_DIALOG))
         this._createUpdateExamDialog.componentInstance.init(DialogMode.EDIT, exam)
         this._createUpdateExamDialog.afterClosed().flatMap((value) => {
-            return Observable.empty()
-        });
+            if (isFalsy(value)) return Observable.empty();
+            return this._examService.create(value)
+        })
+            .subscribe((examDto: ExamDto) => {
+                this._updateExamsList(examDto)
+                this._notificationService.success('i18n.modules.exam.notification.add.title', 'i18n.modules.exam.notification.add.message')
+            })
     }
 
     private _displayForFilter(all: boolean = true) {

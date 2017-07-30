@@ -1,4 +1,5 @@
 import {DialogMode} from './dialog-mode';
+import {isUndefined} from 'util';
 
 export class CreateUpdateDialog<T> {
     private _mode: DialogMode;
@@ -29,7 +30,7 @@ export class CreateUpdateDialog<T> {
         else {
             let prop = this.param;
             for (let pathPart of propertyPath.split('.')) {
-                if (!prop.hasOwnProperty(pathPart)) return '';
+                if (!prop.hasOwnProperty(pathPart) || !isUndefined(prop)) return '';
                 prop = prop[pathPart];
             }
             return prop;
