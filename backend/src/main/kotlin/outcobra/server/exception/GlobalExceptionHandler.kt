@@ -1,7 +1,10 @@
 package outcobra.server.exception
 
 import org.springframework.http.HttpStatus
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.ControllerAdvice
+import org.springframework.web.bind.annotation.ExceptionHandler
+import org.springframework.web.bind.annotation.ResponseBody
+import org.springframework.web.bind.annotation.ResponseStatus
 import javax.persistence.EntityNotFoundException
 
 /**
@@ -32,6 +35,7 @@ class GlobalExceptionHandler {
     @ExceptionHandler(EntityNotFoundException::class)
     @ResponseBody
     fun handleNotFound(exception: EntityNotFoundException): ValidationException {
+        exception.printStackTrace()
         return ValidationKey.ENTITY_NOT_FOUND.makeException(nestedCause = exception)
     }
 }
