@@ -8,6 +8,7 @@ import outcobra.server.model.Semester
 import outcobra.server.model.dto.ExamDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.ExamRepository
+import outcobra.server.model.repository.ExamTaskRepository
 import outcobra.server.service.ExamService
 import outcobra.server.service.ExamTaskService
 import outcobra.server.service.SemesterService
@@ -25,6 +26,7 @@ class DefaultExamService
                     repository: ExamRepository,
                     requestValidator: RequestValidator<ExamDto>,
                     val semesterService: SemesterService,
+                    val examTaskRepository: ExamTaskRepository,
                     val examTaskService: ExamTaskService)
     : ExamService, DefaultBaseService<Exam, ExamDto, ExamRepository>(mapper, repository, requestValidator, Exam::class) {
 
@@ -39,13 +41,19 @@ class DefaultExamService
     }
 
     override fun save(dto: ExamDto): ExamDto {
+        return readById(saveExamWithDependencies(dto))
+    }
+
+    private fun saveExamWithDependencies(dto: ExamDto): Long {
         val tasks = dto.examTasks
         dto.examTasks.drop(tasks.size)
         val savedDto = super.save(dto)
+        repository.flush()
         tasks.forEach { it.examId = savedDto.id }
         examTaskService.saveAll(tasks)
         repository.flush()
-        return readById(savedDto.id)
+        examTaskRepository.flush()
+        return savedDto.id
     }
 
     override fun readAllBySemester(semesterId: Long): List<ExamDto> {

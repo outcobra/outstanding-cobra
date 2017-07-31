@@ -35,7 +35,7 @@ export class CreateUpdateDialog<T> {
         else {
             let prop = this.param;
             for (let pathPart of propertyPath.split('.')) {
-                if (!prop.hasOwnProperty(pathPart) || !isNull(prop)) return defaultValue;
+                if (!prop.hasOwnProperty(pathPart) || isNull(prop)) return defaultValue;
                 prop = prop[pathPart];
             }
             return prop;

@@ -47,7 +47,8 @@ export class ExamCreateUpdateDialog extends CreateUpdateDialog<ExamDto> implemen
         return this._formBuilder.group({
             id: getIfExists(examTask, 'id', 0),
             finished: [getIfExists(examTask, 'finished', false)],
-            task: [getIfExists(examTask, 'task', ''), Validators.required]
+            task: [getIfExists(examTask, 'task', ''), Validators.required],
+            examId: [this.getParamOrDefault('id', 0)]
         });
     }
 
@@ -62,7 +63,7 @@ export class ExamCreateUpdateDialog extends CreateUpdateDialog<ExamDto> implemen
             description: [this.getParamOrDefault('description')],
             date: [this.getParamOrDefault('date'), Validators.required],
             examTasks: this._formBuilder.array(this._formArrayForExamTasks()),
-            subjectId: [this.getParamOrDefault('subjectId'), Validators.required]
+            subjectId: [this.getParamOrDefault('subject.id'), Validators.required]
         });
     }
 
