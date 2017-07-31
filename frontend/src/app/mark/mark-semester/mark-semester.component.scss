@@ -1,14 +1,23 @@
+@import '../../../sass/color-variables';
+@import '../../../sass/variables';
+
 @mixin indentation($step) {
     margin-left: $step * 12px;
+    @media(max-width: 400px) {
+        margin-left: $step * 6px;
+    }
+}
+
+mark-semester {
+    position: relative;
 }
 
 .oc-card {
-    padding: 0;
-}
-
-ul {
-    margin: 0;
-}
+        padding: 0;
+    }
+.mat-subheader {
+    padding: 05px;
+    }
 
 .mark-value-list {
     padding: 0 !important;
@@ -28,14 +37,40 @@ md-list.mark-value-list > md-list-item:not(.mark-group-item) > .mat-list-item-co
     @include indentation(3);
 }
 
-.mark-group-value-list > md-list-item > .mat-list-item-content {
-    @include indentation(4);
+.mark-group-value-list {
+    padding: 0 !important;
+
+    > md-list-item > .mat-list-item-content {
+        @include indentation(4);
+    }
+}
+
+md-list-item.mark-list-item mark-value .mark-value-container {
+    margin-right: 24px;
+}
+
+.mark-mark-group-header md-icon {
+    padding: 0 !important;
 }
 
 .mat-list-item-content,
 .mat-subheader {
     padding: 0 !important;
     height: auto !important;
+}
+
+oc-collapsible-header {
+    &:hover {
+        background-color: $hover-light;
+    }
+
+    &.two-line-header {
+        height: 80px !important;
+    }
+}
+
+.subject-mark-group-controls {
+    display: flex;
 }
 
 

@@ -6,7 +6,7 @@ import * as humanizeDuration from 'humanize-duration';
  * This service translates a given duration into a human readable string
  * @see https://github.com/EvanHahn/HumanizeDuration.js
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.1.0
  */
 @Injectable()
 export class DurationService {

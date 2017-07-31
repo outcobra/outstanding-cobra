@@ -4,7 +4,7 @@ package outcobra.server.exception
 /**
  * This interface defines all functions that are used to throw our ValidationExceptions
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.1.0
  */
 interface ValidationExceptionThrower {
 

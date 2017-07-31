@@ -32,6 +32,11 @@ class MarkController @Inject constructor(val markService: MarkService,
         return markService.readAllByMarkGroup(markGroupId)
     }
 
+    @GetMapping(value = "/subject/{subjectId}/value")
+    fun readMarkValuesBySubject(@PathVariable subjectId: Long): List<MarkValueDto> {
+        return markService.readAllBySubject(subjectId)
+    }
+
     @DeleteMapping(value = "/value/{id}")
     fun deleteMarkValue(@PathVariable id: Long) {
         markService.delete(id)

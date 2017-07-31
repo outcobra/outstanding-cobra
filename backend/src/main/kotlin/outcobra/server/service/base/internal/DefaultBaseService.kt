@@ -15,7 +15,7 @@ import kotlin.reflect.KClass
  * Default implementation of a basic service to save, read and delete an entity
  * @see BaseService
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.1.0
  */
 @Transactional
 @AllOpen

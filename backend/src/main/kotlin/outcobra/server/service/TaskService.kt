@@ -10,7 +10,7 @@ import outcobra.server.service.base.BaseService
 
 /**
  * This service handles the business-logic for the [Task] entity
- * @since <since>
+ * @since 1.1.0
  * @author Vincent Perret
  */
 interface TaskService : BaseService<TaskDto> {

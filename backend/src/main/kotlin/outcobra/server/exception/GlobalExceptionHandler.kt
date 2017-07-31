@@ -8,7 +8,7 @@ import javax.persistence.EntityNotFoundException
  * Handles exceptions globally
  *
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.1.0
  */
 @Suppress("unused")
 @ControllerAdvice

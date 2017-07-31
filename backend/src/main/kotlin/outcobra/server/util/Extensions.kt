@@ -19,7 +19,7 @@ import java.time.LocalDate
  * check if a date is before or equal to another
  * @param b the [LocalDate] the date you want to use as reference
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.1.0
  * */
 fun LocalDate.isBeforeOrEqual(b: LocalDate): Boolean = this.isBefore(b) || this.isEqual(b)
 
@@ -27,7 +27,7 @@ fun LocalDate.isBeforeOrEqual(b: LocalDate): Boolean = this.isBefore(b) || this.
  * check if a date is after or equal to another
  * @param b the [LocalDate]  you want to use as reference
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.1.0
  */
 fun LocalDate.isAfterOrEqual(b: LocalDate): Boolean = this.isAfter(b) || this.isEqual(b)
 
@@ -35,7 +35,7 @@ fun LocalDate.isAfterOrEqual(b: LocalDate): Boolean = this.isAfter(b) || this.is
  * this function helps to determine if two [SchoolYear]s overlap or not
  * @param schoolYear the [SchoolYear] you want to use as reference
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.1.0
  */
 infix fun SchoolYear.doesNotOverlap(schoolYear: SchoolYear): Boolean {
     if (this.id != schoolYear.id) {
@@ -50,7 +50,7 @@ infix fun SchoolYear.doesNotOverlap(schoolYear: SchoolYear): Boolean {
  * this function helps to determine if a [SchoolYear] contains a [Semester]
  * @param semester the [semester] you want to validate
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.1.0
  */
 operator infix fun SchoolYear.contains(semester: Semester): Boolean =
         this.validFrom.isBeforeOrEqual(semester.validFrom) && this.validTo.isAfterOrEqual(semester.validTo)
@@ -59,7 +59,7 @@ operator infix fun SchoolYear.contains(semester: Semester): Boolean =
  * this function helps to determine if two [Semester]s overlap or not
  * @param semester the [Semester] you want to use as reference
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.1.0
  */
 infix fun Semester.doesNotOverlap(semester: Semester): Boolean {
     if (this.id != semester.id) {
@@ -74,7 +74,7 @@ infix fun Semester.doesNotOverlap(semester: Semester): Boolean {
 /**
  * determines the owner ([User]) of the given object
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.1.0
  */
 tailrec fun ParentLinked.followToUser(iterationCount: Int = 0): User {
     if (iterationCount > 50) {
@@ -93,7 +93,7 @@ tailrec fun ParentLinked.followToUser(iterationCount: Int = 0): User {
  * @since <since>
  */
 fun BaseMarkDto.validate() {
-    var valid = !(value > 6 || value < 1)
+    var valid = (!(value > 6 || value < 1)) || (id == 0L && value == 0.0)
     if (this is MarkGroupDto) {
         valid = valid && (parentGroupId == 0L || markGroups.isEmpty())
     }

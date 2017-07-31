@@ -21,6 +21,7 @@ import {OCMaterialModule} from './oc-material.module';
 import {RavenErrorHandler} from './core/error/raven-error-handler';
 import {MarkModule} from './mark/mark.module';
 import {ExamModule} from './exam/exam.module';
+import {PipeModule} from './shared/pipe.module';
 
 @NgModule({
     declarations: [
@@ -41,6 +42,7 @@ import {ExamModule} from './exam/exam.module';
         FlexLayoutModule,
         SimpleNotificationsModule.forRoot(),
         CoreModule,
+        PipeModule,
         OCMaterialModule,
         MdNativeDateModule,
         TranslateModule.forRoot({

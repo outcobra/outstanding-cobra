@@ -11,4 +11,5 @@ import outcobra.server.service.base.BaseService
 interface MarkService : BaseService<MarkValueDto> {
     fun readAllByMarkGroup(markGroupId: Long): List<MarkValueDto>
     fun saveMarkAndGetChangedParent(dto: MarkValueDto): MarkGroupDto
+    fun readAllBySubject(subjectId: Long): List<MarkValueDto>
 }

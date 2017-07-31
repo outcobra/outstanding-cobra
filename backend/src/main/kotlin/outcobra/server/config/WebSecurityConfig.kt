@@ -13,7 +13,7 @@ import javax.inject.Inject
  * WebSecurityConfig which is active all the time but can be overridden
  *
  * @author Mario Kunz
- * @since <since>
+ * @since 1.1.0
  */
 @Configuration
 @EnableWebSecurity

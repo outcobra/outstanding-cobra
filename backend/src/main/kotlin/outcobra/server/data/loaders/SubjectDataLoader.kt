@@ -14,7 +14,7 @@ import javax.inject.Inject
  * This [DataLoader] loads our test [Subject]s
  *
  * @author Joel Messerli
- * @since <since>
+ * @since 1.1.0
  */
 @Component
 @Order(SUBJECT)

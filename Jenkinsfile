@@ -72,15 +72,17 @@ pipeline {
         }
 
         stage('Docker & Deploy') {
-            when { branch 'develop' }
+            when { anyOf { branch 'develop'; branch 'master' } }
             environment { DOCKER = credentials('docker-deploy') }
 
             steps {
                 sh 'docker login -u "$DOCKER_USR" -p "$DOCKER_PSW" docker.pegnu.cloud:443'
-                sh 'docker build -t docker.pegnu.cloud:443/outcobra-backend:$BUILD_NUMBER -t docker.pegnu.cloud:443/outcobra-backend:develop backend'
-                sh 'docker build -t docker.pegnu.cloud:443/outcobra-frontend:$BUILD_NUMBER -t docker.pegnu.cloud:443/outcobra-frontend:develop frontend'
-                sh 'docker push docker.pegnu.cloud:443/outcobra-frontend:develop'
-                sh 'docker push docker.pegnu.cloud:443/outcobra-backend:develop'
+
+                sh 'docker build -t docker.pegnu.cloud:443/outcobra-backend:$BRANCH_NAME-$BUILD_NUMBER -t docker.pegnu.cloud:443/outcobra-backend:$BRANCH_NAME -t docker.pegnu.cloud:443/outcobra-backend:latest backend'
+                sh 'docker build -t docker.pegnu.cloud:443/outcobra-frontend:$BRANCH_NAME-$BUILD_NUMBER -t docker.pegnu.cloud:443/outcobra-frontend:$BRANCH_NAME -t docker.pegnu.cloud:443/outcobra-frontend:latest frontend'
+
+                sh 'docker push docker.pegnu.cloud:443/outcobra-frontend:$BRANCH_NAME && docker push docker.pegnu.cloud:443/outcobra-frontend:latest && docker push docker.pegnu.cloud:443/outcobra-frontend:$BRANCH_NAME-$BUILD_NUMBER'
+                sh 'docker push docker.pegnu.cloud:443/outcobra-backend:$BRANCH_NAME && docker push docker.pegnu.cloud:443/outcobra-backend:latest && docker push docker.pegnu.cloud:443/outcobra-backend:$BRANCH_NAME-$BUILD_NUMBER'
 
                 script {
                     configFileProvider([

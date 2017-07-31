@@ -12,7 +12,7 @@ import kotlin.reflect.KClass
 /**
  * This class allows authorizing the requests within the mapper
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.1.0
  */
 @Component
 class BaseMapper {
@@ -28,7 +28,7 @@ class BaseMapper {
         val parent = parentRepo.findOne(parentId)
         val areFromParent = childRepo.findAll(children).all { it.parent == parent }
         val userIsOwner = parent.followToUser() == userService.getCurrentUser()
-        if (!(areFromParent && userIsOwner)) {
+        if ((areFromParent && userIsOwner).not()) {
             ValidationKey.FORBIDDEN.throwException()
         }
     }

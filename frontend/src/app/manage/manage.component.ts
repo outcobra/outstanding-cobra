@@ -1,12 +1,9 @@
-import {
-    AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit,
-    ViewEncapsulation
-} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewEncapsulation} from '@angular/core';
 import {ManageService} from './service/manage.service';
 import {InstitutionDto, ManageDto, SchoolClassDto, SchoolYearDto, SemesterDto, SubjectDto} from './model/manage.dto';
 import {MdDialogRef} from '@angular/material';
 import {InstitutionDialog} from './institution-dialog/institution-dialog.component';
-import {DialogMode} from '../core/common/dialog-mode';
+import {ViewMode} from '../core/common/view-mode';
 import {SchoolClassDialog} from './school-class-dialog/school-class-dialog.component';
 import {InstitutionService} from './service/institution.service';
 import {SchoolClassService} from './service/school-class.service';
@@ -22,7 +19,7 @@ import {Util} from '../core/util/util';
 import {equals, isFalsy, isNotNull, isTrue, isTruthy} from '../core/util/helper';
 import {Observable} from 'rxjs';
 import {Dto} from '../core/common/dto';
-import {CreateUpdateDialog} from '../core/common/create-update-dialog';
+import {CreateUpdateComponent} from '../core/common/create-update-component';
 import {ResponsiveHelperService} from '../core/services/ui/responsive-helper.service';
 import {ManageView} from './model/manage-view';
 import {NotificationWrapperService} from '../core/notifications/notification-wrapper.service';
@@ -188,14 +185,14 @@ export class ManageComponent implements OnInit, AfterViewInit {
 
     //region add
     public addInstitution() {
-        this._institutionDialogRef = this._manageDialogFactory.getDialog(InstitutionDialog, DialogMode.NEW, null);
+        this._institutionDialogRef = this._manageDialogFactory.getDialog(InstitutionDialog, ViewMode.NEW, null);
         this._handleAddition('institution', this._institutionDialogRef, this._institutionService.create,
             (institution: InstitutionDto) => this.currentManageData[ManageView.INSTITUTION_CLASS].push(institution), this._institutionService
         );
     }
 
     public addSchoolClass(institution: InstitutionDto) {
-        this._schoolClassDialogRef = this._manageDialogFactory.getDialog(SchoolClassDialog, DialogMode.NEW, institution);
+        this._schoolClassDialogRef = this._manageDialogFactory.getDialog(SchoolClassDialog, ViewMode.NEW, institution);
         this._handleAddition('schoolClass', this._schoolClassDialogRef, this._schoolClassService.create,
             (schoolClass: SchoolClassDto) => {
                 if (isFalsy(institution.schoolClasses)) institution.schoolClasses = [];
@@ -206,7 +203,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
     public addSchoolYear(schoolClassId: number) {
         if (isTruthy(schoolClassId)) {
             let schoolClass: SchoolClassDto = this._findSchoolClass(this.currentManageData[ManageView.INSTITUTION_CLASS] as InstitutionDto[], schoolClassId);
-            this._schoolYearDialogRef = this._manageDialogFactory.getDialog(SchoolYearDialog, DialogMode.NEW, schoolClass);
+            this._schoolYearDialogRef = this._manageDialogFactory.getDialog(SchoolYearDialog, ViewMode.NEW, schoolClass);
             this._handleAddition('schoolYear', this._schoolYearDialogRef, this._schoolYearService.create,
                 (schoolYear: SchoolYearDto) => this.currentManageData[ManageView.YEAR_SEMESTER].push(schoolYear), this._schoolYearService
             );
@@ -215,7 +212,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
 
     public addSemester(schoolYear: SchoolYearDto) {
         if (isTruthy(schoolYear)) {
-            this._semesterDialogRef = this._manageDialogFactory.getDialog(SemesterDialog, DialogMode.NEW, schoolYear);
+            this._semesterDialogRef = this._manageDialogFactory.getDialog(SemesterDialog, ViewMode.NEW, schoolYear);
             this._handleAddition('semester', this._semesterDialogRef, this._semesterService.create,
                 (semester: SemesterDto) => {
                     if (isFalsy(schoolYear.semesters)) schoolYear.semesters = [];
@@ -227,7 +224,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
     public addSubject(semesterId: number) {
         if (isTruthy(semesterId)) {
             let semester: SemesterDto = this._findSemester(this.currentManageData[ManageView.YEAR_SEMESTER] as SchoolYearDto[], semesterId);
-            this._subjectDialogRef = this._manageDialogFactory.getDialog(SubjectDialog, DialogMode.NEW, semester);
+            this._subjectDialogRef = this._manageDialogFactory.getDialog(SubjectDialog, ViewMode.NEW, semester);
             this._handleAddition('subject', this._subjectDialogRef, this._subjectService.create,
                 (subject: SubjectDto) => this.currentManageData[ManageView.SUBJECT].push(subject), this._subjectService
             );
@@ -281,32 +278,32 @@ export class ManageComponent implements OnInit, AfterViewInit {
 
     //region edit
     public editInstitution(toEdit: InstitutionDto) {
-        let dialog = this._manageDialogFactory.getDialog(InstitutionDialog, DialogMode.EDIT, null, null, toEdit);
+        let dialog = this._manageDialogFactory.getDialog(InstitutionDialog, ViewMode.EDIT, null, null, toEdit);
         this._handleEdit('institution', dialog, this._institutionService.update, this._institutionService);
     }
 
     public editSchoolClass(toEdit: SchoolClassDto) {
         let parent = (this.currentManageData[ManageView.INSTITUTION_CLASS] as InstitutionDto[])
             .find(institution => institution.id === toEdit.institutionId);
-        let dialog = this._manageDialogFactory.getDialog(SchoolClassDialog, DialogMode.EDIT, parent, null, toEdit);
+        let dialog = this._manageDialogFactory.getDialog(SchoolClassDialog, ViewMode.EDIT, parent, null, toEdit);
         this._handleEdit('schoolClass', dialog, this._schoolClassService.update, this._schoolClassService);
     }
 
     public editSchoolYear(toEdit: SchoolYearDto) {
         let parent = this._findSchoolClass(this.currentManageData[ManageView.INSTITUTION_CLASS] as InstitutionDto[], toEdit.id);
-        let dialog = this._manageDialogFactory.getDialog(SchoolYearDialog, DialogMode.EDIT, parent, null, toEdit);
+        let dialog = this._manageDialogFactory.getDialog(SchoolYearDialog, ViewMode.EDIT, parent, null, toEdit);
         this._handleEdit('schoolYear', dialog, this._schoolYearService.update, this._schoolYearService);
     }
 
     public editSemester(toEdit: SemesterDto) {
         let parent = this.currentManageData[ManageView.YEAR_SEMESTER].find(year => equals(year.id, toEdit.schoolYearId));
-        let dialog = this._manageDialogFactory.getDialog(SemesterDialog, DialogMode.EDIT, parent, null, toEdit);
+        let dialog = this._manageDialogFactory.getDialog(SemesterDialog, ViewMode.EDIT, parent, null, toEdit);
         this._handleEdit('semester', dialog, this._semesterService.update, this._semesterService);
     }
 
     public editSubject(toEdit: SubjectDto) {
         let parent: SemesterDto = this._findSemester(this.currentManageData[ManageView.YEAR_SEMESTER] as SchoolYearDto[], toEdit.semesterId);
-        let dialog = this._manageDialogFactory.getDialog(SubjectDialog, DialogMode.EDIT, parent, null, toEdit);
+        let dialog = this._manageDialogFactory.getDialog(SubjectDialog, ViewMode.EDIT, parent, null, toEdit);
         this._handleEdit('subject', dialog, this._subjectService.update, this._subjectService);
     }
 
@@ -356,7 +353,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
      * @param finishFunction function to execute on create success
      * @param thisArg the scope where the createFunction should be run on
      */
-    private _handleAddition<T extends Dto, D extends CreateUpdateDialog<T>>(entityName: string, dialogRef: MdDialogRef<D>, createFunction: (entity: T) => Observable<T>, finishFunction: (entity: T) => void, thisArg: any) {
+    private _handleAddition<T extends Dto, D extends CreateUpdateComponent<T>>(entityName: string, dialogRef: MdDialogRef<D>, createFunction: (entity: T) => Observable<T>, finishFunction: (entity: T) => void, thisArg: any) {
         dialogRef.afterClosed()
             .filter(isTruthy)
             .flatMap((value: T) => createFunction.call(thisArg, value))
@@ -378,7 +375,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
      * @param editFunction function which edits an entity
      * @param thisArg the scope where the createFunction should be run on
      */
-    private _handleEdit<T extends Dto, D extends CreateUpdateDialog<T>>(entityName: string, dialogRef: MdDialogRef<D>, editFunction: (entity: T) => Observable<T>, thisArg: any) {
+    private _handleEdit<T extends Dto, D extends CreateUpdateComponent<T>>(entityName: string, dialogRef: MdDialogRef<D>, editFunction: (entity: T) => Observable<T>, thisArg: any) {
         dialogRef.afterClosed()
             .filter(isTruthy)
             .flatMap(value => editFunction.call(thisArg, value))

@@ -1,4 +1,5 @@
 import {ColorDto} from '../../core/model/color.dto';
+import {MarkGroupDto} from './mark-group.dto';
 import {MarkGroupDto} from './mark.group.dto';
 import {InstitutionDto, SchoolClassDto} from '../../manage/model/manage.dto';
 
@@ -9,6 +10,7 @@ export interface SemesterMarkDto {
     validTo: Date,
     institution: InstitutionDto,
     schoolClass: SchoolClassDto,
+    value: number,
     subjects: Array<SubjectMarkDto>
 }
 

@@ -11,27 +11,43 @@ import {RouterModule} from '@angular/router';
 import {OCUiModule} from '../oc-ui/oc-ui.module';
 import {MarkService} from './service/mark.service';
 import {SemesterMarkResolver} from './service/semester-mark-resolver.service';
-import { MarkValueComponent } from './mark-value/mark-value.component';
+import {MarkValueComponent} from './mark-value/mark-value.component';
+import {MarkCreateUpdateComponent} from './mark-create-update/mark-create-update.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {PipeModule} from '../shared/pipe.module';
+import {MarkGroupCreateUpdateComponent} from './mark-group-create-update/mark-group-create-update.component';
+import {SubjectMarkGroupResolver} from './service/subject-mark-resolver.service';
+import {MarkGroupResolver} from './service/mark-group-resolver.service';
+import {MarkResolver} from './service/mark-resolver.service';
+import {MarkWeightUpdaterComponent} from './mark-weight-updater/mark-weight-updater.component';
 
 @NgModule({
     imports: [
         CommonModule,
         TranslateModule,
         RouterModule,
+        ReactiveFormsModule,
         MarkRoutingModule,
         CoreModule,
         OCMaterialModule,
         OCUiModule,
-        FlexLayoutModule
+        FlexLayoutModule,
+        PipeModule
     ],
     declarations: [
         MarkComponent,
         MarkSemesterComponent,
-        MarkValueComponent
+        MarkValueComponent,
+        MarkCreateUpdateComponent,
+        MarkGroupCreateUpdateComponent,
+        MarkWeightUpdaterComponent
     ],
     providers: [
         MarkService,
-        SemesterMarkResolver
+        SemesterMarkResolver,
+        SubjectMarkGroupResolver,
+        MarkGroupResolver,
+        MarkResolver
     ]
 })
 export class MarkModule {

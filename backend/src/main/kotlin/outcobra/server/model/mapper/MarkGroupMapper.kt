@@ -1,7 +1,10 @@
 package outcobra.server.model.mapper
 
 import org.springframework.stereotype.Component
-import outcobra.server.model.*
+import outcobra.server.model.Mark
+import outcobra.server.model.MarkGroup
+import outcobra.server.model.MarkValue
+import outcobra.server.model.Subject
 import outcobra.server.model.dto.MarkGroupDto
 import outcobra.server.model.dto.MarkValueDto
 import outcobra.server.model.interfaces.Mapper
@@ -21,13 +24,16 @@ class MarkGroupMapper @Inject constructor(val subjectRepository: SubjectReposito
     : Mapper<MarkGroup, MarkGroupDto>, BaseMapper() {
 
     override fun fromDto(from: MarkGroupDto): MarkGroup {
-        validateChildren(from.markValues.map { it.id }, MarkValue::class, from.id, MarkGroup::class)
-        validateChildren(from.markGroups.map { it.id }, MarkGroup::class, from.id, MarkGroup::class)
+        val isNew = from.id == 0L
+        if (!isNew) {
+            validateChildren(from.markValues.map { it.id }, MarkValue::class, from.id, MarkGroup::class)
+            validateChildren(from.markGroups.map { it.id }, MarkGroup::class, from.id, MarkGroup::class)
+        }
         var subject: Subject? = null
         var parentGroup: MarkGroup? = null
-        if (from.subjectId != 0L) {
+        if (from.parentGroupId == 0L) {
             subject = subjectRepository.findOne(from.subjectId)
-        } else if (from.parentGroupId != 0L) {
+        } else {
             parentGroup = markGroupRepository.findOne(from.parentGroupId)
         }
         val marks: List<Mark> = from.markValues.map { markValueMapper.fromDto(it) }
@@ -35,7 +41,9 @@ class MarkGroupMapper @Inject constructor(val subjectRepository: SubjectReposito
             marks.plus(from.markGroups.map { fromDto(it) })
         }
         val result = MarkGroup(from.weight, parentGroup, from.description, marks, subject)
-        result.id = from.id
+        if (!isNew) {
+            result.id = from.id
+        }
         return result
     }
 
@@ -50,7 +58,7 @@ class MarkGroupMapper @Inject constructor(val subjectRepository: SubjectReposito
             parentGroupId = 0L
         } else {
             parentGroupId = from.parent.id
-            subjectId = 0L
+            subjectId = from.parent.parent.id
         }
         validateChildren(markValues.map { it.id }, MarkValue::class, from.id, MarkGroup::class)
         validateChildren(nestedGroups.map { it.id }, MarkGroup::class, from.id, MarkGroup::class)

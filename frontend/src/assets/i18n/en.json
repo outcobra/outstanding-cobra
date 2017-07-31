@@ -21,6 +21,7 @@
       },
       "form": {
         "error": {
+          "title": "Error",
           "required": "This field is required.",
           "isAfterOrSameDay": "The date should be after the {{date}}",
           "isBeforeOrSameDay": "The date should be before the {{date}}",
@@ -34,6 +35,12 @@
         },
         "error": {
           "delete": "Delete failed"
+        }
+      },
+      "dialog": {
+        "unsavedChanges": {
+          "title": "You have unsaved changes",
+          "message": "Would you really like to discard the changes?"
         }
       },
       "lang": {
@@ -134,7 +141,71 @@
       },
       "mark": {
         "linkTitle": "Marks",
-        "noSemesterAvailable": "You do not have semesters yet"
+        "noSemesterAvailable": "You do not have semesters yet",
+        "common": {
+          "weight": "Weight",
+          "average": "Average mark"
+        },
+        "semester": {
+          "average": "Your average mark for this semester is:"
+        },
+        "createUpdate": {
+          "create": {
+            "title": "Add new mark"
+          },
+          "update": {
+            "title": "Edit mark"
+          },
+          "form": {
+            "value": {
+              "label": "Markvalue",
+              "hint": "Example: 5.25",
+              "error": {
+                "pattern": "The mark must be between 1 and 6 including 2 decimal places max"
+              }
+            },
+            "weight": {
+              "label": "Markweight",
+              "hint": "Example: 2 or 0.5",
+              "error": {
+                "pattern": "The weight must be between 0 and 10 including 2 decimal places max"
+              }
+            },
+            "description": {
+              "label": "Short description",
+              "hint": "",
+              "error": ""
+            }
+          }
+        },
+        "group": {
+          "createUpdate": {
+            "create": {
+              "title": "New markgroup"
+            },
+            "update": {
+              "title": "Edit Markgroup"
+            },
+            "form": {
+              "description": {
+                "label": "Beschreibung"
+              },
+              "selectMark": {
+                "label": "Add a mark to the group"
+              }
+            }
+          }
+        },
+        "dialog": {
+          "markConfirmDelete": {
+            "title": "Delete mark",
+            "message": "Do you really want to delete the mark"
+          },
+          "markGroupConfirmDelete": {
+            "title": "Delete markgroup",
+            "message": "Do you really want to delete the mark group. The child elements will be lost too."
+          }
+        }
       },
       "task": {
         "linkTitle": "Tasks",
@@ -170,7 +241,7 @@
         },
         "dialogs": {
           "confirmDeleteDialog": {
-            "title": "Do you want to delete the Task?",
+            "title": "Delete task",
             "message": "The task will be lost forever (A very long long time)"
           },
           "add": {
@@ -198,7 +269,7 @@
       },
       "manage": {
         "linkTitle": "Manage",
-        "assureDeletion": "Do you really want to delete the object?",
+        "assureDeletion": "Delete object",
         "mobile": {
           "title": {
             "INSTITUTION_CLASS": "Institutions and Classes",

@@ -21,7 +21,7 @@ class DtoLocator {
     }
 
     /**
-     * Returns the class of a dto by its entitys name
+     * Returns the class of a dto by its entity's name
      *
      * @since 1.0.0
      * @throws ClassNotFoundException if the dtos class could not be found

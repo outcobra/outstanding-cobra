@@ -1,5 +1,5 @@
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
-import {SemesterMarkDto} from '../model/SemesterMarkDto';
+import {SemesterMarkDto} from '../model/semester-mark.dto';
 import {Observable} from 'rxjs/Observable';
 import {Injectable} from '@angular/core';
 import {MarkService} from './mark.service';
@@ -13,7 +13,7 @@ export class SemesterMarkResolver implements Resolve<SemesterMarkDto> {
         SemesterMarkDto
         | Observable<SemesterMarkDto>
         | Promise<SemesterMarkDto> {
-        let semesterId = route.params['id'];
+        let semesterId = route.params['semesterId'];
         return this._markService.getMarkSemesterBySemesterId(semesterId);
     }
 

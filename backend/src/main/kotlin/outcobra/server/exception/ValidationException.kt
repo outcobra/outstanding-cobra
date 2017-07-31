@@ -3,7 +3,7 @@ package outcobra.server.exception
 /**
  * A generic exception to throw if you want it to be displayed on the frontend
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.1.0
  */
 class ValidationException(var title: String = "i18n.error.generic.title",
                           override val message: String = "i18n.error.generic.message",

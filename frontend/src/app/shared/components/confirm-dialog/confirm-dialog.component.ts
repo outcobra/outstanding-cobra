@@ -8,8 +8,8 @@ import {Component} from '@angular/core';
 export class ConfirmDialogComponent {
     private _title: string;
     private _message: string;
+    private _result: any;
     private _cancelable: boolean;
-
     constructor() {
     }
 
@@ -29,12 +29,20 @@ export class ConfirmDialogComponent {
         this._message = value;
     }
 
-
     get cancelable(): boolean {
         return this._cancelable;
     }
 
+
     set cancelable(value: boolean) {
         this._cancelable = value;
+    }
+
+    get result(): any {
+        return this._result;
+    }
+
+    set result(value: any) {
+        this._result = value;
     }
 }

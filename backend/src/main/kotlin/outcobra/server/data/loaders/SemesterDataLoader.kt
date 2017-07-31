@@ -20,7 +20,7 @@ import javax.inject.Inject
  * This [DataLoader] loads our test [Semester]s
  *
  * @author Joel Messerli
- * @since <since>
+ * @since 1.1.0
  */
 @Component
 @Order(SEMESTER)

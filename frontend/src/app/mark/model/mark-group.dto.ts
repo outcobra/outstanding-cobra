@@ -1,4 +1,4 @@
-import {BaseMarkDto} from './base.mark.dto';
+import {BaseMarkDto} from './base-mark.dto';
 import {MarkDto} from './mark.dto';
 
 export interface MarkGroupDto extends BaseMarkDto {

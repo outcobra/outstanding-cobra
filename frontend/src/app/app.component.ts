@@ -2,10 +2,11 @@ import {AfterViewInit, Component, HostBinding, OnInit, ViewChild, ViewEncapsulat
 import {Auth0AuthService} from './core/services/auth/auth.service';
 import {TranslateService} from '@ngx-translate/core';
 import {ResponsiveHelperService} from './core/services/ui/responsive-helper.service';
-import {MdSidenav, OverlayContainer} from '@angular/material';
+import {MdIconRegistry, MdSidenav, OverlayContainer} from '@angular/material';
 import {OCTheme} from './oc-ui/theme/oc-theme';
 import {NavigationEnd, Router} from '@angular/router';
 import {isTruthy} from './core/util/helper';
+import {DomSanitizer} from '@angular/platform-browser';
 
 const OC_THEME_STORAGE_LOC = 'oc-theme';
 const OC_MOBILE_CLASS = 'oc-mobile';
@@ -32,7 +33,9 @@ export class AppComponent implements OnInit, AfterViewInit {
                 private _auth: Auth0AuthService,
                 private _responsiveHelper: ResponsiveHelperService,
                 private _router: Router,
-                private _overlayContainer: OverlayContainer) {
+                private _overlayContainer: OverlayContainer,
+                private _sanitizer: DomSanitizer,
+                private _mdIconRegistry: MdIconRegistry) {
     }
 
     ngOnInit() {
@@ -45,6 +48,9 @@ export class AppComponent implements OnInit, AfterViewInit {
                     this.sidenav.close();
                 }
             });
+
+        // TODO maybe search a better place to do this
+        this._mdIconRegistry.addSvgIcon('average', this._sanitizer.bypassSecurityTrustResourceUrl('/assets/img/ic_average.svg'));
     }
 
     ngAfterViewInit() {

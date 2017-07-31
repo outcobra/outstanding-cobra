@@ -1,6 +1,18 @@
-<div class="mark-value" fxLayout="row">
-    <md-icon>{{ getIconNameByMarkValue(mark.value) }}</md-icon>
-    <span fxFlex fxFlexAlign="start">{{ mark.description }}</span>
-    <span fxFlex="150px" fxFlexAlign="end">Gewichtung: {{ mark.weight }}</span>
-    <span fxFlex="40px" fxFlexAlign="end"><b>{{ mark.value }}</b></span>
+<oc-divider></oc-divider>
+<div fxLayout="row" class="mark-value-container">
+    <div class="mark-value" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column">
+        <div fxFlex="50%" fxFlex.lt-sm="40px">
+            <md-icon fxFlex>{{ getIconNameByMarkValue(mark.value) }}</md-icon>
+            <span fxFlex fxFlexAlign="start">{{ mark.description }}</span>
+        </div>
+        <div fxFlex.gt-sm fxFlex.lt-sm="40px">
+            <div fxLayout="row">
+                <md-icon fxHide.gt-sm="true"></md-icon>
+                <span fxFlex
+                      fxFlexAlign="end">{{ 'i18n.modules.mark.common.weight' | translate }}: {{ mark.weight }}</span>
+                <span fxFlex="25%" fxFlexAlign="end"><b>{{ mark.value | markValue }}</b></span>
+            </div>
+        </div>
+    </div>
+    <oc-entity-menu></oc-entity-menu>
 </div>

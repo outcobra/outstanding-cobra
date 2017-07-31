@@ -8,7 +8,7 @@ import {TaskFilterDto} from './model/task-filter.dto';
 import {MdDialog, MdDialogRef} from '@angular/material';
 import {TaskCreateUpdateDialog} from './task-create-update-dialog/task-create-update-dialog.component';
 import {Util} from '../core/util/util';
-import {DialogMode} from '../core/common/dialog-mode';
+import {ViewMode} from '../core/common/view-mode';
 import {Observable} from 'rxjs';
 import {SMALL_DIALOG} from '../core/util/const';
 import {and} from '../core/util/helper';
@@ -123,7 +123,7 @@ export class TaskComponent implements OnInit, AfterViewInit {
 
     public addTask() {
         this._taskCreateUpdateDialog = this._dialogService.open(TaskCreateUpdateDialog, this._responsiveHelperService.getMobileOrGivenDialogConfig(SMALL_DIALOG));
-        this._taskCreateUpdateDialog.componentInstance.init(DialogMode.NEW, null);
+        this._taskCreateUpdateDialog.componentInstance.init(ViewMode.NEW, null);
         this._taskCreateUpdateDialog.afterClosed()
             .flatMap((value) => {
                 if (!value) return Observable.empty();

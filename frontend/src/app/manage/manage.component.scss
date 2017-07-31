@@ -64,7 +64,7 @@ oc-app:not(.oc-mobile) {
                 flex-grow: 1;
             }
 
-            entity-menu {
+            oc-entity-menu {
                 flex-basis: 40px;
             }
         }
@@ -136,7 +136,7 @@ oc-app:not(.oc-mobile) {
                 float: left;
             }
 
-            entity-menu {
+            oc-entity-menu {
                 float: right;
             }
 

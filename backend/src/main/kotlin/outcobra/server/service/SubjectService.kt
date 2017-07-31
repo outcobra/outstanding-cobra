@@ -7,7 +7,7 @@ import outcobra.server.service.base.BaseService
 
 /**
  * This service handles the business-logic for the [Subject] entity
- * @since <since>
+ * @since 1.1.0
  * @author Florian Bürgi
  */
 interface SubjectService : BaseService<SubjectDto> {

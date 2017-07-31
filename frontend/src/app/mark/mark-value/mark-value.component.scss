@@ -5,12 +5,14 @@
 }
 
 .mark-value {
+    padding: 0 16px;
     width: 100%;
     md-icon {
+        float: left;
         margin-right: 5px;
     }
     md-icon, span {
-        display: block;
+        display: flex;
         height: $oc-collapsible-header-height;
         line-height: $oc-collapsible-header-height;
     }

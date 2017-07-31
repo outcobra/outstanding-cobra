@@ -17,7 +17,7 @@ import javax.inject.Inject
  * meant to be used inside the BaseService
  * @see BaseService
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.1.0
  */
 @Component
 class RequestValidator<in Dto>

@@ -5,7 +5,6 @@ import {ManageRoutingModule} from './manage-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SharedModule} from '../shared/shared.module';
 import {ManageService} from './service/manage.service';
-import {EntityMenuComponent} from './entity-menu/entity-menu.component';
 import {InstitutionDialog} from './institution-dialog/institution-dialog.component';
 import {SchoolClassDialog} from './school-class-dialog/school-class-dialog.component';
 import {InstitutionService} from './service/institution.service';
@@ -19,6 +18,7 @@ import {SubjectDialog} from './subject-dialog/subject-dialog.component';
 import {SubjectService} from './service/subject.service';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {OCMaterialModule} from '../oc-material.module';
+import {PipeModule} from '../shared/pipe.module';
 
 @NgModule({
     imports: [
@@ -28,11 +28,11 @@ import {OCMaterialModule} from '../oc-material.module';
         ManageRoutingModule,
         OCMaterialModule,
         FlexLayoutModule,
-        SharedModule
+        SharedModule,
+        PipeModule
     ],
     declarations: [
         ManageComponent,
-        EntityMenuComponent,
         InstitutionDialog,
         SchoolClassDialog,
         SchoolYearDialog,

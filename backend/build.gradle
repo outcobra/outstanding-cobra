@@ -1,14 +1,10 @@
 buildscript {
     ext {
         springBootVersion = '1.5.2.RELEASE'
-        outstandingCobraVersion = '1.0.0'
+        outstandingCobraVersion = outcobraVersion
 
-        if (System.getenv('CIRCLE_BUILD_NUM') != null) {
-            outstandingCobraVersion = outstandingCobraVersion + '-C' + System.getenv('CIRCLE_BUILD_NUM')
-        } else if (System.getenv('SEMAPHORE_BUILD_NUMBER') != null) {
-            outstandingCobraVersion = outstandingCobraVersion + '-S' + System.getenv('SEMAPHORE_BUILD_NUMBER')
-        } else if (System.getenv('JENKINS_URL') != null && System.getenv('BUILD_NUMBER') != null) {
-            outstandingCobraVersion = outstandingCobraVersion + '-J' + System.getenv('BUILD_NUMBER')
+        if (System.getenv('JENKINS_URL') != null && System.getenv('BUILD_NUMBER') != null) {
+            outstandingCobraVersion = outstandingCobraVersion + '-J' + System.getenv('BUILD_NUMBER') + '+' + System.getenv('BRANCH_NAME')
         }
     }
     repositories {
@@ -47,8 +43,8 @@ jar {
 }
 
 gitProperties {
-    dateFormat = "yyyy-MM-dd'T'HH:mmZ"
-    dateFormatTimeZone = "GMT+1"
+    dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+    dateFormatTimeZone = "UTC+2"
     gitRepositoryRoot = new File("${project.rootDir}/")
     gitPropertiesDir = new File("${project.rootDir}/backend/src/main/resources")
     keys = ['git.branch', 'git.commit.id', 'git.commit.id.abbrev', 'git.commit.user.name', 'git.commit.user.email', 'git.commit.message.short', 'git.commit.time']
