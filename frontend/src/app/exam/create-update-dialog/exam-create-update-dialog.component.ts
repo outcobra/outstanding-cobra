@@ -27,8 +27,6 @@ export class ExamCreateUpdateDialog extends CreateUpdateDialog<ExamDto> implemen
     private _title: string;
     public withMark: boolean = false;
 
-
-
     constructor(private _translateService: TranslateService,
                 private _subjectService: SubjectService,
                 private _dialogRef: MdDialogRef<ExamCreateUpdateDialog>,
@@ -76,12 +74,11 @@ export class ExamCreateUpdateDialog extends CreateUpdateDialog<ExamDto> implemen
             id: id,
             name: formValue.name,
             description: formValue.description,
-            date: formValue.date.date,
-            subjectName: subject.name,
-            subjectId: subject.id,
+            date: formValue.date,
+            subject: subject,
             mark: null,
             examTasks: formValue.examTasks
-        } as ExamDto
+        } as ExamDto;
     }
 
     private _addMarkFormGroup() {
