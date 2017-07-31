@@ -11,10 +11,8 @@ import {ExamTaskService} from '../service/exam-task.service';
 import {ResponsiveHelperService} from '../../core/services/ui/responsive-helper.service';
 import {Util} from '../../core/util/util';
 import {ExamTaskDto} from '../model/exam.task.dto';
-import {isNullOrUndefined, isUndefined} from 'util';
-import {DialogInjector} from '@angular/material/typings/dialog/dialog-injector';
 import {DialogMode} from '../../core/common/dialog-mode';
-import {getIfExists, isNull} from 'app/core/util/helper';
+import {getIfExists} from 'app/core/util/helper';
 
 @Component({
     selector: 'exam-create-update-dialog',
@@ -29,9 +27,7 @@ export class ExamCreateUpdateDialog extends CreateUpdateDialog<ExamDto> implemen
     private _title: string;
     public withMark: boolean = false;
 
-    readonly _emptyExamTas = {
-        id: 0
-    };
+
 
     constructor(private _translateService: TranslateService,
                 private _subjectService: SubjectService,
@@ -84,8 +80,8 @@ export class ExamCreateUpdateDialog extends CreateUpdateDialog<ExamDto> implemen
             subjectName: subject.name,
             subjectId: subject.id,
             mark: null,
-            examTasks: formValue.examTasks.value
-        } as ExamDto;
+            examTasks: formValue.examTasks
+        } as ExamDto
     }
 
     private _addMarkFormGroup() {

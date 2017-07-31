@@ -27,7 +27,8 @@ where Repo : JpaRepository<Entity, Long>, Repo : QueryDslPredicateExecutor<Entit
 
     override fun save(dto: Dto): Dto {
         requestValidator.validateRequestByDto(dto)
-        val entity = repository.save(mapper.fromDto(dto))
+        var entity = mapper.fromDto(dto)
+        entity = repository.save(entity)
         return mapper.toDto(entity)
     }
 

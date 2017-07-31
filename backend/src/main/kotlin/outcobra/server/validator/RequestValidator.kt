@@ -50,7 +50,7 @@ where Dto : OutcobraDto {
 
         if (repository.exists(this.identifier)) {
             val currentEntity = repository.findOne(this.identifier) as ParentLinked
-            val parentHasChanged = this.parentLink.id != currentEntity.id
+            val parentHasChanged = this.parentLink.id != currentEntity.parent.id
             if (parentHasChanged) currentEntity.checkOwnerIsCurrent()
         } else if (parentLink.parentClass == User::class.java) {
             //if this entity is new and directly connected to the user we are able to link it automatically
