@@ -15,8 +15,9 @@ import {isTruthy} from '../../core/util/helper';
 })
 export class ExamListItemComponent implements OnInit {
     @Input() public exam: ExamDto;
-    @Output('delete') onExamDeletion: EventEmitter<ExamDto> = new EventEmitter<ExamDto>();
-    @Output('edit') onExamEdition: EventEmitter<ExamDto> = new EventEmitter<ExamDto>();
+    @Output('delete') onDelete: EventEmitter<ExamDto> = new EventEmitter<ExamDto>();
+    @Output('edit') onEdit: EventEmitter<ExamDto> = new EventEmitter<ExamDto>();
+    @Output('addMark') onAddMark: EventEmitter<ExamDto> = new EventEmitter<ExamDto>();
 
     public finishTask$: Subject<number> = new Subject();
 

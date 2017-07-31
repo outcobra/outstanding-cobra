@@ -29,10 +29,16 @@
 </div>
 <button md-button
         color="primary"
-        (click)="onExamEdition.emit(exam)">
+        (click)="onEdit.emit(exam)">
     {{ 'i18n.common.action.edit' | translate }}
 </button>
 <button md-button
-        (click)="onExamDeletion.emit(exam)">
+        (click)="onDelete.emit(exam)">
     {{ 'i18n.common.action.delete' | translate }}
+</button>
+<button md-button
+        color="accent"
+        class="right"
+        (click)="onAddMark.emit(exam)">
+    {{ 'i18n.modules.exam.mark.add' | translate }}
 </button>

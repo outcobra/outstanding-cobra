@@ -78,6 +78,9 @@
           "title": "Learning objectives",
           "add": "Add learning objective"
         },
+        "mark": {
+          "add": "Enter exam mark"
+        },
         "filter": {
           "title": "Filter exams",
           "subject": "Filter exams by subject",

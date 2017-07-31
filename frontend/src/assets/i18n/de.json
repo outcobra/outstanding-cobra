@@ -79,6 +79,9 @@
           "title": "Lernziele",
           "add": "Lernziel hinzufügen"
         },
+        "mark": {
+          "add": "Prüfungsnote eintragen"
+        },
         "filter": {
           "title": "Prüfungen filtern",
           "subject": "Nach Fach filtern",
