@@ -8,8 +8,7 @@ export class FormUtil {
     }
 
     public static getIndexOfFormControl(formArray: FormArray, toSearch: FormControl) {
-        return formArray.controls
-            .findIndex(eq(toSearch));
+        return formArray.controls.findIndex(eq(toSearch));
     }
 
     /**

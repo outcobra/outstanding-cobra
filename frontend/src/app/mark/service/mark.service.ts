@@ -1,11 +1,9 @@
 import {Injectable} from '@angular/core';
-import {AppCrudService} from '../../core/services/core/app-crud.service';
 import {MarkDto} from '../model/mark.dto';
 import {HttpInterceptor} from '../../core/http/http-interceptor';
 import {SemesterMarkDto} from '../model/semester-mark.dto';
 import {Observable} from 'rxjs/Observable';
 import {AppService} from '../../core/services/core/app.service';
-import {MarkDto} from '../model/mark.dto';
 import {MarkGroupDto} from '../model/mark-group.dto';
 
 export const MARK_PATTERN: RegExp = /^(([1-5](\.[0-9]{1,2})?)|6(\.00?)?)$/;

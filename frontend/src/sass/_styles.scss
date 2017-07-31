@@ -139,25 +139,22 @@ md-dialog-container {
         padding: 0 10px;
     }
 
-.form-group.half {
-    display: flex;
-    align-items: center;
-    .half-child {
-        width: 50%;
-        &:first-child {
-            margin-right: 2px;
-        }
-        &:last-child {
-            margin-left: 2px;
-        }
-        md-select {
-            transform: translateY(-2px); // fix misalignment of md-input and md-select
+    &.half {
+        display: flex;
+        align-items: center;
+        .half-child {
+            width: 50%;
+            &:first-child {
+                margin-right: 2px;
+            }
+            &:last-child {
+                margin-left: 2px;
+            }
+            md-select {
+                transform: translateY(-2px); // fix misalignment of md-input and md-select
+            }
         }
     }
-}
-
-.form-error {
-    @extend .text-warn;
 }
 
 // endregion
@@ -192,8 +189,6 @@ button[md-fab] {
     color: $primary-light;
 }
 
-oc-app.oc-mobile {
-    button[md-fab] {
-        bottom: 23px;
-    }
+oc-app.oc-mobile button[md-fab] {
+    bottom: 23px;
 }

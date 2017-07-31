@@ -2,26 +2,24 @@ import {MD_DIALOG_DATA, MdDialogRef} from '@angular/material';
 import {Component, Inject, OnInit} from '@angular/core';
 import {SubjectDto} from '../../manage/model/manage.dto';
 import {AbstractControl, FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {CreateUpdateDialog} from '../../core/common/create-update-dialog';
 import {ExamDto} from '../model/exam.dto';
 import {TranslateService} from '@ngx-translate/core';
 import {SubjectService} from '../../manage/service/subject.service';
 import {ExamService} from '../service/exam.service';
 import {ExamTaskService} from '../service/exam-task.service';
 import {ResponsiveHelperService} from '../../core/services/ui/responsive-helper.service';
-import {Util} from '../../core/util/util';
 import {ExamTaskDto} from '../model/exam.task.dto';
-import {isNullOrUndefined, isUndefined} from 'util';
-import {DialogInjector} from '@angular/material/typings/dialog/dialog-injector';
-import {DialogMode} from '../../core/common/dialog-mode';
-import {getIfExists, isNull} from 'app/core/util/helper';
+import {getIfExists} from 'app/core/util/helper';
+import {CreateUpdateComponent} from '../../core/common/create-update-component';
+import {ViewMode} from '../../core/common/view-mode';
+import {FormUtil} from '../../core/util/form-util';
 
 @Component({
     selector: 'exam-create-update-dialog',
     templateUrl: './exam-create-update-dialog.component.html',
     styleUrls: ['./exam-create-update-dialog.component.scss']
 })
-export class ExamCreateUpdateDialog extends CreateUpdateDialog<ExamDto> implements OnInit {
+export class ExamCreateUpdateDialog extends CreateUpdateComponent<ExamDto> implements OnInit {
 
     private _subjects: SubjectDto[];
     public examCreateUpdateForm: FormGroup;
@@ -40,7 +38,7 @@ export class ExamCreateUpdateDialog extends CreateUpdateDialog<ExamDto> implemen
                 private _examTaskService: ExamTaskService,
                 private _responsiveHelper: ResponsiveHelperService,
                 private _formBuilder: FormBuilder,
-                @Inject(MD_DIALOG_DATA) data: { mode: DialogMode, param: ExamDto }) {
+                @Inject(MD_DIALOG_DATA) data: { mode: ViewMode, param: ExamDto }) {
         super(data.mode, data.param);
     }
 
@@ -81,8 +79,7 @@ export class ExamCreateUpdateDialog extends CreateUpdateDialog<ExamDto> implemen
             name: formValue.name,
             description: formValue.description,
             date: formValue.date.date,
-            subjectName: subject.name,
-            subjectId: subject.id,
+            subject: subject,
             mark: null,
             examTasks: formValue.examTasks.value
         } as ExamDto;
@@ -119,7 +116,7 @@ export class ExamCreateUpdateDialog extends CreateUpdateDialog<ExamDto> implemen
         if (this.examCreateUpdateForm.valid && this.examCreateUpdateForm.dirty) {
             this._dialogRef.close(this._formToExamDto());
         } else {
-            Util.revalidateForm(this.examCreateUpdateForm);
+            FormUtil.revalidateForm(this.examCreateUpdateForm);
         }
     }
 

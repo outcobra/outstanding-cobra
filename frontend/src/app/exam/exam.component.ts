@@ -7,12 +7,12 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {ExamCreateUpdateDialog} from './create-update-dialog/exam-create-update-dialog.component';
 import {MdDialog} from '@angular/material';
 import {ResponsiveHelperService} from '../core/services/ui/responsive-helper.service';
-import {DialogMode} from '../core/common/dialog-mode';
 import {MEDIUM_DIALOG} from '../core/util/const';
 import {ConfirmDialogService} from '../core/services/confirm-dialog.service';
 import {isTruthy} from '../core/util/helper';
 import {Util} from '../core/util/util';
 import * as objectAssign from 'object-assign';
+import {ViewMode} from 'app/core/common/view-mode';
 
 @Component({
     selector: 'exam',
@@ -68,7 +68,7 @@ export class ExamComponent implements OnInit {
 
     public addExam() {
         this._dialogService
-            .open(ExamCreateUpdateDialog, this._makeDialogConfig(DialogMode.NEW))
+            .open(ExamCreateUpdateDialog, this._makeDialogConfig(ViewMode.NEW))
             .afterClosed()
             .first()
             .filter(isTruthy)
@@ -90,7 +90,7 @@ export class ExamComponent implements OnInit {
     }
 
     public editExam(exam: ExamDto) {
-        this._dialogService.open(ExamCreateUpdateDialog, this._makeDialogConfig(DialogMode.EDIT, exam))
+        this._dialogService.open(ExamCreateUpdateDialog, this._makeDialogConfig(ViewMode.EDIT, exam))
             .afterClosed()
             .first()
             .filter(isTruthy)
@@ -115,7 +115,7 @@ export class ExamComponent implements OnInit {
         console.error(this.displayedExams);
     }
 
-    private _makeDialogConfig(mode: DialogMode, param: ExamDto = null) {
+    private _makeDialogConfig(mode: ViewMode, param: ExamDto = null) {
         return objectAssign(this._responsiveHelper.getMobileOrGivenDialogConfig(MEDIUM_DIALOG), {
             data: {
                 mode: mode,

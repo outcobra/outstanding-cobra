@@ -5,7 +5,6 @@ import {MockSemesterService} from '../manage/manage-entities/mock-semester.servi
 import {MockInstitutionService} from '../manage/manage-entities/mock-institution.servicce';
 import {MockSchoolClassService} from '../manage/manage-entities/mock-school-class.service';
 import {MockSubjectService} from '../manage/manage-entities/mock-subject.service';
-import {MarkGroupDto} from '../../../mark/model/mark.group.dto';
 import {MarkGroupDto} from '../../../mark/model/mark-group.dto';
 
 @Injectable()
