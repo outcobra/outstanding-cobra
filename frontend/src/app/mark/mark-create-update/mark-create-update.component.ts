@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
+import {ActivatedRoute, convertToParamMap, NavigationExtras, Router} from '@angular/router';
 import {MarkDto} from '../model/mark.dto';
 import {ViewMode} from '../../core/common/view-mode';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
@@ -8,7 +8,9 @@ import {MarkGroupDto} from '../model/mark-group.dto';
 import {MARK_PATTERN, MarkService, WEIGHT_PATTERN} from '../service/mark.service';
 import {FormUtil} from '../../core/util/form-util';
 import {ConfirmDialogService} from '../../core/services/confirm-dialog.service';
-import {isTrue} from '../../core/util/helper';
+import {getIfTruthy, isNotEmpty, isTrue} from '../../core/util/helper';
+import {Observable} from 'rxjs/Observable';
+import * as objectAssign from 'object-assign';
 
 @Component({
     selector: 'mark-create-update',
@@ -19,6 +21,8 @@ export class MarkCreateUpdateComponent extends ParentLinkedCreateUpdateComponent
     private _markCreateUpdateForm: FormGroup;
     private _parentMarkGroupId: number;
     private _semesterId: number;
+    private _examId: string;
+    private _examName: string;
     private _navigationExtras: NavigationExtras;
 
     constructor(private _route: ActivatedRoute,
@@ -27,18 +31,25 @@ export class MarkCreateUpdateComponent extends ParentLinkedCreateUpdateComponent
                 private _confirmService: ConfirmDialogService,
                 private _markService: MarkService) {
         super();
-        this._route.params.subscribe(params => {
-            this._semesterId = parseInt(params['semesterId']);
-            this._navigationExtras = {
-                queryParams: {
-                    subjectId: parseInt(params['subjectId']),
-                    groupId: this._parentMarkGroupId = parseInt(params['groupId'])
-                }
-            };
-        });
     }
 
     ngOnInit() {
+        Observable.combineLatest(
+            this._route.params,
+            this._route.queryParams,
+            (params, queryParams) => convertToParamMap(objectAssign({}, params, queryParams))
+        ).subscribe(paramMap => {
+            this._semesterId = parseInt(paramMap.get('semesterId'));
+            this._examId = paramMap.get('examId');
+            this._examName = paramMap.get('examName');
+            this._navigationExtras = {
+                queryParams: {
+                    subjectId: parseInt(paramMap.get('subjectId')),
+                    groupId: this._parentMarkGroupId = parseInt(paramMap.get('groupId'))
+                }
+            };
+            console.log(this);
+        });
         this._route.data.subscribe((data: {isEdit: boolean, mark: MarkDto, parent: MarkGroupDto}) => {
             let isEdit = data.isEdit;
             this.initWithParent(isEdit ? ViewMode.EDIT : ViewMode.NEW,
@@ -48,7 +59,7 @@ export class MarkCreateUpdateComponent extends ParentLinkedCreateUpdateComponent
         this._markCreateUpdateForm = this._formBuilder.group({
             value: [this.getParamOrDefault('value'), Validators.compose([Validators.required, Validators.pattern(MARK_PATTERN)])],
             weight: [this.getParamOrDefault('weight', 1), Validators.compose([Validators.required, Validators.pattern(WEIGHT_PATTERN)])],
-            description: [this.getParamOrDefault('description'), Validators.required]
+            description: [this.getParamOrDefault('description', getIfTruthy(this, '_examName', '')), Validators.required]
         });
     }
 
@@ -83,6 +94,7 @@ export class MarkCreateUpdateComponent extends ParentLinkedCreateUpdateComponent
             value: formValue.value,
             weight: formValue.weight,
             description: formValue.description,
+            examId: isNotEmpty(this._examId) ? parseInt(this._examId) : null,
             markGroupId: this._parentMarkGroupId
         } as MarkDto;
     }

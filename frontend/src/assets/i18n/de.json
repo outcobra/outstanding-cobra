@@ -87,7 +87,8 @@
           "add": "Lernziel hinzufügen"
         },
         "mark": {
-          "add": "Prüfungsnote eintragen"
+          "add": "Prüfungsnote eintragen",
+          "title": "Prüfungsnote"
         },
         "filter": {
           "title": "Prüfungen filtern",

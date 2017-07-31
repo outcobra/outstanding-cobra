@@ -14,6 +14,7 @@ import {MdCheckboxModule, MdCoreModule, MdInputModule} from '@angular/material';
 import {ExamListItemComponent} from './exam-list-item/exam-list-item.component';
 import {ExamCreateUpdateDialog} from './create-update-dialog/exam-create-update-dialog.component';
 import {ExamTaskService} from './service/exam-task.service';
+import {PipeModule} from '../shared/pipe.module';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import {ExamTaskService} from './service/exam-task.service';
         TranslateModule,
         ExamRoutingModule,
         SharedModule,
-        OCUiModule
+        OCUiModule,
+        PipeModule
     ],
     providers: [
         ExamService,

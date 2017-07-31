@@ -13,11 +13,9 @@ import {isTruthy} from '../core/util/helper';
 import {Util} from '../core/util/util';
 import * as objectAssign from 'object-assign';
 import {ViewMode} from 'app/core/common/view-mode';
-import {SubjectDto} from '../manage/model/manage.dto';
 import {Subject} from 'rxjs/Subject';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MarkService} from '../mark/service/mark.service';
-import {Observable} from 'rxjs/Observable';
 
 @Component({
     selector: 'exam',
@@ -58,7 +56,7 @@ export class ExamComponent implements OnInit {
                 this._markService.getMarkGroupBySubjectId(exam.subject.id)
                     .subscribe(subjectGroup =>
                         this._router.navigate([`mark/semester/${exam.subject.semesterId}/subject/${exam.subject.id}/group/${subjectGroup.id}/add`],
-                            {relativeTo: this._route.parent})
+                            {relativeTo: this._route.parent, queryParams: {examId: exam.id, examName: exam.name}}) // TODO replace this with stepper components for choosing markgroups etc. (waiting for angular/material2)
                     );
             });
     }

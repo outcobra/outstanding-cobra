@@ -15,7 +15,7 @@ data class ExamDto(val id: Long = 0,
                    val date: LocalDate? = null,
                    val mark: MarkValueDto? = null,
                    val examTasks: List<ExamTaskDto> = listOf(),
-                   val subject: SubjectDto) : OutcobraDto {
+                   val subject: SubjectDto = SubjectDto()) : OutcobraDto {
 
     override fun getIdentifier(): Long = id
     override fun getParentLink(): ParentLink = ParentLink.make(subject.id, Subject::class.java)

@@ -12,6 +12,7 @@ data class MarkValueDto(override val id: Long = 0,
                         override val value: Double = 0.0,
                         override val weight: Double = 0.0,
                         override val description: String = "",
+                        val examId: Long = 0L,
                         val markGroupId: Long = 0) : BaseMarkDto {
 
     override fun getIdentifier(): Long = id

@@ -34,7 +34,7 @@ export function isNotEmpty(toCheck: string|Array<any>): boolean {
     return !isEmpty(toCheck);
 }
 
-export function getIfExists(object: any, prop: string, defaultValue: any = null) {
+export function getIfTruthy(object: any, prop: string, defaultValue: any = null) {
     if (isTruthy(object[prop])) {
         return object[prop];
     }

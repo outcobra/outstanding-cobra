@@ -10,8 +10,14 @@
     </oc-icon-data>
     <oc-icon-data iconName="today"
                   titleKey="i18n.common.label.dueDate"
-                  [showDivider]="exam.examTasks?.length">
+                  [showDivider]="exam.mark">
         <p class="exam-property">{{ exam.date | date:'fullDate' }}</p>
+    </oc-icon-data>
+    <oc-icon-data iconName="poll"
+                  titleKey="i18n.modules.exam.mark.title"
+                  [showDivider]="exam.examTasks?.length"
+                  *ngIf="exam.mark">
+        <p class="exam-property">{{ exam.mark.value | markValue }}</p>
     </oc-icon-data>
     <oc-icon-data *ngIf="exam.examTasks?.length"
                   iconName="assignment_turned_in"
@@ -39,6 +45,7 @@
 <button md-button
         color="accent"
         class="right"
-        (click)="onAddMark.emit(exam)">
+        (click)="onAddMark.emit(exam)"
+        *ngIf="!exam.mark">
     {{ 'i18n.modules.exam.mark.add' | translate }}
 </button>

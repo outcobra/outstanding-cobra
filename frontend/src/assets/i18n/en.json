@@ -86,7 +86,8 @@
           "add": "Add learning objective"
         },
         "mark": {
-          "add": "Enter exam mark"
+          "add": "Enter exam mark",
+          "title": "Exam mark"
         },
         "filter": {
           "title": "Filter exams",

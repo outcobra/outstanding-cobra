@@ -9,7 +9,7 @@ import {ExamService} from '../service/exam.service';
 import {ExamTaskService} from '../service/exam-task.service';
 import {ResponsiveHelperService} from '../../core/services/ui/responsive-helper.service';
 import {ExamTaskDto} from '../model/exam.task.dto';
-import {getIfExists} from 'app/core/util/helper';
+import {getIfTruthy} from 'app/core/util/helper';
 import {CreateUpdateComponent} from '../../core/common/create-update-component';
 import {ViewMode} from '../../core/common/view-mode';
 import {FormUtil} from '../../core/util/form-util';
@@ -49,9 +49,9 @@ export class ExamCreateUpdateDialog extends CreateUpdateComponent<ExamDto> imple
 
     private _formGroupForDtoOrDefault(examTask = {} as ExamTaskDto): FormGroup {
         return this._formBuilder.group({
-            id: getIfExists(examTask, 'id', 0),
-            finished: [getIfExists(examTask, 'finished', false)],
-            task: [getIfExists(examTask, 'task', ''), Validators.required]
+            id: getIfTruthy(examTask, 'id', 0),
+            finished: [getIfTruthy(examTask, 'finished', false)],
+            task: [getIfTruthy(examTask, 'task', ''), Validators.required]
         });
     }
 
