@@ -104,7 +104,7 @@ export class ExamComponent implements OnInit {
     private _displayForFilter(all: boolean = true) {
         this.displayedExams = all ? this._allExams : this._activeExams;
         this.displayedExams.filter((exam: ExamDto) => {
-            let examString = `${exam.name} ${exam.description} ${exam.subjectName}`;
+            let examString = `${exam.name} ${exam.description} ${exam.subject.name}`;
             exam.examTasks.forEach((et: ExamTaskDto) => examString += et.task);
             examString.toLowerCase();
             console.warn(examString);

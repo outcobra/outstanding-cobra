@@ -13,11 +13,10 @@ data class ExamDto(val id: Long = 0,
                    val name: String = "",
                    val description: String = "",
                    val date: LocalDate? = null,
-                   val subjectName: String = "",
                    val mark: MarkValueDto? = null,
                    val examTasks: List<ExamTaskDto> = listOf(),
-                   val subjectId: Long = 0) : OutcobraDto {
+                   val subject: SubjectDto) : OutcobraDto {
 
     override fun getIdentifier(): Long = id
-    override fun getParentLink(): ParentLink = ParentLink.make(subjectId, Subject::class.java)
+    override fun getParentLink(): ParentLink = ParentLink.make(subject.id, Subject::class.java)
 }

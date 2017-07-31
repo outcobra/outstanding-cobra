@@ -1,3 +1,4 @@
+@import '../../sass/color-variables';
 
 md-input-container#exam-search {
     display: block !important;
@@ -13,5 +14,18 @@ md-input-container#exam-search {
         height: 40px;
         width: 100%;
         font-size: 25px !important;
+    }
+}
+
+md-expansion-panel-header {
+    .subject-letter-icon {
+        border-radius: 50%;
+        line-height: 32px;
+        font-size: 1.5em;
+        text-align: center;
+        color: $primary-light;
+        width: 32px;
+        height: 32px;
+        margin: 8px 8px 8px 0;
     }
 }

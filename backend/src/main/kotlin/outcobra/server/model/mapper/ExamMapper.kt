@@ -20,6 +20,7 @@ import javax.inject.Inject
 class ExamMapper @Inject constructor(val markMapper: Mapper<MarkValue, MarkValueDto>,
                                      val examTaskMapper: Mapper<ExamTask, ExamTaskDto>,
                                      val subjectRepository: SubjectRepository,
+                                     val subjectMapper: SubjectMapper,
                                      val requestValidator: RequestValidator<ExamDto>)
     : Mapper<Exam, ExamDto>, BaseMapper() {
 
@@ -27,7 +28,7 @@ class ExamMapper @Inject constructor(val markMapper: Mapper<MarkValue, MarkValue
         if (from.examTasks.isNotEmpty()) {
             validateChildren(from.examTasks.map { it.id }, ExamTask::class, from.id, Exam::class)
         }
-        val subject = subjectRepository.findOne(from.subjectId)
+        val subject = subjectRepository.findOne(from.subject.id)
         var markValue: MarkValue? = null
         if (from.mark != null) {
             markValue = markMapper.fromDto(from.mark)
@@ -42,7 +43,7 @@ class ExamMapper @Inject constructor(val markMapper: Mapper<MarkValue, MarkValue
         if (from.mark != null) {
             markValue = markMapper.toDto(from.mark as MarkValue)
         }
-        return ExamDto(from.id, from.name, from.description ?: "", from.date, from.subject.name, markValue,
-                from.tasks.map { examTaskMapper.toDto(it) }, from.subject.id)
+        return ExamDto(from.id, from.name, from.description ?: "", from.date, markValue,
+                from.tasks.map { examTaskMapper.toDto(it) }, subjectMapper.toDto(from.subject))
     }
 }
