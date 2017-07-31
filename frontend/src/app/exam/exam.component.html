@@ -8,13 +8,16 @@
                    formControlName="searchTerm">
         </md-input-container>
     </div>
-    <md-accordion displayMode="default">
-        <exam-list-item *ngFor="let exam of displayedExams"
-                        [exam]="exam" (deleteExam)="deleteExam($event)" (editExam)="editExam($event)">
-        </exam-list-item>
+    <md-accordion>
+        <md-expansion-panel *ngFor="let exam of displayedExams">
+            <md-expansion-panel-header>
+                <h6 md-subheader>{{ exam.name }}</h6>
+            </md-expansion-panel-header>
+            <exam-list-item [exam]="exam" (delete)="deleteExam($event)" (edit)="editExam($event)">
+            </exam-list-item>
+        </md-expansion-panel>
     </md-accordion>
     <button md-fab [mdTooltip]="'i18n.modules.exam.add' | translate" mdTooltipPosition="left" (click)="addExam()">
         <md-icon>add</md-icon>
     </button>
-
 </div>

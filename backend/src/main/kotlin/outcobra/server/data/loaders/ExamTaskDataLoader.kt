@@ -30,12 +30,11 @@ class ExamTaskDataLoader @Inject constructor(val examTaskRepository: ExamTaskRep
     override fun shouldLoad(): Boolean = true
 
     override fun load() {
-        val exams = listOf(SCRUM_EXAM, DATABASES_EXAM, OOP_DESIGN_EXAM, OOP_EXAM, PROJECT_EXAM,
-                GUP_EXAM, MATHS_EXAM, PHYSICS_EXAM, GERMAN_EXAM)
-        for ((index, value) in exams.withIndex()) {
+        listOf(SCRUM_EXAM, DATABASES_EXAM, OOP_DESIGN_EXAM, OOP_EXAM, PROJECT_EXAM,
+                GUP_EXAM, MATHS_EXAM, PHYSICS_EXAM, GERMAN_EXAM).forEachIndexed { index, exam ->
             for (i in 0 until index) {
                 val finished = Random().nextBoolean()
-                var entity = ExamTask("${value.name} #$i", value, finished)
+                var entity = ExamTask("${exam.name} #$i", exam, finished)
                 entity = examTaskRepository.save(entity)
                 LOGGER.debug("Saved ${entity.task} with id ${entity.id}")
             }

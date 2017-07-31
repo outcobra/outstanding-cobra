@@ -73,7 +73,7 @@
         "linkTitle": "Prüfungen",
         "listTitle": "Deine Prüfungen",
         "add": "Prüfung hinzufügen",
-        "desc": "Prüfungs-Beschreibung",
+        "description": "Prüfungs-Beschreibung",
         "name": "Prüfungs-Name",
         "tasks": "Lernziele",
         "filter": {

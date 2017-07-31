@@ -48,7 +48,7 @@ class ExamDataLoader @Inject constructor(val examRepository: ExamRepository,
                 null, MarkValue(getRandomMark(), getRandomWeight()))
         var GUP_EXAM = Exam("WW2", LocalDate.now().minusWeeks(1), listOf(),
                 null, MarkValue(getRandomMark(), getRandomWeight()))
-        var MATHS_EXAM = Exam("Gonometrie", LocalDate.now().plusDays(1), listOf(),
+        var MATHS_EXAM = Exam("Goniometrie", LocalDate.now().plusDays(1), listOf(),
                 null, null)
         var PROJECT_EXAM = Exam("Präsentation", LocalDate.now().minusMonths(1), listOf(),
                 null, MarkValue(getRandomMark(), getRandomWeight()))

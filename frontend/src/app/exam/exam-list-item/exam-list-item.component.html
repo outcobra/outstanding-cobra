@@ -1,46 +1,38 @@
-<md-expansion-panel>
-    <md-expansion-panel-header>
-        <md-icon>filter_6</md-icon>
-        <h6 md-subheader>{{ exam.name }}</h6>
-    </md-expansion-panel-header>
-    <md-card-content>
-        <div [formGroup]="examFormGroup" class="form-group">
-            <oc-icon-data iconName="title" titleKey="i18n.modules.exam.desc">
-                <p class="exam-property">{{ exam.name }}</p>
-            </oc-icon-data>
-            <oc-icon-data iconName="description" titleKey="i18n.modules.exam.desc">
-                <p class="exam-property">{{ exam.description }}</p>
-            </oc-icon-data>
-            <!-- EXAM DESC END -->
-            <!-- EXAM TODO_DATE START -->
-            <oc-icon-data iconName="today" titleKey="i18n.common.label.date">
-                <md-datepicker #examDatePicker *ngIf="editMode"></md-datepicker>
-                <p class="exam-property">{{ exam.date | date:'fullDate' }}</p>
-            </oc-icon-data>
-            <oc-icon-data iconName="assignment_turned_in" titleKey="i18n.modules.exam.tasks">
-                <div formArrayName="tasks">
-                    <md-list>
-                        <div *ngFor="let examTask of examTaskArray.controls; let i=index"
-                             [formGroupName]="i">
-                            <md-list-item>
-                                <md-checkbox class="exam-property" formControlName="finished"
-                                             (click)="changeExamTaskState(examTask.value.id)">
-                                    {{ examTask.value.task }}
-                                </md-checkbox>
-                            </md-list-item>
-                        </div>
-                    </md-list>
-                </div>
-            </oc-icon-data>
-        </div>
-    </md-card-content>
-    <md-card-actions>
-        <!-- EXAM PROGRESS END-->
-        <button md-raised-button color="primary" (click)="editExam($event)">
-            {{ 'i18n.common.action.edit' | translate }}
-        </button>
-        <button md-raised-button (click)="deleteExam($event)">
-            {{ 'i18n.common.action.delete' | translate }}
-        </button>
-    </md-card-actions>
-</md-expansion-panel>
+<div class="form-group">
+    <oc-icon-data iconName="title"
+                  titleKey="i18n.modules.exam.name">
+        <p class="exam-property">{{ exam.name }}</p>
+    </oc-icon-data>
+    <oc-icon-data *ngIf="exam.description?.length"
+                  iconName="description"
+                  titleKey="i18n.modules.exam.description">
+        <p class="exam-property">{{ exam.description }}</p>
+    </oc-icon-data>
+    <oc-icon-data iconName="today"
+                  titleKey="i18n.common.label.dueDate"
+                  [showDivider]="exam.examTasks?.length">
+        <p class="exam-property">{{ exam.date | date:'fullDate' }}</p>
+    </oc-icon-data>
+    <oc-icon-data *ngIf="exam.examTasks?.length"
+                  iconName="assignment_turned_in"
+                  titleKey="i18n.modules.exam.tasks"
+                  [showDivider]="false">
+        <md-list>
+            <md-list-item *ngFor="let examTask of exam.examTasks">
+                <md-checkbox class="exam-property"
+                             (change)="finishTask$.next(examTask.id)">
+                    {{ examTask.task }}
+                </md-checkbox>
+            </md-list-item>
+        </md-list>
+    </oc-icon-data>
+</div>
+<button md-button
+        color="primary"
+        (click)="onExamEdition.emit(exam)">
+    {{ 'i18n.common.action.edit' | translate }}
+</button>
+<button md-button
+        (click)="onExamDeletion.emit(exam)">
+    {{ 'i18n.common.action.delete' | translate }}
+</button>

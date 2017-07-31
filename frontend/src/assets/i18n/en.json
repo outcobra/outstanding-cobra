@@ -72,7 +72,7 @@
         "linkTitle": "Exams",
         "listTitle": "Your exams",
         "add": "Add exam",
-        "desc": "Exam description",
+        "description": "Exam description",
         "name": "Exam name",
         "tasks": "learning goals",
         "filter": {

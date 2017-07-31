@@ -150,9 +150,4 @@ export class Util {
         }
         return control.valid;
     }
-
-    public static bindAndCall(func: Function, thisArg: any, args?: any) {
-        let f = args ? func.bind(thisArg, args) : func.bind(thisArg);
-        return f.call();
-    }
 }

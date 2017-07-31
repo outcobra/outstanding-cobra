@@ -12,12 +12,19 @@ md-input-container {
     }
 }
 
-.half {
-    float: left;
-    width: 50%;
-    &datepicker {
-        .mat-input-container {
-            width: 50%;
+.form-group.half {
+    display: flex;
+    align-items: center;
+    .half-child {
+        width: 50%;
+        &:first-child {
+            margin-right: 2px;
+        }
+        &:last-child {
+            margin-left: 2px;
+        }
+        md-select {
+            transform: translateY(-2px);
         }
     }
 }

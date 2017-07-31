@@ -1,9 +1,14 @@
 import {DialogMode} from './dialog-mode';
-import {isUndefined} from 'util';
+import {isNull} from '../util/helper';
 
 export class CreateUpdateDialog<T> {
     private _mode: DialogMode;
     private _param: T;
+
+    constructor(mode?: DialogMode, param?: T) {
+        this._mode = mode;
+        this._param = param;
+    }
 
     public init(mode: DialogMode, param?: T): void {
         this._mode = mode;
@@ -20,9 +25,9 @@ export class CreateUpdateDialog<T> {
         return this._param;
     }
 
-    protected getParamOrDefault(propertyPath: string) {
+    protected getParamOrDefault(propertyPath: string, defaultValue: any = '') {
         if (!this.isEditMode()) {
-            return '';
+            return defaultValue;
         }
         if (!propertyPath.includes('.') && this.param.hasOwnProperty(propertyPath)) {
             return this.param[propertyPath];
@@ -30,7 +35,7 @@ export class CreateUpdateDialog<T> {
         else {
             let prop = this.param;
             for (let pathPart of propertyPath.split('.')) {
-                if (!prop.hasOwnProperty(pathPart) || !isUndefined(prop)) return '';
+                if (!prop.hasOwnProperty(pathPart) || !isNull(prop)) return defaultValue;
                 prop = prop[pathPart];
             }
             return prop;

@@ -27,7 +27,7 @@ export class ConfirmDialogService {
         component.title = title;
         component.message = message;
         component.cancelable = cancelable;
-        return dialogRef.afterClosed();
+        return dialogRef.afterClosed().first();
     }
 
 

@@ -34,6 +34,13 @@ export function isNotEmpty(toCheck: string|Array<any>): boolean {
     return !isEmpty(toCheck);
 }
 
+export function getIfExists(object: any, prop: string, defaultValue: any = null) {
+    if (isTruthy(object[prop])) {
+        return object[prop];
+    }
+    return defaultValue;
+}
+
 /**
  * combines multiple {Predicate}s to an and chain of {Predicate}s
  * returns {Predicate} that evaluates all {Predicate}s in the param
