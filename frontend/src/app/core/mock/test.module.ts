@@ -45,6 +45,7 @@ import {ObservableMedia} from '@angular/flex-layout';
 import {MockObservableMedia} from './ui/mock-observable-media.service';
 import {MarkService} from '../../mark/service/mark.service';
 import {MockMarkService} from './mark/mock-mark.service';
+import {PipeModule} from '../../shared/pipe.module';
 
 @NgModule({
     imports: [
@@ -55,7 +56,8 @@ import {MockMarkService} from './mark/mock-mark.service';
         TranslateModule.forRoot({
             loader: {provide: TranslateLoader, useClass: MockTranslateLoader}
         }),
-        SimpleNotificationsModule.forRoot()
+        SimpleNotificationsModule.forRoot(),
+        PipeModule
     ],
     exports: [
         CommonModule,
@@ -63,7 +65,8 @@ import {MockMarkService} from './mark/mock-mark.service';
         NoopAnimationsModule,
         OCMaterialModule,
         TranslateModule,
-        SimpleNotificationsModule
+        SimpleNotificationsModule,
+        PipeModule
     ],
     providers: [
         {

@@ -1,5 +1,5 @@
 <div class="container" fxFlex fxFlex.gt-sm="60" fxFlexOffset.gt-sm="20">
-    <h5>{{ 'i18n.modules.mark.semester.average' | translate }} {{ semesterMark.value | markValue }}</h5>
+    <h1>{{ 'i18n.modules.mark.semester.average' | translate }} {{ semesterMark.value | markValue }}</h1>
     <md-card class="oc-card">
         <md-card-content>
             <oc-collapsible [active]="true">
@@ -20,19 +20,28 @@
                             <span>{{ subject.name }}</span>
                             <div class="oc-filler"></div>
                             <span><b>{{ subject.subjectMarkGroup.value | markValue }}</b></span>
-                            <md-icon [mdTooltip]="'i18n.modules.mark.common.average' | translate" svgIcon="average"></md-icon><!-- TODO needs replacement -->
+                            <md-icon [mdTooltip]="'i18n.modules.mark.common.average' | translate"
+                                     svgIcon="average"></md-icon>
                         </oc-collapsible-header>
                         <md-list class="mark-value-list">
                             <md-list-item class="subject-mark-group-controls">
-                                <button md-button color="accent" (click)="newMarkGroup$.next(subject.subjectMarkGroup)">
+                                <button md-button
+                                        color="accent"
+                                        (click)="newMarkGroup$.next(subject.subjectMarkGroup)"
+                                        [disabled]="!currentSemester">
                                     Add Mark Group
                                 </button>
-                                <button md-button color="accent" (click)="newMark$.next(subject.subjectMarkGroup)">Add
-                                    Mark
+                                <button md-button
+                                        color="accent"
+                                        (click)="newMark$.next(subject.subjectMarkGroup)"
+                                        [disabled]="!currentSemester">
+                                    Add Mark
                                 </button>
                                 <div class="oc-filler"></div>
                                 <mark-weight-updater [markGroup]="subject.subjectMarkGroup"
-                                                     (weightChange)="editSubjectWeight$.next($event)"></mark-weight-updater>
+                                                     (weightChange)="editSubjectWeight$.next($event)"
+                                                     [disabled]="!currentSemester">
+                                </mark-weight-updater>
                             </md-list-item>
 
                             <md-list-item class="mark-list-item"
@@ -48,13 +57,17 @@
                                 <oc-collapsible [active]="isActiveMarkGroup(markGroup.id)">
                                     <oc-collapsible-header class="mark-mark-group-header" [ngClass]="headerClasses">
                                         <mark-value [mark]="markGroup"
+                                                    [editEnabled]="currentSemester"
                                                     (delete)="deleteMarkGroup$.next(markGroup.id)"
                                                     (edit)="editMarkGroup$.next({subjectId: markGroup.subjectId, groupId: markGroup.id})"></mark-value>
                                     </oc-collapsible-header>
                                     <md-list class="mark-group-value-list">
                                         <md-list-item>
-                                            <button md-button color="accent" (click)="newMark$.next(markGroup)">Add
-                                                Mark
+                                            <button md-button
+                                                    color="accent"
+                                                    (click)="newMark$.next(markGroup)"
+                                                    [disabled]="!currentSemester">
+                                                Add Mark
                                             </button>
                                         </md-list-item>
                                         <md-list-item class="mark-list-item"

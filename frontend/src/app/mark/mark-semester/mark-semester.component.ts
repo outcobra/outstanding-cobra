@@ -9,6 +9,7 @@ import {Observable} from 'rxjs/Observable';
 import {MarkGroupDto} from '../model/mark-group.dto';
 import {Subject} from 'rxjs/Subject';
 import {ResponsiveHelperService} from '../../core/services/ui/responsive-helper.service';
+import {DateUtil} from '../../core/services/date-util.service';
 
 type EditMark = {
     subjectId: number,
@@ -34,6 +35,7 @@ export class MarkSemesterComponent implements OnInit {
         groupId: number
     };
     private _headerClasses;
+    private _currentSemester: boolean;
 
     public newMark$: Subject<MarkGroupDto> = new Subject();
     public newMarkGroup$: Subject<MarkGroupDto> = new Subject();
@@ -53,7 +55,10 @@ export class MarkSemesterComponent implements OnInit {
 
     ngOnInit() {
         this._activatedRoute.data
-            .subscribe((sm: { semesterMark: SemesterMarkDto }) => this.semesterMark = sm.semesterMark);
+            .subscribe((sm: { semesterMark: SemesterMarkDto }) => {
+                this.semesterMark = sm.semesterMark;
+                this._currentSemester = DateUtil.isBetweenDaysInclusive(new Date(), this.semesterMark.validFrom, this.semesterMark.validTo);
+            });
         this._activatedRoute.queryParamMap
             .filter(params => isNotEmpty(params.keys) && params.has('subjectId'))
             .subscribe(params => {
@@ -65,38 +70,40 @@ export class MarkSemesterComponent implements OnInit {
         this._updateHeaderClasses({mobile: this._responsiveHelperService.isMobile()});
 
         // region subject initialization
-        this.newMark$.subscribe((markGroup) =>
-            this._router.navigate([`semester/${this.semesterMark.id}/subject/${markGroup.subjectId}/group/${markGroup.id}/add`],
-                {relativeTo: this._activatedRoute.parent})
-        );
+        if (this._currentSemester) {
+            this.newMark$.subscribe((markGroup) =>
+                this._router.navigate([`semester/${this.semesterMark.id}/subject/${markGroup.subjectId}/group/${markGroup.id}/add`],
+                    {relativeTo: this._activatedRoute.parent})
+            );
 
-        this.newMarkGroup$.subscribe((markGroup) =>
-            this._router.navigate([`semester/${this.semesterMark.id}/subject/${markGroup.subjectId}/group/add`],
-                {relativeTo: this._activatedRoute.parent})
-        );
+            this.newMarkGroup$.subscribe((markGroup) =>
+                this._router.navigate([`semester/${this.semesterMark.id}/subject/${markGroup.subjectId}/group/add`],
+                    {relativeTo: this._activatedRoute.parent})
+            );
 
-        this._buildDeleteChain(this.deleteMark$, 'mark', this._markService.deleteMark, console.log);
-        this._buildDeleteChain(this.deleteMarkGroup$, 'markGroup', this._markService.deleteMarkGroup, console.log);
+            this._buildDeleteChain(this.deleteMark$, 'mark', this._markService.deleteMark, console.log);
+            this._buildDeleteChain(this.deleteMarkGroup$, 'markGroup', this._markService.deleteMarkGroup, console.log);
 
-        this.editMark$.subscribe(editMark => {
-            this._router.navigate([`semester/${this.semesterMark.id}/subject/${editMark.subjectId}/group/${editMark.groupId}/edit/${editMark.markId}`],
-                {relativeTo: this._activatedRoute.parent});
-        });
-        this.editMarkGroup$.subscribe(markGroup => {
-            console.log(markGroup);
-            this._router.navigate([`semester/${this.semesterMark.id}/subject/${markGroup.subjectId}/group/edit/${markGroup.groupId}`],
-                {relativeTo: this._activatedRoute.parent});
-        });
+            this.editMark$.subscribe(editMark => {
+                this._router.navigate([`semester/${this.semesterMark.id}/subject/${editMark.subjectId}/group/${editMark.groupId}/edit/${editMark.markId}`],
+                    {relativeTo: this._activatedRoute.parent});
+            });
+            this.editMarkGroup$.subscribe(markGroup => {
+                console.log(markGroup);
+                this._router.navigate([`semester/${this.semesterMark.id}/subject/${markGroup.subjectId}/group/edit/${markGroup.groupId}`],
+                    {relativeTo: this._activatedRoute.parent});
+            });
 
-        this.editSubjectWeight$.subscribe(markGroup => {
-            this._markService.saveMarkGroup(markGroup)
-                .switchMap(() => this._markService.getMarkSemesterBySemesterId(this.semesterMark.id))
-                .subscribe((semesterMark: SemesterMarkDto) => {
-                    this.semesterMark.value = semesterMark.value;
-                    this.semesterMark.subjects.filter(sub => sub.id === markGroup.subjectId)
-                        .forEach(sub => sub.subjectMarkGroup.weight = markGroup.weight);
-                }); // TODO open opened things again
-        });
+            this.editSubjectWeight$.subscribe(markGroup => {
+                this._markService.saveMarkGroup(markGroup)
+                    .switchMap(() => this._markService.getMarkSemesterBySemesterId(this.semesterMark.id))
+                    .subscribe((semesterMark: SemesterMarkDto) => {
+                        this.semesterMark.value = semesterMark.value;
+                        this.semesterMark.subjects.filter(sub => sub.id === markGroup.subjectId)
+                            .forEach(sub => sub.subjectMarkGroup.weight = markGroup.weight);
+                    });
+            });
+        }
         // endregion
 
         this._responsiveHelperService.listenForBreakpointChange().subscribe(this._updateHeaderClasses.bind(this));
@@ -152,5 +159,10 @@ export class MarkSemesterComponent implements OnInit {
 
     get headerClasses() {
         return this._headerClasses;
+    }
+
+
+    get currentSemester(): boolean {
+        return this._currentSemester;
     }
 }
