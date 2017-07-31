@@ -22,14 +22,16 @@ class DefaultExamTaskService @Inject constructor(mapper: Mapper<ExamTask, ExamTa
 
     override fun saveAll(examTasks: List<ExamTaskDto>): List<ExamTaskDto> {
         examTasks.forEach { requestValidator.validateRequestByDto(it) }
-        return examTasks.map { save(it) }
+        val result = examTasks.map { save(it) }
+        repository.flush()
+        return result
     }
 
     override fun changeState(examTaskId: Long): ExamTaskDto {
         requestValidator.validateRequestById(examTaskId, type)
         var examTask = repository.findOne(examTaskId)
         examTask.isFinished = !examTask.isFinished
-        examTask = repository.save(examTask)
+        examTask = repository.saveAndFlush(examTask)
         return mapper.toDto(examTask)
     }
 }

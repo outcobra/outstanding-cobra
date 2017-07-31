@@ -39,12 +39,12 @@ class DefaultExamService
     }
 
     override fun save(dto: ExamDto): ExamDto {
-        //TODO review ugly hack
+        val tasks = dto.examTasks
+        dto.examTasks.drop(tasks.size)
         val savedDto = super.save(dto)
-        if (dto.id == 0L) {
-            dto.examTasks.forEach { it.examId = savedDto.id }
-        }
-        examTaskService.saveAll(dto.examTasks)
+        tasks.forEach { it.examId = savedDto.id }
+        examTaskService.saveAll(tasks)
+        repository.flush()
         return readById(savedDto.id)
     }
 

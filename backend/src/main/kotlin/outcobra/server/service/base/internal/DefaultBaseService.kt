@@ -26,15 +26,18 @@ class DefaultBaseService<Entity, Dto, out Repo>(val mapper: Mapper<Entity, Dto>,
 where Repo : JpaRepository<Entity, Long>, Repo : QueryDslPredicateExecutor<Entity>, Dto : OutcobraDto, Entity : ParentLinked {
 
     override fun save(dto: Dto): Dto {
+        repository.flush()
         requestValidator.validateRequestByDto(dto)
         var entity = mapper.fromDto(dto)
-        entity = repository.save(entity)
+        entity = repository.saveAndFlush(entity)
         return mapper.toDto(entity)
     }
 
     override fun readById(id: Long): Dto {
+        repository.flush()
         requestValidator.validateRequestById(id, type)
-        return mapper.toDto(repository.findOne(id))
+        val entity = repository.findOne(id)
+        return mapper.toDto(entity)
     }
 
     override fun delete(id: Long) {
