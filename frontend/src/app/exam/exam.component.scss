@@ -28,4 +28,7 @@ md-expansion-panel-header {
         height: 32px;
         margin: 8px 8px 8px 0;
     }
+    &.mat-expanded .subject-letter-icon {
+        margin: 16px 8px 16px 0;
+    }
 }

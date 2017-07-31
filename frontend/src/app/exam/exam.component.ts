@@ -13,6 +13,11 @@ import {isTruthy} from '../core/util/helper';
 import {Util} from '../core/util/util';
 import * as objectAssign from 'object-assign';
 import {ViewMode} from 'app/core/common/view-mode';
+import {SubjectDto} from '../manage/model/manage.dto';
+import {Subject} from 'rxjs/Subject';
+import {ActivatedRoute, Router} from '@angular/router';
+import {MarkService} from '../mark/service/mark.service';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
     selector: 'exam',
@@ -28,7 +33,12 @@ export class ExamComponent implements OnInit {
     private _searchFilter: string = '';
     private _searchForm: FormGroup;
 
+    public addMark$: Subject<ExamDto> = new Subject();
+
     constructor(private _examService: ExamService,
+                private _markService: MarkService,
+                private _router: Router,
+                private _route: ActivatedRoute,
                 private _dialogService: MdDialog,
                 private _responsiveHelper: ResponsiveHelperService,
                 private _notificationService: NotificationWrapperService,
@@ -42,6 +52,15 @@ export class ExamComponent implements OnInit {
         this._loadActiveExams();
         this._loadAllExams();
         //this._displayForFilter()
+
+        this.addMark$
+            .subscribe(exam => {
+                this._markService.getMarkGroupBySubjectId(exam.subject.id)
+                    .subscribe(subjectGroup =>
+                        this._router.navigate([`mark/semester/${exam.subject.semesterId}/subject/${exam.subject.id}/group/${subjectGroup.id}/add`],
+                            {relativeTo: this._route.parent})
+                    );
+            });
     }
 
     private _loadActiveExams() {
