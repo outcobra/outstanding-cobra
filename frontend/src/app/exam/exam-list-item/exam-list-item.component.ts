@@ -1,12 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ExamDto} from '../model/exam.dto';
-import {AbstractControl, FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {DateUtil} from '../../core/services/date-util.service';
-import {ExamTaskDto} from '../model/exam.task.dto';
-import {isUndefined} from 'util';
 import {ExamTaskService} from '../service/exam-task.service';
 import {Subject} from 'rxjs/Subject';
-import {isTruthy} from '../../core/util/helper';
+import {ExamTaskDto} from '../model/exam.task.dto';
+import {Util} from '../../core/util/util';
 
 @Component({
     selector: 'exam-list-item',
@@ -25,7 +22,16 @@ export class ExamListItemComponent implements OnInit {
 
     ngOnInit() {
         this.finishTask$
-            .filter(isTruthy)
-            .subscribe(id => this._examTaskService.changeState(id));
+            .subscribe(id => {
+                this._examTaskService.changeState(id)
+                    .subscribe((examTask: ExamTaskDto) => {
+                        this._updateExamTaskList(examTask)
+                    })
+            });
+    }
+
+    private _updateExamTaskList(examTask: ExamTaskDto) {
+        Util.arrayRemove(this.exam.examTasks, (item: ExamTaskDto) => item.id == examTask.id)
+        this.exam.examTasks.push(examTask)
     }
 }

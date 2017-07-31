@@ -19,7 +19,7 @@
                   [showDivider]="false">
         <md-list>
             <md-list-item *ngFor="let examTask of exam.examTasks">
-                <md-checkbox class="exam-property"
+                <md-checkbox class="exam-property" [checked]="examTask.finished"
                              (change)="finishTask$.next(examTask.id)">
                     {{ examTask.task }}
                 </md-checkbox>
