@@ -25,8 +25,8 @@
                 </md-error>
             </md-input-container>
         </div>
-        <div formGroupName="dates" class="form-group">
-            <div class="half">
+        <div formGroupName="dates" class="form-group half">
+            <div class="half-child">
                 <md-input-container>
                     <input mdInput [mdDatepicker]="todoDatePicker" [min]="today"
                            [placeholder]="'i18n.common.label.todoDate' | translate" formControlName="todoDate">
@@ -40,7 +40,7 @@
                 </md-input-container>
                 <md-datepicker #todoDatePicker [touchUi]="isMobile()"></md-datepicker>
             </div>
-            <div class="half">
+            <div class="half-child">
                 <md-input-container>
                     <input mdInput [mdDatepicker]="dueDatePicker" [min]="today"
                            [placeholder]="'i18n.common.label.dueDate' | translate" formControlName="dueDate">

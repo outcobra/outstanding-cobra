@@ -75,6 +75,15 @@
                     </md-list>
                 </div>-->
         <div formArrayName="examTasks" class="form-group">
+            <!-- TODO change when using material typography -->
+            <h5>{{ 'i18n.modules.exam.examTask.title' | translate }}</h5>
+            <button md-button
+                    type="button"
+                    color="accent"
+                    [disabled]="examTaskArray.length >= 15"
+                    (click)="addExamTask()">
+                {{ 'i18n.modules.exam.examTask.add' | translate }}
+            </button>
             <md-list>
                 <md-list-item *ngFor="let examTask of examTaskArray.controls; let i=index" [formGroupName]="i">
                     <md-checkbox formControlName="finished"></md-checkbox>
@@ -83,12 +92,6 @@
                     </md-input-container>
                 </md-list-item>
             </md-list>
-            <div md-dialog-actions>
-                <button md-raised-button
-                        [disabled]="examTaskArray.length >= 15"
-                        (click)="addExamTask()">Test
-                </button>
-            </div>
         </div>
         <!--        <div *ngIf="withMark" class="form-group" formGroupName="mark">
                     <div class="half">

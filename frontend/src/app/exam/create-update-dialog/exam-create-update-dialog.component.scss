@@ -12,23 +12,6 @@ md-input-container {
     }
 }
 
-.form-group.half {
-    display: flex;
-    align-items: center;
-    .half-child {
-        width: 50%;
-        &:first-child {
-            margin-right: 2px;
-        }
-        &:last-child {
-            margin-left: 2px;
-        }
-        md-select {
-            transform: translateY(-2px);
-        }
-    }
-}
-
 md-select {
     width: 100%;
 }

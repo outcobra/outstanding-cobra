@@ -74,7 +74,10 @@
         "add": "Add exam",
         "description": "Exam description",
         "name": "Exam name",
-        "tasks": "learning goals",
+        "examTask": {
+          "title": "Learning objectives",
+          "add": "Add learning objective"
+        },
         "filter": {
           "title": "Filter exams",
           "subject": "Filter exams by subject",

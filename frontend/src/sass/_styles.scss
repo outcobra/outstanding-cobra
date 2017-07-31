@@ -124,30 +124,45 @@ md-dialog-container {
     }
 }
 
-datepicker, md-input-container {
-    &.ng-invalid.ng-touched {
-        label {
-            color: mat-color($warn);
-        }
-        //noinspection CssOptimizeSimilarProperties
-        .mat-input-underline {
-            .mat-input-ripple {
-                background-color: mat-color($warn);
-            }
-            border: mat-color($warn);
-            border-top-width: 1px;
-            border-top-style: solid;
-        }
-    }
-}
+// region form
 
 .form-group {
     width: 100%;
     margin-bottom: 15px;
 }
 
+.form-group.half {
+    display: flex;
+    align-items: center;
+    .half-child {
+        width: 50%;
+        &:first-child {
+            margin-right: 2px;
+        }
+        &:last-child {
+            margin-left: 2px;
+        }
+        md-select {
+            transform: translateY(-2px); // fix misalignment of md-input and md-select
+        }
+    }
+}
+
 .form-error {
     @extend .text-warn;
+}
+
+fieldset {
+    border-color: $disabled-dark;
+    legend {
+        color: $disabled-dark;
+    }
+}
+
+// endregion
+
+.container {
+    padding: 10px 5px;
 }
 
 md-list-item {

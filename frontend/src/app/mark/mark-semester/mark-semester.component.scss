@@ -2,17 +2,14 @@
     margin-left: $step * 12px;
 }
 
-.container {
-    padding: 10px 5px;
-    .oc-card {
-        padding: 0;
-    }
-
-    ul {
-        margin: 0;
-    }
-
+.oc-card {
+    padding: 0;
 }
+
+ul {
+    margin: 0;
+}
+
 .mark-value-list {
     padding: 0 !important;
 }

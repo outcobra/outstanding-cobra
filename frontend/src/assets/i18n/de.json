@@ -75,7 +75,10 @@
         "add": "Prüfung hinzufügen",
         "description": "Prüfungs-Beschreibung",
         "name": "Prüfungs-Name",
-        "tasks": "Lernziele",
+        "examTask": {
+          "title": "Lernziele",
+          "add": "Lernziel hinzufügen"
+        },
         "filter": {
           "title": "Prüfungen filtern",
           "subject": "Nach Fach filtern",
