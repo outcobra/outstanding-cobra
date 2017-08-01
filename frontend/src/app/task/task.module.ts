@@ -9,7 +9,7 @@ import {TaskDetailComponent} from './task-detail-component/task-detail.component
 import {TaskDetailResolver} from './service/task-detail-resolver.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TaskListResolver} from './service/task-list-resolver.service';
-import {TaskFilterResolver} from './service/task-filter-resolver.service';
+import {SubjectFilterResolver} from '../core/services/filter/subject.filter.resolver.service';
 import {TaskCreateUpdateDialog} from './task-create-update-dialog/task-create-update-dialog.component';
 import {SharedModule} from '../shared/shared.module';
 import {FlexLayoutModule} from '@angular/flex-layout';
@@ -36,7 +36,7 @@ import {OCMaterialModule} from '../oc-material.module';
         TaskService,
         TaskDetailResolver,
         TaskListResolver,
-        TaskFilterResolver
+        SubjectFilterResolver
     ],
     entryComponents: [
         TaskCreateUpdateDialog

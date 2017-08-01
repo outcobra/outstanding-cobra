@@ -4,7 +4,7 @@ import {AuthGuard} from '../core/services/auth/auth-guard.service';
 import {TaskComponent} from './task.component';
 import {TaskDetailComponent} from './task-detail-component/task-detail.component';
 import {TaskDetailResolver} from './service/task-detail-resolver.service';
-import {TaskFilterResolver} from './service/task-filter-resolver.service';
+import {SubjectFilterResolver} from '../core/services/filter/subject.filter.resolver.service';
 import {TaskListResolver} from './service/task-list-resolver.service';
 
 @NgModule({
@@ -15,7 +15,7 @@ import {TaskListResolver} from './service/task-list-resolver.service';
                 component: TaskComponent,
                 canActivate: [AuthGuard],
                 resolve: {
-                    taskFilter: TaskFilterResolver,
+                    taskFilter: SubjectFilterResolver,
                     tasks: TaskListResolver
                 },
                 children: [

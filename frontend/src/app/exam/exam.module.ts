@@ -14,6 +14,7 @@ import {MdCheckboxModule, MdCoreModule, MdInputModule} from '@angular/material';
 import {ExamListItemComponent} from './exam-list-item/exam-list-item.component';
 import {ExamCreateUpdateDialog} from './create-update-dialog/exam-create-update-dialog.component';
 import {ExamTaskService} from './service/exam-task.service';
+import {SubjectFilterResolver} from '../core/services/filter/subject.filter.resolver.service';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import {ExamTaskService} from './service/exam-task.service';
     providers: [
         ExamService,
         ExamTaskService,
-        ExamCreateUpdateDialog
+        ExamCreateUpdateDialog,
+        SubjectFilterResolver
     ],
     entryComponents: [
         ExamCreateUpdateDialog

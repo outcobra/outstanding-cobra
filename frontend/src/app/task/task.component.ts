@@ -4,7 +4,7 @@ import {TaskService} from './service/task.service';
 import {TaskDto} from './model/task.dto';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
-import {TaskFilterDto} from './model/task-filter.dto';
+import {SubjectFilterDto} from './model/subject.filter.dto';
 import {MdDialog, MdDialogRef} from '@angular/material';
 import {TaskCreateUpdateDialog} from './task-create-update-dialog/task-create-update-dialog.component';
 import {Util} from '../core/util/util';
@@ -42,7 +42,7 @@ export class TaskComponent implements OnInit, AfterViewInit {
     private _filterForm: FormGroup;
     private _searchForm: FormGroup;
     private _filteredTasks: TaskDto[];
-    private _filterData: TaskFilterDto;
+    private _filterData: SubjectFilterDto;
     private _filterShown: boolean;
 
     private _filtered: boolean = true;
@@ -80,7 +80,7 @@ export class TaskComponent implements OnInit, AfterViewInit {
     //region initialization
 
     private _getAndInitTasksFromResolver() {
-        this._route.data.subscribe((data: { taskFilter: TaskFilterDto, tasks: TaskDto[] }) => {
+        this._route.data.subscribe((data: { taskFilter: SubjectFilterDto, tasks: TaskDto[] }) => {
             this._filterData = data.taskFilter;
             this._refreshTasksWithFilter(data.tasks);
         });
@@ -218,7 +218,7 @@ export class TaskComponent implements OnInit, AfterViewInit {
         return this._filteredTasks;
     }
 
-    get filterData(): TaskFilterDto {
+    get filterData(): SubjectFilterDto {
         return this._filterData;
     }
 
