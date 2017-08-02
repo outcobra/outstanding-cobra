@@ -26,6 +26,7 @@
                 <div class="form-group">
                     <label>{{ 'i18n.modules.task.filter.subject' | translate }}</label>
                     <md-select formControlName="subjectId">
+                        <md-option value=""></md-option>
                         <ng-template ngFor let-subjectClass [ngForOf]="filterData.schoolClassSubjects">
                             <md-option *ngFor="let subject of subjectClass.subjects" [value]="subject.id">
                                 {{ subjectClass.schoolClass.normalizedName + ' - ' + subject.name }}

@@ -14,9 +14,9 @@ import {isTruthy} from '../core/util/helper';
 import {Util} from '../core/util/util';
 import * as objectAssign from 'object-assign';
 import {animate, state, style, transition, trigger} from '@angular/animations';
-import {FilterService} from '../core/services/filter/filter.service';
 import {SubjectFilterDto} from '../task/model/subject.filter.dto';
 import {ActivatedRoute} from '@angular/router';
+import {DateUtil} from '../core/services/date-util.service';
 
 @Component({
     selector: 'exam',
@@ -44,14 +44,14 @@ export class ExamComponent implements OnInit {
 
     private _activeExams: ExamDto[] = [];
     private _allExams: ExamDto[] = [];
-    private displayedExams: ExamDto[] = [];
+    private _displayedExams: ExamDto[] = [];
 
     private _searchForm: FormGroup;
     private _filterForm: FormGroup;
     private _filterData: SubjectFilterDto;
+    private _today: Date = new Date();
 
     constructor(private _examService: ExamService,
-                private _filterService: FilterService,
                 private _dialogService: MdDialog,
                 private _responsiveHelper: ResponsiveHelperService,
                 private _notificationService: NotificationWrapperService,
@@ -82,26 +82,28 @@ export class ExamComponent implements OnInit {
         this._searchForm.get('searchTerm').valueChanges
             .debounceTime(300)
             .distinctUntilChanged()
-            .subscribe((searchTerm: string) => this._displayForFilter(searchTerm));
+            .subscribe((searchTerm: string) => this._displayForFilter());
 
-        this._filterForm.valueChanges.subscribe(() => this._displayForFilter(this.searchTermControl.value))
+        this._filterForm.valueChanges.subscribe(() => this._displayForFilter())
     }
 
     private _loadInitialData() {
 
         this._route.data.subscribe((data: { taskFilter: SubjectFilterDto }) => {
             this._filterData = data.taskFilter;
-            console.warn(data.taskFilter)
+
         });
 
         this._examService.readAll().subscribe((allExams: ExamDto[]) => {
             this._allExams = allExams;
-            this.displayedExams = allExams;
+            this._displayedExams = allExams
+            this._displayForFilter()
             this._sortExams()
         });
 
         this._examService.readAllActive().subscribe((activeExams: ExamDto[]) => {
-            this._activeExams = activeExams;
+            this._activeExams = activeExams
+            this._displayForFilter()
         });
 
 
@@ -127,6 +129,7 @@ export class ExamComponent implements OnInit {
         this._removeExam(examDto);
         this._allExams.push(examDto);
         this._sortExams()
+        this._displayForFilter()
     }
 
     private _removeExam(examDto: ExamDto) {
@@ -179,26 +182,49 @@ export class ExamComponent implements OnInit {
 
     }
 
-    private _displayForFilter(searchTerm: string = '') {
+    private _displayForFilter() {
         let filterValue = this.filterForm.value
-        this.displayedExams = !filterValue.onlyCurrentSemesters ? this._allExams : this._activeExams;
+        let searchTerm = this.searchTermControl.value;
+        let filteredExams: ExamDto[] = !filterValue.onlyCurrentSemesters ? this._allExams : this._activeExams;
+        filteredExams = filteredExams.filter((exam: ExamDto) => this._buildFilterPredicate(exam))
         if (searchTerm != '') {
-            this.displayedExams = this.displayedExams.filter((exam: ExamDto) => {
-                let examString = `${exam.name} ${exam.description} ${exam.subject.name}`;
-                exam.examTasks.forEach((et: ExamTaskDto) => examString += et.task);
-                examString.toLowerCase();
-                console.warn(examString);
-                searchTerm.toLowerCase().split(' ')
-                    .every((searchTerm: string) => examString.includes(searchTerm));
-            });
+            filteredExams = filteredExams.filter((exam: ExamDto) => this._buildSearchPredicate(exam));
+
         }
+        this._displayedExams = filteredExams
+    }
+
+    private _buildFilterPredicate(exam: ExamDto): boolean {
+        let filterValue = this.filterForm.value
+        let result = true
+        if (filterValue.onlyUpcoming) {
+            result = result && DateUtil.isBeforeOrSameDay(this._today, DateUtil.transformToDateIfPossible(exam.date));
+        }
+        if (filterValue.subjectId != '') {
+            result = result && exam.subject.id == filterValue.subjectId
+        }
+        return result;
+    }
+
+    private _buildSearchPredicate(exam: ExamDto): boolean {
+        let searchTerm = this.searchTermControl.value;
+        let examString = `${exam.name} ${exam.description} ${exam.subject.name}`;
+        exam.examTasks.forEach((et: ExamTaskDto) => examString += et.task);
+        examString = examString.toLowerCase();
+        let endResult = searchTerm.toLowerCase().split(' ')
+            .every((searchPart: string) => {
+                let result = examString.includes(searchPart)
+                return result
+            });
+        return endResult
     }
 
     public resetFilter() {
-        this._initForms()
+        this._filterForm.get('subjectId').setValue('')
+        this._filterForm.get('onlyCurrentSemesters').setValue(true)
+        this._filterForm.get('onlyUpcoming').setValue(true)
         this.searchTermControl.setValue('')
         this._displayForFilter()
-        console.warn('reset')
     }
 
     private _makeDialogConfig(mode: DialogMode, param: ExamDto = null) {
@@ -218,6 +244,9 @@ export class ExamComponent implements OnInit {
         return this._filterForm;
     }
 
+    get displayedExams(): ExamDto[] {
+        return this._displayedExams
+    }
 
     get filterData(): SubjectFilterDto {
         return this._filterData;
