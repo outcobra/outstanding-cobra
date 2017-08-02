@@ -161,6 +161,17 @@ fieldset {
 
 // endregion
 
+#filter {
+    margin-bottom: 20px;
+    md-card {
+        overflow: hidden;
+    }
+}
+
+#filter-button {
+    padding: 0 5px;
+}
+
 .container {
     padding: 10px 5px;
 }

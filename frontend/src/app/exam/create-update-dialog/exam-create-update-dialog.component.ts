@@ -11,7 +11,6 @@ import {ExamTaskService} from '../service/exam-task.service';
 import {ResponsiveHelperService} from '../../core/services/ui/responsive-helper.service';
 import {Util} from '../../core/util/util';
 import {ExamTaskDto} from '../model/exam.task.dto';
-import {DialogMode} from '../../core/common/dialog-mode';
 import {getIfExists} from 'app/core/util/helper';
 
 @Component({
@@ -34,7 +33,7 @@ export class ExamCreateUpdateDialog extends CreateUpdateDialog<ExamDto> implemen
                 private _examTaskService: ExamTaskService,
                 private _responsiveHelper: ResponsiveHelperService,
                 private _formBuilder: FormBuilder,
-                @Inject(MD_DIALOG_DATA) data: { mode: DialogMode, param: ExamDto }) {
+                @Inject(MD_DIALOG_DATA) data) {
         super(data.mode, data.param);
     }
 
