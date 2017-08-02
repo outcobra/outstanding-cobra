@@ -33,7 +33,7 @@ class DefaultMarkService
     }
 
     override fun saveMarkAndGetChangedParent(dto: MarkValueDto): MarkGroupDto {
-        super.save(dto)
+        save(dto)
         return markGroupService.readById(dto.markGroupId)
     }
 
@@ -41,5 +41,18 @@ class DefaultMarkService
         validator.validateRequestById(subjectId, Subject::class)
         val subject = markGroupService.getGroupBySubject(subjectId)
         return readAllByMarkGroup(subject.id)
+    }
+
+    override fun save(dto: MarkValueDto): MarkValueDto {
+        validator.validateRequestByDto(dto)
+        var entity = mapper.fromDto(dto)
+        if (entity.exam != null) {
+            val exam = entity.exam
+            entity.exam = null
+            entity = repository.save(entity)
+            entity.exam = exam
+        }
+        entity = repository.save(entity)
+        return mapper.toDto(entity)
     }
 }
