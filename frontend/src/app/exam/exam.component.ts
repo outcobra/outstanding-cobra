@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ExamService} from './service/exam.service';
 import {ExamDto} from './model/exam.dto';
 import {NotificationWrapperService} from '../core/notifications/notification-wrapper.service';
@@ -17,6 +17,8 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 import {SubjectFilterDto} from '../task/model/subject.filter.dto';
 import {ActivatedRoute} from '@angular/router';
 import {DateUtil} from '../core/services/date-util.service';
+import {OCMediaChange} from '../core/services/ui/oc-media-change';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
     selector: 'exam',
@@ -40,7 +42,8 @@ import {DateUtil} from '../core/services/date-util.service';
         ])
     ]
 })
-export class ExamComponent implements OnInit {
+export class ExamComponent implements OnInit, AfterViewInit {
+
 
     private _activeExams: ExamDto[] = [];
     private _allExams: ExamDto[] = [];
@@ -50,6 +53,7 @@ export class ExamComponent implements OnInit {
     private _filterForm: FormGroup;
     private _filterData: SubjectFilterDto;
     private _today: Date = new Date();
+    private _filterShown: boolean = false
 
     constructor(private _examService: ExamService,
                 private _dialogService: MdDialog,
@@ -57,7 +61,8 @@ export class ExamComponent implements OnInit {
                 private _notificationService: NotificationWrapperService,
                 private _confirmDialogService: ConfirmDialogService,
                 private _formBuilder: FormBuilder,
-                private _route: ActivatedRoute) {
+                private _route: ActivatedRoute,
+                private _changeDetectorRef: ChangeDetectorRef) {
     }
 
     ngOnInit() {
@@ -65,6 +70,16 @@ export class ExamComponent implements OnInit {
         this._loadInitialData()
         this._initialFromSubscription()
         this._displayForFilter()
+    }
+
+    ngAfterViewInit(): void {
+        this._filterShown = !this._responsiveHelper.isMobile();
+        Observable.concat(
+            this._responsiveHelper.listenForBreakpointChange(),
+            this._responsiveHelper.listenForOrientationChange())
+            .filter(change => !change.mobile)
+            .subscribe((change: OCMediaChange) => this._filterShown = true);
+        this._changeDetectorRef.detectChanges();
     }
 
     private _initForms() {
@@ -254,5 +269,14 @@ export class ExamComponent implements OnInit {
 
     get searchTermControl(): FormControl {
         return this._searchForm.get('searchTerm') as FormControl;
+    }
+
+
+    get filterShown(): boolean {
+        return this._filterShown;
+    }
+
+    public changeFilterVisibility() {
+        this._filterShown = !this._filterShown;
     }
 }

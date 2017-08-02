@@ -82,6 +82,7 @@
           "title": "Filter exams",
           "subject": "Filter exams by subject",
           "showPending": "Show only upcoming exams",
+          "activeSemesters": "Show only exams from current semesters",
           "search": "Search exam..."
         },
         "notification": {

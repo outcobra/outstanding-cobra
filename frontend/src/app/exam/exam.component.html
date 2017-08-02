@@ -21,10 +21,10 @@
 <div class="row task-list-row" [formGroup]="filterForm" fxLayout="column" fxLayout.gt-sm="row">
     <div id="filter" fxFlex="100" fxFlex.gt-sm="30">
         <md-card [@filterShown]="filterShown">
-            <md-card-title md-subheader>{{ 'i18n.modules.task.filter.title' | translate }}</md-card-title>
+            <md-card-title md-subheader>{{ 'i18n.modules.exam.filter.title' | translate }}</md-card-title>
             <md-card-content>
                 <div class="form-group">
-                    <label>{{ 'i18n.modules.task.filter.subject' | translate }}</label>
+                    <label>{{ 'i18n.modules.exam.filter.subject' | translate }}</label>
                     <md-select formControlName="subjectId">
                         <md-option value=""></md-option>
                         <ng-template ngFor let-subjectClass [ngForOf]="filterData.schoolClassSubjects">
@@ -36,10 +36,10 @@
                 </div>
                 <div class="form-group">
                     <md-slide-toggle formControlName="onlyUpcoming">
-                        {{ 'i18n.modules.task.filter.showPending' | translate }}
+                        {{ 'i18n.modules.exam.filter.showPending' | translate }}
                     </md-slide-toggle>
                     <md-slide-toggle formControlName="onlyCurrentSemesters">
-                        {{ 'i18n.modules.task.filter.showPending' | translate }}
+                        {{ 'i18n.modules.exam.filter.activeSemesters' | translate }}
                     </md-slide-toggle>
                 </div>
             </md-card-content>
