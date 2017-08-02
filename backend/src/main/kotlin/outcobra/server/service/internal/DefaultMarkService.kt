@@ -8,6 +8,7 @@ import outcobra.server.model.Subject
 import outcobra.server.model.dto.MarkGroupDto
 import outcobra.server.model.dto.MarkValueDto
 import outcobra.server.model.interfaces.Mapper
+import outcobra.server.model.repository.ExamRepository
 import outcobra.server.model.repository.MarkValueRepository
 import outcobra.server.service.MarkGroupService
 import outcobra.server.service.MarkService
@@ -24,7 +25,8 @@ class DefaultMarkService
 @Inject constructor(val markValueMapper: Mapper<MarkValue, MarkValueDto>,
                     val markValueRepository: MarkValueRepository,
                     val validator: RequestValidator<MarkValueDto>,
-                    val markGroupService: MarkGroupService)
+                    val markGroupService: MarkGroupService,
+                    val examRepository: ExamRepository)
     : DefaultBaseService<MarkValue, MarkValueDto, MarkValueRepository>(markValueMapper, markValueRepository, validator, MarkValue::class), MarkService {
 
     override fun readAllByMarkGroup(markGroupId: Long): List<MarkValueDto> {
@@ -50,7 +52,8 @@ class DefaultMarkService
             val exam = entity.exam
             entity.exam = null
             entity = repository.save(entity)
-            entity.exam = exam
+            exam.mark = entity
+            examRepository.save(exam)
         }
         entity = repository.save(entity)
         return mapper.toDto(entity)
