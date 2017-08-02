@@ -27,17 +27,6 @@ md-input-container#task-search {
     }
 }
 
-#filter {
-    margin-bottom: 20px;
-    md-card {
-        overflow: hidden;
-    }
-}
-
-#filter-button {
-    padding: 0 5px;
-}
-
 md-icon.filter-toggler {
     transition: transform .25s ease-in-out;
     &.filter-shown {

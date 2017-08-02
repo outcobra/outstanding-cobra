@@ -18,8 +18,8 @@
         </div>
     </div>
 </div>
-<div class="row task-list-row" [formGroup]="filterForm" fxLayout="column" fxLayout.gt-sm="row">
-    <div id="filter" fxFlex="100" fxFlex.gt-sm="30">
+<div [formGroup]="filterForm" fxLayout="column" fxLayout.gt-sm="row">
+    <div class="container" id="filter" fxFlex="100" fxFlex.gt-sm="30">
         <md-card [@filterShown]="filterShown">
             <md-card-title md-subheader>{{ 'i18n.modules.exam.filter.title' | translate }}</md-card-title>
             <md-card-content>
@@ -50,22 +50,23 @@
             </md-card-actions>
         </md-card>
     </div>
-</div>
-<div fxFlex fxFlex.gt-sm="70">
-    <md-accordion>
-        <md-expansion-panel *ngFor="let exam of displayedExams">
-            <md-expansion-panel-header>
+    <div class="container" fxFlex fxFlex.gt-sm="70">
+        <md-accordion>
+            <md-expansion-panel *ngFor="let exam of displayedExams">
+                <md-expansion-panel-header>
                 <span class="subject-letter-icon"
                       [style.background-color]="'#' + exam.subject.color.hex"
                       [mdTooltip]="exam.subject.name">{{ exam.subject.name | slice:0:1 | uppercase }}</span>
-                <h6 md-subheader>{{ exam.name }}</h6>
-            </md-expansion-panel-header>
-            <exam-list-item [exam]="exam" (delete)="deleteExam($event)" (edit)="editExam($event)">
-            </exam-list-item>
-        </md-expansion-panel>
-    </md-accordion>
-    <button md-fab [mdTooltip]="'i18n.modules.exam.add' | translate" mdTooltipPosition="left"
-            (click)="addExam()">
-        <md-icon>add</md-icon>
-    </button>
+                    <h6 md-subheader>{{ exam.name }}</h6>
+                </md-expansion-panel-header>
+                <exam-list-item [exam]="exam" (delete)="deleteExam($event)" (edit)="editExam($event)">
+                </exam-list-item>
+            </md-expansion-panel>
+        </md-accordion>
+        <button md-fab [mdTooltip]="'i18n.modules.exam.add' | translate" mdTooltipPosition="left"
+                (click)="addExam()">
+            <md-icon>add</md-icon>
+        </button>
+    </div>
+
 </div>

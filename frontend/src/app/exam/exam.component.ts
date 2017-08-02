@@ -52,6 +52,7 @@ export class ExamComponent implements OnInit, AfterViewInit {
     private _searchForm: FormGroup;
     private _filterForm: FormGroup;
     private _filterData: SubjectFilterDto;
+    private _filterShown: boolean;
     private _today: Date = new Date();
     private _filterShown: boolean = false
 
@@ -67,8 +68,8 @@ export class ExamComponent implements OnInit, AfterViewInit {
 
     ngOnInit() {
         this._initForms();
-        this._loadInitialData()
-        this._initialFromSubscription()
+        this._loadInitialData();
+        this._initialFromSubscription();
         this._displayForFilter()
     }
 
@@ -85,7 +86,7 @@ export class ExamComponent implements OnInit, AfterViewInit {
     private _initForms() {
         this._searchForm = this._formBuilder.group({
             searchTerm: ['']
-        })
+        });
         this._filterForm = this._formBuilder.group({
             subjectId: [''],
             onlyCurrentSemesters: [true],
@@ -111,13 +112,13 @@ export class ExamComponent implements OnInit, AfterViewInit {
 
         this._examService.readAll().subscribe((allExams: ExamDto[]) => {
             this._allExams = allExams;
-            this._displayedExams = allExams
-            this._displayForFilter()
+            this._displayedExams = allExams;
+            this._displayForFilter();
             this._sortExams()
         });
 
         this._examService.readAllActive().subscribe((activeExams: ExamDto[]) => {
-            this._activeExams = activeExams
+            this._activeExams = activeExams;
             this._displayForFilter()
         });
 
@@ -127,23 +128,23 @@ export class ExamComponent implements OnInit, AfterViewInit {
 
     private _sortExams() {
         let sortFunction = function (currentExam: ExamDto, comparedToExam: ExamDto) {
-            let currentName = currentExam.name.toLowerCase()
-            let comparedToName = comparedToExam.name.toLowerCase()
+            let currentName = currentExam.name.toLowerCase();
+            let comparedToName = comparedToExam.name.toLowerCase();
             if (currentName == comparedToName) {
                 return 0
             } else if (currentName > comparedToName) {
                 return 1
             }
             return -1
-        }
-        this._allExams.sort(sortFunction)
+        };
+        this._allExams.sort(sortFunction);
         this._activeExams.sort(sortFunction)
     }
 
     private _updateExamsList(examDto: ExamDto) {
         this._removeExam(examDto);
         this._allExams.push(examDto);
-        this._sortExams()
+        this._sortExams();
         this._displayForFilter()
     }
 
@@ -164,7 +165,7 @@ export class ExamComponent implements OnInit, AfterViewInit {
                 this._examService.readById(incompleteExam.id)
                     .subscribe((completeExam: ExamDto) => {
                         this._allExams.push(completeExam);
-                        this._sortExams()
+                        this._sortExams();
                         this._notificationService.success('i18n.modules.exam.notification.add.title', 'i18n.modules.exam.notification.add.message');
                     });
             });
@@ -197,11 +198,15 @@ export class ExamComponent implements OnInit, AfterViewInit {
 
     }
 
+    public changeFilterVisibility() {
+        this._filterShown = !this._filterShown;
+    }
+
     private _displayForFilter() {
-        let filterValue = this.filterForm.value
+        let filterValue = this.filterForm.value;
         let searchTerm = this.searchTermControl.value;
         let filteredExams: ExamDto[] = !filterValue.onlyCurrentSemesters ? this._allExams : this._activeExams;
-        filteredExams = filteredExams.filter((exam: ExamDto) => this._buildFilterPredicate(exam))
+        filteredExams = filteredExams.filter((exam: ExamDto) => this._buildFilterPredicate(exam));
         if (searchTerm != '') {
             filteredExams = filteredExams.filter((exam: ExamDto) => this._buildSearchPredicate(exam));
 
@@ -210,8 +215,8 @@ export class ExamComponent implements OnInit, AfterViewInit {
     }
 
     private _buildFilterPredicate(exam: ExamDto): boolean {
-        let filterValue = this.filterForm.value
-        let result = true
+        let filterValue = this.filterForm.value;
+        let result = true;
         if (filterValue.onlyUpcoming) {
             result = result && DateUtil.isBeforeOrSameDay(this._today, DateUtil.transformToDateIfPossible(exam.date));
         }
@@ -226,19 +231,15 @@ export class ExamComponent implements OnInit, AfterViewInit {
         let examString = `${exam.name} ${exam.description} ${exam.subject.name}`;
         exam.examTasks.forEach((et: ExamTaskDto) => examString += et.task);
         examString = examString.toLowerCase();
-        let endResult = searchTerm.toLowerCase().split(' ')
-            .every((searchPart: string) => {
-                let result = examString.includes(searchPart)
-                return result
-            });
-        return endResult
+        return searchTerm.toLowerCase().split(' ')
+            .every((searchPart: string) => examString.includes(searchPart))
     }
 
     public resetFilter() {
-        this._filterForm.get('subjectId').setValue('')
-        this._filterForm.get('onlyCurrentSemesters').setValue(true)
-        this._filterForm.get('onlyUpcoming').setValue(true)
-        this.searchTermControl.setValue('')
+        this._filterForm.get('subjectId').setValue('');
+        this._filterForm.get('onlyCurrentSemesters').setValue(true);
+        this._filterForm.get('onlyUpcoming').setValue(true);
+        this.searchTermControl.setValue('');
         this._displayForFilter()
     }
 
@@ -253,6 +254,10 @@ export class ExamComponent implements OnInit, AfterViewInit {
 
     get searchForm(): FormGroup {
         return this._searchForm;
+    }
+
+    get filterShown(): boolean {
+        return this._filterShown;
     }
 
     get filterForm(): FormGroup {
