@@ -54,7 +54,6 @@ export class ExamComponent implements OnInit, AfterViewInit {
     private _filterData: SubjectFilterDto;
     private _filterShown: boolean;
     private _today: Date = new Date();
-    private _filterShown: boolean = false
 
     constructor(private _examService: ExamService,
                 private _dialogService: MdDialog,
@@ -105,24 +104,13 @@ export class ExamComponent implements OnInit, AfterViewInit {
 
     private _loadInitialData() {
 
-        this._route.data.subscribe((data: { taskFilter: SubjectFilterDto }) => {
+        this._route.data.subscribe((data: { taskFilter: SubjectFilterDto, allExams: ExamDto[], activeExams: ExamDto[] }) => {
             this._filterData = data.taskFilter;
-
-        });
-
-        this._examService.readAll().subscribe((allExams: ExamDto[]) => {
-            this._allExams = allExams;
-            this._displayedExams = allExams;
-            this._displayForFilter();
+            this._activeExams = data.activeExams;
+            this._allExams = data.allExams;
             this._sortExams()
-        });
-
-        this._examService.readAllActive().subscribe((activeExams: ExamDto[]) => {
-            this._activeExams = activeExams;
             this._displayForFilter()
         });
-
-
     }
 
 
@@ -198,10 +186,6 @@ export class ExamComponent implements OnInit, AfterViewInit {
 
     }
 
-    public changeFilterVisibility() {
-        this._filterShown = !this._filterShown;
-    }
-
     private _displayForFilter() {
         let filterValue = this.filterForm.value;
         let searchTerm = this.searchTermControl.value;
@@ -274,11 +258,6 @@ export class ExamComponent implements OnInit, AfterViewInit {
 
     get searchTermControl(): FormControl {
         return this._searchForm.get('searchTerm') as FormControl;
-    }
-
-
-    get filterShown(): boolean {
-        return this._filterShown;
     }
 
     public changeFilterVisibility() {
