@@ -10,34 +10,6 @@
     }
 }
 
-md-input-container#task-search {
-    display: block !important;
-    box-sizing: border-box;
-    margin: 0 20px;
-    .mat-input-placeholder-wrapper {
-        overflow: visible;
-    }
-    label {
-        font-size: 25px !important;
-    }
-    input {
-        height: 40px;
-        width: 100%;
-        font-size: 25px !important;
-    }
-}
-
-#filter {
-    margin-bottom: 20px;
-    md-card {
-        overflow: hidden;
-    }
-}
-
-#filter-button {
-    padding: 0 5px;
-}
-
 md-icon.filter-toggler {
     transition: transform .25s ease-in-out;
     &.filter-shown {

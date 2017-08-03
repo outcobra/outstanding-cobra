@@ -8,7 +8,9 @@ import outcobra.server.model.Semester
 import outcobra.server.model.dto.ExamDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.ExamRepository
+import outcobra.server.model.repository.ExamTaskRepository
 import outcobra.server.service.ExamService
+import outcobra.server.service.ExamTaskService
 import outcobra.server.service.SemesterService
 import outcobra.server.service.base.internal.DefaultBaseService
 import outcobra.server.validator.RequestValidator
@@ -23,8 +25,11 @@ class DefaultExamService
 @Inject constructor(mapper: Mapper<Exam, ExamDto>,
                     repository: ExamRepository,
                     requestValidator: RequestValidator<ExamDto>,
-                    val semesterService: SemesterService)
+                    val semesterService: SemesterService,
+                    val examTaskRepository: ExamTaskRepository,
+                    val examTaskService: ExamTaskService)
     : ExamService, DefaultBaseService<Exam, ExamDto, ExamRepository>(mapper, repository, requestValidator, Exam::class) {
+
     override fun readAll(): List<ExamDto> {
         val currentUser = requestValidator.userService.getCurrentUser()
         if (currentUser != null) {
@@ -33,6 +38,22 @@ class DefaultExamService
             return exams.map { mapper.toDto(it) }
         }
         ValidationKey.FORBIDDEN.throwException()
+    }
+
+    override fun save(dto: ExamDto): ExamDto {
+        return readById(saveExamWithDependencies(dto))
+    }
+
+    private fun saveExamWithDependencies(dto: ExamDto): Long {
+        val tasks = dto.examTasks
+        dto.examTasks.drop(tasks.size)
+        val savedDto = super.save(dto)
+        repository.flush()
+        tasks.forEach { it.examId = savedDto.id }
+        examTaskService.saveAll(tasks)
+        repository.flush()
+        examTaskRepository.flush()
+        return savedDto.id
     }
 
     override fun readAllBySemester(semesterId: Long): List<ExamDto> {

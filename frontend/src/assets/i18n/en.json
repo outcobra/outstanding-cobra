@@ -92,8 +92,10 @@
         "filter": {
           "title": "Filter exams",
           "subject": "Filter exams by subject",
-          "showPending": "Show only upcoming exams",
-          "search": "Search exam..."
+          "showPending": "Show upcoming exams only",
+          "activeSemesters": "Show exams for current semester only",
+          "search": "Search exam...",
+          "noMatch": "Nothing here"
         },
         "notification": {
           "add": {

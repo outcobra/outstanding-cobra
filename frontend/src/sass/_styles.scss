@@ -159,8 +159,36 @@ md-dialog-container {
 
 // endregion
 
+#filter {
+    margin-bottom: 20px;
+    md-card {
+        overflow: hidden;
+    }
+}
+
+#filter-button {
+    padding: 0 5px;
+}
+
 .container {
     padding: 10px 5px;
+}
+
+md-input-container.big-search {
+    display: block !important;
+    box-sizing: border-box;
+    margin: 0 20px;
+    .mat-input-placeholder-wrapper {
+        overflow: visible;
+    }
+    label {
+        font-size: 25px !important;
+    }
+    input {
+        height: 40px;
+        width: 100%;
+        font-size: 25px !important;
+    }
 }
 
 md-list-item {

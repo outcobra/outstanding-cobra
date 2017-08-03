@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {MockCrudService} from '../core/mock-crud.service';
 import {TaskDto} from '../../../task/model/task.dto';
 import {Observable} from 'rxjs/Observable';
-import {TaskFilterDto} from '../../../task/model/task-filter.dto';
+import {SubjectFilterDto} from '../../../task/model/subject.filter.dto';
 import {MockSubjectService} from '../manage/manage-entities/mock-subject.service';
 
 @Injectable()
@@ -23,7 +23,7 @@ export class MockTaskService extends MockCrudService<TaskDto> {
         super([MockTaskService.TASK1]);
     }
 
-    getTaskFilter(): Observable<TaskFilterDto> {
+    getTaskFilter(): Observable<SubjectFilterDto> {
         return Observable.of(null);
     }
 

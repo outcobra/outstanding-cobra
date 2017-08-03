@@ -94,7 +94,9 @@
           "title": "Prüfungen filtern",
           "subject": "Nach Fach filtern",
           "showPending": "Nur zukünftige Prüfungen zeigen",
-          "search": "Prüfungen suchen..."
+          "activeSemesters": "Nur Prüfungen aus aktuellen Semestern anzeigen",
+          "search": "Prüfungen suchen...",
+          "noMatch": "Nichts gefunden"
         },
         "notification": {
           "add": {

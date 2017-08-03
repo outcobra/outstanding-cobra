@@ -1,28 +1,75 @@
 <oc-title-bar>
     <span>{{ 'i18n.modules.exam.linkTitle' | translate }}</span>
 </oc-title-bar>
-<div fxFlex fxFlex.gt-sm="60" fxFlexOffset.gt-sm="20"
-     class="container">
-    <div [formGroup]="searchForm">
-        <md-input-container id="exam-search">
-            <input mdInput [placeholder]="'i18n.modules.exam.filter.search' | translate"
-                   formControlName="searchTerm">
-        </md-input-container>
+<div class="row" [formGroup]="searchForm" fxLayout="column" fxLayout.gt-sm="row">
+    <div fxFlex fxFlex.gt-sm="60" fxFlexOffset.gt-sm="20">
+        <div class="search-row" fxLayout="column" fxLayout.gt-xs="row">
+            <div fxFlex="100" fxFlex.gt-xs="80" fxFlex.gt-sm="100">
+                <md-input-container class="big-search">
+                    <input mdInput [placeholder]="'i18n.modules.task.filter.search' | translate"
+                           formControlName="searchTerm">
+                </md-input-container>
+            </div>
+            <div id="filter-button" fxFlex fxFlex.sm="20" fxHide.gt-sm="true" [style.sm]="{padding: '18.5px 5px'}">
+                <button md-raised-button color="accent" (click)="changeFilterVisibility()" fxFill>
+                    <md-icon [ngClass]="{'filter-shown': filterShown}" class="filter-toggler">expand_less</md-icon>
+                </button>
+            </div>
+        </div>
     </div>
-    <md-accordion>
-        <md-expansion-panel *ngFor="let exam of displayedExams">
-            <md-expansion-panel-header>
+</div>
+<div [formGroup]="filterForm" fxLayout="column" fxLayout.gt-sm="row">
+    <div class="container" id="filter" fxFlex="100" fxFlex.gt-sm="30">
+        <md-card [@filterShown]="filterShown">
+            <md-card-title md-subheader>{{ 'i18n.modules.exam.filter.title' | translate }}</md-card-title>
+            <md-card-content>
+                <div class="form-group">
+                    <label>{{ 'i18n.modules.exam.filter.subject' | translate }}</label>
+                    <md-select formControlName="subjectId">
+                        <md-option value=""></md-option>
+                        <ng-template ngFor let-subjectClass [ngForOf]="filterData.schoolClassSubjects">
+                            <md-option *ngFor="let subject of subjectClass.subjects" [value]="subject.id">
+                                {{ subjectClass.schoolClass.normalizedName + ' - ' + subject.name }}
+                            </md-option>
+                        </ng-template>
+                    </md-select>
+                </div>
+                <div class="form-group">
+                    <md-slide-toggle formControlName="onlyUpcoming">
+                        {{ 'i18n.modules.exam.filter.showPending' | translate }}
+                    </md-slide-toggle>
+                    <md-slide-toggle formControlName="onlyCurrentSemesters">
+                        {{ 'i18n.modules.exam.filter.activeSemesters' | translate }}
+                    </md-slide-toggle>
+                </div>
+            </md-card-content>
+            <md-card-actions>
+                <button md-raised-button (click)="resetFilter()">
+                    {{ 'i18n.common.action.reset' | translate }}
+                </button>
+            </md-card-actions>
+        </md-card>
+    </div>
+    <div class="container" fxFlex fxFlex.gt-sm="70">
+        <h1 *ngIf="displayedExams.length == 0">
+            {{ 'i18n.modules.exam.filter.noMatch' | translate }}
+        </h1>
+        <md-accordion>
+            <md-expansion-panel *ngFor="let exam of displayedExams">
+                <md-expansion-panel-header>
                 <span class="subject-letter-icon"
                       [style.background-color]="'#' + exam.subject.color.hex"
                       [mdTooltip]="exam.subject.name">{{ exam.subject.name | slice:0:1 | uppercase }}</span>
-                <span>{{ exam.name }}</span>
-            </md-expansion-panel-header>
-            <exam-list-item [exam]="exam" (delete)="deleteExam($event)" (edit)="editExam($event)"
-                            (addMark)="addMark$.next($event)">
-            </exam-list-item>
-        </md-expansion-panel>
-    </md-accordion>
-    <button md-fab [mdTooltip]="'i18n.modules.exam.add' | translate" mdTooltipPosition="left" (click)="addExam()">
-        <md-icon>add</md-icon>
-    </button>
+                    <span>{{ exam.name }}</span>
+                </md-expansion-panel-header>
+                <exam-list-item [exam]="exam" (delete)="deleteExam($event)" (edit)="editExam($event)"
+                                (addMark)="addMark$.next($event)">
+                </exam-list-item>
+            </md-expansion-panel>
+        </md-accordion>
+        <button md-fab [mdTooltip]="'i18n.modules.exam.add' | translate" mdTooltipPosition="left"
+                (click)="addExam()">
+            <md-icon>add</md-icon>
+        </button>
+    </div>
 </div>
