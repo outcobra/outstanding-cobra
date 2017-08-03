@@ -11,12 +11,12 @@
 mark-semester {
     position: relative;
 
-.oc-card {
+    .oc-card {
         padding: 0;
     }
     .mat-subheader {
         padding: 05px;
-}
+    }
 
     .mark-value-list {
         padding: 0 !important;
@@ -70,5 +70,8 @@ mark-semester {
 
     .subject-mark-group-controls {
         display: flex;
+        .control-row:last-child {
+            align-self: flex-end;
+        }
     }
 }

@@ -155,7 +155,8 @@
         },
         "createUpdate": {
           "create": {
-            "title": "Neue Note"
+            "title": "Neue Note",
+            "action": "Note erfassen"
           },
           "update": {
             "title": "Note bearbeiten"
@@ -185,7 +186,8 @@
         "group": {
           "createUpdate": {
             "create": {
-              "title": "Neue Notengruppe"
+              "title": "Neue Notengruppe",
+              "action": "Notengruppe erfassen"
             },
             "update": {
               "title": "Notengruppe bearbeiten"

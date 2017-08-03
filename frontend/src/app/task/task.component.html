@@ -25,7 +25,7 @@
 </div>
 <div class="row task-list-row" [formGroup]="filterForm" fxLayout="column" fxLayout.gt-sm="row">
     <div id="filter" fxFlex="100" fxFlex.gt-sm="30">
-        <md-card [@filterShown]="filterShown">
+        <md-card [@slideUpDown]="filterShown">
             <md-card-title md-subheader>{{ 'i18n.modules.task.filter.title' | translate }}</md-card-title>
             <md-card-content>
                 <div class="form-group">

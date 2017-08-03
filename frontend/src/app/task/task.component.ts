@@ -1,5 +1,4 @@
 import {AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {animate, state, style, transition, trigger} from '@angular/animations';
 import {TaskService} from './service/task.service';
 import {TaskDto} from './model/task.dto';
 import {FormBuilder, FormGroup} from '@angular/forms';
@@ -15,28 +14,14 @@ import {and} from '../core/util/helper';
 import {ResponsiveHelperService} from '../core/services/ui/responsive-helper.service';
 import {NotificationWrapperService} from '../core/notifications/notification-wrapper.service';
 import {OCMediaChange} from '../core/services/ui/oc-media-change';
+import {slideUpDownAnimation} from '../core/animations/animations';
 
 @Component({
     selector: 'task',
     templateUrl: './task.component.html',
     styleUrls: ['./task.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    animations: [
-        trigger('filterShown', [
-            state('1', style({
-                height: '*',
-                paddingTop: '*',
-                paddingBottom: '*'
-            })),
-            state('0', style({
-                height: '0',
-                paddingTop: '0',
-                paddingBottom: '0'
-            })),
-            transition('1 => 0', animate('250ms ease-in')),
-            transition('0 => 1', animate('250ms ease-out'))
-        ])
-    ]
+    animations: [slideUpDownAnimation]
 })
 export class TaskComponent implements OnInit, AfterViewInit {
     private _filterForm: FormGroup;

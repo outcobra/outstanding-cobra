@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ExamService} from './service/exam.service';
 import {ExamDto} from './model/exam.dto';
 import {NotificationWrapperService} from '../core/notifications/notification-wrapper.service';
@@ -12,35 +12,23 @@ import {ConfirmDialogService} from '../core/services/confirm-dialog.service';
 import {and, isNotEmpty, isTruthy} from '../core/util/helper';
 import {Util} from '../core/util/util';
 import * as objectAssign from 'object-assign';
-import {animate, state, style, transition, trigger} from '@angular/animations';
 import {SubjectFilterDto} from '../task/model/subject.filter.dto';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {DateUtil} from '../core/services/date-util.service';
 import {OCMediaChange} from '../core/services/ui/oc-media-change';
 import {Observable} from 'rxjs/Observable';
 import {examByNameComparator} from '../core/util/comparator';
+import {Subject} from 'rxjs/Subject';
+import {MarkService} from 'app/mark/service/mark.service';
+import {ViewMode} from '../core/common/view-mode';
+import {slideUpDownAnimation} from '../core/animations/animations';
 
 @Component({
     selector: 'exam',
     templateUrl: './exam.component.html',
     styleUrls: ['./exam.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    animations: [
-        trigger('filterShown', [
-            state('1', style({
-                height: '*',
-                paddingTop: '*',
-                paddingBottom: '*'
-            })),
-            state('0', style({
-                height: '0',
-                paddingTop: '0',
-                paddingBottom: '0'
-            })),
-            transition('1 => 0', animate('250ms ease-in')),
-            transition('0 => 1', animate('250ms ease-out'))
-        ])
-    ]
+    animations: [slideUpDownAnimation]
 })
 export class ExamComponent implements OnInit, AfterViewInit {
 
@@ -66,7 +54,7 @@ export class ExamComponent implements OnInit, AfterViewInit {
                 private _notificationService: NotificationWrapperService,
                 private _confirmDialogService: ConfirmDialogService,
                 private _formBuilder: FormBuilder,
-                private _route: ActivatedRoute) {
+                private _changeDetectorRef: ChangeDetectorRef) {
     }
 
     ngOnInit() {
@@ -93,6 +81,7 @@ export class ExamComponent implements OnInit, AfterViewInit {
         )
             .filter(change => !change.mobile)
             .subscribe((change: OCMediaChange) => this._filterShown = true);
+        this._changeDetectorRef.detectChanges();
     }
 
     private _initForms() {

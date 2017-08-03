@@ -154,7 +154,8 @@
         },
         "createUpdate": {
           "create": {
-            "title": "Add new mark"
+            "title": "Add new mark",
+            "action": "Add mark"
           },
           "update": {
             "title": "Edit mark"
@@ -184,7 +185,8 @@
         "group": {
           "createUpdate": {
             "create": {
-              "title": "New markgroup"
+              "title": "New markgroup",
+              "action": "Add markgroup"
             },
             "update": {
               "title": "Edit Markgroup"

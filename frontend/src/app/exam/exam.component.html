@@ -20,7 +20,7 @@
 </div>
 <div [formGroup]="filterForm" fxLayout="column" fxLayout.gt-sm="row">
     <div class="container" id="filter" fxFlex="100" fxFlex.gt-sm="30">
-        <md-card [@filterShown]="filterShown">
+        <md-card [@slideUpDown]="filterShown">
             <md-card-title md-subheader>{{ 'i18n.modules.exam.filter.title' | translate }}</md-card-title>
             <md-card-content>
                 <div class="form-group">
