@@ -1,7 +1,4 @@
-import {
-    AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit,
-    ViewEncapsulation
-} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewEncapsulation} from '@angular/core';
 import {ManageService} from './service/manage.service';
 import {InstitutionDto, ManageDto, SchoolClassDto, SchoolYearDto, SemesterDto, SubjectDto} from './model/manage.dto';
 import {MdDialogRef} from '@angular/material';
@@ -73,7 +70,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        Observable.concat(
+        Observable.merge(
             this._responsiveHelper.listenForOrientationChange(),
             this._responsiveHelper.listenForBreakpointChange()
         ).subscribe(() => {

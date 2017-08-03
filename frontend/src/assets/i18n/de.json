@@ -84,7 +84,8 @@
           "subject": "Nach Fach filtern",
           "showPending": "Nur zukünftige Prüfungen zeigen",
           "activeSemesters": "Nur Prüfungen aus aktuellen Semestern anzeigen",
-          "search": "Prüfungen suchen..."
+          "search": "Prüfungen suchen...",
+          "noMatch": "Nichts gefunden"
         },
         "notification": {
           "add": {

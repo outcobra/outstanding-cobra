@@ -1,4 +1,4 @@
-import {AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ExamService} from './service/exam.service';
 import {ExamDto} from './model/exam.dto';
 import {NotificationWrapperService} from '../core/notifications/notification-wrapper.service';
@@ -10,7 +10,7 @@ import {ResponsiveHelperService} from '../core/services/ui/responsive-helper.ser
 import {DialogMode} from '../core/common/dialog-mode';
 import {MEDIUM_DIALOG} from '../core/util/const';
 import {ConfirmDialogService} from '../core/services/confirm-dialog.service';
-import {isTruthy} from '../core/util/helper';
+import {and, isNotEmpty, isTruthy} from '../core/util/helper';
 import {Util} from '../core/util/util';
 import * as objectAssign from 'object-assign';
 import {animate, state, style, transition, trigger} from '@angular/animations';
@@ -19,6 +19,7 @@ import {ActivatedRoute} from '@angular/router';
 import {DateUtil} from '../core/services/date-util.service';
 import {OCMediaChange} from '../core/services/ui/oc-media-change';
 import {Observable} from 'rxjs/Observable';
+import {examByNameComparator} from '../core/util/comparator';
 
 @Component({
     selector: 'exam',
@@ -61,25 +62,24 @@ export class ExamComponent implements OnInit, AfterViewInit {
                 private _notificationService: NotificationWrapperService,
                 private _confirmDialogService: ConfirmDialogService,
                 private _formBuilder: FormBuilder,
-                private _route: ActivatedRoute,
-                private _changeDetectorRef: ChangeDetectorRef) {
+                private _route: ActivatedRoute) {
     }
 
     ngOnInit() {
         this._initForms();
         this._loadInitialData();
-        this._initialFromSubscription();
+        this._initialFormSubscription();
         this._displayForFilter()
     }
 
     ngAfterViewInit(): void {
         this._filterShown = !this._responsiveHelper.isMobile();
-        Observable.concat(
+        Observable.merge(
             this._responsiveHelper.listenForBreakpointChange(),
-            this._responsiveHelper.listenForOrientationChange())
+            this._responsiveHelper.listenForOrientationChange()
+        )
             .filter(change => !change.mobile)
             .subscribe((change: OCMediaChange) => this._filterShown = true);
-        this._changeDetectorRef.detectChanges();
     }
 
     private _initForms() {
@@ -90,43 +90,32 @@ export class ExamComponent implements OnInit, AfterViewInit {
             subjectId: [''],
             onlyCurrentSemesters: [true],
             onlyUpcoming: [true]
-        })
+        });
     }
 
-    private _initialFromSubscription() {
-        this._searchForm.get('searchTerm').valueChanges
-            .debounceTime(300)
-            .distinctUntilChanged()
-            .subscribe((searchTerm: string) => this._displayForFilter());
-
-        this._filterForm.valueChanges.subscribe(() => this._displayForFilter())
+    private _initialFormSubscription() {
+        Observable.merge(
+            this._searchForm.get('searchTerm').valueChanges
+                .debounceTime(300)
+                .distinctUntilChanged(),
+            this._filterForm.valueChanges
+        ).subscribe(this._displayForFilter.bind(this));
     }
 
     private _loadInitialData() {
-
         this._route.data.subscribe((data: { taskFilter: SubjectFilterDto, allExams: ExamDto[], activeExams: ExamDto[] }) => {
             this._filterData = data.taskFilter;
             this._activeExams = data.activeExams;
             this._allExams = data.allExams;
-            this._sortExams()
-            this._displayForFilter()
+            this._sortExams();
+            this._displayForFilter();
         });
     }
 
 
     private _sortExams() {
-        let sortFunction = function (currentExam: ExamDto, comparedToExam: ExamDto) {
-            let currentName = currentExam.name.toLowerCase();
-            let comparedToName = comparedToExam.name.toLowerCase();
-            if (currentName == comparedToName) {
-                return 0
-            } else if (currentName > comparedToName) {
-                return 1
-            }
-            return -1
-        };
-        this._allExams.sort(sortFunction);
-        this._activeExams.sort(sortFunction)
+        this._allExams.sort(examByNameComparator);
+        this._activeExams.sort(examByNameComparator)
     }
 
     private _updateExamsList(examDto: ExamDto) {
@@ -187,44 +176,42 @@ export class ExamComponent implements OnInit, AfterViewInit {
     }
 
     private _displayForFilter() {
-        let filterValue = this.filterForm.value;
-        let searchTerm = this.searchTermControl.value;
-        let filteredExams: ExamDto[] = !filterValue.onlyCurrentSemesters ? this._allExams : this._activeExams;
-        filteredExams = filteredExams.filter((exam: ExamDto) => this._buildFilterPredicate(exam));
-        if (searchTerm != '') {
-            filteredExams = filteredExams.filter((exam: ExamDto) => this._buildSearchPredicate(exam));
-
+        let filteredExams: ExamDto[] = !this._filterForm.value.onlyCurrentSemesters ? this._allExams : this._activeExams;
+        filteredExams = filteredExams.filter(this._buildFilterPredicate());
+        if (isNotEmpty(this.searchTermControl.value)) {
+            filteredExams = filteredExams.filter(this._buildSearchPredicate());
         }
         this._displayedExams = filteredExams
     }
 
-    private _buildFilterPredicate(exam: ExamDto): boolean {
-        let filterValue = this.filterForm.value;
-        let result = true;
+    private _buildFilterPredicate(): Predicate<ExamDto> {
+        let filterValue = this._filterForm.value;
+        let predicates: Array<Predicate<ExamDto>> = [];
         if (filterValue.onlyUpcoming) {
-            result = result && DateUtil.isBeforeOrSameDay(this._today, DateUtil.transformToDateIfPossible(exam.date));
+            predicates.push((exam: ExamDto) => DateUtil.isBeforeOrSameDay(this._today, DateUtil.transformToDateIfPossible(exam.date)));
         }
-        if (filterValue.subjectId != '') {
-            result = result && exam.subject.id == filterValue.subjectId
+        if (isNotEmpty(filterValue.subjectId)) {
+            predicates.push((exam: ExamDto) => exam.subject.id == filterValue.subjectId);
         }
-        return result;
+        return and(predicates);
     }
 
-    private _buildSearchPredicate(exam: ExamDto): boolean {
-        let searchTerm = this.searchTermControl.value;
-        let examString = `${exam.name} ${exam.description} ${exam.subject.name}`;
-        exam.examTasks.forEach((et: ExamTaskDto) => examString += et.task);
-        examString = examString.toLowerCase();
-        return searchTerm.toLowerCase().split(' ')
-            .every((searchPart: string) => examString.includes(searchPart))
+    private _buildSearchPredicate(): Predicate<ExamDto> {
+        return (exam) => {
+            let examString = `${exam.name} ${exam.description} ${exam.subject.name}`;
+            exam.examTasks.forEach((et: ExamTaskDto) => examString += et.task);
+            examString = examString.toLowerCase();
+            return this.searchTermControl.value.toLowerCase().split(' ')
+                .every((searchPart: string) => examString.includes(searchPart))
+        }
     }
 
     public resetFilter() {
-        this._filterForm.get('subjectId').setValue('');
-        this._filterForm.get('onlyCurrentSemesters').setValue(true);
-        this._filterForm.get('onlyUpcoming').setValue(true);
-        this.searchTermControl.setValue('');
-        this._displayForFilter()
+        this._searchForm.reset();
+        this._filterForm.reset({
+            onlyCurrentSemesters: true,
+            onlyUpcoming: true
+        });
     }
 
     private _makeDialogConfig(mode: DialogMode, param: ExamDto = null) {

@@ -69,7 +69,7 @@ export class TaskComponent implements OnInit, AfterViewInit {
 
     ngAfterViewInit() {
         this._filterShown = !this._responsiveHelperService.isMobile();
-        Observable.concat(
+        Observable.merge(
             this._responsiveHelperService.listenForBreakpointChange(),
             this._responsiveHelperService.listenForOrientationChange())
             .filter(change => !change.mobile)
@@ -182,10 +182,11 @@ export class TaskComponent implements OnInit, AfterViewInit {
 
     private _buildFilterPredicate(): Predicate<TaskDto> {
         let predicates: Predicate<TaskDto>[] = [];
-        if (this._filterForm.get('subjectId').value) {
-            predicates.push((task: TaskDto) => task.subject.id == this._filterForm.get('subjectId').value);
+        let formValue = this._filterForm.value;
+        if (formValue.subjectId) {
+            predicates.push((task: TaskDto) => task.subject.id == formValue.subjectId);
         }
-        if (this._filterForm.get('finished').value) {
+        if (formValue.finished) {
             predicates.push((task: TaskDto) => task.progress != 100);
         }
         return and(predicates);
