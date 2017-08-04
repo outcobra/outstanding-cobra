@@ -10,6 +10,7 @@ export class ConfirmDialogComponent {
     private _message: string;
     private _result: any;
     private _cancelable: boolean;
+
     constructor() {
     }
 
@@ -32,7 +33,6 @@ export class ConfirmDialogComponent {
     get cancelable(): boolean {
         return this._cancelable;
     }
-
 
     set cancelable(value: boolean) {
         this._cancelable = value;

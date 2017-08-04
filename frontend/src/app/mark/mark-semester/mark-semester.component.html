@@ -52,7 +52,7 @@
                                           *ngFor="let mark of subject.subjectMarkGroup?.markValues">
                                 <mark-value [mark]="mark"
                                             [editEnabled]="currentSemester"
-                                            (delete)="deleteMark$.next(mark.id)"
+                                            (delete)="deleteMark$.next(mark)"
                                             (edit)="editMark$.next({subjectId: subject.id, groupId: mark.markGroupId, markId: mark.id})"></mark-value>
                             </md-list-item>
                             <md-divider></md-divider>
@@ -63,7 +63,7 @@
                                     <oc-collapsible-header class="mark-mark-group-header" [ngClass]="headerClasses">
                                         <mark-value [mark]="markGroup"
                                                     [editEnabled]="currentSemester"
-                                                    (delete)="deleteMarkGroup$.next(markGroup.id)"
+                                                    (delete)="deleteMarkGroup$.next(markGroup)"
                                                     (edit)="editMarkGroup$.next({subjectId: markGroup.subjectId, groupId: markGroup.id})"></mark-value>
                                     </oc-collapsible-header>
                                     <md-list class="mark-group-value-list">
@@ -79,7 +79,7 @@
                                                       *ngFor="let markValue of markGroup.markValues">
                                             <mark-value [mark]="markValue"
                                                         [editEnabled]="currentSemester"
-                                                        (delete)="deleteMark$.next(markValue.id)"
+                                                        (delete)="deleteMark$.next(markValue)"
                                                         (edit)="editMark$.next({subjectId: subject.id, groupId: markValue.markGroupId, markId: markValue.id})"></mark-value>
                                         </md-list-item>
                                     </md-list>

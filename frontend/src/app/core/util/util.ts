@@ -60,14 +60,14 @@ export class Util {
     }
 
     /**
-     * removes the element in the array
+     * removes the first element in the array that matches the predicate
      * if the element is not found the unchanged array is returned
      *
      * @param array
      * @param findPredicate
      * @returns {any}
      */
-    public static arrayRemove<T>(array: Array<T>, findPredicate: Predicate<T>): Array<T> {
+    public static removeFirstMatch<T>(array: Array<T>, findPredicate: Predicate<T>): Array<T> {
         let index = array.findIndex(t => findPredicate(t));
         if (!index && index != 0) {
             return array;

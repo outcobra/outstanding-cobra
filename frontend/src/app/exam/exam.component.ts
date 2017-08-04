@@ -128,7 +128,7 @@ export class ExamComponent implements OnInit, AfterViewInit {
     }
 
     private _removeExam(examDto: ExamDto) {
-        Util.arrayRemove(this._allExams, (exam: ExamDto) => exam.id == examDto.id);
+        Util.removeFirstMatch(this._allExams, (exam: ExamDto) => exam.id == examDto.id);
     }
 
 

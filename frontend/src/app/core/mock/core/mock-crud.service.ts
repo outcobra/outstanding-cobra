@@ -41,7 +41,7 @@ export class MockCrudService<T extends Dto> extends AppCrudService<T> {
     }
 
     deleteById(id: number): Observable<any> {
-        Util.arrayRemove(this._items, item => item.id === id);
+        Util.removeFirstMatch(this._items, item => item.id === id);
         return Observable.empty();
     }
 
