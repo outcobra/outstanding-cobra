@@ -22,6 +22,7 @@ import {RavenErrorHandler} from './core/error/raven-error-handler';
 import {MarkModule} from './mark/mark.module';
 import {ExamModule} from './exam/exam.module';
 import {PipeModule} from './shared/pipe.module';
+import {FallbackModule} from './fallback/fallback.module';
 
 @NgModule({
     declarations: [
@@ -51,7 +52,8 @@ import {PipeModule} from './shared/pipe.module';
                 useFactory: translateFactory,
                 deps: [Http]
             }
-        })
+        }),
+        FallbackModule
     ],
     providers: [
         ConfigService,

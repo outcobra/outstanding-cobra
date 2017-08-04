@@ -54,6 +54,12 @@
         "lavender": "Lavender"
       }
     },
+    "email": {
+      "info": "info@outcobra.school",
+      "support": "support@outcobra.school",
+      "security": "security@outcobra.school",
+      "bug": "bug@outcobra.school"
+    },
     "modules": {
       "info": {
         "title": "Application Information",
@@ -407,6 +413,12 @@
           "message": "The given dates are outside the parent timespan"
         },
         "mark": "The value of the given mark is invalid"
+      },
+      "fallback": {
+        "linkTitle": "Page not found",
+        "heading": "We are sorry...",
+        "content": "...but the page you are looking for seems to have been lost",
+        "hint": "If you think there might be a problem, please contact us: "
       }
     }
   }
