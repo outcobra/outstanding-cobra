@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewEncapsulation} from '@angular/core';
 
 @Component({
     selector: 'oc-entity-menu',
@@ -8,16 +8,4 @@ import {Component, EventEmitter, Output, ViewEncapsulation} from '@angular/core'
 export class OCEntityMenuComponent {
     @Output('delete') onDelete: EventEmitter<any> = new EventEmitter();
     @Output('edit') onEdit: EventEmitter<any> = new EventEmitter();
-
-    constructor() {
-    }
-
-    public clickedEdit() {
-        this.onEdit.emit();
-    }
-
-    public clickedDelete() {
-        this.onDelete.emit();
-    }
-
 }

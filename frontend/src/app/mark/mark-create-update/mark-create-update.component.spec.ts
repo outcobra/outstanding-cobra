@@ -33,7 +33,8 @@ describe('MarkCreateUpdateComponent', () => {
                         }),
                         params: Observable.of({
                             semesterId: MockMarkService.SEMESTER_MARK_1.id
-                        })
+                        }),
+                        queryParams: Observable.of({})
                     }
                 }
             ]

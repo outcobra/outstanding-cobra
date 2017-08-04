@@ -237,7 +237,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
     public deleteInstitution(toDelete: InstitutionDto) {
         this._handleDeletion(toDelete, 'institution', this._institutionService.deleteById,
             (institution) => {
-                Util.arrayRemove(this.currentManageData[ManageView.INSTITUTION_CLASS], (i) => i.id == institution.id);
+                Util.removeFirstMatch(this.currentManageData[ManageView.INSTITUTION_CLASS], (i) => i.id == institution.id);
                 this.currentManageData[ManageView.YEAR_SEMESTER] = this.currentManageData[ManageView.SUBJECT] = null;
             }, this._institutionService
         );
@@ -246,7 +246,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
     public deleteSchoolClass(toDelete: SchoolClassDto) {
         this._handleDeletion(toDelete, 'schoolClass', this._schoolClassService.deleteById, (schoolClass) => {
             let institution = (this.currentManageData[ManageView.INSTITUTION_CLASS] as InstitutionDto[]).find(inst => inst.id === schoolClass.institutionId);
-            Util.arrayRemove(institution.schoolClasses, (clazz) => clazz.id == schoolClass.id);
+            Util.removeFirstMatch(institution.schoolClasses, (clazz) => clazz.id == schoolClass.id);
             this.currentManageData[ManageView.YEAR_SEMESTER] = this.currentManageData[ManageView.SUBJECT] = null;
         }, this._schoolClassService);
     }
@@ -254,7 +254,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
     public deleteSchoolYear(toDelete: SchoolYearDto) {
         this._handleDeletion(toDelete, 'schoolYear', this._schoolYearService.deleteById,
             (schoolYear) => {
-                Util.arrayRemove(this.currentManageData[ManageView.YEAR_SEMESTER], (year) => year.id == schoolYear.id);
+                Util.removeFirstMatch(this.currentManageData[ManageView.YEAR_SEMESTER], (year) => year.id == schoolYear.id);
                 this.currentManageData[ManageView.SUBJECT] = null;
             }, this._schoolYearService
         );
@@ -263,14 +263,14 @@ export class ManageComponent implements OnInit, AfterViewInit {
     public deleteSemester(toDelete: SemesterDto) {
         this._handleDeletion(toDelete, 'semester', this._semesterService.deleteById, (semester) => {
             let schoolYear = (this.currentManageData[ManageView.YEAR_SEMESTER] as SchoolYearDto[]).find(year => year.id === semester.schoolYearId);
-            Util.arrayRemove(schoolYear.semesters, (sem) => sem.id == semester.id);
+            Util.removeFirstMatch(schoolYear.semesters, (sem) => sem.id == semester.id);
             this.currentManageData[ManageView.SUBJECT] = null;
         }, this._semesterService);
     }
 
     public deleteSubject(toDelete: SubjectDto) {
         this._handleDeletion(toDelete, 'subject', this._subjectService.deleteById,
-            (subject) => Util.arrayRemove(this.currentManageData[ManageView.SUBJECT], (sub) => sub.id == subject.id),
+            (subject) => Util.removeFirstMatch(this.currentManageData[ManageView.SUBJECT], (sub) => sub.id == subject.id),
             this._subjectService);
     }
 

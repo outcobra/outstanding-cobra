@@ -48,7 +48,6 @@ export class MarkCreateUpdateComponent extends ParentLinkedCreateUpdateComponent
                     groupId: this._parentMarkGroupId = parseInt(paramMap.get('groupId'))
                 }
             };
-            console.log(this);
         });
         this._route.data.subscribe((data: {isEdit: boolean, mark: MarkDto, parent: MarkGroupDto}) => {
             let isEdit = data.isEdit;

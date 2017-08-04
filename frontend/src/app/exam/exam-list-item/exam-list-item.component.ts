@@ -32,7 +32,7 @@ export class ExamListItemComponent implements OnInit {
     }
 
     private _updateExamTaskList(examTask: ExamTaskDto) {
-        Util.arrayRemove(this.exam.examTasks, (item: ExamTaskDto) => item.id == examTask.id)
+        Util.removeFirstMatch(this.exam.examTasks, (item: ExamTaskDto) => item.id == examTask.id)
         this.exam.examTasks.push(examTask)
     }
 }

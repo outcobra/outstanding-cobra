@@ -46,6 +46,10 @@ import {MockObservableMedia} from './ui/mock-observable-media.service';
 import {MarkService} from '../../mark/service/mark.service';
 import {MockMarkService} from './mark/mock-mark.service';
 import {PipeModule} from '../../shared/pipe.module';
+import {MockExamService} from './exam/mock-exam.service';
+import {ExamService} from '../../exam/service/exam.service';
+import {ExamTaskService} from '../../exam/service/exam-task.service';
+import {MockExamTaskService} from './exam/mock-exam-task.service';
 
 @NgModule({
     imports: [
@@ -140,6 +144,14 @@ import {PipeModule} from '../../shared/pipe.module';
         {
             provide: MarkService,
             useClass: MockMarkService
+        },
+        {
+            provide: ExamService,
+            useClass: MockExamService,
+        },
+        {
+            provide: ExamTaskService,
+            useClass: MockExamTaskService
         },
         {
             provide: DurationService,

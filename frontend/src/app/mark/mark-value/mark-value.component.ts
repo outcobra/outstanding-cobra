@@ -1,16 +1,28 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
+import {
+    AfterViewChecked,
+    AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef,
+    Component,
+    EventEmitter,
+    Input,
+    OnChanges,
+    Output, QueryList,
+    SimpleChanges,
+    ViewChild, ViewChildren, OnInit
+} from '@angular/core';
 import {MarkDto} from '../model/mark.dto';
 import {OCEntityMenuComponent} from '../../oc-ui/components/oc-entity-menu/oc-entity-menu.component';
+import {isNotEmpty} from '../../core/util/helper';
 
 @Component({
     selector: 'mark-value',
     templateUrl: './mark-value.component.html',
-    styleUrls: ['./mark-value.component.scss']
+    styleUrls: ['./mark-value.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MarkValueComponent implements OnInit, OnChanges {
-    @Input() mark: MarkDto;
+export class MarkValueComponent implements AfterViewInit {
     @Input() editEnabled: boolean;
-    @ViewChild(OCEntityMenuComponent) entityMenu: OCEntityMenuComponent;
+    @Input() mark: MarkDto;
+    @ViewChildren(OCEntityMenuComponent) entityMenus: QueryList<OCEntityMenuComponent>;
 
     @Output('edit') public onEdit: EventEmitter<any> = new EventEmitter();
     @Output('delete') public onDelete: EventEmitter<any> = new EventEmitter();
@@ -24,17 +36,13 @@ export class MarkValueComponent implements OnInit, OnChanges {
         .set('5', 'looks_5')
         .set('6', 'looks_6');
 
-    ngOnInit() {
-        if (this.entityMenu) {
-            this.entityMenu.onEdit.subscribe(() => this.onEdit.emit());
-            this.entityMenu.onDelete.subscribe(() => this.onDelete.emit());
+    ngAfterViewInit() {
+        if (isNotEmpty(this.entityMenus)) {
+            this._initEmitters(this.entityMenus);
         }
-    }
-
-    ngOnChanges(changes: SimpleChanges): void {
-        if (changes['editEnabled']) {
-            this.ngOnInit();
-        }
+        this.entityMenus.changes
+            .filter(isNotEmpty)
+            .subscribe(this._initEmitters);
     }
 
     public getIconNameByMarkValue(value: number) {
@@ -42,4 +50,8 @@ export class MarkValueComponent implements OnInit, OnChanges {
         return MarkValueComponent.MARK_ICON_MAPPING.get(first);
     }
 
+    private _initEmitters(list: QueryList<OCEntityMenuComponent>) {
+        list.first.onEdit.subscribe(() => this.onEdit.emit());
+        list.first.onDelete.subscribe(() => this.onDelete.emit());
+    }
 }
