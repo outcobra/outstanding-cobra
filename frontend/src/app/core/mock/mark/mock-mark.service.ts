@@ -6,22 +6,24 @@ import {MockInstitutionService} from '../manage/manage-entities/mock-institution
 import {MockSchoolClassService} from '../manage/manage-entities/mock-school-class.service';
 import {MockSubjectService} from '../manage/manage-entities/mock-subject.service';
 import {MarkGroupDto} from '../../../mark/model/mark-group.dto';
+import {MarkDto} from '../../../mark/model/mark.dto';
 
 @Injectable()
 export class MockMarkService extends MarkService {
+    public static readonly MARK_1: MarkDto = {
+        id: 1,
+        description: 'desc',
+        value: 5,
+        markGroupId: 1,
+        weight: 1,
+        examId: 0
+    };
+
     public static readonly SUBJECT_MARK_GROUP_1: MarkGroupDto = {
         id: 1,
         value: 5,
         description: 'desc',
-        markValues: [
-            {
-                id: 1,
-                description: 'desc',
-                value: 5,
-                markGroupId: 1,
-                weight: 1
-            }
-        ],
+        markValues: [MockMarkService.MARK_1],
         weight: 1,
         parentGroupId: null,
         subjectId: MockSubjectService.SUBJECT1_OF_SEMESTER1.id,
