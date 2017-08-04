@@ -114,7 +114,7 @@ export class MarkGroupCreateUpdateComponent extends ParentLinkedCreateUpdateComp
             description: formValue.description,
             markValues: formValue.selectedMarks,
             parentGroupId: this.parent.id,
-            value: null,
+            value: this.isEditMode() ? this.param.value : null,
             subjectId: 0,
             markGroups: []
         } as MarkGroupDto;
