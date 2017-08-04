@@ -70,7 +70,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        Observable.concat(
+        Observable.merge(
             this._responsiveHelper.listenForOrientationChange(),
             this._responsiveHelper.listenForBreakpointChange()
         ).subscribe(() => {

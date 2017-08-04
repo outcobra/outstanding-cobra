@@ -4,6 +4,7 @@
     width: 100%;
 }
 
+
 .mark-value {
     padding: 0 16px;
     width: 100%;
@@ -15,5 +16,11 @@
         display: flex;
         height: $oc-collapsible-header-height;
         line-height: $oc-collapsible-header-height;
+    }
+}
+
+:host-context(oc-app.oc-mobile) {
+    .mark-value {
+        padding: 0;
     }
 }

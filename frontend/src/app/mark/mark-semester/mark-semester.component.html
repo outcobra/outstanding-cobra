@@ -25,28 +25,33 @@
                         </oc-collapsible-header>
                         <md-list class="mark-value-list">
                             <md-list-item class="subject-mark-group-controls">
-                                <button md-button
-                                        color="accent"
-                                        (click)="newMarkGroup$.next(subject.subjectMarkGroup)"
-                                        [disabled]="!currentSemester">
-                                    Add Mark Group
-                                </button>
-                                <button md-button
-                                        color="accent"
-                                        (click)="newMark$.next(subject.subjectMarkGroup)"
-                                        [disabled]="!currentSemester">
-                                    Add Mark
-                                </button>
+                                <div class="control-row">
+                                    <button md-button
+                                            color="accent"
+                                            (click)="newMarkGroup$.next(subject.subjectMarkGroup)"
+                                            [disabled]="!currentSemester">
+                                        {{ 'i18n.modules.mark.group.createUpdate.create.action' | translate }}
+                                    </button>
+                                    <button md-button
+                                            color="accent"
+                                            (click)="newMark$.next(subject.subjectMarkGroup)"
+                                            [disabled]="!currentSemester">
+                                        {{ 'i18n.modules.mark.createUpdate.create.action' | translate }}
+                                    </button>
+                                </div>
                                 <div class="oc-filler"></div>
-                                <mark-weight-updater [markGroup]="subject.subjectMarkGroup"
-                                                     (weightChange)="editSubjectWeight$.next($event)"
-                                                     [disabled]="!currentSemester">
-                                </mark-weight-updater>
+                                <div class="control-row">
+                                    <mark-weight-updater [markGroup]="subject.subjectMarkGroup"
+                                                         (weightChange)="editSubjectWeight$.next($event)"
+                                                         [disabled]="!currentSemester">
+                                    </mark-weight-updater>
+                                </div>
                             </md-list-item>
 
                             <md-list-item class="mark-list-item"
                                           *ngFor="let mark of subject.subjectMarkGroup?.markValues">
                                 <mark-value [mark]="mark"
+                                            [editEnabled]="currentSemester"
                                             (delete)="deleteMark$.next(mark.id)"
                                             (edit)="editMark$.next({subjectId: subject.id, groupId: mark.markGroupId, markId: mark.id})"></mark-value>
                             </md-list-item>
@@ -67,12 +72,13 @@
                                                     color="accent"
                                                     (click)="newMark$.next(markGroup)"
                                                     [disabled]="!currentSemester">
-                                                Add Mark
+                                                {{ 'i18n.modules.mark.createUpdate.create.action' | translate }}
                                             </button>
                                         </md-list-item>
                                         <md-list-item class="mark-list-item"
                                                       *ngFor="let markValue of markGroup.markValues">
                                             <mark-value [mark]="markValue"
+                                                        [editEnabled]="currentSemester"
                                                         (delete)="deleteMark$.next(markValue.id)"
                                                         (edit)="editMark$.next({subjectId: subject.id, groupId: markValue.markGroupId, markId: markValue.id})"></mark-value>
                                         </md-list-item>

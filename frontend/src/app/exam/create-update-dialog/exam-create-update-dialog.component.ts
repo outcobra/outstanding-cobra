@@ -27,10 +27,6 @@ export class ExamCreateUpdateDialog extends CreateUpdateComponent<ExamDto> imple
     private _title: string;
     public withMark: boolean = false;
 
-    readonly _emptyExamTas = {
-        id: 0
-    };
-
     constructor(private _translateService: TranslateService,
                 private _subjectService: SubjectService,
                 private _dialogRef: MdDialogRef<ExamCreateUpdateDialog>,
@@ -38,7 +34,7 @@ export class ExamCreateUpdateDialog extends CreateUpdateComponent<ExamDto> imple
                 private _examTaskService: ExamTaskService,
                 private _responsiveHelper: ResponsiveHelperService,
                 private _formBuilder: FormBuilder,
-                @Inject(MD_DIALOG_DATA) data: { mode: ViewMode, param: ExamDto }) {
+                @Inject(MD_DIALOG_DATA) data) {
         super(data.mode, data.param);
     }
 
@@ -51,7 +47,8 @@ export class ExamCreateUpdateDialog extends CreateUpdateComponent<ExamDto> imple
         return this._formBuilder.group({
             id: getIfTruthy(examTask, 'id', 0),
             finished: [getIfTruthy(examTask, 'finished', false)],
-            task: [getIfTruthy(examTask, 'task', ''), Validators.required]
+            task: [getIfTruthy(examTask, 'task', ''), Validators.required],
+            examId: [this.getParamOrDefault('id', 0)]
         });
     }
 
@@ -66,7 +63,7 @@ export class ExamCreateUpdateDialog extends CreateUpdateComponent<ExamDto> imple
             description: [this.getParamOrDefault('description')],
             date: [this.getParamOrDefault('date'), Validators.required],
             examTasks: this._formBuilder.array(this._formArrayForExamTasks()),
-            subjectId: [this.getParamOrDefault('subjectId'), Validators.required]
+            subjectId: [this.getParamOrDefault('subject.id'), Validators.required]
         });
     }
 
@@ -78,10 +75,10 @@ export class ExamCreateUpdateDialog extends CreateUpdateComponent<ExamDto> imple
             id: id,
             name: formValue.name,
             description: formValue.description,
-            date: formValue.date.date,
+            date: formValue.date,
             subject: subject,
             mark: null,
-            examTasks: formValue.examTasks.value
+            examTasks: formValue.examTasks
         } as ExamDto;
     }
 

@@ -25,16 +25,13 @@ class ExamMapper @Inject constructor(val markMapper: Mapper<MarkValue, MarkValue
     : Mapper<Exam, ExamDto>, BaseMapper() {
 
     override fun fromDto(from: ExamDto): Exam {
-        if (from.examTasks.isNotEmpty()) {
-            validateChildren(from.examTasks.map { it.id }, ExamTask::class, from.id, Exam::class)
-        }
         val subject = subjectRepository.findOne(from.subject.id)
         var markValue: MarkValue? = null
         if (from.mark != null) {
             markValue = markMapper.fromDto(from.mark)
         }
         val exam = Exam(from.id, from.name, from.description,
-                from.date, from.examTasks.map { examTaskMapper.fromDto(it) }, subject, markValue)
+                from.date, listOf(), subject, markValue)
         return exam
     }
 

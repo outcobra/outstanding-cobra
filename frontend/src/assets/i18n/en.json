@@ -92,8 +92,10 @@
         "filter": {
           "title": "Filter exams",
           "subject": "Filter exams by subject",
-          "showPending": "Show only upcoming exams",
-          "search": "Search exam..."
+          "showPending": "Show upcoming exams only",
+          "activeSemesters": "Show exams for current semester only",
+          "search": "Search exam...",
+          "noMatch": "Nothing here"
         },
         "notification": {
           "add": {
@@ -152,7 +154,8 @@
         },
         "createUpdate": {
           "create": {
-            "title": "Add new mark"
+            "title": "Add new mark",
+            "action": "Add mark"
           },
           "update": {
             "title": "Edit mark"
@@ -182,7 +185,8 @@
         "group": {
           "createUpdate": {
             "create": {
-              "title": "New markgroup"
+              "title": "New markgroup",
+              "action": "Add markgroup"
             },
             "update": {
               "title": "Edit Markgroup"

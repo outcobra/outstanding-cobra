@@ -52,28 +52,7 @@
                 </md-select>
             </div>
         </div>
-        <!--        <div formGroupName="examTasksGroup">
 
-                    <md-list>
-                        <ng-template ngFor let-examTask [ngForOf]="param.examTasks" let-i="index">
-                            <md-list-item>
-                                <md-checkbox [checked]="examTask.finished"
-                                             formControlName="taskControl">
-                                    <md-input-container class="check-box-input">
-                                        <input id="debugId" mdInput [value]="examTask.task" formControlName="{{i}}">
-                                    </md-input-container>
-                                </md-checkbox>
-                            </md-list-item>
-                        </ng-template>
-                        <md-list-item>
-                            <md-checkbox formControlName="newTaskControl">
-                                <md-input-container class="check-box-input">
-                                    <input mdInput value="">
-                                </md-input-container>
-                            </md-checkbox>
-                        </md-list-item>
-                    </md-list>
-                </div>-->
         <div formArrayName="examTasks" class="form-group">
             <!-- TODO change when using material typography -->
             <h5>{{ 'i18n.modules.exam.examTask.title' | translate }}</h5>
@@ -93,16 +72,6 @@
                 </md-list-item>
             </md-list>
         </div>
-        <!--        <div *ngIf="withMark" class="form-group" formGroupName="mark">
-                    <div class="half">
-                        <md-input-container>
-                            <input mdInput type="number" step="0.1" value="4.0" formControlName="markValue">
-                        </md-input-container>
-                        <md-input-container>
-                            <input mdInput type="number" step="0.1" value="1.0" formControlName="markWeight">
-                        </md-input-container>
-                    </div>
-                </div>-->
     </div>
     <div class="dialog-footer" md-dialog-actions>
         <div class="footer-right">

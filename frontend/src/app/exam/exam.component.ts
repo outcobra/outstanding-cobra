@@ -1,35 +1,47 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ExamService} from './service/exam.service';
 import {ExamDto} from './model/exam.dto';
 import {NotificationWrapperService} from '../core/notifications/notification-wrapper.service';
 import {ExamTaskDto} from './model/exam.task.dto';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {ExamCreateUpdateDialog} from './create-update-dialog/exam-create-update-dialog.component';
 import {MdDialog} from '@angular/material';
 import {ResponsiveHelperService} from '../core/services/ui/responsive-helper.service';
 import {MEDIUM_DIALOG} from '../core/util/const';
 import {ConfirmDialogService} from '../core/services/confirm-dialog.service';
-import {isTruthy} from '../core/util/helper';
+import {and, isNotEmpty, isTruthy} from '../core/util/helper';
 import {Util} from '../core/util/util';
 import * as objectAssign from 'object-assign';
-import {ViewMode} from 'app/core/common/view-mode';
-import {Subject} from 'rxjs/Subject';
+import {SubjectFilterDto} from '../task/model/subject.filter.dto';
 import {ActivatedRoute, Router} from '@angular/router';
-import {MarkService} from '../mark/service/mark.service';
+import {DateUtil} from '../core/services/date-util.service';
+import {OCMediaChange} from '../core/services/ui/oc-media-change';
+import {Observable} from 'rxjs/Observable';
+import {examByNameComparator} from '../core/util/comparator';
+import {Subject} from 'rxjs/Subject';
+import {MarkService} from 'app/mark/service/mark.service';
+import {ViewMode} from '../core/common/view-mode';
+import {slideUpDownAnimation} from '../core/animations/animations';
 
 @Component({
     selector: 'exam',
     templateUrl: './exam.component.html',
-    styleUrls: ['./exam.component.scss']
+    styleUrls: ['./exam.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    animations: [slideUpDownAnimation]
 })
-export class ExamComponent implements OnInit {
+export class ExamComponent implements OnInit, AfterViewInit {
+
 
     private _activeExams: ExamDto[] = [];
     private _allExams: ExamDto[] = [];
-    private displayedExams: ExamDto[] = [];
+    private _displayedExams: ExamDto[] = [];
 
-    private _searchFilter: string = '';
     private _searchForm: FormGroup;
+    private _filterForm: FormGroup;
+    private _filterData: SubjectFilterDto;
+    private _filterShown: boolean;
+    private _today: Date = new Date();
 
     public addMark$: Subject<ExamDto> = new Subject();
 
@@ -40,16 +52,16 @@ export class ExamComponent implements OnInit {
                 private _dialogService: MdDialog,
                 private _responsiveHelper: ResponsiveHelperService,
                 private _notificationService: NotificationWrapperService,
-                private _confirmDialogService: ConfirmDialogService) {
+                private _confirmDialogService: ConfirmDialogService,
+                private _formBuilder: FormBuilder,
+                private _changeDetectorRef: ChangeDetectorRef) {
     }
 
     ngOnInit() {
-        this._searchForm = new FormGroup({
-            searchTerm: new FormControl()
-        });
-        this._loadActiveExams();
-        this._loadAllExams();
-        //this._displayForFilter()
+        this._initForms();
+        this._loadInitialData();
+        this._initialFormSubscription();
+        this._displayForFilter();
 
         this.addMark$
             .subscribe(exam => {
@@ -61,27 +73,64 @@ export class ExamComponent implements OnInit {
             });
     }
 
-    private _loadActiveExams() {
-        this._examService.readAllActive().subscribe((activeExams: ExamDto[]) => {
-            this._activeExams = activeExams;
+    ngAfterViewInit(): void {
+        this._filterShown = !this._responsiveHelper.isMobile();
+        Observable.merge(
+            this._responsiveHelper.listenForBreakpointChange(),
+            this._responsiveHelper.listenForOrientationChange()
+        )
+            .filter(change => !change.mobile)
+            .subscribe((change: OCMediaChange) => this._filterShown = true);
+        this._changeDetectorRef.detectChanges();
+    }
+
+    private _initForms() {
+        this._searchForm = this._formBuilder.group({
+            searchTerm: ['']
+        });
+        this._filterForm = this._formBuilder.group({
+            subjectId: [''],
+            onlyCurrentSemesters: [true],
+            onlyUpcoming: [true]
         });
     }
 
-    private _loadAllExams() {
-        this._examService.readAll().subscribe((allExams: ExamDto[]) => {
-            this._allExams = allExams;
-            this.displayedExams = allExams;
+    private _initialFormSubscription() {
+        Observable.merge(
+            this._searchForm.get('searchTerm').valueChanges
+                .debounceTime(300)
+                .distinctUntilChanged(),
+            this._filterForm.valueChanges
+        ).subscribe(this._displayForFilter.bind(this));
+    }
+
+    private _loadInitialData() {
+        this._route.data.subscribe((data: { taskFilter: SubjectFilterDto, allExams: ExamDto[], activeExams: ExamDto[] }) => {
+            this._filterData = data.taskFilter;
+            this._activeExams = data.activeExams;
+            this._allExams = data.allExams;
+            this._sortExams();
+            this._displayForFilter();
         });
+    }
+
+
+    private _sortExams() {
+        this._allExams.sort(examByNameComparator);
+        this._activeExams.sort(examByNameComparator)
     }
 
     private _updateExamsList(examDto: ExamDto) {
         this._removeExam(examDto);
         this._allExams.push(examDto);
+        this._sortExams();
+        this._displayForFilter()
     }
 
     private _removeExam(examDto: ExamDto) {
         Util.arrayRemove(this._allExams, (exam: ExamDto) => exam.id == examDto.id);
     }
+
 
     public addExam() {
         this._dialogService
@@ -90,9 +139,14 @@ export class ExamComponent implements OnInit {
             .first()
             .filter(isTruthy)
             .switchMap((value) => this._examService.create(value))
-            .subscribe((examDto: ExamDto) => {
-                this._allExams.push(examDto);
-                this._notificationService.success('i18n.modules.exam.notification.add.title', 'i18n.modules.exam.notification.add.message');
+            .subscribe((incompleteExam: ExamDto) => {
+                //workaround for backend bug don't remove it
+                this._examService.readById(incompleteExam.id)
+                    .subscribe((completeExam: ExamDto) => {
+                        this._allExams.push(completeExam);
+                        this._sortExams();
+                        this._notificationService.success('i18n.modules.exam.notification.add.title', 'i18n.modules.exam.notification.add.message');
+                    });
             });
     }
 
@@ -112,24 +166,54 @@ export class ExamComponent implements OnInit {
             .first()
             .filter(isTruthy)
             .switchMap((value) => this._examService.create(value))
-            .subscribe((examDto: ExamDto) => {
-                this._updateExamsList(examDto);
-                this._notificationService.success('i18n.modules.exam.notification.add.title', 'i18n.modules.exam.notification.add.message');
+            .subscribe((incompleteExam: ExamDto) => {
+                //workaround for backend bug don't remove it
+                this._examService.readById(incompleteExam.id)
+                    .subscribe((completeExam: ExamDto) => {
+                        this._updateExamsList(completeExam);
+                        this._notificationService.success('i18n.modules.exam.notification.update.title', 'i18n.modules.exam.notification.update.message');
+                    });
             });
+
     }
 
-    private _displayForFilter(all: boolean = true) {
-        this.displayedExams = all ? this._allExams : this._activeExams;
-        this.displayedExams.filter((exam: ExamDto) => {
+    private _displayForFilter() {
+        let filteredExams: ExamDto[] = !this._filterForm.value.onlyCurrentSemesters ? this._allExams : this._activeExams;
+        filteredExams = filteredExams.filter(this._buildFilterPredicate());
+        if (isNotEmpty(this.searchTermControl.value)) {
+            filteredExams = filteredExams.filter(this._buildSearchPredicate());
+        }
+        this._displayedExams = filteredExams
+    }
+
+    private _buildFilterPredicate(): Predicate<ExamDto> {
+        let filterValue = this._filterForm.value;
+        let predicates: Array<Predicate<ExamDto>> = [];
+        if (filterValue.onlyUpcoming) {
+            predicates.push((exam: ExamDto) => DateUtil.isBeforeOrSameDay(this._today, DateUtil.transformToDateIfPossible(exam.date)));
+        }
+        if (isNotEmpty(filterValue.subjectId)) {
+            predicates.push((exam: ExamDto) => exam.subject.id == filterValue.subjectId);
+        }
+        return and(predicates);
+    }
+
+    private _buildSearchPredicate(): Predicate<ExamDto> {
+        return (exam) => {
             let examString = `${exam.name} ${exam.description} ${exam.subject.name}`;
             exam.examTasks.forEach((et: ExamTaskDto) => examString += et.task);
-            examString.toLowerCase();
-            console.warn(examString);
-            this._searchFilter.toLowerCase().split(' ')
-                .every((searchTerm: string) => examString.includes(searchTerm));
+            examString = examString.toLowerCase();
+            return this.searchTermControl.value.toLowerCase().split(' ')
+                .every((searchPart: string) => examString.includes(searchPart))
+        }
+    }
+
+    public resetFilter() {
+        this._searchForm.reset();
+        this._filterForm.reset({
+            onlyCurrentSemesters: true,
+            onlyUpcoming: true
         });
-        this.displayedExams = this._allExams;
-        console.error(this.displayedExams);
     }
 
     private _makeDialogConfig(mode: ViewMode, param: ExamDto = null) {
@@ -143,5 +227,29 @@ export class ExamComponent implements OnInit {
 
     get searchForm(): FormGroup {
         return this._searchForm;
+    }
+
+    get filterShown(): boolean {
+        return this._filterShown;
+    }
+
+    get filterForm(): FormGroup {
+        return this._filterForm;
+    }
+
+    get displayedExams(): ExamDto[] {
+        return this._displayedExams
+    }
+
+    get filterData(): SubjectFilterDto {
+        return this._filterData;
+    }
+
+    get searchTermControl(): FormControl {
+        return this._searchForm.get('searchTerm') as FormControl;
+    }
+
+    public changeFilterVisibility() {
+        this._filterShown = !this._filterShown;
     }
 }
