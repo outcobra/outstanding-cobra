@@ -1,8 +1,8 @@
 <oc-title-bar>
     <span>{{ 'i18n.modules.mark.createUpdate.' + (isEditMode() ? 'update' : 'create') + '.title' | translate }}</span>
 </oc-title-bar>
-<form [formGroup]="markCreateUpdateForm" (submit)="submit()" fxFlex fxFlex.gt-sm="60" fxFlexOffset.gt-sm="20">
-    <md-card>
+<form [formGroup]="markCreateUpdateForm" (submit)="submit()" fxLayout fxLayoutAlign="center start">
+    <md-card fxFlex="960px">
         <div class="form-group">
             <div class="half">
                 <md-input-container>

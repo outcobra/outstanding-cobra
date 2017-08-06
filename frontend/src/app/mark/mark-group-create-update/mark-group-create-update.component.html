@@ -1,8 +1,8 @@
 <oc-title-bar>
     <span>{{ 'i18n.modules.mark.group.createUpdate.' + (isEditMode() ? 'update' : 'create') + '.title' | translate }}</span>
 </oc-title-bar>
-<form [formGroup]="markGroupCreateUpdateForm" (submit)="submit()" fxFlex fxFlex.gt-sm="60" fxFlexOffset.gt-sm="20">
-    <md-card>
+<form [formGroup]="markGroupCreateUpdateForm" (submit)="submit()" fxLayout fxLayoutAlign="center start">
+    <md-card fxFlex.gt-sm="960px">
         <div class="form-group">
             <div class="half">
                 <md-input-container>
@@ -51,7 +51,7 @@
                 <ng-template ngFor let-mark [ngForOf]="selectedMarks">
                     <md-list-item>
                         <mark-value [mark]="mark" [editEnabled]="false" [showDivider]="false"></mark-value>
-                        <button md-raised-button (click)="removeMark$.next(mark)">
+                        <button md-button color="accent" (click)="removeMark$.next(mark)" class="square-button">
                             <md-icon>remove_circle_outline</md-icon>
                         </button>
                     </md-list-item>
