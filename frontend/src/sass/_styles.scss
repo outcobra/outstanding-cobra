@@ -17,7 +17,7 @@ body, .main-area {
     background-color: #F8F8F8 !important;
 }
 
-a {
+a:not(.mat-button) {
     color: $primary-light !important;
 }
 

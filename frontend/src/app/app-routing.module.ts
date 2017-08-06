@@ -1,9 +1,16 @@
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
+import {FallbackComponent} from './fallback/fallback.component';
+import {AuthGuard} from './core/services/auth/auth-guard.service';
 
 @NgModule({
     imports: [
-        RouterModule.forRoot([])
+        RouterModule.forRoot([{
+            path: '**',
+            component: FallbackComponent,
+            canActivate: [AuthGuard],
+
+        }])
     ],
     exports: [
         RouterModule

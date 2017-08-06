@@ -1,16 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
-    selector: 'app-fallback',
+    selector: 'fallback',
     templateUrl: './fallback.component.html',
     styleUrls: ['./fallback.component.scss']
 })
-export class FallbackComponent implements OnInit {
-
-    constructor() {
-    }
-
-    ngOnInit() {
-    }
-
+export class FallbackComponent {
 }
