@@ -11,6 +11,7 @@ import {ConfirmDialogService} from '../../core/services/confirm-dialog.service';
 import {getIfTruthy, isNotEmpty, isTrue} from '../../core/util/helper';
 import {Observable} from 'rxjs/Observable';
 import * as objectAssign from 'object-assign';
+import {NotificationWrapperService} from '../../core/notifications/notification-wrapper.service';
 
 @Component({
     selector: 'mark-create-update',
@@ -29,7 +30,8 @@ export class MarkCreateUpdateComponent extends ParentLinkedCreateUpdateComponent
                 private _router: Router,
                 private _formBuilder: FormBuilder,
                 private _confirmService: ConfirmDialogService,
-                private _markService: MarkService) {
+                private _markService: MarkService,
+                private _notificationService: NotificationWrapperService) {
         super();
     }
 
@@ -39,9 +41,9 @@ export class MarkCreateUpdateComponent extends ParentLinkedCreateUpdateComponent
             this._route.queryParams,
             (params, queryParams) => convertToParamMap(objectAssign({}, params, queryParams))
         ).subscribe(paramMap => {
-            this._semesterId = parseInt(paramMap.get('semesterId'));
             this._examId = paramMap.get('examId');
             this._examName = paramMap.get('examName');
+            this._semesterId = parseInt(paramMap.get('semesterId'));
             this._navigationExtras = {
                 queryParams: {
                     subjectId: parseInt(paramMap.get('subjectId')),
@@ -69,13 +71,17 @@ export class MarkCreateUpdateComponent extends ParentLinkedCreateUpdateComponent
         }
         this._confirmService.open('i18n.common.dialog.unsavedChanges.title', 'i18n.common.dialog.unsavedChanges.message')
             .filter(isTrue)
-            .subscribe(() => this._goToSemesterView());
+            .map(() => Observable.fromPromise(this._goToSemesterView()))
+            .filter(isTrue)
+            .subscribe(() => this._notificationService.success('i18n.common.notification.success.save', 'i18n.modules.mark.createUpdate.notification.success.message'));
     }
 
     public submit() {
         if (this._markCreateUpdateForm.valid && this._markCreateUpdateForm.dirty) {
             this._markService.saveMark(this._formToMark(this._markCreateUpdateForm))
-                .subscribe(() => this._goToSemesterView());
+                .map(() => Observable.fromPromise(this._goToSemesterView()))
+                .filter(isTrue)
+                .subscribe(() => this._notificationService.success('i18n.common.notification.success.save', 'i18n.modules.mark.createUpdate.notification.success.message'));
         }
         else {
             FormUtil.revalidateForm(this._markCreateUpdateForm);
@@ -83,7 +89,7 @@ export class MarkCreateUpdateComponent extends ParentLinkedCreateUpdateComponent
     }
 
     private _goToSemesterView() {
-        this._router.navigate([`mark/semester/${this._semesterId}`], this._navigationExtras);
+        return this._router.navigate([`mark/semester/${this._semesterId}`], this._navigationExtras);
     }
 
     private _formToMark(formGroup: FormGroup): MarkDto {

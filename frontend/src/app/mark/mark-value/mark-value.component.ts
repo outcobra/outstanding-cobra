@@ -1,13 +1,12 @@
 import {
-    AfterViewChecked,
-    AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef,
+    AfterViewInit,
+    ChangeDetectionStrategy,
     Component,
     EventEmitter,
     Input,
-    OnChanges,
-    Output, QueryList,
-    SimpleChanges,
-    ViewChild, ViewChildren, OnInit
+    Output,
+    QueryList,
+    ViewChildren
 } from '@angular/core';
 import {MarkDto} from '../model/mark.dto';
 import {OCEntityMenuComponent} from '../../oc-ui/components/oc-entity-menu/oc-entity-menu.component';
@@ -22,6 +21,7 @@ import {isNotEmpty} from '../../core/util/helper';
 export class MarkValueComponent implements AfterViewInit {
     @Input() editEnabled: boolean;
     @Input() mark: MarkDto;
+    @Input() showDivider: boolean = true;
     @ViewChildren(OCEntityMenuComponent) entityMenus: QueryList<OCEntityMenuComponent>;
 
     @Output('edit') public onEdit: EventEmitter<any> = new EventEmitter();

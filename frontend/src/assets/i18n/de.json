@@ -31,8 +31,8 @@
       },
       "notification": {
         "success": {
-          "save": "Erfolgreich gespeichert",
-          "delete": "Erfolgreich gelöscht"
+          "save": "Speichern erfolgreich",
+          "delete": "Löschen erfolgreich"
         },
         "error": {
           "delete": "Löschen fehlgeschlagen"
@@ -181,6 +181,11 @@
               "hint": "",
               "error": ""
             }
+          },
+          "notification": {
+            "success": {
+              "message": "Die Note wurde erfolgreich gespeichert"
+            }
           }
         },
         "group": {
@@ -192,12 +197,18 @@
             "update": {
               "title": "Notengruppe bearbeiten"
             },
+            "children": "Aktuell ausgewählte Kind-Noten",
             "form": {
               "description": {
                 "label": "Beschreibung"
               },
               "markSelect": {
                 "label": "Füge eine Note zur Gruppe hinzu"
+              }
+            },
+            "notification": {
+              "success": {
+                "message": "Die Notengruppierung wurde erfolgreich gespeichert"
               }
             }
           }

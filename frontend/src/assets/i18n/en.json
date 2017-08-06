@@ -180,6 +180,11 @@
               "hint": "",
               "error": ""
             }
+          },
+          "notification": {
+            "success": {
+              "message": "The mark has been saved successfully"
+            }
           }
         },
         "group": {
@@ -191,12 +196,18 @@
             "update": {
               "title": "Edit Markgroup"
             },
+            "children": "Current mark-child selection",
             "form": {
               "description": {
                 "label": "Beschreibung"
               },
               "selectMark": {
                 "label": "Add a mark to the group"
+              }
+            },
+            "notification": {
+              "success": {
+                "message": "The markgroup has been saved successfully"
               }
             }
           }

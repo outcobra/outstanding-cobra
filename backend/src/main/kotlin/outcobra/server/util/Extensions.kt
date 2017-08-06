@@ -93,7 +93,7 @@ tailrec fun ParentLinked.followToUser(iterationCount: Int = 0): User {
  * @since <since>
  */
 fun BaseMarkDto.validate() {
-    var valid = (!(value > 6 || value < 1))
+    var valid = (id == 0L || !(value > 6 || value < 1))
     if (this is MarkGroupDto) {
         valid = valid && (parentGroupId == 0L || markGroups.isEmpty())
     }

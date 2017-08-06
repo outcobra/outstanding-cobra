@@ -38,7 +38,7 @@ class DefaultMarkGroupService
     override fun save(dto: MarkGroupDto): MarkGroupDto {
         requestValidator.validateRequestByDto(dto)
 
-        if (dto.parentGroupId != 0L) {
+        if (dto.parentGroupId != 0L && dto.id != 0L) {
             val currentMarks = markValueRepository.findAll(QMarkValue.markValue.markGroup.id.eq(dto.id)).toMutableList()
             dto.markValues.forEach { markValue ->
                 val result = currentMarks.removeIf { it.id == markValue.id }
@@ -55,7 +55,14 @@ class DefaultMarkGroupService
                 }
             }
         }
-        return mapper.toDto(repository.save(mapper.fromDto(dto)))
+        val markGroup = repository.save(mapper.fromDto(dto))
+        if (dto.id == 0L) {
+            dto.markValues.forEach {
+                it.markGroupId = markGroup.id
+                markValueRepository.save(markMapper.fromDto(it))
+            }
+        }
+        return mapper.toDto(markGroup)
     }
 
     override fun delete(id: Long) {
