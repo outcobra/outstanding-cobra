@@ -45,6 +45,8 @@ oc-nav {
                             span {
                                 width: 150px;
                                 text-align: left;
+                                opacity: 1;
+                                transition: opacity $animation-duration cubic-bezier(.95,.28,.55,1);
                             }
                             md-icon {
                                 width: $collapsed-width !important;
@@ -86,6 +88,9 @@ oc-nav.oc-nav-collapsed {
     .oc-nav-nav {
         nav {
             width: $collapsed-width;
+            a[md-button] .mat-button-wrapper span {
+                opacity: 0;
+            }
         }
     }
     .oc-nav-collapser md-icon {

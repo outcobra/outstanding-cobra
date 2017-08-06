@@ -177,9 +177,7 @@
               }
             },
             "description": {
-              "label": "Kurzbeschreibung",
-              "hint": "",
-              "error": ""
+              "label": "Kurzbeschreibung"
             }
           },
           "notification": {

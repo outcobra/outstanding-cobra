@@ -32,7 +32,7 @@ class BaseMapper {
         val parent = parentRepo.findOne(parentId)
         val areFromParent = childRepo.findAll(existingChildren).all { it.parent.id == parent.id }
         val userIsOwner = parent.followToUser().auth0Id == userService.getCurrentUser()!!.auth0Id
-        if ((areFromParent && userIsOwner).not()) {
+        if (!(areFromParent && userIsOwner)) {
             ValidationKey.FORBIDDEN.throwException()
         }
     }
