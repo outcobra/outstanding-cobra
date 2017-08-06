@@ -22,7 +22,7 @@ import {RavenErrorHandler} from './core/error/raven-error-handler';
 import {MarkModule} from './mark/mark.module';
 import {ExamModule} from './exam/exam.module';
 import {PipeModule} from './shared/pipe.module';
-import {FallbackComponent} from './fallback/fallback.component';
+import {FallbackComponent} from './main/fallback/fallback.component';
 
 @NgModule({
     declarations: [
