@@ -1,7 +1,7 @@
 import { Directive } from '@angular/core';
 
 @Directive({
-  selector: 'oc-filter'
+  selector: '[ocFilter]'
 })
 export class OCFilterDirective {
 }

@@ -90,8 +90,8 @@ export class ExamComponent implements OnInit, AfterViewInit {
         });
         this._filterForm = this._formBuilder.group({
             subjectId: [''],
-            onlyCurrentSemesters: [true],
-            onlyUpcoming: [true]
+            onlyCurrentSemesters: [false],
+            onlyUpcoming: [false]
         });
     }
 
