@@ -34,8 +34,9 @@ oc-app {
 
 .oc-card {
     @include mat-elevation(1);
-    border-radius: 2px;
+    border-radius: 2px !important;
     background: white !important;
+    padding: 0 !important;
 }
 
 .margin-box {
@@ -194,12 +195,6 @@ md-input-container.big-search {
 md-list-item {
     h1, h2, h3, h4, h5, h6, p, span {
         line-height: normal;
-    }
-}
-
-md-card {
-    &.list-card {
-        padding: 0;
     }
 }
 

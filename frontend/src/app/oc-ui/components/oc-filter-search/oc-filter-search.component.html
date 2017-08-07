@@ -1,0 +1,17 @@
+<div class="oc-search-wrapper">
+    <div class="oc-filter-search-controls">
+        <div class="oc-search-field-toggler">
+            <md-icon>search</md-icon>
+            <span>{{ placeholder }}</span>
+        </div>
+        <div class="oc-filter-toggler">
+            <button md-icon-button>
+                <md-icon>expand_more</md-icon>
+            </button>
+        </div>
+    </div>
+    <div class="oc-search-field"></div>
+</div>
+<div class="oc-filter-container">
+    <ng-content select="[oc-filter]"></ng-content>
+</div>

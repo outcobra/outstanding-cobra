@@ -51,6 +51,11 @@
         </md-card>
     </div>
     <div class="container" fxFlex fxFlex.gt-sm="70">
+        <md-card class="oc-card">
+            <oc-filter-search>
+                <oc-filter>asd</oc-filter>
+            </oc-filter-search>
+        </md-card>
         <h1 *ngIf="displayedExams.length == 0">
             {{ 'i18n.modules.exam.filter.noMatch' | translate }}
         </h1>

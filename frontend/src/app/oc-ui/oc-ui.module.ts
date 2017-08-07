@@ -17,6 +17,8 @@ import {RouterModule} from '@angular/router';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {OCMaterialModule} from '../oc-material.module';
 import {OCEntityMenuComponent} from './components/oc-entity-menu/oc-entity-menu.component';
+import { OCFilterSearchComponent } from './components/oc-filter-search/oc-filter-search.component';
+import { OCFilterDirective } from './components/oc-filter-search/oc-filter.directive';
 
 @NgModule({
     imports: [
@@ -38,7 +40,9 @@ import {OCEntityMenuComponent} from './components/oc-entity-menu/oc-entity-menu.
         OCIconDataDataDirective,
         OCTitleBarComponent,
         OCDividerDirective,
-        OCEntityMenuComponent
+        OCEntityMenuComponent,
+        OCFilterSearchComponent,
+        OCFilterDirective
     ],
     exports: [
         OCNavComponent,
@@ -52,7 +56,9 @@ import {OCEntityMenuComponent} from './components/oc-entity-menu/oc-entity-menu.
         OCIconDataDataDirective,
         OCTitleBarComponent,
         OCDividerDirective,
-        OCEntityMenuComponent
+        OCEntityMenuComponent,
+        OCFilterSearchComponent,
+        OCFilterDirective
     ]
 })
 export class OCUiModule {

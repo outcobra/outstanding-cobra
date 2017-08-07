@@ -11,7 +11,8 @@
         "yes": "Ja",
         "no": "Nein",
         "ok": "OK",
-        "filter": "Filtern"
+        "filter": "Filtern",
+        "search": "Suchen"
       },
       "label": {
         "validFrom": "Gültig ab",
