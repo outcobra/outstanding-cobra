@@ -136,7 +136,7 @@ CREATE TABLE school_year
     ON DELETE CASCADE
 );
 
-CREATE INDEX FKstogi8dpaltkn9o4nskjaq4nx
+CREATE INDEX idx_school_year_school_class_id
   ON school_year (school_class_id);
 
 ALTER TABLE holiday
