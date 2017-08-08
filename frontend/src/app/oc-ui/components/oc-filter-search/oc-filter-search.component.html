@@ -4,15 +4,23 @@
             <md-icon>search</md-icon>
             <span>{{ placeholder }}</span>
         </div>
-        <div class="oc-filter-toggler">
+        <div class="oc-filter">
+            <md-icon>filter_list</md-icon>
             <ng-content select="[ocFilter]"></ng-content>
         </div>
     </div>
-    <div class="oc-search-field" *ngIf="showSearchField">
-        <md-icon>search</md-icon>
-        <input autofocus>
-        <button md-icon-button (click)="showSearchField = !showSearchField">
-            <md-icon>close</md-icon>
-        </button>
-    </div>
+    <form [formGroup]="searchForm">
+        <div class="oc-search-field" *ngIf="showSearchField">
+            <md-icon>search</md-icon>
+            <input formControlName="search"
+                   ocAutoFocus
+                   [ocAutoSelect]="true"
+                   (keyup)="search$.next($event.target.value)">
+            <button md-icon-button
+                    type="button"
+                    (click)="showSearchField = !showSearchField">
+                <md-icon>close</md-icon>
+            </button>
+        </div>
+    </form>
 </div>

@@ -128,4 +128,8 @@ export class Util {
     public static getMillis(): number {
         return new Date().getTime();
     }
+
+    public static getKeyByValue(object, value) {
+        return Object.keys(object).find(key => object[key] === value);
+    }
 }

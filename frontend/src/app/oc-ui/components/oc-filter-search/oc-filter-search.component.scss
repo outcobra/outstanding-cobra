@@ -1,7 +1,7 @@
 @import '../../../../sass/color-variables';
 
 $oc-filter-search-height: 56px;
-$bottom-inset-shadow: 0 -1px 0 rgba(0,0,0,0.12) inset;
+$bottom-inset-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12) inset;
 
 :host {
     .oc-search-wrapper {
@@ -14,12 +14,22 @@ $bottom-inset-shadow: 0 -1px 0 rgba(0,0,0,0.12) inset;
 
         .oc-filter-search-controls {
             display: flex;
+            flex-direction: row;
             .oc-search-field-toggler {
                 flex-grow: 1;
                 display: flex;
                 align-items: center;
+                cursor: pointer;
                 md-icon {
                     margin: 0 8px;
+                }
+            }
+            .oc-filter {
+                display: flex;
+                align-items: center;
+
+                md-icon {
+                    margin: 8px;
                 }
             }
         }
@@ -45,7 +55,19 @@ $bottom-inset-shadow: 0 -1px 0 rgba(0,0,0,0.12) inset;
                 flex-grow: 1;
                 outline: 0;
                 border: none;
+                font-size: 1.3em;
             }
         }
     }
+
+    @media (max-width: 600px) {
+        .oc-search-wrapper {
+            height: $oc-filter-search-height * 2;
+        }
+        .oc-filter-search-controls {
+            display: flex;
+            flex-direction: column !important;
+        }
+    }
+
 }

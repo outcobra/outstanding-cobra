@@ -27,6 +27,9 @@
           "isAfterOrSameDay": "The date should be after the {{date}}",
           "isBeforeOrSameDay": "The date should be before the {{date}}",
           "dateToIsBeforeDateFrom": "'Valid to' is before 'Valid from'"
+        },
+        "filter": {
+          "additional": "Additional filters"
         }
       },
       "notification": {

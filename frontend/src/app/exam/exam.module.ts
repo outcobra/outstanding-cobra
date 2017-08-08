@@ -10,7 +10,6 @@ import {TranslateModule} from '@ngx-translate/core';
 import {ExamService} from './service/exam.service';
 import {SharedModule} from '../shared/shared.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MdCheckboxModule, MdCoreModule, MdInputModule} from '@angular/material';
 import {ExamListItemComponent} from './exam-list-item/exam-list-item.component';
 import {ExamCreateUpdateDialog} from './create-update-dialog/exam-create-update-dialog.component';
 import {ExamTaskService} from './service/exam-task.service';
