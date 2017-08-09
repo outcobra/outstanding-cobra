@@ -138,16 +138,13 @@
           },
           "add": {
             "name": {
-              "label": "Gib einen Prüfungsnamen ein"
+              "label": "Prüfungsnamen"
             },
             "desc": {
-              "label": "Gib eine Prüfungsbeschreibung ein"
-            },
-            "tasks": {
-              "label": "Trag die Lernziele (Prüfungs-Aufgaben) ein"
+              "label": "Prüfungsbeschreibung (optional)"
             },
             "subject": {
-              "label": "Wähle das entsprechende Schulfach"
+              "label": "Wähle ein Schulfach"
             }
           }
         }

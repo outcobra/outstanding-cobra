@@ -60,6 +60,10 @@ md-input-container#task-search {
     }
 }
 
+form[ocFilter] > div {
+    display: inline-block;
+}
+
 #filter {
     margin-bottom: 20px;
     md-card {

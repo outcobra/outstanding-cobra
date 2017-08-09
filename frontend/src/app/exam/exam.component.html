@@ -9,27 +9,32 @@
         <md-card class="oc-card">
             <oc-filter-search (onSearch)="search($event)">
                 <form ocFilter [formGroup]="filterForm">
-                    <md-select formControlName="subjectId"
-                               [placeholder]="'i18n.modules.exam.filter.subject' | translate" floatPlaceholder="never">
-                        <ng-template ngFor let-subjectClass [ngForOf]="filterData.schoolClassSubjects">
-                            <md-option *ngFor="let subject of subjectClass.subjects" [value]="subject.id">
-                                {{ subjectClass.schoolClass.normalizedName + ' - ' + subject.name }}
+                    <div>
+                        <md-select formControlName="subjectId"
+                                   [placeholder]="'i18n.modules.exam.filter.subject' | translate"
+                                   floatPlaceholder="never">
+                            <md-optgroup *ngFor="let schoolClass of filterData.schoolClassSubjects" [label]="schoolClass.schoolClass.normalizedName">
+                                <md-option *ngFor="let subject of schoolClass.subjects" [value]="subject.id">
+                                    {{ subject.name }}
+                                </md-option>
+                            </md-optgroup>
+                        </md-select>
+                        <button md-icon-button (click)="filterForm.controls['subjectId'].setValue(null)">
+                            <md-icon>close</md-icon>
+                        </button>
+                    </div>
+                    <div>
+                        <md-select multiple formControlName="selectFilter"
+                                   [placeholder]="'i18n.common.form.filter.additional' | translate"
+                                   floatPlaceholder="never">
+                            <md-option *ngFor="let key of getSelectFilterKeys()" [value]="key">
+                                {{ selectFilter[key].displayName | translate }}
                             </md-option>
-                        </ng-template>
-                    </md-select>
-                    <button md-icon-button (click)="filterForm.controls['subjectId'].setValue(null)">
-                        <md-icon>close</md-icon>
-                    </button>
-                    <md-select multiple formControlName="selectFilter"
-                               [placeholder]="'i18n.common.form.filter.additional' | translate"
-                               floatPlaceholder="never">
-                        <md-option *ngFor="let key of getSelectFilterKeys()" [value]="key">
-                            {{ selectFilter[key].displayName | translate }}
-                        </md-option>
-                    </md-select>
-                    <button md-icon-button (click)="filterForm.controls['selectFilter'].setValue([])">
-                        <md-icon>close</md-icon>
-                    </button>
+                        </md-select>
+                        <button md-icon-button (click)="filterForm.controls['selectFilter'].setValue([])">
+                            <md-icon>close</md-icon>
+                        </button>
+                    </div>
                 </form>
             </oc-filter-search>
 

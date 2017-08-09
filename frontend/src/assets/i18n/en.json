@@ -137,13 +137,10 @@
           },
           "add": {
             "name": {
-              "label": "Enter a name"
+              "label": "Exam name"
             },
             "desc": {
-              "label": "Enter a description"
-            },
-            "tasks": {
-              "label": "Enter your learning goals"
+              "label": "Exam description (optional)"
             },
             "subject": {
               "label": "Choose a subject"
