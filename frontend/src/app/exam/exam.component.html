@@ -1,7 +1,10 @@
 <oc-title-bar>
     <span>{{ 'i18n.modules.exam.linkTitle' | translate }}</span>
 </oc-title-bar>
-<div fxLayout fxLayoutAlign="center start">
+<ng-template #empty>
+    <oc-empty hint="i18n.modules.exam.empty.hint"></oc-empty>
+</ng-template>
+<div fxLayout fxLayoutAlign="center start" *ngIf="displayedExams.length < 0; else empty">
     <div class="container" fxFlex fxFlex.gt-sm="960px">
         <md-card class="oc-card">
             <oc-filter-search (onSearch)="search($event)">
@@ -30,10 +33,6 @@
                 </form>
             </oc-filter-search>
 
-            <h1 *ngIf="displayedExams.length == 0">
-                {{ 'i18n.modules.exam.filter.noMatch' | translate }}
-            </h1>
-
             <md-accordion displayMode="flat">
                 <md-expansion-panel *ngFor="let exam of displayedExams">
                     <md-expansion-panel-header>
@@ -48,9 +47,11 @@
                 </md-expansion-panel>
             </md-accordion>
         </md-card>
-        <button md-fab [mdTooltip]="'i18n.modules.exam.add' | translate" mdTooltipPosition="left"
-                (click)="addExam()">
-            <md-icon>add</md-icon>
-        </button>
     </div>
 </div>
+<button md-fab
+        [mdTooltip]="'i18n.modules.exam.add' | translate"
+        mdTooltipPosition="left"
+        (click)="addExam()">
+    <md-icon>add</md-icon>
+</button>

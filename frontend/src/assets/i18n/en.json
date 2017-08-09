@@ -18,7 +18,8 @@
         "validFrom": "Valid from",
         "validTo": "Valid to",
         "dueDate": "Due Date",
-        "todoDate": "Todo Date"
+        "todoDate": "Todo Date",
+        "empty": "There seems to be nothing available here"
       },
       "form": {
         "error": {
@@ -85,6 +86,9 @@
         "add": "Add exam",
         "description": "Exam description",
         "name": "Exam name",
+        "empty": {
+          "hint": "Add an exam by pressing the button in the lower right corner!"
+        },
         "examTask": {
           "title": "Learning objectives",
           "add": "Add learning objective"
@@ -169,14 +173,14 @@
               "label": "Markvalue",
               "hint": "Example: 5.25",
               "error": {
-                "pattern": "The mark must be between 1 and 6 including 2 decimal places max"
+                "pattern": "Between 1 and 6 including 2 decimal places max"
               }
             },
             "weight": {
               "label": "Markweight",
               "hint": "Example: 2 or 0.5",
               "error": {
-                "pattern": "The weight must be between 0 and 10 including 2 decimal places max"
+                "pattern": "Between 0.01 and 10 including 2 decimal places max"
               }
             },
             "description": {
@@ -264,10 +268,13 @@
           },
           "add": {
             "name": {
-              "label": "Enter a task name"
+              "label": "Task name"
             },
             "desc": {
-              "label": "Enter a task description"
+              "label": "Task description (optional)"
+            },
+            "subject": {
+              "label": "Choose subject"
             },
             "effort": {
               "label": "Expected effort (in h)",

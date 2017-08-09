@@ -72,46 +72,49 @@ export class MarkSemesterComponent implements OnInit {
         this._updateHeaderClasses({mobile: this._responsiveHelperService.isMobile()});
 
         // region subject initialization
-        if (this._currentSemester) {
-            this.newMark$.subscribe((markGroup) =>
-                this._router.navigate([`subject/${markGroup.subjectId}/group/${markGroup.id}/add`],
-                    {relativeTo: this._activatedRoute})
-            );
+        this.newMark$.skipWhile(() => !this._currentSemester)
+            .subscribe((markGroup) =>
+            this._router.navigate([`subject/${markGroup.subjectId}/group/${markGroup.id}/add`],
+                {relativeTo: this._activatedRoute})
+        );
 
-            this.newMarkGroup$.subscribe((markGroup) =>
-                this._router.navigate([`subject/${markGroup.subjectId}/group/add`],
-                    {relativeTo: this._activatedRoute})
-            );
+        this.newMarkGroup$.skipWhile(() => !this._currentSemester)
+            .subscribe((markGroup) =>
+            this._router.navigate([`subject/${markGroup.subjectId}/group/add`],
+                {relativeTo: this._activatedRoute})
+        );
 
-            this._buildDeleteChain(this.deleteMark$, 'mark', this._markService.deleteMark, (mark: MarkDto) => {
-                let parentMarkGroup = this._getMarkGroupByMark(mark);
-                Util.removeFirstMatch(parentMarkGroup.markValues, markValue => markValue.id === mark.id);
+        this._buildDeleteChain(this.deleteMark$, 'mark', this._markService.deleteMark, (mark: MarkDto) => {
+            let parentMarkGroup = this._getMarkGroupByMark(mark);
+            Util.removeFirstMatch(parentMarkGroup.markValues, markValue => markValue.id === mark.id);
 
-            });
-            this._buildDeleteChain(this.deleteMarkGroup$, 'markGroup', this._markService.deleteMarkGroup, (markGroup: MarkGroupDto) => {
-                let subjectMarkGroup = this._getSubjectMarkGroupBySubjectId(markGroup.subjectId);
-                Util.removeFirstMatch(subjectMarkGroup.markGroups, (mg) => mg.id === markGroup.id);
-            });
+        });
+        this._buildDeleteChain(this.deleteMarkGroup$, 'markGroup', this._markService.deleteMarkGroup, (markGroup: MarkGroupDto) => {
+            let subjectMarkGroup = this._getSubjectMarkGroupBySubjectId(markGroup.subjectId);
+            Util.removeFirstMatch(subjectMarkGroup.markGroups, (mg) => mg.id === markGroup.id);
+        });
 
-            this.editMark$.subscribe(editMark =>
-                this._router.navigate([`subject/${editMark.subjectId}/group/${editMark.groupId}/edit/${editMark.markId}`],
-                    {relativeTo: this._activatedRoute})
-            );
-            this.editMarkGroup$.subscribe(markGroup =>
-                this._router.navigate([`subject/${markGroup.subjectId}/group/edit/${markGroup.groupId}`],
-                    {relativeTo: this._activatedRoute})
-            );
+        this.editMark$.skipWhile(() => !this._currentSemester)
+            .subscribe(editMark =>
+            this._router.navigate([`subject/${editMark.subjectId}/group/${editMark.groupId}/edit/${editMark.markId}`],
+                {relativeTo: this._activatedRoute})
+        );
+        this.editMarkGroup$.skipWhile(() => !this._currentSemester)
+            .subscribe(markGroup =>
+            this._router.navigate([`subject/${markGroup.subjectId}/group/edit/${markGroup.groupId}`],
+                {relativeTo: this._activatedRoute})
+        );
 
-            this.editSubjectWeight$.subscribe(markGroup => {
-                this._markService.saveMarkGroup(markGroup)
-                    .switchMap(() => this._markService.getMarkSemesterBySemesterId(this.semesterMark.id))
-                    .subscribe((semesterMark: SemesterMarkDto) => {
-                        this.semesterMark.value = semesterMark.value;
-                        this.semesterMark.subjects.filter(sub => sub.id === markGroup.subjectId)
-                            .forEach(sub => sub.subjectMarkGroup.weight = markGroup.weight);
-                    });
-            });
-        }
+        this.editSubjectWeight$.skipWhile(() => !this._currentSemester)
+            .subscribe(markGroup => {
+            this._markService.saveMarkGroup(markGroup)
+                .switchMap(() => this._markService.getMarkSemesterBySemesterId(this.semesterMark.id))
+                .subscribe((semesterMark: SemesterMarkDto) => {
+                    this.semesterMark.value = semesterMark.value;
+                    this.semesterMark.subjects.filter(sub => sub.id === markGroup.subjectId)
+                        .forEach(sub => sub.subjectMarkGroup.weight = markGroup.weight);
+                });
+        });
         // endregion
 
         this._responsiveHelperService.listenForBreakpointChange().subscribe(this._updateHeaderClasses.bind(this));
@@ -126,6 +129,7 @@ export class MarkSemesterComponent implements OnInit {
 
     private _buildDeleteChain(subject: Subject<MarkGroupDto | MarkDto>, entityName: string, deleteFunction: (markOrGroup: MarkGroupDto | MarkDto) => Observable<MarkGroupDto | MarkDto>, finishFunction: (markOrGroup: MarkGroupDto | MarkDto) => void) {
         return subject
+            .skipWhile(() => !this._currentSemester)
             .switchMap(markOrGroup => this._showDeleteDialog(entityName, markOrGroup))
             .filter(isTruthy)
             .switchMap(deleteFunction.bind(this._markService))

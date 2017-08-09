@@ -19,7 +19,8 @@
         "validTo": "Gültig bis",
         "todoDate": "Erledigungsdatum",
         "dueDate": "Fälligkeitsdatum",
-        "date": "Datum"
+        "date": "Datum",
+        "empty": "There seems to be nothing available here"
       },
       "form": {
         "error": {
@@ -86,6 +87,9 @@
         "add": "Prüfung hinzufügen",
         "description": "Prüfungs-Beschreibung",
         "name": "Prüfungs-Name",
+        "empty": {
+          "hint": "Füge eine Prüfung über den Knopf unten rechts hinzu!"
+        },
         "examTask": {
           "title": "Lernziele",
           "add": "Lernziel hinzufügen"
@@ -170,14 +174,14 @@
               "label": "Notenwert",
               "hint": "Beispiel: 5.25",
               "error": {
-                "pattern": "Die Note muss zwischen 1 und 6 liegen mit oder ohne zwei Nachkommastellen"
+                "pattern": "Zwischen 1 und 6 mit maximal zwei Nachkommastellen"
               }
             },
             "weight": {
               "label": "Gewichtung",
               "hint": "Beispiel: 2 oder 0.5",
               "error": {
-                "pattern": "Die Gewichtung muss zwischen 0 und 10 liegen mit oder ohne zwei Nachkommastellen"
+                "pattern": "Zwischen 0.01 und 10 mit maximal zwei Nachkommastellen"
               }
             },
             "description": {
@@ -265,10 +269,13 @@
           },
           "add": {
             "name": {
-              "label": "Gib einen Aufgabennamen ein"
+              "label": "Aufgabennamen"
             },
             "desc": {
-              "label": "Gib eine Aufgabenbeschreibung ein"
+              "label": "Aufgabenbeschreibung (optional)"
+            },
+            "subject": {
+              "label": "Fach auswählen"
             },
             "effort": {
               "label": "Erwarteter Aufwand (in Stunden)",
