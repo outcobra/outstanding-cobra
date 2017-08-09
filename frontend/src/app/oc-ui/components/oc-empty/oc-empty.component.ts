@@ -5,7 +5,7 @@ import {Component, Input} from '@angular/core';
     templateUrl: './oc-empty.component.html',
     styleUrls: ['./oc-empty.component.scss']
 })
-export class OcEmptyComponent {
+export class OCEmptyComponent {
     @Input() public iconName: string = 'inbox';
     @Input() public placeholder: string = 'i18n.common.label.empty';
     @Input() public hint: string = '';

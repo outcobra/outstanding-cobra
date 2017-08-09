@@ -1,25 +1,30 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { OcEmptyComponent } from './oc-empty.component';
+import {OCEmptyComponent} from './oc-empty.component';
+import {TestModule} from '../../../core/mock/test.module';
+import {OCUiModule} from '../../oc-ui.module';
 
-describe('OcEmptyComponent', () => {
-  let component: OcEmptyComponent;
-  let fixture: ComponentFixture<OcEmptyComponent>;
+describe('OCEmptyComponent', () => {
+    let component: OCEmptyComponent;
+    let fixture: ComponentFixture<OCEmptyComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ OcEmptyComponent ]
-    })
-    .compileComponents();
-  }));
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            imports: [
+                TestModule,
+                OCUiModule
+            ]
+        })
+            .compileComponents();
+    }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(OcEmptyComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(OCEmptyComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should be created', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should be created', () => {
+        expect(component).toBeTruthy();
+    });
 });

@@ -21,7 +21,7 @@ import {OCFilterSearchComponent} from './components/oc-filter-search/oc-filter-s
 import {OCFilterDirective} from './components/oc-filter-search/oc-filter.directive';
 import {OCAutoFocusDirective} from './directives/oc-auto-focus.directive';
 import {ReactiveFormsModule} from '@angular/forms';
-import { OcEmptyComponent } from './components/oc-empty/oc-empty.component';
+import { OCEmptyComponent } from './components/oc-empty/oc-empty.component';
 
 @NgModule({
     imports: [
@@ -48,7 +48,7 @@ import { OcEmptyComponent } from './components/oc-empty/oc-empty.component';
         OCFilterSearchComponent,
         OCFilterDirective,
         OCAutoFocusDirective,
-        OcEmptyComponent
+        OCEmptyComponent
     ],
     exports: [
         OCNavComponent,
@@ -66,7 +66,7 @@ import { OcEmptyComponent } from './components/oc-empty/oc-empty.component';
         OCFilterSearchComponent,
         OCFilterDirective,
         OCAutoFocusDirective,
-        OcEmptyComponent
+        OCEmptyComponent
     ]
 })
 export class OCUiModule {
