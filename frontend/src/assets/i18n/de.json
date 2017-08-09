@@ -20,7 +20,8 @@
         "todoDate": "Erledigungsdatum",
         "dueDate": "Fälligkeitsdatum",
         "date": "Datum",
-        "empty": "There seems to be nothing available here"
+        "empty": "Scheinbar ist hier nichts vorhanden",
+        "noFilterResults": "Es wurden keine Resultate für den Filter gefunden"
       },
       "form": {
         "error": {

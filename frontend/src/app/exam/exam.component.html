@@ -4,7 +4,7 @@
 <ng-template #empty>
     <oc-empty hint="i18n.modules.exam.empty.hint"></oc-empty>
 </ng-template>
-<div fxLayout fxLayoutAlign="center start" *ngIf="displayedExams.length < 0; else empty">
+<div fxLayout fxLayoutAlign="center start" *ngIf="_allExams.length > 0; else empty">
     <div class="container" fxFlex fxFlex.gt-sm="960px">
         <md-card class="oc-card">
             <oc-filter-search (onSearch)="search($event)">
@@ -33,7 +33,7 @@
                 </form>
             </oc-filter-search>
 
-            <md-accordion displayMode="flat">
+            <md-accordion displayMode="flat" *ngIf="displayedExams.length > 0; else emptyFilter">
                 <md-expansion-panel *ngFor="let exam of displayedExams">
                     <md-expansion-panel-header>
                 <span class="subject-letter-icon"
@@ -46,6 +46,9 @@
                     </exam-list-item>
                 </md-expansion-panel>
             </md-accordion>
+            <ng-template #emptyFilter>
+            <oc-empty placeholder="i18n.common.label.noFilterResults"></oc-empty>
+            </ng-template>
         </md-card>
     </div>
 </div>

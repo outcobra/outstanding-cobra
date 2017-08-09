@@ -19,7 +19,8 @@
         "validTo": "Valid to",
         "dueDate": "Due Date",
         "todoDate": "Todo Date",
-        "empty": "There seems to be nothing available here"
+        "empty": "There seems to be nothing available here",
+        "noFilterResults": "No results that match the current filter have been found"
       },
       "form": {
         "error": {
