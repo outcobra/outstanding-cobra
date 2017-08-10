@@ -416,7 +416,7 @@
         },
         "500": {
           "title": "Serverfehler",
-          "message": "Ein unbekannter Serverfehler ist aufgetreten. bitte versuchen sie es später erneut"
+          "message": "Ein unbekannter Serverfehler ist aufgetreten. Bitte versuchen sie es später erneut"
         }
       },
       "validation": {

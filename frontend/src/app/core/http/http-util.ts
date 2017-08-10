@@ -25,7 +25,7 @@ import * as moment from 'moment';
  * @returns {any}
  */
 export function dateReplacer(key, value): string {
-    if (value instanceof Date) {
+    if (this[key] instanceof Date) {
         return moment(value).format('YYYY-MM-DD');
     }
     return value;
