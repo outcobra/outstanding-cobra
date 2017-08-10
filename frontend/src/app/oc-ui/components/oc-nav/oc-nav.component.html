@@ -2,13 +2,13 @@
     <nav>
         <ul>
             <li [mdTooltip]="'i18n.modules.dashboard.linkTitle' | translate" mdTooltipPosition="after" [mdTooltipDisabled]="!collapsed">
-                <a md-button [routerLink]="'/dashboard'" routerLinkActive="oc-nav-link-active">
+                <a md-button disabled>
                     <md-icon>dashboard</md-icon>
                     <span>{{ 'i18n.modules.dashboard.linkTitle' | translate }}</span>
                 </a>
             </li>
             <li [mdTooltip]="'i18n.modules.timetable.linkTitle' | translate" mdTooltipPosition="after" [mdTooltipDisabled]="!collapsed">
-                <a md-button [routerLink]="'/task'" routerLinkActive="oc-nav-link-active">
+                <a md-button disabled>
                     <md-icon>event</md-icon>
                     <span>{{ 'i18n.modules.timetable.linkTitle' | translate }}</span>
                 </a>

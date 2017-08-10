@@ -9,7 +9,7 @@ import {Icons, Notification} from 'angular2-notifications/dist';
 export class NotificationWrapperService {
 
     private _defaultOptions = {
-        timeOut: 750000,
+        timeOut: 7500,
         showProgressBar: true,
         lastOnBottom: true,
         clickToClose: true,
