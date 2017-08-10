@@ -9,11 +9,12 @@ import {Icons, Notification} from 'angular2-notifications/dist';
 export class NotificationWrapperService {
 
     private _defaultOptions = {
-        timeOut: 7500,
+        timeOut: 750000,
         showProgressBar: true,
         lastOnBottom: true,
         clickToClose: true,
-        animate: 'fromRight'
+        animate: 'fromRight',
+        theClass: 'oc-notification'
     };
 
     private _icns: Icons = appIcons; // can't name it icons because of super class

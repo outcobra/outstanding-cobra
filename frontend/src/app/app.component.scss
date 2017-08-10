@@ -31,10 +31,26 @@
     }
 }
 
-.simple-notification-wrapper {
-    bottom: 35px !important;
+simple-notifications .simple-notification-wrapper {
+    bottom: 30px !important;
     right: 0 !important;
+    width: 400px !important;
+    .oc-notification {
+        margin-bottom: 0 !important;
+    }
 }
+
+oc-app.oc-mobile {
+    simple-notifications, .simple-notification-wrapper {
+        width: 100% !important;
+        bottom: 0 !important;
+        .oc-notification {
+            width: 100% !important;
+        }
+    }
+}
+
+
 
 .lang-toggler {
     margin-top: 10px;

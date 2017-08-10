@@ -34,6 +34,9 @@ import {FallbackComponent} from './main/fallback/fallback.component';
         BrowserAnimationsModule,
         FormsModule,
         HttpModule,
+        SimpleNotificationsModule.forRoot(),
+        OCMaterialModule,
+        MdNativeDateModule,
         SharedModule,
         MainModule,
         ManageModule,
@@ -41,11 +44,8 @@ import {FallbackComponent} from './main/fallback/fallback.component';
         MarkModule,
         ExamModule,
         FlexLayoutModule,
-        SimpleNotificationsModule.forRoot(),
         CoreModule,
         PipeModule,
-        OCMaterialModule,
-        MdNativeDateModule,
         AppRoutingModule,
         TranslateModule.forRoot({
             loader: {
