@@ -216,6 +216,10 @@ export class ExamComponent implements OnInit, AfterViewInit {
         });
     }
 
+    get allExams(): ExamDto[] {
+        return this._allExams;
+    }
+
     public getSelectFilterKeys() {
         return Object.keys(this.selectFilter);
     }
