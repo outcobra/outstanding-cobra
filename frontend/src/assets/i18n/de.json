@@ -428,8 +428,8 @@
       },
       "fallback": {
         "linkTitle": "Seite nicht gefunden",
-        "heading": "Tut uns leid...",
-        "content": "...aber die Seite die du suchst scheint uns leider verloren gegangen zu sein.",
+        "heading": "Tut uns leid",
+        "content": "Die Seite die du suchst existiert leider nicht",
         "hint": "Falls du glaubst es handelt sich hierbei um ein Problem, dann melde dich bitte bei uns: "
       }
     }
