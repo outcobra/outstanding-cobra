@@ -9,7 +9,6 @@ import {AuthGuard} from './core/services/auth/auth-guard.service';
             path: '**',
             component: FallbackComponent,
             canActivate: [AuthGuard],
-
         }])
     ],
     exports: [
