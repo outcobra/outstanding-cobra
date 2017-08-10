@@ -11,13 +11,16 @@
         "yes": "Yes",
         "no": "No",
         "ok": "OK",
-        "filter": "Filter"
+        "filter": "Filter",
+        "search": "Search"
       },
       "label": {
         "validFrom": "Valid from",
         "validTo": "Valid to",
         "dueDate": "Due Date",
-        "todoDate": "Todo Date"
+        "todoDate": "Todo Date",
+        "empty": "There seems to be nothing available here",
+        "noFilterResults": "No results that match the current filter have been found"
       },
       "form": {
         "error": {
@@ -26,6 +29,9 @@
           "isAfterOrSameDay": "The date should be after the {{date}}",
           "isBeforeOrSameDay": "The date should be before the {{date}}",
           "dateToIsBeforeDateFrom": "'Valid to' is before 'Valid from'"
+        },
+        "filter": {
+          "additional": "Additional filters"
         }
       },
       "notification": {
@@ -87,6 +93,9 @@
         "add": "Add exam",
         "description": "Exam description",
         "name": "Exam name",
+        "empty": {
+          "hint": "Add an exam by pressing the button in the lower right corner!"
+        },
         "examTask": {
           "title": "Learning objectives",
           "add": "Add learning objective"
@@ -134,13 +143,10 @@
           },
           "add": {
             "name": {
-              "label": "Enter a name"
+              "label": "Exam name"
             },
             "desc": {
-              "label": "Enter a description"
-            },
-            "tasks": {
-              "label": "Enter your learning goals"
+              "label": "Exam description (optional)"
             },
             "subject": {
               "label": "Choose a subject"
@@ -171,20 +177,23 @@
               "label": "Markvalue",
               "hint": "Example: 5.25",
               "error": {
-                "pattern": "The mark must be between 1 and 6 including 2 decimal places max"
+                "pattern": "Between 1 and 6 including 2 decimal places max"
               }
             },
             "weight": {
               "label": "Markweight",
               "hint": "Example: 2 or 0.5",
               "error": {
-                "pattern": "The weight must be between 0 and 10 including 2 decimal places max"
+                "pattern": "Between 0.01 and 10 including 2 decimal places max"
               }
             },
             "description": {
-              "label": "Short description",
-              "hint": "",
-              "error": ""
+              "label": "Short description"
+            }
+          },
+          "notification": {
+            "success": {
+              "message": "The mark has been saved successfully"
             }
           }
         },
@@ -197,12 +206,18 @@
             "update": {
               "title": "Edit Markgroup"
             },
+            "children": "Current mark-child selection",
             "form": {
               "description": {
                 "label": "Beschreibung"
               },
               "selectMark": {
                 "label": "Add a mark to the group"
+              }
+            },
+            "notification": {
+              "success": {
+                "message": "The markgroup has been saved successfully"
               }
             }
           }
@@ -257,10 +272,13 @@
           },
           "add": {
             "name": {
-              "label": "Enter a task name"
+              "label": "Task name"
             },
             "desc": {
-              "label": "Enter a task description"
+              "label": "Task description (optional)"
+            },
+            "subject": {
+              "label": "Choose subject"
             },
             "effort": {
               "label": "Expected effort (in h)",

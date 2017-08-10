@@ -4,6 +4,7 @@ import {
     MdButtonModule,
     MdButtonToggleModule,
     MdCardModule,
+    MdCheckboxModule,
     MdCoreModule,
     MdDatepickerModule,
     MdDialogModule,
@@ -45,6 +46,7 @@ import {OC_DATE_FORMATS} from './core/common/oc-date-formats';
         MdTabsModule,
         MdDatepickerModule,
         MdExpansionModule,
+        MdCheckboxModule,
         MdCoreModule
     ],
     exports: [
@@ -67,6 +69,7 @@ import {OC_DATE_FORMATS} from './core/common/oc-date-formats';
         MdTabsModule,
         MdDatepickerModule,
         MdExpansionModule,
+        MdCheckboxModule,
         MdCoreModule
     ],
     providers: [

@@ -1,10 +1,3 @@
-.dynamic-mark {
-    display: flex;
-    flex-direction: row;
-    padding: 0 10px;
-    box-sizing: border-box;
-    md-select {
-        flex-grow: 1;
-        padding: 0 10px 0 0;
-    }
+:host-context(oc-app.oc-mobile) .mark-group-children /deep/ .mat-list-item-content {
+    height: 80px !important;
 }

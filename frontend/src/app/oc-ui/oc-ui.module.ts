@@ -17,12 +17,18 @@ import {RouterModule} from '@angular/router';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {OCMaterialModule} from '../oc-material.module';
 import {OCEntityMenuComponent} from './components/oc-entity-menu/oc-entity-menu.component';
+import {OCFilterSearchComponent} from './components/oc-filter-search/oc-filter-search.component';
+import {OCFilterDirective} from './components/oc-filter-search/oc-filter.directive';
+import {OCAutoFocusDirective} from './directives/oc-auto-focus.directive';
+import {ReactiveFormsModule} from '@angular/forms';
+import { OCEmptyComponent } from './components/oc-empty/oc-empty.component';
 
 @NgModule({
     imports: [
         CommonModule,
         RouterModule,
         OCMaterialModule,
+        ReactiveFormsModule,
         FlexLayoutModule,
         TranslateModule
     ],
@@ -38,7 +44,11 @@ import {OCEntityMenuComponent} from './components/oc-entity-menu/oc-entity-menu.
         OCIconDataDataDirective,
         OCTitleBarComponent,
         OCDividerDirective,
-        OCEntityMenuComponent
+        OCEntityMenuComponent,
+        OCFilterSearchComponent,
+        OCFilterDirective,
+        OCAutoFocusDirective,
+        OCEmptyComponent
     ],
     exports: [
         OCNavComponent,
@@ -52,7 +62,11 @@ import {OCEntityMenuComponent} from './components/oc-entity-menu/oc-entity-menu.
         OCIconDataDataDirective,
         OCTitleBarComponent,
         OCDividerDirective,
-        OCEntityMenuComponent
+        OCEntityMenuComponent,
+        OCFilterSearchComponent,
+        OCFilterDirective,
+        OCAutoFocusDirective,
+        OCEmptyComponent
     ]
 })
 export class OCUiModule {

@@ -38,7 +38,6 @@ public class Exam implements ParentLinked {
     //region constructors
 
     /**
-     *
      * @param id
      * @param name
      * @param date
@@ -49,7 +48,7 @@ public class Exam implements ParentLinked {
     public Exam(Long id, String name, String description, LocalDate date, List<ExamTask> tasks, Subject subject, MarkValue mark) {
         this.id = id;
         this.name = name;
-        this.description = description;
+        this.description = description == null ? "" : description;
         this.date = date;
         this.tasks = tasks;
         this.subject = subject;
@@ -57,7 +56,6 @@ public class Exam implements ParentLinked {
     }
 
     /**
-     *
      * @param name
      * @param date
      * @param tasks
@@ -70,6 +68,7 @@ public class Exam implements ParentLinked {
         this.tasks = tasks;
         this.subject = subject;
         this.mark = mark;
+        this.description = "";
     }
 
     public Exam() {

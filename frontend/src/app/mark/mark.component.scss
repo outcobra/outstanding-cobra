@@ -7,3 +7,7 @@ a[md-tab-link] {
 nav {
     background-color: white;
 }
+
+:host {
+    background-color: $background-white;
+}

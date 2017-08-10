@@ -1,16 +1,19 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {MarkGroupDto} from '../model/mark-group.dto';
-import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MarkService, WEIGHT_PATTERN} from '../service/mark.service';
 import {MarkDto} from '../model/mark.dto';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ParentLinkedCreateUpdateComponent} from '../../core/common/parent-linked-create-update-component';
 import {Subject} from 'rxjs/Subject';
-import {isNotNull, isTrue} from '../../core/util/helper';
+import {isEmpty, isNotEmpty, isNotNull, isTrue} from '../../core/util/helper';
 import {Util} from '../../core/util/util';
 import {FormUtil} from '../../core/util/form-util';
 import {ViewMode} from '../../core/common/view-mode';
 import {ConfirmDialogService} from '../../core/services/confirm-dialog.service';
+import {MdSelect} from '@angular/material';
+import {Observable} from 'rxjs/Observable';
+import {NotificationWrapperService} from '../../core/notifications/notification-wrapper.service';
 
 @Component({
     selector: 'mark-group-create-update',
@@ -18,6 +21,12 @@ import {ConfirmDialogService} from '../../core/services/confirm-dialog.service';
     styleUrls: ['./mark-group-create-update.component.scss']
 })
 export class MarkGroupCreateUpdateComponent extends ParentLinkedCreateUpdateComponent<MarkGroupDto, MarkGroupDto> implements OnInit {
+    private _navigationExtras: {
+        queryParams: {
+            subjectId: number;
+            groupId?: number;
+        };
+    };
     private _markGroupCreateUpdateForm: FormGroup;
     private _semesterId: number;
 
@@ -27,26 +36,39 @@ export class MarkGroupCreateUpdateComponent extends ParentLinkedCreateUpdateComp
     public newMark$: Subject<number> = new Subject();
     public removeMark$: Subject<string> = new Subject();
 
+    @ViewChild('markSelect') select: MdSelect;
+
     constructor(private _route: ActivatedRoute,
                 private _router: Router,
                 private _formBuilder: FormBuilder,
                 private _confirmService: ConfirmDialogService,
-                private _markService: MarkService) {
+                private _markService: MarkService,
+                private _notificationService: NotificationWrapperService) {
         super()
     }
 
     ngOnInit() {
-        this._route.paramMap.subscribe((map) => this._semesterId = parseInt(map.get('semesterId')));
+        this._route.paramMap.subscribe(paramMap => {
+            this._semesterId = parseInt(paramMap.get('semesterId'));
+            this._navigationExtras = {
+                queryParams: {
+                    subjectId: parseInt(paramMap.get('subjectId'))
+                }
+            };
+        });
+
         this._route.data.subscribe((marks: { subjectMarkGroup: MarkGroupDto, isEdit: boolean, markGroup?: MarkGroupDto }) => {
                 let isEdit = marks.isEdit;
                 this.initWithParent(isEdit ? ViewMode.EDIT : ViewMode.NEW, marks.subjectMarkGroup, isEdit ? marks.markGroup : null);
                 this._availableMarks = marks.subjectMarkGroup.markValues;
-                let groupValues = this.getParamOrDefault('markValues', []) as Array<MarkDto>;
+                this._selectedMarks = this.getParamOrDefault('markValues', []) as Array<MarkDto>;
+                if (isEdit) {
+                    this._navigationExtras.queryParams.groupId = this.param.id;
+                }
 
                 this._markGroupCreateUpdateForm = this._formBuilder.group({
                     weight: [this.getParamOrDefault('weight'), Validators.compose([Validators.required, Validators.pattern(WEIGHT_PATTERN)])],
-                    description: [this.getParamOrDefault('description'), Validators.required],
-                    selectedMarks: this._formBuilder.array(groupValues.map(this._constructSelectControl, this))
+                    description: [this.getParamOrDefault('description'), Validators.required]
                 });
             }
         );
@@ -54,37 +76,26 @@ export class MarkGroupCreateUpdateComponent extends ParentLinkedCreateUpdateComp
         this.newMark$
             .filter(isNotNull)
             .subscribe(mark => {
-                this.selectedMarkControls.push(this._constructSelectControl(mark));
-                this.selectedMarkControls.markAsDirty();
+                Util.removeItem(this._availableMarks, mark);
                 this._selectedMarks.push(mark);
+                this._markGroupCreateUpdateForm.markAsDirty();
+                if (isEmpty(this._availableMarks)) {
+                    this.select.writeValue(0);
+                }
             });
 
         this.removeMark$
-            .map(this._getMarkFormControlByName, this)
             .filter(isNotNull)
-            .subscribe(formControl => {
-                Util.removeItem(this._selectedMarks, formControl.value);
-                FormUtil.removeControlInArray(this.selectedMarkControls, formControl);
+            .subscribe(mark => {
+                Util.removeItem(this._selectedMarks, mark);
+                this._availableMarks.push(mark);
+                this._markGroupCreateUpdateForm.markAsDirty();
             });
     }
 
-    public getAvailableMarks(formControlName?: string): Array<MarkDto> {
-        let availableMarks = Util.removeItems(Util.cloneArray(this._availableMarks), this._selectedMarks);
-        if (isNotNull(formControlName)) {
-            let formControl = this._getMarkFormControlByName(formControlName);
-            availableMarks.push(formControl.value as MarkDto);
-        }
-        return availableMarks;
-    }
-
     public hasMarksLeft() {
-        return (this._markGroupCreateUpdateForm.get('selectedMarks') as FormArray).length === this._availableMarks.length;
+        return isNotEmpty(this._availableMarks);
     }
-
-    private _getMarkFormControlByName(formControlName: string): AbstractControl | null {
-        return this._markGroupCreateUpdateForm.get(`selectedMarks.${formControlName}`);
-    }
-
 
     public cancel() {
         if (this._markGroupCreateUpdateForm.pristine) {
@@ -99,7 +110,9 @@ export class MarkGroupCreateUpdateComponent extends ParentLinkedCreateUpdateComp
     public submit() {
         if (this._markGroupCreateUpdateForm.valid && this._markGroupCreateUpdateForm.dirty) {
             this._markService.saveMarkGroup(this._formToMarkGroup(this._markGroupCreateUpdateForm))
-                .subscribe(() => this._goToSemesterView());
+                .map(() => Observable.fromPromise(this._goToSemesterView()))
+                .filter(isTrue)
+                .subscribe(() => this._notificationService.success('i18n.common.notification.success.save', 'i18n.modules.mark.group.createUpdate.notification.success.message'));
         }
         else {
             FormUtil.revalidateForm(this._markGroupCreateUpdateForm);
@@ -112,24 +125,20 @@ export class MarkGroupCreateUpdateComponent extends ParentLinkedCreateUpdateComp
             id: this.isEditMode() && this.param.id ? this.param.id : null,
             weight: formValue.weight,
             description: formValue.description,
-            markValues: formValue.selectedMarks,
+            markValues: this._selectedMarks,
             parentGroupId: this.parent.id,
-            value: null,
+            value: this.isEditMode() ? this.param.value : null,
             subjectId: 0,
             markGroups: []
         } as MarkGroupDto;
     }
 
-    private _goToSemesterView() {
-        this._router.navigate([`mark/semester/${this._semesterId}`]);
+    private _goToSemesterView(): Promise<boolean> {
+        return this._router.navigate([`mark/semester/${this._semesterId}`], this._navigationExtras);
     }
 
-    private _constructSelectControl(mark: MarkDto): FormControl {
-        return this._formBuilder.control(mark, Validators.required);
-    }
-
-    get selectedMarkControls(): FormArray {
-        return this._markGroupCreateUpdateForm.get('selectedMarks') as FormArray;
+    get selectedMarks(): Array<MarkDto> {
+        return this._selectedMarks;
     }
 
     get availableMarks(): Array<MarkDto> {

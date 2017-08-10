@@ -10,7 +10,7 @@
     </oc-icon-data>
     <oc-icon-data iconName="today"
                   titleKey="i18n.common.label.dueDate"
-                  [showDivider]="exam.mark">
+                  [showDivider]="exam.mark != null || exam.examTasks?.length">
         <p class="exam-property">{{ exam.date | date:'fullDate' }}</p>
     </oc-icon-data>
     <oc-icon-data iconName="poll"

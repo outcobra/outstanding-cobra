@@ -1,13 +1,13 @@
 package outcobra.server.service.internal
 
 import org.springframework.stereotype.Service
-import outcobra.server.model.Mark
 import outcobra.server.model.MarkGroup
-import outcobra.server.model.MarkValue
+import outcobra.server.model.QMarkValue
 import outcobra.server.model.Semester
 import outcobra.server.model.dto.MarkGroupDto
 import outcobra.server.model.dto.mark.SemesterMarkDto
 import outcobra.server.model.interfaces.Mapper
+import outcobra.server.model.mapper.MarkMapper
 import outcobra.server.model.mapper.mark.SemesterMarkDtoMapper
 import outcobra.server.model.repository.MarkGroupRepository
 import outcobra.server.model.repository.MarkValueRepository
@@ -31,22 +31,38 @@ class DefaultMarkGroupService
                     val markValueRepository: MarkValueRepository,
                     val semesterMarkDtoMapper: SemesterMarkDtoMapper,
                     val semesterRepository: SemesterRepository,
-                    val subjectRepository: SubjectRepository)
+                    val subjectRepository: SubjectRepository,
+                    val markMapper: MarkMapper)
     : DefaultBaseService<MarkGroup, MarkGroupDto, MarkGroupRepository>(markGroupMapper, markGroupRepository, validator, MarkGroup::class), MarkGroupService {
 
     override fun save(dto: MarkGroupDto): MarkGroupDto {
         requestValidator.validateRequestByDto(dto)
-        val entity = repository.save(mapper.fromDto(dto))
-        if (dto.parentGroupId != 0L) {
-            val marks: List<Mark> = entity.marks
-            marks.forEach {
-                if (it is MarkValue) {
-                    it.markGroup = entity
+
+        if (dto.parentGroupId != 0L && dto.id != 0L) {
+            val currentMarks = markValueRepository.findAll(QMarkValue.markValue.markGroup.id.eq(dto.id)).toMutableList()
+            dto.markValues.forEach { markValue ->
+                val result = currentMarks.removeIf { it.id == markValue.id }
+                if (!result) {
+                    markValue.markGroupId = dto.id
+                    markValueRepository.save(markMapper.fromDto(markValue))
+                }
+            }
+            if (currentMarks.isNotEmpty()) {
+                val subjectMarkGroup = repository.findOne(dto.parentGroupId)
+                currentMarks.forEach {
+                    it.markGroup = subjectMarkGroup
                     markValueRepository.save(it)
                 }
             }
         }
-        return mapper.toDto(entity)
+        val markGroup = repository.save(mapper.fromDto(dto))
+        if (dto.id == 0L) {
+            dto.markValues.forEach {
+                it.markGroupId = markGroup.id
+                markValueRepository.save(markMapper.fromDto(it))
+            }
+        }
+        return mapper.toDto(markGroup)
     }
 
     override fun delete(id: Long) {

@@ -7,6 +7,12 @@ $config: mat-typography-config(
     $font-family: 'Montserrat, sans-serif'
 );
 
+.mat-typography {
+    .mat-subheading-1, .mat-subheading-2 {
+        color: $secondary-dark;
+    }
+}
+
 @include mat-base-typography($config);
 @include angular-material-typography($config);
 // Themes

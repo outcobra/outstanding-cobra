@@ -34,8 +34,10 @@ oc-app {
 
 .oc-card {
     @include mat-elevation(1);
-    border-radius: 2px;
+    border-radius: 2px !important;
     background: white !important;
+    padding: 0 !important;
+    display: block;
 }
 
 .margin-box {
@@ -132,7 +134,7 @@ md-dialog-container {
 
 .form-group {
     width: 100%;
-    margin-bottom: 15px;
+    margin-bottom: 16px;
     md-input-container, md-select {
         box-sizing: border-box;
         width: 100%;
@@ -152,6 +154,15 @@ md-dialog-container {
             }
             md-select {
                 transform: translateY(-2px); // fix misalignment of md-input and md-select
+            }
+        }
+        &.responsive {
+            @media (max-width: 600px) {
+                flex-direction: column;
+                .half-child {
+                    margin: 0 0 8px;
+                    width: 100%;
+                }
             }
         }
     }
@@ -194,12 +205,6 @@ md-input-container.big-search {
 md-list-item {
     h1, h2, h3, h4, h5, h6, p, span {
         line-height: normal;
-    }
-}
-
-md-card {
-    &.list-card {
-        padding: 0;
     }
 }
 

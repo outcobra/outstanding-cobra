@@ -27,12 +27,14 @@ export class MarkService extends AppService {
         return this._http.get<MarkGroupDto>(`${this._baseUri}/group/${groupId}`);
     }
 
-    public deleteMark(id: number): Observable<any> {
-        return this._http.delete(`${this._baseUri}/value/${id}`);
+    public deleteMark(mark: MarkDto): Observable<MarkDto> {
+        return this._http.delete(`${this._baseUri}/value/${mark.id}`)
+            .map(() => mark);
     }
 
-    public deleteMarkGroup(id: number): Observable<any> {
-        return this._http.delete(`${this._baseUri}/group/${id}`);
+    public deleteMarkGroup(markGroup: MarkGroupDto): Observable<MarkGroupDto> {
+        return this._http.delete(`${this._baseUri}/group/${markGroup.id}`)
+            .map(() => markGroup);
     }
 
     public saveMark(mark: MarkDto): Observable<MarkGroupDto> {

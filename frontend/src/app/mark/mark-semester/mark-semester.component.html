@@ -1,95 +1,97 @@
-<div class="container" fxFlex fxFlex.gt-sm="60" fxFlexOffset.gt-sm="20">
-    <h1>{{ 'i18n.modules.mark.semester.average' | translate }} {{ semesterMark.value | markValue }}</h1>
-    <md-card class="oc-card">
-        <md-card-content>
-            <oc-collapsible [active]="true">
-                <oc-collapsible-header>
-                    <md-icon>business</md-icon>
-                    <span>{{ semesterMark.institution.name }}</span>
-                </oc-collapsible-header>
-                <oc-collapsible class="mark-school-class" [active]="true">
-                    <oc-collapsible-header class="mark-school-class-header">
-                        <md-icon>class</md-icon>
-                        <span>{{ semesterMark.schoolClass.normalizedName }}</span>
+<div class="container" fxLayout fxLayoutAlign="center start">
+    <div fxFlex.gt-sm="960px">
+        <h1>{{ 'i18n.modules.mark.semester.average' | translate }} {{ semesterMark.value | markValue }}</h1>
+        <md-card class="oc-card">
+            <md-card-content>
+                <oc-collapsible [active]="true">
+                    <oc-collapsible-header>
+                        <md-icon>business</md-icon>
+                        <span>{{ semesterMark.institution.name }}</span>
                     </oc-collapsible-header>
-                    <oc-collapsible *ngFor="let subject of semesterMark.subjects" class="mark-subject"
-                                    [active]="isActiveSubject(subject.id)">
-                        <oc-collapsible-header class="mark-subject-header">
+                    <oc-collapsible class="mark-school-class" [active]="true">
+                        <oc-collapsible-header class="mark-school-class-header">
+                            <md-icon>class</md-icon>
+                            <span>{{ semesterMark.schoolClass.normalizedName }}</span>
+                        </oc-collapsible-header>
+                        <oc-collapsible *ngFor="let subject of semesterMark.subjects" class="mark-subject"
+                                        [active]="isActiveSubject(subject.id)">
+                            <oc-collapsible-header class="mark-subject-header">
                             <span class="subject-circle"
                                   [style.background-color]="subject.color.hex | color"></span>
-                            <span>{{ subject.name }}</span>
-                            <div class="oc-filler"></div>
-                            <span><b>{{ subject.subjectMarkGroup.value | markValue }}</b></span>
-                            <md-icon [mdTooltip]="'i18n.modules.mark.common.average' | translate"
-                                     svgIcon="average"></md-icon>
-                        </oc-collapsible-header>
-                        <md-list class="mark-value-list">
-                            <md-list-item class="subject-mark-group-controls">
-                                <div class="control-row">
-                                    <button md-button
-                                            color="accent"
-                                            (click)="newMarkGroup$.next(subject.subjectMarkGroup)"
-                                            [disabled]="!currentSemester">
-                                        {{ 'i18n.modules.mark.group.createUpdate.create.action' | translate }}
-                                    </button>
-                                    <button md-button
-                                            color="accent"
-                                            (click)="newMark$.next(subject.subjectMarkGroup)"
-                                            [disabled]="!currentSemester">
-                                        {{ 'i18n.modules.mark.createUpdate.create.action' | translate }}
-                                    </button>
-                                </div>
+                                <span>{{ subject.name }}</span>
                                 <div class="oc-filler"></div>
-                                <div class="control-row">
-                                    <mark-weight-updater [markGroup]="subject.subjectMarkGroup"
-                                                         (weightChange)="editSubjectWeight$.next($event)"
-                                                         [disabled]="!currentSemester">
-                                    </mark-weight-updater>
-                                </div>
-                            </md-list-item>
+                                <span><b>{{ subject.subjectMarkGroup.value | markValue }}</b></span>
+                                <md-icon [mdTooltip]="'i18n.modules.mark.common.average' | translate"
+                                         svgIcon="average"></md-icon>
+                            </oc-collapsible-header>
+                            <md-list class="mark-value-list">
+                                <md-list-item class="subject-mark-group-controls">
+                                    <div class="control-row">
+                                        <button md-button
+                                                color="accent"
+                                                (click)="newMarkGroup$.next(subject.subjectMarkGroup)"
+                                                [disabled]="!currentSemester">
+                                            {{ 'i18n.modules.mark.group.createUpdate.create.action' | translate }}
+                                        </button>
+                                        <button md-button
+                                                color="accent"
+                                                (click)="newMark$.next(subject.subjectMarkGroup)"
+                                                [disabled]="!currentSemester">
+                                            {{ 'i18n.modules.mark.createUpdate.create.action' | translate }}
+                                        </button>
+                                    </div>
+                                    <div class="oc-filler"></div>
+                                    <div class="control-row">
+                                        <mark-weight-updater [markGroup]="subject.subjectMarkGroup"
+                                                             (weightChange)="editSubjectWeight$.next($event)"
+                                                             [disabled]="!currentSemester">
+                                        </mark-weight-updater>
+                                    </div>
+                                </md-list-item>
 
-                            <md-list-item class="mark-list-item"
-                                          *ngFor="let mark of subject.subjectMarkGroup?.markValues">
-                                <mark-value [mark]="mark"
-                                            [editEnabled]="currentSemester"
-                                            (delete)="deleteMark$.next(mark.id)"
-                                            (edit)="editMark$.next({subjectId: subject.id, groupId: mark.markGroupId, markId: mark.id})"></mark-value>
-                            </md-list-item>
-                            <md-divider></md-divider>
+                                <md-list-item class="mark-list-item"
+                                              *ngFor="let mark of subject.subjectMarkGroup?.markValues">
+                                    <mark-value [mark]="mark"
+                                                [editEnabled]="currentSemester"
+                                                (delete)="deleteMark$.next(mark)"
+                                                (edit)="editMark$.next({subjectId: subject.id, groupId: mark.markGroupId, markId: mark.id})"></mark-value>
+                                </md-list-item>
+                                <md-divider></md-divider>
 
-                            <md-list-item *ngFor="let markGroup of subject.subjectMarkGroup?.markGroups"
-                                          class="mark-group-item">
-                                <oc-collapsible [active]="isActiveMarkGroup(markGroup.id)">
-                                    <oc-collapsible-header class="mark-mark-group-header" [ngClass]="headerClasses">
-                                        <mark-value [mark]="markGroup"
-                                                    [editEnabled]="currentSemester"
-                                                    (delete)="deleteMarkGroup$.next(markGroup.id)"
-                                                    (edit)="editMarkGroup$.next({subjectId: markGroup.subjectId, groupId: markGroup.id})"></mark-value>
-                                    </oc-collapsible-header>
-                                    <md-list class="mark-group-value-list">
-                                        <md-list-item>
-                                            <button md-button
-                                                    color="accent"
-                                                    (click)="newMark$.next(markGroup)"
-                                                    [disabled]="!currentSemester">
-                                                {{ 'i18n.modules.mark.createUpdate.create.action' | translate }}
-                                            </button>
-                                        </md-list-item>
-                                        <md-list-item class="mark-list-item"
-                                                      *ngFor="let markValue of markGroup.markValues">
-                                            <mark-value [mark]="markValue"
+                                <md-list-item *ngFor="let markGroup of subject.subjectMarkGroup?.markGroups"
+                                              class="mark-group-item">
+                                    <oc-collapsible [active]="isActiveMarkGroup(markGroup.id)">
+                                        <oc-collapsible-header class="mark-mark-group-header" [ngClass]="headerClasses">
+                                            <mark-value [mark]="markGroup"
                                                         [editEnabled]="currentSemester"
-                                                        (delete)="deleteMark$.next(markValue.id)"
-                                                        (edit)="editMark$.next({subjectId: subject.id, groupId: markValue.markGroupId, markId: markValue.id})"></mark-value>
-                                        </md-list-item>
-                                    </md-list>
-                                    <oc-divider></oc-divider>
-                                </oc-collapsible>
-                            </md-list-item>
-                        </md-list>
+                                                        (delete)="deleteMarkGroup$.next(markGroup)"
+                                                        (edit)="editMarkGroup$.next({subjectId: markGroup.subjectId, groupId: markGroup.id})"></mark-value>
+                                        </oc-collapsible-header>
+                                        <md-list class="mark-group-value-list">
+                                            <md-list-item>
+                                                <button md-button
+                                                        color="accent"
+                                                        (click)="newMark$.next(markGroup)"
+                                                        [disabled]="!currentSemester">
+                                                    {{ 'i18n.modules.mark.createUpdate.create.action' | translate }}
+                                                </button>
+                                            </md-list-item>
+                                            <md-list-item class="mark-list-item"
+                                                          *ngFor="let markValue of markGroup.markValues">
+                                                <mark-value [mark]="markValue"
+                                                            [editEnabled]="currentSemester"
+                                                            (delete)="deleteMark$.next(markValue)"
+                                                            (edit)="editMark$.next({subjectId: subject.id, groupId: markValue.markGroupId, markId: markValue.id})"></mark-value>
+                                            </md-list-item>
+                                        </md-list>
+                                        <oc-divider></oc-divider>
+                                    </oc-collapsible>
+                                </md-list-item>
+                            </md-list>
+                        </oc-collapsible>
                     </oc-collapsible>
                 </oc-collapsible>
-            </oc-collapsible>
-        </md-card-content>
-    </md-card>
+            </md-card-content>
+        </md-card>
+    </div>
 </div>

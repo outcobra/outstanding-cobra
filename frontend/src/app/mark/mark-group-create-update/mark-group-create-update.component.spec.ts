@@ -8,6 +8,7 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {ActivatedRoute, convertToParamMap} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 import {MockMarkService} from '../../core/mock/mark/mock-mark.service';
+import {MarkValueComponent} from '../mark-value/mark-value.component';
 
 describe('MarkGroupCreateUpdateComponent', () => {
     let component: MarkGroupCreateUpdateComponent;
@@ -16,7 +17,8 @@ describe('MarkGroupCreateUpdateComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
-                MarkGroupCreateUpdateComponent
+                MarkGroupCreateUpdateComponent,
+                MarkValueComponent
             ],
             imports: [
                 TestModule,

@@ -5,7 +5,9 @@
     <div class="dialog-body" md-dialog-content>
         <div class="form-group">
             <md-input-container>
-                <input mdInput [placeholder]="'i18n.modules.exam.dialogs.add.name.label' | translate"
+                <input mdInput
+                       required
+                       [placeholder]="'i18n.modules.exam.dialogs.add.name.label' | translate"
                        formControlName="name">
                 <md-error *ngIf="examCreateUpdateForm.get('name').invalid && examCreateUpdateForm.get('name').touched">
                     <ng-template [ngIf]="examCreateUpdateForm.get('name').hasError('required')">
@@ -16,7 +18,8 @@
         </div>
         <div class="form-group">
             <md-input-container>
-                <textarea mdInput [placeholder]="'i18n.modules.exam.dialogs.add.desc.label' | translate"
+                <textarea mdInput
+                          [placeholder]="'i18n.modules.exam.dialogs.add.desc.label' | translate"
                           formControlName="description"></textarea>
                 <md-error
                     *ngIf="examCreateUpdateForm.get('description').invalid && examCreateUpdateForm.get('description').touched">
@@ -26,10 +29,11 @@
                 </md-error>
             </md-input-container>
         </div>
-        <div class="form-group half">
+        <div class="form-group half responsive">
             <div class="half-child">
                 <md-input-container>
                     <input mdInput
+                           required
                            [mdDatepicker]="examDatePicker"
                            [placeholder]="'i18n.common.label.todoDate' | translate"
                            formControlName="date">
@@ -47,6 +51,7 @@
             </div>
             <div class="half-child">
                 <md-select formControlName="subjectId"
+                           required
                            [placeholder]="'i18n.modules.exam.dialogs.add.subject.label' | translate">
                     <md-option *ngFor="let subject of subjects" [value]="subject.id">{{ subject.name }}</md-option>
                 </md-select>

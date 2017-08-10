@@ -5,7 +5,7 @@ import {SemesterDto} from '../manage/model/manage.dto';
 import {Util} from '../core/util/util';
 import {DateUtil} from '../core/services/date-util.service';
 import {isEmpty, isTruthy} from '../core/util/helper';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, ActivatedRouteSnapshot, Router} from '@angular/router';
 
 @Component({
     selector: 'mark',
@@ -22,13 +22,13 @@ export class MarkComponent implements OnInit {
     }
 
     ngOnInit() {
-        this._semesterService.readAll()
-            .map(semesters => semesters.map(sem => this._semesterService.mapDates(sem))
-                .sort((first, second) => dateComparator(first.validFrom, second.validFrom)))
+        this._semesterService.readAll().map(semesters => semesters.map(sem => this._semesterService.mapDates(sem)).sort((first, second) => dateComparator(first.validFrom, second.validFrom)))
             .subscribe(semesters => {
                 this.currentSemester = semesters.find(sem => DateUtil.isBetweenDaysInclusive(new Date(), sem.validFrom as Date, sem.validTo as Date));
                 this.semesters = isTruthy(this.currentSemester) ? Util.moveToFirst(semesters, this.currentSemester) : semesters;
-                this._initMarkSemesterView();
+                if (!this._route.snapshot.children.some(route => route.paramMap.has('semesterId'))) {
+                    this._initMarkSemesterView();
+                }
             });
     }
 
@@ -37,7 +37,10 @@ export class MarkComponent implements OnInit {
             return;
         }
         let toShowSemester = isTruthy(this.currentSemester) ? this.currentSemester : this.semesters[0];
-        this._router.navigate(['semester', toShowSemester.id], {relativeTo: this._route, queryParamsHandling: 'merge', skipLocationChange: true});
+        this._router.navigate(['semester', toShowSemester.id], {
+            relativeTo: this._route,
+            queryParamsHandling: 'merge'
+        });
     }
 
 }
