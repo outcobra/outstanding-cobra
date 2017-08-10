@@ -21,5 +21,10 @@
         h1, span {
             text-align: center;
         }
+
+        .oc-empty-content {
+            display: flex;
+            flex-direction: column;
+        }
     }
 }

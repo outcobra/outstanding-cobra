@@ -22,17 +22,18 @@ import {RavenErrorHandler} from './core/error/raven-error-handler';
 import {MarkModule} from './mark/mark.module';
 import {ExamModule} from './exam/exam.module';
 import {PipeModule} from './shared/pipe.module';
+import {FallbackComponent} from './main/fallback/fallback.component';
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        FallbackComponent
     ],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
         FormsModule,
         HttpModule,
-        AppRoutingModule,
         SharedModule,
         MainModule,
         ManageModule,
@@ -45,6 +46,7 @@ import {PipeModule} from './shared/pipe.module';
         PipeModule,
         OCMaterialModule,
         MdNativeDateModule,
+        AppRoutingModule,
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,

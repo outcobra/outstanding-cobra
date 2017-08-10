@@ -40,7 +40,7 @@
                 <input mdInput
                        required
                        [mdDatepicker]="validToPicker"
-                       [min]="parentValidTo"
+                       [max]="parentValidTo"
                        [placeholder]="'i18n.common.label.validTo' | translate"
                        formControlName="validTo">
                 <button mdSuffix [mdDatepickerToggle]="validToPicker" type="button"></button>

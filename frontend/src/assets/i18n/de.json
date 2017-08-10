@@ -61,6 +61,12 @@
         "lavender": "Lavendel"
       }
     },
+    "email": {
+      "info": "info@outcobra.school",
+      "support": "support@outcobra.school",
+      "security": "security@outcobra.school",
+      "bug": "bug@outcobra.school"
+    },
     "modules": {
       "info": {
         "title": "Applikations Informationen",
@@ -419,6 +425,12 @@
           "message": "Die angegebene Zeitdauer ist auesserhalb der Zeitspanne des Vater-Objekts"
         },
         "mark": "Der Wert dieser Note ist ungültig"
+      },
+      "fallback": {
+        "linkTitle": "Seite nicht gefunden",
+        "heading": "Tut uns leid",
+        "content": "Diese Seite existiert leider nicht",
+        "hint": "Falls du glaubst es handelt sich hierbei um ein Problem, dann melde dich bitte bei uns:"
       }
     }
   }
