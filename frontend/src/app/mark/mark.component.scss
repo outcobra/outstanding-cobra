@@ -1,0 +1,13 @@
+@import '../../sass/color-variables';
+
+a[md-tab-link] {
+    color: $primary-dark !important;
+}
+
+nav {
+    background-color: white;
+}
+
+:host {
+    background-color: $background-white;
+}

@@ -5,7 +5,9 @@
     <div class="dialog-body" md-dialog-content>
         <div class="form-group">
             <md-input-container>
-                <input mdInput [placeholder]="'i18n.modules.task.dialogs.add.name.label' | translate"
+                <input mdInput
+                       required
+                       [placeholder]="'i18n.modules.task.dialogs.add.name.label' | translate"
                        formControlName="name">
                 <md-error *ngIf="taskCreateUpdateForm.get('name').invalid && taskCreateUpdateForm.get('name').touched">
                     <ng-template [ngIf]="taskCreateUpdateForm.get('name').hasError('required')">
@@ -16,23 +18,23 @@
         </div>
         <div class="form-group">
             <md-input-container>
-                <textarea mdInput [placeholder]="'i18n.modules.task.dialogs.add.desc.label' | translate"
+                <textarea mdInput
+                          [placeholder]="'i18n.modules.task.dialogs.add.desc.label' | translate"
                           formControlName="description"></textarea>
-                <md-error *ngIf="taskCreateUpdateForm.get('description').invalid && taskCreateUpdateForm.get('description').touched">
-                    <ng-template [ngIf]="taskCreateUpdateForm.get('description').hasError('required')">
-                        {{ 'i18n.common.form.error.required' | translate }}
-                    </ng-template>
-                </md-error>
             </md-input-container>
         </div>
-        <div formGroupName="dates" class="form-group">
-            <div class="half">
+        <div formGroupName="dates" class="form-group half">
+            <div class="half-child">
                 <md-input-container>
-                    <input mdInput [mdDatepicker]="todoDatePicker" [min]="today"
-                           [placeholder]="'i18n.common.label.todoDate' | translate" formControlName="todoDate">
+                    <input mdInput
+                           required
+                           [mdDatepicker]="todoDatePicker"
+                           [min]="today"
+                           [placeholder]="'i18n.common.label.todoDate' | translate"
+                           formControlName="todoDate">
                     <button mdSuffix [mdDatepickerToggle]="todoDatePicker"></button>
                     <md-error align="start"
-                                      *ngIf="taskCreateUpdateForm.get('dates.todoDate').invalid && taskCreateUpdateForm.get('dates.todoDate').touched">
+                              *ngIf="taskCreateUpdateForm.get('dates.todoDate').invalid && taskCreateUpdateForm.get('dates.todoDate').touched">
                         <ng-template [ngIf]="taskCreateUpdateForm.get('dates.todoDate').hasError('required')">
                             {{ 'i18n.common.form.error.required' | translate }}
                         </ng-template>
@@ -40,10 +42,14 @@
                 </md-input-container>
                 <md-datepicker #todoDatePicker [touchUi]="isMobile()"></md-datepicker>
             </div>
-            <div class="half">
+            <div class="half-child">
                 <md-input-container>
-                    <input mdInput [mdDatepicker]="dueDatePicker" [min]="today"
-                           [placeholder]="'i18n.common.label.dueDate' | translate" formControlName="dueDate">
+                    <input mdInput
+                           required
+                           [mdDatepicker]="dueDatePicker"
+                           [min]="today"
+                           [placeholder]="'i18n.common.label.dueDate' | translate"
+                           formControlName="dueDate">
                     <button mdSuffix [mdDatepickerToggle]="dueDatePicker"></button>
                     <md-error align="start"
                               *ngIf="taskCreateUpdateForm.get('dates.dueDate').invalid && taskCreateUpdateForm.get('dates.dueDate').touched">
@@ -54,7 +60,8 @@
                 </md-input-container>
                 <md-datepicker #dueDatePicker [touchUi]="isMobile()"></md-datepicker>
             </div>
-            <span class="form-error" *ngIf="taskCreateUpdateForm.get('dates.todoDate').dirty && taskCreateUpdateForm.get('dates.dueDate').dirty && taskCreateUpdateForm.get('dates').invalid">
+            <span class="form-error"
+                  *ngIf="taskCreateUpdateForm.get('dates.todoDate').dirty && taskCreateUpdateForm.get('dates.dueDate').dirty && taskCreateUpdateForm.get('dates').invalid">
                 <ng-template [ngIf]="taskCreateUpdateForm.get('dates').hasError('dateToIsBeforeDateFrom')">
                     {{ 'i18n.modules.task.dialogs.add.errors.dueDateBeforeTodoDate' | translate }}
                 </ng-template>
@@ -62,10 +69,13 @@
         </div>
         <div class="form-group">
             <md-input-container>
-                <input mdInput type="number" [placeholder]="'i18n.modules.task.dialogs.add.effort.label' | translate"
+                <input mdInput
+                       required
+                       type="number"
+                       [placeholder]="'i18n.modules.task.dialogs.add.effort.label' | translate"
                        formControlName="effort">
                 <md-error class="form-error" align="start"
-                         *ngIf="taskCreateUpdateForm.get('effort').invalid && taskCreateUpdateForm.get('effort').touched">
+                          *ngIf="taskCreateUpdateForm.get('effort').invalid && taskCreateUpdateForm.get('effort').touched">
                     <ng-template [ngIf]="taskCreateUpdateForm.get('effort').hasError('required')">
                         {{ 'i18n.common.form.error.required' | translate }}
                     </ng-template>
@@ -73,7 +83,9 @@
             </md-input-container>
         </div>
         <div class="form-group">
-            <md-select formControlName="subjectId">
+            <md-select formControlName="subjectId"
+                       required
+                       [placeholder]="'i18n.modules.task.dialogs.add.subject.label' | translate">
                 <md-option *ngFor="let subject of subjects" [value]="subject.id">{{ subject.name }}</md-option>
             </md-select>
         </div>

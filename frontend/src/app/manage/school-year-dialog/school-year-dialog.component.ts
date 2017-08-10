@@ -1,14 +1,14 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {ManageDialog} from '../manage-dialog';
+import {ParentLinkedCreateUpdateComponent} from '../../core/common/parent-linked-create-update-component';
 import {SchoolClassDto, SchoolYearDto} from '../model/manage.dto';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MdDialogRef} from '@angular/material';
 import {OCValidators} from '../../core/services/oc-validators';
 import {TranslateService} from '@ngx-translate/core';
 import {DatePipe} from '@angular/common';
-import {Util} from '../../core/util/util';
 import {ResponsiveHelperService} from '../../core/services/ui/responsive-helper.service';
 import {DateUtil} from '../../core/services/date-util.service';
+import {FormUtil} from '../../core/util/form-util';
 
 @Component({
     selector: 'school-year-dialog',
@@ -16,7 +16,7 @@ import {DateUtil} from '../../core/services/date-util.service';
     styleUrls: ['./school-year-dialog.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class SchoolYearDialog extends ManageDialog<SchoolYearDto, SchoolClassDto> implements OnInit {
+export class SchoolYearDialog extends ParentLinkedCreateUpdateComponent<SchoolYearDto, SchoolClassDto> implements OnInit {
 
     private _schoolYearForm: FormGroup;
 
@@ -48,7 +48,7 @@ export class SchoolYearDialog extends ManageDialog<SchoolYearDto, SchoolClassDto
 
     public submit() {
         if (!(this._schoolYearForm.valid && this._schoolYearForm.dirty)) {
-            Util.revalidateForm(this._schoolYearForm);
+            FormUtil.revalidateForm(this._schoolYearForm);
             return;
         }
         if (this.isEditMode()) {

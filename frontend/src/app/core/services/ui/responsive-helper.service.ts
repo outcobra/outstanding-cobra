@@ -3,7 +3,7 @@ import {Observable} from 'rxjs';
 import {MOBILE_DIALOG} from '../../util/const';
 import {MdDialogConfig} from '@angular/material';
 import {Orientation} from './orientation';
-import {isTruthy} from '../../util/helper';
+import {isFalsy} from '../../util/helper';
 import {MediaChange, ObservableMedia} from '@angular/flex-layout';
 import {OCMediaChange} from './oc-media-change';
 
@@ -31,8 +31,8 @@ export class ResponsiveHelperService {
     }
 
     public getMobileOrGivenDialogConfig(config: MdDialogConfig) {
-        if (!this._observableMedia.isActive('gt-xs')) {
-            return MOBILE_DIALOG
+        if (!this._observableMedia.isActive('gt-sm')) {
+            return MOBILE_DIALOG;
         }
         return config;
     }
@@ -46,8 +46,8 @@ export class ResponsiveHelperService {
     }
 
     public getCurrentOrientation(): Orientation {
-        let orientation = isTruthy(window.screen) ? (window.screen as any).orientation.angle : window.orientation;
-        if (Math.abs(orientation) === Orientation.LANDSCAPE) {
+        let orientation = (window.screen as any).orientation;
+        if (isFalsy(orientation) || Math.abs(orientation.angle) === Orientation.LANDSCAPE) {
             return Orientation.LANDSCAPE
         }
         return Orientation.PORTRAIT

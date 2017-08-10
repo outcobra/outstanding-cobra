@@ -14,16 +14,16 @@ import javax.inject.Inject
  * @since 1.1.0
  */
 @Component
-open class SemesterMapper @Inject constructor(val subjectRepository: SubjectRepository,
-                                              val schoolYearRepository: SchoolYearRepository,
-                                              val markReportRepository: MarkReportRepository,
-                                              val timetableRepository: TimetableRepository)
+class SemesterMapper @Inject constructor(val subjectRepository: SubjectRepository,
+                                         val schoolYearRepository: SchoolYearRepository,
+                                         val markReportRepository: MarkReportRepository,
+                                         val timetableRepository: TimetableRepository)
     : Mapper<Semester, SemesterDto>, BaseMapper() {
     override fun toDto(from: Semester): SemesterDto {
         val subjects = from.subjects.map { it.id }
         val reports = from.markReports.map { it.id }
-        val timetableId = if (from.timetable != null) from.timetable.id else -1 // TODO still ugly tough
-        val id = from.id ?: 0
+        val timetableId = from.timetable?.id ?: 0L
+        val id = from.id ?: 0L
         return SemesterDto(id, from.schoolYear.id, from.name, from.validFrom, from.validTo, subjects, reports, timetableId)
     }
 
