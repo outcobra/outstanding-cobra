@@ -36,7 +36,6 @@ import {FallbackComponent} from './main/fallback/fallback.component';
         HttpModule,
         SimpleNotificationsModule.forRoot(),
         OCMaterialModule,
-        MdNativeDateModule,
         SharedModule,
         MainModule,
         ManageModule,

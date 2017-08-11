@@ -60,7 +60,6 @@ export class OCFilterSearchComponent implements OnInit {
 
         Observable.fromEvent(window, 'resize')
             .subscribe(() => this._refreshTriggerDimensions());
-
     }
 
     public closeSearchField() {
