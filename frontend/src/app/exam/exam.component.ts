@@ -143,6 +143,7 @@ export class ExamComponent implements OnInit, AfterViewInit {
                     .subscribe((completeExam: ExamDto) => {
                         this._allExams.push(completeExam);
                         this._sortExams();
+                        this._displayForFilter();
                         this._notificationService.success('i18n.modules.exam.notification.add.title', 'i18n.modules.exam.notification.add.message');
                     });
             });
