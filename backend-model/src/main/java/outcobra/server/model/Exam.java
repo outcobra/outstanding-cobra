@@ -24,7 +24,7 @@ public class Exam implements ParentLinked {
     @NotNull
     private LocalDate date;
 
-    @OneToMany(mappedBy = "exam")
+    @OneToMany(mappedBy = "exam", cascade = CascadeType.MERGE)
     private List<ExamTask> tasks;
 
     @NotNull
