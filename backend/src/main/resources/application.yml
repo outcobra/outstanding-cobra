@@ -94,5 +94,5 @@ spring:
   profiles:
     include: auth0_proxy
 http:
-  proxyHost: proxy.efd.admin.ch
+  proxyHost: proxy-bvcol.admin.ch
   proxyPort: 8080
