@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {AppService} from './core/app.service';
 import {HttpInterceptor} from '../http/http-interceptor';
-import {Observable} from 'rxjs';
+import {Observable} from 'rxjs/Observable';
 import {Info} from '../model/info.dto';
 
 @Injectable()

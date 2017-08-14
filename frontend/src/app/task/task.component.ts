@@ -8,7 +8,7 @@ import {MdDialog, MdDialogRef} from '@angular/material';
 import {TaskCreateUpdateDialog} from './task-create-update-dialog/task-create-update-dialog.component';
 import {Util} from '../core/util/util';
 import {ViewMode} from '../core/common/view-mode';
-import {Observable} from 'rxjs';
+import {Observable} from 'rxjs/Observable';
 import {SMALL_DIALOG} from '../core/util/const';
 import {and} from '../core/util/helper';
 import {ResponsiveHelperService} from '../core/services/ui/responsive-helper.service';
