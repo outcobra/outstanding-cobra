@@ -3,7 +3,6 @@ import {ConfigService} from '../../config/config.service';
 import {tokenNotExpired} from 'angular2-jwt';
 import {Router} from '@angular/router';
 import {HttpInterceptor} from '../../http/http-interceptor';
-import {Util} from '../../util/util';
 import {Observable} from 'rxjs/Observable';
 import {User} from '../../model/user';
 import {TranslateService} from '@ngx-translate/core';
@@ -16,7 +15,6 @@ declare let Auth0Lock: any;
 export class Auth0AuthService implements AuthService {
     private _auth0Config: any;
     private readonly _defaultRedirectRoute = '/dashboard';
-    private _redirectRoute: string;
     private _lock;
 
     constructor(private _config: ConfigService,
@@ -59,21 +57,22 @@ export class Auth0AuthService implements AuthService {
             localStorage.setItem(this._config.get('locStorage.tokenLocation'), authResult.idToken);
             this._lock.getProfile(authResult.idToken, (err, profile) => {
                 localStorage.setItem(this._config.get('locStorage.profileLocation'), JSON.stringify(profile));
+
+                this._http.get<User>('/user/login', 'outcobra')
+                    .catch(() => {
+                        this.logout();
+                        this._notificationService.error('i18n.auth.error.title', 'i18n.auth.error.message');
+                        return Observable.empty();
+                    })
+                    .subscribe((user: User) => {
+                            this._notificationService.success(
+                                this._translateService.instant('i18n.auth.success.hello') + user.username, 'i18n.auth.success.message');
+                            if (authResult.state) {
+                                this._router.navigate([authResult.state]);
+                            }
+                        }
+                    );
             });
-            this._http.get<User>('/user/login', 'outcobra')
-                .catch(() => {
-                    this.logout();
-                    this._notificationService.error('i18n.auth.error.title', 'i18n.auth.error.message');
-                    return Observable.empty();
-                })
-                .subscribe((user: User) =>
-                    this._notificationService.success(
-                        this._translateService.instant('i18n.auth.success.hello') + user.username, 'i18n.auth.success.message'
-                    ));
-            let redirectRoute = Util.getUrlParam('state');
-            if (redirectRoute) {
-                this._router.navigate(redirectRoute);
-            }
         });
     }
 
@@ -86,7 +85,6 @@ export class Auth0AuthService implements AuthService {
      */
     public login(redirectRoute: string = this._defaultRedirectRoute) {
         if (!this.isLoggedIn()) {
-            this._redirectRoute = redirectRoute;
             this._lock.show({ //TODO language
                 auth: {
                     params: {
