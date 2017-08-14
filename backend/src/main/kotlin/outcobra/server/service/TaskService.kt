@@ -4,7 +4,6 @@ import outcobra.server.model.Semester
 import outcobra.server.model.Subject
 import outcobra.server.model.Task
 import outcobra.server.model.dto.TaskDto
-import outcobra.server.model.dto.TaskFilterDto
 import outcobra.server.model.dto.TaskProgressUpdateDto
 import outcobra.server.service.base.BaseService
 
@@ -47,11 +46,6 @@ interface TaskService : BaseService<TaskDto> {
      * Reads all [Task]s of the current user
      */
     fun readAll(): List<TaskDto>
-
-    /**
-     * @return a [TaskFilterDto] for the current user
-     */
-    fun getTaskFilter(): TaskFilterDto
 
     fun updateProgress(taskProgressUpdateDto: TaskProgressUpdateDto): TaskDto
 }

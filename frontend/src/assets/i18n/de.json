@@ -11,29 +11,43 @@
         "yes": "Ja",
         "no": "Nein",
         "ok": "OK",
-        "filter": "Filtern"
+        "filter": "Filtern",
+        "search": "Suchen"
       },
       "label": {
         "validFrom": "Gültig ab",
         "validTo": "Gültig bis",
         "todoDate": "Erledigungsdatum",
-        "dueDate": "Fälligkeitsdatum"
+        "dueDate": "Fälligkeitsdatum",
+        "date": "Datum",
+        "empty": "Scheinbar ist hier nichts vorhanden",
+        "noFilterResults": "Es wurden keine Resultate für den Filter gefunden"
       },
       "form": {
         "error": {
+          "title": "Fehler",
           "required": "Dieses Feld wird benötigt.",
           "isAfterOrSameDay": "Das Datum sollte nach dem {{date}} sein",
           "isBeforeOrSameDay": "Das Datum sollte vor dem {{date}} sein",
           "dateToIsBeforeDateFrom": "'Gültig bis' ist vor 'Gültig ab'"
+        },
+        "filter": {
+          "additional": "Zusätzliche Filter"
         }
       },
       "notification": {
         "success": {
-          "save": "Erfolgreich gespeichert",
-          "delete": "Erfolgreich gelöscht"
+          "save": "Speichern erfolgreich",
+          "delete": "Löschen erfolgreich"
         },
         "error": {
           "delete": "Löschen fehlgeschlagen"
+        }
+      },
+      "dialog": {
+        "unsavedChanges": {
+          "title": "Du hast ungespeicherte Änderungen",
+          "message": "Willst du deine Angaben wirklich verwerfen?"
         }
       },
       "lang": {
@@ -46,6 +60,12 @@
         "bloodorange": "Blutorange",
         "lavender": "Lavendel"
       }
+    },
+    "email": {
+      "info": "info@outcobra.school",
+      "support": "support@outcobra.school",
+      "security": "security@outcobra.school",
+      "bug": "bug@outcobra.school"
     },
     "modules": {
       "info": {
@@ -66,13 +86,153 @@
       "main": {
         "welcome": "Willkommen bei Outcobra",
         "subtitle": "Das Managementtool von Schülern für Schüler",
-        "authors": "von Joel, Florian, Mario und Vincent"
+        "authors": "von Joel, Florian und Mario"
       },
       "exam": {
-        "linkTitle": "Prüfungen"
+        "linkTitle": "Prüfungen",
+        "listTitle": "Deine Prüfungen",
+        "add": "Prüfung hinzufügen",
+        "description": "Prüfungs-Beschreibung",
+        "name": "Prüfungs-Name",
+        "empty": {
+          "hint": "Füge eine Prüfung über den Knopf unten rechts hinzu!"
+        },
+        "examTask": {
+          "title": "Lernziele",
+          "add": "Lernziel hinzufügen"
+        },
+        "mark": {
+          "add": "Prüfungsnote eintragen",
+          "title": "Prüfungsnote"
+        },
+        "filter": {
+          "title": "Prüfungen filtern",
+          "subject": "Nach Fach filtern",
+          "showPending": "Nur zukünftige Prüfungen zeigen",
+          "activeSemesters": "Nur Prüfungen aus aktuellen Semestern anzeigen",
+          "search": "Prüfungen suchen...",
+          "noMatch": "Nichts gefunden"
+        },
+        "notification": {
+          "add": {
+            "title": "Prüfungen hinzugefügt",
+            "message": "Die Prüfungen wurde erfolgreich erstellt"
+          },
+          "update": {
+            "title": "Prüfung geändert",
+            "message": "Die Prüfung wurde erfolgreich gespeichert"
+          },
+          "delete": {
+            "title": "Prüfung gelöscht",
+            "message": "Die Prüfung wurde erfolgreich entfernt"
+          },
+          "error": {
+            "deleteFailed": {
+              "title": "Löschen fehlgeschlagen",
+              "message": "Beim Löschen der Prüfung ist ein Fehler aufgetreten. Bitte versuchen es später erneut"
+            },
+            "taskNotFound": {
+              "title": "Prüfung nicht gefunden",
+              "message": "Wir konnten die gesuchte Prüfung nicht finden"
+            }
+          }
+        },
+        "dialogs": {
+          "confirmDeleteDialog": {
+            "title": "Willst du die Prüfung wirklich löschen?",
+            "message": "Die Prüfung wird für immer weg sein (Eine sehr sehr lange Zeit)"
+          },
+          "add": {
+            "name": {
+              "label": "Prüfungsnamen"
+            },
+            "desc": {
+              "label": "Prüfungsbeschreibung (optional)"
+            },
+            "subject": {
+              "label": "Wähle ein Schulfach"
+            }
+          }
+        }
       },
       "mark": {
-        "linkTitle": "Noten"
+        "linkTitle": "Noten",
+        "noSemesterAvailable": "Du hast noch keine Semester",
+        "common": {
+          "weight": "Gewichtung",
+          "average": "Notendurchschnitt"
+        },
+        "semester": {
+          "average": "Dein Semesterdurchschnitt ist:"
+        },
+        "createUpdate": {
+          "create": {
+            "title": "Neue Note",
+            "action": "Note erfassen"
+          },
+          "update": {
+            "title": "Note bearbeiten"
+          },
+          "form": {
+            "value": {
+              "label": "Notenwert",
+              "hint": "Beispiel: 5.25",
+              "error": {
+                "pattern": "Zwischen 1 und 6 mit maximal zwei Nachkommastellen"
+              }
+            },
+            "weight": {
+              "label": "Gewichtung",
+              "hint": "Beispiel: 2 oder 0.5",
+              "error": {
+                "pattern": "Zwischen 0.01 und 10 mit maximal zwei Nachkommastellen"
+              }
+            },
+            "description": {
+              "label": "Kurzbeschreibung"
+            }
+          },
+          "notification": {
+            "success": {
+              "message": "Die Note wurde erfolgreich gespeichert"
+            }
+          }
+        },
+        "group": {
+          "createUpdate": {
+            "create": {
+              "title": "Neue Notengruppe",
+              "action": "Notengruppe erfassen"
+            },
+            "update": {
+              "title": "Notengruppe bearbeiten"
+            },
+            "children": "Aktuell ausgewählte Kind-Noten",
+            "form": {
+              "description": {
+                "label": "Beschreibung"
+              },
+              "markSelect": {
+                "label": "Füge eine Note zur Gruppe hinzu"
+              }
+            },
+            "notification": {
+              "success": {
+                "message": "Die Notengruppierung wurde erfolgreich gespeichert"
+              }
+            }
+          }
+        },
+        "dialog": {
+          "markConfirmDelete": {
+            "title": "Note wirklich löschen?",
+            "message": "Wollen sie die Note wirklich löschen?"
+          },
+          "markGroupConfirmDelete": {
+            "title": "Notengruppe wirklich löschen?",
+            "message": "Wollen sie die Notengruppe wirklich löschen? Dabei gehen alle untergeordneten Noten verloren."
+          }
+        }
       },
       "task": {
         "linkTitle": "Aufgaben",
@@ -113,10 +273,13 @@
           },
           "add": {
             "name": {
-              "label": "Gib einen Aufgabennamen ein"
+              "label": "Aufgabennamen"
             },
             "desc": {
-              "label": "Gib eine Aufgabenbeschreibung ein"
+              "label": "Aufgabenbeschreibung (optional)"
+            },
+            "subject": {
+              "label": "Fach auswählen"
             },
             "effort": {
               "label": "Erwarteter Aufwand (in Stunden)",
@@ -253,14 +416,21 @@
         },
         "500": {
           "title": "Serverfehler",
-          "message": "Ein unbekannter Serverfehler ist aufgetreten. bitte versuchen sie es später erneut"
+          "message": "Ein unbekannter Serverfehler ist aufgetreten. Bitte versuchen sie es später erneut"
         }
       },
       "validation": {
         "outsideParent": {
           "title": "Ungültiges Datum",
           "message": "Die angegebene Zeitdauer ist auesserhalb der Zeitspanne des Vater-Objekts"
-        }
+        },
+        "mark": "Der Wert dieser Note ist ungültig"
+      },
+      "fallback": {
+        "linkTitle": "Seite nicht gefunden",
+        "heading": "Tut uns leid",
+        "content": "Diese Seite existiert leider nicht",
+        "hint": "Falls du glaubst es handelt sich hierbei um ein Problem, dann melde dich bitte bei uns:"
       }
     }
   }

@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.core.annotation.Order
 import org.springframework.core.env.Environment
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
+import org.springframework.security.config.annotation.web.builders.WebSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import javax.inject.Inject
@@ -20,6 +21,12 @@ import javax.inject.Inject
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER + 1)
 class WebSecurityConfig
 @Inject constructor(val environment: Environment) : WebSecurityConfigurerAdapter() {
+
+    override fun configure(web: WebSecurity?) {
+        if (environment.acceptsProfiles(ProfileRegistry.DEVELOPMENT)) {
+            web!!.ignoring().antMatchers("/h2-console/**")
+        }
+    }
 
     override fun configure(http: HttpSecurity?) {
         http!!.headers().frameOptions().disable()
@@ -39,7 +46,6 @@ class WebSecurityConfig
                             "/configprops",
                             "/api/ping").permitAll()
                     .anyRequest().authenticated()
-
         } else if (environment.acceptsProfiles(ProfileRegistry.PRODUCTION)) {
             http.authorizeRequests()
                     .antMatchers("/api/ping").permitAll()

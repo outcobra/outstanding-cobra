@@ -1,0 +1,51 @@
+<div class="form-group">
+    <oc-icon-data iconName="title"
+                  titleKey="i18n.modules.exam.name">
+        <p class="exam-property">{{ exam.name }}</p>
+    </oc-icon-data>
+    <oc-icon-data *ngIf="exam.description?.length"
+                  iconName="description"
+                  titleKey="i18n.modules.exam.description">
+        <p class="exam-property">{{ exam.description }}</p>
+    </oc-icon-data>
+    <oc-icon-data iconName="today"
+                  titleKey="i18n.common.label.dueDate"
+                  [showDivider]="exam.mark != null || exam.examTasks?.length">
+        <p class="exam-property">{{ exam.date | date:'fullDate' }}</p>
+    </oc-icon-data>
+    <oc-icon-data iconName="poll"
+                  titleKey="i18n.modules.exam.mark.title"
+                  [showDivider]="exam.examTasks?.length"
+                  *ngIf="exam.mark">
+        <p class="exam-property">{{ exam.mark.value | markValue }}</p>
+    </oc-icon-data>
+    <oc-icon-data *ngIf="exam.examTasks?.length"
+                  iconName="assignment_turned_in"
+                  titleKey="i18n.modules.exam.examTask.title"
+                  [showDivider]="false">
+        <md-list>
+            <md-list-item *ngFor="let examTask of exam.examTasks">
+                <md-checkbox class="exam-property" [checked]="examTask.finished"
+                             (change)="finishTask$.next(examTask.id)">
+                    {{ examTask.task }}
+                </md-checkbox>
+            </md-list-item>
+        </md-list>
+    </oc-icon-data>
+</div>
+<button md-button
+        color="primary"
+        (click)="onEdit.emit(exam)">
+    {{ 'i18n.common.action.edit' | translate }}
+</button>
+<button md-button
+        (click)="onDelete.emit(exam)">
+    {{ 'i18n.common.action.delete' | translate }}
+</button>
+<button md-button
+        color="accent"
+        class="right"
+        (click)="onAddMark.emit(exam)"
+        *ngIf="!exam.mark">
+    {{ 'i18n.modules.exam.mark.add' | translate }}
+</button>

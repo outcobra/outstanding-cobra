@@ -11,20 +11,27 @@
         "yes": "Yes",
         "no": "No",
         "ok": "OK",
-        "filter": "Filter"
+        "filter": "Filter",
+        "search": "Search"
       },
       "label": {
         "validFrom": "Valid from",
         "validTo": "Valid to",
         "dueDate": "Due Date",
-        "todoDate": "Todo Date"
+        "todoDate": "Todo Date",
+        "empty": "There seems to be nothing available here",
+        "noFilterResults": "No results that match the current filter have been found"
       },
       "form": {
         "error": {
+          "title": "Error",
           "required": "This field is required.",
           "isAfterOrSameDay": "The date should be after the {{date}}",
           "isBeforeOrSameDay": "The date should be before the {{date}}",
           "dateToIsBeforeDateFrom": "'Valid to' is before 'Valid from'"
+        },
+        "filter": {
+          "additional": "Additional filters"
         }
       },
       "notification": {
@@ -34,6 +41,12 @@
         },
         "error": {
           "delete": "Delete failed"
+        }
+      },
+      "dialog": {
+        "unsavedChanges": {
+          "title": "You have unsaved changes",
+          "message": "Would you really like to discard the changes?"
         }
       },
       "lang": {
@@ -46,6 +59,12 @@
         "bloodorange": "Blood Orange",
         "lavender": "Lavender"
       }
+    },
+    "email": {
+      "info": "info@outcobra.school",
+      "support": "support@outcobra.school",
+      "security": "security@outcobra.school",
+      "bug": "bug@outcobra.school"
     },
     "modules": {
       "info": {
@@ -66,13 +85,153 @@
       "main": {
         "welcome": "Welcome to Outcobra",
         "subtitle": "The management-tool by students for students",
-        "authors": "by Joel, Florian, Mario and Vincent"
+        "authors": "by Joel, Florian and Mario"
       },
       "exam": {
-        "linkTitle": "Exams"
+        "linkTitle": "Exams",
+        "listTitle": "Your exams",
+        "add": "Add exam",
+        "description": "Exam description",
+        "name": "Exam name",
+        "empty": {
+          "hint": "Add an exam by pressing the button in the lower right corner!"
+        },
+        "examTask": {
+          "title": "Learning objectives",
+          "add": "Add learning objective"
+        },
+        "mark": {
+          "add": "Enter exam mark",
+          "title": "Exam mark"
+        },
+        "filter": {
+          "title": "Filter exams",
+          "subject": "Filter exams by subject",
+          "showPending": "Show upcoming exams only",
+          "activeSemesters": "Show exams for current semester only",
+          "search": "Search exam...",
+          "noMatch": "Nothing here"
+        },
+        "notification": {
+          "add": {
+            "title": "Exam saved",
+            "message": "The exam has been saved successfully"
+          },
+          "update": {
+            "title": "Exam saved",
+            "message": "The exam has been saved successfully"
+          },
+          "delete": {
+            "title": "Exam deleted",
+            "message": "The exam has been removed successfully"
+          },
+          "error": {
+            "deleteFailed": {
+              "title": "Task deletion failed",
+              "message": "An error occurred while deleting the ask. Please try again later"
+            },
+            "examNotFound": {
+              "title": "Exam not found",
+              "message": "We couldn't find the requested exam"
+            }
+          }
+        },
+        "dialogs": {
+          "confirmDeleteDialog": {
+            "title": "Do you want to delete the exam?",
+            "message": "The exam will be lost forever (A very long long time)"
+          },
+          "add": {
+            "name": {
+              "label": "Exam name"
+            },
+            "desc": {
+              "label": "Exam description (optional)"
+            },
+            "subject": {
+              "label": "Choose a subject"
+            }
+          }
+        }
       },
       "mark": {
-        "linkTitle": "Marks"
+        "linkTitle": "Marks",
+        "noSemesterAvailable": "You do not have semesters yet",
+        "common": {
+          "weight": "Weight",
+          "average": "Average mark"
+        },
+        "semester": {
+          "average": "Your average mark for this semester is:"
+        },
+        "createUpdate": {
+          "create": {
+            "title": "Add new mark",
+            "action": "Add mark"
+          },
+          "update": {
+            "title": "Edit mark"
+          },
+          "form": {
+            "value": {
+              "label": "Markvalue",
+              "hint": "Example: 5.25",
+              "error": {
+                "pattern": "Between 1 and 6 including 2 decimal places max"
+              }
+            },
+            "weight": {
+              "label": "Markweight",
+              "hint": "Example: 2 or 0.5",
+              "error": {
+                "pattern": "Between 0.01 and 10 including 2 decimal places max"
+              }
+            },
+            "description": {
+              "label": "Short description"
+            }
+          },
+          "notification": {
+            "success": {
+              "message": "The mark has been saved successfully"
+            }
+          }
+        },
+        "group": {
+          "createUpdate": {
+            "create": {
+              "title": "New markgroup",
+              "action": "Add markgroup"
+            },
+            "update": {
+              "title": "Edit Markgroup"
+            },
+            "children": "Current mark-child selection",
+            "form": {
+              "description": {
+                "label": "Beschreibung"
+              },
+              "selectMark": {
+                "label": "Add a mark to the group"
+              }
+            },
+            "notification": {
+              "success": {
+                "message": "The markgroup has been saved successfully"
+              }
+            }
+          }
+        },
+        "dialog": {
+          "markConfirmDelete": {
+            "title": "Delete mark",
+            "message": "Do you really want to delete the mark"
+          },
+          "markGroupConfirmDelete": {
+            "title": "Delete markgroup",
+            "message": "Do you really want to delete the mark group. The child elements will be lost too."
+          }
+        }
       },
       "task": {
         "linkTitle": "Tasks",
@@ -108,15 +267,18 @@
         },
         "dialogs": {
           "confirmDeleteDialog": {
-            "title": "Do you want to delete the Task?",
+            "title": "Delete task",
             "message": "The task will be lost forever (A very long long time)"
           },
           "add": {
             "name": {
-              "label": "Enter a task name"
+              "label": "Task name"
             },
             "desc": {
-              "label": "Enter a task description"
+              "label": "Task description (optional)"
+            },
+            "subject": {
+              "label": "Choose subject"
             },
             "effort": {
               "label": "Expected effort (in h)",
@@ -136,7 +298,7 @@
       },
       "manage": {
         "linkTitle": "Manage",
-        "assureDeletion": "Do you really want to delete the object?",
+        "assureDeletion": "Delete object",
         "mobile": {
           "title": {
             "INSTITUTION_CLASS": "Institutions and Classes",
@@ -267,7 +429,14 @@
         "outsideParent": {
           "title": "Invalid date",
           "message": "The given dates are outside the parent timespan"
-        }
+        },
+        "mark": "The value of the given mark is invalid"
+      },
+      "fallback": {
+        "linkTitle": "Page not found",
+        "heading": "We are sorry",
+        "content": "The page you're searching does not exist",
+        "hint": "If you think there might be a problem, please contact us: "
       }
     }
   }

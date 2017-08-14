@@ -1,5 +1,4 @@
 import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
-import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
     selector: 'oc-nav',
@@ -8,19 +7,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
     encapsulation: ViewEncapsulation.None,
     host: {
         '[class.oc-nav-collapsed]': 'collapsed'
-    },
-    animations: [
-        trigger('collapsed', [
-            state('true', style({
-                width: '0'
-            })),
-            state('false', style({
-                width: '*'
-            })),
-            transition('1 => 0', animate('300ms ease-in')),
-            transition('0 => 1', animate('300ms ease-out'))
-        ])
-    ]
+    }
 })
 export class OCNavComponent implements OnInit {
     @Input() public collapsible: boolean = false;

@@ -1,5 +1,4 @@
 import {dateReplacer} from '../http/http-util';
-import {AbstractControl, FormGroup} from '@angular/forms';
 
 /**
  * Util class
@@ -28,6 +27,20 @@ export class Util {
     }
 
     /**
+     * moves the given element to the first position in the array
+     * if the element is not present it will be added in the front
+     *
+     * @param array
+     * @param element
+     * @returns {Array<T>}
+     */
+    public static moveToFirst<T>(array: Array<T>, element: T): Array<T> {
+        Util.removeItem(array, element);
+        array.unshift(element);
+        return array;
+    }
+
+    /**
      * returns an array containing subarrays from the input array with the length
      * does not mutate the input array
      * length: 2
@@ -47,17 +60,48 @@ export class Util {
     }
 
     /**
-     * removes the element in the array
+     * removes the first element in the array that matches the predicate
      * if the element is not found the unchanged array is returned
      *
      * @param array
      * @param findPredicate
      * @returns {any}
      */
-    public static arrayRemove<T>(array: Array<T>, findPredicate: Predicate<T>): Array<T> {
+    public static removeFirstMatch<T>(array: Array<T>, findPredicate: Predicate<T>): Array<T> {
         let index = array.findIndex(t => findPredicate(t));
-        if (!index && index != 0) return array;
+        if (!index && index != 0) {
+            return array;
+        }
         return array.splice(index, 1)
+    }
+
+    /**
+     * removes the item from the array and returns it
+     * if the item does not exists in the array the array will be return without removing anything
+     *
+     * @param array
+     * @param item
+     * @returns {T[]}
+     */
+    public static removeItem<T>(array: Array<T>, item: T): Array<T> {
+        let itemIndex = array.indexOf(item);
+        if (itemIndex < 0) {
+            return array;
+        }
+        array.splice(itemIndex, 1);
+        return array;
+    }
+
+    /**
+     * removes all elements in the items array from the first given array
+     *
+     * @param {Array<T>} array
+     * @param {Array<T>} items
+     * @returns {Array<T>}
+     */
+    public static removeItems<T>(array: Array<T>, items: Array<T>): Array<T> {
+        items.forEach(item => Util.removeItem(array, item));
+        return array;
     }
 
     /**
@@ -85,41 +129,7 @@ export class Util {
         return new Date().getTime();
     }
 
-    /**
-     * marks invalid fields in the FormGroup as touched and returns the validity of the FormGroup
-     * used for validation on submit
-     *
-     * @param form FormGroup
-     * @return validity of the given FormGroup
-     */
-    public static revalidateForm(form: FormGroup): boolean {
-        Object.keys(form.controls).forEach((key) => {
-            let control: AbstractControl = form.controls[key];
-            if (control instanceof FormGroup) {
-                this.revalidateForm(control);
-            } else {
-                this.revalidateControl(control);
-            }
-        });
-        return form.valid;
-    }
-
-    /**
-     * recalculates the validity of the given control and marks it as touched if invalid
-     *
-     * @param control AbstractControl to be checked
-     * @return {boolean} the validity of the control
-     */
-    public static revalidateControl(control: AbstractControl): boolean {
-        control.updateValueAndValidity({onlySelf: true});
-        if (control.invalid) {
-            control.markAsTouched();
-        }
-        return control.valid;
-    }
-
-    public static bindAndCall(func: Function, thisArg: any, args?: any) {
-        let f = args ? func.bind(thisArg, args) : func.bind(thisArg);
-        return f.call();
+    public static getKeyByValue(object, value) {
+        return Object.keys(object).find(key => object[key] === value);
     }
 }

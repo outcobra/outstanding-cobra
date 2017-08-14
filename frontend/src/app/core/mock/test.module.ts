@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {MockHttpInterceptor} from './http/MockHttpInterceptor';
-import {MockConfigService} from './config/MockConfig';
+import {MockConfigService} from './config/mock-config.service';
 import {MockInfoService} from './info/mock-info.service';
 import {SimpleNotificationsModule} from 'angular2-notifications/dist';
 import {MockNotificationWrapperService} from './notifications/mock-notifications.service';
@@ -43,6 +43,13 @@ import {HttpInterceptor} from '../http/http-interceptor';
 import {ConfigService} from '../config/config.service';
 import {ObservableMedia} from '@angular/flex-layout';
 import {MockObservableMedia} from './ui/mock-observable-media.service';
+import {MarkService} from '../../mark/service/mark.service';
+import {MockMarkService} from './mark/mock-mark.service';
+import {PipeModule} from '../../shared/pipe.module';
+import {MockExamService} from './exam/mock-exam.service';
+import {ExamService} from '../../exam/service/exam.service';
+import {ExamTaskService} from '../../exam/service/exam-task.service';
+import {MockExamTaskService} from './exam/mock-exam-task.service';
 
 @NgModule({
     imports: [
@@ -53,7 +60,8 @@ import {MockObservableMedia} from './ui/mock-observable-media.service';
         TranslateModule.forRoot({
             loader: {provide: TranslateLoader, useClass: MockTranslateLoader}
         }),
-        SimpleNotificationsModule.forRoot()
+        SimpleNotificationsModule.forRoot(),
+        PipeModule
     ],
     exports: [
         CommonModule,
@@ -61,7 +69,8 @@ import {MockObservableMedia} from './ui/mock-observable-media.service';
         NoopAnimationsModule,
         OCMaterialModule,
         TranslateModule,
-        SimpleNotificationsModule
+        SimpleNotificationsModule,
+        PipeModule
     ],
     providers: [
         {
@@ -131,6 +140,18 @@ import {MockObservableMedia} from './ui/mock-observable-media.service';
         {
             provide: TaskService,
             useClass: MockTaskService
+        },
+        {
+            provide: MarkService,
+            useClass: MockMarkService
+        },
+        {
+            provide: ExamService,
+            useClass: MockExamService,
+        },
+        {
+            provide: ExamTaskService,
+            useClass: MockExamTaskService
         },
         {
             provide: DurationService,

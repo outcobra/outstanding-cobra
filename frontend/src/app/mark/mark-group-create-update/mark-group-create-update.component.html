@@ -1,0 +1,69 @@
+<oc-title-bar>
+    <span>{{ 'i18n.modules.mark.group.createUpdate.' + (isEditMode() ? 'update' : 'create') + '.title' | translate }}</span>
+</oc-title-bar>
+<form [formGroup]="markGroupCreateUpdateForm" (submit)="submit()" fxLayout fxLayoutAlign="center start">
+    <md-card fxFlex.gt-sm="960px">
+        <div class="form-group">
+            <div class="half">
+                <md-input-container>
+                    <input mdInput
+                           required
+                           [placeholder]="'i18n.modules.mark.createUpdate.form.weight.label' | translate"
+                           formControlName="weight">
+                    <md-error
+                        *ngIf="markGroupCreateUpdateForm.get('weight').invalid && markGroupCreateUpdateForm.get('weight').touched">
+                        <ng-template [ngIf]="markGroupCreateUpdateForm.get('weight').hasError('required')">
+                            {{ 'i18n.common.form.error.required' | translate }}
+                        </ng-template>
+                        <ng-template [ngIf]="markGroupCreateUpdateForm.get('weight').hasError('pattern')">
+                            {{ 'i18n.modules.mark.createUpdate.form.weight.error.pattern' | translate }}
+                        </ng-template>
+                    </md-error>
+                </md-input-container>
+            </div>
+        </div>
+        <div class="form-group">
+            <md-input-container>
+                <input mdInput
+                       required
+                       [placeholder]="'i18n.modules.mark.group.createUpdate.form.description.label' | translate"
+                       formControlName="description"
+                       maxlength="50" #description>
+                <md-hint align="end">{{description.value.length}} / 50</md-hint>
+                <md-error
+                    *ngIf="markGroupCreateUpdateForm.get('description').invalid && markGroupCreateUpdateForm.get('description').touched">
+                    <ng-template [ngIf]="markGroupCreateUpdateForm.get('description').hasError('required')">
+                        {{ 'i18n.common.form.error.required' | translate }}
+                    </ng-template>
+                </md-error>
+            </md-input-container>
+        </div>
+        <div class="form-group">
+            <md-select #markSelect
+                       (change)="newMark$.next($event.value)"
+                       [disabled]="!hasMarksLeft()"
+                       [placeholder]="'i18n.modules.mark.group.createUpdate.form.selectMark.label' | translate">
+                <md-option *ngFor="let mark of availableMarks" [value]="mark">
+                    {{ mark.description }}
+                </md-option>
+            </md-select>
+            <md-list class="mark-group-children" *ngIf="selectedMarks.length > 0">
+                <h3 md-subheader>{{ 'i18n.modules.mark.group.createUpdate.children' | translate }}</h3>
+                <oc-divider></oc-divider>
+                <ng-template ngFor let-mark [ngForOf]="selectedMarks">
+                    <md-list-item>
+                        <mark-value [mark]="mark" [editEnabled]="false" [showDivider]="false"></mark-value>
+                        <button md-button color="accent" (click)="removeMark$.next(mark)" class="square-button">
+                            <md-icon>remove_circle_outline</md-icon>
+                        </button>
+                    </md-list-item>
+                    <oc-divider></oc-divider>
+                </ng-template>
+            </md-list>
+        </div>
+        <md-card-actions>
+            <button md-button type="button" (click)="cancel()">{{ 'i18n.common.action.cancel' | translate }}</button>
+            <button md-raised-button color="primary" type="submit">{{ 'i18n.common.action.save' | translate }}</button>
+        </md-card-actions>
+    </md-card>
+</form>

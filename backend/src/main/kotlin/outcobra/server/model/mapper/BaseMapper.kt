@@ -15,7 +15,7 @@ import kotlin.reflect.KClass
  * @since 1.1.0
  */
 @Component
-open class BaseMapper {
+class BaseMapper {
     @Inject
     lateinit var repositoryLocator: RepositoryLocator
     @Inject
@@ -23,11 +23,15 @@ open class BaseMapper {
 
     fun validateChildren(children: List<Long>, childType: KClass<out ParentLinked>,
                          parentId: Long, parentType: KClass<out ParentLinked>) {
+        val existingChildren = children.filter { it != 0L }
+        if (parentId == 0L && existingChildren.isEmpty()) {
+            return //this parent object and all of its children are new
+        }
         val childRepo = repositoryLocator.getForEntityClass(childType.java)
         val parentRepo = repositoryLocator.getForEntityClass(parentType.java)
         val parent = parentRepo.findOne(parentId)
-        val areFromParent = childRepo.findAll(children).all { it.parent == parent }
-        val userIsOwner = parent.followToUser() == userService.getCurrentUser()
+        val areFromParent = childRepo.findAll(existingChildren).all { it.parent.id == parent.id }
+        val userIsOwner = parent.followToUser().auth0Id == userService.getCurrentUser()!!.auth0Id
         if (!(areFromParent && userIsOwner)) {
             ValidationKey.FORBIDDEN.throwException()
         }

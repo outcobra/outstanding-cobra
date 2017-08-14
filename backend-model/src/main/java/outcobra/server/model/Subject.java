@@ -1,12 +1,11 @@
 package outcobra.server.model;
 
 import com.querydsl.core.annotations.QueryInit;
-import outcobra.server.model.interfaces.ParentLinked;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import outcobra.server.model.interfaces.ParentLinked;
 
 @Entity
 public class Subject implements ParentLinked {
@@ -179,7 +178,6 @@ public class Subject implements ParentLinked {
         result = 31 * result + (getTasks() != null ? getTasks().hashCode() : 0);
         result = 31 * result + (getMarkReportEntries() != null ? getMarkReportEntries().hashCode() : 0);
         result = 31 * result + (getExams() != null ? getExams().hashCode() : 0);
-        result = 31 * result + (getMarkGroup() != null ? getMarkGroup().hashCode() : 0);
         result = 31 * result + (getTeacher() != null ? getTeacher().hashCode() : 0);
         return result;
     }

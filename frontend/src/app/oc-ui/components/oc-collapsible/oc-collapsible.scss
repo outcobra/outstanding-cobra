@@ -1,4 +1,5 @@
 @import '../../../../sass/_general';
+@import '../../../../sass/variables';
 
 oc-collapsible {
     display: block;
@@ -7,14 +8,35 @@ oc-collapsible {
 }
 
 oc-collapsible-header {
-    display: block;
     cursor: pointer;
     width: 100%;
     box-sizing: border-box;
+    height: $oc-collapsible-header-height;
+    display: flex;
+    flex-direction: row;
     @extend .border-bottom;
+
+    .oc-collapsible-header-content {
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+
+        span, md-icon {
+            padding: 0 5px;
+        }
+    }
+
+    .oc-collapsible-toggle {
+        height: $oc-collapsible-header-height;
+        md-icon {
+            height: $oc-collapsible-header-height;
+            line-height: $oc-collapsible-header-height;
+            transition: all .225s ease-in-out;
+        }
+    }
 }
 
-oc-collapsible-body {
+.oc-collapsible-body {
     overflow: hidden;
     height: inherit;
 
@@ -26,4 +48,12 @@ oc-collapsible-body {
             @extend .border-bottom;
         }
     }
+
+    oc-collapsible {
+        overflow: hidden;
+    }
+}
+
+oc-collapsible.active > oc-collapsible-header > .oc-collapsible-toggle > md-icon {
+    transform: rotate(180deg);
 }

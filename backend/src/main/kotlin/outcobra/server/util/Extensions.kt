@@ -1,8 +1,12 @@
 package outcobra.server.util
 
+import outcobra.server.exception.ValidationException
+import outcobra.server.exception.ValidationKey
 import outcobra.server.model.SchoolYear
 import outcobra.server.model.Semester
 import outcobra.server.model.User
+import outcobra.server.model.dto.MarkGroupDto
+import outcobra.server.model.dto.mark.BaseMarkDto
 import outcobra.server.model.interfaces.ParentLinked
 import java.time.LocalDate
 
@@ -72,10 +76,30 @@ infix fun Semester.doesNotOverlap(semester: Semester): Boolean {
  * @author Florian Bürgi
  * @since 1.1.0
  */
-tailrec fun ParentLinked.followToUser(): User {
-    if (this is User) return this
-    val parentLinked = this.parent
-    return parentLinked.followToUser()
+tailrec fun ParentLinked.followToUser(iterationCount: Int = 0): User {
+    if (iterationCount > 50) {
+        throw ValidationKey.INVALID_DTO.throwException()
+    } else {
+        if (this is User) return this
+        val parentLinked = this.parent
+        return parentLinked.followToUser(iterationCount + 1)
+    }
+}
+
+/**
+ * determines if the [BaseMarkDto] is valid or not
+ * @throws [ValidationException] if the mark is invalid
+ * @author Florian Bürgi
+ * @since <since>
+ */
+fun BaseMarkDto.validate() {
+    var valid = (id == 0L || !(value > 6 || value < 1))
+    if (this is MarkGroupDto) {
+        valid = valid && (parentGroupId == 0L || markGroups.isEmpty())
+    }
+    if (!valid) {
+        ValidationKey.INVALID_MARK.throwException()
+    }
 }
 
 /**

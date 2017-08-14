@@ -4,9 +4,11 @@ import {
     MdButtonModule,
     MdButtonToggleModule,
     MdCardModule,
+    MdCheckboxModule,
     MdCoreModule,
     MdDatepickerModule,
     MdDialogModule,
+    MdExpansionModule,
     MdIconModule,
     MdInputModule,
     MdListModule,
@@ -17,6 +19,7 @@ import {
     MdSidenavModule,
     MdSliderModule,
     MdSlideToggleModule,
+    MdTabsModule,
     MdToolbarModule,
     MdTooltipModule
 } from '@angular/material';
@@ -40,7 +43,10 @@ import {OC_DATE_FORMATS} from './core/common/oc-date-formats';
         MdSliderModule,
         MdRippleModule,
         MdListModule,
+        MdTabsModule,
         MdDatepickerModule,
+        MdExpansionModule,
+        MdCheckboxModule,
         MdCoreModule
     ],
     exports: [
@@ -60,7 +66,10 @@ import {OC_DATE_FORMATS} from './core/common/oc-date-formats';
         MdSliderModule,
         MdRippleModule,
         MdListModule,
+        MdTabsModule,
         MdDatepickerModule,
+        MdExpansionModule,
+        MdCheckboxModule,
         MdCoreModule
     ],
     providers: [

@@ -6,6 +6,7 @@ import outcobra.server.model.*
 import outcobra.server.model.dto.SubjectDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.interfaces.OutcobraDto
+import outcobra.server.model.repository.MarkGroupRepository
 import outcobra.server.model.repository.SubjectRepository
 import outcobra.server.service.SemesterService
 import outcobra.server.service.SubjectService
@@ -22,7 +23,8 @@ class DefaultSubjectService
                     repository: SubjectRepository,
                     requestValidator: RequestValidator<OutcobraDto>,
                     val userService: UserService,
-                    val semesterService: SemesterService) : SubjectService,
+                    val semesterService: SemesterService,
+                    val markGroupRepository: MarkGroupRepository) : SubjectService,
         DefaultBaseService<Subject, SubjectDto, SubjectRepository>(mapper,
                 repository,
                 requestValidator,
@@ -49,5 +51,17 @@ class DefaultSubjectService
         requestValidator.validateRequestById(schoolClassId, SchoolClass::class)
         val filter = QSubject.subject.semester.schoolYear.schoolClass.id.eq(schoolClassId)
         return repository.findAll(filter).map { mapper.toDto(it) }
+    }
+
+    override fun save(dto: SubjectDto): SubjectDto {
+        requestValidator.validateRequestByDto(dto)
+        var subject = mapper.fromDto(dto)
+        if (dto.id == 0L) {
+            val markGroup = MarkGroup(subject)
+            markGroupRepository.save(markGroup)
+            subject.markGroup = markGroup
+        }
+        subject = repository.save(subject)
+        return mapper.toDto(subject)
     }
 }

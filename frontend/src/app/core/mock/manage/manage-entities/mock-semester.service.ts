@@ -30,4 +30,8 @@ export class MockSemesterService extends MockCrudService<SemesterDto> {
             MockSemesterService.SEMESTER1_OF_SCHOOLYEAR2
         ]);
     }
+
+    public mapDates(semester: SemesterDto): SemesterDto {
+        return semester;
+    }
 }

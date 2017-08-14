@@ -10,7 +10,7 @@
     <div fxFlex fxFlex.gt-sm="60" fxFlexOffset.gt-sm="20">
         <div class="search-row" fxLayout="column" fxLayout.gt-xs="row">
             <div fxFlex="100" fxFlex.gt-xs="80" fxFlex.gt-sm="100">
-                <md-input-container id="task-search">
+                <md-input-container class="big-search">
                     <input mdInput [placeholder]="'i18n.modules.task.filter.search' | translate"
                            formControlName="searchTerm">
                 </md-input-container>
@@ -25,17 +25,17 @@
 </div>
 <div class="row task-list-row" [formGroup]="filterForm" fxLayout="column" fxLayout.gt-sm="row">
     <div id="filter" fxFlex="100" fxFlex.gt-sm="30">
-        <md-card [@filterShown]="filterShown">
+        <md-card [@slideUpDown]="filterShown">
             <md-card-title md-subheader>{{ 'i18n.modules.task.filter.title' | translate }}</md-card-title>
             <md-card-content>
                 <div class="form-group">
                     <label>{{ 'i18n.modules.task.filter.subject' | translate }}</label>
                     <md-select formControlName="subjectId">
-                        <ng-template ngFor let-subjectClass [ngForOf]="filterData.schoolClassSubjects">
-                            <md-option *ngFor="let subject of subjectClass.subjects" [value]="subject.id">
-                                {{ subjectClass.schoolClass.normalizedName + ' - ' + subject.name }}
+                        <md-optgroup *ngFor="let schoolClass of filterData.schoolClassSubjects" [label]="schoolClass.schoolClass.normalizedName">
+                            <md-option *ngFor="let subject of schoolClass.subjects" [value]="subject.id">
+                                {{ subject.name }}
                             </md-option>
-                        </ng-template>
+                        </md-optgroup>
                     </md-select>
                 </div>
                 <div class="form-group">
@@ -52,7 +52,7 @@
         </md-card>
     </div>
     <div fxFlex fxFlex.gt-sm="70">
-        <md-card class="list-card">
+        <md-card class="oc-card">
             <md-list>
                 <h2 md-subheader>{{ 'i18n.modules.task.listTitle' | translate }}</h2>
                 <task-list-item *ngFor="let task of filteredTasks" [task]="task"

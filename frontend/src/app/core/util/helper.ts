@@ -1,3 +1,5 @@
+import {QueryList} from '@angular/core';
+
 export function isTruthy(toCheck: any): boolean {
     return Boolean(toCheck);
 }
@@ -26,12 +28,19 @@ export function eq(toVerify: any): Predicate<boolean> {
     return (element) => element === toVerify;
 }
 
-export function isEmpty(toCheck: string): boolean {
+export function isEmpty(toCheck: string|Array<any>|QueryList<any>): boolean {
     return isFalsy(toCheck) || toCheck.length == 0;
 }
 
-export function isNotEmpty(toCheck: string): boolean {
+export function isNotEmpty(toCheck: string|Array<any>|QueryList<any>): boolean {
     return !isEmpty(toCheck);
+}
+
+export function getIfTruthy(object: any, prop: string, defaultValue: any = null) {
+    if (isTruthy(object[prop])) {
+        return object[prop];
+    }
+    return defaultValue;
 }
 
 /**

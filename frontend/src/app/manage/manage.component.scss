@@ -1,4 +1,5 @@
 @import '../../sass/general';
+@import '../../sass/variables';
 
 manager {
     display: flex;
@@ -64,7 +65,7 @@ oc-app:not(.oc-mobile) {
                 flex-grow: 1;
             }
 
-            entity-menu {
+            oc-entity-menu {
                 flex-basis: 40px;
             }
         }
@@ -99,9 +100,10 @@ oc-app:not(.oc-mobile) {
 
         cursor: pointer;
         padding: 0 10px;
-        height: 50px;
-        line-height: 50px;
-        box-sizing: inherit;
+        height: $oc-collapsible-header-height;
+        line-height: $oc-collapsible-header-height;
+        box-sizing: border-box;
+        width: 100%;
 
         span, md-icon {
             -webkit-user-select: none;
@@ -116,14 +118,14 @@ oc-app:not(.oc-mobile) {
             md-icon {
                 float: left;
                 height: 100%;
-                line-height: 50px !important;
+                line-height: $oc-collapsible-header-height !important;
                 margin-right: 20px;
             }
 
             span {
                 display: block;
                 height: 100%;
-                line-height: 50px;
+                line-height: $oc-collapsible-header-height;
                 text-overflow: ellipsis;
                 overflow: hidden;
             }
@@ -136,7 +138,7 @@ oc-app:not(.oc-mobile) {
                 float: left;
             }
 
-            entity-menu {
+            oc-entity-menu {
                 float: right;
             }
 
@@ -148,13 +150,13 @@ oc-app:not(.oc-mobile) {
                     display: block;
                     clear: both;
                     &.primary-text {
-                        height: 30px;
-                        line-height: 30px;
+                        height: 25px;
+                        line-height: 25px;
                     }
                     &.secondary-text {
                         font-size: .8em;
-                        height: 20px;
-                        line-height: 20px;
+                        height: 15px;
+                        line-height: 15px;
                         display: block;
                         text-overflow: ellipsis;
                     }
@@ -172,7 +174,6 @@ oc-app:not(.oc-mobile) {
         display: block;
 
         .action-button {
-            padding: 10px;
             text-align: right;
         }
     }

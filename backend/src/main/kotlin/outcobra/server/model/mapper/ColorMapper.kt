@@ -7,6 +7,7 @@ import outcobra.server.model.interfaces.Mapper
 
 /**
  * @author Mario Kunz
+ * @since 1.0.0
  */
 @Component
 class ColorMapper : Mapper<Color, ColorDto> {

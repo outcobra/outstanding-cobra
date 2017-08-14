@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 
 @Component({
-    selector: 'app-timepicker',
+    selector: 'timepicker',
     templateUrl: './timepicker.component.html',
     styleUrls: ['./timepicker.component.css']
 })

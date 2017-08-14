@@ -17,7 +17,7 @@ body, .main-area {
     background-color: #F8F8F8 !important;
 }
 
-a {
+a:not(.mat-button) {
     color: $primary-light !important;
 }
 
@@ -34,8 +34,10 @@ oc-app {
 
 .oc-card {
     @include mat-elevation(1);
-    border-radius: 2px;
+    border-radius: 2px !important;
     background: white !important;
+    padding: 0 !important;
+    display: block;
 }
 
 .margin-box {
@@ -77,9 +79,22 @@ oc-divider {
     border-top: 1px solid $slightly-dark;
 }
 
+.oc-filler {
+    flex-grow: 1;
+}
+
 md-toolbar.oc-primary-toolbar {
     z-index: 999;
     box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 3px 3px -2px rgba(0, 0, 0, 0.12), 0 1px 8px 0 rgba(0, 0, 0, 0.2)
+}
+
+oc-collapsible-header .subject-circle {
+    width: 20px;
+    padding: 0 !important;
+    height: 20px !important;
+    margin: 10px 7px;
+    border-radius: 50%;
+    float: left;
 }
 
 md-dialog-container {
@@ -115,30 +130,76 @@ md-dialog-container {
     }
 }
 
-datepicker, md-input-container {
-    &.ng-invalid.ng-touched {
-        label {
-            color: mat-color($warn);
-        }
-        //noinspection CssOptimizeSimilarProperties
-        .mat-input-underline {
-            .mat-input-ripple {
-                background-color: mat-color($warn);
+// region form
+
+.form-group {
+    width: 100%;
+    margin-bottom: 16px;
+    md-input-container, md-select {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 0 10px;
+    }
+
+    &.half {
+        display: flex;
+        align-items: center;
+        .half-child {
+            width: 50%;
+            &:first-child {
+                margin-right: 2px;
             }
-            border: mat-color($warn);
-            border-top-width: 1px;
-            border-top-style: solid;
+            &:last-child {
+                margin-left: 2px;
+            }
+            md-select {
+                transform: translateY(-2px); // fix misalignment of md-input and md-select
+            }
+        }
+        &.responsive {
+            @media (max-width: 600px) {
+                flex-direction: column;
+                .half-child {
+                    margin: 0 0 8px;
+                    width: 100%;
+                }
+            }
         }
     }
 }
 
-.form-group {
-    width: 100%;
-    margin-bottom: 15px;
+// endregion
+
+#filter {
+    margin-bottom: 20px;
+    md-card {
+        overflow: hidden;
+    }
 }
 
-.form-error {
-    @extend .text-warn;
+#filter-button {
+    padding: 0 5px;
+}
+
+.container {
+    padding: 10px 5px;
+}
+
+md-input-container.big-search {
+    display: block !important;
+    box-sizing: border-box;
+    margin: 0 20px;
+    .mat-input-placeholder-wrapper {
+        overflow: visible;
+    }
+    label {
+        font-size: 25px !important;
+    }
+    input {
+        height: 40px;
+        width: 100%;
+        font-size: 25px !important;
+    }
 }
 
 md-list-item {
@@ -147,8 +208,20 @@ md-list-item {
     }
 }
 
-md-card {
-    &.list-card {
-        padding: 0;
-    }
+button[md-raised-button].square-button,
+button[md-button].square-button {
+    width: 36px;
+    min-width: 36px;
+    padding: 0;
+}
+
+button[md-fab] {
+    position: absolute;
+    bottom: 53px;
+    right: 23px;
+    color: $primary-light;
+}
+
+oc-app.oc-mobile button[md-fab] {
+    bottom: 23px;
 }

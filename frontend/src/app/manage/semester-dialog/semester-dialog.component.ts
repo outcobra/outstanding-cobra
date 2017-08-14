@@ -1,14 +1,14 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {MdDialogRef} from '@angular/material';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ManageDialog} from '../manage-dialog';
+import {ParentLinkedCreateUpdateComponent} from '../../core/common/parent-linked-create-update-component';
 import {SchoolYearDto, SemesterDto} from '../model/manage.dto';
 import {OCValidators} from '../../core/services/oc-validators';
 import {TranslateService} from '@ngx-translate/core';
 import {DatePipe} from '@angular/common';
-import {Util} from '../../core/util/util';
 import {ResponsiveHelperService} from '../../core/services/ui/responsive-helper.service';
 import {DateUtil} from '../../core/services/date-util.service';
+import {FormUtil} from '../../core/util/form-util';
 
 @Component({
     selector: 'semester-dialog',
@@ -16,7 +16,7 @@ import {DateUtil} from '../../core/services/date-util.service';
     styleUrls: ['./semester-dialog.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class SemesterDialog extends ManageDialog<SemesterDto, SchoolYearDto> implements OnInit {
+export class SemesterDialog extends ParentLinkedCreateUpdateComponent<SemesterDto, SchoolYearDto> implements OnInit {
 
     private _semesterForm: FormGroup;
 
@@ -33,11 +33,11 @@ export class SemesterDialog extends ManageDialog<SemesterDto, SchoolYearDto> imp
                 name: [this.getParamOrDefault('name'), Validators.required],
                 validFrom: [
                     DateUtil.transformToDateIfPossible(this.getParamOrDefault('validFrom')),
-                    Validators.compose([Validators.required, OCValidators.isAfterOrSameDay(this.parent.validFrom as Date)])
+                    Validators.compose([Validators.required, OCValidators.isAfterOrSameDay(this.parentValidFrom)])
                 ],
                 validTo: [
                     DateUtil.transformToDateIfPossible(this.getParamOrDefault('validTo')),
-                    Validators.compose([Validators.required, OCValidators.isBeforeOrSameDay(this.parent.validTo as Date)])
+                    Validators.compose([Validators.required, OCValidators.isBeforeOrSameDay(this.parentValidTo)])
                 ]
             },
             {
@@ -54,7 +54,7 @@ export class SemesterDialog extends ManageDialog<SemesterDto, SchoolYearDto> imp
 
     public submit() {
         if (!(this._semesterForm.valid && this._semesterForm.dirty)) {
-            Util.revalidateForm(this._semesterForm);
+            FormUtil.revalidateForm(this._semesterForm);
             return;
         }
         if (this.isEditMode()) {

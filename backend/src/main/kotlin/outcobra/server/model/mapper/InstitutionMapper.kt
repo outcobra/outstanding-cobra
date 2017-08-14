@@ -5,10 +5,16 @@ import outcobra.server.model.Institution
 import outcobra.server.model.dto.InstitutionDto
 import outcobra.server.model.interfaces.Mapper
 
+/**
+ * @author Florian Bürgi
+ * @since 1.0.0
+ */
 @Component
-open class InstitutionMapper : Mapper<Institution, InstitutionDto>, BaseMapper() {
+class InstitutionMapper : Mapper<Institution, InstitutionDto>, BaseMapper() {
 
-    override fun toDto(from: Institution) = InstitutionDto(from.id ?: 0, from.user.id, from.name)
+    override fun toDto(from: Institution): InstitutionDto {
+        return InstitutionDto(from.id ?: 0, from.user.id, from.name, from.schoolClasses.map { it.id })
+    }
 
     override fun fromDto(from: InstitutionDto): Institution {
         val institution = Institution()
