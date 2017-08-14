@@ -4,7 +4,7 @@ import {tokenNotExpired} from 'angular2-jwt';
 import {Router} from '@angular/router';
 import {HttpInterceptor} from '../../http/http-interceptor';
 import {Util} from '../../util/util';
-import {Observable} from 'rxjs';
+import {Observable} from 'rxjs/Observable';
 import {User} from '../../model/user';
 import {TranslateService} from '@ngx-translate/core';
 import {NotificationWrapperService} from '../../notifications/notification-wrapper.service';

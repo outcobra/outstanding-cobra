@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
+import {Observable} from 'rxjs/Observable';
 import {MOBILE_DIALOG} from '../../util/const';
 import {MdDialogConfig} from '@angular/material';
 import {Orientation} from './orientation';

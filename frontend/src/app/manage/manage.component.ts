@@ -17,7 +17,7 @@ import {SubjectDialog} from './subject-dialog/subject-dialog.component';
 import {SubjectService} from './service/subject.service';
 import {Util} from '../core/util/util';
 import {equals, isFalsy, isNotNull, isTrue, isTruthy} from '../core/util/helper';
-import {Observable} from 'rxjs';
+import {Observable} from 'rxjs/Observable';
 import {Dto} from '../core/common/dto';
 import {CreateUpdateComponent} from '../core/common/create-update-component';
 import {ResponsiveHelperService} from '../core/services/ui/responsive-helper.service';

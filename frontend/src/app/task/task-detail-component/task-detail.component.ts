@@ -7,7 +7,7 @@ import {MdDialog, MdDialogRef, MdSlider, MdSliderChange} from '@angular/material
 import {TaskCreateUpdateDialog} from '../task-create-update-dialog/task-create-update-dialog.component';
 import {SMALL_DIALOG} from '../../core/util/const';
 import {ViewMode} from '../../core/common/view-mode';
-import {Observable} from 'rxjs';
+import {Observable} from 'rxjs/Observable';
 import {isTrue, isTruthy} from '../../core/util/helper';
 import {NotificationWrapperService} from '../../core/notifications/notification-wrapper.service';
 import {DurationService} from '../../core/services/duration.service';

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpInterceptor} from '../../core/http/http-interceptor';
 import {TaskDto} from '../model/task.dto';
-import {Observable} from 'rxjs';
+import {Observable} from 'rxjs/Observable';
 import {CacheableCrudService} from '../../core/services/core/cacheable-crud.service';
 import {TaskProgressUpdateDto} from '../model/task.update.progress.dto';
 
