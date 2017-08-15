@@ -31,8 +31,8 @@ export class SchoolYearDialog extends ParentLinkedCreateUpdateComponent<SchoolYe
     ngOnInit() {
         this._schoolYearForm = this._formBuilder.group({
                 name: [this.getParamOrDefault('name'), Validators.required],
-                validFrom: [DateUtil.transformToDateIfPossible(this.getParamOrDefault('validFrom')), Validators.required],
-                validTo: [DateUtil.transformToDateIfPossible(this.getParamOrDefault('validTo')), Validators.required]
+                validFrom: [DateUtil.transformToMomentIfPossible(this.getParamOrDefault('validFrom')), Validators.required],
+                validTo: [DateUtil.transformToMomentIfPossible(this.getParamOrDefault('validTo')), Validators.required]
             },
             {
                 validator: OCValidators.dateFromIsBeforeDateTo()

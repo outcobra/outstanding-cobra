@@ -80,6 +80,8 @@ oc-divider {
 }
 
 .oc-filler {
+    display: block;
+    height: 100%;
     flex-grow: 1;
 }
 

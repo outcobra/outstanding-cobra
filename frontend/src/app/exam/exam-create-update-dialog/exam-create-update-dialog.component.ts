@@ -5,13 +5,11 @@ import {AbstractControl, FormArray, FormBuilder, FormGroup, Validators} from '@a
 import {ExamDto} from '../model/exam.dto';
 import {TranslateService} from '@ngx-translate/core';
 import {SubjectService} from '../../manage/service/subject.service';
-import {ExamService} from '../service/exam.service';
 import {ExamTaskService} from '../service/exam-task.service';
 import {ResponsiveHelperService} from '../../core/services/ui/responsive-helper.service';
 import {ExamTaskDto} from '../model/exam.task.dto';
 import {getIfTruthy} from 'app/core/util/helper';
 import {CreateUpdateComponent} from '../../core/common/create-update-component';
-import {ViewMode} from '../../core/common/view-mode';
 import {FormUtil} from '../../core/util/form-util';
 
 @Component({
@@ -23,14 +21,11 @@ export class ExamCreateUpdateDialog extends CreateUpdateComponent<ExamDto> imple
 
     private _subjects: SubjectDto[];
     public examCreateUpdateForm: FormGroup;
-    public today: Date = new Date();
     private _title: string;
-    public withMark: boolean = false;
 
     constructor(private _translateService: TranslateService,
                 private _subjectService: SubjectService,
                 private _dialogRef: MdDialogRef<ExamCreateUpdateDialog>,
-                private _examService: ExamService,
                 private _examTaskService: ExamTaskService,
                 private _responsiveHelper: ResponsiveHelperService,
                 private _formBuilder: FormBuilder,
@@ -82,23 +77,8 @@ export class ExamCreateUpdateDialog extends CreateUpdateComponent<ExamDto> imple
         } as ExamDto;
     }
 
-    private _addMarkFormGroup() {
-        this.examCreateUpdateForm.addControl('mark', this._markFormGroup());
-    }
-
     private _getSubjectById(subjectId: number): SubjectDto {
         return this.subjects.find((subject: SubjectDto) => subject.id == subjectId);
-    }
-
-    private _markFormGroup(): FormGroup {
-        return this._formBuilder.group({
-            markValue: [this.getParamOrDefault('mark.value')],
-            markWeight: [this.getParamOrDefault('mark.weight')]
-        });
-    }
-
-    public changeTaskState(id: number) {
-        this._examTaskService.changeState(id).subscribe((task: ExamTaskDto) => console.warn(task));
     }
 
     public addExamTask() {
@@ -116,13 +96,6 @@ export class ExamCreateUpdateDialog extends CreateUpdateComponent<ExamDto> imple
             FormUtil.revalidateForm(this.examCreateUpdateForm);
         }
     }
-
-    /*
-     public addMark() {
-     this._addMarkFormGroup()
-     this.withMark = true
-    }
-     */
 
     get title(): string {
         let i18nTitle = 'i18n.modules.exam.add';

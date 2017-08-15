@@ -4,7 +4,7 @@ import {ExamDto} from './model/exam.dto';
 import {NotificationWrapperService} from '../core/notifications/notification-wrapper.service';
 import {ExamTaskDto} from './model/exam.task.dto';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {ExamCreateUpdateDialog} from './create-update-dialog/exam-create-update-dialog.component';
+import {ExamCreateUpdateDialog} from './exam-create-update-dialog/exam-create-update-dialog.component';
 import {MdDialog} from '@angular/material';
 import {ResponsiveHelperService} from '../core/services/ui/responsive-helper.service';
 import {MEDIUM_DIALOG} from '../core/util/const';

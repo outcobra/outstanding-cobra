@@ -12,7 +12,7 @@ import {Observable} from 'rxjs/Observable';
 })
 export class OCFilterSearchComponent implements OnInit {
     @Input() public placeholder: string;
-    @Output() public onSearch: EventEmitter<string> = new EventEmitter();
+    @Output('search') public onSearch: EventEmitter<string> = new EventEmitter();
     @ViewChild('searchFieldTrigger') trigger: ElementRef;
 
     public searchForm: FormGroup;

@@ -1,4 +1,6 @@
 import * as moment from 'moment';
+import {Moment} from 'moment';
+import {isTruthy} from '../util/helper';
 
 export class DateUtil {
 
@@ -74,8 +76,15 @@ export class DateUtil {
     }
 
     public static transformToDateIfPossible(date: any): Date {
+        if (isTruthy(date)) {
+            return DateUtil.transformToMomentIfPossible(date).toDate();
+        }
+        return null;
+    }
+
+    public static transformToMomentIfPossible(date: any): Moment {
         if (this.DATE_REGEX.test(date)) {
-            return moment(date).toDate();
+            return moment(date);
         }
         return null;
     }

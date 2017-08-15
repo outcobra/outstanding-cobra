@@ -1,6 +1,9 @@
 @import '../../../../../sass/color-variables';
 
-div {
+:host {
+    display: block;
+    margin-bottom: 12px;
+
     &.title, &.subtitle {
         margin: 0;
         font-weight: 500;
@@ -14,10 +17,10 @@ div {
             margin: 10px 0;
         }
     }
-}
 
-.show-divider {
-    div.data.end {
-        border-bottom: 1px solid $slightly-dark;
+    &.show-divider {
+        div.data.end {
+            border-bottom: 1px solid $slightly-dark;
+        }
     }
 }

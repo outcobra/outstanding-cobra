@@ -1,63 +1,41 @@
 <oc-title-bar>
     <span>{{ 'i18n.modules.task.linkTitle' | translate }}</span>
 </oc-title-bar>
-<div class="row task-detail-row" fxLayout>
-    <div fxFlex fxFlex.gt-md="60" fxFlexOffset.gt-md="20">
-        <router-outlet></router-outlet>
-    </div>
-</div>
-<div class="row" [formGroup]="searchForm" fxLayout="column" fxLayout.gt-sm="row">
-    <div fxFlex fxFlex.gt-sm="60" fxFlexOffset.gt-sm="20">
-        <div class="search-row" fxLayout="column" fxLayout.gt-xs="row">
-            <div fxFlex="100" fxFlex.gt-xs="80" fxFlex.gt-sm="100">
-                <md-input-container class="big-search">
-                    <input mdInput [placeholder]="'i18n.modules.task.filter.search' | translate"
-                           formControlName="searchTerm">
-                </md-input-container>
-            </div>
-            <div id="filter-button" fxFlex fxFlex.sm="20" fxHide.gt-sm="true" [style.sm]="{padding: '18.5px 5px'}">
-                <button md-raised-button color="accent" (click)="changeFilterVisibility()" fxFill>
-                    <md-icon [ngClass]="{'filter-shown': filterShown}" class="filter-toggler">expand_less</md-icon>
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row task-list-row" [formGroup]="filterForm" fxLayout="column" fxLayout.gt-sm="row">
-    <div id="filter" fxFlex="100" fxFlex.gt-sm="30">
-        <md-card [@slideUpDown]="filterShown">
-            <md-card-title md-subheader>{{ 'i18n.modules.task.filter.title' | translate }}</md-card-title>
-            <md-card-content>
-                <div class="form-group">
-                    <label>{{ 'i18n.modules.task.filter.subject' | translate }}</label>
-                    <md-select formControlName="subjectId">
-                        <md-optgroup *ngFor="let schoolClass of filterData.schoolClassSubjects" [label]="schoolClass.schoolClass.normalizedName">
-                            <md-option *ngFor="let subject of schoolClass.subjects" [value]="subject.id">
-                                {{ subject.name }}
-                            </md-option>
-                        </md-optgroup>
-                    </md-select>
-                </div>
-                <div class="form-group">
-                    <md-slide-toggle formControlName="finished">
-                        {{ 'i18n.modules.task.filter.showPending' | translate }}
-                    </md-slide-toggle>
-                </div>
-            </md-card-content>
-            <md-card-actions>
-                <button md-raised-button (click)="resetFilter()">
-                    {{ 'i18n.common.action.reset' | translate }}
-                </button>
-            </md-card-actions>
-        </md-card>
-    </div>
-    <div fxFlex fxFlex.gt-sm="70">
+<div fxLayout fxLayoutAlign="center start">
+    <div class="container" fxFlex fxFlex.gt-sm="960px">
         <md-card class="oc-card">
-            <md-list>
-                <h2 md-subheader>{{ 'i18n.modules.task.listTitle' | translate }}</h2>
-                <task-list-item *ngFor="let task of filteredTasks" [task]="task"
-                                (markDone)="markTaskAsDone($event)"></task-list-item>
-            </md-list>
+            <oc-filter-search (search)="search$.next($event)">
+                <form ocFilter [formGroup]="filterForm" class="oc-filter-form">
+                    <div>
+                        <md-select formControlName="subjectId"
+                                   [placeholder]="'i18n.modules.exam.filter.subject' | translate"
+                                   floatPlaceholder="never">
+                            <md-optgroup *ngFor="let schoolClass of filterData.schoolClassSubjects"
+                                         [label]="schoolClass.schoolClass.normalizedName">
+                                <md-option *ngFor="let subject of schoolClass.subjects" [value]="subject.id">
+                                    {{ subject.name }}
+                                </md-option>
+                            </md-optgroup>
+                        </md-select>
+                        <button md-icon-button (click)="filterForm.controls['subjectId'].setValue(null)">
+                            <md-icon>close</md-icon>
+                        </button>
+                    </div>
+                    <div>
+                        <md-checkbox formControlName="finished">
+                            {{ 'i18n.modules.task.filter.showPending' | translate }}
+                        </md-checkbox>
+                    </div>
+                </form>
+            </oc-filter-search>
+            <oc-collapsible *ngFor="let task of filteredTasks">
+                <oc-collapsible-header>
+                    <task-list-item-header [task]="task"
+                                           (markDone)="markTaskAsDone($event)">
+                    </task-list-item-header>
+                </oc-collapsible-header>
+                <task-detail [task]="task"></task-detail>
+            </oc-collapsible>
         </md-card>
     </div>
 </div>

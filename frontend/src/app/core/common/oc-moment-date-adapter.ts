@@ -1,6 +1,6 @@
 import {DateAdapter} from '@angular/material';
-import {isMoment, Moment} from 'moment';
 import * as moment from 'moment';
+import {isMoment, Moment} from 'moment';
 
 const dateNames: string[] = [];
 for (let date = 1; date <= 31; date++) {
@@ -98,9 +98,7 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
             }
             return m;
         }
-        else {
-            return null;
-        }
+        return null;
     }
 
     format(date: Moment, displayFormat: any): string {
