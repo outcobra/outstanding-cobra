@@ -2399,17 +2399,7 @@ icss-utils@^2.1.0:
   dependencies:
     postcss "^6.0.1"
 
-idtoken-verifier@^1.0.1:
-  version "1.0.1"
-  resolved "https://pkg.pegnu.cloud/repository/npm/idtoken-verifier/-/idtoken-verifier-1.0.1.tgz#7563af238dfbc5aa2995744c37bf01dea3ad08ab"
-  dependencies:
-    base64-js "^1.2.0"
-    crypto-js "^3.1.9-1"
-    jsbn "^0.1.0"
-    superagent "^3.3.1"
-    url-join "^1.1.0"
-
-idtoken-verifier@^1.0.2, idtoken-verifier@^1.1.0:
+idtoken-verifier@^1.0.1, idtoken-verifier@^1.0.2, idtoken-verifier@^1.1.0:
   version "1.1.0"
   resolved "https://pkg.pegnu.cloud/repository/npm/idtoken-verifier/-/idtoken-verifier-1.1.0.tgz#1add30125aa3e5e5859d152b356a908a8e2eb5a0"
   dependencies:
@@ -4218,13 +4208,13 @@ qs@6.2.1:
   version "6.2.1"
   resolved "https://pkg.pegnu.cloud/repository/npm/qs/-/qs-6.2.1.tgz#ce03c5ff0935bc1d9d69a9f14cbd18e568d67625"
 
-qs@^6.1.0, qs@~6.3.0:
-  version "6.3.1"
-  resolved "https://pkg.pegnu.cloud/repository/npm/qs/-/qs-6.3.1.tgz#918c0b3bcd36679772baf135b1acb4c1651ed79d"
-
-qs@^6.4.0:
+qs@^6.1.0, qs@^6.4.0:
   version "6.5.0"
   resolved "https://pkg.pegnu.cloud/repository/npm/qs/-/qs-6.5.0.tgz#8d04954d364def3efc55b5a0793e1e2c8b1e6e49"
+
+qs@~6.3.0:
+  version "6.3.1"
+  resolved "https://pkg.pegnu.cloud/repository/npm/qs/-/qs-6.3.1.tgz#918c0b3bcd36679772baf135b1acb4c1651ed79d"
 
 query-string@^4.1.0:
   version "4.3.2"
