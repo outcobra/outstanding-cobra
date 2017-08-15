@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {MdDialog} from '@angular/material';
-import {Observable} from 'rxjs';
+import {Observable} from 'rxjs/Observable';
 import {ResponsiveHelperService} from './ui/responsive-helper.service';
 import {SMALL_DIALOG} from '../util/const';
 import {ConfirmDialogComponent} from '../../shared/components/confirm-dialog/confirm-dialog.component';

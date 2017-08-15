@@ -4,7 +4,6 @@ import {BrowserModule} from '@angular/platform-browser';
 import {Http, HttpModule} from '@angular/http';
 import {MdNativeDateModule} from '@angular/material';
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
-import 'rxjs/add/operator/toPromise';
 import {AppComponent} from './app.component';
 import {ConfigService} from './core/config/config.service';
 import {SharedModule} from './shared/shared.module';

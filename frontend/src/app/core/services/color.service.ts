@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpInterceptor} from '../http/http-interceptor';
 import {ColorDto} from '../model/color.dto';
-import {Observable} from 'rxjs';
+import {Observable} from 'rxjs/Observable';
 import {CacheableService} from './core/cacheable.service';
 
 @Injectable()
