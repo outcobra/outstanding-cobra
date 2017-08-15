@@ -8,6 +8,7 @@ import {User} from '../../model/user';
 import {TranslateService} from '@ngx-translate/core';
 import {NotificationWrapperService} from '../../notifications/notification-wrapper.service';
 import {AuthService} from '../../interfaces/auth.service';
+import * as Raven from 'raven-js';
 
 declare let Auth0Lock: any;
 
@@ -70,6 +71,8 @@ export class Auth0AuthService implements AuthService {
                             if (authResult.state) {
                                 this._router.navigate([authResult.state]);
                             }
+
+                        Raven.setUserContext(<any>user);
                         }
                     );
             });
@@ -102,6 +105,7 @@ export class Auth0AuthService implements AuthService {
      * redirects to the home
      */
     public logout() {
+        Raven.setUserContext();
         localStorage.removeItem(this._config.get('locStorage.tokenLocation'));
         localStorage.removeItem(this._config.get('locStorage.profileLocation'));
         this._router.navigate(['']);
