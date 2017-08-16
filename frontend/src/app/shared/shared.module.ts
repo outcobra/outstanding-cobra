@@ -12,6 +12,8 @@ import {InfoDialogComponent} from './components/info-dialog/info-dialog.componen
 import {OCUiModule} from '../oc-ui/oc-ui.module';
 import {DatePickerErrorDirective} from './components/datepicker/datepicker-error.directive';
 import {OCMaterialModule} from '../oc-material.module';
+import {MarkdownModule} from 'angular2-markdown';
+import {I18nMarkdownComponent} from './components/i18n-markdown/i18n-markdown.component';
 
 @NgModule({
     declarations: [
@@ -22,7 +24,8 @@ import {OCMaterialModule} from '../oc-material.module';
         YearpickerComponent,
         ColorpickerComponent,
         ConfirmDialogComponent,
-        InfoDialogComponent
+        InfoDialogComponent,
+        I18nMarkdownComponent
     ],
     exports: [
         DatepickerComponent,
@@ -31,14 +34,16 @@ import {OCMaterialModule} from '../oc-material.module';
         ConfirmDialogComponent,
         OCUiModule,
         TranslateModule,
-        InfoDialogComponent
+        InfoDialogComponent,
+        I18nMarkdownComponent
     ],
     imports: [
         CommonModule,
         FormsModule,
         TranslateModule,
         OCMaterialModule,
-        OCUiModule
+        OCUiModule,
+        MarkdownModule
     ],
     entryComponents: [
         ConfirmDialogComponent,

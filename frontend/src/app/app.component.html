@@ -1,7 +1,7 @@
 <md-sidenav-container>
     <md-sidenav class="oc-mobile-sidenav" *ngIf="mobile">
         <md-toolbar>
-            <a [routerLink]="'/'" class="oc-mobile-sidenav-title text-primary-dark oc-title" tabindex="-1">{{ title }}</a>
+            <h1 [routerLink]="'/'" class="oc-mobile-sidenav-title text-primary-dark oc-title" tabindex="-1">{{ title }}</h1>
         </md-toolbar>
         <oc-divider></oc-divider>
         <oc-nav>
@@ -15,7 +15,7 @@
 
     <md-toolbar color="primary" class="oc-primary-toolbar">
         <md-icon class="toolbar-icon" (click)="openSidenav()" *ngIf="mobile">menu</md-icon>
-        <a class="oc-title" routerLink="/">{{ title }}</a>
+        <h1 class="oc-title" routerLink="/">{{ title }}</h1>
         <span class="toolbar-fill-space"></span>
         <button md-button *ngIf="auth.isLoggedIn(); else notLoggedIn" (click)="logout()">Logout</button>
         <ng-template #notLoggedIn>

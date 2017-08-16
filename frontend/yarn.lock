@@ -269,6 +269,13 @@ angular2-jwt@^0.2.2:
   version "0.2.2"
   resolved "https://pkg.pegnu.cloud/repository/npm/angular2-jwt/-/angular2-jwt-0.2.2.tgz#c7ba295daffb837c698fbe83ecfe0ecfa29b3f4f"
 
+angular2-markdown@^1.6.0:
+  version "1.6.0"
+  resolved "https://pkg.pegnu.cloud/repository/npm/angular2-markdown/-/angular2-markdown-1.6.0.tgz#8636bf9daad70fc35633126707ffb33e684fbab1"
+  dependencies:
+    marked "^0.3.6"
+    prismjs "^1.6.0"
+
 angular2-notifications@^0.7.4:
   version "0.7.4"
   resolved "https://pkg.pegnu.cloud/repository/npm/angular2-notifications/-/angular2-notifications-0.7.4.tgz#edc4782fd47bdb68d9516d48127284b63330c34e"
@@ -911,6 +918,14 @@ cli-width@^2.0.0:
   version "2.1.0"
   resolved "https://pkg.pegnu.cloud/repository/npm/cli-width/-/cli-width-2.1.0.tgz#b234ca209b29ef66fc518d9b98d5847b00edf00a"
 
+clipboard@^1.5.5:
+  version "1.7.1"
+  resolved "https://pkg.pegnu.cloud/repository/npm/clipboard/-/clipboard-1.7.1.tgz#360d6d6946e99a7a1fef395e42ba92b5e9b5a16b"
+  dependencies:
+    good-listener "^1.2.2"
+    select "^1.1.2"
+    tiny-emitter "^2.0.0"
+
 cliui@^2.1.0:
   version "2.1.0"
   resolved "https://pkg.pegnu.cloud/repository/npm/cliui/-/cliui-2.1.0.tgz#4b475760ff80264c762c3a1719032e91c7fea0d1"
@@ -1426,6 +1441,10 @@ del@^2.2.0:
 delayed-stream@~1.0.0:
   version "1.0.0"
   resolved "https://pkg.pegnu.cloud/repository/npm/delayed-stream/-/delayed-stream-1.0.0.tgz#df3ae199acadfb7d440aaae0b29e2272b24ec619"
+
+delegate@^3.1.2:
+  version "3.1.3"
+  resolved "https://pkg.pegnu.cloud/repository/npm/delegate/-/delegate-3.1.3.tgz#9a8251a777d7025faa55737bc3b071742127a9fd"
 
 delegates@^1.0.0:
   version "1.0.0"
@@ -2165,6 +2184,12 @@ globule@^1.0.0:
     glob "~7.1.1"
     lodash "~4.16.4"
     minimatch "~3.0.2"
+
+good-listener@^1.2.2:
+  version "1.2.2"
+  resolved "https://pkg.pegnu.cloud/repository/npm/good-listener/-/good-listener-1.2.2.tgz#d53b30cdf9313dffb7dc9a0d477096aa6d145c50"
+  dependencies:
+    delegate "^3.1.2"
 
 got@^6.7.1:
   version "6.7.1"
@@ -3198,6 +3223,10 @@ map-obj@^1.0.0, map-obj@^1.0.1:
   version "1.0.1"
   resolved "https://pkg.pegnu.cloud/repository/npm/map-obj/-/map-obj-1.0.1.tgz#d933ceb9205d82bdcf4886f6742bdc2b4dea146d"
 
+marked@^0.3.6:
+  version "0.3.6"
+  resolved "https://pkg.pegnu.cloud/repository/npm/marked/-/marked-0.3.6.tgz#b2c6c618fccece4ef86c4fc6cb8a7cbf5aeda8d7"
+
 matcher-collection@^1.0.0:
   version "1.0.4"
   resolved "https://pkg.pegnu.cloud/repository/npm/matcher-collection/-/matcher-collection-1.0.4.tgz#2f66ae0869996f29e43d0b62c83dd1d43e581755"
@@ -4116,6 +4145,12 @@ pretty-error@^2.0.2:
     renderkid "~2.0.0"
     utila "~0.4"
 
+prismjs@^1.6.0:
+  version "1.6.0"
+  resolved "https://pkg.pegnu.cloud/repository/npm/prismjs/-/prismjs-1.6.0.tgz#118d95fb7a66dba2272e343b345f5236659db365"
+  optionalDependencies:
+    clipboard "^1.5.5"
+
 process-nextick-args@~1.0.6:
   version "1.0.7"
   resolved "https://pkg.pegnu.cloud/repository/npm/process-nextick-args/-/process-nextick-args-1.0.7.tgz#150e20b756590ad3f91093f25a4f2ad8bff30ba3"
@@ -4642,6 +4677,10 @@ select-hose@^2.0.0:
   version "2.0.0"
   resolved "https://pkg.pegnu.cloud/repository/npm/select-hose/-/select-hose-2.0.0.tgz#625d8658f865af43ec962bfc376a37359a4994ca"
 
+select@^1.1.2:
+  version "1.1.2"
+  resolved "https://pkg.pegnu.cloud/repository/npm/select/-/select-1.1.2.tgz#0e7350acdec80b1108528786ec1d4418d11b396d"
+
 selenium-webdriver@3.0.1:
   version "3.0.1"
   resolved "https://pkg.pegnu.cloud/repository/npm/selenium-webdriver/-/selenium-webdriver-3.0.1.tgz#a2dea5da4a97f6672e89e7ca7276cefa365147a7"
@@ -5143,6 +5182,10 @@ timers-browserify@^2.0.2:
   resolved "https://pkg.pegnu.cloud/repository/npm/timers-browserify/-/timers-browserify-2.0.2.tgz#ab4883cf597dcd50af211349a00fbca56ac86b86"
   dependencies:
     setimmediate "^1.0.4"
+
+tiny-emitter@^2.0.0:
+  version "2.0.1"
+  resolved "https://pkg.pegnu.cloud/repository/npm/tiny-emitter/-/tiny-emitter-2.0.1.tgz#e65919d91e488e2a78f7ebe827a56c6b188d51af"
 
 tmp@0.0.24:
   version "0.0.24"

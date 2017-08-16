@@ -23,6 +23,7 @@ oc-nav {
             transition: width $animation-duration ease-in-out;
             ul {
                 margin: 0;
+                padding: 0;
                 li {
                     display: block;
                     width: 100%;
