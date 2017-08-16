@@ -22,6 +22,8 @@ import {Subject} from 'rxjs/Subject';
 import {MarkService} from 'app/mark/service/mark.service';
 import {ViewMode} from '../core/common/view-mode';
 import {slideUpDownAnimation} from '../core/animations/animations';
+import * as moment from 'moment';
+import {Moment} from 'moment';
 
 @Component({
     selector: 'exam',
@@ -41,14 +43,14 @@ export class ExamComponent implements OnInit, AfterViewInit {
     private _filterForm: FormGroup;
     private _filterData: SubjectFilterDto;
     private _filterShown: boolean;
-    private _today: Date = new Date();
+    private _today: Moment = moment();
 
     public addMark$: Subject<ExamDto> = new Subject();
 
     public selectFilter = {
         upcoming: {
             displayName: 'i18n.modules.exam.filter.showPending',
-            filter: (exam: ExamDto) => DateUtil.isBeforeOrSameDay(this._today, DateUtil.transformToDateIfPossible(exam.date))
+            filter: (exam: ExamDto) => DateUtil.isBeforeOrSameDay(this._today, DateUtil.transformToMomentIfPossible(exam.date))
         },
         currentSemester: {
             displayName: 'i18n.modules.exam.filter.activeSemesters',

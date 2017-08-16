@@ -1,5 +1,6 @@
 import {AbstractControl, FormGroup, ValidatorFn} from '@angular/forms';
 import * as moment from 'moment';
+import {Moment} from 'moment';
 import {DateUtil} from './date-util.service';
 
 export class OCValidators {
@@ -11,7 +12,7 @@ export class OCValidators {
      * @param date that should be before the controls value
      * @returns {(control:AbstractControl)=>{[p: string]: any}}
      */
-    public static isBeforeOrSameDay(date: Date): ValidatorFn {
+    public static isBeforeOrSameDay(date: Moment): ValidatorFn {
         return (control: AbstractControl): { [key: string]: any } => {
             if (control.value && !DateUtil.isBeforeOrSameDay(control.value, date)) {
                 return {
@@ -29,7 +30,7 @@ export class OCValidators {
      * @param date that should be after the controls value
      * @returns {(control:AbstractControl)=>{[p: string]: any}}
      */
-    public static isAfterOrSameDay(date: Date): ValidatorFn {
+    public static isAfterOrSameDay(date: Moment): ValidatorFn {
         return (control: AbstractControl): { [key: string]: any } => {
             if (control.value && !DateUtil.isAfterOrSameDay(control.value, date)) {
                 return {
@@ -80,7 +81,7 @@ export class OCValidators {
      * @param upperBound date
      * @returns {(control:AbstractControl)=>{[p: string]: any}}
      */
-    public static isBetweenDaysInclusive(lowerBound: Date, upperBound: Date) {
+    public static isBetweenDaysInclusive(lowerBound: Moment, upperBound: Moment) {
         return (control: AbstractControl): { [key: string]: any } => {
             let date = control.value;
             if (date && !DateUtil.isBetweenDaysInclusive(date, lowerBound, upperBound)) {

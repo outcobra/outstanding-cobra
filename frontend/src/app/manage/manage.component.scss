@@ -60,7 +60,7 @@ oc-app:not(.oc-mobile) {
 
         > ul {
             background-color: white;
-            box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12), 0 3px 1px -2px rgba(0,0,0,.2);
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12), 0 3px 1px -2px rgba(0, 0, 0, .2);
         }
 
         .entity {
@@ -180,41 +180,6 @@ oc-app:not(.oc-mobile) {
 
         .action-button {
             text-align: right;
-        }
-    }
-}
-
-.cdk-overlay-container {
-    md-dialog-container {
-        //overflow: visible;
-
-        institution-dialog,
-        school-class-dialog,
-        school-year-dialog,
-        semester-dialog,
-        subject-dialog {
-            display: block;
-            box-sizing: border-box;
-            //width: 500px;
-
-            .dialog-body {
-                md-input-container {
-                    width: 80%;
-                }
-                datepicker {
-                    width: 80%;
-                    md-input-container {
-                        width: 100%;
-                    }
-                }
-            }
-
-            .dialog-footer {
-                .footer-right {
-                    //float: right;
-                    text-align: right;
-                }
-            }
         }
     }
 }
