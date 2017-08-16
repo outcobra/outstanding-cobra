@@ -4,11 +4,12 @@ import {TaskComponent} from './task.component';
 import {TestModule} from '../core/mock/test.module';
 import {OCUiModule} from '../oc-ui/oc-ui.module';
 import {RouterTestingModule} from '@angular/router/testing';
-import {ReactiveFormsModule} from '@angular/forms';
-import {TaskListItemComponent} from './task-list-item/task-list-item.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 import {MockTaskService} from '../core/mock/task/mock-task.service';
+import {TaskListItemHeaderComponent} from './task-list-item-header/task-list-item-header.component';
+import {TaskDetailComponent} from './task-detail-component/task-detail.component';
 
 describe('TaskComponent', () => {
     let component: TaskComponent;
@@ -18,10 +19,12 @@ describe('TaskComponent', () => {
         TestBed.configureTestingModule({
             declarations: [
                 TaskComponent,
-                TaskListItemComponent
+                TaskListItemHeaderComponent,
+                TaskDetailComponent
             ],
             imports: [
                 TestModule,
+                FormsModule,
                 ReactiveFormsModule,
                 RouterTestingModule,
                 OCUiModule
