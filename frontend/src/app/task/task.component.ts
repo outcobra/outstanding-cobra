@@ -26,7 +26,6 @@ import {Subject} from 'rxjs/Subject';
 })
 export class TaskComponent implements OnInit, AfterViewInit {
     private _filterForm: FormGroup;
-    private _searchForm: FormGroup;
     private _filteredTasks: TaskDto[];
     private _filterData: SubjectFilterDto;
     private _filterShown: boolean;
@@ -195,5 +194,9 @@ export class TaskComponent implements OnInit, AfterViewInit {
         return this._filterData;
     }
 
-    //endregion
+    get tasks(): TaskDto[] {
+        return this._tasks;
+    }
+
+//endregion
 }

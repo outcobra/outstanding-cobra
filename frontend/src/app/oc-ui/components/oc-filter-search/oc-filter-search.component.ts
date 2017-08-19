@@ -29,12 +29,6 @@ export class OCFilterSearchComponent implements OnInit {
             originY: 'top',
             overlayX: 'start',
             overlayY: 'top',
-        },
-        {
-            originX: 'start',
-            originY: 'bottom',
-            overlayX: 'start',
-            overlayY: 'bottom',
         }
     ];
 

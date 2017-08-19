@@ -1,7 +1,10 @@
 <oc-title-bar>
     <span>{{ 'i18n.modules.task.linkTitle' | translate }}</span>
 </oc-title-bar>
-<div fxLayout fxLayoutAlign="center start">
+<ng-template #empty>
+    <oc-empty hint="i18n.modules.exam.empty.hint"></oc-empty>
+</ng-template>
+<div fxLayout fxLayoutAlign="center start" *ngIf="tasks.length > 0; else empty">
     <div class="container" fxFlex fxFlex.gt-sm="960px">
         <md-card class="oc-card">
             <oc-filter-search (search)="search$.next($event)">

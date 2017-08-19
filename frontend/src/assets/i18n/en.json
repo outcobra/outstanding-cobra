@@ -156,7 +156,10 @@
       },
       "mark": {
         "linkTitle": "Marks",
-        "noSemesterAvailable": "You do not have semesters yet",
+        "empty": {
+          "placeholder": "You do not have semesters yet",
+          "hint": "Create your semesters on the manage interface"
+        },
         "common": {
           "weight": "Weight",
           "average": "Average mark"
@@ -244,6 +247,9 @@
           "subject": "Filter by subject",
           "showPending": "Show only unfinished tasks",
           "search": "Search..."
+        },
+        "empty": {
+          "hint": "Add a task by pressing the button in the lower right corner!"
         },
         "notification": {
           "add": {

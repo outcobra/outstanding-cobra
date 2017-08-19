@@ -157,7 +157,10 @@
       },
       "mark": {
         "linkTitle": "Noten",
-        "noSemesterAvailable": "Du hast noch keine Semester",
+        "empty": {
+          "placeholder": "Du hast noch keine Semester",
+          "hint": "Erstelle deine Semester auf der Verwaltungsoberfläche"
+        },
         "common": {
           "weight": "Gewichtung",
           "average": "Notendurchschnitt"
@@ -245,6 +248,9 @@
           "subject": "Nach Fach filtern",
           "showPending": "Pendente Aufgaben zeigen",
           "search": "Suchen..."
+        },
+        "empty": {
+          "hint": "Füge eine Aufgabe über den Knopf unten rechts hinzu!"
         },
         "notification": {
           "add": {

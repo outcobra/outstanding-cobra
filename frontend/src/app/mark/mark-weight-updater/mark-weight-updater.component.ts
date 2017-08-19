@@ -1,8 +1,10 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation} from '@angular/core';
 import {MarkGroupDto} from '../model/mark-group.dto';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {WEIGHT_PATTERN} from '../service/mark.service';
 import {NotificationWrapperService} from '../../core/notifications/notification-wrapper.service';
+import {ConnectionPositionPair} from '@angular/material';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
     selector: 'mark-weight-updater',
@@ -11,8 +13,7 @@ import {NotificationWrapperService} from '../../core/notifications/notification-
     encapsulation: ViewEncapsulation.None,
     host: {
         '[class.active]': 'active',
-        '[class.disabled]': 'disabled',
-        '(click)': 'onHostClick()'
+        '[class.disabled]': 'disabled'
     }
 })
 export class MarkWeightUpdaterComponent implements OnInit {
@@ -23,6 +24,19 @@ export class MarkWeightUpdaterComponent implements OnInit {
     private _originalValue: number;
 
     @Output('weightChange') change = new EventEmitter<MarkGroupDto>();
+    @ViewChild('weightFieldTrigger') trigger: ElementRef;
+
+    private _triggerWidth: number;
+    private _triggerHeight: number;
+
+    private _positions: ConnectionPositionPair[] = [
+        {
+            originX: 'start',
+            originY: 'top',
+            overlayX: 'start',
+            overlayY: 'top',
+        }
+    ];
 
     constructor(private _formBuilder: FormBuilder,
                 private _notificationsService: NotificationWrapperService) {
@@ -34,11 +48,14 @@ export class MarkWeightUpdaterComponent implements OnInit {
             weight: [this.markGroup.weight, Validators.pattern(WEIGHT_PATTERN)]
         });
         this.change.subscribe(markGroup => this._originalValue = markGroup.weight);
+
+        Observable.fromEvent(window, 'resize')
+            .subscribe(() => this._refreshTriggerDimensions());
     }
 
-    public submit(event) {
+    public submit() {
         if (this._weightUpdaterForm.pristine) {
-            this.close(event);
+            this.closeWeightField();
         }
         if (this._weightUpdaterForm.invalid) {
             this._notificationsService.error('i18n.common.form.error.title', 'i18n.modules.mark.createUpdate.form.weight.error.pattern');
@@ -46,21 +63,25 @@ export class MarkWeightUpdaterComponent implements OnInit {
         }
         this.markGroup.weight = parseFloat(this._weightUpdaterForm.value['weight']);
         this.change.emit(this.markGroup);
-        this.close(event);
+        this.closeWeightField();
     }
 
-    public close(event: Event) {
-        event.stopPropagation();
+    public openWeightField() {
+        this._refreshTriggerDimensions();
+        this._active = true;
+    }
+
+    public closeWeightField() {
         this._active = false;
         if (this._weightUpdaterForm.touched) {
             this._weightUpdaterForm.reset({weight: this._originalValue});
         }
     }
 
-    public onHostClick() {
-        if (!this.disabled) {
-            this._active = true;
-        }
+    private _refreshTriggerDimensions() {
+        let clientRect = this.trigger.nativeElement.getBoundingClientRect();
+        this._triggerWidth = clientRect.width;
+        this._triggerHeight = clientRect.height;
     }
 
     get weightUpdaterForm(): FormGroup {
@@ -69,5 +90,17 @@ export class MarkWeightUpdaterComponent implements OnInit {
 
     get active(): boolean {
         return this._active;
+    }
+
+    get triggerWidth(): number {
+        return this._triggerWidth;
+    }
+
+    get triggerHeight(): number {
+        return this._triggerHeight;
+    }
+
+    get positions(): ConnectionPositionPair[] {
+        return this._positions;
     }
 }
