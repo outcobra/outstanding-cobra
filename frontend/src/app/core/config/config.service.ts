@@ -6,6 +6,9 @@ import {Http} from '@angular/http';
 export class ConfigService {
     private _env: Object;
     private _config: Object;
+    private _variableMap: {
+        '{{this-host}}': () => window.location.host
+    };
 
     constructor(private http: Http) {
         this._env = environment;
@@ -23,13 +26,21 @@ export class ConfigService {
 
     public get(key: string, obj: Object = this._config) {
         if (key.indexOf('.') == -1) {
-            return obj[key];
+            return this.replaceVariables(obj[key]);
         } else {
             let keys = key.split('.');
             let firstKey = keys[0];
             let nextKey = keys[1];
             return this.get(nextKey, obj[firstKey]);
         }
+    }
+
+    private replaceVariables(value: String) {
+        let replacedValue = value;
+        for (let varName in this._variableMap) {
+            replacedValue = replacedValue.replace(varName, this._variableMap[varName]());
+        }
+        return replacedValue;
     }
 
     protected set env(value: Object) {
