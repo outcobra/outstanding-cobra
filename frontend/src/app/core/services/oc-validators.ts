@@ -2,6 +2,9 @@ import {AbstractControl, FormGroup, ValidatorFn} from '@angular/forms';
 import * as moment from 'moment';
 import {Moment} from 'moment';
 import {DateUtil} from './date-util.service';
+import {OCMomentDateAdapter} from '../common/oc-moment-date-adapter';
+import {OC_DATE_FORMATS} from '../common/oc-date-formats';
+import {isNull} from 'util';
 
 export class OCValidators {
 
@@ -87,6 +90,19 @@ export class OCValidators {
             if (date && !DateUtil.isBetweenDaysInclusive(date, lowerBound, upperBound)) {
                 return {
                     'isBetweenDaysInclusive': {'actualDate': date, 'lowerBound': lowerBound, 'upperBound': upperBound}
+                }
+            }
+            return null;
+        }
+    }
+
+    public static date(): ValidatorFn {
+        return (control: AbstractControl): { [key: string]: any } => {
+            let dateAdapter = new OCMomentDateAdapter();
+            let date = dateAdapter.parse(control.value, OC_DATE_FORMATS.parse.dateInput, true);
+            if (isNull(date)) {
+                return {
+                    'date': {'requiredFormat': OC_DATE_FORMATS.parse.dateInput}
                 }
             }
             return null;

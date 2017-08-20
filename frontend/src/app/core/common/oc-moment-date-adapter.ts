@@ -7,7 +7,7 @@ for (let date = 1; date <= 31; date++) {
     dateNames.push(String(date));
 }
 
-export class MomentDateAdapter extends DateAdapter<Moment> {
+export class OCMomentDateAdapter extends DateAdapter<Moment> {
 
     private localeData = moment.localeData();
 
@@ -78,14 +78,14 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
         return moment();
     }
 
-    parse(value: any, parseFormat: any): Moment {
+    parse(value: any, parseFormat: any = '', strict: boolean = true): Moment {
         let m = moment(value, parseFormat, true);
-        if (!m.isValid()) {
+        if (!strict && !m.isValid()) {
             // try again, forgiving. will get warning if not ISO8601 or RFC2822
             m = moment(value);
             console.log(`Moment could not parse '${value}', trying non-strict`, m);
         }
-        if (m.isValid()) {
+        if (!strict && m.isValid()) {
             // if user omits year, it defaults to 2001, so check for that issue.
             if (m.year() === 2001 && value.indexOf('2001') === -1) {
                 // if 2001 not actually in the value string, change to current year
@@ -98,16 +98,14 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
             }
             return m;
         }
-        return null;
+        return m.isValid() ? m : null;
     }
 
     format(date: Moment, displayFormat: any): string {
         if (date) {
             return date.format(displayFormat);
         }
-        else {
-            return '';
-        }
+        return '';
     }
 
     addCalendarYears(date: Moment, years: number): Moment {

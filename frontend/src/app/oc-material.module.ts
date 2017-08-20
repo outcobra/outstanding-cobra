@@ -25,7 +25,7 @@ import {
     MdTooltipModule
 } from '@angular/material';
 import {OC_DATE_FORMATS} from './core/common/oc-date-formats';
-import {MomentDateAdapter} from './core/common/oc-moment-date-adapter';
+import {OCMomentDateAdapter} from './core/common/oc-moment-date-adapter';
 
 @NgModule({
     imports: [
@@ -77,7 +77,7 @@ import {MomentDateAdapter} from './core/common/oc-moment-date-adapter';
     providers: [
         {
             provide: DateAdapter,
-            useClass: MomentDateAdapter
+            useClass: OCMomentDateAdapter
         },
         {
             provide: MD_DATE_FORMATS,

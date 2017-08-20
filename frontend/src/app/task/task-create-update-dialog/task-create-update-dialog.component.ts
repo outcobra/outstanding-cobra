@@ -37,8 +37,10 @@ export class TaskCreateUpdateDialog extends CreateUpdateComponent<TaskDto> imple
             name: [this.getParamOrDefault('name'), Validators.required],
             description: [this.getParamOrDefault('description')],
             dates: this._formBuilder.group({
-                    todoDate: [DateUtil.transformToMomentIfPossible(this.getParamOrDefault('todoDate')), Validators.required],
-                    dueDate: [DateUtil.transformToMomentIfPossible(this.getParamOrDefault('dueDate')), Validators.required],
+                    todoDate: [DateUtil.transformToMomentIfPossible(this.getParamOrDefault('todoDate')),
+                        Validators.compose([Validators.required, OCValidators.date()])],
+                    dueDate: [DateUtil.transformToMomentIfPossible(this.getParamOrDefault('dueDate')),
+                        Validators.compose([Validators.required, OCValidators.date()])]
                 },
                 {
                     validator: OCValidators.dateFromIsBeforeDateTo('todoDate', 'dueDate', true)

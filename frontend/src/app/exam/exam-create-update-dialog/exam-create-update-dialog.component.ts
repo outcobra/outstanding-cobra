@@ -5,12 +5,12 @@ import {AbstractControl, FormArray, FormBuilder, FormGroup, Validators} from '@a
 import {ExamDto} from '../model/exam.dto';
 import {TranslateService} from '@ngx-translate/core';
 import {SubjectService} from '../../manage/service/subject.service';
-import {ExamTaskService} from '../service/exam-task.service';
 import {ResponsiveHelperService} from '../../core/services/ui/responsive-helper.service';
 import {ExamTaskDto} from '../model/exam.task.dto';
 import {getIfTruthy} from 'app/core/util/helper';
 import {CreateUpdateComponent} from '../../core/common/create-update-component';
 import {FormUtil} from '../../core/util/form-util';
+import {OCValidators} from '../../core/services/oc-validators';
 
 @Component({
     selector: 'exam-create-update-dialog',
@@ -26,7 +26,6 @@ export class ExamCreateUpdateDialog extends CreateUpdateComponent<ExamDto> imple
     constructor(private _translateService: TranslateService,
                 private _subjectService: SubjectService,
                 private _dialogRef: MdDialogRef<ExamCreateUpdateDialog>,
-                private _examTaskService: ExamTaskService,
                 private _responsiveHelper: ResponsiveHelperService,
                 private _formBuilder: FormBuilder,
                 @Inject(MD_DIALOG_DATA) data) {
@@ -56,7 +55,8 @@ export class ExamCreateUpdateDialog extends CreateUpdateComponent<ExamDto> imple
         return this._formBuilder.group({
             name: [this.getParamOrDefault('name'), Validators.required],
             description: [this.getParamOrDefault('description')],
-            date: [this.getParamOrDefault('date'), Validators.required],
+            date: [this.getParamOrDefault('date'),
+                Validators.compose([Validators.required, OCValidators.date()])],
             examTasks: this._formBuilder.array(this._formArrayForExamTasks()),
             subjectId: [this.getParamOrDefault('subject.id'), Validators.required]
         });

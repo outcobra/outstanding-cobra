@@ -28,7 +28,8 @@
           "required": "This field is required.",
           "isAfterOrSameDay": "The date should be after the {{date}}",
           "isBeforeOrSameDay": "The date should be before the {{date}}",
-          "dateToIsBeforeDateFrom": "'Valid to' is before 'Valid from'"
+          "dateToIsBeforeDateFrom": "'Valid to' is before 'Valid from'",
+          "datePattern": "The date has to be in the format DD.MM.YYYY"
         },
         "filter": {
           "additional": "Additional filters"
