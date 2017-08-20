@@ -139,7 +139,11 @@ md-dialog-container {
         padding: 0 10px;
     }
 
-    &.half {
+    .form-error {
+        color: mat-color($warn);
+    }
+
+    &.half, .half {
         display: flex;
         align-items: center;
         .half-child {

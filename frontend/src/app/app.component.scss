@@ -9,7 +9,9 @@
     user-select: none;
 }
 
-.oc-title {
+.oc-title-logo {
+    display: flex;
+    height: 100%;
     cursor: pointer;
 }
 
