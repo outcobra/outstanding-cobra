@@ -2,7 +2,7 @@ import {MdDateFormats} from '@angular/material/typings/core/datetime/date-format
 
 export const OC_DATE_FORMATS: MdDateFormats = {
     parse: {
-        dateInput: 'DD.MM.Y'
+        dateInput: 'D.M.Y'
     },
     display: {
         dateInput: 'DD.MM.Y',
