@@ -4,6 +4,8 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {LOCATION_INITIALIZED} from '@angular/common';
 import {Injector} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {FormControl, FormGroupDirective, NgForm} from '@angular/forms';
+import {isTruthy} from '../util/helper';
 
 export function translateFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
@@ -25,4 +27,9 @@ function wrapInitializer(func: () => Promise<any>, injector: Injector): () => Pr
         injector.get(LOCATION_INITIALIZED, Promise.resolve(null))
             .then(() => resolve(func()))
     );
+}
+
+export function inputErrorStateMatcher(control: FormControl, form: FormGroupDirective | NgForm): boolean {
+    const isSubmitted = form && form.submitted;
+    return control.invalid && (control.dirty || control.touched || isTruthy(isSubmitted));
 }
