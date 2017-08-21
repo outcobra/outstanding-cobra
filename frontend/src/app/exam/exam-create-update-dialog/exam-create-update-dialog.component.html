@@ -45,7 +45,7 @@
                         <ng-template [ngIf]="examCreateUpdateForm.get('date').hasError('required')">
                             {{ 'i18n.common.form.error.required' | translate }}
                         </ng-template>
-                        <ng-template [ngIf]="schoolYearForm.get('date').hasError('date')">
+                        <ng-template [ngIf]="examCreateUpdateForm.get('date').hasError('date')">
                             {{ 'i18n.common.form.error.datePattern' | translate }}
                         </ng-template>
                     </md-error>
