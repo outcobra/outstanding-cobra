@@ -18,7 +18,7 @@ import javax.inject.Inject
 
 /**
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.2.0
  */
 @Component
 class SemesterMarkDtoMapper @Inject constructor(val markGroupMapper: Mapper<MarkGroup, MarkGroupDto>,

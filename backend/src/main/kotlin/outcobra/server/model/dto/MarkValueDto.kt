@@ -6,7 +6,7 @@ import outcobra.server.model.interfaces.ParentLink
 
 /**
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.2.0
  */
 data class MarkValueDto(override val id: Long = 0,
                         override val value: Double = 0.0,

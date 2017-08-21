@@ -6,7 +6,7 @@ import outcobra.server.model.interfaces.ParentLink
 
 /**
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.2.0
  */
 data class ExamTaskDto(val id: Long = 0,
                        val task: String = "",
