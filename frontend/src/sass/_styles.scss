@@ -185,6 +185,9 @@ md-dialog-container {
 
 .container {
     padding: 10px 5px;
+    &.middle-container {
+        max-width: 960px;
+    }
 }
 
 md-input-container.big-search {
