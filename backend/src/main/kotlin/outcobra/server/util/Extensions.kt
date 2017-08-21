@@ -93,9 +93,11 @@ tailrec fun ParentLinked.followToUser(iterationCount: Int = 0): User {
  * @since <since>
  */
 fun BaseMarkDto.validate() {
-    var valid = (id == 0L || !(value > 6 || value < 1))
-    if (this is MarkGroupDto) {
-        valid = valid && (parentGroupId == 0L || markGroups.isEmpty())
+    var valid = id == 0L
+    valid = if (this is MarkGroupDto) {
+        valid || (parentGroupId == 0L || markGroups.isEmpty())
+    } else {
+        valid || !(value > 6 || value < 1)
     }
     if (!valid) {
         ValidationKey.INVALID_MARK.throwException()
@@ -121,6 +123,7 @@ fun String.firstToUpper(): String {
  * @since 1.0.0
  */
 fun String.firstToLower(): String {
-    if (this.isNullOrEmpty()) return this
+    if (this.isEmpty()) return this
+    if (this.length == 1) return this.toLowerCase()
     return substring(0, 1).toLowerCase() + substring(1, length)
 }
