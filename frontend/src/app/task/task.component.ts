@@ -1,54 +1,41 @@
 import {AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {animate, state, style, transition, trigger} from '@angular/animations';
 import {TaskService} from './service/task.service';
 import {TaskDto} from './model/task.dto';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
-import {TaskFilterDto} from './model/task-filter.dto';
+import {SubjectFilterDto} from './model/subject.filter.dto';
 import {MdDialog, MdDialogRef} from '@angular/material';
 import {TaskCreateUpdateDialog} from './task-create-update-dialog/task-create-update-dialog.component';
 import {Util} from '../core/util/util';
-import {DialogMode} from '../core/common/dialog-mode';
-import {Observable} from 'rxjs';
-import {SMALL_DIALOG} from '../core/util/const';
+import {ViewMode} from '../core/common/view-mode';
+import {Observable} from 'rxjs/Observable';
+import {MEDIUM_DIALOG} from '../core/util/const';
 import {and} from '../core/util/helper';
 import {ResponsiveHelperService} from '../core/services/ui/responsive-helper.service';
 import {NotificationWrapperService} from '../core/notifications/notification-wrapper.service';
 import {OCMediaChange} from '../core/services/ui/oc-media-change';
+import {slideUpDownAnimation} from '../core/animations/animations';
+import {Subject} from 'rxjs/Subject';
 
 @Component({
     selector: 'task',
     templateUrl: './task.component.html',
     styleUrls: ['./task.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    animations: [
-        trigger('filterShown', [
-            state('1', style({
-                height: '*',
-                paddingTop: '*',
-                paddingBottom: '*'
-            })),
-            state('0', style({
-                height: '0',
-                paddingTop: '0',
-                paddingBottom: '0'
-            })),
-            transition('1 => 0', animate('250ms ease-in')),
-            transition('0 => 1', animate('250ms ease-out'))
-        ])
-    ]
+    animations: [slideUpDownAnimation]
 })
 export class TaskComponent implements OnInit, AfterViewInit {
     private _filterForm: FormGroup;
-    private _searchForm: FormGroup;
     private _filteredTasks: TaskDto[];
-    private _filterData: TaskFilterDto;
+    private _filterData: SubjectFilterDto;
     private _filterShown: boolean;
 
     private _filtered: boolean = true;
     private _tasks: TaskDto[];
 
     private _taskCreateUpdateDialog: MdDialogRef<TaskCreateUpdateDialog>;
+
+    public search$: Subject<string> = new Subject();
 
     constructor(private _taskService: TaskService,
                 private _dialogService: MdDialog,
@@ -69,7 +56,7 @@ export class TaskComponent implements OnInit, AfterViewInit {
 
     ngAfterViewInit() {
         this._filterShown = !this._responsiveHelperService.isMobile();
-        Observable.concat(
+        Observable.merge(
             this._responsiveHelperService.listenForBreakpointChange(),
             this._responsiveHelperService.listenForOrientationChange())
             .filter(change => !change.mobile)
@@ -80,7 +67,7 @@ export class TaskComponent implements OnInit, AfterViewInit {
     //region initialization
 
     private _getAndInitTasksFromResolver() {
-        this._route.data.subscribe((data: { taskFilter: TaskFilterDto, tasks: TaskDto[] }) => {
+        this._route.data.subscribe((data: { taskFilter: SubjectFilterDto, tasks: TaskDto[] }) => {
             this._filterData = data.taskFilter;
             this._refreshTasksWithFilter(data.tasks);
         });
@@ -100,9 +87,6 @@ export class TaskComponent implements OnInit, AfterViewInit {
     }
 
     private _initForms() {
-        this._searchForm = this._formBuilder.group({
-            searchTerm: ['']
-        });
         this._filterForm = this._formBuilder.group({
             subjectId: [''],
             finished: [true]
@@ -110,10 +94,11 @@ export class TaskComponent implements OnInit, AfterViewInit {
     }
 
     private _initFormChangeSubscriptions() {
-        this._searchForm.get('searchTerm').valueChanges
+        this.search$
             .debounceTime(300)
             .distinctUntilChanged()
             .subscribe(searchTerm => this._filteredTasks = Util.cloneArray(this.search(searchTerm)));
+        // TODO include normal filter too
 
         this._filterForm.valueChanges
             .subscribe(() => this.doFilter());
@@ -122,8 +107,8 @@ export class TaskComponent implements OnInit, AfterViewInit {
     //endregion
 
     public addTask() {
-        this._taskCreateUpdateDialog = this._dialogService.open(TaskCreateUpdateDialog, this._responsiveHelperService.getMobileOrGivenDialogConfig(SMALL_DIALOG));
-        this._taskCreateUpdateDialog.componentInstance.init(DialogMode.NEW, null);
+        this._taskCreateUpdateDialog = this._dialogService.open(TaskCreateUpdateDialog, this._responsiveHelperService.getMobileOrGivenDialogConfig(MEDIUM_DIALOG));
+        this._taskCreateUpdateDialog.componentInstance.init(ViewMode.NEW, null);
         this._taskCreateUpdateDialog.afterClosed()
             .flatMap((value) => {
                 if (!value) return Observable.empty();
@@ -182,19 +167,14 @@ export class TaskComponent implements OnInit, AfterViewInit {
 
     private _buildFilterPredicate(): Predicate<TaskDto> {
         let predicates: Predicate<TaskDto>[] = [];
-        if (this._filterForm.get('subjectId').value) {
-            predicates.push((task: TaskDto) => task.subject.id == this._filterForm.get('subjectId').value);
+        let formValue = this._filterForm.value;
+        if (formValue.subjectId) {
+            predicates.push((task: TaskDto) => task.subject.id == formValue.subjectId);
         }
-        if (this._filterForm.get('finished').value) {
+        if (formValue.finished) {
             predicates.push((task: TaskDto) => task.progress != 100);
         }
         return and(predicates);
-    }
-
-    public resetFilter() {
-        this._filtered = false;
-        this._filterForm.reset();
-        this._filteredTasks = Util.cloneArray(this._tasks);
     }
 
     public doFilter() {
@@ -202,29 +182,21 @@ export class TaskComponent implements OnInit, AfterViewInit {
         this._filteredTasks = Util.cloneArray(this._filterTasks(this._tasks));
     }
 
-    public changeFilterVisibility() {
-        this._filterShown = !this._filterShown;
-    }
-
     get filterForm(): FormGroup {
         return this._filterForm;
-    }
-
-    get searchForm(): FormGroup {
-        return this._searchForm;
     }
 
     get filteredTasks(): TaskDto[] {
         return this._filteredTasks;
     }
 
-    get filterData(): TaskFilterDto {
+    get filterData(): SubjectFilterDto {
         return this._filterData;
     }
 
-    get filterShown(): boolean {
-        return this._filterShown;
+    get tasks(): TaskDto[] {
+        return this._tasks;
     }
 
-    //endregion
+//endregion
 }

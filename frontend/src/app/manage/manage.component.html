@@ -22,51 +22,49 @@
     <div class="manage-col" [class.border-right]="!isMobile()" [class.mobile-col]="isMobile()" fxFlex.gt-md>
         <ul>
             <li *ngFor="let institution of currentManageData[manageViewRef.INSTITUTION_CLASS]">
-                <oc-collapsible>
+                <oc-collapsible [showToggle]="false">
                     <oc-collapsible-header>
                         <div class="entity">
                             <div class="entity-desc">
                                 <md-icon class="entity-icon">business</md-icon>
                                 <span>{{ institution.name }}</span>
                             </div>
-                            <entity-menu
+                            <oc-entity-menu
                                 (delete)="deleteInstitution(institution)"
                                 (edit)="editInstitution(institution)"
-                            ></entity-menu>
+                            ></oc-entity-menu>
                         </div>
                     </oc-collapsible-header>
-                    <oc-collapsible-body>
-                        <ul>
-                            <li *ngFor="let schoolClass of institution.schoolClasses">
-                                <div class="entity child-entity" (click)="selectSchoolClass(schoolClass.id)"
-                                     [class.active]="schoolClass.id === activeSchoolClassId">
-                                    <div class="entity-desc">
-                                        <md-icon class="entity-icon">subdirectory_arrow_right</md-icon>
-                                        <md-icon class="entity-icon">class</md-icon>
-                                        <span>{{ schoolClass.normalizedName }}</span>
-                                    </div>
-                                    <entity-menu
-                                        (delete)="deleteSchoolClass(schoolClass)"
-                                        (edit)="editSchoolClass(schoolClass)"
-                                    ></entity-menu>
+                    <oc-divider></oc-divider>
+                    <ul>
+                        <li *ngFor="let schoolClass of institution.schoolClasses">
+                            <div class="entity child-entity" (click)="selectSchoolClass(schoolClass.id)"
+                                 [class.active]="schoolClass.id === activeSchoolClassId">
+                                <div class="entity-desc">
+                                    <md-icon class="entity-icon">subdirectory_arrow_right</md-icon>
+                                    <md-icon class="entity-icon">class</md-icon>
+                                    <span>{{ schoolClass.normalizedName }}</span>
                                 </div>
-                            </li>
-                            <li>
-                                <div class="action-button">
-                                    <button md-raised-button color="accent" (click)="addSchoolClass(institution)">
-                                        <md-icon>add</md-icon>
-                                        {{ 'i18n.modules.manage.schoolClass.add' | translate }}
-                                    </button>
-                                </div>
-                            </li>
-                        </ul>
-                    </oc-collapsible-body>
+                                <oc-entity-menu
+                                    (delete)="deleteSchoolClass(schoolClass)"
+                                    (edit)="editSchoolClass(schoolClass)"
+                                ></oc-entity-menu>
+                            </div>
+                            <oc-divider></oc-divider>
+                        </li>
+                        <li>
+                            <div class="action-button">
+                                <button md-button color="accent" (click)="addSchoolClass(institution)">
+                                    {{ 'i18n.modules.manage.schoolClass.add' | translate }}
+                                </button>
+                            </div>
+                        </li>
+                    </ul>
                 </oc-collapsible>
             </li>
             <li>
                 <div class="action-button">
-                    <button md-raised-button color="accent" (click)="addInstitution()">
-                        <md-icon>add</md-icon>
+                    <button md-button color="accent" (click)="addInstitution()">
                         {{ 'i18n.modules.manage.institution.add' | translate }}
                     </button>
                 </div>
@@ -79,7 +77,7 @@
     <div class="manage-col" [class.mobile-col]="isMobile()" fxFlex.gt-md>
         <ul *ngIf="currentManageData[manageViewRef.YEAR_SEMESTER] != null">
             <li *ngFor="let schoolYear of currentManageData[manageViewRef.YEAR_SEMESTER]">
-                <oc-collapsible>
+                <oc-collapsible [showToggle]="false">
                     <oc-collapsible-header>
                         <div class="entity">
                             <div class="entity-desc">
@@ -89,47 +87,45 @@
                                     <span class="secondary-text text-secondary-dark">{{ schoolYear.validFrom | date:'mediumDate' }} - {{ schoolYear.validTo | date:'mediumDate' }}</span>
                                 </div>
                             </div>
-                            <entity-menu
+                            <oc-entity-menu
                                 (delete)="deleteSchoolYear(schoolYear)"
                                 (edit)="editSchoolYear(schoolYear)"
-                            ></entity-menu>
+                            ></oc-entity-menu>
                         </div>
                     </oc-collapsible-header>
-                    <oc-collapsible-body>
-                        <ul>
-                            <li *ngFor="let semester of schoolYear.semesters">
-                                <div class="entity child-entity" (click)="selectSemester(semester.id)"
-                                     [class.active]="semester.id === activeSemesterId">
-                                    <div class="entity-desc">
-                                        <md-icon class="entity-icon">subdirectory_arrow_right</md-icon>
-                                        <md-icon class="entity-icon">school</md-icon>
-                                        <div class="two-line-entity">
-                                            <span class="primary-text">{{ semester.name }}</span>
-                                            <span class="secondary-text text-secondary-dark">{{ semester.validFrom | date:'mediumDate' }} - {{ semester.validTo | date:'mediumDate' }}</span>
-                                        </div>
+                    <oc-divider></oc-divider>
+                    <ul>
+                        <li *ngFor="let semester of schoolYear.semesters">
+                            <div class="entity child-entity" (click)="selectSemester(semester.id)"
+                                 [class.active]="semester.id === activeSemesterId">
+                                <div class="entity-desc">
+                                    <md-icon class="entity-icon">subdirectory_arrow_right</md-icon>
+                                    <md-icon class="entity-icon">school</md-icon>
+                                    <div class="two-line-entity">
+                                        <span class="primary-text">{{ semester.name }}</span>
+                                        <span class="secondary-text text-secondary-dark">{{ semester.validFrom | date:'mediumDate' }} - {{ semester.validTo | date:'mediumDate' }}</span>
                                     </div>
-                                    <entity-menu
-                                        (delete)="deleteSemester(semester)"
-                                        (edit)="editSemester(semester)"
-                                    ></entity-menu>
                                 </div>
-                            </li>
-                            <li>
-                                <div class="action-button">
-                                    <button md-raised-button color="accent" (click)="addSemester(schoolYear)">
-                                        <md-icon>add</md-icon>
-                                        {{ 'i18n.modules.manage.semester.add' | translate }}
-                                    </button>
-                                </div>
-                            </li>
-                        </ul>
-                    </oc-collapsible-body>
+                                <oc-entity-menu
+                                    (delete)="deleteSemester(semester)"
+                                    (edit)="editSemester(semester)"
+                                ></oc-entity-menu>
+                            </div>
+                            <oc-divider></oc-divider>
+                        </li>
+                        <li>
+                            <div class="action-button">
+                                <button md-button color="accent" (click)="addSemester(schoolYear)">
+                                    {{ 'i18n.modules.manage.semester.add' | translate }}
+                                </button>
+                            </div>
+                        </li>
+                    </ul>
                 </oc-collapsible>
             </li>
             <li>
                 <div class="action-button">
-                    <button md-raised-button color="accent" (click)="addSchoolYear(activeSchoolClassId)">
-                        <md-icon>add</md-icon>
+                    <button md-button color="accent" (click)="addSchoolYear(activeSchoolClassId)">
                         {{ 'i18n.modules.manage.schoolYear.add' | translate }}
                     </button>
                 </div>
@@ -142,26 +138,25 @@
     <div class="manage-col" [class.border-left]="!isMobile()" [class.mobile-col]="isMobile()" fxFlex.gt-md>
         <ul *ngIf="currentManageData[manageViewRef.SUBJECT] != null">
             <li *ngFor="let subject of currentManageData[manageViewRef.SUBJECT]">
-                <oc-collapsible>
+                <oc-collapsible [showToggle]="false">
                     <oc-collapsible-header>
                         <div class="entity">
                             <div class="entity-desc">
-                                <span class="subject-icon"
-                                     [style.background-color]="'#' + subject.color.hex"></span>
+                                <span class="subject-circle"
+                                      [style.background-color]="subject.color.hex | color"></span>
                                 <span>{{ subject.name }}</span>
                             </div>
-                            <entity-menu
+                            <oc-entity-menu
                                 (delete)="deleteSubject(subject)"
                                 (edit)="editSubject(subject)"
-                            ></entity-menu>
+                            ></oc-entity-menu>
                         </div>
                     </oc-collapsible-header>
                 </oc-collapsible>
             </li>
             <li>
                 <div class="action-button">
-                    <button md-raised-button color="accent" (click)="addSubject(activeSemesterId)">
-                        <md-icon>add</md-icon>
+                    <button md-button color="accent" (click)="addSubject(activeSemesterId)">
                         {{ 'i18n.modules.manage.subject.add' | translate }}
                     </button>
                 </div>

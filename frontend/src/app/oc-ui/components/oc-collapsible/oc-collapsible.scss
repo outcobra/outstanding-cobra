@@ -1,4 +1,4 @@
-@import '../../../../sass/_general';
+@import '../../../../sass/color-variables';
 
 oc-collapsible {
     display: block;
@@ -7,14 +7,37 @@ oc-collapsible {
 }
 
 oc-collapsible-header {
-    display: block;
     cursor: pointer;
     width: 100%;
     box-sizing: border-box;
-    @extend .border-bottom;
+    display: flex;
+    flex-direction: row;
+
+    &:hover {
+        background-color: $hover-light;
+    }
+
+    .oc-collapsible-header-content {
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+
+        span, md-icon {
+            padding: 0 5px;
+        }
+    }
+
+    .oc-collapsible-toggle {
+        display: flex;
+        align-items: center;
+        md-icon {
+            color: $secondary-dark;
+            transition: all .225s ease-in-out;
+        }
+    }
 }
 
-oc-collapsible-body {
+.oc-collapsible-body {
     overflow: hidden;
     height: inherit;
 
@@ -23,7 +46,14 @@ oc-collapsible-body {
         overflow-y: hidden;
         li {
             overflow-y: hidden;
-            @extend .border-bottom;
         }
     }
+
+    oc-collapsible {
+        overflow: hidden;
+    }
+}
+
+oc-collapsible.active > oc-collapsible-header > .oc-collapsible-toggle > md-icon {
+    transform: rotate(180deg);
 }

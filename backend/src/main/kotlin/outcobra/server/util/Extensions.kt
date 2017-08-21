@@ -1,8 +1,12 @@
 package outcobra.server.util
 
+import outcobra.server.exception.ValidationException
+import outcobra.server.exception.ValidationKey
 import outcobra.server.model.SchoolYear
 import outcobra.server.model.Semester
 import outcobra.server.model.User
+import outcobra.server.model.dto.MarkGroupDto
+import outcobra.server.model.dto.mark.BaseMarkDto
 import outcobra.server.model.interfaces.ParentLinked
 import java.time.LocalDate
 
@@ -72,10 +76,32 @@ infix fun Semester.doesNotOverlap(semester: Semester): Boolean {
  * @author Florian Bürgi
  * @since 1.1.0
  */
-tailrec fun ParentLinked.followToUser(): User {
-    if (this is User) return this
-    val parentLinked = this.parent
-    return parentLinked.followToUser()
+tailrec fun ParentLinked.followToUser(iterationCount: Int = 0): User {
+    if (iterationCount > 50) {
+        throw ValidationKey.INVALID_DTO.throwException()
+    } else {
+        if (this is User) return this
+        val parentLinked = this.parent
+        return parentLinked.followToUser(iterationCount + 1)
+    }
+}
+
+/**
+ * determines if the [BaseMarkDto] is valid or not
+ * @throws [ValidationException] if the mark is invalid
+ * @author Florian Bürgi
+ * @since 1.2.0
+ */
+fun BaseMarkDto.validate() {
+    var valid = id == 0L
+    valid = if (this is MarkGroupDto) {
+        valid || (parentGroupId == 0L || markGroups.isEmpty())
+    } else {
+        valid || !(value > 6 || value < 1)
+    }
+    if (!valid) {
+        ValidationKey.INVALID_MARK.throwException()
+    }
 }
 
 /**
@@ -97,6 +123,7 @@ fun String.firstToUpper(): String {
  * @since 1.0.0
  */
 fun String.firstToLower(): String {
-    if (this.isNullOrEmpty()) return this
+    if (this.isEmpty()) return this
+    if (this.length == 1) return this.toLowerCase()
     return substring(0, 1).toLowerCase() + substring(1, length)
 }

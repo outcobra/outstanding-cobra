@@ -25,4 +25,6 @@ interface SemesterService : BaseService<SemesterDto> {
      */
 
     fun getCurrentSemester(): List<SemesterDto>
+
+    fun readAllByUser(): List<SemesterDto>
 }

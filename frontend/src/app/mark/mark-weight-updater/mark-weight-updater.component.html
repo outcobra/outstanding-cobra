@@ -1,0 +1,51 @@
+<div class="updater-wrapper">
+    <div class="non-active-container"
+         cdk-overlay-origin
+         #weightFieldOrigin="cdkOverlayOrigin"
+         #weightFieldTrigger
+         (click)="openWeightField()">
+        <span>{{ markGroup.weight }}</span>
+        <button md-button
+                class="square-button"
+                type="button"
+                color="accent"
+                [disabled]="disabled">
+            <md-icon>edit</md-icon>
+        </button>
+    </div>
+</div>
+<ng-template cdk-connected-overlay
+             hasBackdrop
+             backdropClass="cdk-overlay-transparent-backdrop"
+             [origin]="weightFieldOrigin"
+             [open]="active"
+             [positions]="positions"
+             [minWidth]="triggerWidth"
+             [height]="triggerHeight"
+             (backdropClick)="closeWeightField()">
+    <form [formGroup]="weightUpdaterForm"
+          (submit)="submit()"
+          class="update-container">
+        <div class="input-container">
+            <input formControlName="weight"
+                   autocomplete="off">
+            <md-icon [mdTooltip]="'i18n.modules.mark.createUpdate.form.weight.hint' | translate"
+                     mdTooltipPosition="below" color="accent">
+                edit
+            </md-icon>
+        </div>
+        <div class="control-panel">
+            <button md-button
+                    class="square-button"
+                    type="submit">
+                <md-icon>check</md-icon>
+            </button>
+            <button md-button
+                    class="square-button"
+                    type="button"
+                    (click)="closeWeightField()">
+                <md-icon>clear</md-icon>
+            </button>
+        </div>
+    </form>
+</ng-template>

@@ -3,22 +3,24 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MdDialogRef} from '@angular/material';
 import {SubjectService} from '../../manage/service/subject.service';
 import {SubjectDto} from '../../manage/model/manage.dto';
-import {Util} from '../../core/util/util';
 import {OCValidators} from '../../core/services/oc-validators';
 import {TaskDto} from '../model/task.dto';
-import {CreateUpdateDialog} from '../../core/common/create-update-dialog';
+import {CreateUpdateComponent} from '../../core/common/create-update-component';
 import {ResponsiveHelperService} from '../../core/services/ui/responsive-helper.service';
 import {DateUtil} from '../../core/services/date-util.service';
+import {FormUtil} from '../../core/util/form-util';
+import * as moment from 'moment';
+import {Moment} from 'moment';
 
 @Component({
     selector: './task-create-update-dialog',
     templateUrl: './task-create-update-dialog.component.html',
     styleUrls: ['./task-create-update-dialog.component.scss']
 })
-export class TaskCreateUpdateDialog extends CreateUpdateDialog<TaskDto> implements OnInit {
+export class TaskCreateUpdateDialog extends CreateUpdateComponent<TaskDto> implements OnInit {
     private _taskCreateUpdateForm: FormGroup;
     private _subjects: SubjectDto[];
-    private _today: Date = new Date();
+    private _today: Moment = moment();
 
     constructor(private _subjectService: SubjectService,
                 private _dialogRef: MdDialogRef<TaskCreateUpdateDialog>,
@@ -35,8 +37,10 @@ export class TaskCreateUpdateDialog extends CreateUpdateDialog<TaskDto> implemen
             name: [this.getParamOrDefault('name'), Validators.required],
             description: [this.getParamOrDefault('description')],
             dates: this._formBuilder.group({
-                    todoDate: [DateUtil.transformToDateIfPossible(this.getParamOrDefault('todoDate')), Validators.required],
-                    dueDate: [DateUtil.transformToDateIfPossible(this.getParamOrDefault('dueDate')), Validators.required],
+                    todoDate: [DateUtil.transformToMomentIfPossible(this.getParamOrDefault('todoDate')),
+                        Validators.compose([Validators.required, OCValidators.date()])],
+                    dueDate: [DateUtil.transformToMomentIfPossible(this.getParamOrDefault('dueDate')),
+                        Validators.compose([Validators.required, OCValidators.date()])]
                 },
                 {
                     validator: OCValidators.dateFromIsBeforeDateTo('todoDate', 'dueDate', true)
@@ -51,7 +55,7 @@ export class TaskCreateUpdateDialog extends CreateUpdateDialog<TaskDto> implemen
             this._dialogRef.close(this._formToTask(this._taskCreateUpdateForm));
         }
         else {
-            Util.revalidateForm(this._taskCreateUpdateForm);
+            FormUtil.revalidateForm(this._taskCreateUpdateForm);
         }
     }
 
@@ -81,7 +85,7 @@ export class TaskCreateUpdateDialog extends CreateUpdateDialog<TaskDto> implemen
         return this._subjects;
     }
 
-    get today(): Date {
+    get today(): Moment {
         return this._today;
     }
 }

@@ -1,0 +1,14 @@
+<button md-icon-button class="right" (click)="$event.stopPropagation()" [md-menu-trigger-for]="menu">
+    <md-icon>more_vert</md-icon>
+</button>
+
+<md-menu x-position="before" #menu="mdMenu" (click)="$event.stopPropagation()">
+    <button md-menu-item (click)="onDelete.emit()">
+        <md-icon>delete</md-icon>
+        <span>{{ 'i18n.common.action.delete' | translate }}</span>
+    </button>
+    <button md-menu-item (click)="onEdit.emit()">
+        <md-icon>edit</md-icon>
+        <span>{{ 'i18n.common.action.edit' | translate }}</span>
+    </button>
+</md-menu>

@@ -3,7 +3,6 @@ import {async, ComponentFixture, inject, TestBed} from '@angular/core/testing';
 import {ManageComponent} from './manage.component';
 import {TestModule} from '../core/mock/test.module';
 import {OCUiModule} from '../oc-ui/oc-ui.module';
-import {EntityMenuComponent} from './entity-menu/entity-menu.component';
 import {ManageService} from './service/manage.service';
 
 describe('ManagerComponent', () => {
@@ -13,8 +12,7 @@ describe('ManagerComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
-                ManageComponent,
-                EntityMenuComponent
+                ManageComponent
             ],
             imports: [
                 TestModule,

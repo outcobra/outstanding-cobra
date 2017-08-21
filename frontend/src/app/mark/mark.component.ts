@@ -1,16 +1,49 @@
 import {Component, OnInit} from '@angular/core';
+import {SemesterService} from '../manage/service/semester.service';
+import {momentComparator} from '../core/util/comparator';
+import {SemesterDto} from '../manage/model/manage.dto';
+import {Util} from '../core/util/util';
+import {DateUtil} from '../core/services/date-util.service';
+import {isEmpty, isTruthy} from '../core/util/helper';
+import {ActivatedRoute, Router} from '@angular/router';
+import * as moment from 'moment';
 
 @Component({
-    selector: 'app-mark',
+    selector: 'mark',
     templateUrl: './mark.component.html',
     styleUrls: ['./mark.component.scss']
 })
 export class MarkComponent implements OnInit {
+    public currentSemester: SemesterDto;
+    public semesters: Array<SemesterDto>;
 
-    constructor() {
+    constructor(private _semesterService: SemesterService,
+                private _router: Router,
+                private _route: ActivatedRoute) {
     }
 
     ngOnInit() {
+        this._semesterService.readAll().map(semesters => semesters.map(sem => this._semesterService.mapDates(sem)).sort((first, second) => momentComparator(first.validFrom, second.validFrom)))
+            .subscribe(semesters => {
+                this.currentSemester = semesters.find(sem => DateUtil.isBetweenDaysInclusive(moment(),
+                    DateUtil.transformToMomentIfPossible(sem.validFrom), DateUtil.transformToMomentIfPossible(sem.validTo)));
+
+                this.semesters = isTruthy(this.currentSemester) ? Util.moveToFirst(semesters, this.currentSemester) : semesters;
+                if (!this._route.snapshot.children.some(route => route.paramMap.has('semesterId'))) {
+                    this._initMarkSemesterView();
+                }
+            });
+    }
+
+    private _initMarkSemesterView() {
+        if (isEmpty(this.semesters)) {
+            return;
+        }
+        let toShowSemester = isTruthy(this.currentSemester) ? this.currentSemester : this.semesters[0];
+        this._router.navigate(['semester', toShowSemester.id], {
+            relativeTo: this._route,
+            queryParamsHandling: 'merge'
+        });
     }
 
 }

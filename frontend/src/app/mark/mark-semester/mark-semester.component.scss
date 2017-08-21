@@ -1,0 +1,74 @@
+@import '../../../sass/color-variables';
+@import '../../../sass/variables';
+
+@mixin indentation($step) {
+    margin-left: $step * 12px;
+    @media(max-width: 400px) {
+        margin-left: $step * 6px;
+    }
+}
+
+mark-semester {
+    position: relative;
+
+    oc-collapsible-header {
+        height: $mark-collapsible-header-height;
+    }
+
+    .mat-subheader {
+        padding: 5px;
+    }
+
+    .mark-value-list {
+        padding: 0 !important;
+    }
+
+    .mark-school-class-header > .oc-collapsible-header-content {
+        @include indentation(1);
+    }
+
+    .mark-subject-header > .oc-collapsible-header-content {
+        @include indentation(2);
+    }
+
+    .mark-mark-group-header > .oc-collapsible-header-content,
+    .mark-value-list > h3,
+    md-list.mark-value-list > md-list-item:not(.mark-group-item) > .mat-list-item-content {
+        @include indentation(3);
+    }
+
+    .mark-group-value-list {
+        padding: 0 !important;
+
+        > md-list-item > .mat-list-item-content {
+            @include indentation(4);
+        }
+    }
+
+    md-list-item.mark-list-item mark-value .mark-value-container {
+        margin-right: 24px;
+    }
+
+    .mark-mark-group-header md-icon {
+        padding: 0 !important;
+    }
+
+    .mat-list-item-content,
+    .mat-subheader {
+        padding: 0 !important;
+        height: auto !important;
+    }
+
+    oc-collapsible-header {
+        &.two-line-header {
+            height: 80px !important;
+        }
+    }
+
+    .subject-mark-group-controls {
+        display: flex;
+        .control-row:last-child {
+            align-self: flex-end;
+        }
+    }
+}

@@ -15,8 +15,6 @@ export const MEDIUM_DIALOG: MdDialogConfig = {
 };
 
 export const MOBILE_DIALOG: MdDialogConfig = {
-    position: {
-        top: '0px',
-        bottom: '0px'
-    }, height: '100%'
+    height: '100%',
+    width: '100%'
 };

@@ -1,4 +1,5 @@
 @import '../../sass/general';
+@import '../../sass/variables';
 
 manager {
     display: flex;
@@ -53,8 +54,13 @@ oc-app:not(.oc-mobile) {
     .manage-col {
         padding: 0 0.5rem;
 
-        >   ul {
-            box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12), 0 3px 1px -2px rgba(0,0,0,.2);
+        ul {
+            padding: 0;
+        }
+
+        > ul {
+            background-color: white;
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12), 0 3px 1px -2px rgba(0, 0, 0, .2);
         }
 
         .entity {
@@ -64,7 +70,7 @@ oc-app:not(.oc-mobile) {
                 flex-grow: 1;
             }
 
-            entity-menu {
+            oc-entity-menu {
                 flex-basis: 40px;
             }
         }
@@ -99,9 +105,10 @@ oc-app:not(.oc-mobile) {
 
         cursor: pointer;
         padding: 0 10px;
-        height: 50px;
-        line-height: 50px;
-        box-sizing: inherit;
+        height: $mark-collapsible-header-height;
+        line-height: $mark-collapsible-header-height;
+        box-sizing: border-box;
+        width: 100%;
 
         span, md-icon {
             -webkit-user-select: none;
@@ -116,14 +123,14 @@ oc-app:not(.oc-mobile) {
             md-icon {
                 float: left;
                 height: 100%;
-                line-height: 50px !important;
+                line-height: $mark-collapsible-header-height !important;
                 margin-right: 20px;
             }
 
             span {
                 display: block;
                 height: 100%;
-                line-height: 50px;
+                line-height: $mark-collapsible-header-height;
                 text-overflow: ellipsis;
                 overflow: hidden;
             }
@@ -136,7 +143,7 @@ oc-app:not(.oc-mobile) {
                 float: left;
             }
 
-            entity-menu {
+            oc-entity-menu {
                 float: right;
             }
 
@@ -148,13 +155,13 @@ oc-app:not(.oc-mobile) {
                     display: block;
                     clear: both;
                     &.primary-text {
-                        height: 30px;
-                        line-height: 30px;
+                        height: 25px;
+                        line-height: 25px;
                     }
                     &.secondary-text {
                         font-size: .8em;
-                        height: 20px;
-                        line-height: 20px;
+                        height: 15px;
+                        line-height: 15px;
                         display: block;
                         text-overflow: ellipsis;
                     }
@@ -172,43 +179,7 @@ oc-app:not(.oc-mobile) {
         display: block;
 
         .action-button {
-            padding: 10px;
             text-align: right;
-        }
-    }
-}
-
-.cdk-overlay-container {
-    md-dialog-container {
-        //overflow: visible;
-
-        institution-dialog,
-        school-class-dialog,
-        school-year-dialog,
-        semester-dialog,
-        subject-dialog {
-            display: block;
-            box-sizing: border-box;
-            //width: 500px;
-
-            .dialog-body {
-                md-input-container {
-                    width: 80%;
-                }
-                datepicker {
-                    width: 80%;
-                    md-input-container {
-                        width: 100%;
-                    }
-                }
-            }
-
-            .dialog-footer {
-                .footer-right {
-                    //float: right;
-                    text-align: right;
-                }
-            }
         }
     }
 }

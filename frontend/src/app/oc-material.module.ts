@@ -1,12 +1,15 @@
 import {NgModule} from '@angular/core';
 import {
+    DateAdapter,
     MD_DATE_FORMATS,
     MdButtonModule,
     MdButtonToggleModule,
     MdCardModule,
+    MdCheckboxModule,
     MdCoreModule,
     MdDatepickerModule,
     MdDialogModule,
+    MdExpansionModule,
     MdIconModule,
     MdInputModule,
     MdListModule,
@@ -17,10 +20,12 @@ import {
     MdSidenavModule,
     MdSliderModule,
     MdSlideToggleModule,
+    MdTabsModule,
     MdToolbarModule,
     MdTooltipModule
 } from '@angular/material';
 import {OC_DATE_FORMATS} from './core/common/oc-date-formats';
+import {OCMomentDateAdapter} from './core/common/oc-moment-date-adapter';
 
 @NgModule({
     imports: [
@@ -40,7 +45,10 @@ import {OC_DATE_FORMATS} from './core/common/oc-date-formats';
         MdSliderModule,
         MdRippleModule,
         MdListModule,
+        MdTabsModule,
         MdDatepickerModule,
+        MdExpansionModule,
+        MdCheckboxModule,
         MdCoreModule
     ],
     exports: [
@@ -60,10 +68,17 @@ import {OC_DATE_FORMATS} from './core/common/oc-date-formats';
         MdSliderModule,
         MdRippleModule,
         MdListModule,
+        MdTabsModule,
         MdDatepickerModule,
+        MdExpansionModule,
+        MdCheckboxModule,
         MdCoreModule
     ],
     providers: [
+        {
+            provide: DateAdapter,
+            useClass: OCMomentDateAdapter
+        },
         {
             provide: MD_DATE_FORMATS,
             useValue: OC_DATE_FORMATS

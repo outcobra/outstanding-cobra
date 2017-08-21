@@ -1,0 +1,67 @@
+@import '../../../sass/color-variables';
+$width: 100px;
+
+mark-weight-updater {
+    height: 36px;
+    .updater-wrapper {
+        position: relative;
+        display: block;
+        height: 36px;
+        width: $width;
+        vertical-align: middle;
+        box-sizing: border-box;
+        .non-active-container {
+            height: 100%;
+            line-height: 36px;
+            padding-left: 5px;
+            transition: background-color .2s ease-in-out;
+            button[md-button] {
+                float: right;
+            }
+        }
+    }
+
+    &:not(.disabled) {
+        .updater-wrapper {
+            cursor: pointer;
+            .non-active-container {
+                &:hover {
+                    background-color: $hover-light;
+                }
+            }
+        }
+    }
+
+}
+.update-container {
+    position: absolute;
+    z-index: 990;
+    right: 0;
+    width: $width;
+    @include mat-elevation(2);
+    .input-container {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        input {
+            font-size: 1em;
+            box-sizing: border-box;
+            outline: none;
+            height: 36px;
+            border: none;
+            width: calc(100% - 36px);
+            background-color: $background-white;
+            padding-left: 5px;
+        }
+        md-icon {
+            width: 36px;
+            text-align: center;
+        }
+    }
+
+    .input-container,
+    .control-panel,
+    .input-container input{
+    }
+    background-color: $background-white;
+}

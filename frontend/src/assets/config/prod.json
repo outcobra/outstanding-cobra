@@ -4,12 +4,12 @@
     "apis": [
       {
         "name": "outcobra",
-        "apiBase": "https://outcobra-a.pegnu.cloud/backend/api/",
+        "apiBase": "https://{{host}}/backend/api/",
         "authToken": true
       },
       {
         "name": "outcobra_public",
-        "apiBase": "https://outcobra-a.pegnu.cloud/backend/",
+        "apiBase": "https://{{host}}/backend/",
         "authToken": false
       }
     ]
@@ -17,7 +17,7 @@
   "auth0": {
     "clientID": "Qih42aYQMS2CGCAqNkgalzFdIyacqi5r",
     "domain": "outcobra.eu.auth0.com",
-    "callbackURL": "https://outcobra-a.pegnu.cloud/"
+    "callbackURL": "https://{{host}}/"
   },
   "locStorage": {
     "tokenLocation": "id_token",

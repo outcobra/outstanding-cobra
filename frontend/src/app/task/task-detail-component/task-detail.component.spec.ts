@@ -6,8 +6,6 @@ import {OCUiModule} from '../../oc-ui/oc-ui.module';
 import {FormsModule} from '@angular/forms';
 import {RouterTestingModule} from '@angular/router/testing';
 import {MockTaskService} from '../../core/mock/task/mock-task.service';
-import {ActivatedRoute} from '@angular/router';
-import {Observable} from 'rxjs/Observable';
 
 describe('TaskDetailComponent', () => {
     let component: TaskDetailComponent;
@@ -25,16 +23,6 @@ describe('TaskDetailComponent', () => {
                 FormsModule,
                 RouterTestingModule,
                 OCUiModule
-            ],
-            providers: [
-                {
-                    provide: ActivatedRoute,
-                    useValue: {
-                        data: Observable.of({
-                            task: MockTaskService.TASK1
-                        })
-                    }
-                }
             ]
         }).compileComponents();
     }));
@@ -42,6 +30,7 @@ describe('TaskDetailComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(TaskDetailComponent);
         component = fixture.componentInstance;
+        component.task = MockTaskService.TASK1;
         fixture.detectChanges();
     });
 

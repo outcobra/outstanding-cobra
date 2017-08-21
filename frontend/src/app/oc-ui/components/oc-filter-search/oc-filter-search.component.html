@@ -1,0 +1,42 @@
+<div class="oc-search-wrapper"
+     cdk-overlay-origin
+     #searchFieldOrigin="cdkOverlayOrigin"
+     #searchFieldTrigger>
+    <div class="oc-filter-search-controls">
+        <div class="oc-search-field-toggler" (click)="openSearchField()">
+            <md-icon>search</md-icon>
+            <span>{{ placeholder }}</span>
+        </div>
+        <div class="oc-filter">
+            <md-icon>filter_list</md-icon>
+            <ng-content select="[ocFilter]"></ng-content>
+        </div>
+    </div>
+</div>
+
+<ng-template
+    cdk-connected-overlay
+    hasBackdrop
+    backdropClass="cdk-overlay-transparent-backdrop"
+    [origin]="searchFieldOrigin"
+    [open]="showSearchField"
+    [positions]="positions"
+    [minWidth]="triggerWidth"
+    [height]="triggerHeight"
+    (backdropClick)="closeSearchField()">
+    <form [formGroup]="searchForm"
+          class="oc-search-form">
+        <div class="oc-search-field">
+            <md-icon>search</md-icon>
+            <input formControlName="search"
+                   ocAutoFocus
+                   [ocAutoSelect]="true"
+                   (keyup)="search$.next($event.target.value)">
+            <button md-icon-button
+                    type="button"
+                    (click)="closeSearchField()">
+                <md-icon>close</md-icon>
+            </button>
+        </div>
+    </form>
+</ng-template>

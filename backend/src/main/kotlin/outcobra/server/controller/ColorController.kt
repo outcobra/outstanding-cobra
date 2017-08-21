@@ -9,6 +9,7 @@ import javax.inject.Inject
 
 /**
  * @author Mario Kunz
+ * @since 1.0.0
  */
 @RestController
 @RequestMapping("/api/color")

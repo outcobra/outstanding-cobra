@@ -1,10 +1,8 @@
 import {APP_INITIALIZER, ErrorHandler, Injector, NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
-import {Http, HttpModule} from '@angular/http';
-import {MdNativeDateModule} from '@angular/material';
+import {HttpModule} from '@angular/http';
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
-import 'rxjs/add/operator/toPromise';
 import {AppComponent} from './app.component';
 import {ConfigService} from './core/config/config.service';
 import {SharedModule} from './shared/shared.module';
@@ -13,37 +11,47 @@ import {AppRoutingModule} from './app-routing.module';
 import {MainModule} from './main/main.module';
 import {ManageModule} from './manage/manage.module';
 import {TaskModule} from './task/task.module';
-import {configLoader, translateFactory, translationLoader} from './core/services/factories';
+import {configLoader, inputErrorStateMatcher, translateFactory, translationLoader} from './core/services/factories';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {CoreModule} from './core/core.module';
 import {OCMaterialModule} from './oc-material.module';
 import {RavenErrorHandler} from './core/error/raven-error-handler';
+import {MarkModule} from './mark/mark.module';
+import {ExamModule} from './exam/exam.module';
+import {PipeModule} from './shared/pipe.module';
+import {FallbackComponent} from './main/fallback/fallback.component';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {MD_ERROR_GLOBAL_OPTIONS} from '@angular/material';
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        FallbackComponent
     ],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
         FormsModule,
         HttpModule,
-        AppRoutingModule,
+        HttpClientModule,
+        SimpleNotificationsModule.forRoot(),
+        OCMaterialModule,
         SharedModule,
         MainModule,
         ManageModule,
         TaskModule,
+        MarkModule,
+        ExamModule,
         FlexLayoutModule,
-        SimpleNotificationsModule.forRoot(),
         CoreModule,
-        OCMaterialModule,
-        MdNativeDateModule,
+        PipeModule,
+        AppRoutingModule,
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
                 useFactory: translateFactory,
-                deps: [Http]
+                deps: [HttpClient]
             }
         })
     ],
@@ -64,6 +72,12 @@ import {RavenErrorHandler} from './core/error/raven-error-handler';
         {
             provide: ErrorHandler,
             useClass: RavenErrorHandler
+        },
+        {
+            provide: MD_ERROR_GLOBAL_OPTIONS,
+            useValue: {
+                errorStateMatcher: inputErrorStateMatcher
+            }
         }
     ],
     bootstrap: [AppComponent]

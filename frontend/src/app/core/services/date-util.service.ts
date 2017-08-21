@@ -1,10 +1,12 @@
 import * as moment from 'moment';
+import {isDate, isMoment, Moment} from 'moment';
+import {isString} from '../util/helper';
 
 export class DateUtil {
 
     // technically min and max date
-    public static readonly MIN_DATE = new Date(1000, 1, 1);
-    public static readonly MAX_DATE = new Date(9999, 11, 31);
+    public static readonly MIN_DATE = moment([1000, 1, 1]);
+    public static readonly MAX_DATE = moment([9999, 11, 31]);
     public static readonly DATE_REGEX = /^\d{4}-\d{1,2}-\d{1,2}$/;
 
     /**
@@ -15,10 +17,8 @@ export class DateUtil {
      * @param date2
      * @returns {boolean}
      */
-    public static isSameDay(date1: Date, date2: Date): boolean {
-        return date1.getDate() === date2.getDate() &&
-            date1.getMonth() === date2.getMonth() &&
-            date1.getFullYear() === date2.getFullYear();
+    public static isSameDay(date1: Moment, date2: Moment): boolean {
+        return date1.isSame(date2); // TODO only day
     }
 
     /**
@@ -27,8 +27,8 @@ export class DateUtil {
      * @param after Date
      * @returns {boolean}
      */
-    public static isBeforeOrSameDay(before: Date, after: Date) {
-        return moment(before.toDateString()).isSameOrBefore(after.toDateString());
+    public static isBeforeOrSameDay(before: Moment, after: Moment) {
+        return before.isSameOrBefore(after);
     }
 
     /**
@@ -37,8 +37,8 @@ export class DateUtil {
      * @param before Date
      * @returns {boolean}
      */
-    public static isAfterOrSameDay(after: Date, before: Date) {
-        return moment(after.toDateString()).isSameOrAfter(before.toDateString());
+    public static isAfterOrSameDay(after: Moment, before: Moment) {
+        return after.isSameOrAfter(before);
     }
 
     /**
@@ -49,8 +49,8 @@ export class DateUtil {
      * @param upperBound
      * @returns {boolean}
      */
-    public static isBetweenDaysInclusive(date: Date, lowerBound: Date, upperBound: Date): boolean {
-        return moment(date.toDateString()).isBetween(lowerBound.toDateString(), upperBound.toDateString(), null, '[]');
+    public static isBetweenDaysInclusive(date: Moment, lowerBound: Moment, upperBound: Moment): boolean {
+        return date.isBetween(lowerBound, upperBound, 'day', '[]');
     }
 
     /**
@@ -59,7 +59,7 @@ export class DateUtil {
      * @param date
      * @returns {boolean}
      */
-    public static isMinDate(date: Date) {
+    public static isMinDate(date: Moment) {
         return this.isSameDay(date, this.MIN_DATE);
     }
 
@@ -69,13 +69,21 @@ export class DateUtil {
      * @param date
      * @returns {boolean}
      */
-    public static isMaxDate(date: Date) {
+    public static isMaxDate(date: Moment) {
         return this.isSameDay(date, this.MAX_DATE);
     }
 
-    public static transformToDateIfPossible(date: any): Date {
-        if (this.DATE_REGEX.test(date)) {
-            return moment(date).toDate();
+    /**
+     * transforms the given date to a moment when the
+     * @param date
+     * @returns {moment.Moment}
+     */
+    public static transformToMomentIfPossible(date: any): Moment {
+        if (isMoment(date)) {
+            return date;
+        }
+        if ((isString(date) && this.DATE_REGEX.test(date)) || isDate(date)) {
+            return moment(date);
         }
         return null;
     }

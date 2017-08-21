@@ -8,6 +8,7 @@ import {Auth0AuthService} from './services/auth/auth.service';
 import {DateUtil} from './services/date-util.service';
 import {NotificationWrapperService} from './notifications/notification-wrapper.service';
 import {DurationService} from './services/duration.service';
+import {FilterService} from './services/filter/filter.service';
 
 @NgModule({
     providers: [
@@ -19,7 +20,8 @@ import {DurationService} from './services/duration.service';
         InfoService,
         ResponsiveHelperService,
         NotificationWrapperService,
-        DurationService
+        DurationService,
+        FilterService
     ]
 })
 export class CoreModule {

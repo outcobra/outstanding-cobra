@@ -6,6 +6,9 @@ import {Http} from '@angular/http';
 export class ConfigService {
     private _env: Object;
     private _config: Object;
+    private static _variableMap = {
+        '{{host}}': () => window.location.host
+    };
 
     constructor(private http: Http) {
         this._env = environment;
@@ -14,6 +17,7 @@ export class ConfigService {
     public load() {
         return this.http.get(`assets/config/${this._env['envName']}.json`)
             .map(response => response.json())
+            .map(config => ConfigService.deepReplaceValues(config))
             .do(config => this._config = config);
     }
 
@@ -30,6 +34,33 @@ export class ConfigService {
             let nextKey = keys[1];
             return this.get(nextKey, obj[firstKey]);
         }
+    }
+
+    private static deepReplaceValues(value: any): Object {
+        // This is apparently a bug...? https://github.com/mean-expert-official/loopback-sdk-builder/issues/371
+        let type: string = typeof value;
+        if (value instanceof Array) {
+            return value.map(entry => ConfigService.deepReplaceValues(entry));
+        } else if (type === 'object') {
+            let newObject = {};
+
+            for (let key in value) {
+                newObject[key] = ConfigService.deepReplaceValues(value[key]);
+            }
+
+            return newObject;
+        } else if (type === 'string') {
+            return ConfigService.replaceVariablesInString(value);
+        }
+
+        return value;
+    }
+
+    private static replaceVariablesInString(value: string): string {
+        for (let key in this._variableMap) {
+            value = value.replace(key, this._variableMap[key]());
+        }
+        return value;
     }
 
     protected set env(value: Object) {

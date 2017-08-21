@@ -1,9 +1,8 @@
 package outcobra.server.model;
 
-import outcobra.server.model.interfaces.ParentLinked;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import outcobra.server.model.interfaces.ParentLinked;
 
 @Entity
 public class ExamTask implements ParentLinked {
@@ -25,6 +24,17 @@ public class ExamTask implements ParentLinked {
 
     public ExamTask(Long id, String task, Exam exam, boolean finished) {
         this.id = id;
+        this.task = task;
+        this.exam = exam;
+        this.finished = finished;
+    }
+
+    /**
+     * @param task
+     * @param exam
+     * @param finished
+     */
+    public ExamTask(String task, Exam exam, boolean finished) {
         this.task = task;
         this.exam = exam;
         this.finished = finished;
