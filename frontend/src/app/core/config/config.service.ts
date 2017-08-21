@@ -7,7 +7,7 @@ export class ConfigService {
     private _env: Object;
     private _config: Object;
     private static _variableMap = {
-        '{{this-host}}': () => window.location.host
+        '{{host}}': () => window.location.host
     };
 
     constructor(private http: Http) {
