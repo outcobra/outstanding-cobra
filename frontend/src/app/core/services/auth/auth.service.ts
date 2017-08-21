@@ -56,7 +56,7 @@ export class Auth0AuthService implements AuthService {
          */
         this._lock.on('authenticated', (authResult) => {
             localStorage.setItem(this._config.get('locStorage.tokenLocation'), authResult.idToken);
-            this._lock.getProfile(authResult.idToken, (err, profile) => {
+            this._lock.getUserInfo(authResult.idToken, (err, profile) => {
                 localStorage.setItem(this._config.get('locStorage.profileLocation'), JSON.stringify(profile));
 
                 this._http.get<User>('/user/login', 'outcobra')
