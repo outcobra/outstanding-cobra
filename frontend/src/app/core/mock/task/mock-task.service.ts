@@ -4,6 +4,7 @@ import {TaskDto} from '../../../task/model/task.dto';
 import {Observable} from 'rxjs/Observable';
 import {SubjectFilterDto} from '../../../task/model/subject.filter.dto';
 import {MockSubjectService} from '../manage/manage-entities/mock-subject.service';
+import * as moment from 'moment';
 
 @Injectable()
 export class MockTaskService extends MockCrudService<TaskDto> {
@@ -11,8 +12,8 @@ export class MockTaskService extends MockCrudService<TaskDto> {
         id: 1,
         description: 'bla',
         name: 'task1',
-        dueDate: new Date(),
-        todoDate: new Date(),
+        dueDate: moment(),
+        todoDate: moment(),
         effort: 10,
         progress: 10,
         subject: MockSubjectService.SUBJECT1_OF_SEMESTER1

@@ -12,7 +12,7 @@ import {Observable} from 'rxjs/Observable';
 })
 export class OCFilterSearchComponent implements OnInit {
     @Input() public placeholder: string;
-    @Output() public onSearch: EventEmitter<string> = new EventEmitter();
+    @Output('search') public onSearch: EventEmitter<string> = new EventEmitter();
     @ViewChild('searchFieldTrigger') trigger: ElementRef;
 
     public searchForm: FormGroup;
@@ -29,12 +29,6 @@ export class OCFilterSearchComponent implements OnInit {
             originY: 'top',
             overlayX: 'start',
             overlayY: 'top',
-        },
-        {
-            originX: 'start',
-            originY: 'bottom',
-            overlayX: 'start',
-            overlayY: 'bottom',
         }
     ];
 
@@ -60,7 +54,6 @@ export class OCFilterSearchComponent implements OnInit {
 
         Observable.fromEvent(window, 'resize')
             .subscribe(() => this._refreshTriggerDimensions());
-
     }
 
     public closeSearchField() {

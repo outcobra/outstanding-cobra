@@ -12,7 +12,11 @@
 </nav>
 <div class="mark-semester-container">
     <ng-template #noSemestersAvailable>
-        <h4>{{ 'i18n.modules.mark.noSemesterAvailable' | translate }}</h4>
+        <oc-empty placeholder="i18n.modules.mark.empty.placeholder"
+                  hint="i18n.modules.mark.empty.hint"
+                  iconName="school">
+            <button md-button [routerLink]="'/manage'" color="accent">{{ 'i18n.modules.manage.linkTitle' | translate }}</button>
+        </oc-empty>
     </ng-template>
     <router-outlet></router-outlet>
 </div>

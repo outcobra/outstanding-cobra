@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {SemesterService} from '../manage/service/semester.service';
-import {dateComparator} from '../core/util/comparator';
+import {momentComparator} from '../core/util/comparator';
 import {SemesterDto} from '../manage/model/manage.dto';
 import {Util} from '../core/util/util';
 import {DateUtil} from '../core/services/date-util.service';
 import {isEmpty, isTruthy} from '../core/util/helper';
-import {ActivatedRoute, ActivatedRouteSnapshot, Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import * as moment from 'moment';
 
 @Component({
     selector: 'mark',
@@ -22,9 +23,11 @@ export class MarkComponent implements OnInit {
     }
 
     ngOnInit() {
-        this._semesterService.readAll().map(semesters => semesters.map(sem => this._semesterService.mapDates(sem)).sort((first, second) => dateComparator(first.validFrom, second.validFrom)))
+        this._semesterService.readAll().map(semesters => semesters.map(sem => this._semesterService.mapDates(sem)).sort((first, second) => momentComparator(first.validFrom, second.validFrom)))
             .subscribe(semesters => {
-                this.currentSemester = semesters.find(sem => DateUtil.isBetweenDaysInclusive(new Date(), sem.validFrom as Date, sem.validTo as Date));
+                this.currentSemester = semesters.find(sem => DateUtil.isBetweenDaysInclusive(moment(),
+                    DateUtil.transformToMomentIfPossible(sem.validFrom), DateUtil.transformToMomentIfPossible(sem.validTo)));
+
                 this.semesters = isTruthy(this.currentSemester) ? Util.moveToFirst(semesters, this.currentSemester) : semesters;
                 if (!this._route.snapshot.children.some(route => route.paramMap.has('semesterId'))) {
                     this._initMarkSemesterView();

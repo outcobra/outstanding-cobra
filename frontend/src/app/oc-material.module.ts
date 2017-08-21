@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {
+    DateAdapter,
     MD_DATE_FORMATS,
     MdButtonModule,
     MdButtonToggleModule,
@@ -24,6 +25,7 @@ import {
     MdTooltipModule
 } from '@angular/material';
 import {OC_DATE_FORMATS} from './core/common/oc-date-formats';
+import {OCMomentDateAdapter} from './core/common/oc-moment-date-adapter';
 
 @NgModule({
     imports: [
@@ -73,6 +75,10 @@ import {OC_DATE_FORMATS} from './core/common/oc-date-formats';
         MdCoreModule
     ],
     providers: [
+        {
+            provide: DateAdapter,
+            useClass: OCMomentDateAdapter
+        },
         {
             provide: MD_DATE_FORMATS,
             useValue: OC_DATE_FORMATS

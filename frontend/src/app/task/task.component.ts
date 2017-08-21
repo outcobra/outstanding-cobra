@@ -9,12 +9,13 @@ import {TaskCreateUpdateDialog} from './task-create-update-dialog/task-create-up
 import {Util} from '../core/util/util';
 import {ViewMode} from '../core/common/view-mode';
 import {Observable} from 'rxjs/Observable';
-import {SMALL_DIALOG} from '../core/util/const';
+import {MEDIUM_DIALOG} from '../core/util/const';
 import {and} from '../core/util/helper';
 import {ResponsiveHelperService} from '../core/services/ui/responsive-helper.service';
 import {NotificationWrapperService} from '../core/notifications/notification-wrapper.service';
 import {OCMediaChange} from '../core/services/ui/oc-media-change';
 import {slideUpDownAnimation} from '../core/animations/animations';
+import {Subject} from 'rxjs/Subject';
 
 @Component({
     selector: 'task',
@@ -25,7 +26,6 @@ import {slideUpDownAnimation} from '../core/animations/animations';
 })
 export class TaskComponent implements OnInit, AfterViewInit {
     private _filterForm: FormGroup;
-    private _searchForm: FormGroup;
     private _filteredTasks: TaskDto[];
     private _filterData: SubjectFilterDto;
     private _filterShown: boolean;
@@ -34,6 +34,8 @@ export class TaskComponent implements OnInit, AfterViewInit {
     private _tasks: TaskDto[];
 
     private _taskCreateUpdateDialog: MdDialogRef<TaskCreateUpdateDialog>;
+
+    public search$: Subject<string> = new Subject();
 
     constructor(private _taskService: TaskService,
                 private _dialogService: MdDialog,
@@ -85,9 +87,6 @@ export class TaskComponent implements OnInit, AfterViewInit {
     }
 
     private _initForms() {
-        this._searchForm = this._formBuilder.group({
-            searchTerm: ['']
-        });
         this._filterForm = this._formBuilder.group({
             subjectId: [''],
             finished: [true]
@@ -95,10 +94,11 @@ export class TaskComponent implements OnInit, AfterViewInit {
     }
 
     private _initFormChangeSubscriptions() {
-        this._searchForm.get('searchTerm').valueChanges
+        this.search$
             .debounceTime(300)
             .distinctUntilChanged()
             .subscribe(searchTerm => this._filteredTasks = Util.cloneArray(this.search(searchTerm)));
+        // TODO include normal filter too
 
         this._filterForm.valueChanges
             .subscribe(() => this.doFilter());
@@ -107,7 +107,7 @@ export class TaskComponent implements OnInit, AfterViewInit {
     //endregion
 
     public addTask() {
-        this._taskCreateUpdateDialog = this._dialogService.open(TaskCreateUpdateDialog, this._responsiveHelperService.getMobileOrGivenDialogConfig(SMALL_DIALOG));
+        this._taskCreateUpdateDialog = this._dialogService.open(TaskCreateUpdateDialog, this._responsiveHelperService.getMobileOrGivenDialogConfig(MEDIUM_DIALOG));
         this._taskCreateUpdateDialog.componentInstance.init(ViewMode.NEW, null);
         this._taskCreateUpdateDialog.afterClosed()
             .flatMap((value) => {
@@ -177,27 +177,13 @@ export class TaskComponent implements OnInit, AfterViewInit {
         return and(predicates);
     }
 
-    public resetFilter() {
-        this._filtered = false;
-        this._filterForm.reset();
-        this._filteredTasks = Util.cloneArray(this._tasks);
-    }
-
     public doFilter() {
         this._filtered = true;
         this._filteredTasks = Util.cloneArray(this._filterTasks(this._tasks));
     }
 
-    public changeFilterVisibility() {
-        this._filterShown = !this._filterShown;
-    }
-
     get filterForm(): FormGroup {
         return this._filterForm;
-    }
-
-    get searchForm(): FormGroup {
-        return this._searchForm;
     }
 
     get filteredTasks(): TaskDto[] {
@@ -208,9 +194,9 @@ export class TaskComponent implements OnInit, AfterViewInit {
         return this._filterData;
     }
 
-    get filterShown(): boolean {
-        return this._filterShown;
+    get tasks(): TaskDto[] {
+        return this._tasks;
     }
 
-    //endregion
+//endregion
 }

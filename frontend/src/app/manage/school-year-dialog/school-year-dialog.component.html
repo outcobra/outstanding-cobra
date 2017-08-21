@@ -3,6 +3,7 @@
     <h1 md-dialog-title *ngIf="!isEditMode()">{{ 'i18n.modules.manage.schoolYear.add' | translate }}</h1>
 </div>
 <form [formGroup]="schoolYearForm" (submit)="submit()">
+    {{schoolYearForm.get('validFrom').errors |json }}
     <div class="dialog-body" md-dialog-content>
         <div class="form-group">
             <md-input-container>
@@ -27,9 +28,12 @@
                     <ng-template [ngIf]="schoolYearForm.get('validFrom').hasError('required')">
                         {{ 'i18n.common.form.error.required' | translate }}
                     </ng-template>
+                    <ng-template [ngIf]="schoolYearForm.get('validFrom').hasError('date')">
+                        {{ 'i18n.common.form.error.datePattern' | translate }}
+                    </ng-template>
                 </md-error>
             </md-input-container>
-            <md-datepicker #validFromPicker [touchUi]="isMobile()"></md-datepicker>
+            <md-datepicker #validFromPicker [touchUi]="isMobile()" pattern=""></md-datepicker>
         </div>
         <div class="form-group">
             <md-input-container>
@@ -42,6 +46,9 @@
                 <md-error *ngIf="schoolYearForm.get('validTo').invalid && schoolYearForm.get('validTo').touched">
                     <ng-template [ngIf]="schoolYearForm.get('validTo').hasError('required')">
                         {{ 'i18n.common.form.error.required' | translate }}
+                    </ng-template>
+                    <ng-template [ngIf]="schoolYearForm.get('validTo').hasError('date')">
+                        {{ 'i18n.common.form.error.datePattern' | translate }}
                     </ng-template>
                 </md-error>
             </md-input-container>

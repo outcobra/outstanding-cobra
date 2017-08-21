@@ -16,8 +16,8 @@ export class SemesterService extends AppCrudService<SemesterDto> {
     }
 
     public mapDates(semester: SemesterDto): SemesterDto {
-        semester.validFrom = DateUtil.transformToDateIfPossible(semester.validFrom);
-        semester.validTo = DateUtil.transformToDateIfPossible(semester.validTo);
+        semester.validFrom = DateUtil.transformToMomentIfPossible(semester.validFrom);
+        semester.validTo = DateUtil.transformToMomentIfPossible(semester.validTo);
         return semester;
     }
 }

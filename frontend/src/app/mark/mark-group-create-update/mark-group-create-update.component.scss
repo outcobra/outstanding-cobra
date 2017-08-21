@@ -1,3 +1,3 @@
-:host-context(oc-app.oc-mobile) .mark-group-children /deep/ .mat-list-item-content {
+:host-context(oc-app.oc-mobile) .mark-group-children ::ng-deep .mat-list-item-content {
     height: 80px !important;
 }

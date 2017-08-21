@@ -32,36 +32,36 @@ mark-weight-updater {
         }
     }
 
-    .update-container {
-        position: absolute;
-        z-index: 990;
-        right: 0;
-        width: $width;
-        @include mat-elevation(2);
-        .input-container {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            input {
-                font-size: 1em;
-                box-sizing: border-box;
-                outline: none;
-                height: 36px;
-                border: none;
-                width: calc(100% - 36px);
-                background-color: $background-white;
-                padding-left: 5px;
-            }
-            md-icon {
-                width: 36px;
-                text-align: center;
-            }
+}
+.update-container {
+    position: absolute;
+    z-index: 990;
+    right: 0;
+    width: $width;
+    @include mat-elevation(2);
+    .input-container {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        input {
+            font-size: 1em;
+            box-sizing: border-box;
+            outline: none;
+            height: 36px;
+            border: none;
+            width: calc(100% - 36px);
+            background-color: $background-white;
+            padding-left: 5px;
         }
-
-        .input-container,
-        .control-panel,
-        .input-container input{
+        md-icon {
+            width: 36px;
+            text-align: center;
         }
-        background-color: $background-white;
     }
+
+    .input-container,
+    .control-panel,
+    .input-container input{
+    }
+    background-color: $background-white;
 }

@@ -1,18 +1,19 @@
 import {OCValidators} from './oc-validators';
 import * as moment from 'moment/moment';
 import {DateUtil} from './date-util.service';
+import {Moment} from 'moment';
 
 describe('OCValidators', () => {
 
     describe('isBeforeOrSameDay', () => {
-        let control: { value: Date };
+        let control: { value: Moment };
 
         beforeEach(() => {
-            control = {value: new Date()};
+            control = {value: moment()};
         });
 
         it('should pass validation with date before', () => {
-            let isBeforeOrEqualDayFn = OCValidators.isBeforeOrSameDay(moment().add(1, 'days').toDate());
+            let isBeforeOrEqualDayFn = OCValidators.isBeforeOrSameDay(moment().add(1, 'days'));
 
             let result = isBeforeOrEqualDayFn.call(null, control);
             expect(result).toBeNull();
@@ -26,7 +27,7 @@ describe('OCValidators', () => {
         });
 
         it('should return after date error', () => {
-            let validatorDate = moment().subtract(1, 'days').toDate();
+            let validatorDate = moment().subtract(1, 'days');
             let isBeforeOrEqualDayFn = OCValidators.isBeforeOrSameDay(validatorDate);
 
             let result = isBeforeOrEqualDayFn.call(null, control);
@@ -37,14 +38,14 @@ describe('OCValidators', () => {
     });
 
     describe('isAfterOrSameDay', () => {
-        let control: { value: Date };
+        let control: { value: Moment };
 
         beforeEach(() => {
-            control = {value: new Date()};
+            control = {value: moment()};
         });
 
         it('should pass validation with date after', () => {
-            let isAfterOrEqualDayFn = OCValidators.isAfterOrSameDay(moment().subtract(1, 'days').toDate());
+            let isAfterOrEqualDayFn = OCValidators.isAfterOrSameDay(moment().subtract(1, 'days'));
 
             let result = isAfterOrEqualDayFn.call(null, control);
             expect(result).toBeNull();
@@ -58,7 +59,7 @@ describe('OCValidators', () => {
         });
 
         it('should return before date error', () => {
-            let validatorDate = moment().add(1, 'days').toDate();
+            let validatorDate = moment().add(1, 'days');
             let isAfterOrEqualDayFn = OCValidators.isAfterOrSameDay(validatorDate);
 
             let result = isAfterOrEqualDayFn.call(null, control);
@@ -69,15 +70,15 @@ describe('OCValidators', () => {
     });
 
     describe('isBetweenDaysInclusive', () => {
-        let control: { value: Date };
+        let control: { value: Moment };
 
         beforeEach(() => {
-            control = {value: new Date()};
+            control = {value: moment()};
         });
 
         it('should pass validation with date in middle', () => {
-            let lowerBound = moment().subtract(7, 'days').toDate();
-            let upperBound = moment().add(7, 'days').toDate();
+            let lowerBound = moment().subtract(7, 'days');
+            let upperBound = moment().add(7, 'days');
 
             let isBetweenDayFn = OCValidators.isBetweenDaysInclusive(lowerBound, upperBound);
             let result = isBetweenDayFn.call(null, control);
@@ -85,8 +86,8 @@ describe('OCValidators', () => {
         });
 
         it('should pass validation with date on lower Bound', () => {
-            let lowerBound = moment().subtract(7, 'days').toDate();
-            let upperBound = moment().add(7, 'days').toDate();
+            let lowerBound = moment().subtract(7, 'days');
+            let upperBound = moment().add(7, 'days');
 
             let isBetweenDayFn = OCValidators.isBetweenDaysInclusive(lowerBound, upperBound);
             let result = isBetweenDayFn.call(null, {value: lowerBound});
@@ -94,10 +95,10 @@ describe('OCValidators', () => {
         });
 
         it('should pass validation with date on lower Bound', () => {
-            let lowerBound = moment().subtract(7, 'days').toDate();
-            let upperBound = moment().add(7, 'days').toDate();
+            let lowerBound = moment().subtract(7, 'days');
+            let upperBound = moment().add(7, 'days');
 
-            let controlValue = moment(lowerBound).subtract(1, 'days').toDate();
+            let controlValue = moment(lowerBound).subtract(1, 'days');
 
             let isBetweenDayFn = OCValidators.isBetweenDaysInclusive(lowerBound, upperBound);
             let result = isBetweenDayFn.call(null, {value: controlValue});

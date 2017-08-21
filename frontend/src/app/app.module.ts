@@ -1,8 +1,7 @@
 import {APP_INITIALIZER, ErrorHandler, Injector, NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
-import {Http, HttpModule} from '@angular/http';
-import {MdNativeDateModule} from '@angular/material';
+import {HttpModule} from '@angular/http';
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import {AppComponent} from './app.component';
 import {ConfigService} from './core/config/config.service';
@@ -22,6 +21,7 @@ import {MarkModule} from './mark/mark.module';
 import {ExamModule} from './exam/exam.module';
 import {PipeModule} from './shared/pipe.module';
 import {FallbackComponent} from './main/fallback/fallback.component';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 
 @NgModule({
     declarations: [
@@ -33,6 +33,9 @@ import {FallbackComponent} from './main/fallback/fallback.component';
         BrowserAnimationsModule,
         FormsModule,
         HttpModule,
+        HttpClientModule,
+        SimpleNotificationsModule.forRoot(),
+        OCMaterialModule,
         SharedModule,
         MainModule,
         ManageModule,
@@ -40,17 +43,14 @@ import {FallbackComponent} from './main/fallback/fallback.component';
         MarkModule,
         ExamModule,
         FlexLayoutModule,
-        SimpleNotificationsModule.forRoot(),
         CoreModule,
         PipeModule,
-        OCMaterialModule,
-        MdNativeDateModule,
         AppRoutingModule,
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
                 useFactory: translateFactory,
-                deps: [Http]
+                deps: [HttpClient]
             }
         })
     ],

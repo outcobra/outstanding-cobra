@@ -12,7 +12,8 @@ export class NotificationWrapperService {
         showProgressBar: true,
         lastOnBottom: true,
         clickToClose: true,
-        animate: 'fromRight'
+        animate: 'fromRight',
+        theClass: 'oc-notification'
     };
 
     private _icns: Icons = appIcons; // can't name it icons because of super class

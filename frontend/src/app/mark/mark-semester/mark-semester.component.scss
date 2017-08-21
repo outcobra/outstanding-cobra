@@ -11,6 +11,10 @@
 mark-semester {
     position: relative;
 
+    oc-collapsible-header {
+        height: $mark-collapsible-header-height;
+    }
+
     .mat-subheader {
         padding: 5px;
     }
@@ -56,10 +60,6 @@ mark-semester {
     }
 
     oc-collapsible-header {
-        &:hover {
-            background-color: $hover-light;
-        }
-
         &.two-line-header {
             height: 80px !important;
         }
