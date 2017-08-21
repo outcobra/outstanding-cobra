@@ -4,7 +4,7 @@ import {ExamDto} from './model/exam.dto';
 import {NotificationWrapperService} from '../core/notifications/notification-wrapper.service';
 import {ExamTaskDto} from './model/exam.task.dto';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {ExamCreateUpdateDialog} from './create-update-dialog/exam-create-update-dialog.component';
+import {ExamCreateUpdateDialog} from './exam-create-update-dialog/exam-create-update-dialog.component';
 import {MdDialog} from '@angular/material';
 import {ResponsiveHelperService} from '../core/services/ui/responsive-helper.service';
 import {MEDIUM_DIALOG} from '../core/util/const';
@@ -22,6 +22,8 @@ import {Subject} from 'rxjs/Subject';
 import {MarkService} from 'app/mark/service/mark.service';
 import {ViewMode} from '../core/common/view-mode';
 import {slideUpDownAnimation} from '../core/animations/animations';
+import * as moment from 'moment';
+import {Moment} from 'moment';
 
 @Component({
     selector: 'exam',
@@ -41,14 +43,14 @@ export class ExamComponent implements OnInit, AfterViewInit {
     private _filterForm: FormGroup;
     private _filterData: SubjectFilterDto;
     private _filterShown: boolean;
-    private _today: Date = new Date();
+    private _today: Moment = moment();
 
     public addMark$: Subject<ExamDto> = new Subject();
 
     public selectFilter = {
         upcoming: {
             displayName: 'i18n.modules.exam.filter.showPending',
-            filter: (exam: ExamDto) => DateUtil.isBeforeOrSameDay(this._today, DateUtil.transformToDateIfPossible(exam.date))
+            filter: (exam: ExamDto) => DateUtil.isBeforeOrSameDay(this._today, DateUtil.transformToMomentIfPossible(exam.date))
         },
         currentSemester: {
             displayName: 'i18n.modules.exam.filter.activeSemesters',
@@ -143,6 +145,7 @@ export class ExamComponent implements OnInit, AfterViewInit {
                     .subscribe((completeExam: ExamDto) => {
                         this._allExams.push(completeExam);
                         this._sortExams();
+                        this._displayForFilter();
                         this._notificationService.success('i18n.modules.exam.notification.add.title', 'i18n.modules.exam.notification.add.message');
                     });
             });

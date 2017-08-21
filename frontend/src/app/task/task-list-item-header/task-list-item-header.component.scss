@@ -1,0 +1,47 @@
+@import '../../../sass/color-variables';
+
+task-list-item-header {
+    width: 100%;
+
+    .task-list-item-header-wrapper {
+        display: flex;
+        align-items: center;
+        height: 56px;
+        padding: 0 12px;
+
+        .subject-letter-icon {
+            border-radius: 50%;
+            line-height: 32px;
+            font-size: 1.5em;
+            text-align: center;
+            color: $primary-light;
+            width: 32px;
+            height: 32px;
+            margin: 8px 8px 8px 0;
+            box-sizing: border-box;
+        }
+
+        .task-header-title {
+            display: flex;
+            flex-direction: column;
+
+            .task-heading {
+                font-size: 1.2em;
+            }
+
+            .task-subheading {
+                font-size: 0.9em;
+                color: $secondary-dark
+            }
+        }
+
+        .show-on-hover {
+            transition: visibility .2s ease-in-out;
+            visibility: hidden;
+        }
+
+        &:hover .show-on-hover {
+            visibility: visible;
+        }
+    }
+}

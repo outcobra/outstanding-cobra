@@ -43,6 +43,14 @@ export function getIfTruthy(object: any, prop: string, defaultValue: any = null)
     return defaultValue;
 }
 
+export function isString(toCheck: any) {
+    return typeof toCheck == 'string';
+}
+
+export function isDate(toCheck: any) {
+    return toCheck instanceof Date;
+}
+
 /**
  * combines multiple {Predicate}s to an and chain of {Predicate}s
  * returns {Predicate} that evaluates all {Predicate}s in the param

@@ -15,7 +15,7 @@ declare let Auth0Lock: any;
 @Injectable()
 export class Auth0AuthService implements AuthService {
     private _auth0Config: any;
-    private readonly _defaultRedirectRoute = '/dashboard';
+    private readonly _defaultRedirectRoute = '/manage';
     private _lock;
 
     constructor(private _config: ConfigService,

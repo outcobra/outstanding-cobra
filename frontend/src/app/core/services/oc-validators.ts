@@ -1,6 +1,10 @@
 import {AbstractControl, FormGroup, ValidatorFn} from '@angular/forms';
 import * as moment from 'moment';
+import {Moment} from 'moment';
 import {DateUtil} from './date-util.service';
+import {OCMomentDateAdapter} from '../common/oc-moment-date-adapter';
+import {OC_DATE_FORMATS} from '../common/oc-date-formats';
+import {isNull} from 'util';
 
 export class OCValidators {
 
@@ -11,7 +15,7 @@ export class OCValidators {
      * @param date that should be before the controls value
      * @returns {(control:AbstractControl)=>{[p: string]: any}}
      */
-    public static isBeforeOrSameDay(date: Date): ValidatorFn {
+    public static isBeforeOrSameDay(date: Moment): ValidatorFn {
         return (control: AbstractControl): { [key: string]: any } => {
             if (control.value && !DateUtil.isBeforeOrSameDay(control.value, date)) {
                 return {
@@ -29,7 +33,7 @@ export class OCValidators {
      * @param date that should be after the controls value
      * @returns {(control:AbstractControl)=>{[p: string]: any}}
      */
-    public static isAfterOrSameDay(date: Date): ValidatorFn {
+    public static isAfterOrSameDay(date: Moment): ValidatorFn {
         return (control: AbstractControl): { [key: string]: any } => {
             if (control.value && !DateUtil.isAfterOrSameDay(control.value, date)) {
                 return {
@@ -80,12 +84,25 @@ export class OCValidators {
      * @param upperBound date
      * @returns {(control:AbstractControl)=>{[p: string]: any}}
      */
-    public static isBetweenDaysInclusive(lowerBound: Date, upperBound: Date) {
+    public static isBetweenDaysInclusive(lowerBound: Moment, upperBound: Moment) {
         return (control: AbstractControl): { [key: string]: any } => {
             let date = control.value;
             if (date && !DateUtil.isBetweenDaysInclusive(date, lowerBound, upperBound)) {
                 return {
                     'isBetweenDaysInclusive': {'actualDate': date, 'lowerBound': lowerBound, 'upperBound': upperBound}
+                }
+            }
+            return null;
+        }
+    }
+
+    public static date(): ValidatorFn {
+        return (control: AbstractControl): { [key: string]: any } => {
+            let dateAdapter = new OCMomentDateAdapter();
+            let date = dateAdapter.parse(control.value, OC_DATE_FORMATS.parse.dateInput, true);
+            if (isNull(date)) {
+                return {
+                    'date': {'requiredFormat': OC_DATE_FORMATS.parse.dateInput}
                 }
             }
             return null;

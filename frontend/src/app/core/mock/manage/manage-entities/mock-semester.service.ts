@@ -10,8 +10,8 @@ export class MockSemesterService extends MockCrudService<SemesterDto> {
         id: 1,
         schoolYearId: 1,
         name: 'semester1',
-        validFrom: moment().subtract(7, 'days').toDate(),
-        validTo: moment().add(1, 'months').toDate(),
+        validFrom: moment().subtract(7, 'days'),
+        validTo: moment().add(1, 'months'),
         subjects: [MockSubjectService.SUBJECT1_OF_SEMESTER1]
     };
 
@@ -19,8 +19,8 @@ export class MockSemesterService extends MockCrudService<SemesterDto> {
         id: 2,
         schoolYearId: 2,
         name: 'semester2',
-        validFrom: moment().subtract(7, 'days').toDate(),
-        validTo: moment().add(1, 'months').toDate(),
+        validFrom: moment().subtract(7, 'days'),
+        validTo: moment().add(1, 'months'),
         subjects: [MockSubjectService.SUBJECT1_OF_SEMESTER2]
     };
 

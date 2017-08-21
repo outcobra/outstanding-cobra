@@ -31,9 +31,9 @@
         @include oc-color($accent, darker);
     }
 
-    /*.text-warn {
+    .text-warn {
         color: mat-color($warn);
-    }*/
+    }
 
     .text-accent {
         color: mat-color($accent);

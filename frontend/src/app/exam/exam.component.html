@@ -7,13 +7,14 @@
 <div fxLayout fxLayoutAlign="center start" *ngIf="allExams.length > 0; else empty">
     <div class="container" fxFlex fxFlex.gt-sm="960px">
         <md-card class="oc-card">
-            <oc-filter-search (onSearch)="search($event)">
+            <oc-filter-search (search)="search($event)">
                 <form ocFilter [formGroup]="filterForm">
                     <div>
                         <md-select formControlName="subjectId"
                                    [placeholder]="'i18n.modules.exam.filter.subject' | translate"
                                    floatPlaceholder="never">
-                            <md-optgroup *ngFor="let schoolClass of filterData.schoolClassSubjects" [label]="schoolClass.schoolClass.normalizedName">
+                            <md-optgroup *ngFor="let schoolClass of filterData.schoolClassSubjects"
+                                         [label]="schoolClass.schoolClass.normalizedName">
                                 <md-option *ngFor="let subject of schoolClass.subjects" [value]="subject.id">
                                     {{ subject.name }}
                                 </md-option>
@@ -41,9 +42,9 @@
             <md-accordion displayMode="flat" *ngIf="displayedExams.length > 0; else emptyFilter">
                 <md-expansion-panel *ngFor="let exam of displayedExams">
                     <md-expansion-panel-header>
-                <span class="subject-letter-icon"
-                      [style.background-color]="'#' + exam.subject.color.hex"
-                      [mdTooltip]="exam.subject.name">{{ exam.subject.name | slice:0:1 | uppercase }}</span>
+                        <span class="subject-letter-icon"
+                              [style.background-color]="'#' + exam.subject.color.hex"
+                              [mdTooltip]="exam.subject.name">{{ exam.subject.name | slice:0:1 | uppercase }}</span>
                         <span>{{ exam.name }}</span>
                     </md-expansion-panel-header>
                     <exam-list-item [exam]="exam" (delete)="deleteExam($event)" (edit)="editExam($event)"

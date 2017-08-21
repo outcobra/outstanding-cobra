@@ -12,6 +12,7 @@ import {ResponsiveHelperService} from '../../core/services/ui/responsive-helper.
 import {DateUtil} from '../../core/services/date-util.service';
 import {MarkDto} from 'app/mark/model/mark.dto';
 import {Util} from '../../core/util/util';
+import * as moment from 'moment';
 
 type EditMark = {
     subjectId: number,
@@ -59,7 +60,8 @@ export class MarkSemesterComponent implements OnInit {
         this._activatedRoute.data
             .subscribe((sm: { semesterMark: SemesterMarkDto }) => {
                 this.semesterMark = sm.semesterMark;
-                this._currentSemester = DateUtil.isBetweenDaysInclusive(new Date(), this.semesterMark.validFrom, this.semesterMark.validTo);
+                this._currentSemester = DateUtil.isBetweenDaysInclusive(moment(), DateUtil.transformToMomentIfPossible(this.semesterMark.validFrom),
+                    DateUtil.transformToMomentIfPossible(this.semesterMark.validTo));
             });
         this._activatedRoute.queryParamMap
             .filter(params => isNotEmpty(params.keys) && params.has('subjectId'))

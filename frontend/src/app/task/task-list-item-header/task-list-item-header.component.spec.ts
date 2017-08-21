@@ -1,34 +1,35 @@
-/* tslint:disable:no-unused-variable */
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {TaskListItemComponent} from './task-list-item.component';
+
+import {TaskListItemHeaderComponent} from './task-list-item-header.component';
 import {TestModule} from '../../core/mock/test.module';
-import {RouterTestingModule} from '@angular/router/testing';
+import {OCUiModule} from '../../oc-ui/oc-ui.module';
 import {MockTaskService} from '../../core/mock/task/mock-task.service';
 
-describe('TaskListItemComponent', () => {
-    let component: TaskListItemComponent;
-    let fixture: ComponentFixture<TaskListItemComponent>;
+describe('TaskListItemHeaderComponent', () => {
+    let component: TaskListItemHeaderComponent;
+    let fixture: ComponentFixture<TaskListItemHeaderComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
-                TaskListItemComponent
+                TaskListItemHeaderComponent
             ],
             imports: [
-                RouterTestingModule,
-                TestModule
+                TestModule,
+                OCUiModule
             ]
-        }).compileComponents();
+        })
+            .compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(TaskListItemComponent);
+        fixture = TestBed.createComponent(TaskListItemHeaderComponent);
         component = fixture.componentInstance;
         component.task = MockTaskService.TASK1;
         fixture.detectChanges();
     });
 
-    it('should create', () => {
+    it('should be created', () => {
         expect(component).toBeTruthy();
     });
 });
