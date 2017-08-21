@@ -90,7 +90,7 @@ tailrec fun ParentLinked.followToUser(iterationCount: Int = 0): User {
  * determines if the [BaseMarkDto] is valid or not
  * @throws [ValidationException] if the mark is invalid
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.2.0
  */
 fun BaseMarkDto.validate() {
     var valid = id == 0L

@@ -6,7 +6,7 @@ import outcobra.server.service.base.BaseService
 
 /**
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.2.0
  */
 interface MarkGroupService : BaseService<MarkGroupDto> {
     fun getGroupBySubject(subjectId: Long): MarkGroupDto

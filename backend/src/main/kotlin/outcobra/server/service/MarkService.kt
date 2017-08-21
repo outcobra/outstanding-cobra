@@ -6,7 +6,7 @@ import outcobra.server.service.base.BaseService
 
 /**
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.2.0
  */
 interface MarkService : BaseService<MarkValueDto> {
     fun readAllByMarkGroup(markGroupId: Long): List<MarkValueDto>
