@@ -6,7 +6,7 @@ import {Http} from '@angular/http';
 export class ConfigService {
     private _env: Object;
     private _config: Object;
-    private _variableMap: {
+    private _variableMap = {
         '{{this-host}}': () => window.location.host
     };
 
