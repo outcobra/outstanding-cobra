@@ -39,7 +39,6 @@ export class SchoolClassDialog extends ParentLinkedCreateUpdateComponent<SchoolC
         }
     }
 
-
     get schoolClassForm(): FormGroup {
         return this._schoolClassForm;
     }

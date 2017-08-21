@@ -5,7 +5,7 @@
     <oc-empty hint="i18n.modules.exam.empty.hint"></oc-empty>
 </ng-template>
 <div fxLayout fxLayoutAlign="center start" *ngIf="allExams.length > 0; else empty">
-    <div class="container" fxFlex fxFlex.gt-sm="960px">
+    <div class="container middle-container" fxFlex>
         <md-card class="oc-card">
             <oc-filter-search (search)="search($event)">
                 <form ocFilter [formGroup]="filterForm">

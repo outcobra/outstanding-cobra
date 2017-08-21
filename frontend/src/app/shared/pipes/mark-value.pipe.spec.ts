@@ -1,7 +1,6 @@
 import {MarkValuePipe} from './mark-value.pipe';
-import {inject, TestBed} from '@angular/core/testing';
+import {async, inject, TestBed} from '@angular/core/testing';
 import {DecimalPipe} from '@angular/common';
-import {async} from 'q';
 import {PipeModule} from '../pipe.module';
 
 describe('MarkValuePipe', () => {

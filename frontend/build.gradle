@@ -1,21 +1,20 @@
 plugins {
-    id "com.moowork.node" version "1.0.1"
+    id "com.moowork.node" version "1.2.0"
 }
 
 node {
-    version = '7.4.0'
+    version = '8.4.0'
     download = true
 }
 
 task ngBuild(type: YarnTask, dependsOn: [yarn_install]) {
 //    enabled = false
-    args = ['run', 'ng', 'build', '--', '--env=staging', '--target=production', '-sm']
+    args = ['run', 'ng', 'build', '--', '--prod', '-sm']
 }
 
 task assemble(dependsOn: ngBuild)
 
 task build(dependsOn: assemble)
-
 
 task ngTest(type: YarnTask, dependsOn: yarn_install) {
     args = ['run', 'ng', 'test', '--', '--watch=false', '--single-run', '--browser=PhantomJS']

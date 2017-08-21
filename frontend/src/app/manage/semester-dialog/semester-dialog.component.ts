@@ -34,11 +34,11 @@ export class SemesterDialog extends ParentLinkedCreateUpdateComponent<SemesterDt
                 name: [this.getParamOrDefault('name'), Validators.required],
                 validFrom: [
                     DateUtil.transformToMomentIfPossible(this.getParamOrDefault('validFrom')),
-                    Validators.compose([Validators.required, OCValidators.isAfterOrSameDay(this.parentValidFrom), OCValidators.date()])
+                    Validators.compose([Validators.required, OCValidators.isAfterOrSameDay(this.parentValidFrom), OCValidators.isBeforeOrSameDay(this.parentValidTo), OCValidators.date()])
                 ],
                 validTo: [
                     DateUtil.transformToMomentIfPossible(this.getParamOrDefault('validTo')),
-                    Validators.compose([Validators.required, OCValidators.isBeforeOrSameDay(this.parentValidTo), OCValidators.date()])
+                    Validators.compose([Validators.required, OCValidators.isBeforeOrSameDay(this.parentValidTo), OCValidators.isAfterOrSameDay(this.parentValidFrom), OCValidators.date()])
                 ]
             },
             {

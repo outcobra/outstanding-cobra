@@ -72,7 +72,10 @@ export class Auth0AuthService implements AuthService {
                                 this._router.navigate([authResult.state]);
                             }
 
-                        Raven.setUserContext(<any>user);
+                        Raven.setUserContext({
+                            id: user.auth0Id,
+                            username: user.username
+                        });
                         }
                     );
             });
