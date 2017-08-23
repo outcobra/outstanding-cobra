@@ -22,7 +22,7 @@
         <img routerLink="/"
              class="oc-title-logo"
              src="/assets/img/oc_logo_stroke_combined_blue_inverted.svg">
-
+        <span class="oc-title-beta">Beta</span>
         <span class="toolbar-fill-space"></span>
         <button md-button *ngIf="auth.isLoggedIn(); else notLoggedIn" (click)="logout()">Logout</button>
         <ng-template #notLoggedIn>
