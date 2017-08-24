@@ -7,10 +7,12 @@ import {I18nMarkdownComponent} from './shared/components/i18n-markdown/i18n-mark
     imports: [
         RouterModule.forRoot([
             {
-                path: 'about',
+                path: 'features',
                 component: I18nMarkdownComponent,
                 data: {
-                    path: '/assets/docs/test'
+                    path: '/assets/docs/features',
+                    displayMode: 'card',
+                    wrapperClasses: ['container', 'middle-container', 'features-text']
                 }
             },
             {
