@@ -6,7 +6,7 @@ Outcobra ist: «Ein Schul-Management-Tool von Schülern für Schüler»
 
 Es soll dir helfen einfach und digital den Überblick über dein Schul-Leben zu behalten.
 
-Hinter Outcobra stehen drei junge Entwickler (in Ausbildung) die sich an einer neuen Herausforderung stellen wollten. Falls du uns näher kennen lernen willst findest du [hier ein kurzes Profil](https://www.outcobra.school/devs).
+Hinter Outcobra stehen drei junge Entwickler (in Ausbildung) die sich an einer neuen Herausforderung stellen wollten. Falls du uns näher kennen lernen willst findest du [hier ein kurzes Profil](/devs).
 
 ## Der Name
 

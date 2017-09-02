@@ -29,6 +29,15 @@ import {I18nMarkdownComponent} from '../shared/components/i18n-markdown/i18n-mar
                             displayMode: 'card',
                             wrapperClasses: ['container', 'middle-container']
                         }
+                    },
+                    {
+                        path: 'devs',
+                        component: I18nMarkdownComponent,
+                        data: {
+                            path: '/assets/docs/profiles',
+                            displayMode: 'card',
+                            wrapperClasses: ['container', 'middle-container']
+                        }
                     }
                 ]
             },
