@@ -437,7 +437,8 @@
           "title": "Invalid date",
           "message": "The given dates are outside the parent timespan"
         },
-        "mark": "The value of the given mark is invalid"
+        "mark": "The value of the given mark is invalid",
+        "relogin": "Your user is not in the database. Please re-login"
       },
       "fallback": {
         "linkTitle": "Page not found",
