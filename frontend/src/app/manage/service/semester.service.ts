@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpInterceptor} from '../../core/http/http-interceptor';
-import {Observable} from 'rxjs';
+import {Observable} from 'rxjs/Observable';
 import {SemesterDto} from '../model/manage.dto';
 import {AppCrudService} from '../../core/services/core/app-crud.service';
 import {DateUtil} from '../../core/services/date-util.service';
@@ -16,8 +16,8 @@ export class SemesterService extends AppCrudService<SemesterDto> {
     }
 
     public mapDates(semester: SemesterDto): SemesterDto {
-        semester.validFrom = DateUtil.transformToDateIfPossible(semester.validFrom);
-        semester.validTo = DateUtil.transformToDateIfPossible(semester.validTo);
+        semester.validFrom = DateUtil.transformToMomentIfPossible(semester.validFrom);
+        semester.validTo = DateUtil.transformToMomentIfPossible(semester.validTo);
         return semester;
     }
 }

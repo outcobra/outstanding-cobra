@@ -21,39 +21,63 @@
                        required
                        [mdDatepicker]="validFromPicker"
                        [min]="parentValidFrom"
+                       [max]="parentValidTo"
                        [placeholder]="'i18n.common.label.validFrom' | translate"
                        formControlName="validFrom">
-                <button mdSuffix [mdDatepickerToggle]="validFromPicker" type="button"></button>
-                <md-error *ngIf="semesterForm.get('validFrom').invalid && semesterForm.get('validFrom').touched">
+                <button mdSuffix
+                        [mdDatepickerToggle]="validFromPicker"
+                        type="button">
+                </button>
+                <md-error>
                     <ng-template [ngIf]="semesterForm.get('validFrom').hasError('required')">
                         {{ 'i18n.common.form.error.required' | translate }}
                     </ng-template>
-                    <ng-template [ngIf]="semesterForm.get('validFrom').hasError('isAfterOrSameDay')">{{ getErrorText('validFrom',
-                        'isAfterOrSameDay', 'afterDate') }}
+                    <ng-template [ngIf]="semesterForm.get('validFrom').hasError('isBeforeOrSameDay')">
+                        {{ getErrorText('validFrom', 'isBeforeOrSameDay', 'beforeDate') }}
+                    </ng-template>
+                    <ng-template [ngIf]="semesterForm.get('validFrom').hasError('isAfterOrSameDay')">
+                        {{ getErrorText('validFrom', 'isAfterOrSameDay', 'afterDate') }}
+                    </ng-template>
+                    <ng-template [ngIf]="semesterForm.get('validFrom').hasError('date')">
+                        {{ 'i18n.common.form.error.datePattern' | translate }}
                     </ng-template>
                 </md-error>
             </md-input-container>
-            <md-datepicker #validFromPicker [touchUi]="isMobile()"></md-datepicker>
+            <md-datepicker #validFromPicker
+                           [touchUi]="isMobile()">
+            </md-datepicker>
         </div>
         <div class="form-group">
             <md-input-container>
                 <input mdInput
                        required
                        [mdDatepicker]="validToPicker"
+                       [min]="parentValidFrom"
                        [max]="parentValidTo"
                        [placeholder]="'i18n.common.label.validTo' | translate"
                        formControlName="validTo">
-                <button mdSuffix [mdDatepickerToggle]="validToPicker" type="button"></button>
-                <md-error *ngIf="semesterForm.get('validTo').invalid && semesterForm.get('validTo').touched">
+                <button mdSuffix
+                        [mdDatepickerToggle]="validToPicker"
+                        type="button">
+                </button>
+                <md-error>
                     <ng-template [ngIf]="semesterForm.get('validTo').hasError('required')">
                         {{ 'i18n.common.form.error.required' | translate }}
                     </ng-template>
-                    <ng-template [ngIf]="semesterForm.get('validTo').hasError('isBeforeOrSameDay')">{{ getErrorText('validTo',
-                        'isBeforeOrSameDay', 'beforeDate') }}
+                    <ng-template [ngIf]="semesterForm.get('validTo').hasError('isBeforeOrSameDay')">
+                        {{ getErrorText('validTo', 'isBeforeOrSameDay', 'beforeDate') }}
+                    </ng-template>
+                    <ng-template [ngIf]="semesterForm.get('validTo').hasError('isAfterOrSameDay')">
+                        {{ getErrorText('validTo', 'isAfterOrSameDay', 'afterDate') }}
+                    </ng-template>
+                    <ng-template [ngIf]="semesterForm.get('validTo').hasError('date')">
+                        {{ 'i18n.common.form.error.datePattern' | translate }}
                     </ng-template>
                 </md-error>
             </md-input-container>
-            <md-datepicker #validToPicker [touchUi]="isMobile()"></md-datepicker>
+            <md-datepicker #validToPicker
+                           [touchUi]="isMobile()">
+            </md-datepicker>
         </div>
         <div class="form-error"
              *ngIf="semesterForm.invalid && semesterForm.touched && ((semesterForm.get('validFrom').touched && semesterForm.get('validTo').touched) || isEditMode())">
@@ -62,8 +86,15 @@
     </div>
     <div class="dialog-footer" md-dialog-actions>
         <div class="footer-right">
-            <button md-button md-dialog-close>{{ 'i18n.common.action.cancel' | translate }}</button>
-            <button md-raised-button color="primary" type="submit">{{ 'i18n.common.action.save' | translate }}</button>
+            <button md-button
+                    md-dialog-close>
+                {{ 'i18n.common.action.cancel' | translate }}
+            </button>
+            <button md-raised-button
+                    color="primary"
+                    type="submit">
+                {{ 'i18n.common.action.save' | translate }}
+            </button>
         </div>
     </div>
 </form>

@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Http, Request, RequestMethod, Response, URLSearchParams} from '@angular/http';
 import {ConfigService} from '../config/config.service';
-import {Observable} from 'rxjs';
-import 'rxjs/add/operator/map';
+import {Observable} from 'rxjs/Observable';
 import {dateReplacer} from './http-util';
 import {RequestOptions} from './request-options';
 import {ValidationException} from './validation-exception';

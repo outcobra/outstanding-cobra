@@ -5,7 +5,7 @@ import outcobra.server.service.base.BaseService
 
 /**
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.2.0
  */
 interface ExamTaskService : BaseService<ExamTaskDto> {
     fun saveAll(examTasks: List<ExamTaskDto>): List<ExamTaskDto>

@@ -28,7 +28,8 @@
           "required": "This field is required.",
           "isAfterOrSameDay": "The date should be after the {{date}}",
           "isBeforeOrSameDay": "The date should be before the {{date}}",
-          "dateToIsBeforeDateFrom": "'Valid to' is before 'Valid from'"
+          "dateToIsBeforeDateFrom": "'Valid to' is before 'Valid from'",
+          "datePattern": "The date has to be in the format DD.MM.YYYY"
         },
         "filter": {
           "additional": "Additional filters"
@@ -156,7 +157,10 @@
       },
       "mark": {
         "linkTitle": "Marks",
-        "noSemesterAvailable": "You do not have semesters yet",
+        "empty": {
+          "placeholder": "You do not have semesters yet",
+          "hint": "Create your semesters on the manage interface"
+        },
         "common": {
           "weight": "Weight",
           "average": "Average mark"
@@ -245,6 +249,9 @@
           "showPending": "Show only unfinished tasks",
           "search": "Search..."
         },
+        "empty": {
+          "hint": "Add a task by pressing the button in the lower right corner!"
+        },
         "notification": {
           "add": {
             "title": "Task added",
@@ -291,10 +298,10 @@
         }
       },
       "timetable": {
-        "linkTitle": "Timetable"
+        "linkTitle": "Timetable (Soon)"
       },
       "dashboard": {
-        "linkTitle": "Dashboard"
+        "linkTitle": "Dashboard (Soon)"
       },
       "manage": {
         "linkTitle": "Manage",

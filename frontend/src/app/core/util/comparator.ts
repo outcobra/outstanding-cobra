@@ -1,7 +1,8 @@
 import * as moment from 'moment/moment';
 import {ExamDto} from '../../exam/model/exam.dto';
+import {Moment} from 'moment';
 
-export function dateComparator(first: Date|string, second: Date|string): number {
+export function momentComparator(first: Moment|string, second: Moment|string): number {
     let firstMoment = moment(first);
     let secondMoment = moment(second);
     if (firstMoment.isBefore(secondMoment)) {

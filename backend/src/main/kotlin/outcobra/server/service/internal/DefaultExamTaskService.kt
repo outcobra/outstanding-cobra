@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 /**
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.2.0
  */
 @Service
 class DefaultExamTaskService @Inject constructor(mapper: Mapper<ExamTask, ExamTaskDto>,

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpInterceptor} from '../../core/http/http-interceptor';
 import {SchoolYearDto} from '../model/manage.dto';
-import {Observable} from 'rxjs';
+import {Observable} from 'rxjs/Observable';
 import {AppCrudService} from '../../core/services/core/app-crud.service';
 
 @Injectable()

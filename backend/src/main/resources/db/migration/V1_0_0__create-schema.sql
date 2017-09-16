@@ -1,8 +1,14 @@
 CREATE TABLE hibernate_sequences
 (
-  sequence_name          VARCHAR(255) NOT NULL PRIMARY KEY,
-  sequence_next_hi_value BIGINT(20)   NULL
+  sequence_name VARCHAR(255) NOT NULL PRIMARY KEY,
+  next_val      BIGINT(20)   NULL
 );
+
+CREATE TABLE hibernate_sequence (
+  next_val BIGINT(20) DEFAULT NULL
+);
+
+INSERT INTO hibernate_sequence (next_val) VALUES (1);
 
 CREATE TABLE class
 (

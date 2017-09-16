@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 /**
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.2.0
  */
 @RestController
 @RequestMapping("/api")

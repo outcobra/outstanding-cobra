@@ -2,12 +2,12 @@ import {MdDateFormats} from '@angular/material/typings/core/datetime/date-format
 
 export const OC_DATE_FORMATS: MdDateFormats = {
     parse: {
-        dateInput: 'DD.MM.YYYY'
+        dateInput: 'D.M.Y'
     },
     display: {
-        dateInput: {year: 'numeric', month: 'numeric', day: 'numeric'},
-        monthYearLabel: {year: 'numeric', month: 'short'},
-        dateA11yLabel: {year: 'numeric', month: 'long', day: 'numeric'},
-        monthYearA11yLabel: {year: 'numeric', month: 'long'}
+        dateInput: 'DD.MM.Y',
+        monthYearLabel: 'MMM Y',
+        dateA11yLabel: 'LL',
+        monthYearA11yLabel: 'MMMM Y'
     }
 };

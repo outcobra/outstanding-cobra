@@ -4,12 +4,12 @@
     "apis": [
       {
         "name": "outcobra",
-        "apiBase": "https://outcobra-a.pegnu.cloud/backend/api/",
+        "apiBase": "https://staging.outcobra.school/backend/api/",
         "authToken": true
       },
       {
         "name": "outcobra_public",
-        "apiBase": "https://outcobra-a.pegnu.cloud/backend/",
+        "apiBase": "https://staging.outcobra.school/backend/",
         "authToken": false
       }
     ]

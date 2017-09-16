@@ -10,7 +10,7 @@ spring:
     hibernate:
       use-new-id-generator-mappings: true
 product:
-  version: 1.1.0
+  version: 1.2.0
 ---
 #---
 # Main Profile definition
@@ -94,5 +94,5 @@ spring:
   profiles:
     include: auth0_proxy
 http:
-  proxyHost: proxy.efd.admin.ch
+  proxyHost: proxy-bvcol.admin.ch
   proxyPort: 8080

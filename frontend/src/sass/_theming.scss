@@ -4,7 +4,7 @@
 @include mat-core();
 
 $config: mat-typography-config(
-    $font-family: 'Montserrat, sans-serif'
+    $font-family: 'Montserrat, Roboto, "Helvetica Neue", sans-serif'
 );
 
 .mat-typography {

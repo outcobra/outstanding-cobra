@@ -17,10 +17,6 @@ body, .main-area {
     background-color: #F8F8F8 !important;
 }
 
-a:not(.mat-button) {
-    color: $primary-light !important;
-}
-
 .mat-sidenav-content {
     display: flex !important;
     flex-direction: column !important;
@@ -80,6 +76,8 @@ oc-divider {
 }
 
 .oc-filler {
+    display: block;
+    height: 100%;
     flex-grow: 1;
 }
 
@@ -141,7 +139,11 @@ md-dialog-container {
         padding: 0 10px;
     }
 
-    &.half {
+    .form-error {
+        color: mat-color($warn);
+    }
+
+    &.half, .half {
         display: flex;
         align-items: center;
         .half-child {
@@ -183,6 +185,9 @@ md-dialog-container {
 
 .container {
     padding: 10px 5px;
+    &.middle-container {
+        max-width: 960px;
+    }
 }
 
 md-input-container.big-search {

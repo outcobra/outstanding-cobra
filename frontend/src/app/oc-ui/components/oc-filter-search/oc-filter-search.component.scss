@@ -24,7 +24,7 @@ $bottom-inset-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12) inset;
                     margin: 0 8px;
                 }
             }
-            .oc-filter {
+            .oc-filter, .oc-filter ::ng-deep .oc-filter-form {
                 display: flex;
                 align-items: center;
 
@@ -43,6 +43,9 @@ $bottom-inset-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12) inset;
         .oc-filter-search-controls {
             display: flex;
             flex-direction: column !important;
+            .oc-filter ::ng-deep .oc-filter-form {
+                flex-direction: column;
+            }
         }
     }
 

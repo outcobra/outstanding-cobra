@@ -9,10 +9,8 @@
                        required
                        [placeholder]="'i18n.modules.exam.dialogs.add.name.label' | translate"
                        formControlName="name">
-                <md-error *ngIf="examCreateUpdateForm.get('name').invalid && examCreateUpdateForm.get('name').touched">
-                    <ng-template [ngIf]="examCreateUpdateForm.get('name').hasError('required')">
-                        {{ 'i18n.common.form.error.required' | translate }}
-                    </ng-template>
+                <md-error *ngIf="examCreateUpdateForm.get('name').hasError('required')">
+                    {{ 'i18n.common.form.error.required' | translate }}
                 </md-error>
             </md-input-container>
         </div>
@@ -21,11 +19,8 @@
                 <textarea mdInput
                           [placeholder]="'i18n.modules.exam.dialogs.add.desc.label' | translate"
                           formControlName="description"></textarea>
-                <md-error
-                    *ngIf="examCreateUpdateForm.get('description').invalid && examCreateUpdateForm.get('description').touched">
-                    <ng-template [ngIf]="examCreateUpdateForm.get('description').hasError('required')">
-                        {{ 'i18n.common.form.error.required' | translate }}
-                    </ng-template>
+                <md-error *ngIf="examCreateUpdateForm.get('description').hasError('required')">
+                    {{ 'i18n.common.form.error.required' | translate }}
                 </md-error>
             </md-input-container>
         </div>
@@ -40,26 +35,32 @@
                     <button mdSuffix
                             [mdDatepickerToggle]="examDatePicker"
                             type="button"></button>
-                    <md-error align="start"
-                              *ngIf="examCreateUpdateForm.get('date').invalid && examCreateUpdateForm.get('date').touched">
+                    <md-error>
                         <ng-template [ngIf]="examCreateUpdateForm.get('date').hasError('required')">
                             {{ 'i18n.common.form.error.required' | translate }}
                         </ng-template>
+                        <ng-template [ngIf]="examCreateUpdateForm.get('date').hasError('date')">
+                            {{ 'i18n.common.form.error.datePattern' | translate }}
+                        </ng-template>
                     </md-error>
                 </md-input-container>
-                <md-datepicker #examDatePicker [touchUi]="isMobile()"></md-datepicker>
+                <md-datepicker #examDatePicker
+                               [touchUi]="isMobile()">
+                </md-datepicker>
             </div>
             <div class="half-child">
                 <md-select formControlName="subjectId"
                            required
                            [placeholder]="'i18n.modules.exam.dialogs.add.subject.label' | translate">
-                    <md-option *ngFor="let subject of subjects" [value]="subject.id">{{ subject.name }}</md-option>
+                    <md-option *ngFor="let subject of subjects"
+                               [value]="subject.id">
+                        {{ subject.name }}
+                    </md-option>
                 </md-select>
             </div>
         </div>
 
         <div formArrayName="examTasks" class="form-group">
-            <!-- TODO change when using material typography -->
             <h5>{{ 'i18n.modules.exam.examTask.title' | translate }}</h5>
             <button md-button
                     type="button"
@@ -80,8 +81,16 @@
     </div>
     <div class="dialog-footer" md-dialog-actions>
         <div class="footer-right">
-            <button md-button type="button" md-dialog-close>{{ 'i18n.common.action.cancel' | translate }}</button>
-            <button md-raised-button color="primary" type="submit">{{ 'i18n.common.action.save' | translate }}</button>
+            <button md-button
+                    type="button"
+                    md-dialog-close>
+                {{ 'i18n.common.action.cancel' | translate }}
+            </button>
+            <button md-raised-button
+                    color="primary"
+                    type="submit">
+                {{ 'i18n.common.action.save' | translate }}
+            </button>
         </div>
     </div>
 </form>

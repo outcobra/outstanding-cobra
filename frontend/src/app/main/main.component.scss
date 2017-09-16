@@ -1,6 +1,7 @@
 @import '../../sass/color-variables';
 
-div {
+div.row {
+    margin-top: 24px;
     text-align: center;
     display: flex;
     flex-direction: column;

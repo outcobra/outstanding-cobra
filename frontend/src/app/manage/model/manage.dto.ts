@@ -1,5 +1,6 @@
 import {Dto} from '../../core/common/dto';
 import {ColorDto} from '../../core/model/color.dto';
+import {Moment} from 'moment';
 
 export interface ManageDto {
     institutions: Array<InstitutionDto>
@@ -22,8 +23,8 @@ export interface SchoolYearDto extends Dto {
     id: number,
     schoolClassId: number,
     name: string,
-    validFrom: string|Date,
-    validTo: string|Date,
+    validFrom: string|Moment,
+    validTo: string|Moment,
     semesters: Array<SemesterDto>
 }
 
@@ -31,8 +32,8 @@ export interface SemesterDto extends Dto {
     id: number,
     schoolYearId: number,
     name: string,
-    validFrom: string|Date,
-    validTo: string|Date,
+    validFrom: string|Moment,
+    validTo: string|Moment,
     subjects: Array<SubjectDto>
 }
 

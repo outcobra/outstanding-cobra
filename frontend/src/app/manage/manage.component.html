@@ -35,31 +35,31 @@
                             ></oc-entity-menu>
                         </div>
                     </oc-collapsible-header>
-                    <oc-collapsible-body>
-                        <ul>
-                            <li *ngFor="let schoolClass of institution.schoolClasses">
-                                <div class="entity child-entity" (click)="selectSchoolClass(schoolClass.id)"
-                                     [class.active]="schoolClass.id === activeSchoolClassId">
-                                    <div class="entity-desc">
-                                        <md-icon class="entity-icon">subdirectory_arrow_right</md-icon>
-                                        <md-icon class="entity-icon">class</md-icon>
-                                        <span>{{ schoolClass.normalizedName }}</span>
-                                    </div>
-                                    <oc-entity-menu
-                                        (delete)="deleteSchoolClass(schoolClass)"
-                                        (edit)="editSchoolClass(schoolClass)"
-                                    ></oc-entity-menu>
+                    <oc-divider></oc-divider>
+                    <ul>
+                        <li *ngFor="let schoolClass of institution.schoolClasses">
+                            <div class="entity child-entity" (click)="selectSchoolClass(schoolClass.id)"
+                                 [class.active]="schoolClass.id === activeSchoolClassId">
+                                <div class="entity-desc">
+                                    <md-icon class="entity-icon">subdirectory_arrow_right</md-icon>
+                                    <md-icon class="entity-icon">class</md-icon>
+                                    <span>{{ schoolClass.normalizedName }}</span>
                                 </div>
-                            </li>
-                            <li>
-                                <div class="action-button">
-                                    <button md-button color="accent" (click)="addSchoolClass(institution)">
-                                        {{ 'i18n.modules.manage.schoolClass.add' | translate }}
-                                    </button>
-                                </div>
-                            </li>
-                        </ul>
-                    </oc-collapsible-body>
+                                <oc-entity-menu
+                                    (delete)="deleteSchoolClass(schoolClass)"
+                                    (edit)="editSchoolClass(schoolClass)"
+                                ></oc-entity-menu>
+                            </div>
+                            <oc-divider></oc-divider>
+                        </li>
+                        <li>
+                            <div class="action-button">
+                                <button md-button color="accent" (click)="addSchoolClass(institution)">
+                                    {{ 'i18n.modules.manage.schoolClass.add' | translate }}
+                                </button>
+                            </div>
+                        </li>
+                    </ul>
                 </oc-collapsible>
             </li>
             <li>
@@ -93,34 +93,34 @@
                             ></oc-entity-menu>
                         </div>
                     </oc-collapsible-header>
-                    <oc-collapsible-body>
-                        <ul>
-                            <li *ngFor="let semester of schoolYear.semesters">
-                                <div class="entity child-entity" (click)="selectSemester(semester.id)"
-                                     [class.active]="semester.id === activeSemesterId">
-                                    <div class="entity-desc">
-                                        <md-icon class="entity-icon">subdirectory_arrow_right</md-icon>
-                                        <md-icon class="entity-icon">school</md-icon>
-                                        <div class="two-line-entity">
-                                            <span class="primary-text">{{ semester.name }}</span>
-                                            <span class="secondary-text text-secondary-dark">{{ semester.validFrom | date:'mediumDate' }} - {{ semester.validTo | date:'mediumDate' }}</span>
-                                        </div>
+                    <oc-divider></oc-divider>
+                    <ul>
+                        <li *ngFor="let semester of schoolYear.semesters">
+                            <div class="entity child-entity" (click)="selectSemester(semester.id)"
+                                 [class.active]="semester.id === activeSemesterId">
+                                <div class="entity-desc">
+                                    <md-icon class="entity-icon">subdirectory_arrow_right</md-icon>
+                                    <md-icon class="entity-icon">school</md-icon>
+                                    <div class="two-line-entity">
+                                        <span class="primary-text">{{ semester.name }}</span>
+                                        <span class="secondary-text text-secondary-dark">{{ semester.validFrom | date:'mediumDate' }} - {{ semester.validTo | date:'mediumDate' }}</span>
                                     </div>
-                                    <oc-entity-menu
-                                        (delete)="deleteSemester(semester)"
-                                        (edit)="editSemester(semester)"
-                                    ></oc-entity-menu>
                                 </div>
-                            </li>
-                            <li>
-                                <div class="action-button">
-                                    <button md-button color="accent" (click)="addSemester(schoolYear)">
-                                        {{ 'i18n.modules.manage.semester.add' | translate }}
-                                    </button>
-                                </div>
-                            </li>
-                        </ul>
-                    </oc-collapsible-body>
+                                <oc-entity-menu
+                                    (delete)="deleteSemester(semester)"
+                                    (edit)="editSemester(semester)"
+                                ></oc-entity-menu>
+                            </div>
+                            <oc-divider></oc-divider>
+                        </li>
+                        <li>
+                            <div class="action-button">
+                                <button md-button color="accent" (click)="addSemester(schoolYear)">
+                                    {{ 'i18n.modules.manage.semester.add' | translate }}
+                                </button>
+                            </div>
+                        </li>
+                    </ul>
                 </oc-collapsible>
             </li>
             <li>
@@ -143,7 +143,7 @@
                         <div class="entity">
                             <div class="entity-desc">
                                 <span class="subject-circle"
-                                     [style.background-color]="subject.color.hex | color"></span>
+                                      [style.background-color]="subject.color.hex | color"></span>
                                 <span>{{ subject.name }}</span>
                             </div>
                             <oc-entity-menu

@@ -10,7 +10,7 @@ import kotlin.reflect.KClass
 
 /**
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.2.0
  */
 open class BaseValidator(val locator: RepositoryLocator, val userService: UserService) {
     /**

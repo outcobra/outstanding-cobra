@@ -9,6 +9,8 @@ import {CreateUpdateComponent} from '../../core/common/create-update-component';
 import {ResponsiveHelperService} from '../../core/services/ui/responsive-helper.service';
 import {DateUtil} from '../../core/services/date-util.service';
 import {FormUtil} from '../../core/util/form-util';
+import * as moment from 'moment';
+import {Moment} from 'moment';
 
 @Component({
     selector: './task-create-update-dialog',
@@ -18,7 +20,7 @@ import {FormUtil} from '../../core/util/form-util';
 export class TaskCreateUpdateDialog extends CreateUpdateComponent<TaskDto> implements OnInit {
     private _taskCreateUpdateForm: FormGroup;
     private _subjects: SubjectDto[];
-    private _today: Date = new Date();
+    private _today: Moment = moment();
 
     constructor(private _subjectService: SubjectService,
                 private _dialogRef: MdDialogRef<TaskCreateUpdateDialog>,
@@ -35,8 +37,10 @@ export class TaskCreateUpdateDialog extends CreateUpdateComponent<TaskDto> imple
             name: [this.getParamOrDefault('name'), Validators.required],
             description: [this.getParamOrDefault('description')],
             dates: this._formBuilder.group({
-                    todoDate: [DateUtil.transformToDateIfPossible(this.getParamOrDefault('todoDate')), Validators.required],
-                    dueDate: [DateUtil.transformToDateIfPossible(this.getParamOrDefault('dueDate')), Validators.required],
+                    todoDate: [DateUtil.transformToMomentIfPossible(this.getParamOrDefault('todoDate')),
+                        Validators.compose([Validators.required, OCValidators.date()])],
+                    dueDate: [DateUtil.transformToMomentIfPossible(this.getParamOrDefault('dueDate')),
+                        Validators.compose([Validators.required, OCValidators.date()])]
                 },
                 {
                     validator: OCValidators.dateFromIsBeforeDateTo('todoDate', 'dueDate', true)
@@ -81,7 +85,7 @@ export class TaskCreateUpdateDialog extends CreateUpdateComponent<TaskDto> imple
         return this._subjects;
     }
 
-    get today(): Date {
+    get today(): Moment {
         return this._today;
     }
 }

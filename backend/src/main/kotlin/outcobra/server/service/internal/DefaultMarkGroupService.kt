@@ -21,7 +21,7 @@ import javax.security.auth.Subject
 
 /**
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.2.0
  */
 @Service
 class DefaultMarkGroupService

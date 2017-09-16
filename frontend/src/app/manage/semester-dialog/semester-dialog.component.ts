@@ -9,6 +9,7 @@ import {DatePipe} from '@angular/common';
 import {ResponsiveHelperService} from '../../core/services/ui/responsive-helper.service';
 import {DateUtil} from '../../core/services/date-util.service';
 import {FormUtil} from '../../core/util/form-util';
+import {Moment} from 'moment';
 
 @Component({
     selector: 'semester-dialog',
@@ -32,12 +33,12 @@ export class SemesterDialog extends ParentLinkedCreateUpdateComponent<SemesterDt
         this._semesterForm = this._formBuilder.group({
                 name: [this.getParamOrDefault('name'), Validators.required],
                 validFrom: [
-                    DateUtil.transformToDateIfPossible(this.getParamOrDefault('validFrom')),
-                    Validators.compose([Validators.required, OCValidators.isAfterOrSameDay(this.parentValidFrom)])
+                    DateUtil.transformToMomentIfPossible(this.getParamOrDefault('validFrom')),
+                    Validators.compose([Validators.required, OCValidators.isAfterOrSameDay(this.parentValidFrom), OCValidators.isBeforeOrSameDay(this.parentValidTo), OCValidators.date()])
                 ],
                 validTo: [
-                    DateUtil.transformToDateIfPossible(this.getParamOrDefault('validTo')),
-                    Validators.compose([Validators.required, OCValidators.isBeforeOrSameDay(this.parentValidTo)])
+                    DateUtil.transformToMomentIfPossible(this.getParamOrDefault('validTo')),
+                    Validators.compose([Validators.required, OCValidators.isBeforeOrSameDay(this.parentValidTo), OCValidators.isAfterOrSameDay(this.parentValidFrom), OCValidators.date()])
                 ]
             },
             {
@@ -69,12 +70,12 @@ export class SemesterDialog extends ParentLinkedCreateUpdateComponent<SemesterDt
         }
     }
 
-    get parentValidFrom(): Date {
-        return DateUtil.transformToDateIfPossible(this.parent.validFrom);
+    get parentValidFrom(): Moment {
+        return DateUtil.transformToMomentIfPossible(this.parent.validFrom);
     }
 
-    get parentValidTo(): Date {
-        return DateUtil.transformToDateIfPossible(this.parent.validTo);
+    get parentValidTo(): Moment {
+        return DateUtil.transformToMomentIfPossible(this.parent.validTo);
     }
 
     public isMobile() {

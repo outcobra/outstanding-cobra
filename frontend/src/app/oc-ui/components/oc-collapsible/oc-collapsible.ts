@@ -51,7 +51,8 @@ export class OCCollapsibleBodyComponent {
         <ng-content select="oc-collapsible-header"></ng-content>
         <div [@ocToggle]="active" class="oc-collapsible-body">
             <ng-content></ng-content>
-        </div>`,
+        </div>
+        <oc-divider *ngIf="showDivider"></oc-divider>`,
     styleUrls: ['./oc-collapsible.scss'],
     encapsulation: ViewEncapsulation.None,
     animations: [
@@ -70,6 +71,7 @@ export class OCCollapsibleBodyComponent {
 export class OCCollapsibleComponent implements AfterContentInit, OnChanges {
     @ContentChild(OCCollapsibleHeaderComponent) public header: OCCollapsibleHeaderComponent;
     @Input() showToggle: boolean = true;
+    @Input() showDivider: boolean = true;
     @HostBinding('class.active')
     @Input() active: boolean = false;
 
