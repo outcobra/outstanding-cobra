@@ -12,7 +12,7 @@
         z-index: 100;
         background-color: white;
         box-shadow: 0 -2px 8px 0 rgba(0,0,0,0.20);
-        /deep/ md-toolbar-row {
+        ::ng-deep md-toolbar-row {
             justify-content: center;
             .bottom-menu {
                 width: 100%;
