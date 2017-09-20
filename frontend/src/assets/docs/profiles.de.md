@@ -19,4 +19,9 @@ Outcobra ist das bisher grösste dieser "Nebenprojekte". Meine Hauptaufgaben lie
 Für mich ist es der Mix aus Bekanntem und vielen neuen Herausforderungen der mich an diesem Projekt fasziniert!
 
 ## Joel
-Meine erste Berührung mit der Softwareentwicklung war mit ungefähr zwölf Jahren, als ich ein Python Buch geschenkt bekommen habe. Seit dann habe ich mich verliebt und bin über C++ und PHP nun bei Java und Kotlin gelandet. Outcobra ist toll für mich, da ich hier moderne, spannende Technologien verwenden kann und zudem auch noch auf dem Gebiet der Systemtechnik wirken kann.
+
+Als ich zwölf war, hat mir mein Onkel ein Python 3 Buch geschenkt. Von diesem Zeitpunkt an war es geschehen und ich begann mir das Programmieren beizubringen. Über die Jahre bin ich mit vielen Programmiersprachen in Kontakt gekommen, habe allerdings das Entwickeln in Java und nun auch Kotlin immer sehr angenehm gefunden.
+
+Bei der Arbeit arbeite ich mit ähnlichen Technologien, welche auch in Outcobra eingesetzt werden: Spring & Hibernate mit einer Rest-Schnittstelle zum UI sind auch dort vorhanden.
+
+In meiner Freizeit beschäftige ich mich oft auch mit Programmieren, was man auch an meinen vielen kleinen GitHub Repoitories sehen kann. Zudem erfreue ich mich in der letzten Zeit immer mehr auch an Linux Servern und habe deshalb selber (inklusive Outcobra) fünf Server, welche meine Mails, Webseiten, Tools und die gesamte Outcobra-Infrastruktur hosten. Ich tausche mich gerne mit meinen Kollegen in der Systemtechnik aus und experimentiere mit Netzwerken herum, da ich mein Wissen in der Informatik möglichst breit halten möchte.
