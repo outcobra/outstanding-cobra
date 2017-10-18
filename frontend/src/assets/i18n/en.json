@@ -86,7 +86,12 @@
       "main": {
         "welcome": "Welcome to Outcobra",
         "subtitle": "The management-tool by students for students",
-        "authors": "by Joel, Florian and Mario"
+        "authors": "by Joel, Florian and Mario",
+        "linkTitles": {
+          "about": "About the project",
+          "features": "Features",
+          "profiles": "About the team"
+        }
       },
       "exam": {
         "linkTitle": "Exams",

@@ -1,25 +1,50 @@
-import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, Optional, SimpleChanges, ViewEncapsulation} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
-import {isNotEmpty} from '../../../core/util/helper';
+import {isTruthy} from '../../../core/util/helper';
+import {ActivatedRoute} from '@angular/router';
+
+type DisplayMode = 'flat' | 'card'
 
 @Component({
     selector: 'i18n-markdown',
-    template: `<markdown [path]="i18nPath"></markdown>`,
-    encapsulation: ViewEncapsulation.Native
+    templateUrl: './i18n-markdown.component.html',
+    styleUrls: ['./i18n-markdown.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
-export class I18nMarkdownComponent implements OnInit {
+export class I18nMarkdownComponent implements OnInit, OnChanges {
     @Input() path: string;
+    @Input() displayMode: DisplayMode = 'flat';
+    @Input() wrapperClasses: string[] = [];
 
     private _i18nPath: string;
 
-    constructor(private _translateService: TranslateService) {
+    constructor(@Optional() private _route: ActivatedRoute,
+                private _translateService: TranslateService) {
     }
 
     ngOnInit(): void {
-        if (isNotEmpty(this.path)) {
-            this._setPathForCurrentLang();
-            this._translateService.onLangChange.subscribe(() => this._setPathForCurrentLang())
+        if (isTruthy(this._route)) {
+            this.path = this._route.snapshot.data.path;
+            this.displayMode = this._route.snapshot.data.displayMode || 'flat';
+            this.wrapperClasses = this._route.snapshot.data.wrapperClasses || [];
+            if (!Array.isArray(this.wrapperClasses)) {
+                throw new Error("wrapperClasses must be an array");
+            }
         }
+        this.wrapperClasses.push(`style-${this.displayMode}`);
+        this._setPathForCurrentLang();
+
+        this._translateService.onLangChange.subscribe(() => this._setPathForCurrentLang())
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        if (isTruthy(changes.path)) {
+            this._setPathForCurrentLang();
+        }
+    }
+
+    public getWrapperClasses(): string[] {
+        return this.wrapperClasses;
     }
 
     private _setPathForCurrentLang(): void {

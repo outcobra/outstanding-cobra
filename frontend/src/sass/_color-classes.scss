@@ -11,11 +11,11 @@
         @include oc-color($primary);
     }
 
-    .color-primary-light {
+    .color-primary-light, .mat-primary-light {
         @include oc-color($primary, lighter);
     }
 
-    .color-primary-dark {
+    .color-primary-dark, .mat-primary-dark {
         @include oc-color($primary, darker);
     }
 
@@ -23,11 +23,11 @@
         @include oc-color($accent);
     }
 
-    .color-accent-light {
+    .color-accent-light, .mat-accent-light {
         @include oc-color($accent, lighter);
     }
 
-    .color-accent-dark {
+    .color-accent-dark, .mat-accent-dark {
         @include oc-color($accent, darker);
     }
 
