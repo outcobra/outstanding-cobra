@@ -4,10 +4,12 @@ import {FallbackComponent} from './main/fallback/fallback.component';
 
 @NgModule({
     imports: [
-        RouterModule.forRoot([{
-            path: '**',
-            component: FallbackComponent
-        }])
+        RouterModule.forRoot([
+            {
+                path: '**',
+                component: FallbackComponent
+            }
+        ])
     ],
     exports: [
         RouterModule
