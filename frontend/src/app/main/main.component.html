@@ -1,3 +1,23 @@
+<div class="content">
+    <router-outlet></router-outlet>
+</div>
+<md-toolbar>
+    <div class="bottom-menu text-accent">
+        <div class="menu-item" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <md-icon>info</md-icon>
+            <span>{{ 'i18n.modules.main.linkTitles.about' | translate }}</span>
+        </div>
+        <div class="menu-item" routerLink="/features" routerLinkActive="active">
+            <md-icon>games</md-icon>
+            <span>{{ 'i18n.modules.main.linkTitles.features' | translate }}</span>
+        </div>
+        <div class="menu-item" routerLink="/devs" routerLinkActive="active">
+            <md-icon>group</md-icon>
+            <span>{{ 'i18n.modules.main.linkTitles.profiles' | translate }}</span>
+        </div>
+    </div>
+</md-toolbar>
+<!--
 <div class="row">
     <div id="icon">
         <h1 class="mat-display-3">{{ 'i18n.modules.main.welcome' | translate }}</h1>
@@ -16,4 +36,4 @@
                    href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0"
                    target="_blank">CC 3.0 BY</a></span>
     </div>
-</div>
+</div>-->

@@ -1,0 +1,11 @@
+<div fxLayout fxLayoutAlign="center start">
+    <div [ngClass]="getWrapperClasses()" [ngSwitch]="displayMode"
+         class="markdown-wrapper" fxFlex>
+        <markdown *ngSwitchCase="'flat'" [path]="i18nPath"></markdown>
+        <md-card *ngSwitchCase="'card'">
+            <md-card-content>
+                <markdown [path]="i18nPath"></markdown>
+            </md-card-content>
+        </md-card>
+    </div>
+</div>
