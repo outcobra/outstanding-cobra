@@ -32,7 +32,7 @@ public class Exam implements ParentLinked {
     @QueryInit("semester.schoolYear.schoolClass.institution.user")
     private Subject subject;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REMOVE)
     private MarkValue mark;
 
     //region constructors
