@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {MdDialogRef} from '@angular/material';
+import {MatDialogRef} from '@angular/material';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ParentLinkedCreateUpdateComponent} from '../../core/common/parent-linked-create-update-component';
 import {SchoolYearDto, SemesterDto} from '../model/manage.dto';
@@ -21,7 +21,7 @@ export class SemesterDialog extends ParentLinkedCreateUpdateComponent<SemesterDt
 
     private _semesterForm: FormGroup;
 
-    constructor(private _dialogRef: MdDialogRef<SemesterDialog>,
+    constructor(private _dialogRef: MatDialogRef<SemesterDialog>,
                 private _formBuilder: FormBuilder,
                 private _translate: TranslateService,
                 private _datePipe: DatePipe,

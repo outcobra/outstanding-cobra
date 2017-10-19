@@ -5,7 +5,7 @@ import {TestModule} from '../../../core/mock/test.module';
 import {RouterTestingModule} from '@angular/router/testing';
 import {OCUiModule} from '../../oc-ui.module';
 import {By} from '@angular/platform-browser';
-import {MdButton} from '@angular/material';
+import {MatButton} from '@angular/material';
 
 describe('OCNavComponent', () => {
     let component: OCNavComponent;
@@ -45,7 +45,7 @@ describe('OCNavComponent', () => {
 
         let isCollapsed = component.collapsed;
 
-        let collapser = fixture.debugElement.query(By.css('.oc-nav-collapser')).query(By.directive(MdButton));
+        let collapser = fixture.debugElement.query(By.css('.oc-nav-collapser')).query(By.directive(MatButton));
         collapser.nativeElement.click();
         expect(component.collapsed).toBe(!isCollapsed);
     });

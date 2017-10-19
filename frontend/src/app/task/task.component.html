@@ -6,28 +6,28 @@
 </ng-template>
 <div fxLayout fxLayoutAlign="center start" *ngIf="tasks.length > 0; else empty">
     <div class="container middle-container" fxFlex>
-        <md-card class="oc-card">
+        <mat-card class="oc-card">
             <oc-filter-search (search)="search$.next($event)">
                 <form ocFilter [formGroup]="filterForm" class="oc-filter-form">
                     <div>
-                        <md-select formControlName="subjectId"
+                        <mat-select formControlName="subjectId"
                                    [placeholder]="'i18n.modules.exam.filter.subject' | translate"
                                    floatPlaceholder="never">
-                            <md-optgroup *ngFor="let schoolClass of filterData.schoolClassSubjects"
+                            <mat-optgroup *ngFor="let schoolClass of filterData.schoolClassSubjects"
                                          [label]="schoolClass.schoolClass.normalizedName">
-                                <md-option *ngFor="let subject of schoolClass.subjects" [value]="subject.id">
+                                <mat-option *ngFor="let subject of schoolClass.subjects" [value]="subject.id">
                                     {{ subject.name }}
-                                </md-option>
-                            </md-optgroup>
-                        </md-select>
-                        <button md-icon-button (click)="filterForm.controls['subjectId'].setValue(null)">
-                            <md-icon>close</md-icon>
+                                </mat-option>
+                            </mat-optgroup>
+                        </mat-select>
+                        <button mat-icon-button (click)="filterForm.controls['subjectId'].setValue(null)">
+                            <mat-icon>close</mat-icon>
                         </button>
                     </div>
                     <div>
-                        <md-checkbox formControlName="finished">
+                        <mat-checkbox formControlName="finished">
                             {{ 'i18n.modules.task.filter.showPending' | translate }}
-                        </md-checkbox>
+                        </mat-checkbox>
                     </div>
                 </form>
             </oc-filter-search>
@@ -39,9 +39,9 @@
                 </oc-collapsible-header>
                 <task-detail [task]="task"></task-detail>
             </oc-collapsible>
-        </md-card>
+        </mat-card>
     </div>
 </div>
-<button md-fab [mdTooltip]="'i18n.modules.task.add' | translate" mdTooltipPosition="left" (click)="addTask()">
-    <md-icon>add</md-icon>
+<button mat-fab [matTooltip]="'i18n.modules.task.add' | translate" matTooltipPosition="left" (click)="addTask()">
+    <mat-icon>add</mat-icon>
 </button>

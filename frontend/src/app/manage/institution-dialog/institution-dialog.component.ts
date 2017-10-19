@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {MdDialogRef} from '@angular/material';
+import {MatDialogRef} from '@angular/material';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ParentLinkedCreateUpdateComponent} from '../../core/common/parent-linked-create-update-component';
 import {InstitutionDto} from '../model/manage.dto';
@@ -15,7 +15,7 @@ export class InstitutionDialog extends ParentLinkedCreateUpdateComponent<Institu
 
     private _institutionForm: FormGroup;
 
-    constructor(private _dialogRef: MdDialogRef<InstitutionDialog>, private _formBuilder: FormBuilder) {
+    constructor(private _dialogRef: MatDialogRef<InstitutionDialog>, private _formBuilder: FormBuilder) {
         super();
     }
 

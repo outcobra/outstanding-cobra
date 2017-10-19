@@ -1,4 +1,4 @@
-import {MD_DIALOG_DATA, MdDialogRef} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Component, Inject, OnInit} from '@angular/core';
 import {SubjectDto} from '../../manage/model/manage.dto';
 import {AbstractControl, FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
@@ -25,10 +25,10 @@ export class ExamCreateUpdateDialog extends CreateUpdateComponent<ExamDto> imple
 
     constructor(private _translateService: TranslateService,
                 private _subjectService: SubjectService,
-                private _dialogRef: MdDialogRef<ExamCreateUpdateDialog>,
+                private _dialogRef: MatDialogRef<ExamCreateUpdateDialog>,
                 private _responsiveHelper: ResponsiveHelperService,
                 private _formBuilder: FormBuilder,
-                @Inject(MD_DIALOG_DATA) data) {
+                @Inject(MAT_DIALOG_DATA) data) {
         super(data.mode, data.param);
     }
 

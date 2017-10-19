@@ -2,16 +2,16 @@
     <span>{{ 'i18n.modules.manage.linkTitle' | translate }}</span>
     <div *ngIf="isMobile()" class="row mobile-manage-nav oc-title-bar-nav" fxLayout="row">
         <div fxFlex="15">
-            <button md-button [disabled]="!isValidDirection(-1)" (click)="lastView()">
-                <md-icon>navigate_before</md-icon>
+            <button mat-button [disabled]="!isValidDirection(-1)" (click)="lastView()">
+                <mat-icon>navigate_before</mat-icon>
             </button>
         </div>
         <div class="mobile-title" fxFlex>
             <h6>{{ mobileTitle | translate }}</h6>
         </div>
         <div fxFlex="15">
-            <button md-button [disabled]="!isValidDirection(1)" (click)="nextView()" class="right">
-                <md-icon>navigate_next</md-icon>
+            <button mat-button [disabled]="!isValidDirection(1)" (click)="nextView()" class="right">
+                <mat-icon>navigate_next</mat-icon>
             </button>
         </div>
     </div>
@@ -26,7 +26,7 @@
                     <oc-collapsible-header>
                         <div class="entity">
                             <div class="entity-desc">
-                                <md-icon class="entity-icon">business</md-icon>
+                                <mat-icon class="entity-icon">business</mat-icon>
                                 <span>{{ institution.name }}</span>
                             </div>
                             <oc-entity-menu
@@ -41,8 +41,8 @@
                             <div class="entity child-entity" (click)="selectSchoolClass(schoolClass.id)"
                                  [class.active]="schoolClass.id === activeSchoolClassId">
                                 <div class="entity-desc">
-                                    <md-icon class="entity-icon">subdirectory_arrow_right</md-icon>
-                                    <md-icon class="entity-icon">class</md-icon>
+                                    <mat-icon class="entity-icon">subdirectory_arrow_right</mat-icon>
+                                    <mat-icon class="entity-icon">class</mat-icon>
                                     <span>{{ schoolClass.normalizedName }}</span>
                                 </div>
                                 <oc-entity-menu
@@ -54,7 +54,7 @@
                         </li>
                         <li>
                             <div class="action-button">
-                                <button md-button color="accent" (click)="addSchoolClass(institution)">
+                                <button mat-button color="accent" (click)="addSchoolClass(institution)">
                                     {{ 'i18n.modules.manage.schoolClass.add' | translate }}
                                 </button>
                             </div>
@@ -64,7 +64,7 @@
             </li>
             <li>
                 <div class="action-button">
-                    <button md-button color="accent" (click)="addInstitution()">
+                    <button mat-button color="accent" (click)="addInstitution()">
                         {{ 'i18n.modules.manage.institution.add' | translate }}
                     </button>
                 </div>
@@ -81,7 +81,7 @@
                     <oc-collapsible-header>
                         <div class="entity">
                             <div class="entity-desc">
-                                <md-icon class="entity-icon">date_range</md-icon>
+                                <mat-icon class="entity-icon">date_range</mat-icon>
                                 <div class="two-line-entity">
                                     <span class="primary-text">{{ schoolYear.name }}</span>
                                     <span class="secondary-text text-secondary-dark">{{ schoolYear.validFrom | date:'mediumDate' }} - {{ schoolYear.validTo | date:'mediumDate' }}</span>
@@ -99,8 +99,8 @@
                             <div class="entity child-entity" (click)="selectSemester(semester.id)"
                                  [class.active]="semester.id === activeSemesterId">
                                 <div class="entity-desc">
-                                    <md-icon class="entity-icon">subdirectory_arrow_right</md-icon>
-                                    <md-icon class="entity-icon">school</md-icon>
+                                    <mat-icon class="entity-icon">subdirectory_arrow_right</mat-icon>
+                                    <mat-icon class="entity-icon">school</mat-icon>
                                     <div class="two-line-entity">
                                         <span class="primary-text">{{ semester.name }}</span>
                                         <span class="secondary-text text-secondary-dark">{{ semester.validFrom | date:'mediumDate' }} - {{ semester.validTo | date:'mediumDate' }}</span>
@@ -115,7 +115,7 @@
                         </li>
                         <li>
                             <div class="action-button">
-                                <button md-button color="accent" (click)="addSemester(schoolYear)">
+                                <button mat-button color="accent" (click)="addSemester(schoolYear)">
                                     {{ 'i18n.modules.manage.semester.add' | translate }}
                                 </button>
                             </div>
@@ -125,7 +125,7 @@
             </li>
             <li>
                 <div class="action-button">
-                    <button md-button color="accent" (click)="addSchoolYear(activeSchoolClassId)">
+                    <button mat-button color="accent" (click)="addSchoolYear(activeSchoolClassId)">
                         {{ 'i18n.modules.manage.schoolYear.add' | translate }}
                     </button>
                 </div>
@@ -156,7 +156,7 @@
             </li>
             <li>
                 <div class="action-button">
-                    <button md-button color="accent" (click)="addSubject(activeSemesterId)">
+                    <button mat-button color="accent" (click)="addSubject(activeSemesterId)">
                         {{ 'i18n.modules.manage.subject.add' | translate }}
                     </button>
                 </div>

@@ -6,61 +6,61 @@
 </ng-template>
 <div fxLayout fxLayoutAlign="center start" *ngIf="allExams.length > 0; else empty">
     <div class="container middle-container" fxFlex>
-        <md-card class="oc-card">
+        <mat-card class="oc-card">
             <oc-filter-search (search)="search($event)">
                 <form ocFilter [formGroup]="filterForm">
                     <div>
-                        <md-select formControlName="subjectId"
+                        <mat-select formControlName="subjectId"
                                    [placeholder]="'i18n.modules.exam.filter.subject' | translate"
                                    floatPlaceholder="never">
-                            <md-optgroup *ngFor="let schoolClass of filterData.schoolClassSubjects"
+                            <mat-optgroup *ngFor="let schoolClass of filterData.schoolClassSubjects"
                                          [label]="schoolClass.schoolClass.normalizedName">
-                                <md-option *ngFor="let subject of schoolClass.subjects" [value]="subject.id">
+                                <mat-option *ngFor="let subject of schoolClass.subjects" [value]="subject.id">
                                     {{ subject.name }}
-                                </md-option>
-                            </md-optgroup>
-                        </md-select>
-                        <button md-icon-button (click)="filterForm.controls['subjectId'].setValue(null)">
-                            <md-icon>close</md-icon>
+                                </mat-option>
+                            </mat-optgroup>
+                        </mat-select>
+                        <button mat-icon-button (click)="filterForm.controls['subjectId'].setValue(null)">
+                            <mat-icon>close</mat-icon>
                         </button>
                     </div>
                     <div>
-                        <md-select multiple formControlName="selectFilter"
+                        <mat-select multiple formControlName="selectFilter"
                                    [placeholder]="'i18n.common.form.filter.additional' | translate"
                                    floatPlaceholder="never">
-                            <md-option *ngFor="let key of getSelectFilterKeys()" [value]="key">
+                            <mat-option *ngFor="let key of getSelectFilterKeys()" [value]="key">
                                 {{ selectFilter[key].displayName | translate }}
-                            </md-option>
-                        </md-select>
-                        <button md-icon-button (click)="filterForm.controls['selectFilter'].setValue([])">
-                            <md-icon>close</md-icon>
+                            </mat-option>
+                        </mat-select>
+                        <button mat-icon-button (click)="filterForm.controls['selectFilter'].setValue([])">
+                            <mat-icon>close</mat-icon>
                         </button>
                     </div>
                 </form>
             </oc-filter-search>
 
-            <md-accordion displayMode="flat" *ngIf="displayedExams.length > 0; else emptyFilter">
-                <md-expansion-panel *ngFor="let exam of displayedExams">
-                    <md-expansion-panel-header>
+            <mat-accordion displayMode="flat" *ngIf="displayedExams.length > 0; else emptyFilter">
+                <mat-expansion-panel *ngFor="let exam of displayedExams">
+                    <mat-expansion-panel-header>
                         <span class="subject-letter-icon"
                               [style.background-color]="'#' + exam.subject.color.hex"
-                              [mdTooltip]="exam.subject.name">{{ exam.subject.name | slice:0:1 | uppercase }}</span>
+                              [matTooltip]="exam.subject.name">{{ exam.subject.name | slice:0:1 | uppercase }}</span>
                         <span>{{ exam.name }}</span>
-                    </md-expansion-panel-header>
+                    </mat-expansion-panel-header>
                     <exam-list-item [exam]="exam" (delete)="deleteExam($event)" (edit)="editExam($event)"
                                     (addMark)="addMark$.next($event)">
                     </exam-list-item>
-                </md-expansion-panel>
-            </md-accordion>
+                </mat-expansion-panel>
+            </mat-accordion>
             <ng-template #emptyFilter>
                 <oc-empty placeholder="i18n.common.label.noFilterResults"></oc-empty>
             </ng-template>
-        </md-card>
+        </mat-card>
     </div>
 </div>
-<button md-fab
-        [mdTooltip]="'i18n.modules.exam.add' | translate"
-        mdTooltipPosition="left"
+<button mat-fab
+        [matTooltip]="'i18n.modules.exam.add' | translate"
+        matTooltipPosition="left"
         (click)="addExam()">
-    <md-icon>add</md-icon>
+    <mat-icon>add</mat-icon>
 </button>

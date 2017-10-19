@@ -23,26 +23,26 @@
                   iconName="assignment_turned_in"
                   titleKey="i18n.modules.exam.examTask.title"
                   [showDivider]="false">
-        <md-list>
-            <md-list-item *ngFor="let examTask of exam.examTasks">
-                <md-checkbox class="exam-property" [checked]="examTask.finished"
+        <mat-list>
+            <mat-list-item *ngFor="let examTask of exam.examTasks">
+                <mat-checkbox class="exam-property" [checked]="examTask.finished"
                              (change)="finishTask$.next(examTask.id)">
                     {{ examTask.task }}
-                </md-checkbox>
-            </md-list-item>
-        </md-list>
+                </mat-checkbox>
+            </mat-list-item>
+        </mat-list>
     </oc-icon-data>
 </div>
-<button md-button
+<button mat-button
         color="primary"
         (click)="onEdit.emit(exam)">
     {{ 'i18n.common.action.edit' | translate }}
 </button>
-<button md-button
+<button mat-button
         (click)="onDelete.emit(exam)">
     {{ 'i18n.common.action.delete' | translate }}
 </button>
-<button md-button
+<button mat-button
         color="accent"
         class="right"
         (click)="onAddMark.emit(exam)"

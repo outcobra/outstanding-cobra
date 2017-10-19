@@ -5,12 +5,12 @@
          #weightFieldTrigger
          (click)="openWeightField()">
         <span>{{ markGroup.weight }}</span>
-        <button md-button
+        <button mat-button
                 class="square-button"
                 type="button"
                 color="accent"
                 [disabled]="disabled">
-            <md-icon>edit</md-icon>
+            <mat-icon>edit</mat-icon>
         </button>
     </div>
 </div>
@@ -29,22 +29,22 @@
         <div class="input-container">
             <input formControlName="weight"
                    autocomplete="off">
-            <md-icon [mdTooltip]="'i18n.modules.mark.createUpdate.form.weight.hint' | translate"
-                     mdTooltipPosition="below" color="accent">
+            <mat-icon [matTooltip]="'i18n.modules.mark.createUpdate.form.weight.hint' | translate"
+                     matTooltipPosition="below" color="accent">
                 edit
-            </md-icon>
+            </mat-icon>
         </div>
         <div class="control-panel">
-            <button md-button
+            <button mat-button
                     class="square-button"
                     type="submit">
-                <md-icon>check</md-icon>
+                <mat-icon>check</mat-icon>
             </button>
-            <button md-button
+            <button mat-button
                     class="square-button"
                     type="button"
                     (click)="closeWeightField()">
-                <md-icon>clear</md-icon>
+                <mat-icon>clear</mat-icon>
             </button>
         </div>
     </form>

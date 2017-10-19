@@ -2,8 +2,8 @@ import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} f
 import {TranslateService} from '@ngx-translate/core';
 import {Subject} from 'rxjs/Subject';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {ConnectionPositionPair} from '@angular/material';
 import {Observable} from 'rxjs/Observable';
+import {ConnectionPositionPair} from '@angular/cdk/overlay';
 
 @Component({
     selector: 'oc-filter-search',

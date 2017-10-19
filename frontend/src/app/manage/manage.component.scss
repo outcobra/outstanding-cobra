@@ -37,7 +37,7 @@ oc-app:not(.oc-mobile) {
             -ms-user-select: none;
             user-select: none;
         }
-        button[md-button] {
+        button[mat-button] {
             min-width: 50px;
             height: 40px;
         }
@@ -110,7 +110,7 @@ oc-app:not(.oc-mobile) {
         box-sizing: border-box;
         width: 100%;
 
-        span, md-icon {
+        span, mat-icon {
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
@@ -120,7 +120,7 @@ oc-app:not(.oc-mobile) {
         .entity-desc {
             position: relative;
             height: 100%;
-            md-icon {
+            mat-icon {
                 float: left;
                 height: 100%;
                 line-height: $mark-collapsible-header-height !important;

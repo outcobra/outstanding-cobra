@@ -10,15 +10,15 @@
     source-map "^0.5.6"
     typescript "^2.3.3"
 
-"@angular/animations@4.3.3":
-  version "4.3.3"
-  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/animations/-/animations-4.3.3.tgz#b71ddd453673929f550b171cca99952b3aaa831c"
+"@angular/animations@4.4.6":
+  version "4.4.6"
+  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/animations/-/animations-4.4.6.tgz#fa661899a8a4e38cb7c583c7a5c97ce65d592a35"
   dependencies:
     tslib "^1.7.1"
 
-"@angular/cdk@^2.0.0-beta.8":
-  version "2.0.0-beta.8"
-  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/cdk/-/cdk-2.0.0-beta.8.tgz#71961c851dfbeb19e085e898bf5e4461408f8b57"
+"@angular/cdk@^2.0.0-beta.12":
+  version "2.0.0-beta.12"
+  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/cdk/-/cdk-2.0.0-beta.12.tgz#3a243cb62b93f4e039120ba70f900dc9e235622e"
   dependencies:
     tslib "^1.7.1"
 
@@ -91,29 +91,29 @@
   optionalDependencies:
     node-sass "^4.3.0"
 
-"@angular/common@4.3.3":
-  version "4.3.3"
-  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/common/-/common-4.3.3.tgz#1fafbea33af4eba4cddd8677ef57a0f76a50488c"
+"@angular/common@4.4.6":
+  version "4.4.6"
+  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/common/-/common-4.4.6.tgz#4b81420724e0828a0e839b95a55eb1a7e83918f2"
   dependencies:
     tslib "^1.7.1"
 
-"@angular/compiler-cli@4.3.3":
-  version "4.3.3"
-  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/compiler-cli/-/compiler-cli-4.3.3.tgz#b3e39991d1a2ac1445a4a7a122e29dce5492c637"
+"@angular/compiler-cli@4.4.6":
+  version "4.4.6"
+  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/compiler-cli/-/compiler-cli-4.4.6.tgz#bafd3d1e260e99087eb9a8cf7532dbd603abb9b1"
   dependencies:
-    "@angular/tsc-wrapped" "4.3.3"
+    "@angular/tsc-wrapped" "4.4.6"
     minimist "^1.2.0"
     reflect-metadata "^0.1.2"
 
-"@angular/compiler@4.3.3":
-  version "4.3.3"
-  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/compiler/-/compiler-4.3.3.tgz#8c1582fe28a784401325e51a04a9b36b6712033e"
+"@angular/compiler@4.4.6":
+  version "4.4.6"
+  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/compiler/-/compiler-4.4.6.tgz#2ee1faf25b757e1d128979074be7fae529b3bc20"
   dependencies:
     tslib "^1.7.1"
 
-"@angular/core@4.3.3":
-  version "4.3.3"
-  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/core/-/core-4.3.3.tgz#8e6a76914661db407fa2d88dd2441c4c016ff625"
+"@angular/core@4.4.6":
+  version "4.4.6"
+  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/core/-/core-4.4.6.tgz#13031fd10dcfe438875419b38f21120958bc2354"
   dependencies:
     tslib "^1.7.1"
 
@@ -121,45 +121,51 @@
   version "2.0.0-rc.1"
   resolved "https://pkg.pegnu.cloud/repository/npm/@angular/flex-layout/-/flex-layout-2.0.0-rc.1.tgz#96fa7f85b2c4bacf2784913a2d607e2ed23dc7f1"
 
-"@angular/forms@4.3.3":
-  version "4.3.3"
-  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/forms/-/forms-4.3.3.tgz#0912aebb818a176f4e08b7df0ec9fd4021efcb6b"
+"@angular/forms@4.4.6":
+  version "4.4.6"
+  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/forms/-/forms-4.4.6.tgz#fe64ace42435c1b80f49034b7c41ce8caf14a44a"
   dependencies:
     tslib "^1.7.1"
 
-"@angular/http@4.3.3":
-  version "4.3.3"
-  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/http/-/http-4.3.3.tgz#cbe3639010362b681076f0b606673a0e62fd940d"
+"@angular/http@4.4.6":
+  version "4.4.6"
+  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/http/-/http-4.4.6.tgz#0af680c6710bdc026d940e225cfd0f6a5c005d0c"
   dependencies:
     tslib "^1.7.1"
 
-"@angular/material@^2.0.0-beta.8":
-  version "2.0.0-beta.8"
-  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/material/-/material-2.0.0-beta.8.tgz#a92852abc9261aea26c2401f576645470be2cf38"
+"@angular/material-moment-adapter@https://github.com/angular/material2-moment-adapter-builds":
+  version "2.0.0-beta.12-a7faebc"
+  resolved "https://github.com/angular/material2-moment-adapter-builds#5bf8068e5cadb618a034a21755fdaf3b3f1a88d1"
   dependencies:
     tslib "^1.7.1"
 
-"@angular/platform-browser-dynamic@4.3.3":
-  version "4.3.3"
-  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/platform-browser-dynamic/-/platform-browser-dynamic-4.3.3.tgz#b16c09dfe97b5b83daa0581b233f5ea3c3eefb3a"
+"@angular/material@^2.0.0-beta.12":
+  version "2.0.0-beta.12"
+  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/material/-/material-2.0.0-beta.12.tgz#71b6d0b7b021891e5d0e3688c1d4bd78c7457f58"
   dependencies:
     tslib "^1.7.1"
 
-"@angular/platform-browser@4.3.3":
-  version "4.3.3"
-  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/platform-browser/-/platform-browser-4.3.3.tgz#623b659794f079096d4f7685b4bebcb49e3b9a71"
+"@angular/platform-browser-dynamic@4.4.6":
+  version "4.4.6"
+  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/platform-browser-dynamic/-/platform-browser-dynamic-4.4.6.tgz#4d3d9a6a7bf2cf3de4058a615ae059eff641fa36"
   dependencies:
     tslib "^1.7.1"
 
-"@angular/router@4.3.3":
-  version "4.3.3"
-  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/router/-/router-4.3.3.tgz#f3f9004ec31b4fe4d15477e1e63e118df36ad46d"
+"@angular/platform-browser@4.4.6":
+  version "4.4.6"
+  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/platform-browser/-/platform-browser-4.4.6.tgz#a9839c547e1b654fa1d24a89780c8ba6ab8dcce0"
   dependencies:
     tslib "^1.7.1"
 
-"@angular/tsc-wrapped@4.3.3":
-  version "4.3.3"
-  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/tsc-wrapped/-/tsc-wrapped-4.3.3.tgz#c5890f743664be64b79c200ae6e9da5d2a801f5b"
+"@angular/router@4.4.6":
+  version "4.4.6"
+  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/router/-/router-4.4.6.tgz#0f6ad29ae0ff8d2c9ea379bd320447217b7ec866"
+  dependencies:
+    tslib "^1.7.1"
+
+"@angular/tsc-wrapped@4.4.6":
+  version "4.4.6"
+  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/tsc-wrapped/-/tsc-wrapped-4.4.6.tgz#16787cbbf50bdc7e738123b19c32527f244e178d"
   dependencies:
     tsickle "^0.21.0"
 
