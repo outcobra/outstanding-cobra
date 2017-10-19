@@ -1,15 +1,15 @@
 package outcobra.server.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import outcobra.server.model.interfaces.ParentLinked;
+
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import outcobra.server.model.interfaces.ParentLinked;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class MarkGroup extends Mark {
-
     @OneToMany(mappedBy = "markGroup")
     private List<Mark> marks;
 
@@ -17,6 +17,7 @@ public class MarkGroup extends Mark {
     private Subject subject;
 
     //region constructors
+
     /**
      * @param weight
      * @param markGroup
@@ -72,10 +73,14 @@ public class MarkGroup extends Mark {
         double valueSum = 0, weightSum = 0;
 
         for (Mark mark : getMarks()) {
+            if (mark.getValue() == 0) continue;
             valueSum += mark.getWeight() * mark.getValue();
             weightSum += mark.getWeight();
         }
 
+        if (weightSum == 0) {
+            return 0;
+        }
         return valueSum / weightSum;
     }
     //endregion
@@ -109,7 +114,6 @@ public class MarkGroup extends Mark {
         if (getMarks() != null ? !getMarks().equals(markGroup.getMarks()) : markGroup.getMarks() != null)
             return false;
         return getSubject() != null ? getSubject().equals(markGroup.getSubject()) : markGroup.getSubject() == null;
-
     }
 
     @Override
@@ -126,7 +130,6 @@ public class MarkGroup extends Mark {
             return subject;
         }
         return markGroup;
-
     }
     //endregion
 }
