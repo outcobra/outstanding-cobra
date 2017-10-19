@@ -50,7 +50,7 @@ pipeline {
                 parallel(
                         "Test Backend": {
                             sh './gradlew :backend:check --stacktrace --info'
-                            sh 'cd backend && bash <(curl -s https://codecov.io/bash)'
+                            sh "#!/bin/bash\ncd backend && bash <(curl -s https://codecov.io/bash)"
                         },
                         "Test Frontend": {
                             sh './gradlew :frontend:test --stacktrace --info'
