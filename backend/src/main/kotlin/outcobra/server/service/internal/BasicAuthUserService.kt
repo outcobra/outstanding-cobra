@@ -6,6 +6,7 @@ import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Service
 import outcobra.server.config.ProfileRegistry.Companion.BASIC_AUTH_SECURITY_MOCK
 import outcobra.server.data.loaders.UserDataLoader
+import outcobra.server.exception.ValidationKey
 import outcobra.server.model.QUser
 import outcobra.server.model.User
 import outcobra.server.model.dto.UserDto
@@ -35,19 +36,10 @@ class BasicAuthUserService @Inject constructor(val userRepository: UserRepositor
         return ""
     }
 
-    override fun getCurrentUser(): User? {
-        val auth0Id = getTokenUserId()
-        return userRepository.findOne(QUser.user.auth0Id.eq(auth0Id))
-    }
+    override fun getCurrentUser() = userRepository.findOne(QUser.user.auth0Id.eq(getTokenUserId()))
+            ?: ValidationKey.USER_NOT_IN_DATABASE_RELOGIN.throwException()
 
-    override fun getCurrentUserDto(): UserDto? {
-        val user = getCurrentUser()
-        if (user == null) {
-            return null
-        } else {
-            return userDtoMapper.toDto(user)
-        }
-    }
+    override fun getCurrentUserDto() = userDtoMapper.toDto(getCurrentUser())!!
 
     override fun getUserProfile(): UserProfile {
         throw UnsupportedOperationException("function not available within this security mock")
