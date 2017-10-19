@@ -22,14 +22,15 @@ If I am neither holding a mouse nor my camera, I grab my Vic Firth Sticks and ta
 
 Kotlin enthusiast, caffeine-junkie and sailor
 
-My main focus in Outcobra is on the application logic.
-This means that I am responsible for the fact that the data you are typing is stored in the correct format, and will be available to you in the future on every device.
+My focus in Outcobra is on the application logic. This means that I am responsible for the fact that the data you are typing is stored in the correct format, and will be available to you in the future on every device.
 
-Designing software never gets boring. If these work, at the end of the day, the feeling is indescribable.
-For this reason, and to keep improving myself, I spend a lot of my spare time with software development.
-On my desk, besides the mouse and the keyboard, a cup of coffee can not be missed.
+Designing software never gets boring. It amazes me how we can chain abstract constructs together to create something new. For this reason, and to keep improving myself, I spend a lot of my spare time with software development.
 
-As a compensation to my activities in computer science, I enjoy the peace on the lake. To make sure I don't get bored, I started taking part in regattas (sailing contests) a few years ago.
+Besides the mouse and the keyboard, a cup of coffee can't be missed on my desk.
+
+During business hours I am mostly occupied with testing activities. Through that, software quality became one of my passions.
+
+As a compensation to my activities in computer science, I enjoy the calm on the lake. To make sure I don't get bored, I started taking part in regattas (sailing contests) a few years ago.
 
 ## Joel
 
