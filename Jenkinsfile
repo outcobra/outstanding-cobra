@@ -43,10 +43,14 @@ pipeline {
         }
 
         stage('Test') {
+            environment {
+                CODECOV_TOKEN = credentials('codecov-token')
+            }
             steps {
                 parallel(
                         "Test Backend": {
-                            sh './gradlew :backend:test --stacktrace --info'
+                            sh './gradlew :backend:check --stacktrace --info'
+                            sh 'cd backend && bash <(curl -s https://codecov.io/bash)'
                         },
                         "Test Frontend": {
                             sh './gradlew :frontend:test --stacktrace --info'
