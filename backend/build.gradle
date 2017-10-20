@@ -4,7 +4,7 @@ buildscript {
         outstandingCobraVersion = outcobraVersion
 
         if (System.getenv('JENKINS_URL') != null && System.getenv('BUILD_NUMBER') != null) {
-            outstandingCobraVersion = outstandingCobraVersion + '-J' + System.getenv('BUILD_NUMBER') + '+' + System.getenv('BRANCH_NAME')
+            outstandingCobraVersion = outstandingCobraVersion + '-J' + System.getenv('BUILD_NUMBER') + '+' + System.getenv('BRANCH_NAME').replace('/', '_')
         }
     }
     repositories {

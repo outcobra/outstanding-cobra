@@ -93,7 +93,7 @@ pipeline {
                             configFile(fileId: '3bfec3c0-2d29-4616-acb6-06d514491d6f', targetLocation: 'known_hosts')
                     ]) {}
                     sshagent(credentials: ['outcobra-deploy-staging-ssh']) {
-                        sh 'ssh -o UserKnownHostsFile=known_hosts outcobra-deploy@helios.peg.nu -C "cd /opt/outcobra-a && ./pullRestart.sh"'
+                        sh 'ssh -4 -v -o UserKnownHostsFile=known_hosts outcobra-deploy@helios.peg.nu -C "cd /opt/outcobra-a && ./pullRestart.sh"'
                     }
                 }
             }
