@@ -28,7 +28,7 @@ Designing software never gets boring. It amazes me how we can chain abstract con
 
 Besides the mouse and the keyboard, a cup of coffee can't be missed on my desk.
 
-During business hours I am mostly occupied with testing activities. Through that, software quality became one of my passions.
+During business hours I am mostly occupied with testing activities. Because of that, software quality became one of my passions.
 
 As a compensation to my activities in computer science, I enjoy the calm on the lake. To make sure I don't get bored, I started taking part in regattas (sailing contests) a few years ago.
 
