@@ -18,6 +18,9 @@ mat-form-field#exam-search {
 }
 
 mat-expansion-panel-header {
+    .mat-content {
+        align-items: center;
+    }
     .subject-letter-icon {
         border-radius: 50%;
         line-height: 32px;

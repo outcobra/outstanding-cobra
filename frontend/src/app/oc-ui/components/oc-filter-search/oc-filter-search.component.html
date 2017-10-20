@@ -29,6 +29,7 @@
         <div class="oc-search-field">
             <mat-icon>search</mat-icon>
             <input formControlName="search"
+                   [placeholder]="placeholder"
                    ocAutoFocus
                    [ocAutoSelect]="true"
                    (keyup)="search$.next($event.target.value)">
