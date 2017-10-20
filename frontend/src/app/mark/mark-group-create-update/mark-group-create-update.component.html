@@ -11,7 +11,7 @@
                            [placeholder]="'i18n.modules.mark.createUpdate.form.weight.label' | translate"
                            formControlName="weight">
                     <mat-error
-                        *ngIf="markGroupCreateUpdateForm.get('weight').invalid && markGroupCreateUpdateForm.get('weight').touched">
+                            *ngIf="markGroupCreateUpdateForm.get('weight').invalid && markGroupCreateUpdateForm.get('weight').touched">
                         <ng-template [ngIf]="markGroupCreateUpdateForm.get('weight').hasError('required')">
                             {{ 'i18n.common.form.error.required' | translate }}
                         </ng-template>
@@ -36,16 +36,18 @@
             </mat-form-field>
         </div>
         <div class="form-group">
-            <mat-select #markSelect
-                       (change)="newMark$.next($event.value)"
-                       [disabled]="!hasMarksLeft()"
-                       [placeholder]="'i18n.modules.mark.group.createUpdate.form.selectMark.label' | translate">
-                <mat-option *ngFor="let mark of availableMarks" [value]="mark">
-                    {{ mark.description }}
-                </mat-option>
-            </mat-select>
+            <mat-form-field>
+                <mat-select #markSelect
+                            (change)="newMark$.next($event.value)"
+                            [disabled]="!hasMarksLeft()"
+                            [placeholder]="'i18n.modules.mark.group.createUpdate.form.selectMark.label' | translate">
+                    <mat-option *ngFor="let mark of availableMarks" [value]="mark">
+                        {{ mark.description }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
             <mat-list class="mark-group-children"
-                     *ngIf="selectedMarks.length > 0">
+                      *ngIf="selectedMarks.length > 0">
                 <h3 mat-subheader>{{ 'i18n.modules.mark.group.createUpdate.children' | translate }}</h3>
                 <oc-divider></oc-divider>
                 <ng-template ngFor let-mark [ngForOf]="selectedMarks">

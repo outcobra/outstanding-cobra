@@ -8,11 +8,11 @@
         flex-grow: 1;
         overflow-y: scroll;
     }
-    md-toolbar {
+    mat-toolbar {
         z-index: 100;
         background-color: white;
         box-shadow: 0 -2px 8px 0 rgba(0,0,0,0.20);
-        ::ng-deep md-toolbar-row {
+        ::ng-deep mat-toolbar-row {
             justify-content: center;
             .bottom-menu {
                 width: 100%;
@@ -32,14 +32,14 @@
                         font-weight: normal;
                         font-size: 0.6em;
                     }
-                    md-icon {
+                    mat-icon {
                         font-size: 1.2em;
                         transition: .2s all ease-in-out;
                     }
                     &:not(.active) {
                         color: black;
                     }
-                    &.active md-icon {
+                    &.active mat-icon {
                         font-size: 1.4em;
                     }
                 }

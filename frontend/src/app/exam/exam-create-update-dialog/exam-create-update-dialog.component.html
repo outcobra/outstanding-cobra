@@ -32,7 +32,10 @@
                            [matDatepicker]="examDatePicker"
                            [placeholder]="'i18n.common.label.todoDate' | translate"
                            formControlName="date">
-                    <mat-datepicker-toggle [for]="examDatePicker"></mat-datepicker-toggle>
+                    <mat-datepicker-toggle matSuffix [for]="examDatePicker"></mat-datepicker-toggle>
+                    <mat-datepicker #examDatePicker
+                                    [touchUi]="isMobile()">
+                    </mat-datepicker>
                     <mat-error>
                         <ng-template [ngIf]="examCreateUpdateForm.get('date').hasError('required')">
                             {{ 'i18n.common.form.error.required' | translate }}
@@ -42,19 +45,18 @@
                         </ng-template>
                     </mat-error>
                 </mat-form-field>
-                <mat-datepicker #examDatePicker
-                               [touchUi]="isMobile()">
-                </mat-datepicker>
             </div>
             <div class="half-child">
-                <mat-select formControlName="subjectId"
-                           required
-                           [placeholder]="'i18n.modules.exam.dialogs.add.subject.label' | translate">
-                    <mat-option *ngFor="let subject of subjects"
-                               [value]="subject.id">
-                        {{ subject.name }}
-                    </mat-option>
-                </mat-select>
+                <mat-form-field>
+                    <mat-select formControlName="subjectId"
+                                required
+                                [placeholder]="'i18n.modules.exam.dialogs.add.subject.label' | translate">
+                        <mat-option *ngFor="let subject of subjects"
+                                    [value]="subject.id">
+                            {{ subject.name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
             </div>
         </div>
 

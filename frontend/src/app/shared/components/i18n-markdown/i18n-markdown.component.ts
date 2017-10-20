@@ -23,16 +23,16 @@ export class I18nMarkdownComponent implements OnInit, OnChanges {
     }
 
     ngOnInit(): void {
-        if (isTruthy(this._route)) {
-            this.path = this._route.snapshot.data.path;
-            this.displayMode = this._route.snapshot.data.displayMode || 'flat';
-            this.wrapperClasses = this._route.snapshot.data.wrapperClasses || [];
+        this._route.data.subscribe(data => {
+            this.path = data.path;
+            this.displayMode = data.displayMode || 'flat';
+            this.wrapperClasses = data.wrapperClasses || [];
             if (!Array.isArray(this.wrapperClasses)) {
                 throw new Error("wrapperClasses must be an array");
             }
-        }
-        this.wrapperClasses.push(`style-${this.displayMode}`);
-        this._setPathForCurrentLang();
+            this.wrapperClasses.push(`style-${this.displayMode}`);
+            this._setPathForCurrentLang();
+        });
 
         this._translateService.onLangChange.subscribe(() => this._setPathForCurrentLang())
     }
