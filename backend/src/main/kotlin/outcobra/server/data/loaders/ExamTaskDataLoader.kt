@@ -15,13 +15,13 @@ import outcobra.server.data.loaders.ExamDataLoader.Companion.PROJECT_EXAM
 import outcobra.server.data.loaders.ExamDataLoader.Companion.SCRUM_EXAM
 import outcobra.server.model.ExamTask
 import outcobra.server.model.repository.ExamTaskRepository
-import java.util.Random
+import java.util.*
 import javax.inject.Inject
 
 /**
  *
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.2.0
  */
 @Component
 @Order(EXAM_TASK)

@@ -13,16 +13,19 @@ import outcobra.server.data.loaders.SubjectDataLoader.Companion.OOP_DESIGN
 import outcobra.server.data.loaders.SubjectDataLoader.Companion.PHYSICS
 import outcobra.server.data.loaders.SubjectDataLoader.Companion.PROJECT
 import outcobra.server.data.loaders.SubjectDataLoader.Companion.SCRUM
-import outcobra.server.model.*
+import outcobra.server.model.Mark
+import outcobra.server.model.MarkGroup
+import outcobra.server.model.MarkValue
+import outcobra.server.model.Subject
 import outcobra.server.model.repository.MarkGroupRepository
 import outcobra.server.model.repository.MarkValueRepository
 import outcobra.server.model.repository.SubjectRepository
-import java.util.Random
+import java.util.*
 import javax.inject.Inject
 
 /**
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.2.0
  */
 @Component
 @Order(MARK)

@@ -4,7 +4,7 @@ import outcobra.server.model.dto.filter.SubjectFilterDto
 
 /**
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.2.0
  */
 interface FilterService {
 

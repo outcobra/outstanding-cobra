@@ -6,7 +6,7 @@ import {Observable} from 'rxjs/Observable';
 
 /**
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.2.0
  */
 
 @Injectable()

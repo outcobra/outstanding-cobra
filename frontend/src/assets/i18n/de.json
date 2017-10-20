@@ -87,7 +87,12 @@
       "main": {
         "welcome": "Willkommen bei Outcobra",
         "subtitle": "Das Managementtool von Schülern für Schüler",
-        "authors": "von Joel, Florian und Mario"
+        "authors": "von Joel, Florian und Mario",
+        "linkTitles": {
+          "about": "Über das Projekt",
+          "features": "Features",
+          "profiles": "Über das Team"
+        }
       },
       "exam": {
         "linkTitle": "Prüfungen",
@@ -431,7 +436,8 @@
           "title": "Ungültiges Datum",
           "message": "Die angegebene Zeitdauer ist auesserhalb der Zeitspanne des Vater-Objekts"
         },
-        "mark": "Der Wert dieser Note ist ungültig"
+        "mark": "Der Wert dieser Note ist ungültig",
+        "relogin": "Ihr Benutzer ist nicht in der Datenbank. Bitte melden Sie sich neu an"
       },
       "fallback": {
         "linkTitle": "Seite nicht gefunden",

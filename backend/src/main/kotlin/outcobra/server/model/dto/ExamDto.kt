@@ -7,7 +7,7 @@ import java.time.LocalDate
 
 /**
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.2.0
  */
 data class ExamDto(val id: Long = 0,
                    val name: String = "",

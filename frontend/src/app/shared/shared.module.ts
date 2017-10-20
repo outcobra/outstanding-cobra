@@ -10,6 +10,7 @@ import {OCUiModule} from '../oc-ui/oc-ui.module';
 import {OCMaterialModule} from '../oc-material.module';
 import {MarkdownModule} from 'angular2-markdown';
 import {I18nMarkdownComponent} from './components/i18n-markdown/i18n-markdown.component';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 @NgModule({
     declarations: [
@@ -33,6 +34,7 @@ import {I18nMarkdownComponent} from './components/i18n-markdown/i18n-markdown.co
         TranslateModule,
         OCMaterialModule,
         OCUiModule,
+        FlexLayoutModule,
         MarkdownModule
     ],
     entryComponents: [
