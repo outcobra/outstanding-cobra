@@ -5,7 +5,7 @@
 <form [formGroup]="schoolYearForm" (submit)="submit()">
     <div class="dialog-body" mat-dialog-content>
         <div class="form-group">
-            <mat-input-container>
+            <mat-form-field>
                 <input matInput
                        required
                        [placeholder]="'i18n.modules.manage.schoolYear.form.label' | translate"
@@ -13,10 +13,10 @@
                 <mat-error *ngIf="schoolYearForm.get('name').hasError('required')">
                     {{ 'i18n.common.form.error.required' | translate }}
                 </mat-error>
-            </mat-input-container>
+            </mat-form-field>
         </div>
         <div class="form-group">
-            <mat-input-container>
+            <mat-form-field>
                 <input matInput
                        required
                        [matDatepicker]="validFromPicker"
@@ -31,13 +31,13 @@
                         {{ 'i18n.common.form.error.datePattern' | translate }}
                     </ng-template>
                 </mat-error>
-            </mat-input-container>
+            </mat-form-field>
             <mat-datepicker #validFromPicker
                            [touchUi]="isMobile()">
             </mat-datepicker>
         </div>
         <div class="form-group">
-            <mat-input-container>
+            <mat-form-field>
                 <input matInput
                        required
                        [matDatepicker]="validToPicker"
@@ -52,7 +52,7 @@
                         {{ 'i18n.common.form.error.datePattern' | translate }}
                     </ng-template>
                 </mat-error>
-            </mat-input-container>
+            </mat-form-field>
             <mat-datepicker #validToPicker
                            [touchUi]="isMobile()">
             </mat-datepicker>

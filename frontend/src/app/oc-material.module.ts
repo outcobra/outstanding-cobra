@@ -8,7 +8,7 @@ import {
     MatCheckboxModule,
     MatDatepickerModule,
     MatDialogModule,
-    MatExpansionModule,
+    MatExpansionModule, MatFormFieldModule,
     MatIconModule,
     MatInputModule,
     MatListModule,
@@ -50,6 +50,7 @@ import {OverlayModule} from '@angular/cdk/overlay';
         MatExpansionModule,
         MatCheckboxModule,
         MatMomentDateModule,
+        MatFormFieldModule,
         OverlayModule
     ],
     exports: [
@@ -74,6 +75,7 @@ import {OverlayModule} from '@angular/cdk/overlay';
         MatExpansionModule,
         MatCheckboxModule,
         MatMomentDateModule,
+        MatFormFieldModule,
         OverlayModule
     ],
     providers: [

@@ -10,16 +10,18 @@
             <oc-filter-search (search)="search$.next($event)">
                 <form ocFilter [formGroup]="filterForm" class="oc-filter-form">
                     <div>
-                        <mat-select formControlName="subjectId"
-                                   [placeholder]="'i18n.modules.exam.filter.subject' | translate"
-                                   floatPlaceholder="never">
-                            <mat-optgroup *ngFor="let schoolClass of filterData.schoolClassSubjects"
-                                         [label]="schoolClass.schoolClass.normalizedName">
-                                <mat-option *ngFor="let subject of schoolClass.subjects" [value]="subject.id">
-                                    {{ subject.name }}
-                                </mat-option>
-                            </mat-optgroup>
-                        </mat-select>
+                        <mat-form-field>
+                            <mat-select formControlName="subjectId"
+                                        [placeholder]="'i18n.modules.exam.filter.subject' | translate"
+                                        floatPlaceholder="never">
+                                <mat-optgroup *ngFor="let schoolClass of filterData.schoolClassSubjects"
+                                              [label]="schoolClass.schoolClass.normalizedName">
+                                    <mat-option *ngFor="let subject of schoolClass.subjects" [value]="subject.id">
+                                        {{ subject.name }}
+                                    </mat-option>
+                                </mat-optgroup>
+                            </mat-select>
+                        </mat-form-field>
                         <button mat-icon-button (click)="filterForm.controls['subjectId'].setValue(null)">
                             <mat-icon>close</mat-icon>
                         </button>

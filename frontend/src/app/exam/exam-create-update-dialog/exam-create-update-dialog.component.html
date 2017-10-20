@@ -4,7 +4,7 @@
 <form [formGroup]="examCreateUpdateForm" (submit)="submit()">
     <div class="dialog-body" mat-dialog-content>
         <div class="form-group">
-            <mat-input-container>
+            <mat-form-field>
                 <input matInput
                        required
                        [placeholder]="'i18n.modules.exam.dialogs.add.name.label' | translate"
@@ -12,21 +12,21 @@
                 <mat-error *ngIf="examCreateUpdateForm.get('name').hasError('required')">
                     {{ 'i18n.common.form.error.required' | translate }}
                 </mat-error>
-            </mat-input-container>
+            </mat-form-field>
         </div>
         <div class="form-group">
-            <mat-input-container>
+            <mat-form-field>
                 <textarea matInput
                           [placeholder]="'i18n.modules.exam.dialogs.add.desc.label' | translate"
                           formControlName="description"></textarea>
                 <mat-error *ngIf="examCreateUpdateForm.get('description').hasError('required')">
                     {{ 'i18n.common.form.error.required' | translate }}
                 </mat-error>
-            </mat-input-container>
+            </mat-form-field>
         </div>
         <div class="form-group half responsive">
             <div class="half-child">
-                <mat-input-container>
+                <mat-form-field>
                     <input matInput
                            required
                            [matDatepicker]="examDatePicker"
@@ -41,7 +41,7 @@
                             {{ 'i18n.common.form.error.datePattern' | translate }}
                         </ng-template>
                     </mat-error>
-                </mat-input-container>
+                </mat-form-field>
                 <mat-datepicker #examDatePicker
                                [touchUi]="isMobile()">
                 </mat-datepicker>
@@ -70,9 +70,9 @@
             <mat-list>
                 <mat-list-item *ngFor="let examTask of examTaskArray.controls; let i=index" [formGroupName]="i">
                     <mat-checkbox formControlName="finished"></mat-checkbox>
-                    <mat-input-container>
+                    <mat-form-field>
                         <input matInput formControlName="task">
-                    </mat-input-container>
+                    </mat-form-field>
                 </mat-list-item>
             </mat-list>
         </div>

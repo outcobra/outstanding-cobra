@@ -133,7 +133,7 @@ mat-dialog-container {
 .form-group {
     width: 100%;
     margin-bottom: 16px;
-    mat-input-container, mat-select {
+    mat-form-field, mat-select {
         box-sizing: border-box;
         width: 100%;
         padding: 0 10px;
@@ -190,7 +190,7 @@ mat-dialog-container {
     }
 }
 
-mat-input-container.big-search {
+mat-form-field.big-search {
     display: block !important;
     box-sizing: border-box;
     margin: 0 20px;

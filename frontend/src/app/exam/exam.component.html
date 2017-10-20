@@ -10,28 +10,32 @@
             <oc-filter-search (search)="search($event)">
                 <form ocFilter [formGroup]="filterForm">
                     <div>
-                        <mat-select formControlName="subjectId"
-                                   [placeholder]="'i18n.modules.exam.filter.subject' | translate"
-                                   floatPlaceholder="never">
-                            <mat-optgroup *ngFor="let schoolClass of filterData.schoolClassSubjects"
-                                         [label]="schoolClass.schoolClass.normalizedName">
-                                <mat-option *ngFor="let subject of schoolClass.subjects" [value]="subject.id">
-                                    {{ subject.name }}
-                                </mat-option>
-                            </mat-optgroup>
-                        </mat-select>
+                        <mat-form-field>
+                            <mat-select formControlName="subjectId"
+                                        [placeholder]="'i18n.modules.exam.filter.subject' | translate"
+                                        floatPlaceholder="never">
+                                <mat-optgroup *ngFor="let schoolClass of filterData.schoolClassSubjects"
+                                              [label]="schoolClass.schoolClass.normalizedName">
+                                    <mat-option *ngFor="let subject of schoolClass.subjects" [value]="subject.id">
+                                        {{ subject.name }}
+                                    </mat-option>
+                                </mat-optgroup>
+                            </mat-select>
+                        </mat-form-field>
                         <button mat-icon-button (click)="filterForm.controls['subjectId'].setValue(null)">
                             <mat-icon>close</mat-icon>
                         </button>
                     </div>
                     <div>
-                        <mat-select multiple formControlName="selectFilter"
-                                   [placeholder]="'i18n.common.form.filter.additional' | translate"
-                                   floatPlaceholder="never">
-                            <mat-option *ngFor="let key of getSelectFilterKeys()" [value]="key">
-                                {{ selectFilter[key].displayName | translate }}
-                            </mat-option>
-                        </mat-select>
+                        <mat-form-field>
+                            <mat-select multiple formControlName="selectFilter"
+                                        [placeholder]="'i18n.common.form.filter.additional' | translate"
+                                        floatPlaceholder="never">
+                                <mat-option *ngFor="let key of getSelectFilterKeys()" [value]="key">
+                                    {{ selectFilter[key].displayName | translate }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
                         <button mat-icon-button (click)="filterForm.controls['selectFilter'].setValue([])">
                             <mat-icon>close</mat-icon>
                         </button>
@@ -39,7 +43,7 @@
                 </form>
             </oc-filter-search>
 
-            <mat-accordion displayMode="flat" *ngIf="displayedExams.length > 0; else emptyFilter">
+            <mat-accordion *ngIf="displayedExams.length > 0; else emptyFilter">
                 <mat-expansion-panel *ngFor="let exam of displayedExams">
                     <mat-expansion-panel-header>
                         <span class="subject-letter-icon"

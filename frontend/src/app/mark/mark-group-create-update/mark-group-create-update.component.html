@@ -5,7 +5,7 @@
     <mat-card fxFlex.gt-sm="960px">
         <div class="form-group">
             <div class="half">
-                <mat-input-container>
+                <mat-form-field>
                     <input matInput
                            required
                            [placeholder]="'i18n.modules.mark.createUpdate.form.weight.label' | translate"
@@ -19,11 +19,11 @@
                             {{ 'i18n.modules.mark.createUpdate.form.weight.error.pattern' | translate }}
                         </ng-template>
                     </mat-error>
-                </mat-input-container>
+                </mat-form-field>
             </div>
         </div>
         <div class="form-group">
-            <mat-input-container>
+            <mat-form-field>
                 <input matInput
                        required
                        [placeholder]="'i18n.modules.mark.group.createUpdate.form.description.label' | translate"
@@ -33,7 +33,7 @@
                 <mat-error *ngIf="markGroupCreateUpdateForm.get('description').hasError('required')">
                     {{ 'i18n.common.form.error.required' | translate }}
                 </mat-error>
-            </mat-input-container>
+            </mat-form-field>
         </div>
         <div class="form-group">
             <mat-select #markSelect

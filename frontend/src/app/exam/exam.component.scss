@@ -1,6 +1,6 @@
 @import '../../sass/color-variables';
 
-mat-input-container#exam-search {
+mat-form-field#exam-search {
     display: block !important;
     box-sizing: border-box;
     margin: 0 20px;
@@ -43,7 +43,7 @@ mat-expansion-panel-header {
     }
 }
 
-mat-input-container#task-search {
+mat-form-field#task-search {
     display: block !important;
     box-sizing: border-box;
     margin: 0 20px;

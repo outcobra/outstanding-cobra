@@ -5,7 +5,7 @@
 <form [formGroup]="institutionForm" (submit)="submit()">
     <div class="dialog-body" mat-dialog-content>
         <div class="form-group">
-            <mat-input-container>
+            <mat-form-field>
                 <input matInput
                        required
                        [autofocus]="false"
@@ -14,7 +14,7 @@
                 <mat-error *ngIf="institutionForm.get('name').hasError('required')">
                     {{ 'i18n.common.form.error.required' | translate }}
                 </mat-error>
-            </mat-input-container>
+            </mat-form-field>
         </div>
     </div>
     <div class="dialog-footer" mat-dialog-actions>

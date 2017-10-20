@@ -4,7 +4,7 @@
 <form [formGroup]="taskCreateUpdateForm" (submit)="submit()">
     <div class="dialog-body" mat-dialog-content>
         <div class="form-group">
-            <mat-input-container>
+            <mat-form-field>
                 <input matInput
                        required
                        [placeholder]="'i18n.modules.task.dialogs.add.name.label' | translate"
@@ -12,20 +12,20 @@
                 <mat-error *ngIf="taskCreateUpdateForm.get('name').hasError('required')">
                     {{ 'i18n.common.form.error.required' | translate }}
                 </mat-error>
-            </mat-input-container>
+            </mat-form-field>
         </div>
         <div class="form-group">
-            <mat-input-container>
+            <mat-form-field>
                 <textarea matInput
                           [placeholder]="'i18n.modules.task.dialogs.add.desc.label' | translate"
                           formControlName="description">
                 </textarea>
-            </mat-input-container>
+            </mat-form-field>
         </div>
         <div formGroupName="dates" class="form-group">
             <div class="half">
                 <div class="half-child">
-                    <mat-input-container>
+                    <mat-form-field>
                         <input matInput
                                required
                                [matDatepicker]="todoDatePicker"
@@ -41,13 +41,13 @@
                                 {{ 'i18n.common.form.error.datePattern' | translate }}
                             </ng-template>
                         </mat-error>
-                    </mat-input-container>
+                    </mat-form-field>
                     <mat-datepicker #todoDatePicker
                                    [touchUi]="isMobile()">
                     </mat-datepicker>
                 </div>
                 <div class="half-child">
-                    <mat-input-container>
+                    <mat-form-field>
                         <input matInput
                                required
                                [matDatepicker]="dueDatePicker"
@@ -60,7 +60,7 @@
                                 {{ 'i18n.common.form.error.required' | translate }}
                             </ng-template>
                         </mat-error>
-                    </mat-input-container>
+                    </mat-form-field>
                     <mat-datepicker #dueDatePicker
                                    [touchUi]="isMobile()">
                     </mat-datepicker>
@@ -74,7 +74,7 @@
             </span>
         </div>
         <div class="form-group">
-            <mat-input-container>
+            <mat-form-field>
                 <input matInput
                        required
                        type="number"
@@ -83,7 +83,7 @@
                 <mat-error *ngIf="taskCreateUpdateForm.get('effort').hasError('required')">
                     {{ 'i18n.common.form.error.required' | translate }}
                 </mat-error>
-            </mat-input-container>
+            </mat-form-field>
         </div>
         <div class="form-group">
             <mat-select formControlName="subjectId"
