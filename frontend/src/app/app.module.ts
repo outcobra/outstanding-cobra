@@ -11,7 +11,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {MainModule} from './main/main.module';
 import {ManageModule} from './manage/manage.module';
 import {TaskModule} from './task/task.module';
-import {configLoader, inputErrorStateMatcher, translateFactory, translationLoader} from './core/services/factories';
+import {configLoader, translateFactory, translationLoader} from './core/services/factories';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {CoreModule} from './core/core.module';
@@ -22,7 +22,8 @@ import {ExamModule} from './exam/exam.module';
 import {PipeModule} from './shared/pipe.module';
 import {FallbackComponent} from './main/fallback/fallback.component';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {MD_ERROR_GLOBAL_OPTIONS} from '@angular/material';
+import {ErrorStateMatcher} from '@angular/material';
+import {OcErrorStateMatcher} from './core/services/oc-error-state-matcher';
 
 @NgModule({
     declarations: [
@@ -74,10 +75,8 @@ import {MD_ERROR_GLOBAL_OPTIONS} from '@angular/material';
             useClass: RavenErrorHandler
         },
         {
-            provide: MD_ERROR_GLOBAL_OPTIONS,
-            useValue: {
-                errorStateMatcher: inputErrorStateMatcher
-            }
+            provide: ErrorStateMatcher,
+            useClass: OcErrorStateMatcher
         }
     ],
     bootstrap: [AppComponent]

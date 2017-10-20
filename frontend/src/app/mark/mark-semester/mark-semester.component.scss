@@ -33,23 +33,23 @@ mark-semester {
 
     .mark-mark-group-header > .oc-collapsible-header-content,
     .mark-value-list > h3,
-    md-list.mark-value-list > md-list-item:not(.mark-group-item) > .mat-list-item-content {
+    mat-list.mark-value-list > mat-list-item:not(.mark-group-item) > .mat-list-item-content {
         @include indentation(3);
     }
 
     .mark-group-value-list {
         padding: 0 !important;
 
-        > md-list-item > .mat-list-item-content {
+        > mat-list-item > .mat-list-item-content {
             @include indentation(4);
         }
     }
 
-    md-list-item.mark-list-item mark-value .mark-value-container {
+    mat-list-item.mark-list-item mark-value .mark-value-container {
         margin-right: 24px;
     }
 
-    .mark-mark-group-header md-icon {
+    .mark-mark-group-header mat-icon {
         padding: 0 !important;
     }
 

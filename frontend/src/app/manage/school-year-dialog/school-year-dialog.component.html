@@ -1,64 +1,61 @@
 <div class="dialog-header">
-    <h1 md-dialog-title *ngIf="isEditMode()">{{ 'i18n.modules.manage.schoolYear.edit' | translate }}</h1>
-    <h1 md-dialog-title *ngIf="!isEditMode()">{{ 'i18n.modules.manage.schoolYear.add' | translate }}</h1>
+    <h1 mat-dialog-title *ngIf="isEditMode()">{{ 'i18n.modules.manage.schoolYear.edit' | translate }}</h1>
+    <h1 mat-dialog-title *ngIf="!isEditMode()">{{ 'i18n.modules.manage.schoolYear.add' | translate }}</h1>
 </div>
 <form [formGroup]="schoolYearForm" (submit)="submit()">
-    <div class="dialog-body" md-dialog-content>
+    <div class="dialog-body" mat-dialog-content>
         <div class="form-group">
-            <md-input-container>
-                <input mdInput
+            <mat-form-field>
+                <input matInput
                        required
                        [placeholder]="'i18n.modules.manage.schoolYear.form.label' | translate"
                        formControlName="name">
-                <md-error *ngIf="schoolYearForm.get('name').hasError('required')">
+                <mat-error *ngIf="schoolYearForm.get('name').hasError('required')">
                     {{ 'i18n.common.form.error.required' | translate }}
-                </md-error>
-            </md-input-container>
+                </mat-error>
+            </mat-form-field>
         </div>
         <div class="form-group">
-            <md-input-container>
-                <input mdInput
+            <mat-form-field>
+                <input matInput
                        required
-                       [mdDatepicker]="validFromPicker"
+                       [matDatepicker]="validFromPicker"
                        [placeholder]="'i18n.common.label.validFrom' | translate"
                        formControlName="validFrom">
-                <button mdSuffix [mdDatepickerToggle]="validFromPicker" type="button"></button>
-                <md-error>
+                <mat-datepicker-toggle [for]=validFromPicker></mat-datepicker-toggle>
+                <mat-error>
                     <ng-template [ngIf]="schoolYearForm.get('validFrom').hasError('required')">
                         {{ 'i18n.common.form.error.required' | translate }}
                     </ng-template>
                     <ng-template [ngIf]="schoolYearForm.get('validFrom').hasError('date')">
                         {{ 'i18n.common.form.error.datePattern' | translate }}
                     </ng-template>
-                </md-error>
-            </md-input-container>
-            <md-datepicker #validFromPicker
+                </mat-error>
+            </mat-form-field>
+            <mat-datepicker #validFromPicker
                            [touchUi]="isMobile()">
-            </md-datepicker>
+            </mat-datepicker>
         </div>
         <div class="form-group">
-            <md-input-container>
-                <input mdInput
+            <mat-form-field>
+                <input matInput
                        required
-                       [mdDatepicker]="validToPicker"
+                       [matDatepicker]="validToPicker"
                        [placeholder]="'i18n.common.label.validTo' | translate"
                        formControlName="validTo">
-                <button mdSuffix
-                        [mdDatepickerToggle]="validToPicker"
-                        type="button">
-                </button>
-                <md-error>
+                <mat-datepicker-toggle [for]="validToPicker"></mat-datepicker-toggle>
+                <mat-error>
                     <ng-template [ngIf]="schoolYearForm.get('validTo').hasError('required')">
                         {{ 'i18n.common.form.error.required' | translate }}
                     </ng-template>
                     <ng-template [ngIf]="schoolYearForm.get('validTo').hasError('date')">
                         {{ 'i18n.common.form.error.datePattern' | translate }}
                     </ng-template>
-                </md-error>
-            </md-input-container>
-            <md-datepicker #validToPicker
+                </mat-error>
+            </mat-form-field>
+            <mat-datepicker #validToPicker
                            [touchUi]="isMobile()">
-            </md-datepicker>
+            </mat-datepicker>
         </div>
         <div class="form-error"
              *ngIf="schoolYearForm.invalid && schoolYearForm.touched && ((schoolYearForm.get('validFrom').touched && schoolYearForm.get('validTo').touched) || isEditMode())">
@@ -67,13 +64,13 @@
             </span>
         </div>
     </div>
-    <div class="dialog-footer" md-dialog-actions>
+    <div class="dialog-footer" mat-dialog-actions>
         <div class="footer-right">
-            <button md-button
-                    md-dialog-close>
+            <button mat-button
+                    mat-dialog-close>
                 {{ 'i18n.common.action.cancel' | translate }}
             </button>
-            <button md-raised-button
+            <button mat-raised-button
                     color="primary"
                     type="submit">
                 {{ 'i18n.common.action.save' | translate }}

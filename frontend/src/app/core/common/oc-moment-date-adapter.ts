@@ -1,3 +1,4 @@
+/*
 import {DateAdapter} from '@angular/material';
 import * as moment from 'moment';
 import {isMoment, Moment} from 'moment';
@@ -160,3 +161,4 @@ export class OCMomentDateAdapter extends DateAdapter<Moment> {
         }
     }
 }
+*/

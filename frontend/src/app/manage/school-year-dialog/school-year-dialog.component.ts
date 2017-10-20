@@ -2,7 +2,7 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ParentLinkedCreateUpdateComponent} from '../../core/common/parent-linked-create-update-component';
 import {SchoolClassDto, SchoolYearDto} from '../model/manage.dto';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {MdDialogRef} from '@angular/material';
+import {MatDialogRef} from '@angular/material';
 import {OCValidators} from '../../core/services/oc-validators';
 import {TranslateService} from '@ngx-translate/core';
 import {DatePipe} from '@angular/common';
@@ -20,7 +20,7 @@ export class SchoolYearDialog extends ParentLinkedCreateUpdateComponent<SchoolYe
 
     private _schoolYearForm: FormGroup;
 
-    constructor(private _dialogRef: MdDialogRef<SchoolYearDialog>,
+    constructor(private _dialogRef: MatDialogRef<SchoolYearDialog>,
                 private _formBuilder: FormBuilder,
                 private _translate: TranslateService,
                 private _datePipe: DatePipe,

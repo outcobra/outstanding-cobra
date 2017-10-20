@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 import {TaskDto} from '../model/task.dto';
 import {ConfirmDialogService} from '../../core/services/confirm-dialog.service';
 import {TaskService} from '../service/task.service';
-import {MdDialog, MdDialogRef, MdSlider, MdSliderChange} from '@angular/material';
+import {MatDialog, MatDialogRef, MatSlider, MatSliderChange} from '@angular/material';
 import {TaskCreateUpdateDialog} from '../task-create-update-dialog/task-create-update-dialog.component';
 import {SMALL_DIALOG} from '../../core/util/const';
 import {ViewMode} from '../../core/common/view-mode';
@@ -19,13 +19,13 @@ import {DurationService} from '../../core/services/duration.service';
 })
 export class TaskDetailComponent implements AfterViewInit {
     @Input() task: TaskDto;
-    private _taskCreateUpdateDialog: MdDialogRef<TaskCreateUpdateDialog>;
-    @ViewChild(MdSlider) slider: MdSlider;
+    private _taskCreateUpdateDialog: MatDialogRef<TaskCreateUpdateDialog>;
+    @ViewChild(MatSlider) slider: MatSlider;
 
     constructor(private _confirmDialogService: ConfirmDialogService,
                 private _notificationService: NotificationWrapperService,
                 private _taskService: TaskService,
-                private _dialogService: MdDialog,
+                private _dialogService: MatDialog,
                 private _router: Router,
                 private _durationService: DurationService) {
     }
@@ -33,7 +33,7 @@ export class TaskDetailComponent implements AfterViewInit {
     ngAfterViewInit() {
         this.slider.change
             .debounceTime(500)
-            .map((sliderChange: MdSliderChange) => sliderChange.value)
+            .map((sliderChange: MatSliderChange) => sliderChange.value)
             .distinctUntilChanged()
             .flatMap((value: number) => this.updateProgress.call(this, value))
             .subscribe();

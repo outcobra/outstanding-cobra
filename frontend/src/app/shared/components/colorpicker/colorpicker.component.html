@@ -1,7 +1,7 @@
 <div class="colorpicker-wrapper">
-    <button md-raised-button (click)="open()">
+    <button mat-raised-button (click)="open()">
         <span>Choose color</span>
-        <md-icon [style.color]="getSelectedColorHex()">colorize</md-icon>
+        <mat-icon [style.color]="getSelectedColorHex()">colorize</mat-icon>
     </button>
     <div class="colorpicker z-depth-1-half" [class.opened]="opened">
         <div class="colorpicker-header">
@@ -11,9 +11,9 @@
             <table>
                 <tr *ngFor="let row of colorRows">
                     <td *ngFor="let color of row" (click)="selectColor(color)">
-                        <div class="color-ripple" md-ripple [mdRippleRadius]="20">
+                        <div class="color-ripple" mat-ripple [matRippleRadius]="20">
                             <div class="color" [style.background-color]="'#' + color.hex">
-                                <md-icon *ngIf="color == selectedColor">check</md-icon>
+                                <mat-icon *ngIf="color == selectedColor">check</mat-icon>
                             </div>
                         </div>
                     </td>
@@ -21,8 +21,8 @@
             </table>
         </div>
         <div class="colorpicker-footer">
-            <button type="button" md-button (click)="cancel()">{{ 'i18n.common.action.cancel' | translate }}</button>
-            <button type="button" md-button (click)="submit()">{{ 'i18n.common.action.ok' | translate }}</button>
+            <button type="button" mat-button (click)="cancel()">{{ 'i18n.common.action.cancel' | translate }}</button>
+            <button type="button" mat-button (click)="submit()">{{ 'i18n.common.action.ok' | translate }}</button>
         </div>
     </div>
 </div>

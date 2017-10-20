@@ -22,7 +22,7 @@ oc-collapsible-header {
         display: flex;
         align-items: center;
 
-        span, md-icon {
+        span, mat-icon {
             padding: 0 5px;
         }
     }
@@ -30,7 +30,7 @@ oc-collapsible-header {
     .oc-collapsible-toggle {
         display: flex;
         align-items: center;
-        md-icon {
+        mat-icon {
             color: $secondary-dark;
             transition: all .225s ease-in-out;
         }
@@ -54,6 +54,6 @@ oc-collapsible-header {
     }
 }
 
-oc-collapsible.active > oc-collapsible-header > .oc-collapsible-toggle > md-icon {
+oc-collapsible.active > oc-collapsible-header > .oc-collapsible-toggle > mat-icon {
     transform: rotate(180deg);
 }

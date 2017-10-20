@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {MdDialog} from '@angular/material';
+import {MatDialog} from '@angular/material';
 import {InfoDialogComponent} from '../../../shared/components/info-dialog/info-dialog.component';
 import {ResponsiveHelperService} from '../../../core/services/ui/responsive-helper.service';
 import {SMALL_DIALOG} from '../../../core/util/const';
@@ -15,7 +15,7 @@ export class OCFooterComponent implements OnInit {
     private _appInfo: Info;
 
     constructor(private _infoService: InfoService,
-                private _dialogService: MdDialog,
+                private _dialogService: MatDialog,
                 private _responsiveHelper: ResponsiveHelperService) {
     }
 

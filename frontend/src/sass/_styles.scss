@@ -1,7 +1,7 @@
 @import 'color-variables';
 @import 'general';
 
-html, body, md-sidenav-container {
+html, body, mat-sidenav-container {
     margin: 0;
     width: 100%;
     height: 100%;
@@ -49,8 +49,8 @@ oc-app {
     margin: 0 auto;
 }
 
-button[md-raised-button], button[md-button] {
-    .md-button-wrapper > * {
+button[mat-raised-button], button[mat-button] {
+    .mat-button-wrapper > * {
         vertical-align: middle;
     }
 }
@@ -81,7 +81,7 @@ oc-divider {
     flex-grow: 1;
 }
 
-md-toolbar.oc-primary-toolbar {
+mat-toolbar.oc-primary-toolbar {
     z-index: 999;
     box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 3px 3px -2px rgba(0, 0, 0, 0.12), 0 1px 8px 0 rgba(0, 0, 0, 0.2)
 }
@@ -95,7 +95,7 @@ oc-collapsible-header .subject-circle {
     float: left;
 }
 
-md-dialog-container {
+mat-dialog-container {
     height: auto !important;
     overflow: visible !important;
     padding: 0 !important;
@@ -133,7 +133,7 @@ md-dialog-container {
 .form-group {
     width: 100%;
     margin-bottom: 16px;
-    md-input-container, md-select {
+    mat-form-field, mat-select {
         box-sizing: border-box;
         width: 100%;
         padding: 0 10px;
@@ -154,8 +154,8 @@ md-dialog-container {
             &:last-child {
                 margin-left: 2px;
             }
-            md-select {
-                transform: translateY(-2px); // fix misalignment of md-input and md-select
+            mat-select {
+                transform: translateY(-2px); // fix misalignment of mat-input and mat-select
             }
         }
         &.responsive {
@@ -174,7 +174,7 @@ md-dialog-container {
 
 #filter {
     margin-bottom: 20px;
-    md-card {
+    mat-card {
         overflow: hidden;
     }
 }
@@ -190,7 +190,7 @@ md-dialog-container {
     }
 }
 
-md-input-container.big-search {
+mat-form-field.big-search {
     display: block !important;
     box-sizing: border-box;
     margin: 0 20px;
@@ -207,26 +207,26 @@ md-input-container.big-search {
     }
 }
 
-md-list-item {
+mat-list-item {
     h1, h2, h3, h4, h5, h6, p, span {
         line-height: normal;
     }
 }
 
-button[md-raised-button].square-button,
-button[md-button].square-button {
+button[mat-raised-button].square-button,
+button[mat-button].square-button {
     width: 36px;
     min-width: 36px;
     padding: 0;
 }
 
-button[md-fab] {
+button[mat-fab] {
     position: absolute;
     bottom: 53px;
     right: 23px;
     color: $primary-light;
 }
 
-oc-app.oc-mobile button[md-fab] {
+oc-app.oc-mobile button[mat-fab] {
     bottom: 23px;
 }

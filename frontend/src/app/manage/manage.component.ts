@@ -1,7 +1,7 @@
 import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewEncapsulation} from '@angular/core';
 import {ManageService} from './service/manage.service';
 import {InstitutionDto, ManageDto, SchoolClassDto, SchoolYearDto, SemesterDto, SubjectDto} from './model/manage.dto';
-import {MdDialogRef} from '@angular/material';
+import {MatDialogRef} from '@angular/material';
 import {InstitutionDialog} from './institution-dialog/institution-dialog.component';
 import {ViewMode} from '../core/common/view-mode';
 import {SchoolClassDialog} from './school-class-dialog/school-class-dialog.component';
@@ -40,11 +40,11 @@ export class ManageComponent implements OnInit, AfterViewInit {
     private _activeSchoolClassId: number = null;
 
     private _activeSemesterId: number = null;
-    private _institutionDialogRef: MdDialogRef<InstitutionDialog>;
-    private _schoolClassDialogRef: MdDialogRef<SchoolClassDialog>;
-    private _schoolYearDialogRef: MdDialogRef<SchoolYearDialog>;
-    private _semesterDialogRef: MdDialogRef<SemesterDialog>;
-    private _subjectDialogRef: MdDialogRef<SubjectDialog>;
+    private _institutionDialogRef: MatDialogRef<InstitutionDialog>;
+    private _schoolClassDialogRef: MatDialogRef<SchoolClassDialog>;
+    private _schoolYearDialogRef: MatDialogRef<SchoolYearDialog>;
+    private _semesterDialogRef: MatDialogRef<SemesterDialog>;
+    private _subjectDialogRef: MatDialogRef<SubjectDialog>;
 
     private _activeManageView;
     public marginLeft: number = 0;
@@ -353,7 +353,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
      * @param finishFunction function to execute on create success
      * @param thisArg the scope where the createFunction should be run on
      */
-    private _handleAddition<T extends Dto, D extends CreateUpdateComponent<T>>(entityName: string, dialogRef: MdDialogRef<D>, createFunction: (entity: T) => Observable<T>, finishFunction: (entity: T) => void, thisArg: any) {
+    private _handleAddition<T extends Dto, D extends CreateUpdateComponent<T>>(entityName: string, dialogRef: MatDialogRef<D>, createFunction: (entity: T) => Observable<T>, finishFunction: (entity: T) => void, thisArg: any) {
         dialogRef.afterClosed()
             .filter(isTruthy)
             .flatMap((value: T) => createFunction.call(thisArg, value))
@@ -375,7 +375,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
      * @param editFunction function which edits an entity
      * @param thisArg the scope where the createFunction should be run on
      */
-    private _handleEdit<T extends Dto, D extends CreateUpdateComponent<T>>(entityName: string, dialogRef: MdDialogRef<D>, editFunction: (entity: T) => Observable<T>, thisArg: any) {
+    private _handleEdit<T extends Dto, D extends CreateUpdateComponent<T>>(entityName: string, dialogRef: MatDialogRef<D>, editFunction: (entity: T) => Observable<T>, thisArg: any) {
         dialogRef.afterClosed()
             .filter(isTruthy)
             .flatMap(value => editFunction.call(thisArg, value))

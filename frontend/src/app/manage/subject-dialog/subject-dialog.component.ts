@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {MdDialogRef} from '@angular/material';
+import {MatDialogRef} from '@angular/material';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ParentLinkedCreateUpdateComponent} from '../../core/common/parent-linked-create-update-component';
 import {SemesterDto, SubjectDto} from '../model/manage.dto';
@@ -15,7 +15,7 @@ export class SubjectDialog extends ParentLinkedCreateUpdateComponent<SubjectDto,
 
     private _subjectForm: FormGroup;
 
-    constructor(private _dialogRef: MdDialogRef<SubjectDialog>,
+    constructor(private _dialogRef: MatDialogRef<SubjectDialog>,
                 private _formBuilder: FormBuilder) {
         super();
     }

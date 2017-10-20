@@ -5,7 +5,7 @@ import {NotificationWrapperService} from '../core/notifications/notification-wra
 import {ExamTaskDto} from './model/exam.task.dto';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {ExamCreateUpdateDialog} from './exam-create-update-dialog/exam-create-update-dialog.component';
-import {MdDialog} from '@angular/material';
+import {MatDialog} from '@angular/material';
 import {ResponsiveHelperService} from '../core/services/ui/responsive-helper.service';
 import {MEDIUM_DIALOG} from '../core/util/const';
 import {ConfirmDialogService} from '../core/services/confirm-dialog.service';
@@ -62,7 +62,7 @@ export class ExamComponent implements OnInit, AfterViewInit {
                 private _markService: MarkService,
                 private _router: Router,
                 private _route: ActivatedRoute,
-                private _dialogService: MdDialog,
+                private _dialogService: MatDialog,
                 private _responsiveHelper: ResponsiveHelperService,
                 private _notificationService: NotificationWrapperService,
                 private _confirmDialogService: ConfirmDialogService,

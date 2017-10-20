@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {MOBILE_DIALOG} from '../../util/const';
-import {MdDialogConfig} from '@angular/material';
+import {MatDialogConfig} from '@angular/material';
 import {Orientation} from './orientation';
 import {isFalsy} from '../../util/helper';
 import {MediaChange, ObservableMedia} from '@angular/flex-layout';
@@ -30,7 +30,7 @@ export class ResponsiveHelperService {
             .map(() => this._makeMediaChange(null));
     }
 
-    public getMobileOrGivenDialogConfig(config: MdDialogConfig) {
+    public getMobileOrGivenDialogConfig(config: MatDialogConfig) {
         if (!this._observableMedia.isActive('gt-sm')) {
             return MOBILE_DIALOG;
         }

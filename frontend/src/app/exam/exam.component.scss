@@ -1,6 +1,6 @@
 @import '../../sass/color-variables';
 
-md-input-container#exam-search {
+mat-form-field#exam-search {
     display: block !important;
     box-sizing: border-box;
     margin: 0 20px;
@@ -17,7 +17,10 @@ md-input-container#exam-search {
     }
 }
 
-md-expansion-panel-header {
+mat-expansion-panel-header {
+    .mat-content {
+        align-items: center;
+    }
     .subject-letter-icon {
         border-radius: 50%;
         line-height: 32px;
@@ -43,7 +46,7 @@ md-expansion-panel-header {
     }
 }
 
-md-input-container#task-search {
+mat-form-field#task-search {
     display: block !important;
     box-sizing: border-box;
     margin: 0 20px;
@@ -66,7 +69,7 @@ form[ocFilter] > div {
 
 #filter {
     margin-bottom: 20px;
-    md-card {
+    mat-card {
         overflow: hidden;
     }
 }
@@ -75,7 +78,7 @@ form[ocFilter] > div {
     padding: 0 5px;
 }
 
-md-icon.filter-toggler {
+mat-icon.filter-toggler {
     transition: transform .25s ease-in-out;
     &.filter-shown {
         transform: rotate(180deg);
