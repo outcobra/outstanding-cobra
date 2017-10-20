@@ -11,12 +11,15 @@ Try-Hard UX/UI Fanatiker, Hobbyfotograf und fast professioneller Drummer
 Ich bin hauptsächlich dafür verantwortlich was du von Outcobra siehst und mit was du beim Benutzen interagierst. Das UX/UI-Design fasziniert mich sehr, da es sehr abwechslungsreich ist und es immer auch noch etwas menschliches an sich hat. Mein grösstes Ziel bei Outcobra ist es für dich eine komfortable und spannende Nutzung bereitzustellen. <br> Wenn ich nicht daran bin deine Erfahrung mit unserem Produkt zu optimieren beschäftige ich mich sehr gerne mit der Fotografie. Vorallem die Astrofotographie konnte mich in letzter Zeit stark in den Bann ziehen. Dies kann ich auch mit meinem Interesse für die Astronomie perfekt kombinieren.<br> Wenn ich weder Tastatur, Maus oder Fotokamera in der Hand habe, greife ich zu meinem Vic Firth Sticks und spiele in der Musikgesellschaft Ins & Mörigen als Schlagzeuger/Perkussionist mit.
 
 ## Florian
-Den ersten Kontakt zur Informatik hatte ich der dritten Klasse... damals erhielt ich meinen ersten Computer.
-Da ich diesen als Nachteilsausgleich in der Schule verwenden durfte, verbrachte ich schnell viel Zeit damit.
-5 Jahre später habe ich begonnen mir selber das Programmieren beizubringen.
-Heute mache ich eine Ausbildung als Softwareentwickler und beschäftige mich zu Bürozeiten hauptsächlich mit der Qualitätssicherung von Softwareprodukten. Um Entwicklungstechnisch auf dem neusten Stand zu blieben, realisiere ich immer wieder kleinere Nebenprojekte.
-Outcobra ist das bisher grösste dieser "Nebenprojekte". Meine Hauptaufgaben liegen hier in der Backend-Entwicklung und im Testing-Bereich.
-Für mich ist es der Mix aus Bekanntem und vielen neuen Herausforderungen der mich an diesem Projekt fasziniert!
+Kotlin Enthusiast, Koffein-Junkie und Segler
+
+Meine Aufgaben in Outcobra liegen hauptsächlich im Bereich der Applikationslogik. Das bedeutet, ich bin verantwortlich dafür, dass die Daten die du eintippst, im richtigen Format gespeichert werden, und dir in Zukunft auf jedem Gerät zur Verfügung stehen.
+
+Das Entwerfen von Programmen wird mir nie langweilig. Es fasziniert mich, wie wir durch das Kombinieren abstrakter Konstrukte immer wieder Neues entstehen lassen können. Aus diesem Grund, und um mich stets zu verbessern, verbringe ich einen grossen Teil meiner Freizeit mit der Softwareentwicklung. Auf meinem Schreibtisch darf dabei nebst Maus und Tastatur auch die Tasse Kaffee nicht fehlen.
+
+Während den Bürozeiten beschäftige ich mich mehrheitlich mit Test-Aktivitäten. Dadurch entwickelte sich die Softwarequalität zu einer meiner Leidenschaften.  
+
+Als Ausgleich zur Informatik geniesse ich die Ruhe auf dem See. Damit mir auch dort nicht langweilig wird, habe ich vor einigen Jahren begonnen, an Regattas (Segelwettbewerben) teil zu nehmen. 
 
 ## Joel
 
