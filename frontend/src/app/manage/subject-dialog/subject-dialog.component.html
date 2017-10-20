@@ -1,32 +1,32 @@
 <div class="dialog-header">
-    <h1 md-dialog-title *ngIf="isEditMode()">{{ 'i18n.modules.manage.subject.edit' | translate }}</h1>
-    <h1 md-dialog-title *ngIf="!isEditMode()">{{ 'i18n.modules.manage.subject.add' | translate }}</h1>
+    <h1 mat-dialog-title *ngIf="isEditMode()">{{ 'i18n.modules.manage.subject.edit' | translate }}</h1>
+    <h1 mat-dialog-title *ngIf="!isEditMode()">{{ 'i18n.modules.manage.subject.add' | translate }}</h1>
 </div>
 <form [formGroup]="subjectForm" (submit)="submit()">
-    <div class="dialog-body" md-dialog-content>
+    <div class="dialog-body" mat-dialog-content>
         <div class="form-group">
-            <md-input-container>
-                <input mdInput
+            <mat-form-field>
+                <input matInput
                        required
                        [autofocus]="false"
                        [placeholder]="'i18n.modules.manage.subject.form.label' | translate"
                        formControlName="name">
-                <md-error *ngIf="subjectForm.get('name').hasError('required')">
+                <mat-error *ngIf="subjectForm.get('name').hasError('required')">
                     {{ 'i18n.common.form.error.required' | translate }}
-                </md-error>
-            </md-input-container>
+                </mat-error>
+            </mat-form-field>
         </div>
         <div class="form-group">
             <colorpicker formControlName="color"></colorpicker>
         </div>
     </div>
-    <div class="dialog-footer" md-dialog-actions>
+    <div class="dialog-footer" mat-dialog-actions>
         <div class="footer-right">
-            <button md-button
-                    md-dialog-close>
+            <button mat-button
+                    mat-dialog-close>
                 {{ 'i18n.common.action.cancel' | translate }}
             </button>
-            <button md-raised-button
+            <button mat-raised-button
                     color="primary"
                     type="submit">
                 {{ 'i18n.common.action.save' | translate }}

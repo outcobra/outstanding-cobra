@@ -18,7 +18,7 @@
     <div class="row task-progress" fxLayout>
         <div class="col s1 progress-value" fxFlex="15">{{ task.progress }}%</div>
         <div class="col s11" fxFlex>
-            <md-slider [(ngModel)]="task.progress" color="accent" thumbLabel step="5"></md-slider>
+            <mat-slider [(ngModel)]="task.progress" color="accent" thumbLabel step="5"></mat-slider>
         </div>
     </div>
 </oc-icon-data>
@@ -26,12 +26,12 @@
     <p class="task-property">{{ getRemainingEffort() }}</p>
 </oc-icon-data>
 <!-- TASK PROGRESS END-->
-<button md-button
+<button mat-button
         color="primary"
         (click)="editTask()">
     {{ 'i18n.common.action.edit' | translate }}
 </button>
-<button md-button
+<button mat-button
         (click)="deleteTask()">
     {{ 'i18n.common.action.delete' | translate }}
 </button>

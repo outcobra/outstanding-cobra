@@ -1,54 +1,54 @@
-<md-sidenav-container>
-    <md-sidenav class="oc-mobile-sidenav" *ngIf="mobile">
-        <md-toolbar>
+<mat-sidenav-container>
+    <mat-sidenav class="oc-mobile-sidenav" *ngIf="mobile">
+        <mat-toolbar>
             <img routerLink="/"
                  class="oc-title-logo"
                  src="/assets/img/oc_logo_stroke_combined_blue.svg">
-        </md-toolbar>
+        </mat-toolbar>
         <oc-divider></oc-divider>
         <oc-nav>
             <div class="lang-toggler">
                 {{ 'i18n.common.lang.de' | translate }}
-                <md-slide-toggle (change)="changeLang()" [(ngModel)]="isEnglish"></md-slide-toggle>
+                <mat-slide-toggle (change)="changeLang()" [(ngModel)]="isEnglish"></mat-slide-toggle>
                 {{ 'i18n.common.lang.en' | translate }}
             </div>
         </oc-nav>
-    </md-sidenav>
+    </mat-sidenav>
 
-    <md-toolbar color="primary" class="oc-primary-toolbar">
-        <md-icon class="toolbar-icon" (click)="openSidenav()" *ngIf="mobile">menu</md-icon>
+    <mat-toolbar color="primary" class="oc-primary-toolbar">
+        <mat-icon class="toolbar-icon" (click)="openSidenav()" *ngIf="mobile">menu</mat-icon>
         <!--<h1 class="oc-title" routerLink="/">{{ title }}</h1>-->
 
         <img routerLink="/"
              class="oc-title-logo"
              src="/assets/img/oc_logo_stroke_combined_blue_inverted.svg">
-
+        <span class="oc-title-beta">Beta</span>
         <span class="toolbar-fill-space"></span>
-        <button md-button *ngIf="auth.isLoggedIn(); else notLoggedIn" (click)="logout()">Logout</button>
+        <button mat-button *ngIf="auth.isLoggedIn(); else notLoggedIn" (click)="logout()">Logout</button>
         <ng-template #notLoggedIn>
-            <button md-button (click)="login()">Login</button>
+            <button mat-button (click)="login()">Login</button>
         </ng-template>
-        <button md-icon-button [md-menu-trigger-for]="themeMenu">
-            <md-icon>more_vert</md-icon>
+        <button mat-icon-button [mat-menu-trigger-for]="themeMenu">
+            <mat-icon>more_vert</mat-icon>
         </button>
-        <md-menu #themeMenu="mdMenu" class="oc-theme-menu">
+        <mat-menu #themeMenu="matMenu" class="oc-theme-menu">
             <span class="oc-theme-menu-title">{{ 'i18n.common.theme.title' | translate }}</span>
-            <button md-menu-item *ngFor="let theme of allThemes" (click)="changeTheme(theme)">
-                <md-icon *ngIf="theme.equals(_activeTheme); else notActiveTheme">check</md-icon>
+            <button mat-menu-item *ngFor="let theme of allThemes" (click)="changeTheme(theme)">
+                <mat-icon *ngIf="theme.equals(_activeTheme); else notActiveTheme">check</mat-icon>
                 <ng-template #notActiveTheme>
-                    <md-icon></md-icon>
+                    <mat-icon></mat-icon>
                 </ng-template>
                 <span>{{ 'i18n.common.theme.' + theme.i18nKey | translate }}</span>
             </button>
-        </md-menu>
-    </md-toolbar>
+        </mat-menu>
+    </mat-toolbar>
 
     <div class="main-area">
         <oc-nav [collapsible]="true" *ngIf="!mobile" class="oc-side-sidenav" #ocNav>
             <!-- TODO only temporary -->
             <div class="lang-toggler" *ngIf="!ocNav.collapsed">
                 {{ 'i18n.common.lang.de' | translate }}
-                <md-slide-toggle (change)="changeLang()" [(ngModel)]="isEnglish"></md-slide-toggle>
+                <mat-slide-toggle (change)="changeLang()" [(ngModel)]="isEnglish"></mat-slide-toggle>
                 {{ 'i18n.common.lang.en' | translate }}
             </div>
         </oc-nav>
@@ -58,4 +58,4 @@
     </div>
     <oc-footer *ngIf="!mobile"></oc-footer>
     <simple-notifications></simple-notifications>
-</md-sidenav-container>
+</mat-sidenav-container>

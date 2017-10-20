@@ -15,7 +15,7 @@ mark-weight-updater {
             line-height: 36px;
             padding-left: 5px;
             transition: background-color .2s ease-in-out;
-            button[md-button] {
+            button[mat-button] {
                 float: right;
             }
         }
@@ -53,7 +53,7 @@ mark-weight-updater {
             background-color: $background-white;
             padding-left: 5px;
         }
-        md-icon {
+        mat-icon {
             width: 36px;
             text-align: center;
         }

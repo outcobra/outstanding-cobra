@@ -1,92 +1,92 @@
 <div class="dialog-header">
-    <h1 md-dialog-title>{{ 'i18n.modules.exam.add' | translate }}</h1>
+    <h1 mat-dialog-title>{{ 'i18n.modules.exam.add' | translate }}</h1>
 </div>
 <form [formGroup]="examCreateUpdateForm" (submit)="submit()">
-    <div class="dialog-body" md-dialog-content>
+    <div class="dialog-body" mat-dialog-content>
         <div class="form-group">
-            <md-input-container>
-                <input mdInput
+            <mat-form-field>
+                <input matInput
                        required
                        [placeholder]="'i18n.modules.exam.dialogs.add.name.label' | translate"
                        formControlName="name">
-                <md-error *ngIf="examCreateUpdateForm.get('name').hasError('required')">
+                <mat-error *ngIf="examCreateUpdateForm.get('name').hasError('required')">
                     {{ 'i18n.common.form.error.required' | translate }}
-                </md-error>
-            </md-input-container>
+                </mat-error>
+            </mat-form-field>
         </div>
         <div class="form-group">
-            <md-input-container>
-                <textarea mdInput
+            <mat-form-field>
+                <textarea matInput
                           [placeholder]="'i18n.modules.exam.dialogs.add.desc.label' | translate"
                           formControlName="description"></textarea>
-                <md-error *ngIf="examCreateUpdateForm.get('description').hasError('required')">
+                <mat-error *ngIf="examCreateUpdateForm.get('description').hasError('required')">
                     {{ 'i18n.common.form.error.required' | translate }}
-                </md-error>
-            </md-input-container>
+                </mat-error>
+            </mat-form-field>
         </div>
         <div class="form-group half responsive">
             <div class="half-child">
-                <md-input-container>
-                    <input mdInput
+                <mat-form-field>
+                    <input matInput
                            required
-                           [mdDatepicker]="examDatePicker"
+                           [matDatepicker]="examDatePicker"
                            [placeholder]="'i18n.common.label.todoDate' | translate"
                            formControlName="date">
-                    <button mdSuffix
-                            [mdDatepickerToggle]="examDatePicker"
-                            type="button"></button>
-                    <md-error>
+                    <mat-datepicker-toggle matSuffix [for]="examDatePicker"></mat-datepicker-toggle>
+                    <mat-datepicker #examDatePicker
+                                    [touchUi]="isMobile()">
+                    </mat-datepicker>
+                    <mat-error>
                         <ng-template [ngIf]="examCreateUpdateForm.get('date').hasError('required')">
                             {{ 'i18n.common.form.error.required' | translate }}
                         </ng-template>
                         <ng-template [ngIf]="examCreateUpdateForm.get('date').hasError('date')">
                             {{ 'i18n.common.form.error.datePattern' | translate }}
                         </ng-template>
-                    </md-error>
-                </md-input-container>
-                <md-datepicker #examDatePicker
-                               [touchUi]="isMobile()">
-                </md-datepicker>
+                    </mat-error>
+                </mat-form-field>
             </div>
             <div class="half-child">
-                <md-select formControlName="subjectId"
-                           required
-                           [placeholder]="'i18n.modules.exam.dialogs.add.subject.label' | translate">
-                    <md-option *ngFor="let subject of subjects"
-                               [value]="subject.id">
-                        {{ subject.name }}
-                    </md-option>
-                </md-select>
+                <mat-form-field>
+                    <mat-select formControlName="subjectId"
+                                required
+                                [placeholder]="'i18n.modules.exam.dialogs.add.subject.label' | translate">
+                        <mat-option *ngFor="let subject of subjects"
+                                    [value]="subject.id">
+                            {{ subject.name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
             </div>
         </div>
 
         <div formArrayName="examTasks" class="form-group">
             <h5>{{ 'i18n.modules.exam.examTask.title' | translate }}</h5>
-            <button md-button
+            <button mat-button
                     type="button"
                     color="accent"
                     [disabled]="examTaskArray.length >= 15"
                     (click)="addExamTask()">
                 {{ 'i18n.modules.exam.examTask.add' | translate }}
             </button>
-            <md-list>
-                <md-list-item *ngFor="let examTask of examTaskArray.controls; let i=index" [formGroupName]="i">
-                    <md-checkbox formControlName="finished"></md-checkbox>
-                    <md-input-container>
-                        <input mdInput formControlName="task">
-                    </md-input-container>
-                </md-list-item>
-            </md-list>
+            <mat-list>
+                <mat-list-item *ngFor="let examTask of examTaskArray.controls; let i=index" [formGroupName]="i">
+                    <mat-checkbox formControlName="finished"></mat-checkbox>
+                    <mat-form-field>
+                        <input matInput formControlName="task">
+                    </mat-form-field>
+                </mat-list-item>
+            </mat-list>
         </div>
     </div>
-    <div class="dialog-footer" md-dialog-actions>
+    <div class="dialog-footer" mat-dialog-actions>
         <div class="footer-right">
-            <button md-button
+            <button mat-button
                     type="button"
-                    md-dialog-close>
+                    mat-dialog-close>
                 {{ 'i18n.common.action.cancel' | translate }}
             </button>
-            <button md-raised-button
+            <button mat-raised-button
                     color="primary"
                     type="submit">
                 {{ 'i18n.common.action.save' | translate }}

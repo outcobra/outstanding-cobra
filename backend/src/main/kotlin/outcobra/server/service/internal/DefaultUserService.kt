@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service
 import outcobra.server.annotation.DefaultImplementation
 import outcobra.server.config.Auth0Client
 import outcobra.server.config.ProfileRegistry.Companion.BASIC_AUTH_SECURITY_MOCK
+import outcobra.server.exception.ValidationException
+import outcobra.server.exception.ValidationKey
 import outcobra.server.model.QUser
 import outcobra.server.model.User
 import outcobra.server.model.dto.UserDto
@@ -34,14 +36,10 @@ class DefaultUserService
         return userDetails.getAuth0Attribute("sub") as String
     }
 
-    override fun getCurrentUser(): User? {
-        val auth0Id = getTokenUserId()
-        return userRepository.findOne(QUser.user.auth0Id.eq(auth0Id))
-    }
+    override fun getCurrentUser() = userRepository.findOne(QUser.user.auth0Id.eq(getTokenUserId()))
+            ?: ValidationKey.USER_NOT_IN_DATABASE_RELOGIN.throwException()
 
-    override fun getCurrentUserDto(): UserDto? {
-        return userDtoMapper.toDto(getCurrentUser())
-    }
+    override fun getCurrentUserDto() = userDtoMapper.toDto(getCurrentUser())!!
 
     override fun getUserProfile(): UserProfile {
         val auth = SecurityContextHolder.getContext().authentication
@@ -49,11 +47,12 @@ class DefaultUserService
     }
 
     override fun loginRegister(): UserDto {
-        val user = getCurrentUser()
-        if (user != null) return userDtoMapper.toDto(user)
-
-        val userDetails = getUserProfile()
-        val newUser = User(userDetails.id, userDetails.nickname, null)
-        return userDtoMapper.toDto(userRepository.save(newUser))
+        return try {
+            userDtoMapper.toDto(getCurrentUser())
+        } catch (vex: ValidationException) {
+            val userDetails = getUserProfile()
+            val newUser = User(userDetails.id, userDetails.nickname, null)
+            userDtoMapper.toDto(userRepository.save(newUser))
+        }
     }
 }

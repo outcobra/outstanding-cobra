@@ -1,5 +1,53 @@
 @import '../../sass/color-variables';
 
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    div.content {
+        flex-grow: 1;
+        overflow-y: scroll;
+    }
+    mat-toolbar {
+        z-index: 100;
+        background-color: white;
+        box-shadow: 0 -2px 8px 0 rgba(0,0,0,0.20);
+        ::ng-deep mat-toolbar-row {
+            justify-content: center;
+            .bottom-menu {
+                width: 100%;
+                max-width: 500px;
+                display: flex;
+                flex-direction: row;
+                align-self: center;
+                .menu-item {
+                    flex-grow: 1;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                    outline: none;
+                    span {
+                        font-weight: normal;
+                        font-size: 0.6em;
+                    }
+                    mat-icon {
+                        font-size: 1.2em;
+                        transition: .2s all ease-in-out;
+                    }
+                    &:not(.active) {
+                        color: black;
+                    }
+                    &.active mat-icon {
+                        font-size: 1.4em;
+                    }
+                }
+            }
+        }
+    }
+}
+
 div.row {
     margin-top: 24px;
     text-align: center;

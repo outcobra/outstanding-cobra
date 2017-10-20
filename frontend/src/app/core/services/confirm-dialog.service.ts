@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {MdDialog} from '@angular/material';
+import {MatDialog} from '@angular/material';
 import {Observable} from 'rxjs/Observable';
 import {ResponsiveHelperService} from './ui/responsive-helper.service';
 import {SMALL_DIALOG} from '../util/const';
@@ -8,7 +8,7 @@ import {ConfirmDialogComponent} from '../../shared/components/confirm-dialog/con
 @Injectable()
 export class ConfirmDialogService {
 
-    constructor(private _dialogService: MdDialog,
+    constructor(private _dialogService: MatDialog,
                 private _responsiveHelper: ResponsiveHelperService) {
     }
 

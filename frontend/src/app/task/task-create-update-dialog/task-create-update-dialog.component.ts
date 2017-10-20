@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {MdDialogRef} from '@angular/material';
+import {MatDialogRef} from '@angular/material';
 import {SubjectService} from '../../manage/service/subject.service';
 import {SubjectDto} from '../../manage/model/manage.dto';
 import {OCValidators} from '../../core/services/oc-validators';
@@ -23,7 +23,7 @@ export class TaskCreateUpdateDialog extends CreateUpdateComponent<TaskDto> imple
     private _today: Moment = moment();
 
     constructor(private _subjectService: SubjectService,
-                private _dialogRef: MdDialogRef<TaskCreateUpdateDialog>,
+                private _dialogRef: MatDialogRef<TaskCreateUpdateDialog>,
                 private _formBuilder: FormBuilder,
                 private responsiveHelperService: ResponsiveHelperService) {
         super();
