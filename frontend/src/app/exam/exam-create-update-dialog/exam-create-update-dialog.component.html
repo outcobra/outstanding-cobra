@@ -75,6 +75,9 @@
                     <md-input-container>
                         <input mdInput formControlName="task">
                     </md-input-container>
+                    <button md-icon-button (click)="removeExamTask(examTask, i)">
+                        <md-icon>delete</md-icon>
+                    </button>
                 </md-list-item>
             </md-list>
         </div>

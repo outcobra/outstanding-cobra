@@ -11,6 +11,7 @@ import {getIfTruthy} from 'app/core/util/helper';
 import {CreateUpdateComponent} from '../../core/common/create-update-component';
 import {FormUtil} from '../../core/util/form-util';
 import {OCValidators} from '../../core/services/oc-validators';
+import {ExamTaskService} from '../service/exam-task.service';
 
 @Component({
     selector: 'exam-create-update-dialog',
@@ -25,6 +26,7 @@ export class ExamCreateUpdateDialog extends CreateUpdateComponent<ExamDto> imple
 
     constructor(private _translateService: TranslateService,
                 private _subjectService: SubjectService,
+                private _examTaskService: ExamTaskService,
                 private _dialogRef: MdDialogRef<ExamCreateUpdateDialog>,
                 private _responsiveHelper: ResponsiveHelperService,
                 private _formBuilder: FormBuilder,
@@ -85,6 +87,15 @@ export class ExamCreateUpdateDialog extends CreateUpdateComponent<ExamDto> imple
         this.examTaskArray.push(this._formGroupForDtoOrDefault());
     }
 
+    public removeExamTask(examTask: FormGroup, index: number) {
+        let elementId = examTask.value.id;
+        if (elementId == 0) {
+            this.examTaskArray.removeAt(index);
+        } else {
+            this._examTaskService.deleteById(elementId);
+            this.examTaskArray.removeAt(index);
+        }
+    }
     public isMobile(): boolean {
         return this._responsiveHelper.isMobile();
     }
