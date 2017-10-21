@@ -12,6 +12,7 @@ import {CreateUpdateComponent} from '../../core/common/create-update-component';
 import {FormUtil} from '../../core/util/form-util';
 import {OCValidators} from '../../core/services/oc-validators';
 import {ExamTaskService} from '../service/exam-task.service';
+import {DateUtil} from '../../core/services/date-util.service';
 
 @Component({
     selector: 'exam-create-update-dialog',
@@ -22,6 +23,7 @@ export class ExamCreateUpdateDialog extends CreateUpdateComponent<ExamDto> imple
 
     private _subjects: SubjectDto[];
     public examCreateUpdateForm: FormGroup;
+    private _examTaskIdsMarkedForDeletion: number[] = [];
     private _title: string;
 
     constructor(private _translateService: TranslateService,
@@ -57,7 +59,7 @@ export class ExamCreateUpdateDialog extends CreateUpdateComponent<ExamDto> imple
         return this._formBuilder.group({
             name: [this.getParamOrDefault('name'), Validators.required],
             description: [this.getParamOrDefault('description')],
-            date: [this.getParamOrDefault('date'),
+            date: [DateUtil.transformToMomentIfPossible(this.getParamOrDefault('date')),
                 Validators.compose([Validators.required, OCValidators.date()])],
             examTasks: this._formBuilder.array(this._formArrayForExamTasks()),
             subjectId: [this.getParamOrDefault('subject.id'), Validators.required]
@@ -79,6 +81,12 @@ export class ExamCreateUpdateDialog extends CreateUpdateComponent<ExamDto> imple
         } as ExamDto;
     }
 
+    private _deleteExamTasksMarkedForDeletion() {
+        this._examTaskIdsMarkedForDeletion.forEach(examTaskId =>
+            this._examTaskService.deleteById(examTaskId).subscribe()
+        )
+    }
+
     private _getSubjectById(subjectId: number): SubjectDto {
         return this.subjects.find((subject: SubjectDto) => subject.id == subjectId);
     }
@@ -89,19 +97,20 @@ export class ExamCreateUpdateDialog extends CreateUpdateComponent<ExamDto> imple
 
     public removeExamTask(examTask: FormGroup, index: number) {
         let elementId = examTask.value.id;
-        if (elementId == 0) {
-            this.examTaskArray.removeAt(index);
-        } else {
-            this._examTaskService.deleteById(elementId);
-            this.examTaskArray.removeAt(index);
+        if (elementId != 0) {
+            this._examTaskIdsMarkedForDeletion.push(elementId);
         }
+        this.examTaskArray.removeAt(index);
     }
+
     public isMobile(): boolean {
         return this._responsiveHelper.isMobile();
     }
 
     public submit() {
         if (this.examCreateUpdateForm.valid && this.examCreateUpdateForm.dirty) {
+            this._deleteExamTasksMarkedForDeletion();
+
             this._dialogRef.close(this._formToExamDto());
         } else {
             FormUtil.revalidateForm(this.examCreateUpdateForm);
