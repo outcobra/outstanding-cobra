@@ -110,7 +110,6 @@ export class ExamCreateUpdateDialog extends CreateUpdateComponent<ExamDto> imple
     public submit() {
         if (this.examCreateUpdateForm.valid && this.examCreateUpdateForm.dirty) {
             this._deleteExamTasksMarkedForDeletion();
-
             this._dialogRef.close(this._formToExamDto());
         } else {
             FormUtil.revalidateForm(this.examCreateUpdateForm);
