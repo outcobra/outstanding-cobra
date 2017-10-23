@@ -154,6 +154,7 @@ export class ExamComponent implements OnInit, AfterViewInit {
             .subscribe(() => {
                 this._notificationService.success('i18n.modules.exam.notification.delete.title', 'i18n.modules.exam.notification.delete.message');
                 this._removeExam(exam);
+                this._displayForFilter();
             });
     }
 
