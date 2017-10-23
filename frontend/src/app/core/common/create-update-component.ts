@@ -36,7 +36,7 @@ export class CreateUpdateComponent<T> {
         return prop;
     }
 
-    protected isEditMode(): boolean {
+    public isEditMode(): boolean {
         return this.mode == ViewMode.EDIT;
     }
 
