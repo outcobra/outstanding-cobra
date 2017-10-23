@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ParentLinkedCreateUpdateComponent} from '../../core/common/parent-linked-create-update-component';
 import {InstitutionDto, SchoolClassDto} from '../model/manage.dto';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {MdDialogRef} from '@angular/material';
+import {MatDialogRef} from '@angular/material';
 import {FormUtil} from '../../core/util/form-util';
 
 @Component({
@@ -14,7 +14,7 @@ export class SchoolClassDialog extends ParentLinkedCreateUpdateComponent<SchoolC
 
     private _schoolClassForm: FormGroup;
 
-    constructor(private _dialogRef: MdDialogRef<SchoolClassDialog>, private _formBuilder: FormBuilder) {
+    constructor(private _dialogRef: MatDialogRef<SchoolClassDialog>, private _formBuilder: FormBuilder) {
         super();
     }
 

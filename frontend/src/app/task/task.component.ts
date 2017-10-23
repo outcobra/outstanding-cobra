@@ -4,7 +4,7 @@ import {TaskDto} from './model/task.dto';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {SubjectFilterDto} from './model/subject.filter.dto';
-import {MdDialog, MdDialogRef} from '@angular/material';
+import {MatDialog, MatDialogRef} from '@angular/material';
 import {TaskCreateUpdateDialog} from './task-create-update-dialog/task-create-update-dialog.component';
 import {Util} from '../core/util/util';
 import {ViewMode} from '../core/common/view-mode';
@@ -33,12 +33,12 @@ export class TaskComponent implements OnInit, AfterViewInit {
     private _filtered: boolean = true;
     private _tasks: TaskDto[];
 
-    private _taskCreateUpdateDialog: MdDialogRef<TaskCreateUpdateDialog>;
+    private _taskCreateUpdateDialog: MatDialogRef<TaskCreateUpdateDialog>;
 
     public search$: Subject<string> = new Subject();
 
     constructor(private _taskService: TaskService,
-                private _dialogService: MdDialog,
+                private _dialogService: MatDialog,
                 private _notificationService: NotificationWrapperService,
                 private _route: ActivatedRoute,
                 private _router: Router,

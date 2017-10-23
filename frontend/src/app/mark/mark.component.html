@@ -1,8 +1,8 @@
 <oc-title-bar>
     <span>{{ 'i18n.modules.mark.linkTitle' | translate }}</span>
 </oc-title-bar>
-<nav md-tab-nav-bar *ngIf="!semesters || semesters.length > 0; else noSemestersAvailable">
-    <a md-tab-link
+<nav mat-tab-nav-bar *ngIf="!semesters || semesters.length > 0; else noSemestersAvailable">
+    <a mat-tab-link
        *ngFor="let semester of semesters"
        [routerLink]="'/mark/semester/' + semester.id"
        routerLinkActive #rla="routerLinkActive"
@@ -15,7 +15,7 @@
         <oc-empty placeholder="i18n.modules.mark.empty.placeholder"
                   hint="i18n.modules.mark.empty.hint"
                   iconName="school">
-            <button md-button [routerLink]="'/manage'" color="accent">{{ 'i18n.modules.manage.linkTitle' | translate }}</button>
+            <button mat-button [routerLink]="'/manage'" color="accent">{{ 'i18n.modules.manage.linkTitle' | translate }}</button>
         </oc-empty>
     </ng-template>
     <router-outlet></router-outlet>

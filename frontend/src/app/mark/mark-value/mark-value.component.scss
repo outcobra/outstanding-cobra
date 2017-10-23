@@ -7,11 +7,11 @@
 .mark-value {
     padding: 0 16px;
     width: 100%;
-    md-icon {
+    mat-icon {
         float: left;
         margin-right: 5px;
     }
-    md-icon, span {
+    mat-icon, span {
         display: flex;
         height: $mark-collapsible-header-height;
         line-height: $mark-collapsible-header-height;

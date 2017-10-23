@@ -20,16 +20,17 @@ If I am neither holding a mouse nor my camera, I grab my Vic Firth Sticks and ta
 
 ## Florian
 
-The first contact with Computers I had in third grade. At that time I got my first own computer.
+Kotlin enthusiast, caffeine-junkie and sailor
 
-Thanks to the fact that I could use it in school, because of my physical disability, I rapidly spent a lot of time with it.
+My focus in Outcobra is on the application logic. This means that I am responsible for the fact that the data you are typing is stored in the correct format, and will be available to you in the future on every device.
 
-Five years later I began to teach programming myself.
+Designing software never gets boring. It amazes me how we can chain abstract constructs together to create something new. For this reason, and to keep improving myself, I spend a lot of my spare time with software development.
 
-Today I am in an apprenticeship as software developer with a focus on Quality Assurance. To be up to date with the current trends in development I realize many side projects.
-Outcobra is to date my biggest one. I mainly focus on backend development and testing.
+Besides the mouse and the keyboard, a cup of coffee can't be missed on my desk.
 
-What fascinates me about the project is the challenge of many known and unknown things which confront me every time.
+During business hours I am mostly occupied with testing activities. Because of that, software quality became one of my passions.
+
+As a compensation to my activities in computer science, I enjoy the calm on the lake. To make sure I don't get bored, I started taking part in regattas (sailing contests) a few years ago.
 
 ## Joel
 

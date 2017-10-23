@@ -3,7 +3,7 @@ import {MarkGroupDto} from '../model/mark-group.dto';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {WEIGHT_PATTERN} from '../service/mark.service';
 import {NotificationWrapperService} from '../../core/notifications/notification-wrapper.service';
-import {ConnectionPositionPair} from '@angular/material';
+import {ConnectionPositionPair} from '@angular/cdk/overlay';
 import {Observable} from 'rxjs/Observable';
 
 @Component({

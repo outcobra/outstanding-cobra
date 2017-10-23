@@ -1,22 +1,22 @@
 <div class="content">
     <router-outlet></router-outlet>
 </div>
-<md-toolbar>
+<mat-toolbar>
     <div class="bottom-menu text-accent">
         <div class="menu-item" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-            <md-icon>info</md-icon>
+            <mat-icon>info</mat-icon>
             <span>{{ 'i18n.modules.main.linkTitles.about' | translate }}</span>
         </div>
         <div class="menu-item" routerLink="/features" routerLinkActive="active">
-            <md-icon>games</md-icon>
+            <mat-icon>games</mat-icon>
             <span>{{ 'i18n.modules.main.linkTitles.features' | translate }}</span>
         </div>
         <div class="menu-item" routerLink="/devs" routerLinkActive="active">
-            <md-icon>group</md-icon>
+            <mat-icon>group</mat-icon>
             <span>{{ 'i18n.modules.main.linkTitles.profiles' | translate }}</span>
         </div>
     </div>
-</md-toolbar>
+</mat-toolbar>
 <!--
 <div class="row">
     <div id="icon">

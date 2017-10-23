@@ -11,7 +11,7 @@ import {Util} from '../../core/util/util';
 import {FormUtil} from '../../core/util/form-util';
 import {ViewMode} from '../../core/common/view-mode';
 import {ConfirmDialogService} from '../../core/services/confirm-dialog.service';
-import {MdSelect} from '@angular/material';
+import {MatSelect} from '@angular/material';
 import {Observable} from 'rxjs/Observable';
 import {NotificationWrapperService} from '../../core/notifications/notification-wrapper.service';
 
@@ -36,7 +36,7 @@ export class MarkGroupCreateUpdateComponent extends ParentLinkedCreateUpdateComp
     public newMark$: Subject<number> = new Subject();
     public removeMark$: Subject<string> = new Subject();
 
-    @ViewChild('markSelect') select: MdSelect;
+    @ViewChild('markSelect') select: MatSelect;
 
     constructor(private _route: ActivatedRoute,
                 private _router: Router,

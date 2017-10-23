@@ -2,11 +2,12 @@ import {AfterViewInit, Component, HostBinding, OnInit, ViewChild, ViewEncapsulat
 import {Auth0AuthService} from './core/services/auth/auth.service';
 import {TranslateService} from '@ngx-translate/core';
 import {ResponsiveHelperService} from './core/services/ui/responsive-helper.service';
-import {MdIconRegistry, MdSidenav, OverlayContainer} from '@angular/material';
+import {MatIconRegistry, MatSidenav} from '@angular/material';
 import {OCTheme} from './oc-ui/theme/oc-theme';
 import {NavigationEnd, Router} from '@angular/router';
 import {isTruthy} from './core/util/helper';
 import {DomSanitizer} from '@angular/platform-browser';
+import {OverlayContainer} from '@angular/cdk/overlay';
 
 const OC_THEME_STORAGE_LOC = 'oc-theme';
 const OC_MOBILE_CLASS = 'oc-mobile';
@@ -25,7 +26,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     private _activeTheme: OCTheme;
     private _allThemes: Array<OCTheme> = OCTheme.values();
 
-    @ViewChild(MdSidenav) public sidenav: MdSidenav;
+    @ViewChild(MatSidenav) public sidenav: MatSidenav;
 
     private _isEnglish: boolean = this._translateService.currentLang == 'en';
 
@@ -35,7 +36,7 @@ export class AppComponent implements OnInit, AfterViewInit {
                 private _router: Router,
                 private _overlayContainer: OverlayContainer,
                 private _sanitizer: DomSanitizer,
-                private _mdIconRegistry: MdIconRegistry) {
+                private _matIconRegistry: MatIconRegistry) {
     }
 
     ngOnInit() {
@@ -50,7 +51,7 @@ export class AppComponent implements OnInit, AfterViewInit {
             });
 
         // TODO maybe search a better place to do this
-        this._mdIconRegistry.addSvgIcon('average', this._sanitizer.bypassSecurityTrustResourceUrl('/assets/img/ic_average.svg'));
+        this._matIconRegistry.addSvgIcon('average', this._sanitizer.bypassSecurityTrustResourceUrl('/assets/img/ic_average.svg'));
     }
 
     ngAfterViewInit() {
@@ -82,7 +83,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
     public changeTheme(theme: OCTheme) {
         if (this._overlayContainer) {
-            this._overlayContainer.themeClass = theme.className;
+            this._overlayContainer.getContainerElement().classList.add(theme.className);
         }
 
         this._activeTheme = theme;

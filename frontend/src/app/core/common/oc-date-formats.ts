@@ -1,6 +1,6 @@
-import {MdDateFormats} from '@angular/material/typings/core/datetime/date-formats';
+import {MatDateFormats} from '@angular/material/typings/core/datetime/date-formats';
 
-export const OC_DATE_FORMATS: MdDateFormats = {
+export const OC_DATE_FORMATS: MatDateFormats = {
     parse: {
         dateInput: 'D.M.Y'
     },

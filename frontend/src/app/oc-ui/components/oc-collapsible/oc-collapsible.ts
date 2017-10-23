@@ -22,7 +22,7 @@ import {isTruthy} from '../../../core/util/helper';
             <ng-content></ng-content>
         </div>
         <div class="oc-collapsible-toggle" *ngIf="showToggle">
-            <md-icon>expand_more</md-icon>
+            <mat-icon>expand_more</mat-icon>
         </div>
     `,
     encapsulation: ViewEncapsulation.None

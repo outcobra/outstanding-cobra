@@ -30,14 +30,14 @@ oc-nav {
                     overflow: hidden;
                     height: $row-height;
 
-                    a[md-button] {
+                    a[mat-button] {
                         width: $uncollapsed-width;
                         padding: 0;
                         transition: background-color .15s ease-in-out;
 
                         .mat-button-wrapper {
                             overflow: hidden;
-                            span, md-icon {
+                            span, mat-icon {
                                 float: left;
                                 display: block !important;
                                 height: 100% !important;
@@ -49,13 +49,13 @@ oc-nav {
                                 opacity: 1;
                                 transition: opacity $animation-duration cubic-bezier(.95,.28,.55,1);
                             }
-                            md-icon {
+                            mat-icon {
                                 width: $collapsed-width !important;
                                 text-align: center;
                             }
                         }
 
-                        &.oc-nav-link-active md-icon {
+                        &.oc-nav-link-active mat-icon {
                             @extend .text-accent;
                         }
                     }
@@ -76,7 +76,7 @@ oc-nav {
             min-width: $collapsed-width;
             width: 100%;
             text-align: end;
-            md-icon {
+            mat-icon {
                 transition: transform $animation-duration ease-in-out;
             }
         }
@@ -89,12 +89,12 @@ oc-nav.oc-nav-collapsed {
     .oc-nav-nav {
         nav {
             width: $collapsed-width;
-            a[md-button] .mat-button-wrapper span {
+            a[mat-button] .mat-button-wrapper span {
                 opacity: 0;
             }
         }
     }
-    .oc-nav-collapser md-icon {
+    .oc-nav-collapser mat-icon {
         transform: rotate(180deg);
     }
 

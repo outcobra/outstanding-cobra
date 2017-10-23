@@ -2,10 +2,10 @@
     <div [ngClass]="getWrapperClasses()" [ngSwitch]="displayMode"
          class="markdown-wrapper" fxFlex>
         <markdown *ngSwitchCase="'flat'" [path]="i18nPath"></markdown>
-        <md-card *ngSwitchCase="'card'">
-            <md-card-content>
+        <mat-card *ngSwitchCase="'card'">
+            <mat-card-content>
                 <markdown [path]="i18nPath"></markdown>
-            </md-card-content>
-        </md-card>
+            </mat-card-content>
+        </mat-card>
     </div>
 </div>

@@ -20,7 +20,7 @@ $bottom-inset-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12) inset;
                 display: flex;
                 align-items: center;
                 cursor: pointer;
-                md-icon {
+                mat-icon {
                     margin: 0 8px;
                 }
             }
@@ -28,7 +28,7 @@ $bottom-inset-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12) inset;
                 display: flex;
                 align-items: center;
 
-                md-icon {
+                mat-icon {
                     margin: 8px;
                 }
             }
@@ -61,7 +61,7 @@ $bottom-inset-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12) inset;
         align-items: center;
         @include mat-elevation(1);
 
-        > md-icon {
+        > mat-icon {
             margin: 0 8px;
         }
 
