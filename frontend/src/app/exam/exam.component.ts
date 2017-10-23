@@ -139,15 +139,11 @@ export class ExamComponent implements OnInit, AfterViewInit {
             .first()
             .filter(isTruthy)
             .switchMap((value) => this._examService.create(value))
-            .subscribe((incompleteExam: ExamDto) => {
-                //workaround for backend bug don't remove it
-                this._examService.readById(incompleteExam.id)
-                    .subscribe((completeExam: ExamDto) => {
-                        this._allExams.push(completeExam);
-                        this._sortExams();
-                        this._displayForFilter();
-                        this._notificationService.success('i18n.modules.exam.notification.add.title', 'i18n.modules.exam.notification.add.message');
-                    });
+            .subscribe((exam: ExamDto) => {
+                this._allExams.push(exam);
+                this._sortExams();
+                this._displayForFilter();
+                this._notificationService.success('i18n.modules.exam.notification.add.title', 'i18n.modules.exam.notification.add.message');
             });
     }
 
@@ -167,13 +163,9 @@ export class ExamComponent implements OnInit, AfterViewInit {
             .first()
             .filter(isTruthy)
             .switchMap((value) => this._examService.create(value))
-            .subscribe((incompleteExam: ExamDto) => {
-                //workaround for backend bug don't remove it
-                this._examService.readById(incompleteExam.id)
-                    .subscribe((completeExam: ExamDto) => {
-                        this._updateExamsList(completeExam);
-                        this._notificationService.success('i18n.modules.exam.notification.update.title', 'i18n.modules.exam.notification.update.message');
-                    });
+            .subscribe((exam: ExamDto) => {
+                this._updateExamsList(exam);
+                this._notificationService.success('i18n.modules.exam.notification.update.title', 'i18n.modules.exam.notification.update.message');
             });
 
     }
