@@ -11,7 +11,6 @@ import {getIfTruthy} from 'app/core/util/helper';
 import {CreateUpdateComponent} from '../../core/common/create-update-component';
 import {FormUtil} from '../../core/util/form-util';
 import {OCValidators} from '../../core/services/oc-validators';
-import {ExamTaskService} from '../service/exam-task.service';
 import {DateUtil} from '../../core/services/date-util.service';
 
 @Component({
