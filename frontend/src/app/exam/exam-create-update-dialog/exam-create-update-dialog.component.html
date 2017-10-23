@@ -30,7 +30,7 @@
                     <input matInput
                            required
                            [matDatepicker]="examDatePicker"
-                           [placeholder]="'i18n.common.label.todoDate' | translate"
+                           [placeholder]="'i18n.common.label.dueDate' | translate"
                            formControlName="date">
                     <mat-datepicker-toggle matSuffix [for]="examDatePicker"></mat-datepicker-toggle>
                     <mat-datepicker #examDatePicker
@@ -60,7 +60,7 @@
             </div>
         </div>
 
-        <div formArrayName="examTasks" class="form-group">
+        <div formArrayName="examTasks" class="form-group exam-tasks">
             <h5>{{ 'i18n.modules.exam.examTask.title' | translate }}</h5>
             <button mat-button
                     type="button"
@@ -71,8 +71,8 @@
             </button>
             <mat-list>
                 <mat-list-item *ngFor="let examTask of examTaskArray.controls; let i=index" [formGroupName]="i">
-                    <mat-checkbox formControlName="finished"></mat-checkbox>
                     <mat-form-field>
+                        <mat-checkbox matPrefix formControlName="finished"></mat-checkbox>
                         <input matInput formControlName="task">
                     </mat-form-field>
                 </mat-list-item>

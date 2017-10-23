@@ -11,6 +11,7 @@ import {getIfTruthy} from 'app/core/util/helper';
 import {CreateUpdateComponent} from '../../core/common/create-update-component';
 import {FormUtil} from '../../core/util/form-util';
 import {OCValidators} from '../../core/services/oc-validators';
+import {DateUtil} from '../../core/services/date-util.service';
 
 @Component({
     selector: 'exam-create-update-dialog',
@@ -55,7 +56,7 @@ export class ExamCreateUpdateDialog extends CreateUpdateComponent<ExamDto> imple
         return this._formBuilder.group({
             name: [this.getParamOrDefault('name'), Validators.required],
             description: [this.getParamOrDefault('description')],
-            date: [this.getParamOrDefault('date'),
+            date: [DateUtil.transformToMomentIfPossible(this.getParamOrDefault('date')),
                 Validators.compose([Validators.required, OCValidators.date()])],
             examTasks: this._formBuilder.array(this._formArrayForExamTasks()),
             subjectId: [this.getParamOrDefault('subject.id'), Validators.required]
