@@ -6,6 +6,7 @@ import outcobra.server.model.Exam
 import outcobra.server.model.QExam
 import outcobra.server.model.Semester
 import outcobra.server.model.dto.ExamDto
+import outcobra.server.model.dto.ExamTaskDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.ExamRepository
 import outcobra.server.model.repository.ExamTaskRepository
@@ -41,19 +42,37 @@ class DefaultExamService
     }
 
     override fun save(dto: ExamDto): ExamDto {
-        return readById(saveExamWithDependencies(dto))
+        return readById(when (dto.id) {
+            0L -> createExam(dto)
+            else -> createExam(dto)
+        })
     }
 
-    private fun saveExamWithDependencies(dto: ExamDto): Long {
-        val tasks = dto.examTasks
-        dto.examTasks.drop(tasks.size)
+    private fun createExam(dto: ExamDto): Long {
+        val tasks = dto.examTasks.toList()
+        dto.examTasks.clear()
+
         val savedDto = super.save(dto)
-        repository.flush()
-        tasks.forEach { it.examId = savedDto.id }
-        examTaskService.saveAll(tasks)
-        repository.flush()
-        examTaskRepository.flush()
+        updateOrSaveExamTasks(tasks, savedDto.id)
         return savedDto.id
+    }
+
+    private fun updateOrSaveExamTasks(tasks: List<ExamTaskDto>, examId: Long) {
+        if (tasks.all { it.id == 0L }) {
+            tasks.forEach { this.saveExamTaskWithNewId(it, examId) }
+            return
+        }
+        val oldTasks = examTaskService.readByExamId(examId).toMutableList()
+        oldTasks.removeIf { task ->
+            tasks.any { it.id == task.id }
+        }
+        oldTasks.map { it.id }.forEach(examTaskService::delete)
+        examTaskService.saveAll(tasks)
+    }
+
+    private fun saveExamTaskWithNewId(dto: ExamTaskDto, examId: Long) {
+        dto.examId = examId
+        examTaskService.save(dto)
     }
 
     override fun readAllBySemester(semesterId: Long): List<ExamDto> {

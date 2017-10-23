@@ -9,5 +9,6 @@ import outcobra.server.service.base.BaseService
  */
 interface ExamTaskService : BaseService<ExamTaskDto> {
     fun saveAll(examTasks: List<ExamTaskDto>): List<ExamTaskDto>
+    fun readByExamId(examId: Long): List<ExamTaskDto>
     fun changeState(examTaskId: Long): ExamTaskDto
 }

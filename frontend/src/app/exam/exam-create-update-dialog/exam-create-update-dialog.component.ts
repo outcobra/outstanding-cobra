@@ -23,12 +23,10 @@ export class ExamCreateUpdateDialog extends CreateUpdateComponent<ExamDto> imple
 
     private _subjects: SubjectDto[];
     public examCreateUpdateForm: FormGroup;
-    private _examTaskIdsMarkedForDeletion: number[] = [];
     private _title: string;
 
     constructor(private _translateService: TranslateService,
                 private _subjectService: SubjectService,
-                private _examTaskService: ExamTaskService,
                 private _dialogRef: MatDialogRef<ExamCreateUpdateDialog>,
                 private _responsiveHelper: ResponsiveHelperService,
                 private _formBuilder: FormBuilder,
@@ -81,12 +79,6 @@ export class ExamCreateUpdateDialog extends CreateUpdateComponent<ExamDto> imple
         } as ExamDto;
     }
 
-    private _deleteExamTasksMarkedForDeletion() {
-        this._examTaskIdsMarkedForDeletion.forEach(examTaskId =>
-            this._examTaskService.deleteById(examTaskId).subscribe()
-        )
-    }
-
     private _getSubjectById(subjectId: number): SubjectDto {
         return this.subjects.find((subject: SubjectDto) => subject.id == subjectId);
     }
@@ -95,12 +87,9 @@ export class ExamCreateUpdateDialog extends CreateUpdateComponent<ExamDto> imple
         this.examTaskArray.push(this._formGroupForDtoOrDefault());
     }
 
-    public removeExamTask(examTask: FormGroup, index: number) {
-        let elementId = examTask.value.id;
-        if (elementId != 0) {
-            this._examTaskIdsMarkedForDeletion.push(elementId);
-        }
+    public removeExamTask(index: number) {
         this.examTaskArray.removeAt(index);
+        this.examTaskArray.markAsDirty();
     }
 
     public isMobile(): boolean {
@@ -109,7 +98,6 @@ export class ExamCreateUpdateDialog extends CreateUpdateComponent<ExamDto> imple
 
     public submit() {
         if (this.examCreateUpdateForm.valid && this.examCreateUpdateForm.dirty) {
-            this._deleteExamTasksMarkedForDeletion();
             this._dialogRef.close(this._formToExamDto());
         } else {
             FormUtil.revalidateForm(this.examCreateUpdateForm);
