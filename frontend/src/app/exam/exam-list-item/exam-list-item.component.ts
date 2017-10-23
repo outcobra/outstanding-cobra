@@ -3,7 +3,6 @@ import {ExamDto} from '../model/exam.dto';
 import {ExamTaskService} from '../service/exam-task.service';
 import {Subject} from 'rxjs/Subject';
 import {ExamTaskDto} from '../model/exam.task.dto';
-import {Util} from '../../core/util/util';
 
 @Component({
     selector: 'exam-list-item',
@@ -23,16 +22,11 @@ export class ExamListItemComponent implements OnInit {
 
     ngOnInit() {
         this.finishTask$
-            .subscribe(id => {
-                this._examTaskService.changeState(id)
-                    .subscribe((examTask: ExamTaskDto) => {
-                        this._updateExamTaskList(examTask)
-                    })
-            });
+            .switchMap(id => this._examTaskService.changeState(id))
+            .subscribe(examTask => this._updateExamTaskList(examTask));
     }
 
     private _updateExamTaskList(examTask: ExamTaskDto) {
-        Util.removeFirstMatch(this.exam.examTasks, (item: ExamTaskDto) => item.id == examTask.id)
-        this.exam.examTasks.push(examTask)
+        this.exam.examTasks.find(et => et.id == examTask.id).finished = examTask.finished;
     }
 }
