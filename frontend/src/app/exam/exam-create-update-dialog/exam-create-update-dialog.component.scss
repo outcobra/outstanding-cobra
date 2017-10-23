@@ -15,3 +15,7 @@ mat-form-field {
 mat-select {
     width: 100%;
 }
+
+.exam-tasks mat-checkbox[matPrefix] {
+    margin-right: 8px;
+}
