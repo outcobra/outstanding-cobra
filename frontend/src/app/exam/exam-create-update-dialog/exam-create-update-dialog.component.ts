@@ -1,17 +1,16 @@
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Component, Inject, OnInit} from '@angular/core';
 import {SubjectDto} from '../../manage/model/manage.dto';
-import {AbstractControl, FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ExamDto} from '../model/exam.dto';
 import {TranslateService} from '@ngx-translate/core';
 import {SubjectService} from '../../manage/service/subject.service';
 import {ResponsiveHelperService} from '../../core/services/ui/responsive-helper.service';
 import {ExamTaskDto} from '../model/exam.task.dto';
-import {getIfTruthy} from 'app/core/util/helper';
+import {isFalsy} from 'app/core/util/helper';
 import {CreateUpdateComponent} from '../../core/common/create-update-component';
 import {FormUtil} from '../../core/util/form-util';
 import {OCValidators} from '../../core/services/oc-validators';
-import {DateUtil} from '../../core/services/date-util.service';
 
 @Component({
     selector: 'exam-create-update-dialog',
@@ -19,7 +18,6 @@ import {DateUtil} from '../../core/services/date-util.service';
     styleUrls: ['./exam-create-update-dialog.component.scss']
 })
 export class ExamCreateUpdateDialog extends CreateUpdateComponent<ExamDto> implements OnInit {
-
     private _subjects: SubjectDto[];
     public examCreateUpdateForm: FormGroup;
     private _title: string;
@@ -35,32 +33,44 @@ export class ExamCreateUpdateDialog extends CreateUpdateComponent<ExamDto> imple
 
     ngOnInit() {
         this._subjectService.readAll().subscribe((subjects: SubjectDto[]) => this._subjects = subjects);
-        this.examCreateUpdateForm = this._initFormGroup();
+        this.examCreateUpdateForm = this._initExamForm();
     }
 
-    private _formGroupForDtoOrDefault(examTask = {} as ExamTaskDto): FormGroup {
+    private _buildExamTaskFormGroup(examTask = this._makeDefaultExamTask()): FormGroup {
+        if (isFalsy(examTask)) {
+            throw new Error('Cannot create exam task form group')
+        }
         return this._formBuilder.group({
-            id: getIfTruthy(examTask, 'id', 0),
-            finished: [getIfTruthy(examTask, 'finished', false)],
-            task: [getIfTruthy(examTask, 'task', ''), Validators.required],
-            examId: [this.getParamOrDefault('id', 0)]
+            id: [examTask.id],
+            finished: [examTask.finished],
+            task: [examTask.task, Validators.required],
+            examId: [examTask.examId]
         });
     }
 
-    private _formArrayForExamTasks(): AbstractControl[] {
-        let tasks = this.getParamOrDefault('examTasks', []);
-        return tasks.map((examTask) => this._formGroupForDtoOrDefault(examTask));
+    private _initExamTaskFormArray(): FormArray {
+        let tasks: Array<ExamTaskDto> = this.getParamOrDefault('examTasks', []);
+        return this._formBuilder.array(tasks.map(this._buildExamTaskFormGroup, this));
     }
 
-    private _initFormGroup(): FormGroup {
+    private _initExamForm(): FormGroup {
         return this._formBuilder.group({
             name: [this.getParamOrDefault('name'), Validators.required],
             description: [this.getParamOrDefault('description')],
-            date: [DateUtil.transformToMomentIfPossible(this.getParamOrDefault('date')),
+            date: [this.getDateParamOrDefault('date'),
                 Validators.compose([Validators.required, OCValidators.date()])],
-            examTasks: this._formBuilder.array(this._formArrayForExamTasks()),
+            examTasks: this._initExamTaskFormArray(),
             subjectId: [this.getParamOrDefault('subject.id'), Validators.required]
         });
+    }
+
+    private _makeDefaultExamTask(): ExamTaskDto {
+        return {
+            id: 0,
+            task: '',
+            finished: false,
+            examId: this.getParamOrDefault('id', 0)
+        } as ExamTaskDto
     }
 
     private _formToExamDto(): ExamDto {
@@ -83,7 +93,12 @@ export class ExamCreateUpdateDialog extends CreateUpdateComponent<ExamDto> imple
     }
 
     public addExamTask() {
-        this.examTaskArray.push(this._formGroupForDtoOrDefault());
+        this.examTaskArray.push(this._buildExamTaskFormGroup());
+    }
+
+    public removeExamTask(index: number) {
+        this.examTaskArray.removeAt(index);
+        this.examTaskArray.markAsDirty();
     }
 
     public isMobile(): boolean {

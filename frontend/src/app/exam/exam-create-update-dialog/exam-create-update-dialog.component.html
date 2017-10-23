@@ -75,6 +75,9 @@
                         <mat-checkbox matPrefix formControlName="finished"></mat-checkbox>
                         <input matInput formControlName="task">
                     </mat-form-field>
+                    <button mat-icon-button (click)="removeExamTask(i)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
                 </mat-list-item>
             </mat-list>
         </div>
