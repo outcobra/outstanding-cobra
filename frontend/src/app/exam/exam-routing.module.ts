@@ -9,14 +9,14 @@ import {ActiveExamListResolver} from './service/active.exam.list.resolver.servic
 @NgModule({
     imports: [
         RouterModule.forChild([{
-                path: 'exam',
+                path: '',
                 component: ExamComponent,
-            canActivate: [AuthGuard],
-            resolve: {
-                taskFilter: SubjectFilterResolver,
-                allExams: ExamListResolver,
-                activeExams: ActiveExamListResolver,
-            }
+                canActivate: [AuthGuard],
+                resolve: {
+                    taskFilter: SubjectFilterResolver,
+                    allExams: ExamListResolver,
+                    activeExams: ActiveExamListResolver,
+                }
             }]
         )],
     exports: [

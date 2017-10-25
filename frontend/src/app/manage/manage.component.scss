@@ -4,6 +4,9 @@
 manager {
     display: flex;
     flex-direction: column;
+
+    // fix IE and Edge
+    flex-grow: 1;
 }
 
 manager, .manage-rows {

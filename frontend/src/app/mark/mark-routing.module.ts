@@ -14,7 +14,7 @@ import {SubjectMarkGroupResolver} from 'app/mark/service/subject-mark-resolver.s
     imports: [
         RouterModule.forChild([
             {
-                path: 'mark',
+                path: '',
                 canActivate: [AuthGuard],
                 children: [
                     {

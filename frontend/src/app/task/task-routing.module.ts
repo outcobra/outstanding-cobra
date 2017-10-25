@@ -11,7 +11,7 @@ import {TaskListResolver} from './service/task-list-resolver.service';
     imports: [
         RouterModule.forChild([
             {
-                path: 'task',
+                path: '',
                 component: TaskComponent,
                 canActivate: [AuthGuard],
                 resolve: {
