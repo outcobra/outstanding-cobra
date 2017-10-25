@@ -1,31 +1,33 @@
-<!-- TASK DESC START-->
-<oc-icon-data iconName="description" titleKey="i18n.modules.task.desc">
-    <p class="task-property">{{ task.description }}</p>
-</oc-icon-data>
-<!-- TASK DESC END -->
-<!-- TASK TODO_DATE START -->
-<oc-icon-data iconName="alarm" titleKey="i18n.common.label.todoDate">
-    <p class="task-property">{{ task.todoDate | date:'fullDate' }}</p>
-</oc-icon-data>
-<!-- TASK TODO_DATE END -->
-<!-- TASK DUE_DATE START-->
-<oc-icon-data iconName="event" titleKey="i18n.common.label.dueDate">
-    <p class="task-property">{{ task.dueDate | date:'fullDate' }}</p>
-</oc-icon-data>
-<!-- TASK DUE_DATE END-->
-<!-- TASK PROGRESS START-->
-<oc-icon-data iconName="show_chart" titleKey="i18n.modules.task.progress">
-    <div class="row task-progress" fxLayout>
-        <div class="col s1 progress-value" fxFlex="15">{{ task.progress }}%</div>
-        <div class="col s11" fxFlex>
-            <mat-slider [(ngModel)]="task.progress" color="accent" thumbLabel step="5"></mat-slider>
+<div class="task-detail">
+    <!-- TASK DESC START-->
+    <oc-icon-data iconName="description" titleKey="i18n.modules.task.desc">
+        <span class="task-property">{{ task.description }}</span>
+    </oc-icon-data>
+    <!-- TASK DESC END -->
+    <!-- TASK TODO_DATE START -->
+    <oc-icon-data iconName="alarm" titleKey="i18n.common.label.todoDate">
+        <span class="task-property">{{ task.todoDate | date:'fullDate' }}</span>
+    </oc-icon-data>
+    <!-- TASK TODO_DATE END -->
+    <!-- TASK DUE_DATE START-->
+    <oc-icon-data iconName="event" titleKey="i18n.common.label.dueDate">
+        <span class="task-property">{{ task.dueDate | date:'fullDate' }}</span>
+    </oc-icon-data>
+    <!-- TASK DUE_DATE END-->
+    <!-- TASK PROGRESS START-->
+    <oc-icon-data iconName="show_chart" titleKey="i18n.modules.task.progress">
+        <div class="row task-progress" fxLayout>
+            <div class="col s1 progress-value" fxFlex="15">{{ task.progress }}%</div>
+            <div class="col s11" fxFlex>
+                <mat-slider [(ngModel)]="task.progress" color="accent" thumbLabel step="5"></mat-slider>
+            </div>
         </div>
-    </div>
-</oc-icon-data>
-<oc-icon-data iconName="timelapse" titleKey="i18n.modules.task.dialogs.add.effort.remaining">
-    <p class="task-property">{{ getRemainingEffort() }}</p>
-</oc-icon-data>
-<!-- TASK PROGRESS END-->
+    </oc-icon-data>
+    <oc-icon-data iconName="timelapse" titleKey="i18n.modules.task.dialogs.add.effort.remaining">
+        <span class="task-property">{{ getRemainingEffort() }}</span>
+    </oc-icon-data>
+    <!-- TASK PROGRESS END-->
+</div>
 <button mat-button
         color="primary"
         (click)="editTask()">

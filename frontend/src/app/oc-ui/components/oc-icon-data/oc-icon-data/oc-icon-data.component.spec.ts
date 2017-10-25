@@ -2,6 +2,7 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {OCIconDataComponent} from './oc-icon-data.component';
 import {TestModule} from '../../../../core/mock/test.module';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 describe('OCIconDataComponent', () => {
     let component: OCIconDataComponent;
@@ -13,7 +14,8 @@ describe('OCIconDataComponent', () => {
                 OCIconDataComponent
             ],
             imports: [
-                TestModule
+                TestModule,
+                FlexLayoutModule
             ]
         }).compileComponents();
     }));

@@ -1,8 +1,11 @@
 @import '../../../sass/color-variables';
 
 :host {
-    padding: 16px 24px;
     display: block;
+
+    .task-detail {
+        margin-bottom: 16px;
+    }
 }
 
 .task-progress {
