@@ -12,7 +12,7 @@
                 <mat-select formControlName="subjectId"
                             [placeholder]="'i18n.modules.exam.filter.subject' | translate"
                             floatPlaceholder="never">
-                    <mat-optgroup *ngFor="let schoolClass of filterData.schoolClassSubjects"
+                    <mat-optgroup *ngFor="let schoolClass of schoolClassSubject.schoolClassSubjects"
                                   [label]="schoolClass.schoolClass.normalizedName">
                         <mat-option *ngFor="let subject of schoolClass.subjects" [value]="subject.id">
                             {{ subject.name }}

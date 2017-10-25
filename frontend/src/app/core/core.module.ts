@@ -8,7 +8,7 @@ import {Auth0AuthService} from './services/auth/auth.service';
 import {DateUtil} from './services/date-util.service';
 import {NotificationWrapperService} from './notifications/notification-wrapper.service';
 import {DurationService} from './services/duration.service';
-import {FilterService} from './services/filter/filter.service';
+import {SchoolClassSubjectService} from './services/school-class-subject/school-class-subject.service';
 
 @NgModule({
     providers: [
@@ -21,7 +21,7 @@ import {FilterService} from './services/filter/filter.service';
         ResponsiveHelperService,
         NotificationWrapperService,
         DurationService,
-        FilterService
+        SchoolClassSubjectService
     ]
 })
 export class CoreModule {

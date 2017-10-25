@@ -90,7 +90,7 @@
                 <mat-select formControlName="subjectId"
                             required
                             [placeholder]="'i18n.modules.task.dialogs.add.subject.label' | translate">
-                    <mat-option *ngFor="let subject of subjects"
+                    <mat-option *ngFor="let subject of schoolClassSubjects"
                                 [value]="subject.id">
                         {{ subject.name }}
                     </mat-option>

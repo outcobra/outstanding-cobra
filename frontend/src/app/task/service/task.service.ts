@@ -3,7 +3,7 @@ import {HttpInterceptor} from '../../core/http/http-interceptor';
 import {TaskDto} from '../model/task.dto';
 import {Observable} from 'rxjs/Observable';
 import {CacheableCrudService} from '../../core/services/core/cacheable-crud.service';
-import {TaskProgressUpdateDto} from '../model/task.update.progress.dto';
+import {TaskProgressUpdateDto} from '../model/task-update-progress.dto';
 
 @Injectable()
 export class TaskService extends CacheableCrudService<TaskDto, TaskDto[]> {

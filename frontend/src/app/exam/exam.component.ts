@@ -12,7 +12,7 @@ import {ConfirmDialogService} from '../core/services/confirm-dialog.service';
 import {and, isNotEmpty, isTruthy} from '../core/util/helper';
 import {Util} from '../core/util/util';
 import * as objectAssign from 'object-assign';
-import {SubjectFilterDto} from '../task/model/subject.filter.dto';
+import {SchoolClassSubjectDto} from '../task/model/school-class-subject.dto';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DateUtil} from '../core/services/date-util.service';
 import {OCMediaChange} from '../core/services/ui/oc-media-change';
@@ -41,7 +41,7 @@ export class ExamComponent implements OnInit, AfterViewInit {
 
     private _currentSearchTerm: string;
     private _filterForm: FormGroup;
-    private _filterData: SubjectFilterDto;
+    private _schoolClassSubject: SchoolClassSubjectDto;
     private _filterShown: boolean;
     private _today: Moment = moment();
 
@@ -105,8 +105,8 @@ export class ExamComponent implements OnInit, AfterViewInit {
     }
 
     private _loadInitialData() {
-        this._route.data.subscribe((data: { taskFilter: SubjectFilterDto, allExams: ExamDto[], activeExams: ExamDto[] }) => {
-            this._filterData = data.taskFilter;
+        this._route.data.subscribe((data: { schoolClassSubject: SchoolClassSubjectDto, allExams: ExamDto[], activeExams: ExamDto[] }) => {
+            this._schoolClassSubject = data.schoolClassSubject;
             this._activeExams = data.activeExams;
             this._allExams = data.allExams;
             this._sortExams();
@@ -131,10 +131,9 @@ export class ExamComponent implements OnInit, AfterViewInit {
         Util.removeFirstMatch(this._allExams, (exam: ExamDto) => exam.id == examDto.id);
     }
 
-
     public addExam() {
         this._dialogService
-            .open(ExamCreateUpdateDialog, this._makeDialogConfig(ViewMode.NEW))
+            .open(ExamCreateUpdateDialog, this._makeDialogConfig(ViewMode.NEW, null, this._schoolClassSubject))
             .afterClosed()
             .first()
             .filter(isTruthy)
@@ -159,7 +158,7 @@ export class ExamComponent implements OnInit, AfterViewInit {
     }
 
     public editExam(exam: ExamDto) {
-        this._dialogService.open(ExamCreateUpdateDialog, this._makeDialogConfig(ViewMode.EDIT, exam))
+        this._dialogService.open(ExamCreateUpdateDialog, this._makeDialogConfig(ViewMode.EDIT, exam, this._schoolClassSubject))
             .afterClosed()
             .first()
             .filter(isTruthy)
@@ -203,11 +202,12 @@ export class ExamComponent implements OnInit, AfterViewInit {
         }
     }
 
-    private _makeDialogConfig(mode: ViewMode, param: ExamDto = null) {
+    private _makeDialogConfig(mode: ViewMode, param: ExamDto = null, schoolClassSubject: SchoolClassSubjectDto) {
         return objectAssign(this._responsiveHelper.getMobileOrGivenDialogConfig(MEDIUM_DIALOG), {
             data: {
                 mode: mode,
-                param: param
+                param: param,
+                schoolClassSubject: schoolClassSubject
             }
         });
     }
@@ -228,7 +228,7 @@ export class ExamComponent implements OnInit, AfterViewInit {
         return this._displayedExams
     }
 
-    get filterData(): SubjectFilterDto {
-        return this._filterData;
+    get schoolClassSubject(): SchoolClassSubjectDto {
+        return this._schoolClassSubject;
     }
 }

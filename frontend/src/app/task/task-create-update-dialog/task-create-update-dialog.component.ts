@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatDialogRef} from '@angular/material';
-import {SubjectService} from '../../manage/service/subject.service';
-import {SubjectDto} from '../../manage/model/manage.dto';
 import {OCValidators} from '../../core/services/oc-validators';
 import {TaskDto} from '../model/task.dto';
 import {CreateUpdateComponent} from '../../core/common/create-update-component';
@@ -11,6 +9,8 @@ import {DateUtil} from '../../core/services/date-util.service';
 import {FormUtil} from '../../core/util/form-util';
 import * as moment from 'moment';
 import {Moment} from 'moment';
+import {SchoolClassSubjectDto} from '../model/school-class-subject.dto';
+import {SchoolClassSubjectService} from '../../core/services/school-class-subject/school-class-subject.service';
 
 @Component({
     selector: './task-create-update-dialog',
@@ -19,10 +19,10 @@ import {Moment} from 'moment';
 })
 export class TaskCreateUpdateDialog extends CreateUpdateComponent<TaskDto> implements OnInit {
     private _taskCreateUpdateForm: FormGroup;
-    private _subjects: SubjectDto[];
+    private _schoolClassSubjects: SchoolClassSubjectDto;
     private _today: Moment = moment();
 
-    constructor(private _subjectService: SubjectService,
+    constructor(private _schoolClassSubjectService: SchoolClassSubjectService,
                 private _dialogRef: MatDialogRef<TaskCreateUpdateDialog>,
                 private _formBuilder: FormBuilder,
                 private responsiveHelperService: ResponsiveHelperService) {
@@ -30,8 +30,8 @@ export class TaskCreateUpdateDialog extends CreateUpdateComponent<TaskDto> imple
     }
 
     ngOnInit() {
-        this._subjectService.getCurrentSubjects()
-            .subscribe((subjects: SubjectDto[]) => this._subjects = subjects);
+        this._schoolClassSubjectService.getSchoolCLassSubjects()
+            .subscribe((subjects: SchoolClassSubjectDto) => this._schoolClassSubjects = subjects);
 
         this._taskCreateUpdateForm = this._formBuilder.group({
             name: [this.getParamOrDefault('name'), Validators.required],
@@ -69,7 +69,7 @@ export class TaskCreateUpdateDialog extends CreateUpdateComponent<TaskDto> imple
             dueDate: formValue.dates.dueDate,
             effort: formValue.effort,
             progress: 0,
-            subject: this._subjects.find(subject => subject.id == formValue.subjectId)
+            //TODO @mario map value
         } as TaskDto
     }
 
@@ -81,8 +81,8 @@ export class TaskCreateUpdateDialog extends CreateUpdateComponent<TaskDto> imple
         return this._taskCreateUpdateForm;
     }
 
-    get subjects(): SubjectDto[] {
-        return this._subjects;
+    get schoolClassSubjects(): SchoolClassSubjectDto {
+        return this._schoolClassSubjects;
     }
 
     get today(): Moment {
