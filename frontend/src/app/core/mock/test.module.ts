@@ -69,7 +69,6 @@ import {MockExamTaskService} from './exam/mock-exam-task.service';
         NoopAnimationsModule,
         OCMaterialModule,
         TranslateModule,
-        SimpleNotificationsModule,
         PipeModule
     ],
     providers: [

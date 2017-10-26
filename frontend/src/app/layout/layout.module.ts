@@ -17,7 +17,7 @@ import {SimpleNotificationsModule} from 'angular2-notifications/dist';
         OCMaterialModule,
         OCUiModule,
         TranslateModule,
-        SimpleNotificationsModule
+        SimpleNotificationsModule.forRoot()
     ],
     declarations: [
         AppLayoutComponent,
