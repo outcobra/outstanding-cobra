@@ -1,5 +1,6 @@
 @import '~@angular/material/theming';
 @import 'color-classes';
+@import '../app/auth/auth-theming';
 
 @include mat-core();
 
@@ -21,6 +22,7 @@ $accent: mat-palette($mat-pink, 500, 300, 900);
 
 $oc-theme-ocean: mat-light-theme($primary, $accent, $warn);
 @include angular-material-theme($oc-theme-ocean);
+@include auth-theme($oc-theme-ocean);
 @include oc-theme-classes($primary, $accent, $warn);
 
 .oc-theme-blood-orange {
@@ -29,6 +31,7 @@ $oc-theme-ocean: mat-light-theme($primary, $accent, $warn);
 
     $oc-theme-blood-orange: mat-light-theme($primary, $accent, $warn);
     @include angular-material-theme($oc-theme-blood-orange);
+    @include auth-theme($oc-theme-blood-orange);
     @include oc-theme-classes($primary, $accent, $warn);
 }
 
@@ -38,5 +41,6 @@ $oc-theme-ocean: mat-light-theme($primary, $accent, $warn);
 
     $oc-theme-lavender: mat-light-theme($primary, $accent, $warn);
     @include angular-material-theme($oc-theme-lavender);
+    @include auth-theme($oc-theme-lavender);
     @include oc-theme-classes($primary, $accent, $warn);
 }

@@ -1,0 +1,29 @@
+@import '../../sass/util';
+
+.auth-wrapper {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    > div {
+        flex-basis: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+
+        mat-icon {
+            @include mat-icon-size(200px);
+        }
+        span {
+            font-size: 2em;
+        }
+
+        &.signup mat-icon {
+            transform: translateX(-22px);
+        }
+    }
+    @media screen and (max-width: 500px) {
+        flex-direction: column;
+    }
+}

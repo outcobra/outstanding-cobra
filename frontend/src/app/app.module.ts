@@ -19,6 +19,7 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {ErrorStateMatcher} from '@angular/material';
 import {OcErrorStateMatcher} from './core/services/oc-error-state-matcher';
 import {LayoutModule} from './layout/layout.module';
+import {AuthModule} from './auth/auth.module';
 
 @NgModule({
     declarations: [
@@ -32,10 +33,11 @@ import {LayoutModule} from './layout/layout.module';
         HttpModule,
         HttpClientModule,
         OCMaterialModule,
+        CoreModule,
         SharedModule,
         LayoutModule,
+        AuthModule,
         FlexLayoutModule,
-        CoreModule,
         PipeModule,
         AppRoutingModule,
         TranslateModule.forRoot({
@@ -69,7 +71,9 @@ import {LayoutModule} from './layout/layout.module';
             useClass: OcErrorStateMatcher
         }
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [
+        AppComponent
+    ]
 })
 export class AppModule {
 }

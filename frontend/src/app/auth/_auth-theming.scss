@@ -1,0 +1,17 @@
+@mixin auth-theme($theme) {
+    $primary-palette: map_get($theme, primary);
+    .auth-wrapper {
+        .signup:hover {
+            background-color: map_get(map_get($theme, background), hover);
+        }
+        .login {
+            background-color: map_get($primary-palette, darker);
+            color: map_get($primary-palette, default-contrast);
+
+            transition: all .5s ease-in-out;
+            &:hover {
+                background-color: map_get($primary-palette, lighter);
+            }
+        }
+    }
+}
