@@ -7,7 +7,7 @@ import {OCMaterialModule} from '../oc-material.module';
 import {OCUiModule} from '../oc-ui/oc-ui.module';
 import {TranslateModule} from '@ngx-translate/core';
 import {FormsModule} from '@angular/forms';
-import {SimpleNotificationsModule} from 'angular2-notifications/dist';
+import {SimpleNotificationsModule} from 'angular2-notifications';
 
 @NgModule({
     imports: [
