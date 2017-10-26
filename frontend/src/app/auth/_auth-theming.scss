@@ -1,16 +1,23 @@
 @mixin auth-theme($theme) {
     $primary-palette: map_get($theme, primary);
     .auth-wrapper {
+        .signup, .login {
+            transition: all .375s cubic-bezier(0.4, 0.0, 0.2, 1);
+            z-index: auto;
+        }
         .signup:hover {
-            background-color: map_get(map_get($theme, background), hover);
+            background-color: rgba(0, 0, 0, 0.05);
+            box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+            z-index: 500;
         }
         .login {
-            background-color: map_get($primary-palette, darker);
+            background-color: map_get($primary-palette, default);
             color: map_get($primary-palette, default-contrast);
 
-            transition: all .5s ease-in-out;
             &:hover {
-                background-color: map_get($primary-palette, lighter);
+                background-color: map_get($primary-palette, darker);
+                box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.75);
+                z-index: 500;
             }
         }
     }
