@@ -4,7 +4,7 @@ import {FallbackComponent} from './main/fallback/fallback.component';
 import {EmptyLayoutComponent} from './layout/empty-layout/empty-layout.component';
 import {AppLayoutComponent} from './layout/app-layout/app-layout.component';
 import {AuthGuard} from './core/services/auth/auth-guard.service';
-import {AuthComponent} from './auth/auth.component';
+import {authRoutes} from './auth/auth-routes';
 
 @NgModule({
     imports: [
@@ -17,12 +17,7 @@ import {AuthComponent} from './auth/auth.component';
             {
                 path: '',
                 component: EmptyLayoutComponent,
-                children: [
-                    {
-                        path: 'auth',
-                        component: AuthComponent
-                    }
-                ]
+                children: authRoutes
             },
             {
                 path: '',

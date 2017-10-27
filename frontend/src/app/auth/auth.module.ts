@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {SignupComponent} from './signup/signup.component';
 import {AuthComponent} from './auth.component';
 import {OCMaterialModule} from '../oc-material.module';
+import {LoginComponent} from './login/login.component';
 
 @NgModule({
     imports: [
@@ -10,6 +11,7 @@ import {OCMaterialModule} from '../oc-material.module';
         OCMaterialModule
     ],
     declarations: [
+        LoginComponent,
         SignupComponent,
         AuthComponent
     ]
