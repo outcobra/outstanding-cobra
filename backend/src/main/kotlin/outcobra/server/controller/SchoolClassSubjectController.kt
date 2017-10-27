@@ -16,7 +16,7 @@ import javax.inject.Inject
 class SchoolClassSubjectController @Inject constructor(val schoolClassSubjectService: SchoolClassSubjectService) {
 
     @GetMapping("/schoolClassSubject")
-    fun getSubjectFilter(): List<SchoolClassSubjectDto> {
+    fun getSchoolClassSubjects(): List<SchoolClassSubjectDto> {
         return schoolClassSubjectService.getSchoolClassSubjects()
     }
 }

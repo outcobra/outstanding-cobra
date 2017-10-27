@@ -3,8 +3,8 @@ import {RouterModule} from '@angular/router';
 import {AuthGuard} from '../core/services/auth/auth-guard.service';
 import {ExamComponent} from './exam.component';
 import {SchoolClassSubjectResolver} from '../core/services/school-class-subject/school-class-subject-resolver.service';
-import {ExamListResolver} from './service/exam.list.resolver.service';
-import {ActiveExamListResolver} from './service/active.exam.list.resolver.service';
+import {ExamListResolver} from './service/exam-list-resolver.service';
+import {ActiveExamListResolver} from './service/active-exam-list-resolver.service';
 
 @NgModule({
     imports: [
@@ -13,7 +13,7 @@ import {ActiveExamListResolver} from './service/active.exam.list.resolver.servic
                 component: ExamComponent,
                 canActivate: [AuthGuard],
                 resolve: {
-                    schoolClassSubject: SchoolClassSubjectResolver,
+                    schoolClassSubjects: SchoolClassSubjectResolver,
                     allExams: ExamListResolver,
                     activeExams: ActiveExamListResolver,
                 }

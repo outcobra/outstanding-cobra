@@ -51,7 +51,7 @@
                     <mat-select formControlName="subjectId"
                                 required
                                 [placeholder]="'i18n.modules.exam.dialogs.add.subject.label' | translate">
-                        <mat-optgroup *ngFor="let schoolClass of schoolClassSubject"
+                        <mat-optgroup *ngFor="let schoolClass of schoolClassSubjects"
                                       [label]="schoolClass.schoolClass.normalizedName">
                             <mat-option *ngFor="let subject of schoolClass.subjects" [value]="subject.id">
                                 {{ subject.name }}

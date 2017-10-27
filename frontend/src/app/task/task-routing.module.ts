@@ -15,7 +15,7 @@ import {TaskListResolver} from './service/task-list-resolver.service';
                 component: TaskComponent,
                 canActivate: [AuthGuard],
                 resolve: {
-                    schoolClassSubject: SchoolClassSubjectResolver,
+                    schoolClassSubjects: SchoolClassSubjectResolver,
                     tasks: TaskListResolver
                 },
                 children: [

@@ -32,7 +32,6 @@ export class TaskCreateUpdateDialog extends CreateUpdateComponent<TaskDto> imple
 
     ngOnInit() {
         this._schoolClassSubjectService.getSchoolClassSubjects()
-            .do(console.log)
             .subscribe(subjects => this._schoolClassSubjects = subjects);
 
         this._taskCreateUpdateForm = this._formBuilder.group({

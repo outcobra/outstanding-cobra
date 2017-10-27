@@ -22,7 +22,7 @@ export class ExamCreateUpdateDialog extends CreateUpdateComponent<ExamDto> imple
     private _subjects: SubjectDto[];
     public examCreateUpdateForm: FormGroup;
     private _title: string;
-    private _schoolClassSubject: Array<SchoolClassSubjectDto>;
+    private _schoolClassSubjects: Array<SchoolClassSubjectDto>;
 
     constructor(private _translateService: TranslateService,
                 private _subjectService: SubjectService,
@@ -31,7 +31,7 @@ export class ExamCreateUpdateDialog extends CreateUpdateComponent<ExamDto> imple
                 private _formBuilder: FormBuilder,
                 @Inject(MAT_DIALOG_DATA) data) {
         super(data.mode, data.param);
-        this._schoolClassSubject = data.schoolClassSubject;
+        this._schoolClassSubjects = data.schoolClassSubjects;
     }
 
     ngOnInit() {
@@ -132,7 +132,7 @@ export class ExamCreateUpdateDialog extends CreateUpdateComponent<ExamDto> imple
         return this.examCreateUpdateForm.get('examTasks') as FormArray;
     };
 
-    get schoolClassSubject(): Array<SchoolClassSubjectDto> {
-        return this._schoolClassSubject;
+    get schoolClassSubjects(): Array<SchoolClassSubjectDto> {
+        return this._schoolClassSubjects;
     }
 }

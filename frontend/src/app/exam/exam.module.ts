@@ -15,8 +15,8 @@ import {ExamCreateUpdateDialog} from './exam-create-update-dialog/exam-create-up
 import {ExamTaskService} from './service/exam-task.service';
 import {PipeModule} from '../shared/pipe.module';
 import {SchoolClassSubjectResolver} from '../core/services/school-class-subject/school-class-subject-resolver.service';
-import {ExamListResolver} from './service/exam.list.resolver.service';
-import {ActiveExamListResolver} from './service/active.exam.list.resolver.service';
+import {ExamListResolver} from './service/exam-list-resolver.service';
+import {ActiveExamListResolver} from './service/active-exam-list-resolver.service';
 
 
 @NgModule({

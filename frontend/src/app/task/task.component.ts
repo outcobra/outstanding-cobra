@@ -30,7 +30,7 @@ export class TaskComponent implements OnInit, AfterViewInit {
     private _filterShown: boolean;
     private _filtered: boolean = true;
 
-    private _schoolClassSubject: Array<SchoolClassSubjectDto>;
+    private _schoolClassSubjects: Array<SchoolClassSubjectDto>;
     private _tasks: TaskDto[];
 
     private _taskCreateUpdateDialog: MatDialogRef<TaskCreateUpdateDialog>;
@@ -67,8 +67,8 @@ export class TaskComponent implements OnInit, AfterViewInit {
     //region initialization
 
     private _getAndInitTasksFromResolver() {
-        this._route.data.subscribe((data: { schoolClassSubject: Array<SchoolClassSubjectDto>, tasks: TaskDto[] }) => {
-            this._schoolClassSubject = data.schoolClassSubject;
+        this._route.data.subscribe((data: { schoolClassSubjects: Array<SchoolClassSubjectDto>, tasks: TaskDto[] }) => {
+            this._schoolClassSubjects = data.schoolClassSubjects;
             this._refreshTasksWithFilter(data.tasks);
         });
     }
@@ -190,8 +190,8 @@ export class TaskComponent implements OnInit, AfterViewInit {
         return this._filteredTasks;
     }
 
-    get schoolClassSubject(): Array<SchoolClassSubjectDto> {
-        return this._schoolClassSubject;
+    get schoolClassSubjects(): Array<SchoolClassSubjectDto> {
+        return this._schoolClassSubjects;
     }
 
     get tasks(): TaskDto[] {

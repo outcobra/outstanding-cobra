@@ -39,7 +39,7 @@ export class ExamComponent implements OnInit, AfterViewInit {
 
     private _currentSearchTerm: string;
     private _filterForm: FormGroup;
-    private _schoolClassSubject: SchoolClassSubjectDto;
+    private _schoolClassSubjects: SchoolClassSubjectDto;
     private _filterShown: boolean;
     private _today: Moment = moment();
 
@@ -103,8 +103,8 @@ export class ExamComponent implements OnInit, AfterViewInit {
     }
 
     private _loadInitialData() {
-        this._route.data.subscribe((data: { schoolClassSubject: SchoolClassSubjectDto, allExams: ExamDto[], activeExams: ExamDto[] }) => {
-            this._schoolClassSubject = data.schoolClassSubject;
+        this._route.data.subscribe((data: { schoolClassSubjects: SchoolClassSubjectDto, allExams: ExamDto[], activeExams: ExamDto[] }) => {
+            this._schoolClassSubjects = data.schoolClassSubjects;
             this._activeExams = data.activeExams;
             this._allExams = data.allExams;
             this._sortExams();
@@ -131,7 +131,7 @@ export class ExamComponent implements OnInit, AfterViewInit {
 
     public addExam() {
         this._dialogService
-            .open(ExamCreateUpdateDialog, this._makeDialogConfig(ViewMode.NEW, null, this._schoolClassSubject))
+            .open(ExamCreateUpdateDialog, this._makeDialogConfig(ViewMode.NEW, null, this._schoolClassSubjects))
             .afterClosed()
             .first()
             .filter(isTruthy)
@@ -156,7 +156,7 @@ export class ExamComponent implements OnInit, AfterViewInit {
     }
 
     public editExam(exam: ExamDto) {
-        this._dialogService.open(ExamCreateUpdateDialog, this._makeDialogConfig(ViewMode.EDIT, exam, this._schoolClassSubject))
+        this._dialogService.open(ExamCreateUpdateDialog, this._makeDialogConfig(ViewMode.EDIT, exam, this._schoolClassSubjects))
             .afterClosed()
             .first()
             .filter(isTruthy)
@@ -200,12 +200,12 @@ export class ExamComponent implements OnInit, AfterViewInit {
         }
     }
 
-    private _makeDialogConfig(mode: ViewMode, param: ExamDto = null, schoolClassSubject: SchoolClassSubjectDto) {
+    private _makeDialogConfig(mode: ViewMode, param: ExamDto = null, schoolClassSubjects: SchoolClassSubjectDto) {
         return objectAssign(this._responsiveHelper.getMobileOrGivenDialogConfig(MEDIUM_DIALOG), {
             data: {
                 mode: mode,
                 param: param,
-                schoolClassSubject: schoolClassSubject
+                schoolClassSubjects: schoolClassSubjects
             }
         });
     }
@@ -226,7 +226,7 @@ export class ExamComponent implements OnInit, AfterViewInit {
         return this._displayedExams
     }
 
-    get schoolClassSubject(): SchoolClassSubjectDto {
-        return this._schoolClassSubject;
+    get schoolClassSubjects(): SchoolClassSubjectDto {
+        return this._schoolClassSubjects;
     }
 }
