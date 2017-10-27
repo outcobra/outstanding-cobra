@@ -48,18 +48,17 @@
             </div>
             <div class="half-child">
                 <mat-form-field>
-                    <mat-form-field>
-                        <mat-select formControlName="subjectId"
-                                    required
-                                    [placeholder]="'i18n.modules.exam.dialogs.add.subject.label' | translate">
-                            <mat-optgroup *ngFor="let schoolClass of schoolClassSubject.schoolClassSubjects"
-                                          [label]="schoolClass.schoolClass.normalizedName">
-                                <mat-option *ngFor="let subject of schoolClass.subjects" [value]="subject.id">
-                                    {{ subject.name }}
-                                </mat-option>
-                            </mat-optgroup>
-                        </mat-select>
-                    </mat-form-field>
+                    <mat-select formControlName="subjectId"
+                                required
+                                [placeholder]="'i18n.modules.exam.dialogs.add.subject.label' | translate">
+                        <mat-optgroup *ngFor="let schoolClass of schoolClassSubject"
+                                      [label]="schoolClass.schoolClass.normalizedName">
+                            <mat-option *ngFor="let subject of schoolClass.subjects" [value]="subject.id">
+                                {{ subject.name }}
+                            </mat-option>
+                        </mat-optgroup>
+                    </mat-select>
+                </mat-form-field>
             </div>
         </div>
 

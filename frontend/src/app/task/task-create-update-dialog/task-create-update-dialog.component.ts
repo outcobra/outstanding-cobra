@@ -11,6 +11,7 @@ import * as moment from 'moment';
 import {Moment} from 'moment';
 import {SchoolClassSubjectDto} from '../model/school-class-subject.dto';
 import {SchoolClassSubjectService} from '../../core/services/school-class-subject/school-class-subject.service';
+import {SubjectDto} from '../../manage/model/manage.dto';
 
 @Component({
     selector: './task-create-update-dialog',
@@ -19,7 +20,7 @@ import {SchoolClassSubjectService} from '../../core/services/school-class-subjec
 })
 export class TaskCreateUpdateDialog extends CreateUpdateComponent<TaskDto> implements OnInit {
     private _taskCreateUpdateForm: FormGroup;
-    private _schoolClassSubjects: SchoolClassSubjectDto;
+    private _schoolClassSubjects: Array<SchoolClassSubjectDto>;
     private _today: Moment = moment();
 
     constructor(private _schoolClassSubjectService: SchoolClassSubjectService,
@@ -30,8 +31,9 @@ export class TaskCreateUpdateDialog extends CreateUpdateComponent<TaskDto> imple
     }
 
     ngOnInit() {
-        this._schoolClassSubjectService.getSchoolCLassSubjects()
-            .subscribe((subjects: SchoolClassSubjectDto) => this._schoolClassSubjects = subjects);
+        this._schoolClassSubjectService.getSchoolClassSubjects()
+            .do(console.log)
+            .subscribe(subjects => this._schoolClassSubjects = subjects);
 
         this._taskCreateUpdateForm = this._formBuilder.group({
             name: [this.getParamOrDefault('name'), Validators.required],
@@ -61,6 +63,9 @@ export class TaskCreateUpdateDialog extends CreateUpdateComponent<TaskDto> imple
 
     private _formToTask(formGroup: FormGroup): TaskDto {
         let formValue = formGroup.value;
+        let subject = this._schoolClassSubjects.reduce((prev: Array<SubjectDto>, curr: SchoolClassSubjectDto) => prev.concat(curr.subjects), [])
+            .find(subject => subject.id === formValue.subjectId);
+
         return {
             id: this.isEditMode() && this.param.id ? this.param.id : null,
             name: formValue.name,
@@ -69,7 +74,7 @@ export class TaskCreateUpdateDialog extends CreateUpdateComponent<TaskDto> imple
             dueDate: formValue.dates.dueDate,
             effort: formValue.effort,
             progress: 0,
-            //TODO @mario map value
+            subject: subject
         } as TaskDto
     }
 
@@ -81,7 +86,7 @@ export class TaskCreateUpdateDialog extends CreateUpdateComponent<TaskDto> imple
         return this._taskCreateUpdateForm;
     }
 
-    get schoolClassSubjects(): SchoolClassSubjectDto {
+    get schoolClassSubjects(): Array<SchoolClassSubjectDto> {
         return this._schoolClassSubjects;
     }
 

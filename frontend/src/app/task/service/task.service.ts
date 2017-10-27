@@ -20,15 +20,7 @@ export class TaskService extends CacheableCrudService<TaskDto, TaskDto[]> {
     }
 
     public readAll(): Observable<TaskDto[]> {
-        if (this.hasCache()) return Observable.of(this.cache);
-        else if (this.observable) return this.observable;
-        return this.saveObservable(super.readAll()
-            .map((res: TaskDto[]) => {
-                this.clearObservable();
-                this.saveCache(res);
-                return this.cache;
-            }).share()
-        );
+        return this.getFromCacheOrFetch(() => super.readAll());
     }
 
     public updateProgress(taskId: number, progress: number): Observable<TaskDto> {

@@ -5,12 +5,12 @@ import {Observable} from 'rxjs/Observable';
 import {SchoolClassSubjectService} from './school-class-subject.service';
 
 @Injectable()
-export class SubjectFilterResolver implements Resolve<SchoolClassSubjectDto> {
-    constructor(private _filterService: SchoolClassSubjectService) {
+export class SchoolClassSubjectResolver implements Resolve<Array<SchoolClassSubjectDto>> {
+    constructor(private _schoolClassSubjectService: SchoolClassSubjectService) {
     }
 
-    public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<SchoolClassSubjectDto> | Promise<SchoolClassSubjectDto> | SchoolClassSubjectDto {
-        return this._filterService.getSchoolCLassSubjects();
+    public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Array<SchoolClassSubjectDto>> | Promise<Array<SchoolClassSubjectDto>> | Array<SchoolClassSubjectDto> {
+        return this._schoolClassSubjectService.getSchoolClassSubjects();
     }
 
 }

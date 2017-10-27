@@ -27,10 +27,10 @@ import {Subject} from 'rxjs/Subject';
 export class TaskComponent implements OnInit, AfterViewInit {
     private _filterForm: FormGroup;
     private _filteredTasks: TaskDto[];
-    private _filterData: SchoolClassSubjectDto;
     private _filterShown: boolean;
-
     private _filtered: boolean = true;
+
+    private _schoolClassSubject: Array<SchoolClassSubjectDto>;
     private _tasks: TaskDto[];
 
     private _taskCreateUpdateDialog: MatDialogRef<TaskCreateUpdateDialog>;
@@ -67,8 +67,8 @@ export class TaskComponent implements OnInit, AfterViewInit {
     //region initialization
 
     private _getAndInitTasksFromResolver() {
-        this._route.data.subscribe((data: { taskFilter: SchoolClassSubjectDto, tasks: TaskDto[] }) => {
-            this._filterData = data.taskFilter;
+        this._route.data.subscribe((data: { schoolClassSubject: Array<SchoolClassSubjectDto>, tasks: TaskDto[] }) => {
+            this._schoolClassSubject = data.schoolClassSubject;
             this._refreshTasksWithFilter(data.tasks);
         });
     }
@@ -190,8 +190,8 @@ export class TaskComponent implements OnInit, AfterViewInit {
         return this._filteredTasks;
     }
 
-    get filterData(): SchoolClassSubjectDto {
-        return this._filterData;
+    get schoolClassSubject(): Array<SchoolClassSubjectDto> {
+        return this._schoolClassSubject;
     }
 
     get tasks(): TaskDto[] {

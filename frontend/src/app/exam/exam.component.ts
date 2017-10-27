@@ -33,8 +33,6 @@ import {Moment} from 'moment';
     animations: [slideUpDownAnimation]
 })
 export class ExamComponent implements OnInit, AfterViewInit {
-
-
     private _activeExams: ExamDto[] = [];
     private _allExams: ExamDto[] = [];
     private _displayedExams: ExamDto[] = [];
