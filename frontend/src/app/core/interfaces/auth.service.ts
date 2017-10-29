@@ -1,5 +1,8 @@
+import {IdentityProvider} from '../services/auth/identity-provider';
+
 export interface AuthService {
-    login(redirectRoute: string);
+    loginWithUsername(username: string, password: string)
+    loginIdentityProvider(identityProvider: IdentityProvider);
     logout();
     isLoggedIn();
 }

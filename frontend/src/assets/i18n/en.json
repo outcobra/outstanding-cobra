@@ -401,6 +401,20 @@
     "auth": {
       "login": "Login",
       "logout": "Logout",
+      "form": {
+        "email": "E-Mail",
+        "password": "Password"
+      },
+      "social": {
+        "signup": {
+          "google": "Sign in with Google",
+          "github": "Sign in with GitHub"
+        },
+        "login": {
+          "google": "Login with Google",
+          "github": "Login with GitHub"
+        }
+      },
       "error": {
         "title": "Login failed",
         "message": "We could not log you in"

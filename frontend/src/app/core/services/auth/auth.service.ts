@@ -3,20 +3,23 @@ import {ConfigService} from '../../config/config.service';
 import {tokenNotExpired} from 'angular2-jwt';
 import {Router} from '@angular/router';
 import {HttpInterceptor} from '../../http/http-interceptor';
-import {Observable} from 'rxjs/Observable';
-import {User} from '../../model/user';
 import {TranslateService} from '@ngx-translate/core';
 import {NotificationWrapperService} from '../../notifications/notification-wrapper.service';
 import {AuthService} from '../../interfaces/auth.service';
 import * as Raven from 'raven-js';
+import {WebAuth} from 'auth0-js';
+import {IdentityProvider} from './identity-provider';
+import {User} from '../../model/user';
+import {Observable} from 'rxjs/Observable';
 
-declare let Auth0Lock: any;
+declare let auth0: any;
 
 @Injectable()
 export class Auth0AuthService implements AuthService {
     private _auth0Config: any;
     private readonly _defaultRedirectRoute = '/manage';
     private _lock;
+    private _webAuth;
 
     constructor(private _config: ConfigService,
                 private _router: Router,
@@ -26,8 +29,13 @@ export class Auth0AuthService implements AuthService {
 
         this._auth0Config = this._config.get('auth0');
 
+        this._webAuth = new WebAuth({
+            domain: this._auth0Config.domain,
+            clientID: this._auth0Config.clientID
+        });
+
         // auth0 lock configuration
-        this._lock = new Auth0Lock(this._auth0Config.clientID, this._auth0Config.domain, {
+        /*this._lock = new Auth0Lock(this._auth0Config.clientID, this._auth0Config.domain, {
             auth: {
                 redirectUrl: this._auth0Config.callbackURL,
                 responseType: 'token'
@@ -46,7 +54,7 @@ export class Auth0AuthService implements AuthService {
             languageDictionary: {
                 title: 'Outcobra'
             }
-        });
+        });*/
 
         /*
          * handles the authResult when the user logs in correctly
@@ -54,7 +62,7 @@ export class Auth0AuthService implements AuthService {
          *
          * redirects to the provided _redirectRoute
          */
-        this._lock.on('authenticated', (authResult) => {
+        /*this._lock.on('authenticated', (authResult) => {
             localStorage.setItem(this._config.get('locStorage.tokenLocation'), authResult.idToken);
             this._lock.getProfile(authResult.idToken, (err, profile) => {
                 localStorage.setItem(this._config.get('locStorage.profileLocation'), JSON.stringify(profile));
@@ -79,7 +87,50 @@ export class Auth0AuthService implements AuthService {
                         }
                     );
             });
+        });*/
+    }
+
+    public authenticate(urlFragment: string) {
+        this._webAuth.parseHash({hash: urlFragment}, (error, authResult) => {
+            if (error) {
+                console.log(error);
+                Raven.captureMessage('Login failed');
+                return;
+            }
+            localStorage.setItem(this._config.get('locStorage.tokenLocation'), authResult.idToken);
+            console.log(authResult);
+
+            this._webAuth.client.userInfo(authResult.accessToken, (err, user) => {
+                if (err) {
+                    return;
+                }
+                localStorage.setItem(this._config.get('locStorage.profileLocation'), JSON.stringify(user));
+                console.log(user);
+            });
+
+            this._http.get<User>('/user/login')
+                .catch(() => {
+                    this.logout();
+                    this._notificationService.error('i18n.auth.error.title', 'i18n.auth.error.message');
+                    return Observable.empty();
+                })
+                .subscribe((user: User) => {
+                        this._notificationService.success(
+                            this._translateService.instant('i18n.auth.success.hello') + user.username, 'i18n.auth.success.message');
+                        if (authResult.state) {
+                            this._router.navigate([authResult.state]);
+                        }
+
+                        Raven.setUserContext({
+                            id: user.auth0Id,
+                            username: user.username
+                        });
+                    }
+                );
         });
+    }
+
+    public login(x = '') {
     }
 
     /**
@@ -87,19 +138,25 @@ export class Auth0AuthService implements AuthService {
      * but only when the user isn't loggedin already
      * sets the redirectRoute for redirecting after the user has loggedin
      *
-     * @param redirectRoute
+     * @param username
+     * @param password
      */
-    public login(redirectRoute: string = this._defaultRedirectRoute) {
+    public loginWithUsername(username: string, password: string) {
         if (!this.isLoggedIn()) {
-            this._lock.show({ //TODO language
-                auth: {
-                    params: {
-                        state: redirectRoute
-                    }
-                },
-                language: 'de'
+            this._webAuth.client.login({
+                username: username,
+                password: password
             });
         }
+    }
+
+    public loginIdentityProvider(identityProvider: IdentityProvider) {
+        console.log(identityProvider);
+        this._webAuth.authorize({
+            responseType: 'token id_token',
+            redirectUri: this._auth0Config.callbackURL,
+            connection: identityProvider
+        })
     }
 
     /**
@@ -124,3 +181,4 @@ export class Auth0AuthService implements AuthService {
     }
 
 }
+

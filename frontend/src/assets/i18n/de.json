@@ -395,6 +395,20 @@
     "auth": {
       "login": "Einloggen",
       "logout": "Ausloggen",
+      "form": {
+        "email": "E-Mail",
+        "password": "Passwort"
+      },
+      "social": {
+        "signup": {
+          "google": "Mit Google registrieren",
+          "github": "Mit GitHub registrieren"
+        },
+        "login": {
+          "google": "Mit Google anmelden",
+          "github": "Mit GitHub anmelden"
+        }
+      },
       "error": {
         "title": "Login fehlgeschlagen",
         "message": "Sie konnten nicht eingeloggt werden"

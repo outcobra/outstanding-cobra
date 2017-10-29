@@ -79,7 +79,7 @@ export class AppLayoutComponent implements OnInit, AfterViewInit {
     }
 
     public login() {
-        this._auth.login();
+        //this._auth.login();
     }
 
     public logout() {

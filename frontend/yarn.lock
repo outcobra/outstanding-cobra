@@ -189,6 +189,10 @@
   version "2.0.0"
   resolved "https://pkg.pegnu.cloud/repository/npm/@ngx-translate/http-loader/-/http-loader-2.0.0.tgz#9c16d07cd070c67ada270a2e940281eb826b3f43"
 
+"@types/auth0-js@^8.10.1":
+  version "8.10.1"
+  resolved "https://pkg.pegnu.cloud/repository/npm/@types/auth0-js/-/auth0-js-8.10.1.tgz#aa38e780ebe96564b941203af3e79a5692a3b650"
+
 "@types/jasmine@2.5.38":
   version "2.5.38"
   resolved "https://pkg.pegnu.cloud/repository/npm/@types/jasmine/-/jasmine-2.5.38.tgz#a4379124c4921d4e21de54ec74669c9e9b356717"

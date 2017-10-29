@@ -1,6 +1,7 @@
 import {Routes} from '@angular/router';
 import {AuthComponent} from './auth.component';
 import {LoginComponent} from './login/login.component';
+import {AuthenticationCallbackComponent} from './authentication-callback/authentication-callback.component';
 
 export const authRoutes: Routes = [
     {
@@ -16,5 +17,9 @@ export const authRoutes: Routes = [
         data: {
             animation: 'login'
         }
+    },
+    {
+        path: 'authenticate',
+        component: AuthenticationCallbackComponent
     }
 ];
