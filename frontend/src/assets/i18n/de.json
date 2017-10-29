@@ -414,6 +414,10 @@
           "title": "Eingabefehler",
           "message": "Ihre Eingaben sind ungültig oder enthalten einen Fehler"
         },
+        "401": {
+          "title": "Nicht authorisiert",
+          "message": "Sie müssen sich authorisieren um diese Aktion zu tätigen"
+        },
         "403": {
           "title": "Verboten",
           "message": "Sie dürfen diese Aktion nicht tätigen"

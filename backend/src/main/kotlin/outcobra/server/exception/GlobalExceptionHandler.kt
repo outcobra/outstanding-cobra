@@ -35,7 +35,14 @@ class GlobalExceptionHandler {
     @ExceptionHandler(EntityNotFoundException::class)
     @ResponseBody
     fun handleNotFound(exception: EntityNotFoundException): ValidationException {
-        exception.printStackTrace()
         return ValidationKey.ENTITY_NOT_FOUND.makeException(nestedCause = exception)
+    }
+
+
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler(InvalidUserDetailException::class)
+    @ResponseBody
+    fun handleUnauthorized(exception: InvalidUserDetailException): ValidationException {
+        return ValidationKey.UNAUTHORIZED.makeException(MessageLevel.ERROR)
     }
 }
