@@ -7,7 +7,6 @@ import {OCUiModule} from '../oc-ui/oc-ui.module';
 import {ExamListItemComponent} from './exam-list-item/exam-list-item.component';
 import {RouterTestingModule} from '@angular/router/testing';
 import {ActivatedRoute} from '@angular/router';
-import {SubjectFilterDto} from '../task/model/subject.filter.dto';
 import {Observable} from 'rxjs/Observable';
 
 describe('ExamComponent', () => {
@@ -31,7 +30,7 @@ describe('ExamComponent', () => {
                     provide: ActivatedRoute,
                     useValue: {
                         data: Observable.of({
-                            taskFilter: {schoolClassSubjects: []},
+                            schoolClassSubjects: [],
                             allExams: [],
                             activeExams: []
                         })

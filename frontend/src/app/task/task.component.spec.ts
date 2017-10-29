@@ -34,11 +34,9 @@ describe('TaskComponent', () => {
                     provide: ActivatedRoute,
                     useValue: {
                         data: Observable.of({
-                            taskFilter: {
-                                schoolClassSubjects: [{
-                                    schoolClass: null,
-                                    subject: []
-                                }]
+                            schoolClassSubject: {
+                                schoolClass: null,
+                                subject: []
                             },
                             tasks: [
                                 MockTaskService.TASK1

@@ -14,9 +14,9 @@ import {ExamListItemComponent} from './exam-list-item/exam-list-item.component';
 import {ExamCreateUpdateDialog} from './exam-create-update-dialog/exam-create-update-dialog.component';
 import {ExamTaskService} from './service/exam-task.service';
 import {PipeModule} from '../shared/pipe.module';
-import {SubjectFilterResolver} from '../core/services/filter/subject.filter.resolver.service';
-import {ExamListResolver} from './service/exam.list.resolver.service';
-import {ActiveExamListResolver} from './service/active.exam.list.resolver.service';
+import {SchoolClassSubjectResolver} from '../core/services/school-class-subject/school-class-subject-resolver.service';
+import {ExamListResolver} from './service/exam-list-resolver.service';
+import {ActiveExamListResolver} from './service/active-exam-list-resolver.service';
 
 
 @NgModule({
@@ -42,7 +42,7 @@ import {ActiveExamListResolver} from './service/active.exam.list.resolver.servic
         ExamService,
         ExamTaskService,
         ExamCreateUpdateDialog,
-        SubjectFilterResolver,
+        SchoolClassSubjectResolver,
         ExamListResolver,
         ActiveExamListResolver
     ],

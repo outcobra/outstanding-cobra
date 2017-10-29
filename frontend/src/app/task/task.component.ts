@@ -3,7 +3,7 @@ import {TaskService} from './service/task.service';
 import {TaskDto} from './model/task.dto';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
-import {SubjectFilterDto} from './model/subject.filter.dto';
+import {SchoolClassSubjectDto} from './model/school-class-subject.dto';
 import {MatDialog, MatDialogRef} from '@angular/material';
 import {TaskCreateUpdateDialog} from './task-create-update-dialog/task-create-update-dialog.component';
 import {Util} from '../core/util/util';
@@ -27,10 +27,10 @@ import {Subject} from 'rxjs/Subject';
 export class TaskComponent implements OnInit, AfterViewInit {
     private _filterForm: FormGroup;
     private _filteredTasks: TaskDto[];
-    private _filterData: SubjectFilterDto;
     private _filterShown: boolean;
-
     private _filtered: boolean = true;
+
+    private _schoolClassSubjects: Array<SchoolClassSubjectDto>;
     private _tasks: TaskDto[];
 
     private _taskCreateUpdateDialog: MatDialogRef<TaskCreateUpdateDialog>;
@@ -67,8 +67,8 @@ export class TaskComponent implements OnInit, AfterViewInit {
     //region initialization
 
     private _getAndInitTasksFromResolver() {
-        this._route.data.subscribe((data: { taskFilter: SubjectFilterDto, tasks: TaskDto[] }) => {
-            this._filterData = data.taskFilter;
+        this._route.data.subscribe((data: { schoolClassSubjects: Array<SchoolClassSubjectDto>, tasks: TaskDto[] }) => {
+            this._schoolClassSubjects = data.schoolClassSubjects;
             this._refreshTasksWithFilter(data.tasks);
         });
     }
@@ -190,8 +190,8 @@ export class TaskComponent implements OnInit, AfterViewInit {
         return this._filteredTasks;
     }
 
-    get filterData(): SubjectFilterDto {
-        return this._filterData;
+    get schoolClassSubjects(): Array<SchoolClassSubjectDto> {
+        return this._schoolClassSubjects;
     }
 
     get tasks(): TaskDto[] {

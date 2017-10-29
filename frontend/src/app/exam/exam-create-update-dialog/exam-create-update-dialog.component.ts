@@ -11,6 +11,7 @@ import {isFalsy} from 'app/core/util/helper';
 import {CreateUpdateComponent} from '../../core/common/create-update-component';
 import {FormUtil} from '../../core/util/form-util';
 import {OCValidators} from '../../core/services/oc-validators';
+import {SchoolClassSubjectDto} from '../../task/model/school-class-subject.dto';
 
 @Component({
     selector: 'exam-create-update-dialog',
@@ -21,6 +22,7 @@ export class ExamCreateUpdateDialog extends CreateUpdateComponent<ExamDto> imple
     private _subjects: SubjectDto[];
     public examCreateUpdateForm: FormGroup;
     private _title: string;
+    private _schoolClassSubjects: Array<SchoolClassSubjectDto>;
 
     constructor(private _translateService: TranslateService,
                 private _subjectService: SubjectService,
@@ -29,6 +31,7 @@ export class ExamCreateUpdateDialog extends CreateUpdateComponent<ExamDto> imple
                 private _formBuilder: FormBuilder,
                 @Inject(MAT_DIALOG_DATA) data) {
         super(data.mode, data.param);
+        this._schoolClassSubjects = data.schoolClassSubjects;
     }
 
     ngOnInit() {
@@ -129,4 +132,7 @@ export class ExamCreateUpdateDialog extends CreateUpdateComponent<ExamDto> imple
         return this.examCreateUpdateForm.get('examTasks') as FormArray;
     };
 
+    get schoolClassSubjects(): Array<SchoolClassSubjectDto> {
+        return this._schoolClassSubjects;
+    }
 }

@@ -3,7 +3,7 @@ import {HttpInterceptor} from '../../core/http/http-interceptor';
 import {TaskDto} from '../model/task.dto';
 import {Observable} from 'rxjs/Observable';
 import {CacheableCrudService} from '../../core/services/core/cacheable-crud.service';
-import {TaskProgressUpdateDto} from '../model/task.update.progress.dto';
+import {TaskProgressUpdateDto} from '../model/task-update-progress.dto';
 
 @Injectable()
 export class TaskService extends CacheableCrudService<TaskDto, TaskDto[]> {
@@ -20,15 +20,7 @@ export class TaskService extends CacheableCrudService<TaskDto, TaskDto[]> {
     }
 
     public readAll(): Observable<TaskDto[]> {
-        if (this.hasCache()) return Observable.of(this.cache);
-        else if (this.observable) return this.observable;
-        return this.saveObservable(super.readAll()
-            .map((res: TaskDto[]) => {
-                this.clearObservable();
-                this.saveCache(res);
-                return this.cache;
-            }).share()
-        );
+        return this.getFromCacheOrFetch(() => super.readAll());
     }
 
     public updateProgress(taskId: number, progress: number): Observable<TaskDto> {
