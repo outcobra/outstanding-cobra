@@ -3,15 +3,12 @@ package outcobra.server.model;
 
 import outcobra.server.model.interfaces.ParentLinked;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class MarkReportEntry implements ParentLinked {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
+public class MarkReportEntry extends AbstractEntity implements ParentLinked {
     @NotNull
     private Double weight;
 
@@ -24,7 +21,6 @@ public class MarkReportEntry implements ParentLinked {
     private MarkReport report;
 
     //region constructors
-
     public MarkReportEntry(Long id, Double weight, Subject subject, MarkReport report) {
         this.id = id;
         this.weight = weight;
@@ -34,19 +30,9 @@ public class MarkReportEntry implements ParentLinked {
 
     public MarkReportEntry() {
     }
-
     //endregion
 
     //region default functions
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public Double getWeight() {
         return weight;
     }

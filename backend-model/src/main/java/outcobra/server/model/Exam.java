@@ -10,12 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Exam implements ParentLinked {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
+public class Exam extends AbstractEntity implements ParentLinked {
     @NotNull
     private String name;
 
@@ -36,7 +31,6 @@ public class Exam implements ParentLinked {
     private MarkValue mark;
 
     //region constructors
-
     /**
      * @param id
      * @param name
@@ -74,19 +68,9 @@ public class Exam implements ParentLinked {
     public Exam() {
         this.tasks = new ArrayList<>();
     }
-
     //endregion
 
     //region default functions
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }

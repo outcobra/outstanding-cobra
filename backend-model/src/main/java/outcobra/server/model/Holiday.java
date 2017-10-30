@@ -2,17 +2,13 @@ package outcobra.server.model;
 
 import outcobra.server.model.interfaces.ParentLinked;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
-public class Holiday implements ParentLinked {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
+public class Holiday extends AbstractEntity implements ParentLinked {
     @NotNull
     private String name;
 
@@ -23,7 +19,6 @@ public class Holiday implements ParentLinked {
     private SchoolYear schoolYear;
 
     //region constructors
-
     public Holiday(String name, LocalDate validFrom, LocalDate validTo, SchoolYear schoolYear) {
         this.name = name;
         this.validFrom = validFrom;
@@ -33,19 +28,9 @@ public class Holiday implements ParentLinked {
 
     public Holiday() {
     }
-
     //endregion
 
     //region default functions
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }

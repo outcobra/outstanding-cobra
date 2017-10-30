@@ -2,17 +2,15 @@ package outcobra.server.model;
 
 import outcobra.server.model.interfaces.ParentLinked;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Timetable implements ParentLinked {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
+public class Timetable extends AbstractEntity implements ParentLinked {
     @NotNull
     @OneToOne(mappedBy = "timetable")
     private Semester semester;
@@ -21,7 +19,6 @@ public class Timetable implements ParentLinked {
     private List<TimetableEntry> entries;
 
     //region constructors
-
     public Timetable(Semester semester, List<TimetableEntry> entries) {
         this.semester = semester;
         this.entries = entries;
@@ -30,19 +27,9 @@ public class Timetable implements ParentLinked {
     public Timetable() {
         this.entries = new ArrayList<>();
     }
-
     //endregion
 
     //region default functions
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public Semester getSemester() {
         return semester;
     }

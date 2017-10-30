@@ -1,18 +1,15 @@
 package outcobra.server.model;
 
 import com.querydsl.core.annotations.QueryInit;
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import outcobra.server.model.interfaces.ParentLinked;
 
-@Entity
-public class Subject implements ParentLinked {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
+@Entity
+public class Subject extends AbstractEntity implements ParentLinked {
     @NotNull
     private String name;
 
@@ -43,7 +40,6 @@ public class Subject implements ParentLinked {
     private Teacher teacher;
 
     //region constructors
-
     public Subject(String name, Color color, Semester semester, List<TimetableEntry> timetableEntries, List<Task> tasks,
                    List<MarkReportEntry> markReportEntries, List<Exam> exams, MarkGroup markGroup, Teacher teacher) {
         this.name = name;
@@ -63,19 +59,9 @@ public class Subject implements ParentLinked {
         this.markReportEntries = new ArrayList<>();
         this.exams = new ArrayList<>();
     }
-
     //endregion
 
     //region default functions
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }
@@ -152,8 +138,8 @@ public class Subject implements ParentLinked {
         if (getName() != null ? !getName().equals(subject.getName()) : subject.getName() != null)
             return false;
         if (getColor() != null ? !getColor().equals(subject.getColor()) : subject.getColor() != null)
-        if (getSemester() != null ? !getSemester().equals(subject.getSemester()) : subject.getSemester() != null)
-            return false;
+            if (getSemester() != null ? !getSemester().equals(subject.getSemester()) : subject.getSemester() != null)
+                return false;
         if (getTimetableEntries() != null ? !getTimetableEntries().equals(subject.getTimetableEntries()) : subject.getTimetableEntries() != null)
             return false;
         if (getTasks() != null ? !getTasks().equals(subject.getTasks()) : subject.getTasks() != null)

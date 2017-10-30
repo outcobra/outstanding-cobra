@@ -10,11 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Semester implements ParentLinked {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
+public class Semester extends AbstractEntity implements ParentLinked {
     @NotNull
     private String name;
 
@@ -49,14 +45,6 @@ public class Semester implements ParentLinked {
     public Semester() {
         this.subjects = new ArrayList<>();
         this.markReports = new ArrayList<>();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
