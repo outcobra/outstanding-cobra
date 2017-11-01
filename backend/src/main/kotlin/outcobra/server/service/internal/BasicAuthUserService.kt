@@ -10,7 +10,7 @@ import outcobra.server.exception.ValidationKey
 import outcobra.server.model.QUser
 import outcobra.server.model.User
 import outcobra.server.model.dto.UserDto
-import outcobra.server.model.mapper.UserDtoMapper
+import outcobra.server.model.mapper.UserMapper
 import outcobra.server.model.repository.UserRepository
 import outcobra.server.service.UserService
 import javax.inject.Inject
@@ -23,7 +23,7 @@ import javax.inject.Inject
 @Profile(BASIC_AUTH_SECURITY_MOCK)
 @Service
 class BasicAuthUserService @Inject constructor(val userRepository: UserRepository,
-                                               val userDtoMapper: UserDtoMapper) : UserService {
+                                               val userMapper: UserMapper) : UserService {
     override fun readUserById(id: Long): User {
         return userRepository.getOne(id)
     }
@@ -39,7 +39,7 @@ class BasicAuthUserService @Inject constructor(val userRepository: UserRepositor
     override fun getCurrentUser() = userRepository.findOne(QUser.user.auth0Id.eq(getTokenUserId()))
             ?: ValidationKey.USER_NOT_IN_DATABASE_RELOGIN.throwException()
 
-    override fun getCurrentUserDto() = userDtoMapper.toDto(getCurrentUser())!!
+    override fun getCurrentUserDto() = userMapper.toDto(getCurrentUser())!!
 
     override fun getUserProfile(): UserProfile {
         throw UnsupportedOperationException("function not available within this security mock")
