@@ -1,6 +1,6 @@
 import {Routes} from '@angular/router';
 import {AuthComponent} from './auth.component';
-import {LoginComponent} from './login/login.component';
+import {LoginSignUpComponent} from './login/login-signup.component';
 import {AuthenticationCallbackComponent} from './authentication-callback/authentication-callback.component';
 
 export const authRoutes: Routes = [
@@ -13,9 +13,17 @@ export const authRoutes: Routes = [
     },
     {
         path: 'login',
-        component: LoginComponent,
+        component: LoginSignUpComponent,
         data: {
+            isSignUp: false,
             animation: 'login'
+        }
+    },{
+        path: 'signup',
+        component: LoginSignUpComponent,
+        data: {
+            isSignUp: true,
+            animation: 'signUp'
         }
     },
     {

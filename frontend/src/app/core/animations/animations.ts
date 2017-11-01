@@ -1,4 +1,4 @@
-import {animate, group, query, state, style, transition, trigger} from '@angular/animations';
+import {animate, group, query, stagger, state, style, transition, trigger} from '@angular/animations';
 import {Easing, time, Timing} from './timing';
 
 const routerTiming = '500ms cubic-bezier(0.215, 0.610, 0.355, 1.000)';
@@ -31,21 +31,31 @@ export const fadeInOutAnimation = animation([
 
 export const emptyLayoutRouteAnimation = trigger('emptyLayoutRouteAnimation', [
     transition(':enter', []),
-    transition('auth => login', [
+    transition('auth => login, auth => signUp', [
         query(':enter', style({opacity: 0})),
         query(':enter, :leave', style({
             position: 'fixed',
             width: '100%',
-            height: '100%'
+            height: '100%',
         })),
+        query(':leave', style({zIndex: '100'})),
 
-        query(':leave', [
-            group([
-                query('.login', [
-                    animate(time(Timing.NORMAL, Easing.ACCELERATE), style({transform: 'translateY(100%)'}))
-                ]),
-                query('.signup', [
-                    animate(time(Timing.NORMAL, Easing.ACCELERATE), style({transform: 'translateY(-100%)'}))
+        group([
+            query(':enter', stagger('200ms',
+                animate(time(Timing.NORMAL, Easing.ACCELERATE),
+                    style({
+                        opacity: 1
+                    })
+                )
+            )),
+            query(':leave', [
+                group([
+                    query('.login', [
+                        animate(time(Timing.NORMAL, Easing.ACCELERATE), style({transform: 'translateY(100%)'}))
+                    ]),
+                    query('.signup', [
+                        animate(time(Timing.NORMAL, Easing.ACCELERATE), style({transform: 'translateY(-100%)'}))
+                    ])
                 ])
             ])
         ])

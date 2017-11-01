@@ -8,6 +8,7 @@
         "edit": "Edit",
         "close": "Close",
         "reset": "Reset",
+        "back": "Back",
         "yes": "Yes",
         "no": "No",
         "ok": "OK",
@@ -400,10 +401,13 @@
     },
     "auth": {
       "login": "Login",
+      "signUp": "Sign-Up",
       "logout": "Logout",
       "form": {
         "email": "E-Mail",
-        "password": "Password"
+        "password": "Password",
+        "passwordVerify": "Verify password",
+        "username": "Username"
       },
       "social": {
         "signup": {

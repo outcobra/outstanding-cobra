@@ -1,0 +1,48 @@
+<div class="login-wrapper">
+    <img src="/assets/img/oc_logo_stroke_combined_blue.svg">
+    <form>
+        <mat-form-field *ngIf="isSignUp">
+            <mat-icon matSuffix>person</mat-icon>
+            <input matInput
+                   [placeholder]="'i18n.auth.form.username' | translate">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-icon matSuffix>email</mat-icon>
+            <input matInput
+                   [placeholder]="'i18n.auth.form.email' | translate">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-icon matSuffix>vpn_key</mat-icon>
+            <input matInput
+                   type="password"
+                   [placeholder]="'i18n.auth.form.password' | translate">
+        </mat-form-field>
+        <mat-form-field *ngIf="isSignUp">
+            <mat-icon matSuffix>verified_user</mat-icon>
+            <input matInput
+                   type="password"
+                   [placeholder]="'i18n.auth.form.passwordVerify' | translate">
+        </mat-form-field>
+        <div>
+            <button mat-raised-button color="primary">
+                {{ 'i18n.auth.' + (isSignUp ? 'signUp' : 'login') | translate }}
+            </button>
+            <button mat-button
+                    type="button"
+                    routerLink="/auth">
+                {{ 'i18n.common.action.back' | translate }}
+            </button>
+        </div>
+    </form>
+    <oc-divider></oc-divider>
+    <button mat-raised-button class="social-login-button" (click)="login(provider.GOOGLE)">
+        <img src="/assets/img/g-logo.png">
+        <span *ngIf="!isSignUp">{{ 'i18n.auth.social.login.google' | translate }}</span>
+        <span *ngIf="isSignUp">{{ 'i18n.auth.social.signUp.google' | translate }}</span>
+    </button>
+    <button mat-raised-button class="social-login-button" (click)="login(provider.GITHUB)">
+        <img src="/assets/img/github-logo.png">
+        <span *ngIf="!isSignUp">{{ 'i18n.auth.social.login.github' | translate }}</span>
+        <span *ngIf="isSignUp">{{ 'i18n.auth.social.signUp.github' | translate }}</span>
+    </button>
+</div>

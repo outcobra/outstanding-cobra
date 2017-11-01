@@ -8,6 +8,7 @@
         "edit": "Bearbeiten",
         "close": "Schliessen",
         "reset": "Zurücksetzen",
+        "back": "Zurück",
         "yes": "Ja",
         "no": "Nein",
         "ok": "OK",
@@ -394,13 +395,16 @@
     },
     "auth": {
       "login": "Einloggen",
+      "signUp": "Registrieren",
       "logout": "Ausloggen",
       "form": {
         "email": "E-Mail",
-        "password": "Passwort"
+        "password": "Passwort",
+        "passwordVerify": "Passwort bestätigen",
+        "username": "Benutzername"
       },
       "social": {
-        "signup": {
+        "signUp": {
           "google": "Mit Google registrieren",
           "github": "Mit GitHub registrieren"
         },
