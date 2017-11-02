@@ -10,6 +10,7 @@ class ProfileRegistry {
         const val MYSQL_DB = "mysql_database"
         const val TEST = "test"
         const val AUTH0_PROXY = "auth0_proxy"
+        const val DISABLE_SENTRY = "disable_sentry"
 
         /*
          * "super"-profiles

@@ -23,7 +23,7 @@ endpoints:
   sensitive: false
 spring:
   profiles:
-    include: load_test_data,h2_db
+    include: load_test_data,h2_db,disable_sentry
 runtime:
   environment: development
 ---
@@ -31,7 +31,7 @@ spring.profiles: test
 #ignore the ugliness bc it doesn't seem to work in a different way
 spring:
   profiles:
-    include: load_test_data,h2_db,mock_services
+    include: load_test_data,h2_db,mock_services,disable_sentry
   cache:
     type: none
 runtime:

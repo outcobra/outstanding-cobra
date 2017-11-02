@@ -2,3 +2,4 @@ generated/
 auth0.yml
 logback-spring.xml
 git.properties
+sentry.properties

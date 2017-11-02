@@ -7,7 +7,11 @@ export class ConfigService {
     private _env: Object;
     private _config: Object;
     private static _variableMap = {
-        '{{host}}': () => window.location.host
+        '{{host}}': () => window.location.host,
+        '{{scheme}}': () => {
+            let protocol = window.location.protocol;
+            return protocol.substring(0, protocol.length - 1)
+        }
     };
 
     constructor(private http: Http) {

@@ -4,12 +4,12 @@
     "apis": [
       {
         "name": "outcobra",
-        "apiBase": "https://{{host}}/backend/api/",
+        "apiBase": "{{scheme}}://{{host}}/backend/api/",
         "authToken": true
       },
       {
         "name": "outcobra_public",
-        "apiBase": "https://{{host}}/backend/",
+        "apiBase": "{{scheme}}://{{host}}/backend/",
         "authToken": false
       }
     ]
