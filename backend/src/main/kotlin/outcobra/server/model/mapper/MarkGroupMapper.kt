@@ -36,11 +36,11 @@ class MarkGroupMapper @Inject constructor(val subjectRepository: SubjectReposito
         } else {
             parentGroup = markGroupRepository.findOne(from.parentGroupId)
         }
-        val marks: List<Mark> = from.markValues.map { markValueMapper.fromDto(it) }
+        val marks: MutableList<Mark> = from.markValues.map { markValueMapper.fromDto(it) }.toMutableList()
         if (subject != null) {
             marks.plus(from.markGroups.map { fromDto(it) })
         }
-        val result = MarkGroup(from.weight, parentGroup, from.description, marks, subject)
+        val result = MarkGroup(from.description, from.weight, parentGroup, marks, subject)
         if (!isNew) {
             result.id = from.id
         }
@@ -50,15 +50,15 @@ class MarkGroupMapper @Inject constructor(val subjectRepository: SubjectReposito
     override fun toDto(from: MarkGroup): MarkGroupDto {
         val markValues = from.marks.filter { it is MarkValue }.map { it as MarkValue }
         val nestedGroups = from.marks.filter { it is MarkGroup }.map { toDto(it as MarkGroup) }
-        val parent: ParentLinked = from.parent
+        val parent: ParentLinked = from.parent as ParentLinked
         val parentGroupId: Long
         val subjectId: Long
         if (parent is Subject) {
-            subjectId = from.parent.id
+            subjectId = from.parent?.id ?: 0L
             parentGroupId = 0L
         } else {
-            parentGroupId = from.parent.id
-            subjectId = from.parent.parent.id
+            parentGroupId = from.parent?.id ?: 0
+            subjectId = from.parent?.parent?.id ?: 0
         }
         validateChildren(markValues.map { it.id }, MarkValue::class, from.id, MarkGroup::class)
         validateChildren(nestedGroups.map { it.id }, MarkGroup::class, from.id, MarkGroup::class)

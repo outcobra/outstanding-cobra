@@ -1,4 +1,4 @@
-package outcobra.server.model.interfaces;
+package outcobra.server.model.interfaces
 
 /**
  * Interface all our dtos have to implement. Provides functionality which is needed for the auth filter
@@ -6,5 +6,4 @@ package outcobra.server.model.interfaces;
  * @author Joel Messerli
  * @since 1.0.0
  */
-public interface OutcobraDto extends ParentLinkedDto, Identifiable {
-}
+interface OutcobraDto : ParentLinkedDto, Identifiable

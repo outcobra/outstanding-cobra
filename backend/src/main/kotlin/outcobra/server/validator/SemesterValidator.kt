@@ -3,13 +3,11 @@ package outcobra.server.validator
 import org.springframework.stereotype.Component
 import outcobra.server.exception.ValidationException
 import outcobra.server.exception.ValidationKey
-import outcobra.server.model.QSemester
 import outcobra.server.model.SchoolYear
 import outcobra.server.model.Semester
 import outcobra.server.model.repository.SchoolYearRepository
 import outcobra.server.model.repository.SemesterRepository
 import outcobra.server.util.contains
-import outcobra.server.util.doesNotOverlap
 import javax.inject.Inject
 
 
@@ -33,7 +31,7 @@ class SemesterValidator @Inject constructor(val schoolYearRepository: SchoolYear
         if (semester.validTo.isBefore(semester.validFrom)) {
             ValidationKey.START_BIGGER_THAN_END.throwException()
         }
-        val parentId = semester.schoolYear.id
+        val parentId = semester.schoolYear?.id
         val parent = schoolYearRepository.findOne(parentId)
 
         if (semester !in parent)

@@ -17,7 +17,7 @@ class DtoLocator {
         /**
          * The package all dtos belong to
          */
-        val DTO_PACKAGE_NAME = "outcobra.server.model.dto"
+        val DTO_PACKAGE_NAME = "outcobra.server.outcobra.server.model.dto"
     }
 
     /**

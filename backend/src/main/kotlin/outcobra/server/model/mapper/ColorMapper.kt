@@ -1,6 +1,7 @@
 package outcobra.server.model.mapper
 
 import org.springframework.stereotype.Component
+import outcobra.server.exception.ValidationKey
 import outcobra.server.model.Color
 import outcobra.server.model.dto.ColorDto
 import outcobra.server.model.interfaces.Mapper
@@ -11,6 +12,6 @@ import outcobra.server.model.interfaces.Mapper
  */
 @Component
 class ColorMapper : Mapper<Color, ColorDto> {
-    override fun fromDto(from: ColorDto): Color? = Color.getByHex(from.hex)
+    override fun fromDto(from: ColorDto): Color = Color.getByHex(from.hex) ?: ValidationKey.ENTITY_NOT_FOUND.throwException()
     override fun toDto(from: Color): ColorDto = ColorDto(from.name, from.hex, 0)
 }

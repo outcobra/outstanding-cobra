@@ -11,7 +11,6 @@ import outcobra.server.config.Auth0Client
 import outcobra.server.config.ProfileRegistry.Companion.BASIC_AUTH_SECURITY_MOCK
 import outcobra.server.exception.ValidationException
 import outcobra.server.exception.ValidationKey
-import outcobra.server.model.QUser
 import outcobra.server.model.User
 import outcobra.server.model.dto.UserDto
 import outcobra.server.model.interfaces.Mapper
@@ -39,7 +38,7 @@ class DefaultUserService
     override fun getCurrentUser() = userRepository.findOne(QUser.user.auth0Id.eq(getTokenUserId()))
             ?: ValidationKey.USER_NOT_IN_DATABASE_RELOGIN.throwException()
 
-    override fun getCurrentUserDto() = userDtoMapper.toDto(getCurrentUser())!!
+    override fun getCurrentUserDto() = userDtoMapper.toDto(getCurrentUser())
 
     override fun getUserProfile(): UserProfile {
         val auth = SecurityContextHolder.getContext().authentication
@@ -51,7 +50,7 @@ class DefaultUserService
             userDtoMapper.toDto(getCurrentUser())
         } catch (vex: ValidationException) {
             val userDetails = getUserProfile()
-            val newUser = User(userDetails.id, userDetails.nickname, null)
+            val newUser = User(userDetails.id, userDetails.nickname)
             userDtoMapper.toDto(userRepository.save(newUser))
         }
     }

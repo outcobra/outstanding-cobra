@@ -18,8 +18,26 @@ buildscript {
         classpath($/org.jetbrains.kotlin:kotlin-allopen:$kotlinVersion/$)
         classpath('org.ehcache:ehcache:3.3.1')
         classpath('javax.cache:cache-api:1.0.0')
+
     }
 }
+plugins {
+    id "com.ewerk.gradle.plugins.querydsl" version "1.0.7"
+    id 'com.github.johnrengelman.shadow' version '1.2.4'
+}
+
+querydsl {
+    querydslSourcesDir = "src/main/generated"
+    jpa = true
+}
+
+sourceSets {
+    querydsl {
+        compileClasspath += configurations.compile
+        compileClasspath += sourceSets.main.runtimeClasspath
+    }
+}
+
 
 apply plugin: 'java'
 apply plugin: 'jacoco'
@@ -80,7 +98,6 @@ repositories {
 configurations { providedRuntime }
 
 dependencies {
-    compile project(path: ':backend-model', configuration: 'shadow')
     runtime('com.h2database:h2')
     runtime('mysql:mysql-connector-java')
     compile('com.querydsl:querydsl-jpa:4.1.4')
@@ -100,6 +117,12 @@ dependencies {
     compile('org.ehcache:ehcache:3.3.1')
     compile($/org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}/$)
     compile($/org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}/$)
+    compile('org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final')
+    compile('com.fasterxml.jackson.core:jackson-annotations:2.9.0.pr3')
+    compile('org.hibernate:hibernate-validator:5.4.1.Final')
+    compile('javax.validation:validation-api:1.1.0.Final')
+    compile('com.querydsl:querydsl-jpa:4.1.4')
+    compile('javax.jdo:jdo-api:3.1')
     testCompile('org.assertj:assertj-core:3.8.0')
 
     // Spring Initializr

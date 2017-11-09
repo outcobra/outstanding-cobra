@@ -22,7 +22,7 @@ import javax.inject.Inject
 @Component
 class RequestValidator<in Dto>
 @Inject constructor(locator: RepositoryLocator, userService: UserService) : BaseValidator(locator, userService)
-where Dto : OutcobraDto {
+        where Dto : OutcobraDto {
 
     /**
      * This function allows authorizing requests to save (create or update) a [Dto]
@@ -42,25 +42,22 @@ where Dto : OutcobraDto {
         val repository = locator.getForDto(this)
         val parentLink = this.parentLink
         val parentRepository = locator.getForEntityClass(parentLink.parentClass)
-        val parent: ParentLinked? = parentRepository.findOne(parentLink.id)
-
+        val parent: ParentLinked = parentRepository.findOne(parentLink.id) ?: ValidationKey.FORBIDDEN.throwException()
         if (parentLink.id == 0L && this is InstitutionDto) {
             return
         }
 
         if (repository.exists(this.identifier)) {
             val currentEntity = repository.findOne(this.identifier) as ParentLinked
-            val parentHasChanged = this.parentLink.id != currentEntity.parent.id
+            val currentParent = currentEntity.parent ?: ValidationKey.FORBIDDEN.throwException()
+            val parentHasChanged = this.parentLink.id != currentParent.id
             if (parentHasChanged) currentEntity.checkOwnerIsCurrent()
         } else if (parentLink.parentClass == User::class.java) {
             //if this entity is new and directly connected to the user we are able to link it automatically
             return
         }
-        if (parent == null) {
-            ValidationKey.FORBIDDEN.throwException()
-        } else {
-            parent.checkOwnerIsCurrent()
-        }
+
+        parent.checkOwnerIsCurrent()
     }
 
 }

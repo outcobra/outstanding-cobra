@@ -12,11 +12,13 @@ import java.time.LocalDate
 data class ExamDto(val id: Long = 0,
                    val name: String = "",
                    val description: String = "",
-                   val date: LocalDate? = null,
+                   val date: LocalDate = LocalDate.now(),
                    val mark: MarkValueDto? = null,
                    var examTasks: MutableList<ExamTaskDto> = mutableListOf(),
                    val subject: SubjectDto = SubjectDto()) : OutcobraDto {
 
-    override fun getIdentifier(): Long = id
-    override fun getParentLink(): ParentLink = ParentLink.make(subject.id, Subject::class.java)
+    override val identifier: Long
+        get() = id
+    override val parentLink: ParentLink
+        get() = ParentLink.make(subject.id, Subject::class.java)
 }

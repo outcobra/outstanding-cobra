@@ -81,7 +81,7 @@ tailrec fun ParentLinked.followToUser(iterationCount: Int = 0): User {
         throw ValidationKey.INVALID_DTO.throwException()
     } else {
         if (this is User) return this
-        val parentLinked = this.parent
+        val parentLinked = this.parent as ParentLinked
         return parentLinked.followToUser(iterationCount + 1)
     }
 }
