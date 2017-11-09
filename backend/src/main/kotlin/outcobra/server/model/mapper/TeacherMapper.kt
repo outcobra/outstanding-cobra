@@ -1,7 +1,7 @@
 package outcobra.server.model.mapper
 
 import org.springframework.stereotype.Component
-import outcobra.server.model.QSubject
+import outcobra.server.model.Institution
 import outcobra.server.model.Teacher
 import outcobra.server.model.dto.TeacherDto
 import outcobra.server.model.interfaces.Mapper
@@ -27,7 +27,9 @@ class TeacherMapper @Inject constructor(val subjectRepository: SubjectRepository
     }
 
     override fun toDto(from: Teacher): TeacherDto {
-        val id = from.id ?: 0
-        return TeacherDto(id, from.institution.id, from.name, from.email)
+        val id = from.id
+        val email = from.email ?: ""
+        val institution = from.institution as Institution
+        return TeacherDto(id, institution.id, from.name, email)
     }
 }

@@ -12,6 +12,11 @@ import outcobra.server.model.interfaces.Mapper
  */
 @Component
 class UserDtoMapper : Mapper<User, UserDto> {
-    override fun fromDto(from: UserDto): User = User(from.id, from.auth0Id, from.username)
-    override fun toDto(from: User): UserDto = UserDto(from.id ?: 0, from.auth0Id, from.username)
+    override fun fromDto(from: UserDto): User {
+        val user = User(from.auth0Id, from.username)
+        user.id = from.id
+        return user
+    }
+
+    override fun toDto(from: User): UserDto = UserDto(from.id, from.auth0Id, from.username)
 }

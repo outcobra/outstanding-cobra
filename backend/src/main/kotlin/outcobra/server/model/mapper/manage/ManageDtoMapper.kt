@@ -1,7 +1,7 @@
 package outcobra.server.model.mapper.manage
 
 import org.springframework.stereotype.Component
-import outcobra.server.exception.ValidationKey
+import outcobra.server.model.Color
 import outcobra.server.model.Institution
 import outcobra.server.model.dto.manage.*
 import outcobra.server.model.interfaces.Mapper
@@ -10,27 +10,24 @@ import javax.inject.Inject
 
 @Component
 class ManageDtoMapper @Inject constructor(val colorMapper: ColorMapper) : Mapper<List<Institution>, ManageDto> {
-    override fun fromDto(from: ManageDto?): List<Institution> {
+    override fun fromDto(from: ManageDto): List<Institution> {
         throw UnsupportedOperationException("this operation will not be used")
     }
 
-    override fun toDto(from: List<Institution>?): ManageDto {
-        if (from != null) {
-            return ManageDto(from.map { toInternalDto(it) })
-        }
-        ValidationKey.SERVER_ERROR.throwWithCause(NullPointerException())
+    override fun toDto(from: List<Institution>): ManageDto {
+        return ManageDto(from.map { toInternalDto(it) })
     }
 
     private fun toInternalDto(from: Institution): InstitutionDto {
-        return InstitutionDto(from.id ?: 0, from.name, from.schoolClasses.map { schoolClass ->
-            SchoolClassDto(schoolClass.id ?: 0, schoolClass.normalizedName, from.id ?: 0,
+        return InstitutionDto(from.id, from.name, from.schoolClasses!!.map { schoolClass ->
+            SchoolClassDto(schoolClass.id, schoolClass.normalizedName, from.id,
                     schoolClass.schoolYears.map { year ->
-                        SchoolYearDto(year.id ?: 0, year.name, year.validFrom, year.validTo, schoolClass.id ?: 0,
+                        SchoolYearDto(year.id, year.name, year.validFrom, year.validTo, schoolClass.id,
                                 year.semesters.map { semester ->
-                                    SemesterDto(semester.id ?: 0, semester.name, semester.validFrom, semester.validTo, year.id ?: 0,
+                                    SemesterDto(semester.id, semester.name, semester.validFrom, semester.validTo, year.id,
                                             semester.subjects.map { subject ->
-                                                SubjectDto(subject.id ?: 0,
-                                                        subject.name, colorMapper.toDto(subject.color), semester.id ?: 0)
+                                                SubjectDto(subject.id,
+                                                        subject.name, colorMapper.toDto(subject.color as Color), semester.id)
                                             })
                                 })
                     })

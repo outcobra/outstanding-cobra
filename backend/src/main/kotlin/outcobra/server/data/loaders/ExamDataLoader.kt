@@ -35,23 +35,23 @@ class ExamDataLoader @Inject constructor(val examRepository: ExamRepository,
 
     companion object {
         var SCRUM_EXAM = Exam("fake daily", LocalDate.now().minusWeeks(1), listOf(),
-                null, MarkValue(getRandomMark(), getRandomWeight()))
+                null, MarkValue(getRandomMark(), getRandomWeight(), null, ""), null)
         var OOP_EXAM = Exam("KR", LocalDate.now().plusWeeks(1), listOf(),
                 null, null)
         var GERMAN_EXAM = Exam("Kulturgeschichte", LocalDate.now().minusWeeks(1), listOf(),
-                null, MarkValue(getRandomMark(), getRandomWeight()))
+                null, MarkValue(getRandomMark(), getRandomWeight(), null, ""), null)
         var PHYSICS_EXAM = Exam("Statik", LocalDate.now().minusWeeks(1), listOf(),
-                null, MarkValue(getRandomMark(), getRandomWeight()))
+                null, MarkValue(getRandomMark(), getRandomWeight(), null, ""), null)
         var OOP_DESIGN_EXAM = Exam("Design-Patterns", LocalDate.now().plusWeeks(1), listOf(),
                 null, null)
         var DATABASES_EXAM = Exam("DB-Project", LocalDate.now(), listOf(),
-                null, MarkValue(getRandomMark(), getRandomWeight()))
+                null, MarkValue(getRandomMark(), getRandomWeight(), null, ""), null)
         var GUP_EXAM = Exam("WW2", LocalDate.now().minusWeeks(1), listOf(),
-                null, MarkValue(getRandomMark(), getRandomWeight()))
+                null, MarkValue(getRandomMark(), getRandomWeight(), null, ""), null)
         var MATHS_EXAM = Exam("Goniometrie", LocalDate.now().plusDays(1), listOf(),
                 null, null)
         var PROJECT_EXAM = Exam("Präsentation", LocalDate.now().minusMonths(1), listOf(),
-                null, MarkValue(getRandomMark(), getRandomWeight()))
+                null, MarkValue(getRandomMark(), getRandomWeight(), null, ""), null)
     }
 
     override fun shouldLoad(): Boolean = true
@@ -70,10 +70,9 @@ class ExamDataLoader @Inject constructor(val examRepository: ExamRepository,
 
     private fun saveAndLog(exam: Exam, subject: Subject): Exam {
         exam.subject = subject
-        if (exam.mark != null) {
-            exam.mark.markGroup = subject.markGroup
+        exam.mark?.markGroup = subject.markGroup
             markValueRepository.save(exam.mark)
-        }
+
         val entity = examRepository.save(exam)
         LOGGER.debug("Saved exam: ${entity.name} with id ${entity.id}")
         return entity

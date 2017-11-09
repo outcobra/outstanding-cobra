@@ -3,7 +3,7 @@ package outcobra.server.model
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.data.Offset
 import org.junit.Test
-import java.util.ArrayList
+import java.util.*
 
 class MarkGroupTest {
 

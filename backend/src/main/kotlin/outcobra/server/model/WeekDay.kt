@@ -1,6 +1,6 @@
-package outcobra.server.model;
+package outcobra.server.model
 
-public enum WeekDay {
+enum class WeekDay {
     MONDAY,
     TUESDAY,
     WEDNESDAY,

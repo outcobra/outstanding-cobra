@@ -1,10 +1,16 @@
 package outcobra.server.model.mapper
 
 import org.springframework.stereotype.Component
-import outcobra.server.model.*
+import outcobra.server.model.MarkReport
+import outcobra.server.model.SchoolYear
+import outcobra.server.model.Semester
+import outcobra.server.model.Subject
 import outcobra.server.model.dto.SemesterDto
 import outcobra.server.model.interfaces.Mapper
-import outcobra.server.model.repository.*
+import outcobra.server.model.repository.MarkReportRepository
+import outcobra.server.model.repository.SchoolYearRepository
+import outcobra.server.model.repository.SubjectRepository
+import outcobra.server.model.repository.TimetableRepository
 import javax.inject.Inject
 
 /**
@@ -23,8 +29,8 @@ class SemesterMapper @Inject constructor(val subjectRepository: SubjectRepositor
         val subjects = from.subjects.map { it.id }
         val reports = from.markReports.map { it.id }
         val timetableId = from.timetable?.id ?: 0L
-        val id = from.id ?: 0L
-        return SemesterDto(id, from.schoolYear.id, from.name, from.validFrom, from.validTo, subjects, reports, timetableId)
+        val id = from.id
+        return SemesterDto(id, from.schoolYear!!.id, from.name, from.validFrom, from.validTo, subjects, reports, timetableId)
     }
 
     override fun fromDto(from: SemesterDto): Semester {

@@ -1,6 +1,7 @@
 package outcobra.server.model.mapper
 
 import org.springframework.stereotype.Component
+import outcobra.server.model.Subject
 import outcobra.server.model.Task
 import outcobra.server.model.dto.TaskDto
 import outcobra.server.model.interfaces.Mapper
@@ -16,9 +17,10 @@ class TaskDtoMapper @Inject constructor(val subjectRepository: SubjectRepository
                                         val subjectMapper: SubjectMapper) : Mapper<Task, TaskDto> {
 
     override fun toDto(from: Task): TaskDto {
-        val id = from.id ?: 0
+        val id = from.id
+        val subject = from.subject as Subject
         val effort = from.effort.toDouble().div(60)
-        return TaskDto(id, subjectMapper.toDto(from.subject), from.name, from.description,
+        return TaskDto(id, subjectMapper.toDto(subject), from.name, from.description,
                 from.todoDate, from.dueDate, effort, from.progress)
     }
 

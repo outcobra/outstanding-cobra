@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component
 import outcobra.server.model.Exam
 import outcobra.server.model.ExamTask
 import outcobra.server.model.MarkValue
+import outcobra.server.model.Subject
 import outcobra.server.model.dto.ExamDto
 import outcobra.server.model.dto.ExamTaskDto
 import outcobra.server.model.dto.MarkValueDto
@@ -30,8 +31,10 @@ class ExamMapper @Inject constructor(val markMapper: Mapper<MarkValue, MarkValue
         if (from.mark != null) {
             markValue = markMapper.fromDto(from.mark)
         }
-        return Exam(from.id, from.name, from.description,
-                from.date, listOf(), subject, markValue)
+        val exam = Exam(from.name, from.date, listOf(), subject, markValue, from.description)
+        exam.id = from.id
+        return exam
+
     }
 
     override fun toDto(from: Exam): ExamDto {
@@ -39,7 +42,8 @@ class ExamMapper @Inject constructor(val markMapper: Mapper<MarkValue, MarkValue
         if (from.mark != null) {
             markValue = markMapper.toDto(from.mark as MarkValue)
         }
+        val subject = from.subject as Subject
         return ExamDto(from.id, from.name, from.description ?: "", from.date, markValue,
-                from.tasks.map { examTaskMapper.toDto(it) }.toMutableList(), subjectMapper.toDto(from.subject))
+                from.tasks.map { examTaskMapper.toDto(it) }.toMutableList(), subjectMapper.toDto(subject))
     }
 }

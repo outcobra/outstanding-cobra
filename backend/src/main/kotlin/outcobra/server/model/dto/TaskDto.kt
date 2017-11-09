@@ -13,13 +13,14 @@ data class TaskDto(
         val subject: SubjectDto = SubjectDto(),
         val name: String = "",
         val description: String = "",
-        val todoDate: LocalDate? = LocalDate.now(),
+        val todoDate: LocalDate = LocalDate.now(),
         val dueDate: LocalDate = LocalDate.now().plusDays(1),
         val effort: Double = 0.0,
         val progress: Int = 0) : OutcobraDto {
 
-    override fun getIdentifier(): Long = id
+    override val identifier: Long get() = id
 
-    override fun getParentLink(): ParentLink = ParentLink.make(subject.id, Subject::class.java)
+    override val parentLink: ParentLink
+        get() = ParentLink.make(subject.id, Subject::class.java)
 
 }
