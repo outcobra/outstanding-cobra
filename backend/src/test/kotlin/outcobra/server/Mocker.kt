@@ -2,7 +2,10 @@ package outcobra.server
 
 import org.mockito.Matchers
 import org.mockito.Mockito
-import org.springframework.context.annotation.*
+import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.Primary
+import org.springframework.context.annotation.Profile
 import outcobra.server.annotation.DefaultImplementation
 import outcobra.server.config.ProfileRegistry.Companion.MOCK_SERVICES
 import outcobra.server.model.User
@@ -22,8 +25,8 @@ class Mocker(userRepository: UserRepository) {
     lateinit var userService: UserService
 
     init {
-        USER = userRepository.save(User(null, USER_AUTH0_ID, USER_NICKNAME, null))
-        USER2 = userRepository.save(User(null, USER2_AUTH0_ID, USER2_NICKNAME, null))
+        USER = userRepository.save(User(USER_AUTH0_ID, USER_NICKNAME, listOf()))
+        USER2 = userRepository.save(User(USER2_AUTH0_ID, USER2_NICKNAME, listOf()))
     }
 
     companion object {

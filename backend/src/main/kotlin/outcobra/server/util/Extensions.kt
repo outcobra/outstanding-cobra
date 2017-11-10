@@ -78,11 +78,12 @@ infix fun Semester.doesNotOverlap(semester: Semester): Boolean {
  */
 tailrec fun ParentLinked.followToUser(iterationCount: Int = 0): User {
     if (iterationCount > 50) {
+        @Suppress("UNREACHABLE_CODE")
         throw ValidationKey.INVALID_DTO.throwException()
     } else {
         if (this is User) return this
         val parentLinked = this.parent as ParentLinked
-        return parentLinked.followToUser(iterationCount + 1)
+        return parentLinked.followToUser(iterationCount.inc())
     }
 }
 
