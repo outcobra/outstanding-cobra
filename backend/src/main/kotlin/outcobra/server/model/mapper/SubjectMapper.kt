@@ -1,10 +1,7 @@
 package outcobra.server.model.mapper
 
 import org.springframework.stereotype.Component
-import outcobra.server.model.Color
-import outcobra.server.model.Semester
-import outcobra.server.model.Subject
-import outcobra.server.model.Teacher
+import outcobra.server.model.*
 import outcobra.server.model.dto.SubjectDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.*

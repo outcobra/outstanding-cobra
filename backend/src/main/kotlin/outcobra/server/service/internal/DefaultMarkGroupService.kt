@@ -2,6 +2,7 @@ package outcobra.server.service.internal
 
 import org.springframework.stereotype.Service
 import outcobra.server.model.MarkGroup
+import outcobra.server.model.QMarkValue
 import outcobra.server.model.Semester
 import outcobra.server.model.dto.MarkGroupDto
 import outcobra.server.model.dto.mark.SemesterMarkDto
@@ -48,7 +49,7 @@ class DefaultMarkGroupService
             }
             if (currentMarks.isNotEmpty()) {
                 val subjectMarkGroup = repository.findOne(dto.parentGroupId)
-                currentMarks.foreach {
+                currentMarks.forEach {
                     it.markGroup = subjectMarkGroup
                     markValueRepository.save(it)
                 }

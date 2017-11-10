@@ -18,4 +18,4 @@ include 'services:webservice'
 
 rootProject.name = 'outstanding-cobra'
 
-include 'backend', 'backend-outcobra.server.model', 'frontend'
+include 'backend', 'frontend'

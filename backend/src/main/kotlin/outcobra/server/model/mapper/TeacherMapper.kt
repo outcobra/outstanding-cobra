@@ -2,6 +2,7 @@ package outcobra.server.model.mapper
 
 import org.springframework.stereotype.Component
 import outcobra.server.model.Institution
+import outcobra.server.model.QSubject
 import outcobra.server.model.Teacher
 import outcobra.server.model.dto.TeacherDto
 import outcobra.server.model.interfaces.Mapper
