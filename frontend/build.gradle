@@ -1,3 +1,4 @@
+/*
 plugins {
     id "com.moowork.node" version "1.2.0"
 }
@@ -20,7 +21,4 @@ task ngTest(type: YarnTask, dependsOn: yarn_install) {
     args = ['run', 'ng', 'test', '--watch=false', '--single-run', '--browser=PhantomJS', '--code-coverage']
 }
 task test(dependsOn: ngTest)
-
-task setCacheFolderCI(type: YarnTask) {
-    args = ['config', 'set', 'cache-folder', '/root/yarn-cache']
-}
+*/

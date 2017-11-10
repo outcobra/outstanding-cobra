@@ -1,6 +1,7 @@
 package outcobra.server.model.mapper
 
 import org.springframework.stereotype.Component
+import outcobra.server.model.QHoliday
 import outcobra.server.model.SchoolClass
 import outcobra.server.model.SchoolYear
 import outcobra.server.model.Semester

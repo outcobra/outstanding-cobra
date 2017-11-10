@@ -2,6 +2,7 @@ package outcobra.server.service.internal
 
 import org.springframework.stereotype.Service
 import outcobra.server.model.ExamTask
+import outcobra.server.model.QExamTask
 import outcobra.server.model.dto.ExamTaskDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.ExamTaskRepository
