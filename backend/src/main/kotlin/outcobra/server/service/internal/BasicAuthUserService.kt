@@ -39,7 +39,7 @@ class BasicAuthUserService @Inject constructor(val userRepository: UserRepositor
     override fun getCurrentUser() = userRepository.findOne(QUser.user.auth0Id.eq(getTokenUserId()))
             ?: ValidationKey.USER_NOT_IN_DATABASE_RELOGIN.throwException()
 
-    override fun getCurrentUserDto() = userDtoMapper.toDto(getCurrentUser())!!
+    override fun getCurrentUserDto() = userDtoMapper.toDto(getCurrentUser())
 
     override fun getUserProfile(): UserProfile {
         throw UnsupportedOperationException("function not available within this security mock")

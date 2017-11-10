@@ -18,7 +18,7 @@ class UserRepositoryTest {
 
     @Inject
     lateinit var userRepository: UserRepository
-    val myUser = User(null, "some_auth0_id", "jmesserli")
+    val myUser = User("some_auth0_id", "jmesserli", listOf())
 
     companion object {
         var userCount = 0L
