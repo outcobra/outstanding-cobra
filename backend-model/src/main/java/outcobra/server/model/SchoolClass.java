@@ -2,17 +2,16 @@ package outcobra.server.model;
 
 import outcobra.server.model.interfaces.ParentLinked;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "class")
-public class SchoolClass implements ParentLinked {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
+public class SchoolClass extends AbstractEntity implements ParentLinked {
     @NotNull
     private String normalizedName;
 
@@ -23,7 +22,6 @@ public class SchoolClass implements ParentLinked {
     private List<SchoolYear> schoolYears;
 
     //region constructors
-
     public SchoolClass(String normalizedName, Institution institution, List<SchoolYear> schoolYears) {
         this.normalizedName = normalizedName;
         this.institution = institution;
@@ -33,19 +31,9 @@ public class SchoolClass implements ParentLinked {
     public SchoolClass() {
         this.schoolYears = new ArrayList<>();
     }
-
     //endregion
 
     //region default functions
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getNormalizedName() {
         return normalizedName;
     }

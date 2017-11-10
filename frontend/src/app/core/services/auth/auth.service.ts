@@ -13,12 +13,12 @@ import {User} from '../../model/user';
 import {Observable} from 'rxjs/Observable';
 
 declare let auth0: any;
+declare let googleyolo: any;
 
 @Injectable()
 export class Auth0AuthService implements AuthService {
     private _auth0Config: any;
     private readonly _defaultRedirectRoute = '/manage';
-    private _lock;
     private _webAuth;
 
     constructor(private _config: ConfigService,
@@ -152,11 +152,26 @@ export class Auth0AuthService implements AuthService {
 
     public loginIdentityProvider(identityProvider: IdentityProvider) {
         console.log(identityProvider);
-        this._webAuth.authorize({
-            responseType: 'token id_token',
-            redirectUri: this._auth0Config.callbackURL,
-            connection: identityProvider
-        })
+
+        if (identityProvider == IdentityProvider.GOOGLE) {
+            googleyolo.hint({
+                supportedAuthMethods: [
+                    'https://accounts.google.com'
+                ],
+                supportedIdTokenProviders: [
+                    {
+                        uri: 'https://accounts.google.com',
+                        clientId: '817442218385-f5jp5mqqvs1sq5iu0qg2urstk7qsdder.apps.googleusercontent.com'
+                    }
+                ]
+            });
+        } else {
+            this._webAuth.authorize({
+                responseType: 'token id_token',
+                redirectUri: this._auth0Config.callbackURL,
+                connection: identityProvider
+            });
+        }
     }
 
     /**

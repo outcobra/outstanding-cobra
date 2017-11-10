@@ -1,23 +1,18 @@
 package outcobra.server.model;
 
 import org.hibernate.validator.constraints.Length;
-
-import java.util.ArrayList;
-import java.util.List;
+import outcobra.server.model.interfaces.ParentLinked;
 
 import javax.jdo.annotations.Index;
 import javax.jdo.annotations.Unique;
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
-
-import outcobra.server.model.interfaces.ParentLinked;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-public class User implements ParentLinked {
-    @Id
-    @GeneratedValue
-    private Long id;
-
+public class User extends AbstractEntity implements ParentLinked {
     @Index
     @Unique
     @NotNull
@@ -29,6 +24,9 @@ public class User implements ParentLinked {
 
     @OneToMany(mappedBy = "user")
     private List<Institution> institutions;
+
+    @OneToMany(mappedBy = "user")
+    private List<Identity> identities;
 
     //region Constructors
     public User(Long id, String auth0Id, String username, List<Institution> institutions) {
@@ -54,18 +52,9 @@ public class User implements ParentLinked {
     public User() {
         this.institutions = new ArrayList<>();
     }
-
     //endregion
 
     //region Getters and setters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getAuth0Id() {
         return auth0Id;
     }
@@ -88,6 +77,14 @@ public class User implements ParentLinked {
 
     public void setInstitutions(List<Institution> institutions) {
         this.institutions = institutions;
+    }
+
+    public List<Identity> getIdentities() {
+        return identities;
+    }
+
+    public void setIdentities(List<Identity> identities) {
+        this.identities = identities;
     }
 
     @SuppressWarnings("SimplifiableIfStatement")

@@ -12,8 +12,8 @@ import javax.inject.Inject
  * @since 1.0.0
  */
 @Component
-class TaskDtoMapper @Inject constructor(val subjectRepository: SubjectRepository,
-                                        val subjectMapper: SubjectMapper) : Mapper<Task, TaskDto> {
+class TaskMapper @Inject constructor(val subjectRepository: SubjectRepository,
+                                     val subjectMapper: SubjectMapper) : Mapper<Task, TaskDto> {
 
     override fun toDto(from: Task): TaskDto {
         val id = from.id ?: 0
