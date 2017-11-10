@@ -2,6 +2,7 @@ package outcobra.server.model
 
 import outcobra.server.model.interfaces.ParentLinked
 import javax.persistence.Entity
+import javax.persistence.ManyToOne
 import javax.persistence.OneToMany
 import javax.persistence.OneToOne
 import javax.validation.constraints.NotNull
@@ -9,7 +10,7 @@ import javax.validation.constraints.NotNull
 @Entity
 data class MarkGroup(@NotNull override var description: String = "",
                      @NotNull override var weight: Double = 1.0,
-                     @NotNull override var markGroup: MarkGroup? = null,
+                     @ManyToOne override var markGroup: MarkGroup? = null,
                      @OneToMany(mappedBy = "markGroup") var marks: MutableList<Mark> = mutableListOf(),
                      @OneToOne(mappedBy = "markGroup") var subject: Subject? = null) : Mark() {
 
