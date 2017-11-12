@@ -30,8 +30,8 @@ export class ConfigService {
             return obj[key];
         } else {
             let keys = key.split('.');
-            let firstKey = keys[0];
-            let nextKey = keys[1];
+            let firstKey = keys.shift();
+            let nextKey = keys.join('.');
             return this.get(nextKey, obj[firstKey]);
         }
     }
@@ -50,7 +50,7 @@ export class ConfigService {
 
             return newObject;
         } else if (type === 'string') {
-            return ConfigService.replaceVariablesInString(value);
+            return ConfigService.replaceVariablesInString(value as string);
         }
 
         return value;

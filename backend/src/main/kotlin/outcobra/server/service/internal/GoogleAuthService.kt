@@ -24,24 +24,24 @@ class GoogleAuthService @Inject constructor(
         private val userRepository: UserRepository,
         private val identityRepository: IdentityRepository,
         private val userMapper: UserMapper,
-        @Value("\${googleapi.clientId}") val clientId: String
-) : AuthService {
+        @Value("\${googleapi.clientId}") val clientId: String) : AuthService {
+
     val idTokenVerifier: GoogleIdTokenVerifier = GoogleIdTokenVerifier.Builder(NetHttpTransport(), JacksonFactory())
             .setAudience(listOf(clientId))
             .build()
 
     override fun loginOrSignUp(identification: String?, secret: String): UserDto {
-        if (secret == null) {
+        if (secret.isEmpty()) {
             ValidationKey.FORBIDDEN.throwException()
         }
 
-        val idToken = idTokenVerifier.verify(secret)?.payload ?: ValidationKey.FORBIDDEN.throwException()
+        val idToken = idTokenVerifier.verify(secret)?.payload
 
-        val predicate = QIdentity.identity.identifier.eq(idToken.subject).and(QIdentity.identity.identityType.eq(AuthRegistry.GOOGLE))
+        val predicate = QIdentity.identity.identifier.eq(idToken!!.subject).and(QIdentity.identity.identityType.eq(AuthRegistry.GOOGLE))
         val identities = identityRepository.findAll(predicate).toList()
 
         if (identities.size > 1) {
-            ValidationKey.SERVER_ERROR.throwException()
+            ValidationKey.IDENTITY_ALREADY_EXISTS.throwException()
         }
 
         if (identities.size == 1) {

@@ -1,8 +1,9 @@
 package outcobra.server.controller
 
+import com.fasterxml.jackson.databind.node.TextNode
 import org.springframework.beans.factory.annotation.Qualifier
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import outcobra.server.config.AuthRegistry
@@ -16,8 +17,8 @@ import javax.inject.Inject
 class AuthController @Inject constructor(
         @Qualifier(AuthRegistry.GOOGLE) val googleAuth: GoogleAuthService
 ) {
-    @GetMapping("/google/{idToken}")
-    fun handleGoogleAuth(@PathVariable("idToken") idToken: String): UserDto {
-        return googleAuth.loginOrSignUp(null, idToken)
+    @PostMapping("/google")
+    fun handleGoogleAuth(@RequestBody idToken: TextNode): UserDto {
+        return googleAuth.loginOrSignUp(null, idToken.asText())
     }
 }

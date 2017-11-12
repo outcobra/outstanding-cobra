@@ -30,8 +30,10 @@ class WebSecurityConfig
 
     override fun configure(http: HttpSecurity?) {
         http!!.headers().frameOptions().disable()
+        http.csrf().disable()
 
-        //TODO discuss what needs to be active on which profile
+        http.authorizeRequests().antMatchers("/api/auth/**").permitAll()
+
         if (environment.acceptsProfiles(ProfileRegistry.DEVELOPMENT)) {
             http.authorizeRequests()
                     .antMatchers("/swagger-ui.html",
@@ -45,7 +47,7 @@ class WebSecurityConfig
                             "/trace",
                             "/configprops",
                             "/api/ping").permitAll()
-                    .anyRequest().authenticated()
+                    .anyRequest().permitAll()
         } else if (environment.acceptsProfiles(ProfileRegistry.PRODUCTION)) {
             http.authorizeRequests()
                     .antMatchers("/api/ping").permitAll()

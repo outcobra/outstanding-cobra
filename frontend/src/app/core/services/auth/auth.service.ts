@@ -13,13 +13,14 @@ import {User} from '../../model/user';
 import {Observable} from 'rxjs/Observable';
 
 declare let auth0: any;
-declare let googleyolo: any;
+declare let gapi: any;
 
 @Injectable()
 export class Auth0AuthService implements AuthService {
     private _auth0Config: any;
     private readonly _defaultRedirectRoute = '/manage';
     private _webAuth;
+    private _googleAuth;
 
     constructor(private _config: ConfigService,
                 private _router: Router,
@@ -33,6 +34,11 @@ export class Auth0AuthService implements AuthService {
             domain: this._auth0Config.domain,
             clientID: this._auth0Config.clientID
         });
+
+        gapi.load('auth2', () => this._googleAuth = gapi.auth2.init({
+                client_id: this._config.get('auth.google.clientId')
+            })
+        );
 
         // auth0 lock configuration
         /*this._lock = new Auth0Lock(this._auth0Config.clientID, this._auth0Config.domain, {
@@ -151,19 +157,11 @@ export class Auth0AuthService implements AuthService {
     }
 
     public loginIdentityProvider(identityProvider: IdentityProvider) {
-        console.log(identityProvider);
-
         if (identityProvider == IdentityProvider.GOOGLE) {
-            googleyolo.hint({
-                supportedAuthMethods: [
-                    'https://accounts.google.com'
-                ],
-                supportedIdTokenProviders: [
-                    {
-                        uri: 'https://accounts.google.com',
-                        clientId: '817442218385-f5jp5mqqvs1sq5iu0qg2urstk7qsdder.apps.googleusercontent.com'
-                    }
-                ]
+            this._googleAuth.signIn().then(user => {
+                console.log(user.getAuthResponse().id_token);
+                this._http.post('/api/auth/google/', user.getAuthResponse().id_token, 'outcobra_public').subscribe();
+
             });
         } else {
             this._webAuth.authorize({

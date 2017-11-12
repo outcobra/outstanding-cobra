@@ -1,3 +1,4 @@
+/*
 package outcobra.server.config
 
 import com.auth0.Auth0
@@ -23,7 +24,6 @@ import java.net.Proxy
 @Profile("!$BASIC_AUTH_SECURITY_MOCK")
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-@Configuration
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 class Auth0Config : Auth0SecurityConfig() {
 
@@ -78,4 +78,4 @@ class Auth0Config : Auth0SecurityConfig() {
 
 class Auth0Client(val client: AuthenticationAPIClient) {
     fun getUserProfile(token: Auth0JWTToken): UserProfile = client.tokenInfo(token.jwt).execute()
-}
+}*/

@@ -1,13 +1,12 @@
 package outcobra.server.service.internal
 
+//import outcobra.server.config.Auth0Client
 import com.auth0.authentication.result.UserProfile
-import com.auth0.spring.security.api.Auth0JWTToken
 import com.auth0.spring.security.api.Auth0UserDetails
 import org.springframework.context.annotation.Profile
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Service
 import outcobra.server.annotation.DefaultImplementation
-import outcobra.server.config.Auth0Client
 import outcobra.server.config.ProfileRegistry.Companion.BASIC_AUTH_SECURITY_MOCK
 import outcobra.server.exception.ValidationException
 import outcobra.server.exception.ValidationKey
@@ -17,6 +16,7 @@ import outcobra.server.model.dto.UserDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.UserRepository
 import outcobra.server.service.UserService
+import java.util.*
 import javax.inject.Inject
 
 @Service
@@ -24,8 +24,7 @@ import javax.inject.Inject
 @Profile("!$BASIC_AUTH_SECURITY_MOCK")
 class DefaultUserService
 @Inject constructor(val userRepository: UserRepository,
-                    val userDtoMapper: Mapper<User, UserDto>,
-                    val auth0Client: Auth0Client) : UserService {
+                    val userDtoMapper: Mapper<User, UserDto>) : UserService {
 
     override fun readUserById(id: Long): User {
         return userRepository.getOne(id)
@@ -43,7 +42,7 @@ class DefaultUserService
 
     override fun getUserProfile(): UserProfile {
         val auth = SecurityContextHolder.getContext().authentication
-        return auth0Client.getUserProfile(auth as Auth0JWTToken)
+        return UserProfile("", "", "", "", "", true, "", Date(), listOf(), mapOf(), mapOf(), mapOf(), "")
     }
 
     override fun loginRegister(): UserDto {

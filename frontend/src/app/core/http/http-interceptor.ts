@@ -5,8 +5,9 @@ import {Observable} from 'rxjs/Observable';
 import {dateReplacer} from './http-util';
 import {RequestOptions} from './request-options';
 import {ValidationException} from './validation-exception';
-import {isNotEmpty} from '../util/helper';
+import {isFalsy, isNotEmpty} from '../util/helper';
 import {NotificationWrapperService} from '../notifications/notification-wrapper.service';
+import {RequestArgs} from '@angular/http/src/interfaces';
 
 /**
  * HttpInterceptor to customize the http request and http responses
@@ -60,7 +61,7 @@ export class HttpInterceptor {
                 headers: request.headers,
                 search: this._buildUrlSearchParams(request.params),
                 body: JSON.stringify(request.data, dateReplacer)
-            })
+            } as RequestArgs)
         ).catch(error => this._handleError(error))
             .map((res: Response) => this._unwrapAndCastHttpResponse<T>(res));
     }
@@ -73,15 +74,17 @@ export class HttpInterceptor {
      * performs a simple get request
      *
      * @param url
+     * @param headers
      * @param params
      * @param apiName
      * @returns {Observable<T>}
      */
-    public get<T>(url: string, apiName?: string, params?: any): Observable<T> {
+    public get<T>(url: string, apiName?: string, headers?: any, params?: any): Observable<T> {
         return this.request<T>({
             method: RequestMethod.Get,
             url: url,
             params: params,
+            headers: headers,
             apiName: apiName
         });
     }
@@ -91,16 +94,18 @@ export class HttpInterceptor {
      *
      * @param url as string
      * @param data which needs to be sent as request body
+     * @param headers
      * @param params additional parameters(headers)
      * @param apiName name of the api to call (described in the config file)
      * @returns {Observable<T>}
      */
-    public post<T>(url: string, data: any, apiName?: string, params?: any): Observable<T> {
+    public post<T>(url: string, data: any, apiName?: string, headers?: any, params?: any): Observable<T> {
         return this.request<T>({
             method: RequestMethod.Post,
             url: url,
             data: data,
             params: params,
+            headers: headers,
             apiName: apiName
         });
     }
@@ -212,7 +217,7 @@ export class HttpInterceptor {
      * @returns requestOptions object with the updated headers
      */
     private _addContentType(request: RequestOptions) {
-        if (request.method !== RequestMethod.Get && request.method !== RequestMethod.Delete) {
+        if (request.method !== RequestMethod.Get && request.method !== RequestMethod.Delete && isFalsy(request.headers['Content-Type'])) {
             request.headers['Content-Type'] = 'application/json ; charset=UTF-8';
         }
         return request;
