@@ -1,7 +1,7 @@
 package outcobra.server.service
 
 import outcobra.server.model.Identity
-import outcobra.server.web.auth.config.AuthRegistry
+import outcobra.server.model.User
 import outcobra.server.web.auth.model.OutcobraUser
 
 /**
@@ -13,8 +13,11 @@ import outcobra.server.web.auth.model.OutcobraUser
  * @since 1.0.0
  */
 interface UserService {
-    fun getCurrentUser(): OutcobraUser
+    fun getCurrentOutcobraUser(): OutcobraUser
 
-    fun findIdentitiesByIdentifierAndType(identifier: String, identityType: AuthRegistry): List<Identity>
+    fun getCurrentUser(): User
 
+    fun findIdentitiesByIdentifierAndType(identifier: String, identityType: String): List<Identity>
+
+    fun readUserById(id: Long): User
 }

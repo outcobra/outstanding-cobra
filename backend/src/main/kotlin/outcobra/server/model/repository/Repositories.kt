@@ -65,4 +65,6 @@ interface IdentityRepository : OutcobraRepository<Identity> {
     fun findByUser(user: User): List<Identity>
 
     fun findByUserAndIdentityType(user: User, identityType: String): List<Identity>
+
+    fun findByIdentifierAndIdentityType(identifier: String, identityType: String): List<Identity>
 }

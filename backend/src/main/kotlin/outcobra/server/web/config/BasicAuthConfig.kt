@@ -1,4 +1,4 @@
-package outcobra.server.config
+package outcobra.server.web.config
 
 import org.springframework.boot.autoconfigure.security.SecurityProperties
 import org.springframework.context.annotation.Configuration

@@ -1,4 +1,4 @@
-/*
+package outcobra.server.web.config/*
 package outcobra.server.config
 
 import com.auth0.Auth0

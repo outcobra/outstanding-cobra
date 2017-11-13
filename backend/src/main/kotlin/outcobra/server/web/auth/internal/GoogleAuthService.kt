@@ -8,13 +8,13 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 import outcobra.server.exception.ValidationKey
 import outcobra.server.model.Identity
-import outcobra.server.model.QIdentity
 import outcobra.server.model.User
 import outcobra.server.model.mapper.UserMapper
 import outcobra.server.model.repository.IdentityRepository
 import outcobra.server.model.repository.UserRepository
-import outcobra.server.web.auth.AuthService
+import outcobra.server.service.UserService
 import outcobra.server.web.auth.config.AuthRegistry
+import outcobra.server.web.auth.model.OutcobraUser
 import outcobra.server.web.auth.util.JwtUtil
 import javax.inject.Inject
 
@@ -22,10 +22,11 @@ import javax.inject.Inject
 @Qualifier(AuthRegistry.GOOGLE)
 class GoogleAuthService @Inject constructor(
         private val userRepository: UserRepository,
+        private val userService: UserService,
         private val identityRepository: IdentityRepository,
         private val userMapper: UserMapper,
         private val jwtUtil: JwtUtil,
-        @Value("\${googleapi.clientId}") val clientId: String) : AuthService {
+        @Value("\${googleapi.clientId}") val clientId: String) : BaseAuthService() {
 
     val idTokenVerifier: GoogleIdTokenVerifier = GoogleIdTokenVerifier.Builder(NetHttpTransport(), JacksonFactory())
             .setAudience(listOf(clientId))
@@ -38,15 +39,14 @@ class GoogleAuthService @Inject constructor(
 
         val idToken = idTokenVerifier.verify(secret)?.payload
 
-        val predicate = QIdentity.identity.identifier.eq(idToken!!.subject).and(QIdentity.identity.identityType.eq(AuthRegistry.GOOGLE))
-        val identities = identityRepository.findAll(predicate).toList()
+        val identities = userService.findIdentitiesByIdentifierAndType(idToken!!.subject, AuthRegistry.GOOGLE)
 
         if (identities.size > 1) {
             ValidationKey.IDENTITY_ALREADY_EXISTS.throwException()
         }
 
         if (identities.size == 1) {
-            return userMapper.toDto(identities.first().user)
+            return userToToken(identities.first().user)
         }
 
         val newUser = User(null, "", idToken["name"] as String, "")
@@ -54,10 +54,10 @@ class GoogleAuthService @Inject constructor(
 
         identityRepository.save(Identity(user, AuthRegistry.GOOGLE, idToken.subject, null))
 
-        return userMapper.toDto(user)
+        return userToToken(user)
     }
 
     fun userToToken(user: User): String {
-        return jwtUtil.generateToken()
+        return jwtUtil.generateToken(OutcobraUser(user.username, "", user.mail))
     }
 }

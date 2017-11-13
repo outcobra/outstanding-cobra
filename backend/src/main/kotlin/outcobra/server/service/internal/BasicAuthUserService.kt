@@ -1,18 +1,14 @@
 package outcobra.server.service.internal
 
-import com.auth0.authentication.result.UserProfile
 import org.springframework.context.annotation.Profile
-import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Service
 import outcobra.server.config.ProfileRegistry.Companion.BASIC_AUTH_SECURITY_MOCK
-import outcobra.server.data.loaders.UserDataLoader
-import outcobra.server.exception.ValidationKey
-import outcobra.server.model.QUser
+import outcobra.server.model.Identity
 import outcobra.server.model.User
-import outcobra.server.model.dto.UserDto
 import outcobra.server.model.mapper.UserMapper
 import outcobra.server.model.repository.UserRepository
 import outcobra.server.service.UserService
+import outcobra.server.web.auth.model.OutcobraUser
 import javax.inject.Inject
 
 /**
@@ -24,7 +20,18 @@ import javax.inject.Inject
 @Service
 class BasicAuthUserService @Inject constructor(val userRepository: UserRepository,
                                                val userMapper: UserMapper) : UserService {
-    override fun readUserById(id: Long): User {
+    override fun getCurrentOutcobraUser(): OutcobraUser {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun getCurrentUser(): User {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun findIdentitiesByIdentifierAndType(identifier: String, identityType: String): List<Identity> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+    /*override fun readUserById(id: Long): User {
         return userRepository.getOne(id)
     }
 
@@ -47,6 +54,6 @@ class BasicAuthUserService @Inject constructor(val userRepository: UserRepositor
 
     override fun loginRegister(): UserDto {
         throw UnsupportedOperationException("function not available within this security mock")
-    }
+    }*/
 
 }
