@@ -1,5 +1,6 @@
 package outcobra.server.web.auth
 
+import me.mkweb.releasr.web.auth.exception.JwtTokenMissingException
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.filter.GenericFilterBean
@@ -25,6 +26,5 @@ class JwtAuthenticationFilter(private val authenticationManager: AuthenticationM
         SecurityContextHolder.getContext().authentication = authentication
 
         chain!!.doFilter(request, response)
-        SecurityContextHolder.getContext().authentication = null
     }
 }

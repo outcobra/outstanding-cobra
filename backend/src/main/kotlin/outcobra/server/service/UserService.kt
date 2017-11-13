@@ -2,6 +2,7 @@ package outcobra.server.service
 
 import outcobra.server.model.Identity
 import outcobra.server.model.User
+import outcobra.server.model.dto.UserDto
 import outcobra.server.web.auth.model.OutcobraUser
 
 /**
@@ -16,6 +17,8 @@ interface UserService {
     fun getCurrentOutcobraUser(): OutcobraUser
 
     fun getCurrentUser(): User
+
+    fun getCurrentUserDto(): UserDto
 
     fun findIdentitiesByIdentifierAndType(identifier: String, identityType: String): List<Identity>
 

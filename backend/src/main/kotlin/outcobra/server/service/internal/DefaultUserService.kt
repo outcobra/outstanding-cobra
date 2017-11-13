@@ -32,6 +32,10 @@ class DefaultUserService
         return userRepository.findByMail(getCurrentOutcobraUser().mail)!!
     }
 
+    override fun getCurrentUserDto(): UserDto {
+        return userDtoMapper.toDto(getCurrentUser())
+    }
+
     override fun readUserById(id: Long): User {
         return userRepository.findOne(id)
     }
