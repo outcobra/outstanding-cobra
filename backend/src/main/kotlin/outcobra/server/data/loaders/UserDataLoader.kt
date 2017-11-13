@@ -27,6 +27,7 @@ class UserDataLoader
         var TEST_USER: User? = null
         val loadedUserToken = "auth0|583b1ac145cc13f8065da5e2"
         val loadedUserName = "OutcobraTest"
+        val loadedUserMail = "testuser@outcobra.ch"
         private val LOGGER = LoggerFactory.getLogger(UserDataLoader::class.java)
         var loaded = false
     }
@@ -35,7 +36,7 @@ class UserDataLoader
 
 
     override fun load() {
-        TEST_USER = userRepository.save(User(loadedUserToken, loadedUserName, arrayListOf()))
+        TEST_USER = userRepository.save(User(loadedUserToken, loadedUserName, loadedUserMail, arrayListOf()))
         LOGGER.debug("Saving user: ${TEST_USER?.username ?: "null"}")
         loaded = true
     }

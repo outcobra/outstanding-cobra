@@ -1,4 +1,4 @@
-package outcobra.server.controller
+package outcobra.server.web.controller
 
 import org.springframework.web.bind.annotation.*
 import outcobra.server.model.dto.TeacherDto

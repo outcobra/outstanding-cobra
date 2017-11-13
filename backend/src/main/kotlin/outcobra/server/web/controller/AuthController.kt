@@ -1,4 +1,4 @@
-package outcobra.server.controller
+package outcobra.server.web.controller
 
 import com.fasterxml.jackson.databind.node.TextNode
 import org.springframework.beans.factory.annotation.Qualifier
@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import outcobra.server.config.AuthRegistry
 import outcobra.server.model.dto.UserDto
-import outcobra.server.service.internal.GoogleAuthService
+import outcobra.server.web.auth.config.AuthRegistry
+import outcobra.server.web.auth.internal.GoogleAuthService
 import javax.inject.Inject
 
 

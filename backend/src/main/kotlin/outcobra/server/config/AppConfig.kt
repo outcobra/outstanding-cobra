@@ -18,6 +18,7 @@ open class AppConfig {
             val yaml = YamlPropertiesFactoryBean()
             yaml.setResources(
                     ClassPathResource("auth0.yml"),
+                    ClassPathResource("auth.yml"),
                     ClassPathResource("googleauth.yml")
             )
             configurer.setProperties(yaml.`object`)

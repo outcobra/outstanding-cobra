@@ -101,6 +101,7 @@ dependencies {
     compile('org.ehcache:ehcache:3.3.1')
     compile($/org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}/$)
     compile($/org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}/$)
+    compile('io.jsonwebtoken:jjwt:0.7.0')
     testCompile('org.assertj:assertj-core:3.8.0')
 
     // Spring Initializr

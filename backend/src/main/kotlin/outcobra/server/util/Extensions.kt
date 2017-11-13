@@ -1,5 +1,6 @@
 package outcobra.server.util
 
+import io.jsonwebtoken.Claims
 import outcobra.server.exception.ValidationException
 import outcobra.server.exception.ValidationKey
 import outcobra.server.model.SchoolYear
@@ -8,7 +9,11 @@ import outcobra.server.model.User
 import outcobra.server.model.dto.MarkGroupDto
 import outcobra.server.model.dto.mark.BaseMarkDto
 import outcobra.server.model.interfaces.ParentLinked
+import java.time.Instant
 import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.util.*
 
 /*
  * Utility class which contains extension functions for already existing classes
@@ -126,4 +131,15 @@ fun String.firstToLower(): String {
     if (this.isEmpty()) return this
     if (this.length == 1) return this.toLowerCase()
     return substring(0, 1).toLowerCase() + substring(1, length)
+}
+
+
+fun Claims.setExpirationTime(dateTime: LocalDateTime) {
+    val instant = Instant.from(dateTime.atZone(ZoneId.systemDefault()))
+    this.expiration = Date.from(instant)
+}
+
+fun Claims.getExpirationTime(): LocalDateTime {
+    val instant = Instant.ofEpochMilli(this.expiration.time)
+    return LocalDateTime.ofInstant(instant, ZoneId.systemDefault())
 }

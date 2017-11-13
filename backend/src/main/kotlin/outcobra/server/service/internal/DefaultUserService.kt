@@ -1,22 +1,18 @@
 package outcobra.server.service.internal
 
 //import outcobra.server.config.Auth0Client
-import com.auth0.authentication.result.UserProfile
-import com.auth0.spring.security.api.Auth0UserDetails
 import org.springframework.context.annotation.Profile
-import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Service
 import outcobra.server.annotation.DefaultImplementation
 import outcobra.server.config.ProfileRegistry.Companion.BASIC_AUTH_SECURITY_MOCK
-import outcobra.server.exception.ValidationException
-import outcobra.server.exception.ValidationKey
-import outcobra.server.model.QUser
+import outcobra.server.model.Identity
 import outcobra.server.model.User
 import outcobra.server.model.dto.UserDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.UserRepository
 import outcobra.server.service.UserService
-import java.util.*
+import outcobra.server.web.auth.config.AuthRegistry
+import outcobra.server.web.auth.model.OutcobraUser
 import javax.inject.Inject
 
 @Service
@@ -25,8 +21,14 @@ import javax.inject.Inject
 class DefaultUserService
 @Inject constructor(val userRepository: UserRepository,
                     val userDtoMapper: Mapper<User, UserDto>) : UserService {
+    override fun getCurrentUser(): OutcobraUser {
 
-    override fun readUserById(id: Long): User {
+    }
+
+    override fun findIdentitiesByIdentifierAndType(identifier: String, identityType: AuthRegistry): List<Identity> {
+    }
+
+    /*override fun readUserById(id: Long): User {
         return userRepository.getOne(id)
     }
 
@@ -50,8 +52,8 @@ class DefaultUserService
             userDtoMapper.toDto(getCurrentUser())
         } catch (vex: ValidationException) {
             val userDetails = getUserProfile()
-            val newUser = User(userDetails.id, userDetails.nickname, null)
+            val newUser = User(userDetails.id, userDetails.nickname, userDetails.email, null)
             userDtoMapper.toDto(userRepository.save(newUser))
         }
-    }
+    }*/
 }

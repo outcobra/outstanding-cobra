@@ -14,7 +14,9 @@ import outcobra.server.model.*
 interface OutcobraRepository<Entity> : JpaRepository<Entity, Long>, QueryDslPredicateExecutor<Entity>
 
 @Repository
-interface UserRepository : OutcobraRepository<User>
+interface UserRepository : OutcobraRepository<User> {
+    fun findByMail(mail: String): User?
+}
 
 @Repository
 interface InstitutionRepository : OutcobraRepository<Institution>

@@ -13,3 +13,6 @@ CREATE UNIQUE INDEX idx_identity_id
 
 CREATE UNIQUE INDEX idx_identity_identifier
   ON identity (identifier);
+
+ALTER TABLE USER
+ADD COLUMN MAIL VARCHAR(100) NOT NULL;

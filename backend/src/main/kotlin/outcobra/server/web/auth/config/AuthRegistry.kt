@@ -1,4 +1,4 @@
-package outcobra.server.config
+package outcobra.server.web.auth.config
 
 class AuthRegistry {
     companion object {
