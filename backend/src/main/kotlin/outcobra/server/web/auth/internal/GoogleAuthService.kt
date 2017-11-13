@@ -9,12 +9,10 @@ import org.springframework.stereotype.Component
 import outcobra.server.exception.ValidationKey
 import outcobra.server.model.Identity
 import outcobra.server.model.User
-import outcobra.server.model.mapper.UserMapper
 import outcobra.server.model.repository.IdentityRepository
 import outcobra.server.model.repository.UserRepository
 import outcobra.server.service.UserService
 import outcobra.server.web.auth.config.AuthRegistry
-import outcobra.server.web.auth.model.OutcobraUser
 import outcobra.server.web.auth.util.JwtUtil
 import javax.inject.Inject
 
@@ -24,20 +22,19 @@ class GoogleAuthService @Inject constructor(
         private val userRepository: UserRepository,
         private val userService: UserService,
         private val identityRepository: IdentityRepository,
-        private val userMapper: UserMapper,
-        private val jwtUtil: JwtUtil,
-        @Value("\${googleapi.clientId}") val clientId: String) : BaseAuthService() {
+        jwtUtil: JwtUtil,
+        @Value("\${googleapi.clientId}") val clientId: String) : BaseAuthService<String>(jwtUtil) {
 
     val idTokenVerifier: GoogleIdTokenVerifier = GoogleIdTokenVerifier.Builder(NetHttpTransport(), JacksonFactory())
             .setAudience(listOf(clientId))
             .build()
 
-    override fun loginOrSignUp(identification: String?, secret: String): String {
-        if (secret.isEmpty()) {
+    override fun loginOrSignUp(arg: String): String {
+        if (arg.isEmpty()) {
             ValidationKey.FORBIDDEN.throwException()
         }
 
-        val idToken = idTokenVerifier.verify(secret)?.payload
+        val idToken = idTokenVerifier.verify(arg)?.payload
 
         val identities = userService.findIdentitiesByIdentifierAndType(idToken!!.subject, AuthRegistry.GOOGLE)
 
@@ -55,9 +52,5 @@ class GoogleAuthService @Inject constructor(
         identityRepository.save(Identity(user, AuthRegistry.GOOGLE, idToken.subject, null))
 
         return userToToken(user)
-    }
-
-    fun userToToken(user: User): String {
-        return jwtUtil.generateToken(OutcobraUser(user.username, "", user.mail))
     }
 }

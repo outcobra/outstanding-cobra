@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Profile
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer
 import org.springframework.core.io.ClassPathResource
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import outcobra.server.config.ProfileRegistry.Companion.BASIC_AUTH_SECURITY_MOCK
 
 
@@ -24,5 +25,8 @@ open class AppConfig {
             configurer.setProperties(yaml.`object`)
             return configurer
         }
+
+        @Bean @Profile("!$BASIC_AUTH_SECURITY_MOCK") @JvmStatic
+        fun passwordEncoder() = BCryptPasswordEncoder()
     }
 }
