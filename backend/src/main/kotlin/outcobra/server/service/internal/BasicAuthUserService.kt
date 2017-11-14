@@ -40,6 +40,9 @@ class BasicAuthUserService @Inject constructor(val userRepository: UserRepositor
     override fun findIdentitiesByIdentifierAndType(identifier: String, identityType: String): List<Identity> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
+
+    override fun checkEmailNotTaken(mail: String) = true
+
     /*override fun readUserById(id: Long): User {
         return userRepository.getOne(id)
     }

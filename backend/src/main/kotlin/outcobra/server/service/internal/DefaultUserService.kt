@@ -44,6 +44,10 @@ class DefaultUserService
         return identityRepository.findByIdentifierAndIdentityType(identifier, identityType)
     }
 
+    override fun checkEmailNotTaken(mail: String): Boolean {
+        return userRepository.findByMail(mail) == null
+    }
+
     /*override fun readUserById(id: Long): User {
         return userRepository.getOne(id)
     }

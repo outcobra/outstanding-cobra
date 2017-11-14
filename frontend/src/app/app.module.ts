@@ -17,7 +17,7 @@ import {PipeModule} from './shared/pipe.module';
 import {FallbackComponent} from './main/fallback/fallback.component';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {ErrorStateMatcher} from '@angular/material';
-import {OcErrorStateMatcher} from './core/services/oc-error-state-matcher';
+import {OCErrorStateMatcher} from './core/services/oc-error-state-matcher';
 import {LayoutModule} from './layout/layout.module';
 import {AuthModule} from './auth/auth.module';
 
@@ -68,7 +68,7 @@ import {AuthModule} from './auth/auth.module';
         },
         {
             provide: ErrorStateMatcher,
-            useClass: OcErrorStateMatcher
+            useClass: OCErrorStateMatcher
         }
     ],
     bootstrap: [

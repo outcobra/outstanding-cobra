@@ -31,6 +31,7 @@ import {ManageDialogFactory} from '../manage/service/manage-dialog-factory';
 import {TaskDetailResolver} from '../task/service/task-detail-resolver.service';
 import {TaskListResolver} from '../task/service/task-list-resolver.service';
 import {TaskService} from '../task/service/task.service';
+import {UserService} from './services/user.service';
 
 @NgModule({
     providers: [
@@ -45,6 +46,7 @@ import {TaskService} from '../task/service/task.service';
         DurationService,
         FilterService,
         AuthGuard,
+        UserService,
         // Exam Services
         ExamService,
         ExamTaskService,

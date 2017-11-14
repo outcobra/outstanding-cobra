@@ -41,13 +41,13 @@ export const emptyLayoutRouteAnimation = trigger('emptyLayoutRouteAnimation', [
         query(':leave', style({zIndex: '100'})),
 
         group([
-            query(':enter', stagger('200ms',
-                animate(time(Timing.NORMAL, Easing.ACCELERATE),
+            query(':enter', [
+                stagger(1000, animate(time(Timing.NORMAL, Easing.ACCELERATE),
                     style({
                         opacity: 1
-                    })
-                )
-            )),
+                    }))
+                )]
+            ),
             query(':leave', [
                 group([
                     query('.login', [

@@ -23,4 +23,6 @@ interface UserService {
     fun findIdentitiesByIdentifierAndType(identifier: String, identityType: String): List<Identity>
 
     fun readUserById(id: Long): User
+
+    fun checkEmailNotTaken(mail: String): Boolean
 }

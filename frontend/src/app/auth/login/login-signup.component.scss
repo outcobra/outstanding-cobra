@@ -13,6 +13,13 @@
             box-sizing: border-box;
         }
 
+        form mat-form-field {
+            padding-bottom: 16px;
+            span.valid {
+                color: green;
+            }
+        }
+
         form > div {
             display: flex;
             flex-direction: column;

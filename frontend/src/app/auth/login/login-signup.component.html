@@ -6,12 +6,46 @@
             <input matInput
                    formControlName="username"
                    [placeholder]="'i18n.auth.form.username' | translate">
+            <mat-error>
+                <ng-template [ngIf]="loginSignUpForm.get('username').hasError('required')">
+                    {{ 'i18n.common.form.error.required' | translate }}
+                </ng-template>
+                <ng-template [ngIf]="loginSignUpForm.get('username').hasError('minlength')">
+                    {{ 'i18n.common.form.error.minLength' |
+                    translate:{length: loginSignUpForm.get('username').getError('minlength').requiredLength} }}
+                </ng-template>
+                <ng-template [ngIf]="loginSignUpForm.get('username').hasError('maxlength')">
+                    {{ 'i18n.common.form.error.maxLength' |
+                    translate:{length: loginSignUpForm.get('username').getError('maxlength').requiredLength} }}
+                </ng-template>
+            </mat-error>
         </mat-form-field>
         <mat-form-field>
             <mat-icon matSuffix>email</mat-icon>
             <input matInput
                    formControlName="mail"
                    [placeholder]="'i18n.auth.form.email' | translate">
+            <mat-hint *ngIf="isSignUp">
+                <ng-template [ngIf]="loginSignUpForm.get('mail').pending">
+                    {{ 'i18n.auth.form.checkingEmail' | translate }}
+                </ng-template>
+                <ng-template [ngIf]="loginSignUpForm.get('mail').valid">
+                    <span class="valid">
+                        {{ 'i18n.auth.form.emailAvailable' | translate }}
+                    </span>
+                </ng-template>
+            </mat-hint>
+            <mat-error>
+                <ng-template [ngIf]="loginSignUpForm.get('mail').hasError('required')">
+                    {{ 'i18n.common.form.error.required' | translate }}
+                </ng-template>
+                <ng-template [ngIf]="loginSignUpForm.get('mail').touched && loginSignUpForm.get('mail').hasError('email')">
+                    {{ 'i18n.common.form.error.email' | translate }}
+                </ng-template>
+                <ng-template [ngIf]="loginSignUpForm.get('mail').getError('emailTaken') === true">
+                    {{ 'i18n.auth.form.emailTaken' | translate }}
+                </ng-template>
+            </mat-error>
         </mat-form-field>
         <div formGroupName="password">
             <mat-form-field>
@@ -20,13 +54,30 @@
                        type="password"
                        formControlName="password"
                        [placeholder]="'i18n.auth.form.password' | translate">
+                <mat-error>
+                    <ng-template [ngIf]="loginSignUpForm.get('password.password').hasError('required')">
+                        {{ 'i18n.common.form.error.required' | translate }}
+                    </ng-template>
+                    <ng-template [ngIf]="loginSignUpForm.get('password.password').hasError('pattern')">
+                        {{ 'i18n.auth.form.error.passwordPattern' | translate }}
+                    </ng-template>
+                </mat-error>
             </mat-form-field>
             <mat-form-field *ngIf="isSignUp">
                 <mat-icon matSuffix>verified_user</mat-icon>
                 <input matInput
                        type="password"
                        formControlName="passwordVerify"
+                       [errorStateMatcher]="passwordVerifyErrorStateMatcher"
                        [placeholder]="'i18n.auth.form.passwordVerify' | translate">
+                <mat-error>
+                    <ng-template [ngIf]="loginSignUpForm.get('password.passwordVerify').hasError('required')">
+                        {{ 'i18n.common.form.error.required' | translate }}
+                    </ng-template>
+                    <ng-template [ngIf]="loginSignUpForm.get('password').hasError('equals')">
+                        {{ 'i18n.auth.form.error.passwordsNotMatching' | translate }}
+                    </ng-template>
+                </mat-error>
             </mat-form-field>
         </div>
         <div>

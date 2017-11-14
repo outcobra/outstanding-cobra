@@ -30,7 +30,7 @@ class WebSecurityConfig
 
     override fun configure(web: WebSecurity?) {
         if (environment.acceptsProfiles(ProfileRegistry.DEVELOPMENT)) {
-            web!!.ignoring().antMatchers("/h2-console/**", "/api/auth/**")
+            web!!.ignoring().antMatchers("/h2-console/**", "/api/auth/**", "/api/user/emailAvailable/*")
         }
     }
 

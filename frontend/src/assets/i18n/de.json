@@ -28,6 +28,9 @@
         "error": {
           "title": "Fehler",
           "required": "Dieses Feld wird benötigt.",
+          "minLength": "Benötigte Länge: {{length}}",
+          "maxLength": "Maximale Länge: {{length}}",
+          "email": "E-Mail hat nicht das richtige Format",
           "isAfterOrSameDay": "Das Datum sollte nach dem {{date}} sein",
           "isBeforeOrSameDay": "Das Datum sollte vor dem {{date}} sein",
           "dateToIsBeforeDateFrom": "'Gültig bis' ist vor 'Gültig ab'",
@@ -401,7 +404,14 @@
         "email": "E-Mail",
         "password": "Passwort",
         "passwordVerify": "Passwort bestätigen",
-        "username": "Benutzername"
+        "username": "Benutzername",
+        "checkingEmail": "Prüfe E-Mail Verfügbarkeit",
+        "emailAvailable": "E-Mail verfügbar",
+        "error": {
+          "emailTaken": "Sorry, diese E-Mail wird schon verwendet",
+          "passwordPattern": "8 Zeichen, Klein- und Grossbuchstaben, Zahl und Sonderzeichen",
+          "passwordsNotMatching": "Die Passwörter stimmen nicht überein"
+        }
       },
       "social": {
         "signUp": {
