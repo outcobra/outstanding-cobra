@@ -1,28 +1,34 @@
 <div class="login-wrapper">
     <img src="/assets/img/oc_logo_stroke_combined_blue.svg">
-    <form>
+    <form [formGroup]="loginSignUpForm">
         <mat-form-field *ngIf="isSignUp">
             <mat-icon matSuffix>person</mat-icon>
             <input matInput
+                   formControlName="username"
                    [placeholder]="'i18n.auth.form.username' | translate">
         </mat-form-field>
         <mat-form-field>
             <mat-icon matSuffix>email</mat-icon>
             <input matInput
+                   formControlName="mail"
                    [placeholder]="'i18n.auth.form.email' | translate">
         </mat-form-field>
-        <mat-form-field>
-            <mat-icon matSuffix>vpn_key</mat-icon>
-            <input matInput
-                   type="password"
-                   [placeholder]="'i18n.auth.form.password' | translate">
-        </mat-form-field>
-        <mat-form-field *ngIf="isSignUp">
-            <mat-icon matSuffix>verified_user</mat-icon>
-            <input matInput
-                   type="password"
-                   [placeholder]="'i18n.auth.form.passwordVerify' | translate">
-        </mat-form-field>
+        <div formGroupName="password">
+            <mat-form-field>
+                <mat-icon matSuffix>vpn_key</mat-icon>
+                <input matInput
+                       type="password"
+                       formControlName="password"
+                       [placeholder]="'i18n.auth.form.password' | translate">
+            </mat-form-field>
+            <mat-form-field *ngIf="isSignUp">
+                <mat-icon matSuffix>verified_user</mat-icon>
+                <input matInput
+                       type="password"
+                       formControlName="passwordVerify"
+                       [placeholder]="'i18n.auth.form.passwordVerify' | translate">
+            </mat-form-field>
+        </div>
         <div>
             <button mat-raised-button color="primary">
                 {{ 'i18n.auth.' + (isSignUp ? 'signUp' : 'login') | translate }}

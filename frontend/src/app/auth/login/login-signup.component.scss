@@ -15,6 +15,7 @@
 
         form > div {
             display: flex;
+            flex-direction: column;
             > button {
                 flex-basis: 50%;
 

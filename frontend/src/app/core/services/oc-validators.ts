@@ -108,4 +108,18 @@ export class OCValidators {
             return null;
         }
     }
+
+    public static equals(field1: string, field2: string): ValidatorFn {
+        return (group: FormGroup): { [key: string]: any } => {
+            let field1Control = group.get(field1);
+            let field2Control = group.get(field2);
+
+            if (field1Control.value === field2Control.value) {
+                return null;
+            }
+            return {
+                'equals': {'expectedValue': field1Control.value, 'actualValue': field2Control.value}
+            };
+        }
+    }
 }

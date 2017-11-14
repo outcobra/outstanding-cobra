@@ -7,10 +7,12 @@ import {TranslateModule} from '@ngx-translate/core';
 import {OCUiModule} from '../oc-ui/oc-ui.module';
 import {AuthenticationCallbackComponent} from './authentication-callback/authentication-callback.component';
 import {RouterModule} from '@angular/router';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
     imports: [
         CommonModule,
+        ReactiveFormsModule,
         TranslateModule,
         OCMaterialModule,
         OCUiModule,
