@@ -5,7 +5,6 @@ import outcobra.server.exception.ValidationKey
 import outcobra.server.model.interfaces.ParentLinked
 import outcobra.server.service.UserService
 import outcobra.server.util.RepositoryLocator
-import outcobra.server.util.followToUser
 import javax.inject.Inject
 import kotlin.reflect.KClass
 
@@ -31,8 +30,8 @@ class BaseMapper {
         val parentRepo = repositoryLocator.getForEntityClass(parentType.java)
         val parent = parentRepo.findOne(parentId)
         val areFromParent = childRepo.findAll(existingChildren).all { it.parent.id == parent.id }
-        val userIsOwner = parent.followToUser().auth0Id == userService.getCurrentUser()!!.auth0Id
-        if (!(areFromParent && userIsOwner)) {
+        //val userIsOwner = parent.followToUser().auth0Id == userService.getCurrentUser()!!.auth0Id TODO match user
+        if (!(areFromParent/* && userIsOwner*/)) {
             ValidationKey.FORBIDDEN.throwException()
         }
     }

@@ -46,7 +46,7 @@ class GoogleAuthService @Inject constructor(
             return userToToken(identities.first().user)
         }
 
-        val newUser = User(null, "", idToken["name"] as String, "")
+        val newUser = User(null, idToken["name"] as String, "") // TODO use mail
         val user = userRepository.save(newUser)
 
         identityRepository.save(Identity(user, AuthRegistry.GOOGLE, idToken.subject, null))

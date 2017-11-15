@@ -11,6 +11,6 @@ import outcobra.server.model.interfaces.Mapper
  */
 @Component
 class UserMapper : Mapper<User, UserDto> {
-    override fun fromDto(from: UserDto): User = User(from.id, "", from.mail ,from.username)
+    override fun fromDto(from: UserDto): User = User(from.id, from.username, from.mail)
     override fun toDto(from: User): UserDto = UserDto(from.id ?: 0, from.username)
 }

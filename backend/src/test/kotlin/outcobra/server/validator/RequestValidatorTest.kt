@@ -11,7 +11,6 @@ import outcobra.server.Mocker
 import outcobra.server.config.ProfileRegistry.Companion.TEST
 import outcobra.server.exception.ValidationException
 import outcobra.server.model.Institution
-import outcobra.server.model.QInstitution
 import outcobra.server.model.QUser
 import outcobra.server.model.dto.InstitutionDto
 import outcobra.server.model.interfaces.Mapper
@@ -59,8 +58,8 @@ open class RequestValidatorTest {
     fun setup() {
         val user2 = userRepository.findOne(QUser.user.auth0Id.eq(Mocker.USER2_AUTH0_ID))
         institutionByUser2 = institutionRepository.save(Institution("InstitutionByUser2", user2))
-        institutionByCurrent = institutionRepository.findAll(
-                QInstitution.institution.user.auth0Id.ne(userServiceMock.getTokenUserId())).first()
+        /*institutionByCurrent = institutionRepository.findAll( TODO
+                QInstitution.institution.user.auth0Id.ne(userServiceMock.getTokenUserId())).first()*/
 
     }
 

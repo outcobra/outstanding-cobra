@@ -21,6 +21,9 @@ public class Identity extends AbstractEntity implements ParentLinked {
     private String identifier;
     private String secret;
 
+    public Identity() {
+    }
+
     public Identity(User user, String identityType, String identifier, String secret) {
         this.user = user;
         this.identityType = identityType;

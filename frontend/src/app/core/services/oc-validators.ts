@@ -117,9 +117,6 @@ export class OCValidators {
         return (group: FormGroup): ValidationErrors | null => {
             let field1Control = group.get(field1);
             let field2Control = group.get(field2);
-            console.log(field1Control.value);
-            console.log(field2Control.value);
-            console.log('-----------------------------');
 
             if (field1Control.value === field2Control.value) {
                 return null;

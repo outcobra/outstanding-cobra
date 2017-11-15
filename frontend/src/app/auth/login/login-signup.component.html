@@ -1,6 +1,6 @@
 <div class="login-wrapper">
     <img src="/assets/img/oc_logo_stroke_combined_blue.svg">
-    <form [formGroup]="loginSignUpForm">
+    <form [formGroup]="loginSignUpForm" (submit)="submit()">
         <mat-form-field *ngIf="isSignUp">
             <mat-icon matSuffix>person</mat-icon>
             <input matInput
@@ -81,7 +81,9 @@
             </mat-form-field>
         </div>
         <div class="button-wrapper">
-            <button mat-raised-button color="primary">
+            <button mat-raised-button
+                    type="submit"
+                    color="primary">
                 {{ 'i18n.auth.' + (isSignUp ? 'signup' : 'login') | translate }}
             </button>
             <button mat-button

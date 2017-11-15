@@ -36,7 +36,7 @@ class UserDataLoader
 
 
     override fun load() {
-        TEST_USER = userRepository.save(User(loadedUserToken, loadedUserName, loadedUserMail, arrayListOf()))
+        TEST_USER = userRepository.save(User(loadedUserName, loadedUserMail, arrayListOf()))
         LOGGER.debug("Saving user: ${TEST_USER?.username ?: "null"}")
         loaded = true
     }

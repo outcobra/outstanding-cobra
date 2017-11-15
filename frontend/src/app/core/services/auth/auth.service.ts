@@ -11,6 +11,7 @@ import {WebAuth} from 'auth0-js';
 import {IdentityProvider} from './identity-provider';
 import {User} from '../../model/user';
 import {Observable} from 'rxjs/Observable';
+import {UsernamePasswordDto} from '../../../auth/model/username-password.dto';
 
 declare let auth0: any;
 declare let gapi: any;
@@ -139,21 +140,27 @@ export class Auth0AuthService implements AuthService {
     public login(x = '') {
     }
 
+    public signUpWithMailAndPassword(usernamePassword: UsernamePasswordDto) {
+        if (this.isLoggedIn()) {
+            return;
+        }
+        this._http.post('/api/auth/password', usernamePassword, 'outcobra_public')
+            .subscribe(console.log);
+    }
+
     /**
      * shows the auth0 login _lock
      * but only when the user isn't loggedin already
      * sets the redirectRoute for redirecting after the user has loggedin
      *
-     * @param username
-     * @param password
+     * @param usernamePassword
      */
-    public loginWithUsername(username: string, password: string) {
-        if (!this.isLoggedIn()) {
-            this._webAuth.client.login({
-                username: username,
-                password: password
-            });
+    public loginWithMailAndPassword(usernamePassword: UsernamePasswordDto) {
+        if (this.isLoggedIn()) {
+            return
         }
+        this._http.post('/api/auth/password', usernamePassword, 'outcobra_public')
+            .subscribe(console.log);
     }
 
     public loginIdentityProvider(identityProvider: IdentityProvider) {

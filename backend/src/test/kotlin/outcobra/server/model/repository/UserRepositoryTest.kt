@@ -7,7 +7,6 @@ import org.junit.runner.RunWith
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.transaction.annotation.Transactional
-import outcobra.server.model.QUser
 import outcobra.server.model.User
 import javax.inject.Inject
 
@@ -46,8 +45,7 @@ class UserRepositoryTest {
     fun testQueryDslExecutor() {
         userRepository.save(myUser)
 
-        val predicate = QUser.user.auth0Id.eq(myUser.auth0Id)
-        val savedUser = userRepository.findOne(predicate)
+        val savedUser = userRepository.findOne(1)
 
         assertThat(savedUser).isEqualTo(myUser)
 

@@ -27,7 +27,7 @@ class UsernamePasswordAuthService(private val userRepository: UserRepository,
         var user = userRepository.findByMail(arg.mail)
 
         if (user == null) {
-            val newUser = User(null, arg.username, arg.mail, listOf())
+            val newUser = User(null, arg.username, arg.mail)
             user = userRepository.save(newUser)
         } else {
             val identities = identityRepository.findByUserAndIdentityType(user, AuthRegistry.PASSWORD)
@@ -38,7 +38,6 @@ class UsernamePasswordAuthService(private val userRepository: UserRepository,
                 }
                 return userToToken(user)
             }
-
         }
         val identity = Identity(user, AuthRegistry.PASSWORD, user!!.username, passwordEncoder.encode(arg.password))
         identityRepository.save(identity)
