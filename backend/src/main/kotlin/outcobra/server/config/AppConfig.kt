@@ -11,7 +11,7 @@ import outcobra.server.config.ProfileRegistry.Companion.BASIC_AUTH_SECURITY_MOCK
 
 
 @Configuration
-open class AppConfig {
+class AppConfig {
     companion object {
         @Bean @Profile("!$BASIC_AUTH_SECURITY_MOCK") @JvmStatic
         fun getAuthConfigs(): PropertySourcesPlaceholderConfigurer {
@@ -19,8 +19,7 @@ open class AppConfig {
             val yaml = YamlPropertiesFactoryBean()
             yaml.setResources(
                     ClassPathResource("auth0.yml"),
-                    ClassPathResource("auth.yml"),
-                    ClassPathResource("googleauth.yml")
+                    ClassPathResource("auth.yml")
             )
             configurer.setProperties(yaml.`object`)
             return configurer

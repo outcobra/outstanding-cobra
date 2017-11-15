@@ -23,7 +23,7 @@ class GoogleAuthService @Inject constructor(
         private val userService: UserService,
         private val identityRepository: IdentityRepository,
         jwtUtil: JwtUtil,
-        @Value("\${googleapi.clientId}") val clientId: String) : BaseAuthService<String>(jwtUtil) {
+        @Value("\${security.google.clientId}") val clientId: String) : BaseAuthService<String>(jwtUtil) {
 
     val idTokenVerifier: GoogleIdTokenVerifier = GoogleIdTokenVerifier.Builder(NetHttpTransport(), JacksonFactory())
             .setAudience(listOf(clientId))

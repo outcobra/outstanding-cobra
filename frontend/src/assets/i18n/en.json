@@ -27,6 +27,9 @@
         "error": {
           "title": "Error",
           "required": "This field is required.",
+          "minLength": "Required length: {{length}}",
+          "maxLength": "Max length: {{length}}",
+          "email": "Email has the wrong format",
           "isAfterOrSameDay": "The date should be after the {{date}}",
           "isBeforeOrSameDay": "The date should be before the {{date}}",
           "dateToIsBeforeDateFrom": "'Valid to' is before 'Valid from'",
@@ -407,7 +410,14 @@
         "email": "E-Mail",
         "password": "Password",
         "passwordVerify": "Verify password",
-        "username": "Username"
+        "username": "Username",
+        "checkingEmail": "Checking email availability",
+        "emailAvailable": "Email available",
+        "error": {
+          "emailTaken": "Sorry, this email is already in use",
+          "passwordPattern": "8 chars, lower- and upppercase, number and special char",
+          "passwordsNotMatching": "The passwords do not match"
+        }
       },
       "social": {
         "signup": {
