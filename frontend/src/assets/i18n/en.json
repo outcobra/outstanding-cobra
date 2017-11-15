@@ -404,7 +404,7 @@
     },
     "auth": {
       "login": "Login",
-      "signUp": "Sign-Up",
+      "signup": "Sign up",
       "logout": "Logout",
       "form": {
         "email": "E-Mail",
@@ -421,8 +421,8 @@
       },
       "social": {
         "signup": {
-          "google": "Sign in with Google",
-          "github": "Sign in with GitHub"
+          "google": "Sign up with Google",
+          "github": "Sign up with GitHub"
         },
         "login": {
           "google": "Login with Google",

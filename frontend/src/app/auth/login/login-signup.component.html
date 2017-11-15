@@ -80,9 +80,9 @@
                 </mat-error>
             </mat-form-field>
         </div>
-        <div>
+        <div class="button-wrapper">
             <button mat-raised-button color="primary">
-                {{ 'i18n.auth.' + (isSignUp ? 'signUp' : 'login') | translate }}
+                {{ 'i18n.auth.' + (isSignUp ? 'signup' : 'login') | translate }}
             </button>
             <button mat-button
                     type="button"
@@ -95,11 +95,11 @@
     <button mat-raised-button class="social-login-button" (click)="login(provider.GOOGLE)">
         <img src="/assets/img/g-logo.png">
         <span *ngIf="!isSignUp">{{ 'i18n.auth.social.login.google' | translate }}</span>
-        <span *ngIf="isSignUp">{{ 'i18n.auth.social.signUp.google' | translate }}</span>
+        <span *ngIf="isSignUp">{{ 'i18n.auth.social.signup.google' | translate }}</span>
     </button>
     <button mat-raised-button class="social-login-button" (click)="login(provider.GITHUB)">
         <img src="/assets/img/github-logo.png">
         <span *ngIf="!isSignUp">{{ 'i18n.auth.social.login.github' | translate }}</span>
-        <span *ngIf="isSignUp">{{ 'i18n.auth.social.signUp.github' | translate }}</span>
+        <span *ngIf="isSignUp">{{ 'i18n.auth.social.signup.github' | translate }}</span>
     </button>
 </div>

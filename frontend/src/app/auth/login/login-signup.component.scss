@@ -23,6 +23,9 @@
         form > div {
             display: flex;
             flex-direction: column;
+            &.button-wrapper {
+                flex-direction: row;
+            }
             > button {
                 flex-basis: 50%;
 

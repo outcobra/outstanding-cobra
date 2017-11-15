@@ -398,7 +398,7 @@
     },
     "auth": {
       "login": "Einloggen",
-      "signUp": "Registrieren",
+      "signup": "Registrieren",
       "logout": "Ausloggen",
       "form": {
         "email": "E-Mail",
@@ -414,7 +414,7 @@
         }
       },
       "social": {
-        "signUp": {
+        "signup": {
           "google": "Mit Google registrieren",
           "github": "Mit GitHub registrieren"
         },
