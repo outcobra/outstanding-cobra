@@ -4,17 +4,31 @@ import outcobra.server.model.interfaces.ParentLinked
 import javax.persistence.Entity
 import javax.persistence.Inheritance
 import javax.persistence.InheritanceType
+import javax.persistence.ManyToOne
+import javax.validation.constraints.NotNull
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-abstract class Mark : ParentLinked, AbstractEntity() {
-    abstract var weight: Double
+abstract class Mark : ParentLinked, AbstractEntity {
 
-    abstract var description: String
+    @NotNull
+    internal var weight: Double = 1.0
 
-    abstract var markGroup: MarkGroup?
+    @NotNull
+    internal var description: String = ""
 
-    abstract val value: Double
+    @ManyToOne
+    internal var markGroup: MarkGroup? = null
+
+    abstract fun getValue(): Double
+
+    constructor(weight: Double, description: String, markGroup: MarkGroup?) : super() {
+        this.weight = weight
+        this.description = description
+        this.markGroup = markGroup
+    }
+
+    constructor() : super()
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

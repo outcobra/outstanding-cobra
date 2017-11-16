@@ -34,7 +34,7 @@ class SemesterMarkDtoMapper @Inject constructor(val markGroupMapper: Mapper<Mark
         val institution = schoolClass.institution as Institution
         return SemesterMarkDto(from.id, from.name, from.validFrom, from.validTo,
                 institutionMapper.toDto(institution), schoolClassMapper.toDto(schoolClass),
-                semesterMarkGroup.value,
+                semesterMarkGroup.getValue(),
                 from.subjects.map { subjectToMarksDto(it) })
     }
 

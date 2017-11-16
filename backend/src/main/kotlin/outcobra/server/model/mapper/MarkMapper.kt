@@ -27,6 +27,6 @@ class MarkMapper @Inject constructor(val markGroupRepository: MarkGroupRepositor
     }
 
     override fun toDto(from: MarkValue): MarkValueDto {
-        return MarkValueDto(from.id, from.value, from.weight, from.description, from.exam?.id ?: 0L, from.markGroup?.id ?: 0)
+        return MarkValueDto(from.id, from.getValue(), from.weight, from.description, from.exam?.id ?: 0L, from.markGroup?.id ?: 0)
     }
 }
