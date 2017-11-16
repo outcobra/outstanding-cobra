@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull
 
 @Entity
 class ExamTask(@NotNull var task: String = "",
-               @NotNull @ManyToOne var exam: Exam? = null,
+               @NotNull @ManyToOne val exam: Exam? = null,
                @NotNull var isFinished: Boolean = false)
     : ParentLinked, AbstractEntity() {
     override val parent: ParentLinked?
