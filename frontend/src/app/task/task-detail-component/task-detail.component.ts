@@ -35,7 +35,7 @@ export class TaskDetailComponent implements AfterViewInit {
             .debounceTime(500)
             .map((sliderChange: MatSliderChange) => sliderChange.value)
             .distinctUntilChanged()
-            .flatMap((value: number) => this.updateProgress.call(this, value))
+            .switchMap((value: number) => this.updateProgress.call(this, value))
             .subscribe();
     }
 
@@ -48,7 +48,7 @@ export class TaskDetailComponent implements AfterViewInit {
         this._taskCreateUpdateDialog.componentInstance.init(ViewMode.EDIT, this.task);
         this._taskCreateUpdateDialog.afterClosed()
             .filter(isTruthy)
-            .flatMap((result: TaskDto) => this._taskService.update(result))
+            .switchMap((result: TaskDto) => this._taskService.update(result))
             .subscribe((task: TaskDto) => {
                 // TODO error handling?
                 if (task) {
@@ -68,7 +68,7 @@ export class TaskDetailComponent implements AfterViewInit {
         this._confirmDialogService.open('i18n.modules.task.dialogs.confirmDeleteDialog.title',
             'i18n.modules.task.dialogs.confirmDeleteDialog.message')
             .filter(isTrue)
-            .flatMap(() => this._taskService.deleteById(this.task.id))
+            .switchMap(() => this._taskService.deleteById(this.task.id))
             .subscribe(result => this._router.navigate(['/task']));
     }
 }

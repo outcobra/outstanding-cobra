@@ -32,6 +32,7 @@ import {TaskDetailResolver} from '../task/service/task-detail-resolver.service';
 import {TaskListResolver} from '../task/service/task-list-resolver.service';
 import {TaskService} from '../task/service/task.service';
 import {UserService} from './services/user.service';
+import {JwtHelperService} from './services/auth/jwt-helper.service';
 
 @NgModule({
     providers: [
@@ -47,6 +48,7 @@ import {UserService} from './services/user.service';
         FilterService,
         AuthGuard,
         UserService,
+        JwtHelperService,
         // Exam Services
         ExamService,
         ExamTaskService,

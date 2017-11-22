@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController
 import outcobra.server.web.auth.config.AuthRegistry
 import outcobra.server.web.auth.internal.GoogleAuthService
 import outcobra.server.web.auth.internal.UsernamePasswordAuthService
+import outcobra.server.web.auth.model.AuthResponseDto
 import outcobra.server.web.auth.model.UsernamePasswordDto
 import javax.inject.Inject
 
@@ -20,12 +21,12 @@ class AuthController @Inject constructor(
         @Qualifier(AuthRegistry.PASSWORD) val usernamePasswordAuthService: UsernamePasswordAuthService) {
 
     @PostMapping("/google")
-    fun handleGoogleAuth(@RequestBody idToken: TextNode): String {
+    fun handleGoogleAuth(@RequestBody idToken: TextNode): AuthResponseDto {
         return googleAuth.loginOrSignUp(idToken.asText())
     }
 
     @PostMapping("/password")
-    fun handleUsernamePasswordAuth(@RequestBody usernamePasswordDto: UsernamePasswordDto): String {
+    fun handleUsernamePasswordAuth(@RequestBody usernamePasswordDto: UsernamePasswordDto): AuthResponseDto {
         return usernamePasswordAuthService.loginOrSignUp(usernamePasswordDto)
     }
 }

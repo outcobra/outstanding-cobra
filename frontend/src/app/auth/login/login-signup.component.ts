@@ -64,16 +64,16 @@ export class LoginSignUpComponent implements OnInit {
     public submit() {
         if (this._loginSignUpForm.valid && this._loginSignUpForm.dirty) {
             let value = this._loginSignUpForm.value;
-            this._authService.signUpWithMailAndPassword({
+            this._authService.loginWithMailAndPassword({
                 username: value.username,
                 mail: value.mail,
                 password: value.password.password
-            })
+            }).subscribe();
         }
     }
 
     public login(identityProvider: IdentityProvider) {
-        this._authService.loginIdentityProvider(identityProvider);
+        this._authService.loginIdentityProvider(identityProvider).subscribe();
     }
 
     get passwordVerifyErrorStateMatcher(): ErrorStateMatcher {

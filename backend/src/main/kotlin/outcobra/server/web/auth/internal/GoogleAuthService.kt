@@ -13,6 +13,7 @@ import outcobra.server.model.repository.IdentityRepository
 import outcobra.server.model.repository.UserRepository
 import outcobra.server.service.UserService
 import outcobra.server.web.auth.config.AuthRegistry
+import outcobra.server.web.auth.model.AuthResponseDto
 import outcobra.server.web.auth.util.JwtUtil
 import javax.inject.Inject
 
@@ -29,7 +30,7 @@ class GoogleAuthService @Inject constructor(
             .setAudience(listOf(clientId))
             .build()
 
-    override fun loginOrSignUp(arg: String): String {
+    override fun loginOrSignUp(arg: String): AuthResponseDto {
         if (arg.isEmpty()) {
             ValidationKey.FORBIDDEN.throwException()
         }
@@ -43,7 +44,7 @@ class GoogleAuthService @Inject constructor(
         }
 
         if (identities.size == 1) {
-            return userToToken(identities.first().user)
+            return userToResponse(identities.first().user)
         }
 
         val newUser = User(null, idToken["name"] as String, "") // TODO use mail
@@ -51,6 +52,6 @@ class GoogleAuthService @Inject constructor(
 
         identityRepository.save(Identity(user, AuthRegistry.GOOGLE, idToken.subject, null))
 
-        return userToToken(user)
+        return userToResponse(user)
     }
 }

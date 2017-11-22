@@ -1,17 +1,17 @@
 import {Injectable} from '@angular/core';
-import {ConfigService} from '../../config/config.service';
-import {tokenNotExpired} from 'angular2-jwt';
 import {Router} from '@angular/router';
 import {HttpInterceptor} from '../../http/http-interceptor';
 import {TranslateService} from '@ngx-translate/core';
 import {NotificationWrapperService} from '../../notifications/notification-wrapper.service';
 import {AuthService} from '../../interfaces/auth.service';
 import * as Raven from 'raven-js';
-import {WebAuth} from 'auth0-js';
 import {IdentityProvider} from './identity-provider';
 import {User} from '../../model/user';
 import {Observable} from 'rxjs/Observable';
 import {UsernamePasswordDto} from '../../../auth/model/username-password.dto';
+import {environment} from '../../../../environments/environment';
+import {JwtHelperService} from './jwt-helper.service';
+import {AuthResponseDto} from './auth-response.dto';
 
 declare let auth0: any;
 declare let gapi: any;
@@ -23,23 +23,18 @@ export class Auth0AuthService implements AuthService {
     private _webAuth;
     private _googleAuth;
 
-    constructor(private _config: ConfigService,
-                private _router: Router,
+    constructor(private _router: Router,
                 private _http: HttpInterceptor,
+                private _jwtHelper: JwtHelperService,
                 private _notificationService: NotificationWrapperService,
                 private _translateService: TranslateService) {
 
-        this._auth0Config = this._config.get('auth0');
-
-        this._webAuth = new WebAuth({
-            domain: this._auth0Config.domain,
-            clientID: this._auth0Config.clientID
-        });
-
         gapi.load('auth2', () => this._googleAuth = gapi.auth2.init({
-                client_id: this._config.get('auth.google.clientId')
+                client_id: environment.auth.google.clientId
             })
         );
+
+        this._jwtHelper.isTokenExpired('');
 
         // auth0 lock configuration
         /*this._lock = new Auth0Lock(this._auth0Config.clientID, this._auth0Config.domain, {
@@ -104,14 +99,14 @@ export class Auth0AuthService implements AuthService {
                 Raven.captureMessage('Login failed');
                 return;
             }
-            localStorage.setItem(this._config.get('locStorage.tokenLocation'), authResult.idToken);
+            localStorage.setItem(environment.locStorage.tokenLocation, authResult.idToken);
             console.log(authResult);
 
             this._webAuth.client.userInfo(authResult.accessToken, (err, user) => {
                 if (err) {
                     return;
                 }
-                localStorage.setItem(this._config.get('locStorage.profileLocation'), JSON.stringify(user));
+                localStorage.setItem(environment.locStorage.profileLocation, JSON.stringify(user));
                 console.log(user);
             });
 
@@ -140,43 +135,25 @@ export class Auth0AuthService implements AuthService {
     public login(x = '') {
     }
 
-    public signUpWithMailAndPassword(usernamePassword: UsernamePasswordDto) {
-        if (this.isLoggedIn()) {
-            return;
-        }
-        this._http.post('/api/auth/password', usernamePassword, 'outcobra_public')
-            .subscribe(console.log);
-    }
-
     /**
-     * shows the auth0 login _lock
-     * but only when the user isn't loggedin already
-     * sets the redirectRoute for redirecting after the user has loggedin
      *
      * @param usernamePassword
      */
-    public loginWithMailAndPassword(usernamePassword: UsernamePasswordDto) {
+    public loginWithMailAndPassword(usernamePassword: UsernamePasswordDto): Observable<boolean> {
         if (this.isLoggedIn()) {
             return
         }
-        this._http.post('/api/auth/password', usernamePassword, 'outcobra_public')
-            .subscribe(console.log);
+        this._http.post<AuthResponseDto>('/api/auth/password', usernamePassword, 'outcobra_public')
+            .map(token => this._afterLogin(token));
     }
 
-    public loginIdentityProvider(identityProvider: IdentityProvider) {
+    public loginIdentityProvider(identityProvider: IdentityProvider): Observable<boolean> {
         if (identityProvider == IdentityProvider.GOOGLE) {
-            this._googleAuth.signIn().then(user => {
-                console.log(user.getAuthResponse().id_token);
-                this._http.post('/api/auth/google/', user.getAuthResponse().id_token, 'outcobra_public').subscribe();
-
-            });
-        } else {
-            this._webAuth.authorize({
-                responseType: 'token id_token',
-                redirectUri: this._auth0Config.callbackURL,
-                connection: identityProvider
-            });
+            return Observable.fromPromise(this._googleAuth.signIn())
+                .switchMap((user: any) => this._http.post<AuthResponseDto>('/api/auth/google/', user.getAuthResponse().id_token, 'outcobra_public')
+                    .map(token => this._afterLogin(token)));
         }
+        return Observable.throw(new Error('Identity provider not supported'));
     }
 
     /**
@@ -186,8 +163,8 @@ export class Auth0AuthService implements AuthService {
      */
     public logout() {
         Raven.setUserContext();
-        localStorage.removeItem(this._config.get('locStorage.tokenLocation'));
-        localStorage.removeItem(this._config.get('locStorage.profileLocation'));
+        localStorage.removeItem(environment.locStorage.tokenLocation);
+        localStorage.removeItem(environment.locStorage.profileLocation);
         this._router.navigate(['']);
     }
 
@@ -197,8 +174,15 @@ export class Auth0AuthService implements AuthService {
      * @returns {boolean}
      */
     public isLoggedIn(): boolean {
-        return tokenNotExpired(this._config.get('locStorage.tokenLocation'));
+        return this._jwtHelper.hasToken() && !this._jwtHelper.isTokenExpired();
     }
 
+    private _afterLogin(response: AuthResponseDto): boolean {
+        if (!this._jwtHelper.isTokenExpired(response.token)) {
+            localStorage.setItem(environment.locStorage.tokenLocation, response.token);
+            return true;
+        }
+        return false;
+    }
 }
 

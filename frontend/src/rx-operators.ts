@@ -12,3 +12,4 @@ import 'rxjs/add/observable/merge';
 import 'rxjs/add/observable/empty';
 import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/observable/timer';
+import 'rxjs/add/observable/fromPromise';

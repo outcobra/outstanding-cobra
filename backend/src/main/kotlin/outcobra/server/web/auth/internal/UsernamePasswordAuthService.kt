@@ -9,6 +9,7 @@ import outcobra.server.model.User
 import outcobra.server.model.repository.IdentityRepository
 import outcobra.server.model.repository.UserRepository
 import outcobra.server.web.auth.config.AuthRegistry
+import outcobra.server.web.auth.model.AuthResponseDto
 import outcobra.server.web.auth.model.UsernamePasswordDto
 import outcobra.server.web.auth.util.JwtUtil
 
@@ -18,7 +19,7 @@ class UsernamePasswordAuthService(private val userRepository: UserRepository,
                                   private val identityRepository: IdentityRepository,
                                   private val passwordEncoder: PasswordEncoder,
                                   jwtUtil: JwtUtil) : BaseAuthService<UsernamePasswordDto>(jwtUtil) {
-    override fun loginOrSignUp(arg: UsernamePasswordDto): String {
+    override fun loginOrSignUp(arg: UsernamePasswordDto): AuthResponseDto {
         if (arg.mail.isEmpty() or arg.password.isEmpty()) {
             ValidationKey.INVALID_DTO.throwException()
         }
@@ -36,11 +37,11 @@ class UsernamePasswordAuthService(private val userRepository: UserRepository,
                 if (!passwordEncoder.matches(arg.password, identities.first().secret)) {
                     ValidationKey.NO_PASSWORD_MATCH.throwException()
                 }
-                return userToToken(user)
+                return userToResponse(user)
             }
         }
         val identity = Identity(user, AuthRegistry.PASSWORD, user!!.username, passwordEncoder.encode(arg.password))
         identityRepository.save(identity)
-        return userToToken(user)
+        return userToResponse(user)
     }
 }

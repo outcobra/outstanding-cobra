@@ -110,7 +110,7 @@ export class TaskComponent implements OnInit, AfterViewInit {
         this._taskCreateUpdateDialog = this._dialogService.open(TaskCreateUpdateDialog, this._responsiveHelperService.getMobileOrGivenDialogConfig(MEDIUM_DIALOG));
         this._taskCreateUpdateDialog.componentInstance.init(ViewMode.NEW, null);
         this._taskCreateUpdateDialog.afterClosed()
-            .flatMap((value) => {
+            .switchMap((value) => {
                 if (!value) return Observable.empty();
                 return this._taskService.create(value)
             })
