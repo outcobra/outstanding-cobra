@@ -12,7 +12,7 @@ class WebConfig(val environment: Environment) : WebMvcConfigurerAdapter() {
     override fun addCorsMappings(registry: CorsRegistry?) {
         if (environment.acceptsProfiles(ProfileRegistry.DEVELOPMENT)) {
             registry!!.addMapping("/**/*")
-                    .allowedOrigins("*")
+                    .allowedOrigins("http://localhost:4200")
         }
     }
 }

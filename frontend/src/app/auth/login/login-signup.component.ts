@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Auth0AuthService} from '../../core/services/auth/auth.service';
 import {IdentityProvider} from '../../core/services/auth/identity-provider';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {OCValidators} from '../../core/services/oc-validators';
 import {UserService} from '../../core/services/user.service';
@@ -23,6 +23,7 @@ export class LoginSignUpComponent implements OnInit {
     private _passwordVerifyErrorStateMatcher: ErrorStateMatcher = new PasswordVerifyErrorStateMatcher();
 
     constructor(private _authService: Auth0AuthService,
+                private _router: Router,
                 private _route: ActivatedRoute,
                 private _formBuilder: FormBuilder,
                 private _userService: UserService) {
@@ -68,12 +69,18 @@ export class LoginSignUpComponent implements OnInit {
                 username: value.username,
                 mail: value.mail,
                 password: value.password.password
-            }).subscribe();
+            }).subscribe(this._handleLogin.bind(this));
         }
     }
 
     public login(identityProvider: IdentityProvider) {
         this._authService.loginIdentityProvider(identityProvider).subscribe();
+    }
+
+    private _handleLogin(result) {
+        if (result) {
+            this._router.navigateByUrl('/manage');
+        }
     }
 
     get passwordVerifyErrorStateMatcher(): ErrorStateMatcher {

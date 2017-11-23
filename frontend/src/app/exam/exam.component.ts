@@ -79,7 +79,7 @@ export class ExamComponent implements OnInit, AfterViewInit {
             .subscribe(exam => {
                 this._markService.getMarkGroupBySubjectId(exam.subject.id)
                     .subscribe(subjectGroup =>
-                        this._router.navigate([`/app/mark/semester/${exam.subject.semesterId}/subject/${exam.subject.id}/group/${subjectGroup.id}/add`],
+                        this._router.navigate([`/mark/semester/${exam.subject.semesterId}/subject/${exam.subject.id}/group/${subjectGroup.id}/add`],
                             {queryParams: {examId: exam.id, examName: exam.name}}) // TODO replace this with stepper components for choosing markgroups etc. (waiting for angular/material2)
                     );
             });

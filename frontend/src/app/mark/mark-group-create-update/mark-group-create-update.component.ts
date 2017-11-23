@@ -134,7 +134,7 @@ export class MarkGroupCreateUpdateComponent extends ParentLinkedCreateUpdateComp
     }
 
     private _goToSemesterView(): Promise<boolean> {
-        return this._router.navigate([`/app/mark/semester/${this._semesterId}`], this._navigationExtras);
+        return this._router.navigate([`/mark/semester/${this._semesterId}`], this._navigationExtras);
     }
 
     get selectedMarks(): Array<MarkDto> {

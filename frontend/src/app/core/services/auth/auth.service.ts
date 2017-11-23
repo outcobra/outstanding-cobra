@@ -141,17 +141,17 @@ export class Auth0AuthService implements AuthService {
      */
     public loginWithMailAndPassword(usernamePassword: UsernamePasswordDto): Observable<boolean> {
         if (this.isLoggedIn()) {
-            return
+            return Observable.of(true);
         }
-        this._http.post<AuthResponseDto>('/api/auth/password', usernamePassword, 'outcobra_public')
+        return this._http.post<AuthResponseDto>('/api/auth/password', usernamePassword, 'outcobra_public')
             .map(token => this._afterLogin(token));
     }
 
     public loginIdentityProvider(identityProvider: IdentityProvider): Observable<boolean> {
         if (identityProvider == IdentityProvider.GOOGLE) {
             return Observable.fromPromise(this._googleAuth.signIn())
-                .switchMap((user: any) => this._http.post<AuthResponseDto>('/api/auth/google/', user.getAuthResponse().id_token, 'outcobra_public')
-                    .map(token => this._afterLogin(token)));
+                .switchMap((user: any) => this._http.post<AuthResponseDto>('/api/auth/google/', user.getAuthResponse().id_token, 'outcobra_public'))
+                .map(token => this._afterLogin(token));
         }
         return Observable.throw(new Error('Identity provider not supported'));
     }

@@ -1,6 +1,6 @@
 <div class="login-wrapper">
     <img src="/assets/img/oc_logo_stroke_combined_blue.svg">
-    <form [formGroup]="loginSignUpForm" (submit)="submit()">
+    <form [formGroup]="loginSignUpForm" (ngSubmit)="submit()">
         <mat-form-field *ngIf="isSignUp">
             <mat-icon matSuffix>person</mat-icon>
             <input matInput

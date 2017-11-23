@@ -89,7 +89,7 @@ export class MarkCreateUpdateComponent extends ParentLinkedCreateUpdateComponent
     }
 
     private _goToSemesterView() {
-        return this._router.navigate([`/app/mark/semester/${this._semesterId}`], this._navigationExtras);
+        return this._router.navigate([`/mark/semester/${this._semesterId}`], this._navigationExtras);
     }
 
     private _formToMark(formGroup: FormGroup): MarkDto {

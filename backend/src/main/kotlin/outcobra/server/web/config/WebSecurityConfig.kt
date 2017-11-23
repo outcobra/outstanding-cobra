@@ -4,6 +4,7 @@ import org.springframework.boot.autoconfigure.security.SecurityProperties
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.annotation.Order
 import org.springframework.core.env.Environment
+import org.springframework.http.HttpMethod
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.builders.WebSecurity
@@ -14,6 +15,7 @@ import outcobra.server.config.ProfileRegistry
 import outcobra.server.web.auth.JwtAuthenticationFilter
 import outcobra.server.web.auth.JwtAuthenticationProvider
 import javax.inject.Inject
+
 
 /**
  * WebSecurityConfig which is active all the time but can be overridden
@@ -31,12 +33,14 @@ class WebSecurityConfig
     override fun configure(web: WebSecurity?) {
         if (environment.acceptsProfiles(ProfileRegistry.DEVELOPMENT)) {
             web!!.ignoring().antMatchers("/h2-console/**", "/api/auth/**", "/api/user/emailAvailable/*")
+                    .antMatchers(HttpMethod.OPTIONS)
         }
     }
 
     override fun configure(http: HttpSecurity?) {
         http!!.headers().frameOptions().disable()
         http.csrf().disable()
+        http.cors().disable()
 
         http.authorizeRequests().antMatchers("/api/auth/**").permitAll()
 
@@ -68,4 +72,6 @@ class WebSecurityConfig
     override fun configure(auth: AuthenticationManagerBuilder?) {
         auth!!.authenticationProvider(jwtAuthenticationProvider)
     }
+
+
 }
