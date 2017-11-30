@@ -28,7 +28,7 @@ import {MockColorService} from './mock-color.service';
 import {MockTaskService} from './task/mock-task.service';
 import {TaskService} from '../../task/service/task.service';
 import {InfoService} from '../services/info.service';
-import {Auth0AuthService} from '../services/auth/auth.service';
+import {DefaultAuthService} from '../services/auth/auth.service';
 import {ResponsiveHelperService} from '../services/ui/responsive-helper.service';
 import {ConfirmDialogService} from '../services/confirm-dialog.service';
 import {ColorService} from '../services/color.service';
@@ -93,7 +93,7 @@ import {MockExamTaskService} from './exam/mock-exam-task.service';
             useClass: MockNotificationWrapperService
         },
         {
-            provide: Auth0AuthService,
+            provide: DefaultAuthService,
             useClass: MockAuthService
         },
         {

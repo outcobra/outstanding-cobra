@@ -1,4 +1,4 @@
-export enum ViewMode { // TODO better name
+export enum ViewMode {
     EDIT,
     NEW
 }

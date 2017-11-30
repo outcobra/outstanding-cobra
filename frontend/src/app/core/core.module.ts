@@ -4,7 +4,7 @@ import {ResponsiveHelperService} from './services/ui/responsive-helper.service';
 import {InfoService} from './services/info.service';
 import {ColorService} from './services/color.service';
 import {ConfirmDialogService} from './services/confirm-dialog.service';
-import {Auth0AuthService} from './services/auth/auth.service';
+import {DefaultAuthService} from './services/auth/auth.service';
 import {DateUtil} from './services/date-util.service';
 import {NotificationWrapperService} from './notifications/notification-wrapper.service';
 import {DurationService} from './services/duration.service';
@@ -33,12 +33,13 @@ import {TaskListResolver} from '../task/service/task-list-resolver.service';
 import {TaskService} from '../task/service/task.service';
 import {UserService} from './services/user.service';
 import {JwtHelperService} from './services/auth/jwt-helper.service';
+import {CurrentSubjectsResolverService} from './services/resolver/current-subjects-resolver.service';
 
 @NgModule({
     providers: [
         HttpInterceptor,
         DateUtil,
-        Auth0AuthService,
+        DefaultAuthService,
         ConfirmDialogService,
         ColorService,
         InfoService,
@@ -74,7 +75,9 @@ import {JwtHelperService} from './services/auth/jwt-helper.service';
         TaskService,
         TaskDetailResolver,
         TaskListResolver,
-        SubjectFilterResolver
+        SubjectFilterResolver,
+
+        CurrentSubjectsResolverService
     ]
 })
 export class CoreModule {

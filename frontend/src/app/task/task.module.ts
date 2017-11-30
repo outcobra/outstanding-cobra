@@ -4,7 +4,7 @@ import {TaskComponent} from './task.component';
 import {TaskRoutingModule} from './task-routing.module';
 import {TaskDetailComponent} from './task-detail-component/task-detail.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {TaskCreateUpdateDialog} from './task-create-update-dialog/task-create-update-dialog.component';
+import {TaskCreateUpdateComponent} from './task-create-update/task-create-update.component';
 import {SharedModule} from '../shared/shared.module';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {OCMaterialModule} from '../oc-material.module';
@@ -25,11 +25,11 @@ import {TaskListItemHeaderComponent} from './task-list-item-header/task-list-ite
     declarations: [
         TaskComponent,
         TaskDetailComponent,
-        TaskCreateUpdateDialog,
+        TaskCreateUpdateComponent,
         TaskListItemHeaderComponent
     ],
     entryComponents: [
-        TaskCreateUpdateDialog
+        TaskCreateUpdateComponent
     ]
 })
 export class TaskModule {

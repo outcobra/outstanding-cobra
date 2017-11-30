@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {MatDialogRef} from '@angular/material';
-import {SubjectService} from '../../manage/service/subject.service';
 import {SubjectDto} from '../../manage/model/manage.dto';
 import {OCValidators} from '../../core/services/oc-validators';
 import {TaskDto} from '../model/task.dto';
@@ -11,27 +9,30 @@ import {DateUtil} from '../../core/services/date-util.service';
 import {FormUtil} from '../../core/util/form-util';
 import * as moment from 'moment';
 import {Moment} from 'moment';
+import {ActivatedRoute} from '@angular/router';
+import {ViewMode} from '../../core/common/view-mode';
 
 @Component({
     selector: './task-create-update-dialog',
-    templateUrl: './task-create-update-dialog.component.html',
-    styleUrls: ['./task-create-update-dialog.component.scss']
+    templateUrl: './task-create-update.component.html',
+    styleUrls: ['./task-create-update.component.scss']
 })
-export class TaskCreateUpdateDialog extends CreateUpdateComponent<TaskDto> implements OnInit {
+export class TaskCreateUpdateComponent extends CreateUpdateComponent<TaskDto> implements OnInit {
     private _taskCreateUpdateForm: FormGroup;
     private _subjects: SubjectDto[];
     private _today: Moment = moment();
 
-    constructor(private _subjectService: SubjectService,
-                private _dialogRef: MatDialogRef<TaskCreateUpdateDialog>,
-                private _formBuilder: FormBuilder,
+    constructor(private _formBuilder: FormBuilder,
+                private _route: ActivatedRoute,
                 private responsiveHelperService: ResponsiveHelperService) {
         super();
     }
 
     ngOnInit() {
-        this._subjectService.getCurrentSubjects()
-            .subscribe((subjects: SubjectDto[]) => this._subjects = subjects);
+        this._route.data.subscribe((data: {viewMode: ViewMode, subjects: Array<SubjectDto>,task?: TaskDto}) => {
+           this.init(data.viewMode as ViewMode, data.viewMode === ViewMode.EDIT ? data.task : null);
+           this._subjects = data.subjects;
+        });
 
         this._taskCreateUpdateForm = this._formBuilder.group({
             name: [this.getParamOrDefault('name'), Validators.required],
@@ -52,7 +53,6 @@ export class TaskCreateUpdateDialog extends CreateUpdateComponent<TaskDto> imple
 
     public submit() {
         if (this._taskCreateUpdateForm.valid && this._taskCreateUpdateForm.dirty) {
-            this._dialogRef.close(this._formToTask(this._taskCreateUpdateForm));
         }
         else {
             FormUtil.revalidateForm(this._taskCreateUpdateForm);

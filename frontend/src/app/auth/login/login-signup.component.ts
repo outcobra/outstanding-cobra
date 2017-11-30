@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Auth0AuthService} from '../../core/services/auth/auth.service';
+import {DefaultAuthService} from '../../core/services/auth/auth.service';
 import {IdentityProvider} from '../../core/services/auth/identity-provider';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
@@ -22,7 +22,7 @@ export class LoginSignUpComponent implements OnInit {
 
     private _passwordVerifyErrorStateMatcher: ErrorStateMatcher = new PasswordVerifyErrorStateMatcher();
 
-    constructor(private _authService: Auth0AuthService,
+    constructor(private _authService: DefaultAuthService,
                 private _router: Router,
                 private _route: ActivatedRoute,
                 private _formBuilder: FormBuilder,

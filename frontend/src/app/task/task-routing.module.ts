@@ -2,10 +2,12 @@ import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {AuthGuard} from '../core/services/auth/auth-guard.service';
 import {TaskComponent} from './task.component';
-import {TaskDetailComponent} from './task-detail-component/task-detail.component';
 import {TaskDetailResolver} from './service/task-detail-resolver.service';
 import {SubjectFilterResolver} from '../core/services/filter/subject.filter.resolver.service';
 import {TaskListResolver} from './service/task-list-resolver.service';
+import {TaskCreateUpdateComponent} from './task-create-update/task-create-update.component';
+import {ViewMode} from '../core/common/view-mode';
+import {CurrentSubjectsResolverService} from '../core/services/resolver/current-subjects-resolver.service';
 
 @NgModule({
     imports: [
@@ -17,16 +19,28 @@ import {TaskListResolver} from './service/task-list-resolver.service';
                 resolve: {
                     taskFilter: SubjectFilterResolver,
                     tasks: TaskListResolver
+                }
+            },
+            {
+                path: 'new',
+                component: TaskCreateUpdateComponent,
+                data: {
+                    viewMode: ViewMode.NEW
                 },
-                children: [
-                    {
-                        path: ':id',
-                        component: TaskDetailComponent,
-                        resolve: {
-                            task: TaskDetailResolver
-                        }
-                    }
-                ]
+                resolve: {
+                    subjects: CurrentSubjectsResolverService
+                }
+            },
+            {
+                path: 'update/:id',
+                component: TaskCreateUpdateComponent,
+                data: {
+                    viewMode: ViewMode.EDIT
+                },
+                resolve: {
+                    task: TaskDetailResolver,
+                    subjects: CurrentSubjectsResolverService
+                }
             }
         ])
     ],
@@ -34,5 +48,6 @@ import {TaskListResolver} from './service/task-list-resolver.service';
         RouterModule
     ]
 })
+
 export class TaskRoutingModule {
 }

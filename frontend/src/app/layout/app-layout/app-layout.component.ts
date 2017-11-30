@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, HostBinding, OnInit, ViewChild} from '@angular/core';
-import {Auth0AuthService} from '../../core/services/auth/auth.service';
+import {DefaultAuthService} from '../../core/services/auth/auth.service';
 import {NavigationEnd, Router} from '@angular/router';
 import {isTruthy} from '../../core/util/helper';
 import {OCTheme} from '../../oc-ui/theme/oc-theme';
@@ -27,7 +27,7 @@ export class AppLayoutComponent implements OnInit, AfterViewInit {
     private _isEnglish: boolean = this._translateService.currentLang == 'en';
 
     constructor(private _translateService: TranslateService,
-                private _auth: Auth0AuthService,
+                private _auth: DefaultAuthService,
                 private _responsiveHelper: ResponsiveHelperService,
                 private _router: Router,
                 private _overlayContainer: OverlayContainer) {
@@ -86,7 +86,7 @@ export class AppLayoutComponent implements OnInit, AfterViewInit {
         this._auth.logout();
     }
 
-    public get auth(): Auth0AuthService {
+    public get auth(): DefaultAuthService {
         return this._auth;
     }
 

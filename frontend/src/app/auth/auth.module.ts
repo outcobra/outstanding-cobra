@@ -5,7 +5,6 @@ import {OCMaterialModule} from '../oc-material.module';
 import {LoginSignUpComponent} from './login/login-signup.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {OCUiModule} from '../oc-ui/oc-ui.module';
-import {AuthenticationCallbackComponent} from './authentication-callback/authentication-callback.component';
 import {RouterModule} from '@angular/router';
 import {ReactiveFormsModule} from '@angular/forms';
 
@@ -20,8 +19,7 @@ import {ReactiveFormsModule} from '@angular/forms';
     ],
     declarations: [
         LoginSignUpComponent,
-        AuthComponent,
-        AuthenticationCallbackComponent
+        AuthComponent
     ]
 })
 export class AuthModule {

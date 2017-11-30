@@ -4,12 +4,9 @@ import {TaskDto} from './model/task.dto';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {SubjectFilterDto} from './model/subject.filter.dto';
-import {MatDialog, MatDialogRef} from '@angular/material';
-import {TaskCreateUpdateDialog} from './task-create-update-dialog/task-create-update-dialog.component';
+import {MatDialog} from '@angular/material';
 import {Util} from '../core/util/util';
-import {ViewMode} from '../core/common/view-mode';
 import {Observable} from 'rxjs/Observable';
-import {MEDIUM_DIALOG} from '../core/util/const';
 import {and} from '../core/util/helper';
 import {ResponsiveHelperService} from '../core/services/ui/responsive-helper.service';
 import {NotificationWrapperService} from '../core/notifications/notification-wrapper.service';
@@ -32,8 +29,6 @@ export class TaskComponent implements OnInit, AfterViewInit {
 
     private _filtered: boolean = true;
     private _tasks: TaskDto[];
-
-    private _taskCreateUpdateDialog: MatDialogRef<TaskCreateUpdateDialog>;
 
     public search$: Subject<string> = new Subject();
 
@@ -107,7 +102,8 @@ export class TaskComponent implements OnInit, AfterViewInit {
     //endregion
 
     public addTask() {
-        this._taskCreateUpdateDialog = this._dialogService.open(TaskCreateUpdateDialog, this._responsiveHelperService.getMobileOrGivenDialogConfig(MEDIUM_DIALOG));
+        this._router.navigateByUrl('/task/new');
+        /*this._taskCreateUpdateDialog = this._dialogService.open(TaskCreateUpdateComponent, this._responsiveHelperService.getMobileOrGivenDialogConfig(MEDIUM_DIALOG));
         this._taskCreateUpdateDialog.componentInstance.init(ViewMode.NEW, null);
         this._taskCreateUpdateDialog.afterClosed()
             .switchMap((value) => {
@@ -118,7 +114,7 @@ export class TaskComponent implements OnInit, AfterViewInit {
                 this._notificationService.success('i18n.modules.task.notification.add.title', 'i18n.modules.task.notification.add.message');
                 this._tasks.push(task);
                 this._checkFilterThenAddToFilteredList(task);
-            });
+            });*/
     }
 
     //region filtering

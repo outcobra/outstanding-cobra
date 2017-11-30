@@ -16,7 +16,7 @@ export class CreateUpdateComponent<T> {
     }
 
     get mode(): ViewMode {
-        return this._mode;
+        return this._mode as ViewMode;
     }
 
     get param(): T {

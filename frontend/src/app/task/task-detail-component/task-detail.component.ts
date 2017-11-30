@@ -3,12 +3,9 @@ import {Router} from '@angular/router';
 import {TaskDto} from '../model/task.dto';
 import {ConfirmDialogService} from '../../core/services/confirm-dialog.service';
 import {TaskService} from '../service/task.service';
-import {MatDialog, MatDialogRef, MatSlider, MatSliderChange} from '@angular/material';
-import {TaskCreateUpdateDialog} from '../task-create-update-dialog/task-create-update-dialog.component';
-import {SMALL_DIALOG} from '../../core/util/const';
-import {ViewMode} from '../../core/common/view-mode';
+import {MatDialog, MatSlider, MatSliderChange} from '@angular/material';
 import {Observable} from 'rxjs/Observable';
-import {isTrue, isTruthy} from '../../core/util/helper';
+import {isTrue} from '../../core/util/helper';
 import {NotificationWrapperService} from '../../core/notifications/notification-wrapper.service';
 import {DurationService} from '../../core/services/duration.service';
 
@@ -19,7 +16,6 @@ import {DurationService} from '../../core/services/duration.service';
 })
 export class TaskDetailComponent implements AfterViewInit {
     @Input() task: TaskDto;
-    private _taskCreateUpdateDialog: MatDialogRef<TaskCreateUpdateDialog>;
     @ViewChild(MatSlider) slider: MatSlider;
 
     constructor(private _confirmDialogService: ConfirmDialogService,
@@ -44,7 +40,7 @@ export class TaskDetailComponent implements AfterViewInit {
     }
 
     public editTask() {
-        this._taskCreateUpdateDialog = this._dialogService.open(TaskCreateUpdateDialog, SMALL_DIALOG);
+        /*this._taskCreateUpdateDialog = this._dialogService.open(TaskCreateUpdateComponent, SMALL_DIALOG);
         this._taskCreateUpdateDialog.componentInstance.init(ViewMode.EDIT, this.task);
         this._taskCreateUpdateDialog.afterClosed()
             .filter(isTruthy)
@@ -56,7 +52,7 @@ export class TaskDetailComponent implements AfterViewInit {
                     this._notificationService.success('i18n.modules.task.notification.update.title',
                         'i18n.modules.task.notification.update.message');
                 }
-            });
+            });*/
     }
 
     public getRemainingEffort() {
