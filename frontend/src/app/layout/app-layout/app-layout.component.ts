@@ -78,10 +78,6 @@ export class AppLayoutComponent implements OnInit, AfterViewInit {
         return OCTheme.getByI18nKey(i18nKey);
     }
 
-    public login() {
-        //this._auth.login();
-    }
-
     public logout() {
         this._auth.logout();
     }

@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
-import {AuthGuard} from '../core/services/auth/auth-guard.service';
 import {ExamComponent} from './exam.component';
 import {SubjectFilterResolver} from '../core/services/filter/subject.filter.resolver.service';
 import {ExamListResolver} from './service/exam-list-resolver.service';
@@ -16,7 +15,6 @@ import {ViewMode} from '../core/common/view-mode';
                 {
                     path: '',
                     component: ExamComponent,
-                    canActivate: [AuthGuard],
                     resolve: {
                         taskFilter: SubjectFilterResolver,
                         allExams: ExamListResolver,
@@ -26,7 +24,6 @@ import {ViewMode} from '../core/common/view-mode';
                 {
                     path: 'new',
                     component: ExamCreateUpdateComponent,
-                    canActivate: [AuthGuard],
                     data: {
                         viewMode: ViewMode.NEW
                     },
@@ -37,7 +34,6 @@ import {ViewMode} from '../core/common/view-mode';
                 {
                     path: 'update/:id',
                     component: ExamCreateUpdateComponent,
-                    canActivate: [AuthGuard],
                     data: {
                         viewMode: ViewMode.EDIT
                     },

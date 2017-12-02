@@ -1,20 +1,40 @@
 import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot} from '@angular/router';
+import {
+    ActivatedRouteSnapshot,
+    CanActivate,
+    CanActivateChild,
+    CanLoad,
+    Route,
+    Router,
+    RouterStateSnapshot
+} from '@angular/router';
 import {DefaultAuthService} from './auth.service';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
-export class AuthGuard implements CanActivate {
-
-    constructor(private _authService: DefaultAuthService) {
+export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
+    constructor(private _authService: DefaultAuthService,
+                private _router: Router) {
     }
 
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+        return this._checkUserLoggedIn();
+    }
+
+    canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+        return this._checkUserLoggedIn();
+    }
+
+    canLoad(route: Route): Observable<boolean> | Promise<boolean> | boolean {
+        return this._checkUserLoggedIn();
+    }
+
+    private _checkUserLoggedIn(): boolean {
         if (this._authService.isLoggedIn()) {
             return true;
         } else {
-            //this._authService.login(state.url);
+            this._router.navigateByUrl('/auth');
             return false;
         }
     }
-
 }

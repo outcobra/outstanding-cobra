@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
-import {AuthGuard} from '../core/services/auth/auth-guard.service';
 import {TaskComponent} from './task.component';
 import {TaskResolver} from './service/task-resolver.service';
 import {SubjectFilterResolver} from '../core/services/filter/subject.filter.resolver.service';
@@ -15,7 +14,6 @@ import {CurrentSubjectsResolverService} from '../core/services/resolver/current-
             {
                 path: '',
                 component: TaskComponent,
-                canActivate: [AuthGuard],
                 resolve: {
                     taskFilter: SubjectFilterResolver,
                     tasks: TaskListResolver

@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
-import {AuthGuard} from '../core/services/auth/auth-guard.service';
 import {MarkComponent} from './mark.component';
 import {MarkSemesterComponent} from './mark-semester/mark-semester.component';
 import {SemesterMarkResolver} from './service/semester-mark-resolver.service';
@@ -15,7 +14,6 @@ import {SubjectMarkGroupResolver} from 'app/mark/service/subject-mark-resolver.s
         RouterModule.forChild([
             {
                 path: '',
-                canActivate: [AuthGuard],
                 children: [
                     {
                         path: '',

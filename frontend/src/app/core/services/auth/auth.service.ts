@@ -58,7 +58,7 @@ export class DefaultAuthService implements AuthService {
         Raven.setUserContext();
         localStorage.removeItem(environment.locStorage.tokenLocation);
         localStorage.removeItem(environment.locStorage.profileLocation);
-        this._router.navigate(['']);
+        this._router.navigateByUrl('/auth');
     }
 
     /**

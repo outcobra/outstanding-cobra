@@ -23,25 +23,29 @@ import {environment} from '../environments/environment';
                 {
                     path: '',
                     component: AppLayoutComponent,
+                    canActivateChild: [AuthGuard],
                     children: [
                         {
                             path: 'exam',
-                            loadChildren: 'app/exam/exam.module#ExamModule'
+                            loadChildren: 'app/exam/exam.module#ExamModule',
+                            canLoad: [AuthGuard]
                         },
                         {
                             path: 'mark',
-                            loadChildren: 'app/mark/mark.module#MarkModule'
+                            loadChildren: 'app/mark/mark.module#MarkModule',
+                            canLoad: [AuthGuard]
                         },
                         {
                             path: 'task',
-                            loadChildren: 'app/task/task.module#TaskModule'
+                            loadChildren: 'app/task/task.module#TaskModule',
+                            canLoad: [AuthGuard]
                         },
                         {
                             path: 'manage',
-                            loadChildren: 'app/manage/manage.module#ManageModule'
+                            loadChildren: 'app/manage/manage.module#ManageModule',
+                            canLoad: [AuthGuard]
                         }
-                    ],
-                    canActivate: [AuthGuard]
+                    ]
                 },
                 {
                     path: '**',
