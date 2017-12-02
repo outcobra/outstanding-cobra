@@ -101,9 +101,16 @@
       "exam": {
         "linkTitle": "Prüfungen",
         "listTitle": "Deine Prüfungen",
-        "add": "Prüfung hinzufügen",
         "description": "Prüfungs-Beschreibung",
         "name": "Prüfungs-Name",
+        "createUpdate": {
+          "create": {
+            "title": "Prüfung hinzufügen"
+          },
+          "update": {
+            "title": "Prüfung bearbeiten"
+          }
+        },
         "empty": {
           "hint": "Füge eine Prüfung über den Knopf unten rechts hinzu!"
         },
@@ -250,9 +257,16 @@
       "task": {
         "linkTitle": "Aufgaben",
         "listTitle": "Deine Aufgaben",
-        "add": "Aufgabe hinzufügen",
         "desc": "Aufgaben Beschreibung",
         "progress": "Fortschritt",
+        "createUpdate": {
+          "create": {
+            "title": "Aufgabe hinzufügen"
+          },
+          "update": {
+            "title": "Aufgabe bearbeiten"
+          }
+        },
         "filter": {
           "title": "Aufgaben filtern",
           "subject": "Nach Fach filtern",

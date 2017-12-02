@@ -100,9 +100,16 @@
       "exam": {
         "linkTitle": "Exams",
         "listTitle": "Your exams",
-        "add": "Add exam",
         "description": "Exam description",
         "name": "Exam name",
+        "createUpdate": {
+          "create": {
+            "title": "Add exam"
+          },
+          "update": {
+            "title": "Edit exam"
+          }
+        },
         "empty": {
           "hint": "Add an exam by pressing the button in the lower right corner!"
         },
@@ -249,7 +256,14 @@
       "task": {
         "linkTitle": "Tasks",
         "listTitle": "Your Tasks",
-        "add": "Add Task",
+        "createUpdate": {
+          "create": {
+            "title": "Aufgabe hinzufügen"
+          },
+          "update": {
+            "title": "Aufgabe bearbeiten"
+          }
+        },
         "desc": "Task description",
         "progress": "Progress",
         "filter": {

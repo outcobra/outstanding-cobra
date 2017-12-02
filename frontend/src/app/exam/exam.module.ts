@@ -9,7 +9,7 @@ import {TranslateModule} from '@ngx-translate/core';
 import {SharedModule} from '../shared/shared.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ExamListItemComponent} from './exam-list-item/exam-list-item.component';
-import {ExamCreateUpdateDialog} from './exam-create-update-dialog/exam-create-update-dialog.component';
+import {ExamCreateUpdateComponent} from './exam-create-update/exam-create-update.component';
 import {PipeModule} from '../shared/pipe.module';
 
 
@@ -17,7 +17,7 @@ import {PipeModule} from '../shared/pipe.module';
     declarations: [
         ExamComponent,
         ExamListItemComponent,
-        ExamCreateUpdateDialog
+        ExamCreateUpdateComponent
     ],
     imports: [
         CommonModule,
@@ -32,7 +32,7 @@ import {PipeModule} from '../shared/pipe.module';
         PipeModule
     ],
     entryComponents: [
-        ExamCreateUpdateDialog
+        ExamCreateUpdateComponent
     ]
 })
 export class ExamModule {

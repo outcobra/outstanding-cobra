@@ -7,7 +7,7 @@ import {HttpStatus} from '../../core/http/http-status';
 import {NotificationWrapperService} from '../../core/notifications/notification-wrapper.service';
 
 @Injectable()
-export class TaskDetailResolver implements Resolve<TaskDto> {
+export class TaskResolver implements Resolve<TaskDto> {
     constructor(private _taskService: TaskService, private _router: Router, private _notificationService: NotificationWrapperService) {
     }
 

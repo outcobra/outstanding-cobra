@@ -22,7 +22,6 @@ export function translationLoader(translateService: TranslateService, injector: 
 
 function wrapInitializer(func: () => Promise<any>, injector: Injector): () => Promise<any> {
     return () => new Promise(resolve =>
-        injector.get(LOCATION_INITIALIZED, Promise.resolve(null))
-            .then(() => resolve(func()))
+        injector.get(LOCATION_INITIALIZED, setTimeout(() => resolve(func())))
     );
 }

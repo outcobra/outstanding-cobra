@@ -4,7 +4,7 @@ import {ExamDto} from './model/exam.dto';
 import {NotificationWrapperService} from '../core/notifications/notification-wrapper.service';
 import {ExamTaskDto} from './model/exam.task.dto';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {ExamCreateUpdateDialog} from './exam-create-update-dialog/exam-create-update-dialog.component';
+import {ExamCreateUpdateComponent} from './exam-create-update/exam-create-update.component';
 import {MatDialog} from '@angular/material';
 import {ResponsiveHelperService} from '../core/services/ui/responsive-helper.service';
 import {MEDIUM_DIALOG} from '../core/util/const';
@@ -15,7 +15,6 @@ import * as objectAssign from 'object-assign';
 import {SubjectFilterDto} from '../task/model/subject.filter.dto';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DateUtil} from '../core/services/date-util.service';
-import {OCMediaChange} from '../core/services/ui/oc-media-change';
 import {Observable} from 'rxjs/Observable';
 import {examByNameComparator} from '../core/util/comparator';
 import {Subject} from 'rxjs/Subject';
@@ -92,7 +91,7 @@ export class ExamComponent implements OnInit, AfterViewInit {
             this._responsiveHelper.listenForOrientationChange()
         )
             .filter(change => !change.mobile)
-            .subscribe((change: OCMediaChange) => this._filterShown = true);
+            .subscribe(() => this._filterShown = true);
         this._changeDetectorRef.detectChanges();
     }
 
@@ -131,10 +130,10 @@ export class ExamComponent implements OnInit, AfterViewInit {
         Util.removeFirstMatch(this._allExams, (exam: ExamDto) => exam.id == examDto.id);
     }
 
-
     public addExam() {
-        this._dialogService
-            .open(ExamCreateUpdateDialog, this._makeDialogConfig(ViewMode.NEW))
+        this._router.navigateByUrl('/exam/new');
+        /*this._dialogService
+            .open(ExamCreateUpdateComponent, this._makeDialogConfig(ViewMode.NEW))
             .afterClosed()
             .first()
             .filter(isTruthy)
@@ -148,7 +147,7 @@ export class ExamComponent implements OnInit, AfterViewInit {
                         this._displayForFilter();
                         this._notificationService.success('i18n.modules.exam.notification.add.title', 'i18n.modules.exam.notification.add.message');
                     });
-            });
+            });*/
     }
 
     public deleteExam(exam: ExamDto) {
@@ -162,7 +161,7 @@ export class ExamComponent implements OnInit, AfterViewInit {
     }
 
     public editExam(exam: ExamDto) {
-        this._dialogService.open(ExamCreateUpdateDialog, this._makeDialogConfig(ViewMode.EDIT, exam))
+        this._dialogService.open(ExamCreateUpdateComponent, this._makeDialogConfig(ViewMode.EDIT, exam))
             .afterClosed()
             .first()
             .filter(isTruthy)

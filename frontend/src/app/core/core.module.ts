@@ -10,10 +10,10 @@ import {NotificationWrapperService} from './notifications/notification-wrapper.s
 import {DurationService} from './services/duration.service';
 import {FilterService} from './services/filter/filter.service';
 import {AuthGuard} from './services/auth/auth-guard.service';
-import {ActiveExamListResolver} from '../exam/service/active.exam.list.resolver.service';
-import {ExamListResolver} from '../exam/service/exam.list.resolver.service';
+import {ActiveExamListResolver} from '../exam/service/active-exam-list-resolver.service';
+import {ExamListResolver} from '../exam/service/exam-list-resolver.service';
 import {ExamService} from '../exam/service/exam.service';
-import {ExamCreateUpdateDialog} from '../exam/exam-create-update-dialog/exam-create-update-dialog.component';
+import {ExamCreateUpdateComponent} from '../exam/exam-create-update/exam-create-update.component';
 import {SubjectFilterResolver} from './services/filter/subject.filter.resolver.service';
 import {ExamTaskService} from '../exam/service/exam-task.service';
 import {SubjectMarkGroupResolver} from '../mark/service/subject-mark-resolver.service';
@@ -28,7 +28,7 @@ import {SchoolClassService} from '../manage/service/school-class.service';
 import {SubjectService} from '../manage/service/subject.service';
 import {SemesterService} from '../manage/service/semester.service';
 import {ManageDialogFactory} from '../manage/service/manage-dialog-factory';
-import {TaskDetailResolver} from '../task/service/task-detail-resolver.service';
+import {TaskResolver} from '../task/service/task-resolver.service';
 import {TaskListResolver} from '../task/service/task-list-resolver.service';
 import {TaskService} from '../task/service/task.service';
 import {UserService} from './services/user.service';
@@ -53,7 +53,7 @@ import {CurrentSubjectsResolverService} from './services/resolver/current-subjec
         // Exam Services
         ExamService,
         ExamTaskService,
-        ExamCreateUpdateDialog,
+        ExamCreateUpdateComponent,
         SubjectFilterResolver,
         ExamListResolver,
         ActiveExamListResolver,
@@ -73,7 +73,7 @@ import {CurrentSubjectsResolverService} from './services/resolver/current-subjec
         MarkResolver,
         // Task Services
         TaskService,
-        TaskDetailResolver,
+        TaskResolver,
         TaskListResolver,
         SubjectFilterResolver,
 

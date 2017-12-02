@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {AuthGuard} from '../core/services/auth/auth-guard.service';
 import {TaskComponent} from './task.component';
-import {TaskDetailResolver} from './service/task-detail-resolver.service';
+import {TaskResolver} from './service/task-resolver.service';
 import {SubjectFilterResolver} from '../core/services/filter/subject.filter.resolver.service';
 import {TaskListResolver} from './service/task-list-resolver.service';
 import {TaskCreateUpdateComponent} from './task-create-update/task-create-update.component';
@@ -38,7 +38,7 @@ import {CurrentSubjectsResolverService} from '../core/services/resolver/current-
                     viewMode: ViewMode.EDIT
                 },
                 resolve: {
-                    task: TaskDetailResolver,
+                    task: TaskResolver,
                     subjects: CurrentSubjectsResolverService
                 }
             }

@@ -6,6 +6,7 @@
 export const environment = {
     production: false,
     envName: 'fire',
+    enableRouteTracing: false,
     api: {
         defaultApiName: 'outcobra',
         apis: [

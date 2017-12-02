@@ -1,113 +1,114 @@
-<div class="dialog-header">
-    <h1 mat-dialog-title>{{ 'i18n.modules.task.add' | translate }}</h1>
-</div>
-<form [formGroup]="taskCreateUpdateForm" (submit)="submit()">
-    <div class="dialog-body" mat-dialog-content>
-        <div class="form-group">
-            <mat-form-field>
-                <input matInput
-                       required
-                       [placeholder]="'i18n.modules.task.dialogs.add.name.label' | translate"
-                       formControlName="name">
-                <mat-error *ngIf="taskCreateUpdateForm.get('name').hasError('required')">
-                    {{ 'i18n.common.form.error.required' | translate }}
-                </mat-error>
-            </mat-form-field>
-        </div>
-        <div class="form-group">
-            <mat-form-field>
+<oc-title-bar>
+    <span>{{ 'i18n.modules.task.createUpdate.' + (isEditMode() ? 'update' : 'create') + '.title' | translate }}</span>
+</oc-title-bar>
+<form [formGroup]="taskCreateUpdateForm" (submit)="submit()" fxLayout fxLayoutAlign="center start">
+    <mat-card fxFlex fxFlex.gt-sm="960px">
+        <mat-card-content>
+            <div class="form-group">
+                <mat-form-field>
+                    <input matInput
+                           required
+                           [placeholder]="'i18n.modules.task.dialogs.add.name.label' | translate"
+                           formControlName="name">
+                    <mat-error *ngIf="taskCreateUpdateForm.get('name').hasError('required')">
+                        {{ 'i18n.common.form.error.required' | translate }}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form-group">
+                <mat-form-field>
                 <textarea matInput
                           [placeholder]="'i18n.modules.task.dialogs.add.desc.label' | translate"
                           formControlName="description">
                 </textarea>
-            </mat-form-field>
-        </div>
-        <div formGroupName="dates" class="form-group">
-            <div class="half">
-                <div class="half-child">
-                    <mat-form-field>
-                        <input matInput
-                               required
-                               [matDatepicker]="todoDatePicker"
-                               [min]="today"
-                               [placeholder]="'i18n.common.label.todoDate' | translate"
-                               formControlName="todoDate">
-                        <mat-datepicker-toggle matSuffix [for]="todoDatePicker"></mat-datepicker-toggle>
-                        <mat-datepicker #todoDatePicker
-                                        [touchUi]="isMobile()">
-                        </mat-datepicker>
-                        <mat-error>
-                            <ng-template [ngIf]="taskCreateUpdateForm.get('dates.todoDate').hasError('required')">
-                                {{ 'i18n.common.form.error.required' | translate }}
-                            </ng-template>
-                            <ng-template [ngIf]="taskCreateUpdateForm.get('dates.todoDate').hasError('date')">
-                                {{ 'i18n.common.form.error.datePattern' | translate }}
-                            </ng-template>
-                        </mat-error>
-                    </mat-form-field>
-                </div>
-                <div class="half-child">
-                    <mat-form-field>
-                        <input matInput
-                               required
-                               [matDatepicker]="dueDatePicker"
-                               [min]="today"
-                               [placeholder]="'i18n.common.label.dueDate' | translate"
-                               formControlName="dueDate">
-                        <mat-datepicker-toggle matSuffix [for]="dueDatePicker"></mat-datepicker-toggle>
-                        <mat-datepicker #dueDatePicker
-                                        [touchUi]="isMobile()">
-                        </mat-datepicker>
-                        <mat-error>
-                            <ng-template [ngIf]="taskCreateUpdateForm.get('dates.dueDate').hasError('required')">
-                                {{ 'i18n.common.form.error.required' | translate }}
-                            </ng-template>
-                        </mat-error>
-                    </mat-form-field>
-                </div>
+                </mat-form-field>
             </div>
-            <span class="form-error"
-                  *ngIf="taskCreateUpdateForm.get('dates.todoDate').dirty && taskCreateUpdateForm.get('dates.dueDate').dirty && taskCreateUpdateForm.get('dates').invalid">
+            <div formGroupName="dates" class="form-group">
+                <div class="half">
+                    <div class="half-child">
+                        <mat-form-field>
+                            <input matInput
+                                   required
+                                   [matDatepicker]="todoDatePicker"
+                                   [min]="today"
+                                   [placeholder]="'i18n.common.label.todoDate' | translate"
+                                   formControlName="todoDate">
+                            <mat-datepicker-toggle matSuffix [for]="todoDatePicker"></mat-datepicker-toggle>
+                            <mat-datepicker #todoDatePicker
+                                            [touchUi]="isMobile()">
+                            </mat-datepicker>
+                            <mat-error>
+                                <ng-template [ngIf]="taskCreateUpdateForm.get('dates.todoDate').hasError('required')">
+                                    {{ 'i18n.common.form.error.required' | translate }}
+                                </ng-template>
+                                <ng-template [ngIf]="taskCreateUpdateForm.get('dates.todoDate').hasError('date')">
+                                    {{ 'i18n.common.form.error.datePattern' | translate }}
+                                </ng-template>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="half-child">
+                        <mat-form-field>
+                            <input matInput
+                                   required
+                                   [matDatepicker]="dueDatePicker"
+                                   [min]="today"
+                                   [placeholder]="'i18n.common.label.dueDate' | translate"
+                                   formControlName="dueDate">
+                            <mat-datepicker-toggle matSuffix [for]="dueDatePicker"></mat-datepicker-toggle>
+                            <mat-datepicker #dueDatePicker
+                                            [touchUi]="isMobile()">
+                            </mat-datepicker>
+                            <mat-error>
+                                <ng-template [ngIf]="taskCreateUpdateForm.get('dates.dueDate').hasError('required')">
+                                    {{ 'i18n.common.form.error.required' | translate }}
+                                </ng-template>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <span class="form-error"
+                      *ngIf="taskCreateUpdateForm.get('dates.todoDate').dirty && taskCreateUpdateForm.get('dates.dueDate').dirty && taskCreateUpdateForm.get('dates').invalid">
                 <ng-template [ngIf]="taskCreateUpdateForm.get('dates').hasError('dateToIsBeforeDateFrom')">
                     {{ 'i18n.modules.task.dialogs.add.errors.dueDateBeforeTodoDate' | translate }}
                 </ng-template>
             </span>
-        </div>
-        <div class="form-group">
-            <mat-form-field>
-                <input matInput
-                       required
-                       type="number"
-                       [placeholder]="'i18n.modules.task.dialogs.add.effort.label' | translate"
-                       formControlName="effort">
-                <mat-error *ngIf="taskCreateUpdateForm.get('effort').hasError('required')">
-                    {{ 'i18n.common.form.error.required' | translate }}
-                </mat-error>
-            </mat-form-field>
-        </div>
-        <div class="form-group">
-            <mat-form-field>
-                <mat-select formControlName="subjectId"
-                            required
-                            [placeholder]="'i18n.modules.task.dialogs.add.subject.label' | translate">
-                    <mat-option *ngFor="let subject of subjects"
-                                [value]="subject.id">
-                        {{ subject.name }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-    </div>
-    <div class="dialog-footer" mat-dialog-actions>
-        <div class="footer-right">
+            </div>
+            <div class="form-group">
+                <mat-form-field>
+                    <input matInput
+                           required
+                           type="number"
+                           [placeholder]="'i18n.modules.task.dialogs.add.effort.label' | translate"
+                           formControlName="effort">
+                    <mat-error *ngIf="taskCreateUpdateForm.get('effort').hasError('required')">
+                        {{ 'i18n.common.form.error.required' | translate }}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form-group">
+                <mat-form-field>
+                    <mat-select formControlName="subjectId"
+                                required
+                                [placeholder]="'i18n.modules.task.dialogs.add.subject.label' | translate">
+                        <mat-option *ngFor="let subject of subjects"
+                                    [value]="subject.id">
+                            {{ subject.name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
             <button mat-button
-                    mat-dialog-close>
+                    type="button"
+                    routerLink="/task">
                 {{ 'i18n.common.action.cancel' | translate }}
             </button>
             <button mat-raised-button
                     color="primary"
                     type="submit">{{ 'i18n.common.action.save' | translate }}
             </button>
-        </div>
-    </div>
+        </mat-card-actions>
+    </mat-card>
 </form>

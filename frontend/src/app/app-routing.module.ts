@@ -5,6 +5,7 @@ import {EmptyLayoutComponent} from './layout/empty-layout/empty-layout.component
 import {AppLayoutComponent} from './layout/app-layout/app-layout.component';
 import {AuthGuard} from './core/services/auth/auth-guard.service';
 import {authRoutes} from './auth/auth-routes';
+import {environment} from '../environments/environment';
 
 @NgModule({
     imports: [
@@ -47,7 +48,10 @@ import {authRoutes} from './auth/auth-routes';
                     component: FallbackComponent
                 }
             ],
-            {enableTracing: true})
+            {
+                // Prints all Routing Events
+                enableTracing: environment.enableRouteTracing
+            })
     ],
     exports: [
         RouterModule

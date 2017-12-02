@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, convertToParamMap, NavigationExtras, Router} from '@angular/router';
+import {ActivatedRoute, convertToParamMap, NavigationExtras, ParamMap, Router} from '@angular/router';
 import {MarkDto} from '../model/mark.dto';
 import {ViewMode} from '../../core/common/view-mode';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
@@ -36,11 +36,11 @@ export class MarkCreateUpdateComponent extends ParentLinkedCreateUpdateComponent
     }
 
     ngOnInit() {
-        Observable.combineLatest(
-            this._route.params,
-            this._route.queryParams,
-            (params, queryParams) => convertToParamMap(objectAssign({}, params, queryParams))
-        ).subscribe(paramMap => {
+        Observable.combineLatest([
+                this._route.params,
+                this._route.queryParams
+            ], (first, second) => convertToParamMap(objectAssign({}, first, second))
+        ).subscribe((paramMap: ParamMap) => {
             this._examId = paramMap.get('examId');
             this._examName = paramMap.get('examName');
             this._semesterId = parseInt(paramMap.get('semesterId'));
@@ -51,7 +51,7 @@ export class MarkCreateUpdateComponent extends ParentLinkedCreateUpdateComponent
                 }
             };
         });
-        this._route.data.subscribe((data: {isEdit: boolean, mark: MarkDto, parent: MarkGroupDto}) => {
+        this._route.data.subscribe((data: { isEdit: boolean, mark: MarkDto, parent: MarkGroupDto }) => {
             let isEdit = data.isEdit;
             this.initWithParent(isEdit ? ViewMode.EDIT : ViewMode.NEW,
                 isEdit ? data.parent : null,
