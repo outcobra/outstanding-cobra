@@ -15,8 +15,11 @@ import {ViewMode} from '../core/common/view-mode';
                 {
                     path: '',
                     component: ExamComponent,
+                    data: {
+                        animation: 'exam'
+                    },
                     resolve: {
-                        taskFilter: SubjectFilterResolver,
+                        examFilter: SubjectFilterResolver,
                         allExams: ExamListResolver,
                         activeExams: ActiveExamListResolver,
                     }
@@ -25,7 +28,8 @@ import {ViewMode} from '../core/common/view-mode';
                     path: 'new',
                     component: ExamCreateUpdateComponent,
                     data: {
-                        viewMode: ViewMode.NEW
+                        viewMode: ViewMode.NEW,
+                        animation: 'examCreateUpdate'
                     },
                     resolve: {
                         subjects: CurrentSubjectsResolverService
@@ -35,7 +39,8 @@ import {ViewMode} from '../core/common/view-mode';
                     path: 'update/:id',
                     component: ExamCreateUpdateComponent,
                     data: {
-                        viewMode: ViewMode.EDIT
+                        viewMode: ViewMode.EDIT,
+                        animation: 'examCreateUpdate'
                     },
                     resolve: {
                         exam: ExamResolver,

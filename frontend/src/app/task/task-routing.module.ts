@@ -14,6 +14,9 @@ import {CurrentSubjectsResolverService} from '../core/services/resolver/current-
             {
                 path: '',
                 component: TaskComponent,
+                data: {
+                    animation: 'task'
+                },
                 resolve: {
                     taskFilter: SubjectFilterResolver,
                     tasks: TaskListResolver
@@ -23,7 +26,8 @@ import {CurrentSubjectsResolverService} from '../core/services/resolver/current-
                 path: 'new',
                 component: TaskCreateUpdateComponent,
                 data: {
-                    viewMode: ViewMode.NEW
+                    viewMode: ViewMode.NEW,
+                    animation: 'taskCreateUpdate'
                 },
                 resolve: {
                     subjects: CurrentSubjectsResolverService
@@ -33,7 +37,8 @@ import {CurrentSubjectsResolverService} from '../core/services/resolver/current-
                 path: 'update/:id',
                 component: TaskCreateUpdateComponent,
                 data: {
-                    viewMode: ViewMode.EDIT
+                    viewMode: ViewMode.EDIT,
+                    animation: 'taskCreateUpdate'
                 },
                 resolve: {
                     task: TaskResolver,

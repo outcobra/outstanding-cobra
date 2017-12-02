@@ -19,5 +19,4 @@ export class EmptyLayoutComponent implements OnInit {
     public prepareRouteState(outlet: RouterOutlet): string {
         return outlet.activatedRouteData['animation'] || 'default';
     }
-
 }

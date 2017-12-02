@@ -101,8 +101,8 @@ export class ExamComponent implements OnInit, AfterViewInit {
     }
 
     private _loadInitialData() {
-        this._route.data.subscribe((data: { taskFilter: SubjectFilterDto, allExams: ExamDto[], activeExams: ExamDto[] }) => {
-            this._filterData = data.taskFilter;
+        this._route.data.subscribe((data: { examFilter: SubjectFilterDto, allExams: ExamDto[], activeExams: ExamDto[] }) => {
+            this._filterData = data.examFilter;
             this._activeExams = data.activeExams;
             this._allExams = data.allExams;
             this._sortExams();

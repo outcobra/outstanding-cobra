@@ -29,6 +29,27 @@ export const fadeInOutAnimation = animation([
 ]);
 */
 
+export const appLayoutRouteAnimation = trigger('appLayoutRouteAnimation', [
+    transition(':enter', []),
+    transition('task => taskCreateUpdate, exam => examCreateUpdate', [
+        query(':self', style({position: 'relative'})),
+        query(':enter, :leave', style({
+            position: 'absolute',
+            width: '100%',
+            height: '100%',
+        })),
+        query(':leave', style({zIndex: 10})),
+        query(':enter', style({
+            transform: 'translateY(-100%)',
+            zIndex: 11
+        })),
+        group([
+            query(':leave', animate(time(Timing.LEAVING, Easing.ACCELERATE), style({opacity: '0'}))),
+            query(':enter', animate(time(Timing.ENTERING, Easing.DECELARATE), style({transform: 'translateY(0)'})))
+        ])
+    ])
+]);
+
 export const emptyLayoutRouteAnimation = trigger('emptyLayoutRouteAnimation', [
     transition(':enter', []),
     transition('auth => login, auth => signUp', [

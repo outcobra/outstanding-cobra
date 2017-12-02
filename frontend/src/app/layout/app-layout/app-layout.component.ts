@@ -1,12 +1,13 @@
 import {AfterViewInit, Component, HostBinding, OnInit, ViewChild} from '@angular/core';
 import {DefaultAuthService} from '../../core/services/auth/auth.service';
-import {NavigationEnd, Router} from '@angular/router';
+import {NavigationEnd, Router, RouterOutlet} from '@angular/router';
 import {isTruthy} from '../../core/util/helper';
 import {OCTheme} from '../../oc-ui/theme/oc-theme';
 import {TranslateService} from '@ngx-translate/core';
 import {ResponsiveHelperService} from '../../core/services/ui/responsive-helper.service';
 import {MatSidenav} from '@angular/material';
 import {OverlayContainer} from '@angular/cdk/overlay';
+import {appLayoutRouteAnimation} from '../../core/animations/animations';
 
 const OC_THEME_STORAGE_LOC = 'oc-theme';
 const OC_MOBILE_CLASS = 'oc-mobile';
@@ -14,7 +15,8 @@ const OC_MOBILE_CLASS = 'oc-mobile';
 @Component({
     selector: 'app-layout',
     templateUrl: './app-layout.component.html',
-    styleUrls: ['./app-layout.component.scss']
+    styleUrls: ['./app-layout.component.scss'],
+    animations: [appLayoutRouteAnimation]
 })
 export class AppLayoutComponent implements OnInit, AfterViewInit {
     private _mobile: boolean;
@@ -71,6 +73,10 @@ export class AppLayoutComponent implements OnInit, AfterViewInit {
 
         this._activeTheme = theme;
         localStorage.setItem(OC_THEME_STORAGE_LOC, this._activeTheme.i18nKey);
+    }
+
+    public prepareRouteState(outlet: RouterOutlet): string {
+        return outlet.activatedRouteData['animation'] || 'default';
     }
 
     private getThemeFromLocalStorage(): OCTheme {
