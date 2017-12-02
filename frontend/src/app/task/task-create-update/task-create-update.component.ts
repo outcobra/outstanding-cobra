@@ -9,8 +9,11 @@ import {DateUtil} from '../../core/services/date-util.service';
 import {FormUtil} from '../../core/util/form-util';
 import * as moment from 'moment';
 import {Moment} from 'moment';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ViewMode} from '../../core/common/view-mode';
+import {TaskService} from '../service/task.service';
+import {NotificationWrapperService} from '../../core/notifications/notification-wrapper.service';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
     selector: './task-create-update-dialog',
@@ -22,16 +25,24 @@ export class TaskCreateUpdateComponent extends CreateUpdateComponent<TaskDto> im
     private _subjects: SubjectDto[];
     private _today: Moment = moment();
 
+    private _submitFunction: (task: TaskDto) => Observable<TaskDto>;
+
     constructor(private _formBuilder: FormBuilder,
                 private _route: ActivatedRoute,
+                private _router: Router,
+                private _taskService: TaskService,
+                private _notificationService: NotificationWrapperService,
                 private responsiveHelperService: ResponsiveHelperService) {
         super();
     }
 
     ngOnInit() {
-        this._route.data.subscribe((data: {viewMode: ViewMode, subjects: Array<SubjectDto>,task?: TaskDto}) => {
-           this.init(data.viewMode as ViewMode, data.viewMode === ViewMode.EDIT ? data.task : null);
-           this._subjects = data.subjects;
+        this._route.data.subscribe((data: { viewMode: ViewMode, subjects: Array<SubjectDto>, task?: TaskDto }) => {
+            this.init(data.viewMode as ViewMode, data.task);
+            this._subjects = data.subjects;
+            this._submitFunction = this.isEditMode()
+                ? this._taskService.update
+                : this._taskService.create
         });
 
         this._taskCreateUpdateForm = this._formBuilder.group({
@@ -53,14 +64,17 @@ export class TaskCreateUpdateComponent extends CreateUpdateComponent<TaskDto> im
 
     public submit() {
         if (this._taskCreateUpdateForm.valid && this._taskCreateUpdateForm.dirty) {
+            this._submitFunction.call(this._taskService, this._formToTask())
+                .switchMap(() => this._router.navigateByUrl('/task'))
+                .subscribe(() => this._notificationService.success('i18n.modules.task.notification.createUpdateSuccess.title', 'i18n.modules.task.notification.createUpdateSuccess.message'));
         }
         else {
             FormUtil.revalidateForm(this._taskCreateUpdateForm);
         }
     }
 
-    private _formToTask(formGroup: FormGroup): TaskDto {
-        let formValue = formGroup.value;
+    private _formToTask(): TaskDto {
+        let formValue = this._taskCreateUpdateForm.value;
         return {
             id: this.isEditMode() && this.param.id ? this.param.id : null,
             name: formValue.name,

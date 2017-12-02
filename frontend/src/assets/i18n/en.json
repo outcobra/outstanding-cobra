@@ -130,11 +130,7 @@
           "noMatch": "Nothing here"
         },
         "notification": {
-          "add": {
-            "title": "Exam saved",
-            "message": "The exam has been saved successfully"
-          },
-          "update": {
+          "createUpdateSuccess": {
             "title": "Exam saved",
             "message": "The exam has been saved successfully"
           },
@@ -276,12 +272,8 @@
           "hint": "Add a task by pressing the button in the lower right corner!"
         },
         "notification": {
-          "add": {
-            "title": "Task added",
-            "message": "The task has been successfully created"
-          },
-          "update": {
-            "title": "Task updated",
+          "createUpdateSuccess": {
+            "title": "Task saved",
             "message": "The task has been saved successfully"
           },
           "error": {

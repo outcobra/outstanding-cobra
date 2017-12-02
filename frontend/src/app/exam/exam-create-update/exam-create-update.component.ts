@@ -9,8 +9,11 @@ import {getIfTruthy, isNotEmpty} from 'app/core/util/helper';
 import {CreateUpdateComponent} from '../../core/common/create-update-component';
 import {FormUtil} from '../../core/util/form-util';
 import {OCValidators} from '../../core/services/oc-validators';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ViewMode} from '../../core/common/view-mode';
+import {NotificationWrapperService} from '../../core/notifications/notification-wrapper.service';
+import {ExamService} from '../service/exam.service';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
     selector: 'exam-create-update-dialog',
@@ -18,13 +21,16 @@ import {ViewMode} from '../../core/common/view-mode';
     styleUrls: ['./exam-create-update.component.scss']
 })
 export class ExamCreateUpdateComponent extends CreateUpdateComponent<ExamDto> implements OnInit {
-
     private _subjects: SubjectDto[];
-    public examCreateUpdateForm: FormGroup;
-    private _title: string;
+    private _examCreateUpdateForm: FormGroup;
+
+    private _submitFunction: (exam: ExamDto) => Observable<ExamDto>;
 
     constructor(private _translateService: TranslateService,
                 private _route: ActivatedRoute,
+                private _router: Router,
+                private _notificationService: NotificationWrapperService,
+                private _examService: ExamService,
                 private _responsiveHelper: ResponsiveHelperService,
                 private _formBuilder: FormBuilder) {
         super();
@@ -32,10 +38,13 @@ export class ExamCreateUpdateComponent extends CreateUpdateComponent<ExamDto> im
 
     ngOnInit() {
         this._route.data.subscribe((data: { viewMode: ViewMode, subjects: Array<SubjectDto>, exam?: ExamDto }) => {
-            this._subjects = data.subjects;
             this.init(data.viewMode as ViewMode, data.exam);
+            this._subjects = data.subjects;
+            this._submitFunction = this.isEditMode()
+                ? this._examService.update
+                : this._examService.create
         });
-        this.examCreateUpdateForm = this._initFormGroup();
+        this._examCreateUpdateForm = this._initFormGroup();
     }
 
     private _formGroupForDtoOrDefault(examTask = {} as ExamTaskDto): FormGroup {
@@ -73,8 +82,8 @@ export class ExamCreateUpdateComponent extends CreateUpdateComponent<ExamDto> im
         });
     }
 
-    private _formToExamDto(): ExamDto {
-        let formValue = this.examCreateUpdateForm.value;
+    private _formToExam(): ExamDto {
+        let formValue = this._examCreateUpdateForm.value;
         let subject = this._getSubjectById(formValue.subjectId);
         let id = this.isEditMode() ? this.param.id : 0;
         return {
@@ -84,7 +93,7 @@ export class ExamCreateUpdateComponent extends CreateUpdateComponent<ExamDto> im
             date: formValue.date,
             subject: subject,
             mark: null,
-            examTasks: formValue.examTasks.filter(isNotEmpty)
+            examTasks: formValue.examTasks.filter(examTask => isNotEmpty(examTask.task))
         } as ExamDto;
     }
 
@@ -101,18 +110,13 @@ export class ExamCreateUpdateComponent extends CreateUpdateComponent<ExamDto> im
     }
 
     public submit() {
-        if (this.examCreateUpdateForm.valid && this.examCreateUpdateForm.dirty) {
+        if (this._examCreateUpdateForm.valid && this._examCreateUpdateForm.dirty) {
+            this._submitFunction.call(this._examService, this._formToExam())
+                .switchMap(() => this._router.navigateByUrl('/exam'))
+                .subscribe(() => this._notificationService.success('i18n.modules.exam.notification.createUpdateSuccess.title', 'i18n.modules.exam.notification.createUpdateSuccess.message'));
         } else {
-            FormUtil.revalidateForm(this.examCreateUpdateForm);
+            FormUtil.revalidateForm(this._examCreateUpdateForm);
         }
-    }
-
-    get title(): string {
-        let i18nTitle = 'i18n.modules.exam.add';
-        if (super.isEditMode()) {
-            i18nTitle = 'i18n.modules.exam.edit';
-        }
-        return this._title = this._translateService.instant(i18nTitle);
     }
 
     get subjects(): SubjectDto[] {
@@ -120,7 +124,10 @@ export class ExamCreateUpdateComponent extends CreateUpdateComponent<ExamDto> im
     }
 
     get examTaskArray(): FormArray {
-        return this.examCreateUpdateForm.get('examTasks') as FormArray;
+        return this._examCreateUpdateForm.get('examTasks') as FormArray;
     };
 
+    get examCreateUpdateForm(): FormGroup {
+        return this._examCreateUpdateForm;
+    }
 }

@@ -10,7 +10,6 @@ import {Observable} from 'rxjs/Observable';
 import {and} from '../core/util/helper';
 import {ResponsiveHelperService} from '../core/services/ui/responsive-helper.service';
 import {NotificationWrapperService} from '../core/notifications/notification-wrapper.service';
-import {OCMediaChange} from '../core/services/ui/oc-media-change';
 import {slideUpDownAnimation} from '../core/animations/animations';
 import {Subject} from 'rxjs/Subject';
 
@@ -55,7 +54,7 @@ export class TaskComponent implements OnInit, AfterViewInit {
             this._responsiveHelperService.listenForBreakpointChange(),
             this._responsiveHelperService.listenForOrientationChange())
             .filter(change => !change.mobile)
-            .subscribe((change: OCMediaChange) => this._filterShown = true);
+            .subscribe(() => this._filterShown = true);
         this._changeDetectorRef.detectChanges();
     }
 
@@ -101,31 +100,7 @@ export class TaskComponent implements OnInit, AfterViewInit {
 
     //endregion
 
-    public addTask() {
-        this._router.navigateByUrl('/task/new');
-        /*this._taskCreateUpdateDialog = this._dialogService.open(TaskCreateUpdateComponent, this._responsiveHelperService.getMobileOrGivenDialogConfig(MEDIUM_DIALOG));
-        this._taskCreateUpdateDialog.componentInstance.init(ViewMode.NEW, null);
-        this._taskCreateUpdateDialog.afterClosed()
-            .switchMap((value) => {
-                if (!value) return Observable.empty();
-                return this._taskService.create(value)
-            })
-            .subscribe((task: TaskDto) => {
-                this._notificationService.success('i18n.modules.task.notification.add.title', 'i18n.modules.task.notification.add.message');
-                this._tasks.push(task);
-                this._checkFilterThenAddToFilteredList(task);
-            });*/
-    }
-
     //region filtering
-
-    private _checkFilterThenAddToFilteredList(task: TaskDto) {
-        let filter = this._buildFilterPredicate();
-        if (!this._filtered || this._filterTask(task, filter)) {
-            this._filteredTasks.push(task);
-        }
-    }
-
     public markTaskAsDone(task: TaskDto) {
         if (task.progress == 100) return;
         this._taskService.updateProgress(task.id, 100)

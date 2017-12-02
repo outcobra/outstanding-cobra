@@ -39,22 +39,6 @@ export class TaskDetailComponent implements AfterViewInit {
         return this._taskService.updateProgress(this.task.id, value);
     }
 
-    public editTask() {
-        /*this._taskCreateUpdateDialog = this._dialogService.open(TaskCreateUpdateComponent, SMALL_DIALOG);
-        this._taskCreateUpdateDialog.componentInstance.init(ViewMode.EDIT, this.task);
-        this._taskCreateUpdateDialog.afterClosed()
-            .filter(isTruthy)
-            .switchMap((result: TaskDto) => this._taskService.update(result))
-            .subscribe((task: TaskDto) => {
-                // TODO error handling?
-                if (task) {
-                    this.task = task;
-                    this._notificationService.success('i18n.modules.task.notification.update.title',
-                        'i18n.modules.task.notification.update.message');
-                }
-            });*/
-    }
-
     public getRemainingEffort() {
         let remaining = this.task.effort / 100 * (100 - this.task.progress);
         return this._durationService.humanizeHours(remaining);

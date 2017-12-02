@@ -13,6 +13,7 @@ class WebConfig(val environment: Environment) : WebMvcConfigurerAdapter() {
         if (environment.acceptsProfiles(ProfileRegistry.DEVELOPMENT)) {
             registry!!.addMapping("/**/*")
                     .allowedOrigins("http://localhost:4200")
+                    .allowedMethods("*")
         }
     }
 }

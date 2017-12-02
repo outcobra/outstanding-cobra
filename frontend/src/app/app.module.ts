@@ -20,6 +20,7 @@ import {ErrorStateMatcher} from '@angular/material';
 import {OCErrorStateMatcher} from './core/services/oc-error-state-matcher';
 import {LayoutModule} from './layout/layout.module';
 import {AuthModule} from './auth/auth.module';
+import {ManageDialogModule} from './manage/manage-dialog.module';
 
 @NgModule({
     declarations: [
@@ -37,6 +38,7 @@ import {AuthModule} from './auth/auth.module';
         SharedModule,
         LayoutModule,
         AuthModule,
+        ManageDialogModule,
         FlexLayoutModule,
         PipeModule,
         AppRoutingModule,

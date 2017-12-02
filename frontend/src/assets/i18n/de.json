@@ -131,12 +131,8 @@
           "noMatch": "Nichts gefunden"
         },
         "notification": {
-          "add": {
-            "title": "Prüfungen hinzugefügt",
-            "message": "Die Prüfungen wurde erfolgreich erstellt"
-          },
-          "update": {
-            "title": "Prüfung geändert",
+          "createUpdateSuccess": {
+            "title": "Prüfung gespeichert",
             "message": "Die Prüfung wurde erfolgreich gespeichert"
           },
           "delete": {
@@ -277,12 +273,8 @@
           "hint": "Füge eine Aufgabe über den Knopf unten rechts hinzu!"
         },
         "notification": {
-          "add": {
-            "title": "Aufgabe hinzugefügt",
-            "message": "Die Aufgabe wurde erfolgreich erstellt"
-          },
-          "update": {
-            "title": "Aufgabe geändert",
+          "createUpdateSuccess": {
+            "title": "Aufgabe gespeichert",
             "message": "Die Aufgabe wurde erfolgreich gespeichert"
           },
           "error": {

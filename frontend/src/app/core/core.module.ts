@@ -34,6 +34,7 @@ import {TaskService} from '../task/service/task.service';
 import {UserService} from './services/user.service';
 import {JwtHelperService} from './services/auth/jwt-helper.service';
 import {CurrentSubjectsResolverService} from './services/resolver/current-subjects-resolver.service';
+import {ExamResolver} from '../exam/service/exam-resolver.service';
 
 @NgModule({
     providers: [
@@ -57,6 +58,7 @@ import {CurrentSubjectsResolverService} from './services/resolver/current-subjec
         SubjectFilterResolver,
         ExamListResolver,
         ActiveExamListResolver,
+        ExamResolver,
         // Manage Services
         ManageService,
         InstitutionService,

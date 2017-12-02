@@ -74,7 +74,7 @@
                     <mat-list-item *ngFor="let examTask of examTaskArray.controls; let i=index" [formGroupName]="i">
                         <mat-checkbox formControlName="finished"></mat-checkbox>
                         <mat-form-field>
-                            <input matInput formControlName="task" ocAutoFocus>
+                            <input matInput formControlName="task" [ocAutoFocus]="!isEditMode() || examTask.value.id === 0">
                         </mat-form-field>
                     </mat-list-item>
                 </mat-list>

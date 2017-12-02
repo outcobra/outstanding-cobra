@@ -14,8 +14,11 @@
     <div class="oc-filler"></div>
     <mat-icon *ngIf="isFinished(); else notFinished">done</mat-icon>
     <ng-template #notFinished>
-        <button mat-icon-button color="accent" class="show-on-hover" (click)="markAsDone($event)">
-            <mat-icon>done</mat-icon>
+        <button mat-button
+                color="accent"
+                class="show-on-hover"
+                (click)="markAsDone($event)">
+            Abschliessen
         </button>
     </ng-template>
 </div>
