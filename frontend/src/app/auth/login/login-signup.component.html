@@ -1,107 +1,114 @@
 <div class="login-wrapper">
     <img src="/assets/img/oc_logo_stroke_combined_blue.svg">
-    <form [formGroup]="loginSignUpForm" (ngSubmit)="submit()">
-        <mat-form-field *ngIf="isSignUp">
-            <mat-icon matSuffix>person</mat-icon>
-            <input matInput
-                   formControlName="username"
-                   [placeholder]="'i18n.auth.form.username' | translate">
-            <mat-error>
-                <ng-template [ngIf]="loginSignUpForm.get('username').hasError('required')">
-                    {{ 'i18n.common.form.error.required' | translate }}
-                </ng-template>
-                <ng-template [ngIf]="loginSignUpForm.get('username').hasError('minlength')">
-                    {{ 'i18n.common.form.error.minLength' |
-                    translate:{length: loginSignUpForm.get('username').getError('minlength').requiredLength} }}
-                </ng-template>
-                <ng-template [ngIf]="loginSignUpForm.get('username').hasError('maxlength')">
-                    {{ 'i18n.common.form.error.maxLength' |
-                    translate:{length: loginSignUpForm.get('username').getError('maxlength').requiredLength} }}
-                </ng-template>
-            </mat-error>
-        </mat-form-field>
-        <mat-form-field>
-            <mat-icon matSuffix>email</mat-icon>
-            <input matInput
-                   formControlName="mail"
-                   [placeholder]="'i18n.auth.form.email' | translate">
-            <mat-hint *ngIf="isSignUp">
-                <ng-template [ngIf]="loginSignUpForm.get('mail').pending">
-                    {{ 'i18n.auth.form.checkingEmail' | translate }}
-                </ng-template>
-                <ng-template [ngIf]="loginSignUpForm.get('mail').valid">
+    <div class="login-form-wrapper" [@loginSignupCollapse]="isLoggedIn" (@loginSignupCollapse.done)="handleLogin($event)">
+        <form [formGroup]="loginSignUpForm" (ngSubmit)="submit()">
+            <mat-form-field *ngIf="isSignUp">
+                <mat-icon matSuffix>person</mat-icon>
+                <input matInput
+                       #username="matInput"
+                       formControlName="username"
+                       [placeholder]="'i18n.auth.form.username' | translate">
+                <mat-error>
+                    <ng-template [ngIf]="username.ngControl.hasError('required')">
+                        {{ 'i18n.common.form.error.required' | translate }}
+                    </ng-template>
+                    <ng-template [ngIf]="username.ngControl.hasError('minlength')">
+                        {{ 'i18n.common.form.error.minLength' |
+                        translate:{length: username.ngControl.getError('minlength').requiredLength} }}
+                    </ng-template>
+                    <ng-template [ngIf]="username.ngControl.hasError('maxlength')">
+                        {{ 'i18n.common.form.error.maxLength' |
+                        translate:{length: username.ngControl.getError('maxlength').requiredLength} }}
+                    </ng-template>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-icon matSuffix>email</mat-icon>
+                <input matInput
+                       #mail="matInput"
+                       formControlName="mail"
+                       [placeholder]="'i18n.auth.form.email' | translate">
+                <mat-hint *ngIf="isSignUp">
+                    <ng-template [ngIf]="mail.ngControl.pending">
+                        {{ 'i18n.auth.form.checkingEmail' | translate }}
+                    </ng-template>
+                    <ng-template [ngIf]="mail.ngControl.valid">
                     <span class="valid">
                         {{ 'i18n.auth.form.emailAvailable' | translate }}
                     </span>
-                </ng-template>
-            </mat-hint>
-            <mat-error>
-                <ng-template [ngIf]="loginSignUpForm.get('mail').hasError('required')">
-                    {{ 'i18n.common.form.error.required' | translate }}
-                </ng-template>
-                <ng-template [ngIf]="loginSignUpForm.get('mail').touched && loginSignUpForm.get('mail').hasError('email')">
-                    {{ 'i18n.common.form.error.email' | translate }}
-                </ng-template>
-                <ng-template [ngIf]="loginSignUpForm.get('mail').getError('emailTaken') === true">
-                    {{ 'i18n.auth.form.emailTaken' | translate }}
-                </ng-template>
-            </mat-error>
-        </mat-form-field>
-        <div formGroupName="password">
-            <mat-form-field>
-                <mat-icon matSuffix>vpn_key</mat-icon>
-                <input matInput
-                       type="password"
-                       formControlName="password"
-                       [placeholder]="'i18n.auth.form.password' | translate">
+                    </ng-template>
+                </mat-hint>
                 <mat-error>
-                    <ng-template [ngIf]="loginSignUpForm.get('password.password').hasError('required')">
+                    <ng-template [ngIf]="mail.ngControl.hasError('required')">
                         {{ 'i18n.common.form.error.required' | translate }}
                     </ng-template>
-                    <ng-template [ngIf]="loginSignUpForm.get('password.password').hasError('pattern')">
-                        {{ 'i18n.auth.form.error.passwordPattern' | translate }}
+                    <ng-template
+                        [ngIf]="mail.ngControl.touched && mail.ngControl.hasError('email')">
+                        {{ 'i18n.common.form.error.email' | translate }}
+                    </ng-template>
+                    <ng-template [ngIf]="mail.ngControl.getError('emailTaken') === true">
+                        {{ 'i18n.auth.form.emailTaken' | translate }}
                     </ng-template>
                 </mat-error>
             </mat-form-field>
-            <mat-form-field *ngIf="isSignUp">
-                <mat-icon matSuffix>verified_user</mat-icon>
-                <input matInput
-                       type="password"
-                       formControlName="passwordVerify"
-                       [errorStateMatcher]="passwordVerifyErrorStateMatcher"
-                       [placeholder]="'i18n.auth.form.passwordVerify' | translate">
-                <mat-error>
-                    <ng-template [ngIf]="loginSignUpForm.get('password.passwordVerify').hasError('required')">
-                        {{ 'i18n.common.form.error.required' | translate }}
-                    </ng-template>
-                    <ng-template [ngIf]="loginSignUpForm.get('password').hasError('equals')">
-                        {{ 'i18n.auth.form.error.passwordsNotMatching' | translate }}
-                    </ng-template>
-                </mat-error>
-            </mat-form-field>
-        </div>
-        <div class="button-wrapper">
-            <button mat-raised-button
-                    type="submit"
-                    color="primary">
-                {{ 'i18n.auth.' + (isSignUp ? 'signup' : 'login') | translate }}
-            </button>
-            <button mat-button
-                    type="button"
-                    routerLink="/auth">
-                {{ 'i18n.common.action.back' | translate }}
-            </button>
-        </div>
-    </form>
-    <oc-divider></oc-divider>
-    <button mat-raised-button class="social-login-button" (click)="login(provider.GOOGLE)">
-        <img src="/assets/img/g-logo.png">
-        <span *ngIf="!isSignUp">{{ 'i18n.auth.social.login.google' | translate }}</span>
-        <span *ngIf="isSignUp">{{ 'i18n.auth.social.signup.google' | translate }}</span>
-    </button>
-    <button mat-raised-button class="social-login-button" (click)="login(provider.GITHUB)">
-        <img src="/assets/img/github-logo.png">
-        <span *ngIf="!isSignUp">{{ 'i18n.auth.social.login.github' | translate }}</span>
-        <span *ngIf="isSignUp">{{ 'i18n.auth.social.signup.github' | translate }}</span>
-    </button>
+            <div formGroupName="password">
+                <mat-form-field>
+                    <mat-icon matSuffix>vpn_key</mat-icon>
+                    <input matInput
+                           #password="matInput"
+                           type="password"
+                           formControlName="password"
+                           [placeholder]="'i18n.auth.form.password' | translate">
+                    <mat-error>
+                        <ng-template [ngIf]="password.ngControl.hasError('required')">
+                            {{ 'i18n.common.form.error.required' | translate }}
+                        </ng-template>
+                        <ng-template [ngIf]="password.ngControl.hasError('pattern')">
+                            {{ 'i18n.auth.form.error.passwordPattern' | translate }}
+                        </ng-template>
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field *ngIf="isSignUp">
+                    <mat-icon matSuffix>verified_user</mat-icon>
+                    <input matInput
+                           #passwordVerify="matInput"
+                           type="password"
+                           formControlName="passwordVerify"
+                           [errorStateMatcher]="passwordVerifyErrorStateMatcher"
+                           [placeholder]="'i18n.auth.form.passwordVerify' | translate">
+                    <mat-error>
+                        <ng-template [ngIf]="passwordVerify.ngControl.hasError('required')">
+                            {{ 'i18n.common.form.error.required' | translate }}
+                        </ng-template>
+                        <ng-template [ngIf]="loginSignUpForm.get('password').hasError('equals')">
+                            {{ 'i18n.auth.form.error.passwordsNotMatching' | translate }}
+                        </ng-template>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="button-wrapper">
+                <button mat-raised-button
+                        type="submit"
+                        color="primary">
+                    {{ 'i18n.auth.' + (isSignUp ? 'signup' : 'login') | translate }}
+                </button>
+                <button mat-button
+                        type="button"
+                        routerLink="/auth">
+                    {{ 'i18n.common.action.back' | translate }}
+                </button>
+            </div>
+        </form>
+        <oc-divider></oc-divider>
+        <button mat-raised-button class="social-login-button" (click)="login(provider.GOOGLE)">
+            <img src="/assets/img/g-logo.png">
+            <span *ngIf="!isSignUp">{{ 'i18n.auth.social.login.google' | translate }}</span>
+            <span *ngIf="isSignUp">{{ 'i18n.auth.social.signup.google' | translate }}</span>
+        </button>
+        <button mat-raised-button class="social-login-button" (click)="login(provider.GITHUB)">
+            <img src="/assets/img/github-logo.png">
+            <span *ngIf="!isSignUp">{{ 'i18n.auth.social.login.github' | translate }}</span>
+            <span *ngIf="isSignUp">{{ 'i18n.auth.social.signup.github' | translate }}</span>
+        </button>
+    </div>
 </div>

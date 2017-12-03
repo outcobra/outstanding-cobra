@@ -3,22 +3,20 @@ import {TaskService} from './service/task.service';
 import {TaskDto} from './model/task.dto';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
-import {SubjectFilterDto} from './model/subject.filter.dto';
+import {SubjectFilterDto} from './model/subject-filter.dto';
 import {MatDialog} from '@angular/material';
 import {Util} from '../core/util/util';
 import {Observable} from 'rxjs/Observable';
 import {and} from '../core/util/helper';
 import {ResponsiveHelperService} from '../core/services/ui/responsive-helper.service';
 import {NotificationWrapperService} from '../core/notifications/notification-wrapper.service';
-import {slideUpDownAnimation} from '../core/animations/animations';
 import {Subject} from 'rxjs/Subject';
 
 @Component({
     selector: 'task',
     templateUrl: './task.component.html',
     styleUrls: ['./task.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    animations: [slideUpDownAnimation]
+    encapsulation: ViewEncapsulation.None
 })
 export class TaskComponent implements OnInit, AfterViewInit {
     private _filterForm: FormGroup;

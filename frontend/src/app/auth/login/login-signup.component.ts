@@ -7,11 +7,15 @@ import {OCValidators} from '../../core/services/oc-validators';
 import {UserService} from '../../core/services/user.service';
 import {ErrorStateMatcher} from '@angular/material';
 import {PasswordVerifyErrorStateMatcher} from './password-verify-error-state-matcher';
+import {loginSignupCollapse} from '../../core/animations/animations';
+import {AnimationEvent} from '@angular/animations';
+import {isFalse, isTrue} from '../../core/util/helper';
 
 @Component({
     selector: 'login',
     templateUrl: './login-signup.component.html',
-    styleUrls: ['./login-signup.component.scss']
+    styleUrls: ['./login-signup.component.scss'],
+    animations: [loginSignupCollapse]
 })
 export class LoginSignUpComponent implements OnInit {
     public isSignUp: boolean;
@@ -60,6 +64,11 @@ export class LoginSignUpComponent implements OnInit {
                 validator: this.isSignUp ? OCValidators.equals('password', 'passwordVerify') : undefined
             })
         });
+
+        if (this._authService.isLoggedIn()) {
+            this._router.navigateByUrl('/manage');
+            return;
+        }
     }
 
     public submit() {
@@ -69,7 +78,7 @@ export class LoginSignUpComponent implements OnInit {
                 username: value.username,
                 mail: value.mail,
                 password: value.password.password
-            }).subscribe(this._handleLogin.bind(this));
+            }).subscribe();
         }
     }
 
@@ -77,10 +86,14 @@ export class LoginSignUpComponent implements OnInit {
         this._authService.loginIdentityProvider(identityProvider).subscribe();
     }
 
-    private _handleLogin(result) {
-        if (result) {
+    public handleLogin(animationEvent: AnimationEvent) {
+        if (isFalse(animationEvent.fromState) && isTrue(animationEvent.toState)) {
             this._router.navigateByUrl('/manage');
         }
+    }
+
+    get isLoggedIn(): boolean {
+        return this._authService.isLoggedIn();
     }
 
     get passwordVerifyErrorStateMatcher(): ErrorStateMatcher {

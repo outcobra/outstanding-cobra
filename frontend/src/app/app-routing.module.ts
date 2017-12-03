@@ -18,12 +18,18 @@ import {environment} from '../environments/environment';
                 {
                     path: '',
                     component: EmptyLayoutComponent,
-                    children: authRoutes
+                    children: authRoutes,
+                    data: {
+                        animation: 'empty'
+                    }
                 },
                 {
                     path: '',
                     component: AppLayoutComponent,
                     canActivateChild: [AuthGuard],
+                    data: {
+                        animation: 'app'
+                    },
                     children: [
                         {
                             path: 'exam',

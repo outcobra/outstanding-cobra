@@ -29,20 +29,36 @@ export const fadeInOutAnimation = animation([
 ]);
 */
 
+function fixContainers(positioning: 'absolute' | 'fixed' = 'fixed') {
+    return query(':enter, :leave', style({
+        position: positioning,
+        width: '100%',
+        height: '100%',
+    }));
+}
+
+function placeEnterOverLeaveState() {
+    return group([
+        query(':enter', style({zIndex: 11})),
+        query(':leave', style({zIndex: 10}))
+    ])
+}
+
+function placeLeaveOverEnterState() {
+    return group([
+        query(':enter', style({zIndex: 10})),
+        query(':leave', style({zIndex: 11}))
+    ])
+}
+
+
 export const appLayoutRouteAnimation = trigger('appLayoutRouteAnimation', [
     transition(':enter', []),
     transition('task => taskCreateUpdate, exam => examCreateUpdate', [
         query(':self', style({position: 'relative'})),
-        query(':enter, :leave', style({
-            position: 'absolute',
-            width: '100%',
-            height: '100%',
-        })),
-        query(':leave', style({zIndex: 10})),
-        query(':enter', style({
-            transform: 'translateY(-100%)',
-            zIndex: 11
-        })),
+        fixContainers('absolute'),
+        placeEnterOverLeaveState(),
+        query(':enter', style({transform: 'translateY(-100%)'})),
         group([
             query(':leave', animate(time(Timing.LEAVING, Easing.ACCELERATE), style({opacity: '0'}))),
             query(':enter', animate(time(Timing.ENTERING, Easing.DECELARATE), style({transform: 'translateY(0)'})))
@@ -54,12 +70,8 @@ export const emptyLayoutRouteAnimation = trigger('emptyLayoutRouteAnimation', [
     transition(':enter', []),
     transition('auth => login, auth => signUp', [
         query(':enter', style({opacity: 0})),
-        query(':enter, :leave', style({
-            position: 'fixed',
-            width: '100%',
-            height: '100%',
-        })),
-        query(':leave', style({zIndex: '100'})),
+        fixContainers(),
+        placeLeaveOverEnterState(),
 
         group([
             query(':enter', [
@@ -81,6 +93,23 @@ export const emptyLayoutRouteAnimation = trigger('emptyLayoutRouteAnimation', [
             ])
         ])
     ])
+]);
+
+export const topLevelRouteAnimation = trigger('topLevelRouteAnimation', [
+    transition('empty => app', [
+        fixContainers(),
+        placeLeaveOverEnterState(),
+
+        query(':leave', animate(time(Timing.NORMAL, Easing.ACCELERATE), style({transform: 'translateY(-100%)'})))
+    ])
+]);
+
+export const loginSignupCollapse = trigger('loginSignupCollapse', [
+    state('true', style({
+        height: 0,
+        overflow: 'hidden'
+    })),
+    transition('false => true', animate(time(Timing.NORMAL, Easing.STANDARD)))
 ]);
 
 export const slideUpDownAnimation = trigger('slideUpDown', [

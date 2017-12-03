@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
-import {SubjectFilterDto} from '../../../task/model/subject.filter.dto';
+import {SubjectFilterDto} from '../../../task/model/subject-filter.dto';
 import {Observable} from 'rxjs/Observable';
 import {FilterService} from './filter.service';
 

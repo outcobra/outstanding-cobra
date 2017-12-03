@@ -1,7 +1,7 @@
 import {AppService} from '../core/app.service';
 import {HttpInterceptor} from '../../http/http-interceptor';
 import {Injectable} from '@angular/core';
-import {SubjectFilterDto} from '../../../task/model/subject.filter.dto';
+import {SubjectFilterDto} from '../../../task/model/subject-filter.dto';
 import {Observable} from 'rxjs/Observable';
 
 @Injectable()

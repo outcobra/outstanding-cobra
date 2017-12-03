@@ -9,14 +9,13 @@ import {ResponsiveHelperService} from '../core/services/ui/responsive-helper.ser
 import {ConfirmDialogService} from '../core/services/confirm-dialog.service';
 import {and, isNotEmpty, isTrue, isTruthy} from '../core/util/helper';
 import {Util} from '../core/util/util';
-import {SubjectFilterDto} from '../task/model/subject.filter.dto';
+import {SubjectFilterDto} from '../task/model/subject-filter.dto';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DateUtil} from '../core/services/date-util.service';
 import {Observable} from 'rxjs/Observable';
 import {examByNameComparator} from '../core/util/comparator';
 import {Subject} from 'rxjs/Subject';
 import {MarkService} from 'app/mark/service/mark.service';
-import {slideUpDownAnimation} from '../core/animations/animations';
 import * as moment from 'moment';
 import {Moment} from 'moment';
 
@@ -24,8 +23,7 @@ import {Moment} from 'moment';
     selector: 'exam',
     templateUrl: './exam.component.html',
     styleUrls: ['./exam.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    animations: [slideUpDownAnimation]
+    encapsulation: ViewEncapsulation.None
 })
 export class ExamComponent implements OnInit, AfterViewInit {
     private _activeExams: ExamDto[] = [];

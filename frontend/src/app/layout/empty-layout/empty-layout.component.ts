@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {RouterOutlet} from '@angular/router';
+import {Component} from '@angular/core';
 import {emptyLayoutRouteAnimation} from '../../core/animations/animations';
+import {RouteAnimationContainer} from '../../core/animations/route-animation-container';
 
 @Component({
     selector: 'app-empty-layout',
@@ -8,15 +8,5 @@ import {emptyLayoutRouteAnimation} from '../../core/animations/animations';
     styleUrls: ['./empty-layout.component.scss'],
     animations: [emptyLayoutRouteAnimation]
 })
-export class EmptyLayoutComponent implements OnInit {
-
-    constructor() {
-    }
-
-    ngOnInit() {
-    }
-
-    public prepareRouteState(outlet: RouterOutlet): string {
-        return outlet.activatedRouteData['animation'] || 'default';
-    }
+export class EmptyLayoutComponent extends RouteAnimationContainer {
 }

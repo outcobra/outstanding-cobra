@@ -1,16 +1,20 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {MatIconRegistry} from '@angular/material';
 import {DomSanitizer} from '@angular/platform-browser';
+import {RouteAnimationContainer} from './core/animations/route-animation-container';
+import {topLevelRouteAnimation} from './core/animations/animations';
 
 @Component({
     selector: 'oc-app',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    animations: [topLevelRouteAnimation]
 })
-export class AppComponent implements OnInit {
+export class AppComponent extends RouteAnimationContainer implements OnInit {
     constructor(private _sanitizer: DomSanitizer,
                 private _matIconRegistry: MatIconRegistry) {
+        super();
     }
 
     ngOnInit() {
