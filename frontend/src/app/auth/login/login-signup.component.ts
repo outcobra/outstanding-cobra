@@ -9,7 +9,9 @@ import {ErrorStateMatcher} from '@angular/material';
 import {PasswordVerifyErrorStateMatcher} from './password-verify-error-state-matcher';
 import {loginSignupCollapse} from '../../core/animations/animations';
 import {AnimationEvent} from '@angular/animations';
-import {isFalse, isTrue} from '../../core/util/helper';
+import {isFalse, isTrue, isTruthy} from '../../core/util/helper';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
     selector: 'login',
@@ -25,6 +27,8 @@ export class LoginSignUpComponent implements OnInit {
     private _loginSignUpForm: FormGroup;
 
     private _passwordVerifyErrorStateMatcher: ErrorStateMatcher = new PasswordVerifyErrorStateMatcher();
+
+    private errors$: BehaviorSubject<string> = new BehaviorSubject(null);
 
     constructor(private _authService: DefaultAuthService,
                 private _router: Router,
@@ -78,18 +82,28 @@ export class LoginSignUpComponent implements OnInit {
                 username: value.username,
                 mail: value.mail,
                 password: value.password.password
-            }).subscribe();
+            }).catch(this._handleLoginError.bind(this))
+                .subscribe();
         }
     }
 
     public login(identityProvider: IdentityProvider) {
-        this._authService.loginIdentityProvider(identityProvider).subscribe();
+        this._authService.loginIdentityProvider(identityProvider)
+            .catch(this._handleLoginError.bind(this))
+            .subscribe();
     }
 
     public handleLogin(animationEvent: AnimationEvent) {
         if (isFalse(animationEvent.fromState) && isTrue(animationEvent.toState)) {
             this._router.navigateByUrl('/manage');
         }
+    }
+
+    private _handleLoginError(error) {
+        if (isTruthy(error.message)) {
+            this.errors$.next(error.message);
+        }
+        return Observable.empty();
     }
 
     get isLoggedIn(): boolean {

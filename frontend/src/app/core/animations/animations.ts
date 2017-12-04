@@ -1,5 +1,5 @@
 import {
-    animate, animation, AnimationOptions, group, query, stagger, state, style, transition, trigger,
+    animate, animation, group, query, stagger, state, style, transition, trigger,
     useAnimation
 } from '@angular/animations';
 import {Easing, time, Timing} from './timing';
@@ -19,7 +19,7 @@ export const fadeInOutAnimation = animation([
     ])
 ]);
 
-function fixContainers(positioning: 'absolute' | 'fixed' = 'fixed') {
+export function fixContainers(positioning: 'absolute' | 'fixed' = 'fixed') {
     return query(':enter, :leave', style({
         overflow: 'hidden',
         position: positioning,
@@ -28,14 +28,14 @@ function fixContainers(positioning: 'absolute' | 'fixed' = 'fixed') {
     }));
 }
 
-function placeEnterOverLeaveState() {
+export function placeEnterOverLeaveState() {
     return group([
         query(':enter', style({zIndex: 11})),
         query(':leave', style({zIndex: 10}))
     ])
 }
 
-function placeLeaveOverEnterState() {
+export function placeLeaveOverEnterState() {
     return group([
         query(':enter', style({zIndex: 10})),
         query(':leave', style({zIndex: 11}))
@@ -78,15 +78,11 @@ export const emptyLayoutRouteAnimation = trigger('emptyLayoutRouteAnimation', [
                     }))
                 )]
             ),
-            query(':leave', [
-                group([
-                    query('.login', [
-                        animate(time(Timing.NORMAL, Easing.ACCELERATE), style({transform: 'translateY(100%)'}))
-                    ]),
-                    query('.signup', [
-                        animate(time(Timing.NORMAL, Easing.ACCELERATE), style({transform: 'translateY(-100%)'}))
-                    ])
-                ])
+            query(':leave .login', [
+                animate(time(Timing.NORMAL, Easing.ACCELERATE), style({transform: 'translateY(100%)'}))
+            ]),
+            query(':leave .signup', [
+                animate(time(Timing.NORMAL, Easing.ACCELERATE), style({transform: 'translateY(-100%)'}))
             ])
         ])
     ])

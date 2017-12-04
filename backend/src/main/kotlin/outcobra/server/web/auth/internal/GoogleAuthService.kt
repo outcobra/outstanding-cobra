@@ -35,19 +35,15 @@ class GoogleAuthService @Inject constructor(
             ValidationKey.FORBIDDEN.throwException()
         }
 
-        val idToken = idTokenVerifier.verify(arg)?.payload
+        val idToken = idTokenVerifier.verify(arg).payload ?: ValidationKey.IDENTITY_PROVIDER_FAILED.throwException()
 
-        val identities = userService.findIdentitiesByIdentifierAndType(idToken!!.subject, AuthRegistry.GOOGLE)
-
-        if (identities.size > 1) {
-            ValidationKey.IDENTITY_ALREADY_EXISTS.throwException()
-        }
+        val identities = userService.findIdentitiesByIdentifierAndType(idToken.subject, AuthRegistry.GOOGLE)
 
         if (identities.size == 1) {
             return userToResponse(identities.first().user)
         }
 
-        val newUser = User(null, idToken["name"] as String, "") // TODO use mail
+        val newUser = User(null, idToken["name"] as String, idToken.email)
         val user = userRepository.save(newUser)
 
         identityRepository.save(Identity(user, AuthRegistry.GOOGLE, idToken.subject, null))

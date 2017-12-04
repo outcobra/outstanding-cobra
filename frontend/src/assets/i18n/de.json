@@ -473,6 +473,13 @@
         "mark": "Der Wert dieser Note ist ungültig",
         "relogin": "Ihr Benutzer ist nicht in der Datenbank. Bitte melden Sie sich neu an"
       },
+      "auth": {
+        "identityProvider": "Fehler beim Einloggen mit dem Identitätsprovider",
+        "password": {
+          "noMatch": "Passwort ist inkorrekt",
+          "unsafe": "Passwort ist zu schwach"
+        }
+      },
       "fallback": {
         "linkTitle": "Seite nicht gefunden",
         "heading": "Tut uns leid",

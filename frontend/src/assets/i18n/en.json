@@ -479,6 +479,13 @@
         "mark": "The value of the given mark is invalid",
         "relogin": "Your user is not in the database. Please re-login"
       },
+      "auth": {
+        "identityProvider": "Failed to log you in by identity provider",
+        "password": {
+          "noMatch": "Password does not match up with the provided mail",
+          "unsafe": "Password is too weak"
+        }
+      },
       "fallback": {
         "linkTitle": "Page not found",
         "heading": "We are sorry",
