@@ -33,6 +33,7 @@
 
     .app-content {
         flex-grow: 1;
+        position: relative;
         > *:not(router-outlet) {
             width: 100%;
             min-height: 100%;

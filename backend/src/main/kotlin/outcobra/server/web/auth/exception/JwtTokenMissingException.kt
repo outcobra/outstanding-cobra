@@ -1,3 +1,3 @@
-package me.mkweb.releasr.web.auth.exception
+package outcobra.server.web.auth.exception
 
 class JwtTokenMissingException(override val message: String?) : Exception(message)

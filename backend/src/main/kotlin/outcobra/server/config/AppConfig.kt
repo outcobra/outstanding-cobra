@@ -17,10 +17,7 @@ class AppConfig {
         fun getAuthConfigs(): PropertySourcesPlaceholderConfigurer {
             val configurer = PropertySourcesPlaceholderConfigurer()
             val yaml = YamlPropertiesFactoryBean()
-            yaml.setResources(
-                    ClassPathResource("auth0.yml"),
-                    ClassPathResource("auth.yml")
-            )
+            yaml.setResources(ClassPathResource("auth.yml"))
             configurer.setProperties(yaml.`object`)
             return configurer
         }

@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, HostBinding, OnInit, ViewChild} from '@angular/core';
 import {DefaultAuthService} from '../../core/services/auth/auth.service';
-import {NavigationEnd, Router} from '@angular/router';
+import {NavigationEnd, NavigationStart, Router} from '@angular/router';
 import {isTruthy} from '../../core/util/helper';
 import {OCTheme} from '../../oc-ui/theme/oc-theme';
 import {TranslateService} from '@ngx-translate/core';
@@ -41,7 +41,7 @@ export class AppLayoutComponent extends RouteAnimationContainer implements OnIni
         this._mobile = this._responsiveHelper.isMobile();
         this.changeTheme(this.getThemeFromLocalStorage() || OCTheme.OCEAN);
         this._router.events
-            .filter(event => event instanceof NavigationEnd)
+            .filter(event => event instanceof NavigationStart)
             .subscribe(() => {
                 if (isTruthy(this.sidenav) && this.sidenav.opened) {
                     this.sidenav.close();

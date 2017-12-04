@@ -14,6 +14,9 @@ import {SubjectMarkGroupResolver} from 'app/mark/service/subject-mark-resolver.s
         RouterModule.forChild([
             {
                 path: '',
+                data: {
+                    animation: 'mark'
+                },
                 children: [
                     {
                         path: '',
@@ -32,13 +35,14 @@ import {SubjectMarkGroupResolver} from 'app/mark/service/subject-mark-resolver.s
                         path: 'semester/:semesterId/subject/:subjectId/group',
                         children: [
                             {
-                                path: 'add',
+                                path: 'new',
                                 component: MarkGroupCreateUpdateComponent,
                                 resolve: {
                                     subjectMarkGroup: SubjectMarkGroupResolver
                                 },
                                 data: {
-                                    isEdit: false
+                                    isEdit: false,
+                                    animation: 'markGroupCreateUpdate'
                                 }
                             },
                             {
@@ -49,17 +53,19 @@ import {SubjectMarkGroupResolver} from 'app/mark/service/subject-mark-resolver.s
                                     markGroup: MarkGroupResolver
                                 },
                                 data: {
-                                    isEdit: true
+                                    isEdit: true,
+                                    animation: 'markGroupCreateUpdate'
                                 }
                             },
                             {
                                 path: ':groupId',
                                 children: [
                                     {
-                                        path: 'add',
+                                        path: 'new',
                                         component: MarkCreateUpdateComponent,
                                         data: {
-                                            isEdit: false
+                                            isEdit: false,
+                                            animation: 'markCreateUpdate'
                                         }
                                     },
                                     {
@@ -70,7 +76,8 @@ import {SubjectMarkGroupResolver} from 'app/mark/service/subject-mark-resolver.s
                                             parent: MarkGroupResolver
                                         },
                                         data: {
-                                            isEdit: true
+                                            isEdit: true,
+                                            animation: 'markCreateUpdate'
                                         }
                                     }
                                 ]

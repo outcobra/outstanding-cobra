@@ -1,36 +1,27 @@
-import {animate, group, query, stagger, state, style, transition, trigger} from '@angular/animations';
+import {
+    animate, animation, AnimationOptions, group, query, stagger, state, style, transition, trigger,
+    useAnimation
+} from '@angular/animations';
 import {Easing, time, Timing} from './timing';
 
-const routerTiming = '500ms cubic-bezier(0.215, 0.610, 0.355, 1.000)';
-
-/*const normalizeEntryAndLeave = animation([
-    query(':enter, :leave', style({position: 'absolute', top: 0, left: 0, right: 0}))
-]);
-
-export const slideInOutAnimation = animation([
-    query(':enter', [
-        style({transform: 'translateY(-100%)'}),
-        animate(routerTiming, style({transform: 'translateY(0%)'}))
-    ]),
-    query(':leave', [
-        style({transform: 'translateY(0%)'}),
-        animate(routerTiming, style({transform: 'translateY(100%)'}))
-    ])
-]);
-
 export const fadeInOutAnimation = animation([
-    query(':enter', [
-        style({opacity: 0}),
-        animate(routerTiming, style({opacity: 1}))
-    ]),
-    query(':leave', [
-        animate(routerTiming, style({opacity: 0}))
+    fixContainers('absolute'),
+    placeLeaveOverEnterState(),
+
+    group([
+        query(':enter :not(oc-title-bar)', [
+            style({opacity: 0}),
+            animate(time(), style({opacity: 1}))
+        ]),
+        query(':leave :not(oc-title-bar)', [
+            animate(time(), style({opacity: 0}))
+        ])
     ])
 ]);
-*/
 
 function fixContainers(positioning: 'absolute' | 'fixed' = 'fixed') {
     return query(':enter, :leave', style({
+        overflow: 'hidden',
         position: positioning,
         width: '100%',
         height: '100%',
@@ -53,8 +44,8 @@ function placeLeaveOverEnterState() {
 
 
 export const appLayoutRouteAnimation = trigger('appLayoutRouteAnimation', [
-    transition(':enter', []),
-    transition('task => taskCreateUpdate, exam => examCreateUpdate', [
+    transition('void => *', []),
+    transition('task => taskCreateUpdate, exam => examCreateUpdate, mark => markCreateUpdate, mark => markGroupCreateUpdate', [
         query(':self', style({position: 'relative'})),
         fixContainers('absolute'),
         placeEnterOverLeaveState(),
@@ -63,7 +54,13 @@ export const appLayoutRouteAnimation = trigger('appLayoutRouteAnimation', [
             query(':leave', animate(time(Timing.LEAVING, Easing.ACCELERATE), style({opacity: '0'}))),
             query(':enter', animate(time(Timing.ENTERING, Easing.DECELARATE), style({transform: 'translateY(0)'})))
         ])
-    ])
+    ]),
+    transition('taskCreateUpdate => *, examCreateUpdate => *, markCreateUpdate => *, markGroupCreateUpdate => *', [
+        fixContainers('absolute'),
+        placeLeaveOverEnterState(),
+        query(':leave', animate(time(Timing.NORMAL, Easing.ACCELERATE), style({transform: 'translateY(-100%)'})))
+    ]),
+    transition('* => *', useAnimation(fadeInOutAnimation))
 ]);
 
 export const emptyLayoutRouteAnimation = trigger('emptyLayoutRouteAnimation', [
@@ -100,7 +97,7 @@ export const topLevelRouteAnimation = trigger('topLevelRouteAnimation', [
         fixContainers(),
         placeLeaveOverEnterState(),
 
-        query(':leave', animate(time(Timing.NORMAL, Easing.ACCELERATE), style({transform: 'translateY(-100%)'})))
+        query(':leave', animate(time('750ms', Easing.ACCELERATE), style({transform: 'translateY(-100%)'})))
     ])
 ]);
 
@@ -109,7 +106,7 @@ export const loginSignupCollapse = trigger('loginSignupCollapse', [
         height: 0,
         overflow: 'hidden'
     })),
-    transition('false => true', animate(time(Timing.NORMAL, Easing.STANDARD)))
+    transition('false => true', animate(time()))
 ]);
 
 export const slideUpDownAnimation = trigger('slideUpDown', [

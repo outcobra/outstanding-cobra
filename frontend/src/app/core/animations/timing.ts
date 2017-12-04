@@ -1,7 +1,7 @@
 // Timings for animations
 // Source: https://material.io/guidelines/motion/duration-easing.html
 
-export function time(timing: Timing | string, easing: Easing | string) {
+export function time(timing: Timing | string = Timing.NORMAL, easing: Easing | string = Easing.STANDARD) {
     return `${timing} ${easing}`;
 }
 
