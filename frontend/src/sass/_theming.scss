@@ -20,27 +20,27 @@ $config: mat-typography-config(
 $primary: mat-palette($mat-indigo, 800, 500, 900);
 $accent: mat-palette($mat-pink, 500, 300, 900);
 
-$oc-theme-ocean: mat-light-theme($primary, $accent, $warn);
+$oc-theme-ocean: mat-light-theme($primary, $accent, $error);
 @include angular-material-theme($oc-theme-ocean);
 @include auth-theme($oc-theme-ocean);
-@include oc-theme-classes($primary, $accent, $warn);
+@include oc-theme-classes($primary, $accent, $error);
 
 .oc-theme-blood-orange {
     $primary: mat-palette($mat-deep-orange, 700, 200, 900);
     $accent: mat-palette($mat-amber, 500, 200, 700);
 
-    $oc-theme-blood-orange: mat-light-theme($primary, $accent, $warn);
+    $oc-theme-blood-orange: mat-light-theme($primary, $accent, $error);
     @include angular-material-theme($oc-theme-blood-orange);
     @include auth-theme($oc-theme-blood-orange);
-    @include oc-theme-classes($primary, $accent, $warn);
+    @include oc-theme-classes($primary, $accent, $error);
 }
 
 .oc-theme-lavender {
     $primary: mat-palette($mat-deep-purple, 700, 400, 900);
     $accent: mat-palette($mat-light-green, 700, 400, 900);
 
-    $oc-theme-lavender: mat-light-theme($primary, $accent, $warn);
+    $oc-theme-lavender: mat-light-theme($primary, $accent, $error);
     @include angular-material-theme($oc-theme-lavender);
     @include auth-theme($oc-theme-lavender);
-    @include oc-theme-classes($primary, $accent, $warn);
+    @include oc-theme-classes($primary, $accent, $error);
 }

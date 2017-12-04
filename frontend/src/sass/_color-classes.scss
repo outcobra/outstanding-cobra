@@ -6,7 +6,7 @@
     color: mat-color($palette, '#{$hue}-contrast');
 }
 
-@mixin oc-theme-classes($primary, $accent, $warn) {
+@mixin oc-theme-classes($primary, $accent, $error) {
     .color-primary {
         @include oc-color($primary);
     }
@@ -32,7 +32,7 @@
     }
 
     .text-warn {
-        color: mat-color($warn);
+        color: mat-color($error);
     }
 
     .text-accent {

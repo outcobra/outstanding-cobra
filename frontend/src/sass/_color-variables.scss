@@ -15,4 +15,7 @@ $hover-dark: rgba(0, 0, 0, 0.5);
 $hover-medium: rgba(0, 0, 0, 0.1);
 $hover-light: rgba(0, 0, 0, 0.04);
 
-$warn: mat-palette($mat-red);
+$warn: mat-palette($mat-orange);
+$error: mat-palette($mat-red);
+$success: mat-palette($mat-green);
+$info: mat-palette($mat-blue)

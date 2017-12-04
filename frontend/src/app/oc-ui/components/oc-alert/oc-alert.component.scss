@@ -1,0 +1,31 @@
+@import '../../../../sass/color-variables';
+@import '~@angular/material/theming';
+
+:host {
+    &.oc-error {
+        color: mat-color($error)
+    }
+
+    &.oc-warning {
+        color: mat-color($warn)
+    }
+
+    &.oc-success {
+        color: mat-color($success)
+    }
+
+    &.oc-info {
+        color: mat-color($info)
+    }
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    mat-icon {
+        padding: 8px;
+        font-size: 2em;
+        width: 1em;
+        height: 1em;
+    }
+}

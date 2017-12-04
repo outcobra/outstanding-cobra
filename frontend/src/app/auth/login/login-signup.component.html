@@ -1,6 +1,9 @@
 <div class="login-wrapper">
     <img src="/assets/img/oc_logo_stroke_combined_blue.svg">
     <div class="login-form-wrapper" [@loginSignupCollapse]="isLoggedIn" (@loginSignupCollapse.done)="handleLogin($event)">
+        <oc-alert type="oc-error">
+            <span>Couldn't log you in</span>
+        </oc-alert>
         <form [formGroup]="loginSignUpForm" (ngSubmit)="submit()">
             <mat-form-field *ngIf="isSignUp">
                 <mat-icon matSuffix>person</mat-icon>
