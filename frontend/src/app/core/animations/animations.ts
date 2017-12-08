@@ -71,18 +71,29 @@ export const emptyLayoutRouteAnimation = trigger('emptyLayoutRouteAnimation', [
         placeLeaveOverEnterState(),
 
         group([
-            query(':enter', [
-                stagger(1000, animate(time(Timing.NORMAL, Easing.ACCELERATE),
-                    style({
-                        opacity: 1
-                    }))
-                )]
-            ),
+            query(':enter', animate(time(Timing.NORMAL, Easing.STANDARD), style({opacity: 1}))),
             query(':leave .login', [
                 animate(time(Timing.NORMAL, Easing.ACCELERATE), style({transform: 'translateY(100%)'}))
             ]),
             query(':leave .signup', [
                 animate(time(Timing.NORMAL, Easing.ACCELERATE), style({transform: 'translateY(-100%)'}))
+            ])
+        ])
+    ]),
+    transition('* => auth', [
+        fixContainers(),
+        placeEnterOverLeaveState(),
+
+        query(':enter .login', style({transform: 'translateY(50%)'})),
+        query(':enter .signup', style({transform: 'translateY(-50%)'})),
+
+        group([
+            query(':leave', animate(time(Timing.NORMAL, Easing.STANDARD), style({opacity: 0}))),
+            query(':enter .login', [
+                animate(time(Timing.NORMAL, Easing.ACCELERATE), style({transform: 'translateY(0)'}))
+            ]),
+            query(':enter .signup', [
+                animate(time(Timing.NORMAL, Easing.ACCELERATE), style({transform: 'translateY(0)'}))
             ])
         ])
     ])
@@ -103,19 +114,4 @@ export const loginSignupCollapse = trigger('loginSignupCollapse', [
         overflow: 'hidden'
     })),
     transition('false => true', animate(time()))
-]);
-
-export const slideUpDownAnimation = trigger('slideUpDown', [
-    state('1', style({
-        height: '*',
-        paddingTop: '*',
-        paddingBottom: '*'
-    })),
-    state('0', style({
-        height: '0',
-        paddingTop: '0',
-        paddingBottom: '0'
-    })),
-    transition('1 => 0', animate('250ms ease-in')),
-    transition('0 => 1', animate('250ms ease-out'))
 ]);
