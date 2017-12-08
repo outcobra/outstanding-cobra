@@ -25,8 +25,10 @@ export class LoginSignUpComponent implements OnInit {
     public provider = IdentityProvider;
 
     private _loginSignUpForm: FormGroup;
-
     private _passwordVerifyErrorStateMatcher: ErrorStateMatcher = new PasswordVerifyErrorStateMatcher();
+
+    private _target: string;
+    private readonly _defaultTarget = '/manage';
 
     private errors$: BehaviorSubject<string> = new BehaviorSubject(null);
 
@@ -39,6 +41,9 @@ export class LoginSignUpComponent implements OnInit {
 
     ngOnInit() {
         this.isSignUp = this._route.snapshot.data['isSignUp'] || false;
+        this._route.queryParamMap
+            .map(map => map.get('target') || this._defaultTarget)
+            .subscribe(target => this._target = target);
         this._loginSignUpForm = this._formBuilder.group({
             mail: [
                 '',
@@ -70,7 +75,7 @@ export class LoginSignUpComponent implements OnInit {
         });
 
         if (this._authService.isLoggedIn()) {
-            this._router.navigateByUrl('/manage');
+            this._router.navigateByUrl(this._target);
             return;
         }
     }
@@ -95,7 +100,7 @@ export class LoginSignUpComponent implements OnInit {
 
     public handleLogin(animationEvent: AnimationEvent) {
         if (isFalse(animationEvent.fromState) && isTrue(animationEvent.toState)) {
-            this._router.navigateByUrl('/manage');
+            this._router.navigateByUrl(this._target);
         }
     }
 

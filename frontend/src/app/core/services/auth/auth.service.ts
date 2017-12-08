@@ -14,7 +14,6 @@ declare let gapi: any;
 
 @Injectable()
 export class DefaultAuthService implements AuthService {
-    private readonly _defaultRedirectRoute = '/manage';
     private _googleAuth;
 
     constructor(private _router: Router,

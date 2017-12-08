@@ -5,7 +5,6 @@ import {EmptyLayoutComponent} from './layout/empty-layout/empty-layout.component
 import {AppLayoutComponent} from './layout/app-layout/app-layout.component';
 import {AuthGuard} from './core/services/auth/auth-guard.service';
 import {authRoutes} from './auth/auth-routes';
-import {environment} from '../environments/environment';
 
 @NgModule({
     imports: [
@@ -26,6 +25,7 @@ import {environment} from '../environments/environment';
                 {
                     path: '',
                     component: AppLayoutComponent,
+                    canActivate: [AuthGuard],
                     canActivateChild: [AuthGuard],
                     data: {
                         animation: 'app'
@@ -60,7 +60,7 @@ import {environment} from '../environments/environment';
             ],
             {
                 // Prints all Routing Events
-                enableTracing: environment.enableRouteTracing
+                //enableTracing: environment.enableRouteTracing
             })
     ],
     exports: [
