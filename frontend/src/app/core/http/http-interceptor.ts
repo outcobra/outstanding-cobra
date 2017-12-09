@@ -4,10 +4,11 @@ import {Observable} from 'rxjs/Observable';
 import {dateReplacer} from './http-util';
 import {RequestOptions} from './request-options';
 import {ValidationException} from './validation-exception';
-import {isFalsy, isNotEmpty} from '../util/helper';
+import {isEmpty, isFalsy, isNotEmpty} from '../util/helper';
 import {NotificationWrapperService} from '../notifications/notification-wrapper.service';
 import {RequestArgs} from '@angular/http/src/interfaces';
 import {environment} from '../../../environments/environment';
+import {Router} from '@angular/router';
 
 /**
  * HttpInterceptor to customize the http request and http responses
@@ -28,7 +29,9 @@ export class HttpInterceptor {
     private _apiNames: string[];
     private _defaultApiName: string;
 
-    constructor(private http: Http, private _notificationsService: NotificationWrapperService) {
+    constructor(private http: Http,
+                private _router: Router,
+                private _notificationsService: NotificationWrapperService) {
         this._defaultApiName = environment.api.defaultApiName;
         this._apiNames = environment.api.apis
             .map(api => api.name);
@@ -245,7 +248,12 @@ export class HttpInterceptor {
     private _addAuthToken(request: RequestOptions) {
         let api = this._getApiFromConfig(request.apiName);
         if (api.authToken === true) {
-            request.headers['Authorization'] = 'Bearer ' + localStorage.getItem(environment.locStorage.tokenLocation);
+            let token = localStorage.getItem(environment.locStorage.tokenLocation);
+            if (isEmpty(token)) {
+
+            }
+
+            request.headers['Authorization'] = 'Bearer ' + token;
         }
     }
 

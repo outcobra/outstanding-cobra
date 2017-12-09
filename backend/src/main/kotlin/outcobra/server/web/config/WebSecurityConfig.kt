@@ -1,5 +1,6 @@
 package outcobra.server.web.config
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.boot.autoconfigure.security.SecurityProperties
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.annotation.Order
@@ -10,6 +11,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.builders.WebSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
+import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 import outcobra.server.config.ProfileRegistry
 import outcobra.server.web.auth.JwtAuthenticationFilter
@@ -28,6 +30,7 @@ import javax.inject.Inject
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER + 1)
 class WebSecurityConfig
 @Inject constructor(val environment: Environment,
+                    val objectMapper: ObjectMapper,
                     val jwtAuthenticationProvider: JwtAuthenticationProvider) : WebSecurityConfigurerAdapter() {
 
     override fun configure(web: WebSecurity?) {
@@ -65,8 +68,9 @@ class WebSecurityConfig
         }
 
         if (!environment.acceptsProfiles(ProfileRegistry.BASIC_AUTH_SECURITY_MOCK)) {
-            http.addFilterBefore(JwtAuthenticationFilter(authenticationManager()), UsernamePasswordAuthenticationFilter::class.java)
+            http.addFilterBefore(JwtAuthenticationFilter(authenticationManager(), objectMapper), UsernamePasswordAuthenticationFilter::class.java)
         }
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
     }
 
     override fun configure(auth: AuthenticationManagerBuilder?) {

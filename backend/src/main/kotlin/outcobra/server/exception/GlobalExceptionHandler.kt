@@ -1,7 +1,5 @@
 package outcobra.server.exception
 
-import outcobra.server.web.auth.exception.JwtTokenMalformedException
-import outcobra.server.web.auth.exception.JwtTokenMissingException
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
@@ -38,12 +36,5 @@ class GlobalExceptionHandler {
     fun handleNotFound(exception: EntityNotFoundException): ValidationException {
         exception.printStackTrace()
         return ValidationKey.ENTITY_NOT_FOUND.makeException(nestedCause = exception)
-    }
-
-    @ResponseStatus(HttpStatus.FORBIDDEN)
-    @ExceptionHandler(JwtTokenMissingException::class, JwtTokenMalformedException::class)
-    @ResponseBody
-    fun handleAuthErrors(exception: Exception): ValidationException {
-        return ValidationKey.FORBIDDEN.makeException(nestedCause = exception)
     }
 }

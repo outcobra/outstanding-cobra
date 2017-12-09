@@ -5,6 +5,7 @@ import {EmptyLayoutComponent} from './layout/empty-layout/empty-layout.component
 import {AppLayoutComponent} from './layout/app-layout/app-layout.component';
 import {AuthGuard} from './core/services/auth/auth-guard.service';
 import {authRoutes} from './auth/auth-routes';
+import {environment} from '../environments/environment';
 
 @NgModule({
     imports: [
@@ -25,8 +26,6 @@ import {authRoutes} from './auth/auth-routes';
                 {
                     path: '',
                     component: AppLayoutComponent,
-                    canActivate: [AuthGuard],
-                    canActivateChild: [AuthGuard],
                     data: {
                         animation: 'app'
                     },
@@ -34,21 +33,29 @@ import {authRoutes} from './auth/auth-routes';
                         {
                             path: 'exam',
                             loadChildren: 'app/exam/exam.module#ExamModule',
+                            canActivate: [AuthGuard],
+                            canActivateChild: [AuthGuard],
                             canLoad: [AuthGuard]
                         },
                         {
                             path: 'mark',
                             loadChildren: 'app/mark/mark.module#MarkModule',
+                            canActivate: [AuthGuard],
+                            canActivateChild: [AuthGuard],
                             canLoad: [AuthGuard]
                         },
                         {
                             path: 'task',
                             loadChildren: 'app/task/task.module#TaskModule',
+                            canActivate: [AuthGuard],
+                            canActivateChild: [AuthGuard],
                             canLoad: [AuthGuard]
                         },
                         {
                             path: 'manage',
                             loadChildren: 'app/manage/manage.module#ManageModule',
+                            canActivate: [AuthGuard],
+                            canActivateChild: [AuthGuard],
                             canLoad: [AuthGuard]
                         }
                     ]
@@ -60,7 +67,7 @@ import {authRoutes} from './auth/auth-routes';
             ],
             {
                 // Prints all Routing Events
-                //enableTracing: environment.enableRouteTracing
+                enableTracing: environment.enableRouteTracing
             })
     ],
     exports: [

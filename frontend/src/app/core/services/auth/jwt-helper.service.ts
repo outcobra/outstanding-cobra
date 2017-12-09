@@ -14,11 +14,11 @@ export class JwtHelperService {
             return true;
         }
         try {
-            let decoded = decode(token, '', false);
+            let decoded = decode(token, '', true);
             if (isFalsy(decoded['exp'])) {
                 return true;
             }
-            return moment.unix(decoded['exp']).isAfter(moment());
+            return moment.unix(decoded['exp']).isBefore(moment());
         } catch (e) {
             return false;
         }
