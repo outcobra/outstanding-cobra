@@ -12,6 +12,7 @@ import {AnimationEvent} from '@angular/animations';
 import {isFalse, isTrue, isTruthy} from '../../core/util/helper';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Observable} from 'rxjs/Observable';
+import {UsernamePasswordDto} from '../model/username-password.dto';
 
 @Component({
     selector: 'login',
@@ -83,17 +84,27 @@ export class LoginSignUpComponent implements OnInit {
     public submit() {
         if (this._loginSignUpForm.valid && this._loginSignUpForm.dirty) {
             let value = this._loginSignUpForm.value;
-            this._authService.loginWithMailAndPassword({
-                username: value.username,
+            let usernamePasswordTuple = {
+                username: this.isSignUp ? value.username : undefined,
                 mail: value.mail,
-                password: value.password.password
-            }).catch(this._handleLoginError.bind(this))
+                password: value.password.password,
+                passwordVerify: this.isSignUp ? value.password.passwordVerify : undefined
+            } as UsernamePasswordDto;
+            let authFunc: (UsernamePasswordDto) => Observable<boolean> = this.isSignUp
+                ? this._authService.signUpWithMailAndPassword
+                : this._authService.loginWithMailAndPassword;
+
+            authFunc.call(this._authService, usernamePasswordTuple)
+                .catch(this._handleLoginError.bind(this))
                 .subscribe();
         }
     }
 
     public login(identityProvider: IdentityProvider) {
-        this._authService.loginIdentityProvider(identityProvider)
+        let authFunc: (UsernamePasswordDto) => Observable<boolean> = this.isSignUp
+            ? this._authService.signUpIdentityProvider
+            : this._authService.loginIdentityProvider;
+        authFunc.call(this._authService, identityProvider)
             .catch(this._handleLoginError.bind(this))
             .subscribe();
     }

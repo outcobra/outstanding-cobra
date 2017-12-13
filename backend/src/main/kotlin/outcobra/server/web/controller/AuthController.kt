@@ -20,13 +20,23 @@ class AuthController @Inject constructor(
         @Qualifier(AuthRegistry.GOOGLE) val googleAuth: GoogleAuthService,
         @Qualifier(AuthRegistry.PASSWORD) val usernamePasswordAuthService: UsernamePasswordAuthService) {
 
-    @PostMapping("/google")
-    fun handleGoogleAuth(@RequestBody idToken: TextNode): AuthResponseDto {
-        return googleAuth.loginOrSignUp(idToken.asText())
+    @PostMapping("/login/google")
+    fun handleGoogleLogin(@RequestBody idToken: TextNode): AuthResponseDto {
+        return googleAuth.login(idToken.asText())
     }
 
-    @PostMapping("/password")
-    fun handleUsernamePasswordAuth(@RequestBody usernamePasswordDto: UsernamePasswordDto): AuthResponseDto {
-        return usernamePasswordAuthService.loginOrSignUp(usernamePasswordDto)
+    @PostMapping("/signUp/google")
+    fun handleGoogleSignUp(@RequestBody idToken: TextNode): AuthResponseDto {
+        return googleAuth.signUp(idToken.asText())
+    }
+
+    @PostMapping("/login")
+    fun handleUsernamePasswordLogin(@RequestBody usernamePasswordDto: UsernamePasswordDto): AuthResponseDto {
+        return usernamePasswordAuthService.login(usernamePasswordDto)
+    }
+
+    @PostMapping("/signUp")
+    fun handleUsernamePasswordSignUp(@RequestBody usernamePasswordDto: UsernamePasswordDto): AuthResponseDto {
+        return usernamePasswordAuthService.signUp(usernamePasswordDto)
     }
 }
