@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service
 import outcobra.server.annotation.DefaultImplementation
 import outcobra.server.config.Auth0Client
 import outcobra.server.config.ProfileRegistry.Companion.BASIC_AUTH_SECURITY_MOCK
+import outcobra.server.exception.InvalidUserDetailException
 import outcobra.server.exception.ValidationException
 import outcobra.server.exception.ValidationKey
 import outcobra.server.model.QUser
@@ -32,8 +33,11 @@ class DefaultUserService
     }
 
     override fun getTokenUserId(): String {
-        val userDetails = SecurityContextHolder.getContext().authentication.principal as Auth0UserDetails
-        return userDetails.getAuth0Attribute("sub") as String
+        val authenticationPrincipal = SecurityContextHolder.getContext().authentication.principal
+        if (authenticationPrincipal is Auth0UserDetails) {
+            return authenticationPrincipal.getAuth0Attribute("sub") as String
+        }
+        throw InvalidUserDetailException("authentication principal: ${authenticationPrincipal} cannot be cast to ${Auth0UserDetails::class.qualifiedName}")
     }
 
     override fun getCurrentUser() = userRepository.findOne(QUser.user.auth0Id.eq(getTokenUserId()))

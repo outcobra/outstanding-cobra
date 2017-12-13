@@ -16,6 +16,7 @@ enum class ValidationKey(val i18nMessage: String = "i18n.error.http.500.message"
     INVALID_DTO("i18n.error.http.400.message", "i18n.error.http.400.title"),
     START_BIGGER_THAN_END("i18n.common.form.error.dateToIsBeforeDateFrom", "i18n.error.http.400.title"),
     FORBIDDEN("i18n.error.http.403.message", "i18n.error.http.403.title"),
+    UNAUTHORIZED("i18n.error.http.401.message", "i18n.error.http.401.title"),
     SEMESTER_OVERLAP("i18n.modules.manage.semester.error.overlap", "i18n.error.http.400.title"),
     OUTSIDE_PARENT("i18n.error.validation.outsideParent.message", "i18n.error.validation.outsideParent.title"),
     INVALID_MARK("i18n.error.validation.mark", "i18n.error.http.400.title"),
