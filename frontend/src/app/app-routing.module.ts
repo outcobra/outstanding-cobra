@@ -6,19 +6,15 @@ import {AppLayoutComponent} from './layout/app-layout/app-layout.component';
 import {AuthGuard} from './core/services/auth/auth-guard.service';
 import {authRoutes} from './auth/auth-routes';
 import {environment} from '../environments/environment';
+import {mainRoutes} from './main/main-routes';
 
 @NgModule({
     imports: [
         RouterModule.forRoot([
                 {
                     path: '',
-                    pathMatch: 'full',
-                    redirectTo: 'manage'
-                },
-                {
-                    path: '',
                     component: EmptyLayoutComponent,
-                    children: authRoutes,
+                    children: authRoutes.concat(mainRoutes),
                     data: {
                         animation: 'empty'
                     }

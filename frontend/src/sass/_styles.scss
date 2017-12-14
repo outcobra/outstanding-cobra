@@ -230,3 +230,8 @@ button[mat-fab] {
 oc-app.oc-mobile button[mat-fab] {
     bottom: 23px;
 }
+
+mat-toolbar.transparent-toolbar {
+    background: none !important;
+    box-shadow: none !important;
+}
