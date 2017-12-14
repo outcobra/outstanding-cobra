@@ -33,7 +33,7 @@ open class DefaultTaskService
                 Task::class) {
 
     override fun readAll(): List<TaskDto> {
-        val userId = userService.getCurrentUser()?.id
+        val userId = userService.getCurrentUser().id
         val filter = QTask.task.subject.semester.schoolYear.schoolClass.institution.user.id.eq(userId)
         return repository.findAll(filter).map { mapper.toDto(it) }
     }

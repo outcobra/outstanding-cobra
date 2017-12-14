@@ -27,32 +27,22 @@ export class DefaultAuthService implements AuthService {
         );
     }
 
-    /**
-     *
-     * @param usernamePassword
-     */
     public loginWithMailAndPassword(usernamePassword: UsernamePasswordDto): Observable<boolean> {
-        if (this.isLoggedIn()) {
-            return Observable.of(true);
-        }
-        return this._http.post<AuthResponseDto>('/api/auth/password', usernamePassword, 'outcobra_public')
-            .map(token => this._afterLogin(token));
+        return this._handleUsernamePasswordAuth(usernamePassword, false);
+    }
+
+    public signUpWithMailAndPassword(usernamePassword: UsernamePasswordDto): Observable<boolean> {
+        return this._handleUsernamePasswordAuth(usernamePassword, true);
     }
 
     public loginIdentityProvider(identityProvider: IdentityProvider): Observable<boolean> {
-        if (identityProvider == IdentityProvider.GOOGLE) {
-            return Observable.fromPromise(this._googleAuth.signIn())
-                .switchMap((user: any) => this._http.post<AuthResponseDto>('/api/auth/google/', user.getAuthResponse().id_token, 'outcobra_public'))
-                .map(token => this._afterLogin(token));
-        }
-        return Observable.throw(new Error('Identity provider not supported'));
+        return this._handleIdentityProviderAuth(identityProvider, false);
     }
 
-    /**
-     * logs the user out and removes the corresponding localStorage items
-     *
-     * redirects to the home
-     */
+    public signUpIdentityProvider(identityProvider: IdentityProvider): Observable<boolean> {
+        return this._handleIdentityProviderAuth(identityProvider, true);
+    }
+
     public logout() {
         Raven.setUserContext();
         localStorage.removeItem(environment.locStorage.tokenLocation);
@@ -60,11 +50,6 @@ export class DefaultAuthService implements AuthService {
         this._router.navigateByUrl('/auth');
     }
 
-    /**
-     * checks whether a not expired valid JWT-Token is stored in the localStorage
-     *
-     * @returns {boolean}
-     */
     public isLoggedIn(): boolean {
         return this._jwtHelper.hasToken() && !this._jwtHelper.isTokenExpired();
     }
@@ -75,6 +60,23 @@ export class DefaultAuthService implements AuthService {
             return true;
         }
         return false;
+    }
+
+    private _handleUsernamePasswordAuth(usernamePassword: UsernamePasswordDto, isSignUp: boolean): Observable<boolean> {
+        if (this.isLoggedIn()) {
+            return Observable.of(true);
+        }
+        return this._http.post<AuthResponseDto>(`/api/auth/${isSignUp ? 'signUp' : 'login'}`, usernamePassword, 'outcobra_public')
+            .map(token => this._afterLogin(token));
+    }
+
+    private _handleIdentityProviderAuth(identityProvider: IdentityProvider, isSignUp: boolean): Observable<boolean> {
+        if (identityProvider == IdentityProvider.GOOGLE) {
+            return Observable.fromPromise(this._googleAuth.signIn())
+                .switchMap((user: any) => this._http.post<AuthResponseDto>(`/api/auth/${isSignUp ? 'signUp' : 'login'}/google/`, user.getAuthResponse().id_token, 'outcobra_public'))
+                .map(token => this._afterLogin(token));
+        }
+        return Observable.throw(new Error('Identity provider not supported'));
     }
 }
 

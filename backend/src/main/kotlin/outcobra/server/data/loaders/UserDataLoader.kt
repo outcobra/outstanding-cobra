@@ -37,7 +37,7 @@ class UserDataLoader
 
 
     override fun load() {
-        authService.loginOrSignUp(UsernamePasswordDto(loadedUserName, loadedUserMail, loadedPassword))
+        authService.signUp(UsernamePasswordDto(loadedUserName, loadedUserMail, loadedPassword, loadedPassword))
         TEST_USER = userRepository.findByMail(loadedUserMail)
         LOGGER.debug("Signing up User: ${TEST_USER?.username ?: "null"}")
 

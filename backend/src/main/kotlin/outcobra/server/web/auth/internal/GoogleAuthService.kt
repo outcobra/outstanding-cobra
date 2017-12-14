@@ -1,5 +1,6 @@
 package outcobra.server.web.auth.internal
 
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier
 import com.google.api.client.http.javanet.NetHttpTransport
 import com.google.api.client.json.jackson2.JacksonFactory
@@ -30,12 +31,19 @@ class GoogleAuthService @Inject constructor(
             .setAudience(listOf(clientId))
             .build()
 
-    override fun loginOrSignUp(arg: String): AuthResponseDto {
-        if (arg.isEmpty()) {
-            ValidationKey.FORBIDDEN.throwException()
-        }
+    override fun login(arg: String): AuthResponseDto {
+        val idToken = verifyToken(arg)
 
-        val idToken = idTokenVerifier.verify(arg).payload ?: ValidationKey.IDENTITY_PROVIDER_FAILED.throwException()
+        val identities = userService.findIdentitiesByIdentifierAndType(idToken.subject, AuthRegistry.GOOGLE)
+
+        if (identities.size == 1) {
+            return userToResponse(identities.first().user)
+        }
+        ValidationKey.USER_NOT_IN_DATABASE_RELOGIN.throwException()
+    }
+
+    override fun signUp(arg: String): AuthResponseDto {
+        val idToken = verifyToken(arg)
 
         val identities = userService.findIdentitiesByIdentifierAndType(idToken.subject, AuthRegistry.GOOGLE)
 
@@ -49,5 +57,12 @@ class GoogleAuthService @Inject constructor(
         identityRepository.save(Identity(user, AuthRegistry.GOOGLE, idToken.subject, null))
 
         return userToResponse(user)
+    }
+
+    private fun verifyToken(token: String): GoogleIdToken.Payload {
+        if (token.isEmpty()) {
+            ValidationKey.FORBIDDEN.throwException()
+        }
+        return idTokenVerifier.verify(token).payload ?: ValidationKey.IDENTITY_PROVIDER_FAILED.throwException()
     }
 }

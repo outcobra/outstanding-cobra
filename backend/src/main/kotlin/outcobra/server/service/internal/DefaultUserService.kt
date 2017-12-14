@@ -47,33 +47,4 @@ class DefaultUserService
     override fun checkEmailNotTaken(mail: String): Boolean {
         return userRepository.findByMail(mail) == null
     }
-
-    /*override fun readUserById(id: Long): User {
-        return userRepository.getOne(id)
-    }
-
-    override fun getTokenUserId(): String {
-        val userDetails = SecurityContextHolder.getContext().authentication.principal as Auth0UserDetails
-        return userDetails.getAuth0Attribute("sub") as String
-    }
-
-    override fun getCurrentUser() = userRepository.findOne(QUser.user.auth0Id.eq(getTokenUserId()))
-            ?: ValidationKey.USER_NOT_IN_DATABASE_RELOGIN.throwException()
-
-    override fun getCurrentUserDto() = userDtoMapper.toDto(getCurrentUser())!!
-
-    override fun getUserProfile(): UserProfile {
-        val auth = SecurityContextHolder.getContext().authentication
-        return UserProfile("", "", "", "", "", true, "", Date(), listOf(), mapOf(), mapOf(), mapOf(), "")
-    }
-
-    override fun loginRegister(): UserDto {
-        return try {
-            userDtoMapper.toDto(getCurrentUser())
-        } catch (vex: ValidationException) {
-            val userDetails = getUserProfile()
-            val newUser = User(userDetails.id, userDetails.nickname, userDetails.email, null)
-            userDtoMapper.toDto(userRepository.save(newUser))
-        }
-    }*/
 }

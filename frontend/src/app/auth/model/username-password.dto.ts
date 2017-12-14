@@ -1,5 +1,6 @@
 export interface UsernamePasswordDto {
     username: string,
     mail: string,
-    password: string
+    password: string,
+    passwordVerify: string
 }

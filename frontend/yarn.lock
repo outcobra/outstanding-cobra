@@ -117,7 +117,7 @@
   dependencies:
     tslib "^1.7.1"
 
-"@angular/flex-layout@^2.0.0-beta.8":
+"@angular/flex-layout@^2.0.0-beta.9":
   version "2.0.0-rc.1"
   resolved "https://pkg.pegnu.cloud/repository/npm/@angular/flex-layout/-/flex-layout-2.0.0-rc.1.tgz#96fa7f85b2c4bacf2784913a2d607e2ed23dc7f1"
 
@@ -133,9 +133,9 @@
   dependencies:
     tslib "^1.7.1"
 
-"@angular/material-moment-adapter@https://github.com/angular/material2-moment-adapter-builds":
-  version "2.0.0-beta.12-a7faebc"
-  resolved "https://github.com/angular/material2-moment-adapter-builds#5bf8068e5cadb618a034a21755fdaf3b3f1a88d1"
+"@angular/material-moment-adapter@https://github.com/angular/material2-moment-adapter-builds#2.0.0-beta.12-520d83b":
+  version "2.0.0-beta.12-520d83b"
+  resolved "https://github.com/angular/material2-moment-adapter-builds#710dd1074256a8b53665d7b0d5ce043bc354e740"
   dependencies:
     tslib "^1.7.1"
 
@@ -5021,7 +5021,13 @@ rx-lite@*, rx-lite@^4.0.8:
   version "4.0.8"
   resolved "https://pkg.pegnu.cloud/repository/npm/rx-lite/-/rx-lite-4.0.8.tgz#0b1e11af8bc44836f04a6407e92da42467b79444"
 
-rxjs@5.4.3, rxjs@^5.4.2:
+rxjs@5.5.0:
+  version "5.5.0"
+  resolved "https://pkg.pegnu.cloud/repository/npm/rxjs/-/rxjs-5.5.0.tgz#26d8f3866eb700e247e0728a147c3d628993d812"
+  dependencies:
+    symbol-observable "^1.0.1"
+
+rxjs@^5.4.2:
   version "5.4.3"
   resolved "https://pkg.pegnu.cloud/repository/npm/rxjs/-/rxjs-5.4.3.tgz#0758cddee6033d68e0fd53676f0f3596ce3d483f"
   dependencies:
