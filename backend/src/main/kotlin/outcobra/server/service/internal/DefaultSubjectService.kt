@@ -36,7 +36,7 @@ class DefaultSubjectService
     }
 
     override fun readAllByUser(): List<SubjectDto> {
-        val userId = userService.getCurrentUser()?.id
+        val userId = userService.getCurrentUser().id
         val filter = QSubject.subject.semester.schoolYear.schoolClass.institution.user.id.eq(userId)
         return repository.findAll(filter).map { mapper.toDto(it) }
     }

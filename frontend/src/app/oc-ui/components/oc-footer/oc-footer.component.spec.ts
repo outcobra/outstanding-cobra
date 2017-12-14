@@ -5,6 +5,7 @@ import {By} from '@angular/platform-browser';
 import {MockInfoService} from '../../../core/mock/info/mock-info.service';
 import {TestModule} from '../../../core/mock/test.module';
 import {InfoService} from '../../../core/services/info.service';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('OCFooterComponent', () => {
     let component: OCFooterComponent;
@@ -13,9 +14,12 @@ describe('OCFooterComponent', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            declarations: [OCFooterComponent],
+            declarations: [
+                OCFooterComponent
+            ],
             imports: [
-                TestModule
+                TestModule,
+                RouterTestingModule
             ]
         }).compileComponents();
     });

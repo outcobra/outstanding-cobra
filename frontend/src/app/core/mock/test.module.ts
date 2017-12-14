@@ -50,6 +50,8 @@ import {MockExamService} from './exam/mock-exam.service';
 import {ExamService} from '../../exam/service/exam.service';
 import {ExamTaskService} from '../../exam/service/exam-task.service';
 import {MockExamTaskService} from './exam/mock-exam-task.service';
+import {UserService} from '../services/user.service';
+import {MockUserService} from './auth/mock-user.service';
 
 @NgModule({
     imports: [
@@ -95,6 +97,10 @@ import {MockExamTaskService} from './exam/mock-exam-task.service';
         {
             provide: DefaultAuthService,
             useClass: MockAuthService
+        },
+        {
+            provide: UserService,
+            useClass: MockUserService
         },
         {
             provide: ResponsiveHelperService,

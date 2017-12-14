@@ -25,15 +25,15 @@ class Mocker(userRepository: UserRepository) {
     lateinit var userService: UserService
 
     init {
-        USER = userRepository.save(User(null, USER_AUTH0_ID, USER_NICKNAME, null))
-        USER2 = userRepository.save(User(null, USER2_AUTH0_ID, USER2_NICKNAME, null))
+        USER = userRepository.save(User(null, USER_NICKNAME, USER_MAIL, null))
+        USER2 = userRepository.save(User(null, USER2_NICKNAME, USER2_MAIL, null))
     }
 
     companion object {
-        val USER_AUTH0_ID = "test|1111111110"
+        val USER_MAIL = "jmesserli@outcobra.school"
         val USER_NICKNAME = "jmesserli"
 
-        val USER2_AUTH0_ID = "saf123123"
+        val USER2_MAIL = "needToRoll@outcobra.school"
         val USER2_NICKNAME = "needToRoll"
     }
 

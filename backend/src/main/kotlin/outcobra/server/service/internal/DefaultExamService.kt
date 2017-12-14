@@ -32,12 +32,9 @@ class DefaultExamService
 
     override fun readAll(): List<ExamDto> {
         val currentUser = requestValidator.userService.getCurrentUser()
-        if (currentUser != null) {
-            val filterByOwner = QExam.exam.subject.semester.schoolYear.schoolClass.institution.user.id.eq(currentUser.id) // TODO match user
-            val exams = repository.findAll(filterByOwner)
-            return exams.map { mapper.toDto(it) }
-        }
-        ValidationKey.FORBIDDEN.throwException()
+        val filterByOwner = QExam.exam.subject.semester.schoolYear.schoolClass.institution.user.id.eq(currentUser.id) // TODO match user
+        val exams = repository.findAll(filterByOwner)
+        return exams.map { mapper.toDto(it) }
     }
 
     override fun save(dto: ExamDto): ExamDto {

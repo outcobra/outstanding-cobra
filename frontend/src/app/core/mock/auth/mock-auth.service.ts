@@ -1,9 +1,23 @@
 import {Injectable} from '@angular/core';
 import {AuthService} from '../../interfaces/auth.service';
+import {UsernamePasswordDto} from '../../../auth/model/username-password.dto';
+import {IdentityProvider} from '../../services/auth/identity-provider';
 
 @Injectable()
 export class MockAuthService implements AuthService {
-    login(redirectRoute: string) {
+    loginWithMailAndPassword(usernamePassword: UsernamePasswordDto) {
+        throw new Error('Method not implemented.');
+    }
+
+    signUpWithMailAndPassword(usernamePassword: UsernamePasswordDto) {
+        throw new Error('Method not implemented.');
+    }
+
+    loginIdentityProvider(identityProvider: IdentityProvider) {
+        throw new Error('Method not implemented.');
+    }
+
+    signUpIdentityProvider(identityProvider: IdentityProvider) {
         throw new Error('Method not implemented.');
     }
 
@@ -12,7 +26,6 @@ export class MockAuthService implements AuthService {
     }
 
     isLoggedIn() {
-        throw new Error('Method not implemented.');
+        return false;
     }
-
 }
