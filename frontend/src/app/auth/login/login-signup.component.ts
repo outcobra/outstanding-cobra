@@ -31,7 +31,7 @@ export class LoginSignUpComponent implements OnInit {
     private _target: string;
     private readonly _defaultTarget = '/manage';
 
-    private errors$: BehaviorSubject<string> = new BehaviorSubject(null);
+    public readonly errors$: BehaviorSubject<string> = new BehaviorSubject(null);
 
     constructor(private _authService: DefaultAuthService,
                 private _router: Router,
