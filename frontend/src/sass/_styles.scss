@@ -235,3 +235,9 @@ mat-toolbar.transparent-toolbar {
     background: none !important;
     box-shadow: none !important;
 }
+
+.oc-title-logo {
+    display: flex;
+    height: 100%;
+    cursor: pointer;
+}

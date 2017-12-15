@@ -1,8 +1,8 @@
-<header fxLayout fxLayoutAlign="center start">
-    <div class="container middle-container">
-        <img src="/assets/img/oc_logo_stroke_combined_blue.svg">
-    </div>
-</header>
+<mat-toolbar>
+    <img class="oc-title-logo" src="/assets/img/oc_logo_stroke_combined_blue.svg">
+    <span class="toolbar-fill-space"></span>
+    <button mat-raised-button color="primary">{{ 'i18n.auth.login' | translate }}</button>
+</mat-toolbar>
 
 <div class="content">
     <router-outlet></router-outlet>
