@@ -2,10 +2,7 @@ package outcobra.server.web.auth.internal
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier
-import com.google.api.client.http.javanet.NetHttpTransport
-import com.google.api.client.json.jackson2.JacksonFactory
 import org.springframework.beans.factory.annotation.Qualifier
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 import outcobra.server.exception.ValidationKey
 import outcobra.server.model.Identity
@@ -16,25 +13,22 @@ import outcobra.server.service.UserService
 import outcobra.server.web.auth.config.AuthRegistry
 import outcobra.server.web.auth.model.AuthResponseDto
 import outcobra.server.web.auth.util.JwtUtil
+import java.lang.Exception
+import java.security.GeneralSecurityException
 import javax.inject.Inject
 
 @Component
 @Qualifier(AuthRegistry.GOOGLE)
 class GoogleAuthService @Inject constructor(
         private val userRepository: UserRepository,
-        private val userService: UserService,
         private val identityRepository: IdentityRepository,
-        jwtUtil: JwtUtil,
-        @Value("\${security.google.clientId}") val clientId: String) : BaseAuthService<String>(jwtUtil) {
-
-    val idTokenVerifier: GoogleIdTokenVerifier = GoogleIdTokenVerifier.Builder(NetHttpTransport(), JacksonFactory())
-            .setAudience(listOf(clientId))
-            .build()
+        private val idTokenVerifier: GoogleIdTokenVerifier,
+        jwtUtil: JwtUtil) : BaseAuthService<String>(jwtUtil) {
 
     override fun login(arg: String): AuthResponseDto {
         val idToken = verifyToken(arg)
 
-        val identities = userService.findIdentitiesByIdentifierAndType(idToken.subject, AuthRegistry.GOOGLE)
+        val identities = identityRepository.findByIdentifierAndIdentityType(idToken.subject, AuthRegistry.GOOGLE)
 
         if (identities.size == 1) {
             return userToResponse(identities.first().user)
@@ -45,7 +39,7 @@ class GoogleAuthService @Inject constructor(
     override fun signUp(arg: String): AuthResponseDto {
         val idToken = verifyToken(arg)
 
-        val identities = userService.findIdentitiesByIdentifierAndType(idToken.subject, AuthRegistry.GOOGLE)
+        val identities = identityRepository.findByIdentifierAndIdentityType(idToken.subject, AuthRegistry.GOOGLE)
 
         if (identities.size == 1) {
             return userToResponse(identities.first().user)
@@ -63,6 +57,10 @@ class GoogleAuthService @Inject constructor(
         if (token.isEmpty()) {
             ValidationKey.FORBIDDEN.throwException()
         }
-        return idTokenVerifier.verify(token).payload ?: ValidationKey.IDENTITY_PROVIDER_FAILED.throwException()
+        return try {
+            idTokenVerifier.verify(token).payload
+        } catch (ex: Exception) {
+            ValidationKey.IDENTITY_PROVIDER_FAILED.throwException()
+        }
     }
 }

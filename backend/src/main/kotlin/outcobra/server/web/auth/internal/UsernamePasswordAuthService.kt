@@ -52,6 +52,7 @@ class UsernamePasswordAuthService(private val userRepository: UserRepository,
         if (arg.password != arg.passwordVerify) {
             ValidationKey.PASSWORDS_NOT_SAME.throwException()
         }
+        // TODO check for identity?
         if (userRepository.countByMail(arg.mail) != 0L) {
             ValidationKey.MAIL_OCCUPIED.throwException()
         }
