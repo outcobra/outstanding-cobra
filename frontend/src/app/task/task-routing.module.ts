@@ -6,7 +6,6 @@ import {SchoolClassSubjectResolver} from '../core/services/school-class-subject/
 import {TaskListResolver} from './service/task-list-resolver.service';
 import {TaskCreateUpdateComponent} from './task-create-update/task-create-update.component';
 import {ViewMode} from '../core/common/view-mode';
-import {CurrentSubjectsResolverService} from '../core/services/resolver/current-subjects-resolver.service';
 
 @NgModule({
     imports: [
@@ -30,7 +29,7 @@ import {CurrentSubjectsResolverService} from '../core/services/resolver/current-
                     animation: 'taskCreateUpdate'
                 },
                 resolve: {
-                    subjects: CurrentSubjectsResolverService
+                    subjects: SchoolClassSubjectResolver
                 }
             },
             {
@@ -42,7 +41,7 @@ import {CurrentSubjectsResolverService} from '../core/services/resolver/current-
                 },
                 resolve: {
                     task: TaskResolver,
-                    subjects: CurrentSubjectsResolverService
+                    subjects: SchoolClassSubjectResolver
                 }
             }
         ])

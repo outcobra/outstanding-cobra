@@ -6,7 +6,6 @@ import {ExamListResolver} from './service/exam-list-resolver.service';
 import {ActiveExamListResolver} from './service/active-exam-list-resolver.service';
 import {ExamCreateUpdateComponent} from './exam-create-update/exam-create-update.component';
 import {ExamResolver} from './service/exam-resolver.service';
-import {CurrentSubjectsResolverService} from '../core/services/resolver/current-subjects-resolver.service';
 import {ViewMode} from '../core/common/view-mode';
 
 @NgModule({
@@ -19,7 +18,7 @@ import {ViewMode} from '../core/common/view-mode';
                         animation: 'exam'
                     },
                     resolve: {
-                        examFilter: SchoolClassSubjectResolver,
+                        schoolClassSubjects: SchoolClassSubjectResolver,
                         allExams: ExamListResolver,
                         activeExams: ActiveExamListResolver,
                     }
@@ -32,7 +31,7 @@ import {ViewMode} from '../core/common/view-mode';
                         animation: 'examCreateUpdate'
                     },
                     resolve: {
-                        subjects: CurrentSubjectsResolverService
+                        subjects: SchoolClassSubjectResolver
                     }
                 },
                 {
@@ -44,7 +43,7 @@ import {ViewMode} from '../core/common/view-mode';
                     },
                     resolve: {
                         exam: ExamResolver,
-                        subjects: CurrentSubjectsResolverService
+                        subjects: SchoolClassSubjectResolver
                     }
                 }
             ]

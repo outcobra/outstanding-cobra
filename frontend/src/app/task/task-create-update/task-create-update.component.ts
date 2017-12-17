@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {MatDialogRef} from '@angular/material';
 import {SubjectDto} from '../../manage/model/manage.dto';
 import {OCValidators} from '../../core/services/oc-validators';
 import {TaskDto} from '../model/task.dto';
@@ -16,8 +15,6 @@ import {TaskService} from '../service/task.service';
 import {NotificationWrapperService} from '../../core/notifications/notification-wrapper.service';
 import {Observable} from 'rxjs/Observable';
 import {SchoolClassSubjectDto} from '../model/school-class-subject.dto';
-import {SchoolClassSubjectService} from '../../core/services/school-class-subject/school-class-subject.service';
-import {SubjectDto} from '../../manage/model/manage.dto';
 
 @Component({
     selector: './task-create-update-dialog',
@@ -41,15 +38,14 @@ export class TaskCreateUpdateComponent extends CreateUpdateComponent<TaskDto> im
     }
 
     ngOnInit() {
-        this._route.data.subscribe((data: { viewMode: ViewMode, subjects: Array<SubjectDto>, task?: TaskDto }) => {
+        this._route.data.subscribe((data: { viewMode: ViewMode, subjects: Array<SchoolClassSubjectDto>, task?: TaskDto }) => {
             this.init(data.viewMode as ViewMode, data.task);
-            this._subjects = data.subjects;
+            this._schoolClassSubjects = data.subjects;
+            console.log(this._schoolClassSubjects);
             this._submitFunction = this.isEditMode()
                 ? this._taskService.update
                 : this._taskService.create
         });
-        this._schoolClassSubjectService.getSchoolClassSubjects()
-            .subscribe(subjects => this._schoolClassSubjects = subjects);
 
         this._taskCreateUpdateForm = this._formBuilder.group({
             name: [this.getParamOrDefault('name'), Validators.required],

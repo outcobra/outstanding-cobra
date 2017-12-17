@@ -4,8 +4,6 @@ import {TaskDto} from './model/task.dto';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {SchoolClassSubjectDto} from './model/school-class-subject.dto';
-import {MatDialog, MatDialogRef} from '@angular/material';
-import {TaskCreateUpdateDialog} from './task-create-update-dialog/task-create-update-dialog.component';
 import {Util} from '../core/util/util';
 import {Observable} from 'rxjs/Observable';
 import {and} from '../core/util/helper';
@@ -31,7 +29,6 @@ export class TaskComponent implements OnInit, AfterViewInit {
     public search$: Subject<string> = new Subject();
 
     constructor(private _taskService: TaskService,
-                private _dialogService: MatDialog,
                 private _notificationService: NotificationWrapperService,
                 private _route: ActivatedRoute,
                 private _router: Router,

@@ -7,6 +7,7 @@ $bottom-inset-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12) inset;
     .oc-search-wrapper {
         position: relative;
         height: $oc-filter-search-height;
+        line-height: $oc-filter-search-height;
         padding: 0 16px;
         box-shadow: $bottom-inset-shadow;
         background-color: $tertiary-light;

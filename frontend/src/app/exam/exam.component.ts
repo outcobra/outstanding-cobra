@@ -9,7 +9,6 @@ import {ResponsiveHelperService} from '../core/services/ui/responsive-helper.ser
 import {ConfirmDialogService} from '../core/services/confirm-dialog.service';
 import {and, isNotEmpty, isTrue, isTruthy} from '../core/util/helper';
 import {Util} from '../core/util/util';
-import * as objectAssign from 'object-assign';
 import {SchoolClassSubjectDto} from '../task/model/school-class-subject.dto';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DateUtil} from '../core/services/date-util.service';

@@ -14,6 +14,7 @@ import {ViewMode} from '../../core/common/view-mode';
 import {NotificationWrapperService} from '../../core/notifications/notification-wrapper.service';
 import {ExamService} from '../service/exam.service';
 import {Observable} from 'rxjs/Observable';
+import {SchoolClassSubjectDto} from '../../task/model/school-class-subject.dto';
 
 @Component({
     selector: 'exam-create-update-dialog',
@@ -21,7 +22,7 @@ import {Observable} from 'rxjs/Observable';
     styleUrls: ['./exam-create-update.component.scss']
 })
 export class ExamCreateUpdateComponent extends CreateUpdateComponent<ExamDto> implements OnInit {
-    private _subjects: SubjectDto[];
+    private _schoolClassSubjects: Array<SchoolClassSubjectDto>;
     private _examCreateUpdateForm: FormGroup;
 
     private _submitFunction: (exam: ExamDto) => Observable<ExamDto>;
@@ -37,9 +38,10 @@ export class ExamCreateUpdateComponent extends CreateUpdateComponent<ExamDto> im
     }
 
     ngOnInit() {
-        this._route.data.subscribe((data: { viewMode: ViewMode, subjects: Array<SubjectDto>, exam?: ExamDto }) => {
+        this._route.data.subscribe((data: { viewMode: ViewMode, subjects: Array<SchoolClassSubjectDto>, exam?: ExamDto }) => {
             this.init(data.viewMode as ViewMode, data.exam);
-            this._subjects = data.subjects;
+            console.log(data.subjects);
+            this._schoolClassSubjects = data.subjects;
             this._submitFunction = this.isEditMode()
                 ? this._examService.update
                 : this._examService.create
@@ -84,7 +86,8 @@ export class ExamCreateUpdateComponent extends CreateUpdateComponent<ExamDto> im
 
     private _formToExam(): ExamDto {
         let formValue = this._examCreateUpdateForm.value;
-        let subject = this._getSubjectById(formValue.subjectId);
+        let subject = this._schoolClassSubjects.reduce((prev: Array<SubjectDto>, curr: SchoolClassSubjectDto) => prev.concat(curr.subjects), [])
+            .find(subject => subject.id === formValue.subjectId);
         let id = this.isEditMode() ? this.param.id : 0;
         return {
             id: id,
@@ -95,10 +98,6 @@ export class ExamCreateUpdateComponent extends CreateUpdateComponent<ExamDto> im
             mark: null,
             examTasks: formValue.examTasks.filter(examTask => isNotEmpty(examTask.task))
         } as ExamDto;
-    }
-
-    private _getSubjectById(subjectId: number): SubjectDto {
-        return this.subjects.find((subject: SubjectDto) => subject.id == subjectId);
     }
 
     public addExamTask() {
@@ -119,8 +118,8 @@ export class ExamCreateUpdateComponent extends CreateUpdateComponent<ExamDto> im
         }
     }
 
-    get subjects(): SubjectDto[] {
-        return this._subjects;
+    get schoolClassSubjects(): Array<SchoolClassSubjectDto> {
+        return this._schoolClassSubjects;
     }
 
     get examTaskArray(): FormArray {

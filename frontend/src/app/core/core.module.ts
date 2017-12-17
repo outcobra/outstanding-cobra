@@ -13,7 +13,6 @@ import {ActiveExamListResolver} from '../exam/service/active-exam-list-resolver.
 import {ExamListResolver} from '../exam/service/exam-list-resolver.service';
 import {ExamService} from '../exam/service/exam.service';
 import {ExamCreateUpdateComponent} from '../exam/exam-create-update/exam-create-update.component';
-import {SubjectFilterResolver} from './services/filter/subject.filter.resolver.service';
 import {ExamTaskService} from '../exam/service/exam-task.service';
 import {SubjectMarkGroupResolver} from '../mark/service/subject-mark-resolver.service';
 import {SemesterMarkResolver} from '../mark/service/semester-mark-resolver.service';
@@ -35,6 +34,7 @@ import {JwtHelperService} from './services/auth/jwt-helper.service';
 import {CurrentSubjectsResolverService} from './services/resolver/current-subjects-resolver.service';
 import {ExamResolver} from '../exam/service/exam-resolver.service';
 import {SchoolClassSubjectService} from './services/school-class-subject/school-class-subject.service';
+import {SchoolClassSubjectResolver} from './services/school-class-subject/school-class-subject-resolver.service';
 
 @NgModule({
     providers: [
@@ -54,7 +54,7 @@ import {SchoolClassSubjectService} from './services/school-class-subject/school-
         ExamService,
         ExamTaskService,
         ExamCreateUpdateComponent,
-        SubjectFilterResolver,
+        SchoolClassSubjectResolver,
         ExamListResolver,
         ActiveExamListResolver,
         ExamResolver,
@@ -76,9 +76,8 @@ import {SchoolClassSubjectService} from './services/school-class-subject/school-
         TaskService,
         TaskResolver,
         TaskListResolver,
-        SubjectFilterResolver,
 
-        CurrentSubjectsResolverService
+        CurrentSubjectsResolverService,
         SchoolClassSubjectService
     ]
 })
