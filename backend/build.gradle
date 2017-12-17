@@ -84,8 +84,6 @@ dependencies {
     runtime('com.h2database:h2')
     runtime('mysql:mysql-connector-java')
     compile('com.querydsl:querydsl-jpa:4.1.4')
-    compile('com.auth0:auth0-spring-security-api:0.3.3')
-    compile('com.auth0:auth0:0.4.0')
     compile('com.google.api-client:google-api-client-assembly:1.23.0')
     compile('io.springfox:springfox-swagger2:2.7.0')
     compile('io.springfox:springfox-swagger-ui:2.7.0')
