@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Prepare') {
             steps {
-                sh 'chmod +x gradlew && mkdir /root/yarn-cache'
+                sh 'chmod +x gradlew'
                 script {
                     configFileProvider([
                             configFile(fileId: '2bc843a4-052f-4a68-9f8a-8b2cb9d2c16c', targetLocation: 'backend/src/main/resources/auth0.yml'),

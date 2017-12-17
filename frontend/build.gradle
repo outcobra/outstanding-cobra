@@ -22,5 +22,5 @@ task ngTest(type: YarnTask, dependsOn: yarn_install) {
 task test(dependsOn: ngTest)
 
 task setCacheFolderCI(type: YarnTask) {
-    args = ['config', 'set', 'cache-folder', '~/yarn-cache']
+    args = ['config', 'set', 'cache-folder', '/root/yarn-cache']
 }
