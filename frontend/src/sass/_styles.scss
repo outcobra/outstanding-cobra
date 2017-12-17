@@ -140,7 +140,7 @@ mat-dialog-container {
     }
 
     .form-error {
-        color: mat-color($warn);
+        color: mat-color($warn-palette);
     }
 
     &.half, .half {

@@ -15,7 +15,11 @@ $hover-dark: rgba(0, 0, 0, 0.5);
 $hover-medium: rgba(0, 0, 0, 0.1);
 $hover-light: rgba(0, 0, 0, 0.04);
 
-$warn: mat-palette($mat-orange);
-$error: mat-palette($mat-red);
-$success: mat-palette($mat-green);
-$info: mat-palette($mat-blue)
+$warn-palette: mat-palette($mat-orange);
+$error-palette: mat-palette($mat-red);
+$success-palette: mat-palette($mat-green);
+$info-palette: mat-palette($mat-blue);
+
+$primary-palette: mat-palette($mat-indigo, 800, 500, 900);
+$primary-light-palette: mat-palette($mat-blue, 800, 500, 900);
+$accent-palette: mat-palette($mat-pink, 500, 300, 900);

@@ -3,19 +3,19 @@
 
 :host {
     &.oc-error {
-        color: mat-color($error)
+        color: mat-color($error-palette)
     }
 
     &.oc-warning {
-        color: mat-color($warn)
+        color: mat-color($warn-palette)
     }
 
     &.oc-success {
-        color: mat-color($success)
+        color: mat-color($success-palette)
     }
 
     &.oc-info {
-        color: mat-color($info)
+        color: mat-color($info-palette)
     }
 
     display: flex;
