@@ -2,7 +2,7 @@ pipeline {
     agent {
         docker {
             image 'jmesserli/openjdk-with-docker'
-            args '-v /var/run/docker.sock:/var/run/docker.sock -v /opt/jenkins-agent/persist/gradle:~/.gradle -v /opt/jenkins-agent/persist/yarn:/root/yarn-cache'
+            args '-v /var/run/docker.sock:/var/run/docker.sock -v /opt/jenkins-agent/persist/gradle:/root/.gradle -v /opt/jenkins-agent/persist/yarn:/root/yarn-cache'
         }
     }
 
