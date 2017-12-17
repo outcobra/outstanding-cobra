@@ -30,7 +30,7 @@ describe('ExamComponent', () => {
                     provide: ActivatedRoute,
                     useValue: {
                         data: Observable.of({
-                            examFilter: {schoolClassSubjects: []},
+                            schoolClassSubjects: [],
                             allExams: [],
                             activeExams: []
                         })

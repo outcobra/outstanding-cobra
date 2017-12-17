@@ -27,6 +27,17 @@ export abstract class CacheableService<T> extends AppService implements Cacheabl
         super(http, baseUri);
     }
 
+    getFromCacheOrFetch(fetchFunc: () => Observable<T>) {
+        if (this.hasCache()) return Observable.of(this.cache);
+        else if (this.observable) return this.observable;
+        return this.saveObservable(fetchFunc()
+            .map((res: T) => {
+                this.clearObservable();
+                this.saveCache(res);
+                return this.cache;
+            }).share());
+    }
+
     /**
      * save the argument to the cache and reset the expiration
      * @param arg the object to be saved

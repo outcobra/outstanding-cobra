@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {ExamComponent} from './exam.component';
-import {SubjectFilterResolver} from '../core/services/filter/subject.filter.resolver.service';
+import {SchoolClassSubjectResolver} from '../core/services/school-class-subject/school-class-subject-resolver.service';
 import {ExamListResolver} from './service/exam-list-resolver.service';
 import {ActiveExamListResolver} from './service/active-exam-list-resolver.service';
 import {ExamCreateUpdateComponent} from './exam-create-update/exam-create-update.component';
@@ -19,7 +19,7 @@ import {ViewMode} from '../core/common/view-mode';
                         animation: 'exam'
                     },
                     resolve: {
-                        examFilter: SubjectFilterResolver,
+                        examFilter: SchoolClassSubjectResolver,
                         allExams: ExamListResolver,
                         activeExams: ActiveExamListResolver,
                     }

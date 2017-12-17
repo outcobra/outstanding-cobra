@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {TaskComponent} from './task.component';
 import {TaskResolver} from './service/task-resolver.service';
-import {SubjectFilterResolver} from '../core/services/filter/subject.filter.resolver.service';
+import {SchoolClassSubjectResolver} from '../core/services/school-class-subject/school-class-subject-resolver.service';
 import {TaskListResolver} from './service/task-list-resolver.service';
 import {TaskCreateUpdateComponent} from './task-create-update/task-create-update.component';
 import {ViewMode} from '../core/common/view-mode';
@@ -18,7 +18,7 @@ import {CurrentSubjectsResolverService} from '../core/services/resolver/current-
                     animation: 'task'
                 },
                 resolve: {
-                    taskFilter: SubjectFilterResolver,
+                    schoolClassSubjects: SchoolClassSubjectResolver,
                     tasks: TaskListResolver
                 }
             },
@@ -51,6 +51,5 @@ import {CurrentSubjectsResolverService} from '../core/services/resolver/current-
         RouterModule
     ]
 })
-
 export class TaskRoutingModule {
 }

@@ -9,7 +9,8 @@ import {ResponsiveHelperService} from '../core/services/ui/responsive-helper.ser
 import {ConfirmDialogService} from '../core/services/confirm-dialog.service';
 import {and, isNotEmpty, isTrue, isTruthy} from '../core/util/helper';
 import {Util} from '../core/util/util';
-import {SubjectFilterDto} from '../task/model/subject-filter.dto';
+import * as objectAssign from 'object-assign';
+import {SchoolClassSubjectDto} from '../task/model/school-class-subject.dto';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DateUtil} from '../core/services/date-util.service';
 import {Observable} from 'rxjs/Observable';
@@ -32,7 +33,7 @@ export class ExamComponent implements OnInit, AfterViewInit {
 
     private _currentSearchTerm: string;
     private _filterForm: FormGroup;
-    private _filterData: SubjectFilterDto;
+    private _schoolClassSubjects: SchoolClassSubjectDto;
     private _filterShown: boolean;
     private _today: Moment = moment();
 
@@ -99,8 +100,8 @@ export class ExamComponent implements OnInit, AfterViewInit {
     }
 
     private _loadInitialData() {
-        this._route.data.subscribe((data: { examFilter: SubjectFilterDto, allExams: ExamDto[], activeExams: ExamDto[] }) => {
-            this._filterData = data.examFilter;
+        this._route.data.subscribe((data: { schoolClassSubjects: SchoolClassSubjectDto, allExams: ExamDto[], activeExams: ExamDto[] }) => {
+            this._schoolClassSubjects = data.schoolClassSubjects;
             this._activeExams = data.activeExams;
             this._allExams = data.allExams;
             this._sortExams();
@@ -125,6 +126,7 @@ export class ExamComponent implements OnInit, AfterViewInit {
             .subscribe(() => {
                 this._notificationService.success('i18n.modules.exam.notification.delete.title', 'i18n.modules.exam.notification.delete.message');
                 this._removeExam(exam);
+                this._displayForFilter();
             });
     }
 
@@ -180,7 +182,7 @@ export class ExamComponent implements OnInit, AfterViewInit {
         return this._displayedExams
     }
 
-    get filterData(): SubjectFilterDto {
-        return this._filterData;
+    get schoolClassSubjects(): SchoolClassSubjectDto {
+        return this._schoolClassSubjects;
     }
 }

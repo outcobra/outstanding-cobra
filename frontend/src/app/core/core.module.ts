@@ -8,7 +8,6 @@ import {DefaultAuthService} from './services/auth/auth.service';
 import {DateUtil} from './services/date-util.service';
 import {NotificationWrapperService} from './notifications/notification-wrapper.service';
 import {DurationService} from './services/duration.service';
-import {FilterService} from './services/filter/filter.service';
 import {AuthGuard} from './services/auth/auth-guard.service';
 import {ActiveExamListResolver} from '../exam/service/active-exam-list-resolver.service';
 import {ExamListResolver} from '../exam/service/exam-list-resolver.service';
@@ -35,6 +34,7 @@ import {UserService} from './services/user.service';
 import {JwtHelperService} from './services/auth/jwt-helper.service';
 import {CurrentSubjectsResolverService} from './services/resolver/current-subjects-resolver.service';
 import {ExamResolver} from '../exam/service/exam-resolver.service';
+import {SchoolClassSubjectService} from './services/school-class-subject/school-class-subject.service';
 
 @NgModule({
     providers: [
@@ -47,7 +47,6 @@ import {ExamResolver} from '../exam/service/exam-resolver.service';
         ResponsiveHelperService,
         NotificationWrapperService,
         DurationService,
-        FilterService,
         AuthGuard,
         UserService,
         JwtHelperService,
@@ -80,6 +79,7 @@ import {ExamResolver} from '../exam/service/exam-resolver.service';
         SubjectFilterResolver,
 
         CurrentSubjectsResolverService
+        SchoolClassSubjectService
     ]
 })
 export class CoreModule {

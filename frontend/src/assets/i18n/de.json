@@ -74,16 +74,16 @@
     },
     "modules": {
       "info": {
-        "title": "Applikations Informationen",
+        "title": "Applikationsinformationen",
         "version": "Version",
         "build": {
           "title": "Build Informationen",
-          "time": "Gebaut um",
+          "time": "Buildzeitpunkt",
           "artifact": "Artefakt"
         },
         "git": {
           "title": "Git Informationen",
-          "commitTime": "Commitet am",
+          "commitTime": "Commitzeitpunkt",
           "revision": "Revision",
           "branch": "Branch"
         }

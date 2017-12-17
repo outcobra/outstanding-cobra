@@ -1,14 +1,13 @@
 package outcobra.server.service.internal
 
 import org.springframework.stereotype.Service
-import outcobra.server.exception.ValidationKey
 import outcobra.server.model.Exam
 import outcobra.server.model.QExam
 import outcobra.server.model.Semester
 import outcobra.server.model.dto.ExamDto
+import outcobra.server.model.dto.ExamTaskDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.ExamRepository
-import outcobra.server.model.repository.ExamTaskRepository
 import outcobra.server.service.ExamService
 import outcobra.server.service.ExamTaskService
 import outcobra.server.service.SemesterService
@@ -26,9 +25,8 @@ class DefaultExamService
                     repository: ExamRepository,
                     requestValidator: RequestValidator<ExamDto>,
                     val semesterService: SemesterService,
-                    val examTaskRepository: ExamTaskRepository,
-                    val examTaskService: ExamTaskService)
-    : ExamService, DefaultBaseService<Exam, ExamDto, ExamRepository>(mapper, repository, requestValidator, Exam::class) {
+                    val examTaskService: ExamTaskService) : ExamService,
+        DefaultBaseService<Exam, ExamDto, ExamRepository>(mapper, repository, requestValidator, Exam::class) {
 
     override fun readAll(): List<ExamDto> {
         val currentUser = requestValidator.userService.getCurrentUser()
@@ -38,19 +36,30 @@ class DefaultExamService
     }
 
     override fun save(dto: ExamDto): ExamDto {
-        return readById(saveExamWithDependencies(dto))
+        val tasks = dto.examTasks.toList()
+        dto.examTasks.clear()
+
+        val savedDto = super.save(dto)
+        val updatedTasks = updateOrSaveExamTasks(tasks, savedDto.id)
+        savedDto.examTasks = updatedTasks.toMutableList()
+        return savedDto
     }
 
-    private fun saveExamWithDependencies(dto: ExamDto): Long {
-        val tasks = dto.examTasks
-        dto.examTasks.drop(tasks.size)
-        val savedDto = super.save(dto)
-        repository.flush()
-        tasks.forEach { it.examId = savedDto.id }
-        examTaskService.saveAll(tasks)
-        repository.flush()
-        examTaskRepository.flush()
-        return savedDto.id
+    private fun updateOrSaveExamTasks(tasks: List<ExamTaskDto>, examId: Long): List<ExamTaskDto> {
+        if (tasks.all { it.id == 0L }) {
+            return tasks.map { this.saveExamTaskWithNewId(it, examId) }
+        }
+        val oldTasks = examTaskService.readByExamId(examId).toMutableList()
+        oldTasks.removeIf { task ->
+            tasks.any { it.id == task.id }
+        }
+        oldTasks.map { it.id }.forEach(examTaskService::delete)
+        return examTaskService.saveAll(tasks)
+    }
+
+    private fun saveExamTaskWithNewId(dto: ExamTaskDto, examId: Long): ExamTaskDto {
+        dto.examId = examId
+        return examTaskService.save(dto)
     }
 
     override fun readAllBySemester(semesterId: Long): List<ExamDto> {

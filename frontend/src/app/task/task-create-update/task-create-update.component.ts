@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {MatDialogRef} from '@angular/material';
 import {SubjectDto} from '../../manage/model/manage.dto';
 import {OCValidators} from '../../core/services/oc-validators';
 import {TaskDto} from '../model/task.dto';
@@ -14,6 +15,9 @@ import {ViewMode} from '../../core/common/view-mode';
 import {TaskService} from '../service/task.service';
 import {NotificationWrapperService} from '../../core/notifications/notification-wrapper.service';
 import {Observable} from 'rxjs/Observable';
+import {SchoolClassSubjectDto} from '../model/school-class-subject.dto';
+import {SchoolClassSubjectService} from '../../core/services/school-class-subject/school-class-subject.service';
+import {SubjectDto} from '../../manage/model/manage.dto';
 
 @Component({
     selector: './task-create-update-dialog',
@@ -22,7 +26,7 @@ import {Observable} from 'rxjs/Observable';
 })
 export class TaskCreateUpdateComponent extends CreateUpdateComponent<TaskDto> implements OnInit {
     private _taskCreateUpdateForm: FormGroup;
-    private _subjects: SubjectDto[];
+    private _schoolClassSubjects: Array<SchoolClassSubjectDto>;
     private _today: Moment = moment();
 
     private _submitFunction: (task: TaskDto) => Observable<TaskDto>;
@@ -44,6 +48,8 @@ export class TaskCreateUpdateComponent extends CreateUpdateComponent<TaskDto> im
                 ? this._taskService.update
                 : this._taskService.create
         });
+        this._schoolClassSubjectService.getSchoolClassSubjects()
+            .subscribe(subjects => this._schoolClassSubjects = subjects);
 
         this._taskCreateUpdateForm = this._formBuilder.group({
             name: [this.getParamOrDefault('name'), Validators.required],
@@ -75,6 +81,8 @@ export class TaskCreateUpdateComponent extends CreateUpdateComponent<TaskDto> im
 
     private _formToTask(): TaskDto {
         let formValue = this._taskCreateUpdateForm.value;
+        let subject = this._schoolClassSubjects.reduce((prev: Array<SubjectDto>, curr: SchoolClassSubjectDto) => prev.concat(curr.subjects), [])
+            .find(subject => subject.id === formValue.subjectId);
         return {
             id: this.isEditMode() && this.param.id ? this.param.id : null,
             name: formValue.name,
@@ -83,7 +91,7 @@ export class TaskCreateUpdateComponent extends CreateUpdateComponent<TaskDto> im
             dueDate: formValue.dates.dueDate,
             effort: formValue.effort,
             progress: 0,
-            subject: this._subjects.find(subject => subject.id == formValue.subjectId)
+            subject: subject
         } as TaskDto
     }
 
@@ -95,8 +103,8 @@ export class TaskCreateUpdateComponent extends CreateUpdateComponent<TaskDto> im
         return this._taskCreateUpdateForm;
     }
 
-    get subjects(): SubjectDto[] {
-        return this._subjects;
+    get schoolClassSubjects(): Array<SchoolClassSubjectDto> {
+        return this._schoolClassSubjects;
     }
 
     get today(): Moment {

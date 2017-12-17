@@ -1,4 +1,6 @@
 import {ViewMode} from './view-mode';
+import {Moment} from 'moment';
+import {DateUtil} from '../services/date-util.service';
 
 export class CreateUpdateComponent<T> {
     private _mode: ViewMode;
@@ -15,12 +17,8 @@ export class CreateUpdateComponent<T> {
         }
     }
 
-    get mode(): ViewMode {
-        return this._mode as ViewMode;
-    }
-
-    get param(): T {
-        return this._param;
+    protected getDateParamOrDefault(propertyPath: string, defaultValue: Moment | string = '') {
+        return DateUtil.transformToMomentIfPossible(this.getParamOrDefault(propertyPath, defaultValue))
     }
 
     protected getParamOrDefault(propertyPath: string, defaultValue: any = '') {
@@ -38,7 +36,15 @@ export class CreateUpdateComponent<T> {
         return prop;
     }
 
-    isEditMode(): boolean {
+    public isEditMode(): boolean {
         return this.mode == ViewMode.EDIT;
+    }
+
+    get mode(): ViewMode {
+        return this._mode as ViewMode;
+    }
+
+    get param(): T {
+        return this._param;
     }
 }

@@ -11,6 +11,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ExamListItemComponent} from './exam-list-item/exam-list-item.component';
 import {ExamCreateUpdateComponent} from './exam-create-update/exam-create-update.component';
 import {PipeModule} from '../shared/pipe.module';
+import {SchoolClassSubjectResolver} from '../core/services/school-class-subject/school-class-subject-resolver.service';
+import {ExamListResolver} from './service/exam-list-resolver.service';
+import {ActiveExamListResolver} from './service/active-exam-list-resolver.service';
 
 
 @NgModule({
@@ -30,9 +33,6 @@ import {PipeModule} from '../shared/pipe.module';
         SharedModule,
         OCUiModule,
         PipeModule
-    ],
-    entryComponents: [
-        ExamCreateUpdateComponent
     ]
 })
 export class ExamModule {
