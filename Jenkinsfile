@@ -2,7 +2,7 @@ pipeline {
     agent {
         docker {
             image 'jmesserli/openjdk-with-docker'
-            args '-v /var/run/docker.sock:/var/run/docker.sock'
+            args '-v /var/run/docker.sock:/var/run/docker.sock -v /opt/jenkins-agent/persist/gradle:/root/.gradle -v /opt/jenkins-agent/persist/yarn:/root/yarn-cache'
         }
     }
 
@@ -26,7 +26,7 @@ pipeline {
                             sh './gradlew clean :backend:assemble --stacktrace --info'
                         },
                         "Build Frontend": {
-                            sh './gradlew :frontend:assemble --stacktrace --info'
+                            sh './gradlew :frontend:setCacheFolderCI :frontend:assemble --stacktrace --info'
                         }
                 )
             }
