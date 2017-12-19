@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {MockHttpInterceptor} from './http/MockHttpInterceptor';
-import {MockConfigService} from './config/mock-config.service';
 import {MockInfoService} from './info/mock-info.service';
 import {SimpleNotificationsModule} from 'angular2-notifications/dist';
 import {MockNotificationWrapperService} from './notifications/mock-notifications.service';
@@ -40,7 +39,6 @@ import {ConnectionBackend, HttpModule} from '@angular/http';
 import {DurationService} from '../services/duration.service';
 import {MockDurationService} from './datetime/mock-duration.service';
 import {HttpInterceptor} from '../http/http-interceptor';
-import {ConfigService} from '../config/config.service';
 import {ObservableMedia} from '@angular/flex-layout';
 import {MockObservableMedia} from './ui/mock-observable-media.service';
 import {MarkService} from '../../mark/service/mark.service';
@@ -81,10 +79,6 @@ import {MockUserService} from './auth/mock-user.service';
         {
             provide: HttpInterceptor,
             useClass: MockHttpInterceptor
-        },
-        {
-            provide: ConfigService,
-            useClass: MockConfigService
         },
         {
             provide: InfoService,

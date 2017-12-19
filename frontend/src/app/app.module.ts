@@ -4,10 +4,9 @@ import {BrowserModule} from '@angular/platform-browser';
 import {HttpModule} from '@angular/http';
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import {AppComponent} from './app.component';
-import {ConfigService} from './core/config/config.service';
 import {SharedModule} from './shared/shared.module';
 import {AppRoutingModule} from './app-routing.module';
-import {configLoader, translateFactory, translationLoader} from './core/services/factories';
+import {translateFactory, translationLoader} from './core/services/factories';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {CoreModule} from './core/core.module';
@@ -53,13 +52,6 @@ import {MainModule} from './main/main.module';
         })
     ],
     providers: [
-        ConfigService,
-        {
-            provide: APP_INITIALIZER,
-            useFactory: configLoader,
-            deps: [ConfigService, Injector],
-            multi: true
-        },
         {
             provide: APP_INITIALIZER,
             useFactory: translationLoader,
