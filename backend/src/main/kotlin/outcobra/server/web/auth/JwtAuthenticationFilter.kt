@@ -1,6 +1,8 @@
 package outcobra.server.web.auth
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import org.springframework.http.HttpStatus
+import org.springframework.http.MediaType
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.core.AuthenticationException
 import org.springframework.security.core.context.SecurityContextHolder
@@ -17,16 +19,18 @@ import kotlin.reflect.full.cast
 
 class JwtAuthenticationFilter(private val authenticationManager: AuthenticationManager,
                               private val objectMapper: ObjectMapper) : GenericFilterBean() {
+    private val HEADER_PREFIX = "Bearer"
+
     override fun doFilter(request: ServletRequest?, response: ServletResponse?, chain: FilterChain?) {
         val resp = HttpServletResponse::class.cast(response)
         try {
             val header = (request!! as HttpServletRequest).getHeader("Authorization")
 
-            if (header == null || !header.startsWith("Bearer")) {
+            if (header == null || !header.startsWith(HEADER_PREFIX)) {
                 throw JwtTokenMissingException("No JWT token found in request headers")
             }
 
-            val authToken = header.substring(7)
+            val authToken = header.removePrefix(HEADER_PREFIX).trim()
 
             val authRequest = JwtAuthenticationToken(authToken)
 
@@ -35,8 +39,8 @@ class JwtAuthenticationFilter(private val authenticationManager: AuthenticationM
 
             chain!!.doFilter(request, response)
         } catch (e: AuthenticationException) {
-            resp.contentType = "application/json"
-            resp.status = 403
+            resp.contentType = MediaType.APPLICATION_JSON_VALUE
+            resp.status = HttpStatus.FORBIDDEN.value()
             objectMapper.writeValue(response!!.writer, ValidationKey.FORBIDDEN.makeException(nestedCause = e))
         }
     }

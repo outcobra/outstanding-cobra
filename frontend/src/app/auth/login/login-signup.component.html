@@ -109,10 +109,5 @@
             <span *ngIf="!isSignUp">{{ 'i18n.auth.social.login.google' | translate }}</span>
             <span *ngIf="isSignUp">{{ 'i18n.auth.social.signup.google' | translate }}</span>
         </button>
-        <button mat-raised-button class="social-login-button" (click)="login(provider.GITHUB)">
-            <img src="/assets/img/github-logo.png">
-            <span *ngIf="!isSignUp">{{ 'i18n.auth.social.login.github' | translate }}</span>
-            <span *ngIf="isSignUp">{{ 'i18n.auth.social.signup.github' | translate }}</span>
-        </button>
     </div>
 </div>

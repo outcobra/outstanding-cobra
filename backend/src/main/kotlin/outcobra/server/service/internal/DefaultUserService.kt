@@ -1,16 +1,13 @@
 package outcobra.server.service.internal
 
-//import outcobra.server.config.Auth0Client
 import org.springframework.context.annotation.Profile
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Service
 import outcobra.server.annotation.DefaultImplementation
 import outcobra.server.config.ProfileRegistry.Companion.BASIC_AUTH_SECURITY_MOCK
-import outcobra.server.model.Identity
 import outcobra.server.model.User
 import outcobra.server.model.dto.UserDto
 import outcobra.server.model.interfaces.Mapper
-import outcobra.server.model.repository.IdentityRepository
 import outcobra.server.model.repository.UserRepository
 import outcobra.server.service.UserService
 import outcobra.server.web.auth.model.JwtAuthenticationToken
@@ -22,7 +19,6 @@ import javax.inject.Inject
 @Profile("!$BASIC_AUTH_SECURITY_MOCK")
 class DefaultUserService
 @Inject constructor(val userRepository: UserRepository,
-                    val identityRepository: IdentityRepository,
                     val userDtoMapper: Mapper<User, UserDto>) : UserService {
     override fun getCurrentOutcobraUser(): OutcobraUser {
         return (SecurityContextHolder.getContext().authentication as JwtAuthenticationToken).principal!!

@@ -477,7 +477,8 @@
           "message": "The given dates are outside the parent timespan"
         },
         "mark": "The value of the given mark is invalid",
-        "relogin": "Your user is not in the database. Please re-login"
+        "relogin": "Your user is not in the database. Please re-login",
+        "notSignedUp": "Your user is not in the database. Please sign up first"
       },
       "auth": {
         "identityProvider": "Failed to log you in by identity provider",

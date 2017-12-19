@@ -471,7 +471,8 @@
           "message": "Die angegebene Zeitdauer ist auesserhalb der Zeitspanne des Vater-Objekts"
         },
         "mark": "Der Wert dieser Note ist ungültig",
-        "relogin": "Ihr Benutzer ist nicht in der Datenbank. Bitte melden Sie sich neu an"
+        "relogin": "Ihr Benutzer ist nicht in der Datenbank. Bitte melden Sie sich neu an",
+        "notSignedUp": "Ihr Benutzer ist nicht in der Datenbank. Bitte registrieren sich zuerst"
       },
       "auth": {
         "identityProvider": "Fehler beim Einloggen mit dem Identitätsprovider",

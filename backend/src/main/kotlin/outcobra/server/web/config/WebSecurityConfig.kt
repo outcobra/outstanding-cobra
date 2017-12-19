@@ -60,7 +60,7 @@ class WebSecurityConfig
                             "/trace",
                             "/configprops",
                             "/api/ping").permitAll()
-                    .anyRequest().permitAll()
+                    .anyRequest().authenticated()
         } else if (environment.acceptsProfiles(ProfileRegistry.PRODUCTION)) {
             http.authorizeRequests()
                     .antMatchers("/api/ping").permitAll()

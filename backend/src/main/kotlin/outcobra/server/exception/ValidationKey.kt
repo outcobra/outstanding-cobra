@@ -20,6 +20,7 @@ enum class ValidationKey(val i18nMessage: String = "i18n.error.http.500.message"
     OUTSIDE_PARENT("i18n.error.validation.outsideParent.message", "i18n.error.validation.outsideParent.title"),
     INVALID_MARK("i18n.error.validation.mark", "i18n.error.http.400.title"),
     USER_NOT_IN_DATABASE_RELOGIN("i18n.error.validation.relogin", "i18n.error.http.400.title"),
+    USER_NOT_SIGNED_UP("i18n.error.validation.notSignedUp", "i18n.error.http.400.title"),
     IDENTITY_PROVIDER_FAILED("i18n.error.auth.identityProvider", "i18n.error.http.400.title"),
     MAIL_OCCUPIED("i18n.error.auth.mailOccupied", "i18n.error.http.400.title"),
     NO_PASSWORD_MATCH("i18n.error.auth.password.noMatch", "i18n.error.http.400.title"),

@@ -29,8 +29,6 @@ class JwtUtil(@Value("\${security.jwt.secret}") private val secret: String) {
                     .setSigningKey(secret)
                     .parseClaimsJws(token)
                     .body
-            //u.setId(java.lang.Long.parseLong(body.get("userId") as String))
-            //u.setRole(body.get("role") as String)
             val expiration: LocalDateTime = body.getExpirationTime()
             if (expiration.isBefore(LocalDateTime.now())) {
                 throw JwtExpiredException(expiration)
@@ -42,7 +40,6 @@ class JwtUtil(@Value("\${security.jwt.secret}") private val secret: String) {
         } catch (e: ClassCastException) {
             return null
         }
-
     }
 
     /**
@@ -56,8 +53,6 @@ class JwtUtil(@Value("\${security.jwt.secret}") private val secret: String) {
         val claims = Jwts.claims().setSubject(u.username)
         claims.setExpirationTime(LocalDateTime.now().plusHours(4))
         claims["mail"] = u.mail
-        //claims.put("userId", u.getId() + "")
-        //claims.put("role", u.getRole())
 
         return Jwts.builder()
                 .setClaims(claims)

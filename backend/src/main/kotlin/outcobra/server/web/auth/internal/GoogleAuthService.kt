@@ -9,12 +9,10 @@ import outcobra.server.model.Identity
 import outcobra.server.model.User
 import outcobra.server.model.repository.IdentityRepository
 import outcobra.server.model.repository.UserRepository
-import outcobra.server.service.UserService
 import outcobra.server.web.auth.config.AuthRegistry
 import outcobra.server.web.auth.model.AuthResponseDto
 import outcobra.server.web.auth.util.JwtUtil
 import java.lang.Exception
-import java.security.GeneralSecurityException
 import javax.inject.Inject
 
 @Component
@@ -33,7 +31,7 @@ class GoogleAuthService @Inject constructor(
         if (identities.size == 1) {
             return userToResponse(identities.first().user)
         }
-        ValidationKey.USER_NOT_IN_DATABASE_RELOGIN.throwException()
+        ValidationKey.USER_NOT_SIGNED_UP.throwException()
     }
 
     override fun signUp(arg: String): AuthResponseDto {
