@@ -42,7 +42,7 @@ class UsernamePasswordAuthService(private val userRepository: UserRepository,
                 return userToResponse(user)
             }
         }
-        ValidationKey.USER_NOT_IN_DATABASE_RELOGIN.throwException()
+        ValidationKey.USER_NOT_SIGNED_UP.throwException()
     }
 
     override fun signUp(arg: UsernamePasswordDto): AuthResponseDto {

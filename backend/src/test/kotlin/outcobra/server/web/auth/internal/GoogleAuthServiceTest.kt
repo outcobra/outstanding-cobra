@@ -109,7 +109,7 @@ class GoogleAuthServiceTest {
         NEXT_USER = OutcobraUser("a", "b", "c@d.ch")
         assertThatThrownBy { authService.login("true") }
                 .isInstanceOf(ValidationException::class.java)
-                .hasMessage(ValidationKey.USER_NOT_IN_DATABASE_RELOGIN.i18nMessage)
+                .hasMessage(ValidationKey.USER_NOT_SIGNED_UP.i18nMessage)
 
         NEXT_USER = lastUser
     }

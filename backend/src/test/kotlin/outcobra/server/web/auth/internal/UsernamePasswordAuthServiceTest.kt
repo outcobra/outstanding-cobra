@@ -20,7 +20,6 @@ import outcobra.server.exception.ValidationException
 import outcobra.server.exception.ValidationKey
 import outcobra.server.model.repository.IdentityRepository
 import outcobra.server.model.repository.UserRepository
-import outcobra.server.web.auth.AuthService
 import outcobra.server.web.auth.config.AuthRegistry
 import outcobra.server.web.auth.model.UsernamePasswordDto
 import outcobra.server.web.auth.util.JwtUtil
@@ -121,7 +120,7 @@ class UsernamePasswordAuthServiceTest {
 
         assertThatThrownBy { authService.login(usernamePasswordTuple) }
                 .isInstanceOf(ValidationException::class.java)
-                .hasMessage(ValidationKey.USER_NOT_IN_DATABASE_RELOGIN.i18nMessage)
+                .hasMessage(ValidationKey.USER_NOT_SIGNED_UP.i18nMessage)
     }
 
     @TestConfiguration
