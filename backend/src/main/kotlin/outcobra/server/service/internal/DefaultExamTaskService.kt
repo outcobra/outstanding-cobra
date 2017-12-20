@@ -36,7 +36,7 @@ class DefaultExamTaskService @Inject constructor(mapper: Mapper<ExamTask, ExamTa
     override fun changeState(examTaskId: Long): ExamTaskDto {
         requestValidator.validateRequestById(examTaskId, type)
         var examTask = repository.findOne(examTaskId)
-        examTask.isFinished = !examTask.isFinished
+        examTask.finished = !examTask.finished
         examTask = repository.saveAndFlush(examTask)
         return mapper.toDto(examTask)
     }

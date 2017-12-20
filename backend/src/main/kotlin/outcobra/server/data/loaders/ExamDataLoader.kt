@@ -16,6 +16,7 @@ import outcobra.server.data.loaders.SubjectDataLoader.Companion.PHYSICS
 import outcobra.server.data.loaders.SubjectDataLoader.Companion.PROJECT
 import outcobra.server.data.loaders.SubjectDataLoader.Companion.SCRUM
 import outcobra.server.model.Exam
+import outcobra.server.model.Mark
 import outcobra.server.model.MarkValue
 import outcobra.server.model.Subject
 import outcobra.server.model.repository.ExamRepository
@@ -35,23 +36,23 @@ class ExamDataLoader @Inject constructor(val examRepository: ExamRepository,
 
     companion object {
         var SCRUM_EXAM = Exam("fake daily", LocalDate.now().minusWeeks(1), listOf(),
-                null, MarkValue(getRandomMark(), getRandomWeight(), null, ""), null)
+                null, MarkValue(getRandomMark(), getRandomWeight(), null, ""), "")
         var OOP_EXAM = Exam("KR", LocalDate.now().plusWeeks(1), listOf(),
                 null, null)
         var GERMAN_EXAM = Exam("Kulturgeschichte", LocalDate.now().minusWeeks(1), listOf(),
-                null, MarkValue(getRandomMark(), getRandomWeight(), null, ""), null)
+                null, MarkValue(getRandomMark(), getRandomWeight(), null, ""), "")
         var PHYSICS_EXAM = Exam("Statik", LocalDate.now().minusWeeks(1), listOf(),
-                null, MarkValue(getRandomMark(), getRandomWeight(), null, ""), null)
+                null, MarkValue(getRandomMark(), getRandomWeight(), null, ""), "")
         var OOP_DESIGN_EXAM = Exam("Design-Patterns", LocalDate.now().plusWeeks(1), listOf(),
                 null, null)
         var DATABASES_EXAM = Exam("DB-Project", LocalDate.now(), listOf(),
-                null, MarkValue(getRandomMark(), getRandomWeight(), null, ""), null)
+                null, MarkValue(getRandomMark(), getRandomWeight(), null, ""), "")
         var GUP_EXAM = Exam("WW2", LocalDate.now().minusWeeks(1), listOf(),
-                null, MarkValue(getRandomMark(), getRandomWeight(), null, ""), null)
+                null, MarkValue(getRandomMark(), getRandomWeight(), null, ""), "")
         var MATHS_EXAM = Exam("Goniometrie", LocalDate.now().plusDays(1), listOf(),
                 null, null)
         var PROJECT_EXAM = Exam("Präsentation", LocalDate.now().minusMonths(1), listOf(),
-                null, MarkValue(getRandomMark(), getRandomWeight(), null, ""), null)
+                null, MarkValue(getRandomMark(), getRandomWeight(), null, ""), "")
     }
 
     override fun shouldLoad(): Boolean = true
@@ -71,8 +72,9 @@ class ExamDataLoader @Inject constructor(val examRepository: ExamRepository,
     private fun saveAndLog(exam: Exam, subject: Subject): Exam {
         exam.subject = subject
         exam.mark?.markGroup = subject.markGroup
+        if (exam.mark is Mark) {
             markValueRepository.save(exam.mark)
-
+        }
         val entity = examRepository.save(exam)
         LOGGER.debug("Saved exam: ${entity.name} with id ${entity.id}")
         return entity

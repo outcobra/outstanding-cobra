@@ -26,6 +26,6 @@ class ExamTaskMapper @Inject constructor(val examRepository: ExamRepository,
     }
 
     override fun toDto(from: ExamTask): ExamTaskDto {
-        return ExamTaskDto(from.id, from.task, from.isFinished, from.exam?.id ?: 0L)
+        return ExamTaskDto(from.id, from.task, from.finished, from.exam?.id ?: 0L)
     }
 }
