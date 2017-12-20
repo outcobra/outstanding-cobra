@@ -12,7 +12,7 @@ pipeline {
                 sh 'chmod +x gradlew'
                 script {
                     configFileProvider([
-                            configFile(fileId: '71d9eae2-4107-4b77-a63b-febab204e5eb', targetLocation: 'backend/src/main/resources/auth.yml')
+                            configFile(fileId: '71d9eae2-4107-4b77-a63b-febab204e5eb', targetLocation: 'backend/src/main/resources/auth.yml'),
                             configFile(fileId: '2dcade8f-58b0-4ded-9c56-f2566f084c66', targetLocation: 'backend/src/main/resources/logback-spring.xml')
                     ]) {}
                 }
