@@ -4,11 +4,11 @@ import io.jsonwebtoken.Claims
 import io.jsonwebtoken.JwtException
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
-import me.mkweb.releasr.web.auth.exception.JwtExpiredException
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 import outcobra.server.util.getExpirationTime
 import outcobra.server.util.setExpirationTime
+import outcobra.server.web.auth.exception.JwtExpiredException
 import outcobra.server.web.auth.model.OutcobraUser
 import java.time.LocalDateTime
 

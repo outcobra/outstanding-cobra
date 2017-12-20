@@ -1,4 +1,4 @@
-package me.mkweb.releasr.web.auth.exception
+package outcobra.server.web.auth.exception
 
 import org.springframework.security.core.AuthenticationException
 import java.time.LocalDateTime
