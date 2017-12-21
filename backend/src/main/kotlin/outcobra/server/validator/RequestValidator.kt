@@ -42,22 +42,26 @@ class RequestValidator<in Dto>
         val repository = locator.getForDto(this)
         val parentLink = this.parentLink
         val parentRepository = locator.getForEntityClass(parentLink.parentClass)
-        val parent: ParentLinked = parentRepository.findOne(parentLink.id) ?: ValidationKey.FORBIDDEN.throwException()
+        val parent: ParentLinked? = parentRepository.findOne(parentLink.id)
+
         if (parentLink.id == 0L && this is InstitutionDto) {
             return
         }
 
         if (repository.exists(this.identifier)) {
             val currentEntity = repository.findOne(this.identifier) as ParentLinked
-            val currentParent = currentEntity.parent ?: ValidationKey.FORBIDDEN.throwException()
-            val parentHasChanged = this.parentLink.id != currentParent.id
+            val parentHasChanged = this.parentLink.id != currentEntity.parent?.id ?: ValidationKey.FORBIDDEN.throwException()
+
             if (parentHasChanged) currentEntity.checkOwnerIsCurrent()
         } else if (parentLink.parentClass == User::class.java) {
             //if this entity is new and directly connected to the user we are able to link it automatically
             return
         }
-
-        parent.checkOwnerIsCurrent()
+        if (parent == null) {
+            ValidationKey.FORBIDDEN.throwException()
+        } else {
+            parent.checkOwnerIsCurrent()
+        }
     }
 
 }

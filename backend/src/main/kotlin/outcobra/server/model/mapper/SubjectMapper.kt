@@ -23,8 +23,8 @@ class SubjectMapper @Inject constructor(//val teacherRepository: TeacherReposito
 
     override fun fromDto(from: SubjectDto): Subject {
         val id = from.identifier
-        val timetableEntries = timetableRepository.findOne(QTimetable.timetable.semester.id.eq(from.semesterId)).entries
-        val reportEntries = markReportRepository.findOne(QMarkReport.markReport.semester.id.eq(from.semesterId)).entries
+        val timetableEntries = timetableRepository.findOne(QTimetable.timetable.semester.id.eq(from.semesterId))?.entries ?: listOf()
+        val reportEntries = markReportRepository.findOne(QMarkReport.markReport.semester.id.eq(from.semesterId))?.entries ?: listOf()
         val tasks = taskRepository.findAll(QTask.task.subject.id.eq(id)).toList()
         val exams = examRepository.findAll(QExam.exam.subject.id.eq(id)).toList()
         val markGroup = markGroupRepository.findOne(QMarkGroup.markGroup1.id.eq(id))
@@ -37,10 +37,10 @@ class SubjectMapper @Inject constructor(//val teacherRepository: TeacherReposito
 
     override fun toDto(from: Subject): SubjectDto {
         val id = from.id
-        val semester = from.semester as Semester
-        val color = from.color as Color
-        val teacher = from.teacher as Teacher
-        return SubjectDto(id, semester.id, from.name, colorMapper.toDto(color), teacher.id)
+        val semesterId = from.semester?.id ?: 0L
+        val teacherId = from.teacher?.id ?: 0L
+        val color = from.color ?: Color.BLUE //how else do you want to recover in this case
+        return SubjectDto(id, semesterId, from.name, colorMapper.toDto(color), teacherId)
     }
 
 }
