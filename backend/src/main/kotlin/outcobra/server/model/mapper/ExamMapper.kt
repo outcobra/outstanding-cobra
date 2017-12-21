@@ -43,7 +43,7 @@ class ExamMapper @Inject constructor(val markMapper: Mapper<MarkValue, MarkValue
             markValue = markMapper.toDto(from.mark as MarkValue)
         }
         val subject = from.subject as Subject
-        return ExamDto(from.id, from.name, from.description ?: "", from.date, markValue,
+        return ExamDto(from.id, from.name, from.description, from.date, markValue,
                 from.tasks.map { examTaskMapper.toDto(it) }.toMutableList(), subjectMapper.toDto(subject))
     }
 }
