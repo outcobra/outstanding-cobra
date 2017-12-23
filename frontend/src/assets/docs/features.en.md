@@ -8,7 +8,7 @@ At the current state Outcobra consists of 3 main features and one management fea
 Namely our features are:
  - Tasks
  - Exams
- - Noten
+ - Marks
 
 ### Tasks
 Outcobra allows you to create tasks for your subjects. Those tasks are presented to you in a clean list which you can apply filters to and make a search.
@@ -62,5 +62,5 @@ Just underneath you find a listing of a bunch of technologies we used. The list 
 ## Authentication
 ![Auth0](assets/docs/img/auth0.svg)
 
-## Datensicherheit
+## Data security
 ![Backblaze](assets/docs/img/backblaze.svg)
