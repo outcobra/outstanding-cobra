@@ -58,7 +58,7 @@ class MarkGroupMapper @Inject constructor(val subjectRepository: SubjectReposito
             parentGroupId = 0L
         } else {
             parentGroupId = from.parent?.id ?: 0
-            subjectId = from.parent?.parent?.id ?: 0
+            subjectId = 0L
         }
         validateChildren(markValues.map { it.id }, MarkValue::class, from.id, MarkGroup::class)
         validateChildren(nestedGroups.map { it.id }, MarkGroup::class, from.id, MarkGroup::class)

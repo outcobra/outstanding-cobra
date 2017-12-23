@@ -17,10 +17,6 @@ class MarkValue(@NotNull private var value: Double = 0.0,
     }
 
     override val parent: ParentLinked?
-        get() {
-            if (exam != null) {
-                return exam
-            }
-            return markGroup
-        }
+        get() = markGroup
+
 }
