@@ -50,7 +50,7 @@ class MarkGroupMapper @Inject constructor(val subjectRepository: SubjectReposito
     override fun toDto(from: MarkGroup): MarkGroupDto {
         val markValues = from.marks.filter { it is MarkValue }.map { it as MarkValue }
         val nestedGroups = from.marks.filter { it is MarkGroup }.map { toDto(it as MarkGroup) }
-        val parent: ParentLinked = from.parent as ParentLinked
+        val parent: ParentLinked = from.parent!!
         val parentGroupId: Long
         val subjectId: Long
         if (parent is Subject) {
