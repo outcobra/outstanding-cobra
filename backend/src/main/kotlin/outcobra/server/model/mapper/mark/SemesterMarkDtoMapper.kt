@@ -1,7 +1,11 @@
 package outcobra.server.model.mapper.mark
 
 import org.springframework.stereotype.Component
-import outcobra.server.model.*
+import outcobra.server.exception.ValidationKey
+import outcobra.server.model.Color
+import outcobra.server.model.MarkGroup
+import outcobra.server.model.Semester
+import outcobra.server.model.Subject
 import outcobra.server.model.dto.ColorDto
 import outcobra.server.model.dto.MarkGroupDto
 import outcobra.server.model.dto.mark.SemesterMarkDto
@@ -29,9 +33,9 @@ class SemesterMarkDtoMapper @Inject constructor(val markGroupMapper: Mapper<Mark
     }
 
     override fun toDto(from: Semester): SemesterMarkDto {
-        val schoolClass = from.schoolYear?.schoolClass as SchoolClass
-        val semesterMarkGroup = MarkGroup(marks = from.subjects.map { it.markGroup as Mark }.toMutableList())
-        val institution = schoolClass.institution as Institution
+        val schoolClass = from.schoolYear?.schoolClass ?: ValidationKey.ENTITY_NOT_FOUND.throwException()
+        val semesterMarkGroup = MarkGroup(marks = from.subjects.map { it.markGroup!! }.toMutableList())
+        val institution = schoolClass.institution ?: ValidationKey.ENTITY_NOT_FOUND.throwException()
         return SemesterMarkDto(from.id, from.name, from.validFrom, from.validTo,
                 institutionMapper.toDto(institution), schoolClassMapper.toDto(schoolClass),
                 semesterMarkGroup.getValue(),
@@ -39,8 +43,8 @@ class SemesterMarkDtoMapper @Inject constructor(val markGroupMapper: Mapper<Mark
     }
 
     private fun subjectToMarksDto(from: Subject): SubjectMarkDto {
-        val color = from.color as Color
-        val markGroup = from.markGroup as MarkGroup
+        val color = from.color!!
+        val markGroup = from.markGroup!!
         return SubjectMarkDto(from.id, from.name, colorMapper.toDto(color), markGroupMapper.toDto(markGroup))
     }
 

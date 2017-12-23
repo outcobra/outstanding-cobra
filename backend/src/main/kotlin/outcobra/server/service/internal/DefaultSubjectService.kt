@@ -2,10 +2,7 @@ package outcobra.server.service.internal
 
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import outcobra.server.model.QSubject
-import outcobra.server.model.SchoolClass
-import outcobra.server.model.Semester
-import outcobra.server.model.Subject
+import outcobra.server.model.*
 import outcobra.server.model.dto.SubjectDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.interfaces.OutcobraDto
@@ -60,7 +57,7 @@ class DefaultSubjectService
         requestValidator.validateRequestByDto(dto)
         var subject = mapper.fromDto(dto)
         if (dto.id == 0L) {
-            val markGroup = outcobra.server.model.MarkGroup(subject = subject)
+            val markGroup = MarkGroup(subject = subject)
             markGroupRepository.save(markGroup)
             subject.markGroup = markGroup
         }

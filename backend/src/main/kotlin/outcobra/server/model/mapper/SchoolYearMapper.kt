@@ -35,7 +35,7 @@ class SchoolYearMapper @Inject constructor(val semesterRepository: SemesterRepos
     override fun toDto(from: SchoolYear): SchoolYearDto {
         val semesters = from.semesters.map { it.id }
         val id = from.id
-        val schoolClass = from.schoolClass as SchoolClass
+        val schoolClass = from.schoolClass!!
         return SchoolYearDto(id, schoolClass.id, from.name, from.validFrom, from.validTo, semesters)
     }
 }

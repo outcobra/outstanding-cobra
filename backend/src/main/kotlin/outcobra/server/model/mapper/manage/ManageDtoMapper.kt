@@ -1,7 +1,6 @@
 package outcobra.server.model.mapper.manage
 
 import org.springframework.stereotype.Component
-import outcobra.server.model.Color
 import outcobra.server.model.Institution
 import outcobra.server.model.dto.manage.*
 import outcobra.server.model.interfaces.Mapper
@@ -27,7 +26,7 @@ class ManageDtoMapper @Inject constructor(val colorMapper: ColorMapper) : Mapper
                                     SemesterDto(semester.id, semester.name, semester.validFrom, semester.validTo, year.id,
                                             semester.subjects.map { subject ->
                                                 SubjectDto(subject.id,
-                                                        subject.name, colorMapper.toDto(subject.color as Color), semester.id)
+                                                        subject.name, colorMapper.toDto(subject.color!!), semester.id)
                                             })
                                 })
                     })
