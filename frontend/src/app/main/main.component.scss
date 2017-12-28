@@ -1,29 +1,31 @@
 @import '../../sass/color-variables';
 
 :host {
-    display: flex;
-    flex-direction: column;
-    overflow-y: scroll;
-
-    mat-toolbar {
-        padding: 0 calc((100% - 940px) / 2);
-        @media(max-width: 960px) {
-            padding: 0 8px;
-        }
-    }
-
-    #oc-welcome-banner {
-        background-color: mat-color($primary-light-palette);
-        color: white;
+    overflow-y: auto;
+    height: 100%;
+    > div {
         display: flex;
-        flex-basis: 50vh;
-        > * {
-            display: flex;
-            flex-basis: 50%;
-            align-items: center;
+        flex-direction: column;
 
-            &:first-child {
-                justify-content: flex-end;
+        mat-toolbar {
+            padding: 0 calc((100% - 940px) / 2);
+            @media(max-width: 960px) {
+                padding: 0 8px;
+            }
+        }
+
+        #oc-welcome-banner {
+            background-color: mat-color($primary-light-palette);
+            color: white;
+            display: flex;
+            height: 50vh;
+            align-items: center;
+            justify-content: center;
+            #oc-welcome-banner-title {
+                text-align: center;
+                line-height: 1.2em;
+                font-size: 4em;
+                font-weight: 700;
             }
         }
     }
