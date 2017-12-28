@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        kotlinVersion = '1.1.51'
+        kotlinVersion = '1.2.10'
         outcobraVersion = '1.3.0'
     }
     repositories {

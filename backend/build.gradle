@@ -2,6 +2,9 @@ buildscript {
     ext {
         springBootVersion = '1.5.2.RELEASE'
         outstandingCobraVersion = outcobraVersion
+        ehcacheVersion = '3.4.0'
+        jacksonVersion = '2.9.2'
+        javaxCacheApiVersion = '1.0.0'
 
         if (System.getenv('JENKINS_URL') != null && System.getenv('BUILD_NUMBER') != null) {
             outstandingCobraVersion = outstandingCobraVersion + '-J' + System.getenv('BUILD_NUMBER') + '+' + System.getenv('BRANCH_NAME').replace('/', '_')
@@ -14,10 +17,10 @@ buildscript {
     dependencies {
         classpath($/org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion/$)
         classpath($/org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion/$)
-        classpath('gradle.plugin.com.gorylenko.gradle-git-properties:gradle-git-properties:1.4.17')
+        classpath($/gradle.plugin.com.gorylenko.gradle-git-properties:gradle-git-properties:1.4.17/$)
         classpath($/org.jetbrains.kotlin:kotlin-allopen:$kotlinVersion/$)
-        classpath('org.ehcache:ehcache:3.3.1')
-        classpath('javax.cache:cache-api:1.0.0')
+        classpath($/org.ehcache:ehcache:$ehcacheVersion/$)
+        classpath($/javax.cache:cache-api:$javaxCacheApiVersion/$)
     }
 }
 
@@ -90,14 +93,14 @@ dependencies {
     compile('io.springfox:springfox-swagger-ui:2.7.0')
     compile('io.springfox:springfox-staticdocs:2.6.1')
     compile('javax.inject:javax.inject:1')
-    compile('javax.cache:cache-api:1.0.0')
+    compile($/javax.cache:cache-api:$javaxCacheApiVersion/$)
     compile('com.fasterxml.jackson.module:jackson-module-parameter-names')
     compile('com.fasterxml.jackson.datatype:jackson-datatype-jdk8')
-    compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.0.pr3')
-    compile('com.fasterxml.jackson.module:jackson-module-kotlin:2.9.0.pr3')
+    compile($/com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion/$)
+    compile($/com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion/$)
     compile('org.flywaydb:flyway-core:4.2.0')
     compile('com.getsentry.raven:raven-logback:8.0.3')
-    compile('org.ehcache:ehcache:3.3.1')
+    compile($/org.ehcache:ehcache:$ehcacheVersion/$)
     compile($/org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}/$)
     compile($/org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}/$)
     testCompile('org.assertj:assertj-core:3.8.0')
