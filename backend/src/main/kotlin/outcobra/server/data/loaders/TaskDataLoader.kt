@@ -43,12 +43,12 @@ class TaskDataLoader(val taskRepository: TaskRepository) : DataLoader {
     }
 
     override fun load() {
-        TASK1 = saveTask(Task("Retro Präsi", "Sprintretrospektive Präsentation vorbereiten", LocalDate.of(2016, 12, 22), LocalDate.of(2016, 12, 28), 12, 55, SCRUM))
-        TASK2 = saveTask(Task("OOP", "Sequenzdiagramm zeichnen", LocalDate.of(2016, 10, 22), LocalDate.of(2016, 10, 28), 22, 15, OOP))
-        TASK3 = saveTask(Task("WW2", "Dossier zum zweiten Weltkrieg fertiglesen", LocalDate.of(2016, 10, 22), LocalDate.of(2016, 10, 28), 22, 15, GUP))
-        TASK4 = saveTask(Task("Hebelgesetze", "AB Hebelgesetz machen", LocalDate.of(2016, 10, 22), LocalDate.of(2016, 10, 28), 22, 15, PHYSICS))
-        TASK5 = saveTask(Task("Burndown", "Burndown Chats analysieren", LocalDate.of(2016, 10, 22), LocalDate.of(2016, 10, 28), 22, 15, SCRUM))
-        TASK6 = saveTask(Task("SQL", "AB SQL-Statements lösen", LocalDate.of(2016, 8, 22), LocalDate.of(2016, 8, 28), 32, 85, DATABASES))
-        TASK7 = saveTask(Task("PostgreSQL", "PostrgeSQL RDBM kennelernen", LocalDate.of(2016, 6, 22), LocalDate.of(2016, 6, 28), 42, 25, DATABASES))
+        TASK1 = saveTask(Task("Retro Präsi", "Sprintretrospektive Präsentation vorbereiten", LocalDate.of(2017, 12, 22), LocalDate.of(2017, 12, 28), 12, 55, SCRUM))
+        TASK2 = saveTask(Task("OOP", "Sequenzdiagramm zeichnen", LocalDate.of(2017, 10, 22), LocalDate.of(2017, 10, 28), 22, 15, OOP))
+        TASK3 = saveTask(Task("WW2", "Dossier zum zweiten Weltkrieg fertiglesen", LocalDate.of(2017, 10, 22), LocalDate.of(2017, 10, 28), 22, 15, GUP))
+        TASK4 = saveTask(Task("Hebelgesetze", "AB Hebelgesetz machen", LocalDate.of(2017, 10, 22), LocalDate.of(2017, 10, 28), 22, 15, PHYSICS))
+        TASK5 = saveTask(Task("Burndown", "Burndown Chats analysieren", LocalDate.of(2017, 10, 22), LocalDate.of(2017, 10, 28), 22, 15, SCRUM))
+        TASK6 = saveTask(Task("SQL", "AB SQL-Statements lösen", LocalDate.of(2017, 8, 22), LocalDate.of(2017, 8, 28), 32, 85, DATABASES))
+        TASK7 = saveTask(Task("PostgreSQL", "PostrgeSQL RDBM kennelernen", LocalDate.of(2017, 6, 22), LocalDate.of(2017, 6, 28), 42, 25, DATABASES))
     }
 }

@@ -1,22 +1,17 @@
 package outcobra.server.service.internal
 
-import com.auth0.authentication.result.UserProfile
-import com.auth0.spring.security.api.Auth0JWTToken
-import com.auth0.spring.security.api.Auth0UserDetails
 import org.springframework.context.annotation.Profile
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Service
 import outcobra.server.annotation.DefaultImplementation
-import outcobra.server.config.Auth0Client
 import outcobra.server.config.ProfileRegistry.Companion.BASIC_AUTH_SECURITY_MOCK
-import outcobra.server.exception.ValidationException
-import outcobra.server.exception.ValidationKey
-import outcobra.server.model.QUser
 import outcobra.server.model.User
 import outcobra.server.model.dto.UserDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.UserRepository
 import outcobra.server.service.UserService
+import outcobra.server.web.auth.model.JwtAuthenticationToken
+import outcobra.server.web.auth.model.OutcobraUser
 import javax.inject.Inject
 
 @Service
@@ -24,35 +19,24 @@ import javax.inject.Inject
 @Profile("!$BASIC_AUTH_SECURITY_MOCK")
 class DefaultUserService
 @Inject constructor(val userRepository: UserRepository,
-                    val userDtoMapper: Mapper<User, UserDto>,
-                    val auth0Client: Auth0Client) : UserService {
+                    val userDtoMapper: Mapper<User, UserDto>) : UserService {
+    override fun getCurrentOutcobraUser(): OutcobraUser {
+        return (SecurityContextHolder.getContext().authentication as JwtAuthenticationToken).principal!!
+    }
+
+    override fun getCurrentUser(): User {
+        return userRepository.findByMail(getCurrentOutcobraUser().mail)!!
+    }
+
+    override fun getCurrentUserDto(): UserDto {
+        return userDtoMapper.toDto(getCurrentUser())
+    }
 
     override fun readUserById(id: Long): User {
-        return userRepository.getOne(id)
+        return userRepository.findOne(id)
     }
 
-    override fun getTokenUserId(): String {
-        val userDetails = SecurityContextHolder.getContext().authentication.principal as Auth0UserDetails
-        return userDetails.getAuth0Attribute("sub") as String
-    }
-
-    override fun getCurrentUser() = userRepository.findOne(QUser.user.auth0Id.eq(getTokenUserId()))
-            ?: ValidationKey.USER_NOT_IN_DATABASE_RELOGIN.throwException()
-
-    override fun getCurrentUserDto() = userDtoMapper.toDto(getCurrentUser())!!
-
-    override fun getUserProfile(): UserProfile {
-        val auth = SecurityContextHolder.getContext().authentication
-        return auth0Client.getUserProfile(auth as Auth0JWTToken)
-    }
-
-    override fun loginRegister(): UserDto {
-        return try {
-            userDtoMapper.toDto(getCurrentUser())
-        } catch (vex: ValidationException) {
-            val userDetails = getUserProfile()
-            val newUser = User(userDetails.id, userDetails.nickname, null)
-            userDtoMapper.toDto(userRepository.save(newUser))
-        }
+    override fun checkEmailNotTaken(mail: String): Boolean {
+        return userRepository.findByMail(mail) == null
     }
 }

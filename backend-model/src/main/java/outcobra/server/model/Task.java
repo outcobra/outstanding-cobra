@@ -3,18 +3,15 @@ package outcobra.server.model;
 import com.querydsl.core.annotations.QueryInit;
 import outcobra.server.model.interfaces.ParentLinked;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 
 @Entity
 
-public class Task implements ParentLinked {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
+public class Task extends AbstractEntity implements ParentLinked {
     @NotNull
     private String name;
 
@@ -30,7 +27,6 @@ public class Task implements ParentLinked {
     private Subject subject;
 
     //region constructors
-
     public Task(String name, String description, LocalDate todoDate, LocalDate dueDate,
                 Integer effort, Integer progress, Subject subject) {
         this.name = name;
@@ -44,19 +40,9 @@ public class Task implements ParentLinked {
 
     public Task() {
     }
-
     //endregion
 
     //region default functions
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }

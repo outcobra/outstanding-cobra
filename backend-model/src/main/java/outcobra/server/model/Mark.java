@@ -2,17 +2,17 @@ package outcobra.server.model;
 
 import outcobra.server.model.interfaces.ParentLinked;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class Mark implements ParentLinked {
+public abstract class Mark extends AbstractEntity implements ParentLinked {
     @NotNull
     protected Double weight;
-    @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
-    protected Long id;
 
     @NotNull
     protected String description;
@@ -39,14 +39,6 @@ public abstract class Mark implements ParentLinked {
 
     public void setWeight(Double weight) {
         this.weight = weight;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public MarkGroup getMarkGroup() {

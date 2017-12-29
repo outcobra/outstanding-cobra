@@ -140,7 +140,7 @@ mat-dialog-container {
     }
 
     .form-error {
-        color: mat-color($warn);
+        color: mat-color($warn-palette);
     }
 
     &.half, .half {
@@ -229,4 +229,15 @@ button[mat-fab] {
 
 oc-app.oc-mobile button[mat-fab] {
     bottom: 23px;
+}
+
+mat-toolbar.transparent-toolbar {
+    background: none !important;
+    box-shadow: none !important;
+}
+
+.oc-title-logo {
+    display: flex;
+    height: 100%;
+    cursor: pointer;
 }

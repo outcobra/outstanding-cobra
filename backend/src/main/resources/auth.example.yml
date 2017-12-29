@@ -1,0 +1,5 @@
+security:
+  jwt:
+    secret: # TODO Add Base64 secret here
+  google:
+    clientId: # TODO Add Google Client ID here

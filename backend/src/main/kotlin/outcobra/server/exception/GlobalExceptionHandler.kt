@@ -13,7 +13,6 @@ import javax.persistence.EntityNotFoundException
  * @author Florian Bürgi
  * @since 1.1.0
  */
-@Suppress("unused")
 @ControllerAdvice
 class GlobalExceptionHandler {
 

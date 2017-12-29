@@ -2,17 +2,16 @@ package outcobra.server.model;
 
 import outcobra.server.model.interfaces.ParentLinked;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.time.LocalTime;
 
 @Entity
-public class TimetableEntry implements ParentLinked {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
+public class TimetableEntry extends AbstractEntity implements ParentLinked {
     @NotNull
     @Enumerated(EnumType.STRING)
     private WeekDay weekDay;
@@ -51,19 +50,9 @@ public class TimetableEntry implements ParentLinked {
 
     public TimetableEntry() {
     }
-
     //endregion
 
     //region default Functions
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public WeekDay getWeekDay() {
         return weekDay;
     }

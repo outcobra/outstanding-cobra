@@ -76,13 +76,13 @@ export class MarkSemesterComponent implements OnInit {
         // region subject initialization
         this.newMark$.skipWhile(() => !this._currentSemester)
             .subscribe((markGroup) =>
-            this._router.navigate([`subject/${markGroup.subjectId}/group/${markGroup.id}/add`],
+            this._router.navigate([`subject/${markGroup.subjectId}/group/${markGroup.id}/new`],
                 {relativeTo: this._activatedRoute})
         );
 
         this.newMarkGroup$.skipWhile(() => !this._currentSemester)
             .subscribe((markGroup) =>
-            this._router.navigate([`subject/${markGroup.subjectId}/group/add`],
+            this._router.navigate([`subject/${markGroup.subjectId}/group/new`],
                 {relativeTo: this._activatedRoute})
         );
 

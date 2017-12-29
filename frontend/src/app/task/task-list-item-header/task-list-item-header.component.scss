@@ -33,6 +33,10 @@ task-list-item-header {
             }
         }
 
+        mat-icon, button[mat-button] {
+            margin-right: 16px;
+        }
+
         .show-on-hover {
             transition: visibility .2s ease-in-out;
             visibility: hidden;

@@ -1,79 +1,59 @@
 package outcobra.server.model;
 
 import org.hibernate.validator.constraints.Length;
+import outcobra.server.model.interfaces.ParentLinked;
 
+import javax.jdo.annotations.Unique;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.jdo.annotations.Index;
-import javax.jdo.annotations.Unique;
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-
-import outcobra.server.model.interfaces.ParentLinked;
-
 @Entity
-public class User implements ParentLinked {
-    @Id
-    @GeneratedValue
-    private Long id;
-
-    @Index
-    @Unique
-    @NotNull
-    private String auth0Id;
-
+public class User extends AbstractEntity implements ParentLinked {
     @Length(max = 50)
     @NotNull
     private String username;
 
+    @Length(max = 100)
+    @NotNull
+    @Unique
+    private String mail;
+
     @OneToMany(mappedBy = "user")
     private List<Institution> institutions;
 
+    @OneToMany(mappedBy = "user")
+    private List<Identity> identities;
+
     //region Constructors
-    public User(Long id, String auth0Id, String username, List<Institution> institutions) {
+    public User(Long id, String username, String mail, List<Institution> institutions) {
         this.id = id;
-        this.auth0Id = auth0Id;
         this.username = username;
         this.institutions = institutions;
+        this.mail = mail;
     }
 
-    public User(String auth0Id, String username, List<Institution> institutions) {
-        this.auth0Id = auth0Id;
+    public User(String username, String mail, List<Institution> institutions) {
         this.username = username;
         this.institutions = institutions;
+        this.mail = mail;
     }
 
-    public User(Long id, String auth0Id, String username) {
+    public User(Long id, String username, String mail) {
         this();
         this.id = id;
-        this.auth0Id = auth0Id;
         this.username = username;
+        this.mail = mail;
     }
 
     public User() {
         this.institutions = new ArrayList<>();
     }
-
     //endregion
 
     //region Getters and setters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getAuth0Id() {
-        return auth0Id;
-    }
-
-    public void setAuth0Id(String auth0Id) {
-        this.auth0Id = auth0Id;
-    }
-
     public String getUsername() {
         return username;
     }
@@ -82,12 +62,28 @@ public class User implements ParentLinked {
         this.username = username;
     }
 
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
     public List<Institution> getInstitutions() {
         return institutions;
     }
 
     public void setInstitutions(List<Institution> institutions) {
         this.institutions = institutions;
+    }
+
+    public List<Identity> getIdentities() {
+        return identities;
+    }
+
+    public void setIdentities(List<Identity> identities) {
+        this.identities = identities;
     }
 
     @SuppressWarnings("SimplifiableIfStatement")
@@ -99,7 +95,7 @@ public class User implements ParentLinked {
         User user = (User) o;
 
         if (!getId().equals(user.getId())) return false;
-        if (!getAuth0Id().equals(user.getAuth0Id())) return false;
+        if (!getMail().equals(user.getMail())) return false;
         return getUsername().equals(user.getUsername());
 
     }
@@ -107,7 +103,7 @@ public class User implements ParentLinked {
     @Override
     public int hashCode() {
         int result = getId().hashCode();
-        result = 31 * result + getAuth0Id().hashCode();
+        result = 31 * result + getUsername().hashCode();
         result = 31 * result + getUsername().hashCode();
         return result;
     }
@@ -115,7 +111,7 @@ public class User implements ParentLinked {
 
     @Override
     public String toString() {
-        return String.format("User{auth0Id='%s', username='%s', institutions=%s}", auth0Id, username, institutions);
+        return String.format("User{id=%s, username='%s', mail='%s', institutions=%s}", id, username, mail, institutions);
     }
 
     @Override
