@@ -111,7 +111,7 @@ public class User extends AbstractEntity implements ParentLinked {
 
     @Override
     public String toString() {
-        return String.format("User{username='%s', mail='%s', institutions=%s}", username, mail, institutions);
+        return String.format("User{id=%s, username='%s', mail='%s', institutions=%s}", id, username, mail, institutions);
     }
 
     @Override

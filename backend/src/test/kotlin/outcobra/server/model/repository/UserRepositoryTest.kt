@@ -5,14 +5,17 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.transaction.annotation.Transactional
+import outcobra.server.config.ProfileRegistry.Companion.TEST
 import outcobra.server.model.User
 import javax.inject.Inject
 
 @RunWith(SpringRunner::class)
 @SpringBootTest
 @Transactional
+@ActiveProfiles(TEST)
 class UserRepositoryTest {
 
     @Inject
@@ -34,22 +37,22 @@ class UserRepositoryTest {
         userRepository.flush()
         assertThat(userRepository.count()).isEqualTo(userCount + 1)
 
-        val savedUser = userRepository.findOne(saved.id)
-        assertThat(savedUser).isEqualTo(myUser)
+        val newUser = userRepository.findOne(saved.id)
+        assertThat(newUser).isEqualTo(myUser)
 
-        userRepository.delete(savedUser)
+        userRepository.delete(newUser)
         assertThat(userRepository.count()).isEqualTo(userCount)
     }
 
     @Test
     fun testQueryDslExecutor() {
-        userRepository.save(myUser)
+        val savedUser = userRepository.save(myUser)
 
-        val savedUser = userRepository.findOne(1)
+        val newUser = userRepository.findOne(savedUser.id)
 
-        assertThat(savedUser).isEqualTo(myUser)
+        assertThat(newUser).isEqualTo(myUser)
 
-        userRepository.delete(savedUser.id)
+        userRepository.delete(newUser.id)
         assertThat(userRepository.count()).isEqualTo(userCount)
     }
 }
