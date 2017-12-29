@@ -14,32 +14,43 @@ CREATE UNIQUE INDEX idx_identity_id
 CREATE UNIQUE INDEX idx_identity_identifier
   ON identity (identifier);
 
-ALTER TABLE USER
+ALTER TABLE user
   ADD COLUMN MAIL VARCHAR(100);
 
 CREATE PROCEDURE migrate_auth0_google()
   BEGIN
+    DECLARE done INT DEFAULT FALSE;
+    DECLARE cur_user BIGINT(20);
+    DECLARE cur_auth0id VARCHAR(255);
+
     DECLARE auth0_cur CURSOR FOR
       SELECT
         id,
         auth0id
       FROM user
       WHERE auth0id LIKE 'google-oauth2|%'; -- length: 14
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
 
-    DECLARE cur_user BIGINT(20);
-    DECLARE auth0id VARCHAR(255);
+    OPEN auth0_cur;
 
-    LOOP
+    migrate_loop: LOOP
       FETCH auth0_cur
-      INTO cur_user, auth0id;
+      INTO cur_user, cur_auth0id;
+
+      IF done
+      THEN
+        LEAVE migrate_loop;
+      END IF;
 
       INSERT INTO identity (user, identity_type, identifier)
-      VALUES (cur_user, 'google-auth', substring(auth0id, 14));
+      VALUES (cur_user, 'google-auth', substring(cur_auth0id, 15));
     END LOOP;
+
+    CLOSE auth0_cur;
   END;
 
-CALL migrate_auth0_google();
+CALL migrate_auth0_google;
 DROP PROCEDURE migrate_auth0_google;
 
-ALTER TABLE USER
-  DROP COLUMN AUTH0ID;
+ALTER TABLE user
+  DROP COLUMN auth0id;
