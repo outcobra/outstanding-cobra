@@ -22,7 +22,7 @@ class SchoolClassController
      * @param schoolClassDto the new [SchoolClassDto] you want to save, as Json in the [RequestBody]
      * @return the [schoolClassDto] that has been saved in the database
      */
-    @RequestMapping(value = "/schoolClass", method = arrayOf(RequestMethod.POST, RequestMethod.PUT))
+    @RequestMapping("/schoolClass", method = arrayOf(RequestMethod.POST, RequestMethod.PUT))
     fun saveSchoolClass(@RequestBody schoolClassDto: SchoolClassDto): SchoolClassDto {
         return schoolClassService.save(schoolClassDto)
     }
@@ -31,12 +31,12 @@ class SchoolClassController
      * This method reads a SchoolClass out of the database and returns it as a [SchoolClassDto]
      * @param id the id of the schoolClass you want to read, as [PathParam]
      */
-    @GetMapping(value = "/schoolClass/{id}")
+    @GetMapping("/schoolClass/{id}")
     fun readSchoolClassById(@PathVariable id: Long): SchoolClassDto {
         return schoolClassService.readById(id)
     }
 
-    @GetMapping(value = "/schoolClass")
+    @GetMapping("/schoolClass")
     fun readSchoolClassesByUser(): List<SchoolClassDto> {
         return schoolClassService.readAllByUser()
     }
@@ -47,7 +47,7 @@ class SchoolClassController
      * @return All SchoolClasses that are associated with the given Institution
      */
 
-    @GetMapping(value = "/institution/{institutionId}/schoolClass")
+    @GetMapping("/institution/{institutionId}/schoolClass")
     fun readAllSchoolClassesByInstitution(@PathVariable institutionId: Long): List<SchoolClassDto> {
         return schoolClassService.readAllByInstitution(institutionId)
     }
@@ -56,7 +56,7 @@ class SchoolClassController
      * This method deletes a schoolClass
      * @param id The id of the SchoolClass that should be deleted
      */
-    @DeleteMapping(value = "/schoolClass/{id}")
+    @DeleteMapping("/schoolClass/{id}")
     fun deleteSchoolClass(@PathVariable id: Long) {
         schoolClassService.delete(id)
     }

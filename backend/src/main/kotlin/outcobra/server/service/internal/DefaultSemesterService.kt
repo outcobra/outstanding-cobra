@@ -42,7 +42,7 @@ class DefaultSemesterService
     }
 
     override fun getCurrentSemester(): List<SemesterDto> {
-        val currentUserId = userService.getCurrentUser()?.id
+        val currentUserId = userService.getCurrentUser().id
         val today = LocalDate.now()
         //check ownership manually
         val withCurrentUser = QSemester.semester.schoolYear.schoolClass.institution.user.id.eq(currentUserId)
@@ -52,7 +52,7 @@ class DefaultSemesterService
     }
 
     override fun readAllByUser(): List<SemesterDto> {
-        val currentUserId = userService.getCurrentUser()?.id
+        val currentUserId = userService.getCurrentUser().id
         val withCurrentUser = QSemester.semester.schoolYear.schoolClass.institution.user.id.eq(currentUserId)
         return repository.findAll(withCurrentUser).map { mapper.toDto(it) }
     }

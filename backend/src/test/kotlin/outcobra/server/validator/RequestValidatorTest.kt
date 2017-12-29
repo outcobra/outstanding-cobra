@@ -36,7 +36,7 @@ import javax.transaction.Transactional
 @RunWith(SpringRunner::class)
 @ActiveProfiles(TEST)
 @Transactional
-open class RequestValidatorTest {
+class RequestValidatorTest {
 
     @Inject
     lateinit var userRepository: UserRepository
@@ -78,7 +78,7 @@ open class RequestValidatorTest {
     fun testFakeParent() {
         assertThatThrownBy {
             val original = institutionMapper.toDto(institutionByUser2)
-            val fake = InstitutionDto(original.id, userServiceMock.getCurrentUser()!!.id, original.name, original.schoolClassIds)
+            val fake = InstitutionDto(original.id, userServiceMock.getCurrentUser().id, original.name, original.schoolClassIds)
             institutionService.save(fake)
         }.isInstanceOf(ValidationException::class.java)
     }

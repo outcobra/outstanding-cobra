@@ -48,7 +48,7 @@ class InstitutionServiceTest {
 
     @Before
     fun setup() {
-        userId = userService.getCurrentUser()!!.id
+        userId = userService.getCurrentUser().id
     }
 
     /**

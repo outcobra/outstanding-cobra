@@ -21,7 +21,7 @@ import javax.inject.Inject
  */
 @Component
 @Transactional
-open class DefaultSchoolClassService
+class DefaultSchoolClassService
 @Inject constructor(mapper: Mapper<SchoolClass, SchoolClassDto>,
                     repository: SchoolClassRepository,
                     requestValidator: RequestValidator<SchoolClassDto>,
@@ -29,7 +29,7 @@ open class DefaultSchoolClassService
     : SchoolClassService, DefaultBaseService<SchoolClass, SchoolClassDto, SchoolClassRepository>(mapper, repository, requestValidator, SchoolClass::class) {
 
     override fun readAllByUser(): List<SchoolClassDto> {
-        val userId = userService.getCurrentUser()?.id
+        val userId = userService.getCurrentUser().id
                 ?: ValidationKey.SERVER_ERROR.throwWithCause(NullPointerException())
         val filter = QSchoolClass.schoolClass.institution.user.id.eq(userId)
         return repository.findAll(filter).map { mapper.toDto(it) }

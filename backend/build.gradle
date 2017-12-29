@@ -98,7 +98,7 @@ dependencies {
     compile('com.fasterxml.jackson.datatype:jackson-datatype-jdk8')
     compile($/com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion/$)
     compile($/com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion/$)
-    compile('org.flywaydb:flyway-core:4.2.0')
+    compile('org.flywaydb:flyway-core:5.0.3')
     compile('com.getsentry.raven:raven-logback:8.0.3')
     compile($/org.ehcache:ehcache:$ehcacheVersion/$)
     compile($/org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}/$)

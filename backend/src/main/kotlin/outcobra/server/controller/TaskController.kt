@@ -13,47 +13,47 @@ import javax.inject.Inject
 @RequestMapping("/api")
 class TaskController @Inject constructor(val taskService: TaskService) {
 
-    @GetMapping(value = "/task")
+    @GetMapping("/task")
     fun getAllTasks(): List<TaskDto> {
         return taskService.readAll()
     }
 
-    @RequestMapping(value = "/task", method = arrayOf(RequestMethod.POST, RequestMethod.PUT))
+    @RequestMapping("/task", method = arrayOf(RequestMethod.POST, RequestMethod.PUT))
     fun saveTask(@RequestBody taskDto: TaskDto): TaskDto {
         return taskService.save(taskDto)
     }
 
-    @GetMapping(value = "/task/{id}")
+    @GetMapping("/task/{id}")
     fun readTaskById(@PathVariable id: Long): TaskDto {
         return taskService.readById(id)
     }
 
-    @GetMapping(value = "/subject/{subjectId}/task")
+    @GetMapping("/subject/{subjectId}/task")
     fun readAllTasksBySubject(@PathVariable subjectId: Long): List<TaskDto> {
         return taskService.readAllBySubject(subjectId)
     }
 
-    @GetMapping(value = "/semester/{semesterId}/task")
+    @GetMapping("/semester/{semesterId}/task")
     fun readAllTasksBySemester(@PathVariable semesterId: Long): List<TaskDto> {
         return taskService.readAllBySemester(semesterId)
     }
 
-    @GetMapping(value = "/subject/{subjectId}/task/open")
+    @GetMapping("/subject/{subjectId}/task/open")
     fun readAllOpenTasksBySubject(@PathVariable subjectId: Long): List<TaskDto> {
         return taskService.readAllOpenBySubject(subjectId)
     }
 
-    @GetMapping(value = "/semester/{semesterId}/task/open")
+    @GetMapping("/semester/{semesterId}/task/open")
     fun readAllOpenTasksBySemester(@PathVariable semesterId: Long): List<TaskDto> {
         return taskService.readAllOpenBySemester(semesterId)
     }
 
-    @DeleteMapping(value = "/task/{taskId}")
+    @DeleteMapping("/task/{taskId}")
     fun deleteTask(@PathVariable taskId: Long) {
         taskService.delete(taskId)
     }
 
-    @PostMapping(value = "/task/progress")
+    @PostMapping("/task/progress")
     fun updateProgress(@RequestBody taskProgressUpdateDto: TaskProgressUpdateDto): TaskDto {
         return taskService.updateProgress(taskProgressUpdateDto)
     }

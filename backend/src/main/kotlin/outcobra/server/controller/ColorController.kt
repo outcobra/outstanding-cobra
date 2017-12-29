@@ -15,7 +15,7 @@ import javax.inject.Inject
 @RequestMapping("/api/color")
 class ColorController @Inject constructor(val service: ColorService) {
 
-    @GetMapping(value = "")
+    @GetMapping("")
     fun getColors(): List<ColorDto> {
         return service.getColorsWithIndex()
     }
