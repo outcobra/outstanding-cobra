@@ -12,6 +12,6 @@ import outcobra.server.model.interfaces.Mapper
  */
 @Component
 class ColorMapper : Mapper<Color, ColorDto> {
-    override fun fromDto(from: ColorDto): Color = Color.getByHex(from.hex) ?: ValidationKey.ENTITY_NOT_FOUND.throwException()
+    override fun fromDto(from: ColorDto): Color = Color.getByHex(from.hex) ?: ValidationKey.INVALID_DTO.throwException()
     override fun toDto(from: Color): ColorDto = ColorDto(from.name, from.hex, 0)
 }

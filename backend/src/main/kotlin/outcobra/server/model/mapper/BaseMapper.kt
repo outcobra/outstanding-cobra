@@ -29,7 +29,7 @@ class BaseMapper {
         }
         val childRepo = repositoryLocator.getForEntityClass(childType.java)
         val parentRepo = repositoryLocator.getForEntityClass(parentType.java)
-        val parent = parentRepo.findOne(parentId)
+        val parent = parentRepo.findOne(parentId) ?: ValidationKey.ENTITY_NOT_FOUND.throwException()
         val areFromParent = childRepo.findAll(existingChildren).all { it.parent?.id == parent.id }
         val userIsOwner = parent.followToUser().auth0Id == userService.getCurrentUser().auth0Id
         if (!(areFromParent && userIsOwner)) {

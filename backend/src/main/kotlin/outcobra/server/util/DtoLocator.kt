@@ -28,5 +28,5 @@ class DtoLocator {
      */
     @Cacheable(DTO_FOR_NAME)
     fun getForEntityName(entityName: String): Class<*> =
-            ClassUtils.forName("$DTO_PACKAGE_NAME.${entityName.firstToUpper()}Dto", null)
+            ClassUtils.forName("$DTO_PACKAGE_NAME.${entityName.capitalize()}Dto", null)
 }

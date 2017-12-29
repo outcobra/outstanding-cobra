@@ -82,7 +82,7 @@ tailrec fun ParentLinked.followToUser(iterationCount: Int = 0): User {
         throw ValidationKey.INVALID_DTO.throwException()
     } else {
         if (this is User) return this
-        val parentLinked = this.parent as ParentLinked
+        val parentLinked = this.parent ?: ValidationKey.ENTITY_NOT_FOUND.throwException()
         return parentLinked.followToUser(iterationCount.inc())
     }
 }
@@ -103,28 +103,4 @@ fun BaseMarkDto.validate() {
     if (!valid) {
         ValidationKey.INVALID_MARK.throwException()
     }
-}
-
-/**
- * Upper-Cases the first character of a string
- *
- * @author Joel Messerli
- * @since 1.0.0
- */
-fun String.firstToUpper(): String {
-    if (this.isEmpty()) return this
-    if (this.length == 1) return this.toUpperCase()
-    return this.substring(0, 1).toUpperCase() + this.substring(1, this.length)
-}
-
-/**
- * Lower-Cases the first character of a string
- *
- * @author Joel Messerli
- * @since 1.0.0
- */
-fun String.firstToLower(): String {
-    if (this.isEmpty()) return this
-    if (this.length == 1) return this.toLowerCase()
-    return substring(0, 1).toLowerCase() + substring(1, length)
 }
