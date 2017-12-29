@@ -17,6 +17,7 @@ CREATE UNIQUE INDEX idx_identity_identifier
 ALTER TABLE user
   ADD COLUMN MAIL VARCHAR(100);
 
+DELIMITER //
 CREATE PROCEDURE migrate_auth0_google()
   BEGIN
     DECLARE done INT DEFAULT FALSE;
@@ -48,6 +49,8 @@ CREATE PROCEDURE migrate_auth0_google()
 
     CLOSE auth0_cur;
   END;
+//
+DELIMITER ;
 
 CALL migrate_auth0_google;
 DROP PROCEDURE migrate_auth0_google;
