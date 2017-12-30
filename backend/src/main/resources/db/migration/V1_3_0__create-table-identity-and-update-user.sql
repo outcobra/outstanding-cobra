@@ -1,11 +1,11 @@
 CREATE TABLE identity (
   id            BIGINT(20)   NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  user          BIGINT(20)   NOT NULL,
+  user_id          BIGINT(20)   NOT NULL,
   identity_type VARCHAR(255) NOT NULL,
   identifier    VARCHAR(255) NOT NULL,
   secret        VARCHAR(255),
 
-  CONSTRAINT fk_identity_user FOREIGN KEY (user) REFERENCES user (id)
+  CONSTRAINT fk_identity_user FOREIGN KEY (user_id) REFERENCES user (id)
 );
 
 CREATE UNIQUE INDEX idx_identity_id
@@ -43,7 +43,7 @@ CREATE PROCEDURE migrate_auth0_google()
         LEAVE migrate_loop;
       END IF;
 
-      INSERT INTO identity (user, identity_type, identifier)
+      INSERT INTO identity (user_id, identity_type, identifier)
       VALUES (cur_user, 'google-auth', substring(cur_auth0id, 15));
     END LOOP;
 
