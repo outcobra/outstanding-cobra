@@ -4,9 +4,8 @@ import {FallbackComponent} from './main/fallback/fallback.component';
 import {EmptyLayoutComponent} from './layout/empty-layout/empty-layout.component';
 import {AppLayoutComponent} from './layout/app-layout/app-layout.component';
 import {AuthGuard} from './core/services/auth/auth-guard.service';
-import {authRoutes} from './auth/auth-routes';
+import {publicRoutes} from './public-routes';
 import {environment} from '../environments/environment';
-import {mainRoutes} from './main/main-routes';
 
 @NgModule({
     imports: [
@@ -14,10 +13,10 @@ import {mainRoutes} from './main/main-routes';
                 {
                     path: '',
                     component: EmptyLayoutComponent,
-                    children: authRoutes.concat(mainRoutes),
                     data: {
                         animation: 'empty'
-                    }
+                    },
+                    children: publicRoutes
                 },
                 {
                     path: '',

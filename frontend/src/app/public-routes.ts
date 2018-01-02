@@ -1,7 +1,32 @@
-import {MainComponent} from './main.component';
-import {I18nMarkdownComponent} from '../shared/components/i18n-markdown/i18n-markdown.component';
+import {Routes} from '@angular/router';
+import {AuthComponent} from './auth/auth.component';
+import {LoginSignUpComponent} from './auth/login/login-signup.component';
+import {I18nMarkdownComponent} from './shared/components/i18n-markdown/i18n-markdown.component';
+import {MainComponent} from './main/main.component';
 
-export const mainRoutes = [
+export const publicRoutes: Routes = [
+    {
+        path: 'auth',
+        component: AuthComponent,
+        data: {
+            animation: 'auth'
+        }
+    },
+    {
+        path: 'login',
+        component: LoginSignUpComponent,
+        data: {
+            isSignUp: false,
+            animation: 'login'
+        }
+    },{
+        path: 'signup',
+        component: LoginSignUpComponent,
+        data: {
+            isSignUp: true,
+            animation: 'signUp'
+        }
+    },
     {
         path: '',
         component: MainComponent,
