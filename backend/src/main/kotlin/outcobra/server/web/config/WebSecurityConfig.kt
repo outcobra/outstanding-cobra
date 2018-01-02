@@ -34,9 +34,9 @@ class WebSecurityConfig
                     val jwtAuthenticationProvider: JwtAuthenticationProvider) : WebSecurityConfigurerAdapter() {
 
     override fun configure(web: WebSecurity?) {
+        web!!.ignoring().antMatchers("/api/auth/**", "/api/user/emailAvailable/*").antMatchers(HttpMethod.OPTIONS)
         if (environment.acceptsProfiles(ProfileRegistry.DEVELOPMENT)) {
-            web!!.ignoring().antMatchers("/h2-console/**", "/api/auth/**", "/api/user/emailAvailable/*")
-                    .antMatchers(HttpMethod.OPTIONS)
+            web.ignoring().antMatchers("/h2-console/**").antMatchers(HttpMethod.OPTIONS)
         }
     }
 
@@ -76,6 +76,4 @@ class WebSecurityConfig
     override fun configure(auth: AuthenticationManagerBuilder?) {
         auth!!.authenticationProvider(jwtAuthenticationProvider)
     }
-
-
 }
