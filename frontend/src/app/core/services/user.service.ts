@@ -10,6 +10,6 @@ export class UserService extends AppService {
     }
 
     public checkMailNotTaken(mail: string): Observable<boolean> {
-        return this._http.get(`${this._baseUri}/emailAvailable/${mail}`);
+        return this._http.post(`${this._baseUri}/emailAvailable`, mail);
     }
 }
