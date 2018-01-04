@@ -29,11 +29,9 @@ export class HttpInterceptor {
     private _apiNames: string[];
     private _defaultApiName: string;
 
-    constructor(
-        private http: Http,
-        private _router: Router,
-        private _notificationsService: NotificationWrapperService
-    ) {
+    constructor(private http: Http,
+                private _router: Router,
+                private _notificationsService: NotificationWrapperService) {
         this._defaultApiName = environment.api.defaultApiName;
         this._apiNames = environment.api.apis
             .map(api => api.name);
