@@ -250,7 +250,7 @@ export class HttpInterceptor {
         if (api.authToken === true) {
             let token = localStorage.getItem(environment.locStorage.tokenLocation);
             if (isEmpty(token)) {
-
+                return;
             }
 
             request.headers['Authorization'] = 'Bearer ' + token;

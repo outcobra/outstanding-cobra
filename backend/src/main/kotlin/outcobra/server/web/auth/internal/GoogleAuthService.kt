@@ -2,6 +2,7 @@ package outcobra.server.web.auth.internal
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.stereotype.Component
 import outcobra.server.exception.ValidationKey
@@ -22,6 +23,9 @@ class GoogleAuthService @Inject constructor(
         private val identityRepository: IdentityRepository,
         private val idTokenVerifier: GoogleIdTokenVerifier,
         jwtUtil: JwtUtil) : BaseAuthService<String>(jwtUtil) {
+    companion object {
+        private val LOGGER = LoggerFactory.getLogger(GoogleAuthService::class.java)
+    }
 
     override fun login(arg: String): AuthResponseDto {
         val idToken = verifyToken(arg)
@@ -58,6 +62,7 @@ class GoogleAuthService @Inject constructor(
         return try {
             idTokenVerifier.verify(token).payload
         } catch (ex: Exception) {
+            LOGGER.debug("Identity provider failed", ex)
             ValidationKey.IDENTITY_PROVIDER_FAILED.throwException()
         }
     }

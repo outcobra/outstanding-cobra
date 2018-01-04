@@ -9,7 +9,9 @@ import javax.servlet.ServletResponse
 import javax.servlet.http.HttpServletRequest
 
 class JwtAuthenticationFilter : GenericFilterBean() {
-    private val HEADER_PREFIX = "Bearer"
+    companion object {
+        private const val HEADER_PREFIX = "Bearer"
+    }
 
     override fun doFilter(request: ServletRequest?, response: ServletResponse?, chain: FilterChain?) {
         val header = (request!! as HttpServletRequest).getHeader("Authorization")

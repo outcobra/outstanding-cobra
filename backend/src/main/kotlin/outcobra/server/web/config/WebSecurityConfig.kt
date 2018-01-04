@@ -31,19 +31,22 @@ class WebSecurityConfig
 @Inject constructor(val environment: Environment,
                     val jwtAuthenticationProvider: JwtAuthenticationProvider) : WebSecurityConfigurerAdapter() {
 
-    override fun configure(web: WebSecurity?) {
-        web!!.ignoring().antMatchers("/api/auth/**", "/api/user/emailAvailable/*").antMatchers(HttpMethod.OPTIONS)
+    override fun configure(web: WebSecurity) {
+        web.ignoring().antMatchers(HttpMethod.OPTIONS)
+
         if (environment.acceptsProfiles(ProfileRegistry.DEVELOPMENT)) {
-            web.ignoring().antMatchers("/h2-console/**").antMatchers(HttpMethod.OPTIONS)
+            web.ignoring().antMatchers("/h2-console/**")
         }
     }
 
-    override fun configure(http: HttpSecurity?) {
-        http!!.headers().frameOptions().disable()
+    override fun configure(http: HttpSecurity) {
+        http.headers().frameOptions().disable()
         http.csrf().disable()
         http.cors().disable()
 
-        http.authorizeRequests().antMatchers("/api/auth/**").permitAll()
+        http.authorizeRequests()
+                .antMatchers("/api/auth/**", "/api/user/emailAvailable", "/api/ping").permitAll()
+                .anyRequest().authenticated()
 
         if (environment.acceptsProfiles(ProfileRegistry.DEVELOPMENT)) {
             http.authorizeRequests()
@@ -51,18 +54,11 @@ class WebSecurityConfig
                             "/webjars/springfox-swagger-ui/**",
                             "/swagger-resources/**",
                             "/v2/api-docs",
-                            "/h2-console/**",
                             "/env",
                             "/health",
                             "/info",
                             "/trace",
-                            "/configprops",
-                            "/api/ping").permitAll()
-                    .anyRequest().authenticated()
-        } else if (environment.acceptsProfiles(ProfileRegistry.PRODUCTION)) {
-            http.authorizeRequests()
-                    .antMatchers("/api/ping").permitAll()
-                    .anyRequest().authenticated()
+                            "/configprops").permitAll()
         }
 
         if (!environment.acceptsProfiles(ProfileRegistry.BASIC_AUTH_SECURITY_MOCK)) {
