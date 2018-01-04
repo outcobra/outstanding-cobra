@@ -16,9 +16,7 @@ data class Subject(@NotNull var name: String = "",
                    @OneToOne var markGroup: MarkGroup? = null,
                    @ManyToOne var teacher: Teacher? = null)
     : ParentLinked, AbstractEntity() {
+
     override val parent: ParentLinked?
         get() = semester
-    //region constructors
-
-    //endregion
 }

@@ -8,7 +8,7 @@ import javax.persistence.MappedSuperclass
 /**
  * @author Florian Bürgi
  * @since <since>
-</since> */
+ */
 
 @MappedSuperclass
 abstract class AbstractEntity {

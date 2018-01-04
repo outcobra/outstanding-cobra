@@ -12,7 +12,7 @@ import outcobra.server.model.interfaces.ParentLink
  * This is a DTO. DTOs are serializable and the only thing that will be sent over the network.
  * In this case it represents an [Institution].
  *
- * For instance field information pleas check the outcobra.server.model class.
+ * For instance field information please check the model class.
  * @see Institution
  */
 data class InstitutionDto(val id: Long = 0,

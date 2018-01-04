@@ -12,7 +12,7 @@ data class Holiday(@NotNull var name: String? = null,
                    @NotNull var validTo: LocalDate = LocalDate.now(),
                    @ManyToOne var schoolYear: SchoolYear? = null)
     : ParentLinked, AbstractEntity() {
+
     override val parent: ParentLinked?
         get() = schoolYear
-
 }

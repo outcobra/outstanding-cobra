@@ -4,8 +4,9 @@ import java.util.*
 
 /**
  * @author Mario Kunz
+ * @since 1.1.0
  */
-enum class Color constructor(val hex: String) {
+enum class Color(val hex: String) {
     RED("F44336"),
     PINK("E91E63"),
     DEEP_PINK("AD1457"),
@@ -36,10 +37,7 @@ enum class Color constructor(val hex: String) {
                 val index = hex.indexOf('-')
                 hex = hex.substring(0, index)
             }
-            val finalHex = hex
-            return Arrays.stream(values())
-                    .filter { color -> color.hex.contains(finalHex) }
-                    .findFirst().orElse(null)
+            return values().firstOrNull { color -> color.hex == hex }
         }
 
         val randomColor: Color

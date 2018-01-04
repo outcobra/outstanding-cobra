@@ -15,7 +15,6 @@ import javax.validation.constraints.NotNull
  * @author Joel Messerli
  * @since 1.0.0
  */
-
 @Entity
 data class Institution(@NotNull var name: String = "",
                        @ManyToOne var user: User? = null,
@@ -23,7 +22,7 @@ data class Institution(@NotNull var name: String = "",
                        var schoolClasses: List<SchoolClass>? = null,
                        @OneToMany(mappedBy = "institution") var teachers: List<Teacher>? = null)
     : ParentLinked, AbstractEntity() {
+
     override val parent: ParentLinked?
         get() = user
 }
-

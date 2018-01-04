@@ -11,12 +11,12 @@ import javax.validation.constraints.NotNull
 data class Exam(@NotNull var name: String = "",
                 @NotNull var date: LocalDate = LocalDate.now(),
                 @OneToMany(mappedBy = "exam", cascade = arrayOf(CascadeType.REMOVE)) var tasks: List<ExamTask> = listOf(),
-                @NotNull @ManyToOne @QueryInit("semester.schoolYear.schoolClass.institution.user") var subject: Subject? = null,
+                @QueryInit("semester.schoolYear.schoolClass.institution.user")
+                @NotNull @ManyToOne var subject: Subject? = null,
                 @OneToOne(cascade = arrayOf(CascadeType.REMOVE)) var mark: MarkValue? = null,
                 @NotNull var description: String = "")
     : ParentLinked, AbstractEntity() {
+
     override val parent: ParentLinked?
         get() = subject
-
-
 }

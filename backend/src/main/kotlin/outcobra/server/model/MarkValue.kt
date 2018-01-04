@@ -10,13 +10,11 @@ class MarkValue(@NotNull private var value: Double = 0.0,
                 weight: Double = 1.0,
                 markGroup: MarkGroup? = null,
                 description: String = "",
-                @OneToOne(mappedBy = "mark") var exam: Exam? = null) : Mark(weight, description, markGroup) {
+                @OneToOne(mappedBy = "mark") var exam: Exam? = null)
+    : Mark(weight, description, markGroup) {
 
-    override fun getValue(): Double {
-        return value
-    }
+    override fun getValue(): Double = value
 
     override val parent: ParentLinked?
         get() = markGroup
-
 }

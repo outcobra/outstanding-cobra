@@ -13,12 +13,7 @@ class MarkGroup(description: String = "",
                 @OneToOne(mappedBy = "markGroup") var subject: Subject? = null) : Mark(weight, description, markGroup) {
 
     override val parent: ParentLinked?
-        get() {
-            if (this.markGroup == null) {
-                return subject
-            }
-            return markGroup
-        }
+        get() = markGroup ?: subject
 
 
     override fun getValue(): Double {
@@ -39,12 +34,10 @@ class MarkGroup(description: String = "",
         } else valueSum / weightSum
     }
 
-    // Todo persist
     fun addMark(mark: Mark) {
         marks.add(mark)
     }
 
-    // Todo persist
     fun removeMark(mark: Mark) {
         marks.remove(mark)
     }

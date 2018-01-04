@@ -15,8 +15,10 @@ data class Task(@NotNull var name: String = "",
                 var dueDate: LocalDate = LocalDate.now(),
                 var effort: Int = 0,
                 var progress: Int = 0,
-                @ManyToOne @QueryInit("semester.schoolYear.schoolClass.institution.user") var subject: Subject? = null)
+                @QueryInit("semester.schoolYear.schoolClass.institution.user")
+                @ManyToOne var subject: Subject? = null)
     : ParentLinked, AbstractEntity() {
+
     override val parent: ParentLinked?
         get() = subject
 }

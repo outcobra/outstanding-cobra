@@ -13,9 +13,8 @@ class SchoolClass(@NotNull var normalizedName: String = "",
                   @OneToMany(mappedBy = "schoolClass", cascade = arrayOf(CascadeType.REMOVE))
                   var schoolYears: List<SchoolYear> = listOf())
     : ParentLinked, AbstractEntity() {
+
     override val parent: ParentLinked?
         get() = institution
-
-
 }
 
