@@ -13,6 +13,5 @@ import outcobra.server.config.ProfileRegistry.Companion.TEST
 class OutstandingCobraServerApplicationTests {
     @Test
     fun contextLoads() {
-
     }
 }

@@ -57,10 +57,10 @@ class RequestValidatorTest {
 
     @Before
     fun setup() {
-        val user2 = userRepository.findOne(QUser.user.auth0Id.eq(Mocker.USER2_AUTH0_ID))
+        val user2 = userRepository.findOne(QUser.user.mail.eq(Mocker.USER2_MAIL))
         institutionByUser2 = institutionRepository.save(Institution("InstitutionByUser2", user2))
         institutionByCurrent = institutionRepository.findAll(
-                QInstitution.institution.user.auth0Id.ne(userServiceMock.getTokenUserId())).first()
+                QInstitution.institution.user.mail.ne(userServiceMock.getCurrentUser().mail)).first()
 
     }
 

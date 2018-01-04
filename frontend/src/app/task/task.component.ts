@@ -4,25 +4,18 @@ import {TaskDto} from './model/task.dto';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {SchoolClassSubjectDto} from './model/school-class-subject.dto';
-import {MatDialog, MatDialogRef} from '@angular/material';
-import {TaskCreateUpdateDialog} from './task-create-update-dialog/task-create-update-dialog.component';
 import {Util} from '../core/util/util';
-import {ViewMode} from '../core/common/view-mode';
 import {Observable} from 'rxjs/Observable';
-import {MEDIUM_DIALOG} from '../core/util/const';
 import {and} from '../core/util/helper';
 import {ResponsiveHelperService} from '../core/services/ui/responsive-helper.service';
 import {NotificationWrapperService} from '../core/notifications/notification-wrapper.service';
-import {OCMediaChange} from '../core/services/ui/oc-media-change';
-import {slideUpDownAnimation} from '../core/animations/animations';
 import {Subject} from 'rxjs/Subject';
 
 @Component({
     selector: 'task',
     templateUrl: './task.component.html',
     styleUrls: ['./task.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    animations: [slideUpDownAnimation]
+    encapsulation: ViewEncapsulation.None
 })
 export class TaskComponent implements OnInit, AfterViewInit {
     private _filterForm: FormGroup;
@@ -33,12 +26,9 @@ export class TaskComponent implements OnInit, AfterViewInit {
     private _schoolClassSubjects: Array<SchoolClassSubjectDto>;
     private _tasks: TaskDto[];
 
-    private _taskCreateUpdateDialog: MatDialogRef<TaskCreateUpdateDialog>;
-
     public search$: Subject<string> = new Subject();
 
     constructor(private _taskService: TaskService,
-                private _dialogService: MatDialog,
                 private _notificationService: NotificationWrapperService,
                 private _route: ActivatedRoute,
                 private _router: Router,
@@ -60,7 +50,7 @@ export class TaskComponent implements OnInit, AfterViewInit {
             this._responsiveHelperService.listenForBreakpointChange(),
             this._responsiveHelperService.listenForOrientationChange())
             .filter(change => !change.mobile)
-            .subscribe((change: OCMediaChange) => this._filterShown = true);
+            .subscribe(() => this._filterShown = true);
         this._changeDetectorRef.detectChanges();
     }
 
@@ -106,30 +96,7 @@ export class TaskComponent implements OnInit, AfterViewInit {
 
     //endregion
 
-    public addTask() {
-        this._taskCreateUpdateDialog = this._dialogService.open(TaskCreateUpdateDialog, this._responsiveHelperService.getMobileOrGivenDialogConfig(MEDIUM_DIALOG));
-        this._taskCreateUpdateDialog.componentInstance.init(ViewMode.NEW, null);
-        this._taskCreateUpdateDialog.afterClosed()
-            .flatMap((value) => {
-                if (!value) return Observable.empty();
-                return this._taskService.create(value)
-            })
-            .subscribe((task: TaskDto) => {
-                this._notificationService.success('i18n.modules.task.notification.add.title', 'i18n.modules.task.notification.add.message');
-                this._tasks.push(task);
-                this._checkFilterThenAddToFilteredList(task);
-            });
-    }
-
     //region filtering
-
-    private _checkFilterThenAddToFilteredList(task: TaskDto) {
-        let filter = this._buildFilterPredicate();
-        if (!this._filtered || this._filterTask(task, filter)) {
-            this._filteredTasks.push(task);
-        }
-    }
-
     public markTaskAsDone(task: TaskDto) {
         if (task.progress == 100) return;
         this._taskService.updateProgress(task.id, 100)

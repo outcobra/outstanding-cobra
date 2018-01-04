@@ -1,4 +1,4 @@
 generated/
-auth0.yml
+auth.yml
 logback-spring.xml
 git.properties

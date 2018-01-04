@@ -2,23 +2,53 @@ package outcobra.server.model
 
 import org.hibernate.validator.constraints.Length
 import outcobra.server.model.interfaces.ParentLinked
-import javax.jdo.annotations.Index
+
 import javax.jdo.annotations.Unique
 import javax.persistence.Entity
 import javax.persistence.OneToMany
 import javax.validation.constraints.NotNull
+import java.util.ArrayList
 
 @Entity
-data class User(@Index @Unique @NotNull var auth0Id: String = "",
-                @Length(max = 50) @NotNull var username: String = "",
-                @OneToMany(mappedBy = "user") var institutions: List<Institution> = listOf())
-    : ParentLinked, AbstractEntity() {
-    override val parent: ParentLinked
+class User : AbstractEntity, ParentLinked {
+    @Length(max = 50)
+    @NotNull
+    private var username: String? = null
+
+    @Length(max = 100)
+    @NotNull
+    @Unique
+    private var mail: String? = null
+
+    @OneToMany(mappedBy = "user")
+    private var institutions: List<Institution>? = null
+
+    @OneToMany(mappedBy = "user")
+    private val identities: List<Identity>? = null
+
+
+    override val parent: ParentLinked?
         get() = this
 
-    override fun toString(): String {
-        return String.format("User{auth0Id='%s', username='%s', institutions=%s}", auth0Id, username, institutions)
+    //region Constructors
+    constructor(id: Long?, username: String, mail: String, institutions: List<Institution>) {
+        this.username = username
+        this.institutions = institutions
+        this.mail = mail
     }
 
-    //endregion
+    constructor(username: String, mail: String, institutions: List<Institution>) {
+        this.username = username
+        this.institutions = institutions
+        this.mail = mail
+    }
+
+    constructor(id: Long?, username: String, mail: String) : this() {
+        this.username = username
+        this.mail = mail
+    }
+
+    constructor() {
+        this.institutions = ArrayList()
+    }
 }

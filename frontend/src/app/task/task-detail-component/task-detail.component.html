@@ -30,7 +30,7 @@
 </div>
 <button mat-button
         color="primary"
-        (click)="editTask()">
+        [routerLink]="'/task/update/' + task.id">
     {{ 'i18n.common.action.edit' | translate }}
 </button>
 <button mat-button

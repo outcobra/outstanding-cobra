@@ -1,20 +1,14 @@
 import {MatDialogConfig} from '@angular/material';
 
 export const SMALL_DIALOG: MatDialogConfig = {
-    position: {
-        top: '20px'
-    },
     width: '500px'
-};
+} as MatDialogConfig;
 
 export const MEDIUM_DIALOG: MatDialogConfig = {
-    position: {
-        top: '20px'
-    },
     width: '800px'
-};
+} as MatDialogConfig;
 
 export const MOBILE_DIALOG: MatDialogConfig = {
     height: '100%',
     width: '100%'
-};
+} as MatDialogConfig;

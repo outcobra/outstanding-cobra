@@ -19,7 +19,9 @@ export class OCNavComponent implements OnInit {
     }
 
     public toggleNavCollapse() {
-        if (!this.collapsible) return;
+        if (!this.collapsible) {
+            return;
+        }
         this._collapsed = !this._collapsed;
     }
 

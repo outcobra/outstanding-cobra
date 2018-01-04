@@ -342,7 +342,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
      * waits for emitted values from the given dialog
      *
      * checks that the emitted values are not null or something similar {@see isTruthy}
-     * performs a flatMap on the createFunction which must return an Observable of the entity Type
+     * performs a switchMap on the createFunction which must return an Observable of the entity Type
      * and then executes the finishFunction when a value is emitted by the switched Observable
      * also shows a success notification before executing the finishFunction
      *
@@ -356,7 +356,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
     private _handleAddition<T extends Dto, D extends CreateUpdateComponent<T>>(entityName: string, dialogRef: MatDialogRef<D>, createFunction: (entity: T) => Observable<T>, finishFunction: (entity: T) => void, thisArg: any) {
         dialogRef.afterClosed()
             .filter(isTruthy)
-            .flatMap((value: T) => createFunction.call(thisArg, value))
+            .switchMap((value: T) => createFunction.call(thisArg, value))
             .subscribe((entity: T) => {
                 this._showSaveSuccessNotification(entityName);
                 finishFunction(entity);
@@ -367,7 +367,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
      * waits for emitted values from the given dialog
      *
      * checks that the emitted values are not null or something similar {@see isTruthy}
-     * performs a flatMap on the editFunction which must return an Observable of the entity Type
+     * performs a switchMap on the editFunction which must return an Observable of the entity Type
      * also shows a success notification in the end
      *
      * @param entityName name success message
@@ -378,7 +378,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
     private _handleEdit<T extends Dto, D extends CreateUpdateComponent<T>>(entityName: string, dialogRef: MatDialogRef<D>, editFunction: (entity: T) => Observable<T>, thisArg: any) {
         dialogRef.afterClosed()
             .filter(isTruthy)
-            .flatMap(value => editFunction.call(thisArg, value))
+            .switchMap(value => editFunction.call(thisArg, value))
             .catch(() => {
                 this._prepareManageData();
                 return Observable.empty();

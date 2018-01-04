@@ -1,5 +1,6 @@
 @import '~@angular/material/theming';
 @import 'color-classes';
+@import '../app/auth/auth-theming';
 
 @include mat-core();
 
@@ -16,27 +17,8 @@ $config: mat-typography-config(
 @include mat-base-typography($config);
 @include angular-material-typography($config);
 // Themes
-$primary: mat-palette($mat-indigo, 800, 500, 900);
-$accent: mat-palette($mat-pink, 500, 300, 900);
 
-$oc-theme-ocean: mat-light-theme($primary, $accent, $warn);
+$oc-theme-ocean: mat-light-theme($primary-palette, $accent-palette, $error-palette);
 @include angular-material-theme($oc-theme-ocean);
-@include oc-theme-classes($primary, $accent, $warn);
-
-.oc-theme-blood-orange {
-    $primary: mat-palette($mat-deep-orange, 700, 200, 900);
-    $accent: mat-palette($mat-amber, 500, 200, 700);
-
-    $oc-theme-blood-orange: mat-light-theme($primary, $accent, $warn);
-    @include angular-material-theme($oc-theme-blood-orange);
-    @include oc-theme-classes($primary, $accent, $warn);
-}
-
-.oc-theme-lavender {
-    $primary: mat-palette($mat-deep-purple, 700, 400, 900);
-    $accent: mat-palette($mat-light-green, 700, 400, 900);
-
-    $oc-theme-lavender: mat-light-theme($primary, $accent, $warn);
-    @include angular-material-theme($oc-theme-lavender);
-    @include oc-theme-classes($primary, $accent, $warn);
-}
+@include auth-theme($oc-theme-ocean);
+@include oc-theme-classes($primary-palette, $accent-palette, $error-palette);

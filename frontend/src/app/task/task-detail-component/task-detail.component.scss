@@ -1,11 +1,7 @@
 @import '../../../sass/color-variables';
 
-:host {
-    display: block;
-
-    .task-detail {
-        margin-bottom: 16px;
-    }
+.task-detail {
+    margin-bottom: 16px;
 }
 
 .task-progress {
