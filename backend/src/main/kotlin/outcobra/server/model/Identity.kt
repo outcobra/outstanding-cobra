@@ -21,5 +21,4 @@ data class Identity(@NotNull @ManyToOne var user: User? = null,
 
     override val parent: ParentLinked?
         get() = user
-
 }
