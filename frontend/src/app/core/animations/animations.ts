@@ -1,7 +1,4 @@
-import {
-    animate, animation, group, query, stagger, state, style, transition, trigger,
-    useAnimation
-} from '@angular/animations';
+import {animate, animation, group, query, state, style, transition, trigger, useAnimation} from '@angular/animations';
 import {Easing, time, Timing} from './timing';
 
 export const fadeInOutAnimation = animation([

@@ -29,7 +29,7 @@ class GoogleAuthService @Inject constructor(
         val identities = identityRepository.findByIdentifierAndIdentityType(idToken.subject, AuthRegistry.GOOGLE)
 
         if (identities.size == 1) {
-            return userToResponse(identities.first().user)
+            return userToResponse(identities.first().user!!)
         }
         ValidationKey.USER_NOT_SIGNED_UP.throwException()
     }
@@ -40,10 +40,10 @@ class GoogleAuthService @Inject constructor(
         val identities = identityRepository.findByIdentifierAndIdentityType(idToken.subject, AuthRegistry.GOOGLE)
 
         if (identities.size == 1) {
-            return userToResponse(identities.first().user)
+            return userToResponse(identities.first().user!!)
         }
 
-        val newUser = User(null, idToken["name"] as String, idToken.email)
+        val newUser = User(idToken["name"] as String, idToken.email)
         val user = userRepository.save(newUser)
 
         identityRepository.save(Identity(user, AuthRegistry.GOOGLE, idToken.subject, null))
