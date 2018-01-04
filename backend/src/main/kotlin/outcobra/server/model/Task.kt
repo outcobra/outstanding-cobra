@@ -7,7 +7,6 @@ import javax.persistence.Entity
 import javax.persistence.ManyToOne
 import javax.validation.constraints.NotNull
 
-
 @Entity
 data class Task(@NotNull var name: String = "",
                 var description: String = "",
@@ -22,5 +21,3 @@ data class Task(@NotNull var name: String = "",
     override val parent: ParentLinked?
         get() = subject
 }
-
-
