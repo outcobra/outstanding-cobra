@@ -73,7 +73,7 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "karma-junit-reporter": "1.2.0",
     "karma-phantomjs-launcher": "^1.0.4",
-    "node-sass": "^4.5.0",
+    "node-sass": "^4.6.0",
     "protractor": "~5.1.0",
     "ts-node": "^3.0.4",
     "tslint": "^4.5.0",

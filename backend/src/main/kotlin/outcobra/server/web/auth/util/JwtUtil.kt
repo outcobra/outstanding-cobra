@@ -1,9 +1,9 @@
 package outcobra.server.web.auth.util
 
 import io.jsonwebtoken.Claims
-import io.jsonwebtoken.JwtException
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 import outcobra.server.util.getExpirationTime
@@ -15,6 +15,10 @@ import java.time.LocalDateTime
 
 @Component
 class JwtUtil(@Value("\${security.jwt.secret}") private val secret: String) {
+    companion object {
+        private val LOGGER = LoggerFactory.getLogger(JwtUtil::class.java)
+    }
+
     fun parseToken(token: String): Claims? {
         @Suppress("UsePropertyAccessSyntax")
         try {
@@ -28,9 +32,8 @@ class JwtUtil(@Value("\${security.jwt.secret}") private val secret: String) {
             }
 
             return body
-        } catch (e: JwtException) {
-            return null
-        } catch (e: ClassCastException) {
+        } catch (e: Exception) {
+            LOGGER.debug("JWT Validation failed", e)
             return null
         }
     }

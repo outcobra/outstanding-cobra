@@ -4,7 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import {dateReplacer} from './http-util';
 import {RequestOptions} from './request-options';
 import {ValidationException} from './validation-exception';
-import {isEmpty, isFalsy, isNotEmpty} from '../util/helper';
+import {isFalsy, isNotEmpty} from '../util/helper';
 import {NotificationWrapperService} from '../notifications/notification-wrapper.service';
 import {RequestArgs} from '@angular/http/src/interfaces';
 import {environment} from '../../../environments/environment';
@@ -249,11 +249,10 @@ export class HttpInterceptor {
         let api = this._getApiFromConfig(request.apiName);
         if (api.authToken === true) {
             let token = localStorage.getItem(environment.locStorage.tokenLocation);
-            if (isEmpty(token)) {
 
+            if (isNotEmpty(token)) {
+                request.headers['Authorization'] = 'Bearer ' + token;
             }
-
-            request.headers['Authorization'] = 'Bearer ' + token;
         }
     }
 
