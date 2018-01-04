@@ -27,9 +27,8 @@ class TeacherMapper @Inject constructor(val subjectRepository: SubjectRepository
     }
 
     override fun toDto(from: Teacher): TeacherDto {
-        val id = from.id
         val email = from.email ?: ""
         val institution = from.institution!!
-        return TeacherDto(id, institution.id, from.name, email)
+        return TeacherDto(from.id, institution.id, from.name, email)
     }
 }
