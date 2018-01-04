@@ -22,9 +22,6 @@ const OC_MOBILE_CLASS = 'oc-mobile';
 export class AppLayoutComponent extends RouteAnimationContainer implements OnInit, AfterViewInit {
     private _mobile: boolean;
 
-    private _activeTheme: OCTheme;
-    private _allThemes: Array<OCTheme> = OCTheme.values();
-
     @ViewChild(MatSidenav) public sidenav: MatSidenav;
 
     private _isEnglish: boolean = this._translateService.currentLang == 'en';
@@ -32,14 +29,12 @@ export class AppLayoutComponent extends RouteAnimationContainer implements OnIni
     constructor(private _translateService: TranslateService,
                 private _auth: DefaultAuthService,
                 private _responsiveHelper: ResponsiveHelperService,
-                private _router: Router,
-                private _overlayContainer: OverlayContainer) {
+                private _router: Router) {
         super();
     }
 
     ngOnInit() {
         this._mobile = this._responsiveHelper.isMobile();
-        this.changeTheme(this.getThemeFromLocalStorage() || OCTheme.OCEAN);
         this._router.events
             .filter(event => event instanceof NavigationStart)
             .subscribe(() => {
@@ -64,35 +59,12 @@ export class AppLayoutComponent extends RouteAnimationContainer implements OnIni
         }
     }
 
-    @HostBinding('class') get hostClasses(): string {
-        return this._activeTheme.className + (this._mobile ? (' ' + OC_MOBILE_CLASS) : '');
-    }
-
-    public changeTheme(theme: OCTheme) {
-        if (this._overlayContainer) {
-            this._overlayContainer.getContainerElement().classList.add(theme.className);
-        }
-
-        this._activeTheme = theme;
-        localStorage.setItem(OC_THEME_STORAGE_LOC, this._activeTheme.i18nKey);
-    }
-
-    private getThemeFromLocalStorage(): OCTheme {
-        let i18nKey = localStorage.getItem(OC_THEME_STORAGE_LOC);
-        return OCTheme.getByI18nKey(i18nKey);
-    }
-
     public logout() {
         this._auth.logout();
     }
 
     public get auth(): DefaultAuthService {
         return this._auth;
-    }
-
-
-    get allThemes(): Array<OCTheme> {
-        return this._allThemes;
     }
 
     get mobile(): boolean {

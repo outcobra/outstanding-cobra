@@ -58,12 +58,6 @@
       "lang": {
         "en": "Englisch",
         "de": "Deutsch"
-      },
-      "theme": {
-        "title": "Theme wechseln",
-        "ocean": "Ozean",
-        "bloodorange": "Blutorange",
-        "lavender": "Lavendel"
       }
     },
     "email": {
@@ -255,6 +249,7 @@
         "listTitle": "Deine Aufgaben",
         "desc": "Aufgaben Beschreibung",
         "progress": "Fortschritt",
+        "finish": "Abschliessen",
         "createUpdate": {
           "create": {
             "title": "Aufgabe hinzufügen"

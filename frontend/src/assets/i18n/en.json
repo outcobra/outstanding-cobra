@@ -57,12 +57,6 @@
       "lang": {
         "en": "English",
         "de": "German"
-      },
-      "theme": {
-        "title": "Choose Theme",
-        "ocean": "Ocean",
-        "bloodorange": "Blood Orange",
-        "lavender": "Lavender"
       }
     },
     "email": {
@@ -252,6 +246,9 @@
       "task": {
         "linkTitle": "Tasks",
         "listTitle": "Your Tasks",
+        "desc": "Task description",
+        "progress": "Progress",
+        "finish": "Finish",
         "createUpdate": {
           "create": {
             "title": "Aufgabe hinzufügen"
@@ -260,8 +257,6 @@
             "title": "Aufgabe bearbeiten"
           }
         },
-        "desc": "Task description",
-        "progress": "Progress",
         "filter": {
           "title": "Filter Tasks",
           "subject": "Filter by subject",

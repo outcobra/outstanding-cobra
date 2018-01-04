@@ -2,12 +2,12 @@
     <div class="icon">
         <mat-icon>{{ iconName }}</mat-icon>
     </div>
-    <div class="data" fxLayout="column" [ngClass]="{'multi-child': getDataOrder()}">
-        <div class="data-wrapper" [fxFlexOrder]="getDataOrder()">
-            <ng-content></ng-content>
-        </div>
+    <div class="data" fxLayout="column" [ngClass]="{'multi-child': hasChild()}">
         <label class="text-secondary-dark data-title">
             {{ titleKey | translate}}
         </label>
+        <div class="data-wrapper">
+            <ng-content></ng-content>
+        </div>
     </div>
 </div>
