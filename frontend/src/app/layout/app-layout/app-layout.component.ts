@@ -1,17 +1,12 @@
-import {AfterViewInit, Component, HostBinding, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {DefaultAuthService} from '../../core/services/auth/auth.service';
-import {NavigationEnd, NavigationStart, Router} from '@angular/router';
+import {NavigationStart, Router} from '@angular/router';
 import {isTruthy} from '../../core/util/helper';
-import {OCTheme} from '../../oc-ui/theme/oc-theme';
 import {TranslateService} from '@ngx-translate/core';
 import {ResponsiveHelperService} from '../../core/services/ui/responsive-helper.service';
 import {MatSidenav} from '@angular/material';
-import {OverlayContainer} from '@angular/cdk/overlay';
 import {appLayoutRouteAnimation} from '../../core/animations/animations';
 import {RouteAnimationContainer} from '../../core/animations/route-animation-container';
-
-const OC_THEME_STORAGE_LOC = 'oc-theme';
-const OC_MOBILE_CLASS = 'oc-mobile';
 
 @Component({
     selector: 'app-layout',

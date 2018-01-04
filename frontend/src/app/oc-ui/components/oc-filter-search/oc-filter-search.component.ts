@@ -17,7 +17,7 @@ export class OCFilterSearchComponent implements OnInit, OnDestroy {
     @Output('search') public onSearch: EventEmitter<string> = new EventEmitter();
     @ViewChild('searchFieldTrigger') trigger: ElementRef;
 
-    private currentPlaceholder: string;
+    private _currentPlaceholder: string;
 
     public searchForm: FormGroup;
     public showSearchField: boolean = false;
@@ -47,7 +47,7 @@ export class OCFilterSearchComponent implements OnInit, OnDestroy {
             search: []
         });
 
-        this.currentPlaceholder = this._getGivenOrPlaceholder(this.placeholder);
+        this._currentPlaceholder = this._getGivenOrPlaceholder(this.placeholder);
         this._refreshTriggerDimensions();
 
         this.search$
@@ -56,7 +56,7 @@ export class OCFilterSearchComponent implements OnInit, OnDestroy {
             .distinctUntilChanged()
             .subscribe(searchStr => {
                 this.onSearch.emit(searchStr);
-                this.currentPlaceholder = this._getGivenOrPlaceholder(isNotEmpty(searchStr) ? searchStr : this.placeholder);
+                this._currentPlaceholder = this._getGivenOrPlaceholder(isNotEmpty(searchStr) ? searchStr : this.placeholder);
             });
 
         Observable.fromEvent(window, 'resize')
@@ -67,7 +67,7 @@ export class OCFilterSearchComponent implements OnInit, OnDestroy {
             .takeUntil(this._ngUnsubscribe)
             .subscribe(() => {
             if (isEmpty(this.placeholder) && isEmpty(this.searchForm.get('search').value)) {
-                this.currentPlaceholder = this._getDefaultPlaceholder().call(this);
+                this._currentPlaceholder = this._getDefaultPlaceholder().call(this);
             }
         });
     }
@@ -111,5 +111,9 @@ export class OCFilterSearchComponent implements OnInit, OnDestroy {
 
     get triggerWidth(): number {
         return this._triggerWidth;
+    }
+
+    get currentPlaceholder(): string {
+        return this._currentPlaceholder;
     }
 }
