@@ -178,6 +178,13 @@ export class MarkSemesterComponent implements OnInit {
         return null;
     }
 
+    public getClassForInsufficientMark(mark: number) {
+        if(mark<4.0){
+            return "insufficient";
+        }
+        return "";
+    }
+
     public isTruthy(val: any): boolean {
         return isTruthy(val);
     }

@@ -25,7 +25,7 @@
                                 </span>
                                 <span>{{ subject.name }}</span>
                                 <div class="oc-filler"></div>
-                                <span>
+                                <span [ngClass]="getClassForInsufficientMark(subject.subjectMarkGroup.value)">
                                     <b>{{ subject.subjectMarkGroup.value | markValue }}</b>
                                 </span>
                                 <mat-icon [matTooltip]="'i18n.modules.mark.common.average' | translate"
