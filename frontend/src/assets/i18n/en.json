@@ -249,6 +249,7 @@
         "desc": "Task description",
         "progress": "Progress",
         "finish": "Finish",
+        "add": "Create Task",
         "createUpdate": {
           "create": {
             "title": "Aufgabe hinzufügen"

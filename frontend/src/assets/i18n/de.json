@@ -250,6 +250,7 @@
         "desc": "Aufgaben Beschreibung",
         "progress": "Fortschritt",
         "finish": "Abschliessen",
+        "add": "Aufgabe erstellen",
         "createUpdate": {
           "create": {
             "title": "Aufgabe hinzufügen"
