@@ -408,6 +408,7 @@
       "login": "Login",
       "signup": "Sign up",
       "logout": "Logout",
+      "goToApp": "Go to App",
       "form": {
         "email": "E-Mail",
         "password": "Password",

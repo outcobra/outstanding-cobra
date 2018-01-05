@@ -2,16 +2,24 @@
     <mat-toolbar>
         <img class="oc-title-logo" src="/assets/img/oc_logo_stroke_combined_blue.svg">
         <span class="toolbar-fill-space"></span>
-        <button mat-button
-                routerLink="/signUp"
-                id="signup-button">
-            {{ 'i18n.auth.signup' | translate }}
-        </button>
         <button mat-raised-button
-                routerLink="/login"
-                color="primary">
-            {{ 'i18n.auth.login' | translate }}
+                routerLink="/manage"
+                color="primary"
+                *ngIf="authService.isLoggedIn(); else notLoggedIn">
+            {{ 'i18n.auth.goToApp' | translate }}
         </button>
+        <ng-template #notLoggedIn>
+            <button mat-button
+                    routerLink="/signUp"
+                    id="signup-button">
+                {{ 'i18n.auth.signup' | translate }}
+            </button>
+            <button mat-raised-button
+                    routerLink="/login"
+                    color="primary">
+                {{ 'i18n.auth.login' | translate }}
+            </button>
+        </ng-template>
     </mat-toolbar>
 
     <div id="oc-welcome-banner">

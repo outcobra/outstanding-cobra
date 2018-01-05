@@ -402,6 +402,7 @@
       "login": "Einloggen",
       "signup": "Registrieren",
       "logout": "Ausloggen",
+      "goToApp": "Zur App wechseln",
       "form": {
         "email": "E-Mail",
         "password": "Passwort",
