@@ -57,12 +57,6 @@
       "lang": {
         "en": "English",
         "de": "German"
-      },
-      "theme": {
-        "title": "Choose Theme",
-        "ocean": "Ocean",
-        "bloodorange": "Blood Orange",
-        "lavender": "Lavender"
       }
     },
     "email": {
@@ -252,6 +246,10 @@
       "task": {
         "linkTitle": "Tasks",
         "listTitle": "Your Tasks",
+        "desc": "Task description",
+        "progress": "Progress",
+        "finish": "Finish",
+        "add": "Create Task",
         "createUpdate": {
           "create": {
             "title": "Aufgabe hinzufügen"
@@ -260,8 +258,6 @@
             "title": "Aufgabe bearbeiten"
           }
         },
-        "desc": "Task description",
-        "progress": "Progress",
         "filter": {
           "title": "Filter Tasks",
           "subject": "Filter by subject",
@@ -412,6 +408,7 @@
       "login": "Login",
       "signup": "Sign up",
       "logout": "Logout",
+      "goToApp": "Go to App",
       "form": {
         "email": "E-Mail",
         "password": "Password",

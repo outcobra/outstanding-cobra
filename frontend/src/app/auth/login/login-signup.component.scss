@@ -11,6 +11,10 @@
     .login-wrapper {
         max-width: 300px;
 
+        oc-alert {
+            margin: 0 0 4px -8px;
+        }
+
         form, form mat-form-field, img {
             width: 100%;
             box-sizing: border-box;
