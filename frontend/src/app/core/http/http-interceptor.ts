@@ -9,7 +9,6 @@ import {NotificationWrapperService} from '../notifications/notification-wrapper.
 import {RequestArgs} from '@angular/http/src/interfaces';
 import {environment} from '../../../environments/environment';
 import {Router} from '@angular/router';
-import {BasilWrapperService} from '../persistence/basil-wrapper.service';
 
 /**
  * HttpInterceptor to customize the http request and http responses
@@ -32,8 +31,7 @@ export class HttpInterceptor {
 
     constructor(private http: Http,
                 private _router: Router,
-                private _notificationsService: NotificationWrapperService,
-                private _basil: BasilWrapperService) {
+                private _notificationsService: NotificationWrapperService) {
         this._defaultApiName = environment.api.defaultApiName;
         this._apiNames = environment.api.apis
             .map(api => api.name);
@@ -250,7 +248,7 @@ export class HttpInterceptor {
     private _addAuthToken(request: RequestOptions) {
         let api = this._getApiFromConfig(request.apiName);
         if (api.authToken === true) {
-            let token = this._basil.get(environment.persistence.tokenLocation);
+            let token = localStorage.getItem(environment.locStorage.tokenLocation);
 
             if (isNotEmpty(token)) {
                 request.headers['Authorization'] = 'Bearer ' + token;

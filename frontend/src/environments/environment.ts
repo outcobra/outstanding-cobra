@@ -27,10 +27,7 @@ export const environment = {
             clientId: '1070281471136-d6siv7l8a3ece1phmmi8stpd8c7h0f4f.apps.googleusercontent.com'
         }
     },
-    persistence: {
-        basilOptions: {
-            namespace: "oc-data"
-        },
+    locStorage: {
         tokenLocation: 'id_token',
         profileLocation: 'profile'
     }

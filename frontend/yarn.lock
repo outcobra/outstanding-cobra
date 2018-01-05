@@ -621,10 +621,6 @@ base64id@1.0.0:
   version "1.0.0"
   resolved "https://pkg.pegnu.cloud/repository/npm/base64id/-/base64id-1.0.0.tgz#47688cb99bb6804f0e06d3e763b1c32e57d8e6b6"
 
-basil.js@^0.4.5:
-  version "0.4.5"
-  resolved "https://pkg.pegnu.cloud/repository/npm/basil.js/-/basil.js-0.4.5.tgz#a93b3674052cb8c6bbf6539d641bdfd66c5f55a6"
-
 batch@0.6.1:
   version "0.6.1"
   resolved "https://pkg.pegnu.cloud/repository/npm/batch/-/batch-0.6.1.tgz#dc34314f4e679318093fc760272525f94bf25c16"

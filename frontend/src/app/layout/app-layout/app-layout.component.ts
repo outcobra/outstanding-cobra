@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, HostBinding, OnInit, ViewChild} from '@angular/core';
 import {DefaultAuthService} from '../../core/services/auth/auth.service';
-import {NavigationStart, Router} from '@angular/router';
+import {NavigationEnd, NavigationStart, Router} from '@angular/router';
 import {isTruthy} from '../../core/util/helper';
 import {OCTheme} from '../../oc-ui/theme/oc-theme';
 import {TranslateService} from '@ngx-translate/core';
@@ -9,7 +9,6 @@ import {MatSidenav} from '@angular/material';
 import {OverlayContainer} from '@angular/cdk/overlay';
 import {appLayoutRouteAnimation} from '../../core/animations/animations';
 import {RouteAnimationContainer} from '../../core/animations/route-animation-container';
-import {BasilWrapperService} from '../../core/persistence/basil-wrapper.service';
 
 const OC_THEME_STORAGE_LOC = 'oc-theme';
 const OC_MOBILE_CLASS = 'oc-mobile';
@@ -34,14 +33,13 @@ export class AppLayoutComponent extends RouteAnimationContainer implements OnIni
                 private _auth: DefaultAuthService,
                 private _responsiveHelper: ResponsiveHelperService,
                 private _router: Router,
-                private _overlayContainer: OverlayContainer,
-                private _basil: BasilWrapperService) {
+                private _overlayContainer: OverlayContainer) {
         super();
     }
 
     ngOnInit() {
         this._mobile = this._responsiveHelper.isMobile();
-        this.changeTheme(this.getThemeFromStorage() || OCTheme.OCEAN);
+        this.changeTheme(this.getThemeFromLocalStorage() || OCTheme.OCEAN);
         this._router.events
             .filter(event => event instanceof NavigationStart)
             .subscribe(() => {
@@ -76,11 +74,11 @@ export class AppLayoutComponent extends RouteAnimationContainer implements OnIni
         }
 
         this._activeTheme = theme;
-        this._basil.set(OC_THEME_STORAGE_LOC, this._activeTheme.i18nKey);
+        localStorage.setItem(OC_THEME_STORAGE_LOC, this._activeTheme.i18nKey);
     }
 
-    private getThemeFromStorage(): OCTheme {
-        let i18nKey = this._basil.get(OC_THEME_STORAGE_LOC);
+    private getThemeFromLocalStorage(): OCTheme {
+        let i18nKey = localStorage.getItem(OC_THEME_STORAGE_LOC);
         return OCTheme.getByI18nKey(i18nKey);
     }
 
