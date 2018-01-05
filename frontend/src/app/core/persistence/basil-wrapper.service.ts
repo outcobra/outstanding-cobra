@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import Basil from 'basil.js';
+import * as Basil from 'basil.js';
 import {environment} from '../../../environments/environment';
 
 @Injectable()
