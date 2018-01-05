@@ -35,6 +35,7 @@ import {CurrentSubjectsResolverService} from './services/resolver/current-subjec
 import {ExamResolver} from '../exam/service/exam-resolver.service';
 import {SchoolClassSubjectService} from './services/school-class-subject/school-class-subject.service';
 import {SchoolClassSubjectResolver} from './services/school-class-subject/school-class-subject-resolver.service';
+import {BasilWrapperService} from './persistence/basil-wrapper.service';
 
 @NgModule({
     providers: [
@@ -50,6 +51,7 @@ import {SchoolClassSubjectResolver} from './services/school-class-subject/school
         AuthGuard,
         UserService,
         JwtHelperService,
+        BasilWrapperService,
         // Exam Services
         ExamService,
         ExamTaskService,

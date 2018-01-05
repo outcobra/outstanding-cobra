@@ -3,10 +3,11 @@ import {decode} from 'jwt-simple';
 import {environment} from '../../../../environments/environment';
 import {isEmpty, isFalsy, isNotEmpty} from '../../util/helper';
 import * as moment from 'moment';
+import {BasilWrapperService} from '../../persistence/basil-wrapper.service';
 
 @Injectable()
 export class JwtHelperService {
-    constructor() {
+    constructor(private _basil: BasilWrapperService) {
     }
 
     public isTokenExpired(token: string = this.getToken()): boolean {
@@ -25,10 +26,10 @@ export class JwtHelperService {
     }
 
     public hasToken(): boolean {
-        return isNotEmpty(localStorage.getItem(environment.locStorage.tokenLocation));
+        return isNotEmpty(this._basil.get(environment.persistence.tokenLocation));
     }
 
     public getToken() {
-        return localStorage.getItem(environment.locStorage.tokenLocation);
+        return this._basil.get(environment.persistence.tokenLocation);
     }
 }
