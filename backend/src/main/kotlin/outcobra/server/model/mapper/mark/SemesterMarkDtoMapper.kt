@@ -1,6 +1,7 @@
 package outcobra.server.model.mapper.mark
 
 import org.springframework.stereotype.Component
+import outcobra.server.exception.ValidationKey
 import outcobra.server.model.Color
 import outcobra.server.model.MarkGroup
 import outcobra.server.model.Semester
@@ -27,21 +28,24 @@ class SemesterMarkDtoMapper @Inject constructor(val markGroupMapper: Mapper<Mark
                                                 val institutionMapper: InstitutionMapper)
     : Mapper<Semester, SemesterMarkDto>, BaseMapper() {
 
-    override fun fromDto(from: SemesterMarkDto?): Semester {
+    override fun fromDto(from: SemesterMarkDto): Semester {
         throw UnsupportedOperationException("It is not supported to parse this dto to a semester")
     }
 
     override fun toDto(from: Semester): SemesterMarkDto {
-        val schoolClass = from.schoolYear.schoolClass
-        val semesterMarkGroup = MarkGroup(from.subjects.map { it.markGroup }, null)
+        val schoolClass = from.schoolYear?.schoolClass ?: ValidationKey.ENTITY_NOT_FOUND.throwException()
+        val semesterMarkGroup = MarkGroup(marks = from.subjects.map { it.markGroup!! }.toMutableList())
+        val institution = schoolClass.institution ?: ValidationKey.ENTITY_NOT_FOUND.throwException()
         return SemesterMarkDto(from.id, from.name, from.validFrom, from.validTo,
-                institutionMapper.toDto(schoolClass.institution), schoolClassMapper.toDto(schoolClass),
-                semesterMarkGroup.value,
+                institutionMapper.toDto(institution), schoolClassMapper.toDto(schoolClass),
+                semesterMarkGroup.getValue(),
                 from.subjects.map { subjectToMarksDto(it) })
     }
 
     private fun subjectToMarksDto(from: Subject): SubjectMarkDto {
-        return SubjectMarkDto(from.id, from.name, colorMapper.toDto(from.color), markGroupMapper.toDto(from.markGroup))
+        val color = from.color!!
+        val markGroup = from.markGroup!!
+        return SubjectMarkDto(from.id, from.name, colorMapper.toDto(color), markGroupMapper.toDto(markGroup))
     }
 
 }

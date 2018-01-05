@@ -10,6 +10,7 @@ data class SubjectDto(val id: Long = 0,
                       val color: ColorDto = ColorDto(),
                       val teacherId: Long? = 0) : OutcobraDto {
 
-    override fun getIdentifier(): Long = id
-    override fun getParentLink(): ParentLink = ParentLink.make(semesterId, Semester::class.java)
+    override val identifier: Long get() = id
+    override val parentLink: ParentLink
+        get() = ParentLink.make(semesterId, Semester::class.java)
 }

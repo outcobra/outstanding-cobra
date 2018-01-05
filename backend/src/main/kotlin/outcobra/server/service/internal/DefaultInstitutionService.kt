@@ -15,10 +15,11 @@ import javax.inject.Inject
 
 @Service
 @Transactional
-class DefaultInstitutionService(val userService: UserService,
-                                mapper: Mapper<Institution, InstitutionDto>,
-                                repository: InstitutionRepository,
-                                requestValidator: RequestValidator<InstitutionDto>) : InstitutionService,
+class DefaultInstitutionService
+@Inject constructor(val userService: UserService,
+                    mapper: Mapper<Institution, InstitutionDto>,
+                    repository: InstitutionRepository,
+                    requestValidator: RequestValidator<InstitutionDto>) : InstitutionService,
         DefaultBaseService<Institution, InstitutionDto, InstitutionRepository>(mapper,
                 repository,
                 requestValidator,

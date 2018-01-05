@@ -50,6 +50,7 @@ import {ExamTaskService} from '../../exam/service/exam-task.service';
 import {MockExamTaskService} from './exam/mock-exam-task.service';
 import {UserService} from '../services/user.service';
 import {MockUserService} from './auth/mock-user.service';
+import {BasilWrapperService} from '../persistence/basil-wrapper.service';
 
 @NgModule({
     imports: [
@@ -159,7 +160,8 @@ import {MockUserService} from './auth/mock-user.service';
         {
             provide: ObservableMedia,
             useClass: MockObservableMedia
-        }
+        },
+        BasilWrapperService
     ]
 })
 export class TestModule {
