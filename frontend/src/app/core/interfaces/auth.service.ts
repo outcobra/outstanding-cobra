@@ -3,8 +3,11 @@ import {UsernamePasswordDto} from '../../auth/model/username-password.dto';
 
 export interface AuthService {
     loginWithMailAndPassword(usernamePassword: UsernamePasswordDto)
+
     signUpWithMailAndPassword(usernamePassword: UsernamePasswordDto)
+
     loginIdentityProvider(identityProvider: IdentityProvider);
+
     signUpIdentityProvider(identityProvider: IdentityProvider);
 
     /**

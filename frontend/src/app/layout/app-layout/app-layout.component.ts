@@ -66,7 +66,8 @@ export class AppLayoutComponent extends RouteAnimationContainer implements OnIni
         }
     }
 
-    @HostBinding('class') get hostClasses(): string {
+    @HostBinding('class')
+    get hostClasses(): string {
         return this._activeTheme.className + (this._mobile ? (' ' + OC_MOBILE_CLASS) : '');
     }
 

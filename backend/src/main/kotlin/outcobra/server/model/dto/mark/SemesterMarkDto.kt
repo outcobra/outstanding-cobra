@@ -12,8 +12,8 @@ import java.time.LocalDate
  */
 data class SemesterMarkDto(val id: Long = 0,
                            val name: String = "",
-                           val validFrom: LocalDate? = null,
-                           val validTo: LocalDate? = null,
+                           val validFrom: LocalDate = LocalDate.now(),
+                           val validTo: LocalDate = LocalDate.now(),
                            val institution: InstitutionDto,
                            val schoolClass: SchoolClassDto,
                            val value: Double = 0.0,

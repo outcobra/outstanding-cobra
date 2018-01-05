@@ -9,12 +9,13 @@ data class SemesterDto(
         val id: Long,
         val schoolYearId: Long = 0,
         val name: String = "",
-        val validFrom: LocalDate? = null,
-        val validTo: LocalDate? = null,
+        val validFrom: LocalDate = LocalDate.now(),
+        val validTo: LocalDate = LocalDate.now(),
         val subjectIds: List<Long> = arrayListOf(),
         val markReportIds: List<Long> = arrayListOf(),
         val timetableId: Long = 0) : OutcobraDto {
 
-    override fun getIdentifier(): Long = id
-    override fun getParentLink(): ParentLink = ParentLink.make(schoolYearId, SchoolYear::class.java)
+    override val identifier: Long get() = id
+    override val parentLink: ParentLink
+        get() = ParentLink.make(schoolYearId, SchoolYear::class.java)
 }
