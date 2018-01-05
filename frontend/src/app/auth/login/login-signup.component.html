@@ -47,7 +47,7 @@
                         {{ 'i18n.common.form.error.required' | translate }}
                     </ng-template>
                     <ng-template
-                        [ngIf]="mail.ngControl.touched && mail.ngControl.hasError('email')">
+                        [ngIf]="mail.ngControl.hasError('email')">
                         {{ 'i18n.common.form.error.email' | translate }}
                     </ng-template>
                     <ng-template [ngIf]="mail.ngControl.getError('emailTaken') === true">

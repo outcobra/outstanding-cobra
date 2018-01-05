@@ -37,8 +37,7 @@ export class LoginSignUpComponent implements OnInit {
                 private _router: Router,
                 private _route: ActivatedRoute,
                 private _formBuilder: FormBuilder,
-                private _userService: UserService,
-                private _changeDetectorRef: ChangeDetectorRef) {
+                private _userService: UserService) {
     }
 
     ngOnInit() {
@@ -119,7 +118,6 @@ export class LoginSignUpComponent implements OnInit {
     private _handleLoginError(error) {
         if (isTruthy(error.message)) {
             this.errors$.next(error.message);
-            this._changeDetectorRef.detectChanges();
         }
         return Observable.empty();
     }
