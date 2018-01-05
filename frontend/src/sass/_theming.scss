@@ -18,7 +18,7 @@ $config: mat-typography-config(
 @include angular-material-typography($config);
 // Themes
 
-$oc-theme-ocean: mat-light-theme($primary-palette, $accent-palette, $error-palette);
-@include angular-material-theme($oc-theme-ocean);
-@include auth-theme($oc-theme-ocean);
+$oc-theme: mat-light-theme($primary-palette, $accent-palette, $error-palette);
+@include angular-material-theme($oc-theme);
+@include auth-theme($oc-theme);
 @include oc-theme-classes($primary-palette, $accent-palette, $error-palette);

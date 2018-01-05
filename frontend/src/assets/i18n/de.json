@@ -58,12 +58,6 @@
       "lang": {
         "en": "Englisch",
         "de": "Deutsch"
-      },
-      "theme": {
-        "title": "Theme wechseln",
-        "ocean": "Ozean",
-        "bloodorange": "Blutorange",
-        "lavender": "Lavendel"
       }
     },
     "email": {
@@ -255,6 +249,8 @@
         "listTitle": "Deine Aufgaben",
         "desc": "Aufgaben Beschreibung",
         "progress": "Fortschritt",
+        "finish": "Abschliessen",
+        "add": "Aufgabe erstellen",
         "createUpdate": {
           "create": {
             "title": "Aufgabe hinzufügen"
@@ -406,6 +402,7 @@
       "login": "Einloggen",
       "signup": "Registrieren",
       "logout": "Ausloggen",
+      "goToApp": "Zur App wechseln",
       "form": {
         "email": "E-Mail",
         "password": "Passwort",

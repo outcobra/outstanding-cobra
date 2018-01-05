@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {DefaultAuthService} from '../../core/services/auth/auth.service';
 import {IdentityProvider} from '../../core/services/auth/identity-provider';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -10,9 +10,9 @@ import {PasswordVerifyErrorStateMatcher} from './password-verify-error-state-mat
 import {loginSignupCollapse} from '../../core/animations/animations';
 import {AnimationEvent} from '@angular/animations';
 import {isFalse, isTrue, isTruthy} from '../../core/util/helper';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Observable} from 'rxjs/Observable';
 import {UsernamePasswordDto} from '../model/username-password.dto';
+import {ReplaySubject} from 'rxjs/ReplaySubject';
 
 @Component({
     selector: 'login',
@@ -31,7 +31,7 @@ export class LoginSignUpComponent implements OnInit {
     private _target: string;
     private readonly _defaultTarget = '/manage';
 
-    public readonly errors$: BehaviorSubject<string> = new BehaviorSubject(null);
+    public readonly errors$: ReplaySubject<string> = new ReplaySubject();
 
     constructor(private _authService: DefaultAuthService,
                 private _router: Router,
