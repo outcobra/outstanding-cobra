@@ -40,7 +40,6 @@ export class ExamCreateUpdateComponent extends CreateUpdateComponent<ExamDto> im
     ngOnInit() {
         this._route.data.subscribe((data: { viewMode: ViewMode, subjects: Array<SchoolClassSubjectDto>, exam?: ExamDto }) => {
             this.init(data.viewMode as ViewMode, data.exam);
-            console.log(data.subjects);
             this._schoolClassSubjects = data.subjects;
             this._submitFunction = this.isEditMode()
                 ? this._examService.update

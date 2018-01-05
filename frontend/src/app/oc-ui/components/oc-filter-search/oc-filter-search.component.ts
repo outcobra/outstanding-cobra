@@ -87,7 +87,6 @@ export class OCFilterSearchComponent implements OnInit, OnDestroy {
     }
 
     private _getGivenOrPlaceholder(altPlaceholder: string) {
-        console.log(this._getDefaultPlaceholder().call(this));
         return altPlaceholder || this._getDefaultPlaceholder().call(this);
     }
 
