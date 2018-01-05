@@ -26,8 +26,8 @@ class Mocker(val userMapper: UserMapper, userRepository: UserRepository) {
     lateinit var userService: UserService
 
     init {
-        USER = userRepository.save(User(null, USER_NICKNAME, USER_MAIL, null))
-        USER2 = userRepository.save(User(null, USER2_NICKNAME, USER2_MAIL, null))
+        USER = userRepository.save(User(USER_NICKNAME, USER_MAIL))
+        USER2 = userRepository.save(User(USER2_NICKNAME, USER2_MAIL))
     }
 
     companion object {

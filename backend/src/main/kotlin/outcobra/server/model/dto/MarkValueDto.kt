@@ -15,6 +15,7 @@ data class MarkValueDto(override val id: Long = 0,
                         val examId: Long = 0L,
                         var markGroupId: Long = 0) : BaseMarkDto {
 
-    override fun getIdentifier(): Long = id
-    override fun getParentLink(): ParentLink = ParentLink.make(markGroupId, MarkGroup::class.java)
+    override val identifier: Long get() = id
+    override val parentLink: ParentLink
+        get() = ParentLink.make(markGroupId, MarkGroup::class.java)
 }

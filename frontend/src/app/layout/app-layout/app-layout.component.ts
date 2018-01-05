@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, HostBinding, OnInit, ViewChild} from '@angular/core';
 import {DefaultAuthService} from '../../core/services/auth/auth.service';
-import {NavigationEnd, NavigationStart, Router} from '@angular/router';
+import {NavigationStart, Router} from '@angular/router';
 import {isTruthy} from '../../core/util/helper';
 import {OCTheme} from '../../oc-ui/theme/oc-theme';
 import {TranslateService} from '@ngx-translate/core';
@@ -64,7 +64,8 @@ export class AppLayoutComponent extends RouteAnimationContainer implements OnIni
         }
     }
 
-    @HostBinding('class') get hostClasses(): string {
+    @HostBinding('class')
+    get hostClasses(): string {
         return this._activeTheme.className + (this._mobile ? (' ' + OC_MOBILE_CLASS) : '');
     }
 

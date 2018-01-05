@@ -6,7 +6,8 @@ import {Injectable} from '@angular/core';
 
 @Injectable()
 export class CurrentSubjectsResolverService implements Resolve<Array<SubjectDto>> {
-    constructor(private _subjectService: SubjectService) {}
+    constructor(private _subjectService: SubjectService) {
+    }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Array<SubjectDto>> | Promise<Array<SubjectDto>> | Array<SubjectDto> {
         return this._subjectService.getCurrentSubjects();

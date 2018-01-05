@@ -1,10 +1,7 @@
 package outcobra.server.service.internal
 
 import org.springframework.stereotype.Service
-import outcobra.server.model.MarkGroup
-import outcobra.server.model.MarkValue
-import outcobra.server.model.QMarkValue
-import outcobra.server.model.Subject
+import outcobra.server.model.*
 import outcobra.server.model.dto.MarkGroupDto
 import outcobra.server.model.dto.MarkValueDto
 import outcobra.server.model.interfaces.Mapper
@@ -49,7 +46,7 @@ class DefaultMarkService
         validator.validateRequestByDto(dto)
         var entity = mapper.fromDto(dto)
         if (entity.exam != null) {
-            val exam = entity.exam
+            val exam = entity.exam as Exam
             entity.exam = null
             entity = repository.save(entity)
             exam.mark = entity
