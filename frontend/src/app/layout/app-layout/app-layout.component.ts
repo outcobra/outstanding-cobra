@@ -9,6 +9,7 @@ import {MatSidenav} from '@angular/material';
 import {OverlayContainer} from '@angular/cdk/overlay';
 import {appLayoutRouteAnimation} from '../../core/animations/animations';
 import {RouteAnimationContainer} from '../../core/animations/route-animation-container';
+import {BasilWrapperService} from '../../core/persistence/basil-wrapper.service';
 
 const OC_THEME_STORAGE_LOC = 'oc-theme';
 const OC_MOBILE_CLASS = 'oc-mobile';
@@ -33,13 +34,14 @@ export class AppLayoutComponent extends RouteAnimationContainer implements OnIni
                 private _auth: DefaultAuthService,
                 private _responsiveHelper: ResponsiveHelperService,
                 private _router: Router,
-                private _overlayContainer: OverlayContainer) {
+                private _overlayContainer: OverlayContainer,
+                private _basil: BasilWrapperService) {
         super();
     }
 
     ngOnInit() {
         this._mobile = this._responsiveHelper.isMobile();
-        this.changeTheme(this.getThemeFromLocalStorage() || OCTheme.OCEAN);
+        this.changeTheme(this.getThemeFromStorage() || OCTheme.OCEAN);
         this._router.events
             .filter(event => event instanceof NavigationStart)
             .subscribe(() => {
@@ -75,11 +77,11 @@ export class AppLayoutComponent extends RouteAnimationContainer implements OnIni
         }
 
         this._activeTheme = theme;
-        localStorage.setItem(OC_THEME_STORAGE_LOC, this._activeTheme.i18nKey);
+        this._basil.set(OC_THEME_STORAGE_LOC, this._activeTheme.i18nKey);
     }
 
-    private getThemeFromLocalStorage(): OCTheme {
-        let i18nKey = localStorage.getItem(OC_THEME_STORAGE_LOC);
+    private getThemeFromStorage(): OCTheme {
+        let i18nKey = this._basil.get(OC_THEME_STORAGE_LOC);
         return OCTheme.getByI18nKey(i18nKey);
     }
 
