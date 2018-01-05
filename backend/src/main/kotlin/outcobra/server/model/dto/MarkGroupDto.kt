@@ -18,15 +18,17 @@ data class MarkGroupDto(override val id: Long = 0,
                         val subjectId: Long = 0,
                         val parentGroupId: Long = 0,
                         val markGroups: List<MarkGroupDto> = listOf()) : BaseMarkDto {
-
-    override fun getIdentifier(): Long = id
-
-    override fun getParentLink(): ParentLink {
-        if (!(subjectId == 0L).xor(parentGroupId == 0L)) {
-            ValidationKey.INVALID_DTO.throwException()
-        } else if (parentGroupId != 0L) {
-            return ParentLink.make(parentGroupId, MarkGroup::class.java)
+    override val parentLink: ParentLink
+        get() {
+            if (!(subjectId == 0L).xor(parentGroupId == 0L)) {
+                ValidationKey.INVALID_DTO.throwException()
+            } else if (parentGroupId != 0L) {
+                return ParentLink.make(parentGroupId, MarkGroup::class.java)
+            }
+            return ParentLink.make(subjectId, Subject::class.java)
         }
-        return ParentLink.make(subjectId, Subject::class.java)
-    }
+
+    override val identifier: Long get() = id
+
+
 }

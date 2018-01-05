@@ -25,7 +25,7 @@ class SchoolYearValidator @Inject constructor(val schoolYearRepository: SchoolYe
         if (schoolYear.validTo.isBefore(schoolYear.validFrom)) {
             ValidationKey.START_BIGGER_THAN_END.throwException()
         }
-        val predicate = QSchoolYear.schoolYear.schoolClass.id.eq(schoolYear.schoolClass.id)
+        val predicate = QSchoolYear.schoolYear.schoolClass.id.eq(schoolYear.schoolClass?.id)
         val schoolYears = schoolYearRepository.findAll(predicate).toList()
         return schoolYears.all { it.doesNotOverlap(schoolYear) }
     }

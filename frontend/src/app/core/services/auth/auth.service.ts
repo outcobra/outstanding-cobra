@@ -9,6 +9,7 @@ import {UsernamePasswordDto} from '../../../auth/model/username-password.dto';
 import {environment} from '../../../../environments/environment';
 import {JwtHelperService} from './jwt-helper.service';
 import {AuthResponseDto} from './auth-response.dto';
+import {BasilWrapperService} from '../../persistence/basil-wrapper.service';
 
 declare let gapi: any;
 
@@ -18,7 +19,8 @@ export class DefaultAuthService implements AuthService {
 
     constructor(private _router: Router,
                 private _http: HttpInterceptor,
-                private _jwtHelper: JwtHelperService) {
+                private _jwtHelper: JwtHelperService,
+                private _basil: BasilWrapperService) {
 
         gapi.load('auth2', () =>
             this._googleAuth = gapi.auth2.init({
@@ -45,8 +47,8 @@ export class DefaultAuthService implements AuthService {
 
     public logout() {
         Raven.setUserContext();
-        localStorage.removeItem(environment.locStorage.tokenLocation);
-        localStorage.removeItem(environment.locStorage.profileLocation);
+        this._basil.remove(environment.persistence.tokenLocation);
+        this._basil.remove(environment.persistence.profileLocation);
         this._router.navigateByUrl('');
     }
 
@@ -56,7 +58,7 @@ export class DefaultAuthService implements AuthService {
 
     private _afterLogin(response: AuthResponseDto): boolean {
         if (!this._jwtHelper.isTokenExpired(response.token)) {
-            localStorage.setItem(environment.locStorage.tokenLocation, response.token);
+            this._basil.set(environment.persistence.tokenLocation, response.token);
             return true;
         }
         return false;

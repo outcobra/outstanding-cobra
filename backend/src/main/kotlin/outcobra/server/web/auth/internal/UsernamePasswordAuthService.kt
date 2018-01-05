@@ -60,7 +60,7 @@ class UsernamePasswordAuthService(private val userRepository: UserRepository,
             ValidationKey.PASSWORD_UNSAFE.throwException()
         }
 
-        val newUser = User(null, arg.username, arg.mail)
+        val newUser = User(arg.username ?: "", arg.mail)
         val user = userRepository.save(newUser)
 
         val identity = Identity(user, AuthRegistry.PASSWORD, user!!.username, passwordEncoder.encode(arg.password))

@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @Component
 @Transactional
-open class DefaultTeacherService
+class DefaultTeacherService
 @Inject constructor(repository: TeacherRepository,
                     mapper: Mapper<Teacher, TeacherDto>,
                     requestValidator: RequestValidator<TeacherDto>)

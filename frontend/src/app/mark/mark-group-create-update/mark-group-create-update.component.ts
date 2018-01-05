@@ -59,7 +59,7 @@ export class MarkGroupCreateUpdateComponent extends ParentLinkedCreateUpdateComp
 
         this._route.data.subscribe((marks: { subjectMarkGroup: MarkGroupDto, isEdit: boolean, markGroup?: MarkGroupDto }) => {
                 let isEdit = marks.isEdit;
-                this.initWithParent((isEdit ? ViewMode.EDIT : ViewMode.NEW), marks.subjectMarkGroup, isEdit ? marks.markGroup : null);
+            this.initWithParent((isEdit ? ViewMode.EDIT : ViewMode.NEW), marks.subjectMarkGroup, isEdit ? marks.markGroup : null);
                 this._availableMarks = marks.subjectMarkGroup.markValues;
                 this._selectedMarks = this.getParamOrDefault('markValues', []) as Array<MarkDto>;
                 if (isEdit) {

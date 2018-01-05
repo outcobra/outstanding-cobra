@@ -13,7 +13,7 @@ import outcobra.server.model.interfaces.Mapper
 class InstitutionMapper : Mapper<Institution, InstitutionDto>, BaseMapper() {
 
     override fun toDto(from: Institution): InstitutionDto {
-        return InstitutionDto(from.id ?: 0, from.user.id, from.name, from.schoolClasses.map { it.id })
+        return InstitutionDto(from.id, from.user?.id ?: 0, from.name, from.schoolClasses?.map { it.id } ?: listOf())
     }
 
     override fun fromDto(from: InstitutionDto): Institution {
