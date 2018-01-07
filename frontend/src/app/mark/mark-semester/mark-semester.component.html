@@ -25,7 +25,7 @@
                                 </span>
                                 <span>{{ subject.name }}</span>
                                 <div class="oc-filler"></div>
-                                <span [MarkHighlighter]="subject.subjectMarkGroup.value">
+                                <span [markHighlighter]="subject.subjectMarkGroup.value">
                                     <b>{{ subject.subjectMarkGroup.value | markValue }}</b>
                                 </span>
                                 <mat-icon [matTooltip]="'i18n.modules.mark.common.average' | translate"

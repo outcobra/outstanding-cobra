@@ -1,10 +1,10 @@
 import {Directive, HostBinding, Input} from '@angular/core';
 
 @Directive({
-    selector: '[MarkHighlighter]'
+    selector: '[markHighlighter]'
 })
 export class MarkHighlighterDirective {
-    @Input('MarkHighlighter') mark: number;
+    @Input('markHighlighter') mark: number;
 
     @HostBinding('class.insufficient')
     public get insufficient() {
