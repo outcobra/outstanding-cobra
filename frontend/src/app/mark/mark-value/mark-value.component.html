@@ -10,7 +10,7 @@
                 <mat-icon fxHide.gt-sm="true"></mat-icon>
                 <span fxFlex
                       fxFlexAlign="end">{{ 'i18n.modules.mark.common.weight' | translate }}: {{ mark.weight }}</span>
-                <span fxFlex="15%" fxFlexAlign="end" [ngClass]="getClassForInsufficient()"><b>{{ mark.value | markValue }}</b></span>
+                <span fxFlex="15%" fxFlexAlign="end" [ocMarkHighlighter]="mark.value"><b>{{ mark.value | markValue }}</b></span>
             </div>
         </div>
     </div>
