@@ -54,12 +54,4 @@ export class MarkValueComponent implements AfterViewInit {
         list.first.onEdit.subscribe(() => this.onEdit.emit());
         list.first.onDelete.subscribe(() => this.onDelete.emit());
     }
-
-    public getClassForInsufficient(){
-        let markValue = this.mark.value
-        if(markValue<4.0){
-            return "insufficient"
-        }
-        return ""
-    }
 }

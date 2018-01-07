@@ -14,7 +14,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {PipeModule} from '../shared/pipe.module';
 import {MarkGroupCreateUpdateComponent} from './mark-group-create-update/mark-group-create-update.component';
 import {MarkWeightUpdaterComponent} from './mark-weight-updater/mark-weight-updater.component';
-import {OcMarkHighlighterDirective} from './directive/oc-mark-highlighter-directive';
+import {MarkHighlighterDirective} from './mark-highlighter/mark-highlighter.directive';
 
 @NgModule({
     imports: [
@@ -35,7 +35,7 @@ import {OcMarkHighlighterDirective} from './directive/oc-mark-highlighter-direct
         MarkCreateUpdateComponent,
         MarkGroupCreateUpdateComponent,
         MarkWeightUpdaterComponent,
-        OcMarkHighlighterDirective
+        MarkHighlighterDirective
     ]
 })
 export class MarkModule {
