@@ -123,4 +123,5 @@ fun Claims.getExpirationTime(): LocalDateTime {
     return LocalDateTime.ofInstant(instant, ZoneId.systemDefault())
 }
 
-fun SecurityContext.jwtAuthentication() = authentication as JwtAuthenticationToken
+val SecurityContext.jwtAuthentication
+    get() = authentication as JwtAuthenticationToken

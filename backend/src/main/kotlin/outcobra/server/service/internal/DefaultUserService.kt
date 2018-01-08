@@ -20,7 +20,7 @@ class DefaultUserService
 @Inject constructor(val userRepository: UserRepository,
                     val userDtoMapper: Mapper<User, UserDto>) : UserService {
 
-    override fun getCurrentOutcobraUser() = SecurityContextHolder.getContext().jwtAuthentication().principal!!
+    override fun getCurrentOutcobraUser() = SecurityContextHolder.getContext().jwtAuthentication.principal!!
 
     override fun getCurrentUser() = userRepository.findByMail(getCurrentOutcobraUser().mail)!!
 
