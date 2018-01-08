@@ -174,7 +174,7 @@ export class HttpInterceptor {
     ///////// Helper Functions ////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
     private _serializeBody(body: any, headers: {[key: string]: string}) {
-        if (isTruthy(headers) && (isFalsy(headers['Content-Type']) || headers['Content-Type'] === 'application/json')) {
+        if (isTruthy(headers) && (isFalsy(headers['Content-Type']) || headers['Content-Type'].includes('application/json'))) {
             return JSON.stringify(body, dateReplacer)
         }
         return body;
