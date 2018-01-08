@@ -6,7 +6,7 @@ import {Observable} from 'rxjs/Observable';
 @Injectable()
 export class UserService extends AppService {
     constructor(http: HttpInterceptor) {
-        super(http, '/user');
+        super(http, '/api/user');
     }
 
     public checkMailNotTaken(mail: string): Observable<boolean> {
