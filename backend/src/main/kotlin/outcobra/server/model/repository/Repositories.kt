@@ -16,7 +16,7 @@ interface OutcobraRepository<Entity> : JpaRepository<Entity, Long>, QueryDslPred
 @Repository
 interface UserRepository : OutcobraRepository<User> {
     fun findByMail(mail: String): User?
-    fun countByMail(mail: String): Long
+    fun existsByMail(mail: String): Boolean
 }
 
 @Repository

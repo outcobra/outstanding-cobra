@@ -1,6 +1,7 @@
 package outcobra.server.util
 
 import io.jsonwebtoken.Claims
+import org.springframework.security.core.context.SecurityContext
 import outcobra.server.exception.ValidationException
 import outcobra.server.exception.ValidationKey
 import outcobra.server.model.SchoolYear
@@ -9,6 +10,7 @@ import outcobra.server.model.User
 import outcobra.server.model.dto.MarkGroupDto
 import outcobra.server.model.dto.mark.BaseMarkDto
 import outcobra.server.model.interfaces.ParentLinked
+import outcobra.server.web.auth.model.JwtAuthenticationToken
 import java.time.Instant
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -120,3 +122,6 @@ fun Claims.getExpirationTime(): LocalDateTime {
     val instant = Instant.ofEpochMilli(this.expiration.time)
     return LocalDateTime.ofInstant(instant, ZoneId.systemDefault())
 }
+
+val SecurityContext.jwtAuthentication
+    get() = authentication as JwtAuthenticationToken
