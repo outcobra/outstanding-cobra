@@ -37,9 +37,9 @@
                         {{ 'i18n.auth.form.checkingEmail' | translate }}
                     </ng-template>
                     <ng-template [ngIf]="mail.ngControl.valid">
-                    <span class="valid">
-                        {{ 'i18n.auth.form.emailAvailable' | translate }}
-                    </span>
+                        <span class="valid">
+                            {{ 'i18n.auth.form.mailAvailable' | translate }}
+                        </span>
                     </ng-template>
                 </mat-hint>
                 <mat-error>
@@ -52,6 +52,9 @@
                     </ng-template>
                     <ng-template [ngIf]="mail.ngControl.getError('emailTaken') === true">
                         {{ 'i18n.auth.form.emailTaken' | translate }}
+                    </ng-template>
+                    <ng-template [ngIf]="isSignUp && mail.ngControl.getError('mailTaken') === true">
+                        {{ 'i18n.auth.form.mailOccupied' | translate }}
                     </ng-template>
                 </mat-error>
             </mat-form-field>
