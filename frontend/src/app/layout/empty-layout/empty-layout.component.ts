@@ -3,7 +3,7 @@ import {emptyLayoutRouteAnimation} from '../../core/animations/animations';
 import {RouteAnimationContainer} from '../../core/animations/route-animation-container';
 
 @Component({
-    selector: 'app-empty-layout',
+    selector: 'empty-layout',
     templateUrl: './empty-layout.component.html',
     styleUrls: ['./empty-layout.component.scss'],
     animations: [emptyLayoutRouteAnimation]
