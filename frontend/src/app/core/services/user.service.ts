@@ -6,10 +6,12 @@ import {Observable} from 'rxjs/Observable';
 @Injectable()
 export class UserService extends AppService {
     constructor(http: HttpInterceptor) {
-        super(http, '/user');
+        super(http, '/api/user');
     }
 
     public checkMailNotTaken(mail: string): Observable<boolean> {
-        return this._http.post(`${this._baseUri}/emailAvailable`, mail, 'outcobra_public');
+        return this._http.post(`${this._baseUri}/emailAvailable`, mail, 'outcobra_public', {
+            'Content-Type': 'text/plain'
+        });
     }
 }

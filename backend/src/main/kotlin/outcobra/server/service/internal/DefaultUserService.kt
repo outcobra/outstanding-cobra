@@ -10,8 +10,7 @@ import outcobra.server.model.dto.UserDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.UserRepository
 import outcobra.server.service.UserService
-import outcobra.server.web.auth.model.JwtAuthenticationToken
-import outcobra.server.web.auth.model.OutcobraUser
+import outcobra.server.util.jwtAuthentication
 import javax.inject.Inject
 
 @Service
@@ -20,23 +19,14 @@ import javax.inject.Inject
 class DefaultUserService
 @Inject constructor(val userRepository: UserRepository,
                     val userDtoMapper: Mapper<User, UserDto>) : UserService {
-    override fun getCurrentOutcobraUser(): OutcobraUser {
-        return (SecurityContextHolder.getContext().authentication as JwtAuthenticationToken).principal!!
-    }
 
-    override fun getCurrentUser(): User {
-        return userRepository.findByMail(getCurrentOutcobraUser().mail)!!
-    }
+    override fun getCurrentOutcobraUser() = SecurityContextHolder.getContext().jwtAuthentication.principal!!
 
-    override fun getCurrentUserDto(): UserDto {
-        return userDtoMapper.toDto(getCurrentUser())
-    }
+    override fun getCurrentUser() = userRepository.findByMail(getCurrentOutcobraUser().mail)!!
 
-    override fun readUserById(id: Long): User {
-        return userRepository.findOne(id)
-    }
+    override fun getCurrentUserDto() = userDtoMapper.toDto(getCurrentUser())
 
-    override fun checkEmailNotTaken(mail: String): Boolean {
-        return userRepository.findByMail(mail) == null
-    }
+    override fun readUserById(id: Long): User = userRepository.findOne(id)
+
+    override fun checkEmailNotTaken(mail: String) = !userRepository.existsByMail(mail)
 }
