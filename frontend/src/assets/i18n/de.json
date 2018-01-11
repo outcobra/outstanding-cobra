@@ -409,7 +409,8 @@
         "passwordVerify": "Passwort bestätigen",
         "username": "Benutzername",
         "checkingEmail": "Prüfe E-Mail Verfügbarkeit",
-        "emailAvailable": "E-Mail verfügbar",
+        "mailAvailable": "E-Mail verfügbar",
+        "mailOccupied": "E-Mail vergeben",
         "error": {
           "emailTaken": "Sorry, diese E-Mail wird schon verwendet",
           "passwordPattern": "8 Zeichen, Klein- und Grossbuchstaben, Zahl und Sonderzeichen",
@@ -475,7 +476,8 @@
         "password": {
           "noMatch": "Passwort ist inkorrekt",
           "unsafe": "Passwort ist zu schwach"
-        }
+        },
+        "mailOccupied": "Diese E-Mail wird schon verwendet"
       },
       "fallback": {
         "linkTitle": "Seite nicht gefunden",

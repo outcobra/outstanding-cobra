@@ -4,7 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import {dateReplacer} from './http-util';
 import {RequestOptions} from './request-options';
 import {ValidationException} from './validation-exception';
-import {isFalsy, isNotEmpty} from '../util/helper';
+import {isFalsy, isNotEmpty, isTruthy} from '../util/helper';
 import {NotificationWrapperService} from '../notifications/notification-wrapper.service';
 import {RequestArgs} from '@angular/http/src/interfaces';
 import {environment} from '../../../environments/environment';
@@ -65,7 +65,7 @@ export class HttpInterceptor {
                 url: this._buildApiUrl(request),
                 headers: request.headers,
                 search: this._buildUrlSearchParams(request.params),
-                body: JSON.stringify(request.data, dateReplacer)
+                body: this._serializeBody(request.data, request.headers)
             } as RequestArgs)
         ).catch(error => this._handleError(error))
             .map((res: Response) => this._unwrapAndCastHttpResponse<T>(res));
@@ -173,6 +173,12 @@ export class HttpInterceptor {
     ///////////////////////////////////////////////////////////////////////////
     ///////// Helper Functions ////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
+    private _serializeBody(body: any, headers: {[key: string]: string}) {
+        if (isTruthy(headers) && (isFalsy(headers['Content-Type']) || headers['Content-Type'].includes('application/json'))) {
+            return JSON.stringify(body, dateReplacer)
+        }
+        return body;
+    }
 
     /**
      * interpolates the url in the requestOptions
