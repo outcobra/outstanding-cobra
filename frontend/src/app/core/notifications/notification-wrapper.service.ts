@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
-import {NotificationsService} from 'angular2-notifications';
+import {Icons, Notification, NotificationsService} from 'angular2-notifications';
 import {TranslateService} from '@ngx-translate/core';
 import {appIcons} from './icons';
-import {Icons, Notification} from 'angular2-notifications/dist';
 
 @Injectable()
 export class NotificationWrapperService {

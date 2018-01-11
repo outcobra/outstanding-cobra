@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {MockHttpInterceptor} from './http/MockHttpInterceptor';
 import {MockInfoService} from './info/mock-info.service';
-import {SimpleNotificationsModule} from 'angular2-notifications/dist';
+import {SimpleNotificationsModule} from 'angular2-notifications';
 import {MockNotificationWrapperService} from './notifications/mock-notifications.service';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {CommonModule} from '@angular/common';
