@@ -17,7 +17,7 @@ task downloadGoogleAuthLibrary(type: Download) {
     dest 'src/lib/google_auth.js'
 }
 
-task ngBuild(type: YarnTask, dependsOn: [downloadGoogleAuthLibrary]) {
+task ngBuild(type: YarnTask, dependsOn: [yarn_install, downloadGoogleAuthLibrary]) {
 //    enabled = false
     args = ['run', 'ng', 'build', '--prod', '-sm']
 }
