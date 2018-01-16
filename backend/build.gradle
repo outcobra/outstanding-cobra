@@ -81,7 +81,7 @@ check.dependsOn += jacocoTestReport
 
 task configurationZip(type: Zip) {
     archiveName = 'outcobra-configuration.' + outstandingCobraVersion + '.zip'
-    from(files('src/main/resources/*.deploy.yml'))
+    from(fileTree(dir: 'src/main/resources').include('*.deploy.yml'))
 }
 
 sourceCompatibility = 1.8

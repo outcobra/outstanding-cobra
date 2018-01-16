@@ -10,13 +10,14 @@ endpoints:
     allowed-origins: "*"
 product:
   version: #{Octopus.Release.Number}
+sentry.dsn: #{SENTRY_DSN}
 ---
 spring.profiles: production
 spring:
   profiles:
     include: mysql_database
 runtime:
-  environment: #{Octopus.Release.Number}
+  environment: #{Octopus.Environment.Name}
 ---
 spring:
   profiles: mysql_database

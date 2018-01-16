@@ -1,3 +1,11 @@
+def branchSuffix() {
+    return env.BRANCH_NAME == 'master' ? '' : '-' + env.BRANCH_NAME
+}
+
+def fullVersion() {
+    return env.VERSION + '.' + env.BUILD_NUMBER + env.BRANCH_SUFFIX
+}
+
 pipeline {
     agent {
         docker {
@@ -85,11 +93,11 @@ pipeline {
         }
 
         stage('Docker & Octopus Release') {
-            when { anyOf { branch 'develop'; branch 'master' } }
+            // when { anyOf { branch 'develop'; branch 'master' } }
             environment {
                 DOCKER = credentials('docker-deploy')
-                BRANCH_SUFFIX = env.BRANCH_NAME == 'master' ? '' : '-' + env.BRANCH_NAME
-                FULL_VERSION = env.VERSION + '.' + env.BUILD_NUMBER + env.BRANCH_SUFFIX
+                BRANCH_SUFFIX = branchSuffix()
+                FULL_VERSION = fullVersion()
                 OCTOPUS_API_KEY = credentials('octopus-deploy')
             }
 
@@ -103,19 +111,19 @@ pipeline {
                 sh 'docker push docker.pegnu.cloud:443/outcobra-backend:$FULL_VERSION && docker push docker.pegnu.cloud:443/outcobra-backend:latest'
 
                 sh 'curl -so octo.tar.gz https://download.octopusdeploy.com/octopus-tools/4.29.0/OctopusTools.4.29.0.ubuntu.16.04-x64.tar.gz && tar -xvf octo.tar.gz -C octo'
-
+                sh 'octo/Octo push --package backend/build/distributions/outcobra-configuration.$FULL_VERSION.zip --replace-existing --server https://deploy.pegnu.cloud --apiKey $OCTOPUS_API_KEY'
                 sh 'octo/Octo create-release --project "Outstanding Cobra" --version $FULL_VERSION --package outcobra-configuration:$FULL_VERSION --package outcobra-frontend:$FULL_VERSION --package outcobra-backend:$FULL_VERSION --package mariadb:10 --server https://deploy.pegnu.cloud --apiKey $OCTOPUS_API_KEY'
             }
 
             post {
                 success {
                     slackSend color: 'good',
-                            message: ":rocket: Shipped #${env.BUILD_NUMBER} to staging environment"
+                            message: ":rocket: Build #${env.BUILD_NUMBER} successful and released to [Octopus](https://deploy.pegnu.cloud/app#/projects/outstanding-cobra/releases/${env.FULL_VERSION})"
                 }
 
                 failure {
                     slackSend color: 'danger',
-                            message: ":heavy_exclamation_mark: @jmesserli Deployment for #${env.BUILD_NUMBER} failed!"
+                            message: ":heavy_exclamation_mark: Releasing #${env.BUILD_NUMBER} (${env.FULL_VERSION}) failed!"
                 }
             }
         }
