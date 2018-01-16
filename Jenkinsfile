@@ -6,6 +6,14 @@ pipeline {
         }
     }
 
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '20'))
+    }
+
+    environment {
+        VERSION = readFile('VERSION')
+    }
+
     stages {
         stage('Prepare') {
             steps {
@@ -23,7 +31,7 @@ pipeline {
             steps {
                 parallel(
                         "Build Backend": {
-                            sh './gradlew clean :backend:assemble --stacktrace --info'
+                            sh './gradlew clean :backend:assemble :backend:configurationZip --stacktrace --info'
                         },
                         "Build Frontend": {
                             sh './gradlew :frontend:setCacheFolderCI :frontend:assemble --stacktrace --info'
@@ -76,27 +84,27 @@ pipeline {
             }
         }
 
-        stage('Docker & Deploy') {
+        stage('Docker & Octopus Release') {
             when { anyOf { branch 'develop'; branch 'master' } }
-            environment { DOCKER = credentials('docker-deploy') }
+            environment {
+                DOCKER = credentials('docker-deploy')
+                BRANCH_SUFFIX = env.BRANCH_NAME == 'master' ? '' : '-' + env.BRANCH_NAME
+                FULL_VERSION = env.VERSION + '.' + env.BUILD_NUMBER + env.BRANCH_SUFFIX
+                OCTOPUS_API_KEY = credentials('octopus-deploy')
+            }
 
             steps {
                 sh 'docker login -u "$DOCKER_USR" -p "$DOCKER_PSW" docker.pegnu.cloud:443'
 
-                sh 'docker build -t docker.pegnu.cloud:443/outcobra-backend:$BRANCH_NAME-$BUILD_NUMBER -t docker.pegnu.cloud:443/outcobra-backend:$BRANCH_NAME -t docker.pegnu.cloud:443/outcobra-backend:latest backend'
-                sh 'docker build -t docker.pegnu.cloud:443/outcobra-frontend:$BRANCH_NAME-$BUILD_NUMBER -t docker.pegnu.cloud:443/outcobra-frontend:$BRANCH_NAME -t docker.pegnu.cloud:443/outcobra-frontend:latest frontend'
+                sh 'docker build -t docker.pegnu.cloud:443/outcobra-backend:$FULL_VERSION -t docker.pegnu.cloud:443/outcobra-backend:latest backend'
+                sh 'docker build -t docker.pegnu.cloud:443/outcobra-frontend:$FULL_VERSION -t docker.pegnu.cloud:443/outcobra-frontend:latest frontend'
 
-                sh 'docker push docker.pegnu.cloud:443/outcobra-frontend:$BRANCH_NAME && docker push docker.pegnu.cloud:443/outcobra-frontend:latest && docker push docker.pegnu.cloud:443/outcobra-frontend:$BRANCH_NAME-$BUILD_NUMBER'
-                sh 'docker push docker.pegnu.cloud:443/outcobra-backend:$BRANCH_NAME && docker push docker.pegnu.cloud:443/outcobra-backend:latest && docker push docker.pegnu.cloud:443/outcobra-backend:$BRANCH_NAME-$BUILD_NUMBER'
+                sh 'docker push docker.pegnu.cloud:443/outcobra-frontend:$FULL_VERSION && docker push docker.pegnu.cloud:443/outcobra-frontend:latest'
+                sh 'docker push docker.pegnu.cloud:443/outcobra-backend:$FULL_VERSION && docker push docker.pegnu.cloud:443/outcobra-backend:latest'
 
-                script {
-                    configFileProvider([
-                            configFile(fileId: '3bfec3c0-2d29-4616-acb6-06d514491d6f', targetLocation: 'known_hosts')
-                    ]) {}
-                    sshagent(credentials: ['outcobra-deploy-staging-ssh']) {
-                        sh 'ssh -4 -v -o UserKnownHostsFile=known_hosts outcobra-deploy@helios.peg.nu -C "cd /opt/outcobra-a && ./pullRestart.sh"'
-                    }
-                }
+                sh 'curl -so octo.tar.gz https://download.octopusdeploy.com/octopus-tools/4.29.0/OctopusTools.4.29.0.ubuntu.16.04-x64.tar.gz && tar -xvf octo.tar.gz -C octo'
+
+                sh 'octo/Octo create-release --project "Outstanding Cobra" --version $FULL_VERSION --package outcobra-configuration:$FULL_VERSION --package outcobra-frontend:$FULL_VERSION --package outcobra-backend:$FULL_VERSION --package mariadb:10 --server https://deploy.pegnu.cloud --apiKey $OCTOPUS_API_KEY'
             }
 
             post {

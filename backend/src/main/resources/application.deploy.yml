@@ -1,0 +1,35 @@
+spring:
+  jackson:
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+  jpa:
+    hibernate:
+      use-new-id-generator-mappings: true
+endpoints:
+  cors:
+    allowed-origins: "*"
+product:
+  version: #{Octopus.Release.Number}
+---
+spring.profiles: production
+spring:
+  profiles:
+    include: mysql_database
+runtime:
+  environment: #{Octopus.Release.Number}
+---
+spring:
+  profiles: mysql_database
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://#{DOCKER_DATABASE_HOST}:3306/#{MYSQL_DATABASE}
+    username: #{MYSQL_USER}
+    password: #{MYSQL_PASSWORD}
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+    hibernate:
+      ddl-auto: validate
+flyway:
+  locations: db/migration

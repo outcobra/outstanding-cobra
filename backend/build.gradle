@@ -4,7 +4,14 @@ buildscript {
         outstandingCobraVersion = outcobraVersion
 
         if (System.getenv('JENKINS_URL') != null && System.getenv('BUILD_NUMBER') != null) {
-            outstandingCobraVersion = outstandingCobraVersion + '-J' + System.getenv('BUILD_NUMBER') + '+' + System.getenv('BRANCH_NAME').replace('/', '_')
+            branch = System.getenv('BRANCH_NAME').replace('/', '_')
+            branch_suffix = "-" + branch
+            if (branch == 'master') {
+                branch_suffix = ""
+            }
+            outstandingCobraVersion = outstandingCobraVersion + '.' + System.getenv('BUILD_NUMBER') + branch_suffix
+
+            // Creates versions like 1.3.102-develop for develop builds and 1.4.6 for release (master) builds
         }
     }
     repositories {
@@ -71,6 +78,11 @@ jacocoTestReport {
     }
 }
 check.dependsOn += jacocoTestReport
+
+task configurationZip(type: Zip) {
+    archiveName = 'outcobra-configuration.' + outstandingCobraVersion + '.zip'
+    from(files('src/main/resources/*.deploy.yml'))
+}
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
