@@ -1,5 +1,5 @@
 def branchSuffix() {
-    return env.BRANCH_NAME == 'master' ? '' : '-' + env.BRANCH_NAME
+    return env.BRANCH_NAME == 'master' ? '' : '-' + env.BRANCH_NAME.replace('/', '_')
 }
 
 def fullVersion() {
