@@ -9,7 +9,7 @@ def fullVersion() {
 pipeline {
     agent {
         docker {
-            image 'jmesserli/openjdk-with-docker'
+            image 'jmesserli/oc-docker-build-container'
             args '-v /var/run/docker.sock:/var/run/docker.sock -v /opt/jenkins-agent/persist/yarn:/root/yarn-cache'
         }
     }
@@ -109,9 +109,8 @@ pipeline {
                 sh 'docker push docker.pegnu.cloud:443/outcobra-frontend:$FULL_VERSION && docker push docker.pegnu.cloud:443/outcobra-frontend:latest'
                 sh 'docker push docker.pegnu.cloud:443/outcobra-backend:$FULL_VERSION && docker push docker.pegnu.cloud:443/outcobra-backend:latest'
 
-                sh 'curl -so octo.tar.gz https://download.octopusdeploy.com/octopus-tools/4.29.0/OctopusTools.4.29.0.ubuntu.16.04-x64.tar.gz && mkdir octo && tar -xvC octo -f octo.tar.gz'
-                sh 'octo/Octo push --package backend/build/distributions/outcobra-configuration.$FULL_VERSION.zip --replace-existing --server https://deploy.pegnu.cloud --apiKey $OCTOPUS_API_KEY'
-                sh 'octo/Octo create-release --project "Outstanding Cobra" --version $FULL_VERSION --package outcobra-configuration:$FULL_VERSION --package outcobra-frontend:$FULL_VERSION --package outcobra-backend:$FULL_VERSION --package mariadb:10 --server https://deploy.pegnu.cloud --apiKey $OCTOPUS_API_KEY'
+                sh '/opt/octo/Octo push --package backend/build/distributions/outcobra-configuration.$FULL_VERSION.zip --replace-existing --server https://deploy.pegnu.cloud --apiKey $OCTOPUS_API_KEY'
+                sh '/opt/octo/Octo create-release --project "Outstanding Cobra" --version $FULL_VERSION --package outcobra-configuration:$FULL_VERSION --package outcobra-frontend:$FULL_VERSION --package outcobra-backend:$FULL_VERSION --package mariadb:10 --server https://deploy.pegnu.cloud --apiKey $OCTOPUS_API_KEY'
             }
 
             post {
