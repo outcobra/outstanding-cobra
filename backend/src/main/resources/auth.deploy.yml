@@ -1,0 +1,5 @@
+security:
+  jwt:
+    secret: #{JWT_SECRET}
+  google:
+    clientId: #{GOOGLE_CLIENT_ID}
