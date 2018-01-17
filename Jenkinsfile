@@ -87,7 +87,7 @@ pipeline {
         }
 
         stage('Docker & Octopus Release') {
-            // when { anyOf { branch 'develop'; branch 'master' } }
+            when { anyOf { branch 'develop'; branch 'master' } }
             environment {
                 DOCKER = credentials('docker-deploy')
                 FULL_VERSION = fullVersion()
