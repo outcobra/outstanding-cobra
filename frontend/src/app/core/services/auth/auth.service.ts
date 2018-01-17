@@ -79,8 +79,7 @@ export class DefaultAuthService implements AuthService {
         if (identityProvider == IdentityProvider.GOOGLE) {
             return Observable.fromPromise(this._googleAuth.signIn())
                 .switchMap((user: any) => this._http.post<AuthResponseDto>(`/api/auth/${isSignUp ? 'signUp' : 'login'}/google/`, user.getAuthResponse().id_token, 'outcobra_public'))
-                .map(token => this._afterLogin(token))
-                .share();
+                .map(token => this._afterLogin(token));
         }
         return Observable.throw(new Error('Identity provider not supported'));
     }

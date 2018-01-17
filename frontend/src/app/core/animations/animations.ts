@@ -29,14 +29,14 @@ export function placeEnterOverLeaveState() {
     return group([
         query(':enter', style({zIndex: 11})),
         query(':leave', style({zIndex: 10}))
-    ])
+    ]);
 }
 
 export function placeLeaveOverEnterState() {
     return group([
         query(':enter', style({zIndex: 10})),
         query(':leave', style({zIndex: 11}))
-    ])
+    ]);
 }
 
 
@@ -101,7 +101,19 @@ export const topLevelRouteAnimation = trigger('topLevelRouteAnimation', [
         fixContainers(),
         placeLeaveOverEnterState(),
 
-        query(':leave', animate(time('750ms', Easing.ACCELERATE), style({transform: 'translateY(-100%)'})))
+        query(':leave', [
+            query('.login-form-wrapper', [
+                    animate(time(), style({
+                        height: 0,
+                        overflow: 'hidden'
+                    }))
+                ],
+                {optional: true}),
+
+            animate(time('750ms', Easing.ACCELERATE), style({
+                transform: 'translateY(-100%)'
+            }))
+        ])
     ])
 ]);
 

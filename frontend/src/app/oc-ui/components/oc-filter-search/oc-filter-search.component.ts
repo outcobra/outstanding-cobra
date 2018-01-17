@@ -5,7 +5,6 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
 import {ConnectionPositionPair} from '@angular/cdk/overlay';
 import {isEmpty, isNotEmpty} from '../../../core/util/helper';
-import {Subscription} from 'rxjs/Subscription';
 
 @Component({
     selector: 'oc-filter-search',
@@ -33,6 +32,8 @@ export class OCFilterSearchComponent implements OnInit, OnDestroy {
             originY: 'top',
             overlayX: 'start',
             overlayY: 'top',
+            offsetX: 0,
+            offsetY: 0
         }
     ];
 
