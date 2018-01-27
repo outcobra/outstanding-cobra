@@ -4,10 +4,12 @@ import org.springframework.stereotype.Component
 import outcobra.server.model.Exam
 import outcobra.server.model.ExamTask
 import outcobra.server.model.MarkValue
+import outcobra.server.model.QMarkValue
 import outcobra.server.model.dto.ExamDto
 import outcobra.server.model.dto.ExamTaskDto
 import outcobra.server.model.dto.MarkValueDto
 import outcobra.server.model.interfaces.Mapper
+import outcobra.server.model.repository.MarkValueRepository
 import outcobra.server.model.repository.SubjectRepository
 import outcobra.server.validator.RequestValidator
 import javax.inject.Inject
@@ -20,13 +22,14 @@ import javax.inject.Inject
 class ExamMapper @Inject constructor(val markMapper: Mapper<MarkValue, MarkValueDto>,
                                      val examTaskMapper: Mapper<ExamTask, ExamTaskDto>,
                                      val subjectRepository: SubjectRepository,
+                                     val markRepository: MarkValueRepository,
                                      val subjectMapper: SubjectMapper,
                                      val requestValidator: RequestValidator<ExamDto>)
     : Mapper<Exam, ExamDto>, BaseMapper() {
 
     override fun fromDto(from: ExamDto): Exam {
         val subject = subjectRepository.findOne(from.subject.id)
-        var markValue: MarkValue? = null
+        var markValue: MarkValue? = markRepository.findAll(QMarkValue.markValue.exam.id.eq(from.id)).firstOrNull()
         if (from.mark != null) {
             markValue = markMapper.fromDto(from.mark)
         }
