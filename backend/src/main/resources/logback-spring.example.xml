@@ -7,9 +7,10 @@
 
     <springProperty name="product_version" source="product.version" defaultValue="unspecified"/>
     <springProperty name="environment" source="runtime.environment" defaultValue="unknown"/>
+    <springProperty name="sentry_dsn" source="sentry.dsn" defaultValue="https://00e7fe8c3ae9488ba591314d7773b81a@sentry.pegnu.cloud/2"/>
 
     <appender name="SENTRY" class="com.getsentry.raven.logback.SentryAppender">
-        <dsn>https://00e7fe8c3ae9488ba591314d7773b81a@sentry.pegnu.cloud/2</dsn>
+        <dsn>${sentry_dsn}</dsn>
         <environment>${environment}</environment>
         <release>${product_version}</release>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">

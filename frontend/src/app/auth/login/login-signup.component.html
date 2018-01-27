@@ -1,7 +1,6 @@
 <div class="login-wrapper">
     <img src="/assets/img/oc_logo_stroke_combined_blue.svg">
-    <div class="login-form-wrapper" [@loginSignupCollapse]="isLoggedIn"
-         (@loginSignupCollapse.done)="handleLogin($event)">
+    <div class="login-form-wrapper">
         <oc-alert type="oc-error" *ngIf="errors$ | async">
             <span>{{ errors$ | async | translate }}</span>
         </oc-alert>
