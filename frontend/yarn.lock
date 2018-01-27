@@ -214,10 +214,6 @@
   version "0.0.11"
   resolved "https://pkg.pegnu.cloud/repository/npm/@schematics/schematics/-/schematics-0.0.11.tgz#c8f70f270ed38f29b2873248126fd59abd635862"
 
-"@types/auth0-js@^8.10.1":
-  version "8.10.1"
-  resolved "https://pkg.pegnu.cloud/repository/npm/@types/auth0-js/-/auth0-js-8.10.1.tgz#aa38e780ebe96564b941203af3e79a5692a3b650"
-
 "@types/jasmine@2.5.38":
   version "2.5.38"
   resolved "https://pkg.pegnu.cloud/repository/npm/@types/jasmine/-/jasmine-2.5.38.tgz#a4379124c4921d4e21de54ec74669c9e9b356717"
