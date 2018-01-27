@@ -199,9 +199,9 @@
   version "9.0.2"
   resolved "https://pkg.pegnu.cloud/repository/npm/@ngx-translate/core/-/core-9.0.2.tgz#d4cab861e3ea8ea14a6df5dcd744dfeb29fb15e2"
 
-"@ngx-translate/http-loader@2.0.0":
-  version "2.0.0"
-  resolved "https://pkg.pegnu.cloud/repository/npm/@ngx-translate/http-loader/-/http-loader-2.0.0.tgz#9c16d07cd070c67ada270a2e940281eb826b3f43"
+"@ngx-translate/http-loader@^2.0":
+  version "2.0.1"
+  resolved "https://pkg.pegnu.cloud/repository/npm/@ngx-translate/http-loader/-/http-loader-2.0.1.tgz#aa67788e64bfa8652691a77b022b3b4031209113"
 
 "@schematics/angular@~0.1.17":
   version "0.1.17"
@@ -1385,9 +1385,9 @@ code-point-at@^1.0.0:
   version "1.1.0"
   resolved "https://pkg.pegnu.cloud/repository/npm/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
 
-codelyzer@~4.0.2:
-  version "4.0.2"
-  resolved "https://pkg.pegnu.cloud/repository/npm/codelyzer/-/codelyzer-4.0.2.tgz#d5e2390b97d95e73a7b1e6f0cf03e16cbf35b06f"
+codelyzer@^4.1:
+  version "4.1.0"
+  resolved "https://pkg.pegnu.cloud/repository/npm/codelyzer/-/codelyzer-4.1.0.tgz#3117754538d8f5ffa36dff91d340573a836cf373"
   dependencies:
     app-root-path "^2.0.1"
     css-selector-tokenizer "^0.7.0"
@@ -3960,7 +3960,7 @@ json-stable-stringify@~0.0.0:
   dependencies:
     jsonify "~0.0.0"
 
-json-stringify-safe@5.0.x, json-stringify-safe@^5.0.1, json-stringify-safe@~5.0.1:
+json-stringify-safe@5.0.x, json-stringify-safe@~5.0.1:
   version "5.0.1"
   resolved "https://pkg.pegnu.cloud/repository/npm/json-stringify-safe/-/json-stringify-safe-5.0.1.tgz#1296a2d58fd45f19a0f6ce01d65701e2c735b6eb"
 
@@ -5868,11 +5868,9 @@ range-parser@^1.0.3, range-parser@^1.2.0, range-parser@~1.2.0:
   version "1.2.0"
   resolved "https://pkg.pegnu.cloud/repository/npm/range-parser/-/range-parser-1.2.0.tgz#f49be6b487894ddc40dcc94a322f611092e00d5e"
 
-raven-js@3.10.0:
-  version "3.10.0"
-  resolved "https://pkg.pegnu.cloud/repository/npm/raven-js/-/raven-js-3.10.0.tgz#bef526fb4f8e74382fa181e90e3599f404b80b12"
-  dependencies:
-    json-stringify-safe "^5.0.1"
+raven-js@3.21.0:
+  version "3.21.0"
+  resolved "https://pkg.pegnu.cloud/repository/npm/raven-js/-/raven-js-3.21.0.tgz#609236eb0ec30faf696b552f842a80b426be6258"
 
 raw-body@2, raw-body@2.3.2:
   version "2.3.2"
@@ -7336,15 +7334,11 @@ typedarray@^0.0.6, typedarray@~0.0.5:
   version "0.0.6"
   resolved "https://pkg.pegnu.cloud/repository/npm/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 
-typeface-montserrat@^0.0.24:
-  version "0.0.24"
-  resolved "https://pkg.pegnu.cloud/repository/npm/typeface-montserrat/-/typeface-montserrat-0.0.24.tgz#dc819a5a8e7e89af4107671c56b7b9e1ab2ceea2"
+typeface-montserrat@^0.0.45:
+  version "0.0.45"
+  resolved "https://pkg.pegnu.cloud/repository/npm/typeface-montserrat/-/typeface-montserrat-0.0.45.tgz#17bd9a48d1b4a3ed7f3110db8e18ea828e88594b"
 
-typescript@<2.6.0:
-  version "2.5.3"
-  resolved "https://pkg.pegnu.cloud/repository/npm/typescript/-/typescript-2.5.3.tgz#df3dcdc38f3beb800d4bc322646b04a3f6ca7f0d"
-
-typescript@~2.6.2:
+typescript@^2.6, typescript@~2.6.2:
   version "2.6.2"
   resolved "https://pkg.pegnu.cloud/repository/npm/typescript/-/typescript-2.6.2.tgz#3c5b6fd7f6de0914269027f03c0946758f7673a4"
 
