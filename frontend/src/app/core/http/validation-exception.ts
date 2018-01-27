@@ -3,9 +3,9 @@ export enum MessageLevel {
 }
 
 export class ValidationException {
-    title: string
-    message: string
-    messageLevel: MessageLevel
-    status: number
-    cause: any
+    title: string;
+    message: string;
+    messageLevel: MessageLevel;
+    status: number;
+    cause: any;
 }

@@ -24,7 +24,6 @@
         "outcobra.scss"
       ],
       "scripts": [
-        "assets/scripts/auth0.min.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

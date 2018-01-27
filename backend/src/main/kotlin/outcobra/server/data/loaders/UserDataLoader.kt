@@ -7,7 +7,8 @@ import org.springframework.transaction.annotation.Transactional
 import outcobra.server.data.DataLoadOrder.USER
 import outcobra.server.model.User
 import outcobra.server.model.repository.UserRepository
-import outcobra.server.service.UserService
+import outcobra.server.web.auth.AuthService
+import outcobra.server.web.auth.model.UsernamePasswordDto
 import javax.inject.Inject
 
 /**
@@ -21,12 +22,13 @@ import javax.inject.Inject
 @Order(USER)
 class UserDataLoader
 @Inject constructor(val userRepository: UserRepository,
-                    val userService: UserService) : DataLoader {
+                    val authService: AuthService<UsernamePasswordDto>) : DataLoader {
 
     companion object {
         var TEST_USER: User? = null
-        val loadedUserToken = "auth0|583b1ac145cc13f8065da5e2"
         val loadedUserName = "OutcobraTest"
+        val loadedUserMail = "testuser@outcobra.ch"
+        val loadedPassword = "Secret$1"
         private val LOGGER = LoggerFactory.getLogger(UserDataLoader::class.java)
         var loaded = false
     }
@@ -35,8 +37,10 @@ class UserDataLoader
 
 
     override fun load() {
-        TEST_USER = userRepository.save(User(loadedUserToken, loadedUserName, arrayListOf()))
-        LOGGER.debug("Saving user: ${TEST_USER?.username ?: "null"}")
+        authService.signUp(UsernamePasswordDto(loadedUserName, loadedUserMail, loadedPassword, loadedPassword))
+        TEST_USER = userRepository.findByMail(loadedUserMail)
+        LOGGER.debug("Signing up User: ${TEST_USER?.username ?: "null"}")
+
         loaded = true
     }
 }

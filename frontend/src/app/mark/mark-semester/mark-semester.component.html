@@ -25,13 +25,12 @@
                                 </span>
                                 <span>{{ subject.name }}</span>
                                 <div class="oc-filler"></div>
-                                <span>
+                                <span [markHighlighter]="subject.subjectMarkGroup.value">
                                     <b>{{ subject.subjectMarkGroup.value | markValue }}</b>
                                 </span>
                                 <mat-icon [matTooltip]="'i18n.modules.mark.common.average' | translate"
-                                         svgIcon="average"></mat-icon>
+                                          svgIcon="average"></mat-icon>
                             </oc-collapsible-header>
-                            <oc-divider></oc-divider>
                             <mat-list class="mark-value-list">
                                 <mat-list-item class="subject-mark-group-controls">
                                     <div class="control-row">
@@ -58,20 +57,22 @@
                                 </mat-list-item>
 
                                 <mat-list-item class="mark-list-item"
-                                              *ngFor="let mark of subject.subjectMarkGroup?.markValues">
+                                               *ngFor="let mark of subject.subjectMarkGroup?.markValues">
                                     <mark-value [mark]="mark"
                                                 [editEnabled]="currentSemester"
                                                 (delete)="deleteMark$.next(mark)"
                                                 (edit)="editMark$.next({subjectId: subject.id, groupId: mark.markGroupId, markId: mark.id})"></mark-value>
                                 </mat-list-item>
                                 <mat-list-item *ngFor="let markGroup of subject.subjectMarkGroup?.markGroups"
-                                              class="mark-group-item">
+                                               class="mark-group-item">
                                     <oc-collapsible [active]="isActiveMarkGroup(markGroup.id)" [showDivider]="false">
                                         <oc-collapsible-header class="mark-mark-group-header" [ngClass]="headerClasses">
                                             <mark-value [mark]="markGroup"
+                                                        [showDivider]="true"
                                                         [editEnabled]="currentSemester"
                                                         (delete)="deleteMarkGroup$.next(markGroup)"
-                                                        (edit)="editMarkGroup$.next({subjectId: markGroup.subjectId, groupId: markGroup.id})"></mark-value>
+                                                        (edit)="editMarkGroup$.next({subjectId: markGroup.subjectId, groupId: markGroup.id})">
+                                            </mark-value>
                                         </oc-collapsible-header>
                                         <oc-divider></oc-divider>
                                         <mat-list class="mark-group-value-list">
@@ -84,17 +85,17 @@
                                                 </button>
                                             </mat-list-item>
                                             <mat-list-item class="mark-list-item"
-                                                          *ngFor="let markValue of markGroup.markValues">
+                                                           *ngFor="let markValue of markGroup.markValues">
                                                 <mark-value [mark]="markValue"
                                                             [editEnabled]="currentSemester"
                                                             (delete)="deleteMark$.next(markValue)"
                                                             (edit)="editMark$.next({subjectId: subject.id, groupId: markValue.markGroupId, markId: markValue.id})"></mark-value>
                                             </mat-list-item>
                                         </mat-list>
-                                        <oc-divider></oc-divider>
                                     </oc-collapsible>
                                 </mat-list-item>
                             </mat-list>
+                            <oc-divider></oc-divider>
                         </oc-collapsible>
                     </oc-collapsible>
                 </oc-collapsible>

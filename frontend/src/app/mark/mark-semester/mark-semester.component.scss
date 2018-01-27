@@ -49,8 +49,14 @@ mark-semester {
         margin-right: 24px;
     }
 
-    .mark-mark-group-header mat-icon {
-        padding: 0 !important;
+    .mark-mark-group-header {
+        .oc-collapsible-toggle {
+            border-top: 1px solid $slightly-dark;
+        }
+
+        mat-icon {
+            padding: 0 !important;
+        }
     }
 
     .mat-list-item-content,

@@ -37,7 +37,7 @@ class SubjectDataLoader
     override fun shouldLoad() = true
 
     private fun saveSubject(name: String, semester: Semester): Subject {
-        val subject = Subject(name, Color.getRandomColor(), semester, mutableListOf(), mutableListOf(), mutableListOf(), mutableListOf(), null, null)
+        val subject = Subject(name, Color.randomColor, semester, mutableListOf(), mutableListOf(), mutableListOf(), mutableListOf(), null, null)
 
         LOGGER.debug("Saving subject: ${subject.name}")
         return subjectRepository.save(subject)

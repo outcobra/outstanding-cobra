@@ -54,7 +54,9 @@
                     </span>
                     <span>{{ exam.name }}</span>
                 </mat-expansion-panel-header>
-                <exam-list-item [exam]="exam" (delete)="deleteExam($event)" (edit)="editExam($event)"
+                <exam-list-item [exam]="exam"
+                                (delete)="deleteExam($event)"
+                                (edit)="editExam($event)"
                                 (addMark)="addMark$.next($event)">
                 </exam-list-item>
             </mat-expansion-panel>
@@ -65,8 +67,8 @@
     </div>
 </div>
 <button mat-fab
+        routerLink="/exam/new"
         [matTooltip]="'i18n.modules.exam.add' | translate"
-        matTooltipPosition="left"
-        (click)="addExam()">
+        matTooltipPosition="left">
     <mat-icon>add</mat-icon>
 </button>

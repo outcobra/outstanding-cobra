@@ -1,12 +1,15 @@
 import {Injectable} from '@angular/core';
 import {Http, Request, RequestMethod, Response, URLSearchParams} from '@angular/http';
-import {ConfigService} from '../config/config.service';
 import {Observable} from 'rxjs/Observable';
 import {dateReplacer} from './http-util';
 import {RequestOptions} from './request-options';
 import {ValidationException} from './validation-exception';
-import {isNotEmpty} from '../util/helper';
+import {isFalsy, isNotEmpty, isTruthy} from '../util/helper';
 import {NotificationWrapperService} from '../notifications/notification-wrapper.service';
+import {RequestArgs} from '@angular/http/src/interfaces';
+import {environment} from '../../../environments/environment';
+import {Router} from '@angular/router';
+import {BasilWrapperService} from '../persistence/basil-wrapper.service';
 
 /**
  * HttpInterceptor to customize the http request and http responses
@@ -27,10 +30,13 @@ export class HttpInterceptor {
     private _apiNames: string[];
     private _defaultApiName: string;
 
-    constructor(private http: Http, private _notificationsService: NotificationWrapperService, private config: ConfigService) {
-        this._defaultApiName = this.config.get('api.defaultApiName');
-        this._apiNames = this.config.get('api.apis')
-            .map(api => api['name']);
+    constructor(private http: Http,
+                private _router: Router,
+                private _notificationsService: NotificationWrapperService,
+                private _basil: BasilWrapperService) {
+        this._defaultApiName = environment.api.defaultApiName;
+        this._apiNames = environment.api.apis
+            .map(api => api.name);
     }
 
     /**
@@ -59,8 +65,8 @@ export class HttpInterceptor {
                 url: this._buildApiUrl(request),
                 headers: request.headers,
                 search: this._buildUrlSearchParams(request.params),
-                body: JSON.stringify(request.data, dateReplacer)
-            })
+                body: this._serializeBody(request.data, request.headers)
+            } as RequestArgs)
         ).catch(error => this._handleError(error))
             .map((res: Response) => this._unwrapAndCastHttpResponse<T>(res));
     }
@@ -73,15 +79,17 @@ export class HttpInterceptor {
      * performs a simple get request
      *
      * @param url
+     * @param headers
      * @param params
      * @param apiName
      * @returns {Observable<T>}
      */
-    public get<T>(url: string, apiName?: string, params?: any): Observable<T> {
+    public get<T>(url: string, apiName?: string, headers?: any, params?: any): Observable<T> {
         return this.request<T>({
             method: RequestMethod.Get,
             url: url,
             params: params,
+            headers: headers,
             apiName: apiName
         });
     }
@@ -91,16 +99,18 @@ export class HttpInterceptor {
      *
      * @param url as string
      * @param data which needs to be sent as request body
+     * @param headers
      * @param params additional parameters(headers)
      * @param apiName name of the api to call (described in the config file)
      * @returns {Observable<T>}
      */
-    public post<T>(url: string, data: any, apiName?: string, params?: any): Observable<T> {
+    public post<T>(url: string, data: any, apiName?: string, headers?: any, params?: any): Observable<T> {
         return this.request<T>({
             method: RequestMethod.Post,
             url: url,
             data: data,
             params: params,
+            headers: headers,
             apiName: apiName
         });
     }
@@ -163,6 +173,12 @@ export class HttpInterceptor {
     ///////////////////////////////////////////////////////////////////////////
     ///////// Helper Functions ////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
+    private _serializeBody(body: any, headers: {[key: string]: string}) {
+        if (isTruthy(headers) && (isFalsy(headers['Content-Type']) || headers['Content-Type'].includes('application/json'))) {
+            return JSON.stringify(body, dateReplacer)
+        }
+        return body;
+    }
 
     /**
      * interpolates the url in the requestOptions
@@ -188,7 +204,7 @@ export class HttpInterceptor {
         requestOptions.url = this._removeRepeatedSlashes(requestOptions.url);
         // cleanup unnecessary slashes at the end
         requestOptions.url = requestOptions.url.replace(/\/+$/g, '');
-        return ( requestOptions );
+        return (requestOptions);
     }
 
     /**
@@ -212,7 +228,7 @@ export class HttpInterceptor {
      * @returns requestOptions object with the updated headers
      */
     private _addContentType(request: RequestOptions) {
-        if (request.method !== RequestMethod.Get && request.method !== RequestMethod.Delete) {
+        if (request.method !== RequestMethod.Get && request.method !== RequestMethod.Delete && isFalsy(request.headers['Content-Type'])) {
             request.headers['Content-Type'] = 'application/json ; charset=UTF-8';
         }
         return request;
@@ -224,7 +240,7 @@ export class HttpInterceptor {
      * @param params object containing the params
      * @returns {URLSearchParams} all search params
      */
-    private _buildUrlSearchParams(params: {}|any) {
+    private _buildUrlSearchParams(params: {} | any) {
         let urlParams = new URLSearchParams();
         for (let key in params) {
             urlParams.append(key, params[key]);
@@ -240,7 +256,11 @@ export class HttpInterceptor {
     private _addAuthToken(request: RequestOptions) {
         let api = this._getApiFromConfig(request.apiName);
         if (api.authToken === true) {
-            request.headers['Authorization'] = 'Bearer ' + localStorage.getItem(this.config.get('locStorage.tokenLocation'));
+            let token = this._basil.get(environment.persistence.tokenLocation);
+
+            if (isNotEmpty(token)) {
+                request.headers['Authorization'] = 'Bearer ' + token;
+            }
         }
     }
 
@@ -254,7 +274,7 @@ export class HttpInterceptor {
     private _unwrapAndCastHttpResponse<T>(response: Response): T {
         let responseStr = response.text();
         if (responseStr.length <= 0) return null;
-        return JSON.parse(responseStr) as T;
+        return response.json() as T;
     }
 
     /**
@@ -276,7 +296,7 @@ export class HttpInterceptor {
      */
     private _getApiFromConfig(apiName: string) {
         let name = (this._apiNames.indexOf(apiName) >= 0) ? apiName : this._defaultApiName;
-        return this.config.get('api.apis')
+        return environment.api.apis
             .find(api => api.name === name);
     }
 

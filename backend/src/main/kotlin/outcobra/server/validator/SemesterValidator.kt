@@ -33,7 +33,7 @@ class SemesterValidator @Inject constructor(val schoolYearRepository: SchoolYear
         if (semester.validTo.isBefore(semester.validFrom)) {
             ValidationKey.START_BIGGER_THAN_END.throwException()
         }
-        val parentId = semester.schoolYear.id
+        val parentId = semester.schoolYear?.id
         val parent = schoolYearRepository.findOne(parentId)
 
         if (semester !in parent)

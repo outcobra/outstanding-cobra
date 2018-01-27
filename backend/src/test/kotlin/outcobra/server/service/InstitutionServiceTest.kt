@@ -85,7 +85,7 @@ class InstitutionServiceTest {
         val institution2 = institutionService.save(InstitutionDto(name = "laslsafl", userId = userId))
         val secondUser = userRepository.findAll(QUser.user.id.ne(institution1.userId)).first()
         val notInList = Institution("notInList", secondUser)
-        institutionRepository.save(notInList) //creates institution that should no be in the list
+        institutionRepository.save(notInList) //creates institution that should not be in the list
 
         val expected = arrayListOf(institution1, institution2)
         val institutions = institutionService.readAll()

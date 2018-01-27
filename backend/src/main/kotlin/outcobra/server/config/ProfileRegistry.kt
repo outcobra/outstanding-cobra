@@ -9,7 +9,7 @@ class ProfileRegistry {
         const val H2_DB = "h2_db"
         const val MYSQL_DB = "mysql_database"
         const val TEST = "test"
-        const val AUTH0_PROXY = "auth0_proxy"
+        const val BIT = "bit"
 
         /*
          * "super"-profiles

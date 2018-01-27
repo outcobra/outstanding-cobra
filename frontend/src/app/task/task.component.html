@@ -44,6 +44,9 @@
         </mat-accordion>
     </div>
 </div>
-<button mat-fab [matTooltip]="'i18n.modules.task.add' | translate" matTooltipPosition="left" (click)="addTask()">
+<button mat-fab
+        routerLink="/task/new"
+        [matTooltip]="'i18n.modules.task.add' | translate"
+        matTooltipPosition="left">
     <mat-icon>add</mat-icon>
 </button>

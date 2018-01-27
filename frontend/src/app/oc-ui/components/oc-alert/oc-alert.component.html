@@ -1,0 +1,7 @@
+<div [ngSwitch]="type">
+    <mat-icon *ngSwitchCase="'oc-error'">error</mat-icon>
+    <mat-icon *ngSwitchCase="'oc-warning'">warning</mat-icon>
+    <mat-icon *ngSwitchCase="'oc-success'">info</mat-icon>
+    <mat-icon *ngSwitchCase="'oc-info'">check_circle</mat-icon>
+</div>
+<ng-content></ng-content>

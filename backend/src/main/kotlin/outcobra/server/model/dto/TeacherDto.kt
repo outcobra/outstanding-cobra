@@ -10,6 +10,7 @@ data class TeacherDto(val id: Long = 0,
                       val name: String = "",
                       val email: String = "") : OutcobraDto {
 
-    override fun getIdentifier(): Long = id
-    override fun getParentLink(): ParentLink = ParentLink.make(institutionId, Institution::class.java)
+    override val identifier: Long get() = id
+    override val parentLink: ParentLink
+        get() = ParentLink.make(institutionId, Institution::class.java)
 }

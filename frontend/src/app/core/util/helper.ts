@@ -20,6 +20,10 @@ export function isTrue(toCheck: any): boolean {
     return toCheck === true;
 }
 
+export function isFalse(toCheck: any): boolean {
+    return toCheck === false;
+}
+
 export function equals(first: any, second: any): boolean {
     return first === second;
 }

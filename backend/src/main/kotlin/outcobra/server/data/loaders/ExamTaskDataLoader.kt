@@ -14,6 +14,7 @@ import outcobra.server.data.loaders.ExamDataLoader.Companion.PHYSICS_EXAM
 import outcobra.server.data.loaders.ExamDataLoader.Companion.PROJECT_EXAM
 import outcobra.server.data.loaders.ExamDataLoader.Companion.SCRUM_EXAM
 import outcobra.server.model.ExamTask
+import outcobra.server.model.repository.ExamRepository
 import outcobra.server.model.repository.ExamTaskRepository
 import java.util.*
 import javax.inject.Inject
@@ -25,20 +26,23 @@ import javax.inject.Inject
  */
 @Component
 @Order(EXAM_TASK)
-class ExamTaskDataLoader @Inject constructor(val examTaskRepository: ExamTaskRepository) : DataLoader {
+class ExamTaskDataLoader @Inject constructor(val examTaskRepository: ExamTaskRepository,
+                                             val examRepository: ExamRepository) : DataLoader {
     private val LOGGER = LoggerFactory.getLogger(ExamTaskDataLoader::class.java)
     override fun shouldLoad(): Boolean = true
 
     override fun load() {
         listOf(SCRUM_EXAM, DATABASES_EXAM, OOP_DESIGN_EXAM, OOP_EXAM, PROJECT_EXAM,
-                GUP_EXAM, MATHS_EXAM, PHYSICS_EXAM, GERMAN_EXAM).forEachIndexed { index, exam ->
-            for (i in 0 until index) {
-                val finished = Random().nextBoolean()
-                var entity = ExamTask("${exam.name} #$i", exam, finished)
-                entity = examTaskRepository.save(entity)
-                LOGGER.debug("Saved ${entity.task} with id ${entity.id}")
-            }
-        }
+                GUP_EXAM, MATHS_EXAM, PHYSICS_EXAM, GERMAN_EXAM)
+                .forEachIndexed { index, exam ->
+                    examRepository.save(exam)
+                    for (i in 0 until index) {
+                        val finished = Random().nextBoolean()
+                        var entity = ExamTask("${exam.name} #$i", exam, finished)
+                        entity = examTaskRepository.save(entity)
+                        LOGGER.debug("Saved ${entity.task} with id ${entity.id}")
+                    }
+                }
     }
 
 }

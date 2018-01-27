@@ -1,0 +1,69 @@
+@import '../../../sass/color-variables';
+
+:host {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $background-white;
+
+    .login-wrapper {
+        max-width: 300px;
+
+        oc-alert {
+            margin: 0 0 4px -8px;
+        }
+
+        form, form mat-form-field, img {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        form mat-form-field {
+            padding-bottom: 16px;
+            span.valid {
+                color: green;
+            }
+        }
+
+        form > div {
+            display: flex;
+            flex-direction: column;
+            &.button-wrapper {
+                flex-direction: row;
+            }
+            > button {
+                flex-basis: 50%;
+
+                &:first-child {
+                    margin-right: 4px;
+                }
+
+                &:last-child {
+                    margin-left: 4px;
+                }
+            }
+        }
+
+        @media screen and (max-width: 300px) {
+            form, img {
+                padding: 0 5px;
+            }
+        }
+
+        oc-divider {
+            margin: 10px 0;
+        }
+
+        .social-login-button {
+            width: 100%;
+            margin-bottom: 8px;
+            img {
+                height: 22px;
+                width: 22px;
+                margin-right: 8px;
+            }
+        }
+    }
+}

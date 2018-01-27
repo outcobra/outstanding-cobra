@@ -8,6 +8,7 @@
         "edit": "Bearbeiten",
         "close": "Schliessen",
         "reset": "Zurücksetzen",
+        "back": "Zurück",
         "yes": "Ja",
         "no": "Nein",
         "ok": "OK",
@@ -27,6 +28,9 @@
         "error": {
           "title": "Fehler",
           "required": "Dieses Feld wird benötigt.",
+          "minLength": "Benötigte Länge: {{length}}",
+          "maxLength": "Maximale Länge: {{length}}",
+          "email": "E-Mail hat nicht das richtige Format",
           "isAfterOrSameDay": "Das Datum sollte nach dem {{date}} sein",
           "isBeforeOrSameDay": "Das Datum sollte vor dem {{date}} sein",
           "dateToIsBeforeDateFrom": "'Gültig bis' ist vor 'Gültig ab'",
@@ -54,12 +58,6 @@
       "lang": {
         "en": "Englisch",
         "de": "Deutsch"
-      },
-      "theme": {
-        "title": "Theme wechseln",
-        "ocean": "Ozean",
-        "bloodorange": "Blutorange",
-        "lavender": "Lavendel"
       }
     },
     "email": {
@@ -97,9 +95,16 @@
       "exam": {
         "linkTitle": "Prüfungen",
         "listTitle": "Deine Prüfungen",
-        "add": "Prüfung hinzufügen",
         "description": "Prüfungs-Beschreibung",
         "name": "Prüfungs-Name",
+        "createUpdate": {
+          "create": {
+            "title": "Prüfung hinzufügen"
+          },
+          "update": {
+            "title": "Prüfung bearbeiten"
+          }
+        },
         "empty": {
           "hint": "Füge eine Prüfung über den Knopf unten rechts hinzu!"
         },
@@ -120,12 +125,8 @@
           "noMatch": "Nichts gefunden"
         },
         "notification": {
-          "add": {
-            "title": "Prüfungen hinzugefügt",
-            "message": "Die Prüfungen wurde erfolgreich erstellt"
-          },
-          "update": {
-            "title": "Prüfung geändert",
+          "createUpdateSuccess": {
+            "title": "Prüfung gespeichert",
             "message": "Die Prüfung wurde erfolgreich gespeichert"
           },
           "delete": {
@@ -246,9 +247,18 @@
       "task": {
         "linkTitle": "Aufgaben",
         "listTitle": "Deine Aufgaben",
-        "add": "Aufgabe hinzufügen",
         "desc": "Aufgaben Beschreibung",
         "progress": "Fortschritt",
+        "finish": "Abschliessen",
+        "add": "Aufgabe erstellen",
+        "createUpdate": {
+          "create": {
+            "title": "Aufgabe hinzufügen"
+          },
+          "update": {
+            "title": "Aufgabe bearbeiten"
+          }
+        },
         "filter": {
           "title": "Aufgaben filtern",
           "subject": "Nach Fach filtern",
@@ -259,12 +269,8 @@
           "hint": "Füge eine Aufgabe über den Knopf unten rechts hinzu!"
         },
         "notification": {
-          "add": {
-            "title": "Aufgabe hinzugefügt",
-            "message": "Die Aufgabe wurde erfolgreich erstellt"
-          },
-          "update": {
-            "title": "Aufgabe geändert",
+          "createUpdateSuccess": {
+            "title": "Aufgabe gespeichert",
             "message": "Die Aufgabe wurde erfolgreich gespeichert"
           },
           "error": {
@@ -394,7 +400,33 @@
     },
     "auth": {
       "login": "Einloggen",
+      "signup": "Registrieren",
       "logout": "Ausloggen",
+      "goToApp": "Zur App wechseln",
+      "form": {
+        "email": "E-Mail",
+        "password": "Passwort",
+        "passwordVerify": "Passwort bestätigen",
+        "username": "Benutzername",
+        "checkingEmail": "Prüfe E-Mail Verfügbarkeit",
+        "mailAvailable": "E-Mail verfügbar",
+        "mailOccupied": "E-Mail vergeben",
+        "error": {
+          "emailTaken": "Sorry, diese E-Mail wird schon verwendet",
+          "passwordPattern": "8 Zeichen, Klein- und Grossbuchstaben, Zahl und Sonderzeichen",
+          "passwordsNotMatching": "Die Passwörter stimmen nicht überein"
+        }
+      },
+      "social": {
+        "signup": {
+          "google": "Mit Google registrieren",
+          "github": "Mit GitHub registrieren"
+        },
+        "login": {
+          "google": "Mit Google anmelden",
+          "github": "Mit GitHub anmelden"
+        }
+      },
       "error": {
         "title": "Login fehlgeschlagen",
         "message": "Sie konnten nicht eingeloggt werden"
@@ -437,7 +469,15 @@
           "message": "Die angegebene Zeitdauer ist auesserhalb der Zeitspanne des Vater-Objekts"
         },
         "mark": "Der Wert dieser Note ist ungültig",
-        "relogin": "Ihr Benutzer ist nicht in der Datenbank. Bitte melden Sie sich neu an"
+        "notSignedUp": "Ihr Benutzer ist nicht in der Datenbank. Bitte registrieren sich zuerst"
+      },
+      "auth": {
+        "identityProvider": "Fehler beim Einloggen mit dem Identitätsprovider",
+        "password": {
+          "noMatch": "Passwort ist inkorrekt",
+          "unsafe": "Passwort ist zu schwach"
+        },
+        "mailOccupied": "Diese E-Mail wird schon verwendet"
       },
       "fallback": {
         "linkTitle": "Seite nicht gefunden",

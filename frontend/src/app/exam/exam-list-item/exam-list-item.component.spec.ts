@@ -4,6 +4,7 @@ import {ExamListItemComponent} from './exam-list-item.component';
 import {TestModule} from '../../core/mock/test.module';
 import {OCUiModule} from '../../oc-ui/oc-ui.module';
 import {MockExamService} from '../../core/mock/exam/mock-exam.service';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('ExamListItemComponent', () => {
     let component: ExamListItemComponent;
@@ -16,7 +17,8 @@ describe('ExamListItemComponent', () => {
             ],
             imports: [
                 TestModule,
-                OCUiModule
+                OCUiModule,
+                RouterTestingModule
             ]
         })
             .compileComponents();

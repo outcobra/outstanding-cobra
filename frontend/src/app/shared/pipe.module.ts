@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {ColorPipe} from './pipes/color.pipe';
-import {CommonModule, DecimalPipe} from '@angular/common';
+import {CommonModule, DatePipe, DecimalPipe} from '@angular/common';
 import {MarkValuePipe} from './pipes/mark-value.pipe';
 
 @NgModule({
@@ -16,6 +16,7 @@ import {MarkValuePipe} from './pipes/mark-value.pipe';
         MarkValuePipe
     ],
     providers: [
+        DatePipe,
         DecimalPipe
     ]
 })

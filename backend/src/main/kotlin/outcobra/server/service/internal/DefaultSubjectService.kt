@@ -57,7 +57,7 @@ class DefaultSubjectService
         requestValidator.validateRequestByDto(dto)
         var subject = mapper.fromDto(dto)
         if (dto.id == 0L) {
-            val markGroup = MarkGroup(subject)
+            val markGroup = MarkGroup(subject = subject)
             markGroupRepository.save(markGroup)
             subject.markGroup = markGroup
         }

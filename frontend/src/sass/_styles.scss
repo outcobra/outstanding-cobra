@@ -17,11 +17,6 @@ body, .main-area {
     background-color: #F8F8F8 !important;
 }
 
-.mat-sidenav-content {
-    display: flex !important;
-    flex-direction: column !important;
-}
-
 oc-app {
     overflow: hidden;
     height: 100%;
@@ -140,7 +135,7 @@ mat-dialog-container {
     }
 
     .form-error {
-        color: mat-color($warn);
+        color: mat-color($warn-palette);
     }
 
     &.half, .half {
@@ -229,4 +224,15 @@ button[mat-fab] {
 
 oc-app.oc-mobile button[mat-fab] {
     bottom: 23px;
+}
+
+mat-toolbar.transparent-toolbar {
+    background: none !important;
+    box-shadow: none !important;
+}
+
+.oc-title-logo {
+    display: flex;
+    height: 100%;
+    cursor: pointer;
 }

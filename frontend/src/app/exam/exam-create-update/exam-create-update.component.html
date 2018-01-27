@@ -1,0 +1,99 @@
+<oc-title-bar>
+    <span>{{ 'i18n.modules.exam.createUpdate.' + (isEditMode() ? 'update' : 'create') + '.title' | translate }}</span>
+</oc-title-bar>
+<form [formGroup]="examCreateUpdateForm" (submit)="submit()" fxLayout fxLayoutAlign="center start">
+    <mat-card fxFlex fxFlex.gt-sm="960px">
+        <mat-card-content>
+            <div class="form-group">
+                <mat-form-field>
+                    <input matInput
+                           required
+                           [placeholder]="'i18n.modules.exam.dialogs.add.name.label' | translate"
+                           formControlName="name">
+                    <mat-error *ngIf="examCreateUpdateForm.get('name').hasError('required')">
+                        {{ 'i18n.common.form.error.required' | translate }}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form-group">
+                <mat-form-field>
+                <textarea matInput
+                          [placeholder]="'i18n.modules.exam.dialogs.add.desc.label' | translate"
+                          formControlName="description"></textarea>
+                    <mat-error *ngIf="examCreateUpdateForm.get('description').hasError('required')">
+                        {{ 'i18n.common.form.error.required' | translate }}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form-group half responsive">
+                <div class="half-child">
+                    <mat-form-field>
+                        <input matInput
+                               required
+                               [matDatepicker]="examDatePicker"
+                               [placeholder]="'i18n.common.label.todoDate' | translate"
+                               formControlName="date">
+                        <mat-datepicker-toggle matSuffix [for]="examDatePicker"></mat-datepicker-toggle>
+                        <mat-datepicker #examDatePicker
+                                        [touchUi]="isMobile()">
+                        </mat-datepicker>
+                        <mat-error>
+                            <ng-template [ngIf]="examCreateUpdateForm.get('date').hasError('required')">
+                                {{ 'i18n.common.form.error.required' | translate }}
+                            </ng-template>
+                            <ng-template [ngIf]="examCreateUpdateForm.get('date').hasError('date')">
+                                {{ 'i18n.common.form.error.datePattern' | translate }}
+                            </ng-template>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="half-child">
+                    <mat-form-field>
+                        <mat-select formControlName="subjectId"
+                                    required
+                                    [placeholder]="'i18n.modules.exam.dialogs.add.subject.label' | translate">
+                            <mat-optgroup *ngFor="let schoolClass of schoolClassSubjects"
+                                          [label]="schoolClass.schoolClass.normalizedName">
+                                <mat-option *ngFor="let subject of schoolClass.subjects" [value]="subject.id">
+                                    {{ subject.name }}
+                                </mat-option>
+                            </mat-optgroup>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div formArrayName="examTasks" class="form-group">
+                <h5>{{ 'i18n.modules.exam.examTask.title' | translate }}</h5>
+                <button mat-button
+                        type="button"
+                        color="accent"
+                        [disabled]="examTaskArray.length >= 15"
+                        (click)="addExamTask()">
+                    {{ 'i18n.modules.exam.examTask.add' | translate }}
+                </button>
+                <mat-list>
+                    <mat-list-item *ngFor="let examTask of examTaskArray.controls; let i=index" [formGroupName]="i">
+                        <mat-checkbox formControlName="finished"></mat-checkbox>
+                        <mat-form-field>
+                            <input matInput formControlName="task"
+                                   [ocAutoFocus]="!isEditMode() || examTask.value.id === 0">
+                        </mat-form-field>
+                    </mat-list-item>
+                </mat-list>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-button
+                    type="button"
+                    routerLink="/exam">
+                {{ 'i18n.common.action.cancel' | translate }}
+            </button>
+            <button mat-raised-button
+                    color="primary"
+                    type="submit">
+                {{ 'i18n.common.action.save' | translate }}
+            </button>
+        </mat-card-actions>
+    </mat-card>
+</form>

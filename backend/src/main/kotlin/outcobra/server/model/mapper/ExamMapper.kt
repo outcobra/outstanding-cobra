@@ -30,16 +30,19 @@ class ExamMapper @Inject constructor(val markMapper: Mapper<MarkValue, MarkValue
         if (from.mark != null) {
             markValue = markMapper.fromDto(from.mark)
         }
-        return Exam(from.id, from.name, from.description,
-                from.date, listOf(), subject, markValue)
+        val exam = Exam(from.name, from.date, listOf(), subject, markValue, from.description)
+        exam.id = from.id
+        return exam
+
     }
 
     override fun toDto(from: Exam): ExamDto {
         var markValue: MarkValueDto? = null
         if (from.mark != null) {
-            markValue = markMapper.toDto(from.mark as MarkValue)
+            markValue = markMapper.toDto(from.mark!!)
         }
-        return ExamDto(from.id, from.name, from.description ?: "", from.date, markValue,
-                from.tasks.map { examTaskMapper.toDto(it) }.toMutableList(), subjectMapper.toDto(from.subject))
+        val subject = from.subject!!
+        return ExamDto(from.id, from.name, from.description, from.date, markValue,
+                from.tasks.map { examTaskMapper.toDto(it) }.toMutableList(), subjectMapper.toDto(subject))
     }
 }
