@@ -106,6 +106,6 @@
             </div>
         </form>
         <oc-divider></oc-divider>
-        <google-login (login)="login(provider.GOOGLE, $event)"></google-login>
+        <google-login [isSignUp]="isSignUp" (login)="login(provider.GOOGLE, $event)"></google-login>
     </div>
 </div>

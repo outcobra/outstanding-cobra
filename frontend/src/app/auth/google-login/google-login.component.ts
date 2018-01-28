@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, EventEmitter, NgZone, Output} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, NgZone, Output} from '@angular/core';
 import {environment} from '../../../environments/environment';
 
 declare let gapi: any;
@@ -9,6 +9,8 @@ declare let gapi: any;
     styleUrls: ['google-login.component.scss']
 })
 export class GoogleLoginComponent implements AfterViewInit {
+    @Input() public isSignUp: boolean;
+
     @Output('login') private _onLogin: EventEmitter<string> = new EventEmitter<string>();
 
     private _googleAuth;
