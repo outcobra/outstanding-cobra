@@ -16,7 +16,7 @@ import {publicRoutes} from './public-routes';
                     children: publicRoutes
                 },
                 {
-                    path: 'app',
+                    path: '',
                     component: AppLayoutComponent,
                     data: {
                         animation: 'app'

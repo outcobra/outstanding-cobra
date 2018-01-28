@@ -27,7 +27,7 @@ export class LoginSignUpComponent implements OnInit {
     private _passwordVerifyErrorStateMatcher: ErrorStateMatcher = new PasswordVerifyErrorStateMatcher();
 
     private _target: string;
-    private readonly _defaultTarget = '/app/manage';
+    private readonly _defaultTarget = '/manage';
 
     public readonly errors$: ReplaySubject<string> = new ReplaySubject();
 
