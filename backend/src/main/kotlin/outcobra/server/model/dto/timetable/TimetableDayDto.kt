@@ -7,5 +7,6 @@ import java.time.LocalDate
  * @author Florian Bürgi
  * @since <since>
  */
-data class TimetableDayDto(val date: LocalDate,
+data class TimetableDayDto(val entries: MutableList<TimetableEntryDto>,
+                           val date: LocalDate,
                            val weekDay: WeekDay)
