@@ -17,52 +17,52 @@ import javax.inject.Inject
 class MarkController @Inject constructor(val markService: MarkService,
                                          val markGroupService: MarkGroupService) {
 
-    @RequestMapping(value = "/value", method = arrayOf(RequestMethod.PUT, RequestMethod.POST))
+    @RequestMapping("/value", method = arrayOf(RequestMethod.PUT, RequestMethod.POST))
     fun saveMarkValue(@RequestBody markValueDto: MarkValueDto): MarkGroupDto {
         return markService.saveMarkAndGetChangedParent(markValueDto)
     }
 
-    @GetMapping(value = "/value/{id}")
+    @GetMapping("/value/{id}")
     fun readMarkValueById(@PathVariable id: Long): MarkValueDto {
         return this.markService.readById(id)
     }
 
-    @GetMapping(value = "/group/{markGroupId}/value")
+    @GetMapping("/group/{markGroupId}/value")
     fun readMarkValuesByGroup(@PathVariable markGroupId: Long): List<MarkValueDto> {
         return markService.readAllByMarkGroup(markGroupId)
     }
 
-    @GetMapping(value = "/subject/{subjectId}/value")
+    @GetMapping("/subject/{subjectId}/value")
     fun readMarkValuesBySubject(@PathVariable subjectId: Long): List<MarkValueDto> {
         return markService.readAllBySubject(subjectId)
     }
 
-    @DeleteMapping(value = "/value/{id}")
+    @DeleteMapping("/value/{id}")
     fun deleteMarkValue(@PathVariable id: Long) {
         markService.delete(id)
     }
 
-    @RequestMapping(value = "/group", method = arrayOf(RequestMethod.PUT, RequestMethod.POST))
+    @RequestMapping("/group", method = arrayOf(RequestMethod.PUT, RequestMethod.POST))
     fun saveMarkGroup(@RequestBody markDto: MarkGroupDto): MarkGroupDto {
         return markGroupService.save(markDto)
     }
 
-    @GetMapping(value = "/group/{id}")
+    @GetMapping("/group/{id}")
     fun readMarkGroupById(@PathVariable id: Long): MarkGroupDto {
         return this.markGroupService.readById(id)
     }
 
-    @GetMapping(value = "/subject/{subjectId}/group")
+    @GetMapping("/subject/{subjectId}/group")
     fun readMarkGroupBySubject(@PathVariable subjectId: Long): MarkGroupDto {
         return markGroupService.getGroupBySubject(subjectId)
     }
 
-    @DeleteMapping(value = "/group/{id}")
+    @DeleteMapping("/group/{id}")
     fun deleteMarkGroup(@PathVariable id: Long) {
         markGroupService.delete(id)
     }
 
-    @GetMapping(value = "/semester/{semesterId}")
+    @GetMapping("/semester/{semesterId}")
     fun getInitialMarkData(@PathVariable semesterId: Long): SemesterMarkDto {
         return markGroupService.getInitialData(semesterId)
     }
