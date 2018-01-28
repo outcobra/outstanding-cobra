@@ -10,7 +10,7 @@ import javax.inject.Inject
 @RequestMapping("/api/institution")
 class InstitutionController @Inject constructor(val institutionService: InstitutionService) {
 
-    @RequestMapping("", method = arrayOf(RequestMethod.PUT, RequestMethod.POST))
+    @RequestMapping(method = arrayOf(RequestMethod.PUT, RequestMethod.POST))
     fun saveInstitution(@RequestBody institutionDto: InstitutionDto): InstitutionDto {
         return institutionService.save(institutionDto)
     }
@@ -20,7 +20,7 @@ class InstitutionController @Inject constructor(val institutionService: Institut
         return institutionService.readById(id)
     }
 
-    @GetMapping("")
+    @GetMapping()
     fun readAllInstitutions(): List<InstitutionDto> {
         return institutionService.readAll()
     }
