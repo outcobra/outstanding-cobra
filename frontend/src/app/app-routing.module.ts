@@ -4,6 +4,7 @@ import {FallbackComponent} from './main/fallback/fallback.component';
 import {AppLayoutComponent} from './layout/app-layout/app-layout.component';
 import {AuthGuard} from './core/services/auth/auth-guard.service';
 import {publicRoutes} from './public-routes';
+import {environment} from '../environments/environment';
 
 @NgModule({
     imports: [
@@ -59,7 +60,7 @@ import {publicRoutes} from './public-routes';
             ],
             {
                 // Prints all Routing Events
-                enableTracing: false//environment.enableRouteTracing
+                enableTracing: environment.enableRouteTracing
             })
     ],
     exports: [
