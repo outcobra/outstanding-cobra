@@ -1,25 +1,22 @@
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {FallbackComponent} from './main/fallback/fallback.component';
-import {EmptyLayoutComponent} from './layout/empty-layout/empty-layout.component';
 import {AppLayoutComponent} from './layout/app-layout/app-layout.component';
 import {AuthGuard} from './core/services/auth/auth-guard.service';
 import {publicRoutes} from './public-routes';
-import {environment} from '../environments/environment';
 
 @NgModule({
     imports: [
         RouterModule.forRoot([
                 {
                     path: '',
-                    component: EmptyLayoutComponent,
                     data: {
                         animation: 'empty'
                     },
                     children: publicRoutes
                 },
                 {
-                    path: '',
+                    path: 'app',
                     component: AppLayoutComponent,
                     data: {
                         animation: 'app'
@@ -62,7 +59,7 @@ import {environment} from '../environments/environment';
             ],
             {
                 // Prints all Routing Events
-                enableTracing: environment.enableRouteTracing
+                enableTracing: false//environment.enableRouteTracing
             })
     ],
     exports: [

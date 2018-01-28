@@ -1,4 +1,4 @@
-import {animate, animation, group, query, state, style, transition, trigger, useAnimation} from '@angular/animations';
+import {animate, animation, group, query, style, transition, trigger, useAnimation} from '@angular/animations';
 import {Easing, time, Timing} from './timing';
 
 export const fadeInOutAnimation = animation([
@@ -9,10 +9,10 @@ export const fadeInOutAnimation = animation([
         query(':enter :not(oc-title-bar)', [
             style({opacity: 0}),
             animate(time(), style({opacity: 1}))
-        ]),
+        ], {optional: true}),
         query(':leave :not(oc-title-bar)', [
             animate(time(), style({opacity: 0}))
-        ])
+        ], {optional: true})
     ])
 ]);
 
@@ -41,7 +41,7 @@ export function placeLeaveOverEnterState() {
 
 
 export const appLayoutRouteAnimation = trigger('appLayoutRouteAnimation', [
-    transition('void => *', []),
+    transition('void => *, * => void', []),
     transition('task => taskCreateUpdate, exam => examCreateUpdate, mark => markCreateUpdate, mark => markGroupCreateUpdate', [
         query(':self', style({position: 'relative'})),
         fixContainers('absolute'),
@@ -61,7 +61,7 @@ export const appLayoutRouteAnimation = trigger('appLayoutRouteAnimation', [
 ]);
 
 export const emptyLayoutRouteAnimation = trigger('emptyLayoutRouteAnimation', [
-    transition(':enter', []),
+    transition('void => *, * => void', []),
     transition('auth => login, auth => signUp', [
         query(':enter', style({opacity: 0})),
         fixContainers(),
@@ -94,33 +94,4 @@ export const emptyLayoutRouteAnimation = trigger('emptyLayoutRouteAnimation', [
             ])
         ])
     ])
-]);
-
-export const topLevelRouteAnimation = trigger('topLevelRouteAnimation', [
-    transition('empty => app', [
-        fixContainers(),
-        placeLeaveOverEnterState(),
-
-        query(':leave', [
-            query('.login-form-wrapper', [
-                    animate(time(), style({
-                        height: 0,
-                        overflow: 'hidden'
-                    }))
-                ],
-                {optional: true}),
-
-            animate(time('750ms', Easing.ACCELERATE), style({
-                transform: 'translateY(-100%)'
-            }))
-        ])
-    ])
-]);
-
-export const loginSignupCollapse = trigger('loginSignupCollapse', [
-    state('true', style({
-        height: 0,
-        overflow: 'hidden'
-    })),
-    transition('false => true', animate(time()))
 ]);

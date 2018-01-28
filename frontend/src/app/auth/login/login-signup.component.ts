@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {DefaultAuthService} from '../../core/services/auth/auth.service';
 import {IdentityProvider} from '../../core/services/auth/identity-provider';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -7,7 +7,6 @@ import {OCValidators} from '../../core/services/oc-validators';
 import {UserService} from '../../core/services/user.service';
 import {ErrorStateMatcher} from '@angular/material';
 import {PasswordVerifyErrorStateMatcher} from './password-verify-error-state-matcher';
-import {loginSignupCollapse} from '../../core/animations/animations';
 import {isTruthy} from '../../core/util/helper';
 import {Observable} from 'rxjs/Observable';
 import {UsernamePasswordDto} from '../model/username-password.dto';
@@ -17,7 +16,7 @@ import {ReplaySubject} from 'rxjs/ReplaySubject';
     selector: 'login',
     templateUrl: './login-signup.component.html',
     styleUrls: ['./login-signup.component.scss'],
-    animations: [loginSignupCollapse]
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginSignUpComponent implements OnInit {
     public isSignUp: boolean;
@@ -28,7 +27,7 @@ export class LoginSignUpComponent implements OnInit {
     private _passwordVerifyErrorStateMatcher: ErrorStateMatcher = new PasswordVerifyErrorStateMatcher();
 
     private _target: string;
-    private readonly _defaultTarget = '/manage';
+    private readonly _defaultTarget = '/app/manage';
 
     public readonly errors$: ReplaySubject<string> = new ReplaySubject();
 
@@ -95,15 +94,15 @@ export class LoginSignUpComponent implements OnInit {
 
             authFunc.call(this._authService, usernamePasswordTuple)
                 .catch(this._handleLoginError.bind(this))
-                .subscribe();
+                .subscribe(() => this._router.navigateByUrl(this._target));
         }
     }
 
-    public login(identityProvider: IdentityProvider) {
-        let authFunc: (UsernamePasswordDto) => Observable<boolean> = this.isSignUp
+    public login(identityProvider: IdentityProvider, token: string) {
+        let authFunc: (UsernamePasswordDto, token) => Observable<boolean> = this.isSignUp
             ? this._authService.signUpIdentityProvider
             : this._authService.loginIdentityProvider;
-        authFunc.call(this._authService, identityProvider)
+        authFunc.call(this._authService, identityProvider, token)
             .catch(this._handleLoginError.bind(this))
             .subscribe(() => this._router.navigateByUrl(this._target));
     }

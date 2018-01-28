@@ -6,9 +6,9 @@ export interface AuthService {
 
     signUpWithMailAndPassword(usernamePassword: UsernamePasswordDto)
 
-    loginIdentityProvider(identityProvider: IdentityProvider);
+    loginIdentityProvider(identityProvider: IdentityProvider, token: string);
 
-    signUpIdentityProvider(identityProvider: IdentityProvider);
+    signUpIdentityProvider(identityProvider: IdentityProvider, token: string);
 
     /**
      * logs the user out and removes the corresponding persistence items
