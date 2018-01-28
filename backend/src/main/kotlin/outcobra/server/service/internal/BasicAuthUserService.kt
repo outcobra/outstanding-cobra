@@ -62,5 +62,4 @@ class BasicAuthUserService @Inject constructor(val userRepository: UserRepositor
     override fun loginRegister(): UserDto {
         throw UnsupportedOperationException("function not available within this security mock")
     }*/
-
 }
