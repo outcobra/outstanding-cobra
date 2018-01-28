@@ -53,14 +53,14 @@ class UsernamePasswordAuthService(private val userRepository: UserRepository,
             ValidationKey.PASSWORDS_NOT_SAME.throwException()
         }
         // TODO check for identity?
-        if (userRepository.countByMail(arg.mail) != 0L) {
+        if (userRepository.existsByMail(arg.mail)) {
             ValidationKey.MAIL_OCCUPIED.throwException()
         }
         if (!PASSWORD_REGEX.matcher(arg.password).matches()) {
             ValidationKey.PASSWORD_UNSAFE.throwException()
         }
 
-        val newUser = User(null, arg.username, arg.mail)
+        val newUser = User(arg.username ?: "", arg.mail)
         val user = userRepository.save(newUser)
 
         val identity = Identity(user, AuthRegistry.PASSWORD, user!!.username, passwordEncoder.encode(arg.password))

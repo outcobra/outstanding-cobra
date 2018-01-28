@@ -12,12 +12,7 @@
     ],
     "module": "es2015",
     "outDir": "../dist/out-tsc",
-    "baseUrl": "",
-    "exclude": [
-      "test.ts",
-      "**/*.spec.ts",
-      "app/core/mock/**/*"
-    ]
+    "baseUrl": ""
   },
   "exclude": [
     "test.ts",

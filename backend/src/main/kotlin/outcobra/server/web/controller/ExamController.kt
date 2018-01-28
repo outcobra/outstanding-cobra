@@ -13,7 +13,7 @@ import javax.inject.Inject
 @RequestMapping("/api")
 class ExamController @Inject constructor(val examService: ExamService) {
 
-    @RequestMapping(value = "/exam", method = arrayOf(RequestMethod.PUT, RequestMethod.POST))
+    @RequestMapping("/exam", method = arrayOf(RequestMethod.PUT, RequestMethod.POST))
     fun saveExam(@RequestBody examDto: ExamDto): ExamDto {
         return examService.save(examDto)
     }

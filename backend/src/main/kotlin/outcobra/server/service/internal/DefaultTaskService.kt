@@ -20,7 +20,7 @@ import javax.inject.Inject
 
 @Component
 @Transactional
-open class DefaultTaskService
+class DefaultTaskService
 @Inject constructor(mapper: Mapper<Task, TaskDto>,
                     repository: TaskRepository,
                     requestValidator: RequestValidator<TaskDto>,

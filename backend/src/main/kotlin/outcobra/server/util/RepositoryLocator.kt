@@ -31,7 +31,7 @@ class RepositoryLocator @Inject constructor(val context: ApplicationContext) {
      * @since 1.0.0
      */
     private fun getForEntityName(entityName: String): JpaRepository<*, Long> {
-        val repoName = entityName.firstToLower() + "Repository"
+        val repoName = entityName.decapitalize() + "Repository"
         try {
             @Suppress("UNCHECKED_CAST")
             val repoBean = context.getBean(repoName) as? JpaRepository<*, Long>

@@ -14,6 +14,7 @@ endpoints:
     allowed-origins: "*"
 product:
   version: 1.3.0
+sentry.dsn: https://00e7fe8c3ae9488ba591314d7773b81a@sentry.pegnu.cloud/2
 ---
 #---
 # Main Profile definition
@@ -29,6 +30,8 @@ spring:
     include: load_test_data,h2_db
 runtime:
   environment: development
+logging.level:
+  outcobra: debug
 ---
 spring.profiles: test
 #ignore the ugliness bc it doesn't seem to work in a different way
@@ -68,9 +71,6 @@ spring:
   h2:
     console:
       enabled: true
-logging:
-  level:
-    outcobra.server.data: debug
 security:
   basic:
     enabled: false
@@ -93,9 +93,3 @@ flyway:
   locations: db/migration
 ---
 spring.profiles: bit
-spring:
-  profiles:
-    include: auth0_proxy
-http:
-  proxyHost: proxy-bvcol.admin.ch
-  proxyPort: 8080

@@ -35,6 +35,8 @@ export class MarkWeightUpdaterComponent implements OnInit {
             originY: 'top',
             overlayX: 'start',
             overlayY: 'top',
+            offsetX: 0,
+            offsetY: 0
         }
     ];
 

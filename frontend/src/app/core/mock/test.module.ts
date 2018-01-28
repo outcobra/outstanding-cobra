@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {MockHttpInterceptor} from './http/MockHttpInterceptor';
 import {MockInfoService} from './info/mock-info.service';
-import {SimpleNotificationsModule} from 'angular2-notifications/dist';
+import {SimpleNotificationsModule} from 'angular2-notifications';
 import {MockNotificationWrapperService} from './notifications/mock-notifications.service';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {CommonModule} from '@angular/common';
@@ -50,6 +50,7 @@ import {ExamTaskService} from '../../exam/service/exam-task.service';
 import {MockExamTaskService} from './exam/mock-exam-task.service';
 import {UserService} from '../services/user.service';
 import {MockUserService} from './auth/mock-user.service';
+import {BasilWrapperService} from '../persistence/basil-wrapper.service';
 
 @NgModule({
     imports: [
@@ -159,7 +160,8 @@ import {MockUserService} from './auth/mock-user.service';
         {
             provide: ObservableMedia,
             useClass: MockObservableMedia
-        }
+        },
+        BasilWrapperService
     ]
 })
 export class TestModule {

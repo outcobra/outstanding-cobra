@@ -4,6 +4,7 @@ import {MarkValueComponent} from './mark-value.component';
 import {TestModule} from '../../core/mock/test.module';
 import {MockMarkService} from '../../core/mock/mark/mock-mark.service';
 import {OCUiModule} from '../../oc-ui/oc-ui.module';
+import {MarkHighlighterDirective} from '../mark-highlighter/mark-highlighter.directive';
 
 describe('MarkValueComponent', () => {
     let component: MarkValueComponent;
@@ -12,7 +13,8 @@ describe('MarkValueComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
-                MarkValueComponent
+                MarkValueComponent,
+                MarkHighlighterDirective
             ],
             imports: [
                 TestModule,

@@ -19,7 +19,7 @@ export const publicRoutes: Routes = [
             isSignUp: false,
             animation: 'login'
         }
-    },{
+    }, {
         path: 'signup',
         component: LoginSignUpComponent,
         data: {

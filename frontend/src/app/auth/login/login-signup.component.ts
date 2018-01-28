@@ -8,11 +8,10 @@ import {UserService} from '../../core/services/user.service';
 import {ErrorStateMatcher} from '@angular/material';
 import {PasswordVerifyErrorStateMatcher} from './password-verify-error-state-matcher';
 import {loginSignupCollapse} from '../../core/animations/animations';
-import {AnimationEvent} from '@angular/animations';
-import {isFalse, isTrue, isTruthy} from '../../core/util/helper';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {isTruthy} from '../../core/util/helper';
 import {Observable} from 'rxjs/Observable';
 import {UsernamePasswordDto} from '../model/username-password.dto';
+import {ReplaySubject} from 'rxjs/ReplaySubject';
 
 @Component({
     selector: 'login',
@@ -31,7 +30,7 @@ export class LoginSignUpComponent implements OnInit {
     private _target: string;
     private readonly _defaultTarget = '/manage';
 
-    public readonly errors$: BehaviorSubject<string> = new BehaviorSubject(null);
+    public readonly errors$: ReplaySubject<string> = new ReplaySubject();
 
     constructor(private _authService: DefaultAuthService,
                 private _router: Router,
@@ -106,24 +105,14 @@ export class LoginSignUpComponent implements OnInit {
             : this._authService.loginIdentityProvider;
         authFunc.call(this._authService, identityProvider)
             .catch(this._handleLoginError.bind(this))
-            .subscribe();
-    }
-
-    public handleLogin(animationEvent: AnimationEvent) {
-        if (isFalse(animationEvent.fromState) && isTrue(animationEvent.toState)) {
-            this._router.navigateByUrl(this._target);
-        }
+            .subscribe(() => this._router.navigateByUrl(this._target));
     }
 
     private _handleLoginError(error) {
         if (isTruthy(error.message)) {
             this.errors$.next(error.message);
         }
-        return Observable.empty();
-    }
-
-    get isLoggedIn(): boolean {
-        return this._authService.isLoggedIn();
+        return Observable.of(false);
     }
 
     get passwordVerifyErrorStateMatcher(): ErrorStateMatcher {

@@ -41,7 +41,6 @@ export class TaskCreateUpdateComponent extends CreateUpdateComponent<TaskDto> im
         this._route.data.subscribe((data: { viewMode: ViewMode, subjects: Array<SchoolClassSubjectDto>, task?: TaskDto }) => {
             this.init(data.viewMode as ViewMode, data.task);
             this._schoolClassSubjects = data.subjects;
-            console.log(this._schoolClassSubjects);
             this._submitFunction = this.isEditMode()
                 ? this._taskService.update
                 : this._taskService.create

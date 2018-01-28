@@ -20,17 +20,17 @@ class SubjectController @Inject constructor(val subjectService: SubjectService) 
      * @param subjectDto the new [SubjectDto] as Json in the [RequestBody]
      * @return the [SubjectDto] that has been saved in the database
      */
-    @RequestMapping(value = "/subject", method = arrayOf(RequestMethod.POST, RequestMethod.PUT))
+    @RequestMapping("/subject", method = arrayOf(RequestMethod.POST, RequestMethod.PUT))
     fun saveSubject(@RequestBody subjectDto: SubjectDto): SubjectDto {
         return subjectService.save(subjectDto)
     }
 
-    @GetMapping(value = "/subject")
+    @GetMapping("/subject")
     fun readAllSubjectsByUser(): List<SubjectDto> {
         return subjectService.readAllByUser()
     }
 
-    @GetMapping(value = "/semester/current/subject")
+    @GetMapping("/semester/current/subject")
     fun readSubjectsByCurrentSemester(): List<SubjectDto> {
         return subjectService.readAllByCurrentSemester()
     }
@@ -39,7 +39,7 @@ class SubjectController @Inject constructor(val subjectService: SubjectService) 
      * This method reads a subject out of the database and returns it as a [SubjectDto]
      * @param semesterId the id of the subject to read
      */
-    @GetMapping(value = "/semester/{semesterId}/subject")
+    @GetMapping("/semester/{semesterId}/subject")
     fun readAllSubjectsBySemester(@PathVariable semesterId: Long): List<SubjectDto> {
         return subjectService.readAllBySemester(semesterId)
     }
@@ -49,7 +49,7 @@ class SubjectController @Inject constructor(val subjectService: SubjectService) 
      * @param subjectId The subjectId of the Semester of which to read all Subjects
      * @return All Subjects that are associated with the given Semester
      */
-    @GetMapping(value = "/subject/{subjectId}")
+    @GetMapping("/subject/{subjectId}")
     fun readSubjectById(@PathVariable subjectId: Long): SubjectDto {
         return subjectService.readById(subjectId)
     }
@@ -58,7 +58,7 @@ class SubjectController @Inject constructor(val subjectService: SubjectService) 
      * This method deletes a subject
      * @param subjectId The id of the Subject that should be deleted
      */
-    @DeleteMapping(value = "/subject/{subjectId}")
+    @DeleteMapping("/subject/{subjectId}")
     fun deleteSubject(@PathVariable subjectId: Long) {
         subjectService.delete(subjectId)
     }

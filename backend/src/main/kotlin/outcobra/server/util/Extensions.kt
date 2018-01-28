@@ -1,6 +1,7 @@
 package outcobra.server.util
 
 import io.jsonwebtoken.Claims
+import org.springframework.security.core.context.SecurityContext
 import outcobra.server.exception.ValidationException
 import outcobra.server.exception.ValidationKey
 import outcobra.server.model.SchoolYear
@@ -9,6 +10,7 @@ import outcobra.server.model.User
 import outcobra.server.model.dto.MarkGroupDto
 import outcobra.server.model.dto.mark.BaseMarkDto
 import outcobra.server.model.interfaces.ParentLinked
+import outcobra.server.web.auth.model.JwtAuthenticationToken
 import java.time.Instant
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -87,8 +89,8 @@ tailrec fun ParentLinked.followToUser(iterationCount: Int = 0): User {
         throw ValidationKey.INVALID_DTO.throwException()
     } else {
         if (this is User) return this
-        val parentLinked = this.parent
-        return parentLinked.followToUser(iterationCount + 1)
+        val parentLinked = this.parent ?: ValidationKey.ENTITY_NOT_FOUND.throwException()
+        return parentLinked.followToUser(iterationCount.inc())
     }
 }
 
@@ -110,30 +112,6 @@ fun BaseMarkDto.validate() {
     }
 }
 
-/**
- * Upper-Cases the first character of a string
- *
- * @author Joel Messerli
- * @since 1.0.0
- */
-fun String.firstToUpper(): String {
-    if (this.isEmpty()) return this
-    if (this.length == 1) return this.toUpperCase()
-    return this.substring(0, 1).toUpperCase() + this.substring(1, this.length)
-}
-
-/**
- * Lower-Cases the first character of a string
- *
- * @author Joel Messerli
- * @since 1.0.0
- */
-fun String.firstToLower(): String {
-    if (this.isEmpty()) return this
-    if (this.length == 1) return this.toLowerCase()
-    return substring(0, 1).toLowerCase() + substring(1, length)
-}
-
 
 fun Claims.setExpirationTime(dateTime: LocalDateTime) {
     val instant = Instant.from(dateTime.atZone(ZoneId.systemDefault()))
@@ -144,3 +122,6 @@ fun Claims.getExpirationTime(): LocalDateTime {
     val instant = Instant.ofEpochMilli(this.expiration.time)
     return LocalDateTime.ofInstant(instant, ZoneId.systemDefault())
 }
+
+val SecurityContext.jwtAuthentication
+    get() = authentication as JwtAuthenticationToken

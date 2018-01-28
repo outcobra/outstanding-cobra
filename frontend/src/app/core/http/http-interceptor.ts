@@ -4,11 +4,12 @@ import {Observable} from 'rxjs/Observable';
 import {dateReplacer} from './http-util';
 import {RequestOptions} from './request-options';
 import {ValidationException} from './validation-exception';
-import {isEmpty, isFalsy, isNotEmpty} from '../util/helper';
+import {isFalsy, isNotEmpty, isTruthy} from '../util/helper';
 import {NotificationWrapperService} from '../notifications/notification-wrapper.service';
 import {RequestArgs} from '@angular/http/src/interfaces';
 import {environment} from '../../../environments/environment';
 import {Router} from '@angular/router';
+import {BasilWrapperService} from '../persistence/basil-wrapper.service';
 
 /**
  * HttpInterceptor to customize the http request and http responses
@@ -31,7 +32,8 @@ export class HttpInterceptor {
 
     constructor(private http: Http,
                 private _router: Router,
-                private _notificationsService: NotificationWrapperService) {
+                private _notificationsService: NotificationWrapperService,
+                private _basil: BasilWrapperService) {
         this._defaultApiName = environment.api.defaultApiName;
         this._apiNames = environment.api.apis
             .map(api => api.name);
@@ -63,7 +65,7 @@ export class HttpInterceptor {
                 url: this._buildApiUrl(request),
                 headers: request.headers,
                 search: this._buildUrlSearchParams(request.params),
-                body: JSON.stringify(request.data, dateReplacer)
+                body: this._serializeBody(request.data, request.headers)
             } as RequestArgs)
         ).catch(error => this._handleError(error))
             .map((res: Response) => this._unwrapAndCastHttpResponse<T>(res));
@@ -171,6 +173,12 @@ export class HttpInterceptor {
     ///////////////////////////////////////////////////////////////////////////
     ///////// Helper Functions ////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
+    private _serializeBody(body: any, headers: {[key: string]: string}) {
+        if (isTruthy(headers) && (isFalsy(headers['Content-Type']) || headers['Content-Type'].includes('application/json'))) {
+            return JSON.stringify(body, dateReplacer)
+        }
+        return body;
+    }
 
     /**
      * interpolates the url in the requestOptions
@@ -248,12 +256,11 @@ export class HttpInterceptor {
     private _addAuthToken(request: RequestOptions) {
         let api = this._getApiFromConfig(request.apiName);
         if (api.authToken === true) {
-            let token = localStorage.getItem(environment.locStorage.tokenLocation);
-            if (isEmpty(token)) {
+            let token = this._basil.get(environment.persistence.tokenLocation);
 
+            if (isNotEmpty(token)) {
+                request.headers['Authorization'] = 'Bearer ' + token;
             }
-
-            request.headers['Authorization'] = 'Bearer ' + token;
         }
     }
 

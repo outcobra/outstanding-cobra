@@ -15,7 +15,7 @@ class AuthConfig {
         @Bean
         @Profile("!$BASIC_AUTH_SECURITY_MOCK")
         @JvmStatic
-        fun idTokenVerifier( @Value("\${security.google.clientId}") clientId: String): GoogleIdTokenVerifier =
+        fun idTokenVerifier(@Value("\${security.google.clientId}") clientId: String): GoogleIdTokenVerifier =
                 GoogleIdTokenVerifier.Builder(NetHttpTransport(), JacksonFactory())
                         .setAudience(listOf(clientId))
                         .build()

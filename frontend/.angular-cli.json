@@ -24,7 +24,7 @@
         "outcobra.scss"
       ],
       "scripts": [
-        "assets/scripts/auth0.min.js"
+        "lib/google_auth.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

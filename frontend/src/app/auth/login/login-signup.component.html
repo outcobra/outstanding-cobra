@@ -1,7 +1,6 @@
 <div class="login-wrapper">
     <img src="/assets/img/oc_logo_stroke_combined_blue.svg">
-    <div class="login-form-wrapper" [@loginSignupCollapse]="isLoggedIn"
-         (@loginSignupCollapse.done)="handleLogin($event)">
+    <div class="login-form-wrapper">
         <oc-alert type="oc-error" *ngIf="errors$ | async">
             <span>{{ errors$ | async | translate }}</span>
         </oc-alert>
@@ -37,9 +36,9 @@
                         {{ 'i18n.auth.form.checkingEmail' | translate }}
                     </ng-template>
                     <ng-template [ngIf]="mail.ngControl.valid">
-                    <span class="valid">
-                        {{ 'i18n.auth.form.emailAvailable' | translate }}
-                    </span>
+                        <span class="valid">
+                            {{ 'i18n.auth.form.mailAvailable' | translate }}
+                        </span>
                     </ng-template>
                 </mat-hint>
                 <mat-error>
@@ -47,11 +46,14 @@
                         {{ 'i18n.common.form.error.required' | translate }}
                     </ng-template>
                     <ng-template
-                        [ngIf]="mail.ngControl.touched && mail.ngControl.hasError('email')">
+                        [ngIf]="mail.ngControl.hasError('email')">
                         {{ 'i18n.common.form.error.email' | translate }}
                     </ng-template>
                     <ng-template [ngIf]="mail.ngControl.getError('emailTaken') === true">
                         {{ 'i18n.auth.form.emailTaken' | translate }}
+                    </ng-template>
+                    <ng-template [ngIf]="isSignUp && mail.ngControl.getError('mailTaken') === true">
+                        {{ 'i18n.auth.form.mailOccupied' | translate }}
                     </ng-template>
                 </mat-error>
             </mat-form-field>

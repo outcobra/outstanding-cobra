@@ -57,12 +57,6 @@
       "lang": {
         "en": "English",
         "de": "German"
-      },
-      "theme": {
-        "title": "Choose Theme",
-        "ocean": "Ocean",
-        "bloodorange": "Blood Orange",
-        "lavender": "Lavender"
       }
     },
     "email": {
@@ -252,6 +246,10 @@
       "task": {
         "linkTitle": "Tasks",
         "listTitle": "Your Tasks",
+        "desc": "Task description",
+        "progress": "Progress",
+        "finish": "Finish",
+        "add": "Create Task",
         "createUpdate": {
           "create": {
             "title": "Aufgabe hinzufügen"
@@ -260,8 +258,6 @@
             "title": "Aufgabe bearbeiten"
           }
         },
-        "desc": "Task description",
-        "progress": "Progress",
         "filter": {
           "title": "Filter Tasks",
           "subject": "Filter by subject",
@@ -412,13 +408,15 @@
       "login": "Login",
       "signup": "Sign up",
       "logout": "Logout",
+      "goToApp": "Go to App",
       "form": {
         "email": "E-Mail",
         "password": "Password",
         "passwordVerify": "Verify password",
         "username": "Username",
         "checkingEmail": "Checking email availability",
-        "emailAvailable": "Email available",
+        "mailAvailable": "Email available",
+        "mailOccupied": "Email already used",
         "error": {
           "emailTaken": "Sorry, this email is already in use",
           "passwordPattern": "8 chars, lower- and upppercase, number and special char",
@@ -484,7 +482,8 @@
         "password": {
           "noMatch": "Password does not match up with the provided mail",
           "unsafe": "Password is too weak"
-        }
+        },
+        "mailOccupied": "This Email is already in use"
       },
       "fallback": {
         "linkTitle": "Page not found",

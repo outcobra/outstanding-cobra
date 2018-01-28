@@ -15,7 +15,7 @@ export class OCIconDataComponent {
     @Input() public showDivider: boolean = true;
     @ContentChild(OCIconDataChildComponent) child: OCIconDataChildComponent;
 
-    public getDataOrder() {
-        return isTruthy(this.child) ? 1 : 0;
+    public hasChild() {
+        return isTruthy(this.child);
     }
 }
