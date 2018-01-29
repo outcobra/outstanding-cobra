@@ -7,10 +7,7 @@
 .task-progress {
     margin: 0;
     height: 48px;
-    div.progress-value {
-        height: 100%;
-        line-height: 48px;
-    }
+
     mat-slider {
         width: 100%;
     }

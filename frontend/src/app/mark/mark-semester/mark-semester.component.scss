@@ -23,6 +23,7 @@ mark-semester {
         padding: 0 !important;
     }
 
+    // region indents
     .mark-school-class-header > .oc-collapsible-header-content {
         @include indentation(1);
     }
@@ -43,6 +44,11 @@ mark-semester {
         > mat-list-item > .mat-list-item-content {
             @include indentation(4);
         }
+    }
+    // endregion
+
+    mat-list-item {
+        height: auto !important;
     }
 
     mat-list-item.mark-list-item mark-value .mark-value-container {
