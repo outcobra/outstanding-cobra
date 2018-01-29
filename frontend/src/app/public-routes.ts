@@ -37,7 +37,7 @@ export const publicRoutes: Routes = [
                 data: {
                     path: '/assets/docs/features',
                     displayMode: 'card',
-                    wrapperClasses: ['container', 'middle-container', 'features-text']
+                    wrapperClasses: ['features-text']
                 }
             },
             {
@@ -46,7 +46,6 @@ export const publicRoutes: Routes = [
                 data: {
                     path: '/assets/docs/about',
                     displayMode: 'card',
-                    wrapperClasses: ['container', 'middle-container']
                 }
             },
             {
@@ -55,7 +54,6 @@ export const publicRoutes: Routes = [
                 data: {
                     path: '/assets/docs/profiles',
                     displayMode: 'card',
-                    wrapperClasses: ['container', 'middle-container']
                 }
             }
         ]

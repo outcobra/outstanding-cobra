@@ -1,12 +1,9 @@
 @import '../../sass/color-variables';
 
 :host {
-    overflow-y: auto;
+    overflow-y: scroll;
     height: 100%;
     > div {
-        display: flex;
-        flex-direction: column;
-
         mat-toolbar {
             padding: 0 calc((100% - 940px) / 2);
             @media(max-width: 960px) {
@@ -30,6 +27,36 @@
                 line-height: 1.2em;
                 font-size: 4em;
                 font-weight: 700;
+            }
+        }
+    }
+
+    .bottom-menu {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-self: center;
+        .menu-item {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            outline: none;
+            span {
+                font-weight: normal;
+                font-size: 0.6em;
+            }
+            mat-icon {
+                font-size: 1.2em;
+                transition: .2s all ease-in-out;
+            }
+            &:not(.active) {
+                color: black;
+            }
+            &.active mat-icon {
+                font-size: 1.4em;
             }
         }
     }
