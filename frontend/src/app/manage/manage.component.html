@@ -21,7 +21,7 @@
     <!-- FIRST COLUMN START -->
     <div class="manage-col" [class.border-right]="!isMobile()" [class.mobile-col]="isMobile()" fxFlex.gt-md>
         <ul>
-            <li *ngFor="let institution of currentManageData[manageViewRef.INSTITUTION_CLASS]">
+            <li *ngFor="let institution of currentInstitutions$ | async">
                 <oc-collapsible [showToggle]="false">
                     <oc-collapsible-header>
                         <div class="entity">
@@ -75,8 +75,8 @@
 
     <!-- MIDDLE COLUMN START -->
     <div class="manage-col" [class.mobile-col]="isMobile()" fxFlex.gt-md>
-        <ul *ngIf="currentManageData[manageViewRef.YEAR_SEMESTER] != null">
-            <li *ngFor="let schoolYear of currentManageData[manageViewRef.YEAR_SEMESTER]">
+        <ul *ngIf="(currentSchoolYears$ | async) != null">
+            <li *ngFor="let schoolYear of currentSchoolYears$ | async">
                 <oc-collapsible [showToggle]="false">
                     <oc-collapsible-header>
                         <div class="entity">
@@ -136,8 +136,8 @@
 
     <!-- LAST COLUMN START -->
     <div class="manage-col" [class.border-left]="!isMobile()" [class.mobile-col]="isMobile()" fxFlex.gt-md>
-        <ul *ngIf="currentManageData[manageViewRef.SUBJECT] != null">
-            <li *ngFor="let subject of currentManageData[manageViewRef.SUBJECT]">
+        <ul *ngIf="(currentSubjects$ | async) != null">
+            <li *ngFor="let subject of currentSubjects$ | async">
                 <oc-collapsible [showToggle]="false">
                     <oc-collapsible-header>
                         <div class="entity">

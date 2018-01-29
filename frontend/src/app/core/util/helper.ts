@@ -5,7 +5,7 @@ export function isTruthy(toCheck: any): boolean {
 }
 
 export function isFalsy(toCheck: any): boolean {
-    return !isTruthy(toCheck)
+    return !isTruthy(toCheck);
 }
 
 export function isNull(toCheck: any): boolean {
@@ -32,11 +32,11 @@ export function eq(toVerify: any): Predicate<boolean> {
     return (element) => element === toVerify;
 }
 
-export function isEmpty(toCheck: string|Array<any>|QueryList<any>): boolean {
+export function isEmpty(toCheck: string | Array<any> | QueryList<any>): boolean {
     return isFalsy(toCheck) || toCheck.length == 0;
 }
 
-export function isNotEmpty(toCheck: string|Array<any>|QueryList<any>): boolean {
+export function isNotEmpty(toCheck: string | Array<any> | QueryList<any>): boolean {
     return !isEmpty(toCheck);
 }
 

@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import {DefaultAuthService} from '../../core/services/auth/auth.service';
 import {NavigationStart, Router} from '@angular/router';
 import {isTruthy} from '../../core/util/helper';
@@ -24,7 +24,8 @@ export class AppLayoutComponent extends RouteAnimationContainer implements OnIni
     constructor(private _translateService: TranslateService,
                 private _auth: DefaultAuthService,
                 private _responsiveHelper: ResponsiveHelperService,
-                private _router: Router) {
+                private _router: Router,
+                private _changeDetectorRef: ChangeDetectorRef) {
         super();
     }
 
@@ -41,7 +42,10 @@ export class AppLayoutComponent extends RouteAnimationContainer implements OnIni
 
     ngAfterViewInit(): void {
         this._responsiveHelper.listenForBreakpointChange()
-            .subscribe((change) => this._mobile = change.mobile);
+            .subscribe((change) => {
+                this._mobile = change.mobile;
+                this._changeDetectorRef.markForCheck();
+            });
     }
 
     public changeLang() {

@@ -13,7 +13,7 @@ export interface InstitutionDto extends Dto {
 }
 
 export interface SchoolClassDto extends Dto {
-    id: number,
+    id: number,create
     institutionId: number,
     normalizedName: string,
     schoolYears: Array<SchoolYearDto>

@@ -4,6 +4,7 @@ import {InstitutionDto, SchoolClassDto} from '../model/manage.dto';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatDialogRef} from '@angular/material';
 import {FormUtil} from '../../core/util/form-util';
+import {SchoolClassService} from '../service/school-class.service';
 
 @Component({
     selector: 'school-class-dialog',
@@ -14,7 +15,9 @@ export class SchoolClassDialog extends ParentLinkedCreateUpdateComponent<SchoolC
 
     private _schoolClassForm: FormGroup;
 
-    constructor(private _dialogRef: MatDialogRef<SchoolClassDialog>, private _formBuilder: FormBuilder) {
+    constructor(private _dialogRef: MatDialogRef<SchoolClassDialog>,
+                private _schoolClassService: SchoolClassService,
+                private _formBuilder: FormBuilder) {
         super();
     }
 
@@ -31,12 +34,17 @@ export class SchoolClassDialog extends ParentLinkedCreateUpdateComponent<SchoolC
         }
         if (this.isEditMode()) {
             this.param.normalizedName = this._schoolClassForm.get('normalizedName').value;
-            this._dialogRef.close(this.param);
+            this._saveAndClose(this.param);
         } else {
             let value = this._schoolClassForm.value as SchoolClassDto;
             value.institutionId = this.parent.id;
-            this._dialogRef.close(value);
+            this._saveAndClose(value);
         }
+    }
+
+    private _saveAndClose(schoolClass: SchoolClassDto) {
+        this._schoolClassService.create(schoolClass)
+            .subscribe(result => this._dialogRef.close(result));
     }
 
     get schoolClassForm(): FormGroup {
