@@ -3,7 +3,7 @@
         <mat-icon>{{ iconName }}</mat-icon>
     </div>
     <div class="data" fxLayout="column" [ngClass]="{'multi-child': hasChild()}">
-        <label class="text-secondary-dark data-title">
+        <label *ngIf="titleKey && titleKey.length > 0" class="text-secondary-dark data-title">
             {{ titleKey | translate}}
         </label>
         <div class="data-wrapper">

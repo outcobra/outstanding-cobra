@@ -5,7 +5,7 @@ import {ConfirmDialogService} from '../../core/services/confirm-dialog.service';
 import {TaskService} from '../service/task.service';
 import {MatDialog, MatSlider, MatSliderChange} from '@angular/material';
 import {Observable} from 'rxjs/Observable';
-import {isTrue} from '../../core/util/helper';
+import {isEmpty, isTrue} from '../../core/util/helper';
 import {NotificationWrapperService} from '../../core/notifications/notification-wrapper.service';
 import {DurationService} from '../../core/services/duration.service';
 
@@ -50,5 +50,9 @@ export class TaskDetailComponent implements AfterViewInit {
             .filter(isTrue)
             .switchMap(() => this._taskService.deleteById(this.task.id))
             .subscribe(result => this._router.navigate(['/task']));
+    }
+
+    public isEmpty(val: string): boolean {
+        return isEmpty(val);
     }
 }

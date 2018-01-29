@@ -1,6 +1,6 @@
 <div class="task-detail">
     <!-- TASK DESC START-->
-    <oc-icon-data iconName="description" titleKey="i18n.modules.task.desc">
+    <oc-icon-data *ngIf="!isEmpty(task.description)" iconName="description" titleKey="i18n.modules.task.desc">
         <span class="task-property">{{ task.description }}</span>
     </oc-icon-data>
     <!-- TASK DESC END -->
@@ -15,10 +15,13 @@
     </oc-icon-data>
     <!-- TASK DUE_DATE END-->
     <!-- TASK PROGRESS START-->
-    <oc-icon-data iconName="show_chart" titleKey="i18n.modules.task.progress">
+    <oc-icon-data iconName="show_chart">
         <div class="row task-progress" fxLayout>
-            <div class="col s1 progress-value" fxFlex="15">{{ task.progress }}%</div>
-            <div class="col s11" fxFlex>
+            <div class="task-progress-label" fxFlex="15" fxLayout="column">
+                <span class="text-secondary-dark">{{ 'i18n.modules.task.progress' | translate }}</span>
+                <span class="progress-value">{{ task.progress }}%</span>
+            </div>
+            <div fxFlex>
                 <mat-slider [(ngModel)]="task.progress" color="accent" thumbLabel step="5"></mat-slider>
             </div>
         </div>

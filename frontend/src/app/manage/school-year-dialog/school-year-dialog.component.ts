@@ -9,6 +9,7 @@ import {DatePipe} from '@angular/common';
 import {ResponsiveHelperService} from '../../core/services/ui/responsive-helper.service';
 import {DateUtil} from '../../core/services/date-util.service';
 import {FormUtil} from '../../core/util/form-util';
+import {SchoolYearService} from '../service/school-year.service';
 
 @Component({
     selector: 'school-year-dialog',
@@ -21,6 +22,7 @@ export class SchoolYearDialog extends ParentLinkedCreateUpdateComponent<SchoolYe
     private _schoolYearForm: FormGroup;
 
     constructor(private _dialogRef: MatDialogRef<SchoolYearDialog>,
+                private _schoolYearService: SchoolYearService,
                 private _formBuilder: FormBuilder,
                 private _translate: TranslateService,
                 private _datePipe: DatePipe,
@@ -57,16 +59,21 @@ export class SchoolYearDialog extends ParentLinkedCreateUpdateComponent<SchoolYe
             this.param.name = this._schoolYearForm.get('name').value;
             this.param.validFrom = this._schoolYearForm.get('validFrom').value;
             this.param.validTo = this._schoolYearForm.get('validTo').value;
-            this._dialogRef.close(this.param);
+            this._saveAndClose(this.param);
         } else {
             let value = this._schoolYearForm.value as SchoolYearDto;
             value.schoolClassId = this.parent.id;
-            this._dialogRef.close(value);
+            this._saveAndClose(value)
         }
     }
 
     public isMobile() {
         return this.responsiveHelperService.isMobile();
+    }
+
+    private _saveAndClose(schoolYear: SchoolYearDto) {
+        this._schoolYearService.save(schoolYear)
+            .subscribe(result => this._dialogRef.close(result))
     }
 
     get schoolYearForm(): FormGroup {

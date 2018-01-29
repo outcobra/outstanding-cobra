@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ParentLinkedCreateUpdateComponent} from '../../core/common/parent-linked-create-update-component';
 import {InstitutionDto} from '../model/manage.dto';
 import {FormUtil} from '../../core/util/form-util';
+import {InstitutionService} from '../service/institution.service';
 
 @Component({
     selector: 'institution-dialog',
@@ -15,7 +16,9 @@ export class InstitutionDialog extends ParentLinkedCreateUpdateComponent<Institu
 
     private _institutionForm: FormGroup;
 
-    constructor(private _dialogRef: MatDialogRef<InstitutionDialog>, private _formBuilder: FormBuilder) {
+    constructor(private _dialogRef: MatDialogRef<InstitutionDialog>,
+                private _institutionService: InstitutionService,
+                private _formBuilder: FormBuilder) {
         super();
     }
 
@@ -31,12 +34,17 @@ export class InstitutionDialog extends ParentLinkedCreateUpdateComponent<Institu
         }
         if (this.isEditMode()) {
             this.param.name = this._institutionForm.get('name').value;
-            this._dialogRef.close(this.param);
+            this._saveAndClose(this.param);
         } else {
             let value = this._institutionForm.value as InstitutionDto;
-            this._dialogRef.close(value);
+            this._saveAndClose(value);
         }
 
+    }
+
+    private _saveAndClose(institution: InstitutionDto) {
+        this._institutionService.save(institution)
+            .subscribe(result => this._dialogRef.close(result));
     }
 
     get institutionForm(): FormGroup {
