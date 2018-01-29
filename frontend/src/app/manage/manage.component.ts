@@ -1,10 +1,5 @@
 import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    OnInit,
+    AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit,
     ViewEncapsulation
 } from '@angular/core';
 import {ManageService} from './service/manage.service';
@@ -43,20 +38,15 @@ const I18N_PREFIX = 'i18n.modules.manage.mobile.title.';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ManageComponent implements OnInit, AfterViewInit {
-    public readonly manageViewRef = ManageView;
-
     private _manageData: ManageDto;
     private _currentManageData: Map<number, BehaviorSubject<Array<InstitutionDto | SchoolYearDto | SubjectDto>>> = new Map()
         .set(ManageView.INSTITUTION_CLASS, new BehaviorSubject<Array<InstitutionDto>>(null))
         .set(ManageView.YEAR_SEMESTER, new BehaviorSubject<Array<SchoolYearDto>>(null))
         .set(ManageView.SUBJECT, new BehaviorSubject<Array<SubjectDto>>(null));
-    //public currentInstitutions$: BehaviorSubject<Array<InstitutionDto>> = new BehaviorSubject(null);
-    //public currentSchoolYears$: BehaviorSubject<Array<SchoolYearDto>> = new BehaviorSubject(null);
-    //public currentSubjects$: BehaviorSubject<Array<SubjectDto>> = new BehaviorSubject(null);
-    //public currentManageData: Array<Array<InstitutionDto | SchoolYearDto | SubjectDto>> = [];
-    private _activeSchoolClassId: number = null;
 
+    private _activeSchoolClassId: number = null;
     private _activeSemesterId: number = null;
+
     private _institutionDialogRef: MatDialogRef<InstitutionDialog>;
     private _schoolClassDialogRef: MatDialogRef<SchoolClassDialog>;
     private _schoolYearDialogRef: MatDialogRef<SchoolYearDialog>;
