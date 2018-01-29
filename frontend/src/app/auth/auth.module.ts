@@ -7,6 +7,7 @@ import {TranslateModule} from '@ngx-translate/core';
 import {OCUiModule} from '../oc-ui/oc-ui.module';
 import {RouterModule} from '@angular/router';
 import {ReactiveFormsModule} from '@angular/forms';
+import {GoogleLoginComponent} from './google-login/google-login.component';
 
 @NgModule({
     imports: [
@@ -19,6 +20,7 @@ import {ReactiveFormsModule} from '@angular/forms';
     ],
     declarations: [
         LoginSignUpComponent,
+        GoogleLoginComponent,
         AuthComponent
     ]
 })

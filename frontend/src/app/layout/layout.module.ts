@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {AppLayoutComponent} from './app-layout/app-layout.component';
-import {EmptyLayoutComponent} from './empty-layout/empty-layout.component';
 import {RouterModule} from '@angular/router';
 import {OCMaterialModule} from '../oc-material.module';
 import {OCUiModule} from '../oc-ui/oc-ui.module';
@@ -20,12 +19,10 @@ import {SimpleNotificationsModule} from 'angular2-notifications';
         SimpleNotificationsModule.forRoot()
     ],
     declarations: [
-        AppLayoutComponent,
-        EmptyLayoutComponent
+        AppLayoutComponent
     ],
     exports: [
-        AppLayoutComponent,
-        EmptyLayoutComponent
+        AppLayoutComponent
     ]
 })
 export class LayoutModule {

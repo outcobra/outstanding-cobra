@@ -1,0 +1,5 @@
+<button mat-raised-button (click)="login()">
+    <img src="/assets/img/g-logo.png">
+    <span *ngIf="!isSignUp">{{ 'i18n.auth.social.login.google' | translate }}</span>
+    <span *ngIf="isSignUp">{{ 'i18n.auth.social.signup.google' | translate }}</span>
+</button>

@@ -5,6 +5,7 @@ import {TestModule} from '../../core/mock/test.module';
 import {OCUiModule} from '../../oc-ui/oc-ui.module';
 import {ReactiveFormsModule} from '@angular/forms';
 import {RouterTestingModule} from '@angular/router/testing';
+import {GoogleLoginComponent} from '../google-login/google-login.component';
 
 describe('LoginComponent', () => {
     let component: LoginSignUpComponent;
@@ -13,7 +14,8 @@ describe('LoginComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
-                LoginSignUpComponent
+                LoginSignUpComponent,
+                GoogleLoginComponent
             ],
             imports: [
                 TestModule,
