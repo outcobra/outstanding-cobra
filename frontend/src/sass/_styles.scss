@@ -179,6 +179,8 @@ mat-dialog-container {
 }
 
 .container {
+    display: block;
+    width: 100%;
     padding: 10px 5px;
     &.middle-container {
         max-width: 960px;
