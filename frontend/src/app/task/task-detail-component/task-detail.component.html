@@ -1,6 +1,6 @@
 <div class="task-detail">
     <!-- TASK DESC START-->
-    <oc-icon-data iconName="description" titleKey="i18n.modules.task.desc">
+    <oc-icon-data *ngIf="!isEmpty(task.description)" iconName="description" titleKey="i18n.modules.task.desc">
         <span class="task-property">{{ task.description }}</span>
     </oc-icon-data>
     <!-- TASK DESC END -->
