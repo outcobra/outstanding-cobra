@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {SemesterMarkDto} from '../model/semester-mark.dto';
 import {isNotEmpty, isTruthy} from '../../core/util/helper';
