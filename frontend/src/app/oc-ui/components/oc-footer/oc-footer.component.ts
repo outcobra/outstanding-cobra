@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {InfoDialogComponent} from '../../../shared/components/info-dialog/info-dialog.component';
 import {ResponsiveHelperService} from '../../../core/services/ui/responsive-helper.service';
@@ -9,19 +9,24 @@ import {InfoService} from '../../../core/services/info.service';
 @Component({
     selector: 'oc-footer',
     templateUrl: './oc-footer.component.html',
-    styleUrls: ['./oc-footer.component.scss']
+    styleUrls: ['./oc-footer.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class OCFooterComponent implements OnInit {
     private _appInfo: Info;
 
     constructor(private _infoService: InfoService,
                 private _dialogService: MatDialog,
-                private _responsiveHelper: ResponsiveHelperService) {
+                private _responsiveHelper: ResponsiveHelperService,
+                private _changeDetectorRef: ChangeDetectorRef) {
     }
 
     ngOnInit() {
         this._infoService.getInfo()
-            .subscribe(info => this._appInfo = info)
+            .subscribe(info => {
+                this._appInfo = info;
+                this._changeDetectorRef.markForCheck();
+            })
     }
 
     public openInfoDialog() {

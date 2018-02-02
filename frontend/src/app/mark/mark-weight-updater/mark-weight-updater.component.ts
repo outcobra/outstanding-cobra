@@ -49,7 +49,9 @@ export class MarkWeightUpdaterComponent implements OnInit {
         this._weightUpdaterForm = this._formBuilder.group({
             weight: [this.markGroup.weight, Validators.pattern(WEIGHT_PATTERN)]
         });
-        this.change.subscribe(markGroup => this._originalValue = markGroup.weight);
+        this.change
+            .filter(() => !this.disabled)
+            .subscribe(markGroup => this._originalValue = markGroup.weight);
 
         Observable.fromEvent(window, 'resize')
             .subscribe(() => this._refreshTriggerDimensions());
@@ -69,8 +71,10 @@ export class MarkWeightUpdaterComponent implements OnInit {
     }
 
     public openWeightField() {
-        this._refreshTriggerDimensions();
-        this._active = true;
+        if (!this.disabled) {
+            this._refreshTriggerDimensions();
+            this._active = true;
+        }
     }
 
     public closeWeightField() {
