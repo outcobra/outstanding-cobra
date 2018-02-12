@@ -13,7 +13,7 @@ export class DateBodyAwareHttpInterceptor implements HttpInterceptor {
     }
 
     private static _serializeBody(body: any, headers: HttpHeaders) {
-        if (!headers.has('Content-Type') || headers.getAll('Content-Type').includes('application/json')) {
+        if (!headers.has('Content-Type') || headers.getAll('Content-Type').indexOf('application/json') >= 0) {
             return JSON.stringify(body, dateReplacer)
         }
         return body;
