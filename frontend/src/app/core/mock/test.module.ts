@@ -47,11 +47,13 @@ import {MockExamTaskService} from './exam/mock-exam-task.service';
 import {UserService} from '../services/user.service';
 import {MockUserService} from './auth/mock-user.service';
 import {BasilWrapperService} from '../persistence/basil-wrapper.service';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
     imports: [
         CommonModule,
         NoopAnimationsModule,
+        HttpClientModule,
         OCMaterialModule,
         TranslateModule.forRoot({
             loader: {provide: TranslateLoader, useClass: MockTranslateLoader}
