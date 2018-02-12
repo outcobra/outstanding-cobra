@@ -1,14 +1,14 @@
 import {Injectable} from '@angular/core';
-import {HttpInterceptor} from '../../core/http/http-interceptor';
 import {TaskDto} from '../model/task.dto';
 import {Observable} from 'rxjs/Observable';
 import {CacheableCrudService} from '../../core/services/core/cacheable-crud.service';
 import {TaskProgressUpdateDto} from '../model/task-update-progress.dto';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 export class TaskService extends CacheableCrudService<TaskDto, TaskDto[]> {
-    constructor(http: HttpInterceptor) {
-        super(http, '/task');
+    constructor(http: HttpClient) {
+        super(http, '/api/task');
     }
 
     public readById(id: number): Observable<TaskDto> {
@@ -24,7 +24,7 @@ export class TaskService extends CacheableCrudService<TaskDto, TaskDto[]> {
     }
 
     public updateProgress(taskId: number, progress: number): Observable<TaskDto> {
-        return this._http.post(`${this._baseUri}/progress`, {
+        return this._http.post<TaskDto>(`${this._baseUri}/progress`, {
             taskId: taskId,
             progress: progress
         } as TaskProgressUpdateDto);

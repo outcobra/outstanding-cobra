@@ -18,7 +18,8 @@ class ExamController @Inject constructor(val examService: ExamService) {
         return examService.save(examDto)
     }
 
-    @GetMapping("/active/exam")
+    // TODO not really accurate naming imho
+    @GetMapping("/exam/active")
     fun readAllActive(): List<ExamDto> {
         return examService.readAllInActiveSemesters()
     }

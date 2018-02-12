@@ -1,5 +1,4 @@
 import {NgModule} from '@angular/core';
-import {MockHttpInterceptor} from './http/MockHttpInterceptor';
 import {MockInfoService} from './info/mock-info.service';
 import {SimpleNotificationsModule} from 'angular2-notifications';
 import {MockNotificationWrapperService} from './notifications/mock-notifications.service';
@@ -34,11 +33,8 @@ import {ColorService} from '../services/color.service';
 import {OCMaterialModule} from '../../oc-material.module';
 import {NotificationWrapperService} from 'app/core/notifications/notification-wrapper.service';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {MockBackend} from '@angular/http/testing';
-import {ConnectionBackend, HttpModule} from '@angular/http';
 import {DurationService} from '../services/duration.service';
 import {MockDurationService} from './datetime/mock-duration.service';
-import {HttpInterceptor} from '../http/http-interceptor';
 import {ObservableMedia} from '@angular/flex-layout';
 import {MockObservableMedia} from './ui/mock-observable-media.service';
 import {MarkService} from '../../mark/service/mark.service';
@@ -55,7 +51,6 @@ import {BasilWrapperService} from '../persistence/basil-wrapper.service';
 @NgModule({
     imports: [
         CommonModule,
-        HttpModule,
         NoopAnimationsModule,
         OCMaterialModule,
         TranslateModule.forRoot({
@@ -66,21 +61,12 @@ import {BasilWrapperService} from '../persistence/basil-wrapper.service';
     ],
     exports: [
         CommonModule,
-        HttpModule,
         NoopAnimationsModule,
         OCMaterialModule,
         TranslateModule,
         PipeModule
     ],
     providers: [
-        {
-            provide: ConnectionBackend,
-            useClass: MockBackend
-        },
-        {
-            provide: HttpInterceptor,
-            useClass: MockHttpInterceptor
-        },
         {
             provide: InfoService,
             useClass: MockInfoService

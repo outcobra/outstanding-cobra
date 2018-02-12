@@ -53,7 +53,8 @@ export class MarkSemesterComponent implements OnInit {
                 private _markService: MarkService,
                 private _confirmationDialogService: ConfirmDialogService,
                 private _translateService: TranslateService,
-                private _responsiveHelperService: ResponsiveHelperService) {
+                private _responsiveHelperService: ResponsiveHelperService,
+                private _changeDetectorRef: ChangeDetectorRef) {
     }
 
     ngOnInit() {
@@ -75,6 +76,7 @@ export class MarkSemesterComponent implements OnInit {
 
         // region subject initialization
         this.newMark$.skipWhile(() => !this._currentSemester)
+            .do(console.log)
             .subscribe((markGroup) =>
                 this._router.navigate([`subject/${markGroup.subjectId}/group/${markGroup.id}/new`],
                 {relativeTo: this._activatedRoute})
@@ -89,11 +91,14 @@ export class MarkSemesterComponent implements OnInit {
         this._buildDeleteChain(this.deleteMark$, 'mark', this._markService.deleteMark, (mark: MarkDto) => {
             let parentMarkGroup = this._getMarkGroupByMark(mark);
             Util.removeFirstMatch(parentMarkGroup.markValues, markValue => markValue.id === mark.id);
+            this._changeDetectorRef.markForCheck();
+
 
         });
         this._buildDeleteChain(this.deleteMarkGroup$, 'markGroup', this._markService.deleteMarkGroup, (markGroup: MarkGroupDto) => {
             let subjectMarkGroup = this._getSubjectMarkGroupBySubjectId(markGroup.subjectId);
             Util.removeFirstMatch(subjectMarkGroup.markGroups, (mg) => mg.id === markGroup.id);
+            this._changeDetectorRef.markForCheck();
         });
 
         this.editMark$.skipWhile(() => !this._currentSemester)

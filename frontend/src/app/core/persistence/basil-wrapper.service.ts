@@ -18,6 +18,10 @@ export class BasilWrapperService {
         return this._basil.get(key);
     }
 
+    public has(key: string): boolean {
+        return this._basil.keys().includes(key);
+    }
+
     public keys(): Array<string> {
         return this._basil.keys();
     }

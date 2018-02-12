@@ -1,5 +1,4 @@
 import {NgModule} from '@angular/core';
-import {HttpInterceptor} from './http/http-interceptor';
 import {ResponsiveHelperService} from './services/ui/responsive-helper.service';
 import {InfoService} from './services/info.service';
 import {ColorService} from './services/color.service';
@@ -36,10 +35,17 @@ import {ExamResolver} from '../exam/service/exam-resolver.service';
 import {SchoolClassSubjectService} from './services/school-class-subject/school-class-subject.service';
 import {SchoolClassSubjectResolver} from './services/school-class-subject/school-class-subject-resolver.service';
 import {BasilWrapperService} from './persistence/basil-wrapper.service';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {AuthHttpInterceptor} from './http/auth-http-interceptor';
+import {UrlPrefixingHttpInterceptor} from './http/url-prefixing-http-interceptor';
+import {DateBodyAwareHttpInterceptor} from './http/date-body-aware-http-interceptor';
+import {ErrorCatchingHttpInterceptor} from './http/error-catching-http-interceptor';
 
 @NgModule({
+    imports: [
+        HttpClientModule
+    ],
     providers: [
-        HttpInterceptor,
         DateUtil,
         DefaultAuthService,
         ConfirmDialogService,
@@ -80,7 +86,29 @@ import {BasilWrapperService} from './persistence/basil-wrapper.service';
         TaskListResolver,
 
         CurrentSubjectsResolverService,
-        SchoolClassSubjectService
+        SchoolClassSubjectService,
+        {
+            provide: HTTP_INTERCEPTORS,
+            multi: true,
+            useClass: AuthHttpInterceptor,
+            deps: [DefaultAuthService]
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            multi: true,
+            useClass: UrlPrefixingHttpInterceptor
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            multi: true,
+            useClass: DateBodyAwareHttpInterceptor
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            multi: true,
+            useClass: ErrorCatchingHttpInterceptor,
+            deps: [NotificationWrapperService]
+        }
     ]
 })
 export class CoreModule {

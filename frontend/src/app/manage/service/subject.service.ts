@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
-import {HttpInterceptor} from '../../core/http/http-interceptor';
 import {Observable} from 'rxjs/Observable';
 import {SubjectDto} from '../model/manage.dto';
 import {AppCrudService} from '../../core/services/core/app-crud.service';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 export class SubjectService extends AppCrudService<SubjectDto> {
-    constructor(http: HttpInterceptor) {
-        super(http, '/subject')
+    constructor(http: HttpClient) {
+        super(http, '/api/subject')
     }
 
     public readById(id: number): Observable<SubjectDto> {
@@ -15,6 +15,6 @@ export class SubjectService extends AppCrudService<SubjectDto> {
     }
 
     public getCurrentSubjects(): Observable<SubjectDto[]> {
-        return this._http.get<SubjectDto[]>(`/semester/current/${this._baseUri}`, 'outcobra');
+        return this._http.get<SubjectDto[]>(`/semester/current/${this._baseUri}`);
     }
 }
