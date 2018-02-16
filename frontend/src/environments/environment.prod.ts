@@ -15,7 +15,7 @@ export const environment = {
     },
     persistence: {
         basilOptions: {
-            namespace: "oc-data"
+            namespace: 'oc-data'
         },
         tokenLocation: 'id_token',
         profileLocation: 'profile'

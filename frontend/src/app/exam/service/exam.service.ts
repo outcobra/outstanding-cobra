@@ -12,7 +12,7 @@ import {HttpClient} from '@angular/common/http';
 @Injectable()
 export class ExamService extends AppCrudService<ExamDto> {
     constructor(http: HttpClient) {
-        super(http, "/api/exam")
+        super(http, '/api/exam')
     }
 
     public readBySemester(semesterId: number): Observable<ExamDto[]> {
@@ -21,7 +21,7 @@ export class ExamService extends AppCrudService<ExamDto> {
     }
 
     public readAllActive(): Observable<ExamDto[]> {
-        let uri: string = `${this._baseUri}/active`;
+        let uri: string = '/api/active/exam';
         return this._http.get<ExamDto[]>(uri);
     }
 

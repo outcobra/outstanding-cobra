@@ -28,7 +28,7 @@ export class I18nMarkdownComponent implements OnInit, OnChanges {
             this.displayMode = data.displayMode || 'flat';
             this.wrapperClasses = data.wrapperClasses || [];
             if (!Array.isArray(this.wrapperClasses)) {
-                throw new Error("wrapperClasses must be an array");
+                throw new Error('wrapperClasses must be an array');
             }
             this.wrapperClasses.push(`style-${this.displayMode}`);
             this._setPathForCurrentLang();
