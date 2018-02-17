@@ -62,7 +62,7 @@ class GoogleAuthService @Inject constructor(
         return try {
             idTokenVerifier.verify(token).payload
         } catch (ex: Exception) {
-            LOGGER.debug("Identity provider failed", ex)
+            LOGGER.warn("Identity provider failed", ex)
             ValidationKey.IDENTITY_PROVIDER_FAILED.throwException()
         }
     }
