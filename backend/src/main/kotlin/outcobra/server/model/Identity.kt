@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull
 
 /**
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.4.0
  */
 @Entity
 data class Identity(@NotNull @ManyToOne var user: User? = null,

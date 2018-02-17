@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 /**
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.4.0
  */
 @RunWith(SpringRunner::class)
 @SpringBootTest

@@ -18,6 +18,8 @@ spring:
     include: mysql_database
 runtime:
   environment: #{Octopus.Environment.Name}
+management:
+  add-application-context-header: false
 ---
 spring:
   profiles: mysql_database

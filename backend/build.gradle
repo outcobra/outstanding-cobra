@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '1.5.2.RELEASE'
+        springBootVersion = '1.5.10.RELEASE'
         outstandingCobraVersion = outcobraVersion
         ehcacheVersion = '3.4.0'
         jacksonVersion = '2.9.3'
