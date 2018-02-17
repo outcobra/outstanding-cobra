@@ -3,18 +3,9 @@ export const environment = {
     envName: 'prod',
     enableRouteTracing: false,
     api: {
-        defaultApiName: 'outcobra',
-        apis: [
-            {
-                name: 'outcobra',
-                apiBase: `https://${window.location.host}/backend/api/`,
-                authToken: true
-            },
-            {
-                name: 'outcobra_public',
-                apiBase: `https://${window.location.host}/backend/`,
-                authToken: false
-            }
+        apiBase: 'https://${window.location.host}/backend',
+        blackList: [
+            '/assets'
         ]
     },
     auth: {
@@ -24,7 +15,7 @@ export const environment = {
     },
     persistence: {
         basilOptions: {
-            namespace: "oc-data"
+            namespace: 'oc-data'
         },
         tokenLocation: 'id_token',
         profileLocation: 'profile'

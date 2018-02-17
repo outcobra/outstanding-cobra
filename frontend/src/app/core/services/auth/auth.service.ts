@@ -1,6 +1,5 @@
 import {Injectable, NgZone} from '@angular/core';
 import {Router} from '@angular/router';
-import {HttpInterceptor} from '../../http/http-interceptor';
 import {AuthService} from '../../interfaces/auth.service';
 import * as Raven from 'raven-js';
 import {IdentityProvider} from './identity-provider';
@@ -10,12 +9,13 @@ import {environment} from '../../../../environments/environment';
 import {JwtHelperService} from './jwt-helper.service';
 import {AuthResponseDto} from './auth-response.dto';
 import {BasilWrapperService} from '../../persistence/basil-wrapper.service';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 export class DefaultAuthService implements AuthService {
     constructor(private _router: Router,
                 private _ngZone: NgZone,
-                private _http: HttpInterceptor,
+                private _http: HttpClient,
                 private _jwtHelper: JwtHelperService,
                 private _basil: BasilWrapperService) {
     }
@@ -43,6 +43,10 @@ export class DefaultAuthService implements AuthService {
         this._router.navigate(['']);
     }
 
+    public getToken() {
+        return this._jwtHelper.getToken();
+    }
+
     public isLoggedIn(): boolean {
         return this._jwtHelper.hasToken() && !this._jwtHelper.isTokenExpired();
     }
@@ -59,7 +63,7 @@ export class DefaultAuthService implements AuthService {
         if (this.isLoggedIn()) {
             return Observable.of(true);
         }
-        return this._http.post<AuthResponseDto>(`/api/auth/${isSignUp ? 'signUp' : 'login'}`, usernamePassword, 'outcobra_public')
+        return this._http.post<AuthResponseDto>(`/api/auth/${isSignUp ? 'signUp' : 'login'}`, usernamePassword)
             .map(token => this._afterLogin(token));
     }
 
@@ -68,7 +72,7 @@ export class DefaultAuthService implements AuthService {
             return Observable.of(true);
         }
         if (identityProvider == IdentityProvider.GOOGLE) {
-            return this._http.post<AuthResponseDto>(`/api/auth/${isSignUp ? 'signUp' : 'login'}/google/`, token, 'outcobra_public')
+            return this._http.post<AuthResponseDto>(`/api/auth/${isSignUp ? 'signUp' : 'login'}/google/`, token)
                 .map(token => this._afterLogin(token));
         }
         return Observable.throw(new Error('Identity provider not supported'));

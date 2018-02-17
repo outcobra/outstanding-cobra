@@ -1,6 +1,5 @@
 package outcobra.server.web.controller
 
-import com.fasterxml.jackson.databind.node.TextNode
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -20,14 +19,14 @@ class AuthController @Inject constructor(
         @Qualifier(AuthRegistry.GOOGLE) val googleAuth: GoogleAuthService,
         @Qualifier(AuthRegistry.PASSWORD) val usernamePasswordAuthService: UsernamePasswordAuthService) {
 
-    @PostMapping("/login/google")
-    fun handleGoogleLogin(@RequestBody idToken: TextNode): AuthResponseDto {
-        return googleAuth.login(idToken.asText())
+    @PostMapping("/login/google", consumes = ["text/plain"])
+    fun handleGoogleLogin(@RequestBody idToken: String): AuthResponseDto {
+        return googleAuth.login(idToken)
     }
 
-    @PostMapping("/signUp/google")
-    fun handleGoogleSignUp(@RequestBody idToken: TextNode): AuthResponseDto {
-        return googleAuth.signUp(idToken.asText())
+    @PostMapping("/signUp/google", consumes = ["text/plain"])
+    fun handleGoogleSignUp(@RequestBody idToken: String): AuthResponseDto {
+        return googleAuth.signUp(idToken)
     }
 
     @PostMapping("/login")

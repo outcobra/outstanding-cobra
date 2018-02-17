@@ -8,18 +8,9 @@ export const environment = {
     envName: 'fire',
     enableRouteTracing: false,
     api: {
-        defaultApiName: 'outcobra',
-        apis: [
-            {
-                name: 'outcobra',
-                apiBase: 'https://staging.outcobra.school/backend/api/',
-                authToken: true
-            },
-            {
-                name: 'outcobra_public',
-                apiBase: 'https://staging.outcobra.school/backend/',
-                authToken: false
-            }
+        apiBase: 'https://staging.outcobra.school/backend',
+        blackList: [
+            '/assets'
         ]
     },
     auth: {
