@@ -1,8 +1,8 @@
 import {AppCrudService} from '../../core/services/core/app-crud.service';
 import {ExamTaskDto} from '../model/exam.task.dto';
 import {Injectable} from '@angular/core';
-import {HttpInterceptor} from '../../core/http/http-interceptor';
 import {Observable} from 'rxjs/Observable';
+import {HttpClient} from '@angular/common/http';
 
 /**
  * @author Florian Bürgi
@@ -10,9 +10,8 @@ import {Observable} from 'rxjs/Observable';
  */
 @Injectable()
 export class ExamTaskService extends AppCrudService<ExamTaskDto> {
-
-    constructor(http: HttpInterceptor) {
-        super(http, "/examTask")
+    constructor(http: HttpClient) {
+        super(http, "/api/examTask")
     }
 
     public saveAll(tasks: ExamTaskDto[]): Observable<ExamTaskDto[]> {

@@ -26,7 +26,7 @@ export class JwtHelperService {
     }
 
     public hasToken(): boolean {
-        return isNotEmpty(this._basil.get(environment.persistence.tokenLocation));
+        return this._basil.has(environment.persistence.tokenLocation);
     }
 
     public getToken() {

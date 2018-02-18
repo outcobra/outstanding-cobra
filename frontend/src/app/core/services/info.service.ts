@@ -1,16 +1,16 @@
 import {Injectable} from '@angular/core';
 import {AppService} from './core/app.service';
-import {HttpInterceptor} from '../http/http-interceptor';
 import {Observable} from 'rxjs/Observable';
 import {Info} from '../model/info.dto';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 export class InfoService extends AppService {
-    constructor(http: HttpInterceptor) {
+    constructor(http: HttpClient) {
         super(http, '/info');
     }
 
     public getInfo(): Observable<Info> {
-        return this._http.get<Info>(this._baseUri, 'outcobra_public');
+        return this._http.get<Info>(this._baseUri);
     }
 }

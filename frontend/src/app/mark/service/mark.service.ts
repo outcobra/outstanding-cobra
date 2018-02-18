@@ -1,18 +1,19 @@
 import {Injectable} from '@angular/core';
 import {MarkDto} from '../model/mark.dto';
-import {HttpInterceptor} from '../../core/http/http-interceptor';
 import {SemesterMarkDto} from '../model/semester-mark.dto';
 import {Observable} from 'rxjs/Observable';
 import {AppService} from '../../core/services/core/app.service';
 import {MarkGroupDto} from '../model/mark-group.dto';
+import {HttpClient} from '@angular/common/http';
+import {map} from 'rxjs/operators';
 
 export const MARK_PATTERN: RegExp = /^(([1-5](\.[0-9]{1,2})?)|6(\.00?)?)$/;
 export const WEIGHT_PATTERN: RegExp = /^(([0-9](\.[0-9]{1,2})?)|10(\.00?)?)$/;
 
 @Injectable()
 export class MarkService extends AppService {
-    constructor(http: HttpInterceptor) {
-        super(http, '/mark');
+    constructor(http: HttpClient) {
+        super(http, '/api/mark');
     }
 
     public getMarkSemesterBySemesterId(semesterId: number): Observable<SemesterMarkDto> {
@@ -29,12 +30,12 @@ export class MarkService extends AppService {
 
     public deleteMark(mark: MarkDto): Observable<MarkDto> {
         return this._http.delete(`${this._baseUri}/value/${mark.id}`)
-            .map(() => mark);
+            .pipe(map(() => mark));
     }
 
     public deleteMarkGroup(markGroup: MarkGroupDto): Observable<MarkGroupDto> {
         return this._http.delete(`${this._baseUri}/group/${markGroup.id}`)
-            .map(() => markGroup);
+            .pipe(map(() => markGroup));
     }
 
     public saveMark(mark: MarkDto): Observable<MarkGroupDto> {

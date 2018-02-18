@@ -8,7 +8,6 @@ import javax.annotation.PostConstruct
 @Profile(ProfileRegistry.BIT)
 @Component
 class BitConfig {
-
     @PostConstruct
     fun bitSetup() {
         System.setProperty("http.proxyHost", "proxy-bvcol.admin.ch")

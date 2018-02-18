@@ -20,7 +20,7 @@ data class MarkGroupDto(override val id: Long = 0,
                         val markGroups: List<MarkGroupDto> = listOf()) : BaseMarkDto {
     override val parentLink: ParentLink
         get() {
-            if (!(subjectId == 0L).xor(parentGroupId == 0L)) {
+            if (subjectId == 0L && parentGroupId == 0L) {
                 ValidationKey.INVALID_DTO.throwException()
             } else if (parentGroupId != 0L) {
                 return ParentLink.make(parentGroupId, MarkGroup::class.java)
