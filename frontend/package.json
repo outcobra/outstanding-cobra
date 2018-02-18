@@ -6,7 +6,7 @@
   "scripts": {
     "ng": "ng",
     "serve": "npm run serve:dev",
-    "serve:dev": "ng serve -sm",
+    "serve:dev": "ng serve -sm --proxy-config proxy.conf.js",
     "serve:prod": "ng serve --prod -sm",
     "serve:fire": "ng serve --environment fire -sm",
     "build": "ng build",

@@ -9,9 +9,9 @@ import outcobra.server.web.auth.config.AuthRegistry
 import outcobra.server.web.auth.internal.GoogleAuthService
 import outcobra.server.web.auth.internal.UsernamePasswordAuthService
 import outcobra.server.web.auth.model.AuthResponseDto
+import outcobra.server.web.auth.model.IdTokenDto
 import outcobra.server.web.auth.model.UsernamePasswordDto
 import javax.inject.Inject
-
 
 @RestController
 @RequestMapping("/api/auth")
@@ -19,14 +19,14 @@ class AuthController @Inject constructor(
         @Qualifier(AuthRegistry.GOOGLE) val googleAuth: GoogleAuthService,
         @Qualifier(AuthRegistry.PASSWORD) val usernamePasswordAuthService: UsernamePasswordAuthService) {
 
-    @PostMapping("/login/google", consumes = ["text/plain"])
-    fun handleGoogleLogin(@RequestBody idToken: String): AuthResponseDto {
-        return googleAuth.login(idToken)
+    @PostMapping("/login/google")
+    fun handleGoogleLogin(@RequestBody tokenDto: IdTokenDto): AuthResponseDto {
+        return googleAuth.login(tokenDto.idToken)
     }
 
-    @PostMapping("/signUp/google", consumes = ["text/plain"])
-    fun handleGoogleSignUp(@RequestBody idToken: String): AuthResponseDto {
-        return googleAuth.signUp(idToken)
+    @PostMapping("/signUp/google")
+    fun handleGoogleSignUp(@RequestBody tokenDto: IdTokenDto): AuthResponseDto {
+        return googleAuth.signUp(tokenDto.idToken)
     }
 
     @PostMapping("/login")
