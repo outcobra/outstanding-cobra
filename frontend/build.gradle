@@ -32,7 +32,7 @@ task ngTest(type: YarnTask, dependsOn: yarn_install) {
 task test(dependsOn: ngTest)
 
 task ngServe(type: YarnTask, dependsOn: yarn_install) {
-    args = ['ng', 's']
+    args = ['ng', 's', '--proxy-conf proxy.conf.js']
 }
 
 task setCacheFolderCI(type: YarnTask) {
