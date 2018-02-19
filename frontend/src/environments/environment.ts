@@ -8,7 +8,7 @@ export const environment = {
     envName: 'dev',
     enableRouteTracing: false,
     api: {
-        apiBase: 'http://localhost:8080',
+        apiBase: 'http://localhost:4200',
         blackList: [
             '/assets'
         ]

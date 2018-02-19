@@ -3,7 +3,7 @@ export const environment = {
     envName: 'prod',
     enableRouteTracing: false,
     api: {
-        apiBase: 'https://${window.location.host}/backend',
+        apiBase: `https://${window.location.host}/backend`,
         blackList: [
             '/assets'
         ]

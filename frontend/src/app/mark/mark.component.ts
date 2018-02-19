@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {SemesterService} from '../manage/service/semester.service';
 import {momentComparator} from '../core/util/comparator';
 import {SemesterDto} from '../manage/model/manage.dto';
@@ -11,8 +11,7 @@ import * as moment from 'moment';
 @Component({
     selector: 'mark',
     templateUrl: './mark.component.html',
-    styleUrls: ['./mark.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    styleUrls: ['./mark.component.scss']
 })
 export class MarkComponent implements OnInit {
     public currentSemester: SemesterDto;

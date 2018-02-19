@@ -9,7 +9,8 @@ import {environment} from '../../../../environments/environment';
 import {JwtHelperService} from './jwt-helper.service';
 import {AuthResponseDto} from './auth-response.dto';
 import {BasilWrapperService} from '../../persistence/basil-wrapper.service';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {IdTokenDto} from "./id-token.dto";
 
 @Injectable()
 export class DefaultAuthService implements AuthService {
@@ -60,6 +61,7 @@ export class DefaultAuthService implements AuthService {
     }
 
     private _handleUsernamePasswordAuth(usernamePassword: UsernamePasswordDto, isSignUp: boolean): Observable<boolean> {
+        this._removeTokenIfExpired();
         if (this.isLoggedIn()) {
             return Observable.of(true);
         }
@@ -68,14 +70,21 @@ export class DefaultAuthService implements AuthService {
     }
 
     private _handleIdentityProviderAuth(identityProvider: IdentityProvider, isSignUp: boolean, token: string): Observable<boolean> {
+        this._removeTokenIfExpired();
         if (this.isLoggedIn()) {
             return Observable.of(true);
         }
         if (identityProvider == IdentityProvider.GOOGLE) {
-            return this._http.post<AuthResponseDto>(`/api/auth/${isSignUp ? 'signUp' : 'login'}/google/`, token)
+            return this._http.post<AuthResponseDto>(`/api/auth/${isSignUp ? 'signUp' : 'login'}/google/`, <IdTokenDto>{idToken: token}, {headers: new HttpHeaders({'Content-Type': 'application/json'})})
                 .map(token => this._afterLogin(token));
         }
         return Observable.throw(new Error('Identity provider not supported'));
+    }
+
+    private _removeTokenIfExpired() {
+        if (this._jwtHelper.isTokenExpired()) {
+            this._basil.remove(environment.persistence.tokenLocation);
+        }
     }
 }
 
