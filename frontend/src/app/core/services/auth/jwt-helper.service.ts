@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {decode} from 'jwt-simple';
 import {environment} from '../../../../environments/environment';
-import {isEmpty, isFalsy, isNotEmpty} from '../../util/helper';
+import {isEmpty, isFalsy} from '../../util/helper';
 import * as moment from 'moment';
 import {BasilWrapperService} from '../../persistence/basil-wrapper.service';
 
@@ -21,7 +21,7 @@ export class JwtHelperService {
             }
             return moment.unix(decoded['exp']).isBefore(moment());
         } catch (e) {
-            return false;
+            return true;
         }
     }
 
