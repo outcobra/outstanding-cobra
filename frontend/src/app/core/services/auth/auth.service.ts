@@ -61,6 +61,7 @@ export class DefaultAuthService implements AuthService {
     }
 
     private _handleUsernamePasswordAuth(usernamePassword: UsernamePasswordDto, isSignUp: boolean): Observable<boolean> {
+        this._removeTokenIfExpired();
         if (this.isLoggedIn()) {
             return Observable.of(true);
         }
@@ -69,6 +70,7 @@ export class DefaultAuthService implements AuthService {
     }
 
     private _handleIdentityProviderAuth(identityProvider: IdentityProvider, isSignUp: boolean, token: string): Observable<boolean> {
+        this._removeTokenIfExpired();
         if (this.isLoggedIn()) {
             return Observable.of(true);
         }
@@ -77,6 +79,12 @@ export class DefaultAuthService implements AuthService {
                 .map(token => this._afterLogin(token));
         }
         return Observable.throw(new Error('Identity provider not supported'));
+    }
+
+    private _removeTokenIfExpired() {
+        if (this._jwtHelper.isTokenExpired()) {
+            this._basil.remove(environment.persistence.tokenLocation);
+        }
     }
 }
 
