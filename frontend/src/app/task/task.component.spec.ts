@@ -34,11 +34,9 @@ describe('TaskComponent', () => {
                     provide: ActivatedRoute,
                     useValue: {
                         data: Observable.of({
-                            taskFilter: {
-                                schoolClassSubjects: [{
-                                    schoolClass: null,
-                                    subject: []
-                                }]
+                            schoolClassSubject: {
+                                schoolClass: null,
+                                subject: []
                             },
                             tasks: [
                                 MockTaskService.TASK1
@@ -53,7 +51,7 @@ describe('TaskComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(TaskComponent);
         component = fixture.componentInstance;
-        Promise.resolve(null).then(() => fixture.detectChanges()); // prevent 'Expression has changed after it was checked' error
+        setTimeout(() => fixture.detectChanges()); // prevent 'Expression has changed after it was checked' error
     });
 
     it('should create', () => {

@@ -1,21 +1,31 @@
+def branchSuffix() {
+    return env.BRANCH_NAME == 'master' ? '' : '-' + env.BRANCH_NAME.replaceAll(/[^0-9A-Za-z-]+/, '-')
+}
+
+def fullVersion() {
+    return env.VERSION + '.' + env.BUILD_NUMBER + branchSuffix()
+}
+
 pipeline {
     agent {
         docker {
-            image 'jmesserli/openjdk-with-docker'
-            args '-v /var/run/docker.sock:/var/run/docker.sock'
+            image 'jmesserli/oc-docker-build-container'
+            args '-v /var/run/docker.sock:/var/run/docker.sock -v /opt/jenkins-agent/persist/yarn:/root/yarn-cache'
         }
+    }
+
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '20'))
+    }
+
+    environment {
+        VERSION = readFile('VERSION')
     }
 
     stages {
         stage('Prepare') {
             steps {
                 sh 'chmod +x gradlew'
-                script {
-                    configFileProvider([
-                            configFile(fileId: '2bc843a4-052f-4a68-9f8a-8b2cb9d2c16c', targetLocation: 'backend/src/main/resources/auth0.yml'),
-                            configFile(fileId: '2dcade8f-58b0-4ded-9c56-f2566f084c66', targetLocation: 'backend/src/main/resources/logback-spring.xml')
-                    ]) {}
-                }
             }
         }
 
@@ -23,10 +33,10 @@ pipeline {
             steps {
                 parallel(
                         "Build Backend": {
-                            sh './gradlew clean :backend:assemble --stacktrace --info'
+                            sh './gradlew clean :backend:assemble :backend:configurationZip --stacktrace --info'
                         },
                         "Build Frontend": {
-                            sh './gradlew :frontend:assemble --stacktrace --info'
+                            sh './gradlew :frontend:setCacheFolderCI :frontend:assemble --stacktrace --info'
                         }
                 )
             }
@@ -50,10 +60,11 @@ pipeline {
                 parallel(
                         "Test Backend": {
                             sh './gradlew :backend:check --stacktrace --info'
-                            sh "#!/bin/bash\ncd backend && bash <(curl -s https://codecov.io/bash)"
+                            sh "#!/bin/bash\ncd backend && bash <(curl -s https://codecov.io/bash) -cF backend"
                         },
                         "Test Frontend": {
                             sh './gradlew :frontend:test --stacktrace --info'
+                            sh "#!/bin/bash\ncd frontend && bash <(curl -s https://codecov.io/bash) -cF frontend"
                         }
                 )
             }
@@ -75,38 +86,36 @@ pipeline {
             }
         }
 
-        stage('Docker & Deploy') {
+        stage('Docker & Octopus Release') {
             when { anyOf { branch 'develop'; branch 'master' } }
-            environment { DOCKER = credentials('docker-deploy') }
+            environment {
+                DOCKER = credentials('docker-deploy')
+                FULL_VERSION = fullVersion()
+                OCTOPUS_API_KEY = credentials('octopus-deploy')
+            }
 
             steps {
                 sh 'docker login -u "$DOCKER_USR" -p "$DOCKER_PSW" docker.pegnu.cloud:443'
 
-                sh 'docker build -t docker.pegnu.cloud:443/outcobra-backend:$BRANCH_NAME-$BUILD_NUMBER -t docker.pegnu.cloud:443/outcobra-backend:$BRANCH_NAME -t docker.pegnu.cloud:443/outcobra-backend:latest backend'
-                sh 'docker build -t docker.pegnu.cloud:443/outcobra-frontend:$BRANCH_NAME-$BUILD_NUMBER -t docker.pegnu.cloud:443/outcobra-frontend:$BRANCH_NAME -t docker.pegnu.cloud:443/outcobra-frontend:latest frontend'
+                sh 'docker build -t docker.pegnu.cloud:443/outcobra-backend:$FULL_VERSION -t docker.pegnu.cloud:443/outcobra-backend:latest backend'
+                sh 'docker build -t docker.pegnu.cloud:443/outcobra-frontend:$FULL_VERSION -t docker.pegnu.cloud:443/outcobra-frontend:latest frontend'
 
-                sh 'docker push docker.pegnu.cloud:443/outcobra-frontend:$BRANCH_NAME && docker push docker.pegnu.cloud:443/outcobra-frontend:latest && docker push docker.pegnu.cloud:443/outcobra-frontend:$BRANCH_NAME-$BUILD_NUMBER'
-                sh 'docker push docker.pegnu.cloud:443/outcobra-backend:$BRANCH_NAME && docker push docker.pegnu.cloud:443/outcobra-backend:latest && docker push docker.pegnu.cloud:443/outcobra-backend:$BRANCH_NAME-$BUILD_NUMBER'
+                sh 'docker push docker.pegnu.cloud:443/outcobra-frontend:$FULL_VERSION && docker push docker.pegnu.cloud:443/outcobra-frontend:latest'
+                sh 'docker push docker.pegnu.cloud:443/outcobra-backend:$FULL_VERSION && docker push docker.pegnu.cloud:443/outcobra-backend:latest'
 
-                script {
-                    configFileProvider([
-                            configFile(fileId: '3bfec3c0-2d29-4616-acb6-06d514491d6f', targetLocation: 'known_hosts')
-                    ]) {}
-                    sshagent(credentials: ['outcobra-deploy-staging-ssh']) {
-                        sh 'ssh -4 -v -o UserKnownHostsFile=known_hosts outcobra-deploy@helios.peg.nu -C "cd /opt/outcobra-a && ./pullRestart.sh"'
-                    }
-                }
+                sh '/opt/octo/Octo push --package backend/build/distributions/outcobra-configuration.$FULL_VERSION.zip --replace-existing --server https://deploy.pegnu.cloud --apiKey $OCTOPUS_API_KEY'
+                sh '/opt/octo/Octo create-release --project "Outstanding Cobra" --version $FULL_VERSION --package outcobra-configuration:$FULL_VERSION --package outcobra-frontend:$FULL_VERSION --package outcobra-backend:$FULL_VERSION --package mariadb:10 --server https://deploy.pegnu.cloud --apiKey $OCTOPUS_API_KEY'
             }
 
             post {
                 success {
                     slackSend color: 'good',
-                            message: ":rocket: Shipped #${env.BUILD_NUMBER} to staging environment"
+                            message: ":rocket: Build #${env.BUILD_NUMBER} successful and released to [Octopus](https://deploy.pegnu.cloud/app#/projects/outstanding-cobra/releases/${env.FULL_VERSION})"
                 }
 
                 failure {
                     slackSend color: 'danger',
-                            message: ":heavy_exclamation_mark: @jmesserli Deployment for #${env.BUILD_NUMBER} failed!"
+                            message: ":heavy_exclamation_mark: Releasing #${env.BUILD_NUMBER} (${env.FULL_VERSION}) failed!"
                 }
             }
         }

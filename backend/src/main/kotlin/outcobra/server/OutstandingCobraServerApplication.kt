@@ -8,7 +8,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2
 @SpringBootApplication
 @EnableSwagger2
 @EnableCaching
-open class OutstandingCobraServerApplication {
+class OutstandingCobraServerApplication {
 
     companion object {
         @JvmStatic

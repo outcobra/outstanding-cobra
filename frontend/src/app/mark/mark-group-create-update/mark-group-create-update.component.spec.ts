@@ -9,6 +9,7 @@ import {ActivatedRoute, convertToParamMap} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 import {MockMarkService} from '../../core/mock/mark/mock-mark.service';
 import {MarkValueComponent} from '../mark-value/mark-value.component';
+import {MarkHighlighterDirective} from '../mark-highlighter/mark-highlighter.directive';
 
 describe('MarkGroupCreateUpdateComponent', () => {
     let component: MarkGroupCreateUpdateComponent;
@@ -18,7 +19,8 @@ describe('MarkGroupCreateUpdateComponent', () => {
         TestBed.configureTestingModule({
             declarations: [
                 MarkGroupCreateUpdateComponent,
-                MarkValueComponent
+                MarkValueComponent,
+                MarkHighlighterDirective
             ],
             imports: [
                 TestModule,

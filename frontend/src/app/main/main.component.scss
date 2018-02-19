@@ -1,76 +1,63 @@
 @import '../../sass/color-variables';
 
 :host {
-    display: flex;
-    flex-direction: column;
+    overflow-y: scroll;
     height: 100%;
-    div.content {
-        flex-grow: 1;
-        overflow-y: scroll;
-    }
-    mat-toolbar {
-        z-index: 100;
-        background-color: white;
-        box-shadow: 0 -2px 8px 0 rgba(0,0,0,0.20);
-        ::ng-deep mat-toolbar-row {
+    > div {
+        mat-toolbar {
+            padding: 0 calc((100% - 940px) / 2);
+            @media(max-width: 960px) {
+                padding: 0 8px;
+            }
+
+            #signup-button {
+                margin-right: 4px;
+            }
+        }
+
+        #oc-welcome-banner {
+            background-color: mat-color($primary-light-palette);
+            color: white;
+            display: flex;
+            height: 50vh;
+            width: 100%;
+            align-items: center;
             justify-content: center;
-            .bottom-menu {
-                width: 100%;
-                max-width: 500px;
-                display: flex;
-                flex-direction: row;
-                align-self: center;
-                .menu-item {
-                    flex-grow: 1;
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    justify-content: center;
-                    cursor: pointer;
-                    outline: none;
-                    span {
-                        font-weight: normal;
-                        font-size: 0.6em;
-                    }
-                    mat-icon {
-                        font-size: 1.2em;
-                        transition: .2s all ease-in-out;
-                    }
-                    &:not(.active) {
-                        color: black;
-                    }
-                    &.active mat-icon {
-                        font-size: 1.4em;
-                    }
-                }
+            #oc-welcome-banner-title {
+                text-align: center;
+                line-height: 1.2em;
+                font-size: 4em;
+                font-weight: 700;
             }
         }
     }
-}
 
-div.row {
-    margin-top: 24px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-
-    #icon {
-        flex-grow: 1;
-        img {
-            margin: 40px auto;
-            width: 300px;
-        }
-    }
-    #credit {
-        flex-basis: 20px;
-        font-size: .8em;
+    .bottom-menu {
         width: 100%;
-        span {
-            margin: 0 auto;
-            display: block;
-            position: relative;
-            a {
-                color: $disabled-light;
+        display: flex;
+        flex-direction: row;
+        align-self: center;
+        .menu-item {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            outline: none;
+            span {
+                font-weight: normal;
+                font-size: 0.6em;
+            }
+            mat-icon {
+                font-size: 1.2em;
+                transition: .2s all ease-in-out;
+            }
+            &:not(.active) {
+                color: black;
+            }
+            &.active mat-icon {
+                font-size: 1.4em;
             }
         }
     }

@@ -1,14 +1,14 @@
 import {Injectable} from '@angular/core';
-import {HttpInterceptor} from '../../core/http/http-interceptor';
 import {Observable} from 'rxjs/Observable';
 import {SemesterDto} from '../model/manage.dto';
 import {AppCrudService} from '../../core/services/core/app-crud.service';
 import {DateUtil} from '../../core/services/date-util.service';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 export class SemesterService extends AppCrudService<SemesterDto> {
-    constructor(http: HttpInterceptor) {
-        super(http, '/semester');
+    constructor(http: HttpClient) {
+        super(http, '/api/semester');
     }
 
     public readById(id: number): Observable<SemesterDto> {

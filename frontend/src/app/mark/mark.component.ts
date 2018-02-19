@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {SemesterService} from '../manage/service/semester.service';
 import {momentComparator} from '../core/util/comparator';
 import {SemesterDto} from '../manage/model/manage.dto';
@@ -19,7 +19,8 @@ export class MarkComponent implements OnInit {
 
     constructor(private _semesterService: SemesterService,
                 private _router: Router,
-                private _route: ActivatedRoute) {
+                private _route: ActivatedRoute,
+                private _changeDetectorRef: ChangeDetectorRef) {
     }
 
     ngOnInit() {
@@ -32,6 +33,7 @@ export class MarkComponent implements OnInit {
                 if (!this._route.snapshot.children.some(route => route.paramMap.has('semesterId'))) {
                     this._initMarkSemesterView();
                 }
+                this._changeDetectorRef.markForCheck();
             });
     }
 

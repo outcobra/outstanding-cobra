@@ -6,8 +6,6 @@ task-list-item-header {
     .task-list-item-header-wrapper {
         display: flex;
         align-items: center;
-        height: 56px;
-        padding: 0 12px;
 
         .subject-letter-icon {
             border-radius: 50%;
@@ -33,6 +31,10 @@ task-list-item-header {
                 font-size: 0.9em;
                 color: $secondary-dark
             }
+        }
+
+        mat-icon, button[mat-button] {
+            margin-right: 16px;
         }
 
         .show-on-hover {

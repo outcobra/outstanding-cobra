@@ -1,13 +1,23 @@
 plugins {
     id "com.moowork.node" version "1.2.0"
+    id "de.undercouch.download" version "3.3.0"
 }
+
+apply plugin: 'de.undercouch.download'
+
+import de.undercouch.gradle.tasks.download.Download
 
 node {
     version = '8.4.0'
     download = true
 }
 
-task ngBuild(type: YarnTask, dependsOn: [yarn_install]) {
+task downloadGoogleAuthLibrary(type: Download) {
+    src 'http://apis.google.com/js/platform.js'
+    dest 'src/lib/google_auth.js'
+}
+
+task ngBuild(type: YarnTask, dependsOn: [yarn_install, downloadGoogleAuthLibrary]) {
 //    enabled = false
     args = ['run', 'ng', 'build', '--prod', '-sm']
 }
@@ -17,6 +27,14 @@ task assemble(dependsOn: ngBuild)
 task build(dependsOn: assemble)
 
 task ngTest(type: YarnTask, dependsOn: yarn_install) {
-    args = ['run', 'ng', 'test', '--watch=false', '--single-run', '--browser=PhantomJS']
+    args = ['run', 'ng', 'test', '--watch=false', '--single-run', '--browser=PhantomJS', '--code-coverage']
 }
 task test(dependsOn: ngTest)
+
+task ngServe(type: YarnTask, dependsOn: yarn_install) {
+    args = ['ng', 's', '--proxy-conf proxy.conf.js']
+}
+
+task setCacheFolderCI(type: YarnTask) {
+    args = ['config', 'set', 'cache-folder', '/root/yarn-cache']
+}

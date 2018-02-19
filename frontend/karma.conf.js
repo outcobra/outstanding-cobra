@@ -4,7 +4,7 @@
 module.exports = function (config) {
     config.set({
         basePath: '',
-        frameworks: ['intl-shim', 'jasmine', '@angular/cli'],
+        frameworks: ['jasmine', '@angular/cli'],
         plugins: [
             require('karma-jasmine'),
             require('karma-phantomjs-launcher'),
@@ -12,8 +12,7 @@ module.exports = function (config) {
             require('karma-jasmine-html-reporter'),
             require('karma-coverage-istanbul-reporter'),
             require('karma-junit-reporter'),
-            require('@angular/cli/plugins/karma'),
-            require('karma-intl-shim')
+            require('@angular/cli/plugins/karma')
         ],
         client: {
             clearContext: false // leave Jasmine Spec Runner output visible in browser
@@ -28,7 +27,7 @@ module.exports = function (config) {
             'text/x-typescript': ['ts', 'tsx']
         },
         coverageIstanbulReporter: {
-            reports: ['html', 'lcovonly'],
+            reports: ['html', 'json'],
             fixWebpackSourcePaths: true
         },
         angularCli: {

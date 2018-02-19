@@ -10,6 +10,7 @@ import {ResponsiveHelperService} from '../../core/services/ui/responsive-helper.
 import {DateUtil} from '../../core/services/date-util.service';
 import {FormUtil} from '../../core/util/form-util';
 import {Moment} from 'moment';
+import {SemesterService} from '../service/semester.service';
 
 @Component({
     selector: 'semester-dialog',
@@ -22,6 +23,7 @@ export class SemesterDialog extends ParentLinkedCreateUpdateComponent<SemesterDt
     private _semesterForm: FormGroup;
 
     constructor(private _dialogRef: MatDialogRef<SemesterDialog>,
+                private _semesterService: SemesterService,
                 private _formBuilder: FormBuilder,
                 private _translate: TranslateService,
                 private _datePipe: DatePipe,
@@ -62,12 +64,21 @@ export class SemesterDialog extends ParentLinkedCreateUpdateComponent<SemesterDt
             this.param.name = this._semesterForm.get('name').value;
             this.param.validFrom = this._semesterForm.get('validFrom').value;
             this.param.validTo = this._semesterForm.get('validTo').value;
-            this._dialogRef.close(this.param);
+            this._saveAndClose(this.param);
         } else {
             let value = this._semesterForm.value as SemesterDto;
             value.schoolYearId = this.parent.id;
-            this._dialogRef.close(value);
+            this._saveAndClose(value)
         }
+    }
+
+    public isMobile() {
+        return this.responsiveHelperService.isMobile();
+    }
+
+    private _saveAndClose(semester: SemesterDto) {
+        this._semesterService.save(semester)
+            .subscribe(result => this._dialogRef.close(result));
     }
 
     get parentValidFrom(): Moment {
@@ -76,10 +87,6 @@ export class SemesterDialog extends ParentLinkedCreateUpdateComponent<SemesterDt
 
     get parentValidTo(): Moment {
         return DateUtil.transformToMomentIfPossible(this.parent.validTo);
-    }
-
-    public isMobile() {
-        return this.responsiveHelperService.isMobile();
     }
 
     get semesterForm(): FormGroup {

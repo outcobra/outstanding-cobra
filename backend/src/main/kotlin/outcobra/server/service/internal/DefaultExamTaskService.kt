@@ -2,6 +2,7 @@ package outcobra.server.service.internal
 
 import org.springframework.stereotype.Service
 import outcobra.server.model.ExamTask
+import outcobra.server.model.QExamTask
 import outcobra.server.model.dto.ExamTaskDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.ExamTaskRepository
@@ -27,10 +28,15 @@ class DefaultExamTaskService @Inject constructor(mapper: Mapper<ExamTask, ExamTa
         return result
     }
 
+    override fun readByExamId(examId: Long): List<ExamTaskDto> =
+        repository.findAll(QExamTask.examTask.exam.id.eq(examId))
+                .map(mapper::toDto)
+
+
     override fun changeState(examTaskId: Long): ExamTaskDto {
         requestValidator.validateRequestById(examTaskId, type)
         var examTask = repository.findOne(examTaskId)
-        examTask.isFinished = !examTask.isFinished
+        examTask.finished = !examTask.finished
         examTask = repository.saveAndFlush(examTask)
         return mapper.toDto(examTask)
     }

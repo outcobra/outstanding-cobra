@@ -10,6 +10,7 @@ import {MarkValueComponent} from '../mark-value/mark-value.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {RouterTestingModule} from '@angular/router/testing';
 import {MarkWeightUpdaterComponent} from '../mark-weight-updater/mark-weight-updater.component';
+import {MarkHighlighterDirective} from '../mark-highlighter/mark-highlighter.directive';
 
 describe('MarkSemesterComponent', () => {
     let component: MarkSemesterComponent;
@@ -20,7 +21,8 @@ describe('MarkSemesterComponent', () => {
             declarations: [
                 MarkSemesterComponent,
                 MarkValueComponent,
-                MarkWeightUpdaterComponent
+                MarkWeightUpdaterComponent,
+                MarkHighlighterDirective
             ],
             imports: [
                 TestModule,

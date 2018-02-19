@@ -8,7 +8,8 @@ import {
     MatCheckboxModule,
     MatDatepickerModule,
     MatDialogModule,
-    MatExpansionModule, MatFormFieldModule,
+    MatExpansionModule,
+    MatFormFieldModule,
     MatIconModule,
     MatInputModule,
     MatListModule,
@@ -24,8 +25,8 @@ import {
     MatTooltipModule
 } from '@angular/material';
 import {OC_DATE_FORMATS} from './core/common/oc-date-formats';
-import {MatMomentDateModule, MomentDateAdapter} from '@angular/material-moment-adapter';
 import {OverlayModule} from '@angular/cdk/overlay';
+import {MatMomentDateModule, MomentDateAdapter} from '@angular/material-moment-adapter';
 
 @NgModule({
     imports: [

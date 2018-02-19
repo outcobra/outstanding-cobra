@@ -5,5 +5,24 @@
 
 export const environment = {
     production: false,
-    envName: 'fire'
+    envName: 'fire',
+    enableRouteTracing: false,
+    api: {
+        apiBase: 'https://staging.outcobra.school/backend',
+        blackList: [
+            '/assets'
+        ]
+    },
+    auth: {
+        google: {
+            clientId: '1070281471136-d6siv7l8a3ece1phmmi8stpd8c7h0f4f.apps.googleusercontent.com'
+        }
+    },
+    persistence: {
+        basilOptions: {
+            namespace: "oc-data"
+        },
+        tokenLocation: 'id_token',
+        profileLocation: 'profile'
+    }
 };

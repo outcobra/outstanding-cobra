@@ -11,7 +11,7 @@
                 <mat-select formControlName="subjectId"
                             [placeholder]="'i18n.modules.exam.filter.subject' | translate"
                             floatPlaceholder="never">
-                    <mat-optgroup *ngFor="let schoolClass of filterData.schoolClassSubjects"
+                    <mat-optgroup *ngFor="let schoolClass of schoolClassSubjects"
                                   [label]="schoolClass.schoolClass.normalizedName">
                         <mat-option *ngFor="let subject of schoolClass.subjects" [value]="subject.id">
                             {{ subject.name }}
@@ -44,6 +44,10 @@
         </mat-accordion>
     </div>
 </div>
-<button mat-fab [matTooltip]="'i18n.modules.task.add' | translate" matTooltipPosition="left" (click)="addTask()">
+<button mat-fab
+        color="accent"
+        routerLink="/task/new"
+        [matTooltip]="'i18n.modules.task.add' | translate"
+        matTooltipPosition="left">
     <mat-icon>add</mat-icon>
 </button>

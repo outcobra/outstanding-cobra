@@ -8,6 +8,7 @@ import outcobra.server.model.dto.InstitutionDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.InstitutionRepository
 import outcobra.server.service.InstitutionService
+import outcobra.server.service.UserService
 import outcobra.server.service.base.internal.DefaultBaseService
 import outcobra.server.validator.RequestValidator
 import javax.inject.Inject
@@ -15,7 +16,8 @@ import javax.inject.Inject
 @Service
 @Transactional
 class DefaultInstitutionService
-@Inject constructor(mapper: Mapper<Institution, InstitutionDto>,
+@Inject constructor(val userService: UserService,
+                    mapper: Mapper<Institution, InstitutionDto>,
                     repository: InstitutionRepository,
                     requestValidator: RequestValidator<InstitutionDto>) : InstitutionService,
         DefaultBaseService<Institution, InstitutionDto, InstitutionRepository>(mapper,
@@ -25,7 +27,7 @@ class DefaultInstitutionService
 
 
     override fun readAll(): List<InstitutionDto> {
-        val whereOwnerMatch = QInstitution.institution.user.auth0Id.eq(requestValidator.userService.getTokenUserId())
+        val whereOwnerMatch = QInstitution.institution.user.id.eq(userService.getCurrentUserDto().id)
         return repository.findAll(whereOwnerMatch).map { mapper.toDto(it) }
     }
 

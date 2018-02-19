@@ -1,0 +1,5 @@
+@mixin mark-theme($theme) {
+    .insufficient {
+        color: map-get(map-get($theme, warn), default)
+    }
+}

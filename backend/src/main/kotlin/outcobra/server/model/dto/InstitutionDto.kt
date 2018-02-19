@@ -12,7 +12,7 @@ import outcobra.server.model.interfaces.ParentLink
  * This is a DTO. DTOs are serializable and the only thing that will be sent over the network.
  * In this case it represents an [Institution].
  *
- * For instance field information pleas check the model class.
+ * For instance field information please check the model class.
  * @see Institution
  */
 data class InstitutionDto(val id: Long = 0,
@@ -23,11 +23,13 @@ data class InstitutionDto(val id: Long = 0,
      * This function returns the objects unique identifier.
      * This identifier is equal to the primary key of the object in the database
      */
-    override fun getIdentifier(): Long = id
+    override val identifier: Long
+        get() = id
 
     /**
      * This function is defined in the [OutcobraDto] interface.
      * This function is used to verify the ownership of an entity.
      */
-    override fun getParentLink(): ParentLink = ParentLink.make(userId, User::class.java)
+    override val parentLink: ParentLink
+        get() = ParentLink.make(userId, User::class.java)
 }

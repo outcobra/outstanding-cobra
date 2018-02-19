@@ -5,7 +5,7 @@
     <div class="oc-filter-search-controls">
         <div class="oc-search-field-toggler" (click)="openSearchField()">
             <mat-icon>search</mat-icon>
-            <span>{{ placeholder }}</span>
+            <span>{{ currentPlaceholder }}</span>
         </div>
         <div class="oc-filter">
             <mat-icon>filter_list</mat-icon>
@@ -29,7 +29,7 @@
         <div class="oc-search-field">
             <mat-icon>search</mat-icon>
             <input formControlName="search"
-                   [placeholder]="placeholder"
+                   [placeholder]="currentPlaceholder"
                    ocAutoFocus
                    [ocAutoSelect]="true"
                    (keyup)="search$.next($event.target.value)">

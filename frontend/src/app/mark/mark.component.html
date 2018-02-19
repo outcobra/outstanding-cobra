@@ -15,7 +15,9 @@
         <oc-empty placeholder="i18n.modules.mark.empty.placeholder"
                   hint="i18n.modules.mark.empty.hint"
                   iconName="school">
-            <button mat-button [routerLink]="'/manage'" color="accent">{{ 'i18n.modules.manage.linkTitle' | translate }}</button>
+            <button mat-button routerLink="/manage" color="accent">
+                {{ 'i18n.modules.manage.linkTitle' | translate }}
+            </button>
         </oc-empty>
     </ng-template>
     <router-outlet></router-outlet>

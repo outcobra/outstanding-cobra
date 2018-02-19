@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ParentLinkedCreateUpdateComponent} from '../../core/common/parent-linked-create-update-component';
 import {SemesterDto, SubjectDto} from '../model/manage.dto';
 import {FormUtil} from '../../core/util/form-util';
+import {SubjectService} from '../service/subject.service';
 
 @Component({
     selector: 'subject-dialog',
@@ -16,6 +17,7 @@ export class SubjectDialog extends ParentLinkedCreateUpdateComponent<SubjectDto,
     private _subjectForm: FormGroup;
 
     constructor(private _dialogRef: MatDialogRef<SubjectDialog>,
+                private _subjectService: SubjectService,
                 private _formBuilder: FormBuilder) {
         super();
     }
@@ -36,12 +38,17 @@ export class SubjectDialog extends ParentLinkedCreateUpdateComponent<SubjectDto,
         if (this.isEditMode()) {
             this.param.name = this._subjectForm.get('name').value;
             this.param.color = this._subjectForm.get('color').value;
-            this._dialogRef.close(this.param);
+            this._saveAndClose(this.param);
         } else {
             let value = this._subjectForm.value;
             value.semesterId = this.parent.id;
-            this._dialogRef.close(value);
+            this._saveAndClose(value);
         }
+    }
+
+    private _saveAndClose(subject: SubjectDto) {
+        this._subjectService.save(subject)
+            .subscribe(result => this._dialogRef.close(result))
     }
 
     get subjectForm(): FormGroup {

@@ -36,7 +36,7 @@ class DefaultSubjectService
     }
 
     override fun readAllByUser(): List<SubjectDto> {
-        val userId = userService.getCurrentUser()?.id
+        val userId = userService.getCurrentUser().id
         val filter = QSubject.subject.semester.schoolYear.schoolClass.institution.user.id.eq(userId)
         return repository.findAll(filter).map { mapper.toDto(it) }
     }
@@ -57,7 +57,7 @@ class DefaultSubjectService
         requestValidator.validateRequestByDto(dto)
         var subject = mapper.fromDto(dto)
         if (dto.id == 0L) {
-            val markGroup = MarkGroup(subject)
+            val markGroup = MarkGroup(subject = subject)
             markGroupRepository.save(markGroup)
             subject.markGroup = markGroup
         }

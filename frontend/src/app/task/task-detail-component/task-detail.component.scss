@@ -1,17 +1,13 @@
 @import '../../../sass/color-variables';
 
-:host {
-    padding: 16px 24px;
-    display: block;
+.task-detail {
+    margin-bottom: 16px;
 }
 
 .task-progress {
     margin: 0;
     height: 48px;
-    div.progress-value {
-        height: 100%;
-        line-height: 48px;
-    }
+
     mat-slider {
         width: 100%;
     }

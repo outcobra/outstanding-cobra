@@ -36,7 +36,7 @@ import javax.transaction.Transactional
 @RunWith(SpringRunner::class)
 @ActiveProfiles(TEST)
 @Transactional
-open class RequestValidatorTest {
+class RequestValidatorTest {
 
     @Inject
     lateinit var userRepository: UserRepository
@@ -57,10 +57,10 @@ open class RequestValidatorTest {
 
     @Before
     fun setup() {
-        val user2 = userRepository.findOne(QUser.user.auth0Id.eq(Mocker.USER2_AUTH0_ID))
+        val user2 = userRepository.findOne(QUser.user.mail.eq(Mocker.USER2_MAIL))
         institutionByUser2 = institutionRepository.save(Institution("InstitutionByUser2", user2))
         institutionByCurrent = institutionRepository.findAll(
-                QInstitution.institution.user.auth0Id.ne(userServiceMock.getTokenUserId())).first()
+                QInstitution.institution.user.mail.ne(userServiceMock.getCurrentUser().mail)).first()
 
     }
 
@@ -68,7 +68,7 @@ open class RequestValidatorTest {
     fun testFakeChild() {
         assertThatThrownBy {
             val original = institutionMapper.toDto(institutionByUser2)
-            val cuckooChild = institutionByCurrent.schoolClasses.first()
+            val cuckooChild = institutionByCurrent.schoolClasses!!.first()
             val fake = InstitutionDto(original.id, original.userId, original.name, arrayListOf(cuckooChild.id))
             institutionService.save(fake)
         }.isInstanceOf(ValidationException::class.java)
@@ -78,7 +78,7 @@ open class RequestValidatorTest {
     fun testFakeParent() {
         assertThatThrownBy {
             val original = institutionMapper.toDto(institutionByUser2)
-            val fake = InstitutionDto(original.id, userServiceMock.getCurrentUser()!!.id, original.name, original.schoolClassIds)
+            val fake = InstitutionDto(original.id, userServiceMock.getCurrentUser().id, original.name, original.schoolClassIds)
             institutionService.save(fake)
         }.isInstanceOf(ValidationException::class.java)
     }

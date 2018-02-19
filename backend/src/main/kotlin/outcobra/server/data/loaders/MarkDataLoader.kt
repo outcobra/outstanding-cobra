@@ -68,11 +68,11 @@ class MarkDataLoader @Inject constructor(val markValueRepository: MarkValueRepos
     }
 
     private fun saveMarksForSemester(subject: Subject) {
-        MARK_GROUP_SUBJ = MarkGroup(1.0, null, "${subject.name} mark", listOf<Mark>(), subject)
+        MARK_GROUP_SUBJ = MarkGroup("${subject.name} mark", 1.0, null, mutableListOf(), subject)
         MARK_GROUP_SUBJ = markGroupRepository.save(MARK_GROUP_SUBJ)
         subject.markGroup = MARK_GROUP_SUBJ
         subjectRepository.save(subject)
-        SUBGROUP1 = markGroupRepository.save(MarkGroup(0.5, MARK_GROUP_SUBJ, "subgroup", listOf<Mark>(), subject))
+        SUBGROUP1 = markGroupRepository.save(MarkGroup("subgroup", 0.5, MARK_GROUP_SUBJ, mutableListOf(), subject))
         MARK1 = markValueRepository.save(MarkValue(getRandomMark(), getRandomWeight(), MARK_GROUP_SUBJ, "mark1", null))
         MARK2 = markValueRepository.save(MarkValue(getRandomMark(), getRandomWeight(), SUBGROUP1, "mark2", null))
         MARK3 = markValueRepository.save(MarkValue(getRandomMark(), getRandomWeight(), SUBGROUP1, "mark3", null))

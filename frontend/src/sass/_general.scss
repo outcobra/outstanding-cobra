@@ -62,7 +62,6 @@
     float: left;
 }
 
-// TODO remove when material2 beta.9 is out
-.dialog-body {
+input:not([matInput]) {
     font-family: Montserrat, sans-serif !important;
 }

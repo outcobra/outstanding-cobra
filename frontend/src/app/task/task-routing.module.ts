@@ -1,32 +1,48 @@
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
-import {AuthGuard} from '../core/services/auth/auth-guard.service';
 import {TaskComponent} from './task.component';
-import {TaskDetailComponent} from './task-detail-component/task-detail.component';
-import {TaskDetailResolver} from './service/task-detail-resolver.service';
-import {SubjectFilterResolver} from '../core/services/filter/subject.filter.resolver.service';
+import {TaskResolver} from './service/task-resolver.service';
+import {SchoolClassSubjectResolver} from '../core/services/school-class-subject/school-class-subject-resolver.service';
 import {TaskListResolver} from './service/task-list-resolver.service';
+import {TaskCreateUpdateComponent} from './task-create-update/task-create-update.component';
+import {ViewMode} from '../core/common/view-mode';
 
 @NgModule({
     imports: [
         RouterModule.forChild([
             {
-                path: 'task',
+                path: '',
                 component: TaskComponent,
-                canActivate: [AuthGuard],
-                resolve: {
-                    taskFilter: SubjectFilterResolver,
-                    tasks: TaskListResolver
+                data: {
+                    animation: 'task'
                 },
-                children: [
-                    {
-                        path: ':id',
-                        component: TaskDetailComponent,
-                        resolve: {
-                            task: TaskDetailResolver
-                        }
-                    }
-                ]
+                resolve: {
+                    schoolClassSubjects: SchoolClassSubjectResolver,
+                    tasks: TaskListResolver
+                }
+            },
+            {
+                path: 'new',
+                component: TaskCreateUpdateComponent,
+                data: {
+                    viewMode: ViewMode.NEW,
+                    animation: 'taskCreateUpdate'
+                },
+                resolve: {
+                    subjects: SchoolClassSubjectResolver
+                }
+            },
+            {
+                path: 'update/:id',
+                component: TaskCreateUpdateComponent,
+                data: {
+                    viewMode: ViewMode.EDIT,
+                    animation: 'taskCreateUpdate'
+                },
+                resolve: {
+                    task: TaskResolver,
+                    subjects: SchoolClassSubjectResolver
+                }
             }
         ])
     ],

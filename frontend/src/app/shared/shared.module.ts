@@ -8,7 +8,7 @@ import {ColorpickerComponent} from './components/colorpicker/colorpicker.compone
 import {InfoDialogComponent} from './components/info-dialog/info-dialog.component';
 import {OCUiModule} from '../oc-ui/oc-ui.module';
 import {OCMaterialModule} from '../oc-material.module';
-import {MarkdownModule} from 'angular2-markdown';
+import {MarkdownModule} from 'ngx-md';
 import {I18nMarkdownComponent} from './components/i18n-markdown/i18n-markdown.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 

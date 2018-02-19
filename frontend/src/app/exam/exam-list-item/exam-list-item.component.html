@@ -1,36 +1,40 @@
 <div class="form-group">
     <oc-icon-data iconName="title"
                   titleKey="i18n.modules.exam.name">
-        <p class="exam-property">{{ exam.name }}</p>
+        <span class="exam-property">{{ exam.name }}</span>
     </oc-icon-data>
     <oc-icon-data *ngIf="exam.description?.length"
                   iconName="description"
                   titleKey="i18n.modules.exam.description">
-        <p class="exam-property">{{ exam.description }}</p>
+        <span class="exam-property">{{ exam.description }}</span>
     </oc-icon-data>
     <oc-icon-data iconName="today"
                   titleKey="i18n.common.label.dueDate"
                   [showDivider]="exam.mark != null || exam.examTasks?.length">
-        <p class="exam-property">{{ exam.date | date:'fullDate' }}</p>
+        <span class="exam-property">{{ exam.date | date:'fullDate' }}</span>
     </oc-icon-data>
     <oc-icon-data iconName="poll"
                   titleKey="i18n.modules.exam.mark.title"
                   [showDivider]="exam.examTasks?.length"
                   *ngIf="exam.mark">
-        <p class="exam-property">{{ exam.mark.value | markValue }}</p>
+        <span class="exam-property">{{ exam.mark.value | markValue }}</span>
     </oc-icon-data>
     <oc-icon-data *ngIf="exam.examTasks?.length"
                   iconName="assignment_turned_in"
                   titleKey="i18n.modules.exam.examTask.title"
                   [showDivider]="false">
-        <mat-list>
-            <mat-list-item *ngFor="let examTask of exam.examTasks">
-                <mat-checkbox class="exam-property" [checked]="examTask.finished"
-                             (change)="finishTask$.next(examTask.id)">
-                    {{ examTask.task }}
-                </mat-checkbox>
-            </mat-list-item>
-        </mat-list>
+        <oc-icon-data-child>
+            <oc-icon-data-data>
+                <mat-list>
+                    <mat-list-item *ngFor="let examTask of exam.examTasks">
+                        <mat-checkbox class="exam-property" [checked]="examTask.finished"
+                                      (change)="finishTask$.next(examTask.id)">
+                            {{ examTask.task }}
+                        </mat-checkbox>
+                    </mat-list-item>
+                </mat-list>
+            </oc-icon-data-data>
+        </oc-icon-data-child>
     </oc-icon-data>
 </div>
 <button mat-button
