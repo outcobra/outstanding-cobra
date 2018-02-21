@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull
 
 /**
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.4.0
  * @param repeatEveryNWeeks value needs to be >=1
  * if a subject takes place more than once a week, there are multiples TimeTableEntries
  */

@@ -7,7 +7,7 @@ import javax.persistence.MappedSuperclass
 
 /**
  * @author Florian Bürgi
- * @since <since>
+ * @since 1.4.0
  */
 
 @MappedSuperclass

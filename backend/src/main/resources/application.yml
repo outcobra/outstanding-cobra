@@ -13,7 +13,7 @@ endpoints:
   cors:
     allowed-origins: "*"
 product:
-  version: 1.3.0
+  version: 1.4.0
 sentry.dsn: https://00e7fe8c3ae9488ba591314d7773b81a@sentry.pegnu.cloud/2
 ---
 #---
@@ -49,6 +49,8 @@ spring:
     include: mysql_database
 runtime:
   environment: production
+management:
+  add-application-context-header: false
 #---
 # Normal Profile definition
 # This part includes all profiles which are used by those in the area above
