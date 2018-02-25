@@ -7338,7 +7338,11 @@ typeface-montserrat@^0.0.45:
   version "0.0.45"
   resolved "https://pkg.pegnu.cloud/repository/npm/typeface-montserrat/-/typeface-montserrat-0.0.45.tgz#17bd9a48d1b4a3ed7f3110db8e18ea828e88594b"
 
-typescript@^2.6, typescript@~2.6.2:
+typescript@^2.6.0:
+  version "2.7.1"
+  resolved "https://pkg.pegnu.cloud/repository/npm/typescript/-/typescript-2.7.1.tgz#bb3682c2c791ac90e7c6210b26478a8da085c359"
+
+typescript@~2.6.2:
   version "2.6.2"
   resolved "https://pkg.pegnu.cloud/repository/npm/typescript/-/typescript-2.6.2.tgz#3c5b6fd7f6de0914269027f03c0946758f7673a4"
 

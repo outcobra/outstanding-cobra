@@ -1,6 +1,7 @@
 package outcobra.server.model
 
 import outcobra.server.model.interfaces.ParentLinked
+import java.time.LocalDate
 import java.time.LocalTime
 import javax.persistence.Entity
 import javax.persistence.EnumType
@@ -16,11 +17,13 @@ import javax.validation.constraints.NotNull
  * @since <since>
  * @param repeatEveryNWeeks value needs to be >=1
  * if a subject takes place more than once a week, there are multiples TimeTableEntries
+ * @param firstOccurrenceAt to determine whatever a lesson takes place or not
  */
 @Entity
 data class TimetableEntry(@NotNull @Enumerated(EnumType.STRING) var weekDay: WeekDay = WeekDay.MONDAY,
                           @NotNull var time: LocalTime? = LocalTime.of(8, 0),
                           @Min(1) @NotNull var repeatEveryNWeeks: Int = 1,
+                          @NotNull var firstOccurrenceAt: LocalDate = LocalDate.now(),
                           var room: String? = "",
                           @ManyToOne var timetable: Timetable? = null,
                           @ManyToOne var subject: Subject? = null)
@@ -28,5 +31,4 @@ data class TimetableEntry(@NotNull @Enumerated(EnumType.STRING) var weekDay: Wee
 
     override val parent: ParentLinked?
         get() = timetable
-
 }
