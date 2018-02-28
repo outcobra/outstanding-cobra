@@ -5,7 +5,7 @@ import {ExamDto} from '../model/exam.dto';
 import {TranslateService} from '@ngx-translate/core';
 import {ResponsiveHelperService} from '../../core/services/ui/responsive-helper.service';
 import {ExamTaskDto} from '../model/exam.task.dto';
-import {getIfTruthy, isFalsy, isNotEmpty} from 'app/core/util/helper';
+import {getIfTruthy, isNotEmpty} from 'app/core/util/helper';
 import {CreateUpdateComponent} from '../../core/common/create-update-component';
 import {FormUtil} from '../../core/util/form-util';
 import {OCValidators} from '../../core/services/oc-validators';
@@ -50,33 +50,18 @@ export class ExamCreateUpdateComponent extends CreateUpdateComponent<ExamDto> im
         this._examCreateUpdateForm = this._initFormGroup();
     }
 
-    public addExamTask(formControl: AbstractControl, index) {
-        if (this.examTaskArray.length < 15
-            && this._dirtyTasks.indexOf(index) === -1
-            && (isFalsy(formControl) || isNotEmpty(formControl.value['task']))) {
-            this.examTaskArray.push(this._formGroupForDtoOrDefault());
-            this._dirtyTasks.push(index);
-        }
+    private _formGroupForDtoOrDefault(examTask = {} as ExamTaskDto): FormGroup {
+        return this._formBuilder.group({
+            id: getIfTruthy(examTask, 'id', 0),
+            finished: getIfTruthy(examTask, 'finished', false),
+            task: getIfTruthy(examTask, 'task', ''),
+            examId: this.getParamOrDefault('id', 0)
+        });
     }
 
-    public removeTask(index) {
-        this.examTaskArray.removeAt(index);
-        this._dirtyTasks.pop();
-        this.examTaskArray.markAsDirty();
-    }
-
-    public isMobile(): boolean {
-        return this._responsiveHelper.isMobile();
-    }
-
-    public submit() {
-        if (this._examCreateUpdateForm.valid && this._examCreateUpdateForm.dirty) {
-            this._submitFunction.call(this._examService, this._formToExam())
-                .switchMap(() => this._router.navigateByUrl('/exam'))
-                .subscribe(() => this._notificationService.success('i18n.modules.exam.notification.createUpdateSuccess.title', 'i18n.modules.exam.notification.createUpdateSuccess.message'));
-        } else {
-            FormUtil.revalidateForm(this._examCreateUpdateForm);
-        }
+    private _formArrayForExamTasks(): AbstractControl[] {
+        let tasks = this.getParamOrDefault('examTasks', [{}]);
+        return tasks.map((examTask) => this._formGroupForDtoOrDefault(examTask));
     }
 
     private _initFormGroup(): FormGroup {
@@ -100,21 +85,6 @@ export class ExamCreateUpdateComponent extends CreateUpdateComponent<ExamDto> im
         });
     }
 
-    private _formGroupForDtoOrDefault(examTask = {} as ExamTaskDto): FormGroup {
-        return this._formBuilder.group({
-            id: getIfTruthy(examTask, 'id', 0),
-            finished: getIfTruthy(examTask, 'finished', false),
-            task: getIfTruthy(examTask, 'task', ''),
-            examId: this.getParamOrDefault('id', 0)
-        });
-    }
-
-    private _formArrayForExamTasks(): AbstractControl[] {
-        let tasks = this.getParamOrDefault('examTasks', []);
-        tasks.push({});
-        return tasks.map((examTask) => this._formGroupForDtoOrDefault(examTask));
-    }
-
     private _formToExam(): ExamDto {
         let formValue = this._examCreateUpdateForm.value;
         let subject = this._schoolClassSubjects.reduce((prev: Array<SubjectDto>, curr: SchoolClassSubjectDto) => prev.concat(curr.subjects), [])
@@ -129,6 +99,32 @@ export class ExamCreateUpdateComponent extends CreateUpdateComponent<ExamDto> im
             mark: null,
             examTasks: formValue.examTasks.filter(examTask => isNotEmpty(examTask.task))
         } as ExamDto;
+    }
+
+    public addExamTask(formControl: AbstractControl, index) {
+        if ((this._examCreateUpdateForm.get('examTasks') as FormArray).length < 15 && this._dirtyTasks.indexOf(index) === -1 && isNotEmpty(formControl.value['task'])) {
+            this.examTaskArray.push(this._formGroupForDtoOrDefault());
+            this._dirtyTasks.push(index);
+        }
+    }
+
+    public removeTask(index) {
+        (this._examCreateUpdateForm.get('examTasks') as FormArray).removeAt(index);
+        this._dirtyTasks.pop();
+    }
+
+    public isMobile(): boolean {
+        return this._responsiveHelper.isMobile();
+    }
+
+    public submit() {
+        if (this._examCreateUpdateForm.valid && this._examCreateUpdateForm.dirty) {
+            this._submitFunction.call(this._examService, this._formToExam())
+                .switchMap(() => this._router.navigateByUrl('/exam'))
+                .subscribe(() => this._notificationService.success('i18n.modules.exam.notification.createUpdateSuccess.title', 'i18n.modules.exam.notification.createUpdateSuccess.message'));
+        } else {
+            FormUtil.revalidateForm(this._examCreateUpdateForm);
+        }
     }
 
     get schoolClassSubjects(): Array<SchoolClassSubjectDto> {
