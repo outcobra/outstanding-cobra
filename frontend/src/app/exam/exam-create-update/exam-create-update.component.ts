@@ -27,8 +27,6 @@ export class ExamCreateUpdateComponent extends CreateUpdateComponent<ExamDto> im
 
     private _submitFunction: (exam: ExamDto) => Observable<ExamDto>;
 
-    private _dirtyTasks: Array<number> = [];
-
     constructor(private _translateService: TranslateService,
                 private _route: ActivatedRoute,
                 private _router: Router,
@@ -60,7 +58,7 @@ export class ExamCreateUpdateComponent extends CreateUpdateComponent<ExamDto> im
     }
 
     private _formArrayForExamTasks(): AbstractControl[] {
-        let tasks = this.getParamOrDefault('examTasks', [{}]);
+        let tasks = this.getParamOrDefault('examTasks', []);
         return tasks.map((examTask) => this._formGroupForDtoOrDefault(examTask));
     }
 
@@ -101,16 +99,8 @@ export class ExamCreateUpdateComponent extends CreateUpdateComponent<ExamDto> im
         } as ExamDto;
     }
 
-    public addExamTask(formControl: AbstractControl, index) {
-        if ((this._examCreateUpdateForm.get('examTasks') as FormArray).length < 15 && this._dirtyTasks.indexOf(index) === -1 && isNotEmpty(formControl.value['task'])) {
-            this.examTaskArray.push(this._formGroupForDtoOrDefault());
-            this._dirtyTasks.push(index);
-        }
-    }
-
-    public removeTask(index) {
-        (this._examCreateUpdateForm.get('examTasks') as FormArray).removeAt(index);
-        this._dirtyTasks.pop();
+    public addExamTask() {
+        this.examTaskArray.push(this._formGroupForDtoOrDefault());
     }
 
     public isMobile(): boolean {
@@ -139,4 +129,3 @@ export class ExamCreateUpdateComponent extends CreateUpdateComponent<ExamDto> im
         return this._examCreateUpdateForm;
     }
 }
-
