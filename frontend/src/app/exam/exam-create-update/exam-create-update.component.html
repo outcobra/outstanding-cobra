@@ -71,21 +71,22 @@
                         color="accent">
                     {{ 'i18n.modules.exam.examTask.add' | translate }}
                 </button>
-                <div *ngFor="let examTask of examTaskArray.controls; let i=index"
-                     #taskList
-                     [formGroupName]="i"
-                     fxLayout
-                     fxLayoutAlign="start center">
-                    <mat-checkbox formControlName="finished" *ngIf="isEditMode()"></mat-checkbox>
-                    <mat-form-field>
-                        <input matInput
-                               formControlName="task"
-                               (keyup)="addExamTask(examTask, i)">
-                    </mat-form-field>
-                    <button type="button" mat-icon-button>
-                        <mat-icon (click)="removeTask(i)">delete</mat-icon>
-                    </button>
-                </div>
+                <ng-template #taskList>
+                    <div *ngFor="let examTask of examTaskArray.controls; let i=index"
+                         [formGroupName]="i"
+                         fxLayout
+                         fxLayoutAlign="start center">
+                        <mat-checkbox formControlName="finished" *ngIf="isEditMode()"></mat-checkbox>
+                        <mat-form-field>
+                            <input matInput
+                                   formControlName="task"
+                                   (keyup)="addExamTask(examTask, i)">
+                        </mat-form-field>
+                        <button type="button" mat-icon-button>
+                            <mat-icon (click)="removeTask(i)">delete</mat-icon>
+                        </button>
+                    </div>
+                </ng-template>
             </div>
         </mat-card-content>
         <mat-card-actions>
