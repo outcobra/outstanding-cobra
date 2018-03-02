@@ -65,22 +65,28 @@
 
             <div formArrayName="examTasks" class="form-group">
                 <h5>{{ 'i18n.modules.exam.examTask.title' | translate }}</h5>
-                <button mat-button
-                        type="button"
-                        color="accent"
-                        [disabled]="examTaskArray.length >= 15"
-                        (click)="addExamTask()">
+                <button *ngIf="examTaskArray.length === 0; else taskList"
+                        (click)="addExamTask(null, 0)"
+                        mat-button
+                        color="accent">
                     {{ 'i18n.modules.exam.examTask.add' | translate }}
                 </button>
-                <mat-list>
-                    <mat-list-item *ngFor="let examTask of examTaskArray.controls; let i=index" [formGroupName]="i">
-                        <mat-checkbox formControlName="finished"></mat-checkbox>
+                <ng-template #taskList>
+                    <div *ngFor="let examTask of examTaskArray.controls; let i=index"
+                         [formGroupName]="i"
+                         fxLayout
+                         fxLayoutAlign="start center">
+                        <mat-checkbox formControlName="finished" *ngIf="isEditMode()"></mat-checkbox>
                         <mat-form-field>
-                            <input matInput formControlName="task"
-                                   [ocAutoFocus]="!isEditMode() || examTask.value.id === 0">
+                            <input matInput
+                                   formControlName="task"
+                                   (keyup)="addExamTask(examTask, i)">
                         </mat-form-field>
-                    </mat-list-item>
-                </mat-list>
+                        <button type="button" mat-icon-button>
+                            <mat-icon (click)="removeTask(i)">delete</mat-icon>
+                        </button>
+                    </div>
+                </ng-template>
             </div>
         </mat-card-content>
         <mat-card-actions>
