@@ -10,7 +10,7 @@ import {isTrue} from '../util/helper';
 import {Observable} from 'rxjs/Observable';
 
 export class OCValidators {
-    public static readonly PASSWORD_REGEX: RegExp = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{8,}$/;
+    public static readonly PASSWORD_REGEX: RegExp = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[\-_£{}[\]!*|\/\\:.;@#$%^&+=])(?=\S+$).{8,}$/;
 
     /**
      * validates whether the current value of the control is before the given date or not
