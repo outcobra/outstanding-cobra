@@ -44,10 +44,6 @@ class WebSecurityConfig
         http.csrf().disable()
         http.cors().disable()
 
-        http.authorizeRequests()
-                .antMatchers("/api/auth/**", "/api/user/emailAvailable", "/api/ping").permitAll()
-                .anyRequest().authenticated()
-
         if (environment.acceptsProfiles(ProfileRegistry.DEVELOPMENT)) {
             http.authorizeRequests()
                     .antMatchers("/swagger-ui.html",
@@ -60,6 +56,11 @@ class WebSecurityConfig
                             "/trace",
                             "/configprops").permitAll()
         }
+
+        http.authorizeRequests()
+                .antMatchers("/api/auth/**", "/api/user/emailAvailable", "/api/ping").permitAll()
+                .anyRequest().authenticated()
+
 
         if (!environment.acceptsProfiles(ProfileRegistry.BASIC_AUTH_SECURITY_MOCK)) {
             http.addFilterBefore(JwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter::class.java)

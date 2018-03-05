@@ -40,6 +40,7 @@ import {AuthHttpInterceptor} from './http/auth-http-interceptor';
 import {UrlPrefixingHttpInterceptor} from './http/url-prefixing-http-interceptor';
 import {DateBodyAwareHttpInterceptor} from './http/date-body-aware-http-interceptor';
 import {ErrorCatchingHttpInterceptor} from './http/error-catching-http-interceptor';
+import {ActiveSemesterService} from './services/semester/active-semester.service';
 
 @NgModule({
     imports: [
@@ -87,6 +88,7 @@ import {ErrorCatchingHttpInterceptor} from './http/error-catching-http-intercept
 
         CurrentSubjectsResolverService,
         SchoolClassSubjectService,
+        ActiveSemesterService,
         {
             provide: HTTP_INTERCEPTORS,
             multi: true,

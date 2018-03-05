@@ -86,6 +86,9 @@
         "welcome": "Willkommen bei Outcobra",
         "subtitle": "Das Managementtool von Schülern für Schüler",
         "authors": "von Joel, Florian und Mario",
+        "semesterChooser": {
+          "tooltip": "Aktives Semester wechseln"
+        },
         "linkTitles": {
           "about": "Über das Projekt",
           "features": "Features",

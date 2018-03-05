@@ -11,6 +11,7 @@ import {OCMaterialModule} from '../oc-material.module';
 import {MarkdownModule} from 'ngx-md';
 import {I18nMarkdownComponent} from './components/i18n-markdown/i18n-markdown.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import {SemesterChooserComponent} from './components/semester-chooser/semester-chooser.component';
 
 @NgModule({
     declarations: [
@@ -18,7 +19,8 @@ import {FlexLayoutModule} from '@angular/flex-layout';
         ColorpickerComponent,
         ConfirmDialogComponent,
         InfoDialogComponent,
-        I18nMarkdownComponent
+        I18nMarkdownComponent,
+        SemesterChooserComponent
     ],
     exports: [
         ColorpickerComponent,
@@ -26,7 +28,8 @@ import {FlexLayoutModule} from '@angular/flex-layout';
         OCUiModule,
         TranslateModule,
         InfoDialogComponent,
-        I18nMarkdownComponent
+        I18nMarkdownComponent,
+        SemesterChooserComponent
     ],
     imports: [
         CommonModule,

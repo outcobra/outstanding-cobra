@@ -7,6 +7,7 @@ import {OCUiModule} from '../oc-ui/oc-ui.module';
 import {TranslateModule} from '@ngx-translate/core';
 import {FormsModule} from '@angular/forms';
 import {SimpleNotificationsModule} from 'angular2-notifications';
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
     imports: [
@@ -15,6 +16,7 @@ import {SimpleNotificationsModule} from 'angular2-notifications';
         RouterModule,
         OCMaterialModule,
         OCUiModule,
+        SharedModule,
         TranslateModule,
         SimpleNotificationsModule.forRoot()
     ],

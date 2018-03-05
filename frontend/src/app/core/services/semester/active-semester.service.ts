@@ -1,0 +1,18 @@
+import {Injectable} from '@angular/core';
+import {CacheableService} from '../core/cacheable.service';
+import {SemesterDto} from '../../../manage/model/manage.dto';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs/Observable';
+import {SemesterService} from '../../../manage/service/semester.service';
+
+@Injectable()
+export class ActiveSemesterService extends CacheableService<SemesterDto[]> {
+    constructor(private _semesterService: SemesterService, http: HttpClient) {
+        super(http, '/api/semester');
+    }
+
+    public getSemestersByUser(): Observable<SemesterDto[]> {
+        return this.getFromCacheOrFetch(() => this._semesterService.readAll());
+    }
+
+}
