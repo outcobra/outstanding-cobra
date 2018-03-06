@@ -23,6 +23,8 @@ import {OCAutoFocusDirective} from './directives/oc-auto-focus.directive';
 import {ReactiveFormsModule} from '@angular/forms';
 import {OCEmptyComponent} from './components/oc-empty/oc-empty.component';
 import {OCAlertComponent} from "./components/oc-alert/oc-alert.component";
+import {OCPopup} from './components/oc-popup/oc-popup';
+import {OCPopupTrigger} from './components/oc-popup/oc-popup-trigger';
 
 @NgModule({
     imports: [
@@ -50,7 +52,9 @@ import {OCAlertComponent} from "./components/oc-alert/oc-alert.component";
         OCFilterDirective,
         OCAutoFocusDirective,
         OCEmptyComponent,
-        OCAlertComponent
+        OCAlertComponent,
+        OCPopup,
+        OCPopupTrigger
     ],
     exports: [
         OCNavComponent,
@@ -69,7 +73,9 @@ import {OCAlertComponent} from "./components/oc-alert/oc-alert.component";
         OCFilterDirective,
         OCAutoFocusDirective,
         OCEmptyComponent,
-        OCAlertComponent
+        OCAlertComponent,
+        OCPopup,
+        OCPopupTrigger
     ]
 })
 export class OCUiModule {

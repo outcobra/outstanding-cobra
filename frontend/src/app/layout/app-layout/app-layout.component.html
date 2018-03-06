@@ -25,6 +25,14 @@
             <span class="oc-title-beta">Beta</span>
             <span class="toolbar-fill-space"></span>
             <semester-chooser></semester-chooser>
+
+            <button mat-icon-button [ocPopupTrigger]="popup">
+                <mat-icon>school</mat-icon>
+            </button>
+            <oc-popup #popup>
+                <button mat-button color="primary">Test</button>
+            </oc-popup>
+
             <button mat-button (click)="logout()">{{ 'i18n.auth.logout' | translate }}</button>
         </mat-toolbar>
 
