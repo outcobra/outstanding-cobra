@@ -16,6 +16,6 @@ export class SemesterChooserComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this._activeSemesterService.getSemestersByUser().subscribe(this._semesters$.next)
+        //this._activeSemesterService.getSemestersByUser().subscribe(this._semesters$.next)
     }
 }
