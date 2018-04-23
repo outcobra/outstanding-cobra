@@ -30,8 +30,7 @@ import javax.inject.Inject
  */
 @Component
 @Order(EXAM)
-class ExamDataLoader @Inject constructor(val examRepository: ExamRepository,
-                                         val markValueRepository: MarkValueRepository) : DataLoader {
+class ExamDataLoader @Inject constructor(val examRepository: ExamRepository) : DataLoader {
     private val LOGGER = LoggerFactory.getLogger(ExamDataLoader::class.java)
 
     companion object {
@@ -71,10 +70,6 @@ class ExamDataLoader @Inject constructor(val examRepository: ExamRepository,
 
     private fun saveAndLog(exam: Exam, subject: Subject): Exam {
         exam.subject = subject
-        exam.mark?.markGroup = subject.markGroup
-        if (exam.mark is Mark) {
-            markValueRepository.save(exam.mark)
-        }
         val entity = examRepository.save(exam)
         LOGGER.debug("Saved exam: ${entity.name} with id ${entity.id}")
         return entity
