@@ -8,8 +8,8 @@ import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.transaction.annotation.Transactional
 import outcobra.server.config.ProfileRegistry
-import outcobra.server.model.Exam
-import outcobra.server.model.QExam
+import outcobra.server.model.domain.Exam
+import outcobra.server.model.domain.QExam
 import outcobra.server.model.dto.ExamDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.ExamRepository

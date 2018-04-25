@@ -9,7 +9,7 @@ import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.transaction.annotation.Transactional
 import outcobra.server.config.ProfileRegistry.Companion.TEST
-import outcobra.server.model.User
+import outcobra.server.model.domain.User
 import javax.inject.Inject
 
 @RunWith(SpringRunner::class)

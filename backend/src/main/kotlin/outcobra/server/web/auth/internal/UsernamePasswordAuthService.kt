@@ -5,8 +5,8 @@ import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import outcobra.server.exception.ValidationKey
-import outcobra.server.model.Identity
-import outcobra.server.model.User
+import outcobra.server.model.domain.Identity
+import outcobra.server.model.domain.User
 import outcobra.server.model.repository.IdentityRepository
 import outcobra.server.model.repository.UserRepository
 import outcobra.server.web.auth.config.AuthRegistry

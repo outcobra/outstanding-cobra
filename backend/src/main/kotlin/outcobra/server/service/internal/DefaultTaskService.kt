@@ -2,10 +2,10 @@ package outcobra.server.service.internal
 
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
-import outcobra.server.model.QTask
-import outcobra.server.model.Semester
-import outcobra.server.model.Subject
-import outcobra.server.model.Task
+import outcobra.server.model.domain.QTask
+import outcobra.server.model.domain.Semester
+import outcobra.server.model.domain.Subject
+import outcobra.server.model.domain.Task
 import outcobra.server.model.dto.TaskDto
 import outcobra.server.model.dto.TaskProgressUpdateDto
 import outcobra.server.model.interfaces.Mapper
@@ -34,7 +34,7 @@ class DefaultTaskService
 
     override fun readAll(): List<TaskDto> {
         val userId = userService.getCurrentUser().id
-        val filter = QTask.task.subject.semester.schoolYear.schoolClass.institution.user.id.eq(userId)
+        val filter = QTask.task.subject.user.id.eq(userId)
         return repository.findAll(filter).map { mapper.toDto(it) }
     }
 
@@ -45,7 +45,7 @@ class DefaultTaskService
 
     override fun readAllBySemester(semesterId: Long): List<TaskDto> {
         requestValidator.validateRequestById(semesterId, Semester::class)
-        val filter = QTask.task.subject.semester.id.eq(semesterId)
+        val filter = QTask.task.subject.semesters.any().id.eq(semesterId)
         return repository.findAll(filter).map { mapper.toDto(it) }
     }
 
@@ -57,7 +57,7 @@ class DefaultTaskService
 
     override fun readAllOpenBySemester(semesterId: Long): List<TaskDto> {
         requestValidator.validateRequestById(semesterId, Semester::class)
-        val filter = QTask.task.progress.ne(100).and(QTask.task.subject.semester.id.eq(semesterId))
+        val filter = QTask.task.progress.ne(100).and(QTask.task.subject.semesters.any().id.eq(semesterId))
         return repository.findAll(filter).map { mapper.toDto(it) }
     }
 

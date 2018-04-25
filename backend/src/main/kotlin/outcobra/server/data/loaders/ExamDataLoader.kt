@@ -15,12 +15,10 @@ import outcobra.server.data.loaders.SubjectDataLoader.Companion.OOP_DESIGN
 import outcobra.server.data.loaders.SubjectDataLoader.Companion.PHYSICS
 import outcobra.server.data.loaders.SubjectDataLoader.Companion.PROJECT
 import outcobra.server.data.loaders.SubjectDataLoader.Companion.SCRUM
-import outcobra.server.model.Exam
-import outcobra.server.model.Mark
-import outcobra.server.model.MarkValue
-import outcobra.server.model.Subject
+import outcobra.server.model.domain.Exam
+import outcobra.server.model.domain.MarkValue
+import outcobra.server.model.domain.Subject
 import outcobra.server.model.repository.ExamRepository
-import outcobra.server.model.repository.MarkValueRepository
 import java.time.LocalDate
 import javax.inject.Inject
 

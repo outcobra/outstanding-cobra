@@ -2,10 +2,10 @@ package outcobra.server.model.mapper.mark
 
 import org.springframework.stereotype.Component
 import outcobra.server.exception.ValidationKey
-import outcobra.server.model.Color
-import outcobra.server.model.MarkGroup
-import outcobra.server.model.Semester
-import outcobra.server.model.Subject
+import outcobra.server.model.domain.Color
+import outcobra.server.model.domain.MarkGroup
+import outcobra.server.model.domain.Semester
+import outcobra.server.model.domain.Subject
 import outcobra.server.model.dto.ColorDto
 import outcobra.server.model.dto.MarkGroupDto
 import outcobra.server.model.dto.mark.SemesterMarkDto
@@ -33,7 +33,8 @@ class SemesterMarkDtoMapper @Inject constructor(val markGroupMapper: Mapper<Mark
     }
 
     override fun toDto(from: Semester): SemesterMarkDto {
-        val schoolClass = from.schoolYear?.schoolClass ?: ValidationKey.ENTITY_NOT_FOUND.throwException()
+        // TODO amend-base-data use correct semester
+        val schoolClass = from.schoolYear?.schoolClasses?.first() ?: ValidationKey.ENTITY_NOT_FOUND.throwException()
         val semesterMarkGroup = MarkGroup(marks = from.subjects.map { it.markGroup!! }.toMutableList())
         val institution = schoolClass.institution ?: ValidationKey.ENTITY_NOT_FOUND.throwException()
         return SemesterMarkDto(from.id, from.name, from.validFrom, from.validTo,

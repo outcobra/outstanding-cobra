@@ -2,8 +2,8 @@ package outcobra.server.validator
 
 import org.springframework.stereotype.Component
 import outcobra.server.exception.ValidationKey
-import outcobra.server.model.QSchoolYear
-import outcobra.server.model.SchoolYear
+import outcobra.server.model.domain.QSchoolYear
+import outcobra.server.model.domain.SchoolYear
 import outcobra.server.model.repository.SchoolYearRepository
 import outcobra.server.util.doesNotOverlap
 import javax.inject.Inject
@@ -25,7 +25,7 @@ class SchoolYearValidator @Inject constructor(val schoolYearRepository: SchoolYe
         if (schoolYear.validTo.isBefore(schoolYear.validFrom)) {
             ValidationKey.START_BIGGER_THAN_END.throwException()
         }
-        val predicate = QSchoolYear.schoolYear.schoolClass.id.eq(schoolYear.schoolClass?.id)
+        val predicate = QSchoolYear.schoolYear.schoolClasses.any().id.`in`(schoolYear.schoolClasses.map { it.id })
         val schoolYears = schoolYearRepository.findAll(predicate).toList()
         return schoolYears.all { it.doesNotOverlap(schoolYear) }
     }

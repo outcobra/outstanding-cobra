@@ -1,6 +1,6 @@
 package outcobra.server.service
 
-import outcobra.server.model.User
+import outcobra.server.model.domain.User
 import outcobra.server.model.dto.UserDto
 import outcobra.server.web.auth.model.OutcobraUser
 

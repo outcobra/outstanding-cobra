@@ -3,7 +3,7 @@ package outcobra.server.validator
 import org.springframework.stereotype.Component
 import outcobra.server.exception.ValidationException
 import outcobra.server.exception.ValidationKey
-import outcobra.server.model.User
+import outcobra.server.model.domain.User
 import outcobra.server.model.dto.InstitutionDto
 import outcobra.server.model.interfaces.OutcobraDto
 import outcobra.server.model.interfaces.ParentLinked

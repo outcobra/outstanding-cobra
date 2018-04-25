@@ -1,6 +1,6 @@
 package outcobra.server.model.dto
 
-import outcobra.server.model.Exam
+import outcobra.server.model.domain.Exam
 import outcobra.server.model.interfaces.OutcobraDto
 import outcobra.server.model.interfaces.ParentLink
 

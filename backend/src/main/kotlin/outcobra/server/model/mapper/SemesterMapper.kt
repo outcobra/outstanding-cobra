@@ -1,7 +1,7 @@
 package outcobra.server.model.mapper
 
 import org.springframework.stereotype.Component
-import outcobra.server.model.*
+import outcobra.server.model.domain.*
 import outcobra.server.model.dto.SemesterDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.MarkReportRepository

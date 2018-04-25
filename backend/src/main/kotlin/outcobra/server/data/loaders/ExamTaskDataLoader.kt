@@ -13,7 +13,7 @@ import outcobra.server.data.loaders.ExamDataLoader.Companion.OOP_EXAM
 import outcobra.server.data.loaders.ExamDataLoader.Companion.PHYSICS_EXAM
 import outcobra.server.data.loaders.ExamDataLoader.Companion.PROJECT_EXAM
 import outcobra.server.data.loaders.ExamDataLoader.Companion.SCRUM_EXAM
-import outcobra.server.model.ExamTask
+import outcobra.server.model.domain.ExamTask
 import outcobra.server.model.repository.ExamRepository
 import outcobra.server.model.repository.ExamTaskRepository
 import java.util.*

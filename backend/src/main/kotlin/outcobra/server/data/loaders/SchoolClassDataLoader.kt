@@ -6,8 +6,8 @@ import org.springframework.stereotype.Component
 import outcobra.server.data.DataLoadOrder.SCHOOL_CLASS
 import outcobra.server.data.loaders.InstitutionDataLoader.Companion.BMS_GIBB
 import outcobra.server.data.loaders.InstitutionDataLoader.Companion.IET_GIBB
-import outcobra.server.model.Institution
-import outcobra.server.model.SchoolClass
+import outcobra.server.model.domain.Institution
+import outcobra.server.model.domain.SchoolClass
 import outcobra.server.model.repository.SchoolClassRepository
 import javax.inject.Inject
 

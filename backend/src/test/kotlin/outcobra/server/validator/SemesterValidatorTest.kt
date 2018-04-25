@@ -12,12 +12,13 @@ import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.transaction.annotation.Transactional
 import outcobra.server.config.ProfileRegistry.Companion.TEST
 import outcobra.server.exception.ValidationKey
-import outcobra.server.model.SchoolClass
-import outcobra.server.model.SchoolYear
-import outcobra.server.model.Semester
+import outcobra.server.model.domain.SchoolClass
+import outcobra.server.model.domain.SchoolYear
+import outcobra.server.model.domain.Semester
 import outcobra.server.model.repository.SchoolClassRepository
 import outcobra.server.model.repository.SchoolYearRepository
 import outcobra.server.model.repository.SemesterRepository
+import outcobra.server.service.UserService
 import java.time.LocalDate
 import javax.inject.Inject
 
@@ -34,6 +35,8 @@ class SemesterValidatorTest {
     lateinit var schoolClassRepository: SchoolClassRepository
     @Inject
     lateinit var validator: SemesterValidator
+    @Inject
+    lateinit var userService: UserService
 
     val now: LocalDate = LocalDate.now()
     var schoolClass: SchoolClass? = null
@@ -44,7 +47,7 @@ class SemesterValidatorTest {
     fun setUp() {
         if (schoolClass == null) {
             schoolClass = schoolClassRepository.findAll().first()
-            schoolYear = schoolYearRepository.save(SchoolYear("", now, now.plusYears(1), schoolClass, listOf(), listOf()))
+            schoolYear = schoolYearRepository.save(SchoolYear("", now, now.plusYears(1), userService.getCurrentUser(), listOf(SchoolClass()), listOf(), listOf()))
             existing = semesterRepository.save(Semester("", now, now.plusMonths(6), schoolYear, listOf(), listOf(), null))
         }
     }

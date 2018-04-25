@@ -12,9 +12,9 @@ import org.springframework.transaction.annotation.Transactional
 import outcobra.server.config.ProfileRegistry.Companion.TEST
 import outcobra.server.exception.ValidationException
 import outcobra.server.exception.ValidationKey
-import outcobra.server.model.Institution
-import outcobra.server.model.SchoolClass
-import outcobra.server.model.SchoolYear
+import outcobra.server.model.domain.Institution
+import outcobra.server.model.domain.SchoolClass
+import outcobra.server.model.domain.SchoolYear
 import outcobra.server.model.dto.SchoolYearDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.InstitutionRepository
@@ -53,7 +53,7 @@ class DefaultSchoolYearServiceTest {
     fun setUp() {
         institution = institutionRepository.save(Institution("Test", userService.getCurrentUser()))
         schoolClass = schoolClassRepository.save(SchoolClass("TestClass", institution, listOf()))
-        existing = schoolYearRepository.save(SchoolYear("existing", now, now.plusYears(1), schoolClass, listOf(), listOf()))
+        existing = schoolYearRepository.save(SchoolYear("existing", now, now.plusYears(1), userService.getCurrentUser(), listOf(schoolClass!!), listOf(), listOf()))
         yearCount = schoolYearRepository.count()
     }
 
@@ -74,7 +74,7 @@ class DefaultSchoolYearServiceTest {
     fun saveInvalidStartEnd() {
         val from = existing?.validTo?.plusDays(1)
         val to = now.plusYears(2)
-        val invalidYear = SchoolYear("invalid", to, from!!, schoolClass, listOf(), listOf())
+        val invalidYear = SchoolYear("invalid", to, from!!, userService.getCurrentUser(), listOf(schoolClass!!), listOf(), listOf())
         assertThatThrownBy {
             schoolYearService.save(schoolYearMapper.toDto(invalidYear))
         }.isEqualTo(ValidationKey.START_BIGGER_THAN_END.makeException())
@@ -85,7 +85,7 @@ class DefaultSchoolYearServiceTest {
     fun saveInvalidOverlap() {
         val from = existing?.validTo
         val to = now.plusYears(2)
-        val invalidYear = SchoolYear("invalid", from!!, to, schoolClass, listOf(), listOf())
+        val invalidYear = SchoolYear("invalid", from!!, to, userService.getCurrentUser(), listOf(schoolClass!!), listOf(), listOf())
         assertThatThrownBy {
             schoolYearService.save(schoolYearMapper.toDto(invalidYear))
         }.isInstanceOf(ValidationException::class.java)
@@ -110,13 +110,13 @@ class DefaultSchoolYearServiceTest {
         assertThat(dto.name).isEqualTo(existing!!.name)
         assertThat(dto.validFrom).isEqualTo(existing!!.validFrom)
         assertThat(dto.validTo).isEqualTo(existing!!.validTo)
-        assertThat(dto.schoolClassId).isEqualTo(schoolClass?.id)
+        assertThat(dto.schoolClassIds).contains(schoolClass?.id)
     }
 
     private fun saveValidYear() {
         val from = existing?.validTo?.plusDays(1)
         val to = now.plusYears(2)
-        val validYear = SchoolYear("valid", from!!, to, schoolClass, listOf(), listOf())
+        val validYear = SchoolYear("valid", from!!, to, userService.getCurrentUser(), listOf(schoolClass!!), listOf(), listOf())
         schoolYearService.save(schoolYearMapper.toDto(validYear))
     }
 

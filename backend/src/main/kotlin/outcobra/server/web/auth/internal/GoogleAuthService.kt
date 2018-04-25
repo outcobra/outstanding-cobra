@@ -6,8 +6,8 @@ import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.stereotype.Component
 import outcobra.server.exception.ValidationKey
-import outcobra.server.model.Identity
-import outcobra.server.model.User
+import outcobra.server.model.domain.Identity
+import outcobra.server.model.domain.User
 import outcobra.server.model.repository.IdentityRepository
 import outcobra.server.model.repository.UserRepository
 import outcobra.server.web.auth.config.AuthRegistry

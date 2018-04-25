@@ -1,10 +1,10 @@
 package outcobra.server.model.mapper
 
 import org.springframework.stereotype.Component
-import outcobra.server.model.Mark
-import outcobra.server.model.MarkGroup
-import outcobra.server.model.MarkValue
-import outcobra.server.model.Subject
+import outcobra.server.model.domain.Mark
+import outcobra.server.model.domain.MarkGroup
+import outcobra.server.model.domain.MarkValue
+import outcobra.server.model.domain.Subject
 import outcobra.server.model.dto.MarkGroupDto
 import outcobra.server.model.dto.MarkValueDto
 import outcobra.server.model.interfaces.Mapper

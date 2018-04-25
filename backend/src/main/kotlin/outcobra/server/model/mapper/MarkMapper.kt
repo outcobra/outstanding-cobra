@@ -1,7 +1,7 @@
 package outcobra.server.model.mapper
 
 import org.springframework.stereotype.Component
-import outcobra.server.model.MarkValue
+import outcobra.server.model.domain.MarkValue
 import outcobra.server.model.dto.MarkValueDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.ExamRepository

@@ -9,8 +9,8 @@ import outcobra.server.data.loaders.YearDataLoader.Companion.YEAR2
 import outcobra.server.data.loaders.YearDataLoader.Companion.YEAR3
 import outcobra.server.data.loaders.YearDataLoader.Companion.YEAR4
 import outcobra.server.data.loaders.YearDataLoader.Companion.YEAR5
-import outcobra.server.model.SchoolYear
-import outcobra.server.model.Semester
+import outcobra.server.model.domain.SchoolYear
+import outcobra.server.model.domain.Semester
 import outcobra.server.model.repository.SemesterRepository
 import java.time.LocalDate
 import java.time.temporal.TemporalAdjusters.lastDayOfMonth

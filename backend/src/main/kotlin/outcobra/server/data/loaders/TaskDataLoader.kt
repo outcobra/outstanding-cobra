@@ -10,7 +10,7 @@ import outcobra.server.data.loaders.SubjectDataLoader.Companion.GUP
 import outcobra.server.data.loaders.SubjectDataLoader.Companion.OOP
 import outcobra.server.data.loaders.SubjectDataLoader.Companion.PHYSICS
 import outcobra.server.data.loaders.SubjectDataLoader.Companion.SCRUM
-import outcobra.server.model.Task
+import outcobra.server.model.domain.Task
 import outcobra.server.model.repository.TaskRepository
 import java.time.LocalDate
 

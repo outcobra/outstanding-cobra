@@ -1,8 +1,8 @@
 package outcobra.server.model.dto
 
 import outcobra.server.exception.ValidationKey
-import outcobra.server.model.MarkGroup
-import outcobra.server.model.Subject
+import outcobra.server.model.domain.MarkGroup
+import outcobra.server.model.domain.Subject
 import outcobra.server.model.dto.mark.BaseMarkDto
 import outcobra.server.model.interfaces.ParentLink
 

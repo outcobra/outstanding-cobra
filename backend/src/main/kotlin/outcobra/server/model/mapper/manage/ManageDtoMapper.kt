@@ -1,7 +1,7 @@
 package outcobra.server.model.mapper.manage
 
 import org.springframework.stereotype.Component
-import outcobra.server.model.Institution
+import outcobra.server.model.domain.Institution
 import outcobra.server.model.dto.manage.*
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.mapper.ColorMapper

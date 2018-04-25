@@ -4,9 +4,9 @@ import org.slf4j.LoggerFactory
 import org.springframework.core.annotation.Order
 import org.springframework.stereotype.Component
 import outcobra.server.data.DataLoadOrder.SUBJECT
-import outcobra.server.model.Color
-import outcobra.server.model.Semester
-import outcobra.server.model.Subject
+import outcobra.server.model.domain.Color
+import outcobra.server.model.domain.Semester
+import outcobra.server.model.domain.Subject
 import outcobra.server.model.repository.SubjectRepository
 import javax.inject.Inject
 
@@ -37,7 +37,7 @@ class SubjectDataLoader
     override fun shouldLoad() = true
 
     private fun saveSubject(name: String, semester: Semester): Subject {
-        val subject = Subject(name, Color.randomColor, semester, mutableListOf(), mutableListOf(), mutableListOf(), mutableListOf(), null, null)
+        val subject = Subject(name, Color.randomColor, UserDataLoader.TEST_USER!!, listOf(semester), mutableListOf(), mutableListOf(), mutableListOf(), mutableListOf(), null, null)
 
         LOGGER.debug("Saving subject: ${subject.name}")
         return subjectRepository.save(subject)

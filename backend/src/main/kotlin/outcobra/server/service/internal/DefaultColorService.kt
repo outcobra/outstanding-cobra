@@ -1,7 +1,7 @@
 package outcobra.server.service.internal
 
 import org.springframework.stereotype.Service
-import outcobra.server.model.Color
+import outcobra.server.model.domain.Color
 import outcobra.server.model.dto.ColorDto
 import outcobra.server.model.mapper.ColorMapper
 import outcobra.server.service.ColorService

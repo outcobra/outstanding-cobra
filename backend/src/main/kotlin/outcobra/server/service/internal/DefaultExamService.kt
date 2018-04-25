@@ -1,9 +1,9 @@
 package outcobra.server.service.internal
 
 import org.springframework.stereotype.Service
-import outcobra.server.model.Exam
-import outcobra.server.model.QExam
-import outcobra.server.model.Semester
+import outcobra.server.model.domain.Exam
+import outcobra.server.model.domain.QExam
+import outcobra.server.model.domain.Semester
 import outcobra.server.model.dto.ExamDto
 import outcobra.server.model.dto.ExamTaskDto
 import outcobra.server.model.interfaces.Mapper
@@ -30,7 +30,7 @@ class DefaultExamService
 
     override fun readAll(): List<ExamDto> {
         val currentUser = requestValidator.userService.getCurrentUser()
-        val filterByOwner = QExam.exam.subject.semester.schoolYear.schoolClass.institution.user.id.eq(currentUser.id)
+        val filterByOwner = QExam.exam.subject.user.id.eq(currentUser.id)
         val exams = repository.findAll(filterByOwner)
         return exams.map { mapper.toDto(it) }
     }
@@ -64,7 +64,7 @@ class DefaultExamService
 
     override fun readAllBySemester(semesterId: Long): List<ExamDto> {
         requestValidator.validateRequestById(semesterId, Semester::class)
-        val filterBySemester = QExam.exam.subject.semester.id.eq(semesterId)
+        val filterBySemester = QExam.exam.subject.semesters.any().id.eq(semesterId)
         return repository.findAll(filterBySemester).map { mapper.toDto(it) }
     }
 

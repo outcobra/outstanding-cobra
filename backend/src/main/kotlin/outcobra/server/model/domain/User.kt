@@ -1,4 +1,4 @@
-package outcobra.server.model
+package outcobra.server.model.domain
 
 import org.hibernate.validator.constraints.Length
 import outcobra.server.model.interfaces.ParentLinked

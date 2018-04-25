@@ -1,6 +1,6 @@
 package outcobra.server.model.dto
 
-import outcobra.server.model.SchoolYear
+import outcobra.server.model.domain.SchoolYear
 import outcobra.server.model.interfaces.OutcobraDto
 import outcobra.server.model.interfaces.ParentLink
 import java.time.LocalDate

@@ -1,7 +1,7 @@
 package outcobra.server.model.mapper
 
 import org.springframework.stereotype.Component
-import outcobra.server.model.Task
+import outcobra.server.model.domain.Task
 import outcobra.server.model.dto.TaskDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.SubjectRepository

@@ -1,10 +1,10 @@
 package outcobra.server.model.mapper
 
 import org.springframework.stereotype.Component
-import outcobra.server.model.Exam
-import outcobra.server.model.ExamTask
-import outcobra.server.model.MarkValue
-import outcobra.server.model.QMarkValue
+import outcobra.server.model.domain.Exam
+import outcobra.server.model.domain.ExamTask
+import outcobra.server.model.domain.MarkValue
+import outcobra.server.model.domain.QMarkValue
 import outcobra.server.model.dto.ExamDto
 import outcobra.server.model.dto.ExamTaskDto
 import outcobra.server.model.dto.MarkValueDto

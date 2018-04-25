@@ -1,15 +1,16 @@
 package outcobra.server.model.mapper
 
 import org.springframework.stereotype.Component
-import outcobra.server.model.QHoliday
-import outcobra.server.model.SchoolClass
-import outcobra.server.model.SchoolYear
-import outcobra.server.model.Semester
+import outcobra.server.model.domain.QHoliday
+import outcobra.server.model.domain.SchoolClass
+import outcobra.server.model.domain.SchoolYear
+import outcobra.server.model.domain.Semester
 import outcobra.server.model.dto.SchoolYearDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.HolidayRepository
 import outcobra.server.model.repository.SchoolClassRepository
 import outcobra.server.model.repository.SemesterRepository
+import outcobra.server.model.repository.UserRepository
 import javax.inject.Inject
 
 /**
@@ -19,21 +20,23 @@ import javax.inject.Inject
 @Component
 class SchoolYearMapper @Inject constructor(val semesterRepository: SemesterRepository,
                                            val classRepository: SchoolClassRepository,
+                                           val userRepository: UserRepository,
                                            val holidayRepository: HolidayRepository)
     : Mapper<SchoolYear, SchoolYearDto>, BaseMapper() {
 
     override fun fromDto(from: SchoolYearDto): SchoolYear {
-        validateChildren(from.semesterIds, Semester::class, from.schoolClassId, SchoolClass::class)
+        validateChildren(from.semesterIds, Semester::class, from.userId, SchoolClass::class)
         val holidays = holidayRepository.findAll(QHoliday.holiday.schoolYear.id.eq(from.id)).toList()
-        val schoolClass = classRepository.findOne(from.schoolClassId)
+        val schoolClasses = from.schoolClassIds.map { classRepository.findOne(it) }
         val semesters = from.semesterIds.map { semesterRepository.findOne(it) }
-        val schoolYear = SchoolYear(from.name, from.validFrom, from.validTo, schoolClass, holidays, semesters)
+        val user = userRepository.findOne(from.userId)
+        val schoolYear = SchoolYear(from.name, from.validFrom, from.validTo, user, schoolClasses, holidays, semesters)
         schoolYear.id = from.id
         return schoolYear
     }
 
     override fun toDto(from: SchoolYear): SchoolYearDto {
         val semesters = from.semesters.map { it.id }
-        return SchoolYearDto(from.id, from.schoolClass!!.id, from.name, from.validFrom, from.validTo, semesters)
+        return SchoolYearDto(from.id, from.schoolClasses.map { it.id }, from.name, from.validFrom, from.validTo, from.user.id, semesters)
     }
 }

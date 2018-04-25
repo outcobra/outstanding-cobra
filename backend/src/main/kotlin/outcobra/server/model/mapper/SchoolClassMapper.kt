@@ -2,9 +2,9 @@ package outcobra.server.model.mapper
 
 
 import org.springframework.stereotype.Component
-import outcobra.server.model.Institution
-import outcobra.server.model.SchoolClass
-import outcobra.server.model.SchoolYear
+import outcobra.server.model.domain.Institution
+import outcobra.server.model.domain.SchoolClass
+import outcobra.server.model.domain.SchoolYear
 import outcobra.server.model.dto.SchoolClassDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.InstitutionRepository

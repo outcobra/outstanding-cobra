@@ -9,9 +9,9 @@ import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.transaction.annotation.Transactional
 import outcobra.server.config.ProfileRegistry.Companion.TEST
-import outcobra.server.model.Institution
-import outcobra.server.model.SchoolClass
-import outcobra.server.model.SchoolYear
+import outcobra.server.model.domain.Institution
+import outcobra.server.model.domain.SchoolClass
+import outcobra.server.model.domain.SchoolYear
 import outcobra.server.model.repository.InstitutionRepository
 import outcobra.server.model.repository.SchoolClassRepository
 import outcobra.server.model.repository.SchoolYearRepository
@@ -46,7 +46,7 @@ class SchoolYearValidatorTest {
     fun before() {
         val institution = Institution("TEST", userService.getCurrentUser())
         schoolClass = SchoolClass("tester", institution, listOf())
-        existing = SchoolYear("existing", now, now.plusYears(1), schoolClass, listOf(), listOf())
+        existing = SchoolYear("existing", now, now.plusYears(1), userService.getCurrentUser(), listOf(schoolClass), listOf(), listOf())
 
         institutionRepository.save(institution)
         classRepository.save(schoolClass)
@@ -55,13 +55,13 @@ class SchoolYearValidatorTest {
 
     @Test
     fun testValidCreation() {
-        val toCreate = SchoolYear("valid", now.minusYears(1), now.minusDays(1), schoolClass, listOf(), listOf())
+        val toCreate = SchoolYear("valid", now.minusYears(1), now.minusDays(1), userService.getCurrentUser(), listOf(schoolClass), listOf(), listOf())
         assertThat(validator.validateSchoolYearCreation(toCreate)).isTrue()
     }
 
     @Test
     fun testInvalidWithSameDates() {
-        val toCreate = SchoolYear("invalid", now, now.plusYears(1), schoolClass, listOf(), listOf())
+        val toCreate = SchoolYear("invalid", now, now.plusYears(1), userService.getCurrentUser(), listOf(schoolClass), listOf(), listOf())
         assertThat(validator.validateSchoolYearCreation(toCreate)).isFalse()
     }
 }

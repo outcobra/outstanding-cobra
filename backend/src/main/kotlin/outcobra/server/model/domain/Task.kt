@@ -1,4 +1,4 @@
-package outcobra.server.model
+package outcobra.server.model.domain
 
 import com.querydsl.core.annotations.QueryInit
 import outcobra.server.model.interfaces.ParentLinked
@@ -14,7 +14,6 @@ data class Task(@NotNull var name: String = "",
                 var dueDate: LocalDate = LocalDate.now(),
                 var effort: Int = 0,
                 var progress: Int = 0,
-                @QueryInit("semester.schoolYear.schoolClass.institution.user")
                 @ManyToOne var subject: Subject? = null)
     : ParentLinked, AbstractEntity() {
 

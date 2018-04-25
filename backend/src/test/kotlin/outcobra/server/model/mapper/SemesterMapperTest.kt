@@ -12,7 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.transaction.annotation.Transactional
 import outcobra.server.config.ProfileRegistry.Companion.TEST
 import outcobra.server.exception.ValidationKey
-import outcobra.server.model.*
+import outcobra.server.model.domain.*
 import outcobra.server.model.dto.SemesterDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.InstitutionRepository
@@ -55,8 +55,8 @@ class SemesterMapperTest {
         val semesterName = "TestSemester"
         val validFrom = now.minusMonths(6)
         val validTo = now
-        val parentYear = SchoolYear("TestYear", now.minusYears(1), now, SchoolClass(), listOf(), listOf())
-        val subjects = arrayListOf(Subject("TestSemester", Color.randomColor))
+        val parentYear = SchoolYear("TestYear", now.minusYears(1), now, userService.getCurrentUser(), listOf(SchoolClass()), listOf(), listOf())
+        val subjects = listOf(Subject("TestSemester", Color.randomColor))
         return Semester(semesterName, validFrom, validTo, parentYear, subjects)
     }
 
@@ -66,7 +66,7 @@ class SemesterMapperTest {
         institution = institutionRepository.save(institution)
         var schoolClass = SchoolClass("TestSchoolClass2017", institution)
         schoolClass = schoolClassRepository.save(schoolClass)
-        schoolYear = SchoolYear("TestSchoolYear", now.minusYears(1), now, schoolClass, listOf(), listOf())
+        schoolYear = SchoolYear("TestSchoolYear", now.minusYears(1), now, userService.getCurrentUser(), listOf(schoolClass), listOf(), listOf())
         schoolYear = schoolYearRepository.save(schoolYear)
     }
 

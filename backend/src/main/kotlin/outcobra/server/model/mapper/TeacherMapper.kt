@@ -1,8 +1,8 @@
 package outcobra.server.model.mapper
 
 import org.springframework.stereotype.Component
-import outcobra.server.model.QSubject
-import outcobra.server.model.Teacher
+import outcobra.server.model.domain.QSubject
+import outcobra.server.model.domain.Teacher
 import outcobra.server.model.dto.TeacherDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.InstitutionRepository

@@ -2,7 +2,7 @@ package outcobra.server.model.mapper
 
 import org.springframework.stereotype.Component
 import outcobra.server.exception.ValidationKey
-import outcobra.server.model.Color
+import outcobra.server.model.domain.Color
 import outcobra.server.model.dto.ColorDto
 import outcobra.server.model.interfaces.Mapper
 

@@ -1,6 +1,6 @@
 package outcobra.server.service
 
-import outcobra.server.model.Semester
+import outcobra.server.model.domain.Semester
 import outcobra.server.model.dto.SemesterDto
 import outcobra.server.service.base.BaseService
 

@@ -22,7 +22,7 @@ import outcobra.server.config.ProfileRegistry
 import outcobra.server.data.loaders.UserDataLoader
 import outcobra.server.exception.ValidationException
 import outcobra.server.exception.ValidationKey
-import outcobra.server.model.Identity
+import outcobra.server.model.domain.Identity
 import outcobra.server.model.repository.IdentityRepository
 import outcobra.server.model.repository.UserRepository
 import outcobra.server.web.auth.config.AuthRegistry

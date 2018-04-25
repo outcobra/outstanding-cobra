@@ -1,4 +1,4 @@
-package outcobra.server.model
+package outcobra.server.model.domain
 
 import com.querydsl.core.annotations.QueryInit
 import outcobra.server.model.interfaces.ParentLinked
@@ -8,7 +8,8 @@ import javax.validation.constraints.NotNull
 @Entity
 data class Subject(@NotNull var name: String = "",
                    @NotNull @Enumerated(EnumType.STRING) var color: Color? = null,
-                   @ManyToOne @QueryInit("schoolYear.schoolClass.institution.user") var semester: Semester? = null,
+                   @ManyToOne @NotNull var user: User = User(),
+                   @ManyToMany @QueryInit("schoolYear.schoolClass.institution.user") var semesters: List<Semester> = listOf(),
                    @OneToMany(mappedBy = "subject") var timetableEntries: List<TimetableEntry> = listOf(),
                    @OneToMany(mappedBy = "subject") var tasks: List<Task> = listOf(),
                    @OneToMany(mappedBy = "subject") var markReportEntries: List<MarkReportEntry> = listOf(),
@@ -18,5 +19,5 @@ data class Subject(@NotNull var name: String = "",
     : ParentLinked, AbstractEntity() {
 
     override val parent: ParentLinked?
-        get() = semester
+        get() = user
 }

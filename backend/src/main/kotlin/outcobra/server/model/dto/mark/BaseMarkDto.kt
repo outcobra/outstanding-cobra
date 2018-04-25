@@ -1,6 +1,6 @@
 package outcobra.server.model.dto.mark
 
-import outcobra.server.model.Mark
+import outcobra.server.model.domain.Mark
 import outcobra.server.model.interfaces.OutcobraDto
 
 /**

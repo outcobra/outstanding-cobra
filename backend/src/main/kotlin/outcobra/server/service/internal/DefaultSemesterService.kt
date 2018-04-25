@@ -3,9 +3,9 @@ package outcobra.server.service.internal
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 import outcobra.server.exception.ValidationKey
-import outcobra.server.model.QSemester
-import outcobra.server.model.SchoolYear
-import outcobra.server.model.Semester
+import outcobra.server.model.domain.QSemester
+import outcobra.server.model.domain.SchoolYear
+import outcobra.server.model.domain.Semester
 import outcobra.server.model.dto.SemesterDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.SemesterRepository
@@ -45,7 +45,7 @@ class DefaultSemesterService
         val currentUserId = userService.getCurrentUser().id
         val today = LocalDate.now()
         //check ownership manually
-        val withCurrentUser = QSemester.semester.schoolYear.schoolClass.institution.user.id.eq(currentUserId)
+        val withCurrentUser = QSemester.semester.schoolYear.user.id.eq(currentUserId)
         val todayBetweenValidFromAndTo = withCurrentUser.and(QSemester.semester.validFrom.loe(today)
                 .and(QSemester.semester.validTo.goe(today)))
         return repository.findAll(todayBetweenValidFromAndTo).map { mapper.toDto(it) }
@@ -53,7 +53,7 @@ class DefaultSemesterService
 
     override fun readAllByUser(): List<SemesterDto> {
         val currentUserId = userService.getCurrentUser().id
-        val withCurrentUser = QSemester.semester.schoolYear.schoolClass.institution.user.id.eq(currentUserId)
+        val withCurrentUser = QSemester.semester.schoolYear.user.id.eq(currentUserId)
         return repository.findAll(withCurrentUser).map { mapper.toDto(it) }
     }
 }

@@ -10,9 +10,9 @@ import org.springframework.test.context.junit4.SpringRunner
 import outcobra.server.Mocker
 import outcobra.server.config.ProfileRegistry.Companion.TEST
 import outcobra.server.exception.ValidationException
-import outcobra.server.model.Institution
-import outcobra.server.model.QInstitution
-import outcobra.server.model.QUser
+import outcobra.server.model.domain.Institution
+import outcobra.server.model.domain.QInstitution
+import outcobra.server.model.domain.QUser
 import outcobra.server.model.dto.InstitutionDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.InstitutionRepository

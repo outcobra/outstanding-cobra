@@ -13,10 +13,10 @@ import outcobra.server.data.loaders.SubjectDataLoader.Companion.OOP_DESIGN
 import outcobra.server.data.loaders.SubjectDataLoader.Companion.PHYSICS
 import outcobra.server.data.loaders.SubjectDataLoader.Companion.PROJECT
 import outcobra.server.data.loaders.SubjectDataLoader.Companion.SCRUM
-import outcobra.server.model.Mark
-import outcobra.server.model.MarkGroup
-import outcobra.server.model.MarkValue
-import outcobra.server.model.Subject
+import outcobra.server.model.domain.Mark
+import outcobra.server.model.domain.MarkGroup
+import outcobra.server.model.domain.MarkValue
+import outcobra.server.model.domain.Subject
 import outcobra.server.model.repository.MarkGroupRepository
 import outcobra.server.model.repository.MarkValueRepository
 import outcobra.server.model.repository.SubjectRepository

@@ -5,7 +5,7 @@ import org.springframework.core.annotation.Order
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 import outcobra.server.data.DataLoadOrder.USER
-import outcobra.server.model.User
+import outcobra.server.model.domain.User
 import outcobra.server.model.repository.UserRepository
 import outcobra.server.web.auth.AuthService
 import outcobra.server.web.auth.model.UsernamePasswordDto

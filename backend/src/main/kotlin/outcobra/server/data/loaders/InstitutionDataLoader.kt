@@ -4,7 +4,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.core.annotation.Order
 import org.springframework.stereotype.Component
 import outcobra.server.data.DataLoadOrder.INSTITUTION
-import outcobra.server.model.Institution
+import outcobra.server.model.domain.Institution
 import outcobra.server.model.repository.InstitutionRepository
 import javax.inject.Inject
 

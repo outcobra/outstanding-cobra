@@ -8,8 +8,8 @@ import outcobra.server.data.loaders.SchoolClassDataLoader.Companion.BMSI2014_5A
 import outcobra.server.data.loaders.SchoolClassDataLoader.Companion.BMSI2014_5C
 import outcobra.server.data.loaders.SchoolClassDataLoader.Companion.INF2014_5G
 import outcobra.server.data.loaders.SchoolClassDataLoader.Companion.INF2014_5K
-import outcobra.server.model.SchoolClass
-import outcobra.server.model.SchoolYear
+import outcobra.server.model.domain.SchoolClass
+import outcobra.server.model.domain.SchoolYear
 import outcobra.server.model.repository.SchoolYearRepository
 import java.time.LocalDate
 import javax.inject.Inject
@@ -39,7 +39,7 @@ class YearDataLoader
     private fun saveYear(name: String, year: Int, schoolClass: SchoolClass): SchoolYear {
         val startDate = LocalDate.of(year, 8, 1)
         val endDate = LocalDate.of(year + 1, 7, 31)
-        val schoolYear = SchoolYear(name, startDate, endDate, schoolClass, mutableListOf(), mutableListOf())
+        val schoolYear = SchoolYear(name, startDate, endDate, UserDataLoader.TEST_USER!!, listOf(schoolClass), mutableListOf(), mutableListOf())
 
         LOGGER.debug("Saving schoolYear: ${schoolYear.name}")
         return yearRepository.save(schoolYear)

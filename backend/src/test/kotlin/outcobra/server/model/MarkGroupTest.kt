@@ -3,6 +3,9 @@ package outcobra.server.model
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.data.Offset
 import org.junit.Test
+import outcobra.server.model.domain.Mark
+import outcobra.server.model.domain.MarkGroup
+import outcobra.server.model.domain.MarkValue
 import java.util.*
 
 class MarkGroupTest {

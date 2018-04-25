@@ -3,7 +3,7 @@ package outcobra.server.service.internal
 import org.springframework.context.annotation.Profile
 import org.springframework.stereotype.Service
 import outcobra.server.config.ProfileRegistry.Companion.BASIC_AUTH_SECURITY_MOCK
-import outcobra.server.model.User
+import outcobra.server.model.domain.User
 import outcobra.server.model.dto.UserDto
 import outcobra.server.model.mapper.UserMapper
 import outcobra.server.model.repository.UserRepository

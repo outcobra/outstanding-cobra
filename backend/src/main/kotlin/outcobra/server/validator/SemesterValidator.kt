@@ -3,9 +3,9 @@ package outcobra.server.validator
 import org.springframework.stereotype.Component
 import outcobra.server.exception.ValidationException
 import outcobra.server.exception.ValidationKey
-import outcobra.server.model.QSemester
-import outcobra.server.model.SchoolYear
-import outcobra.server.model.Semester
+import outcobra.server.model.domain.QSemester
+import outcobra.server.model.domain.SchoolYear
+import outcobra.server.model.domain.Semester
 import outcobra.server.model.repository.SchoolYearRepository
 import outcobra.server.model.repository.SemesterRepository
 import outcobra.server.util.contains

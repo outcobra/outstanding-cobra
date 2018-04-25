@@ -4,9 +4,9 @@ import io.jsonwebtoken.Claims
 import org.springframework.security.core.context.SecurityContext
 import outcobra.server.exception.ValidationException
 import outcobra.server.exception.ValidationKey
-import outcobra.server.model.SchoolYear
-import outcobra.server.model.Semester
-import outcobra.server.model.User
+import outcobra.server.model.domain.SchoolYear
+import outcobra.server.model.domain.Semester
+import outcobra.server.model.domain.User
 import outcobra.server.model.dto.MarkGroupDto
 import outcobra.server.model.dto.mark.BaseMarkDto
 import outcobra.server.model.interfaces.ParentLinked

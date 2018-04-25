@@ -10,7 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.transaction.annotation.Transactional
 import outcobra.server.config.ProfileRegistry
 import outcobra.server.exception.ValidationKey
-import outcobra.server.model.Color
+import outcobra.server.model.domain.Color
 import outcobra.server.model.dto.ColorDto
 import outcobra.server.model.interfaces.Mapper
 import javax.inject.Inject
