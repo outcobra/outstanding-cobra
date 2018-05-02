@@ -10,8 +10,13 @@ data class Semester(@NotNull var name: String = "",
                     @NotNull var validFrom: LocalDate = LocalDate.now(),
                     @NotNull var validTo: LocalDate = LocalDate.now(),
                     @ManyToOne @NotNull var schoolYear: SchoolYear? = null,
-                    @ManyToMany(mappedBy = "semesters", cascade = [(CascadeType.REMOVE)]) var subjects: List<Subject> = listOf(),
-                    @OneToMany(mappedBy = "semester") var markReports: List<MarkReport> = listOf(),
+
+                    @ManyToMany(cascade = [CascadeType.ALL])
+                    var subjects: List<Subject> = listOf(),
+
+                    @OneToMany(mappedBy = "semester")
+                    var markReports: List<MarkReport> = listOf(),
+
                     @OneToOne var timetable: Timetable? = null)
     : ParentLinked, AbstractEntity() {
     override val parent: ParentLinked?

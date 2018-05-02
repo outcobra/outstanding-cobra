@@ -44,16 +44,16 @@ class DefaultSchoolYearServiceTest {
     lateinit var schoolYearRepository: SchoolYearRepository
 
     val now = LocalDate.now()
-    var institution: Institution? = null
-    var schoolClass: SchoolClass? = null
-    var existing: SchoolYear? = null
+    lateinit var institution: Institution
+    lateinit var schoolClass: SchoolClass
+    lateinit var existing: SchoolYear
     var yearCount = -1L
 
     @Before
     fun setUp() {
         institution = institutionRepository.save(Institution("Test", userService.getCurrentUser()))
         schoolClass = schoolClassRepository.save(SchoolClass("TestClass", institution, mutableListOf()))
-        existing = schoolYearRepository.save(SchoolYear("existing", now, now.plusYears(1), userService.getCurrentUser(), mutableListOf(schoolClass!!), listOf(), listOf()))
+        existing = schoolYearRepository.save(SchoolYear("existing", now, now.plusYears(1), userService.getCurrentUser(), mutableListOf(schoolClass), listOf(), listOf()))
         yearCount = schoolYearRepository.count()
     }
 
@@ -65,16 +65,16 @@ class DefaultSchoolYearServiceTest {
 
     @Test
     fun saveValidUpdate() {
-        existing?.validTo?.plusYears(1)
-        schoolYearService.save(schoolYearMapper.toDto(existing!!))
+        existing.validTo.plusYears(1)
+        schoolYearService.save(schoolYearMapper.toDto(existing))
         assertThat(schoolYearRepository.count()).isEqualTo(yearCount)
     }
 
     @Test
     fun saveInvalidStartEnd() {
-        val from = existing?.validTo?.plusDays(1)
+        val from = existing.validTo.plusDays(1)
         val to = now.plusYears(2)
-        val invalidYear = SchoolYear("invalid", to, from!!, userService.getCurrentUser(), mutableListOf(schoolClass!!), listOf(), listOf())
+        val invalidYear = SchoolYear("invalid", to, from, userService.getCurrentUser(), mutableListOf(schoolClass), listOf(), listOf())
         assertThatThrownBy {
             schoolYearService.save(schoolYearMapper.toDto(invalidYear))
         }.isEqualTo(ValidationKey.START_BIGGER_THAN_END.makeException())
@@ -83,9 +83,9 @@ class DefaultSchoolYearServiceTest {
 
     @Test
     fun saveInvalidOverlap() {
-        val from = existing?.validTo
+        val from = existing.validTo
         val to = now.plusYears(2)
-        val invalidYear = SchoolYear("invalid", from!!, to, userService.getCurrentUser(), mutableListOf(schoolClass!!), listOf(), listOf())
+        val invalidYear = SchoolYear("invalid", from, to, userService.getCurrentUser(), mutableListOf(schoolClass), listOf(), listOf())
         assertThatThrownBy {
             schoolYearService.save(schoolYearMapper.toDto(invalidYear))
         }.isInstanceOf(ValidationException::class.java)
@@ -95,28 +95,27 @@ class DefaultSchoolYearServiceTest {
     @Test
     fun readAllBySchoolClass() {
         assertThat(schoolClass).isNotNull()
-        var count = schoolYearService.readAllBySchoolClass(schoolClassId = schoolClass!!.id).count()
+        var count = schoolYearService.readAllBySchoolClass(schoolClassId = schoolClass.id).count()
         assertThat(count).isEqualTo(1)
         saveValidYear()
-        count = schoolYearService.readAllBySchoolClass(schoolClassId = schoolClass!!.id).count()
+        count = schoolYearService.readAllBySchoolClass(schoolClassId = schoolClass.id).count()
         assertThat(count).isEqualTo(2)
     }
 
     @Test
     fun readById() {
-        assertThat(existing != null)
-        val dto = schoolYearService.readById(existing!!.id)
-        assertThat(dto.id).isEqualTo(existing!!.id)
-        assertThat(dto.name).isEqualTo(existing!!.name)
-        assertThat(dto.validFrom).isEqualTo(existing!!.validFrom)
-        assertThat(dto.validTo).isEqualTo(existing!!.validTo)
-        assertThat(dto.schoolClassIds).contains(schoolClass?.id)
+        val dto = schoolYearService.readById(existing.id)
+        assertThat(dto.id).isEqualTo(existing.id)
+        assertThat(dto.name).isEqualTo(existing.name)
+        assertThat(dto.validFrom).isEqualTo(existing.validFrom)
+        assertThat(dto.validTo).isEqualTo(existing.validTo)
+        assertThat(dto.schoolClassIds).contains(schoolClass.id)
     }
 
     private fun saveValidYear() {
-        val from = existing?.validTo?.plusDays(1)
+        val from = existing.validTo.plusDays(1)
         val to = now.plusYears(2)
-        val validYear = SchoolYear("valid", from!!, to, userService.getCurrentUser(), mutableListOf(schoolClass!!), listOf(), listOf())
+        val validYear = SchoolYear("valid", from, to, userService.getCurrentUser(), mutableListOf(schoolClass), listOf(), listOf())
         schoolYearService.save(schoolYearMapper.toDto(validYear))
     }
 

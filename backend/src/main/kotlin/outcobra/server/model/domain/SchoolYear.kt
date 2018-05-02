@@ -1,6 +1,5 @@
 package outcobra.server.model.domain
 
-import com.querydsl.core.annotations.QueryInit
 import outcobra.server.model.interfaces.ParentLinked
 import java.time.LocalDate
 import javax.persistence.*
@@ -12,12 +11,17 @@ class SchoolYear(
         @NotNull var validFrom: LocalDate = LocalDate.now(),
         @NotNull var validTo: LocalDate = LocalDate.now(),
         @ManyToOne @NotNull var user: User = User(),
-        @QueryInit("institution.user")
-        @ManyToMany(cascade = [(CascadeType.ALL)])
+
+        @ManyToMany(mappedBy = "schoolYears")
         var schoolClasses: MutableList<SchoolClass> = mutableListOf(),
-        @OneToMany(mappedBy = "schoolYear") var holidays: List<Holiday> = listOf(),
-        @OneToMany(mappedBy = "schoolYear", cascade = [(CascadeType.REMOVE)])
-        var semesters: List<Semester> = listOf()) : ParentLinked, AbstractEntity() {
+
+        @OneToMany(mappedBy = "schoolYear", cascade = [(CascadeType.ALL)])
+        var semesters: List<Semester> = listOf(),
+
+        @OneToMany(mappedBy = "schoolYear")
+        var holidays: List<Holiday> = listOf())
+    : ParentLinked, AbstractEntity() {
+
 
     override val parent: ParentLinked?
         get() = user

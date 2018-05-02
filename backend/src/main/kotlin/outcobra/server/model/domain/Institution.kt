@@ -18,9 +18,12 @@ import javax.validation.constraints.NotNull
 @Entity
 data class Institution(@NotNull var name: String = "",
                        @ManyToOne var user: User? = null,
-                       @OneToMany(mappedBy = "institution", cascade = arrayOf(CascadeType.REMOVE))
-                       var schoolClasses: List<SchoolClass>? = null,
-                       @OneToMany(mappedBy = "institution") var teachers: List<Teacher>? = null)
+
+                       @OneToMany(mappedBy = "institution", cascade = [(CascadeType.ALL)])
+                       var schoolClasses: List<SchoolClass> = listOf(),
+
+                       @OneToMany(mappedBy = "institution")
+                       var teachers: List<Teacher> = listOf())
     : ParentLinked, AbstractEntity() {
 
     override val parent: ParentLinked?

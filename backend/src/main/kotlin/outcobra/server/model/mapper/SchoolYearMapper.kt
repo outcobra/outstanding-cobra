@@ -30,7 +30,7 @@ class SchoolYearMapper @Inject constructor(val semesterRepository: SemesterRepos
         val schoolClasses = from.schoolClassIds.map { classRepository.findOne(it) }
         val semesters = from.semesterIds.map { semesterRepository.findOne(it) }
         val user = userRepository.findOne(from.userId)
-        val schoolYear = SchoolYear(from.name, from.validFrom, from.validTo, user, schoolClasses.toMutableList(), holidays, semesters)
+        val schoolYear = SchoolYear(from.name, from.validFrom, from.validTo, user, schoolClasses.toMutableList(), semesters, holidays)
         schoolYear.id = from.id
         return schoolYear
     }

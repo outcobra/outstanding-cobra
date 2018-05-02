@@ -3,7 +3,6 @@ package outcobra.server.service.internal
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 import outcobra.server.exception.ValidationKey
-import outcobra.server.model.domain.QSchoolYear
 import outcobra.server.model.domain.SchoolClass
 import outcobra.server.model.domain.SchoolYear
 import outcobra.server.model.dto.SchoolYearDto
@@ -34,8 +33,9 @@ class DefaultSchoolYearService
 
     override fun readAllBySchoolClass(schoolClassId: Long): List<SchoolYearDto> {
         requestValidator.validateRequestById(schoolClassId, SchoolClass::class)
-        val filter = QSchoolYear.schoolYear.schoolClasses.any().id.eq(schoolClassId)
-        return repository.findAll(filter).map { mapper.toDto(it) }
+        //val filter = QSchoolYear.schoolYear.schoolClasses.any().id.eq(schoolClassId)
+        //return repository.findAll(filter).map { mapper.toDto(it) }
+        return repository.findBySchoolClassesId(schoolClassId).map { mapper.toDto(it) }
     }
 
 }

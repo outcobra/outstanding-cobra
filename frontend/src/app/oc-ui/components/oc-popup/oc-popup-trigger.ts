@@ -1,5 +1,11 @@
 import {
-    AfterContentInit, Directive, ElementRef, HostListener, Input, OnDestroy, OnInit,
+    AfterContentInit,
+    Directive,
+    ElementRef,
+    HostListener,
+    Input,
+    OnDestroy,
+    OnInit,
     ViewContainerRef
 } from '@angular/core';
 import {OCPopup} from './oc-popup';
@@ -21,7 +27,7 @@ import {merge} from 'rxjs/observable/merge';
 })
 export class OCPopupTrigger implements OnInit, OnDestroy, AfterContentInit {
     private _overlayRef: OverlayRef;
-    private _portal: TemplatePortal;
+    private _portal: TemplatePortal<any>;
 
     private _popupOpen: boolean = false;
 
