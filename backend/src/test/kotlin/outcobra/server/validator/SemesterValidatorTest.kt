@@ -47,7 +47,7 @@ class SemesterValidatorTest {
     fun setUp() {
         if (schoolClass == null) {
             schoolClass = schoolClassRepository.findAll().first()
-            schoolYear = schoolYearRepository.save(SchoolYear("", now, now.plusYears(1), userService.getCurrentUser(), listOf(SchoolClass()), listOf(), listOf()))
+            schoolYear = schoolYearRepository.save(SchoolYear("", now, now.plusYears(1), userService.getCurrentUser(), mutableListOf(SchoolClass()), listOf(), listOf()))
             existing = semesterRepository.save(Semester("", now, now.plusMonths(6), schoolYear, listOf(), listOf(), null))
         }
     }

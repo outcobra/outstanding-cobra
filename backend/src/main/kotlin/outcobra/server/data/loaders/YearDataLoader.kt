@@ -39,7 +39,7 @@ class YearDataLoader
     private fun saveYear(name: String, year: Int, schoolClass: SchoolClass): SchoolYear {
         val startDate = LocalDate.of(year, 8, 1)
         val endDate = LocalDate.of(year + 1, 7, 31)
-        val schoolYear = SchoolYear(name, startDate, endDate, UserDataLoader.TEST_USER!!, listOf(schoolClass), mutableListOf(), mutableListOf())
+        val schoolYear = SchoolYear(name, startDate, endDate, UserDataLoader.TEST_USER!!, mutableListOf(schoolClass), mutableListOf(), mutableListOf())
 
         LOGGER.debug("Saving schoolYear: ${schoolYear.name}")
         return yearRepository.save(schoolYear)

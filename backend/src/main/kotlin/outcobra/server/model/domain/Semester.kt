@@ -1,6 +1,5 @@
 package outcobra.server.model.domain
 
-import com.querydsl.core.annotations.QueryInit
 import outcobra.server.model.interfaces.ParentLinked
 import java.time.LocalDate
 import javax.persistence.*

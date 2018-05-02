@@ -46,7 +46,7 @@ class SchoolYearValidatorTest {
     fun before() {
         val institution = Institution("TEST", userService.getCurrentUser())
         schoolClass = SchoolClass("tester", institution, listOf())
-        existing = SchoolYear("existing", now, now.plusYears(1), userService.getCurrentUser(), listOf(schoolClass), listOf(), listOf())
+        existing = SchoolYear("existing", now, now.plusYears(1), userService.getCurrentUser(), mutableListOf(schoolClass), listOf(), listOf())
 
         institutionRepository.save(institution)
         classRepository.save(schoolClass)
@@ -55,13 +55,13 @@ class SchoolYearValidatorTest {
 
     @Test
     fun testValidCreation() {
-        val toCreate = SchoolYear("valid", now.minusYears(1), now.minusDays(1), userService.getCurrentUser(), listOf(schoolClass), listOf(), listOf())
+        val toCreate = SchoolYear("valid", now.minusYears(1), now.minusDays(1), userService.getCurrentUser(), mutableListOf(schoolClass), listOf(), listOf())
         assertThat(validator.validateSchoolYearCreation(toCreate)).isTrue()
     }
 
     @Test
     fun testInvalidWithSameDates() {
-        val toCreate = SchoolYear("invalid", now, now.plusYears(1), userService.getCurrentUser(), listOf(schoolClass), listOf(), listOf())
+        val toCreate = SchoolYear("invalid", now, now.plusYears(1), userService.getCurrentUser(), mutableListOf(schoolClass), listOf(), listOf())
         assertThat(validator.validateSchoolYearCreation(toCreate)).isFalse()
     }
 }

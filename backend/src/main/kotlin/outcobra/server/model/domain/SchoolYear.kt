@@ -12,11 +12,12 @@ class SchoolYear(
         @NotNull var validFrom: LocalDate = LocalDate.now(),
         @NotNull var validTo: LocalDate = LocalDate.now(),
         @ManyToOne @NotNull var user: User = User(),
-        @QueryInit("institution.user") @ManyToMany var schoolClasses: List<SchoolClass> = listOf(),
+        @QueryInit("institution.user")
+        @ManyToMany(cascade = [(CascadeType.ALL)]) var schoolClasses: MutableList<SchoolClass> = mutableListOf(),
         @OneToMany(mappedBy = "schoolYear") var holidays: List<Holiday> = listOf(),
         @OneToMany(mappedBy = "schoolYear", cascade = [(CascadeType.REMOVE)])
         var semesters: List<Semester> = listOf()) : ParentLinked, AbstractEntity() {
 
-        override val parent: ParentLinked?
-                get() = user
+    override val parent: ParentLinked?
+        get() = user
 }

@@ -1,7 +1,10 @@
 package outcobra.server.model.mapper
 
 import org.springframework.stereotype.Component
-import outcobra.server.model.domain.*
+import outcobra.server.model.domain.QHoliday
+import outcobra.server.model.domain.SchoolYear
+import outcobra.server.model.domain.Semester
+import outcobra.server.model.domain.User
 import outcobra.server.model.dto.SchoolYearDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.HolidayRepository
@@ -27,7 +30,7 @@ class SchoolYearMapper @Inject constructor(val semesterRepository: SemesterRepos
         val schoolClasses = from.schoolClassIds.map { classRepository.findOne(it) }
         val semesters = from.semesterIds.map { semesterRepository.findOne(it) }
         val user = userRepository.findOne(from.userId)
-        val schoolYear = SchoolYear(from.name, from.validFrom, from.validTo, user, schoolClasses, holidays, semesters)
+        val schoolYear = SchoolYear(from.name, from.validFrom, from.validTo, user, schoolClasses.toMutableList(), holidays, semesters)
         schoolYear.id = from.id
         return schoolYear
     }

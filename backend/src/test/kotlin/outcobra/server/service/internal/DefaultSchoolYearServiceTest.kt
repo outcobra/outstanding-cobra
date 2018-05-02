@@ -53,7 +53,7 @@ class DefaultSchoolYearServiceTest {
     fun setUp() {
         institution = institutionRepository.save(Institution("Test", userService.getCurrentUser()))
         schoolClass = schoolClassRepository.save(SchoolClass("TestClass", institution, listOf()))
-        existing = schoolYearRepository.save(SchoolYear("existing", now, now.plusYears(1), userService.getCurrentUser(), listOf(schoolClass!!), listOf(), listOf()))
+        existing = schoolYearRepository.save(SchoolYear("existing", now, now.plusYears(1), userService.getCurrentUser(), mutableListOf(schoolClass!!), listOf(), listOf()))
         yearCount = schoolYearRepository.count()
     }
 
@@ -74,7 +74,7 @@ class DefaultSchoolYearServiceTest {
     fun saveInvalidStartEnd() {
         val from = existing?.validTo?.plusDays(1)
         val to = now.plusYears(2)
-        val invalidYear = SchoolYear("invalid", to, from!!, userService.getCurrentUser(), listOf(schoolClass!!), listOf(), listOf())
+        val invalidYear = SchoolYear("invalid", to, from!!, userService.getCurrentUser(), mutableListOf(schoolClass!!), listOf(), listOf())
         assertThatThrownBy {
             schoolYearService.save(schoolYearMapper.toDto(invalidYear))
         }.isEqualTo(ValidationKey.START_BIGGER_THAN_END.makeException())
@@ -85,7 +85,7 @@ class DefaultSchoolYearServiceTest {
     fun saveInvalidOverlap() {
         val from = existing?.validTo
         val to = now.plusYears(2)
-        val invalidYear = SchoolYear("invalid", from!!, to, userService.getCurrentUser(), listOf(schoolClass!!), listOf(), listOf())
+        val invalidYear = SchoolYear("invalid", from!!, to, userService.getCurrentUser(), mutableListOf(schoolClass!!), listOf(), listOf())
         assertThatThrownBy {
             schoolYearService.save(schoolYearMapper.toDto(invalidYear))
         }.isInstanceOf(ValidationException::class.java)
@@ -116,7 +116,7 @@ class DefaultSchoolYearServiceTest {
     private fun saveValidYear() {
         val from = existing?.validTo?.plusDays(1)
         val to = now.plusYears(2)
-        val validYear = SchoolYear("valid", from!!, to, userService.getCurrentUser(), listOf(schoolClass!!), listOf(), listOf())
+        val validYear = SchoolYear("valid", from!!, to, userService.getCurrentUser(), mutableListOf(schoolClass!!), listOf(), listOf())
         schoolYearService.save(schoolYearMapper.toDto(validYear))
     }
 
