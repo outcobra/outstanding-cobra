@@ -29,9 +29,9 @@ import javax.inject.Inject
 @Component
 @Order(EXAM)
 class ExamDataLoader @Inject constructor(val examRepository: ExamRepository) : DataLoader {
-    private val LOGGER = LoggerFactory.getLogger(ExamDataLoader::class.java)
-
     companion object {
+        private val LOGGER = LoggerFactory.getLogger(ExamDataLoader::class.java)
+
         var SCRUM_EXAM = Exam("fake daily", LocalDate.now().minusWeeks(1), listOf(),
                 null, MarkValue(getRandomMark(), getRandomWeight(), null, ""), "")
         var OOP_EXAM = Exam("KR", LocalDate.now().plusWeeks(1), listOf(),

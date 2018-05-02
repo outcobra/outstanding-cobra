@@ -52,7 +52,7 @@ class DefaultSchoolYearServiceTest {
     @Before
     fun setUp() {
         institution = institutionRepository.save(Institution("Test", userService.getCurrentUser()))
-        schoolClass = schoolClassRepository.save(SchoolClass("TestClass", institution, listOf()))
+        schoolClass = schoolClassRepository.save(SchoolClass("TestClass", institution, mutableListOf()))
         existing = schoolYearRepository.save(SchoolYear("existing", now, now.plusYears(1), userService.getCurrentUser(), mutableListOf(schoolClass!!), listOf(), listOf()))
         yearCount = schoolYearRepository.count()
     }

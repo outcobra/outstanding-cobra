@@ -27,7 +27,7 @@ class SchoolClassMapper @Inject constructor(val schoolYearRepository: SchoolYear
     override fun fromDto(from: SchoolClassDto): SchoolClass {
         validateChildren(from.schoolYearIds, SchoolYear::class, from.institutionId, Institution::class)
         val institution = institutionRepository.findOne(from.institutionId)
-        val years = from.schoolYearIds.map { schoolYearRepository.findOne(it) }
+        val years = from.schoolYearIds.map { schoolYearRepository.findOne(it) }.toMutableList()
         val schoolClass = SchoolClass(from.normalizedName, institution, years)
         schoolClass.id = from.id
         return schoolClass

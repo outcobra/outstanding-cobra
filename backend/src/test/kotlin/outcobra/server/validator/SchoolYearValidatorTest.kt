@@ -45,7 +45,7 @@ class SchoolYearValidatorTest {
     @Before
     fun before() {
         val institution = Institution("TEST", userService.getCurrentUser())
-        schoolClass = SchoolClass("tester", institution, listOf())
+        schoolClass = SchoolClass("tester", institution, mutableListOf())
         existing = SchoolYear("existing", now, now.plusYears(1), userService.getCurrentUser(), mutableListOf(schoolClass), listOf(), listOf())
 
         institutionRepository.save(institution)

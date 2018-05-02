@@ -48,7 +48,7 @@ class SemesterMapperTest {
     lateinit var userService: UserService
 
     private val now = LocalDate.now()
-    private val baseSemester = createBasicSemester()
+    private lateinit var baseSemester: Semester
     private var schoolYear: SchoolYear? = null
 
     private fun createBasicSemester(): Semester {
@@ -62,6 +62,7 @@ class SemesterMapperTest {
 
     @Before
     fun saveRequiredEntities() {
+        baseSemester = createBasicSemester()
         var institution = Institution("TestInstitution", userService.getCurrentUser())
         institution = institutionRepository.save(institution)
         var schoolClass = SchoolClass("TestSchoolClass2017", institution)
