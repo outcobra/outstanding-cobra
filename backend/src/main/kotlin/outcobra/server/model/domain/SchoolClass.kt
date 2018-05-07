@@ -9,9 +9,11 @@ import javax.validation.constraints.NotNull
 
 @Entity(name = "class")
 class SchoolClass(@NotNull var normalizedName: String = "",
-                  @ManyToOne var institution: Institution? = null,
 
-                  @ManyToMany(cascade = [CascadeType.ALL])
+                  @ManyToOne
+                  var institution: Institution? = null,
+
+                  @ManyToMany(mappedBy = "schoolClasses")
                   var schoolYears: MutableList<SchoolYear> = mutableListOf())
     : ParentLinked, AbstractEntity() {
 

@@ -19,7 +19,7 @@ import javax.validation.constraints.NotNull
 data class Institution(@NotNull var name: String = "",
                        @ManyToOne var user: User? = null,
 
-                       @OneToMany(mappedBy = "institution", cascade = [(CascadeType.ALL)])
+                       @OneToMany(mappedBy = "institution")
                        var schoolClasses: List<SchoolClass> = listOf(),
 
                        @OneToMany(mappedBy = "institution")

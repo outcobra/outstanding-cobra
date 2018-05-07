@@ -9,9 +9,11 @@ import javax.validation.constraints.NotNull
 data class Semester(@NotNull var name: String = "",
                     @NotNull var validFrom: LocalDate = LocalDate.now(),
                     @NotNull var validTo: LocalDate = LocalDate.now(),
-                    @ManyToOne @NotNull var schoolYear: SchoolYear? = null,
 
-                    @ManyToMany(cascade = [CascadeType.ALL])
+                    @ManyToOne @NotNull
+                    var schoolYear: SchoolYear? = null,
+
+                    @ManyToMany(mappedBy = "semesters")
                     var subjects: List<Subject> = listOf(),
 
                     @OneToMany(mappedBy = "semester")

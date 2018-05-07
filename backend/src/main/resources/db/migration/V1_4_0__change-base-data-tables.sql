@@ -1,11 +1,11 @@
 # region DDL buildup
-CREATE TABLE class_school_year (
+CREATE TABLE school_year_school_class (
   id             BIGINT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  class_id       BIGINT(20) NOT NULL,
   school_year_id BIGINT(20) NOT NULL,
-  CONSTRAINT fk_class_school_year_class
-  FOREIGN KEY (class_id) REFERENCES class (id),
-  CONSTRAINT fk_class_school_year_school_year
+  school_class_id       BIGINT(20) NOT NULL,
+  CONSTRAINT fk_school_year_school_class_class
+  FOREIGN KEY (school_class_id) REFERENCES class (id),
+  CONSTRAINT fk_school_year_school_class_school_year
   FOREIGN KEY (school_year_id) REFERENCES school_year (id)
 );
 
@@ -31,6 +31,8 @@ FOREIGN KEY (user_id) REFERENCES user (id);
 # endregion
 
 # region DML transfer
+DELIMITER $
+
 CREATE PROCEDURE UPDATE_BASE_DATA()
   BEGIN
     DECLARE user BIGINT(20);
@@ -75,7 +77,7 @@ CREATE PROCEDURE UPDATE_BASE_DATA()
         LEAVE classYearLoop;
       END IF;
 
-      INSERT INTO class_year (class_id, school_year_id) VALUES (class, year);
+      INSERT INTO school_year_school_class (school_year_id, school_class_id) VALUES (year, class);
       UPDATE school_year SET user_id = user where id = year;
     END LOOP;
 
@@ -95,7 +97,8 @@ CREATE PROCEDURE UPDATE_BASE_DATA()
 
     CLOSE user_class_year;
     CLOSE user_semester_subject;
-  END;
+  END$
+DELIMITER ;
 
 CALL UPDATE_BASE_DATA();
 COMMIT;

@@ -7,9 +7,12 @@ import javax.validation.constraints.NotNull
 @Entity
 data class Subject(@NotNull var name: String = "",
                    @NotNull @Enumerated(EnumType.STRING) var color: Color? = null,
-                   @ManyToOne @NotNull var user: User = User(),
 
-                   @ManyToMany(mappedBy = "subjects")
+                   @ManyToOne @NotNull
+                   var user: User = User(),
+
+                   @ManyToMany
+                   @JoinTable(name = "semester_subject", joinColumns = [JoinColumn(name = "subject_id")], inverseJoinColumns = [JoinColumn(name = "semester_id")])
                    var semesters: List<Semester> = listOf(),
 
                    @OneToMany(mappedBy = "subject")
@@ -24,8 +27,11 @@ data class Subject(@NotNull var name: String = "",
                    @OneToMany(mappedBy = "subject")
                    var exams: List<Exam> = listOf(),
 
-                   @OneToOne var markGroup: MarkGroup? = null,
-                   @ManyToOne var teacher: Teacher? = null)
+                   @OneToOne
+                   var markGroup: MarkGroup? = null,
+
+                   @ManyToOne
+                   var teacher: Teacher? = null)
     : ParentLinked, AbstractEntity() {
 
     override val parent: ParentLinked?

@@ -10,9 +10,11 @@ class SchoolYear(
         @NotNull var name: String = "",
         @NotNull var validFrom: LocalDate = LocalDate.now(),
         @NotNull var validTo: LocalDate = LocalDate.now(),
-        @ManyToOne @NotNull var user: User = User(),
+        @ManyToOne @NotNull
+        var user: User = User(),
 
-        @ManyToMany(mappedBy = "schoolYears")
+        @ManyToMany
+        @JoinTable(name = "school_year_school_class", joinColumns = [JoinColumn(name = "school_year_id")], inverseJoinColumns = [JoinColumn(name = "school_class_id")])
         var schoolClasses: MutableList<SchoolClass> = mutableListOf(),
 
         @OneToMany(mappedBy = "schoolYear", cascade = [(CascadeType.ALL)])
