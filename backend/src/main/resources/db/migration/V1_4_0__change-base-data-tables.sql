@@ -107,4 +107,9 @@ DROP PROCEDURE UPDATE_BASE_DATA;
 # endregion
 
 # region DDL cleanup
+ALTER TABLE subject
+    DROP COLUMN semester_id;
+
+ALTER TABLE school_year
+    DROP COLUMN school_class_id;
 # endregion

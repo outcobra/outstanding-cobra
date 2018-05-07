@@ -68,7 +68,7 @@ class RequestValidatorTest {
     fun testFakeChild() {
         assertThatThrownBy {
             val original = institutionMapper.toDto(institutionByUser2)
-            val cuckooChild = institutionByCurrent.schoolClasses!!.first()
+            val cuckooChild = institutionByCurrent.schoolClasses.first()
             val fake = InstitutionDto(original.id, original.userId, original.name, arrayListOf(cuckooChild.id))
             institutionService.save(fake)
         }.isInstanceOf(ValidationException::class.java)
