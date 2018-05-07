@@ -7,8 +7,6 @@ import outcobra.server.data.DataLoadOrder.SEMESTER
 import outcobra.server.data.loaders.YearDataLoader.Companion.YEAR1
 import outcobra.server.data.loaders.YearDataLoader.Companion.YEAR2
 import outcobra.server.data.loaders.YearDataLoader.Companion.YEAR3
-import outcobra.server.data.loaders.YearDataLoader.Companion.YEAR4
-import outcobra.server.data.loaders.YearDataLoader.Companion.YEAR5
 import outcobra.server.model.domain.SchoolYear
 import outcobra.server.model.domain.Semester
 import outcobra.server.model.repository.SemesterRepository
@@ -27,15 +25,12 @@ import javax.inject.Inject
 class SemesterDataLoader
 @Inject constructor(val semesterRepository: SemesterRepository) : DataLoader {
     companion object {
-        lateinit var SEMESTER1: Semester
-        lateinit var SEMESTER2: Semester
-        lateinit var SEMESTER3: Semester
-        lateinit var SEMESTER4: Semester
-        lateinit var SEMESTER5: Semester
-        lateinit var SEMESTER6: Semester
-        lateinit var SEMESTER7: Semester
-        lateinit var SEMESTER8: Semester
-        lateinit var SEMESTER9: Semester
+        lateinit var SEMESTER2016_1: Semester
+        lateinit var SEMESTER2017_1: Semester
+        lateinit var SEMESTER2018_1: Semester
+        lateinit var SEMESTER2016_2: Semester
+        lateinit var SEMESTER2017_2: Semester
+        lateinit var SEMESTER2018_2: Semester
 
         private val LOGGER = LoggerFactory.getLogger(SemesterDataLoader::class.java)
     }
@@ -51,14 +46,11 @@ class SemesterDataLoader
     }
 
     override fun load() {
-        SEMESTER1 = saveSemester("1. Semester 16/17", LocalDate.of(2016, 8, 1), YEAR1)
-        SEMESTER2 = saveSemester("1. Semester 17/18", LocalDate.of(2017, 8, 1), YEAR2)
-        SEMESTER3 = saveSemester("1. Semester 18/19", LocalDate.of(2018, 8, 1), YEAR3)
-        SEMESTER4 = saveSemester("1. Semester 19/20", LocalDate.of(2019, 8, 1), YEAR4)
-        SEMESTER5 = saveSemester("2. Semester 16/17", LocalDate.of(2017, 2, 1), YEAR1)
-        SEMESTER6 = saveSemester("2. Semester 17/18", LocalDate.of(2018, 2, 1), YEAR2)
-        SEMESTER7 = saveSemester("2. Semester 18/19", LocalDate.of(2019, 2, 1), YEAR3)
-        SEMESTER8 = saveSemester("2. Semester 19/20", LocalDate.of(2020, 2, 1), YEAR4)
-        SEMESTER9 = saveSemester("1. Semester 16/17", LocalDate.of(2016, 8, 1), YEAR5)
+        SEMESTER2016_1 = saveSemester("1. Semester 16/17", LocalDate.of(2016, 8, 1), YEAR1)
+        SEMESTER2016_2 = saveSemester("2. Semester 16/17", LocalDate.of(2017, 2, 1), YEAR1)
+        SEMESTER2017_1 = saveSemester("1. Semester 17/18", LocalDate.of(2017, 8, 1), YEAR2)
+        SEMESTER2017_2 = saveSemester("2. Semester 17/18", LocalDate.of(2018, 2, 1), YEAR2)
+        SEMESTER2018_1 = saveSemester("1. Semester 18/19", LocalDate.of(2018, 8, 1), YEAR3)
+        SEMESTER2018_2 = saveSemester("2. Semester 18/19", LocalDate.of(2019, 2, 1), YEAR3)
     }
 }

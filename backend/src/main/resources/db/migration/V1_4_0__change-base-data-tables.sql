@@ -1,22 +1,32 @@
 # region DDL buildup
 CREATE TABLE school_year_school_class (
-  id             BIGINT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  school_year_id BIGINT(20) NOT NULL,
-  school_class_id       BIGINT(20) NOT NULL,
+  id              BIGINT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  school_year_id  BIGINT(20) NOT NULL,
+  school_class_id BIGINT(20) NOT NULL,
   CONSTRAINT fk_school_year_school_class_class
   FOREIGN KEY (school_class_id) REFERENCES class (id),
   CONSTRAINT fk_school_year_school_class_school_year
   FOREIGN KEY (school_year_id) REFERENCES school_year (id)
 );
 
-CREATE TABLE semester_subject (
+CREATE TABLE subject_semester (
   id          BIGINT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   semester_id BIGINT(20) NOT NULL,
   subject_id  BIGINT(20) NOT NULL,
-  CONSTRAINT fk_semester_subject_semester
+  CONSTRAINT fk_subject_semester_semester
   FOREIGN KEY (semester_id) REFERENCES semester (id),
-  CONSTRAINT fk_semester_subject_subject
+  CONSTRAINT fk_subject_semester_subject
   FOREIGN KEY (subject_id) REFERENCES subject (id)
+);
+
+CREATE TABLE subject_school_class (
+  id              BIGINT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  subject_id      BIGINT(20) NOT NULL,
+  school_class_id BIGINT(20) NOT NULL,
+  CONSTRAINT fk_subject_school_class_subject
+  FOREIGN KEY (subject_id) REFERENCES subject (id),
+  CONSTRAINT fk_subject_school_class_school_class
+  FOREIGN KEY (school_class_id) REFERENCES class (id)
 );
 
 ALTER TABLE school_year
@@ -53,7 +63,7 @@ CREATE PROCEDURE UPDATE_BASE_DATA()
         JOIN school_year sy ON c.id = sy.school_class_id
     );
 
-    DECLARE user_semester_subject CURSOR FOR (
+    DECLARE user_subject_semester CURSOR FOR (
       SELECT
         u.id  AS user_id,
         se.id AS semester_id,
@@ -64,6 +74,16 @@ CREATE PROCEDURE UPDATE_BASE_DATA()
         JOIN school_year sy ON c.id = sy.school_class_id
         JOIN semester se ON sy.id = se.school_year_id
         JOIN subject su ON se.id = su.semester_id
+    );
+
+    DECLARE subject_school_class CURSOR FOR (
+      SELECT
+        s.id,
+        c.id
+      FROM subject s
+        JOIN semester se ON s.semester_id = se.id
+        JOIN school_year sy ON se.school_year_id = sy.id
+        JOIN class c ON sy.school_class_id = c.id
     );
 
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
@@ -78,25 +98,42 @@ CREATE PROCEDURE UPDATE_BASE_DATA()
       END IF;
 
       INSERT INTO school_year_school_class (school_year_id, school_class_id) VALUES (year, class);
-      UPDATE school_year SET user_id = user where id = year;
+      UPDATE school_year
+      SET user_id = user
+      WHERE id = year;
     END LOOP;
 
     SET done = 0;
-    OPEN user_semester_subject;
+    OPEN user_subject_semester;
     semesterSubjectLoop: LOOP
-      FETCH user_semester_subject
+      FETCH user_subject_semester
       INTO user, semester, subject;
       IF done = 1
       THEN
         LEAVE semesterSubjectLoop;
       END IF;
 
-      INSERT INTO semester_subject (semester_id, subject_id) VALUES (semester, subject);
-      UPDATE subject SET user_id = user where id = subject;
+      INSERT INTO subject_semester (semester_id, subject_id) VALUES (semester, subject);
+      UPDATE subject
+      SET user_id = user
+      WHERE id = subject;
+    END LOOP;
+    SET done = 0;
+
+    OPEN subject_school_class;
+    subjectSchoolClassLoop: LOOP
+      FETCH subject_school_class
+      INTO subject, class;
+      IF done = 1
+      THEN
+        LEAVE subjectSchoolClassLoop;
+      END IF;
+
+      INSERT INTO subject_school_class (subject_id, school_class_id) VALUES (subject, class);
     END LOOP;
 
     CLOSE user_class_year;
-    CLOSE user_semester_subject;
+    CLOSE user_subject_semester;
   END$
 DELIMITER ;
 
@@ -108,8 +145,10 @@ DROP PROCEDURE UPDATE_BASE_DATA;
 
 # region DDL cleanup
 ALTER TABLE subject
-    DROP COLUMN semester_id;
+  DROP FOREIGN KEY fk_subject_semester,
+  DROP COLUMN semester_id;
 
 ALTER TABLE school_year
-    DROP COLUMN school_class_id;
+  DROP FOREIGN KEY fk_school_year_class,
+  DROP COLUMN school_class_id;
 # endregion

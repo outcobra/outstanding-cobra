@@ -33,7 +33,7 @@ class SchoolClassDataLoader
     override fun shouldLoad() = true
 
     private fun saveSchoolClass(normalizedName: String, institution: Institution): SchoolClass {
-        val schoolClass = SchoolClass(normalizedName, institution, arrayListOf())
+        val schoolClass = SchoolClass(normalizedName, institution)
 
         LOGGER.debug("Saving schoolClass: ${schoolClass.normalizedName}")
         return schoolClassRepository.save(schoolClass)

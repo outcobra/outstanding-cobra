@@ -4,7 +4,18 @@ import org.slf4j.LoggerFactory
 import org.springframework.core.annotation.Order
 import org.springframework.stereotype.Component
 import outcobra.server.data.DataLoadOrder.SUBJECT
+import outcobra.server.data.loaders.SchoolClassDataLoader.Companion.BMSI2014_5A
+import outcobra.server.data.loaders.SchoolClassDataLoader.Companion.BMSI2014_5C
+import outcobra.server.data.loaders.SchoolClassDataLoader.Companion.INF2014_5G
+import outcobra.server.data.loaders.SchoolClassDataLoader.Companion.INF2014_5K
+import outcobra.server.data.loaders.SemesterDataLoader.Companion.SEMESTER2016_1
+import outcobra.server.data.loaders.SemesterDataLoader.Companion.SEMESTER2016_2
+import outcobra.server.data.loaders.SemesterDataLoader.Companion.SEMESTER2017_1
+import outcobra.server.data.loaders.SemesterDataLoader.Companion.SEMESTER2017_2
+import outcobra.server.data.loaders.SemesterDataLoader.Companion.SEMESTER2018_1
+import outcobra.server.data.loaders.SemesterDataLoader.Companion.SEMESTER2018_2
 import outcobra.server.model.domain.Color
+import outcobra.server.model.domain.SchoolClass
 import outcobra.server.model.domain.Semester
 import outcobra.server.model.domain.Subject
 import outcobra.server.model.repository.SubjectRepository
@@ -36,22 +47,23 @@ class SubjectDataLoader
 
     override fun shouldLoad() = true
 
-    private fun saveSubject(name: String, semester: Semester): Subject {
-        val subject = Subject(name, Color.randomColor, UserDataLoader.TEST_USER!!, listOf(semester), mutableListOf(), mutableListOf(), mutableListOf(), mutableListOf(), null, null)
+    private fun saveSubject(name: String, semesters: MutableList<Semester>, classes: MutableList<SchoolClass>): Subject {
+        val subject = Subject(name, Color.randomColor, UserDataLoader.TEST_USER!!, semesters, classes, mutableListOf(), mutableListOf(), mutableListOf(), mutableListOf(), null, null)
 
         LOGGER.debug("Saving subject: ${subject.name}")
         return subjectRepository.save(subject)
     }
 
     override fun load() {
-        SCRUM = saveSubject("Scrum", SemesterDataLoader.SEMESTER1)
-        OOP = saveSubject("Objektorientiert implementieren", SemesterDataLoader.SEMESTER2)
-        GUP = saveSubject("Geschichte und Politik", SemesterDataLoader.SEMESTER3)
-        PHYSICS = saveSubject("Physik", SemesterDataLoader.SEMESTER4)
-        OOP_DESIGN = saveSubject("Objektorientiert entwerfen", SemesterDataLoader.SEMESTER5)
-        PROJECT = saveSubject("IT-Kleinprojekt", SemesterDataLoader.SEMESTER6)
-        MATHS = saveSubject("Math", SemesterDataLoader.SEMESTER7)
-        GERMAN = saveSubject("Deutsch", SemesterDataLoader.SEMESTER8)
-        DATABASES = saveSubject("Datenbanken", SemesterDataLoader.SEMESTER9)
+        SCRUM = saveSubject("Scrum", arrayListOf(SEMESTER2016_1), arrayListOf(INF2014_5G, INF2014_5K))
+        OOP = saveSubject("Objektorientiert implementieren", arrayListOf(SEMESTER2016_2), arrayListOf(INF2014_5G, INF2014_5K))
+        OOP_DESIGN = saveSubject("Objektorientiert entwerfen", arrayListOf(SEMESTER2016_2), arrayListOf(INF2014_5G, INF2014_5K))
+        PROJECT = saveSubject("IT-Kleinprojekt", arrayListOf(SEMESTER2017_2), arrayListOf(INF2014_5K))
+        DATABASES = saveSubject("Datenbanken", arrayListOf(SEMESTER2018_2), arrayListOf(INF2014_5K))
+
+        PHYSICS = saveSubject("Physik", arrayListOf(SEMESTER2017_1), arrayListOf(BMSI2014_5C))
+        GERMAN = saveSubject("Deutsch", arrayListOf(SEMESTER2017_1), arrayListOf(BMSI2014_5C))
+        GUP = saveSubject("Geschichte und Politik", arrayListOf(SEMESTER2018_1), arrayListOf(BMSI2014_5A))
+        MATHS = saveSubject("Math", arrayListOf(SEMESTER2018_2), arrayListOf(BMSI2014_5A))
     }
 }

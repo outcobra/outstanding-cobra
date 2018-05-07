@@ -7,7 +7,8 @@ import outcobra.server.model.interfaces.ParentLink
 data class SchoolClassDto(val id: Long = 0,
                           val institutionId: Long = 0,
                           val normalizedName: String = "",
-                          val schoolYearIds: List<Long> = arrayListOf()) : OutcobraDto {
+                          val schoolYearIds: List<Long> = arrayListOf(),
+                          val subjectIds: List<Long> = arrayListOf()) : OutcobraDto {
 
     override val identifier: Long
         get() = id

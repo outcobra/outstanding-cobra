@@ -1,7 +1,10 @@
 package outcobra.server.model.mapper
 
 import org.springframework.stereotype.Component
-import outcobra.server.model.domain.*
+import outcobra.server.model.domain.QExam
+import outcobra.server.model.domain.QMarkGroup
+import outcobra.server.model.domain.QTask
+import outcobra.server.model.domain.Subject
 import outcobra.server.model.dto.SubjectDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.*
@@ -13,6 +16,7 @@ import javax.inject.Inject
  */
 @Component
 class SubjectMapper @Inject constructor(val semesterRepository: SemesterRepository,
+                                        val classRepository: SchoolClassRepository,
                                         val taskRepository: TaskRepository,
                                         val examRepository: ExamRepository,
                                         val markGroupRepository: MarkGroupRepository,
@@ -30,16 +34,18 @@ class SubjectMapper @Inject constructor(val semesterRepository: SemesterReposito
         val exams = examRepository.findAll(QExam.exam.subject.id.eq(id)).toList()
         val markGroup = markGroupRepository.findOne(QMarkGroup.markGroup1.id.eq(id))
         val semesters = from.semesterIds.map { semesterRepository.findOne(it) }
+        val classes = from.classIds.map { classRepository.findOne(it) }
         val user = userRepository.findOne(from.userId)
-        val subject = Subject(from.name, colorMapper.fromDto(from.color), user, semesters, listOf(), tasks, listOf(), exams, markGroup, null)
+        val subject = Subject(from.name, colorMapper.fromDto(from.color), user, semesters, classes, listOf(), tasks, listOf(), exams, markGroup, null)
         subject.id = from.identifier
         return subject
     }
 
     override fun toDto(from: Subject): SubjectDto {
         val semesterIds = from.semesters.map { it.id }
+        val classIds = from.schoolClasses.map { it.id }
         val teacherId = from.teacher?.id ?: 0L
-        val color = from.color ?: Color.BLUE //how else do you want to recover in this case
-        return SubjectDto(from.id, semesterIds, from.name, colorMapper.toDto(color), teacherId)
+        val color = from.color
+        return SubjectDto(from.id, semesterIds, classIds, from.name, colorMapper.toDto(color), teacherId)
     }
 }

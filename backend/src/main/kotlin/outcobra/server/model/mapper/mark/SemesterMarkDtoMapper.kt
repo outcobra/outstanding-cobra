@@ -44,7 +44,7 @@ class SemesterMarkDtoMapper @Inject constructor(val markGroupMapper: Mapper<Mark
     }
 
     private fun subjectToMarksDto(from: Subject): SubjectMarkDto {
-        val color = from.color!!
+        val color = from.color
         val markGroup = from.markGroup!!
         return SubjectMarkDto(from.id, from.name, colorMapper.toDto(color), markGroupMapper.toDto(markGroup))
     }
