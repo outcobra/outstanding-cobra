@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {CacheableService} from '../core/cacheable.service';
-import {SemesterDto} from '../../../manage/model/manage.dto';
+import {SemesterDto} from '../../../manage/old/model/manage.dto';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
-import {SemesterService} from '../../../manage/service/semester.service';
+import {SemesterService} from '../../../manage/old/service/semester.service';
 
 @Injectable()
 export class ActiveSemesterService extends CacheableService<SemesterDto[]> {

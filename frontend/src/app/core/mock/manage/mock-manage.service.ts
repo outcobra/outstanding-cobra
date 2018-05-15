@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {ManageService} from '../../../manage/service/manage.service';
+import {ManageService} from '../../../manage/old/service/manage.service';
 import {Observable} from 'rxjs/Observable';
-import {ManageDto} from '../../../manage/model/manage.dto';
-import {InstitutionService} from '../../../manage/service/institution.service';
+import {ManageDto} from '../../../manage/old/model/manage.dto';
+import {InstitutionService} from '../../../manage/old/service/institution.service';
 
 @Injectable()
 export class MockManageService extends ManageService {

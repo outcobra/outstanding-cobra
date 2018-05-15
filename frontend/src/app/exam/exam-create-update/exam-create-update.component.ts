@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {SubjectDto} from '../../manage/model/manage.dto';
+import {SubjectDto} from '../../manage/old/model/manage.dto';
 import {AbstractControl, FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ExamDto} from '../model/exam.dto';
 import {TranslateService} from '@ngx-translate/core';

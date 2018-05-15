@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActiveSemesterService} from '../../../core/services/semester/active-semester.service';
-import {SemesterDto} from '../../../manage/model/manage.dto';
+import {SemesterDto} from '../../../manage/old/model/manage.dto';
 import {Subject} from 'rxjs/Subject';
 
 @Component({

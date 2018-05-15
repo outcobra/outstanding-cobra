@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {MockCrudService} from '../../core/mock-crud.service';
-import {SubjectDto} from '../../../../manage/model/manage.dto';
+import {SubjectDto} from '../../../../manage/old/model/manage.dto';
 
 @Injectable()
 export class MockSubjectService extends MockCrudService<SubjectDto> {

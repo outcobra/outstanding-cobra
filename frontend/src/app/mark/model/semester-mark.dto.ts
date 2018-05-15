@@ -1,6 +1,6 @@
 import {ColorDto} from '../../core/model/color.dto';
 import {MarkGroupDto} from './mark-group.dto';
-import {InstitutionDto, SchoolClassDto} from '../../manage/model/manage.dto';
+import {InstitutionDto, SchoolClassDto} from '../../manage/old/model/manage.dto';
 import {Moment} from 'moment';
 
 export interface SemesterMarkDto {

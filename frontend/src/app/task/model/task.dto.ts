@@ -1,4 +1,4 @@
-import {SubjectDto} from '../../manage/model/manage.dto';
+import {SubjectDto} from '../../manage/old/model/manage.dto';
 import {Dto} from '../../core/common/dto';
 import {Moment} from 'moment';
 

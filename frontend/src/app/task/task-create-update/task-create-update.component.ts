@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {SubjectDto} from '../../manage/model/manage.dto';
+import {SubjectDto} from '../../manage/old/model/manage.dto';
 import {OCValidators} from '../../core/services/oc-validators';
 import {TaskDto} from '../model/task.dto';
 import {CreateUpdateComponent} from '../../core/common/create-update-component';

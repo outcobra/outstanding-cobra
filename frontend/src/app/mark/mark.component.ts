@@ -1,7 +1,7 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {SemesterService} from '../manage/service/semester.service';
+import {SemesterService} from '../manage/old/service/semester.service';
 import {momentComparator} from '../core/util/comparator';
-import {SemesterDto} from '../manage/model/manage.dto';
+import {SemesterDto} from '../manage/old/model/manage.dto';
 import {Util} from '../core/util/util';
 import {DateUtil} from '../core/services/date-util.service';
 import {isEmpty, isTruthy} from '../core/util/helper';

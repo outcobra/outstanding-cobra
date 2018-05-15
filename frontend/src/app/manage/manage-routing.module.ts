@@ -1,13 +1,23 @@
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
-import {ManageComponent} from './manage.component';
+import {SchoolClassComponent} from './school-class/school-class.component';
+import {SchoolYearSemesterComponent} from './school-year-semester/school-year-semester.component';
+import {SubjectComponent} from './subject/subject.component';
 
 @NgModule({
     imports: [
         RouterModule.forChild([
             {
-                path: '',
-                component: ManageComponent
+                path: 'classes',
+                component: SchoolClassComponent
+            },
+            {
+                path: 'schoolyears',
+                component: SchoolYearSemesterComponent
+            },
+            {
+                path: 'subjects',
+                component: SubjectComponent
             }
         ])
     ],

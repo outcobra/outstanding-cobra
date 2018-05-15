@@ -319,6 +319,15 @@
         "linkTitle": "Dashboard (Bald)"
       },
       "manage": {
+        "classes": {
+          "linkTitle": "Schulklassen"
+        },
+        "schoolYearSem": {
+          "linkTitle": "Jahre und Semester"
+        },
+        "subject": {
+          "linkTitle": "Fächer"
+        },
         "linkTitle": "Verwalten",
         "assureDeletion": "Wirklich löschen?",
         "mobile": {
@@ -386,7 +395,7 @@
             "overlap": "Das neue Semester überschneidet sich mit einem Bestehenden"
           }
         },
-        "subject": {
+        "subjectOld": {
           "add": "Fach hinzufügen",
           "edit": "Fach bearbeiten",
           "confirmDeleteMessage": "Wollen Sie das Schulfach wirklich löschen. Alle Kindelemente (Klassen, Schuljahre, Semester, Schulfächer) gehen damit auch verloren.",
