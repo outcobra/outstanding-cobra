@@ -5,11 +5,12 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {SchoolClassSubjectDto} from './model/school-class-subject.dto';
 import {Util} from '../core/util/util';
-import {Observable} from 'rxjs/Observable';
 import {and} from '../core/util/helper';
 import {ResponsiveHelperService} from '../core/services/ui/responsive-helper.service';
 import {NotificationWrapperService} from '../core/notifications/notification-wrapper.service';
-import {Subject} from 'rxjs/Subject';
+import {merge, Subject} from 'rxjs';
+import {debounceTime, distinctUntilChanged, filter} from 'rxjs/operators';
+import {OCMediaChange} from '../core/services/ui/oc-media-change';
 
 @Component({
     selector: 'task',
@@ -46,10 +47,9 @@ export class TaskComponent implements OnInit, AfterViewInit {
 
     ngAfterViewInit() {
         this._filterShown = !this._responsiveHelperService.isMobile();
-        Observable.merge(
-            this._responsiveHelperService.listenForBreakpointChange(),
+        merge(this._responsiveHelperService.listenForBreakpointChange(),
             this._responsiveHelperService.listenForOrientationChange())
-            .filter(change => !change.mobile)
+            .pipe(filter((change: OCMediaChange) => !change.mobile))
             .subscribe(() => this._filterShown = true);
         this._changeDetectorRef.detectChanges();
     }
@@ -84,10 +84,10 @@ export class TaskComponent implements OnInit, AfterViewInit {
     }
 
     private _initFormChangeSubscriptions() {
-        this.search$
-            .debounceTime(300)
-            .distinctUntilChanged()
-            .subscribe(searchTerm => this._filteredTasks = Util.cloneArray(this.search(searchTerm)));
+        this.search$.pipe(
+            debounceTime(300),
+            distinctUntilChanged()
+        ).subscribe(searchTerm => this._filteredTasks = Util.cloneArray(this.search(searchTerm)));
         // TODO include normal filter too
 
         this._filterForm.valueChanges

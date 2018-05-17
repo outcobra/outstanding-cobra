@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {ManageDto} from '../model/manage.dto';
 import {AppService} from '../../../core/services/core/app.service';
 import {HttpClient} from '@angular/common/http';

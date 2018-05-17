@@ -9,6 +9,7 @@ import outcobra.server.model.dto.SchoolYearDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.SchoolYearRepository
 import outcobra.server.service.SchoolYearService
+import outcobra.server.service.UserService
 import outcobra.server.service.base.internal.DefaultBaseService
 import outcobra.server.validator.RequestValidator
 import outcobra.server.validator.SchoolYearValidator
@@ -20,6 +21,7 @@ class DefaultSchoolYearService
 @Inject constructor(mapper: Mapper<SchoolYear, SchoolYearDto>,
                     repository: SchoolYearRepository,
                     requestValidator: RequestValidator<SchoolYearDto>,
+                    val userService: UserService,
                     val schoolYearValidator: SchoolYearValidator)
     : SchoolYearService, DefaultBaseService<SchoolYear, SchoolYearDto, SchoolYearRepository>(mapper, repository, requestValidator, SchoolYear::class) {
 
@@ -38,4 +40,8 @@ class DefaultSchoolYearService
         return repository.findBySchoolClassesId(schoolClassId).map { mapper.toDto(it) }
     }
 
+    override fun readAllByUser(): List<SchoolYearDto> {
+        return repository.findByUserId(userService.getCurrentUser().id)
+                .map { mapper.toDto(it) }
+    }
 }

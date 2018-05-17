@@ -1,22 +1,24 @@
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {MOBILE_DIALOG} from '../../util/const';
 import {MatDialogConfig} from '@angular/material';
 import {Orientation} from './orientation';
 import {isFalsy} from '../../util/helper';
 import {MediaChange, ObservableMedia} from '@angular/flex-layout';
 import {OCMediaChange} from './oc-media-change';
+import {debounceTime, distinctUntilChanged, map} from 'rxjs/operators';
+import {fromEvent} from 'rxjs/internal/observable/fromEvent';
 
 @Injectable()
 export class ResponsiveHelperService {
     private _mobile: boolean;
-    private _mediaChange: Observable<OCMediaChange>;
+    private readonly _mediaChange: Observable<OCMediaChange>;
 
     constructor(private _observableMedia: ObservableMedia) {
         this._mobile = this._checkMobile();
         this._mediaChange = this._observableMedia.asObservable()
-            .map(change => this._makeMediaChange(change));
-        this._mediaChange.subscribe((change) => this._mobile = change.mobile);
+            .pipe(map(change => this._makeMediaChange(change)));
+        this._mediaChange.subscribe((change: OCMediaChange) => this._mobile = change.mobile);
     }
 
     public listenForBreakpointChange(): Observable<OCMediaChange> {
@@ -24,10 +26,11 @@ export class ResponsiveHelperService {
     }
 
     public listenForOrientationChange(): Observable<OCMediaChange> {
-        return Observable.fromEvent(window, 'orientationchange')
-            .distinctUntilChanged()
-            .debounceTime(200)
-            .map(() => this._makeMediaChange(null));
+        return fromEvent(window, 'orientationchange').pipe(
+            distinctUntilChanged(),
+            debounceTime(200),
+            map(() => this._makeMediaChange(null))
+        );
     }
 
     public getMobileOrGivenDialogConfig(config: MatDialogConfig) {

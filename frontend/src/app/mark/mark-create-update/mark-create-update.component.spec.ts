@@ -6,7 +6,7 @@ import {TestModule} from '../../core/mock/test.module';
 import {ReactiveFormsModule} from '@angular/forms';
 import {RouterTestingModule} from '@angular/router/testing';
 import {ActivatedRoute} from '@angular/router';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {MockMarkService} from 'app/core/mock/mark/mock-mark.service';
 
 describe('MarkCreateUpdateComponent', () => {

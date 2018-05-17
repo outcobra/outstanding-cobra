@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
 import {SchoolClassSubjectDto} from '../../../task/model/school-class-subject.dto';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {SchoolClassSubjectService} from './school-class-subject.service';
 
 @Injectable()

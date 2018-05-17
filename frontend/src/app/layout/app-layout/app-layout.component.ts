@@ -7,6 +7,7 @@ import {ResponsiveHelperService} from '../../core/services/ui/responsive-helper.
 import {MatSidenav} from '@angular/material';
 import {appLayoutRouteAnimation} from '../../core/animations/animations';
 import {RouteAnimationContainer} from '../../core/animations/route-animation-container';
+import {filter} from 'rxjs/operators';
 
 @Component({
     selector: 'app-layout',
@@ -31,8 +32,7 @@ export class AppLayoutComponent extends RouteAnimationContainer implements OnIni
 
     ngOnInit() {
         this._mobile = this._responsiveHelper.isMobile();
-        this._router.events
-            .filter(event => event instanceof NavigationStart)
+        this._router.events.pipe(filter(event => event instanceof NavigationStart))
             .subscribe(() => {
                 if (isTruthy(this.sidenav) && this.sidenav.opened) {
                     this.sidenav.close();

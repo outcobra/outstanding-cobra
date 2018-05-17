@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ManageService} from '../../../manage/old/service/manage.service';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {ManageDto} from '../../../manage/old/model/manage.dto';
 import {InstitutionService} from '../../../manage/old/service/institution.service';
 

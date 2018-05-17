@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {SemesterDto} from '../model/manage.dto';
-import {AppCrudService} from '../../../core/services/core/app-crud.service';
-import {DateUtil} from '../../../core/services/date-util.service';
 import {HttpClient} from '@angular/common/http';
+import {AppCrudService} from '../../core/services/core/app-crud.service';
+import {SemesterDto} from '../old/model/manage.dto';
+import {DateUtil} from '../../core/services/date-util.service';
 
 @Injectable()
 export class SemesterService extends AppCrudService<SemesterDto> {

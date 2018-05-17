@@ -1,6 +1,6 @@
 import {AppService} from './app.service';
 import {CrudService} from './crud.service';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {isFalsy} from '../../util/helper';
 
 /**

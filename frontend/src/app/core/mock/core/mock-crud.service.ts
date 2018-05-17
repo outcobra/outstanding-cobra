@@ -1,4 +1,4 @@
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {isNotNull} from '../../util/helper';
 import {Util} from '../../util/util';
 import {AppCrudService} from '../../services/core/app-crud.service';

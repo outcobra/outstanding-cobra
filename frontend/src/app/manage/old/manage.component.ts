@@ -25,13 +25,13 @@ import {SubjectDialog} from './subject-dialog/subject-dialog.component';
 import {SubjectService} from './service/subject.service';
 import {Util} from '../../core/util/util';
 import {equals, isFalsy, isNotNull, isTrue, isTruthy} from '../../core/util/helper';
-import {Observable} from 'rxjs/Observable';
+import {BehaviorSubject, empty, merge, Observable} from 'rxjs';
 import {Dto} from '../../core/common/dto';
 import {CreateUpdateComponent} from '../../core/common/create-update-component';
 import {ResponsiveHelperService} from '../../core/services/ui/responsive-helper.service';
 import {ManageView} from './model/manage-view';
 import {NotificationWrapperService} from '../../core/notifications/notification-wrapper.service';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {catchError, filter, finalize, switchMap} from 'rxjs/operators';
 
 const I18N_PREFIX = 'i18n.modules.manage.mobile.title.';
 
@@ -82,7 +82,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        Observable.merge(
+        merge(
             this._responsiveHelper.listenForOrientationChange(),
             this._responsiveHelper.listenForBreakpointChange()
         ).subscribe(() => {
@@ -350,15 +350,16 @@ export class ManageComponent implements OnInit, AfterViewInit {
      * @param thisArg the scope where the createFunction should be run on
      */
     private _handleDeletion<T extends Dto>(entity: T, entityName: string, deleteFunction: (id: number) => Observable<any>, finishFunction: (entity: T) => void, thisArg: any) {
-        this._openDeleteConfirmDialog(entityName)
-            .filter(isTrue)
-            .switchMap(() => deleteFunction.call(thisArg, entity.id))
-            .catch(() => {
+        this._openDeleteConfirmDialog(entityName).pipe(
+            filter(isTrue),
+            switchMap(() => deleteFunction.call(thisArg, entity.id)),
+            catchError(() => {
                 this._notificationService.remove();
                 this._showDeleteErrorNotification(entityName);
-                return Observable.empty();
-            })
-            .finally(() => this._changeDetectorRef.markForCheck())
+                return empty();
+            }),
+            finalize(() => this._changeDetectorRef.markForCheck())
+        )
             .subscribe(() => {
                 this._showDeleteSuccessNotification(entityName);
                 finishFunction(entity);
@@ -378,13 +379,13 @@ export class ManageComponent implements OnInit, AfterViewInit {
      * @param finishFunction function to execute on create success
      */
     private _handleAddition<T extends Dto, D extends CreateUpdateComponent<T>>(entityName: string, dialogRef: MatDialogRef<D>, finishFunction: (entity: T) => void) {
-        dialogRef.afterClosed()
-            .filter(isTruthy)
-            .finally(() => this._changeDetectorRef.markForCheck())
-            .subscribe((entity: T) => {
-                this._showSaveSuccessNotification(entityName);
-                finishFunction(entity);
-            });
+        dialogRef.afterClosed().pipe(
+            filter(isTruthy),
+            finalize(() => this._changeDetectorRef.markForCheck())
+        ).subscribe((entity: T) => {
+            this._showSaveSuccessNotification(entityName);
+            finishFunction(entity);
+        });
     }
 
     /**
@@ -399,14 +400,14 @@ export class ManageComponent implements OnInit, AfterViewInit {
      * @param dialogRef to listen for close event
      */
     private _handleEdit<T extends Dto, D extends CreateUpdateComponent<T>>(entityName: string, dialogRef: MatDialogRef<D>) {
-        dialogRef.afterClosed()
-            .filter(isTruthy)
-            .catch(() => {
+        dialogRef.afterClosed().pipe(
+            filter(isTruthy),
+            catchError(() => {
                 this._prepareManageData();
-                return Observable.empty();
-            })
-            .finally(() => this._changeDetectorRef.markForCheck())
-            .subscribe(() => this._showSaveSuccessNotification(entityName));
+                return empty();
+            }),
+            finalize(() => this._changeDetectorRef.markForCheck())
+        ).subscribe(() => this._showSaveSuccessNotification(entityName));
     }
 
     //endregion

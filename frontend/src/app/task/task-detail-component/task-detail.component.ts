@@ -4,10 +4,11 @@ import {TaskDto} from '../model/task.dto';
 import {ConfirmDialogService} from '../../core/services/confirm-dialog.service';
 import {TaskService} from '../service/task.service';
 import {MatDialog, MatSlider, MatSliderChange} from '@angular/material';
-import {Observable} from 'rxjs/Observable';
 import {isEmpty, isTrue} from '../../core/util/helper';
 import {NotificationWrapperService} from '../../core/notifications/notification-wrapper.service';
 import {DurationService} from '../../core/services/duration.service';
+import {debounceTime, distinctUntilChanged, filter, map, switchMap} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 
 @Component({
     selector: 'task-detail',
@@ -27,12 +28,12 @@ export class TaskDetailComponent implements AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this.slider.change
-            .debounceTime(500)
-            .map((sliderChange: MatSliderChange) => sliderChange.value)
-            .distinctUntilChanged()
-            .switchMap((value: number) => this.updateProgress.call(this, value))
-            .subscribe();
+        this.slider.change.pipe(
+            debounceTime(500),
+            map((sliderChange: MatSliderChange) => sliderChange.value),
+            distinctUntilChanged(),
+            switchMap((value: number) => this.updateProgress.call(this, value))
+        ).subscribe();
     }
 
     private updateProgress(value: number): Observable<TaskDto> {
@@ -47,9 +48,10 @@ export class TaskDetailComponent implements AfterViewInit {
     public deleteTask() {
         this._confirmDialogService.open('i18n.modules.task.dialogs.confirmDeleteDialog.title',
             'i18n.modules.task.dialogs.confirmDeleteDialog.message')
-            .filter(isTrue)
-            .switchMap(() => this._taskService.deleteById(this.task.id))
-            .subscribe(result => this._router.navigate(['/task']));
+            .pipe(
+                filter(isTrue),
+                switchMap(() => this._taskService.deleteById(this.task.id))
+            ).subscribe(_ => this._router.navigate(['/task']));
     }
 
     public isEmpty(val: string): boolean {

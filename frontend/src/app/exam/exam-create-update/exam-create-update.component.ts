@@ -13,7 +13,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ViewMode} from '../../core/common/view-mode';
 import {NotificationWrapperService} from '../../core/notifications/notification-wrapper.service';
 import {ExamService} from '../service/exam.service';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {SchoolClassSubjectDto} from '../../task/model/school-class-subject.dto';
 
 @Component({

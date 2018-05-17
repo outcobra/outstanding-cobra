@@ -5,14 +5,14 @@ import {isNotEmpty, isTruthy} from '../../core/util/helper';
 import {MarkService} from '../service/mark.service';
 import {ConfirmDialogService} from '../../core/services/confirm-dialog.service';
 import {TranslateService} from '@ngx-translate/core';
-import {Observable} from 'rxjs/Observable';
+import {Observable, Subject} from 'rxjs';
 import {MarkGroupDto} from '../model/mark-group.dto';
-import {Subject} from 'rxjs/Subject';
 import {ResponsiveHelperService} from '../../core/services/ui/responsive-helper.service';
 import {DateUtil} from '../../core/services/date-util.service';
 import {MarkDto} from 'app/mark/model/mark.dto';
 import {Util} from '../../core/util/util';
 import * as moment from 'moment';
+import {filter, skipWhile, switchMap} from 'rxjs/operators';
 
 type EditMark = {
     subjectId: number,
@@ -65,7 +65,7 @@ export class MarkSemesterComponent implements OnInit {
                     DateUtil.transformToMomentIfPossible(this.semesterMark.validTo));
             });
         this._activatedRoute.queryParamMap
-            .filter(params => isNotEmpty(params.keys) && params.has('subjectId'))
+            .pipe(filter(params => isNotEmpty(params.keys) && params.has('subjectId')))
             .subscribe(params => {
                 this._initOpenings = {
                     subjectId: parseInt(params.get('subjectId')),
@@ -75,17 +75,17 @@ export class MarkSemesterComponent implements OnInit {
         this._updateHeaderClasses({mobile: this._responsiveHelperService.isMobile()});
 
         // region subject initialization
-        this.newMark$.skipWhile(() => !this._currentSemester)
+        this.newMark$.pipe(skipWhile(() => !this._currentSemester))
             .subscribe((markGroup) =>
                 this._router.navigate([`subject/${markGroup.subjectId}/group/${markGroup.id}/new`],
-                {relativeTo: this._activatedRoute})
-        );
+                    {relativeTo: this._activatedRoute})
+            );
 
-        this.newMarkGroup$.skipWhile(() => !this._currentSemester)
+        this.newMarkGroup$.pipe(skipWhile(() => !this._currentSemester))
             .subscribe((markGroup) =>
                 this._router.navigate([`subject/${markGroup.subjectId}/group/new`],
-                {relativeTo: this._activatedRoute})
-        );
+                    {relativeTo: this._activatedRoute})
+            );
 
         this._buildDeleteChain(this.deleteMark$, 'mark', this._markService.deleteMark, (mark: MarkDto) => {
             let parentMarkGroup = this._getMarkGroupByMark(mark);
@@ -98,27 +98,27 @@ export class MarkSemesterComponent implements OnInit {
             this._changeDetectorRef.markForCheck();
         });
 
-        this.editMark$.skipWhile(() => !this._currentSemester)
+        this.editMark$.pipe(skipWhile(() => !this._currentSemester))
             .subscribe(editMark =>
-            this._router.navigate([`subject/${editMark.subjectId}/group/${editMark.groupId}/edit/${editMark.markId}`],
-                {relativeTo: this._activatedRoute})
-        );
-        this.editMarkGroup$.skipWhile(() => !this._currentSemester)
+                this._router.navigate([`subject/${editMark.subjectId}/group/${editMark.groupId}/edit/${editMark.markId}`],
+                    {relativeTo: this._activatedRoute})
+            );
+        this.editMarkGroup$.pipe(skipWhile(() => !this._currentSemester))
             .subscribe(markGroup =>
-            this._router.navigate([`subject/${markGroup.subjectId}/group/edit/${markGroup.groupId}`],
-                {relativeTo: this._activatedRoute})
-        );
+                this._router.navigate([`subject/${markGroup.subjectId}/group/edit/${markGroup.groupId}`],
+                    {relativeTo: this._activatedRoute})
+            );
 
-        this.editSubjectWeight$.skipWhile(() => !this._currentSemester)
+        this.editSubjectWeight$.pipe(skipWhile(() => !this._currentSemester))
             .subscribe(markGroup => {
-            this._markService.saveMarkGroup(markGroup)
-                .switchMap(() => this._markService.getMarkSemesterBySemesterId(this.semesterMark.id))
-                .subscribe((semesterMark: SemesterMarkDto) => {
-                    this.semesterMark.value = semesterMark.value;
-                    this.semesterMark.subjects.filter(sub => sub.id === markGroup.subjectId)
-                        .forEach(sub => sub.subjectMarkGroup.weight = markGroup.weight);
-                });
-        });
+                this._markService.saveMarkGroup(markGroup)
+                    .pipe(switchMap(() => this._markService.getMarkSemesterBySemesterId(this.semesterMark.id)))
+                    .subscribe((semesterMark: SemesterMarkDto) => {
+                        this.semesterMark.value = semesterMark.value;
+                        this.semesterMark.subjects.filter(sub => sub.id === markGroup.subjectId)
+                            .forEach(sub => sub.subjectMarkGroup.weight = markGroup.weight);
+                    });
+            });
         // endregion
 
         this._responsiveHelperService.listenForBreakpointChange().subscribe(this._updateHeaderClasses.bind(this));
@@ -132,12 +132,12 @@ export class MarkSemesterComponent implements OnInit {
     }
 
     private _buildDeleteChain(subject: Subject<MarkGroupDto | MarkDto>, entityName: string, deleteFunction: (markOrGroup: MarkGroupDto | MarkDto) => Observable<MarkGroupDto | MarkDto>, finishFunction: (markOrGroup: MarkGroupDto | MarkDto) => void) {
-        return subject
-            .skipWhile(() => !this._currentSemester)
-            .switchMap(markOrGroup => this._showDeleteDialog(entityName, markOrGroup))
-            .filter(isTruthy)
-            .switchMap(deleteFunction.bind(this._markService))
-            .subscribe(finishFunction.bind(this));
+        return subject.pipe(
+            skipWhile(() => !this._currentSemester),
+            switchMap(markOrGroup => this._showDeleteDialog(entityName, markOrGroup)),
+            filter(isTruthy),
+            switchMap(deleteFunction.bind(this._markService)),
+        ).subscribe(finishFunction.bind(this));
     }
 
     // endregion

@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {isNotEmpty} from '../util/helper';
-import {ErrorObservable} from 'rxjs/observable/ErrorObservable';
 import {NotificationWrapperService} from '../notifications/notification-wrapper.service';
 import {catchError} from 'rxjs/operators';
 import {ValidationException} from './validation-exception';
+import {throwError} from 'rxjs/internal/observable/throwError';
 
 @Injectable()
 export class ErrorCatchingHttpInterceptor implements HttpInterceptor {
@@ -21,11 +21,11 @@ export class ErrorCatchingHttpInterceptor implements HttpInterceptor {
         let validationException = errorResponse.error as ValidationException;
         if (isNotEmpty(validationException.title) && isNotEmpty(validationException.message)) {
             this._notificationService.error(validationException.title, validationException.message);
-            return ErrorObservable.create(validationException);
+            return throwError(validationException);
         } else {
             let status = errorResponse.status;
             this._notificationService.error(`i18n.error.http.${status}.title`, `i18n.error.http.${status}.message`);
-            return ErrorObservable.create(errorResponse);
+            return throwError(errorResponse);
         }
     }
 }

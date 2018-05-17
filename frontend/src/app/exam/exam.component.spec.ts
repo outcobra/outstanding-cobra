@@ -7,7 +7,7 @@ import {OCUiModule} from '../oc-ui/oc-ui.module';
 import {ExamListItemComponent} from './exam-list-item/exam-list-item.component';
 import {RouterTestingModule} from '@angular/router/testing';
 import {ActivatedRoute} from '@angular/router';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 
 describe('ExamComponent', () => {
     let component: ExamComponent;

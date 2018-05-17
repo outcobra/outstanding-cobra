@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {TaskDto} from '../model/task.dto';
-import {Observable} from 'rxjs/Observable';
+import {Observable, of} from 'rxjs';
 import {CacheableCrudService} from '../../core/services/core/cacheable-crud.service';
 import {TaskProgressUpdateDto} from '../model/task-update-progress.dto';
 import {HttpClient} from '@angular/common/http';
@@ -14,7 +14,7 @@ export class TaskService extends CacheableCrudService<TaskDto, TaskDto[]> {
     public readById(id: number): Observable<TaskDto> {
         if (this.hasCache()) {
             let task = this.cache.find(task => task.id == id);
-            if (task) return Observable.of(task);
+            if (task) return of(task);
         }
         return super.readById(id);
     }

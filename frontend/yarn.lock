@@ -27,15 +27,15 @@
     "@ngtools/json-schema" "^1.1.0"
     rxjs "^5.5.6"
 
-"@angular/animations@5.2.3":
-  version "5.2.3"
-  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/animations/-/animations-5.2.3.tgz#e0eb8d55f807e799df128af9150c075c9ab82adf"
+"@angular/animations@6.0.2":
+  version "6.0.2"
+  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/animations/-/animations-6.0.2.tgz#92063f612c3b33d962eddc9ad538cadd231fbe47"
   dependencies:
-    tslib "^1.7.1"
+    tslib "^1.9.0"
 
-"@angular/cdk@^5.0.4":
-  version "5.1.0"
-  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/cdk/-/cdk-5.1.0.tgz#e04547609d96d8b6fe0dac17bed323760c3952e9"
+"@angular/cdk@6.0.2":
+  version "6.0.2"
+  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/cdk/-/cdk-6.0.2.tgz#65089561f91038ba6d744b9a251998bf99c75097"
   dependencies:
     tslib "^1.7.1"
 
@@ -103,80 +103,80 @@
   optionalDependencies:
     node-sass "^4.7.2"
 
-"@angular/common@5.2.3":
-  version "5.2.3"
-  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/common/-/common-5.2.3.tgz#f2a5c12ec44b73a248d8dcb2d37ac2749f091cf7"
+"@angular/common@6.0.2":
+  version "6.0.2"
+  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/common/-/common-6.0.2.tgz#e4cbb7d45d8d2f35e918d62f0cbfd8c87e9168f7"
   dependencies:
-    tslib "^1.7.1"
+    tslib "^1.9.0"
 
-"@angular/compiler-cli@5.2.3":
-  version "5.2.3"
-  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/compiler-cli/-/compiler-cli-5.2.3.tgz#75b39a346f1b2a95ebc403016d19fc33d5315221"
+"@angular/compiler-cli@6.0.2":
+  version "6.0.2"
+  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/compiler-cli/-/compiler-cli-6.0.2.tgz#439b2b7241063ef9b86cf2e11b64620a377b695d"
   dependencies:
     chokidar "^1.4.2"
     minimist "^1.2.0"
     reflect-metadata "^0.1.2"
-    tsickle "^0.26.0"
+    tsickle "^0.27.2"
 
-"@angular/compiler@5.2.3":
-  version "5.2.3"
-  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/compiler/-/compiler-5.2.3.tgz#49167adb35bdb5e7e915cce912c432300fc16816"
+"@angular/compiler@6.0.2":
+  version "6.0.2"
+  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/compiler/-/compiler-6.0.2.tgz#b9d29b7e032c767179967540f1ed7f8777a615a1"
+  dependencies:
+    tslib "^1.9.0"
+
+"@angular/core@6.0.2":
+  version "6.0.2"
+  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/core/-/core-6.0.2.tgz#d183730d73182a4590a5d71083db45655f210e69"
+  dependencies:
+    tslib "^1.9.0"
+
+"@angular/flex-layout@^6.0.0-beta.15":
+  version "6.0.0-beta.15"
+  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/flex-layout/-/flex-layout-6.0.0-beta.15.tgz#9e85e9292286941973c7e6cdec02990d5fd6ec15"
   dependencies:
     tslib "^1.7.1"
 
-"@angular/core@5.2.3":
-  version "5.2.3"
-  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/core/-/core-5.2.3.tgz#157dcb437d085b325513689e0e4ae70182f3f708"
+"@angular/forms@6.0.2":
+  version "6.0.2"
+  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/forms/-/forms-6.0.2.tgz#a0647930e8b6e7fbd48f55eb69b399a41bcd091a"
+  dependencies:
+    tslib "^1.9.0"
+
+"@angular/http@6.0.2":
+  version "6.0.2"
+  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/http/-/http-6.0.2.tgz#bd0db5b296c45ab314ef38208a40a39f82557e82"
+  dependencies:
+    tslib "^1.9.0"
+
+"@angular/material-moment-adapter@^6.0.2":
+  version "6.0.2"
+  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/material-moment-adapter/-/material-moment-adapter-6.0.2.tgz#d5e3af8f69ce1e94e4dcdb196aa0dc5a339369ac"
   dependencies:
     tslib "^1.7.1"
 
-"@angular/flex-layout@^2.0.0-beta.12":
-  version "2.0.0-beta.12"
-  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/flex-layout/-/flex-layout-2.0.0-beta.12.tgz#80970dc1d60f27fa41537659926f3238f759f343"
+"@angular/material@6.0.2":
+  version "6.0.2"
+  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/material/-/material-6.0.2.tgz#bd4b84d764c3c488856243e9dc05ab14ce3310d7"
   dependencies:
     tslib "^1.7.1"
 
-"@angular/forms@5.2.3":
-  version "5.2.3"
-  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/forms/-/forms-5.2.3.tgz#4992419191a3800516085209be331fc0d63bd099"
+"@angular/platform-browser-dynamic@6.0.2":
+  version "6.0.2"
+  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/platform-browser-dynamic/-/platform-browser-dynamic-6.0.2.tgz#755689df9f02bbcb270c7872a75a2ffe7e0b0c33"
   dependencies:
-    tslib "^1.7.1"
+    tslib "^1.9.0"
 
-"@angular/http@5.2.3":
-  version "5.2.3"
-  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/http/-/http-5.2.3.tgz#067945f6339619b0b3fd13e8af7b6a1301e69176"
+"@angular/platform-browser@6.0.2":
+  version "6.0.2"
+  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/platform-browser/-/platform-browser-6.0.2.tgz#19f56f6efbd0e7af5f35fe2f8cde3557dc8ba689"
   dependencies:
-    tslib "^1.7.1"
+    tslib "^1.9.0"
 
-"@angular/material-moment-adapter@^5.0.4":
-  version "5.1.0"
-  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/material-moment-adapter/-/material-moment-adapter-5.1.0.tgz#95bd8fdc6b8ad9170628f42ccecce9e9952a932e"
+"@angular/router@6.0.2":
+  version "6.0.2"
+  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/router/-/router-6.0.2.tgz#a7c925751accede6c5b4a8369170a53f3a48b940"
   dependencies:
-    tslib "^1.7.1"
-
-"@angular/material@^5.0.4":
-  version "5.1.0"
-  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/material/-/material-5.1.0.tgz#038803b6a52e484c6bf9bb413714795952d61d49"
-  dependencies:
-    tslib "^1.7.1"
-
-"@angular/platform-browser-dynamic@5.2.3":
-  version "5.2.3"
-  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/platform-browser-dynamic/-/platform-browser-dynamic-5.2.3.tgz#87d5172da2c102c3cf48da29d39e9b4b9414b419"
-  dependencies:
-    tslib "^1.7.1"
-
-"@angular/platform-browser@5.2.3":
-  version "5.2.3"
-  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/platform-browser/-/platform-browser-5.2.3.tgz#953df896839879e2b8ca89a364d66e3ac1dcd167"
-  dependencies:
-    tslib "^1.7.1"
-
-"@angular/router@5.2.3":
-  version "5.2.3"
-  resolved "https://pkg.pegnu.cloud/repository/npm/@angular/router/-/router-5.2.3.tgz#c56bce42817c67aeb65291e5adf293300038069e"
-  dependencies:
-    tslib "^1.7.1"
+    tslib "^1.9.0"
 
 "@ngtools/json-schema@1.1.0", "@ngtools/json-schema@^1.1.0":
   version "1.1.0"
@@ -366,9 +366,9 @@ amqplib@^0.5.2:
     readable-stream "1.x >=1.1.9"
     safe-buffer "^5.0.1"
 
-angular2-notifications@^0.9.7:
-  version "0.9.7"
-  resolved "https://pkg.pegnu.cloud/repository/npm/angular2-notifications/-/angular2-notifications-0.9.7.tgz#210a007d6b15c92d3fd9b1b1a3e0e221517c09e0"
+angular2-notifications@^1.0.2:
+  version "1.0.2"
+  resolved "https://pkg.pegnu.cloud/repository/npm/angular2-notifications/-/angular2-notifications-1.0.2.tgz#93b6c6838dc582c3838d46d03a21adc333056059"
 
 ansi-html@0.0.7:
   version "0.0.7"
@@ -1385,15 +1385,15 @@ code-point-at@^1.0.0:
   version "1.1.0"
   resolved "https://pkg.pegnu.cloud/repository/npm/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
 
-codelyzer@^4.1:
-  version "4.1.0"
-  resolved "https://pkg.pegnu.cloud/repository/npm/codelyzer/-/codelyzer-4.1.0.tgz#3117754538d8f5ffa36dff91d340573a836cf373"
+codelyzer@^4.3.0:
+  version "4.3.0"
+  resolved "https://pkg.pegnu.cloud/repository/npm/codelyzer/-/codelyzer-4.3.0.tgz#6bf3ba68efd9d655a451ecaa14a2852001a43dfb"
   dependencies:
     app-root-path "^2.0.1"
     css-selector-tokenizer "^0.7.0"
     cssauron "^1.4.0"
     semver-dsl "^1.0.1"
-    source-map "^0.5.6"
+    source-map "^0.5.7"
     sprintf-js "^1.0.3"
 
 collection-visit@^1.0.0:
@@ -4723,9 +4723,9 @@ netmask@~1.0.4:
   version "1.0.6"
   resolved "https://pkg.pegnu.cloud/repository/npm/netmask/-/netmask-1.0.6.tgz#20297e89d86f6f6400f250d9f4f6b4c1945fcd35"
 
-ngx-md@3.1.0:
-  version "3.1.0"
-  resolved "https://pkg.pegnu.cloud/repository/npm/ngx-md/-/ngx-md-3.1.0.tgz#785a50fb7f98bdd2c0abcfa1aa913e30fae6c6a4"
+ngx-md@3.1.1:
+  version "3.1.1"
+  resolved "https://pkg.pegnu.cloud/repository/npm/ngx-md/-/ngx-md-3.1.1.tgz#41310ac862713cb4cc6b4f455743d948943ed728"
   dependencies:
     marked "^0.3.9"
     prismjs "^1.9.0"
@@ -6301,7 +6301,17 @@ run-queue@^1.0.0, run-queue@^1.0.3:
   dependencies:
     aproba "^1.1.1"
 
-rxjs@5.5.6, rxjs@^5.5.6:
+rxjs-compat@6.1.0:
+  version "6.1.0"
+  resolved "https://pkg.pegnu.cloud/repository/npm/rxjs-compat/-/rxjs-compat-6.1.0.tgz#935059623ee4c167728c9dd03ee6e4468cc5b583"
+
+rxjs@6.1.0:
+  version "6.1.0"
+  resolved "https://pkg.pegnu.cloud/repository/npm/rxjs/-/rxjs-6.1.0.tgz#833447de4e4f6427b9cec3e5eb9f56415cd28315"
+  dependencies:
+    tslib "^1.9.0"
+
+rxjs@^5.5.6:
   version "5.5.6"
   resolved "https://pkg.pegnu.cloud/repository/npm/rxjs/-/rxjs-5.5.6.tgz#e31fb96d6fd2ff1fd84bcea8ae9c02d007179c02"
   dependencies:
@@ -6737,7 +6747,7 @@ source-map-resolve@^0.5.0:
     source-map-url "^0.4.0"
     urix "^0.1.0"
 
-source-map-support@^0.4.1, source-map-support@^0.4.2, source-map-support@~0.4.0:
+source-map-support@^0.4.1, source-map-support@~0.4.0:
   version "0.4.16"
   resolved "https://pkg.pegnu.cloud/repository/npm/source-map-support/-/source-map-support-0.4.16.tgz#16fecf98212467d017d586a2af68d628b9421cd8"
   dependencies:
@@ -6759,7 +6769,7 @@ source-map@0.1.x, source-map@~0.1.33:
   dependencies:
     amdefine ">=0.0.4"
 
-source-map@0.5.x, source-map@^0.5.3, source-map@^0.5.6, source-map@~0.5.1, source-map@~0.5.3, source-map@~0.5.6:
+source-map@0.5.x, source-map@^0.5.3, source-map@^0.5.6, source-map@^0.5.7, source-map@~0.5.1, source-map@~0.5.3, source-map@~0.5.6:
   version "0.5.7"
   resolved "https://pkg.pegnu.cloud/repository/npm/source-map/-/source-map-0.5.7.tgz#8a039d2d1021d22d1ea14c80d8ea468ba2ef3fcc"
 
@@ -7251,14 +7261,14 @@ tsconfig@^7.0.0:
     strip-bom "^3.0.0"
     strip-json-comments "^2.0.0"
 
-tsickle@^0.26.0:
-  version "0.26.0"
-  resolved "https://pkg.pegnu.cloud/repository/npm/tsickle/-/tsickle-0.26.0.tgz#40b30a2dd6abcb33b182e37596674bd1cfe4039c"
+tsickle@^0.27.2:
+  version "0.27.5"
+  resolved "https://pkg.pegnu.cloud/repository/npm/tsickle/-/tsickle-0.27.5.tgz#41e1a41a5acf971cbb2b0558a9590779234d591f"
   dependencies:
     minimist "^1.2.0"
     mkdirp "^0.5.1"
-    source-map "^0.5.6"
-    source-map-support "^0.4.2"
+    source-map "^0.6.0"
+    source-map-support "^0.5.0"
 
 tslib@^1.7.1:
   version "1.7.1"
@@ -7267,6 +7277,10 @@ tslib@^1.7.1:
 tslib@^1.8.0, tslib@^1.8.1:
   version "1.9.0"
   resolved "https://pkg.pegnu.cloud/repository/npm/tslib/-/tslib-1.9.0.tgz#e37a86fda8cbbaf23a057f473c9f4dc64e5fc2e8"
+
+tslib@^1.9.0:
+  version "1.9.1"
+  resolved "https://pkg.pegnu.cloud/repository/npm/tslib/-/tslib-1.9.1.tgz#a5d1f0532a49221c87755cfcc89ca37197242ba7"
 
 tslint@^5.9.1:
   version "5.9.1"
@@ -7334,7 +7348,11 @@ typeface-montserrat@^0.0.45:
   version "0.0.45"
   resolved "https://pkg.pegnu.cloud/repository/npm/typeface-montserrat/-/typeface-montserrat-0.0.45.tgz#17bd9a48d1b4a3ed7f3110db8e18ea828e88594b"
 
-typescript@^2.6.0, typescript@~2.6.2:
+typescript@2.7.2:
+  version "2.7.2"
+  resolved "https://pkg.pegnu.cloud/repository/npm/typescript/-/typescript-2.7.2.tgz#2d615a1ef4aee4f574425cdff7026edf81919836"
+
+typescript@~2.6.2:
   version "2.6.2"
   resolved "https://pkg.pegnu.cloud/repository/npm/typescript/-/typescript-2.6.2.tgz#3c5b6fd7f6de0914269027f03c0946758f7673a4"
 
@@ -7984,6 +8002,6 @@ yn@^2.0.0:
   version "2.0.0"
   resolved "https://pkg.pegnu.cloud/repository/npm/yn/-/yn-2.0.0.tgz#e5adabc8acf408f6385fc76495684c88e6af689a"
 
-zone.js@^0.8.4:
-  version "0.8.16"
-  resolved "https://pkg.pegnu.cloud/repository/npm/zone.js/-/zone.js-0.8.16.tgz#ac31b6c418f88c0f918ad6acd8a402aca9313abb"
+zone.js@^0.8.26:
+  version "0.8.26"
+  resolved "https://pkg.pegnu.cloud/repository/npm/zone.js/-/zone.js-0.8.26.tgz#7bdd72f7668c5a7ad6b118148b4ea39c59d08d2d"

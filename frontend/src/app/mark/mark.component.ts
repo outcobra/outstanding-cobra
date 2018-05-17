@@ -7,6 +7,7 @@ import {DateUtil} from '../core/services/date-util.service';
 import {isEmpty, isTruthy} from '../core/util/helper';
 import {ActivatedRoute, Router} from '@angular/router';
 import * as moment from 'moment';
+import {map} from 'rxjs/operators';
 
 @Component({
     selector: 'mark',
@@ -24,17 +25,19 @@ export class MarkComponent implements OnInit {
     }
 
     ngOnInit() {
-        this._semesterService.readAll().map(semesters => semesters.map(sem => this._semesterService.mapDates(sem)).sort((first, second) => momentComparator(first.validFrom, second.validFrom)))
-            .subscribe(semesters => {
-                this.currentSemester = semesters.find(sem => DateUtil.isBetweenDaysInclusive(moment(),
-                    DateUtil.transformToMomentIfPossible(sem.validFrom), DateUtil.transformToMomentIfPossible(sem.validTo)));
+        this._semesterService.readAll().pipe(map(semesters =>
+            semesters.map(sem => this._semesterService.mapDates(sem))
+                .sort((first, second) => momentComparator(first.validFrom, second.validFrom))
+        )).subscribe(semesters => {
+            this.currentSemester = semesters.find(sem => DateUtil.isBetweenDaysInclusive(moment(),
+                DateUtil.transformToMomentIfPossible(sem.validFrom), DateUtil.transformToMomentIfPossible(sem.validTo)));
 
-                this.semesters = isTruthy(this.currentSemester) ? Util.moveToFirst(semesters, this.currentSemester) : semesters;
-                if (!this._route.snapshot.children.some(route => route.paramMap.has('semesterId'))) {
-                    this._initMarkSemesterView();
-                }
-                this._changeDetectorRef.markForCheck();
-            });
+            this.semesters = isTruthy(this.currentSemester) ? Util.moveToFirst(semesters, this.currentSemester) : semesters;
+            if (!this._route.snapshot.children.some(route => route.paramMap.has('semesterId'))) {
+                this._initMarkSemesterView();
+            }
+            this._changeDetectorRef.markForCheck();
+        });
     }
 
     private _initMarkSemesterView() {

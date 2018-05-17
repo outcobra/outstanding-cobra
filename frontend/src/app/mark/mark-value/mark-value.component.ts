@@ -11,6 +11,7 @@ import {
 import {MarkDto} from '../model/mark.dto';
 import {OCEntityMenuComponent} from '../../oc-ui/components/oc-entity-menu/oc-entity-menu.component';
 import {isNotEmpty} from '../../core/util/helper';
+import {filter} from 'rxjs/operators';
 
 @Component({
     selector: 'mark-value',
@@ -40,8 +41,7 @@ export class MarkValueComponent implements AfterViewInit {
         if (isNotEmpty(this.entityMenus)) {
             this._initEmitters(this.entityMenus);
         }
-        this.entityMenus.changes
-            .filter(isNotEmpty)
+        this.entityMenus.changes.pipe(filter(isNotEmpty))
             .subscribe(this._initEmitters);
     }
 

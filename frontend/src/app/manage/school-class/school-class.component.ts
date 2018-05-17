@@ -1,15 +1,25 @@
 import {Component, OnInit} from '@angular/core';
+import {Observable} from 'rxjs';
+import {SchoolClassDto} from '../old/model/manage.dto';
+import {ManageService} from '../service/manage.service';
 
 @Component({
-  selector: 'app-school-class',
-  templateUrl: './school-class.component.html',
-  styleUrls: ['./school-class.component.scss']
+    selector: 'app-school-class',
+    templateUrl: './school-class.component.html',
+    styleUrls: ['./school-class.component.scss']
 })
 export class SchoolClassComponent implements OnInit {
+    private _schoolClasses$: Observable<Array<SchoolClassDto>>;
 
-  constructor() { }
+    constructor(private manageService: ManageService) {
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+        this._schoolClasses$ = this.manageService.getSchoolClasses()
+    }
 
+
+    get schoolClasses$(): Observable<Array<SchoolClassDto>> {
+        return this._schoolClasses$;
+    }
 }

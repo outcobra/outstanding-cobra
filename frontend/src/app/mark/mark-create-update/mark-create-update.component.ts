@@ -9,9 +9,11 @@ import {MARK_PATTERN, MarkService, WEIGHT_PATTERN} from '../service/mark.service
 import {FormUtil} from '../../core/util/form-util';
 import {ConfirmDialogService} from '../../core/services/confirm-dialog.service';
 import {getIfTruthy, isNotEmpty, isTrue} from '../../core/util/helper';
-import {Observable} from 'rxjs/Observable';
+import {combineLatest} from 'rxjs';
 import * as objectAssign from 'object-assign';
 import {NotificationWrapperService} from '../../core/notifications/notification-wrapper.service';
+import {filter, map} from 'rxjs/operators';
+import {fromPromise} from 'rxjs/internal/observable/fromPromise';
 
 @Component({
     selector: 'mark-create-update',
@@ -36,7 +38,7 @@ export class MarkCreateUpdateComponent extends ParentLinkedCreateUpdateComponent
     }
 
     ngOnInit() {
-        Observable.combineLatest([
+        combineLatest([
                 this._route.params,
                 this._route.queryParams
             ], (first, second) => convertToParamMap(objectAssign({}, first, second))
@@ -70,17 +72,21 @@ export class MarkCreateUpdateComponent extends ParentLinkedCreateUpdateComponent
             return;
         }
         this._confirmService.open('i18n.common.dialog.unsavedChanges.title', 'i18n.common.dialog.unsavedChanges.message')
-            .filter(isTrue)
-            .map(() => Observable.fromPromise(this._goToSemesterView()))
-            .filter(isTrue)
+            .pipe(
+                filter(isTrue),
+                map(() => fromPromise(this._goToSemesterView())),
+                filter(isTrue)
+            )
             .subscribe(() => this._notificationService.success('i18n.common.notification.success.save', 'i18n.modules.mark.createUpdate.notification.success.message'));
     }
 
     public submit() {
         if (this._markCreateUpdateForm.valid && this._markCreateUpdateForm.dirty) {
             this._markService.saveMark(this._formToMark(this._markCreateUpdateForm))
-                .map(() => Observable.fromPromise(this._goToSemesterView()))
-                .filter(isTrue)
+                .pipe(
+                    map(() => fromPromise(this._goToSemesterView())),
+                    filter(isTrue)
+                )
                 .subscribe(() => this._notificationService.success('i18n.common.notification.success.save', 'i18n.modules.mark.createUpdate.notification.success.message'));
         }
         else {

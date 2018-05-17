@@ -5,15 +5,16 @@ import {MarkService, WEIGHT_PATTERN} from '../service/mark.service';
 import {MarkDto} from '../model/mark.dto';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ParentLinkedCreateUpdateComponent} from '../../core/common/parent-linked-create-update-component';
-import {Subject} from 'rxjs/Subject';
 import {isEmpty, isNotEmpty, isNotNull, isTrue} from '../../core/util/helper';
 import {Util} from '../../core/util/util';
 import {FormUtil} from '../../core/util/form-util';
 import {ViewMode} from '../../core/common/view-mode';
 import {ConfirmDialogService} from '../../core/services/confirm-dialog.service';
 import {MatSelect} from '@angular/material';
-import {Observable} from 'rxjs/Observable';
+import {Subject} from 'rxjs';
 import {NotificationWrapperService} from '../../core/notifications/notification-wrapper.service';
+import {filter, map} from 'rxjs/operators';
+import {fromPromise} from 'rxjs/internal-compatibility';
 
 @Component({
     selector: 'mark-group-create-update',
@@ -59,7 +60,7 @@ export class MarkGroupCreateUpdateComponent extends ParentLinkedCreateUpdateComp
 
         this._route.data.subscribe((marks: { subjectMarkGroup: MarkGroupDto, isEdit: boolean, markGroup?: MarkGroupDto }) => {
                 let isEdit = marks.isEdit;
-            this.initWithParent((isEdit ? ViewMode.EDIT : ViewMode.NEW), marks.subjectMarkGroup, isEdit ? marks.markGroup : null);
+                this.initWithParent((isEdit ? ViewMode.EDIT : ViewMode.NEW), marks.subjectMarkGroup, isEdit ? marks.markGroup : null);
                 this._availableMarks = marks.subjectMarkGroup.markValues;
                 this._selectedMarks = this.getParamOrDefault('markValues', []) as Array<MarkDto>;
                 if (isEdit) {
@@ -73,8 +74,7 @@ export class MarkGroupCreateUpdateComponent extends ParentLinkedCreateUpdateComp
             }
         );
 
-        this.newMark$
-            .filter(isNotNull)
+        this.newMark$.pipe(filter(isNotNull))
             .subscribe(mark => {
                 Util.removeItem(this._availableMarks, mark);
                 this._selectedMarks.push(mark);
@@ -84,8 +84,7 @@ export class MarkGroupCreateUpdateComponent extends ParentLinkedCreateUpdateComp
                 }
             });
 
-        this.removeMark$
-            .filter(isNotNull)
+        this.removeMark$.pipe(filter(isNotNull))
             .subscribe(mark => {
                 Util.removeItem(this._selectedMarks, mark);
                 this._availableMarks.push(mark);
@@ -103,16 +102,17 @@ export class MarkGroupCreateUpdateComponent extends ParentLinkedCreateUpdateComp
             return;
         }
         this._confirmService.open('i18n.common.dialog.unsavedChanges.title', 'i18n.common.dialog.unsavedChanges.message')
-            .filter(isTrue)
+            .pipe(filter(isTrue))
             .subscribe(() => this._goToSemesterView());
     }
 
     public submit() {
         if (this._markGroupCreateUpdateForm.valid && this._markGroupCreateUpdateForm.dirty) {
             this._markService.saveMarkGroup(this._formToMarkGroup(this._markGroupCreateUpdateForm))
-                .map(() => Observable.fromPromise(this._goToSemesterView()))
-                .filter(isTrue)
-                .subscribe(() => this._notificationService.success('i18n.common.notification.success.save', 'i18n.modules.mark.group.createUpdate.notification.success.message'));
+                .pipe(
+                    map(() => fromPromise(this._goToSemesterView())),
+                    filter(isTrue)
+                ).subscribe(() => this._notificationService.success('i18n.common.notification.success.save', 'i18n.modules.mark.group.createUpdate.notification.success.message'));
         }
         else {
             FormUtil.revalidateForm(this._markGroupCreateUpdateForm);

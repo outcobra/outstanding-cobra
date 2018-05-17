@@ -12,12 +12,12 @@ import {Util} from '../core/util/util';
 import {SchoolClassSubjectDto} from '../task/model/school-class-subject.dto';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DateUtil} from '../core/services/date-util.service';
-import {Observable} from 'rxjs/Observable';
+import {merge, Subject} from 'rxjs';
 import {examByNameComparator} from '../core/util/comparator';
-import {Subject} from 'rxjs/Subject';
 import {MarkService} from 'app/mark/service/mark.service';
 import * as moment from 'moment';
 import {Moment} from 'moment';
+import {filter, switchMap} from 'rxjs/operators';
 
 @Component({
     selector: 'exam',
@@ -78,11 +78,10 @@ export class ExamComponent implements OnInit, AfterViewInit {
 
     ngAfterViewInit(): void {
         this._filterShown = !this._responsiveHelper.isMobile();
-        Observable.merge(
+        merge(
             this._responsiveHelper.listenForBreakpointChange(),
             this._responsiveHelper.listenForOrientationChange()
-        )
-            .filter(change => !change.mobile)
+        ).pipe(filter(change => !change.mobile))
             .subscribe(() => this._filterShown = true);
         this._changeDetectorRef.detectChanges();
     }
@@ -119,14 +118,14 @@ export class ExamComponent implements OnInit, AfterViewInit {
     }
 
     public deleteExam(exam: ExamDto) {
-        this._confirmDialogService.open('i18n.modules.exam.dialogs.confirmDeleteDialog.title', 'i18n.modules.exam.dialogs.confirmDeleteDialog.message')
-            .filter(isTruthy)
-            .switchMap(() => this._examService.deleteById(exam.id))
-            .subscribe(() => {
-                this._notificationService.success('i18n.modules.exam.notification.delete.title', 'i18n.modules.exam.notification.delete.message');
-                this._removeExam(exam);
-                this._displayForFilter();
-            });
+        this._confirmDialogService.open('i18n.modules.exam.dialogs.confirmDeleteDialog.title', 'i18n.modules.exam.dialogs.confirmDeleteDialog.message').pipe(
+            filter(isTruthy),
+            switchMap(() => this._examService.deleteById(exam.id))
+        ).subscribe(() => {
+            this._notificationService.success('i18n.modules.exam.notification.delete.title', 'i18n.modules.exam.notification.delete.message');
+            this._removeExam(exam);
+            this._displayForFilter();
+        });
     }
 
     public editExam(exam: ExamDto) {

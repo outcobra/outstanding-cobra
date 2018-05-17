@@ -6,7 +6,7 @@ import {OCUiModule} from '../oc-ui/oc-ui.module';
 import {RouterTestingModule} from '@angular/router/testing';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {MockTaskService} from '../core/mock/task/mock-task.service';
 import {TaskListItemHeaderComponent} from './task-list-item-header/task-list-item-header.component';
 import {TaskDetailComponent} from './task-detail-component/task-detail.component';

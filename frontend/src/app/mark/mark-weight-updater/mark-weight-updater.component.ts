@@ -4,7 +4,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {WEIGHT_PATTERN} from '../service/mark.service';
 import {NotificationWrapperService} from '../../core/notifications/notification-wrapper.service';
 import {ConnectionPositionPair} from '@angular/cdk/overlay';
-import {Observable} from 'rxjs/Observable';
+import {fromEvent} from 'rxjs';
+import {filter} from 'rxjs/operators';
 
 @Component({
     selector: 'mark-weight-updater',
@@ -49,11 +50,12 @@ export class MarkWeightUpdaterComponent implements OnInit {
         this._weightUpdaterForm = this._formBuilder.group({
             weight: [this.markGroup.weight, Validators.pattern(WEIGHT_PATTERN)]
         });
-        this.change
-            .filter(() => !this.disabled)
+        this.change.pipe(
+            filter(_ => !this.disabled)
+        )
             .subscribe(markGroup => this._originalValue = markGroup.weight);
 
-        Observable.fromEvent(window, 'resize')
+        fromEvent(window, 'resize')
             .subscribe(() => this._refreshTriggerDimensions());
     }
 

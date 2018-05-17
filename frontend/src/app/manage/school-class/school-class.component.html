@@ -1,3 +1,16 @@
-<p>
-  school-class works!
-</p>
+<oc-title-bar>
+    <span>{{ 'i18n.modules.exam.linkTitle' | translate }}</span>
+</oc-title-bar>
+
+<div fxLayout fxLayoutAlign="center start">
+    <div class="container middle-container" fxFlex>
+        <mat-accordion>
+            <mat-expansion-panel *ngFor="let schoolClass of schoolClasses$ | async"
+                                 displayMode="flat">
+                <mat-expansion-panel-header>
+                    {{ schoolClass.normalizedName }}
+                </mat-expansion-panel-header>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+</div>

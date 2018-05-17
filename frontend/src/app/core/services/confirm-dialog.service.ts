@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
 import {MatDialog} from '@angular/material';
-import {Observable} from 'rxjs/Observable';
 import {ResponsiveHelperService} from './ui/responsive-helper.service';
 import {SMALL_DIALOG} from '../util/const';
 import {ConfirmDialogComponent} from '../../shared/components/confirm-dialog/confirm-dialog.component';
+import {first} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 
 @Injectable()
 export class ConfirmDialogService {
@@ -29,7 +30,7 @@ export class ConfirmDialogService {
         component.message = message;
         component.result = result;
         component.cancelable = cancelable;
-        return dialogRef.afterClosed().first();
+        return dialogRef.afterClosed().pipe(first());
     }
 
 

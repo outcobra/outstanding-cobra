@@ -19,8 +19,7 @@ import {
 } from '@angular/cdk/overlay';
 import {isFalsy} from '../../../core/util/helper';
 import {TemplatePortal} from '@angular/cdk/portal';
-import {Observable} from 'rxjs/Observable';
-import {merge} from 'rxjs/observable/merge';
+import {merge, Observable} from 'rxjs';
 
 @Directive({
     selector: '[ocPopupTrigger]'

@@ -8,9 +8,9 @@ import {UserService} from '../../core/services/user.service';
 import {ErrorStateMatcher} from '@angular/material';
 import {PasswordVerifyErrorStateMatcher} from './password-verify-error-state-matcher';
 import {isTruthy} from '../../core/util/helper';
-import {Observable} from 'rxjs/Observable';
+import {Observable, of, ReplaySubject} from 'rxjs';
 import {UsernamePasswordDto} from '../model/username-password.dto';
-import {ReplaySubject} from 'rxjs/ReplaySubject';
+import {map} from 'rxjs/operators';
 
 @Component({
     selector: 'login',
@@ -40,8 +40,7 @@ export class LoginSignUpComponent implements OnInit {
 
     ngOnInit() {
         this.isSignUp = this._route.snapshot.data['isSignUp'] || false;
-        this._route.queryParamMap
-            .map(map => map.get('target') || this._defaultTarget)
+        this._route.queryParamMap.pipe(map(map => map.get('target') || this._defaultTarget))
             .subscribe(target => this._target = target);
         this._loginSignUpForm = this._formBuilder.group({
             mail: [
@@ -111,7 +110,7 @@ export class LoginSignUpComponent implements OnInit {
         if (isTruthy(error.message)) {
             this.errors$.next(error.message);
         }
-        return Observable.of(false);
+        return of(false);
     }
 
     get passwordVerifyErrorStateMatcher(): ErrorStateMatcher {

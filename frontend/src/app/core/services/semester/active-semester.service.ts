@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {CacheableService} from '../core/cacheable.service';
 import {SemesterDto} from '../../../manage/old/model/manage.dto';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {SemesterService} from '../../../manage/old/service/semester.service';
 
 @Injectable()

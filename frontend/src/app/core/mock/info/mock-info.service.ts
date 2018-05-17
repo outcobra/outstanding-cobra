@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {InfoService} from '../../services/info.service';
 import {Info} from '../../model/info.dto';
 
