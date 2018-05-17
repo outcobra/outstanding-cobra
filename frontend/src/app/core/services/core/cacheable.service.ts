@@ -1,9 +1,8 @@
 import {Cacheable} from '../../interfaces/cacheable';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {Util} from '../../util/util';
 import {AppService} from './app.service';
 import {HttpClient} from '@angular/common/http';
-import {of} from 'rxjs/internal/observable/of';
 import {map, share} from 'rxjs/operators';
 
 /**

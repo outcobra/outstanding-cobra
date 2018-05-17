@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
+import {fromEvent, Observable} from 'rxjs';
 import {MOBILE_DIALOG} from '../../util/const';
 import {MatDialogConfig} from '@angular/material';
 import {Orientation} from './orientation';
@@ -7,7 +7,6 @@ import {isFalsy} from '../../util/helper';
 import {MediaChange, ObservableMedia} from '@angular/flex-layout';
 import {OCMediaChange} from './oc-media-change';
 import {debounceTime, distinctUntilChanged, map} from 'rxjs/operators';
-import {fromEvent} from 'rxjs/internal/observable/fromEvent';
 
 @Injectable()
 export class ResponsiveHelperService {

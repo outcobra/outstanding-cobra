@@ -1,11 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {Observable, throwError} from 'rxjs';
 import {isNotEmpty} from '../util/helper';
 import {NotificationWrapperService} from '../notifications/notification-wrapper.service';
 import {catchError} from 'rxjs/operators';
 import {ValidationException} from './validation-exception';
-import {throwError} from 'rxjs/internal/observable/throwError';
 
 @Injectable()
 export class ErrorCatchingHttpInterceptor implements HttpInterceptor {

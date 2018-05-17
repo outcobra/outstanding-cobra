@@ -11,10 +11,9 @@ import {FormUtil} from '../../core/util/form-util';
 import {ViewMode} from '../../core/common/view-mode';
 import {ConfirmDialogService} from '../../core/services/confirm-dialog.service';
 import {MatSelect} from '@angular/material';
-import {Subject} from 'rxjs';
+import {from, Subject} from 'rxjs';
 import {NotificationWrapperService} from '../../core/notifications/notification-wrapper.service';
 import {filter, map} from 'rxjs/operators';
-import {fromPromise} from 'rxjs/internal-compatibility';
 
 @Component({
     selector: 'mark-group-create-update',
@@ -110,7 +109,7 @@ export class MarkGroupCreateUpdateComponent extends ParentLinkedCreateUpdateComp
         if (this._markGroupCreateUpdateForm.valid && this._markGroupCreateUpdateForm.dirty) {
             this._markService.saveMarkGroup(this._formToMarkGroup(this._markGroupCreateUpdateForm))
                 .pipe(
-                    map(() => fromPromise(this._goToSemesterView())),
+                    map(() => from(this._goToSemesterView())),
                     filter(isTrue)
                 ).subscribe(() => this._notificationService.success('i18n.common.notification.success.save', 'i18n.modules.mark.group.createUpdate.notification.success.message'));
         }

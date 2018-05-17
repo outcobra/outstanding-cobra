@@ -9,11 +9,10 @@ import {MARK_PATTERN, MarkService, WEIGHT_PATTERN} from '../service/mark.service
 import {FormUtil} from '../../core/util/form-util';
 import {ConfirmDialogService} from '../../core/services/confirm-dialog.service';
 import {getIfTruthy, isNotEmpty, isTrue} from '../../core/util/helper';
-import {combineLatest} from 'rxjs';
+import {combineLatest, from} from 'rxjs';
 import * as objectAssign from 'object-assign';
 import {NotificationWrapperService} from '../../core/notifications/notification-wrapper.service';
 import {filter, map} from 'rxjs/operators';
-import {fromPromise} from 'rxjs/internal/observable/fromPromise';
 
 @Component({
     selector: 'mark-create-update',
@@ -74,7 +73,7 @@ export class MarkCreateUpdateComponent extends ParentLinkedCreateUpdateComponent
         this._confirmService.open('i18n.common.dialog.unsavedChanges.title', 'i18n.common.dialog.unsavedChanges.message')
             .pipe(
                 filter(isTrue),
-                map(() => fromPromise(this._goToSemesterView())),
+                map(() => from(this._goToSemesterView())),
                 filter(isTrue)
             )
             .subscribe(() => this._notificationService.success('i18n.common.notification.success.save', 'i18n.modules.mark.createUpdate.notification.success.message'));
@@ -84,7 +83,7 @@ export class MarkCreateUpdateComponent extends ParentLinkedCreateUpdateComponent
         if (this._markCreateUpdateForm.valid && this._markCreateUpdateForm.dirty) {
             this._markService.saveMark(this._formToMark(this._markCreateUpdateForm))
                 .pipe(
-                    map(() => fromPromise(this._goToSemesterView())),
+                    map(() => from(this._goToSemesterView())),
                     filter(isTrue)
                 )
                 .subscribe(() => this._notificationService.success('i18n.common.notification.success.save', 'i18n.modules.mark.createUpdate.notification.success.message'));
