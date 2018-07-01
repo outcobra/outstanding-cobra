@@ -31,7 +31,7 @@ class SchoolClassMapper @Inject constructor(val schoolYearRepository: SchoolYear
         val institution = institutionRepository.findOne(from.institutionId)
         val years = from.schoolYearIds.map { schoolYearRepository.findOne(it) }.toMutableList()
         val subjects = from.subjectIds.map { subjectRepository.findOne(it) }.toMutableList()
-        val schoolClass = SchoolClass(from.normalizedName, institution, years, subjects)
+        val schoolClass = SchoolClass(from.normalizedName, institution, years, mutableListOf(), subjects)
         schoolClass.id = from.id
         return schoolClass
     }

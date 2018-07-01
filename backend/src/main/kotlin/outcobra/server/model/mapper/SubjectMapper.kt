@@ -36,7 +36,7 @@ class SubjectMapper @Inject constructor(val semesterRepository: SemesterReposito
         val semesters = from.semesterIds.map { semesterRepository.findOne(it) }
         val classes = from.classIds.map { classRepository.findOne(it) }
         val user = userRepository.findOne(from.userId)
-        val subject = Subject(from.name, colorMapper.fromDto(from.color), user, semesters, classes, listOf(), tasks, listOf(), exams, markGroup, null)
+        val subject = Subject(from.name, colorMapper.fromDto(from.color), user, semesters, classes, listOf(markGroup), listOf(), tasks, listOf(), exams, null)
         subject.id = from.identifier
         return subject
     }

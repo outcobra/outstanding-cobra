@@ -20,6 +20,7 @@
         "validTo": "Valid to",
         "dueDate": "Due Date",
         "todoDate": "Todo Date",
+        "dateRange": "Period",
         "empty": "There seems to be nothing available here",
         "noFilterResults": "No results that match the current filter have been found"
       },
@@ -318,6 +319,18 @@
         "linkTitle": "Dashboard (Soon)"
       },
       "manage": {
+        "classes": {
+          "linkTitle": "Schoolyears",
+          "actions": {
+            "openYears": "Show school years"
+          }
+        },
+        "schoolYearSem": {
+          "linkTitle": "Years and Semesters",
+          "label": {
+            "semester": "Semester"
+          }
+        },
         "linkTitle": "Manage",
         "assureDeletion": "Delete object",
         "mobile": {

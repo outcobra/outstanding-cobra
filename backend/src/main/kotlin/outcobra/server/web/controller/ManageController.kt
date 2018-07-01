@@ -4,9 +4,8 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import outcobra.server.model.dto.SchoolClassDto
-import outcobra.server.model.dto.SchoolYearDto
 import outcobra.server.model.dto.SubjectDto
-import outcobra.server.model.dto.manage.ManageDto
+import outcobra.server.model.dto.manage.old.ManageDto
 import outcobra.server.service.ManageService
 import outcobra.server.service.SchoolClassService
 import outcobra.server.service.SchoolYearService
@@ -30,7 +29,7 @@ class ManageController constructor(val manageService: ManageService,
     }
 
     @GetMapping("/schoolYearsSemesters")
-    fun getSchoolYearsAndSemesters(): List<SchoolYearDto> {
+    fun getSchoolYearsAndSemesters(): List<outcobra.server.model.dto.manage.SchoolYearDto> {
         return schoolYearService.readAllByUser()
     }
 

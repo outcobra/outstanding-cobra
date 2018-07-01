@@ -2,7 +2,6 @@ package outcobra.server.service.internal
 
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import outcobra.server.model.*
 import outcobra.server.model.domain.*
 import outcobra.server.model.dto.SubjectDto
 import outcobra.server.model.interfaces.Mapper
@@ -60,7 +59,7 @@ class DefaultSubjectService
         if (dto.id == 0L) {
             val markGroup = MarkGroup(subject = subject)
             markGroupRepository.save(markGroup)
-            subject.markGroup = markGroup
+            subject.markGroups = listOf(markGroup)
         }
         subject = repository.save(subject)
         return mapper.toDto(subject)

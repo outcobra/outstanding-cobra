@@ -4,19 +4,22 @@ import org.slf4j.LoggerFactory
 import org.springframework.core.annotation.Order
 import org.springframework.stereotype.Component
 import outcobra.server.data.DataLoadOrder.MARK
-import outcobra.server.data.loaders.SubjectDataLoader.Companion.DATABASES
-import outcobra.server.data.loaders.SubjectDataLoader.Companion.GERMAN
-import outcobra.server.data.loaders.SubjectDataLoader.Companion.GUP
-import outcobra.server.data.loaders.SubjectDataLoader.Companion.MATHS
-import outcobra.server.data.loaders.SubjectDataLoader.Companion.OOP
-import outcobra.server.data.loaders.SubjectDataLoader.Companion.OOP_DESIGN
-import outcobra.server.data.loaders.SubjectDataLoader.Companion.PHYSICS
-import outcobra.server.data.loaders.SubjectDataLoader.Companion.PROJECT
-import outcobra.server.data.loaders.SubjectDataLoader.Companion.SCRUM
+import outcobra.server.data.loaders.SchoolClassSubjectSemesterDataLoader.Companion.BM5A_GUP_2018_1
+import outcobra.server.data.loaders.SchoolClassSubjectSemesterDataLoader.Companion.BM5A_MATHS_2018_2
+import outcobra.server.data.loaders.SchoolClassSubjectSemesterDataLoader.Companion.BMS5C_GERMAN_2017_1
+import outcobra.server.data.loaders.SchoolClassSubjectSemesterDataLoader.Companion.BMS5C_PHYSICS_2017_1
+import outcobra.server.data.loaders.SchoolClassSubjectSemesterDataLoader.Companion.INF5G_OOP_2016_2
+import outcobra.server.data.loaders.SchoolClassSubjectSemesterDataLoader.Companion.INF5G_OOP_DESIGN_2016_2
+import outcobra.server.data.loaders.SchoolClassSubjectSemesterDataLoader.Companion.INF5G_SCRUM_2016_1
+import outcobra.server.data.loaders.SchoolClassSubjectSemesterDataLoader.Companion.INF5K_DATABASES_2016_2
+import outcobra.server.data.loaders.SchoolClassSubjectSemesterDataLoader.Companion.INF5K_OOP_2016_2
+import outcobra.server.data.loaders.SchoolClassSubjectSemesterDataLoader.Companion.INF5K_OOP_DESIGN_2016_2
+import outcobra.server.data.loaders.SchoolClassSubjectSemesterDataLoader.Companion.INF5K_PROJECT_2017_2
+import outcobra.server.data.loaders.SchoolClassSubjectSemesterDataLoader.Companion.INF5K_SCRUM_2016_1
 import outcobra.server.model.domain.Mark
 import outcobra.server.model.domain.MarkGroup
 import outcobra.server.model.domain.MarkValue
-import outcobra.server.model.domain.Subject
+import outcobra.server.model.domain.SchoolClassSubjectSemester
 import outcobra.server.model.repository.MarkGroupRepository
 import outcobra.server.model.repository.MarkValueRepository
 import outcobra.server.model.repository.SubjectRepository
@@ -63,20 +66,29 @@ class MarkDataLoader @Inject constructor(val markValueRepository: MarkValueRepos
     override fun shouldLoad(): Boolean = true
 
     override fun load() {
-        listOf(SCRUM, OOP, GUP, PHYSICS, OOP_DESIGN, PROJECT, MATHS, GERMAN, DATABASES)
+        listOf(INF5G_SCRUM_2016_1,
+                INF5K_SCRUM_2016_1,
+                INF5G_OOP_2016_2,
+                INF5K_OOP_2016_2,
+                INF5G_OOP_DESIGN_2016_2,
+                INF5K_OOP_DESIGN_2016_2,
+                INF5K_PROJECT_2017_2,
+                INF5K_DATABASES_2016_2,
+                BMS5C_PHYSICS_2017_1,
+                BMS5C_GERMAN_2017_1,
+                BM5A_GUP_2018_1,
+                BM5A_MATHS_2018_2)
                 .forEach { saveMarksForSemester(it) }
     }
 
-    private fun saveMarksForSemester(subject: Subject) {
-        MARK_GROUP_SUBJ = MarkGroup("${subject.name} mark", 1.0, null, mutableListOf(), subject)
+    private fun saveMarksForSemester(schoolClassSubjectSemester: SchoolClassSubjectSemester) {
+        MARK_GROUP_SUBJ = MarkGroup("${schoolClassSubjectSemester.subject!!.name} mark", 1.0, null, mutableListOf(), schoolClassSubjectSemester)
         MARK_GROUP_SUBJ = markGroupRepository.save(MARK_GROUP_SUBJ)
-        subject.markGroup = MARK_GROUP_SUBJ
-        subjectRepository.save(subject)
-        SUBGROUP1 = markGroupRepository.save(MarkGroup("subgroup", 0.5, MARK_GROUP_SUBJ, mutableListOf(), subject))
+        SUBGROUP1 = markGroupRepository.save(MarkGroup("subgroup", 0.5, MARK_GROUP_SUBJ, mutableListOf(), schoolClassSubjectSemester))
         MARK1 = markValueRepository.save(MarkValue(getRandomMark(), getRandomWeight(), MARK_GROUP_SUBJ, "mark1", null))
         MARK2 = markValueRepository.save(MarkValue(getRandomMark(), getRandomWeight(), SUBGROUP1, "mark2", null))
         MARK3 = markValueRepository.save(MarkValue(getRandomMark(), getRandomWeight(), SUBGROUP1, "mark3", null))
-        LOGGER.debug("saved marks for subject ${subject.name}")
+        LOGGER.debug("saved marks for subject ${schoolClassSubjectSemester.subject.name} of school class ${schoolClassSubjectSemester.schoolClass!!.normalizedName} in semester ${schoolClassSubjectSemester.semester!!.name}")
 
     }
 }

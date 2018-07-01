@@ -2,7 +2,10 @@ package outcobra.server.model.domain
 
 import outcobra.server.model.interfaces.ParentLinked
 import java.time.LocalDate
-import javax.persistence.*
+import javax.persistence.Entity
+import javax.persistence.ManyToOne
+import javax.persistence.OneToMany
+import javax.persistence.OneToOne
 import javax.validation.constraints.NotNull
 
 @Entity
@@ -13,8 +16,8 @@ data class Semester(@NotNull var name: String = "",
                     @ManyToOne @NotNull
                     var schoolYear: SchoolYear? = null,
 
-                    @ManyToMany(mappedBy = "semesters")
-                    var subjects: List<Subject> = listOf(),
+                    @OneToMany
+                    var schoolClassSubjectSemester: List<SchoolClassSubjectSemester> = listOf(),
 
                     @OneToMany(mappedBy = "semester")
                     var markReports: List<MarkReport> = listOf(),

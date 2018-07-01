@@ -36,7 +36,7 @@ class SemesterMapper @Inject constructor(val subjectRepository: SubjectRepositor
         val subjects = from.subjectIds.map { subjectRepository.findOne(it) }
         val reports = from.markReportIds.map { markReportRepository.findOne(it) }
         val timeTable = timetableRepository.findOne(QTimetable.timetable.semester.id.eq(from.identifier))
-        val semester = Semester(from.name, from.validFrom, from.validTo, year, subjects, reports, timeTable)
+        val semester = Semester(from.name, from.validFrom, from.validTo, year, listOf(), subjects, listOf(), reports, timeTable)
         semester.id = from.id
         return semester
     }

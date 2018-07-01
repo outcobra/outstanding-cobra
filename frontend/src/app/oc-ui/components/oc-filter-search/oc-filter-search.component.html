@@ -18,11 +18,11 @@
     cdkConnectedOverlay
     hasBackdrop
     backdropClass="cdk-overlay-transparent-backdrop"
-    [origin]="searchFieldOrigin"
-    [open]="showSearchField"
-    [positions]="positions"
-    [minWidth]="triggerWidth"
-    [height]="triggerHeight"
+    [cdkConnectedOverlayOrigin]="searchFieldOrigin"
+    [cdkConnectedOverlayOpen]="showSearchField"
+    [cdkConnectedOverlayPositions]="positions"
+    [cdkConnectedOverlayMinWidth]="triggerWidth"
+    [cdkConnectedOverlayHeight]="triggerHeight"
     (backdropClick)="closeSearchField()">
     <form [formGroup]="searchForm"
           class="oc-search-form">

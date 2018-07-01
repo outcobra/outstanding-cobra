@@ -35,7 +35,7 @@ class SemesterMarkDtoMapper @Inject constructor(val markGroupMapper: Mapper<Mark
     override fun toDto(from: Semester): SemesterMarkDto {
         // TODO amend-base-data use correct semester
         val schoolClass = from.schoolYear?.schoolClasses?.first() ?: ValidationKey.ENTITY_NOT_FOUND.throwException()
-        val semesterMarkGroup = MarkGroup(marks = from.subjects.map { it.markGroup!! }.toMutableList())
+        val semesterMarkGroup = MarkGroup(marks = from.subjects.flatMap { it.markGroups }.toMutableList())
         val institution = schoolClass.institution ?: ValidationKey.ENTITY_NOT_FOUND.throwException()
         return SemesterMarkDto(from.id, from.name, from.validFrom, from.validTo,
                 institutionMapper.toDto(institution), schoolClassMapper.toDto(schoolClass),
@@ -45,8 +45,9 @@ class SemesterMarkDtoMapper @Inject constructor(val markGroupMapper: Mapper<Mark
 
     private fun subjectToMarksDto(from: Subject): SubjectMarkDto {
         val color = from.color
-        val markGroup = from.markGroup!!
-        return SubjectMarkDto(from.id, from.name, colorMapper.toDto(color), markGroupMapper.toDto(markGroup))
+        val markGroups = from.markGroups!!
+        // TODO mark groups needs to be chosen by semester/subject/schoolClass
+        return SubjectMarkDto(from.id, from.name, colorMapper.toDto(color), markGroups.map { markGroupMapper.toDto(it) }.first())
     }
 
 }

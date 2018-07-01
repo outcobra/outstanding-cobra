@@ -9,7 +9,7 @@ CREATE TABLE school_year_school_class (
   FOREIGN KEY (school_year_id) REFERENCES school_year (id)
 );
 
-CREATE TABLE subject_semester (
+/*CREATE TABLE subject_semester (
   id          BIGINT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   semester_id BIGINT(20) NOT NULL,
   subject_id  BIGINT(20) NOT NULL,
@@ -17,9 +17,9 @@ CREATE TABLE subject_semester (
   FOREIGN KEY (semester_id) REFERENCES semester (id),
   CONSTRAINT fk_subject_semester_subject
   FOREIGN KEY (subject_id) REFERENCES subject (id)
-);
+);*/
 
-CREATE TABLE subject_school_class (
+/*CREATE TABLE subject_school_class (
   id              BIGINT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   subject_id      BIGINT(20) NOT NULL,
   school_class_id BIGINT(20) NOT NULL,
@@ -27,7 +27,7 @@ CREATE TABLE subject_school_class (
   FOREIGN KEY (subject_id) REFERENCES subject (id),
   CONSTRAINT fk_subject_school_class_school_class
   FOREIGN KEY (school_class_id) REFERENCES class (id)
-);
+);*/
 
 ALTER TABLE school_year
   ADD COLUMN user_id BIGINT(20) NOT NULL DEFAULT 1,
@@ -38,6 +38,43 @@ ALTER TABLE subject
   ADD COLUMN user_id BIGINT(20) NOT NULL DEFAULT 1,
   ADD CONSTRAINT fk_subject_user
 FOREIGN KEY (user_id) REFERENCES user (id);
+
+
+CREATE TABLE school_class_subject_semester (
+  id BIGINT(20) NOT NULL PRIMARY KEY,
+  school_class_id BIGINT(20) NOT NULL,
+  subject_id      BIGINT(20) NOT NULL,
+  semester_id     BIGINT(20) NOT NULL
+);
+
+ALTER TABLE school_class_subject_semester
+  ADD CONSTRAINT fk_scssm_school_class
+  FOREIGN KEY (school_class_id) REFERENCES class(id);
+
+ALTER TABLE school_class_subject_semester
+  ADD CONSTRAINT fk_scssm_subject
+  FOREIGN KEY (subject_id) REFERENCES subject(id);
+
+ALTER TABLE school_class_subject_semester
+  ADD CONSTRAINT fk_scssm_semester
+  FOREIGN KEY (semester_id) REFERENCES semester(id);
+
+
+ALTER TABLE exam
+  ADD COLUMN school_class_subject_semester_id BIGINT(20) NOT NULL DEFAULT 0,
+  ADD CONSTRAINT fk_scss_exam
+  FOREIGN KEY (school_class_subject_semester_id) REFERENCES school_class_subject_semester(id);
+
+ALTER TABLE mark_group
+  ADD COLUMN school_class_subject_semester_id BIGINT(20) NOT NULL DEFAULT 0,
+  ADD CONSTRAINT fk_scss_mark_group
+  FOREIGN KEY (school_class_subject_semester_id) REFERENCES school_class_subject_semester(id);
+
+ALTER TABLE task
+  ADD COLUMN school_class_subject_semester_id BIGINT(20) NOT NULL DEFAULT 0,
+  ADD CONSTRAINT fk_scss_task
+  FOREIGN KEY (school_class_subject_semester_id) REFERENCES school_class_subject_semester(id);
+
 # endregion
 
 # region DML transfer
@@ -151,4 +188,8 @@ ALTER TABLE subject
 ALTER TABLE school_year
   DROP FOREIGN KEY fk_school_year_class,
   DROP COLUMN school_class_id;
+
+ALTER TABLE subject
+  DROP FOREIGN KEY fk_subject_mark_group,
+  DROP COLUMN mark_group_id;
 # endregion

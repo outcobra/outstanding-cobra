@@ -41,6 +41,9 @@ interface TimetableRepository : OutcobraRepository<Timetable>
 interface SubjectRepository : OutcobraRepository<Subject>
 
 @Repository
+interface SchoolClassSubjectSemesterRepository : OutcobraRepository<SchoolClassSubjectSemester>
+
+@Repository
 interface TaskRepository : OutcobraRepository<Task>
 
 @Repository

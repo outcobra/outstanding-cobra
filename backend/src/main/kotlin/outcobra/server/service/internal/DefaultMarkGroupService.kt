@@ -74,8 +74,8 @@ class DefaultMarkGroupService
 
     override fun getGroupBySubject(subjectId: Long): MarkGroupDto {
         requestValidator.validateRequestById(subjectId, Subject::class)
-        val markGroup = subjectRepository.findOne(subjectId).markGroup
-        return mapper.toDto(markGroup as MarkGroup)
+        val markGroups = subjectRepository.findOne(subjectId).markGroups
+        return mapper.toDto(markGroups as MarkGroup)
     }
 
     override fun getInitialData(semesterId: Long): SemesterMarkDto {

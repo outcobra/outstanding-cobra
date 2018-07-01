@@ -11,11 +11,11 @@ import {ManageService} from '../service/manage.service';
 export class SchoolClassComponent implements OnInit {
     private _schoolClasses$: Observable<Array<SchoolClassDto>>;
 
-    constructor(private manageService: ManageService) {
+    constructor(private _manageService: ManageService) {
     }
 
     ngOnInit() {
-        this._schoolClasses$ = this.manageService.getSchoolClasses()
+        this._schoolClasses$ = this._manageService.getSchoolClasses()
     }
 
 

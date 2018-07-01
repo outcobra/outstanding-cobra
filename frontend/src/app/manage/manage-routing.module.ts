@@ -8,15 +8,19 @@ import {SubjectComponent} from './subject/subject.component';
     imports: [
         RouterModule.forChild([
             {
-                path: 'classes',
+                path: 'class',
                 component: SchoolClassComponent
             },
             {
-                path: 'schoolyears',
+                path: 'class/:id/schoolyear',
                 component: SchoolYearSemesterComponent
             },
             {
-                path: 'subjects',
+                path: 'schoolyear',
+                component: SchoolYearSemesterComponent
+            },
+            {
+                path: 'subject',
                 component: SubjectComponent
             }
         ])

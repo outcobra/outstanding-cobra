@@ -1,15 +1,20 @@
 <oc-title-bar>
-    <span>{{ 'i18n.modules.exam.linkTitle' | translate }}</span>
+    <span>{{ 'i18n.modules.manage.classes.linkTitle' | translate }}</span>
 </oc-title-bar>
 
 <div fxLayout fxLayoutAlign="center start">
     <div class="container middle-container" fxFlex>
-        <mat-accordion>
-            <mat-expansion-panel *ngFor="let schoolClass of schoolClasses$ | async"
-                                 displayMode="flat">
+        <mat-accordion displayMode="flat">
+            <mat-expansion-panel *ngFor="let schoolClass of schoolClasses$ | async">
                 <mat-expansion-panel-header>
                     {{ schoolClass.normalizedName }}
                 </mat-expansion-panel-header>
+                <mat-action-row>
+                    <a mat-button
+                       [routerLink]="[schoolClass.id, 'schoolyear']">
+                        {{ 'i18n.modules.manage.classes.actions.openYears' | translate }}
+                    </a>
+                </mat-action-row>
             </mat-expansion-panel>
         </mat-accordion>
     </div>

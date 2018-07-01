@@ -1,6 +1,6 @@
 package outcobra.server.service
 
-import outcobra.server.model.dto.manage.ManageDto
+import outcobra.server.model.dto.manage.old.ManageDto
 
 /**
  * Service which handles all the business logic for the manage endpoint

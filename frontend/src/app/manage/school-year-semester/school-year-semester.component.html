@@ -1,3 +1,37 @@
-<p>
-  school-year-semester works!
-</p>
+<oc-title-bar>
+    <span>{{ 'i18n.modules.manage.schoolYearSem.linkTitle' | translate }}</span>
+</oc-title-bar>
+
+<div fxLayout fxLayoutAlign="center start">
+    <div class="container middle-container" fxFlex>
+        <mat-accordion displayMode="flat">
+            <mat-expansion-panel *ngFor="let schoolYear of schoolYearSemesters$ | async">
+                <mat-expansion-panel-header>
+                    {{ schoolYear.name }}
+                </mat-expansion-panel-header>
+                <oc-icon-data iconName="schedule"
+                              titleKey="i18n.common.label.dateRange"
+                              [showDivider]="false">
+                    <span>{{ schoolYear.validFrom | date }} - {{ schoolYear.validTo | date }}</span>
+                </oc-icon-data>
+                <oc-icon-data iconName="event"
+                              titleKey="i18n.modules.manage.schoolYearSem.label.semester"
+                              [showDivider]="false">
+                    <oc-icon-data-child *ngFor="let semester of schoolYear.semesters">
+                        <oc-icon-data-title>{{ semester.validFrom | date }} - {{ semester.validTo | date }}</oc-icon-data-title>
+                        <oc-icon-data-data>
+                            <p>{{ semester.name }}</p>
+                            <button mat-button>Bla</button>
+                        </oc-icon-data-data>
+                    </oc-icon-data-child>
+                </oc-icon-data>
+                <mat-action-row>
+                    <a mat-button
+                       [routerLink]="[schoolYear.id, 'schoolyear']">
+                        {{ 'i18n.modules.manage.classes.actions.openYears' | translate }}
+                    </a>
+                </mat-action-row>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+</div>

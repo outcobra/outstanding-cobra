@@ -1,4 +1,4 @@
-package outcobra.server.model.dto.manage
+package outcobra.server.model.dto.manage.old
 
 import outcobra.server.model.dto.ColorDto
 import java.time.LocalDate

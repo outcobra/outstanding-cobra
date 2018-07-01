@@ -20,6 +20,7 @@
         "validTo": "Gültig bis",
         "todoDate": "Erledigungsdatum",
         "dueDate": "Fälligkeitsdatum",
+        "dateRange": "Zeitraum",
         "date": "Datum",
         "empty": "Scheinbar ist hier nichts vorhanden",
         "noFilterResults": "Es wurden keine Resultate für den Filter gefunden"
@@ -320,10 +321,16 @@
       },
       "manage": {
         "classes": {
-          "linkTitle": "Schulklassen"
+          "linkTitle": "Schulklassen",
+          "actions": {
+            "openYears": "Schuljahre anzeigen"
+          }
         },
         "schoolYearSem": {
-          "linkTitle": "Jahre und Semester"
+          "linkTitle": "Jahre und Semester",
+          "label": {
+            "semester": "Semester"
+          }
         },
         "subject": {
           "linkTitle": "Fächer"

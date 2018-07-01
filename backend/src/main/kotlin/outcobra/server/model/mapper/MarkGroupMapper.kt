@@ -40,7 +40,7 @@ class MarkGroupMapper @Inject constructor(val subjectRepository: SubjectReposito
         if (subject != null) {
             marks.plus(from.markGroups.map { fromDto(it) })
         }
-        val result = MarkGroup(from.description, from.weight, parentGroup, marks, subject)
+        val result = MarkGroup(from.description, from.weight, parentGroup, marks, null, null, subject)
         if (!isNew) {
             result.id = from.id
         }
