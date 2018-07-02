@@ -4,7 +4,6 @@ import org.springframework.stereotype.Component
 import outcobra.server.model.domain.Task
 import outcobra.server.model.dto.TaskDto
 import outcobra.server.model.interfaces.Mapper
-import outcobra.server.model.repository.SubjectRepository
 import javax.inject.Inject
 
 /**
@@ -12,14 +11,11 @@ import javax.inject.Inject
  * @since 1.0.0
  */
 @Component
-class TaskMapper @Inject constructor(val subjectRepository: SubjectRepository,
-                                     val schoolClassSubjectSemesterMapper: SchoolClassSubjectSemesterMapper,
-                                     val subjectMapper: SubjectMapper) : Mapper<Task, TaskDto> {
-
+class TaskMapper @Inject constructor(val schoolClassSemesterSubjectMapper: SchoolClassSubjectSemesterMapper) : Mapper<Task, TaskDto> {
     override fun toDto(from: Task): TaskDto {
         val effort = from.effort.toDouble().div(60)
 
-        val (schoolClassDto, subjectDto, semesterDto) = schoolClassSubjectSemesterMapper.toDtoTriple(from.schoolClassSemesterSubject)
+        val (schoolClassDto, subjectDto, semesterDto) = schoolClassSemesterSubjectMapper.toDtoTriple(from.schoolClassSemesterSubject)
         return TaskDto(from.id,
                 from.name,
                 from.description,
@@ -41,7 +37,7 @@ class TaskMapper @Inject constructor(val subjectRepository: SubjectRepository,
                 from.dueDate,
                 effort,
                 from.progress,
-                schoolClassSubjectSemesterMapper.fromDto(from)
+                schoolClassSemesterSubjectMapper.fromDto(from)
         )
         task.id = from.id
         return task

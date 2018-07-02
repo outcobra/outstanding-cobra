@@ -11,7 +11,7 @@ class SchoolClass(@NotNull var normalizedName: String = "",
                   @ManyToOne
                   var institution: Institution? = null,
 
-                  @OneToMany
+                  @OneToMany(mappedBy = "schoolClass")
                   var schoolClassSemester: List<SchoolClassSemester> = listOf()
 ) : ParentLinked, AbstractEntity() {
 

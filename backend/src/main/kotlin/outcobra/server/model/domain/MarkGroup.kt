@@ -1,10 +1,11 @@
 package outcobra.server.model.domain
 
 import outcobra.server.model.interfaces.ParentLinked
-import javax.persistence.*
+import javax.persistence.Entity
+import javax.persistence.ManyToOne
+import javax.persistence.OneToMany
 
 @Entity
-@SecondaryTable(name = "school_class_subject_semester_mark", pkJoinColumns = [PrimaryKeyJoinColumn(name = "mark_group_id", referencedColumnName = "id")])
 class MarkGroup(description: String = "",
                 weight: Double = 1.0,
                 markGroup: MarkGroup? = null,

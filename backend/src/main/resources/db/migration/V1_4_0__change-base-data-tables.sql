@@ -76,6 +76,11 @@ ALTER TABLE task
   ADD CONSTRAINT fk_scss_task
   FOREIGN KEY (school_class_semester_subject_id) REFERENCES school_class_semester_subject(id);
 
+ALTER TABLE mark_report
+  ADD COLUMN school_class_semester_id BIGINT(20) NOT NULL DEFAULT 0,
+  ADD CONSTRAINT fk_scs_mark_report
+  FOREIGN KEY (school_class_semester_id) REFERENCES school_class_semester(id);
+
 # endregion
 
 # region DML transfer
@@ -193,4 +198,17 @@ ALTER TABLE school_year
 ALTER TABLE subject
   DROP FOREIGN KEY fk_subject_mark_group,
   DROP COLUMN mark_group_id;
+
+ALTER TABLE exam
+  DROP FOREIGN KEY fk_exam_subject,
+  DROP COLUMN subject_id;
+
+ALTER TABLE task
+  DROP FOREIGN KEY fk_task_subject,
+  DROP COLUMN subject_id;
+
+ALTER TABLE mark_report
+  DROP FOREIGN KEY fk_mark_report_semester,
+  DROP COLUMN semester_id;
+
 # endregion

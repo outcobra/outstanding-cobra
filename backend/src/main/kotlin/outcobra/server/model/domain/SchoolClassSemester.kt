@@ -11,5 +11,5 @@ data class SchoolClassSemester(@ManyToOne
                                @ManyToOne
                                val semester: Semester = Semester(),
 
-                               @OneToMany
+                               @OneToMany(mappedBy = "schoolClassSemester")
                                val subjects: List<SchoolClassSemesterSubject> = listOf()) : AbstractEntity()

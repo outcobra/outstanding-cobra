@@ -16,7 +16,7 @@ data class Semester(@NotNull var name: String = "",
                     @ManyToOne @NotNull
                     var schoolYear: SchoolYear? = null,
 
-                    @OneToMany
+                    @OneToMany(mappedBy = "semester")
                     var schoolClassSemester: List<SchoolClassSemester> = listOf(),
 
                     @OneToOne var timetable: Timetable? = null)
