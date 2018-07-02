@@ -45,9 +45,9 @@ class SubjectDataLoader
     override fun load() {
         SCRUM = saveSubject("Scrum")
         OOP = saveSubject("Objektorientiert implementieren")
-        OOP = saveSubject("Objektorientiert entwerfen")
-        OOP = saveSubject("IT-Kleinprojekt")
-        OOP = saveSubject("Datenbanken")
+        OOP_DESIGN = saveSubject("Objektorientiert entwerfen")
+        PROJECT = saveSubject("IT-Kleinprojekt")
+        DATABASES = saveSubject("Datenbanken")
 
         PHYSICS = saveSubject("Physik")
         GERMAN = saveSubject("Deutsch")

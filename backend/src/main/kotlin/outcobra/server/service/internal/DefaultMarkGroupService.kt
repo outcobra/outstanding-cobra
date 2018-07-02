@@ -2,6 +2,7 @@ package outcobra.server.service.internal
 
 import org.springframework.stereotype.Service
 import outcobra.server.model.domain.MarkGroup
+import outcobra.server.model.domain.QMarkGroup
 import outcobra.server.model.domain.QMarkValue
 import outcobra.server.model.domain.Semester
 import outcobra.server.model.dto.MarkGroupDto
@@ -12,7 +13,6 @@ import outcobra.server.model.mapper.mark.SemesterMarkDtoMapper
 import outcobra.server.model.repository.MarkGroupRepository
 import outcobra.server.model.repository.MarkValueRepository
 import outcobra.server.model.repository.SemesterRepository
-import outcobra.server.model.repository.SubjectRepository
 import outcobra.server.service.MarkGroupService
 import outcobra.server.service.base.internal.DefaultBaseService
 import outcobra.server.validator.RequestValidator
@@ -31,7 +31,6 @@ class DefaultMarkGroupService
                     val markValueRepository: MarkValueRepository,
                     val semesterMarkDtoMapper: SemesterMarkDtoMapper,
                     val semesterRepository: SemesterRepository,
-                    val subjectRepository: SubjectRepository,
                     val markMapper: MarkMapper)
     : DefaultBaseService<MarkGroup, MarkGroupDto, MarkGroupRepository>(markGroupMapper, markGroupRepository, validator, MarkGroup::class), MarkGroupService {
 
@@ -74,7 +73,7 @@ class DefaultMarkGroupService
 
     override fun getGroupBySubject(subjectId: Long): MarkGroupDto {
         requestValidator.validateRequestById(subjectId, Subject::class)
-        val markGroups = subjectRepository.findOne(subjectId).markGroups
+        val markGroups = repository.findAll(QMarkGroup.markGroup1.schoolClassSemesterSubject.subject.id.eq(subjectId))
         return mapper.toDto(markGroups as MarkGroup)
     }
 

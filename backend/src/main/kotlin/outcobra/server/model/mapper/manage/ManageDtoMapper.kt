@@ -2,7 +2,8 @@ package outcobra.server.model.mapper.manage
 
 import org.springframework.stereotype.Component
 import outcobra.server.model.domain.Institution
-import outcobra.server.model.dto.manage.old.*
+import outcobra.server.model.dto.manage.old.InstitutionDto
+import outcobra.server.model.dto.manage.old.ManageDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.mapper.ColorMapper
 import javax.inject.Inject
@@ -18,7 +19,8 @@ class ManageDtoMapper @Inject constructor(val colorMapper: ColorMapper) : Mapper
     }
 
     private fun toInternalDto(from: Institution): InstitutionDto {
-        return InstitutionDto(from.id, from.name, from.schoolClasses.map { schoolClass ->
+        return InstitutionDto(0L, "abc", listOf())
+        /*return InstitutionDto(from.id, from.name, from.schoolClasses.map { schoolClass ->
             SchoolClassDto(schoolClass.id, schoolClass.normalizedName, from.id,
                     schoolClass.schoolYears.map { year ->
                         SchoolYearDto(year.id, year.name, year.validFrom, year.validTo, schoolClass.id,
@@ -32,6 +34,6 @@ class ManageDtoMapper @Inject constructor(val colorMapper: ColorMapper) : Mapper
                                                     })
                                 })
                     })
-        })
+        })*/
     }
 }

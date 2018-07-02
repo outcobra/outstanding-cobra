@@ -10,13 +10,14 @@ import java.time.LocalDate
  */
 data class TaskDto(
         val id: Long = 0,
-        val subject: SubjectDto = SubjectDto(),
         val name: String = "",
         val description: String = "",
         val todoDate: LocalDate = LocalDate.now(),
         val dueDate: LocalDate = LocalDate.now().plusDays(1),
         val effort: Double = 0.0,
-        val progress: Int = 0) : OutcobraDto {
+        val progress: Int = 0,
+        override val schoolClass: SchoolClassDto,
+        override val subject: SubjectDto, override val semester: SemesterDto) : SchoolClassSemesterSubjectDto, OutcobraDto {
 
     override val identifier: Long get() = id
 

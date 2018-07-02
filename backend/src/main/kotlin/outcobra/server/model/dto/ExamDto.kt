@@ -15,7 +15,9 @@ data class ExamDto(val id: Long = 0,
                    val date: LocalDate = LocalDate.now(),
                    val mark: MarkValueDto? = null,
                    var examTasks: MutableList<ExamTaskDto> = mutableListOf(),
-                   val subject: SubjectDto = SubjectDto()) : OutcobraDto {
+                   override val schoolClass: SchoolClassDto,
+                   override val subject: SubjectDto,
+                   override val semester: SemesterDto) : SchoolClassSemesterSubjectDto, OutcobraDto {
 
     override val identifier: Long
         get() = id

@@ -17,7 +17,10 @@ data class MarkGroupDto(override val id: Long = 0,
                         val markValues: List<MarkValueDto> = listOf(),
                         val subjectId: Long = 0,
                         val parentGroupId: Long = 0,
-                        val markGroups: List<MarkGroupDto> = listOf()) : BaseMarkDto {
+                        val markGroups: List<MarkGroupDto> = listOf(),
+                        override val schoolClass: SchoolClassDto = SchoolClassDto(),
+                        override val subject: SubjectDto = SubjectDto(),
+                        override val semester: SemesterDto = SemesterDto()) : SchoolClassSemesterSubjectDto, BaseMarkDto {
     override val parentLink: ParentLink
         get() {
             if (subjectId == 0L && parentGroupId == 0L) {

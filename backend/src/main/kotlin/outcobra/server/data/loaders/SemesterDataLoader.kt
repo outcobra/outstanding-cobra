@@ -39,7 +39,7 @@ class SemesterDataLoader
 
     private fun saveSemester(name: String, startDate: LocalDate, schoolYear: SchoolYear): Semester {
         val endDate = startDate.plusMonths(5).with(lastDayOfMonth())
-        val semester = Semester(name, startDate, endDate, schoolYear, mutableListOf(), mutableListOf(), null)
+        val semester = Semester(name, startDate, endDate, schoolYear, mutableListOf(), null)
 
         LOGGER.debug("Saving semester: ${semester.name}")
         return semesterRepository.save(semester)

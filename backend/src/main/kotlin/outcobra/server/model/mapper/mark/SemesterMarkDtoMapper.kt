@@ -2,10 +2,7 @@ package outcobra.server.model.mapper.mark
 
 import org.springframework.stereotype.Component
 import outcobra.server.exception.ValidationKey
-import outcobra.server.model.domain.Color
-import outcobra.server.model.domain.MarkGroup
-import outcobra.server.model.domain.Semester
-import outcobra.server.model.domain.Subject
+import outcobra.server.model.domain.*
 import outcobra.server.model.dto.ColorDto
 import outcobra.server.model.dto.MarkGroupDto
 import outcobra.server.model.dto.mark.SemesterMarkDto
@@ -14,6 +11,7 @@ import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.mapper.BaseMapper
 import outcobra.server.model.mapper.InstitutionMapper
 import outcobra.server.model.mapper.SchoolClassMapper
+import outcobra.server.model.repository.MarkGroupRepository
 import javax.inject.Inject
 
 
@@ -23,6 +21,7 @@ import javax.inject.Inject
  */
 @Component
 class SemesterMarkDtoMapper @Inject constructor(val markGroupMapper: Mapper<MarkGroup, MarkGroupDto>,
+                                                val markGroupRepository: MarkGroupRepository,
                                                 val colorMapper: Mapper<Color, ColorDto>,
                                                 val schoolClassMapper: SchoolClassMapper,
                                                 val institutionMapper: InstitutionMapper)
@@ -33,21 +32,22 @@ class SemesterMarkDtoMapper @Inject constructor(val markGroupMapper: Mapper<Mark
     }
 
     override fun toDto(from: Semester): SemesterMarkDto {
-        // TODO amend-base-data use correct semester
         val schoolClass = from.schoolYear?.schoolClasses?.first() ?: ValidationKey.ENTITY_NOT_FOUND.throwException()
-        val semesterMarkGroup = MarkGroup(marks = from.subjects.flatMap { it.markGroups }.toMutableList())
-        val institution = schoolClass.institution ?: ValidationKey.ENTITY_NOT_FOUND.throwException()
-        return SemesterMarkDto(from.id, from.name, from.validFrom, from.validTo,
-                institutionMapper.toDto(institution), schoolClassMapper.toDto(schoolClass),
+
+        val markGroupsOfSemester = markGroupRepository.findAll(QMarkGroup.markGroup1.schoolClassSemesterSubject.schoolClassSemester.semester.id.eq(from.id))
+
+        val semesterMarkGroup = MarkGroup(marks = markGroupsOfSemester.toMutableList())
+
+        return SemesterMarkDto(from.id, from.name, from.validFrom, from.validTo, schoolClassMapper.toDto(schoolClass),
                 semesterMarkGroup.getValue(),
-                from.subjects.map { subjectToMarksDto(it) })
+                markGroupsOfSemester
+                        .filter { it.schoolClassSemesterSubject.subject != null }
+                        .map { subjectToMarksDto(it.schoolClassSemesterSubject.subject!!, it) })
     }
 
-    private fun subjectToMarksDto(from: Subject): SubjectMarkDto {
+    private fun subjectToMarksDto(from: Subject, markGroup: MarkGroup): SubjectMarkDto {
         val color = from.color
-        val markGroups = from.markGroups!!
-        // TODO mark groups needs to be chosen by semester/subject/schoolClass
-        return SubjectMarkDto(from.id, from.name, colorMapper.toDto(color), markGroups.map { markGroupMapper.toDto(it) }.first())
+        return SubjectMarkDto(from.id, from.name, colorMapper.toDto(color), markGroupMapper.toDto(markGroup))
     }
 
 }

@@ -11,12 +11,12 @@ class MarkGroup(description: String = "",
                 @OneToMany(mappedBy = "markGroup")
                 var marks: MutableList<Mark> = mutableListOf(),
 
-                @OneToOne
-                var schoolClassSubjectSemester: SchoolClassSubjectSemester
+                @ManyToOne
+                var schoolClassSemesterSubject: SchoolClassSemesterSubject = SchoolClassSemesterSubject()
 ) : Mark(weight, description, markGroup) {
 
     override val parent: ParentLinked?
-        get() = markGroup ?: schoolClassSubjectSemester.subject
+        get() = markGroup ?: schoolClassSemesterSubject.subject
 
 
     override fun getValue(): Double {

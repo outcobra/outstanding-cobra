@@ -13,19 +13,36 @@ import javax.inject.Inject
  */
 @Component
 class TaskMapper @Inject constructor(val subjectRepository: SubjectRepository,
+                                     val schoolClassSubjectSemesterMapper: SchoolClassSubjectSemesterMapper,
                                      val subjectMapper: SubjectMapper) : Mapper<Task, TaskDto> {
 
     override fun toDto(from: Task): TaskDto {
-        val subject = from.subject!!
         val effort = from.effort.toDouble().div(60)
-        return TaskDto(from.id, subjectMapper.toDto(subject), from.name, from.description,
-                from.todoDate, from.dueDate, effort, from.progress)
+
+        val (schoolClassDto, subjectDto, semesterDto) = schoolClassSubjectSemesterMapper.toDtoTriple(from.schoolClassSemesterSubject)
+        return TaskDto(from.id,
+                from.name,
+                from.description,
+                from.todoDate,
+                from.dueDate,
+                effort,
+                from.progress,
+                schoolClassDto,
+                subjectDto,
+                semesterDto
+        )
     }
 
     override fun fromDto(from: TaskDto): Task {
-        val subject = subjectRepository.findOne(from.subject.id)
         val effort = Math.round(from.effort * 60).toInt()
-        val task = Task(from.name, from.description, from.todoDate, from.dueDate, effort, from.progress, subject)
+        val task = Task(from.name,
+                from.description,
+                from.todoDate,
+                from.dueDate,
+                effort,
+                from.progress,
+                schoolClassSubjectSemesterMapper.fromDto(from)
+        )
         task.id = from.id
         return task
     }

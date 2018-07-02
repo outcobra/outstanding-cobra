@@ -6,17 +6,18 @@ import org.springframework.stereotype.Component
 import outcobra.server.data.DataLoadOrder.EXAM
 import outcobra.server.data.loaders.MarkDataLoader.Companion.getRandomMark
 import outcobra.server.data.loaders.MarkDataLoader.Companion.getRandomWeight
-import outcobra.server.data.loaders.SchoolClassSubjectSemesterDataLoader.Companion.BM5A_GUP_2018_1
-import outcobra.server.data.loaders.SchoolClassSubjectSemesterDataLoader.Companion.BM5A_MATHS_2018_2
-import outcobra.server.data.loaders.SchoolClassSubjectSemesterDataLoader.Companion.BMS5C_PHYSICS_2017_1
-import outcobra.server.data.loaders.SchoolClassSubjectSemesterDataLoader.Companion.INF5G_OOP_2016_2
-import outcobra.server.data.loaders.SchoolClassSubjectSemesterDataLoader.Companion.INF5G_OOP_DESIGN_2016_2
-import outcobra.server.data.loaders.SchoolClassSubjectSemesterDataLoader.Companion.INF5G_SCRUM_2016_1
-import outcobra.server.data.loaders.SchoolClassSubjectSemesterDataLoader.Companion.INF5K_DATABASES_2016_2
-import outcobra.server.data.loaders.SchoolClassSubjectSemesterDataLoader.Companion.INF5K_PROJECT_2017_2
+import outcobra.server.data.loaders.SchoolClassSemesterSubjectDataLoader.Companion.BMS5A_GUP_2018_1
+import outcobra.server.data.loaders.SchoolClassSemesterSubjectDataLoader.Companion.BMS5A_MATHS_2018_2
+import outcobra.server.data.loaders.SchoolClassSemesterSubjectDataLoader.Companion.BMS5C_GERMAN_2017_1
+import outcobra.server.data.loaders.SchoolClassSemesterSubjectDataLoader.Companion.BMS5C_PHYSICS_2017_1
+import outcobra.server.data.loaders.SchoolClassSemesterSubjectDataLoader.Companion.INF5G_OOP_2016_2
+import outcobra.server.data.loaders.SchoolClassSemesterSubjectDataLoader.Companion.INF5G_OOP_DESIGN_2016_2
+import outcobra.server.data.loaders.SchoolClassSemesterSubjectDataLoader.Companion.INF5G_SCRUM_2016_1
+import outcobra.server.data.loaders.SchoolClassSemesterSubjectDataLoader.Companion.INF5K_DATABASES_2016_2
+import outcobra.server.data.loaders.SchoolClassSemesterSubjectDataLoader.Companion.INF5K_PROJECT_2017_2
 import outcobra.server.model.domain.Exam
 import outcobra.server.model.domain.MarkValue
-import outcobra.server.model.domain.SchoolClassSubjectSemester
+import outcobra.server.model.domain.SchoolClassSemesterSubject
 import outcobra.server.model.repository.ExamRepository
 import java.time.LocalDate
 import javax.inject.Inject
@@ -31,41 +32,35 @@ class ExamDataLoader @Inject constructor(val examRepository: ExamRepository) : D
     companion object {
         private val LOGGER = LoggerFactory.getLogger(ExamDataLoader::class.java)
 
-        var SCRUM_EXAM = Exam("fake daily", LocalDate.now().minusWeeks(1), listOf(),
-                null, MarkValue(getRandomMark(), getRandomWeight(), null, ""), "")
-        var OOP_EXAM = Exam("KR", LocalDate.now().plusWeeks(1), listOf(),
-                null, null)
-        var GERMAN_EXAM = Exam("Kulturgeschichte", LocalDate.now().minusWeeks(1), listOf(),
-                null, MarkValue(getRandomMark(), getRandomWeight(), null, ""), "")
-        var PHYSICS_EXAM = Exam("Statik", LocalDate.now().minusWeeks(1), listOf(),
-                null, MarkValue(getRandomMark(), getRandomWeight(), null, ""), "")
-        var OOP_DESIGN_EXAM = Exam("Design-Patterns", LocalDate.now().plusWeeks(1), listOf(),
-                null, null)
-        var DATABASES_EXAM = Exam("DB-Project", LocalDate.now(), listOf(),
-                null, MarkValue(getRandomMark(), getRandomWeight(), null, ""), "")
-        var GUP_EXAM = Exam("WW2", LocalDate.now().minusWeeks(1), listOf(),
-                null, MarkValue(getRandomMark(), getRandomWeight(), null, ""), "")
-        var MATHS_EXAM = Exam("Goniometrie", LocalDate.now().plusDays(1), listOf(),
-                null, null)
-        var PROJECT_EXAM = Exam("Präsentation", LocalDate.now().minusMonths(1), listOf(),
-                null, MarkValue(getRandomMark(), getRandomWeight(), null, ""), "")
+        lateinit var SCRUM_EXAM: Exam
+        lateinit var OOP_EXAM: Exam
+        lateinit var GERMAN_EXAM: Exam
+        lateinit var PHYSICS_EXAM: Exam
+        lateinit var OOP_DESIGN_EXAM: Exam
+        lateinit var DATABASES_EXAM: Exam
+        lateinit var GUP_EXAM: Exam
+        lateinit var MATHS_EXAM: Exam
+        lateinit var PROJECT_EXAM: Exam
     }
 
     override fun shouldLoad(): Boolean = true
 
     override fun load() {
-        SCRUM_EXAM = saveAndLog(SCRUM_EXAM, INF5G_SCRUM_2016_1)
-        OOP_EXAM = saveAndLog(OOP_EXAM, INF5G_OOP_2016_2)
-        MATHS_EXAM = saveAndLog(MATHS_EXAM, BM5A_MATHS_2018_2)
-        PROJECT_EXAM = saveAndLog(PROJECT_EXAM, INF5K_PROJECT_2017_2)
-        GUP_EXAM = saveAndLog(GUP_EXAM, BM5A_GUP_2018_1)
-        PHYSICS_EXAM = saveAndLog(PHYSICS_EXAM, BMS5C_PHYSICS_2017_1)
-        GERMAN_EXAM = saveAndLog(GERMAN_EXAM, INF5K_DATABASES_2016_2)
-        OOP_DESIGN_EXAM = saveAndLog(OOP_DESIGN_EXAM, INF5G_OOP_DESIGN_2016_2)
+        SCRUM_EXAM = saveAndLog("fake daily", INF5G_SCRUM_2016_1)
+        OOP_EXAM = saveAndLog("KR", INF5G_OOP_2016_2)
+        MATHS_EXAM = saveAndLog("Goniometrie", BMS5A_MATHS_2018_2)
+        PROJECT_EXAM = saveAndLog("Präsentation", INF5K_PROJECT_2017_2)
+        GUP_EXAM = saveAndLog("WW2", BMS5A_GUP_2018_1)
+        PHYSICS_EXAM = saveAndLog("Statik", BMS5C_PHYSICS_2017_1)
+        GERMAN_EXAM = saveAndLog("Kulturgeschichte", BMS5C_GERMAN_2017_1)
+        OOP_DESIGN_EXAM = saveAndLog("Design-Patterns", INF5G_OOP_DESIGN_2016_2)
+        DATABASES_EXAM = saveAndLog("SQL-Basics", INF5K_DATABASES_2016_2)
     }
 
-    private fun saveAndLog(exam: Exam, schoolClassSubjectSemester: SchoolClassSubjectSemester): Exam {
-        exam.schoolClassSubjectSemester = schoolClassSubjectSemester
+    private fun saveAndLog(examName: String, schoolClassSemesterSubject: SchoolClassSemesterSubject): Exam {
+        val exam = Exam(examName, LocalDate.now().minusWeeks(1), listOf(), schoolClassSemesterSubject, MarkValue(getRandomMark(), getRandomWeight()), "")
+
+
         val entity = examRepository.save(exam)
         LOGGER.debug("Saved exam: ${entity.name} with id ${entity.id}")
         return entity

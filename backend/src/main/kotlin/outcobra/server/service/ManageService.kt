@@ -10,4 +10,8 @@ interface ManageService {
      * Creates a [ManageDto] which contains multiple things that are required for the manage ui
      */
     fun getManageData(): ManageDto
+
+    fun getSchoolClasses(): List<Any>
+    fun getSchoolYearsAndSemesters(): List<Any>
+    fun getSubjects(): List<Any>
 }

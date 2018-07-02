@@ -5,8 +5,7 @@ import outcobra.server.model.interfaces.OutcobraDto
 import outcobra.server.model.interfaces.ParentLink
 
 data class SubjectDto(val id: Long = 0,
-                      val semesterIds: List<Long> = listOf(),
-                      val classIds: List<Long> = listOf(),
+                      val schoolClassSemesterDto: List<SchoolClassSemesterDto> = listOf(),
                       val name: String = "",
                       val color: ColorDto = ColorDto(),
                       val userId: Long = 0,

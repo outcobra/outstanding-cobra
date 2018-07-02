@@ -34,30 +34,30 @@ class DefaultTaskService
 
     override fun readAll(): List<TaskDto> {
         val userId = userService.getCurrentUser().id
-        val filter = QTask.task.subject.user.id.eq(userId)
+        val filter = QTask.task.schoolClassSemesterSubject.subject.user.id.eq(userId)
         return repository.findAll(filter).map { mapper.toDto(it) }
     }
 
     override fun readAllBySubject(subjectId: Long): List<TaskDto> {
-        val filter = QTask.task.subject.id.eq(subjectId)
+        val filter = QTask.task.schoolClassSemesterSubject.subject.id.eq(subjectId)
         return repository.findAll(filter).map { mapper.toDto(it) }
     }
 
     override fun readAllBySemester(semesterId: Long): List<TaskDto> {
         requestValidator.validateRequestById(semesterId, Semester::class)
-        val filter = QTask.task.subject.semesters.any().id.eq(semesterId)
+        val filter = QTask.task.schoolClassSemesterSubject.schoolClassSemester.semester.id.eq(semesterId)
         return repository.findAll(filter).map { mapper.toDto(it) }
     }
 
     override fun readAllOpenBySubject(subjectId: Long): List<TaskDto> {
         requestValidator.validateRequestById(subjectId, Subject::class)
-        val filter = QTask.task.progress.ne(100).and(QTask.task.subject.id.eq(subjectId))
+        val filter = QTask.task.progress.ne(100).and(QTask.task.schoolClassSemesterSubject.subject.id.eq(subjectId))
         return repository.findAll(filter).map { mapper.toDto(it) }
     }
 
     override fun readAllOpenBySemester(semesterId: Long): List<TaskDto> {
         requestValidator.validateRequestById(semesterId, Semester::class)
-        val filter = QTask.task.progress.ne(100).and(QTask.task.subject.semesters.any().id.eq(semesterId))
+        val filter = QTask.task.progress.ne(100).and(QTask.task.schoolClassSemesterSubject.schoolClassSemester.semester.id.eq(semesterId))
         return repository.findAll(filter).map { mapper.toDto(it) }
     }
 

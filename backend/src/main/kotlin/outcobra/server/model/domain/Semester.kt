@@ -17,10 +17,7 @@ data class Semester(@NotNull var name: String = "",
                     var schoolYear: SchoolYear? = null,
 
                     @OneToMany
-                    var schoolClassSubjectSemester: List<SchoolClassSubjectSemester> = listOf(),
-
-                    @OneToMany(mappedBy = "semester")
-                    var markReports: List<MarkReport> = listOf(),
+                    var schoolClassSemester: List<SchoolClassSemester> = listOf(),
 
                     @OneToOne var timetable: Timetable? = null)
     : ParentLinked, AbstractEntity() {

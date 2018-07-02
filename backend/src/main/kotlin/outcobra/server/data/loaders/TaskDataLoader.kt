@@ -5,11 +5,11 @@ import org.slf4j.LoggerFactory
 import org.springframework.core.annotation.Order
 import org.springframework.stereotype.Component
 import outcobra.server.data.DataLoadOrder.TASK
-import outcobra.server.data.loaders.SchoolClassSubjectSemesterDataLoader.Companion.BM5A_GUP_2018_1
-import outcobra.server.data.loaders.SchoolClassSubjectSemesterDataLoader.Companion.BMS5C_PHYSICS_2017_1
-import outcobra.server.data.loaders.SchoolClassSubjectSemesterDataLoader.Companion.INF5G_OOP_2016_2
-import outcobra.server.data.loaders.SchoolClassSubjectSemesterDataLoader.Companion.INF5G_SCRUM_2016_1
-import outcobra.server.data.loaders.SchoolClassSubjectSemesterDataLoader.Companion.INF5K_DATABASES_2016_2
+import outcobra.server.data.loaders.SchoolClassSemesterSubjectDataLoader.Companion.BMS5A_GUP_2018_1
+import outcobra.server.data.loaders.SchoolClassSemesterSubjectDataLoader.Companion.BMS5C_PHYSICS_2017_1
+import outcobra.server.data.loaders.SchoolClassSemesterSubjectDataLoader.Companion.INF5G_OOP_2016_2
+import outcobra.server.data.loaders.SchoolClassSemesterSubjectDataLoader.Companion.INF5G_SCRUM_2016_1
+import outcobra.server.data.loaders.SchoolClassSemesterSubjectDataLoader.Companion.INF5K_DATABASES_2016_2
 import outcobra.server.model.domain.Task
 import outcobra.server.model.repository.TaskRepository
 import java.time.LocalDate
@@ -45,7 +45,7 @@ class TaskDataLoader(val taskRepository: TaskRepository) : DataLoader {
     override fun load() {
         TASK1 = saveTask(Task("Retro Präsi", "Sprintretrospektive Präsentation vorbereiten", LocalDate.of(2017, 12, 22), LocalDate.of(2017, 12, 28), 12, 55, INF5G_SCRUM_2016_1))
         TASK2 = saveTask(Task("OOP", "Sequenzdiagramm zeichnen", LocalDate.of(2017, 10, 22), LocalDate.of(2017, 10, 28), 22, 15, INF5G_OOP_2016_2))
-        TASK3 = saveTask(Task("WW2", "Dossier zum zweiten Weltkrieg fertiglesen", LocalDate.of(2017, 10, 22), LocalDate.of(2017, 10, 28), 22, 15, BM5A_GUP_2018_1))
+        TASK3 = saveTask(Task("WW2", "Dossier zum zweiten Weltkrieg fertiglesen", LocalDate.of(2017, 10, 22), LocalDate.of(2017, 10, 28), 22, 15, BMS5A_GUP_2018_1))
         TASK4 = saveTask(Task("Hebelgesetze", "AB Hebelgesetz machen", LocalDate.of(2017, 10, 22), LocalDate.of(2017, 10, 28), 22, 15, BMS5C_PHYSICS_2017_1))
         TASK5 = saveTask(Task("Burndown", "Burndown Chats analysieren", LocalDate.of(2017, 10, 22), LocalDate.of(2017, 10, 28), 22, 15, INF5G_SCRUM_2016_1))
         TASK6 = saveTask(Task("SQL", "AB SQL-Statements lösen", LocalDate.of(2017, 8, 22), LocalDate.of(2017, 8, 28), 32, 85, INF5K_DATABASES_2016_2))

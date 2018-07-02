@@ -56,8 +56,8 @@ class SemesterMapperTest {
         val validFrom = now.minusMonths(6)
         val validTo = now
         val parentYear = SchoolYear("TestYear", now.minusYears(1), now, userService.getCurrentUser(), mutableListOf(SchoolClass()), listOf(), listOf())
-        val subjects = listOf(Subject("TestSemester", Color.randomColor))
-        return Semester(semesterName, validFrom, validTo, parentYear, subjects)
+        val schoolClassSemester = listOf(SchoolClassSemester(SchoolClass("TestClass"), Semester("TestSemester"), listOf(SchoolClassSemesterSubject(subject = Subject("TestSemester", Color.randomColor)))))
+        return Semester(semesterName, validFrom, validTo, parentYear, schoolClassSemester)
     }
 
     @Before
@@ -75,7 +75,7 @@ class SemesterMapperTest {
     fun mapValidEntityToDto() {
         val semesterDto = semesterMapper.toDto(baseSemester)
         assertThat(semesterDto.name).isEqualTo(baseSemester.name)
-        assertThat(semesterDto.subjectIds.count()).isEqualTo(1)
+        assertThat(semesterDto.schoolClassSubjectDto.flatMap { it.subjectIds }.count()).isEqualTo(1)
         assertThat(semesterDto.validFrom).isEqualTo(baseSemester.validFrom)
         assertThat(semesterDto.validTo).isEqualTo(baseSemester.validTo)
     }

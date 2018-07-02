@@ -13,6 +13,18 @@ import javax.inject.Inject
 class DefaultManageService @Inject constructor(val institutionRepository: InstitutionRepository,
                                                val userService: UserService,
                                                val manageDtoMapper: ManageDtoMapper) : ManageService {
+    override fun getSchoolClasses(): List<Any> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun getSchoolYearsAndSemesters(): List<Any> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun getSubjects(): List<Any> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun getManageData(): ManageDto {
         val userId = userService.getCurrentUser().id
         val ownedByUser = QInstitution.institution.user.id.eq(userId)

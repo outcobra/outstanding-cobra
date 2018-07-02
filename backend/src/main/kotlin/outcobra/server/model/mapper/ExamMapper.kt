@@ -10,7 +10,6 @@ import outcobra.server.model.dto.ExamTaskDto
 import outcobra.server.model.dto.MarkValueDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.MarkValueRepository
-import outcobra.server.model.repository.SubjectRepository
 import outcobra.server.validator.RequestValidator
 import javax.inject.Inject
 
@@ -21,19 +20,26 @@ import javax.inject.Inject
 @Component
 class ExamMapper @Inject constructor(val markMapper: Mapper<MarkValue, MarkValueDto>,
                                      val examTaskMapper: Mapper<ExamTask, ExamTaskDto>,
-                                     val subjectRepository: SubjectRepository,
+                                     val schoolClassSemesterSubjectMapper: SchoolClassSubjectSemesterMapper,
                                      val markRepository: MarkValueRepository,
                                      val subjectMapper: SubjectMapper,
+                                     val schoolClassMapper: SchoolClassMapper,
+                                     val semesterMapper: SemesterMapper,
                                      val requestValidator: RequestValidator<ExamDto>)
     : Mapper<Exam, ExamDto>, BaseMapper() {
 
     override fun fromDto(from: ExamDto): Exam {
-        val subject = subjectRepository.findOne(from.subject.id)
         var markValue: MarkValue? = markRepository.findAll(QMarkValue.markValue.exam.id.eq(from.id)).firstOrNull()
         if (from.mark != null) {
             markValue = markMapper.fromDto(from.mark)
         }
-        val exam = Exam(from.name, from.date, listOf(), subject, markValue, from.description)
+        val exam = Exam(from.name,
+                from.date,
+                listOf(),
+                schoolClassSemesterSubjectMapper.fromDto(from),
+                markValue,
+                from.description
+        )
         exam.id = from.id
         return exam
 
@@ -44,8 +50,17 @@ class ExamMapper @Inject constructor(val markMapper: Mapper<MarkValue, MarkValue
         if (from.mark != null) {
             markValue = markMapper.toDto(from.mark!!)
         }
-        val subject = from.subject!!
-        return ExamDto(from.id, from.name, from.description, from.date, markValue,
-                from.tasks.map { examTaskMapper.toDto(it) }.toMutableList(), subjectMapper.toDto(subject))
+
+        val (schoolClass, subject, semester) = schoolClassSemesterSubjectMapper.toDtoTriple(from.schoolClassSemesterSubject)
+        return ExamDto(from.id,
+                from.name,
+                from.description,
+                from.date,
+                markValue,
+                from.tasks.map { examTaskMapper.toDto(it) }.toMutableList(),
+                schoolClass,
+                subject,
+                semester
+        )
     }
 }

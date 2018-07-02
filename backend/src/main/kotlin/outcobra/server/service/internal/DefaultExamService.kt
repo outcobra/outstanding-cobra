@@ -30,7 +30,7 @@ class DefaultExamService
 
     override fun readAll(): List<ExamDto> {
         val currentUser = requestValidator.userService.getCurrentUser()
-        val filterByOwner = QExam.exam.subject.user.id.eq(currentUser.id)
+        val filterByOwner = QExam.exam.schoolClassSemesterSubject.subject.user.id.eq(currentUser.id)
         val exams = repository.findAll(filterByOwner)
         return exams.map { mapper.toDto(it) }
     }
@@ -64,7 +64,7 @@ class DefaultExamService
 
     override fun readAllBySemester(semesterId: Long): List<ExamDto> {
         requestValidator.validateRequestById(semesterId, Semester::class)
-        val filterBySemester = QExam.exam.subject.semesters.any().id.eq(semesterId)
+        val filterBySemester = QExam.exam.schoolClassSemesterSubject.schoolClassSemester.semester.id.eq(semesterId)
         return repository.findAll(filterBySemester).map { mapper.toDto(it) }
     }
 

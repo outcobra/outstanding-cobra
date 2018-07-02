@@ -12,7 +12,7 @@ class SchoolClass(@NotNull var normalizedName: String = "",
                   var institution: Institution? = null,
 
                   @OneToMany
-                  var schoolClassSubjectSemester: List<SchoolClassSubjectSemester> = listOf()
+                  var schoolClassSemester: List<SchoolClassSemester> = listOf()
 ) : ParentLinked, AbstractEntity() {
 
     override val parent: ParentLinked?

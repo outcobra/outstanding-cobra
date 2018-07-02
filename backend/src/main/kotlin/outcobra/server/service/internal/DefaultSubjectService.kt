@@ -2,7 +2,10 @@ package outcobra.server.service.internal
 
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import outcobra.server.model.domain.*
+import outcobra.server.model.domain.QSubject
+import outcobra.server.model.domain.SchoolClass
+import outcobra.server.model.domain.Semester
+import outcobra.server.model.domain.Subject
 import outcobra.server.model.dto.SubjectDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.interfaces.OutcobraDto
@@ -43,25 +46,26 @@ class DefaultSubjectService
 
     override fun readAllBySemester(semesterId: Long): List<SubjectDto> {
         requestValidator.validateRequestById(semesterId, Semester::class)
-        val filter = QSubject.subject.semesters.any().id.eq(semesterId)
+        val filter = QSubject.subject.schoolClassSemesterSubjects.any().schoolClassSemester.semester.id.eq(semesterId)
         return repository.findAll(filter).map { mapper.toDto(it) }
     }
 
     override fun readAllBySchoolClass(schoolClassId: Long): List<SubjectDto> {
         requestValidator.validateRequestById(schoolClassId, SchoolClass::class)
-        val filter = QSubject.subject.semesters.any().schoolYear.schoolClasses.any().id.eq(schoolClassId)
+        val filter = QSubject.subject.schoolClassSemesterSubjects.any().schoolClassSemester.schoolClass.id.eq(schoolClassId)
         return repository.findAll(filter).map { mapper.toDto(it) }
     }
 
     override fun save(dto: SubjectDto): SubjectDto {
         requestValidator.validateRequestByDto(dto)
         var subject = mapper.fromDto(dto)
-        if (dto.id == 0L) {
-            val markGroup = MarkGroup(subject = subject)
-            markGroupRepository.save(markGroup)
-            subject.markGroups = listOf(markGroup)
-        }
         subject = repository.save(subject)
+
+        if (dto.id == 0L) {
+            /*val markGroup = MarkGroup(schoolClassSemesterSubject = subject.schoolClassSemesterSubjects) TODO create Mark Group but for which semester/schoolClass or do we even need to create a mark group here?
+            markGroupRepository.save(markGroup)
+            subject.markGroups = listOf(markGroup)*/
+        }
         return mapper.toDto(subject)
     }
 }

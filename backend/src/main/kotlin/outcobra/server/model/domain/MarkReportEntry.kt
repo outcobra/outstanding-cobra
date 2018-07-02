@@ -10,10 +10,10 @@ import javax.validation.constraints.NotNull
 @Entity
 data class MarkReportEntry(@NotNull var weight: Double? = null,
                            @OneToOne
-                           var schoolClassSubjectSemester: SchoolClassSubjectSemester,
+                           var schoolClassSemester: SchoolClassSemester,
                            @NotNull @ManyToOne var report: MarkReport? = null)
     : ParentLinked, AbstractEntity() {
 
     override val parent: ParentLinked?
-        get() = schoolClassSubjectSemester.subject
+        get() = schoolClassSemester.semester
 }

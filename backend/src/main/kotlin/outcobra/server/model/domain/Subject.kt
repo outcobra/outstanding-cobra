@@ -11,8 +11,8 @@ data class Subject(@NotNull var name: String = "",
                    @ManyToOne @NotNull
                    var user: User = User(),
 
-                   @OneToMany
-                   var schoolClassSubjectSemester: List<SchoolClassSubjectSemester> = listOf(),
+                   @OneToMany(mappedBy = "subject")
+                   var schoolClassSemesterSubjects: List<SchoolClassSemesterSubject> = listOf(),
 
                    @ManyToOne
                    var teacher: Teacher? = null)

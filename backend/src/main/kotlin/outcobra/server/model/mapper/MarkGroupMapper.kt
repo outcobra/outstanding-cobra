@@ -19,6 +19,7 @@ import javax.inject.Inject
  */
 @Component
 class MarkGroupMapper @Inject constructor(val subjectRepository: SubjectRepository,
+                                          val schoolClassSemesterSubjectMapper: SchoolClassSubjectSemesterMapper,
                                           val markGroupRepository: MarkGroupRepository,
                                           val markValueMapper: Mapper<MarkValue, MarkValueDto>)
     : Mapper<MarkGroup, MarkGroupDto>, BaseMapper() {
@@ -40,7 +41,7 @@ class MarkGroupMapper @Inject constructor(val subjectRepository: SubjectReposito
         if (subject != null) {
             marks.plus(from.markGroups.map { fromDto(it) })
         }
-        val result = MarkGroup(from.description, from.weight, parentGroup, marks, null, null, subject)
+        val result = MarkGroup(from.description, from.weight, parentGroup, marks, schoolClassSemesterSubjectMapper.fromDto(from))
         if (!isNew) {
             result.id = from.id
         }
@@ -62,9 +63,19 @@ class MarkGroupMapper @Inject constructor(val subjectRepository: SubjectReposito
         }
         validateChildren(markValues.map { it.id }, MarkValue::class, from.id, MarkGroup::class)
         validateChildren(nestedGroups.map { it.id }, MarkGroup::class, from.id, MarkGroup::class)
-        return MarkGroupDto(from.id, from.getValue(), from.weight, from.description,
+
+        val (schoolClassDto, subjectDto, semesterDto) = schoolClassSemesterSubjectMapper.toDtoTriple(from.schoolClassSemesterSubject)
+        return MarkGroupDto(from.id,
+                from.getValue(),
+                from.weight,
+                from.description,
                 markValues.map { mark -> markValueMapper.toDto(mark) },
-                subjectId, parentGroupId, nestedGroups)
+                subjectId,
+                parentGroupId,
+                nestedGroups,
+                schoolClassDto,
+                subjectDto,
+                semesterDto)
     }
 
 

@@ -3,7 +3,7 @@ package outcobra.server.model.domain
 import outcobra.server.model.interfaces.ParentLinked
 import java.time.LocalDate
 import javax.persistence.Entity
-import javax.persistence.OneToOne
+import javax.persistence.ManyToOne
 import javax.validation.constraints.NotNull
 
 @Entity
@@ -13,10 +13,11 @@ data class Task(@NotNull var name: String = "",
                 var dueDate: LocalDate = LocalDate.now(),
                 var effort: Int = 0,
                 var progress: Int = 0,
-                @OneToOne
-                var schoolClassSubjectSemester: SchoolClassSubjectSemester)
+
+                @ManyToOne
+                var schoolClassSemesterSubject: SchoolClassSemesterSubject = SchoolClassSemesterSubject())
     : ParentLinked, AbstractEntity() {
 
     override val parent: ParentLinked?
-        get() = schoolClassSubjectSemester.subject
+        get() = schoolClassSemesterSubject.subject
 }

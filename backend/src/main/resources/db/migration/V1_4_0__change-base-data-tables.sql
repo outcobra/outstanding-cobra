@@ -40,40 +40,41 @@ ALTER TABLE subject
 FOREIGN KEY (user_id) REFERENCES user (id);
 
 
-CREATE TABLE school_class_subject_semester (
+CREATE TABLE school_class_semester (
   id BIGINT(20) NOT NULL PRIMARY KEY,
   school_class_id BIGINT(20) NOT NULL,
-  subject_id      BIGINT(20) NOT NULL,
-  semester_id     BIGINT(20) NOT NULL
+  semester_id     BIGINT(20) NOT NULL,
+  CONSTRAINT fk_scs_school_class
+  FOREIGN KEY (school_class_id) REFERENCES class(id),
+  CONSTRAINT fk_scs_semester
+  FOREIGN KEY (semester_id) REFERENCES semester(id)
+
 );
 
-ALTER TABLE school_class_subject_semester
-  ADD CONSTRAINT fk_scssm_school_class
-  FOREIGN KEY (school_class_id) REFERENCES class(id);
-
-ALTER TABLE school_class_subject_semester
-  ADD CONSTRAINT fk_scssm_subject
-  FOREIGN KEY (subject_id) REFERENCES subject(id);
-
-ALTER TABLE school_class_subject_semester
-  ADD CONSTRAINT fk_scssm_semester
-  FOREIGN KEY (semester_id) REFERENCES semester(id);
-
+CREATE TABLE school_class_semester_subject (
+  id BIGINT(20) NOT NULL PRIMARY KEY,
+  school_class_semester_id BIGINT(20) NOT NULL,
+  subject_id BIGINT(20) NOT NULL,
+  CONSTRAINT fk_scss_scs
+  FOREIGN KEY (school_class_semester_id) REFERENCES school_class_semester(id),
+  CONSTRAINT fk_scss_subject
+  FOREIGN KEY (subject_id) REFERENCES subject(id)
+);
 
 ALTER TABLE exam
-  ADD COLUMN school_class_subject_semester_id BIGINT(20) NOT NULL DEFAULT 0,
+  ADD COLUMN school_class_semester_subject_id BIGINT(20) NOT NULL DEFAULT 0,
   ADD CONSTRAINT fk_scss_exam
-  FOREIGN KEY (school_class_subject_semester_id) REFERENCES school_class_subject_semester(id);
+  FOREIGN KEY (school_class_semester_subject_id) REFERENCES school_class_semester_subject(id);
 
 ALTER TABLE mark_group
-  ADD COLUMN school_class_subject_semester_id BIGINT(20) NOT NULL DEFAULT 0,
+  ADD COLUMN school_class_semester_subject_id BIGINT(20) NOT NULL DEFAULT 0,
   ADD CONSTRAINT fk_scss_mark_group
-  FOREIGN KEY (school_class_subject_semester_id) REFERENCES school_class_subject_semester(id);
+  FOREIGN KEY (school_class_semester_subject_id) REFERENCES school_class_semester_subject(id);
 
 ALTER TABLE task
-  ADD COLUMN school_class_subject_semester_id BIGINT(20) NOT NULL DEFAULT 0,
+  ADD COLUMN school_class_semester_subject_id BIGINT(20) NOT NULL DEFAULT 0,
   ADD CONSTRAINT fk_scss_task
-  FOREIGN KEY (school_class_subject_semester_id) REFERENCES school_class_subject_semester(id);
+  FOREIGN KEY (school_class_semester_subject_id) REFERENCES school_class_semester_subject(id);
 
 # endregion
 
