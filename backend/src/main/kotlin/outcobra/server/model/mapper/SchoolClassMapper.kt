@@ -42,8 +42,8 @@ class SchoolClassMapper @Inject constructor(val schoolClassRepository: SchoolCla
                 .map {
                     Optional.ofNullable(schoolClassSemesterRepository.findOne(it))
                             .orElseGet { SchoolClassSemester(
-                                    schoolClassRepository.findOne(it) ?: schoolClass,
-                                    semesterRepository.findOne(from.id)
+                                    schoolClassRepository.findOne(from.id) ?: schoolClass,
+                                    semesterRepository.findOne(it)
                             ) }
                 }
 

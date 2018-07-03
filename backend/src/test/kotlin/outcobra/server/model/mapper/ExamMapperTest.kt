@@ -51,7 +51,7 @@ class ExamMapperTest {
         val exam = examRepository.findAll(examWithMarkPredicate).first()
         val originalDto = examMapper.toDto(exam)
         val newName = originalDto.name + "Modified"
-        val modifiedDto = ExamDto(originalDto.id, newName, originalDto.description, originalDto.date, null, originalDto.examTasks, originalDto.schoolClass, originalDto.subject, originalDto.semester)
+        val modifiedDto = originalDto.copy(name = newName)
         val modifiedEntity = examMapper.fromDto(modifiedDto)
         assertThat(modifiedEntity.mark).isEqualToComparingFieldByField(exam.mark)
         assertThat(modifiedEntity.name).isEqualTo(newName)

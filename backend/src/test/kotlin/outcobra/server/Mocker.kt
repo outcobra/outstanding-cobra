@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Primary
 import org.springframework.context.annotation.Profile
 import outcobra.server.annotation.DefaultImplementation
 import outcobra.server.config.ProfileRegistry.Companion.MOCK_SERVICES
+import outcobra.server.data.loaders.UserDataLoader
 import outcobra.server.model.domain.User
 import outcobra.server.model.mapper.UserMapper
 import outcobra.server.model.repository.UserRepository
@@ -43,8 +44,8 @@ class Mocker(val userMapper: UserMapper, userRepository: UserRepository) {
     fun mockUserService(): UserService {
         val mockService = Mockito.mock(UserService::class.java)
 
-        Mockito.`when`(mockService.getCurrentUser()).then { userService.readUserById(USER.id) }
-        Mockito.`when`(mockService.getCurrentUserDto()).then { userMapper.toDto(userService.readUserById(USER.id)) }
+        Mockito.`when`(mockService.getCurrentUser()).then { userService.readUserById(UserDataLoader.TEST_USER!!.id) }
+        Mockito.`when`(mockService.getCurrentUserDto()).then { userMapper.toDto(userService.readUserById(UserDataLoader.TEST_USER!!.id)) }
         Mockito.`when`(mockService.readUserById(Matchers.anyLong())).then { userService.readUserById(it.arguments[0] as Long) }
         return mockService
     }

@@ -53,6 +53,7 @@ class SubjectMapper @Inject constructor(val schoolClassMapper: SchoolClassMapper
                 schoolClassSemesterSubjectDtos,
                 from.name,
                 colorMapper.toDto(color),
+                from.user.id,
                 teacherId
         )
     }
