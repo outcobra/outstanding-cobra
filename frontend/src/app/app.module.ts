@@ -21,6 +21,7 @@ import {LayoutModule} from './layout/layout.module';
 import {AuthModule} from './auth/auth.module';
 import {ManageDialogModule} from './manage/old/manage-dialog.module';
 import {MainModule} from './main/main.module';
+import {NgxMdModule} from 'ngx-md';
 
 @NgModule({
     declarations: [
@@ -49,7 +50,8 @@ import {MainModule} from './main/main.module';
                 useFactory: translateFactory,
                 deps: [HttpClient]
             }
-        })
+        }),
+        NgxMdModule.forRoot()
     ],
     providers: [
         {

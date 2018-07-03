@@ -3,6 +3,7 @@ import {ManageService} from '../../../manage/old/service/manage.service';
 import {Observable} from 'rxjs';
 import {ManageDto} from '../../../manage/old/model/manage.dto';
 import {InstitutionService} from '../../../manage/old/service/institution.service';
+import {map} from 'rxjs/operators';
 
 @Injectable()
 export class MockManageService extends ManageService {
@@ -12,8 +13,8 @@ export class MockManageService extends ManageService {
 
     public getManageData(): Observable<ManageDto> {
         return this._institutionService.readAll()
-            .map(i => {
+            .pipe(map(i => {
                 return {institutions: i} as ManageDto
-            });
+            }));
     }
 }

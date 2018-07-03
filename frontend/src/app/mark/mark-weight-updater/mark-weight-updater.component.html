@@ -17,11 +17,11 @@
 <ng-template cdk-connected-overlay
              hasBackdrop
              backdropClass="cdk-overlay-transparent-backdrop"
-             [origin]="weightFieldOrigin"
-             [open]="active"
-             [positions]="positions"
-             [minWidth]="triggerWidth"
-             [height]="triggerHeight"
+             [cdkConnectedOverlayOrigin]="weightFieldOrigin"
+             [cdkConnectedOverlayOpen]="active"
+             [cdkConnectedOverlayPositions]="positions"
+             [cdkConnectedOverlayMinWidth]="triggerWidth"
+             [cdkConnectedOverlayHeight]="triggerHeight"
              (backdropClick)="closeWeightField()">
     <form [formGroup]="weightUpdaterForm"
           (submit)="submit()"
