@@ -12,12 +12,10 @@ import org.springframework.transaction.annotation.Transactional
 import outcobra.server.config.ProfileRegistry.Companion.TEST
 import outcobra.server.exception.ValidationException
 import outcobra.server.exception.ValidationKey
-import outcobra.server.model.domain.Institution
 import outcobra.server.model.domain.SchoolClass
 import outcobra.server.model.domain.SchoolYear
 import outcobra.server.model.dto.SchoolYearDto
 import outcobra.server.model.interfaces.Mapper
-import outcobra.server.model.repository.InstitutionRepository
 import outcobra.server.model.repository.SchoolClassRepository
 import outcobra.server.model.repository.SchoolYearRepository
 import outcobra.server.service.UserService
@@ -33,8 +31,6 @@ class DefaultSchoolYearServiceTest {
     @Inject
     lateinit var userService: UserService
     @Inject
-    lateinit var institutionRepository: InstitutionRepository
-    @Inject
     lateinit var schoolClassRepository: SchoolClassRepository
     @Inject
     lateinit var schoolYearService: DefaultSchoolYearService
@@ -44,15 +40,14 @@ class DefaultSchoolYearServiceTest {
     lateinit var schoolYearRepository: SchoolYearRepository
 
     val now = LocalDate.now()
-    lateinit var institution: Institution
     lateinit var schoolClass: SchoolClass
     lateinit var existing: SchoolYear
     var yearCount = -1L
+    val user = userService.getCurrentUser()
 
     @Before
     fun setUp() {
-        institution = institutionRepository.save(Institution("Test", userService.getCurrentUser()))
-        schoolClass = schoolClassRepository.save(SchoolClass("TestClass", institution, mutableListOf()))
+        schoolClass = schoolClassRepository.save(SchoolClass("TestClass", user, mutableListOf()))
         existing = schoolYearRepository.save(SchoolYear("existing", now, now.plusYears(1), userService.getCurrentUser(), mutableListOf(schoolClass), listOf(), listOf()))
         yearCount = schoolYearRepository.count()
     }

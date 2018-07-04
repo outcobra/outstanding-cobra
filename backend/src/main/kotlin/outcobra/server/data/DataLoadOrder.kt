@@ -10,7 +10,6 @@ import outcobra.server.data.loaders.DataLoader
  */
 object DataLoadOrder {
     const val USER = 1
-    const val INSTITUTION = 4
     const val SCHOOL_CLASS = 7
     const val YEAR = 10
     const val SEMESTER = 13

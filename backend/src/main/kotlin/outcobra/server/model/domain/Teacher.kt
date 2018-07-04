@@ -9,10 +9,10 @@ import javax.validation.constraints.NotNull
 @Entity
 data class Teacher(@NotNull var name: String = "",
                    var email: String? = null,
-                   @ManyToOne var institution: Institution? = null,
+                   @ManyToOne var user: User = User(),
                    @OneToMany(mappedBy = "teacher") var subjects: List<Subject> = listOf())
     : ParentLinked, AbstractEntity() {
 
     override val parent: ParentLinked?
-        get() = institution
+        get() = user
 }

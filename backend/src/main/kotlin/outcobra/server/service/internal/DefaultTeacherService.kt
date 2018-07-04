@@ -2,8 +2,6 @@ package outcobra.server.service.internal
 
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
-import outcobra.server.model.domain.Institution
-import outcobra.server.model.domain.QTeacher
 import outcobra.server.model.domain.Teacher
 import outcobra.server.model.dto.TeacherDto
 import outcobra.server.model.interfaces.Mapper
@@ -20,10 +18,4 @@ class DefaultTeacherService
                     mapper: Mapper<Teacher, TeacherDto>,
                     requestValidator: RequestValidator<TeacherDto>)
     : TeacherService, DefaultBaseService<Teacher, TeacherDto, TeacherRepository>(mapper, repository, requestValidator, Teacher::class) {
-
-    override fun readAllByInstitution(institutionId: Long): List<TeacherDto> {
-        requestValidator.validateRequestById(institutionId, Institution::class)
-        val withSameId = QTeacher.teacher.institution.id.eq(institutionId)
-        return repository.findAll(withSameId).map { mapper.toDto(it) }
-    }
 }

@@ -2,7 +2,6 @@ package outcobra.server.service.internal
 
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
-import outcobra.server.model.domain.Institution
 import outcobra.server.model.domain.QSchoolClass
 import outcobra.server.model.domain.SchoolClass
 import outcobra.server.model.dto.SchoolClassDto
@@ -29,13 +28,7 @@ class DefaultSchoolClassService
 
     override fun readAllByUser(): List<SchoolClassDto> {
         val userId = userService.getCurrentUser().id
-        val filter = QSchoolClass.schoolClass.institution.user.id.eq(userId)
-        return repository.findAll(filter).map { mapper.toDto(it) }
-    }
-
-    override fun readAllByInstitution(institutionId: Long): List<SchoolClassDto> {
-        requestValidator.validateRequestById(institutionId, Institution::class)
-        val filter = QSchoolClass.schoolClass.institution.id.eq(institutionId)
+        val filter = QSchoolClass.schoolClass.user.id.eq(userId)
         return repository.findAll(filter).map { mapper.toDto(it) }
     }
 }

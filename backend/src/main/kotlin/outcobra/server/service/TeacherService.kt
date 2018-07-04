@@ -10,10 +10,4 @@ import outcobra.server.service.base.BaseService
  * @since 1.0.0
  */
 interface TeacherService : BaseService<TeacherDto> {
-    /**
-     * Returns all Teachers that are associated to a specific Institution
-     * @param institutionId The id of the Institution of which the Teachers should be retrieved
-     * @return A list of Teachers that are associated with the given Institution
-     */
-    fun readAllByInstitution(institutionId: Long): List<TeacherDto>
 }

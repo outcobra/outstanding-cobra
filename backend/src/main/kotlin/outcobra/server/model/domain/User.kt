@@ -10,7 +10,6 @@ import javax.validation.constraints.NotNull
 @Entity
 data class User(@Length(max = 50) @NotNull var username: String = "",
                 @Length(max = 100) @NotNull @Unique var mail: String = "",
-                @OneToMany(mappedBy = "user") var institutions: List<Institution> = listOf(),
                 @OneToMany(mappedBy = "user") val identities: List<Identity> = listOf())
     : AbstractEntity(), ParentLinked {
 

@@ -6,10 +6,10 @@ import outcobra.server.model.domain.SchoolClass
 import outcobra.server.model.domain.SchoolClassSemester
 import outcobra.server.model.dto.SchoolClassDto
 import outcobra.server.model.interfaces.Mapper
-import outcobra.server.model.repository.InstitutionRepository
 import outcobra.server.model.repository.SchoolClassRepository
 import outcobra.server.model.repository.SchoolClassSemesterRepository
 import outcobra.server.model.repository.SemesterRepository
+import outcobra.server.model.repository.UserRepository
 import java.util.*
 import javax.inject.Inject
 
@@ -20,7 +20,7 @@ import javax.inject.Inject
 @Component
 class SchoolClassMapper @Inject constructor(val schoolClassRepository: SchoolClassRepository,
                                             val schoolClassSemesterRepository: SchoolClassSemesterRepository,
-                                            val institutionRepository: InstitutionRepository,
+                                            val userRepository: UserRepository,
                                             val semesterRepository: SemesterRepository) :
         Mapper<SchoolClass, SchoolClassDto>, BaseMapper() {
 
@@ -30,12 +30,12 @@ class SchoolClassMapper @Inject constructor(val schoolClassRepository: SchoolCla
                     it.subjects.map { sub -> sub.id }
             )
         }
-        return SchoolClassDto(from.id, from.institution!!.id, from.normalizedName, semesterSubjects)
+        return SchoolClassDto(from.id, from.user.id, from.normalizedName, semesterSubjects)
     }
 
     override fun fromDto(from: SchoolClassDto): SchoolClass {
-        val institution = institutionRepository.findOne(from.institutionId)
-        val schoolClass = SchoolClass(from.normalizedName, institution)
+        val user = userRepository.findOne(from.userId)
+        val schoolClass = SchoolClass(from.normalizedName, user)
 
         schoolClass.schoolClassSemester = from.semesterSubjects.map { it.semesterId }
                 .distinct()

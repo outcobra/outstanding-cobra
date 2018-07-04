@@ -20,9 +20,6 @@ interface UserRepository : OutcobraRepository<User> {
 }
 
 @Repository
-interface InstitutionRepository : OutcobraRepository<Institution>
-
-@Repository
 interface SchoolYearRepository : OutcobraRepository<SchoolYear> {
     fun findBySchoolClassesId(id: Long): List<SchoolYear>
     fun findByUserId(id: Long): List<SchoolYear>

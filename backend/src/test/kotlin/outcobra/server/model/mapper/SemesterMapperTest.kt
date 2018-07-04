@@ -15,7 +15,6 @@ import outcobra.server.exception.ValidationKey
 import outcobra.server.model.domain.*
 import outcobra.server.model.dto.SemesterDto
 import outcobra.server.model.interfaces.Mapper
-import outcobra.server.model.repository.InstitutionRepository
 import outcobra.server.model.repository.SchoolClassRepository
 import outcobra.server.model.repository.SchoolYearRepository
 import outcobra.server.service.UserService
@@ -36,9 +35,6 @@ class SemesterMapperTest {
     lateinit var semesterMapper: Mapper<Semester, SemesterDto>
 
     @Inject
-    lateinit var institutionRepository: InstitutionRepository
-
-    @Inject
     lateinit var schoolClassRepository: SchoolClassRepository
 
     @Inject
@@ -50,6 +46,7 @@ class SemesterMapperTest {
     private val now = LocalDate.now()
     private lateinit var baseSemester: Semester
     private var schoolYear: SchoolYear? = null
+    private val user = userService.getCurrentUser()
 
     private fun createBasicSemester(): Semester {
         val semesterName = "TestSemester"
@@ -63,9 +60,7 @@ class SemesterMapperTest {
     @Before
     fun saveRequiredEntities() {
         baseSemester = createBasicSemester()
-        var institution = Institution("TestInstitution", userService.getCurrentUser())
-        institution = institutionRepository.save(institution)
-        var schoolClass = SchoolClass("TestSchoolClass2017", institution)
+        var schoolClass = SchoolClass("TestSchoolClass2017", user)
         schoolClass = schoolClassRepository.save(schoolClass)
         schoolYear = SchoolYear("TestSchoolYear", now.minusYears(1), now, userService.getCurrentUser(), mutableListOf(schoolClass), listOf(), listOf())
         schoolYear = schoolYearRepository.save(schoolYear)

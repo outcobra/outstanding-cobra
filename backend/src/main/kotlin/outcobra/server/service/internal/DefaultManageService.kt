@@ -1,18 +1,11 @@
 package outcobra.server.service.internal
 
 import org.springframework.stereotype.Service
-import outcobra.server.model.domain.QInstitution
 import outcobra.server.model.dto.manage.old.ManageDto
-import outcobra.server.model.mapper.manage.ManageDtoMapper
-import outcobra.server.model.repository.InstitutionRepository
 import outcobra.server.service.ManageService
-import outcobra.server.service.UserService
-import javax.inject.Inject
 
 @Service
-class DefaultManageService @Inject constructor(val institutionRepository: InstitutionRepository,
-                                               val userService: UserService,
-                                               val manageDtoMapper: ManageDtoMapper) : ManageService {
+class DefaultManageService : ManageService {
     override fun getSchoolClasses(): List<Any> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
@@ -26,10 +19,7 @@ class DefaultManageService @Inject constructor(val institutionRepository: Instit
     }
 
     override fun getManageData(): ManageDto {
-        val userId = userService.getCurrentUser().id
-        val ownedByUser = QInstitution.institution.user.id.eq(userId)
-        val institutions = institutionRepository.findAll(ownedByUser).toList()
-        return manageDtoMapper.toDto(institutions)
+        TODO("not implemented")
     }
 
 }

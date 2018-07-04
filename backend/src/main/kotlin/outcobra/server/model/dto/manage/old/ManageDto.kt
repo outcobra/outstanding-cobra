@@ -4,13 +4,7 @@ import outcobra.server.model.dto.ColorDto
 import java.time.LocalDate
 
 data class ManageDto(
-        val institutions: List<InstitutionDto>
-)
-
-data class InstitutionDto(
-        val id: Long,
-        val name: String,
-        val schoolClasses: List<SchoolClassDto>
+        val institutions: List<Unit>
 )
 
 data class SchoolClassDto(

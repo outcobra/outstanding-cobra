@@ -4,7 +4,6 @@ import org.springframework.stereotype.Component
 import outcobra.server.exception.ValidationException
 import outcobra.server.exception.ValidationKey
 import outcobra.server.model.domain.User
-import outcobra.server.model.dto.InstitutionDto
 import outcobra.server.model.interfaces.OutcobraDto
 import outcobra.server.model.interfaces.ParentLinked
 import outcobra.server.service.UserService
@@ -44,7 +43,7 @@ class RequestValidator<in Dto>
         val parentRepository = locator.getForEntityClass(parentLink.parentClass)
         val parent: ParentLinked? = parentRepository.findOne(parentLink.id)
 
-        if (parentLink.id == 0L && this is InstitutionDto) {
+        if (parentLink.id == 0L) {
             return
         }
 

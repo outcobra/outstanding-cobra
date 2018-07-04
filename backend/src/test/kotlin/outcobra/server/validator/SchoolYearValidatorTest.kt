@@ -9,10 +9,8 @@ import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.transaction.annotation.Transactional
 import outcobra.server.config.ProfileRegistry.Companion.TEST
-import outcobra.server.model.domain.Institution
 import outcobra.server.model.domain.SchoolClass
 import outcobra.server.model.domain.SchoolYear
-import outcobra.server.model.repository.InstitutionRepository
 import outcobra.server.model.repository.SchoolClassRepository
 import outcobra.server.model.repository.SchoolYearRepository
 import outcobra.server.service.UserService
@@ -29,8 +27,6 @@ class SchoolYearValidatorTest {
     @Inject
     lateinit var userService: UserService
     @Inject
-    lateinit var institutionRepository: InstitutionRepository
-    @Inject
     lateinit var classRepository: SchoolClassRepository
     @Inject
     lateinit var yearRepository: SchoolYearRepository
@@ -42,13 +38,13 @@ class SchoolYearValidatorTest {
 
     val now: LocalDate = LocalDate.now()
 
+    val user = userService.getCurrentUser()
+
     @Before
     fun before() {
-        val institution = Institution("TEST", userService.getCurrentUser())
-        schoolClass = SchoolClass("tester", institution, mutableListOf())
+        schoolClass = SchoolClass("tester", user, mutableListOf())
         existing = SchoolYear("existing", now, now.plusYears(1), userService.getCurrentUser(), mutableListOf(schoolClass), listOf(), listOf())
 
-        institutionRepository.save(institution)
         classRepository.save(schoolClass)
         yearRepository.save(existing)
     }

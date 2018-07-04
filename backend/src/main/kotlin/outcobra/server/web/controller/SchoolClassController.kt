@@ -42,17 +42,6 @@ class SchoolClassController
     }
 
     /**
-     * This method reads all SchoolClasses that are associated with a specific Institution
-     * @param institutionId The id of the Institution of which to get all SchoolClasses
-     * @return All SchoolClasses that are associated with the given Institution
-     */
-
-    @GetMapping("/institution/{institutionId}/schoolClass")
-    fun readAllSchoolClassesByInstitution(@PathVariable institutionId: Long): List<SchoolClassDto> {
-        return schoolClassService.readAllByInstitution(institutionId)
-    }
-
-    /**
      * This method deletes a schoolClass
      * @param id The id of the SchoolClass that should be deleted
      */

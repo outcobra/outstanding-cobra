@@ -85,6 +85,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/outcobra
     username: outcobra
+    password: test
   jpa:
     properties:
       hibernate:
@@ -93,5 +94,6 @@ spring:
       ddl-auto: validate
 flyway:
   locations: db/migration
+  enabled: true
 ---
 spring.profiles: bit

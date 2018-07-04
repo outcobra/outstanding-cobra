@@ -18,11 +18,6 @@ class TeacherController @Inject constructor(val teacherService: TeacherService) 
         return teacherService.readById(id)
     }
 
-    @GetMapping("/institution/{institutionId}/teacher")
-    fun readAllTeachersByInstitution(@PathVariable institutionId: Long): List<TeacherDto> {
-        return teacherService.readAllByInstitution(institutionId)
-    }
-
     @DeleteMapping("/teacher/{id}")
     fun deleteTeacher(@PathVariable id: Long) {
         teacherService.delete(id)
