@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {decode} from 'jwt-simple';
+import {jwt_decode} from 'jwt-decode';
 import {environment} from '../../../../environments/environment';
 import {isEmpty, isFalsy} from '../../util/helper';
 import * as moment from 'moment';
@@ -15,7 +15,7 @@ export class JwtHelperService {
             return true;
         }
         try {
-            let decoded = decode(token, '', true);
+            let decoded = jwt_decode(token);
             if (isFalsy(decoded['exp'])) {
                 return true;
             }
