@@ -53,7 +53,7 @@ class SemesterMapper @Inject constructor(val schoolClassSemesterRepository: Scho
                                     schoolClassRepository.findOne(it),
                                     semesterRepository.findOne(from.id) ?: semester
                             ) }
-                }
+                }.toMutableList()
 
         semester.id = from.id
         return semester

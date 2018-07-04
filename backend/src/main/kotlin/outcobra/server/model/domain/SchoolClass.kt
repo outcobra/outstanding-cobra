@@ -1,6 +1,7 @@
 package outcobra.server.model.domain
 
 import outcobra.server.model.interfaces.ParentLinked
+import javax.persistence.CascadeType
 import javax.persistence.Entity
 import javax.persistence.ManyToOne
 import javax.persistence.OneToMany
@@ -11,8 +12,8 @@ class SchoolClass(@NotNull var normalizedName: String = "",
                   @ManyToOne
                   var user: User = User(),
 
-                  @OneToMany(mappedBy = "schoolClass")
-                  var schoolClassSemester: List<SchoolClassSemester> = listOf()
+                  @OneToMany(mappedBy = "schoolClass", cascade = [CascadeType.ALL])
+                  var schoolClassSemester: MutableList<SchoolClassSemester> = mutableListOf()
 ) : ParentLinked, AbstractEntity() {
 
     override val parent: ParentLinked?

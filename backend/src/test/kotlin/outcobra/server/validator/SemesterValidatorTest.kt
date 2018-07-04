@@ -48,7 +48,7 @@ class SemesterValidatorTest {
         if (schoolClass == null) {
             schoolClass = schoolClassRepository.findAll().first()
             schoolYear = schoolYearRepository.saveAndFlush(SchoolYear("", now, now.plusYears(1), userService.getCurrentUser(), mutableListOf(schoolClass!!), listOf(), listOf()))
-            existing = semesterRepository.saveAndFlush(Semester("", now, now.plusMonths(6), schoolYear, listOf(), null))
+            existing = semesterRepository.saveAndFlush(Semester("", now, now.plusMonths(6), schoolYear, mutableListOf(), null))
         }
     }
 
@@ -57,7 +57,7 @@ class SemesterValidatorTest {
         assertThat(schoolClass).isNotNull()
         val from = existing!!.validTo.plusDays(1)
         val to = schoolYear!!.validTo
-        val validation = validator.validateSemesterCreation(Semester("", from, to, schoolYear, listOf(), null))
+        val validation = validator.validateSemesterCreation(Semester("", from, to, schoolYear, mutableListOf(), null))
         assertThat(validation)
     }
 
@@ -66,7 +66,7 @@ class SemesterValidatorTest {
         assertThat(schoolClass).isNotNull()
         val from = existing!!.validTo.minusDays(20)
         val to = schoolYear!!.validTo
-        val validation = validator.validateSemesterCreation(Semester("", from, to, schoolYear, listOf(), null))
+        val validation = validator.validateSemesterCreation(Semester("", from, to, schoolYear, mutableListOf(), null))
         assertThat(validation).isFalse()
     }
 
@@ -75,7 +75,7 @@ class SemesterValidatorTest {
         assertThat(schoolClass).isNotNull()
         val from = existing!!.validFrom.plusDays(10)
         val to = existing!!.validTo.minusDays(10)
-        val validation = validator.validateSemesterCreation(Semester("", from, to, schoolYear, listOf(), null))
+        val validation = validator.validateSemesterCreation(Semester("", from, to, schoolYear, mutableListOf(), null))
         assertThat(validation).isFalse()
     }
 
@@ -85,7 +85,7 @@ class SemesterValidatorTest {
         val from = existing!!.validFrom.minusDays(10)
         val to = existing!!.validTo.plusDays(10)
         assertThatThrownBy {
-            validator.validateSemesterCreation(Semester("", from, to, schoolYear, listOf(), null))
+            validator.validateSemesterCreation(Semester("", from, to, schoolYear, mutableListOf(), null))
         }.isEqualTo(ValidationKey.OUTSIDE_PARENT.makeException())
     }
 
@@ -95,7 +95,7 @@ class SemesterValidatorTest {
         val from = existing!!.validTo.plusDays(1)
         val to = schoolYear!!.validTo.plusDays(10)
         assertThatThrownBy {
-            validator.validateSemesterCreation(Semester("", from, to, schoolYear, listOf(), null))
+            validator.validateSemesterCreation(Semester("", from, to, schoolYear, mutableListOf(), null))
         }.isEqualTo(ValidationKey.OUTSIDE_PARENT.makeException())
     }
 
@@ -105,7 +105,7 @@ class SemesterValidatorTest {
         val from = existing!!.validTo.plusDays(1)
         val to = schoolYear!!.validTo
         assertThatThrownBy {
-            validator.validateSemesterCreation(Semester("", to, from, schoolYear, listOf(), null))
+            validator.validateSemesterCreation(Semester("", to, from, schoolYear, mutableListOf(), null))
         }.isEqualTo(ValidationKey.START_BIGGER_THAN_END.makeException())
     }
 

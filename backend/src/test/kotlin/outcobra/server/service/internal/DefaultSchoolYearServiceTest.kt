@@ -43,11 +43,10 @@ class DefaultSchoolYearServiceTest {
     lateinit var schoolClass: SchoolClass
     lateinit var existing: SchoolYear
     var yearCount = -1L
-    val user = userService.getCurrentUser()
 
     @Before
     fun setUp() {
-        schoolClass = schoolClassRepository.save(SchoolClass("TestClass", user, mutableListOf()))
+        schoolClass = schoolClassRepository.save(SchoolClass("TestClass", userService.getCurrentUser(), mutableListOf()))
         existing = schoolYearRepository.save(SchoolYear("existing", now, now.plusYears(1), userService.getCurrentUser(), mutableListOf(schoolClass), listOf(), listOf()))
         yearCount = schoolYearRepository.count()
     }

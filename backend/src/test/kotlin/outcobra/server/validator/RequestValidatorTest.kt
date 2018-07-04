@@ -1,10 +1,21 @@
 package outcobra.server.validator
 
+import org.assertj.core.api.Assertions.assertThatThrownBy
+import org.junit.Before
+import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit4.SpringRunner
+import outcobra.server.Mocker
 import outcobra.server.config.ProfileRegistry.Companion.TEST
+import outcobra.server.exception.ValidationException
+import outcobra.server.model.domain.*
+import outcobra.server.model.dto.SchoolClassDto
+import outcobra.server.model.mapper.SchoolClassMapper
+import outcobra.server.model.repository.SchoolClassRepository
+import outcobra.server.model.repository.SchoolClassSemesterRepository
+import outcobra.server.model.repository.SemesterRepository
 import outcobra.server.model.repository.UserRepository
 import outcobra.server.service.SchoolClassService
 import outcobra.server.service.UserService
@@ -29,57 +40,66 @@ class RequestValidatorTest {
     @Inject
     lateinit var userRepository: UserRepository
     @Inject
-    lateinit var userServiceMock: UserService
+    lateinit var userService: UserService
     @Inject
     lateinit var schoolClassService: SchoolClassService
+    @Inject
+    lateinit var schoolClassRepository: SchoolClassRepository
+    @Inject
+    lateinit var schoolClassMapper: SchoolClassMapper
+    @Inject
+    lateinit var semesterRepository: SemesterRepository
+    @Inject
+    lateinit var schoolClassSemesterRepository: SchoolClassSemesterRepository
+
+    lateinit var schoolClassByUser2: SchoolClass
+    lateinit var schoolClassByCurrent: SchoolClass
 
 
-    /*@Before TODO rewrite test with other entity
+    @Before
     fun setup() {
         val user2 = userRepository.findOne(QUser.user.mail.eq(Mocker.USER2_MAIL))
-        institutionByUser2 = institutionRepository.save(Institution("InstitutionByUser2", user2))
-        institutionByCurrent = institutionRepository.findAll(
-                QInstitution.institution.user.mail.ne(userServiceMock.getCurrentUser().mail)).first()
+        schoolClassByUser2 = schoolClassRepository.save(SchoolClass("SchoolClassByUser2", user2))
+        val semester = semesterRepository.save(Semester("Semester1"))
 
+        val scs = schoolClassSemesterRepository.saveAndFlush(SchoolClassSemester(schoolClassByUser2, semester))
+        schoolClassByUser2.schoolClassSemester.add(scs)
+
+        schoolClassByCurrent = schoolClassRepository.findAll(
+                QSchoolClass.schoolClass.user.mail.ne(userService.getCurrentUser().mail)
+        ).first()
     }
 
     @Test
     fun testFakeChild() {
         assertThatThrownBy {
-            val original = institutionMapper.toDto(institutionByUser2)
-            val cuckooChild = institutionByCurrent.schoolClasses.first()
-            val fake = InstitutionDto(original.id, original.userId, original.name, arrayListOf(cuckooChild.id))
-            institutionService.save(fake)
+            val original = schoolClassMapper.toDto(schoolClassByUser2)
+            val cuckooChild = schoolClassByCurrent.schoolClassSemester.first().semester
+            val fake = original.copy(semesterSubjects = listOf(SchoolClassDto.SemesterSubjectDto(cuckooChild.id, listOf())))
+            schoolClassService.save(fake)
         }.isInstanceOf(ValidationException::class.java)
     }
 
     @Test
     fun testFakeParent() {
         assertThatThrownBy {
-            val original = institutionMapper.toDto(institutionByUser2)
-            val fake = InstitutionDto(original.id, userServiceMock.getCurrentUser().id, original.name, original.schoolClassIds)
-            institutionService.save(fake)
+            val original = schoolClassMapper.toDto(schoolClassByUser2)
+            val fake = original.copy(userId = userService.getCurrentUser().id)
+            schoolClassService.save(fake)
         }.isInstanceOf(ValidationException::class.java)
     }
 
     @Test
     fun testIllegalGet() {
         assertThatThrownBy {
-            institutionService.readById(institutionByUser2.id)
+            schoolClassService.readById(schoolClassByUser2.id)
         }.isInstanceOf(ValidationException::class.java)
     }
 
     @Test
     fun testIllegalDelete() {
         assertThatThrownBy {
-            institutionService.delete(institutionByUser2.id)
+            schoolClassService.delete(schoolClassByUser2.id)
         }.isInstanceOf(ValidationException::class.java)
     }
-
-    @Test
-    fun testIllegalReadByParent() {
-        assertThatThrownBy {
-            schoolClassService.readAllByInstitution(institutionByUser2.id)
-        }.isInstanceOf(ValidationException::class.java)
-    }*/
 }

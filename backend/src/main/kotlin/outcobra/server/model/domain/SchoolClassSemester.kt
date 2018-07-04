@@ -1,5 +1,6 @@
 package outcobra.server.model.domain
 
+import javax.persistence.CascadeType
 import javax.persistence.Entity
 import javax.persistence.ManyToOne
 import javax.persistence.OneToMany
@@ -11,5 +12,5 @@ data class SchoolClassSemester(@ManyToOne
                                @ManyToOne
                                val semester: Semester = Semester(),
 
-                               @OneToMany(mappedBy = "schoolClassSemester")
+                               @OneToMany(mappedBy = "schoolClassSemester", cascade = [CascadeType.MERGE, CascadeType.PERSIST])
                                val subjects: List<SchoolClassSemesterSubject> = listOf()) : AbstractEntity()

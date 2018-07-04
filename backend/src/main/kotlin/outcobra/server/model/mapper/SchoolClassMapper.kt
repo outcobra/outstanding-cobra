@@ -45,7 +45,7 @@ class SchoolClassMapper @Inject constructor(val schoolClassRepository: SchoolCla
                                     schoolClassRepository.findOne(from.id) ?: schoolClass,
                                     semesterRepository.findOne(it)
                             ) }
-                }
+                }.toMutableList()
 
         schoolClass.id = from.id
         return schoolClass

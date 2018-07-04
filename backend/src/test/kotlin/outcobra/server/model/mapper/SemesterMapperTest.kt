@@ -46,21 +46,20 @@ class SemesterMapperTest {
     private val now = LocalDate.now()
     private lateinit var baseSemester: Semester
     private var schoolYear: SchoolYear? = null
-    private val user = userService.getCurrentUser()
 
     private fun createBasicSemester(): Semester {
         val semesterName = "TestSemester"
         val validFrom = now.minusMonths(6)
         val validTo = now
         val parentYear = SchoolYear("TestYear", now.minusYears(1), now, userService.getCurrentUser(), mutableListOf(SchoolClass()), listOf(), listOf())
-        val schoolClassSemester = listOf(SchoolClassSemester(SchoolClass("TestClass"), Semester("TestSemester"), listOf(SchoolClassSemesterSubject(subject = Subject("TestSemester", Color.randomColor)))))
+        val schoolClassSemester = mutableListOf(SchoolClassSemester(SchoolClass("TestClass"), Semester("TestSemester"), listOf(SchoolClassSemesterSubject(subject = Subject("TestSemester", Color.randomColor)))))
         return Semester(semesterName, validFrom, validTo, parentYear, schoolClassSemester)
     }
 
     @Before
     fun saveRequiredEntities() {
         baseSemester = createBasicSemester()
-        var schoolClass = SchoolClass("TestSchoolClass2017", user)
+        var schoolClass = SchoolClass("TestSchoolClass2017", userService.getCurrentUser())
         schoolClass = schoolClassRepository.save(schoolClass)
         schoolYear = SchoolYear("TestSchoolYear", now.minusYears(1), now, userService.getCurrentUser(), mutableListOf(schoolClass), listOf(), listOf())
         schoolYear = schoolYearRepository.save(schoolYear)
