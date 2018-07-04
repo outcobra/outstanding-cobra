@@ -8,7 +8,7 @@ apply plugin: 'de.undercouch.download'
 import de.undercouch.gradle.tasks.download.Download
 
 node {
-    version = '8.4.0'
+    version = '8.9.0'
     download = true
 }
 
