@@ -9,6 +9,7 @@ import {ManageService} from './service/manage.service';
 import {OCUiModule} from '../oc-ui/oc-ui.module';
 import {TranslateModule} from '@ngx-translate/core';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import {SchoolYearResolverService} from './service/school-year-resolver.service';
 
 @NgModule({
     declarations: [
@@ -25,7 +26,8 @@ import {FlexLayoutModule} from '@angular/flex-layout';
         OCMaterialModule
     ],
     providers: [
-        ManageService
+        ManageService,
+        SchoolYearResolverService
     ]
 })
 export class ManageModule {

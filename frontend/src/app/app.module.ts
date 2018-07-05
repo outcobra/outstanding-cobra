@@ -1,7 +1,6 @@
 import {APP_INITIALIZER, ErrorHandler, Injector, NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
-import {HttpModule} from '@angular/http';
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import {AppComponent} from './app.component';
 import {SharedModule} from './shared/shared.module';
@@ -32,7 +31,6 @@ import {NgxMdModule} from 'ngx-md';
         BrowserModule,
         BrowserAnimationsModule,
         FormsModule,
-        HttpModule,
         HttpClientModule,
         OCMaterialModule,
         CoreModule,

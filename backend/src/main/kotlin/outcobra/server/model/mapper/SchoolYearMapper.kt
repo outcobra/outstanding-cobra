@@ -27,22 +27,32 @@ class SchoolYearMapper @Inject constructor(val semesterRepository: SemesterRepos
     : Mapper<SchoolYear, SchoolYearDto>, BaseMapper() {
 
     override fun fromDto(from: SchoolYearDto): SchoolYear {
-        validateChildren(from.semesterIds, Semester::class, from.userId, User::class)
+        validateChildren(from.semesters.map { it.id }, Semester::class, from.userId, User::class)
         val holidays = holidayRepository.findAll(QHoliday.holiday.schoolYear.id.eq(from.id)).toList()
         val schoolClasses = from.schoolClassIds.map { classRepository.findOne(it) }
-        val semesters = from.semesterIds.map { semesterRepository.findOne(it) }
+        val semesters = from.semesters.map { semesterRepository.findOne(it.id) }
         val user = userRepository.findOne(from.userId)
-        val schoolYear = SchoolYear(from.name, from.validFrom, from.validTo, user, schoolClasses.toMutableList(), semesters, holidays)
+
+        val schoolYear = SchoolYear(from.name,
+                from.validFrom,
+                from.validTo,
+                user,
+                schoolClasses.toMutableList(),
+                semesters,
+                holidays
+        )
         schoolYear.id = from.id
         return schoolYear
     }
 
     override fun toDto(from: SchoolYear): SchoolYearDto {
-        val semesters = from.semesters.map { it.id }
-        return SchoolYearDto(from.id, from.schoolClasses.map { it.id }, from.name, from.validFrom, from.validTo, from.user.id, semesters)
-    }
-
-    fun withSemesters(from: SchoolYear): outcobra.server.model.dto.manage.SchoolYearDto {
-        return outcobra.server.model.dto.manage.SchoolYearDto(from.id, from.name, from.validFrom, from.validTo, from.schoolClasses.map { it.id }, from.semesters.map { semesterMapper.toDto(it) })
+        return SchoolYearDto(from.id,
+                from.schoolClasses.map { it.id },
+                from.name,
+                from.validFrom,
+                from.validTo,
+                from.user.id,
+                from.semesters.map { semesterMapper.toDto(it) }
+        )
     }
 }

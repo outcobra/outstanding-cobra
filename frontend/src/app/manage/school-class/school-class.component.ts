@@ -4,7 +4,7 @@ import {SchoolClassDto} from '../old/model/manage.dto';
 import {ManageService} from '../service/manage.service';
 
 @Component({
-    selector: 'app-school-class',
+    selector: 'school-class',
     templateUrl: './school-class.component.html',
     styleUrls: ['./school-class.component.scss']
 })

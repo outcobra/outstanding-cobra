@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {jwt_decode} from 'jwt-decode';
 import {environment} from '../../../../environments/environment';
 import {isEmpty, isFalsy} from '../../util/helper';
 import * as moment from 'moment';
+import * as jwtDecode from 'jwt-decode';
 import {BasilWrapperService} from '../../persistence/basil-wrapper.service';
 
 @Injectable()
@@ -15,7 +15,7 @@ export class JwtHelperService {
             return true;
         }
         try {
-            let decoded = jwt_decode(token);
+            let decoded = jwtDecode(token);
             if (isFalsy(decoded['exp'])) {
                 return true;
             }

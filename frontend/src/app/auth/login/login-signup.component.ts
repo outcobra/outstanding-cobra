@@ -10,7 +10,7 @@ import {PasswordVerifyErrorStateMatcher} from './password-verify-error-state-mat
 import {isTruthy} from '../../core/util/helper';
 import {Observable, of, ReplaySubject} from 'rxjs';
 import {UsernamePasswordDto} from '../model/username-password.dto';
-import {map} from 'rxjs/operators';
+import {catchError, map} from 'rxjs/operators';
 
 @Component({
     selector: 'login',
@@ -92,7 +92,7 @@ export class LoginSignUpComponent implements OnInit {
                 : this._authService.loginWithMailAndPassword;
 
             authFunc.call(this._authService, usernamePasswordTuple)
-                .catch(this._handleLoginError.bind(this))
+                .pipe(catchError(this._handleLoginError.bind(this)))
                 .subscribe(() => this._router.navigateByUrl(this._target));
         }
     }
@@ -102,7 +102,7 @@ export class LoginSignUpComponent implements OnInit {
             ? this._authService.signUpIdentityProvider
             : this._authService.loginIdentityProvider;
         authFunc.call(this._authService, identityProvider, token)
-            .catch(this._handleLoginError.bind(this))
+            .pipe(catchError(this._handleLoginError.bind(this)))
             .subscribe(() => this._router.navigateByUrl(this._target));
     }
 

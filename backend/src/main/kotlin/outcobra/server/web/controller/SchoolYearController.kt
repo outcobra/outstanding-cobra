@@ -9,6 +9,11 @@ import javax.inject.Inject
 @RequestMapping("/api")
 class SchoolYearController @Inject constructor(val schoolYearService: SchoolYearService) {
 
+    @GetMapping("/schoolYear")
+    fun readSchoolYearsByCurrentUser(): List<SchoolYearDto> {
+        return schoolYearService.readAllByUser()
+    }
+
     @RequestMapping("/schoolYear", method = arrayOf(RequestMethod.POST, RequestMethod.PUT))
     fun saveSchoolYear(@RequestBody schoolYearDto: SchoolYearDto): SchoolYearDto {
         return schoolYearService.save(schoolYearDto)

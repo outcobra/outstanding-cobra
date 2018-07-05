@@ -320,7 +320,7 @@
       },
       "manage": {
         "classes": {
-          "linkTitle": "Schoolyears",
+          "linkTitle": "Schoolclasses",
           "actions": {
             "openYears": "Show school years"
           }

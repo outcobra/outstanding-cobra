@@ -18,6 +18,6 @@ interface SchoolYearService : BaseService<SchoolYearDto> {
      */
     fun readAllBySchoolClass(schoolClassId: Long): List<SchoolYearDto>
 
-    fun readAllByUser(): List<outcobra.server.model.dto.manage.SchoolYearDto>
+    fun readAllByUser(): List<SchoolYearDto>
 
 }

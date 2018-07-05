@@ -29,6 +29,10 @@ oc-app {
     background: white !important;
     padding: 0 !important;
     display: block;
+
+    > mat-card-content > mat-list, > mat-card-content > mat-nav-list {
+        padding: 0;
+    }
 }
 
 .margin-box {
