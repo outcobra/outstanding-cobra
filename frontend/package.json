@@ -43,7 +43,7 @@
     "humanize-duration": "^3.10.0",
     "jwt-simple": "^0.5.1",
     "material-design-icons": "^3.0.1",
-    "moment": "^2.17.1",
+    "moment": "^2.19.3",
     "ngx-md": "3.1.0",
     "object-assign": "^4.1.1",
     "raven-js": "3.21.0",
