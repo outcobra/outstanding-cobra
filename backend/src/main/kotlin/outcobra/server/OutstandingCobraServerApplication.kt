@@ -9,7 +9,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2
 @EnableSwagger2
 @EnableCaching
 class OutstandingCobraServerApplication {
-
     companion object {
         @JvmStatic
         fun main(args: Array<String>) {

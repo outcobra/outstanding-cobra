@@ -23,7 +23,7 @@ data class TimetableEntry(@NotNull @Enumerated(EnumType.STRING) var weekDay: Wee
                           @Min(1) @NotNull var repeatEveryNWeeks: Int = 1,
                           var room: String? = "",
                           @ManyToOne var timetable: Timetable? = null,
-                          @ManyToOne var subject: Subject? = null)
+                          @ManyToOne var schoolClassSemesterSubject: SchoolClassSemesterSubject? = null)
     : AbstractEntity(), ParentLinked {
 
     override val parent: ParentLinked?
