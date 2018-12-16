@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Icons, Notification, NotificationsService} from 'angular2-notifications';
+import {Icons, Notification, NotificationsService, NotificationType} from 'angular2-notifications';
 import {TranslateService} from '@ngx-translate/core';
 import {appIcons} from './icons';
 
@@ -29,7 +29,7 @@ export class NotificationWrapperService {
      * @returns {Notification}
      */
     public success(title: string, content: string, optionsOverride?: any): Notification {
-        return this.create(title, content, 'success', this._icns.success, optionsOverride);
+        return this.create(title, content, NotificationType.Success, this._icns.success, optionsOverride);
     }
 
     /**
@@ -41,7 +41,7 @@ export class NotificationWrapperService {
      * @returns {Notification}
      */
     public error(title: string, content: string, optionsOverride?: any): Notification {
-        return this.create(title, content, 'error', this._icns.error, optionsOverride);
+        return this.create(title, content, NotificationType.Error, this._icns.error, optionsOverride);
     }
 
     /**
@@ -53,7 +53,7 @@ export class NotificationWrapperService {
      * @returns {Notification}
      */
     public alert(title: string, content: string, optionsOverride?: any): Notification {
-        return this.create(title, content, 'alert', this._icns.alert, optionsOverride);
+        return this.create(title, content, NotificationType.Alert, this._icns.alert, optionsOverride);
     }
 
     /**
@@ -65,7 +65,7 @@ export class NotificationWrapperService {
      * @returns {Notification}
      */
     public info(title: string, content: string, optionsOverride?: any): Notification {
-        return this.create(title, content, 'info', this._icns.info, optionsOverride);
+        return this.create(title, content, NotificationType.Info, this._icns.info, optionsOverride);
     }
 
     /**
@@ -80,7 +80,7 @@ export class NotificationWrapperService {
      * @param optionsOverride special options for the notification (overrides default)
      * @returns {Notification}
      */
-    public create(title: string, content: string, type: string, icon: string, optionsOverride?: any): Notification {
+    public create(title: string, content: string, type: NotificationType, icon: string, optionsOverride?: any): Notification {
         return this._notificationsService.set({
             title: this._translateService.instant(title),
             content: this._translateService.instant(content),
