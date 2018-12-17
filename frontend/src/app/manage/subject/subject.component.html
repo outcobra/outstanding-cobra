@@ -1,3 +1,70 @@
-<p>
-  subject works!
-</p>
+<oc-title-bar>
+    <span>{{ 'i18n.modules.manage.subject.linkTitle' | translate }}</span>
+</oc-title-bar>
+
+<div fxLayout fxLayoutAlign="center start">
+    <div class="container middle-container" fxFlex>
+        <div class="flex-container">
+            <span *ngIf="schoolClass" class="text-secondary-dark">
+                <!--<mat-icon>book</mat-icon>-->
+                Fächer von {{ schoolClass.normalizedName }}
+            </span>
+            <div class="oc-filler"></div>
+            <a mat-raised-button
+               color="accent">
+                {{ 'i18n.modules.manage.subject.actions.addSubject' | translate }}
+            </a>
+        </div>
+        <mat-accordion>
+            <mat-expansion-panel *ngFor="let subject of subjects; let subIdx=index"
+                                 [expanded]="subIdx == 0">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>{{ subject.name }}</mat-panel-title>
+                    <!--<mat-panel-description>
+                        {{ schoolYear.validFrom | date }} - {{ schoolYear.validTo | date }}
+                    </mat-panel-description>-->
+                </mat-expansion-panel-header>
+                <ng-template matExpansionPanelContent>
+                    <div class="schoolyear-semester-container">
+                        <!--<div *ngFor="let semester of schoolYear.semesters; let semIdx=index"
+                             class="semester-detail"
+                             [ngClass]="semIdx % 2 == 0 ? 'semester-even' : 'semester-odd'">
+                            <div>
+                                <span class="text-secondary-dark">{{ semester.validFrom | date }} - {{ semester.validTo | date }}</span><br>
+                                <span>{{ semester.name }}</span><br>
+                                <button mat-button
+                                        [routerLink]="goToSubjectsUrl(semester.id)"
+                                        color="primary">
+                                    {{ 'i18n.modules.manage.schoolYearSemester.openSubjects' | translate }}
+                                </button>
+                            </div>
+                            <div class="semester-actions">
+                                <button mat-icon-button>
+                                    <mat-icon>edit</mat-icon>
+                                </button>
+                                <button mat-icon-button>
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                            </div>
+                        </div>-->
+                    </div>
+                    <mat-action-row class="schoolyear-action-row">
+                        <!--<a mat-stroked-button
+                           color="accent"
+                           [routerLink]="[schoolYear.id, 'schoolyear']">
+                            <mat-icon>add</mat-icon>
+                            <span>{{ 'i18n.modules.manage.schoolYearSemester.actions.addSemester' | translate }}</span>
+                        </a>-->
+                        <span class="oc-filler"></span>
+                        <button mat-icon-button>
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-icon-button>
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </mat-action-row>
+                </ng-template>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+</div>

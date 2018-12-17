@@ -17,7 +17,7 @@
                             <mat-icon>delete</mat-icon>
                         </button>
                         <a mat-icon-button
-                           [routerLink]="[schoolClass.id, 'schoolyear']"
+                           [routerLink]="['../schoolyear/schoolClass', schoolClass.id]"
                            [matTooltip]="'i18n.modules.manage.classes.actions.openYears' | translate">
                             <mat-icon>exit_to_app</mat-icon>
                         </a>

@@ -15,7 +15,7 @@ export class SchoolClassComponent implements OnInit {
     }
 
     ngOnInit() {
-        this._schoolClasses$ = this._manageService.getSchoolClasses()
+        this._schoolClasses$ = this._manageService.getSchoolClasses();
     }
 
 

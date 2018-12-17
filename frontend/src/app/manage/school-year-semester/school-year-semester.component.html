@@ -1,37 +1,67 @@
 <oc-title-bar>
-    <span>{{ 'i18n.modules.manage.schoolYearSem.linkTitle' | translate }}</span>
+    <span>{{ 'i18n.modules.manage.schoolYearSemester.linkTitle' | translate }}</span>
 </oc-title-bar>
 
 <div fxLayout fxLayoutAlign="center start">
     <div class="container middle-container" fxFlex>
-        <mat-accordion displayMode="flat">
-            <mat-expansion-panel *ngFor="let schoolYear of schoolYearSemesters$ | async">
+        <div class="flex-container">
+            <span *ngIf="schoolClass" class="text-secondary-dark">
+                <!--<mat-icon>book</mat-icon>-->
+                Schuljahre von {{ schoolClass.normalizedName }}
+            </span>
+            <div class="oc-filler"></div>
+            <a mat-raised-button
+               color="accent">
+                {{ 'i18n.modules.manage.schoolYearSemester.actions.addSchoolYear' | translate }}
+            </a>
+        </div>
+        <mat-accordion>
+            <mat-expansion-panel *ngFor="let schoolYear of schoolYearSemesters; let syIdx=index"
+                                 [expanded]="syIdx == 0">
                 <mat-expansion-panel-header>
-                    {{ schoolYear.name }}
+                    <mat-panel-title>{{ schoolYear.name }}</mat-panel-title>
+                    <mat-panel-description>
+                        {{ schoolYear.validFrom | date }} - {{ schoolYear.validTo | date }}
+                    </mat-panel-description>
                 </mat-expansion-panel-header>
                 <ng-template matExpansionPanelContent>
-                    <oc-icon-data iconName="schedule"
-                                  titleKey="i18n.common.label.dateRange"
-                                  [showDivider]="false">
-                        <span>{{ schoolYear.validFrom | date }} - {{ schoolYear.validTo | date }}</span>
-                    </oc-icon-data>
-                    <oc-icon-data iconName="event"
-                                  titleKey="i18n.modules.manage.schoolYearSem.label.semester"
-                                  [showDivider]="false">
-                        <oc-icon-data-child *ngFor="let semester of schoolYear.semesters">
-                            <oc-icon-data-title>{{ semester.validFrom | date }} - {{ semester.validTo | date }}
-                            </oc-icon-data-title>
-                            <oc-icon-data-data>
-                                <p>{{ semester.name }}</p>
-                                <button mat-button>Bla</button>
-                            </oc-icon-data-data>
-                        </oc-icon-data-child>
-                    </oc-icon-data>
-                    <mat-action-row>
-                        <a mat-button
+                    <div class="schoolyear-semester-container">
+                        <div *ngFor="let semester of schoolYear.semesters; let semIdx=index"
+                             class="semester-detail"
+                             [ngClass]="semIdx % 2 == 0 ? 'semester-even' : 'semester-odd'">
+                            <div>
+                                <span class="text-secondary-dark">{{ semester.validFrom | date }} - {{ semester.validTo | date }}</span><br>
+                                <span>{{ semester.name }}</span><br>
+                                <a mat-button
+                                        [routerLink]="goToSubjectsUrl(semester.id)"
+                                        color="primary">
+                                    {{ 'i18n.modules.manage.schoolYearSemester.openSubjects' | translate }}
+                                </a>
+                            </div>
+                            <div class="semester-actions">
+                                <button mat-icon-button>
+                                    <mat-icon>edit</mat-icon>
+                                </button>
+                                <button mat-icon-button>
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <mat-action-row class="schoolyear-action-row">
+                        <a mat-stroked-button
+                           color="accent"
                            [routerLink]="[schoolYear.id, 'schoolyear']">
-                            {{ 'i18n.modules.manage.classes.actions.openYears' | translate }}
+                            <mat-icon>add</mat-icon>
+                            <span>{{ 'i18n.modules.manage.schoolYearSemester.actions.addSemester' | translate }}</span>
                         </a>
+                        <span class="oc-filler"></span>
+                        <button mat-icon-button>
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-icon-button>
+                            <mat-icon>delete</mat-icon>
+                        </button>
                     </mat-action-row>
                 </ng-template>
             </mat-expansion-panel>

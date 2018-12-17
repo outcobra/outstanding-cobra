@@ -7,7 +7,7 @@ import {ManageDto, SchoolClassDto, SchoolYearDto, SubjectDto} from '../old/model
 @Injectable()
 export class ManageService extends AppService {
     constructor(http: HttpClient) {
-        super(http, '/api/manage')
+        super(http, '/api/manage');
     }
 
     public getManageData(): Observable<ManageDto> {

@@ -23,8 +23,8 @@ export interface SchoolYearDto extends Dto {
     id: number,
     schoolClassId: number,
     name: string,
-    validFrom: string|Moment,
-    validTo: string|Moment,
+    validFrom: string | Moment,
+    validTo: string | Moment,
     semesters: Array<SemesterDto>
 }
 
@@ -32,8 +32,8 @@ export interface SemesterDto extends Dto {
     id: number,
     schoolYearId: number,
     name: string,
-    validFrom: string|Moment,
-    validTo: string|Moment,
+    validFrom: string | Moment,
+    validTo: string | Moment,
     subjects: Array<SubjectDto>
 }
 

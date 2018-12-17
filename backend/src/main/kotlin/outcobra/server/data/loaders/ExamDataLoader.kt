@@ -43,7 +43,7 @@ class ExamDataLoader @Inject constructor(val examRepository: ExamRepository) : D
         lateinit var PROJECT_EXAM: Exam
     }
 
-    override fun shouldLoad(): Boolean = true
+    override fun count(): Long = examRepository.count()
 
     override fun load() {
         SCRUM_EXAM = saveAndLog("fake daily", INF5G_SCRUM_2016_1, true)

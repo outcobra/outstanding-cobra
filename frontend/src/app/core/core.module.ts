@@ -18,19 +18,12 @@ import {SemesterMarkResolver} from '../mark/service/semester-mark-resolver.servi
 import {MarkGroupResolver} from '../mark/service/mark-group-resolver.service';
 import {MarkService} from '../mark/service/mark.service';
 import {MarkResolver} from '../mark/service/mark-resolver.service';
-import {InstitutionService} from '../manage/old/service/institution.service';
-import {SchoolYearService} from '../manage/service/school-year.service';
-import {ManageService} from '../manage/old/service/manage.service';
-import {SchoolClassService} from '../manage/service/school-class.service';
-import {SubjectService} from '../manage/old/service/subject.service';
-import {SemesterService} from '../manage/old/service/semester.service';
 import {ManageDialogFactory} from '../manage/old/service/manage-dialog-factory';
 import {TaskResolver} from '../task/service/task-resolver.service';
 import {TaskListResolver} from '../task/service/task-list-resolver.service';
 import {TaskService} from '../task/service/task.service';
 import {UserService} from './services/user.service';
 import {JwtHelperService} from './services/auth/jwt-helper.service';
-import {CurrentSubjectsResolverService} from './services/resolver/current-subjects-resolver.service';
 import {ExamResolver} from '../exam/service/exam-resolver.service';
 import {SchoolClassSubjectService} from './services/school-class-subject/school-class-subject.service';
 import {SchoolClassSubjectResolver} from './services/school-class-subject/school-class-subject-resolver.service';
@@ -40,7 +33,6 @@ import {AuthHttpInterceptor} from './http/auth-http-interceptor';
 import {UrlPrefixingHttpInterceptor} from './http/url-prefixing-http-interceptor';
 import {DateBodyAwareHttpInterceptor} from './http/date-body-aware-http-interceptor';
 import {ErrorCatchingHttpInterceptor} from './http/error-catching-http-interceptor';
-import {ActiveSemesterService} from './services/semester/active-semester.service';
 
 @NgModule({
     imports: [
@@ -68,12 +60,6 @@ import {ActiveSemesterService} from './services/semester/active-semester.service
         ActiveExamListResolver,
         ExamResolver,
         // Manage Services
-        ManageService,
-        InstitutionService,
-        SchoolClassService,
-        SchoolYearService,
-        SemesterService,
-        SubjectService,
         ManageDialogFactory,
         // Mark Services
         MarkService,
@@ -86,9 +72,9 @@ import {ActiveSemesterService} from './services/semester/active-semester.service
         TaskResolver,
         TaskListResolver,
 
-        CurrentSubjectsResolverService,
+        //CurrentSubjectsResolverService,
         SchoolClassSubjectService,
-        ActiveSemesterService,
+        //ActiveSemesterService,
         {
             provide: HTTP_INTERCEPTORS,
             multi: true,

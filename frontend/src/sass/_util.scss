@@ -3,3 +3,10 @@
     height: $size;
     width: $size;
 }
+
+@function map_deep_get($map, $keys...) {
+    @each $key in $keys {
+        $map: map_get($map, $key);
+    }
+    @return $map;
+}

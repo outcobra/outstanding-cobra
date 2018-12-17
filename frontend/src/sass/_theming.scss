@@ -1,7 +1,9 @@
 @import '~@angular/material/theming';
 @import 'color-classes';
-@import '../app/auth/auth-theming';
-@import "../app/mark/mark-theming";
+@import 'util';
+@import '../app/auth/auth.theme';
+@import "../app/mark/mark.theme";
+@import "../app/manage/manage.theme";
 
 @include mat-core();
 
@@ -23,4 +25,5 @@ $oc-theme: mat-light-theme($primary-palette, $accent-palette, $error-palette);
 @include angular-material-theme($oc-theme);
 @include auth-theme($oc-theme);
 @include mark-theme($oc-theme)
+@include manage-theme($oc-theme);
 @include oc-theme-classes($primary-palette, $accent-palette, $error-palette);

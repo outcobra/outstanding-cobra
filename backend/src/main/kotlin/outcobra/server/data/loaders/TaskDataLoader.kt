@@ -35,7 +35,7 @@ class TaskDataLoader(val taskRepository: TaskRepository) : DataLoader {
         private val LOGGER: Logger = LoggerFactory.getLogger(TaskDataLoader::class.java)
     }
 
-    override fun shouldLoad() = true
+    override fun count(): Long = taskRepository.count()
 
     private fun saveTask(task: Task): Task {
         LOGGER.debug("Saving task: ${task.name}")

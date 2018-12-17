@@ -48,7 +48,7 @@ export class SubjectDialog extends ParentLinkedCreateUpdateComponent<SubjectDto,
 
     private _saveAndClose(subject: SubjectDto) {
         this._subjectService.save(subject)
-            .subscribe(result => this._dialogRef.close(result))
+            .subscribe(result => this._dialogRef.close(result));
     }
 
     get subjectForm(): FormGroup {

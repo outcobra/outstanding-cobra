@@ -30,6 +30,8 @@ interface SubjectService : BaseService<SubjectDto> {
      */
     fun readAllBySchoolClass(schoolClassId: Long): List<SubjectDto>
 
+    fun readAllBySchoolClassAndSemester(schoolClassId: Long, semesterId: Long): List<SubjectDto>
+
     /**
      * reads all subjects by the current active semester
      * @return all [SubjectDto]s which are active now

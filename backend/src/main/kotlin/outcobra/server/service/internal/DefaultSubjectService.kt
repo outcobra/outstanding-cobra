@@ -56,6 +56,19 @@ class DefaultSubjectService
         return repository.findAll(filter).map { mapper.toDto(it) }
     }
 
+    override fun readAllBySchoolClassAndSemester(schoolClassId: Long, semesterId: Long): List<SubjectDto> {
+        requestValidator.validateRequestById(schoolClassId, SchoolClass::class)
+        requestValidator.validateRequestById(semesterId, Semester::class)
+
+        val qSchoolClassSemester = QSubject.subject.schoolClassSemesterSubjects.any().schoolClassSemester
+
+        val filter = qSchoolClassSemester.schoolClass.id.eq(schoolClassId)
+                .and(qSchoolClassSemester.semester.id.eq(semesterId))
+
+        return repository.findAll(filter)
+                .map { mapper.toDto(it) }
+    }
+
     override fun save(dto: SubjectDto): SubjectDto {
         requestValidator.validateRequestByDto(dto)
         var subject = mapper.fromDto(dto)

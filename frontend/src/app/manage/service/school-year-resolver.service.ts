@@ -6,7 +6,7 @@ import {SchoolYearService} from './school-year.service';
 import {SchoolClassService} from './school-class.service';
 
 @Injectable()
-export class SchoolYearResolverService implements Resolve<Array<SchoolYearDto>>{
+export class SchoolYearResolverService implements Resolve<Array<SchoolYearDto>> {
     constructor(private _schoolYearService: SchoolYearService,
                 private _schoolClassService: SchoolClassService) {
     }

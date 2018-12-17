@@ -63,7 +63,7 @@ class MarkDataLoader @Inject constructor(val markValueRepository: MarkValueRepos
         }
     }
 
-    override fun shouldLoad(): Boolean = true
+    override fun count(): Long = markGroupRepository.count()
 
     override fun load() {
         listOf(INF5G_SCRUM_2016_1,

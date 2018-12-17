@@ -10,7 +10,14 @@ interface DataLoader {
     /**
      * Whether or not to invoke this loader during application startup
      */
-    fun shouldLoad(): Boolean
+    fun shouldLoad(): Boolean {
+        return count() == 0L
+    }
+
+    /**
+     * Count of current rows in database
+     */
+    fun count(): Long
 
     /**
      * Gets called by [DataLoaderService] when this [DataLoader] is invoked

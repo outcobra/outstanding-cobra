@@ -63,7 +63,7 @@ export class SchoolYearDialog extends ParentLinkedCreateUpdateComponent<SchoolYe
         } else {
             let value = this._schoolYearForm.value as SchoolYearDto;
             value.schoolClassId = this.parent.id;
-            this._saveAndClose(value)
+            this._saveAndClose(value);
         }
     }
 
@@ -73,7 +73,7 @@ export class SchoolYearDialog extends ParentLinkedCreateUpdateComponent<SchoolYe
 
     private _saveAndClose(schoolYear: SchoolYearDto) {
         this._schoolYearService.save(schoolYear)
-            .subscribe(result => this._dialogRef.close(result))
+            .subscribe(result => this._dialogRef.close(result));
     }
 
     get schoolYearForm(): FormGroup {

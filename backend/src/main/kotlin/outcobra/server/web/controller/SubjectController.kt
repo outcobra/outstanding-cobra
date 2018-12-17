@@ -62,4 +62,21 @@ class SubjectController @Inject constructor(val subjectService: SubjectService) 
     fun deleteSubject(@PathVariable subjectId: Long) {
         subjectService.delete(subjectId)
     }
+
+    @GetMapping("/subject/schoolClass/{schoolClassId}")
+    fun getSubjectBySchoolClass(@PathVariable schoolClassId: Long): List<SubjectDto> {
+        return subjectService.readAllBySchoolClass(schoolClassId)
+    }
+
+    @GetMapping("/subject/semester/{semesterId}")
+    fun getSubjectBySemester(@PathVariable semesterId: Long): List<SubjectDto> {
+        return subjectService.readAllBySemester(semesterId)
+    }
+
+
+    @GetMapping("/subject/schoolClass/{schoolClassId}/semester/{semesterId}")
+    fun getSubjectBySchoolClassAndSemester(@PathVariable("schoolClassId") schoolClassId: Long,
+                                           @PathVariable("semesterId") semesterId: Long): List<SubjectDto> {
+        return subjectService.readAllBySchoolClassAndSemester(schoolClassId, semesterId)
+    }
 }

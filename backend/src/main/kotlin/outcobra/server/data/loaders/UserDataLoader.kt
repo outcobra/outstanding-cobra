@@ -33,7 +33,7 @@ class UserDataLoader
         var loaded = false
     }
 
-    override fun shouldLoad() = true
+    override fun count(): Long = userRepository.count()
 
 
     override fun load() {

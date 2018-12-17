@@ -35,6 +35,6 @@ describe('ManagerComponent', () => {
         manageService.getManageData()
             .subscribe(data => {
                 expect(data).toBeTruthy();
-            })
+            });
     }));
 });

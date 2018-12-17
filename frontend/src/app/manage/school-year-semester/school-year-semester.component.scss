@@ -1,0 +1,46 @@
+:host {
+    .schoolyear-semester-container {
+        display: flex;
+
+        .semester-detail {
+            flex-grow: 1;
+            padding: 8px 16px;
+
+            display: flex;
+            > div:not(.semester-actions) {
+                flex-grow: 1;
+
+                button {
+                    margin-top: 8px;
+                    margin-left: -16px;
+                }
+            }
+            .semester-actions {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                height: 100%;
+
+                // compensate lower height of normal buttons for correct alignment
+                margin-bottom: 2px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            flex-direction: column;
+
+            .semester-detail {
+                .semester-actions {
+                    height: auto;
+                }
+            }
+        }
+    }
+
+    .schoolyear-action-row {
+        padding: 8px 16px;
+        > :first-child {
+            margin-left: -16px;
+        }
+    }
+}

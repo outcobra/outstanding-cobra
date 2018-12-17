@@ -46,7 +46,7 @@ class SchoolClassSemesterSubjectDataLoader(val schoolClassSemesterSubjectReposit
         private val LOGGER = LoggerFactory.getLogger(SchoolClassSemesterSubjectDataLoader::class.java)
     }
 
-    override fun shouldLoad() = true
+    override fun count(): Long = schoolClassSemesterSubjectRepository.count()
 
     override fun load() {
         INF5G_SCRUM_2016_1 = save(INF2014_5G, SCRUM, SEMESTER2016_1)

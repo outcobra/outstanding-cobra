@@ -27,7 +27,7 @@ class SchoolClassDataLoader
         private val LOGGER = LoggerFactory.getLogger(SchoolClassDataLoader::class.java)
     }
 
-    override fun shouldLoad() = true
+    override fun count(): Long = schoolClassRepository.count()
 
     private fun saveSchoolClass(normalizedName: String): SchoolClass {
         val schoolClass = SchoolClass(normalizedName, UserDataLoader.TEST_USER!!)

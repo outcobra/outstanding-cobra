@@ -185,10 +185,22 @@ mat-dialog-container {
 .container {
     display: block;
     width: 100%;
-    padding: 10px 5px;
+    padding: 8px;
     &.middle-container {
         max-width: 960px;
     }
+
+    > * + * {
+        margin-top: 12px;
+        display: block;
+    }
+}
+
+.flex-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 mat-form-field.big-search {

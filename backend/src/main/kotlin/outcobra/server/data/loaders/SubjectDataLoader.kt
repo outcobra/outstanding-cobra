@@ -33,7 +33,7 @@ class SubjectDataLoader
         private val LOGGER = LoggerFactory.getLogger(SubjectDataLoader::class.java)
     }
 
-    override fun shouldLoad() = true
+    override fun count(): Long = subjectRepository.count()
 
     private fun saveSubject(name: String): Subject {
         val subject = Subject(name, Color.randomColor, UserDataLoader.TEST_USER!!, listOf(), null)

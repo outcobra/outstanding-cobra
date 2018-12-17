@@ -19,7 +19,7 @@ DROP FOREIGN KEY fk_semester_timetable;
 
 CREATE TABLE school_year
 (
-  id              BIGINT(20)   NOT NULL PRIMARY KEY,
+  id              BIGINT(20)   NOT NULL AUTO_INCREMENT PRIMARY KEY,
   name            VARCHAR(255) NOT NULL,
   valid_from      TINYBLOB     NOT NULL,
   valid_to        TINYBLOB     NOT NULL,
@@ -30,7 +30,7 @@ CREATE TABLE school_year
 
 CREATE TABLE school_year_school_class
 (
-  id BIGINT(20) NOT NULL PRIMARY KEY,
+  id BIGINT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   school_year_id BIGINT(20) NOT NULL,
   school_class_id BIGINT(20) NOT NULL,
   CONSTRAINT fk_sysc_school_year
@@ -41,7 +41,7 @@ CREATE TABLE school_year_school_class
 
 CREATE TABLE semester
 (
-  id             BIGINT(20)   NOT NULL PRIMARY KEY,
+  id             BIGINT(20)   NOT NULL AUTO_INCREMENT PRIMARY KEY,
   name           VARCHAR(255) NOT NULL,
   valid_from     TINYBLOB     NOT NULL,
   valid_to       TINYBLOB     NOT NULL,
@@ -65,7 +65,7 @@ FOREIGN KEY (timetable_id) REFERENCES timetable (id)
 
 CREATE TABLE subject
 (
-  id            BIGINT(20)   NOT NULL PRIMARY KEY,
+  id            BIGINT(20)   NOT NULL AUTO_INCREMENT PRIMARY KEY,
   color         VARCHAR(255) NOT NULL,
   name          VARCHAR(255) NOT NULL,
   user_id       BIGINT(20)   NULL,
@@ -90,7 +90,7 @@ CREATE INDEX idx_subject_semester_id
 /* endregion */
 
 CREATE TABLE school_class_semester (
-  id              BIGINT(20) NOT NULL PRIMARY KEY,
+  id              BIGINT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   school_class_id BIGINT(20) NOT NULL,
   semester_id     BIGINT(20) NOT NULL,
   CONSTRAINT fk_scs_school_class
@@ -100,7 +100,7 @@ CREATE TABLE school_class_semester (
 );
 
 CREATE TABLE school_class_semester_subject (
-  id                       BIGINT(20) NOT NULL PRIMARY KEY,
+  id                       BIGINT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   school_class_semester_id BIGINT(20) NOT NULL,
   subject_id               BIGINT(20) NOT NULL,
   CONSTRAINT fk_scss_scs

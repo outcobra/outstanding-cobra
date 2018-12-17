@@ -32,7 +32,7 @@ class YearDataLoader
         private val LOGGER = LoggerFactory.getLogger(YearDataLoader::class.java)
     }
 
-    override fun shouldLoad() = true
+    override fun count(): Long = yearRepository.count()
 
     private fun saveYear(name: String, year: Int, schoolClass: MutableList<SchoolClass>): SchoolYear {
         val startDate = LocalDate.of(year, 8, 1)

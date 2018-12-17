@@ -29,7 +29,8 @@ import javax.inject.Inject
 class ExamTaskDataLoader @Inject constructor(val examTaskRepository: ExamTaskRepository,
                                              val examRepository: ExamRepository) : DataLoader {
     private val LOGGER = LoggerFactory.getLogger(ExamTaskDataLoader::class.java)
-    override fun shouldLoad(): Boolean = true
+
+    override fun count(): Long = examTaskRepository.count()
 
     override fun load() {
         listOf(SCRUM_EXAM, DATABASES_EXAM, OOP_DESIGN_EXAM, OOP_EXAM, PROJECT_EXAM,

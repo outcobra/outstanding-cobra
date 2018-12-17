@@ -68,7 +68,7 @@ export class SemesterDialog extends ParentLinkedCreateUpdateComponent<SemesterDt
         } else {
             let value = this._semesterForm.value as SemesterDto;
             value.schoolYearId = this.parent.id;
-            this._saveAndClose(value)
+            this._saveAndClose(value);
         }
     }
 

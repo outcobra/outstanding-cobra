@@ -6,7 +6,7 @@
 export const environment = {
     production: false,
     envName: 'dev',
-    enableRouteTracing: false,
+    enableRouteTracing: true,
     api: {
         apiBase: 'http://localhost:4200',
         blackList: [

@@ -35,7 +35,7 @@ class SemesterDataLoader
         private val LOGGER = LoggerFactory.getLogger(SemesterDataLoader::class.java)
     }
 
-    override fun shouldLoad() = true
+    override fun count(): Long = semesterRepository.count()
 
     private fun saveSemester(name: String, startDate: LocalDate, schoolYear: SchoolYear): Semester {
         val endDate = startDate.plusMonths(5).with(lastDayOfMonth())

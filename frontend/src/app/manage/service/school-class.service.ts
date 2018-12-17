@@ -7,11 +7,7 @@ import {SchoolClassDto, SchoolYearDto} from '../old/model/manage.dto';
 @Injectable()
 export class SchoolClassService extends AppCrudService<SchoolClassDto> {
     constructor(http: HttpClient) {
-        super(http, '/api/schoolClass')
-    }
-
-    public readById(id: number): Observable<SchoolClassDto> {
-        throw new Error('not implemented');
+        super(http, '/api/schoolClass');
     }
 
     public readSchoolYearsByClass(schoolClassId: number): Observable<Array<SchoolYearDto>> {

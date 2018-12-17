@@ -326,8 +326,13 @@
             "openYears": "Schuljahre anzeigen"
           }
         },
-        "schoolYearSem": {
+        "schoolYearSemester": {
           "linkTitle": "Jahre und Semester",
+          "openSubjects": "Fächer anzeigen",
+          "actions": {
+            "addSemester": "Semester",
+            "addSchoolYear": "Schuljahr hinzufügen"
+          },
           "label": {
             "semester": "Semester"
           }

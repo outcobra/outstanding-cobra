@@ -1,0 +1,5 @@
+@import './school-year-semester/school-year-semester.theme';
+
+@mixin manage-theme($theme) {
+    @include school-year-semester-theme($theme);
+}

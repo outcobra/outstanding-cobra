@@ -6,7 +6,7 @@ import {HttpClient} from '@angular/common/http';
 //@Injectable()
 export class SchoolClassService extends AppCrudService<SchoolClassDto> {
     constructor(http: HttpClient) {
-        super(http, '/api/schoolClass')
+        super(http, '/api/schoolClass');
     }
 
     public readById(id: number): Observable<SchoolClassDto> {

@@ -7,7 +7,7 @@ import {SubjectDto} from '../old/model/manage.dto';
 @Injectable()
 export class SubjectService extends AppCrudService<SubjectDto> {
     constructor(http: HttpClient) {
-        super(http, '/api/subject')
+        super(http, '/api/subject');
     }
 
     public readById(id: number): Observable<SubjectDto> {
@@ -16,5 +16,17 @@ export class SubjectService extends AppCrudService<SubjectDto> {
 
     public getCurrentSubjects(): Observable<SubjectDto[]> {
         return this._http.get<SubjectDto[]>(`/semester/current/${this._baseUri}`);
+    }
+
+    public getSubjectsBySchoolClassAndSemester(schoolClassId: number, semesterId: number): Observable<SubjectDto[]> {
+        return this._http.get<SubjectDto[]>(`${this._baseUri}/schoolClass/${schoolClassId}/semester/${semesterId}`);
+    }
+
+    public getSubjectsBySchoolClass(schoolClassId: number): Observable<SubjectDto[]> {
+        return this._http.get<SubjectDto[]>(`${this._baseUri}/schoolClass/${schoolClassId}`);
+    }
+
+    public getSubjectsBySemester(semesterId: number): Observable<SubjectDto[]> {
+        return this._http.get<SubjectDto[]>(`${this._baseUri}/semester/${semesterId}`);
     }
 }
