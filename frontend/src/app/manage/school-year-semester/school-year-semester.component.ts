@@ -30,27 +30,18 @@ export class SchoolYearSemesterComponent implements OnInit {
     }
 
     public goToSubjectsUrl(semesterId: number): any[] {
-        const base: any[] = ['..', 'subject'];
+        const base = '../subject';
         const semesterBase: any[] = ['semester', semesterId];
 
         if (this._schoolClass) {
-            console.log([
-                '..',
-                '..',
-                ...base,
-                'schoolClass',
-                this._schoolClass.id,
-                ...semesterBase
-            ]);
             return [
-                '../..',
-                ...base,
+                '../../'.concat(base),
                 'schoolClass',
                 this._schoolClass.id,
                 ...semesterBase
             ];
         }
-        return base.concat(semesterBase);
+        return [base, ...semesterBase];
     }
 
     get schoolYearSemesters(): Array<SchoolYearDto> {
