@@ -48,6 +48,7 @@ class ExamMapperTest {
     @Test
     fun mapDtoToExamWithExistingMark() {
         val examWithMarkPredicate = QExam.exam.mark.isNotNull
+        println(examRepository.findAll().size)
         val exam = examRepository.findAll(examWithMarkPredicate).first()
         val originalDto = examMapper.toDto(exam)
         val newName = originalDto.name + "Modified"

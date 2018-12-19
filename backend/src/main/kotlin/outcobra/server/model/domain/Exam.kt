@@ -12,14 +12,9 @@ data class Exam(@NotNull var name: String = "",
                 @NotNull var date: LocalDate = LocalDate.now(),
                 @OneToMany(mappedBy = "exam", cascade = [(CascadeType.REMOVE)])
                 var tasks: List<ExamTask> = listOf(),
-
-                @ManyToOne
-                @QueryInit("subject.user", "schoolClassSemester.semester")
+                @ManyToOne @QueryInit("subject.user", "schoolClassSemester.semester")
                 var schoolClassSemesterSubject: SchoolClassSemesterSubject = SchoolClassSemesterSubject(),
-
-                @OneToOne(cascade = [(CascadeType.ALL)])
-                var mark: MarkValue? = null,
-
+                @OneToOne(cascade = [(CascadeType.ALL)]) var mark: MarkValue? = null,
                 @NotNull var description: String = "")
     : ParentLinked, AbstractEntity() {
 

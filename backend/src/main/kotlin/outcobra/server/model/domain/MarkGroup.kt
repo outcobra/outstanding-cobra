@@ -10,11 +10,8 @@ import javax.persistence.OneToMany
 class MarkGroup(description: String = "",
                 weight: Double = 1.0,
                 markGroup: MarkGroup? = null,
-                @OneToMany(mappedBy = "markGroup")
-                var marks: MutableList<Mark> = mutableListOf(),
-
-                @ManyToOne
-                @QueryInit("schoolClassSemester.semester", "subject.user")
+                @OneToMany(mappedBy = "markGroup") var marks: MutableList<Mark> = mutableListOf(),
+                @ManyToOne @QueryInit("schoolClassSemester.semester", "subject.user")
                 var schoolClassSemesterSubject: SchoolClassSemesterSubject = SchoolClassSemesterSubject()
 ) : Mark(weight, description, markGroup) {
 

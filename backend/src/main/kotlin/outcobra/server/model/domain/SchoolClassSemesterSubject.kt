@@ -7,10 +7,6 @@ import javax.persistence.ManyToOne
 
 @Entity
 data class SchoolClassSemesterSubject(
-        @ManyToOne(cascade = [CascadeType.ALL])
-        @QueryInit("semester")
+        @ManyToOne(cascade = [CascadeType.ALL]) @QueryInit("semester")
         val schoolClassSemester: SchoolClassSemester = SchoolClassSemester(),
-
-        @ManyToOne
-        @QueryInit("user")
-        val subject: Subject = Subject()) : AbstractEntity()
+        @ManyToOne @QueryInit("user") val subject: Subject = Subject()) : AbstractEntity()

@@ -14,9 +14,7 @@ data class Task(@NotNull var name: String = "",
                 var dueDate: LocalDate = LocalDate.now(),
                 var effort: Int = 0,
                 var progress: Int = 0,
-
-                @ManyToOne
-                @QueryInit("schoolClassSemester.semester", "subject.user")
+                @ManyToOne @QueryInit("schoolClassSemester.semester", "subject.user")
                 var schoolClassSemesterSubject: SchoolClassSemesterSubject = SchoolClassSemesterSubject())
     : ParentLinked, AbstractEntity() {
 
