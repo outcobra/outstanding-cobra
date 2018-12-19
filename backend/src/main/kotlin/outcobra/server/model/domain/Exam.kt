@@ -1,5 +1,6 @@
 package outcobra.server.model.domain
 
+import com.querydsl.core.annotations.QueryInit
 import outcobra.server.model.interfaces.ParentLinked
 import java.time.LocalDate
 import javax.persistence.*
@@ -13,6 +14,7 @@ data class Exam(@NotNull var name: String = "",
                 var tasks: List<ExamTask> = listOf(),
 
                 @ManyToOne
+                @QueryInit("subject.user", "schoolClassSemester.semester")
                 var schoolClassSemesterSubject: SchoolClassSemesterSubject = SchoolClassSemesterSubject(),
 
                 @OneToOne(cascade = [(CascadeType.ALL)])

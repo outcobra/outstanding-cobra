@@ -1,5 +1,6 @@
 package outcobra.server.model.domain
 
+import com.querydsl.core.annotations.QueryInit
 import javax.persistence.CascadeType
 import javax.persistence.Entity
 import javax.persistence.ManyToOne
@@ -10,6 +11,7 @@ data class SchoolClassSemester(@ManyToOne
                                val schoolClass: SchoolClass = SchoolClass(),
 
                                @ManyToOne
+                               @QueryInit("schoolYear", "timetable")
                                val semester: Semester = Semester(),
 
                                @OneToMany(mappedBy = "schoolClassSemester", cascade = [CascadeType.MERGE, CascadeType.PERSIST])

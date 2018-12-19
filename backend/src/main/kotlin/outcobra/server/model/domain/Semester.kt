@@ -1,5 +1,6 @@
 package outcobra.server.model.domain
 
+import com.querydsl.core.annotations.QueryInit
 import outcobra.server.model.interfaces.ParentLinked
 import java.time.LocalDate
 import javax.persistence.*
@@ -11,6 +12,7 @@ data class Semester(@NotNull var name: String = "",
                     @NotNull var validTo: LocalDate = LocalDate.now(),
 
                     @ManyToOne @NotNull
+                    @QueryInit("user")
                     var schoolYear: SchoolYear? = null,
 
                     @OneToMany(mappedBy = "semester", cascade = [CascadeType.ALL])
