@@ -5,10 +5,23 @@
 <div fxLayout fxLayoutAlign="center start">
     <div class="container middle-container" fxFlex>
         <div class="flex-container">
-            <span *ngIf="schoolClass" class="text-secondary-dark">
-                <!--<mat-icon>book</mat-icon>-->
-                Fächer von {{ schoolClass.normalizedName }}
+            <span *ngIf="schoolClass && semester; else singleOrNothing" class="text-secondary-dark">
+                {{ 'i18n.modules.manage.subject.parents.double' | translate:{schoolClass: schoolClass.normalizedName, semester: semester.name} }}
             </span>
+            <ng-template #singleOrNothing>
+                <span *ngIf="schoolClass || semester" class="text-secondary-dark">
+                    {{ 'i18n.modules.manage.subject.parents.single' | translate:{value: schoolClass?.normalizedName || semester?.name} }}
+                </span>
+            </ng-template>
+            <!--<span *ngIf="schoolClass" class="text-secondary-dark">
+                &lt;!&ndash;<mat-icon>book</mat-icon>&ndash;&gt;
+                {{ schoolClass.normalizedName }}
+            </span>
+            <span *ngIf="schoolClass && semester">&nbsp;{{ 'i18n.modules.manage.subject.parents.and' | translate }}&nbsp;</span>
+            <span *ngIf="semester" class="text-secondary-dark">
+                &lt;!&ndash;<mat-icon>book</mat-icon>&ndash;&gt;
+                {{ semester.name }}
+            </span>-->
             <div class="oc-filler"></div>
             <a mat-raised-button
                color="accent">
@@ -19,7 +32,12 @@
             <mat-expansion-panel *ngFor="let subject of subjects; let subIdx=index"
                                  [expanded]="subIdx == 0">
                 <mat-expansion-panel-header>
-                    <mat-panel-title>{{ subject.name }}</mat-panel-title>
+                    <mat-panel-title>
+                        <span class="subject-circle"
+                              [style.background-color]="subject.color.hex | color">
+                        </span>
+                        <span>{{ subject.name }}</span>
+                    </mat-panel-title>
                     <!--<mat-panel-description>
                         {{ schoolYear.validFrom | date }} - {{ schoolYear.validTo | date }}
                     </mat-panel-description>-->

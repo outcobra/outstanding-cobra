@@ -20,6 +20,7 @@ export class SubjectComponent implements OnInit {
         this._route.data.subscribe(data => {
             this._subjects = data.subjects;
             if (isNotNull(data.semester)) {
+                console.log(data.semester);
                 this._semester = data.semester;
             }
             if (isNotNull(data.schoolClass)) {

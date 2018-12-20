@@ -23,8 +23,8 @@ export class SchoolYearSemesterComponent implements OnInit {
     ngOnInit() {
         this._route.data.subscribe(data => {
             this._schoolYearSemesters = data.schoolYears;
-            if (isNotNull(data.class)) {
-                this._schoolClass = data.class;
+            if (isNotNull(data.schoolClass)) {
+                this._schoolClass = data.schoolClass;
             }
         });
     }

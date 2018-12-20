@@ -338,7 +338,14 @@
           }
         },
         "subject": {
-          "linkTitle": "Fächer"
+          "linkTitle": "Fächer",
+          "parents": {
+            "single": "Fächer von {{value}}",
+            "double": "Fächer von {{schoolClass}} und {{semester}}"
+          },
+          "actions": {
+            "addSubject": "Fach hinzufügen"
+          }
         },
         "linkTitle": "Verwalten",
         "assureDeletion": "Wirklich löschen?",

@@ -27,7 +27,7 @@ import {SubjectResolverService} from './service/subject/subject-resolver.service
                 component: SchoolYearSemesterComponent,
                 resolve: {
                     schoolYears: SchoolYearResolverService,
-                    class: SchoolClassResolverService
+                    schoolClass: SchoolClassResolverService
                 }
             },
             {
@@ -41,6 +41,15 @@ import {SubjectResolverService} from './service/subject/subject-resolver.service
                 path: 'subject/semester/:semesterId',
                 component: SubjectComponent,
                 resolve: {
+                    semester: SemesterResolverService,
+                    subjects: SubjectResolverService
+                }
+            },
+            {
+                path: 'subject/schoolClass/:schoolClassId',
+                component: SubjectComponent,
+                resolve: {
+                    schoolClass: SchoolClassResolverService,
                     subjects: SubjectResolverService
                 }
             },
@@ -48,7 +57,7 @@ import {SubjectResolverService} from './service/subject/subject-resolver.service
                 path: 'subject/schoolClass/:schoolClassId/semester/:semesterId',
                 component: SubjectComponent,
                 resolve: {
-                    class: SchoolClassResolverService,
+                    schoolClass: SchoolClassResolverService,
                     semester: SemesterResolverService,
                     subjects: SubjectResolverService
                 }

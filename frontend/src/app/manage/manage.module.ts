@@ -17,6 +17,7 @@ import {SubjectResolverService} from './service/subject/subject-resolver.service
 import {SubjectService} from './service/subject.service';
 import {SchoolClassService} from './service/school-class.service';
 import {SchoolYearService} from './service/school-year.service';
+import {PipeModule} from '../shared/pipe.module';
 
 @NgModule({
     declarations: [
@@ -30,7 +31,8 @@ import {SchoolYearService} from './service/school-year.service';
         TranslateModule,
         FlexLayoutModule,
         OCUiModule,
-        OCMaterialModule
+        OCMaterialModule,
+        PipeModule
     ],
     providers: [
         ManageService,
