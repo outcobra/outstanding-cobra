@@ -11,12 +11,8 @@ import {TranslateModule} from '@ngx-translate/core';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {SchoolYearResolverService} from './service/school-year-resolver.service';
 import {SchoolClassResolverService} from './service/school-class-resolver.service';
-import {SemesterService} from './service/semester.service';
 import {SemesterResolverService} from './service/semester-resolver.service';
 import {SubjectResolverService} from './service/subject/subject-resolver.service';
-import {SubjectService} from './service/subject.service';
-import {SchoolClassService} from './service/school-class.service';
-import {SchoolYearService} from './service/school-year.service';
 
 @NgModule({
     declarations: [
@@ -34,10 +30,6 @@ import {SchoolYearService} from './service/school-year.service';
     ],
     providers: [
         ManageService,
-        SchoolClassService,
-        SchoolYearService,
-        SemesterService,
-        SubjectService,
         SchoolYearResolverService,
         SchoolClassResolverService,
         SemesterResolverService,
@@ -45,8 +37,4 @@ import {SchoolYearService} from './service/school-year.service';
     ]
 })
 export class ManageModule {
-    constructor(semesterService: SemesterService) {
-        console.log(semesterService);
-    }
-
 }

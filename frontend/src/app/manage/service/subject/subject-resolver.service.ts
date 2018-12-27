@@ -3,7 +3,7 @@ import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {map, switchMap} from 'rxjs/operators';
 import {SubjectDto} from '../../old/model/manage.dto';
-import {SubjectService} from '../subject.service';
+import {SubjectService} from '../../../core/services/manage/subject.service';
 
 @Injectable()
 export class SubjectResolverService implements Resolve<Array<SubjectDto>> {

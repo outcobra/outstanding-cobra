@@ -2,7 +2,7 @@ import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/rou
 import {SchoolClassDto} from '../old/model/manage.dto';
 import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
-import {SchoolClassService} from './school-class.service';
+import {SchoolClassService} from '../../core/services/manage/school-class.service';
 import {filter, map, switchMap} from 'rxjs/operators';
 
 @Injectable()
