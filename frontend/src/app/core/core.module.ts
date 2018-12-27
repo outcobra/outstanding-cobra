@@ -33,6 +33,10 @@ import {AuthHttpInterceptor} from './http/auth-http-interceptor';
 import {UrlPrefixingHttpInterceptor} from './http/url-prefixing-http-interceptor';
 import {DateBodyAwareHttpInterceptor} from './http/date-body-aware-http-interceptor';
 import {ErrorCatchingHttpInterceptor} from './http/error-catching-http-interceptor';
+import {SchoolClassService} from './services/manage/school-class.service';
+import {SchoolYearService} from './services/manage/school-year.service';
+import {SemesterService} from './services/manage/semester.service';
+import {SubjectService} from './services/manage/subject.service';
 
 @NgModule({
     imports: [
@@ -51,6 +55,11 @@ import {ErrorCatchingHttpInterceptor} from './http/error-catching-http-intercept
         UserService,
         JwtHelperService,
         BasilWrapperService,
+        // Manage Services
+        SchoolClassService,
+        SchoolYearService,
+        SemesterService,
+        SubjectService,
         // Exam Services
         ExamService,
         ExamTaskService,

@@ -3,7 +3,7 @@ import {SemesterDto} from '../old/model/manage.dto';
 import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {filter, map, switchMap} from 'rxjs/operators';
-import {SemesterService} from './semester.service';
+import {SemesterService} from '../../core/services/manage/semester.service';
 
 @Injectable()
 export class SemesterResolverService implements Resolve<SemesterDto> {

@@ -9,12 +9,8 @@ import javax.validation.constraints.NotNull
 
 @Entity
 data class MarkReport(@NotNull var name: String = "",
-
-                      @ManyToOne
-                      var schoolClassSemester: SchoolClassSemester,
-
-                      @OneToMany(mappedBy = "report")
-                      var entries: List<MarkReportEntry> = arrayListOf()
+                      @ManyToOne var schoolClassSemester: SchoolClassSemester,
+                      @OneToMany(mappedBy = "report") var entries: List<MarkReportEntry> = arrayListOf()
 ) : ParentLinked, AbstractEntity() {
 
     override val parent: ParentLinked?

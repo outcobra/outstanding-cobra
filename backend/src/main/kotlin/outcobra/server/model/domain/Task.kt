@@ -1,5 +1,6 @@
 package outcobra.server.model.domain
 
+import com.querydsl.core.annotations.QueryInit
 import outcobra.server.model.interfaces.ParentLinked
 import java.time.LocalDate
 import javax.persistence.Entity
@@ -13,8 +14,7 @@ data class Task(@NotNull var name: String = "",
                 var dueDate: LocalDate = LocalDate.now(),
                 var effort: Int = 0,
                 var progress: Int = 0,
-
-                @ManyToOne
+                @ManyToOne @QueryInit("schoolClassSemester.semester", "subject.user")
                 var schoolClassSemesterSubject: SchoolClassSemesterSubject = SchoolClassSemesterSubject())
     : ParentLinked, AbstractEntity() {
 

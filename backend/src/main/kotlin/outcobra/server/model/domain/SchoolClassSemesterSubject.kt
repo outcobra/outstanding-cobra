@@ -1,13 +1,12 @@
 package outcobra.server.model.domain
 
+import com.querydsl.core.annotations.QueryInit
 import javax.persistence.CascadeType
 import javax.persistence.Entity
 import javax.persistence.ManyToOne
 
 @Entity
 data class SchoolClassSemesterSubject(
-        @ManyToOne(cascade = [CascadeType.ALL])
+        @ManyToOne(cascade = [CascadeType.ALL]) @QueryInit("semester")
         val schoolClassSemester: SchoolClassSemester = SchoolClassSemester(),
-
-        @ManyToOne
-        val subject: Subject = Subject()) : AbstractEntity()
+        @ManyToOne @QueryInit("user") val subject: Subject = Subject()) : AbstractEntity()
