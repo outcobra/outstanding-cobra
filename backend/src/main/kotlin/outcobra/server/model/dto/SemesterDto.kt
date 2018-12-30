@@ -13,7 +13,7 @@ data class SemesterDto(
         val validTo: LocalDate = LocalDate.now(),
         val markReportIds: List<Long> = arrayListOf(),
         val timetableId: Long = 0,
-        val schoolClassSubjectDto: List<SemesterDto.SchoolClassSubjectDto> = listOf()) : OutcobraDto {
+        val schoolClassSubjects: List<SemesterDto.SchoolClassSubjectDto> = listOf()) : OutcobraDto {
 
     override val identifier: Long get() = id
     override val parentLink: ParentLink

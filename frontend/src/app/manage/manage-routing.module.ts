@@ -16,14 +16,29 @@ import {SubjectResolverService} from './service/subject/subject-resolver.service
                 component: SchoolClassComponent
             },
             {
-                path: 'schoolyear',
+                path: 'schoolYear',
                 component: SchoolYearSemesterComponent,
                 resolve: {
                     schoolYears: SchoolYearResolverService
                 }
             },
             {
-                path: 'schoolyear/schoolClass/:schoolClassId',
+                path: 'schoolYear/:schoolYearId',
+                component: SchoolYearSemesterComponent,
+                resolve: {
+                    schoolYears: SchoolYearResolverService
+                }
+            },
+            {
+                path: 'schoolYear/schoolClass/:schoolClassId',
+                component: SchoolYearSemesterComponent,
+                resolve: {
+                    schoolYears: SchoolYearResolverService,
+                    schoolClass: SchoolClassResolverService
+                }
+            },
+            {
+                path: 'schoolYear/:schoolYearId/schoolClass/:schoolClassId',
                 component: SchoolYearSemesterComponent,
                 resolve: {
                     schoolYears: SchoolYearResolverService,

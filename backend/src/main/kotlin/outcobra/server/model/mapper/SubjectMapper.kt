@@ -27,11 +27,11 @@ class SubjectMapper @Inject constructor(val schoolClassMapper: SchoolClassMapper
                 colorMapper.fromDto(from.color),
                 user
         )
-        subject.schoolClassSemesterSubjects = from.schoolClassSemesterDto.map {
+        subject.schoolClassSemesterSubjects = from.schoolClassSemesters.map {
             SchoolClassSemesterSubject(
                     SchoolClassSemester(
-                            schoolClassMapper.fromDto(it.schoolClassDto),
-                            semesterMapper.fromDto(it.semesterDto)
+                            schoolClassMapper.fromDto(it.schoolClass),
+                            semesterMapper.fromDto(it.semester)
                     ),
                     subject
             )
@@ -43,14 +43,14 @@ class SubjectMapper @Inject constructor(val schoolClassMapper: SchoolClassMapper
     }
 
     override fun toDto(from: Subject): SubjectDto {
-        val schoolClassSemesterSubjectDtos = from.schoolClassSemesterSubjects.map { SchoolClassSemesterDto(
+        val schoolClassSemesterSubjects = from.schoolClassSemesterSubjects.map { SchoolClassSemesterDto(
                 schoolClassMapper.toDto(it.schoolClassSemester.schoolClass),
                 semesterMapper.toDto(it.schoolClassSemester.semester)
         ) }
         val teacherId = from.teacher?.id ?: 0L
         val color = from.color
         return SubjectDto(from.id,
-                schoolClassSemesterSubjectDtos,
+                schoolClassSemesterSubjects,
                 from.name,
                 colorMapper.toDto(color),
                 from.user.id,

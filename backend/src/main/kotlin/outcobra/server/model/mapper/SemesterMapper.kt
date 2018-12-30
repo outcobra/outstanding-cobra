@@ -45,7 +45,7 @@ class SemesterMapper @Inject constructor(val schoolClassSemesterRepository: Scho
                 timetable = timeTable
         )
 
-        semester.schoolClassSemester = from.schoolClassSubjectDto.map { it.schoolClassId }
+        semester.schoolClassSemester = from.schoolClassSubjects.map { it.schoolClassId }
                 .distinct()
                 .map {
                     Optional.ofNullable(schoolClassSemesterRepository.findOne(it))

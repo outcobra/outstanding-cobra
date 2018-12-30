@@ -74,7 +74,7 @@ class SemesterMapperTest {
     fun mapValidEntityToDto() {
         val semesterDto = semesterMapper.toDto(baseSemester)
         assertThat(semesterDto.name).isEqualTo(baseSemester.name)
-        assertThat(semesterDto.schoolClassSubjectDto.flatMap { it.subjectIds }.count()).isEqualTo(1)
+        assertThat(semesterDto.schoolClassSubjects.flatMap { it.subjectIds }.count()).isEqualTo(1)
         assertThat(semesterDto.validFrom).isEqualTo(baseSemester.validFrom)
         assertThat(semesterDto.validTo).isEqualTo(baseSemester.validTo)
     }

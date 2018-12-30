@@ -1,7 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {SchoolClassDto, SemesterDto, SubjectDto} from '../old/model/manage.dto';
 import {isNotNull} from '../../core/util/helper';
+import {SubjectDto} from '../../core/model/manage/subject.dto';
+import {SemesterDto} from '../../core/model/manage/semester.dto';
+import {SchoolClassDto} from '../../core/model/manage/school-class.dto';
+
+export interface AggregatedSchoolClassSemester {
+    schoolClass: SchoolClassDto,
+    semesters: Array<SemesterDto>
+}
 
 @Component({
     selector: 'app-subject',
@@ -10,6 +17,7 @@ import {isNotNull} from '../../core/util/helper';
 })
 export class SubjectComponent implements OnInit {
     private _subjects: Array<SubjectDto>;
+    private _subjectToSchoolClasses: { [key: number]: Array<AggregatedSchoolClassSemester> };
     private _semester: SemesterDto;
     private _schoolClass: SchoolClassDto;
 
@@ -19,6 +27,7 @@ export class SubjectComponent implements OnInit {
     ngOnInit() {
         this._route.data.subscribe(data => {
             this._subjects = data.subjects;
+            this._subjectToSchoolClasses = this._groupSchoolClasses(data.subjects);
             if (isNotNull(data.semester)) {
                 console.log(data.semester);
                 this._semester = data.semester;
@@ -27,6 +36,54 @@ export class SubjectComponent implements OnInit {
                 this._schoolClass = data.schoolClass;
             }
         });
+    }
+
+    public getSchoolClassSemesters(subjectId: number) {
+        return this._subjectToSchoolClasses[subjectId];
+    }
+
+    public buildSchoolClassUrl() {
+        return [this._buildRelativeUrlPart(), 'schoolClass'];
+    }
+
+    public buildSemesterUrl(semester: SemesterDto) {
+        const urlParts = [this._buildRelativeUrlPart(), 'schoolYear', semester.schoolYearId];
+        if (isNotNull(this._schoolClass)) {
+            urlParts.push('schoolClass', this._schoolClass.id);
+        }
+        return urlParts;
+    }
+
+    private _buildRelativeUrlPart(): string {
+        let urlParts = '..';
+        if (isNotNull(this._semester)) {
+            urlParts += '/../..';
+        }
+        if (isNotNull(this._schoolClass)) {
+            urlParts += '/../..';
+        }
+        return urlParts;
+    }
+
+    private _groupSchoolClasses(subjects: Array<SubjectDto>) {
+        const result = {};
+
+        for (let subject of subjects) {
+            let grouped = [];
+            for (let schoolClassSemester of subject.schoolClassSemesters) {
+                const sameClass = grouped.find(s => s.schoolClass.id === schoolClassSemester.schoolClass.id);
+                if (isNotNull(sameClass)) {
+                    sameClass.semesters.push(schoolClassSemester.semester);
+                } else {
+                    grouped.push({
+                        schoolClass: schoolClassSemester.schoolClass,
+                        semesters: [schoolClassSemester.semester]
+                    });
+                }
+            }
+            result[subject.id] = grouped;
+        }
+        return result;
     }
 
     get subjects(): Array<SubjectDto> {

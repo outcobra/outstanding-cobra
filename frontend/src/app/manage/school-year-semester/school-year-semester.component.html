@@ -16,8 +16,8 @@
             </a>
         </div>
         <mat-accordion>
-            <mat-expansion-panel *ngFor="let schoolYear of schoolYearSemesters; let syIdx=index"
-                                 [expanded]="syIdx == 0">
+            <mat-expansion-panel *ngFor="let schoolYear of schoolYearSemesters; first as isFirst"
+                                 [expanded]="((activeSchoolYearId$ | async) === schoolYear.id) || isFirst">
                 <mat-expansion-panel-header>
                     <mat-panel-title>{{ schoolYear.name }}</mat-panel-title>
                     <mat-panel-description>
@@ -26,14 +26,14 @@
                 </mat-expansion-panel-header>
                 <ng-template matExpansionPanelContent>
                     <div class="schoolyear-semester-container">
-                        <div *ngFor="let semester of schoolYear.semesters; let semIdx=index"
+                        <div *ngFor="let semester of schoolYear.semesters; even as isEven"
                              class="semester-detail"
-                             [ngClass]="semIdx % 2 == 0 ? 'semester-even' : 'semester-odd'">
+                             [ngClass]="isEven ? 'semester-even' : 'semester-odd'">
                             <div>
                                 <span class="text-secondary-dark">{{ semester.validFrom | date }} - {{ semester.validTo | date }}</span><br>
                                 <span>{{ semester.name }}</span><br>
                                 <a mat-button
-                                   [routerLink]="goToSubjectsUrl(semester.id)"
+                                   [routerLink]="goToSubjectsUrl(semester.id, activeSchoolYearId$ | async)"
                                    color="primary">
                                     {{ 'i18n.modules.manage.schoolYearSemester.openSubjects' | translate }}
                                 </a>
@@ -51,7 +51,7 @@
                     <mat-action-row class="schoolyear-action-row">
                         <a mat-stroked-button
                            color="accent"
-                           [routerLink]="[schoolYear.id, 'schoolyear']">
+                           [routerLink]="[schoolYear.id, 'schoolYear']">
                             <mat-icon>add</mat-icon>
                             <span>{{ 'i18n.modules.manage.schoolYearSemester.actions.addSemester' | translate }}</span>
                         </a>
