@@ -10,12 +10,20 @@ html, body, mat-sidenav-container {
 
 html {
     line-height: normal;
-    color: rgba(0, 0, 0, 0.87);
+    color: $primary-dark;
     font-size: 14px;
 }
 
 body, .main-area {
     background-color: #F8F8F8 !important;
+}
+
+a, a:visited, a:focus, a:hover {
+    color: $link-blue;
+}
+
+a:hover:not([mat-button]):not([mat-stroked-button]):not([mat-raised-button]):not([mat-flat-button]) {
+    text-decoration: underline;
 }
 
 oc-app {
@@ -49,10 +57,8 @@ oc-app {
     margin: 0 auto;
 }
 
-button[mat-raised-button], button[mat-button] {
-    .mat-button-wrapper > * {
-        vertical-align: middle;
-    }
+.mat-button-wrapper mat-icon + span {
+    margin-left: 4px;
 }
 
 .app-content {
@@ -251,6 +257,14 @@ oc-app.oc-mobile button[mat-fab] {
 mat-toolbar.transparent-toolbar {
     background: none !important;
     box-shadow: none !important;
+}
+
+.mat-expansion-panel .mat-action-row {
+    padding: 16px;
+
+    > a:first-child {
+        margin-left: -16px !important;
+    }
 }
 
 .oc-title-logo {

@@ -344,7 +344,8 @@
             "double": "Fächer von {{schoolClass}} und {{semester}}"
           },
           "actions": {
-            "addSubject": "Fach hinzufügen"
+            "addSubject": "Fach hinzufügen",
+            "addSemesterAndSchoolClass": "Semester/Klasse"
           }
         },
         "linkTitle": "Verwalten",

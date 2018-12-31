@@ -5,11 +5,13 @@
 <div fxLayout fxLayoutAlign="center start">
     <div class="container middle-container" fxFlex>
         <div class="flex-container">
-            <span *ngIf="schoolClass && semester; else singleOrNothing" class="text-secondary-dark">
+            <span *ngIf="schoolClass && semester; else singleOrNothing"
+                  class="text-secondary-dark">
                 {{ 'i18n.modules.manage.subject.parents.double' | translate:{schoolClass: schoolClass.normalizedName, semester: semester.name} }}
             </span>
             <ng-template #singleOrNothing>
-                <span *ngIf="schoolClass || semester" class="text-secondary-dark">
+                <span *ngIf="schoolClass || semester"
+                      class="text-secondary-dark">
                     {{ 'i18n.modules.manage.subject.parents.single' | translate:{value: schoolClass?.normalizedName || semester?.name} }}
                 </span>
             </ng-template>
@@ -44,31 +46,37 @@
                                         {{schoolClassSemesters.schoolClass.normalizedName}}
                                     </a>
                                     <span class="oc-filler"></span>
-                                    <mat-icon>remove_circle_outline</mat-icon>
+                                    <button mat-icon-button>
+                                        <mat-icon>remove_circle_outline</mat-icon>
+                                    </button>
                                 </mat-list-item>
-                                <mat-list-item *ngFor="let sem of schoolClassSemesters.semesters; first as isFirst"
-                                               class="semester-list-item">
+                                <mat-list-item
+                                    *ngFor="let sem of schoolClassSemesters.semesters; first as isFirst"
+                                    class="semester-list-item">
                                     <mat-icon matListIcon *ngIf="isFirst"
-                                              [color]="(!schoolClass || schoolClass?.id === schoolClassSemesters.schoolClass.id) && semester?.id === sem.id ? 'accent' : null">event
+                                              [color]="(!schoolClass || schoolClass?.id === schoolClassSemesters.schoolClass.id) && semester?.id === sem.id ? 'accent' : null">
+                                        event
                                     </mat-icon>
                                     <mat-icon matListIcon *ngIf="!isFirst"></mat-icon>
                                     <a [routerLink]="buildSemesterUrl(sem)">
                                         {{ sem.name }}
                                     </a>
                                     <span class="oc-filler"></span>
-                                    <mat-icon>remove_circle_outline</mat-icon>
+                                    <button mat-icon-button>
+                                        <mat-icon>remove_circle_outline</mat-icon>
+                                    </button>
                                 </mat-list-item>
                                 <mat-divider *ngIf="!isLast"></mat-divider>
                             </ng-template>
                         </mat-list>
                     </div>
-                    <mat-action-row class="schoolyear-action-row">
-                        <!--<a mat-stroked-button
-                           color="accent"
-                           [routerLink]="[schoolYear.id, 'schoolyear']">
-                            <mat-icon>add</mat-icon>
-                            <span>{{ 'i18n.modules.manage.schoolYearSemester.actions.addSemester' | translate }}</span>
-                        </a>-->
+                    <mat-action-row>
+                        <a *ngIf="!schoolClass && !semester"
+                           mat-stroked-button
+                           color="accent">
+                            <mat-icon>link</mat-icon>
+                            <span>{{ 'i18n.modules.manage.subject.actions.addSemesterAndSchoolClass' | translate }}</span>
+                        </a>
                         <span class="oc-filler"></span>
                         <button mat-icon-button>
                             <mat-icon>edit</mat-icon>

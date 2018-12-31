@@ -1,6 +1,9 @@
 :host {
     mat-list-item {
         font-size: 1rem;
+        .mat-list-item-content {
+            padding: 0 16px 0 12px;
+        }
 
         &.semester-list-item {
             // width of full icon - 2x padding of icon
