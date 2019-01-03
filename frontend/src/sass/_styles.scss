@@ -18,12 +18,16 @@ body, .main-area {
     background-color: #F8F8F8 !important;
 }
 
-a, a:visited, a:focus, a:hover {
+a:not([mat-button]):not([mat-stroked-button]):not([mat-raised-button]):not([mat-flat-button]):not([mat-icon-button]) {
     color: $link-blue;
-}
 
-a:hover:not([mat-button]):not([mat-stroked-button]):not([mat-raised-button]):not([mat-flat-button]) {
-    text-decoration: underline;
+    &:visited, &:focus, &:hover {
+        color: $link-blue;
+    }
+
+    &:hover {
+        text-decoration: underline;
+    }
 }
 
 oc-app {
@@ -271,4 +275,12 @@ mat-toolbar.transparent-toolbar {
     display: flex;
     height: 100%;
     cursor: pointer;
+}
+
+.oc-action-row {
+    display: flex;
+
+    > * + * {
+        margin-left: 4px !important;
+    }
 }

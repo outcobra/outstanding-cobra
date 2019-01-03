@@ -32,11 +32,18 @@
                             <div>
                                 <span class="text-secondary-dark">{{ semester.validFrom | date }} - {{ semester.validTo | date }}</span><br>
                                 <span>{{ semester.name }}</span><br>
-                                <a mat-button
-                                   [routerLink]="goToSubjectsUrl(semester.id, activeSchoolYearId$ | async)"
-                                   color="primary">
-                                    {{ 'i18n.modules.manage.schoolYearSemester.openSubjects' | translate }}
-                                </a>
+                                <span>Fächer</span>
+                                <div class="oc-action-row">
+                                    <a mat-button
+                                       [routerLink]="goToSubjectsUrl(semester.id, activeSchoolYearId$ | async)"
+                                       color="primary">
+                                        {{ 'i18n.modules.manage.schoolYearSemester.actions.openSubjects' | translate }}
+                                    </a>
+                                    <a mat-icon-button
+                                    color="primary">
+                                        <mat-icon>add_circle_outline</mat-icon>
+                                    </a>
+                                </div>
                             </div>
                             <div class="semester-actions">
                                 <button mat-icon-button>

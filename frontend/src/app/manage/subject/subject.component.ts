@@ -46,12 +46,14 @@ export class SubjectComponent implements OnInit {
         return [this._buildRelativeUrlPart(), 'schoolClass'];
     }
 
-    public buildSemesterUrl(semester: SemesterDto) {
-        const urlParts = [this._buildRelativeUrlPart(), 'schoolYear', semester.schoolYearId];
-        if (isNotNull(this._schoolClass)) {
-            urlParts.push('schoolClass', this._schoolClass.id);
-        }
-        return urlParts;
+    public buildSemesterUrl(semester: SemesterDto, schoolClass: SchoolClassDto) {
+        return [
+            this._buildRelativeUrlPart(),
+            'schoolYear',
+            semester.schoolYearId,
+            'schoolClass',
+            schoolClass.id
+        ];
     }
 
     private _buildRelativeUrlPart(): string {

@@ -320,18 +320,20 @@
         "linkTitle": "Dashboard (Bald)"
       },
       "manage": {
-        "classes": {
+        "schoolClasses": {
           "linkTitle": "Schulklassen",
           "actions": {
-            "openYears": "Schuljahre anzeigen"
+            "addSchoolClass": "Schulklasse hinzufügen",
+            "openSemesters": "Semester({{semesterCount}}) anzeigen",
+            "openSubjects": "Fächer({{subjectCount}}) anzeigen"
           }
         },
         "schoolYearSemester": {
           "linkTitle": "Jahre und Semester",
-          "openSubjects": "Fächer anzeigen",
           "actions": {
             "addSemester": "Semester",
-            "addSchoolYear": "Schuljahr hinzufügen"
+            "addSchoolYear": "Schuljahr hinzufügen",
+            "openSubjects": "Fächer anzeigen"
           },
           "label": {
             "semester": "Semester"

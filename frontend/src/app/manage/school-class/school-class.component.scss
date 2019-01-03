@@ -1,0 +1,34 @@
+:host {
+
+    mat-card + mat-card {
+        margin-top: 16px;
+    }
+
+    .school-class-info-row,
+    .school-class-action-row {
+        display: flex;
+        align-items: center;
+        min-height: 48px;
+        padding: 0 16px;
+    }
+
+    .school-class-info-row {
+        // padding-left: 24px;
+    }
+
+    .school-class-action-row {
+        padding-bottom: 8px;
+    }
+
+    .school-class-action-row > div {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        padding: 8px 0 0;
+        margin: 0 4px;
+
+        &:last-child {
+            align-items: flex-end;
+        }
+    }
+}

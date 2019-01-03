@@ -51,14 +51,13 @@
                                     </button>
                                 </mat-list-item>
                                 <mat-list-item
-                                    *ngFor="let sem of schoolClassSemesters.semesters; first as isFirst"
+                                    *ngFor="let sem of schoolClassSemesters.semesters"
                                     class="semester-list-item">
-                                    <mat-icon matListIcon *ngIf="isFirst"
+                                    <mat-icon matListIcon
                                               [color]="(!schoolClass || schoolClass?.id === schoolClassSemesters.schoolClass.id) && semester?.id === sem.id ? 'accent' : null">
                                         event
                                     </mat-icon>
-                                    <mat-icon matListIcon *ngIf="!isFirst"></mat-icon>
-                                    <a [routerLink]="buildSemesterUrl(sem)">
+                                    <a [routerLink]="buildSemesterUrl(sem, schoolClassSemesters.schoolClass)">
                                         {{ sem.name }}
                                     </a>
                                     <span class="oc-filler"></span>

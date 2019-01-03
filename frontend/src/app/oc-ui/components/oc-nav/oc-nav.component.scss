@@ -42,6 +42,7 @@ oc-nav {
                         transition: background-color .15s ease-in-out;
 
                         .mat-button-wrapper {
+                            display: flex;
                             overflow: hidden;
                             span, mat-icon {
                                 float: left;

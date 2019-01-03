@@ -1,0 +1,14 @@
+@mixin school-class-theme($theme) {
+    $darker: map_deep_get($theme, primary, 500);
+    $lighter: map_deep_get($theme, primary, 200);
+
+    .school-class-action-row > div {
+        &:first-child {
+            border-top: 2px solid $darker;
+        }
+
+        &:last-child {
+            border-top: 2px solid $lighter;
+        }
+    }
+}
