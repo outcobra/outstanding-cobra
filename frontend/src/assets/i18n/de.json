@@ -322,28 +322,33 @@
       "manage": {
         "schoolClasses": {
           "linkTitle": "Schulklassen",
+          "empty": "Du hast noch keine Schulklassen",
           "actions": {
             "addSchoolClass": "Schulklasse hinzufügen",
-            "openSemesters": "Semester({{semesterCount}}) anzeigen",
-            "openSubjects": "Fächer({{subjectCount}}) anzeigen"
+            "openSemesters": "Semester anzeigen",
+            "openSubjects": "Fächer anzeigen"
           }
         },
         "schoolYearSemester": {
           "linkTitle": "Jahre und Semester",
+          "empty": "Du hast noch keine Schuljahre",
           "actions": {
             "addSemester": "Semester",
             "addSchoolYear": "Schuljahr hinzufügen",
             "openSubjects": "Fächer anzeigen"
           },
+          "parent": "Schuljahre von",
           "label": {
             "semester": "Semester"
           }
         },
         "subject": {
           "linkTitle": "Fächer",
+          "empty": "Du hast noch keine Fächer",
           "parents": {
-            "single": "Fächer von {{value}}",
-            "double": "Fächer von {{schoolClass}} und {{semester}}"
+            "single": "Fächer von",
+            "double": "Fächer von",
+            "connector": "und"
           },
           "actions": {
             "addSubject": "Fach hinzufügen",

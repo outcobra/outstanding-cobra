@@ -7,12 +7,15 @@
             padding: 8px 16px;
 
             display: flex;
-            > div:not(.semester-actions) {
+            .semester-info {
                 flex-grow: 1;
 
-                a {
+                > span + a {
                     margin-top: 8px;
-                    margin-left: -16px;
+                }
+
+                a {
+                    margin-left: -8px;
                 }
             }
             .semester-actions {

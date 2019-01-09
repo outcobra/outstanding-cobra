@@ -24,7 +24,7 @@ class SemesterMapper @Inject constructor(val schoolClassSemesterRepository: Scho
     override fun toDto(from: Semester): SemesterDto {
         val semesterSubjects = from.schoolClassSemester.map {
             SemesterDto.SchoolClassSubjectDto(it.schoolClass.id,
-                    it.subjects.map { sub -> sub.id }
+                    it.subjects.map { sub -> sub.subject.id }
             )
         }
 

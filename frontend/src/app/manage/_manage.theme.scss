@@ -1,7 +1,15 @@
-@import './school-year-semester/school-year-semester.theme';
-@import './school-class/school-class.theme';
 
 @mixin manage-theme($theme) {
-    @include school-year-semester-theme($theme);
-    @include school-class-theme($theme);
+    $darker: map_deep_get($theme, primary, 500);
+    $lighter: map_deep_get($theme, primary, 200);
+
+    .manage-entity-even {
+        border-top: 4px solid $darker;
+        margin-right: 4px;
+    }
+
+    .manage-entity-odd {
+        border-top: 4px solid $lighter;
+        margin-left: 4px;
+    }
 }

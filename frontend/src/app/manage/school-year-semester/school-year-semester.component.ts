@@ -5,6 +5,7 @@ import {ActivatedRoute} from '@angular/router';
 import {isNotNull} from '../../core/util/helper';
 import {filter, map} from 'rxjs/operators';
 import {BehaviorSubject, Observable, Subject} from 'rxjs';
+import {SemesterDto} from '../../core/model/manage/semester.dto';
 
 @Component({
     selector: 'school-year-semester',
@@ -58,6 +59,14 @@ export class SchoolYearSemesterComponent implements OnInit {
             ];
         }
         return [base, ...semesterBase];
+    }
+
+    public getSemesterSubjectCount(semester: SemesterDto): number {
+        const subjectIds = semester.schoolClassSubjects
+            .filter(scs => !this._schoolClass || scs.schoolClassId === this._schoolClass.id)
+            .map(scs => scs.subjectIds)
+            .reduce((accumulator, subjects) => accumulator.concat(subjects), []);
+        return new Set(subjectIds).size;
     }
 
     get schoolYearSemesters(): Array<SchoolYearDto> {

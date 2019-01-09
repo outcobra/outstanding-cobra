@@ -7,12 +7,22 @@
         <div class="flex-container">
             <span *ngIf="schoolClass && semester; else singleOrNothing"
                   class="text-secondary-dark">
-                {{ 'i18n.modules.manage.subject.parents.double' | translate:{schoolClass: schoolClass.normalizedName, semester: semester.name} }}
+                <span translate>i18n.modules.manage.subject.parents.double</span>
+                <a [routerLink]="buildSchoolClassUrl()">
+                    {{ schoolClass.normalizedName }}
+                </a>
+                <span translate>i18n.modules.manage.subject.parents.connector</span>
+                <a [routerLink]="buildSemesterUrl(semester, schoolClass)">
+                    {{ semester.name }}
+                </a>
             </span>
             <ng-template #singleOrNothing>
                 <span *ngIf="schoolClass || semester"
                       class="text-secondary-dark">
-                    {{ 'i18n.modules.manage.subject.parents.single' | translate:{value: schoolClass?.normalizedName || semester?.name} }}
+                    <span translate>i18n.modules.manage.subject.parents.single</span>
+                    <a [routerLink]="schoolClass ? buildSchoolClassUrl() : buildSemesterUrl(semester, schoolClass)">
+                        {{ schoolClass?.normalizedName || semester?.name }}
+                    </a>
                 </span>
             </ng-template>
             <div class="oc-filler"></div>
@@ -21,7 +31,7 @@
                 {{ 'i18n.modules.manage.subject.actions.addSubject' | translate }}
             </a>
         </div>
-        <mat-accordion>
+        <mat-accordion *ngIf="subjects && subjects.length > 0; else empty">
             <mat-expansion-panel *ngFor="let subject of subjects; first as isFirst"
                                  [expanded]="isFirst">
                 <mat-expansion-panel-header>
@@ -33,42 +43,43 @@
                     </mat-panel-title>
                 </mat-expansion-panel-header>
                 <ng-template matExpansionPanelContent>
-                    <div class="schoolyear-semester-container">
-                        <mat-list>
-                            <ng-template ngFor let-schoolClassSemesters let-isLast="last"
-                                         [ngForOf]="getSchoolClassSemesters(subject.id)">
-                                <mat-list-item>
-                                    <mat-icon matListIcon
-                                              [color]="schoolClass?.id === schoolClassSemesters.schoolClass.id ? 'accent' : null">
-                                        book
-                                    </mat-icon>
-                                    <a [routerLink]="buildSchoolClassUrl()">
-                                        {{schoolClassSemesters.schoolClass.normalizedName}}
-                                    </a>
-                                    <span class="oc-filler"></span>
-                                    <button mat-icon-button>
-                                        <mat-icon>remove_circle_outline</mat-icon>
-                                    </button>
-                                </mat-list-item>
-                                <mat-list-item
-                                    *ngFor="let sem of schoolClassSemesters.semesters"
-                                    class="semester-list-item">
-                                    <mat-icon matListIcon
-                                              [color]="(!schoolClass || schoolClass?.id === schoolClassSemesters.schoolClass.id) && semester?.id === sem.id ? 'accent' : null">
-                                        event
-                                    </mat-icon>
-                                    <a [routerLink]="buildSemesterUrl(sem, schoolClassSemesters.schoolClass)">
-                                        {{ sem.name }}
-                                    </a>
-                                    <span class="oc-filler"></span>
-                                    <button mat-icon-button>
-                                        <mat-icon>remove_circle_outline</mat-icon>
-                                    </button>
-                                </mat-list-item>
-                                <mat-divider *ngIf="!isLast"></mat-divider>
-                            </ng-template>
-                        </mat-list>
-                    </div>
+                    <mat-list>
+                        <ng-template ngFor let-schoolClassSemesters let-isEven="even"
+                                     [ngForOf]="getSchoolClassSemesters(subject.id)">
+                            <div mat-list-item>
+                                <div class="school-class-semester-list-item-content"
+                                     [ngClass]="isEven ? 'manage-entity-even' : 'manage-entity-odd'">
+                                    <div class="school-class-list-item">
+                                        <mat-icon matListIcon
+                                                  [color]="schoolClass?.id === schoolClassSemesters.schoolClass.id ? 'accent' : null">
+                                            book
+                                        </mat-icon>
+                                        <a [routerLink]="buildSchoolClassUrl()">
+                                            {{schoolClassSemesters.schoolClass.normalizedName}}
+                                        </a>
+                                        <span class="oc-filler"></span>
+                                        <button mat-icon-button>
+                                            <mat-icon>remove_circle_outline</mat-icon>
+                                        </button>
+                                    </div>
+                                    <div *ngFor="let sem of schoolClassSemesters.semesters"
+                                         class="semester-list-item">
+                                        <mat-icon matListIcon
+                                                  [color]="(!schoolClass || schoolClass?.id === schoolClassSemesters.schoolClass.id) && semester?.id === sem.id ? 'accent' : null">
+                                            event
+                                        </mat-icon>
+                                        <a [routerLink]="buildSemesterUrl(sem, schoolClassSemesters.schoolClass)">
+                                            {{ sem.name }}
+                                        </a>
+                                        <span class="oc-filler"></span>
+                                        <button mat-icon-button>
+                                            <mat-icon>remove_circle_outline</mat-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </mat-list>
                     <mat-action-row>
                         <a *ngIf="!schoolClass && !semester"
                            mat-stroked-button
@@ -87,5 +98,8 @@
                 </ng-template>
             </mat-expansion-panel>
         </mat-accordion>
+        <ng-template #empty>
+            <oc-empty placeholder="i18n.modules.manage.subject.empty"></oc-empty>
+        </ng-template>
     </div>
 </div>

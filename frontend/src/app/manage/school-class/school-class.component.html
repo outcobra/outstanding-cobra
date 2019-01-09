@@ -11,55 +11,57 @@
                 {{ 'i18n.modules.manage.schoolClasses.actions.addSchoolClass' | translate }}
             </a>
         </div>
-        <mat-list>
-            <ng-template ngFor let-schoolClass [ngForOf]="schoolClasses$ | async">
-                <mat-card class="oc-card" mat-list-item>
-                    <div class="school-class-info-row">
-                        <span>{{ schoolClass.normalizedName }}</span>
-                        <span class="oc-filler"></span>
-                        <button mat-icon-button>
-                            <mat-icon>edit</mat-icon>
-                        </button>
-                        <button mat-icon-button>
-                            <mat-icon>delete</mat-icon>
-                        </button>
-                    </div>
-                    <div class="school-class-action-row">
-                        <div>
-                            <span class="text-secondary-dark">Semester ({{ schoolClassStats[schoolClass.id].semesters }})</span>
-                            <div class="oc-action-row">
-                                <a mat-icon-button>
-                                    <mat-icon>remove_red_eye</mat-icon>
-                                </a>
-                                <a mat-icon-button>
-                                    <mat-icon>add_circle_outline</mat-icon>
-                                </a>
-                            </div>
+        <mat-list *ngIf="schoolClasses && schoolClasses.length > 0; else empty">
+            <mat-card *ngFor="let schoolClass of schoolClasses"
+                      class="oc-card"
+                      mat-list-item>
+                <div class="school-class-info-row">
+                    <span>{{ schoolClass.normalizedName }}</span>
+                    <span class="oc-filler"></span>
+                    <button mat-icon-button>
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button>
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
+                <div class="school-class-action-row">
+                    <div class="manage-entity-even">
+                        <span
+                            class="text-secondary-dark">Semester ({{ schoolClassStats[schoolClass.id].semesters }})</span>
+                        <div class="oc-action-row">
+                            <a mat-icon-button
+                               color="primary"
+                               [routerLink]="['../schoolYear/schoolClass/', schoolClass.id]"
+                               [matTooltip]="'i18n.modules.manage.schoolClasses.actions.openSemesters' | translate">
+                                <mat-icon>remove_red_eye</mat-icon>
+                            </a>
+                            <a mat-icon-button
+                               color="primary">
+                                <mat-icon>add_circle_outline</mat-icon>
+                            </a>
                         </div>
-                        <div>
-                            <span class="text-secondary-dark">Fächer ({{ schoolClassStats[schoolClass.id].subjects }})</span>
-                            <div class="oc-action-row">
-                                <a mat-icon-button>
-                                    <mat-icon>remove_red_eye</mat-icon>
-                                </a>
-                                <a mat-icon-button>
-                                    <mat-icon>add_circle_outline</mat-icon>
-                                </a>
-                            </div>
-                        </div>
-                        <!--<a mat-stroked-button
-                           color="accent"
-                           [routerLink]="['../schoolYear/schoolClass', schoolClass.id]">
-                            {{ 'i18n.modules.manage.classes.actions.openSemesters' | translate:{semesterCount: schoolClassStats[schoolClass.id].semesters} }}
-                        </a>
-                        <span class="oc-filler"></span>
-                        <a mat-stroked-button
-                           color="accent"
-                           [routerLink]="['../subject/schoolClass', schoolClass.id]">
-                            {{ 'i18n.modules.manage.classes.actions.openSubjects' | translate:{subjectCount: schoolClassStats[schoolClass.id].subjects} }}
-                        </a>-->
                     </div>
-                </mat-card>
+                    <div class="manage-entity-odd">
+                            <span
+                                class="text-secondary-dark">Fächer ({{ schoolClassStats[schoolClass.id].subjects }})</span>
+                        <div class="oc-action-row">
+                            <a mat-icon-button
+                               color="primary"
+                               [routerLink]="['../subject/schoolClass/', schoolClass.id]"
+                               [matTooltip]="'i18n.modules.manage.schoolClasses.actions.openSubjects' | translate">
+                                <mat-icon>remove_red_eye</mat-icon>
+                            </a>
+                            <a mat-icon-button
+                               color="primary">
+                                <mat-icon>add_circle_outline</mat-icon>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </mat-card>
+            <ng-template #empty>
+                <oc-empty placeholder="i18n.modules.manage.schoolClasses.empty"></oc-empty>
             </ng-template>
         </mat-list>
     </div>

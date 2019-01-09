@@ -1,11 +1,9 @@
 package outcobra.server.service.internal
 
+import com.querydsl.jpa.JPAExpressions
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import outcobra.server.model.domain.QSubject
-import outcobra.server.model.domain.SchoolClass
-import outcobra.server.model.domain.Semester
-import outcobra.server.model.domain.Subject
+import outcobra.server.model.domain.*
 import outcobra.server.model.dto.SubjectDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.interfaces.OutcobraDto
@@ -60,10 +58,16 @@ class DefaultSubjectService
         requestValidator.validateRequestById(schoolClassId, SchoolClass::class)
         requestValidator.validateRequestById(semesterId, Semester::class)
 
-        val qSchoolClassSemester = QSubject.subject.schoolClassSemesterSubjects.any().schoolClassSemester
+        val qSchoolClassSemester = QSchoolClassSemester.schoolClassSemester
 
-        val filter = qSchoolClassSemester.schoolClass.id.eq(schoolClassId)
-                .and(qSchoolClassSemester.semester.id.eq(semesterId))
+
+        val filter = QSubject.subject.schoolClassSemesterSubjects.any().schoolClassSemester
+                .`in`(JPAExpressions.selectFrom(qSchoolClassSemester)
+                        .where(
+                                qSchoolClassSemester.schoolClass.id.eq(schoolClassId)
+                                        .and(qSchoolClassSemester.semester.id.eq(semesterId))
+                        )
+                )
 
         return repository.findAll(filter)
                 .map { mapper.toDto(it) }

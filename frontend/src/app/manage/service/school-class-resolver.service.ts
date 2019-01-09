@@ -1,9 +1,9 @@
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
-import {SchoolClassDto} from '../old/model/manage.dto';
 import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {SchoolClassService} from '../../core/services/manage/school-class.service';
 import {filter, map, switchMap} from 'rxjs/operators';
+import {SchoolClassDto} from '../../core/model/manage/school-class.dto';
 
 @Injectable()
 export class SchoolClassResolverService implements Resolve<SchoolClassDto> {

@@ -54,7 +54,6 @@ export class DefaultAuthService implements AuthService {
     }
 
     private _afterLogin(response: AuthResponseDto): boolean {
-        console.log(response);
         if (!this._jwtHelper.isTokenExpired(response.token)) {
             this._basil.set(environment.persistence.tokenLocation, response.token);
             return true;

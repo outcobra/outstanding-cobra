@@ -7,7 +7,10 @@
         <div class="flex-container">
             <span *ngIf="schoolClass" class="text-secondary-dark">
                 <!--<mat-icon>book</mat-icon>-->
-                Schuljahre von {{ schoolClass.normalizedName }}
+                <span translate>i18n.modules.manage.schoolYearSemester.parent</span>&nbsp;
+                <a [routerLink]="(activeSchoolYearId$ | async) ? ['../../../../schoolClass'] : ['../../../schoolClass']">
+                    {{ schoolClass.normalizedName }}
+                </a>
             </span>
             <div class="oc-filler"></div>
             <a mat-raised-button
@@ -15,7 +18,7 @@
                 {{ 'i18n.modules.manage.schoolYearSemester.actions.addSchoolYear' | translate }}
             </a>
         </div>
-        <mat-accordion>
+        <mat-accordion *ngIf="schoolYearSemesters && schoolYearSemesters.length > 0; else empty">
             <mat-expansion-panel *ngFor="let schoolYear of schoolYearSemesters; first as isFirst"
                                  [expanded]="((activeSchoolYearId$ | async) === schoolYear.id) || isFirst">
                 <mat-expansion-panel-header>
@@ -28,19 +31,23 @@
                     <div class="schoolyear-semester-container">
                         <div *ngFor="let semester of schoolYear.semesters; even as isEven"
                              class="semester-detail"
-                             [ngClass]="isEven ? 'semester-even' : 'semester-odd'">
-                            <div>
-                                <span class="text-secondary-dark">{{ semester.validFrom | date }} - {{ semester.validTo | date }}</span><br>
-                                <span>{{ semester.name }}</span><br>
-                                <span>Fächer</span>
+                             [ngClass]="isEven ? 'manage-entity-even' : 'manage-entity-odd'">
+                            <div class="semester-info">
+                                <p>
+                                    <span class="text-secondary-dark">{{ semester.validFrom | date }} - {{ semester.validTo | date }}</span>
+                                    <br>
+                                    {{ semester.name }}
+                                </p>
+                                <span>Fächer ({{ getSemesterSubjectCount(semester) }})</span>
                                 <div class="oc-action-row">
-                                    <a mat-button
+                                    <a mat-icon-button
                                        [routerLink]="goToSubjectsUrl(semester.id, activeSchoolYearId$ | async)"
                                        color="primary">
-                                        {{ 'i18n.modules.manage.schoolYearSemester.actions.openSubjects' | translate }}
+                                        <mat-icon>remove_red_eye</mat-icon>
+                                        <!--{{ 'i18n.modules.manage.schoolYearSemester.actions.openSubjects' | translate }}-->
                                     </a>
                                     <a mat-icon-button
-                                    color="primary">
+                                       color="primary">
                                         <mat-icon>add_circle_outline</mat-icon>
                                     </a>
                                 </div>
@@ -73,5 +80,8 @@
                 </ng-template>
             </mat-expansion-panel>
         </mat-accordion>
+        <ng-template #empty>
+            <oc-empty placeholder="i18n.modules.manage.schoolYearSemester.empty"></oc-empty>
+        </ng-template>
     </div>
 </div>

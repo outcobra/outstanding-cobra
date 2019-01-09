@@ -1,14 +1,35 @@
 :host {
-    mat-list-item {
-        font-size: 1rem;
-        .mat-list-item-content {
-            padding: 0 16px 0 12px;
-        }
+    mat-list {
+        display: flex;
+        flex-wrap: wrap;
+    }
 
-        &.semester-list-item {
-            // width of full icon - 2x padding of icon
-            // 32px - 4px - 4px
-            padding-left: 24px;
+    div[mat-list-item] {
+        flex-basis: 50%;
+
+        .school-class-semester-list-item-content {
+            box-sizing: border-box;
+            font-size: 1rem;
+            padding: 0 16px 0 12px;
+
+            > div {
+                display: flex;
+                align-items: center;
+                height: 48px;
+
+                mat-icon {
+                    padding: 0 4px;
+                }
+
+                &.semester-list-item {
+                    // width of full icon - 2x padding of icon
+                    // 32px - 4px - 4px
+                    padding-left: 24px;
+                }
+            }
+        }
+        @media screen and (max-width: 480px) {
+            flex-basis: 100%;
         }
     }
 }

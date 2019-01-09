@@ -1,6 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {Observable} from 'rxjs';
-import {tap} from 'rxjs/operators';
 import {SchoolClassDto} from '../../core/model/manage/school-class.dto';
 import {SchoolClassService} from '../../core/services/manage/school-class.service';
 
@@ -10,7 +8,7 @@ import {SchoolClassService} from '../../core/services/manage/school-class.servic
     styleUrls: ['./school-class.component.scss']
 })
 export class SchoolClassComponent implements OnInit {
-    private _schoolClasses$: Observable<Array<SchoolClassDto>>;
+    private _schoolClasses: Array<SchoolClassDto>;
 
     private _schoolClassStats: {
         [schoolClassId: number]: {
@@ -23,8 +21,11 @@ export class SchoolClassComponent implements OnInit {
     }
 
     ngOnInit() {
-        this._schoolClasses$ = this._schoolClassService.readAll()
-            .pipe(tap(schoolClasses => this._calculateStats(schoolClasses)));
+        this._schoolClassService.readAll()
+            .subscribe(schoolClasses => {
+                this._calculateStats(schoolClasses);
+                this._schoolClasses = schoolClasses;
+            })
     }
 
 
@@ -39,8 +40,8 @@ export class SchoolClassComponent implements OnInit {
         }
     }
 
-    get schoolClasses$(): Observable<Array<SchoolClassDto>> {
-        return this._schoolClasses$;
+    get schoolClasses(): Array<SchoolClassDto> {
+        return this._schoolClasses;
     }
 
 

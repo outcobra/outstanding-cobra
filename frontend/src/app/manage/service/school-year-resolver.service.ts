@@ -1,9 +1,9 @@
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
-import {SchoolYearDto} from '../old/model/manage.dto';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {SchoolYearService} from '../../core/services/manage/school-year.service';
 import {SchoolClassService} from '../../core/services/manage/school-class.service';
+import {SchoolYearDto} from '../../core/model/manage/school-year.dto';
 
 @Injectable()
 export class SchoolYearResolverService implements Resolve<Array<SchoolYearDto>> {
