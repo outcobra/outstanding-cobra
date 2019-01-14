@@ -7,7 +7,8 @@
         <div class="flex-container">
             <div class="oc-filler"></div>
             <a mat-raised-button
-               color="accent">
+               color="accent"
+               routerLink="new">
                 {{ 'i18n.modules.manage.schoolClasses.actions.addSchoolClass' | translate }}
             </a>
         </div>
@@ -18,21 +19,23 @@
                 <div class="school-class-info-row">
                     <span>{{ schoolClass.normalizedName }}</span>
                     <span class="oc-filler"></span>
-                    <button mat-icon-button>
+                    <a mat-icon-button
+                       [routerLink]="['update', schoolClass.id]">
                         <mat-icon>edit</mat-icon>
-                    </button>
+                    </a>
                     <button mat-icon-button>
                         <mat-icon>delete</mat-icon>
                     </button>
                 </div>
                 <div class="school-class-action-row">
                     <div class="manage-entity-even">
-                        <span
-                            class="text-secondary-dark">Semester ({{ schoolClassStats[schoolClass.id].semesters }})</span>
+                        <span class="text-secondary-dark">
+                            Semester ({{ schoolClassStats[schoolClass.id].semesters }})
+                        </span>
                         <div class="oc-action-row">
                             <a mat-icon-button
                                color="primary"
-                               [routerLink]="['../schoolYear/schoolClass/', schoolClass.id]"
+                               [routerLink]="['../../schoolYear/schoolClass/', schoolClass.id]"
                                [matTooltip]="'i18n.modules.manage.schoolClasses.actions.openSemesters' | translate">
                                 <mat-icon>remove_red_eye</mat-icon>
                             </a>
@@ -43,12 +46,13 @@
                         </div>
                     </div>
                     <div class="manage-entity-odd">
-                            <span
-                                class="text-secondary-dark">Fächer ({{ schoolClassStats[schoolClass.id].subjects }})</span>
+                            <span class="text-secondary-dark">
+                                Fächer ({{ schoolClassStats[schoolClass.id].subjects }})
+                            </span>
                         <div class="oc-action-row">
                             <a mat-icon-button
                                color="primary"
-                               [routerLink]="['../subject/schoolClass/', schoolClass.id]"
+                               [routerLink]="['../../subject/schoolClass/', schoolClass.id]"
                                [matTooltip]="'i18n.modules.manage.schoolClasses.actions.openSubjects' | translate">
                                 <mat-icon>remove_red_eye</mat-icon>
                             </a>

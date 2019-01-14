@@ -37,6 +37,7 @@ import {SchoolClassService} from './services/manage/school-class.service';
 import {SchoolYearService} from './services/manage/school-year.service';
 import {SemesterService} from './services/manage/semester.service';
 import {SubjectService} from './services/manage/subject.service';
+import {SchoolClassByIdResolverService} from './services/manage/resolver/school-class-by-id-resolver.service';
 
 @NgModule({
     imports: [
@@ -60,6 +61,7 @@ import {SubjectService} from './services/manage/subject.service';
         SchoolYearService,
         SemesterService,
         SubjectService,
+        SchoolClassByIdResolverService,
         // Exam Services
         ExamService,
         ExamTaskService,

@@ -14,11 +14,16 @@ import {SchoolClassResolverService} from './service/school-class-resolver.servic
 import {SemesterResolverService} from './service/semester-resolver.service';
 import {SubjectResolverService} from './service/subject/subject-resolver.service';
 import {PipeModule} from '../shared/pipe.module';
+import {SchoolClassCreateUpdateComponent} from './create-update/school-class-create-update/school-class-create-update.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {SchoolYearCreateUpdateComponent} from './create-update/school-year-create-update-component/school-year-create-update.component';
 
 @NgModule({
     declarations: [
         SchoolClassComponent,
+        SchoolClassCreateUpdateComponent,
         SchoolYearSemesterComponent,
+        SchoolYearCreateUpdateComponent,
         SubjectComponent
     ],
     imports: [
@@ -26,6 +31,7 @@ import {PipeModule} from '../shared/pipe.module';
         CommonModule,
         TranslateModule,
         FlexLayoutModule,
+        ReactiveFormsModule,
         OCUiModule,
         OCMaterialModule,
         PipeModule

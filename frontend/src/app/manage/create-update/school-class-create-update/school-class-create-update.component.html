@@ -1,0 +1,30 @@
+<oc-title-bar>
+    <h1 *ngIf="isEditMode()">{{ 'i18n.modules.manage.schoolClass.edit' | translate }}</h1>
+    <h1 *ngIf="!isEditMode()">{{ 'i18n.modules.manage.schoolClass.add' | translate }}</h1>
+</oc-title-bar>
+<form [formGroup]="schoolClassForm" (submit)="submit()" fxLayout fxLayoutAlign="center start">
+    <mat-card fxFlex fxFlex.gt-xs="600px">
+        <mat-card-content class="form-group">
+            <mat-form-field>
+                <input matInput
+                       required
+                       [autofocus]="false"
+                       [placeholder]="'i18n.modules.manage.schoolClass.form.label' | translate"
+                       formControlName="normalizedName">
+                <mat-error *ngIf="schoolClassForm.get('normalizedName').hasError('required')">
+                    {{ 'i18n.common.form.error.required' | translate }}
+                </mat-error>
+            </mat-form-field>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-button
+                    mat-dialog-close>
+                {{ 'i18n.common.action.cancel' | translate }}
+            </button>
+            <button mat-raised-button
+                    color="primary" type="submit">
+                {{ 'i18n.common.action.save' | translate }}
+            </button>
+        </mat-card-actions>
+    </mat-card>
+</form>
