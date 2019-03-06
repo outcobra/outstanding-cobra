@@ -1,14 +1,20 @@
-import {AbstractControl, AsyncValidatorFn, FormGroup, ValidationErrors, ValidatorFn} from '@angular/forms';
+import {
+    AbstractControl,
+    AsyncValidatorFn,
+    FormGroup,
+    ValidationErrors,
+    ValidatorFn
+} from '@angular/forms';
 import * as moment from 'moment';
-import {Moment} from 'moment';
-import {DateUtil} from './date-util.service';
-import {OC_DATE_FORMATS} from '../common/oc-date-formats';
-import {isNull} from 'util';
-import {MomentDateAdapter} from '@angular/material-moment-adapter';
-import {UserService} from './user.service';
-import {isTrue} from '../util/helper';
-import {Observable, timer} from 'rxjs';
-import {map, switchMap} from 'rxjs/operators';
+import { Moment } from 'moment';
+import { DateUtil } from './date-util.service';
+import { OC_DATE_FORMATS } from '../common/oc-date-formats';
+import { isNull } from 'util';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { UserService } from './user.service';
+import { isTrue } from '../util/helper';
+import { Observable, timer } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 
 export class OCValidators {
     public static readonly PASSWORD_REGEX: RegExp = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{8,}$/;
@@ -25,10 +31,10 @@ export class OCValidators {
             if (control.value && !DateUtil.isBeforeOrSameDay(control.value, date)) {
                 return {
                     'isBeforeOrSameDay': {'beforeDate': date, 'actualDate': control.value}
-                }
+                };
             }
             return null;
-        }
+        };
     }
 
     /**
@@ -43,10 +49,10 @@ export class OCValidators {
             if (control.value && !DateUtil.isAfterOrSameDay(control.value, date)) {
                 return {
                     'isAfterOrSameDay': {'afterDate': date, 'actualDate': control.value}
-                }
+                };
             }
             return null;
-        }
+        };
     }
 
     /**
@@ -61,24 +67,35 @@ export class OCValidators {
      * @param isSameDayPossible
      * @returns {any}
      */
-    public static dateFromIsBeforeDateTo(firstDateName: string = 'datefrom', secondDateName: string = 'dateto', isSameDayPossible: boolean = false) {
+    public static dateFromIsBeforeDateTo(firstDateName: string = 'datefrom',
+                                         secondDateName: string = 'dateto',
+                                         isSameDayPossible: boolean = false) {
         return (formGroup: FormGroup): ValidationErrors | null => {
             let keys = Object.keys(formGroup.controls);
-            let dateFromKey = keys.find(key => key.toLowerCase().includes(firstDateName.toLowerCase()) || key.toLowerCase().includes('validfrom'));
-            let dateToKey = keys.find(key => key.toLowerCase().includes(secondDateName.toLowerCase()) || key.toLowerCase().includes('validto'));
+            let dateFromKey = keys.find(key => key.toLowerCase()
+                .includes(firstDateName.toLowerCase()) || key.toLowerCase()
+                .includes('validfrom'));
+            let dateToKey = keys.find(key => key.toLowerCase()
+                .includes(secondDateName.toLowerCase()) || key.toLowerCase()
+                .includes('validto'));
             if (!dateFromKey && !dateToKey) return null;
 
             let dateFromControl = formGroup.controls[dateFromKey];
             let dateToControl = formGroup.controls[dateToKey];
 
-            if ((isSameDayPossible && !moment(dateFromControl.value).isSameOrBefore(moment(dateToControl.value))) ||
-                (!isSameDayPossible && !moment(dateFromControl.value).isBefore(moment(dateToControl.value)))) {
+            if ((isSameDayPossible && !moment(dateFromControl.value)
+                .isSameOrBefore(moment(dateToControl.value))) ||
+                (!isSameDayPossible && !moment(dateFromControl.value)
+                    .isBefore(moment(dateToControl.value)))) {
                 return {
-                    'dateToIsBeforeDateFrom': {'fromDate': dateFromControl.value, 'toDate': dateToControl.value}
-                }
+                    'dateToIsBeforeDateFrom': {
+                        'fromDate': dateFromControl.value,
+                        'toDate': dateToControl.value
+                    }
+                };
             }
             return null;
-        }
+        };
     }
 
     /**
@@ -94,11 +111,15 @@ export class OCValidators {
             let date = control.value;
             if (date && !DateUtil.isBetweenDaysInclusive(date, lowerBound, upperBound)) {
                 return {
-                    'isBetweenDaysInclusive': {'actualDate': date, 'lowerBound': lowerBound, 'upperBound': upperBound}
-                }
+                    'isBetweenDaysInclusive': {
+                        'actualDate': date,
+                        'lowerBound': lowerBound,
+                        'upperBound': upperBound
+                    }
+                };
             }
             return null;
-        }
+        };
     }
 
     public static date(): ValidatorFn {
@@ -108,10 +129,10 @@ export class OCValidators {
             if (isNull(date)) {
                 return {
                     'date': {'requiredFormat': OC_DATE_FORMATS.parse.dateInput}
-                }
+                };
             }
             return null;
-        }
+        };
     }
 
     public static equals(field1: string, field2: string): ValidatorFn {
@@ -125,17 +146,18 @@ export class OCValidators {
             return {
                 'equals': {'expectedValue': field1Control.value, 'actualValue': field2Control.value}
             };
-        }
+        };
     }
 
     public static checkMailNotTaken(userService: UserService): AsyncValidatorFn {
         return (control: AbstractControl): Observable<ValidationErrors | null> => {
-            return timer(500).pipe(
-                switchMap(() => userService.checkMailNotTaken(control.value)),
-                map(res => {
-                    return isTrue(res) ? null : {mailTaken: true};
-                })
-            );
-        }
+            return timer(500)
+                .pipe(
+                    switchMap(() => userService.checkMailNotTaken(control.value)),
+                    map(res => {
+                        return isTrue(res) ? null : {mailTaken: true};
+                    })
+                );
+        };
     }
 }

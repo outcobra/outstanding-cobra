@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional
 import outcobra.server.model.domain.QSchoolClass
 import outcobra.server.model.domain.SchoolClass
 import outcobra.server.model.dto.SchoolClassDto
+import outcobra.server.model.dto.SchoolYearDto
 import outcobra.server.model.interfaces.Mapper
 import outcobra.server.model.repository.SchoolClassRepository
 import outcobra.server.service.SchoolClassService
@@ -30,5 +31,12 @@ class DefaultSchoolClassService
         val userId = userService.getCurrentUser().id
         val filter = QSchoolClass.schoolClass.user.id.eq(userId)
         return repository.findAll(filter).map { mapper.toDto(it) }
+    }
+
+    override fun linkSchoolYear(schoolClassId: Long, schoolYearId: Long) {
+        requestValidator.validateRequestById(schoolClassId, SchoolClassDto::class)
+        requestValidator.validateRequestById(schoolYearId, SchoolYearDto::class)
+
+        val schoolClass = readById(schoolClassId)
     }
 }

@@ -15,7 +15,6 @@ import {SchoolYearCreateUpdateComponent} from './create-update/school-year-creat
     imports: [
         RouterModule.forChild([
             // region schoolClass
-            // display
             {
                 path: 'schoolClass',
                 children: [
@@ -25,13 +24,19 @@ import {SchoolYearCreateUpdateComponent} from './create-update/school-year-creat
                     },
                     {
                         path: 'new',
-                        component: SchoolClassCreateUpdateComponent
+                        component: SchoolClassCreateUpdateComponent,
+                        data: {
+                            isEdit: false
+                        }
                     },
                     {
                         path: 'update/:schoolClassId',
                         component: SchoolClassCreateUpdateComponent,
                         resolve: {
                             schoolClass: SchoolClassByIdResolverService
+                        },
+                        data: {
+                            isEdit: false
                         }
                     },
                 ]

@@ -1,9 +1,9 @@
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
-import {SemesterDto} from '../old/model/manage.dto';
 import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {filter, map, switchMap} from 'rxjs/operators';
 import {SemesterService} from '../../core/services/manage/semester.service';
+import { SemesterDto } from '../../core/model/manage/semester.dto';
 
 @Injectable()
 export class SemesterResolverService implements Resolve<SemesterDto> {

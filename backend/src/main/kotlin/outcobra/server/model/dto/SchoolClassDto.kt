@@ -1,19 +1,15 @@
 package outcobra.server.model.dto
 
-import outcobra.server.model.domain.User
 import outcobra.server.model.interfaces.OutcobraDto
-import outcobra.server.model.interfaces.ParentLink
+import outcobra.server.model.interfaces.UserParentLinkedDto
 
 data class SchoolClassDto(val id: Long = 0,
-                          val userId: Long = 0,
+                          override var userId: Long = 0,
                           val normalizedName: String = "",
-                          val semesterSubjects: List<SchoolClassDto.SemesterSubjectDto> = listOf()) : OutcobraDto {
+                          val semesterSubjects: List<SchoolClassDto.SemesterSubjectDto> = listOf()) : UserParentLinkedDto, OutcobraDto {
 
     override val identifier: Long
         get() = id
-
-    override val parentLink: ParentLink
-        get() = ParentLink.make(userId, User::class.java)
 
     data class SemesterSubjectDto(val semesterId: Long,
                                   val subjectIds: List<Long>)

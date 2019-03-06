@@ -49,4 +49,9 @@ class SchoolClassController
     fun deleteSchoolClass(@PathVariable id: Long) {
         schoolClassService.delete(id)
     }
+
+    @PutMapping("/schoolClass/{id}/link/{schoolYearId}")
+    fun linkSchoolYear(@PathVariable id: Long, @PathVariable schoolYearId: Long) {
+        schoolClassService
+    }
 }

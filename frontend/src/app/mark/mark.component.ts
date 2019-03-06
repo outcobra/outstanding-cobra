@@ -1,13 +1,13 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {SemesterService} from '../core/services/manage/semester.service';
 import {momentComparator} from '../core/util/comparator';
-import {SemesterDto} from '../manage/old/model/manage.dto';
 import {Util} from '../core/util/util';
 import {DateUtil} from '../core/services/date-util.service';
 import {isEmpty, isTruthy} from '../core/util/helper';
 import {ActivatedRoute, Router} from '@angular/router';
 import * as moment from 'moment';
 import {map} from 'rxjs/operators';
+import { SemesterDto } from '../core/model/manage/semester.dto';
 
 @Component({
     selector: 'mark',
