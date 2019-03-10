@@ -16,5 +16,4 @@ interface SchoolClassService : BaseService<SchoolClassDto> {
      */
     fun readAllByUser(): List<SchoolClassDto>
 
-    fun linkSchoolYear(schoolClassId: Long, schoolYearId: Long)
 }

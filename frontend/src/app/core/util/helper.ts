@@ -40,6 +40,10 @@ export function isNotEmpty(toCheck: string | Array<any> | QueryList<any>): boole
     return !isEmpty(toCheck);
 }
 
+export function hasProperty(propertyName: PropertyKey): Predicate<Object> {
+    return obj => obj.hasOwnProperty(propertyName);
+}
+
 export function getIfTruthy(object: any, prop: string, defaultValue: any = null) {
     if (isTruthy(object[prop])) {
         return object[prop];

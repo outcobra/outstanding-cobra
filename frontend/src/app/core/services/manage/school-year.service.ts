@@ -13,4 +13,8 @@ export class SchoolYearService extends AppCrudService<SchoolYearDto> {
     public readById(id: number): Observable<SchoolYearDto> {
         throw new Error('not implemented');
     }
+
+    public linkSchoolClass(id: number, schoolClassId: number): Observable<SchoolYearDto> {
+        return this._http.put<SchoolYearDto>(`${this._baseUri}/${id}/link/schoolClass/${schoolClassId}`, null);
+    }
 }

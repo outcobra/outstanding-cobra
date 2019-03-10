@@ -1,5 +1,6 @@
 package outcobra.server.service
 
+import outcobra.server.model.domain.SchoolYear
 import outcobra.server.model.dto.SchoolYearDto
 import outcobra.server.service.base.BaseService
 
@@ -20,4 +21,5 @@ interface SchoolYearService : BaseService<SchoolYearDto> {
 
     fun readAllByUser(): List<SchoolYearDto>
 
+    fun linkSchoolClass(schoolYearId: Long, schoolClassId: Long): SchoolYear?
 }

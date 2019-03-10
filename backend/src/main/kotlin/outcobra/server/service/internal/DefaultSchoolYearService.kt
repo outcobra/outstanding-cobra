@@ -8,6 +8,7 @@ import outcobra.server.model.domain.SchoolClass
 import outcobra.server.model.domain.SchoolYear
 import outcobra.server.model.dto.SchoolYearDto
 import outcobra.server.model.mapper.SchoolYearMapper
+import outcobra.server.model.repository.SchoolClassRepository
 import outcobra.server.model.repository.SchoolYearRepository
 import outcobra.server.service.SchoolYearService
 import outcobra.server.service.UserService
@@ -23,7 +24,8 @@ class DefaultSchoolYearService
                     repository: SchoolYearRepository,
                     requestValidator: RequestValidator<SchoolYearDto>,
                     val userService: UserService,
-                    val schoolYearValidator: SchoolYearValidator)
+                    val schoolYearValidator: SchoolYearValidator,
+                    val schoolClassRepository: SchoolClassRepository)
     : SchoolYearService, DefaultBaseService<SchoolYear, SchoolYearDto, SchoolYearRepository>(schoolYearMapper, repository, requestValidator, SchoolYear::class) {
 
     override fun save(dto: SchoolYearDto): SchoolYearDto {
@@ -43,5 +45,20 @@ class DefaultSchoolYearService
     override fun readAllByUser(): List<SchoolYearDto> {
         return repository.findByUserId(userService.getCurrentUser().id)
                 .map { schoolYearMapper.toDto(it) }
+    }
+
+    override fun linkSchoolClass(schoolYearId: Long, schoolClassId: Long): SchoolYear? {
+        requestValidator.validateRequestById(schoolYearId, SchoolYear::class)
+        requestValidator.validateRequestById(schoolClassId, SchoolClass::class)
+
+        val schoolYear = repository.findOne(schoolYearId)
+
+        if (schoolYear.schoolClasses.any { it.id == schoolYearId }) {
+            return schoolYear
+        }
+
+        schoolYear.schoolClasses.add(schoolClassRepository.findOne(schoolClassId))
+
+        return repository.save(schoolYear)
     }
 }

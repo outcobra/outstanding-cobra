@@ -22,7 +22,7 @@ class SchoolClassController
      * @param schoolClassDto the new [SchoolClassDto] you want to save, as Json in the [RequestBody]
      * @return the [schoolClassDto] that has been saved in the database
      */
-    @RequestMapping("/schoolClass", method = arrayOf(RequestMethod.POST, RequestMethod.PUT))
+    @RequestMapping("/schoolClass", method = [RequestMethod.POST, RequestMethod.PUT])
     fun saveSchoolClass(@RequestBody schoolClassDto: SchoolClassDto): SchoolClassDto {
         return schoolClassService.save(schoolClassDto)
     }
@@ -48,10 +48,5 @@ class SchoolClassController
     @DeleteMapping("/schoolClass/{id}")
     fun deleteSchoolClass(@PathVariable id: Long) {
         schoolClassService.delete(id)
-    }
-
-    @PutMapping("/schoolClass/{id}/link/{schoolYearId}")
-    fun linkSchoolYear(@PathVariable id: Long, @PathVariable schoolYearId: Long) {
-        schoolClassService
     }
 }

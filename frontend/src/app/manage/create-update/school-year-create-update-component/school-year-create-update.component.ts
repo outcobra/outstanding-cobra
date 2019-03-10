@@ -1,19 +1,19 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { OCValidators } from '../../../core/services/oc-validators';
-import { TranslateService } from '@ngx-translate/core';
-import { DatePipe } from '@angular/common';
-import { ResponsiveHelperService } from '../../../core/services/ui/responsive-helper.service';
-import { DateUtil } from '../../../core/services/date-util.service';
-import { FormUtil } from '../../../core/util/form-util';
-import { SchoolYearDto } from '../../../core/model/manage/school-year.dto';
-import { SchoolYearService } from '../../../core/services/manage/school-year.service';
-import { CreateUpdateComponent } from '../../../core/common/create-update-component';
-import { ViewMode } from '../../../core/common/view-mode';
-import { ActivatedRoute, Router } from '@angular/router';
-import { hasOwnProperty } from 'tslint/lib/utils';
-import { switchMap } from 'rxjs/operators';
-import { of } from 'rxjs';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {OCValidators} from '../../../core/services/oc-validators';
+import {TranslateService} from '@ngx-translate/core';
+import {DatePipe} from '@angular/common';
+import {ResponsiveHelperService} from '../../../core/services/ui/responsive-helper.service';
+import {DateUtil} from '../../../core/services/date-util.service';
+import {FormUtil} from '../../../core/util/form-util';
+import {SchoolYearDto} from '../../../core/model/manage/school-year.dto';
+import {SchoolYearService} from '../../../core/services/manage/school-year.service';
+import {CreateUpdateComponent} from '../../../core/common/create-update-component';
+import {ViewMode} from '../../../core/common/view-mode';
+import {ActivatedRoute, Router} from '@angular/router';
+import {filter, switchMap} from 'rxjs/operators';
+import {of} from 'rxjs';
+import {hasProperty} from '../../../core/util/helper';
 
 @Component({
     selector: 'school-year-create-update',
@@ -39,8 +39,9 @@ export class SchoolYearCreateUpdateComponent extends CreateUpdateComponent<Schoo
 
     ngOnInit() {
         this._route.params
-            .pipe(hasOwnProperty.bind(null, 'schoolClassId'))
+            .pipe(filter(hasProperty('schoolClassId')))
             .subscribe(({schoolClassId}) => this.schoolClassId = schoolClassId);
+
         this._route.data.subscribe(({schoolYear, isEdit}: { schoolYear?: SchoolYearDto, isEdit: boolean }) => {
             if (isEdit) {
                 this.init(ViewMode.EDIT, schoolYear);
@@ -52,11 +53,17 @@ export class SchoolYearCreateUpdateComponent extends CreateUpdateComponent<Schoo
                     name: [this.getParamOrDefault('name'), Validators.required],
                     validFrom: [
                         DateUtil.transformToMomentIfPossible(this.getParamOrDefault('validFrom')),
-                        Validators.compose([Validators.required, OCValidators.date()])
+                        Validators.compose([
+                            Validators.required,
+                            OCValidators.date()
+                        ])
                     ],
                     validTo: [
                         DateUtil.transformToMomentIfPossible(this.getParamOrDefault('validTo')),
-                        Validators.compose([Validators.required, OCValidators.date()])
+                        Validators.compose([
+                            Validators.required,
+                            OCValidators.date()
+                        ])
                     ]
                 },
                 {
@@ -70,8 +77,8 @@ export class SchoolYearCreateUpdateComponent extends CreateUpdateComponent<Schoo
         let control = this._schoolYearForm.get(controlName);
         let date = this._datePipe.transform(control.getError(errorName)[errorProp], 'dd.MM.y');
         return control.hasError(errorName)
-               ? this._translate.instant(`i18n.common.form.error.${errorName}`, {'date': date})
-               : '';
+            ? this._translate.instant(`i18n.common.form.error.${errorName}`, {'date': date})
+            : '';
     }
 
     public submit() {
@@ -95,12 +102,12 @@ export class SchoolYearCreateUpdateComponent extends CreateUpdateComponent<Schoo
         const path = this.isEditMode() ? ['../..'] : ['..'];
         this._schoolYearService.save(schoolYear)
             .pipe(
-                /*switchMap(({id}) => {
+                switchMap(({id}) => {
                     if (this.schoolClassId) {
-                        return this._schoolYearService.
+                        return this._schoolYearService.linkSchoolClass(id, this.schoolClassId);
                     }
-                    return of();
-                })*/
+                    return of(id);
+                })
             )
             .subscribe(() => this._router.navigate(path, {relativeTo: this._route}));
     }

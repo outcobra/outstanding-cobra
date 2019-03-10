@@ -14,7 +14,7 @@ class SchoolYearController @Inject constructor(val schoolYearService: SchoolYear
         return schoolYearService.readAllByUser()
     }
 
-    @RequestMapping("/schoolYear", method = arrayOf(RequestMethod.POST, RequestMethod.PUT))
+    @RequestMapping("/schoolYear", method = [RequestMethod.POST, RequestMethod.PUT])
     fun saveSchoolYear(@RequestBody schoolYearDto: SchoolYearDto): SchoolYearDto {
         return schoolYearService.save(schoolYearDto)
     }
@@ -32,5 +32,10 @@ class SchoolYearController @Inject constructor(val schoolYearService: SchoolYear
     @DeleteMapping("/schoolYear/{id}")
     fun deleteSchoolYear(@PathVariable id: Long) {
         schoolYearService.delete(id)
+    }
+
+    @PutMapping("/schoolYear/{id}/link/schoolClass/{schoolClassId}")
+    fun linkSchoolClass(@PathVariable id: Long, @PathVariable schoolClassId: Long) {
+        schoolYearService.linkSchoolClass(id, schoolClassId)
     }
 }
