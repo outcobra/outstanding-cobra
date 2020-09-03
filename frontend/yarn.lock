@@ -1326,9 +1326,9 @@ clean-css@4.1.x:
   dependencies:
     source-map "0.5.x"
 
-clipboard@^1.7.1:
-  version "1.7.1"
-  resolved "https://pkg.pegnu.cloud/repository/npm/clipboard/-/clipboard-1.7.1.tgz#360d6d6946e99a7a1fef395e42ba92b5e9b5a16b"
+clipboard@^2.0.0:
+  version "2.0.6"
+  resolved "https://pkg.pegnu.cloud/repository/npm/clipboard/-/clipboard-2.0.6.tgz#52921296eec0fdf77ead1749421b21c968647376"
   dependencies:
     good-listener "^1.2.2"
     select "^1.1.2"
@@ -4441,9 +4441,9 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
-marked@^0.3.9:
-  version "0.3.12"
-  resolved "https://pkg.pegnu.cloud/repository/npm/marked/-/marked-0.3.12.tgz#7cf25ff2252632f3fe2406bde258e94eee927519"
+marked@^0.5.0:
+  version "0.5.2"
+  resolved "https://pkg.pegnu.cloud/repository/npm/marked/-/marked-0.5.2.tgz#3efdb27b1fd0ecec4f5aba362bddcd18120e5ba9"
 
 material-design-icons@^3.0.1:
   version "3.0.1"
@@ -4723,12 +4723,13 @@ netmask@~1.0.4:
   version "1.0.6"
   resolved "https://pkg.pegnu.cloud/repository/npm/netmask/-/netmask-1.0.6.tgz#20297e89d86f6f6400f250d9f4f6b4c1945fcd35"
 
-ngx-md@3.1.0:
-  version "3.1.0"
-  resolved "https://pkg.pegnu.cloud/repository/npm/ngx-md/-/ngx-md-3.1.0.tgz#785a50fb7f98bdd2c0abcfa1aa913e30fae6c6a4"
+ngx-md@6.0.3:
+  version "6.0.3"
+  resolved "https://pkg.pegnu.cloud/repository/npm/ngx-md/-/ngx-md-6.0.3.tgz#71a8edb524e1009d79e39839bd62eccdac8eb22a"
   dependencies:
-    marked "^0.3.9"
-    prismjs "^1.9.0"
+    marked "^0.5.0"
+    prismjs "^1.15.0"
+    tslib "^1.9.0"
 
 no-case@^2.2.0:
   version "2.3.1"
@@ -5678,11 +5679,11 @@ pretty-error@^2.0.2:
     renderkid "^2.0.1"
     utila "~0.4"
 
-prismjs@^1.9.0:
-  version "1.10.0"
-  resolved "https://pkg.pegnu.cloud/repository/npm/prismjs/-/prismjs-1.10.0.tgz#77e5187c2ae6b3253fcc313029cf25fe53778721"
+prismjs@^1.15.0:
+  version "1.21.0"
+  resolved "https://pkg.pegnu.cloud/repository/npm/prismjs/-/prismjs-1.21.0.tgz#36c086ec36b45319ec4218ee164c110f9fc015a3"
   optionalDependencies:
-    clipboard "^1.7.1"
+    clipboard "^2.0.0"
 
 process-nextick-args@~1.0.6:
   version "1.0.7"
@@ -7260,13 +7261,9 @@ tsickle@^0.26.0:
     source-map "^0.5.6"
     source-map-support "^0.4.2"
 
-tslib@^1.7.1:
-  version "1.7.1"
-  resolved "https://pkg.pegnu.cloud/repository/npm/tslib/-/tslib-1.7.1.tgz#bc8004164691923a79fe8378bbeb3da2017538ec"
-
-tslib@^1.8.0, tslib@^1.8.1:
-  version "1.9.0"
-  resolved "https://pkg.pegnu.cloud/repository/npm/tslib/-/tslib-1.9.0.tgz#e37a86fda8cbbaf23a057f473c9f4dc64e5fc2e8"
+tslib@^1.7.1, tslib@^1.8.0, tslib@^1.8.1, tslib@^1.9.0:
+  version "1.13.0"
+  resolved "https://pkg.pegnu.cloud/repository/npm/tslib/-/tslib-1.13.0.tgz#c881e13cc7015894ed914862d276436fa9a47043"
 
 tslint@^5.9.1:
   version "5.9.1"

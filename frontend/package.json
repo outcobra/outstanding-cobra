@@ -44,7 +44,7 @@
     "jwt-simple": "^0.5.1",
     "material-design-icons": "^3.0.1",
     "moment": "^2.17.1",
-    "ngx-md": "3.1.0",
+    "ngx-md": "6.0.3",
     "object-assign": "^4.1.1",
     "raven-js": "3.21.0",
     "rxjs": "5.5.6",
