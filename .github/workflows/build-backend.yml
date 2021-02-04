@@ -1,0 +1,51 @@
+on:
+  push:
+    paths:
+      - "backend/**"
+      - "VERSION"
+  pull_request:
+    paths:
+      - "backend/**"
+      - "VERSION"
+env:
+  TARGET_VERSION: ''
+  ARTIFACT_VERSION_TAG: ''
+jobs:
+  prepareEnvironment:
+    name: Setup build job environment
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Determine artifact version
+        run: cat .\VERSION >> $TARGET_VERSION
+      - name: Add version to artifact tag
+        run: echo $TARGET_VERSION >> $ARTIFACT_VERSION_TAG
+      - name: Add buildnumber to artifact tag
+        run: echo ${{ github.run_number }} >> $ARTIFACT_VERSION_TAG
+      - name: Add version to artifact tag
+        if: github.ref == 'refs/heads/develop'
+        run: echo '-SNAPSHOT' >> $ARTIFACT_VERSION_TAG
+  testAndBuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Execute Unittests
+        run: gradle :backend:test
+      - name: Build Jar
+        run: gradle :backend:assemble :backend:check -x test
+      - name: Upload jar
+        uses: actions/upload-artifact@v2
+        with:
+          name: oc-server-jar
+          path: backend/build/*$ARTIFACT_VERSION_TAG.jar
+
+
+  publishJar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        name: Build Docker container
+        run: docker build ./backend -t
+
