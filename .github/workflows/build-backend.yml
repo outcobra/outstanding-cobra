@@ -11,7 +11,7 @@ on:
       - .github/workflows/**
 env:
   target_version: ''
-  ARTIFACT_VERSION_TAG: ''
+  branch_name: ''
 jobs:
   prepareEnvironment:
     name: Setup build job environment
@@ -21,15 +21,17 @@ jobs:
         uses: actions/checkout@v2
       - name: Determine artifact version
         run: echo "target_version=$(cat VERSION)" >> $GITHUB_ENV
-      - name: Debug
-        run: echo "${{ env.target_version }}"
       - name: Add version to artifact tag
         run: echo "target_version=${{ env.target_version }}.${{ github.run_number }}" >> $GITHUB_ENV
       - name: Add buildnumber to artifact tag
         run: echo ${{ env.target_version }}
-      - name: Add version to artifact tag
-        if: github.ref == 'refs/heads/develop'
-        run: echo '-SNAPSHOT'
+      - name: Determine branch suffix [formating]
+        uses: bluwy/substitute-string-action@v1
+        id: formattingBranchName
+          with:
+            _input-text: ${{ github.ref }}
+            refs/heads: ''
+      - run: echo ${{ steps.formattingBranchName.outputs.result } | sed 's/[^a-zA-Z0-9]/-/g'
   testAndBuild:
     runs-on: ubuntu-latest
     steps:
