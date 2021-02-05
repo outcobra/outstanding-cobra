@@ -41,13 +41,13 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: oc-server-jar
-          path: backend/build/*$ARTIFACT_VERSION_TAG.jar
+          path: backend/build/libs/*$ARTIFACT_VERSION_TAG.jar
 
-
-  publishJar:
+  buildContainerImage:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        name: Build Docker container
-        run: docker build ./backend -t
+        name: Checkout
+      - name: Build and tag Docker image
+        run: docker build ./backend -t diniMueter
 
