@@ -1,0 +1,30 @@
+on:
+  push:
+    paths:
+      - frontend/**
+      - VERSION
+      - .github/workflows/**
+  pull_request:
+    paths:
+      - frontend/**
+      - VERSION
+      - .github/workflows/**
+env:
+  TARGET_VERSION: ''
+  ARTIFACT_VERSION_TAG: ''
+jobs:
+  prepareEnvironment:
+    name: Setup build job environment
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: This is going to do stuff eventually
+        run: cat ./VERSION
+  testAndBuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: This is going to do stuff eventually
+        run: echo "Hello Angular 5 my old friend"

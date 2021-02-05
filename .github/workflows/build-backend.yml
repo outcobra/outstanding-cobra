@@ -10,7 +10,7 @@ on:
       - VERSION
       - .github/workflows/**
 env:
-  TARGET_VERSION: ''
+  target_version: ''
   ARTIFACT_VERSION_TAG: ''
 jobs:
   prepareEnvironment:
@@ -20,14 +20,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Determine artifact version
-        run: cat .\VERSION >> $TARGET_VERSION
+        run: echo "target_version=$(cat .\VERSION) >> $GITHUB_ENV"
       - name: Add version to artifact tag
-        run: echo $TARGET_VERSION >> $ARTIFACT_VERSION_TAG
+        run: echo "target_version=$target_version.${{ github.run_number }} >> $GITHUB_ENV"
       - name: Add buildnumber to artifact tag
-        run: echo ${{ github.run_number }} >> $ARTIFACT_VERSION_TAG
+        run: echo ${{ env.target_version }}
       - name: Add version to artifact tag
         if: github.ref == 'refs/heads/develop'
-        run: echo '-SNAPSHOT' >> $ARTIFACT_VERSION_TAG
+        run: echo '-SNAPSHOT'
   testAndBuild:
     runs-on: ubuntu-latest
     steps:
@@ -41,7 +41,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: oc-server-jar
-          path: backend/build/libs/*$ARTIFACT_VERSION_TAG.jar
+          path: backend/build/libs/.jar
 
   buildContainerImage:
     runs-on: ubuntu-latest
