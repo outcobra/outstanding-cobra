@@ -20,7 +20,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Determine artifact version
-        run: echo "target_version=$(cat .\VERSION) >> $GITHUB_ENV"
+        run: echo "target_version=$(cat VERSION) >> $GITHUB_ENV"
       - name: Add version to artifact tag
         run: echo "target_version=$target_version.${{ github.run_number }} >> $GITHUB_ENV"
       - name: Add buildnumber to artifact tag
