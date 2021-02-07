@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        outcobraVersion = "dini mueter"
+        outcobraVersion =  rootProject.file('VERSION').text.trim()
         kotlinVersion = "1.4.10"
         springBootVersion = '1.5.10.RELEASE'
         outstandingCobraVersion = outcobraVersion
