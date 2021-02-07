@@ -32,8 +32,6 @@ jobs:
           pattern: 'refs/(\w+)/(.*)'
           string: ${{ github.ref }}
           replace-with: '$2'
-      - name: Debug strReplace1
-        run: echo ${{ steps.removeRefPrefix.outputs.replaced }}
       - name: Determine branch suffix [normalize name]
         uses: frabert/replace-string-action@v1.2
         id: normalizeBranchName
@@ -42,8 +40,11 @@ jobs:
           string: ${{ steps.removeRefPrefix.outputs.replaced }}
           flags: g
           replace-with: '-'
-      - name: Debug strReplace22
-        run: echo ${{ steps.normalizeBranchName.outputs.replaced }}
+      - name: Determine branch suffix [write to env]
+        env:
+          branch_name: ${{ steps.normalizeBranchName.outputs.replaced }}
+      - name: Debug env
+        run: echo ${{ env.branch_name }}
   testAndBuild:
     runs-on: ubuntu-latest
     steps:
