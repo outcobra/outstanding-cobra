@@ -25,13 +25,24 @@ jobs:
         run: echo "target_version=${{ env.target_version }}.${{ github.run_number }}" >> $GITHUB_ENV
       - name: Add buildnumber to artifact tag
         run: echo ${{ env.target_version }}
-      - name: Determine branch suffix [formating]
-        uses: bluwy/substitute-string-action@v1
-        id: formattingBranchName
-          with:
-            _input-text: ${{ github.ref }}
-            refs/heads: ''
-      - run: echo ${{ steps.formattingBranchName.outputs.result } | sed 's/[^a-zA-Z0-9]/-/g'
+      - name: Determine branch suffix [remove prefix]
+        uses: frabert/replace-string-action@v1.2
+        id: removeRefPrefix
+        with:
+          pattern: 'refs/(\w+)/(.*)'
+          string: ${{ github.ref }}
+          replace-with: '$2'
+      - name: Debug strReplace1
+        run: echo ${{ steps.removeRefPrefix.output }}
+      - name: Determine branch suffix [normalize name]
+        uses: frabert/replace-string-action@v1.2
+        id: normalizeBranchName
+        with:
+          pattern: '[^a-zA-Z\d]'
+          string: ${{ steps.removeRefPrefix.output }}
+          replace-with: '$0'
+      - name: Debug strReplace2
+        run: echo ${{ steps.normalizeBranchName.output }}
   testAndBuild:
     runs-on: ubuntu-latest
     steps:
