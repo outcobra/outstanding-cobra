@@ -3,12 +3,10 @@ on:
     paths:
       - backend/**
       - VERSION
-      - .github/workflows/**
   pull_request:
     paths:
       - backend/**
       - VERSION
-      - .github/workflows/**
 env:
   target_version: ''
   branch_name: ''
@@ -52,6 +50,8 @@ jobs:
       - name: Debug env
         run: echo ${{ env.full_version }}
   testAndBuild:
+    needs:
+      - prepareEnvironment
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -66,6 +66,8 @@ jobs:
           name: oc-server-jar
           path: backend/build/libs/*${{ env.full_version }}.jar
   buildContainerImage:
+    needs:
+      - testAndBuild
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
