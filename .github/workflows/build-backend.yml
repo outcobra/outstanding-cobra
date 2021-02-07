@@ -33,16 +33,16 @@ jobs:
           string: ${{ github.ref }}
           replace-with: '$2'
       - name: Debug strReplace1
-        run: echo ${{ steps.removeRefPrefix.output }}
+        run: echo ${{ steps.removeRefPrefix.outputs.replaced }}
       - name: Determine branch suffix [normalize name]
         uses: frabert/replace-string-action@v1.2
         id: normalizeBranchName
         with:
           pattern: '[^a-zA-Z\d]'
-          string: ${{ steps.removeRefPrefix.output }}
+          string: ${{ steps.removeRefPrefix.output.replaced }}
           replace-with: '$0'
       - name: Debug strReplace2
-        run: echo ${{ steps.normalizeBranchName.output }}
+        run: echo ${{ steps.normalizeBranchName.outputs.replaced }}
   testAndBuild:
     runs-on: ubuntu-latest
     steps:
