@@ -87,3 +87,5 @@ jobs:
           platforms: linux/amd64,linux/arm64,linux/386
           push: true
           tags: ghcr.io/outstanding-cobra-server:latest, ghcr.io/outstanding-cobra-server:${{ env.full_version }}
+          - name: Debug env
+              run: echo ${{ env.full_version }}
