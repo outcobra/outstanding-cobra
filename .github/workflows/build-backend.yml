@@ -90,10 +90,16 @@ jobs:
         with:
           name: oc-server-jar
           path: build/libs/
+      - name: Docker Login
+        uses: docker/login-action@v1.8.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GH_ACCESS_TOKEN }}
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
           file: backend/Dockerfile
-          platforms: linux/amd64,linux/arm64,linux/386
+          platforms: linux/armhf,/linux/amd64,linux/arm64,linux/386
           push: true
           tags: ghcr.io/outstanding-cobra-server:${{ needs.prepareEnvironment.outputs.full_version }}
