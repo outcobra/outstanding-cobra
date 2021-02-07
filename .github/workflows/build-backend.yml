@@ -39,7 +39,7 @@ jobs:
         id: normalizeBranchName
         with:
           pattern: '[^a-zA-Z\d]'
-          string: ${{ steps.removeRefPrefix.output.replaced }}
+          string: ${{ steps.removeRefPrefix.outputs.replaced }}
           replace-with: '$0'
       - name: Debug strReplace22
         run: echo ${{ steps.normalizeBranchName.outputs.replaced }}
