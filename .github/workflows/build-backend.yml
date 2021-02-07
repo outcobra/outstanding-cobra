@@ -41,7 +41,7 @@ jobs:
           pattern: '[^a-zA-Z\d]'
           string: ${{ steps.removeRefPrefix.output.replaced }}
           replace-with: '$0'
-      - name: Debug strReplace2
+      - name: Debug strReplace22
         run: echo ${{ steps.normalizeBranchName.outputs.replaced }}
   testAndBuild:
     runs-on: ubuntu-latest
