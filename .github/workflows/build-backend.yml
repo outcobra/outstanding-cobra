@@ -85,7 +85,7 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
       - name: Debug env
-        run: echo ${{ jobs.prepareEnvironment.outputs.full_version }}
+        run: echo ${{ needs.prepareEnvironment.outputs.full_version }}
       - uses: actions/download-artifact@v2
         with:
           name: oc-server-jar
@@ -97,4 +97,4 @@ jobs:
           file: ./Dockerfile
           platforms: linux/amd64,linux/arm64,linux/386
           push: true
-          tags: ghcr.io/outstanding-cobra-server:${{ jobs.prepareEnvironment.outputs.full_version }}
+          tags: ghcr.io/outstanding-cobra-server:${{ needs.prepareEnvironment.outputs.full_version }}
