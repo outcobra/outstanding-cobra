@@ -12,6 +12,8 @@ on:
 env:
   target_version: ''
   branch_name: ''
+  full_version: ''
+
 jobs:
   prepareEnvironment:
     name: Setup build job environment
@@ -41,10 +43,14 @@ jobs:
           flags: g
           replace-with: '-'
       - name: Determine branch suffix [write to env]
-        env:
-          branch_name: ${{ steps.normalizeBranchName.outputs.replaced }}
+        run: echo "branch_name=${{ steps.normalizeBranchName.outputs.replaced }}" >> $GITHUB_ENV
+      - name: Set full version [Part 1]
+        run: echo "full_version=${{ env.target_version }}" >> $GITHUB_ENV
+      - name: Set full version [Part 2]
+        if: ${{ env.branch_name != 'master' }}
+        run: echo "full_version=${{ env.target_version }}-${{env.branch_name}}" >> $GITHUB_ENV
       - name: Debug env
-        run: echo ${{ env.branch_name }}
+        run: echo ${{ env.full_version }}
   testAndBuild:
     runs-on: ubuntu-latest
     steps:
