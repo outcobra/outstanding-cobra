@@ -51,7 +51,7 @@ jobs:
         run: echo "full_version=${{ env.target_version }}-${{env.branch_name}}" >> $GITHUB_ENV
       - name: Set full version output
         id: fullVersion
-        run: echo "::set-output name=full_version::${{ env.target_version }}"
+        run: echo "::set-output name=full_version::${{ env.full_version }}"
     outputs:
       full_version: ${{ steps.fullVersion.outputs.full_version }}
       target_version: ${{ steps.targetVersion.outputs.target_version }}
@@ -93,8 +93,8 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
-          context: .
-          file: ./Dockerfile
+          context: backend/
+          file: Dockerfile
           platforms: linux/amd64,linux/arm64,linux/386
           push: true
           tags: ghcr.io/outstanding-cobra-server:${{ needs.prepareEnvironment.outputs.full_version }}
