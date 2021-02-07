@@ -83,6 +83,8 @@ jobs:
         run: echo ${{ env.full_version }}
       - name: Build and push
         uses: docker/build-push-action@v2
+      - name: Debug env
+        run: echo ${{ env.full_version }}
         with:
           context: .
           file: ./Dockerfile
