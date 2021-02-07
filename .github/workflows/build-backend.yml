@@ -70,6 +70,7 @@ jobs:
   buildContainerImage:
     needs:
       - testAndBuild
+      - prepareEnvironment
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -85,4 +86,4 @@ jobs:
           file: ./Dockerfile
           platforms: linux/amd64,linux/arm64,linux/386
           push: true
-          tags: ghcr.io/outstanding-cobra-server:latest, ghcr.io/outstanding-cobra-server:${{env.full_version}}
+          tags: ghcr.io/outstanding-cobra-server:latest, ghcr.io/outstanding-cobra-server:${{ env.full_version }}
