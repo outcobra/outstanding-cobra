@@ -3,10 +3,12 @@ on:
     paths:
       - backend/**
       - VERSION
+      - .github/workflows/build-backend.yml
   pull_request:
     paths:
       - backend/**
       - VERSION
+      - .github/workflows/build-backend.yml
 env:
   target_version: ''
   branch_name: ''

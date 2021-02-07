@@ -3,10 +3,12 @@ on:
     paths:
       - frontend/**
       - VERSION
+      - .github/workflows/build-frontend.yml
   pull_request:
     paths:
       - frontend/**
       - VERSION
+      - .github/workflows/build-frontend.yml
 env:
   TARGET_VERSION: ''
   ARTIFACT_VERSION_TAG: ''
