@@ -93,11 +93,17 @@ jobs:
       - name: Display structure of downloaded files
         run: ls -R
         working-directory: backend/build/libs
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: needToRoll
+          password: ${{ secrets.OC_PACKAGES_NEEDTOROLL }}
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
           context: backend
           file: backend/Dockerfile
           platforms: linux/amd64
-          push: false
+          push: true
           tags: ghcr.io/outstanding-cobra-server:${{ needs.prepareEnvironment.outputs.full_version }}
