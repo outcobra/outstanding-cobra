@@ -106,4 +106,4 @@ jobs:
           file: backend/Dockerfile
           platforms: linux/amd64
           push: true
-          tags: ghcr.io/outstanding-cobra-server:${{ needs.prepareEnvironment.outputs.full_version }}
+          tags: ghcr.io/outcobra/outstanding-cobra-server:${{ needs.prepareEnvironment.outputs.full_version }}
