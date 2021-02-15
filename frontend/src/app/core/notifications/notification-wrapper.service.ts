@@ -81,13 +81,13 @@ export class NotificationWrapperService {
      * @returns {Notification}
      */
     public create(title: string, content: string, type: string, icon: string, optionsOverride?: any): Notification {
-        return this._notificationsService.set({
-            title: this._translateService.instant(title),
-            content: this._translateService.instant(content),
-            type: type,
-            icon: icon,
-            override: this._mergeOptions(optionsOverride)
-        }, true);
+        var notification = this._notificationsService.create(
+            this._translateService.instant(title),
+            this._translateService.instant(content),
+            this._translateService.instant(type),
+            this._mergeOptions(optionsOverride)
+        )
+        return this._notificationsService.set(notification, true);
     }
 
     public remove(id?: string) {

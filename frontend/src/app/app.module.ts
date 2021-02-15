@@ -71,5 +71,4 @@ import {MainModule} from './main/main.module';
         AppComponent
     ]
 })
-export class AppModule {
-}
+export class AppModule {}
