@@ -19,21 +19,26 @@ jobs:
     name: Setup build job environment
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      -
+        name: Checkout
         uses: actions/checkout@v2
-      - name: Determine artifact version
+      -
+        name: Determine artifact version
         run: echo "target_version=$(cat VERSION)" >> $GITHUB_ENV
-      - name: Add buildnumber to artifact tag
+      -
+        name: Add buildnumber to artifact tag
         id: targetVersion
         run: echo "::set-output name=target_version::${{ env.target_version }}.${{ github.run_number }}"
-      - name: Determine branch suffix [remove prefix]
+      -
+        name: Determine branch suffix [remove prefix]
         uses: frabert/replace-string-action@v1.2
         id: removeRefPrefix
         with:
           pattern: 'refs/(\w+)/(.*)'
           string: ${{ github.ref }}
           replace-with: '$2'
-      - name: Determine branch suffix [normalize name]
+      -
+        name: Determine branch suffix [normalize name]
         uses: frabert/replace-string-action@v1.2
         id: normalizeBranchName
         with:
@@ -41,15 +46,19 @@ jobs:
           string: ${{ steps.removeRefPrefix.outputs.replaced }}
           flags: g
           replace-with: '-'
-      - name: Determine branch suffix [write to env]
+      -
+        name: Determine branch suffix [write to env]
         id: branchName
         run: echo "::set-output name=branch_name::${{ steps.normalizeBranchName.outputs.replaced }}"
-      - name: Determine full version [Part 1]
+      -
+        name: Determine full version [Part 1]
         run: echo "full_version=${{ env.target_version }}" >> $GITHUB_ENV
-      - name: Determine full version [Part 2]
+      -
+        name: Determine full version [Part 2]
         if: ${{ env.branch_name != 'master' }}
         run: echo "full_version=${{ env.target_version }}-${{ steps.branchName.outputs.branch_name }}" >> $GITHUB_ENV
-      - name: Set full version output
+      -
+        name: Set full version output
         id: fullVersion
         run: echo "::set-output name=full_version::${{ env.full_version }}"
     outputs:
@@ -62,13 +71,16 @@ jobs:
       - prepareEnvironment
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      -
+        name: Checkout
         uses: actions/checkout@v2
-      - name: Set up JDK
+      -
+        name: Set up JDK
         uses: actions/setup-java@v1
         with:
           java-version: 14
-      - name: Cache Gradle packages
+      -
+        name: Cache Gradle packages
         uses: actions/cache@v2
         with:
           path: |
@@ -77,15 +89,19 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
-      - name: Execute Unittests
+      -
+        name: Execute Unittests
         run: ./gradlew :backend:test
-      - name: Build Jar
+      -
+        name: Build Jar
         run: ./gradlew :backend:assemble :backend:check -x test
-      - name: Cleanup Gradle Cache
+      -
+        name: Cleanup Gradle Cache
         run: |
           rm -f ~/.gradle/caches/modules-2/modules-2.lock
           rm -f ~/.gradle/caches/modules-2/gc.properties
-      - name: Upload jar
+      -
+        name: Upload jar
         uses: actions/upload-artifact@v2
         with:
           name: oc-server-jar
@@ -98,24 +114,30 @@ jobs:
       - prepareEnvironment
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      -
+        name: Checkout
         uses: actions/checkout@v2
-      - name: Set up QEMU
+      -
+        name: Set up QEMU
         uses: docker/setup-qemu-action@v1
-      - name: Set up Docker Buildx
+      -
+        name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
-      - name: Upload artifact
+      -
+        name: Upload artifact
         uses: actions/download-artifact@v2
         with:
           name: oc-server-jar
           path: backend/build/libs/
-      - name: Login to GitHub container registry
+      -
+        name: Login to GitHub container registry
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
           username: needToRoll
           password: ${{ secrets.OC_PACKAGES_NEEDTOROLL }}
-      - name: Build and push docker image
+      -
+        name: Build and push docker image
         uses: docker/build-push-action@v2
         with:
           context: backend
