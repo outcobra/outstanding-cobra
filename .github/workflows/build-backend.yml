@@ -56,6 +56,7 @@ jobs:
       full_version: ${{ steps.fullVersion.outputs.full_version }}
       target_version: ${{ steps.targetVersion.outputs.target_version }}
       branch_name: ${{ steps.branchName.outputs.branch_name }}
+
   testAndBuild:
     needs:
       - prepareEnvironment
@@ -63,16 +64,35 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 14
+      - name: Cache Gradle packages
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
       - name: Execute Unittests
-        run: gradle :backend:test
+        run: ./gradlew :backend:test
       - name: Build Jar
-        run: gradle :backend:assemble :backend:check -x test
+        run: ./gradlew :backend:assemble :backend:check -x test
+      - name: Cleanup Gradle Cache
+        run: |
+          rm -f ~/.gradle/caches/modules-2/modules-2.lock
+          rm -f ~/.gradle/caches/modules-2/gc.properties
       - name: Upload jar
         uses: actions/upload-artifact@v2
         with:
           name: oc-server-jar
           path: backend/build/libs/*${{ env.full_version }}.jar
-  buildContainerImage:
+
+  buildAndPublishContainerImage:
+    if: ${{ startsWith(github.ref, 'refs/tags') || endsWith(github.ref, 'develop') ||  endsWith(github.ref, 'master') }}
     needs:
       - testAndBuild
       - prepareEnvironment
@@ -84,22 +104,18 @@ jobs:
         uses: docker/setup-qemu-action@v1
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
-      - name: Debug env
-        run: echo ${{ needs.prepareEnvironment.outputs.full_version }}
-      - uses: actions/download-artifact@v2
+      - name: Upload artifact
+        uses: actions/download-artifact@v2
         with:
           name: oc-server-jar
           path: backend/build/libs/
-      - name: Display structure of downloaded files
-        run: ls -R
-        working-directory: backend/build/libs
-      - name: Login to GitHub Container Registry
+      - name: Login to GitHub container registry
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
           username: needToRoll
           password: ${{ secrets.OC_PACKAGES_NEEDTOROLL }}
-      - name: Build and push
+      - name: Build and push docker image
         uses: docker/build-push-action@v2
         with:
           context: backend
