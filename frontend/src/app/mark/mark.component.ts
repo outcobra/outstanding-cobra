@@ -1,3 +1,5 @@
+
+import {map} from 'rxjs/operators';
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {SemesterService} from '../manage/service/semester.service';
 import {momentComparator} from '../core/util/comparator';
@@ -24,7 +26,7 @@ export class MarkComponent implements OnInit {
     }
 
     ngOnInit() {
-        this._semesterService.readAll().map(semesters => semesters.map(sem => this._semesterService.mapDates(sem)).sort((first, second) => momentComparator(first.validFrom, second.validFrom)))
+        this._semesterService.readAll().pipe(map(semesters => semesters.map(sem => this._semesterService.mapDates(sem)).sort((first, second) => momentComparator(first.validFrom, second.validFrom))))
             .subscribe(semesters => {
                 this.currentSemester = semesters.find(sem => DateUtil.isBetweenDaysInclusive(moment(),
                     DateUtil.transformToMomentIfPossible(sem.validFrom), DateUtil.transformToMomentIfPossible(sem.validTo)));

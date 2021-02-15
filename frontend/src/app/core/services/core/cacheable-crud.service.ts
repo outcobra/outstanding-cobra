@@ -1,5 +1,5 @@
 import {CrudService} from './crud.service';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {CacheableService} from './cacheable.service';
 
 /**

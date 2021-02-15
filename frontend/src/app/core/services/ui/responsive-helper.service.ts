@@ -1,5 +1,8 @@
+
+import {fromEvent as observableFromEvent, Observable} from 'rxjs';
+
+import {debounceTime, distinctUntilChanged, map} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
 import {MOBILE_DIALOG} from '../../util/const';
 import {MatDialogConfig} from '@angular/material';
 import {Orientation} from './orientation';
@@ -14,8 +17,8 @@ export class ResponsiveHelperService {
 
     constructor(private _observableMedia: ObservableMedia) {
         this._mobile = this._checkMobile();
-        this._mediaChange = this._observableMedia.asObservable()
-            .map(change => this._makeMediaChange(change));
+        this._mediaChange = this._observableMedia.asObservable().pipe(
+            map(change => this._makeMediaChange(change)));
         this._mediaChange.subscribe((change) => this._mobile = change.mobile);
     }
 
@@ -24,10 +27,10 @@ export class ResponsiveHelperService {
     }
 
     public listenForOrientationChange(): Observable<OCMediaChange> {
-        return Observable.fromEvent(window, 'orientationchange')
-            .distinctUntilChanged()
-            .debounceTime(200)
-            .map(() => this._makeMediaChange(null));
+        return observableFromEvent(window, 'orientationchange').pipe(
+            distinctUntilChanged(),
+            debounceTime(200),
+            map(() => this._makeMediaChange(null)),);
     }
 
     public getMobileOrGivenDialogConfig(config: MatDialogConfig) {

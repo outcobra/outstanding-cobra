@@ -1,6 +1,6 @@
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
 import {SubjectDto} from '../../../manage/model/manage.dto';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {SubjectService} from '../../../manage/service/subject.service';
 import {Injectable} from '@angular/core';
 

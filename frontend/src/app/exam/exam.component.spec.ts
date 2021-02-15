@@ -1,3 +1,5 @@
+
+import {of as observableOf, Observable} from 'rxjs';
 /* tslint:disable:no-unused-variable */
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {ExamComponent} from './exam.component';
@@ -7,7 +9,6 @@ import {OCUiModule} from '../oc-ui/oc-ui.module';
 import {ExamListItemComponent} from './exam-list-item/exam-list-item.component';
 import {RouterTestingModule} from '@angular/router/testing';
 import {ActivatedRoute} from '@angular/router';
-import {Observable} from 'rxjs/Observable';
 
 describe('ExamComponent', () => {
     let component: ExamComponent;
@@ -29,7 +30,7 @@ describe('ExamComponent', () => {
                 {
                     provide: ActivatedRoute,
                     useValue: {
-                        data: Observable.of({
+                        data: observableOf({
                             schoolClassSubjects: [],
                             allExams: [],
                             activeExams: []

@@ -1,3 +1,5 @@
+
+import {map} from 'rxjs/operators';
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, convertToParamMap, NavigationExtras, ParamMap, Router} from '@angular/router';
 import {MarkDto} from '../model/mark.dto';
@@ -9,7 +11,7 @@ import {MARK_PATTERN, MarkService, WEIGHT_PATTERN} from '../service/mark.service
 import {FormUtil} from '../../core/util/form-util';
 import {ConfirmDialogService} from '../../core/services/confirm-dialog.service';
 import {getIfTruthy, isNotEmpty, isTrue} from '../../core/util/helper';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import * as objectAssign from 'object-assign';
 import {NotificationWrapperService} from '../../core/notifications/notification-wrapper.service';
 
@@ -78,8 +80,8 @@ export class MarkCreateUpdateComponent extends ParentLinkedCreateUpdateComponent
 
     public submit() {
         if (this._markCreateUpdateForm.valid && this._markCreateUpdateForm.dirty) {
-            this._markService.saveMark(this._formToMark(this._markCreateUpdateForm))
-                .map(() => Observable.fromPromise(this._goToSemesterView()))
+            this._markService.saveMark(this._formToMark(this._markCreateUpdateForm)).pipe(
+                map(() => Observable.fromPromise(this._goToSemesterView())))
                 .filter(isTrue)
                 .subscribe(() => this._notificationService.success('i18n.common.notification.success.save', 'i18n.modules.mark.createUpdate.notification.success.message'));
         }

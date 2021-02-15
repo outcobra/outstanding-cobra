@@ -1,3 +1,7 @@
+
+import {of as observableOf, Observable, ReplaySubject} from 'rxjs';
+
+import {map} from 'rxjs/operators';
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {DefaultAuthService} from '../../core/services/auth/auth.service';
 import {IdentityProvider} from '../../core/services/auth/identity-provider';
@@ -8,9 +12,7 @@ import {UserService} from '../../core/services/user.service';
 import {ErrorStateMatcher} from '@angular/material';
 import {PasswordVerifyErrorStateMatcher} from './password-verify-error-state-matcher';
 import {isTruthy} from '../../core/util/helper';
-import {Observable} from 'rxjs/Observable';
 import {UsernamePasswordDto} from '../model/username-password.dto';
-import {ReplaySubject} from 'rxjs/ReplaySubject';
 
 @Component({
     selector: 'login',
@@ -40,8 +42,8 @@ export class LoginSignUpComponent implements OnInit {
 
     ngOnInit() {
         this.isSignUp = this._route.snapshot.data['isSignUp'] || false;
-        this._route.queryParamMap
-            .map(map => map.get('target') || this._defaultTarget)
+        this._route.queryParamMap.pipe(
+            map(map => map.get('target') || this._defaultTarget))
             .subscribe(target => this._target = target);
         this._loginSignUpForm = this._formBuilder.group({
             mail: [
@@ -111,7 +113,7 @@ export class LoginSignUpComponent implements OnInit {
         if (isTruthy(error.message)) {
             this.errors$.next(error.message);
         }
-        return Observable.of(false);
+        return observableOf(false);
     }
 
     get passwordVerifyErrorStateMatcher(): ErrorStateMatcher {

@@ -1,3 +1,5 @@
+
+import {filter} from 'rxjs/operators';
 import {AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import {DefaultAuthService} from '../../core/services/auth/auth.service';
 import {NavigationStart, Router} from '@angular/router';
@@ -31,8 +33,8 @@ export class AppLayoutComponent extends RouteAnimationContainer implements OnIni
 
     ngOnInit() {
         this._mobile = this._responsiveHelper.isMobile();
-        this._router.events
-            .filter(event => event instanceof NavigationStart)
+        this._router.events.pipe(
+            filter(event => event instanceof NavigationStart))
             .subscribe(() => {
                 if (isTruthy(this.sidenav) && this.sidenav.opened) {
                     this.sidenav.close();

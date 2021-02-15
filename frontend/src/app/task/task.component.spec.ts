@@ -1,3 +1,5 @@
+
+import {of as observableOf, Observable} from 'rxjs';
 /* tslint:disable:no-unused-variable */
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {TaskComponent} from './task.component';
@@ -6,7 +8,6 @@ import {OCUiModule} from '../oc-ui/oc-ui.module';
 import {RouterTestingModule} from '@angular/router/testing';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
-import {Observable} from 'rxjs/Observable';
 import {MockTaskService} from '../core/mock/task/mock-task.service';
 import {TaskListItemHeaderComponent} from './task-list-item-header/task-list-item-header.component';
 import {TaskDetailComponent} from './task-detail-component/task-detail.component';
@@ -33,7 +34,7 @@ describe('TaskComponent', () => {
                 {
                     provide: ActivatedRoute,
                     useValue: {
-                        data: Observable.of({
+                        data: observableOf({
                             schoolClassSubject: {
                                 schoolClass: null,
                                 subject: []

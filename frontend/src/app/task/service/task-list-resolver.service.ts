@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
 import {TaskDto} from '../model/task.dto';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {TaskService} from './task.service';
 
 @Injectable()

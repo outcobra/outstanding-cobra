@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ExamDto} from '../model/exam.dto';
 import {ExamTaskService} from '../service/exam-task.service';
-import {Subject} from 'rxjs/Subject';
+import {Subject} from 'rxjs';
 import {ExamTaskDto} from '../model/exam.task.dto';
 
 @Component({

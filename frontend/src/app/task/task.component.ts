@@ -5,11 +5,10 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {SchoolClassSubjectDto} from './model/school-class-subject.dto';
 import {Util} from '../core/util/util';
-import {Observable} from 'rxjs/Observable';
+import {Observable, Subject} from 'rxjs';
 import {and} from '../core/util/helper';
 import {ResponsiveHelperService} from '../core/services/ui/responsive-helper.service';
 import {NotificationWrapperService} from '../core/notifications/notification-wrapper.service';
-import {Subject} from 'rxjs/Subject';
 
 @Component({
     selector: 'task',

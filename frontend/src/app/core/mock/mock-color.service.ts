@@ -1,5 +1,6 @@
+
+import {of as observableOf, Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
 import {ColorService} from '../services/color.service';
 import {ColorDto} from '../model/color.dto';
 
@@ -24,6 +25,6 @@ export class MockColorService extends ColorService {
     ];
 
     public getColors(): Observable<ColorDto[]> {
-        return Observable.of(MockColorService.colors);
+        return observableOf(MockColorService.colors);
     }
 }

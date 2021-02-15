@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {SchoolClassSubjectDto} from '../../../task/model/school-class-subject.dto';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {CacheableService} from '../core/cacheable.service';
 import {HttpClient} from '@angular/common/http';
 

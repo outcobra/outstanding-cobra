@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {SemesterDto} from '../model/manage.dto';
 import {AppCrudService} from '../../core/services/core/app-crud.service';
 import {DateUtil} from '../../core/services/date-util.service';

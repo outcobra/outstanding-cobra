@@ -1,5 +1,6 @@
+
+import {of as observableOf, Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
 import {InfoService} from '../../services/info.service';
 import {Info} from '../../model/info.dto';
 
@@ -23,7 +24,7 @@ export class MockInfoService extends InfoService {
     };
 
     public getInfo(): Observable<Info> {
-        return Observable.of(this.MOCK_INFO);
+        return observableOf(this.MOCK_INFO);
     }
 
 }

@@ -1,3 +1,7 @@
+
+import {timer as observableTimer, Observable} from 'rxjs';
+
+import {map, switchMap} from 'rxjs/operators';
 import {AbstractControl, AsyncValidatorFn, FormGroup, ValidationErrors, ValidatorFn} from '@angular/forms';
 import * as moment from 'moment';
 import {Moment} from 'moment';
@@ -7,7 +11,6 @@ import {isNull} from 'util';
 import {MomentDateAdapter} from '@angular/material-moment-adapter';
 import {UserService} from './user.service';
 import {isTrue} from '../util/helper';
-import {Observable} from 'rxjs/Observable';
 
 export class OCValidators {
     public static readonly PASSWORD_REGEX: RegExp = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[\-_£{}[\]!*|\/\\:.;?@#$%^&+=])(?=\S+$).{8,}$/;
@@ -129,11 +132,11 @@ export class OCValidators {
 
     public static checkMailNotTaken(userService: UserService): AsyncValidatorFn {
         return (control: AbstractControl): Observable<ValidationErrors | null> => {
-            return Observable.timer(500)
-                .switchMap(() => userService.checkMailNotTaken(control.value))
-                .map(res => {
+            return observableTimer(500).pipe(
+                switchMap(() => userService.checkMailNotTaken(control.value)),
+                map(res => {
                     return isTrue(res) ? null : {mailTaken: true};
-                });
+                }),);
         }
     }
 }

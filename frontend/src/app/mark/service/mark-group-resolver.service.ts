@@ -1,5 +1,5 @@
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {MarkService} from './mark.service';
 import {MarkGroupDto} from '../model/mark-group.dto';

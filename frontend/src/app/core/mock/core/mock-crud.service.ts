@@ -1,4 +1,5 @@
-import {Observable} from 'rxjs/Observable';
+
+import {of as observableOf, Observable} from 'rxjs';
 import {isNotNull} from '../../util/helper';
 import {Util} from '../../util/util';
 import {AppCrudService} from '../../services/core/app-crud.service';
@@ -27,17 +28,17 @@ export class MockCrudService<T extends Dto> extends AppCrudService<T> {
     }
 
     create(arg: T): Observable<T> {
-        return Observable.of(this._createItem(arg));
+        return observableOf(this._createItem(arg));
     }
 
     readById(id: number): Observable<T> {
-        return Observable.of(
+        return observableOf(
             this._items.find(item => item.id === id)
         );
     }
 
     readAll(): Observable<T[]> {
-        return Observable.of(this._items);
+        return observableOf(this._items);
     }
 
     deleteById(id: number): Observable<any> {

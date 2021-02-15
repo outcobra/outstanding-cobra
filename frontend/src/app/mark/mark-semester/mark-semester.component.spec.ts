@@ -1,10 +1,11 @@
+
+import {of as observableOf, Observable} from 'rxjs';
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {MarkSemesterComponent} from './mark-semester.component';
 import {TestModule} from '../../core/mock/test.module';
 import {OCUiModule} from '../../oc-ui/oc-ui.module';
 import {ActivatedRoute, convertToParamMap} from '@angular/router';
-import {Observable} from 'rxjs/Observable';
 import {MockMarkService} from '../../core/mock/mark/mock-mark.service';
 import {MarkValueComponent} from '../mark-value/mark-value.component';
 import {ReactiveFormsModule} from '@angular/forms';
@@ -34,10 +35,10 @@ describe('MarkSemesterComponent', () => {
                 {
                     provide: ActivatedRoute,
                     useValue: {
-                        data: Observable.of({
+                        data: observableOf({
                             semesterMark: MockMarkService.SEMESTER_MARK_1
                         }),
-                        queryParamMap: Observable.of(convertToParamMap({}))
+                        queryParamMap: observableOf(convertToParamMap({}))
                     }
                 }
             ]

@@ -1,3 +1,5 @@
+
+import {of as observableOf, Observable} from 'rxjs';
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {MarkGroupCreateUpdateComponent} from './mark-group-create-update.component';
@@ -6,7 +8,6 @@ import {OCUiModule} from '../../oc-ui/oc-ui.module';
 import {ReactiveFormsModule} from '@angular/forms';
 import {RouterTestingModule} from '@angular/router/testing';
 import {ActivatedRoute, convertToParamMap} from '@angular/router';
-import {Observable} from 'rxjs/Observable';
 import {MockMarkService} from '../../core/mock/mark/mock-mark.service';
 import {MarkValueComponent} from '../mark-value/mark-value.component';
 import {MarkHighlighterDirective} from '../mark-highlighter/mark-highlighter.directive';
@@ -32,11 +33,11 @@ describe('MarkGroupCreateUpdateComponent', () => {
                 {
                     provide: ActivatedRoute,
                     useValue: {
-                        data: Observable.of({
+                        data: observableOf({
                             subjectMarkGroup: MockMarkService.SUBJECT_MARK_GROUP_1,
                             isEdit: false
                         }),
-                        paramMap: Observable.of(convertToParamMap({
+                        paramMap: observableOf(convertToParamMap({
                             semesterId: MockMarkService.SEMESTER_MARK_1.id
                         }))
                     }

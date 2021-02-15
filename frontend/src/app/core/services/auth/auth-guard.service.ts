@@ -9,7 +9,7 @@ import {
     RouterStateSnapshot
 } from '@angular/router';
 import {DefaultAuthService} from './auth.service';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 
 @Injectable()
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {

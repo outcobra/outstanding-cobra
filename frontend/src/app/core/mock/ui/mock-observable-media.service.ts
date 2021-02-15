@@ -1,11 +1,11 @@
+
+import {of as observableOf, Observable, Subscription} from 'rxjs';
 import {MediaChange, ObservableMedia} from '@angular/flex-layout';
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
-import {Subscription} from 'rxjs/Subscription';
 
 @Injectable()
 export class MockObservableMedia extends ObservableMedia {
-    private observable: Observable<MediaChange> = Observable.of(
+    private observable: Observable<MediaChange> = observableOf(
         new MediaChange()
     );
 

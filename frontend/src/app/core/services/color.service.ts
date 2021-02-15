@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ColorDto} from '../model/color.dto';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {CacheableService} from './core/cacheable.service';
 import {HttpClient} from '@angular/common/http';
 

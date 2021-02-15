@@ -1,9 +1,12 @@
+
+import {throwError as observableThrowError, of as observableOf, Observable} from 'rxjs';
+
+import {map} from 'rxjs/operators';
 import {Injectable, NgZone} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from '../../interfaces/auth.service';
 import * as Raven from 'raven-js';
 import {IdentityProvider} from './identity-provider';
-import {Observable} from 'rxjs/Observable';
 import {UsernamePasswordDto} from '../../../auth/model/username-password.dto';
 import {environment} from '../../../../environments/environment';
 import {JwtHelperService} from './jwt-helper.service';
@@ -63,22 +66,22 @@ export class DefaultAuthService implements AuthService {
     private _handleUsernamePasswordAuth(usernamePassword: UsernamePasswordDto, isSignUp: boolean): Observable<boolean> {
         this._removeTokenIfExpired();
         if (this.isLoggedIn()) {
-            return Observable.of(true);
+            return observableOf(true);
         }
-        return this._http.post<AuthResponseDto>(`/api/auth/${isSignUp ? 'signUp' : 'login'}`, usernamePassword)
-            .map(token => this._afterLogin(token));
+        return this._http.post<AuthResponseDto>(`/api/auth/${isSignUp ? 'signUp' : 'login'}`, usernamePassword).pipe(
+            map(token => this._afterLogin(token)));
     }
 
     private _handleIdentityProviderAuth(identityProvider: IdentityProvider, isSignUp: boolean, token: string): Observable<boolean> {
         this._removeTokenIfExpired();
         if (this.isLoggedIn()) {
-            return Observable.of(true);
+            return observableOf(true);
         }
         if (identityProvider == IdentityProvider.GOOGLE) {
-            return this._http.post<AuthResponseDto>(`/api/auth/${isSignUp ? 'signUp' : 'login'}/google/`, <IdTokenDto>{idToken: token}, {headers: new HttpHeaders({'Content-Type': 'application/json'})})
-                .map(token => this._afterLogin(token));
+            return this._http.post<AuthResponseDto>(`/api/auth/${isSignUp ? 'signUp' : 'login'}/google/`, <IdTokenDto>{idToken: token}, {headers: new HttpHeaders({'Content-Type': 'application/json'})}).pipe(
+                map(token => this._afterLogin(token)));
         }
-        return Observable.throw(new Error('Identity provider not supported'));
+        return observableThrowError(new Error('Identity provider not supported'));
     }
 
     private _removeTokenIfExpired() {

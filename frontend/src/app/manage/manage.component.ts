@@ -20,13 +20,12 @@ import {SubjectDialog} from './subject-dialog/subject-dialog.component';
 import {SubjectService} from './service/subject.service';
 import {Util} from '../core/util/util';
 import {equals, isFalsy, isNotNull, isTrue, isTruthy} from '../core/util/helper';
-import {Observable} from 'rxjs/Observable';
+import {Observable, BehaviorSubject} from 'rxjs';
 import {Dto} from '../core/common/dto';
 import {CreateUpdateComponent} from '../core/common/create-update-component';
 import {ResponsiveHelperService} from '../core/services/ui/responsive-helper.service';
 import {ManageView} from './model/manage-view';
 import {NotificationWrapperService} from '../core/notifications/notification-wrapper.service';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 const I18N_PREFIX = 'i18n.modules.manage.mobile.title.';
 

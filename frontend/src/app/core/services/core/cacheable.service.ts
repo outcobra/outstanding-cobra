@@ -1,5 +1,8 @@
+
+import {of as observableOf, Observable} from 'rxjs';
+
+import {share, map} from 'rxjs/operators';
 import {Cacheable} from '../../interfaces/cacheable';
-import {Observable} from 'rxjs/Observable';
 import {Util} from '../../util/util';
 import {AppService} from './app.service';
 import {HttpClient} from '@angular/common/http';
@@ -28,14 +31,14 @@ export abstract class CacheableService<T> extends AppService implements Cacheabl
     }
 
     getFromCacheOrFetch(fetchFunc: () => Observable<T>) {
-        if (this.hasCache()) return Observable.of(this.cache);
+        if (this.hasCache()) return observableOf(this.cache);
         else if (this.observable) return this.observable;
-        return this.saveObservable(fetchFunc()
-            .map((res: T) => {
+        return this.saveObservable(fetchFunc().pipe(
+            map((res: T) => {
                 this.clearObservable();
                 this.saveCache(res);
                 return this.cache;
-            }).share());
+            }),share(),));
     }
 
     /**

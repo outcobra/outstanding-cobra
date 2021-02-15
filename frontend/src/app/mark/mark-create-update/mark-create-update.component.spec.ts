@@ -1,3 +1,5 @@
+
+import {of as observableOf, Observable} from 'rxjs';
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {MarkCreateUpdateComponent} from './mark-create-update.component';
@@ -6,7 +8,6 @@ import {TestModule} from '../../core/mock/test.module';
 import {ReactiveFormsModule} from '@angular/forms';
 import {RouterTestingModule} from '@angular/router/testing';
 import {ActivatedRoute} from '@angular/router';
-import {Observable} from 'rxjs/Observable';
 import {MockMarkService} from 'app/core/mock/mark/mock-mark.service';
 
 describe('MarkCreateUpdateComponent', () => {
@@ -28,13 +29,13 @@ describe('MarkCreateUpdateComponent', () => {
                 {
                     provide: ActivatedRoute,
                     useValue: {
-                        data: Observable.of({
+                        data: observableOf({
 
                         }),
-                        params: Observable.of({
+                        params: observableOf({
                             semesterId: MockMarkService.SEMESTER_MARK_1.id
                         }),
-                        queryParams: Observable.of({})
+                        queryParams: observableOf({})
                     }
                 }
             ]

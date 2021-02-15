@@ -1,7 +1,8 @@
+
+import {of as observableOf, Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {MockCrudService} from '../core/mock-crud.service';
 import {TaskDto} from '../../../task/model/task.dto';
-import {Observable} from 'rxjs/Observable';
 import {SchoolClassSubjectDto} from '../../../task/model/school-class-subject.dto';
 import {MockSubjectService} from '../manage/manage-entities/mock-subject.service';
 import * as moment from 'moment';
@@ -25,11 +26,11 @@ export class MockTaskService extends MockCrudService<TaskDto> {
     }
 
     getTaskFilter(): Observable<SchoolClassSubjectDto> {
-        return Observable.of(null);
+        return observableOf(null);
     }
 
     updateProgress(taskId: number, progress: number): Observable<TaskDto> {
-        return Observable.of(null);
+        return observableOf(null);
     }
 
     isFinished(task: TaskDto): boolean {

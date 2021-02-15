@@ -4,7 +4,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {WEIGHT_PATTERN} from '../service/mark.service';
 import {NotificationWrapperService} from '../../core/notifications/notification-wrapper.service';
 import {ConnectionPositionPair} from '@angular/cdk/overlay';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 
 @Component({
     selector: 'mark-weight-updater',
