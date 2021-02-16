@@ -38,7 +38,7 @@
         <div class="form-group">
             <mat-form-field>
                 <mat-select #markSelect
-                            (change)="newMark$.next($event.value)"
+                            (selectionChange)="newMark$.next($event.value)"
                             [disabled]="!hasMarksLeft()"
                             [placeholder]="'i18n.modules.mark.group.createUpdate.form.selectMark.label' | translate">
                     <mat-option *ngFor="let mark of availableMarks" [value]="mark">
