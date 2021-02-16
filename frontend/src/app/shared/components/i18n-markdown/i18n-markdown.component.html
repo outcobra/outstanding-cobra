@@ -1,6 +1,7 @@
 <div fxLayout fxLayoutAlign="center start">
     <div [ngClass]="getWrapperClasses()" [ngSwitch]="displayMode"
          class="markdown-wrapper" fxFlex>
+        <!-- TODO: Reintroduce markdown elements with proper library -->
 <!--        <markdown *ngSwitchCase="'flat'" [path]="i18nPath"></markdown>-->
         <mat-card *ngSwitchCase="'card'">
             <mat-card-content>
