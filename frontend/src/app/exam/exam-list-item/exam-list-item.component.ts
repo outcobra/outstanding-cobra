@@ -3,6 +3,7 @@ import {ExamDto} from '../model/exam.dto';
 import {ExamTaskService} from '../service/exam-task.service';
 import {Subject} from 'rxjs';
 import {ExamTaskDto} from '../model/exam.task.dto';
+import {switchMap} from 'rxjs/operators';
 
 @Component({
     selector: 'exam-list-item',
@@ -21,8 +22,7 @@ export class ExamListItemComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.finishTask$
-            .switchMap(id => this._examTaskService.changeState(id))
+        this.finishTask$.pipe(switchMap(id => this._examTaskService.changeState(id)))
             .subscribe(examTask => this._updateExamTaskList(examTask));
     }
 

@@ -5,10 +5,11 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {SchoolClassSubjectDto} from './model/school-class-subject.dto';
 import {Util} from '../core/util/util';
-import {Observable, Subject} from 'rxjs';
+import {merge, Observable, pipe, Subject} from 'rxjs';
 import {and} from '../core/util/helper';
 import {ResponsiveHelperService} from '../core/services/ui/responsive-helper.service';
 import {NotificationWrapperService} from '../core/notifications/notification-wrapper.service';
+import {debounceTime, distinctUntilChanged, filter} from 'rxjs/operators';
 
 @Component({
     selector: 'task',
@@ -45,11 +46,12 @@ export class TaskComponent implements OnInit, AfterViewInit {
 
     ngAfterViewInit() {
         this._filterShown = !this._responsiveHelperService.isMobile();
-        Observable.merge(
+        merge(
             this._responsiveHelperService.listenForBreakpointChange(),
-            this._responsiveHelperService.listenForOrientationChange())
-            .filter(change => !change.mobile)
-            .subscribe(() => this._filterShown = true);
+            this._responsiveHelperService.listenForOrientationChange()
+        ).pipe(
+            filter(change => !change.mobile)
+        ).subscribe(() => this._filterShown = true);
         this._changeDetectorRef.detectChanges();
     }
 
@@ -83,9 +85,10 @@ export class TaskComponent implements OnInit, AfterViewInit {
     }
 
     private _initFormChangeSubscriptions() {
-        this.search$
-            .debounceTime(300)
-            .distinctUntilChanged()
+        this.search$.pipe(
+            debounceTime(300),
+            distinctUntilChanged()
+        )
             .subscribe(searchTerm => this._filteredTasks = Util.cloneArray(this.search(searchTerm)));
         // TODO include normal filter too
 
