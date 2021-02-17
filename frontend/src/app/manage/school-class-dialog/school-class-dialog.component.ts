@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ParentLinkedCreateUpdateComponent} from '../../core/common/parent-linked-create-update-component';
 import {InstitutionDto, SchoolClassDto} from '../model/manage.dto';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {MatDialogRef} from '@angular/material';
+import { MatDialogRef } from '@angular/material/dialog';
 import {FormUtil} from '../../core/util/form-util';
 import {SchoolClassService} from '../service/school-class.service';
 

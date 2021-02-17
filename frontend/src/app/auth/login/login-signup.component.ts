@@ -9,7 +9,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {OCValidators} from '../../core/services/oc-validators';
 import {UserService} from '../../core/services/user.service';
-import {ErrorStateMatcher} from '@angular/material';
+import { ErrorStateMatcher } from '@angular/material/core';
 import {PasswordVerifyErrorStateMatcher} from './password-verify-error-state-matcher';
 import {isTruthy} from '../../core/util/helper';
 import {UsernamePasswordDto} from '../model/username-password.dto';

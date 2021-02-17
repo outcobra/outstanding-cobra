@@ -1,4 +1,4 @@
-import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import {ViewMode} from '../../core/common/view-mode';
 import {Dto} from '../../core/common/dto';
 import {ParentLinkedCreateUpdateComponent} from '../../core/common/parent-linked-create-update-component';

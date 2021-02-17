@@ -1,7 +1,7 @@
 
 import {first} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
-import {MatDialog} from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import {Observable} from 'rxjs';
 import {ResponsiveHelperService} from './ui/responsive-helper.service';
 import {SMALL_DIALOG} from '../util/const';

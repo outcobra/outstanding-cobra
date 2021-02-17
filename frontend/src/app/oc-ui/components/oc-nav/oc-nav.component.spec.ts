@@ -5,7 +5,7 @@ import {TestModule} from '../../../core/mock/test.module';
 import {RouterTestingModule} from '@angular/router/testing';
 import {OCUiModule} from '../../oc-ui.module';
 import {By} from '@angular/platform-browser';
-import {MatButton} from '@angular/material';
+import { MatButton } from '@angular/material/button';
 
 describe('OCNavComponent', () => {
     let component: OCNavComponent;

@@ -12,7 +12,7 @@ import {Util} from '../../core/util/util';
 import {FormUtil} from '../../core/util/form-util';
 import {ViewMode} from '../../core/common/view-mode';
 import {ConfirmDialogService} from '../../core/services/confirm-dialog.service';
-import {MatSelect} from '@angular/material';
+import { MatSelect } from '@angular/material/select';
 import {NotificationWrapperService} from '../../core/notifications/notification-wrapper.service';
 
 @Component({

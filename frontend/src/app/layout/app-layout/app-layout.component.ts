@@ -6,7 +6,7 @@ import {NavigationStart, Router} from '@angular/router';
 import {isTruthy} from '../../core/util/helper';
 import {TranslateService} from '@ngx-translate/core';
 import {ResponsiveHelperService} from '../../core/services/ui/responsive-helper.service';
-import {MatSidenav} from '@angular/material';
+import { MatSidenav } from '@angular/material/sidenav';
 import {appLayoutRouteAnimation} from '../../core/animations/animations';
 import {RouteAnimationContainer} from '../../core/animations/route-animation-container';
 

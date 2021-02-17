@@ -1,4 +1,4 @@
-import {MatDialogConfig} from '@angular/material';
+import { MatDialogConfig } from '@angular/material/dialog';
 
 export const SMALL_DIALOG: MatDialogConfig = {
     width: '500px'

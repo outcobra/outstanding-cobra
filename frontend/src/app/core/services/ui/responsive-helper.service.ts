@@ -4,7 +4,7 @@ import {fromEvent as observableFromEvent, Observable} from 'rxjs';
 import {debounceTime, distinctUntilChanged, map} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {MOBILE_DIALOG} from '../../util/const';
-import {MatDialogConfig} from '@angular/material';
+import { MatDialogConfig } from '@angular/material/dialog';
 import {Orientation} from './orientation';
 import {isFalsy} from '../../util/helper';
 import {MediaChange, ObservableMedia} from '@angular/flex-layout';

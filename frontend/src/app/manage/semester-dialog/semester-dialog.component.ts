@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {MatDialogRef} from '@angular/material';
+import { MatDialogRef } from '@angular/material/dialog';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ParentLinkedCreateUpdateComponent} from '../../core/common/parent-linked-create-update-component';
 import {SchoolYearDto, SemesterDto} from '../model/manage.dto';

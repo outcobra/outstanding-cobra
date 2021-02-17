@@ -4,7 +4,7 @@ import {ExamDto} from './model/exam.dto';
 import {NotificationWrapperService} from '../core/notifications/notification-wrapper.service';
 import {ExamTaskDto} from './model/exam.task.dto';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {MatDialog} from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import {ResponsiveHelperService} from '../core/services/ui/responsive-helper.service';
 import {ConfirmDialogService} from '../core/services/confirm-dialog.service';
 import {and, isNotEmpty, isTrue, isTruthy} from '../core/util/helper';

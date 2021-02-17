@@ -4,7 +4,7 @@ import {
 } from '@angular/core';
 import {ManageService} from './service/manage.service';
 import {InstitutionDto, ManageDto, SchoolClassDto, SchoolYearDto, SemesterDto, SubjectDto} from './model/manage.dto';
-import {MatDialogRef} from '@angular/material';
+import { MatDialogRef } from '@angular/material/dialog';
 import {InstitutionDialog} from './institution-dialog/institution-dialog.component';
 import {ViewMode} from '../core/common/view-mode';
 import {SchoolClassDialog} from './school-class-dialog/school-class-dialog.component';

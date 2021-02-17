@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {MatIconRegistry} from '@angular/material';
+import { MatIconRegistry } from '@angular/material/icon';
 import {DomSanitizer} from '@angular/platform-browser';
 import {RouteAnimationContainer} from './core/animations/route-animation-container';
 
