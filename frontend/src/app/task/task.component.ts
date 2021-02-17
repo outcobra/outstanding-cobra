@@ -1,15 +1,15 @@
-import {AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {TaskService} from './service/task.service';
-import {TaskDto} from './model/task.dto';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
-import {SchoolClassSubjectDto} from './model/school-class-subject.dto';
-import {Util} from '../core/util/util';
-import {merge, Observable, pipe, Subject} from 'rxjs';
-import {and} from '../core/util/helper';
-import {ResponsiveHelperService} from '../core/services/ui/responsive-helper.service';
-import {NotificationWrapperService} from '../core/notifications/notification-wrapper.service';
-import {debounceTime, distinctUntilChanged, filter} from 'rxjs/operators';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, Predicate, ViewEncapsulation } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { merge, Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
+import { NotificationWrapperService } from '../core/notifications/notification-wrapper.service';
+import { ResponsiveHelperService } from '../core/services/ui/responsive-helper.service';
+import { and } from '../core/util/helper';
+import { Util } from '../core/util/util';
+import { SchoolClassSubjectDto } from './model/school-class-subject.dto';
+import { TaskDto } from './model/task.dto';
+import { TaskService } from './service/task.service';
 
 @Component({
     selector: 'task',

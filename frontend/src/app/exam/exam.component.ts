@@ -1,23 +1,23 @@
-import {AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {ExamService} from './service/exam.service';
-import {ExamDto} from './model/exam.dto';
-import {NotificationWrapperService} from '../core/notifications/notification-wrapper.service';
-import {ExamTaskDto} from './model/exam.task.dto';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, Predicate, ViewEncapsulation } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import {ResponsiveHelperService} from '../core/services/ui/responsive-helper.service';
-import {ConfirmDialogService} from '../core/services/confirm-dialog.service';
-import {and, isNotEmpty, isTrue, isTruthy} from '../core/util/helper';
-import {Util} from '../core/util/util';
-import {SchoolClassSubjectDto} from '../task/model/school-class-subject.dto';
-import {ActivatedRoute, Router} from '@angular/router';
-import {DateUtil} from '../core/services/date-util.service';
-import {Observable, Subject,  merge } from 'rxjs';
-import {examByNameComparator} from '../core/util/comparator';
-import {MarkService} from 'app/mark/service/mark.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MarkService } from 'app/mark/service/mark.service';
 import * as moment from 'moment';
-import {Moment} from 'moment';
-import {filter, switchMap} from 'rxjs/operators';
+import { Moment } from 'moment';
+import { merge, Subject } from 'rxjs';
+import { filter, switchMap } from 'rxjs/operators';
+import { NotificationWrapperService } from '../core/notifications/notification-wrapper.service';
+import { ConfirmDialogService } from '../core/services/confirm-dialog.service';
+import { DateUtil } from '../core/services/date-util.service';
+import { ResponsiveHelperService } from '../core/services/ui/responsive-helper.service';
+import { examByNameComparator } from '../core/util/comparator';
+import { and, isNotEmpty, isTrue, isTruthy } from '../core/util/helper';
+import { Util } from '../core/util/util';
+import { SchoolClassSubjectDto } from '../task/model/school-class-subject.dto';
+import { ExamDto } from './model/exam.dto';
+import { ExamTaskDto } from './model/exam.task.dto';
+import { ExamService } from './service/exam.service';
 
 @Component({
     selector: 'exam',

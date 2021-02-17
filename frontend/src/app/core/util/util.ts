@@ -1,3 +1,4 @@
+import { Predicate } from '@angular/core';
 import {dateReplacer} from '../http/http-util';
 
 /**

@@ -1,24 +1,23 @@
-
-import {fromEvent as observableFromEvent, Observable} from 'rxjs';
-
-import {debounceTime, distinctUntilChanged, map} from 'rxjs/operators';
-import {Injectable} from '@angular/core';
-import {MOBILE_DIALOG} from '../../util/const';
+import { Injectable } from '@angular/core';
+import { MediaChange, MediaObserver } from '@angular/flex-layout';
 import { MatDialogConfig } from '@angular/material/dialog';
-import {Orientation} from './orientation';
-import {isFalsy} from '../../util/helper';
-import {MediaChange, ObservableMedia} from '@angular/flex-layout';
-import {OCMediaChange} from './oc-media-change';
+import { fromEvent as observableFromEvent, Observable } from 'rxjs';
+
+import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { MOBILE_DIALOG } from '../../util/const';
+import { isFalsy } from '../../util/helper';
+import { OCMediaChange } from './oc-media-change';
+import { Orientation } from './orientation';
 
 @Injectable()
 export class ResponsiveHelperService {
     private _mobile: boolean;
     private _mediaChange: Observable<OCMediaChange>;
 
-    constructor(private _observableMedia: ObservableMedia) {
+    constructor(private _observableMedia: MediaObserver) {
         this._mobile = this._checkMobile();
-        this._mediaChange = this._observableMedia.asObservable().pipe(
-            map(change => this._makeMediaChange(change)));
+        this._mediaChange = this._observableMedia.asObservable()
+            .pipe(map(change => this._makeMediaChange(change)));
         this._mediaChange.subscribe((change) => this._mobile = change.mobile);
     }
 
@@ -56,12 +55,12 @@ export class ResponsiveHelperService {
         return Orientation.PORTRAIT
     }
 
-    private _makeMediaChange(change?: MediaChange): OCMediaChange {
+    private _makeMediaChange(change?: MediaChange[]): OCMediaChange {
         return {
             mobile: this._checkMobile(),
             width: window.innerWidth,
             orientation: this.getCurrentOrientation(),
-            originalChange: change
+            originalChange: change[0] // TODO find out how this works now
         } as OCMediaChange;
     }
 

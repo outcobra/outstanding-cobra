@@ -1,7 +1,7 @@
 
 import {of as observableOf, Observable, ReplaySubject} from 'rxjs';
 
-import {map} from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {DefaultAuthService} from '../../core/services/auth/auth.service';
 import {IdentityProvider} from '../../core/services/auth/identity-provider';
@@ -95,7 +95,7 @@ export class LoginSignUpComponent implements OnInit {
                 : this._authService.loginWithMailAndPassword;
 
             authFunc.call(this._authService, usernamePasswordTuple)
-                .catch(this._handleLoginError.bind(this))
+                .pipe(catchError(this._handleLoginError.bind(this)))
                 .subscribe(() => this._router.navigateByUrl(this._target));
         }
     }

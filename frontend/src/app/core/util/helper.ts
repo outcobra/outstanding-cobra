@@ -1,3 +1,4 @@
+import { Predicate } from '@angular/core';
 import {QueryList} from '@angular/core';
 
 export function isTruthy(toCheck: any): boolean {
@@ -28,7 +29,7 @@ export function equals(first: any, second: any): boolean {
     return first === second;
 }
 
-export function eq(toVerify: any): Predicate<boolean> {
+export function eq<T>(toVerify: T): Predicate<T> {
     return (element) => element === toVerify;
 }
 

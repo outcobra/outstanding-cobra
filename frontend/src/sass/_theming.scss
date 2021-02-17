@@ -22,5 +22,5 @@ $config: mat-typography-config(
 $oc-theme: mat-light-theme($primary-palette, $accent-palette, $error-palette);
 @include angular-material-theme($oc-theme);
 @include auth-theme($oc-theme);
-@include mark-theme($oc-theme)
+@include mark-theme($oc-theme);
 @include oc-theme-classes($primary-palette, $accent-palette, $error-palette);
