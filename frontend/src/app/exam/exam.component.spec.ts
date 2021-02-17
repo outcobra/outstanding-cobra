@@ -1,7 +1,7 @@
 
 import {of as observableOf, Observable} from 'rxjs';
 /* tslint:disable:no-unused-variable */
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import {ExamComponent} from './exam.component';
 import {TestModule} from '../core/mock/test.module';
 import {ReactiveFormsModule} from '@angular/forms';
@@ -14,7 +14,7 @@ describe('ExamComponent', () => {
     let component: ExamComponent;
     let fixture: ComponentFixture<ExamComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [
                 ExamComponent,

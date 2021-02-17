@@ -1,7 +1,7 @@
 
 import {of as observableOf, Observable} from 'rxjs';
 /* tslint:disable:no-unused-variable */
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import {TaskComponent} from './task.component';
 import {TestModule} from '../core/mock/test.module';
 import {OCUiModule} from '../oc-ui/oc-ui.module';
@@ -16,7 +16,7 @@ describe('TaskComponent', () => {
     let component: TaskComponent;
     let fixture: ComponentFixture<TaskComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [
                 TaskComponent,

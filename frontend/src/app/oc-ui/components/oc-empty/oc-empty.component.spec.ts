@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import {OCEmptyComponent} from './oc-empty.component';
 import {TestModule} from '../../../core/mock/test.module';
@@ -8,7 +8,7 @@ describe('OCEmptyComponent', () => {
     let component: OCEmptyComponent;
     let fixture: ComponentFixture<OCEmptyComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [
                 TestModule,

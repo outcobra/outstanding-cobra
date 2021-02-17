@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import {AuthComponent} from './auth.component';
 import {TestModule} from '../core/mock/test.module';
@@ -9,7 +9,7 @@ describe('AuthComponent', () => {
     let component: AuthComponent;
     let fixture: ComponentFixture<AuthComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [
                 TestModule,

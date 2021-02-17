@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import {MarkWeightUpdaterComponent} from './mark-weight-updater.component';
 import {TestModule} from '../../core/mock/test.module';
@@ -9,7 +9,7 @@ describe('MarkWeightUpdaterComponent', () => {
     let component: MarkWeightUpdaterComponent;
     let fixture: ComponentFixture<MarkWeightUpdaterComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [
                 MarkWeightUpdaterComponent

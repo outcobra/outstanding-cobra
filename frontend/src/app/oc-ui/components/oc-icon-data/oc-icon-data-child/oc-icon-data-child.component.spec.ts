@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import {OCIconDataChildComponent} from './oc-icon-data-child.component';
 
@@ -6,7 +6,7 @@ describe('OCIconDataChildComponent', () => {
     let component: OCIconDataChildComponent;
     let fixture: ComponentFixture<OCIconDataChildComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [OCIconDataChildComponent]
         })

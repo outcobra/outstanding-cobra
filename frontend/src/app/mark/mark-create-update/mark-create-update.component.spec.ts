@@ -1,6 +1,6 @@
 
 import {of as observableOf, Observable} from 'rxjs';
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import {MarkCreateUpdateComponent} from './mark-create-update.component';
 import {OCUiModule} from '../../oc-ui/oc-ui.module';
@@ -14,7 +14,7 @@ describe('MarkCreateUpdateComponent', () => {
     let component: MarkCreateUpdateComponent;
     let fixture: ComponentFixture<MarkCreateUpdateComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [
                 MarkCreateUpdateComponent

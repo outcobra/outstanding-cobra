@@ -59,9 +59,10 @@ import {environment} from '../environments/environment';
                 }
             ],
             {
-                // Prints all Routing Events
-                enableTracing: environment.enableRouteTracing
-            })
+    // Prints all Routing Events
+    enableTracing: environment.enableRouteTracing,
+    relativeLinkResolution: 'legacy'
+})
     ],
     exports: [
         RouterModule

@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import {TaskListItemHeaderComponent} from './task-list-item-header.component';
 import {TestModule} from '../../core/mock/test.module';
@@ -9,7 +9,7 @@ describe('TaskListItemHeaderComponent', () => {
     let component: TaskListItemHeaderComponent;
     let fixture: ComponentFixture<TaskListItemHeaderComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [
                 TaskListItemHeaderComponent

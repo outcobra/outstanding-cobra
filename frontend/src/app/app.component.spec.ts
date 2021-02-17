@@ -1,5 +1,5 @@
 /* tslint:disable:no-unused-variable */
-import {async, TestBed} from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
 import {AppComponent} from './app.component';
 import {TestModule} from './core/mock/test.module';
 import {OCUiModule} from './oc-ui/oc-ui.module';
@@ -21,7 +21,7 @@ describe('App: Frontend', () => {
         });
     });
 
-    it('should create the app', async(() => {
+    it('should create the app', waitForAsync(() => {
         let fixture = TestBed.createComponent(AppComponent);
         let app = fixture.debugElement.componentInstance;
         expect(app).toBeTruthy();

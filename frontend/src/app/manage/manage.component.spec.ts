@@ -1,5 +1,5 @@
 /* tslint:disable:no-unused-variable */
-import {async, ComponentFixture, inject, TestBed} from '@angular/core/testing';
+import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/testing';
 import {ManageComponent} from './manage.component';
 import {TestModule} from '../core/mock/test.module';
 import {OCUiModule} from '../oc-ui/oc-ui.module';
@@ -9,7 +9,7 @@ describe('ManagerComponent', () => {
     let component: ManageComponent;
     let fixture: ComponentFixture<ManageComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [
                 ManageComponent

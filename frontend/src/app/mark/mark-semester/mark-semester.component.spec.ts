@@ -1,6 +1,6 @@
 
 import {of as observableOf, Observable} from 'rxjs';
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import {MarkSemesterComponent} from './mark-semester.component';
 import {TestModule} from '../../core/mock/test.module';
@@ -17,7 +17,7 @@ describe('MarkSemesterComponent', () => {
     let component: MarkSemesterComponent;
     let fixture: ComponentFixture<MarkSemesterComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [
                 MarkSemesterComponent,

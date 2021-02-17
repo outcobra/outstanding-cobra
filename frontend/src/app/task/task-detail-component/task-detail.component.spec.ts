@@ -1,5 +1,5 @@
 /* tslint:disable:no-unused-variable */
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import {TaskDetailComponent} from './task-detail.component';
 import {TestModule} from '../../core/mock/test.module';
 import {OCUiModule} from '../../oc-ui/oc-ui.module';
@@ -13,7 +13,7 @@ describe('TaskDetailComponent', () => {
 
     let mockTaskService: MockTaskService = new MockTaskService();
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [
                 TaskDetailComponent
