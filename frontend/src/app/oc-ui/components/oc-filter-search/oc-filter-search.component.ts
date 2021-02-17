@@ -16,7 +16,7 @@ import {isEmpty, isNotEmpty} from '../../../core/util/helper';
 export class OCFilterSearchComponent implements OnInit, OnDestroy {
     @Input() public placeholder: string;
     @Output('search') public onSearch: EventEmitter<string> = new EventEmitter();
-    @ViewChild('searchFieldTrigger') trigger: ElementRef;
+    @ViewChild('searchFieldTrigger', { static: true }) trigger: ElementRef;
 
     private _currentPlaceholder: string;
 

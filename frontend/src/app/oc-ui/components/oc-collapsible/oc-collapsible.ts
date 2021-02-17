@@ -12,8 +12,8 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
-import {animate, state, style, transition, trigger} from '@angular/animations';
-import {isTruthy} from '../../../core/util/helper';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { isTruthy } from '../../../core/util/helper';
 
 @Component({
     selector: 'oc-collapsible-header',
@@ -21,7 +21,8 @@ import {isTruthy} from '../../../core/util/helper';
         <div class="oc-collapsible-header-content">
             <ng-content></ng-content>
         </div>
-        <div class="oc-collapsible-toggle" *ngIf="showToggle">
+        <div class="oc-collapsible-toggle"
+             *ngIf="showToggle">
             <mat-icon>expand_more</mat-icon>
         </div>
     `,
@@ -49,7 +50,8 @@ export class OCCollapsibleBodyComponent {
     selector: 'oc-collapsible',
     template: `
         <ng-content select="oc-collapsible-header"></ng-content>
-        <div [@ocToggle]="active" class="oc-collapsible-body">
+        <div [@ocToggle]="active"
+             class="oc-collapsible-body">
             <ng-content></ng-content>
         </div>
         <oc-divider *ngIf="showDivider"></oc-divider>`,
@@ -69,7 +71,7 @@ export class OCCollapsibleBodyComponent {
     ]
 })
 export class OCCollapsibleComponent implements AfterContentInit, OnChanges {
-    @ContentChild(OCCollapsibleHeaderComponent) public header: OCCollapsibleHeaderComponent;
+    @ContentChild(OCCollapsibleHeaderComponent, { static: false }) public header: OCCollapsibleHeaderComponent;
     @Input() showToggle: boolean = true;
     @Input() showDivider: boolean = true;
     @HostBinding('class.active')

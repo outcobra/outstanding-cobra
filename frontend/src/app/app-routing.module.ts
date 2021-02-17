@@ -25,28 +25,28 @@ import {environment} from '../environments/environment';
                     children: [
                         {
                             path: 'exam',
-                            loadChildren: 'app/exam/exam.module#ExamModule',
+                            loadChildren: () => import('app/exam/exam.module').then(m => m.ExamModule),
                             canActivate: [AuthGuard],
                             canActivateChild: [AuthGuard],
                             canLoad: [AuthGuard]
                         },
                         {
                             path: 'mark',
-                            loadChildren: 'app/mark/mark.module#MarkModule',
+                            loadChildren: () => import('app/mark/mark.module').then(m => m.MarkModule),
                             canActivate: [AuthGuard],
                             canActivateChild: [AuthGuard],
                             canLoad: [AuthGuard]
                         },
                         {
                             path: 'task',
-                            loadChildren: 'app/task/task.module#TaskModule',
+                            loadChildren: () => import('app/task/task.module').then(m => m.TaskModule),
                             canActivate: [AuthGuard],
                             canActivateChild: [AuthGuard],
                             canLoad: [AuthGuard]
                         },
                         {
                             path: 'manage',
-                            loadChildren: 'app/manage/manage.module#ManageModule',
+                            loadChildren: () => import('app/manage/manage.module').then(m => m.ManageModule),
                             canActivate: [AuthGuard],
                             canActivateChild: [AuthGuard],
                             canLoad: [AuthGuard]

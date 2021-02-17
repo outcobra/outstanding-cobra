@@ -25,7 +25,7 @@ export class MarkWeightUpdaterComponent implements OnInit {
     private _originalValue: number;
 
     @Output('weightChange') change = new EventEmitter<MarkGroupDto>();
-    @ViewChild('weightFieldTrigger') trigger: ElementRef;
+    @ViewChild('weightFieldTrigger', { static: true }) trigger: ElementRef;
 
     private _triggerWidth: number;
     private _triggerHeight: number;

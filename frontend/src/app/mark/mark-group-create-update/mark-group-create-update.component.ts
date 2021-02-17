@@ -36,7 +36,7 @@ export class MarkGroupCreateUpdateComponent extends ParentLinkedCreateUpdateComp
     public newMark$: Subject<number> = new Subject();
     public removeMark$: Subject<string> = new Subject();
 
-    @ViewChild('markSelect') select: MatSelect;
+    @ViewChild('markSelect', { static: true }) select: MatSelect;
 
     constructor(private _route: ActivatedRoute,
                 private _router: Router,

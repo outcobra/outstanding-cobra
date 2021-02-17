@@ -17,7 +17,7 @@ import {debounceTime, distinctUntilChanged, filter, map, switchMap} from 'rxjs/o
 })
 export class TaskDetailComponent implements AfterViewInit {
     @Input() task: TaskDto;
-    @ViewChild(MatSlider) slider: MatSlider;
+    @ViewChild(MatSlider, { static: true }) slider: MatSlider;
 
     constructor(private _confirmDialogService: ConfirmDialogService,
                 private _notificationService: NotificationWrapperService,
