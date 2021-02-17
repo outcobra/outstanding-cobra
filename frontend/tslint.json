@@ -15,6 +15,9 @@
       true,
       "spaces"
     ],
+    "deprecation": {
+      "severity": "warning"
+    },
     "label-position": true,
     "max-line-length": [
       true,
@@ -47,7 +50,6 @@
     "no-switch-case-fall-through": true,
     "no-trailing-whitespace": true,
     "no-unused-expression": true,
-    "no-use-before-declare": true,
     "no-var-keyword": true,
     "object-literal-sort-keys": false,
     "one-line": [
