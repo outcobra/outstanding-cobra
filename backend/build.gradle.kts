@@ -23,7 +23,6 @@ plugins {
     id("jacoco")
     id("org.jetbrains.kotlin.jvm")
     id("org.jetbrains.kotlin.kapt")
-    id("org.jetbrains.kotlin.plugin.allopen")
     id("org.jetbrains.kotlin.plugin.jpa")
     id("org.jetbrains.kotlin.plugin.spring")
 }
@@ -94,6 +93,12 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-tomcat")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 tasks.test {

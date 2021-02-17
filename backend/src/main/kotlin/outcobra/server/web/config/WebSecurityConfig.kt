@@ -4,6 +4,7 @@ import org.springframework.boot.autoconfigure.security.SecurityProperties
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.annotation.Order
 import org.springframework.core.env.Environment
+import org.springframework.core.env.Profiles
 import org.springframework.http.HttpMethod
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -34,7 +35,7 @@ class WebSecurityConfig
     override fun configure(web: WebSecurity) {
         web.ignoring().antMatchers(HttpMethod.OPTIONS)
 
-        if (environment.acceptsProfiles(ProfileRegistry.DEVELOPMENT)) {
+        if (environment.acceptsProfiles(Profiles.of(ProfileRegistry.DEVELOPMENT))) {
             web.ignoring().antMatchers("/h2-console/**")
         }
     }
@@ -46,9 +47,8 @@ class WebSecurityConfig
 
         http.authorizeRequests()
                 .antMatchers("/api/auth/**", "/api/user/emailAvailable", "/api/ping").permitAll()
-                .anyRequest().authenticated()
 
-        if (environment.acceptsProfiles(ProfileRegistry.DEVELOPMENT)) {
+        if (environment.acceptsProfiles(Profiles.of(ProfileRegistry.DEVELOPMENT))) {
             http.authorizeRequests()
                     .antMatchers("/swagger-ui.html",
                             "/webjars/springfox-swagger-ui/**",
@@ -61,9 +61,12 @@ class WebSecurityConfig
                             "/configprops").permitAll()
         }
 
-        if (!environment.acceptsProfiles(ProfileRegistry.BASIC_AUTH_SECURITY_MOCK)) {
+        if (!environment.acceptsProfiles(Profiles.of(ProfileRegistry.BASIC_AUTH_SECURITY_MOCK))) {
             http.addFilterBefore(JwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter::class.java)
         }
+
+        http.authorizeRequests().anyRequest().authenticated();
+
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
     }
 
