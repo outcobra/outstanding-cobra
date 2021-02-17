@@ -1,48 +1,57 @@
-<div fxLayout="column" fxLayoutAlign="start center">
+<div fxLayout="column"
+     fxLayoutAlign="start center">
+  <mat-toolbar>
+    <img class="oc-title-logo"
+         src="/assets/img/oc_logo_stroke_combined_blue.svg">
+    <span class="toolbar-fill-space"></span>
+    <button mat-raised-button
+            routerLink="/manage"
+            color="primary"
+            *ngIf="authService.isLoggedIn(); else notLoggedIn">
+      {{ 'i18n.auth.goToApp' | translate }}
+    </button>
+    <ng-template #notLoggedIn>
+      <button mat-button
+              routerLink="/signup"
+              id="signup-button">
+        {{ 'i18n.auth.signup' | translate }}
+      </button>
+      <button mat-raised-button
+              routerLink="/login"
+              color="primary">
+        {{ 'i18n.auth.login' | translate }}
+      </button>
+    </ng-template>
+  </mat-toolbar>
+
+  <div id="oc-welcome-banner">
+    <h1 id="oc-welcome-banner-title">{{ 'i18n.modules.main.subtitle' | translate }}</h1>
+  </div>
+
+  <div class="container middle-container">
     <mat-toolbar>
-        <img class="oc-title-logo" src="/assets/img/oc_logo_stroke_combined_blue.svg">
-        <span class="toolbar-fill-space"></span>
-        <button mat-raised-button
-                routerLink="/manage"
-                color="primary"
-                *ngIf="authService.isLoggedIn(); else notLoggedIn">
-            {{ 'i18n.auth.goToApp' | translate }}
-        </button>
-        <ng-template #notLoggedIn>
-            <button mat-button
-                    routerLink="/signup"
-                    id="signup-button">
-                {{ 'i18n.auth.signup' | translate }}
-            </button>
-            <button mat-raised-button
-                    routerLink="/login"
-                    color="primary">
-                {{ 'i18n.auth.login' | translate }}
-            </button>
-        </ng-template>
+      <div class="bottom-menu text-accent">
+        <div class="menu-item"
+             routerLink="/"
+             routerLinkActive="active"
+             [routerLinkActiveOptions]="{ exact: true }">
+          <mat-icon>info</mat-icon>
+          <span>{{ 'i18n.modules.main.linkTitles.about' | translate }}</span>
+        </div>
+        <div class="menu-item"
+             routerLink="/features"
+             routerLinkActive="active">
+          <mat-icon>games</mat-icon>
+          <span>{{ 'i18n.modules.main.linkTitles.features' | translate }}</span>
+        </div>
+        <div class="menu-item"
+             routerLink="/devs"
+             routerLinkActive="active">
+          <mat-icon>group</mat-icon>
+          <span>{{ 'i18n.modules.main.linkTitles.profiles' | translate }}</span>
+        </div>
+      </div>
     </mat-toolbar>
-
-    <div id="oc-welcome-banner">
-        <h1 id="oc-welcome-banner-title">{{ 'i18n.modules.main.subtitle' | translate }}</h1>
-    </div>
-
-    <div class="container middle-container">
-        <mat-toolbar>
-            <div class="bottom-menu text-accent">
-                <div class="menu-item" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-                    <mat-icon>info</mat-icon>
-                    <span>{{ 'i18n.modules.main.linkTitles.about' | translate }}</span>
-                </div>
-                <div class="menu-item" routerLink="/features" routerLinkActive="active">
-                    <mat-icon>games</mat-icon>
-                    <span>{{ 'i18n.modules.main.linkTitles.features' | translate }}</span>
-                </div>
-                <div class="menu-item" routerLink="/devs" routerLinkActive="active">
-                    <mat-icon>group</mat-icon>
-                    <span>{{ 'i18n.modules.main.linkTitles.profiles' | translate }}</span>
-                </div>
-            </div>
-        </mat-toolbar>
-        <router-outlet></router-outlet>
-    </div>
+    <router-outlet></router-outlet>
+  </div>
 </div>

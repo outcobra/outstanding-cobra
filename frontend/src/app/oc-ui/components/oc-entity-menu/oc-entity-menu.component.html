@@ -1,14 +1,21 @@
-<button mat-icon-button class="right" (click)="$event.stopPropagation()" [mat-menu-trigger-for]="menu">
-    <mat-icon>more_vert</mat-icon>
+<button mat-icon-button
+        class="right"
+        (click)="$event.stopPropagation()"
+        [mat-menu-trigger-for]="menu">
+  <mat-icon>more_vert</mat-icon>
 </button>
 
-<mat-menu x-position="before" #menu="matMenu" (click)="$event.stopPropagation()">
-    <button mat-menu-item (click)="onDelete.emit()">
-        <mat-icon>delete</mat-icon>
-        <span>{{ 'i18n.common.action.delete' | translate }}</span>
-    </button>
-    <button mat-menu-item (click)="onEdit.emit()">
-        <mat-icon>edit</mat-icon>
-        <span>{{ 'i18n.common.action.edit' | translate }}</span>
-    </button>
+<mat-menu x-position="before"
+          #menu="matMenu"
+          (click)="$event.stopPropagation()">
+  <button mat-menu-item
+          (click)="onDelete.emit()">
+    <mat-icon>delete</mat-icon>
+    <span>{{ 'i18n.common.action.delete' | translate }}</span>
+  </button>
+  <button mat-menu-item
+          (click)="onEdit.emit()">
+    <mat-icon>edit</mat-icon>
+    <span>{{ 'i18n.common.action.edit' | translate }}</span>
+  </button>
 </mat-menu>

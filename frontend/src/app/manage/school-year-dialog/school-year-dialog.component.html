@@ -1,80 +1,87 @@
 <div class="dialog-header">
-    <h1 mat-dialog-title *ngIf="isEditMode()">{{ 'i18n.modules.manage.schoolYear.edit' | translate }}</h1>
-    <h1 mat-dialog-title *ngIf="!isEditMode()">{{ 'i18n.modules.manage.schoolYear.add' | translate }}</h1>
+  <h1 mat-dialog-title
+      *ngIf="isEditMode()">{{ 'i18n.modules.manage.schoolYear.edit' | translate }}</h1>
+  <h1 mat-dialog-title
+      *ngIf="!isEditMode()">{{ 'i18n.modules.manage.schoolYear.add' | translate }}</h1>
 </div>
-<form [formGroup]="schoolYearForm" (submit)="submit()">
-    <div class="dialog-body" mat-dialog-content>
-        <div class="form-group">
-            <mat-form-field>
-                <input matInput
-                       required
-                       [placeholder]="'i18n.modules.manage.schoolYear.form.label' | translate"
-                       formControlName="name">
-                <mat-error *ngIf="schoolYearForm.get('name').hasError('required')">
-                    {{ 'i18n.common.form.error.required' | translate }}
-                </mat-error>
-            </mat-form-field>
-        </div>
-        <div class="form-group">
-            <mat-form-field>
-                <input matInput
-                       required
-                       [matDatepicker]="validFromPicker"
-                       [placeholder]="'i18n.common.label.validFrom' | translate"
-                       formControlName="validFrom">
-                <mat-datepicker-toggle matSuffix [for]=validFromPicker></mat-datepicker-toggle>
-                <mat-datepicker #validFromPicker
-                                [touchUi]="isMobile()">
-                </mat-datepicker>
-                <mat-error>
-                    <ng-template [ngIf]="schoolYearForm.get('validFrom').hasError('required')">
-                        {{ 'i18n.common.form.error.required' | translate }}
-                    </ng-template>
-                    <ng-template [ngIf]="schoolYearForm.get('validFrom').hasError('date')">
-                        {{ 'i18n.common.form.error.datePattern' | translate }}
-                    </ng-template>
-                </mat-error>
-            </mat-form-field>
-        </div>
-        <div class="form-group">
-            <mat-form-field>
-                <input matInput
-                       required
-                       [matDatepicker]="validToPicker"
-                       [placeholder]="'i18n.common.label.validTo' | translate"
-                       formControlName="validTo">
-                <mat-datepicker-toggle matSuffix [for]="validToPicker"></mat-datepicker-toggle>
-                <mat-datepicker #validToPicker
-                                [touchUi]="isMobile()">
-                </mat-datepicker>
-                <mat-error>
-                    <ng-template [ngIf]="schoolYearForm.get('validTo').hasError('required')">
-                        {{ 'i18n.common.form.error.required' | translate }}
-                    </ng-template>
-                    <ng-template [ngIf]="schoolYearForm.get('validTo').hasError('date')">
-                        {{ 'i18n.common.form.error.datePattern' | translate }}
-                    </ng-template>
-                </mat-error>
-            </mat-form-field>
-        </div>
-        <div class="form-error"
-             *ngIf="schoolYearForm.invalid && schoolYearForm.touched && ((schoolYearForm.get('validFrom').touched && schoolYearForm.get('validTo').touched) || isEditMode())">
+<form [formGroup]="schoolYearForm"
+      (submit)="submit()">
+  <div class="dialog-body"
+       mat-dialog-content>
+    <div class="form-group">
+      <mat-form-field>
+        <input matInput
+               required
+               [placeholder]="'i18n.modules.manage.schoolYear.form.label' | translate"
+               formControlName="name">
+        <mat-error *ngIf="schoolYearForm.get('name').hasError('required')">
+          {{ 'i18n.common.form.error.required' | translate }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field>
+        <input matInput
+               required
+               [matDatepicker]="validFromPicker"
+               [placeholder]="'i18n.common.label.validFrom' | translate"
+               formControlName="validFrom">
+        <mat-datepicker-toggle matSuffix
+                               [for]=validFromPicker></mat-datepicker-toggle>
+        <mat-datepicker #validFromPicker
+                        [touchUi]="isMobile()">
+        </mat-datepicker>
+        <mat-error>
+          <ng-template [ngIf]="schoolYearForm.get('validFrom').hasError('required')">
+            {{ 'i18n.common.form.error.required' | translate }}
+          </ng-template>
+          <ng-template [ngIf]="schoolYearForm.get('validFrom').hasError('date')">
+            {{ 'i18n.common.form.error.datePattern' | translate }}
+          </ng-template>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field>
+        <input matInput
+               required
+               [matDatepicker]="validToPicker"
+               [placeholder]="'i18n.common.label.validTo' | translate"
+               formControlName="validTo">
+        <mat-datepicker-toggle matSuffix
+                               [for]="validToPicker"></mat-datepicker-toggle>
+        <mat-datepicker #validToPicker
+                        [touchUi]="isMobile()">
+        </mat-datepicker>
+        <mat-error>
+          <ng-template [ngIf]="schoolYearForm.get('validTo').hasError('required')">
+            {{ 'i18n.common.form.error.required' | translate }}
+          </ng-template>
+          <ng-template [ngIf]="schoolYearForm.get('validTo').hasError('date')">
+            {{ 'i18n.common.form.error.datePattern' | translate }}
+          </ng-template>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-error"
+         *ngIf="schoolYearForm.invalid && schoolYearForm.touched && ((schoolYearForm.get('validFrom').touched && schoolYearForm.get('validTo').touched) || isEditMode())">
             <span *ngIf="schoolYearForm.hasError('dateToIsBeforeDateFrom')">
                 {{ 'i18n.common.form.error.dateToIsBeforeDateFrom' | translate }}
             </span>
-        </div>
     </div>
-    <div class="dialog-footer" mat-dialog-actions>
-        <div class="footer-right">
-            <button mat-button
-                    mat-dialog-close>
-                {{ 'i18n.common.action.cancel' | translate }}
-            </button>
-            <button mat-raised-button
-                    color="primary"
-                    type="submit">
-                {{ 'i18n.common.action.save' | translate }}
-            </button>
-        </div>
+  </div>
+  <div class="dialog-footer"
+       mat-dialog-actions>
+    <div class="footer-right">
+      <button mat-button
+              mat-dialog-close>
+        {{ 'i18n.common.action.cancel' | translate }}
+      </button>
+      <button mat-raised-button
+              color="primary"
+              type="submit">
+        {{ 'i18n.common.action.save' | translate }}
+      </button>
     </div>
+  </div>
 </form>

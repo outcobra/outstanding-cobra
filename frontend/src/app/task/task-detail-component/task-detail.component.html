@@ -1,42 +1,53 @@
 <div class="task-detail">
-    <!-- TASK DESC START-->
-    <oc-icon-data *ngIf="!isEmpty(task.description)" iconName="description" titleKey="i18n.modules.task.desc">
-        <span class="task-property">{{ task.description }}</span>
-    </oc-icon-data>
-    <!-- TASK DESC END -->
-    <!-- TASK TODO_DATE START -->
-    <oc-icon-data iconName="alarm" titleKey="i18n.common.label.todoDate">
-        <span class="task-property">{{ task.todoDate | date:'fullDate' }}</span>
-    </oc-icon-data>
-    <!-- TASK TODO_DATE END -->
-    <!-- TASK DUE_DATE START-->
-    <oc-icon-data iconName="event" titleKey="i18n.common.label.dueDate">
-        <span class="task-property">{{ task.dueDate | date:'fullDate' }}</span>
-    </oc-icon-data>
-    <!-- TASK DUE_DATE END-->
-    <!-- TASK PROGRESS START-->
-    <oc-icon-data iconName="show_chart">
-        <div class="row task-progress" fxLayout>
-            <div class="task-progress-label" fxFlex="15" fxLayout="column">
-                <span class="text-secondary-dark">{{ 'i18n.modules.task.progress' | translate }}</span>
-                <span class="progress-value">{{ task.progress }}%</span>
-            </div>
-            <div fxFlex>
-                <mat-slider [(ngModel)]="task.progress" color="accent" thumbLabel step="5"></mat-slider>
-            </div>
-        </div>
-    </oc-icon-data>
-    <oc-icon-data iconName="timelapse" titleKey="i18n.modules.task.dialogs.add.effort.remaining">
-        <span class="task-property">{{ getRemainingEffort() }}</span>
-    </oc-icon-data>
-    <!-- TASK PROGRESS END-->
+  <!-- TASK DESC START-->
+  <oc-icon-data *ngIf="!isEmpty(task.description)"
+                iconName="description"
+                titleKey="i18n.modules.task.desc">
+    <span class="task-property">{{ task.description }}</span>
+  </oc-icon-data>
+  <!-- TASK DESC END -->
+  <!-- TASK TODO_DATE START -->
+  <oc-icon-data iconName="alarm"
+                titleKey="i18n.common.label.todoDate">
+    <span class="task-property">{{ task.todoDate | date:'fullDate' }}</span>
+  </oc-icon-data>
+  <!-- TASK TODO_DATE END -->
+  <!-- TASK DUE_DATE START-->
+  <oc-icon-data iconName="event"
+                titleKey="i18n.common.label.dueDate">
+    <span class="task-property">{{ task.dueDate | date:'fullDate' }}</span>
+  </oc-icon-data>
+  <!-- TASK DUE_DATE END-->
+  <!-- TASK PROGRESS START-->
+  <oc-icon-data iconName="show_chart">
+    <div class="row task-progress"
+         fxLayout>
+      <div class="task-progress-label"
+           fxFlex="15"
+           fxLayout="column">
+        <span class="text-secondary-dark">{{ 'i18n.modules.task.progress' | translate }}</span>
+        <span class="progress-value">{{ task.progress }}%</span>
+      </div>
+      <div fxFlex>
+        <mat-slider [(ngModel)]="task.progress"
+                    color="accent"
+                    thumbLabel
+                    step="5"></mat-slider>
+      </div>
+    </div>
+  </oc-icon-data>
+  <oc-icon-data iconName="timelapse"
+                titleKey="i18n.modules.task.dialogs.add.effort.remaining">
+    <span class="task-property">{{ getRemainingEffort() }}</span>
+  </oc-icon-data>
+  <!-- TASK PROGRESS END-->
 </div>
 <button mat-button
         color="primary"
         [routerLink]="'/task/update/' + task.id">
-    {{ 'i18n.common.action.edit' | translate }}
+  {{ 'i18n.common.action.edit' | translate }}
 </button>
 <button mat-button
         (click)="deleteTask()">
-    {{ 'i18n.common.action.delete' | translate }}
+  {{ 'i18n.common.action.delete' | translate }}
 </button>

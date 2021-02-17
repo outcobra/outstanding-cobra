@@ -1,75 +1,84 @@
 <oc-title-bar>
-    <span>{{ 'i18n.modules.exam.linkTitle' | translate }}</span>
+  <span>{{ 'i18n.modules.exam.linkTitle' | translate }}</span>
 </oc-title-bar>
 <ng-template #empty>
-    <oc-empty hint="i18n.modules.exam.empty.hint"></oc-empty>
+  <oc-empty hint="i18n.modules.exam.empty.hint"></oc-empty>
 </ng-template>
 
 <oc-filter-search (search)="search($event)">
-    <form ocFilter [formGroup]="filterForm">
-        <div>
-            <mat-form-field>
-                <mat-select formControlName="subjectId"
-                            [placeholder]="'i18n.modules.exam.filter.subject' | translate"
-                            floatPlaceholder="never">
-                    <mat-optgroup *ngFor="let schoolClass of schoolClassSubjects"
-                                  [label]="schoolClass.schoolClass.normalizedName">
-                        <mat-option *ngFor="let subject of schoolClass.subjects" [value]="subject.id">
-                            {{ subject.name }}
-                        </mat-option>
-                    </mat-optgroup>
-                </mat-select>
-            </mat-form-field>
-            <button mat-icon-button (click)="filterForm.controls['subjectId'].setValue(null)">
-                <mat-icon>close</mat-icon>
-            </button>
-        </div>
-        <div>
-            <mat-form-field>
-                <mat-select multiple formControlName="selectFilter"
-                            [placeholder]="'i18n.common.form.filter.additional' | translate"
-                            floatPlaceholder="never">
-                    <mat-option *ngFor="let key of getSelectFilterKeys()" [value]="key">
-                        {{ selectFilter[key].displayName | translate }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-            <button mat-icon-button (click)="filterForm.controls['selectFilter'].setValue([])">
-                <mat-icon>close</mat-icon>
-            </button>
-        </div>
-    </form>
+  <form ocFilter
+        [formGroup]="filterForm">
+    <div>
+      <mat-form-field>
+        <mat-select formControlName="subjectId"
+                    [placeholder]="'i18n.modules.exam.filter.subject' | translate"
+                    floatPlaceholder="never">
+          <mat-optgroup *ngFor="let schoolClass of schoolClassSubjects"
+                        [label]="schoolClass.schoolClass.normalizedName">
+            <mat-option *ngFor="let subject of schoolClass.subjects"
+                        [value]="subject.id">
+              {{ subject.name }}
+            </mat-option>
+          </mat-optgroup>
+        </mat-select>
+      </mat-form-field>
+      <button mat-icon-button
+              (click)="filterForm.controls['subjectId'].setValue(null)">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-select multiple
+                    formControlName="selectFilter"
+                    [placeholder]="'i18n.common.form.filter.additional' | translate"
+                    floatPlaceholder="never">
+          <mat-option *ngFor="let key of getSelectFilterKeys()"
+                      [value]="key">
+            {{ selectFilter[key].displayName | translate }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-icon-button
+              (click)="filterForm.controls['selectFilter'].setValue([])">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </form>
 </oc-filter-search>
 
-<div fxLayout fxLayoutAlign="center start" *ngIf="allExams.length > 0; else empty">
-    <div class="container middle-container" fxFlex>
-        <mat-accordion *ngIf="displayedExams.length > 0; else emptyFilter">
-            <mat-expansion-panel *ngFor="let exam of displayedExams">
-                <mat-expansion-panel-header>
+<div fxLayout
+     fxLayoutAlign="center start"
+     *ngIf="allExams.length > 0; else empty">
+  <div class="container middle-container"
+       fxFlex>
+    <mat-accordion *ngIf="displayedExams.length > 0; else emptyFilter">
+      <mat-expansion-panel *ngFor="let exam of displayedExams">
+        <mat-expansion-panel-header>
                     <span class="subject-letter-icon"
                           [style.background-color]="'#' + exam.subject.color.hex"
                           [matTooltip]="exam.subject.name"
                           matTooltipPosition="after">
                             {{ exam.subject.name | slice:0:1 | uppercase }}
                     </span>
-                    <span>{{ exam.name }}</span>
-                </mat-expansion-panel-header>
-                <exam-list-item [exam]="exam"
-                                (delete)="deleteExam($event)"
-                                (edit)="editExam($event)"
-                                (addMark)="addMark$.next($event)">
-                </exam-list-item>
-            </mat-expansion-panel>
-        </mat-accordion>
-        <ng-template #emptyFilter>
-            <oc-empty placeholder="i18n.common.label.noFilterResults"></oc-empty>
-        </ng-template>
-    </div>
+          <span>{{ exam.name }}</span>
+        </mat-expansion-panel-header>
+        <exam-list-item [exam]="exam"
+                        (delete)="deleteExam($event)"
+                        (edit)="editExam($event)"
+                        (addMark)="addMark$.next($event)">
+        </exam-list-item>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <ng-template #emptyFilter>
+      <oc-empty placeholder="i18n.common.label.noFilterResults"></oc-empty>
+    </ng-template>
+  </div>
 </div>
 <button mat-fab
         color="accent"
         routerLink="/exam/new"
         [matTooltip]="'i18n.modules.exam.add' | translate"
         matTooltipPosition="left">
-    <mat-icon>add</mat-icon>
+  <mat-icon>add</mat-icon>
 </button>

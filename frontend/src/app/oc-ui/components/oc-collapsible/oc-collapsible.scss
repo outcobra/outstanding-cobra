@@ -1,59 +1,61 @@
 @import '../../../../sass/color-variables';
 
 oc-collapsible {
-    display: block;
-    height: 100%;
-    width: 100%;
+  display: block;
+  height: 100%;
+  width: 100%;
 }
 
 oc-collapsible-header {
-    cursor: pointer;
-    width: 100%;
-    box-sizing: border-box;
+  cursor: pointer;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+
+  &:hover {
+    background-color: $hover-light;
+  }
+
+  .oc-collapsible-header-content {
+    flex-grow: 1;
     display: flex;
-    flex-direction: row;
+    align-items: center;
 
-    &:hover {
-        background-color: $hover-light;
+    span, mat-icon {
+      padding: 0 5px;
     }
+  }
 
-    .oc-collapsible-header-content {
-        flex-grow: 1;
-        display: flex;
-        align-items: center;
+  .oc-collapsible-toggle {
+    display: flex;
+    align-items: center;
 
-        span, mat-icon {
-            padding: 0 5px;
-        }
+    mat-icon {
+      color: $secondary-dark;
+      transition: all .225s ease-in-out;
     }
-
-    .oc-collapsible-toggle {
-        display: flex;
-        align-items: center;
-        mat-icon {
-            color: $secondary-dark;
-            transition: all .225s ease-in-out;
-        }
-    }
+  }
 }
 
 .oc-collapsible-body {
-    overflow: hidden;
+  overflow: hidden;
+  height: inherit;
+
+  ul {
     height: inherit;
+    overflow-y: hidden;
 
-    ul {
-        height: inherit;
-        overflow-y: hidden;
-        li {
-            overflow-y: hidden;
-        }
+    li {
+      overflow-y: hidden;
     }
+  }
 
-    oc-collapsible {
-        overflow: hidden;
-    }
+  oc-collapsible {
+    overflow: hidden;
+  }
 }
 
 oc-collapsible.active > oc-collapsible-header > .oc-collapsible-toggle > mat-icon {
-    transform: rotate(180deg);
+  transform: rotate(180deg);
 }

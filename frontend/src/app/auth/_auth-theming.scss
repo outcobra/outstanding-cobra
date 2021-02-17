@@ -1,27 +1,30 @@
 @mixin auth-theme($theme) {
-    $primary-palette: map_get($theme, primary);
-    .auth-wrapper {
-        .signup, .login {
-            transition: all .375s cubic-bezier(0.4, 0.0, 0.2, 1);
-            z-index: auto;
-        }
-        .signup {
-            background-color: map_get(map_get($theme, background), background);
-            &:hover {
-                filter: grayscale(10%);
-                box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
-                z-index: 500;
-            }
-        }
-        .login {
-            background-color: map_get($primary-palette, default);
-            color: map_get($primary-palette, default-contrast);
-
-            &:hover {
-                background-color: map_get($primary-palette, darker);
-                box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.75);
-                z-index: 500;
-            }
-        }
+  $primary-palette: map_get($theme, primary);
+  .auth-wrapper {
+    .signup, .login {
+      transition: all .375s cubic-bezier(0.4, 0.0, 0.2, 1);
+      z-index: auto;
     }
+
+    .signup {
+      background-color: map_get(map_get($theme, background), background);
+
+      &:hover {
+        filter: grayscale(10%);
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+        z-index: 500;
+      }
+    }
+
+    .login {
+      background-color: map_get($primary-palette, default);
+      color: map_get($primary-palette, default-contrast);
+
+      &:hover {
+        background-color: map_get($primary-palette, darker);
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.75);
+        z-index: 500;
+      }
+    }
+  }
 }

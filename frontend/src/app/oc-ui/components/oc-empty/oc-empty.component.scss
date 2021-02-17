@@ -1,30 +1,32 @@
 :host {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  .oc-empty-wrapper {
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
-    .oc-empty-wrapper {
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 48px 0;
+    align-items: center;
+    padding: 48px 0;
 
-        mat-icon {
-            width: 96px;
-            height: 96px;
-            font-size: 96px;
-        }
-
-        h1 {
-            margin: 24px 0 12px;
-        }
-        h1, span {
-            text-align: center;
-        }
-
-        .oc-empty-content {
-            display: flex;
-            flex-direction: column;
-        }
+    mat-icon {
+      width: 96px;
+      height: 96px;
+      font-size: 96px;
     }
+
+    h1 {
+      margin: 24px 0 12px;
+    }
+
+    h1, span {
+      text-align: center;
+    }
+
+    .oc-empty-content {
+      display: flex;
+      flex-direction: column;
+    }
+  }
 }

@@ -1,17 +1,17 @@
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
-import {ManageDto} from '../model/manage.dto';
-import {AppService} from '../../core/services/core/app.service';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { AppService } from '../../core/services/core/app.service';
+import { ManageDto } from '../model/manage.dto';
 
 @Injectable()
 export class ManageService extends AppService {
-    constructor(http: HttpClient) {
-        super(http, '/api/manage')
-    }
+  constructor(http: HttpClient) {
+    super(http, '/api/manage');
+  }
 
-    public getManageData(): Observable<ManageDto> {
-        return this._http.get<ManageDto>(this._baseUri);
-    }
+  public getManageData(): Observable<ManageDto> {
+    return this._http.get<ManageDto>(this._baseUri);
+  }
 
 }

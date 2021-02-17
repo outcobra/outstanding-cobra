@@ -1,45 +1,58 @@
 <mat-sidenav-container>
-    <mat-sidenav class="oc-mobile-sidenav" *ngIf="mobile">
-        <mat-toolbar>
-            <img routerLink="/"
-                 class="oc-title-logo"
-                 src="/assets/img/oc_logo_stroke_combined_blue.svg">
-        </mat-toolbar>
-        <oc-divider></oc-divider>
-        <oc-nav>
-            <div class="lang-toggler">
-                {{ 'i18n.common.lang.de' | translate }}
-                <mat-slide-toggle (change)="changeLang()" [(ngModel)]="isEnglish"></mat-slide-toggle>
-                {{ 'i18n.common.lang.en' | translate }}
-            </div>
-        </oc-nav>
-    </mat-sidenav>
+  <mat-sidenav class="oc-mobile-sidenav"
+               *ngIf="mobile">
+    <mat-toolbar>
+      <img routerLink="/"
+           class="oc-title-logo"
+           src="/assets/img/oc_logo_stroke_combined_blue.svg">
+    </mat-toolbar>
+    <oc-divider></oc-divider>
+    <oc-nav>
+      <div class="lang-toggler">
+        {{ 'i18n.common.lang.de' | translate }}
+        <mat-slide-toggle (change)="changeLang()"
+                          [(ngModel)]="isEnglish"></mat-slide-toggle>
+        {{ 'i18n.common.lang.en' | translate }}
+      </div>
+    </oc-nav>
+  </mat-sidenav>
 
-    <div class="oc-app-layout-wrapper">
-        <mat-toolbar color="primary" class="oc-primary-toolbar">
-            <mat-icon class="toolbar-icon" (click)="openSidenav()" *ngIf="mobile">menu</mat-icon>
+  <div class="oc-app-layout-wrapper">
+    <mat-toolbar color="primary"
+                 class="oc-primary-toolbar">
+      <mat-icon class="toolbar-icon"
+                (click)="openSidenav()"
+                *ngIf="mobile">menu
+      </mat-icon>
 
-            <img routerLink="/"
-                 class="oc-title-logo"
-                 src="/assets/img/oc_logo_stroke_combined_blue_inverted.svg">
-            <span class="oc-title-beta">Beta</span>
-            <span class="toolbar-fill-space"></span>
-            <button mat-button (click)="logout()">{{ 'i18n.auth.logout' | translate }}</button>
-        </mat-toolbar>
+      <img routerLink="/"
+           class="oc-title-logo"
+           src="/assets/img/oc_logo_stroke_combined_blue_inverted.svg">
+      <span class="oc-title-beta">Beta</span>
+      <span class="toolbar-fill-space"></span>
+      <button mat-button
+              (click)="logout()">{{ 'i18n.auth.logout' | translate }}</button>
+    </mat-toolbar>
 
-        <div class="main-area">
-            <oc-nav [collapsible]="true" *ngIf="!mobile" class="oc-side-sidenav" #ocNav>
-                <div class="lang-toggler" *ngIf="!ocNav.collapsed">
-                    {{ 'i18n.common.lang.de' | translate }}
-                    <mat-slide-toggle (change)="changeLang()" [(ngModel)]="isEnglish"></mat-slide-toggle>
-                    {{ 'i18n.common.lang.en' | translate }}
-                </div>
-            </oc-nav>
-            <div class="app-content" [@appLayoutRouteAnimation]="prepareRouteState(routerOutlet)">
-                <router-outlet #routerOutlet="outlet"></router-outlet>
-            </div>
+    <div class="main-area">
+      <oc-nav [collapsible]="true"
+              *ngIf="!mobile"
+              class="oc-side-sidenav"
+              #ocNav>
+        <div class="lang-toggler"
+             *ngIf="!ocNav.collapsed">
+          {{ 'i18n.common.lang.de' | translate }}
+          <mat-slide-toggle (change)="changeLang()"
+                            [(ngModel)]="isEnglish"></mat-slide-toggle>
+          {{ 'i18n.common.lang.en' | translate }}
         </div>
-        <oc-footer *ngIf="!mobile"></oc-footer>
-        <simple-notifications></simple-notifications>
+      </oc-nav>
+      <div class="app-content"
+           [@appLayoutRouteAnimation]="prepareRouteState(routerOutlet)">
+        <router-outlet #routerOutlet="outlet"></router-outlet>
+      </div>
     </div>
+    <oc-footer *ngIf="!mobile"></oc-footer>
+    <simple-notifications></simple-notifications>
+  </div>
 </mat-sidenav-container>

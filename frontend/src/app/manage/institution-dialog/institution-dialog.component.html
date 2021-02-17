@@ -1,33 +1,38 @@
 <div class="dialog-header">
-    <h1 mat-dialog-title *ngIf="isEditMode()">{{ 'i18n.modules.manage.institution.edit' | translate }}</h1>
-    <h1 mat-dialog-title *ngIf="!isEditMode()">{{ 'i18n.modules.manage.institution.add' | translate }}</h1>
+  <h1 mat-dialog-title
+      *ngIf="isEditMode()">{{ 'i18n.modules.manage.institution.edit' | translate }}</h1>
+  <h1 mat-dialog-title
+      *ngIf="!isEditMode()">{{ 'i18n.modules.manage.institution.add' | translate }}</h1>
 </div>
-<form [formGroup]="institutionForm" (submit)="submit()">
-    <div class="dialog-body" mat-dialog-content>
-        <div class="form-group">
-            <mat-form-field>
-                <input matInput
-                       required
-                       [autofocus]="false"
-                       [placeholder]="'i18n.modules.manage.institution.form.label' | translate"
-                       formControlName="name">
-                <mat-error *ngIf="institutionForm.get('name').hasError('required')">
-                    {{ 'i18n.common.form.error.required' | translate }}
-                </mat-error>
-            </mat-form-field>
-        </div>
+<form [formGroup]="institutionForm"
+      (submit)="submit()">
+  <div class="dialog-body"
+       mat-dialog-content>
+    <div class="form-group">
+      <mat-form-field>
+        <input matInput
+               required
+               [autofocus]="false"
+               [placeholder]="'i18n.modules.manage.institution.form.label' | translate"
+               formControlName="name">
+        <mat-error *ngIf="institutionForm.get('name').hasError('required')">
+          {{ 'i18n.common.form.error.required' | translate }}
+        </mat-error>
+      </mat-form-field>
     </div>
-    <div class="dialog-footer" mat-dialog-actions>
-        <div class="footer-right">
-            <button mat-button
-                    mat-dialog-close>
-                {{ 'i18n.common.action.cancel' | translate }}
-            </button>
-            <button mat-raised-button
-                    color="primary"
-                    type="submit">
-                {{ 'i18n.common.action.save' | translate }}
-            </button>
-        </div>
+  </div>
+  <div class="dialog-footer"
+       mat-dialog-actions>
+    <div class="footer-right">
+      <button mat-button
+              mat-dialog-close>
+        {{ 'i18n.common.action.cancel' | translate }}
+      </button>
+      <button mat-raised-button
+              color="primary"
+              type="submit">
+        {{ 'i18n.common.action.save' | translate }}
+      </button>
     </div>
+  </div>
 </form>

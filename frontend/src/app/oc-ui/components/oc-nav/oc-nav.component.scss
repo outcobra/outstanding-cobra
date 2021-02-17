@@ -6,96 +6,106 @@ $uncollapsed-width: 200px;
 $animation-duration: .3s;
 
 oc-nav {
-    position: relative;
-    transition: all $animation-duration ease-in-out;
-    overflow-x: hidden;
+  position: relative;
+  transition: all $animation-duration ease-in-out;
+  overflow-x: hidden;
 
-    * {
-        color: $secondary-dark;
-    }
+  * {
+    color: $secondary-dark;
+  }
 
-    flex-basis: $uncollapsed-width;
+  flex-basis: $uncollapsed-width;
 
-    .oc-nav-nav {
-        margin-top: 8px;
-        nav {
+  .oc-nav-nav {
+    margin-top: 8px;
+
+    nav {
+      width: $uncollapsed-width;
+      transition: width $animation-duration ease-in-out;
+
+      ul {
+        margin: 0;
+        padding: 0;
+
+        li {
+          display: block;
+          width: 100%;
+          overflow: hidden;
+          height: $row-height;
+
+          a[mat-button] {
             width: $uncollapsed-width;
-            transition: width $animation-duration ease-in-out;
-            ul {
-                margin: 0;
-                padding: 0;
-                li {
-                    display: block;
-                    width: 100%;
-                    overflow: hidden;
-                    height: $row-height;
+            padding: 0;
+            transition: background-color .15s ease-in-out;
 
-                    a[mat-button] {
-                        width: $uncollapsed-width;
-                        padding: 0;
-                        transition: background-color .15s ease-in-out;
+            .mat-button-wrapper {
+              overflow: hidden;
 
-                        .mat-button-wrapper {
-                            overflow: hidden;
-                            span, mat-icon {
-                                float: left;
-                                display: block !important;
-                                height: 100% !important;
-                                line-height: $row-height !important;
-                            }
-                            span {
-                                width: 150px;
-                                text-align: left;
-                                opacity: 1;
-                                transition: opacity $animation-duration cubic-bezier(.95,.28,.55,1);
-                            }
-                            mat-icon {
-                                width: $collapsed-width !important;
-                                text-align: center;
-                            }
-                        }
+              span, mat-icon {
+                float: left;
+                display: block !important;
+                height: 100% !important;
+                line-height: $row-height !important;
+              }
 
-                        &.oc-nav-link-active mat-icon {
-                            @extend .text-accent;
-                        }
-                    }
-                }
+              span {
+                width: 150px;
+                text-align: left;
+                opacity: 1;
+                transition: opacity $animation-duration cubic-bezier(.95, .28, .55, 1);
+              }
+
+              mat-icon {
+                width: $collapsed-width !important;
+                text-align: center;
+              }
             }
-        }
-    }
 
-    .oc-nav-collapser {
-        width: 100%;
-        position: absolute;
-        bottom: 0;
-
-        transition: min-width $animation-duration ease-in-out;
-
-        button {
-            transition: width $animation-duration ease-in-out;
-            min-width: $collapsed-width;
-            width: 100%;
-            text-align: end;
-            mat-icon {
-                transition: transform $animation-duration ease-in-out;
+            &.oc-nav-link-active mat-icon {
+              @extend .text-accent;
             }
+          }
         }
+      }
     }
+  }
+
+  .oc-nav-collapser {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+
+    transition: min-width $animation-duration ease-in-out;
+
+    button {
+      transition: width $animation-duration ease-in-out;
+      min-width: $collapsed-width;
+      width: 100%;
+      text-align: end;
+
+      mat-icon {
+        transition: transform $animation-duration ease-in-out;
+      }
+    }
+  }
 }
 
 oc-nav.oc-nav-collapsed {
-    flex-basis: $collapsed-width;
-    width: $collapsed-width;
-    .oc-nav-nav {
-        nav {
-            width: $collapsed-width;
-            a[mat-button] .mat-button-wrapper span {
-                opacity: 0;
-            }
-        }
+  flex-basis: $collapsed-width;
+  width: $collapsed-width;
+
+  .oc-nav-nav {
+    nav {
+      width: $collapsed-width;
+
+      a[mat-button] .mat-button-wrapper span {
+        opacity: 0;
+      }
     }
-    .oc-nav-collapser mat-icon {
-        transform: rotate(180deg);
-    }
+  }
+
+  .oc-nav-collapser mat-icon {
+    transform: rotate(180deg);
+  }
 
 }

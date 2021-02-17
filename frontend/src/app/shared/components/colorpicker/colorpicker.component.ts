@@ -1,134 +1,143 @@
-import {Component, ElementRef, EventEmitter, forwardRef, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {ColorService} from '../../../core/services/color.service';
-import {ColorDto} from '../../../core/model/color.dto';
-import {Util} from '../../../core/util/util';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  forwardRef,
+  Input,
+  OnInit,
+  Output,
+  ViewEncapsulation
+} from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ColorDto } from '../../../core/model/color.dto';
+import { ColorService } from '../../../core/services/color.service';
+import { Util } from '../../../core/util/util';
 
 const noop = () => {
 };
 
 export const COLORPICKER_CONTROL_VALUE_ACCESSOR: any = {
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => ColorpickerComponent),
-    multi: true
+  provide: NG_VALUE_ACCESSOR,
+  useExisting: forwardRef(() => ColorpickerComponent),
+  multi: true
 };
 
 @Component({
-    selector: 'colorpicker',
-    templateUrl: './colorpicker.component.html',
-    styleUrls: ['./colorpicker.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    host: {
-        '(document: click)': 'onDocumentClick($event)'
-    },
-    providers: [COLORPICKER_CONTROL_VALUE_ACCESSOR]
+  selector: 'colorpicker',
+  templateUrl: './colorpicker.component.html',
+  styleUrls: ['./colorpicker.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  host: {
+    '(document: click)': 'onDocumentClick($event)'
+  },
+  providers: [COLORPICKER_CONTROL_VALUE_ACCESSOR]
 })
 export class ColorpickerComponent implements OnInit, ControlValueAccessor {
-    @Input() opened: boolean = false;
-    @Input() initColor: string;
-    private _colorRows: ColorDto[][];
-    private _colors: ColorDto[];
-    private _selectedColor: ColorDto;
+  @Input() opened: boolean = false;
+  @Input() initColor: string;
+  private _colorRows: ColorDto[][];
+  private _colors: ColorDto[];
+  private _selectedColor: ColorDto;
 
-    private _outColor: ColorDto = null;
+  private _outColor: ColorDto = null;
 
-    @Output('selectColor') _onSelectColor = new EventEmitter<ColorDto>();
+  @Output('selectColor') _onSelectColor = new EventEmitter<ColorDto>();
 
-    private _onTouchedCallback: () => void = noop;
-    private _onChangeCallback: (_: any) => void = noop;
+  private _onTouchedCallback: () => void = noop;
+  private _onChangeCallback: (_: any) => void = noop;
 
-    constructor(private _elementRef: ElementRef,
-                private _colorService: ColorService) {
+  constructor(private _elementRef: ElementRef,
+              private _colorService: ColorService) {
+  }
+
+  ngOnInit() {
+    this._colorService.getColors()
+      .subscribe((res: ColorDto[]) => {
+        this._selectedColor = res.find(color => this.initColor && color.hex.toLowerCase() == this.initColor.toLowerCase());
+        this._colorRows = Util.split(res, 5);
+        this._colors = res;
+      });
+  }
+
+  public selectColor(color: ColorDto) {
+    this.writeValue(color);
+  }
+
+  public open() {
+    this.opened = true;
+  }
+
+  public close() {
+    if (this.isOpen()) {
+      this._onTouchedCallback();
+      this.opened = false;
     }
+  }
 
-    ngOnInit() {
-        this._colorService.getColors()
-            .subscribe((res: ColorDto[]) => {
-                this._selectedColor = res.find(color => this.initColor && color.hex.toLowerCase() == this.initColor.toLowerCase());
-                this._colorRows = Util.split(res, 5);
-                this._colors = res;
-            });
+  public toggle() {
+    if (this.isOpen()) {
+      this.close();
+    } else {
+      this.open();
     }
+  }
 
-    public selectColor(color: ColorDto) {
-        this.writeValue(color);
-    }
+  public isOpen() {
+    return this.opened;
+  }
 
-    public open() {
-        this.opened = true;
-    }
+  public submit() {
+    if (!this._outColor) this.selectColor(this._getRandomColor());
+    this.close();
+  }
 
-    public close() {
-        if (this.isOpen()) {
-            this._onTouchedCallback();
-            this.opened = false;
-        }
-    }
+  public cancel() {
+    this.close();
+  }
 
-    public toggle() {
-        if (this.isOpen()) {
-            this.close();
-        } else {
-            this.open();
-        }
-    }
+  private _getRandomColor() {
+    return this._colors[Math.floor(Math.random() * this._colors.length)];
+  }
 
-    public isOpen() {
-        return this.opened;
+  /**
+   * target function of document click (see @Component Metadata)
+   *
+   * you are not unused
+   * @param event
+   */
+  onDocumentClick(event) {
+    if (event.target.className.includes('colorpicker-toggler') || !this._elementRef.nativeElement.contains(event.target)) {
+      this.close();
     }
+  }
 
-    public submit() {
-        if (!this._outColor) this.selectColor(this._getRandomColor());
-        this.close();
+  public writeValue(value: ColorDto): void {
+    if (value && this._selectedColor !== value) {
+      this._selectedColor = value;
+      this._onSelectColor.emit(value);
+      this._outColor = value;
+      this._onChangeCallback(value);
     }
+  }
 
-    public cancel() {
-        this.close();
-    }
+  public registerOnChange(fn: any): void {
+    this._onChangeCallback = fn;
+  }
 
-    private _getRandomColor() {
-        return this._colors[Math.floor(Math.random() * this._colors.length)];
-    }
+  public registerOnTouched(fn: any): void {
+    this._onTouchedCallback = fn;
+  }
 
-    /**
-     * target function of document click (see @Component Metadata)
-     *
-     * you are not unused
-     * @param event
-     */
-    onDocumentClick(event) {
-        if (event.target.className.includes('colorpicker-toggler') || !this._elementRef.nativeElement.contains(event.target)) {
-            this.close();
-        }
-    }
+  public getSelectedColorHex(): string {
+    if (!this._selectedColor) return '#00000';
+    return `#${this._selectedColor.hex}`;
+  }
 
-    public writeValue(value: ColorDto): void {
-        if (value && this._selectedColor !== value) {
-            this._selectedColor = value;
-            this._onSelectColor.emit(value);
-            this._outColor = value;
-            this._onChangeCallback(value);
-        }
-    }
+  get colorRows(): ColorDto[][] {
+    return this._colorRows;
+  }
 
-    public registerOnChange(fn: any): void {
-        this._onChangeCallback = fn;
-    }
-
-    public registerOnTouched(fn: any): void {
-        this._onTouchedCallback = fn;
-    }
-
-    public getSelectedColorHex(): string {
-        if (!this._selectedColor) return '#00000';
-        return `#${this._selectedColor.hex}`;
-    }
-
-    get colorRows(): ColorDto[][] {
-        return this._colorRows;
-    }
-
-    get selectedColor(): ColorDto {
-        return this._selectedColor;
-    }
+  get selectedColor(): ColorDto {
+    return this._selectedColor;
+  }
 }

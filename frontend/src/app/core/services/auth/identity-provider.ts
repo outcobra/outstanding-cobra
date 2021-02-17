@@ -1,3 +1,3 @@
 export enum IdentityProvider {
-    GOOGLE = 'google-oauth2'
+  GOOGLE = 'google-oauth2'
 }

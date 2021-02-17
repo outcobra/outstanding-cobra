@@ -1,21 +1,21 @@
 mat-form-field {
-    width: 100%;
+  width: 100%;
 
-    textarea {
-        resize: vertical;
-    }
+  textarea {
+    resize: vertical;
+  }
 }
 
 :host {
-    .form-group {
-        padding: 0 4px;
-    }
+  .form-group {
+    padding: 0 4px;
+  }
 }
 
 mat-select {
-    width: 100%;
+  width: 100%;
 }
 
 .exam-tasks mat-checkbox[matPrefix] {
-    margin-right: 8px;
+  margin-right: 8px;
 }

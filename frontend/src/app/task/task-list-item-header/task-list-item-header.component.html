@@ -5,21 +5,21 @@
           matTooltipPosition="after">
             {{ task.subject.name | slice:0:1 | uppercase }}
     </span>
-    <div class="task-header-title">
-        <span class="task-heading">{{ task.name }}</span>
-        <span *ngIf="hasDescription"
-              class="task-subheading">
+  <div class="task-header-title">
+    <span class="task-heading">{{ task.name }}</span>
+    <span *ngIf="hasDescription"
+          class="task-subheading">
             {{ task.description }}
         </span>
-    </div>
-    <div class="oc-filler"></div>
-    <mat-icon *ngIf="isFinished(); else notFinished">done</mat-icon>
-    <ng-template #notFinished>
-        <button mat-button
-                color="accent"
-                class="show-on-hover"
-                (click)="markAsDone($event)">
-            {{ 'i18n.modules.task.finish' | translate }}
-        </button>
-    </ng-template>
+  </div>
+  <div class="oc-filler"></div>
+  <mat-icon *ngIf="isFinished(); else notFinished">done</mat-icon>
+  <ng-template #notFinished>
+    <button mat-button
+            color="accent"
+            class="show-on-hover"
+            (click)="markAsDone($event)">
+      {{ 'i18n.modules.task.finish' | translate }}
+    </button>
+  </ng-template>
 </div>

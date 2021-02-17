@@ -11,42 +11,38 @@
  * automatically update themselves. This includes Safari >= 10, Chrome >= 55 (including Opera),
  * Edge >= 13 on the desktop, and iOS 10 and Chrome on mobile.
  *
- * Learn more in https://angular.io/docs/ts/latest/guide/browser-support.html
+ * Learn more in https://angular.io/guide/browser-support
  */
 
 /***************************************************************************************************
  * BROWSER POLYFILLS
  */
 
-/** IE9, IE10 and IE11 requires all of the following polyfills. **/
-import 'core-js/es6/symbol';
-import 'core-js/es6/object';
-import 'core-js/es6/function';
-import 'core-js/es6/parse-int';
-import 'core-js/es6/parse-float';
-import 'core-js/es6/number';
-import 'core-js/es6/math';
-import 'core-js/es6/string';
-import 'core-js/es6/date';
-import 'core-js/es6/array';
-import 'core-js/es6/regexp';
-import 'core-js/es6/map';
-import 'core-js/es6/weak-map';
-import 'core-js/es6/set';
-/** Evergreen browsers require these. **/
-import 'core-js/es6/reflect';
-import 'core-js/es7/reflect';
-
-// IE Array.prototype.includes
-import 'core-js/es7/array';
-
-/**
- * Required to support Web Animations `@angular/platform-browser/animations`.
- * Needed for: All but Chrome, Firefox and Opera. http://caniuse.com/#feat=web-animation
- **/
-import 'web-animations-js';
+import 'core-js/features/array';
+import 'core-js/features/date';
+import 'core-js/features/function';
+import 'core-js/features/map';
+import 'core-js/features/math';
+import 'core-js/features/number';
+import 'core-js/features/object';
+import 'core-js/features/parse-float';
+import 'core-js/features/parse-int';
+import 'core-js/features/reflect';
+import 'core-js/features/regexp';
+import 'core-js/features/set';
+import 'core-js/features/string';
+import 'core-js/features/symbol';
 /***************************************************************************************************
- * Zone JS is required by Angular itself.
+ * APPLICATION IMPORTS
+ */
+/**
+ * Web Animations `@angular/platform-browser/animations`
+ * Only required if AnimationBuilder is used within the application and using IE/Edge or Safari.
+ * Standard animation support in Angular DOES NOT require any polyfills (as of Angular 6.0).
+ */
+import 'web-animations-js'; // Run `npm install --save web-animations-js`.
+/***************************************************************************************************
+ * Zone JS is required by default for Angular itself.
  */
 import 'zone.js/dist/zone'; // Included with Angular CLI.
 

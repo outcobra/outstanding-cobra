@@ -1,9 +1,9 @@
-import {MediaChange} from '@angular/flex-layout';
-import {Orientation} from './orientation';
+import { MediaChange } from '@angular/flex-layout';
+import { Orientation } from './orientation';
 
 export interface OCMediaChange {
-    mobile: boolean,
-    width: number,
-    orientation: Orientation,
-    originalChange: MediaChange
+  mobile: boolean,
+  width: number,
+  orientation: Orientation,
+  originalChange: MediaChange
 }

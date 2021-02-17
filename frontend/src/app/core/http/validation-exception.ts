@@ -1,11 +1,11 @@
 export enum MessageLevel {
-    ERROR, WARNING, INFO
+  ERROR, WARNING, INFO
 }
 
 export class ValidationException {
-    title: string;
-    message: string;
-    messageLevel: MessageLevel;
-    status: number;
-    cause: any;
+  title: string;
+  message: string;
+  messageLevel: MessageLevel;
+  status: number;
+  cause: any;
 }

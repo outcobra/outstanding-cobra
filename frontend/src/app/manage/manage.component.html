@@ -1,167 +1,199 @@
 <oc-title-bar>
-    <span>{{ 'i18n.modules.manage.linkTitle' | translate }}</span>
-    <div *ngIf="isMobile()" class="row mobile-manage-nav oc-title-bar-nav" fxLayout="row">
-        <div fxFlex="15">
-            <button mat-button [disabled]="!isValidDirection(-1)" (click)="lastView()">
-                <mat-icon>navigate_before</mat-icon>
-            </button>
-        </div>
-        <div class="mobile-title" fxFlex>
-            <h6>{{ mobileTitle | translate }}</h6>
-        </div>
-        <div fxFlex="15">
-            <button mat-button [disabled]="!isValidDirection(1)" (click)="nextView()" class="right">
-                <mat-icon>navigate_next</mat-icon>
-            </button>
-        </div>
+  <span>{{ 'i18n.modules.manage.linkTitle' | translate }}</span>
+  <div *ngIf="isMobile()"
+       class="row mobile-manage-nav oc-title-bar-nav"
+       fxLayout="row">
+    <div fxFlex="15">
+      <button mat-button
+              [disabled]="!isValidDirection(-1)"
+              (click)="lastView()">
+        <mat-icon>navigate_before</mat-icon>
+      </button>
     </div>
+    <div class="mobile-title"
+         fxFlex>
+      <h6>{{ mobileTitle | translate }}</h6>
+    </div>
+    <div fxFlex="15">
+      <button mat-button
+              [disabled]="!isValidDirection(1)"
+              (click)="nextView()"
+              class="right">
+        <mat-icon>navigate_next</mat-icon>
+      </button>
+    </div>
+  </div>
 </oc-title-bar>
-<div class="row manage-rows" [class.mobile]="isMobile()" [style.margin-left.px]="isMobile() ? marginLeft : 0"
+<div class="row manage-rows"
+     [class.mobile]="isMobile()"
+     [style.margin-left.px]="isMobile() ? marginLeft : 0"
      fxLayout.gt-md>
-    <!-- FIRST COLUMN START -->
-    <div class="manage-col" [class.border-right]="!isMobile()" [class.mobile-col]="isMobile()" fxFlex.gt-md>
-        <ul>
-            <li *ngFor="let institution of currentInstitutions$ | async">
-                <oc-collapsible [showToggle]="false">
-                    <oc-collapsible-header>
-                        <div class="entity">
-                            <div class="entity-desc">
-                                <mat-icon class="entity-icon">business</mat-icon>
-                                <span>{{ institution.name }}</span>
-                            </div>
-                            <oc-entity-menu
-                                (delete)="deleteInstitution(institution)"
-                                (edit)="editInstitution(institution)"
-                            ></oc-entity-menu>
-                        </div>
-                    </oc-collapsible-header>
-                    <oc-divider></oc-divider>
-                    <ul>
-                        <li *ngFor="let schoolClass of institution.schoolClasses">
-                            <div class="entity child-entity" (click)="selectSchoolClass(schoolClass.id)"
-                                 [class.active]="schoolClass.id === activeSchoolClassId">
-                                <div class="entity-desc">
-                                    <mat-icon class="entity-icon">subdirectory_arrow_right</mat-icon>
-                                    <mat-icon class="entity-icon">class</mat-icon>
-                                    <span>{{ schoolClass.normalizedName }}</span>
-                                </div>
-                                <oc-entity-menu
-                                    (delete)="deleteSchoolClass(schoolClass)"
-                                    (edit)="editSchoolClass(schoolClass)"
-                                ></oc-entity-menu>
-                            </div>
-                            <oc-divider></oc-divider>
-                        </li>
-                        <li>
-                            <div class="action-button">
-                                <button mat-button color="accent" (click)="addSchoolClass(institution)">
-                                    {{ 'i18n.modules.manage.schoolClass.add' | translate }}
-                                </button>
-                            </div>
-                        </li>
-                    </ul>
-                </oc-collapsible>
+  <!-- FIRST COLUMN START -->
+  <div class="manage-col"
+       [class.border-right]="!isMobile()"
+       [class.mobile-col]="isMobile()"
+       fxFlex.gt-md>
+    <ul>
+      <li *ngFor="let institution of currentInstitutions$ | async">
+        <oc-collapsible [showToggle]="false">
+          <oc-collapsible-header>
+            <div class="entity">
+              <div class="entity-desc">
+                <mat-icon class="entity-icon">business</mat-icon>
+                <span>{{ institution.name }}</span>
+              </div>
+              <oc-entity-menu
+                (delete)="deleteInstitution(institution)"
+                (edit)="editInstitution(institution)"
+              ></oc-entity-menu>
+            </div>
+          </oc-collapsible-header>
+          <oc-divider></oc-divider>
+          <ul>
+            <li *ngFor="let schoolClass of institution.schoolClasses">
+              <div class="entity child-entity"
+                   (click)="selectSchoolClass(schoolClass.id)"
+                   [class.active]="schoolClass.id === activeSchoolClassId">
+                <div class="entity-desc">
+                  <mat-icon class="entity-icon">subdirectory_arrow_right</mat-icon>
+                  <mat-icon class="entity-icon">class</mat-icon>
+                  <span>{{ schoolClass.normalizedName }}</span>
+                </div>
+                <oc-entity-menu
+                  (delete)="deleteSchoolClass(schoolClass)"
+                  (edit)="editSchoolClass(schoolClass)"
+                ></oc-entity-menu>
+              </div>
+              <oc-divider></oc-divider>
             </li>
             <li>
-                <div class="action-button">
-                    <button mat-button color="accent" (click)="addInstitution()">
-                        {{ 'i18n.modules.manage.institution.add' | translate }}
-                    </button>
-                </div>
+              <div class="action-button">
+                <button mat-button
+                        color="accent"
+                        (click)="addSchoolClass(institution)">
+                  {{ 'i18n.modules.manage.schoolClass.add' | translate }}
+                </button>
+              </div>
             </li>
-        </ul>
-    </div>
-    <!-- FIRST COLUMN END -->
+          </ul>
+        </oc-collapsible>
+      </li>
+      <li>
+        <div class="action-button">
+          <button mat-button
+                  color="accent"
+                  (click)="addInstitution()">
+            {{ 'i18n.modules.manage.institution.add' | translate }}
+          </button>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <!-- FIRST COLUMN END -->
 
-    <!-- MIDDLE COLUMN START -->
-    <div class="manage-col" [class.mobile-col]="isMobile()" fxFlex.gt-md>
-        <ul *ngIf="(currentSchoolYears$ | async) != null">
-            <li *ngFor="let schoolYear of currentSchoolYears$ | async">
-                <oc-collapsible [showToggle]="false">
-                    <oc-collapsible-header>
-                        <div class="entity">
-                            <div class="entity-desc">
-                                <mat-icon class="entity-icon">date_range</mat-icon>
-                                <div class="two-line-entity">
-                                    <span class="primary-text">{{ schoolYear.name }}</span>
-                                    <span class="secondary-text text-secondary-dark">{{ schoolYear.validFrom | date:'mediumDate' }} - {{ schoolYear.validTo | date:'mediumDate' }}</span>
-                                </div>
-                            </div>
-                            <oc-entity-menu
-                                (delete)="deleteSchoolYear(schoolYear)"
-                                (edit)="editSchoolYear(schoolYear)"
-                            ></oc-entity-menu>
-                        </div>
-                    </oc-collapsible-header>
-                    <oc-divider></oc-divider>
-                    <ul>
-                        <li *ngFor="let semester of schoolYear.semesters">
-                            <div class="entity child-entity" (click)="selectSemester(semester.id)"
-                                 [class.active]="semester.id === activeSemesterId">
-                                <div class="entity-desc">
-                                    <mat-icon class="entity-icon">subdirectory_arrow_right</mat-icon>
-                                    <mat-icon class="entity-icon">school</mat-icon>
-                                    <div class="two-line-entity">
-                                        <span class="primary-text">{{ semester.name }}</span>
-                                        <span class="secondary-text text-secondary-dark">{{ semester.validFrom | date:'mediumDate' }} - {{ semester.validTo | date:'mediumDate' }}</span>
-                                    </div>
-                                </div>
-                                <oc-entity-menu
-                                    (delete)="deleteSemester(semester)"
-                                    (edit)="editSemester(semester)"
-                                ></oc-entity-menu>
-                            </div>
-                            <oc-divider></oc-divider>
-                        </li>
-                        <li>
-                            <div class="action-button">
-                                <button mat-button color="accent" (click)="addSemester(schoolYear)">
-                                    {{ 'i18n.modules.manage.semester.add' | translate }}
-                                </button>
-                            </div>
-                        </li>
-                    </ul>
-                </oc-collapsible>
+  <!-- MIDDLE COLUMN START -->
+  <div class="manage-col"
+       [class.mobile-col]="isMobile()"
+       fxFlex.gt-md>
+    <ul *ngIf="(currentSchoolYears$ | async) != null">
+      <li *ngFor="let schoolYear of currentSchoolYears$ | async">
+        <oc-collapsible [showToggle]="false">
+          <oc-collapsible-header>
+            <div class="entity">
+              <div class="entity-desc">
+                <mat-icon class="entity-icon">date_range</mat-icon>
+                <div class="two-line-entity">
+                  <span class="primary-text">{{ schoolYear.name }}</span>
+                  <span class="secondary-text text-secondary-dark">{{ schoolYear.validFrom | date:'mediumDate' }}
+                    - {{ schoolYear.validTo | date:'mediumDate' }}</span>
+                </div>
+              </div>
+              <oc-entity-menu
+                (delete)="deleteSchoolYear(schoolYear)"
+                (edit)="editSchoolYear(schoolYear)"
+              ></oc-entity-menu>
+            </div>
+          </oc-collapsible-header>
+          <oc-divider></oc-divider>
+          <ul>
+            <li *ngFor="let semester of schoolYear.semesters">
+              <div class="entity child-entity"
+                   (click)="selectSemester(semester.id)"
+                   [class.active]="semester.id === activeSemesterId">
+                <div class="entity-desc">
+                  <mat-icon class="entity-icon">subdirectory_arrow_right</mat-icon>
+                  <mat-icon class="entity-icon">school</mat-icon>
+                  <div class="two-line-entity">
+                    <span class="primary-text">{{ semester.name }}</span>
+                    <span class="secondary-text text-secondary-dark">{{ semester.validFrom | date:'mediumDate' }}
+                      - {{ semester.validTo | date:'mediumDate' }}</span>
+                  </div>
+                </div>
+                <oc-entity-menu
+                  (delete)="deleteSemester(semester)"
+                  (edit)="editSemester(semester)"
+                ></oc-entity-menu>
+              </div>
+              <oc-divider></oc-divider>
             </li>
             <li>
-                <div class="action-button">
-                    <button mat-button color="accent" (click)="addSchoolYear(activeSchoolClassId)">
-                        {{ 'i18n.modules.manage.schoolYear.add' | translate }}
-                    </button>
-                </div>
+              <div class="action-button">
+                <button mat-button
+                        color="accent"
+                        (click)="addSemester(schoolYear)">
+                  {{ 'i18n.modules.manage.semester.add' | translate }}
+                </button>
+              </div>
             </li>
-        </ul>
-    </div>
-    <!-- MIDDLE COLUMN END -->
+          </ul>
+        </oc-collapsible>
+      </li>
+      <li>
+        <div class="action-button">
+          <button mat-button
+                  color="accent"
+                  (click)="addSchoolYear(activeSchoolClassId)">
+            {{ 'i18n.modules.manage.schoolYear.add' | translate }}
+          </button>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <!-- MIDDLE COLUMN END -->
 
-    <!-- LAST COLUMN START -->
-    <div class="manage-col" [class.border-left]="!isMobile()" [class.mobile-col]="isMobile()" fxFlex.gt-md>
-        <ul *ngIf="(currentSubjects$ | async) != null">
-            <li *ngFor="let subject of currentSubjects$ | async">
-                <oc-collapsible [showToggle]="false">
-                    <oc-collapsible-header>
-                        <div class="entity">
-                            <div class="entity-desc">
+  <!-- LAST COLUMN START -->
+  <div class="manage-col"
+       [class.border-left]="!isMobile()"
+       [class.mobile-col]="isMobile()"
+       fxFlex.gt-md>
+    <ul *ngIf="(currentSubjects$ | async) != null">
+      <li *ngFor="let subject of currentSubjects$ | async">
+        <oc-collapsible [showToggle]="false">
+          <oc-collapsible-header>
+            <div class="entity">
+              <div class="entity-desc">
                                 <span class="subject-circle"
                                       [style.background-color]="subject.color.hex | color"></span>
-                                <span>{{ subject.name }}</span>
-                            </div>
-                            <oc-entity-menu
-                                (delete)="deleteSubject(subject)"
-                                (edit)="editSubject(subject)"
-                            ></oc-entity-menu>
-                        </div>
-                    </oc-collapsible-header>
-                </oc-collapsible>
-            </li>
-            <li>
-                <div class="action-button">
-                    <button mat-button color="accent" (click)="addSubject(activeSemesterId)">
-                        {{ 'i18n.modules.manage.subject.add' | translate }}
-                    </button>
-                </div>
-            </li>
-        </ul>
-    </div>
-    <!-- LAST COLUMN END -->
+                <span>{{ subject.name }}</span>
+              </div>
+              <oc-entity-menu
+                (delete)="deleteSubject(subject)"
+                (edit)="editSubject(subject)"
+              ></oc-entity-menu>
+            </div>
+          </oc-collapsible-header>
+        </oc-collapsible>
+      </li>
+      <li>
+        <div class="action-button">
+          <button mat-button
+                  color="accent"
+                  (click)="addSubject(activeSemesterId)">
+            {{ 'i18n.modules.manage.subject.add' | translate }}
+          </button>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <!-- LAST COLUMN END -->
 </div>

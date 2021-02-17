@@ -1,13 +1,13 @@
 @import '../../sass/color-variables';
 
 a[mat-tab-link] {
-    color: $primary-dark !important;
+  color: $primary-dark !important;
 }
 
 nav {
-    background-color: white;
+  background-color: white;
 }
 
 :host {
-    background-color: $background-white;
+  background-color: $background-white;
 }

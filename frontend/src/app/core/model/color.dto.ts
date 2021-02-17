@@ -2,7 +2,7 @@
  * ColorDto Model
  */
 export interface ColorDto {
-    name: string,
-    hex: string,
-    index: number
+  name: string,
+  hex: string,
+  index: number
 }

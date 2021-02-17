@@ -1,14 +1,14 @@
 @import '../../../sass/color-variables';
 
 .task-detail {
-    margin-bottom: 16px;
+  margin-bottom: 16px;
 }
 
 .task-progress {
-    margin: 0;
-    height: 48px;
+  margin: 0;
+  height: 48px;
 
-    mat-slider {
-        width: 100%;
-    }
+  mat-slider {
+    width: 100%;
+  }
 }

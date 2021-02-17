@@ -2,30 +2,30 @@
 @import '~@angular/material/theming';
 
 :host {
-    &.oc-error {
-        color: mat-color($error-palette)
-    }
+  &.oc-error {
+    color: mat-color($error-palette)
+  }
 
-    &.oc-warning {
-        color: mat-color($warn-palette)
-    }
+  &.oc-warning {
+    color: mat-color($warn-palette)
+  }
 
-    &.oc-success {
-        color: mat-color($success-palette)
-    }
+  &.oc-success {
+    color: mat-color($success-palette)
+  }
 
-    &.oc-info {
-        color: mat-color($info-palette)
-    }
+  &.oc-info {
+    color: mat-color($info-palette)
+  }
 
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 
-    mat-icon {
-        padding: 8px;
-        font-size: 2em;
-        width: 1em;
-        height: 1em;
-    }
+  mat-icon {
+    padding: 8px;
+    font-size: 2em;
+    width: 1em;
+    height: 1em;
+  }
 }

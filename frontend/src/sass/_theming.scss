@@ -6,13 +6,13 @@
 @include mat-core();
 
 $config: mat-typography-config(
-    $font-family: 'Montserrat, Roboto, "Helvetica Neue", sans-serif'
+  $font-family: 'Montserrat, Roboto, "Helvetica Neue", sans-serif'
 );
 
 .mat-typography {
-    .mat-subheading-1, .mat-subheading-2 {
-        color: $secondary-dark;
-    }
+  .mat-subheading-1, .mat-subheading-2 {
+    color: $secondary-dark;
+  }
 }
 
 @include mat-base-typography($config);
@@ -22,5 +22,5 @@ $config: mat-typography-config(
 $oc-theme: mat-light-theme($primary-palette, $accent-palette, $error-palette);
 @include angular-material-theme($oc-theme);
 @include auth-theme($oc-theme);
-@include mark-theme($oc-theme)
+@include mark-theme($oc-theme);
 @include oc-theme-classes($primary-palette, $accent-palette, $error-palette);

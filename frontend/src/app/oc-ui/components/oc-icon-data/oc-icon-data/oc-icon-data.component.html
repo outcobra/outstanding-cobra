@@ -1,13 +1,16 @@
 <div fxLayout>
-    <div class="icon">
-        <mat-icon>{{ iconName }}</mat-icon>
+  <div class="icon">
+    <mat-icon>{{ iconName }}</mat-icon>
+  </div>
+  <div class="data"
+       fxLayout="column"
+       [ngClass]="{'multi-child': hasChild()}">
+    <label *ngIf="titleKey && titleKey.length > 0"
+           class="text-secondary-dark data-title">
+      {{ titleKey | translate}}
+    </label>
+    <div class="data-wrapper">
+      <ng-content></ng-content>
     </div>
-    <div class="data" fxLayout="column" [ngClass]="{'multi-child': hasChild()}">
-        <label *ngIf="titleKey && titleKey.length > 0" class="text-secondary-dark data-title">
-            {{ titleKey | translate}}
-        </label>
-        <div class="data-wrapper">
-            <ng-content></ng-content>
-        </div>
-    </div>
+  </div>
 </div>

@@ -1,6 +1,6 @@
-import {BaseMarkDto} from './base-mark.dto';
+import { BaseMarkDto } from './base-mark.dto';
 
 export interface MarkDto extends BaseMarkDto {
-    examId: number,
-    markGroupId: number
+  examId: number,
+  markGroupId: number
 }
