@@ -1,5 +1,5 @@
 import * as Raven from 'raven-js';
-import {ErrorHandler} from '@angular/core';
+import { ErrorHandler, Injectable } from '@angular/core';
 import {environment} from '../../../environments/environment';
 
 if (environment.production) {
@@ -7,6 +7,7 @@ if (environment.production) {
         .install();
 }
 
+@Injectable()
 export class RavenErrorHandler implements ErrorHandler {
 
     /**

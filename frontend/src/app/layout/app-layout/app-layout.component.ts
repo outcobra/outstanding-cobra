@@ -19,7 +19,7 @@ import {RouteAnimationContainer} from '../../core/animations/route-animation-con
 export class AppLayoutComponent extends RouteAnimationContainer implements OnInit, AfterViewInit {
     private _mobile: boolean;
 
-    @ViewChild(MatSidenav, { static: false }) public sidenav: MatSidenav;
+    @ViewChild(MatSidenav) public sidenav: MatSidenav;
 
     private _isEnglish: boolean = this._translateService.currentLang == 'en';
 

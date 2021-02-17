@@ -15,9 +15,11 @@
     "outDir": "../dist/out-tsc",
     "baseUrl": ""
   },
-  "exclude": [
-    "test.ts",
-    "**/*.spec.ts",
-    "app/core/mock/**/*"
+  "files": [
+    "main.ts",
+    "polyfills.ts"
+  ],
+  "include": [
+    "src/**/*.d.ts"
   ]
 }

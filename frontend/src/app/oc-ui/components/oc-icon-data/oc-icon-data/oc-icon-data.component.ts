@@ -13,7 +13,7 @@ export class OCIconDataComponent {
     @Input() public titleKey: string;
     @HostBinding('class.show-divider')
     @Input() public showDivider: boolean = true;
-    @ContentChild(OCIconDataChildComponent, { static: false }) child: OCIconDataChildComponent;
+    @ContentChild(OCIconDataChildComponent) child: OCIconDataChildComponent;
 
     public hasChild() {
         return isTruthy(this.child);

@@ -1,7 +1,9 @@
 import * as moment from 'moment';
 import {isDate, isMoment, Moment} from 'moment';
 import {isString} from '../util/helper';
+import { Injectable } from "@angular/core";
 
+@Injectable()
 export class DateUtil {
 
     // technically min and max date

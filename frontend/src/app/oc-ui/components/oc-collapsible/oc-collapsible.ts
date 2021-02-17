@@ -71,7 +71,7 @@ export class OCCollapsibleBodyComponent {
     ]
 })
 export class OCCollapsibleComponent implements AfterContentInit, OnChanges {
-    @ContentChild(OCCollapsibleHeaderComponent, { static: false }) public header: OCCollapsibleHeaderComponent;
+    @ContentChild(OCCollapsibleHeaderComponent) public header: OCCollapsibleHeaderComponent;
     @Input() showToggle: boolean = true;
     @Input() showDivider: boolean = true;
     @HostBinding('class.active')
