@@ -16,7 +16,8 @@
     "build:fire": "ng build --environment fire -sm",
     "build:prod": "ng build --prod -sm",
     "build:node-sass": "npm rebuild node-sass",
-    "deploy:fire": "firebase deploy"
+    "deploy:fire": "firebase deploy",
+    "postinstall": "ngcc"
   },
   "private": true,
   "dependencies": {

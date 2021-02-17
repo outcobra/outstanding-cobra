@@ -37,10 +37,6 @@ import {FlexLayoutModule} from '@angular/flex-layout';
         OCUiModule,
         FlexLayoutModule,
         // NgxMdModule
-    ],
-    entryComponents: [
-        ConfirmDialogComponent,
-        InfoDialogComponent
     ]
 })
 export class SharedModule {

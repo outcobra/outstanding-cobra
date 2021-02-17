@@ -34,13 +34,6 @@ import {OCMaterialModule} from '../oc-material.module';
         SchoolYearDialog,
         SemesterDialog,
         SubjectDialog
-    ],
-    entryComponents: [
-        InstitutionDialog,
-        SchoolClassDialog,
-        SchoolYearDialog,
-        SemesterDialog,
-        SubjectDialog
     ]
 })
 export class ManageDialogModule {

@@ -8,11 +8,6 @@ import {ConfirmDialogComponent} from '../../shared/components/confirm-dialog/con
         TaskCreateUpdateComponent,
         InfoDialogComponent,
         ConfirmDialogComponent
-    ],
-    entryComponents: [
-        TaskCreateUpdateComponent,
-        InfoDialogComponent,
-        ConfirmDialogComponent
     ]
 })
 export class DialogTestModule {
