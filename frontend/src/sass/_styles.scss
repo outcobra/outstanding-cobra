@@ -2,239 +2,251 @@
 @import 'general';
 
 html, body, mat-sidenav-container {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-    box-sizing: border-box;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
 }
 
 html {
-    line-height: normal;
-    color: rgba(0, 0, 0, 0.87);
+  line-height: normal;
+  color: rgba(0, 0, 0, 0.87);
 }
 
 body, .main-area {
-    background-color: #F8F8F8 !important;
+  background-color: #F8F8F8 !important;
 }
 
 oc-app {
-    overflow: hidden;
-    height: 100%;
-    width: 100%;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
 }
 
 .oc-card {
-    @include mat-elevation(1);
-    border-radius: 2px !important;
-    background: white !important;
-    padding: 0 !important;
-    display: block;
+  @include mat-elevation(1);
+  border-radius: 2px !important;
+  background: white !important;
+  padding: 0 !important;
+  display: block;
 }
 
 .margin-box {
-    margin: 10px 0;
+  margin: 10px 0;
 }
 
 .toolbar-fill-space {
-    flex: 1 1 auto;
+  flex: 1 1 auto;
 }
 
 .centered {
-    position: absolute;
-    margin: 0 auto;
+  position: absolute;
+  margin: 0 auto;
 }
 
 button[mat-raised-button], button[mat-button] {
-    .mat-button-wrapper > * {
-        vertical-align: middle;
-    }
+  .mat-button-wrapper > * {
+    vertical-align: middle;
+  }
 }
 
 .app-content {
-    overflow-y: auto;
-    overflow-x: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .toolbar-icon {
-    cursor: pointer;
-    margin: 16px 16px 16px 0;
+  cursor: pointer;
+  margin: 16px 16px 16px 0;
 }
 
 .auth0-lock {
-    font-family: 'Roboto', sans-serif !important;
+  font-family: 'Roboto', sans-serif !important;
 }
 
 oc-divider {
-    display: block;
-    margin: 0;
-    border-top: 1px solid $slightly-dark;
+  display: block;
+  margin: 0;
+  border-top: 1px solid $slightly-dark;
 }
 
 .oc-filler {
-    display: block;
-    height: 100%;
-    flex-grow: 1;
+  display: block;
+  height: 100%;
+  flex-grow: 1;
 }
 
 mat-toolbar.oc-primary-toolbar {
-    z-index: 999;
-    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 3px 3px -2px rgba(0, 0, 0, 0.12), 0 1px 8px 0 rgba(0, 0, 0, 0.2)
+  z-index: 999;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 3px 3px -2px rgba(0, 0, 0, 0.12), 0 1px 8px 0 rgba(0, 0, 0, 0.2)
 }
 
 oc-collapsible-header .subject-circle {
-    width: 20px;
-    padding: 0 !important;
-    height: 20px !important;
-    margin: 10px 7px;
-    border-radius: 50%;
-    float: left;
+  width: 20px;
+  padding: 0 !important;
+  height: 20px !important;
+  margin: 10px 7px;
+  border-radius: 50%;
+  float: left;
 }
 
 mat-dialog-container {
-    height: auto !important;
-    overflow: visible !important;
-    padding: 0 !important;
-    max-width: 100vw !important;
+  height: auto !important;
+  overflow: visible !important;
+  padding: 0 !important;
+  max-width: 100vw !important;
 
-    .dialog-header, .dialog-body, .dialog-footer {
-        display: block;
-        padding: 10px 40px;
-        margin: 0;
-    }
+  .dialog-header, .dialog-body, .dialog-footer {
+    display: block;
+    padding: 10px 40px;
+    margin: 0;
+  }
 
-    .dialog-header, .dialog-body {
-        padding-top: 20px;
-    }
+  .dialog-header, .dialog-body {
+    padding-top: 20px;
+  }
 
-    .dialog-header {
-        @extend .color-primary;
-        h1 {
-            margin: 10px 0;
-            color: $primary-light;
-            font-size: 2em;
-            font-weight: normal;
-        }
+  .dialog-header {
+    @extend .color-primary;
+
+    h1 {
+      margin: 10px 0;
+      color: $primary-light;
+      font-size: 2em;
+      font-weight: normal;
     }
+  }
 }
 
 @media screen and (max-width: 500px) {
-    .dialog-header h1 {
-        font-size: 1.5em !important;
-    }
+  .dialog-header h1 {
+    font-size: 1.5em !important;
+  }
 }
 
 // region form
 
 .form-group {
+  width: 100%;
+  margin-bottom: 16px;
+
+  mat-form-field, mat-select {
+    box-sizing: border-box;
     width: 100%;
-    margin-bottom: 16px;
-    mat-form-field, mat-select {
-        box-sizing: border-box;
-        width: 100%;
-        padding: 0 10px;
+    padding: 0 10px;
+  }
+
+  .form-error {
+    color: mat-color($warn-palette);
+  }
+
+  &.half, .half {
+    display: flex;
+    align-items: center;
+
+    .half-child {
+      width: 50%;
+
+      &:first-child {
+        margin-right: 2px;
+      }
+
+      &:last-child {
+        margin-left: 2px;
+      }
+
+      mat-select {
+        transform: translateY(-2px); // fix misalignment of mat-input and mat-select
+      }
     }
 
-    .form-error {
-        color: mat-color($warn-palette);
-    }
-
-    &.half, .half {
-        display: flex;
-        align-items: center;
+    &.responsive {
+      @media (max-width: 600px) {
+        flex-direction: column;
         .half-child {
-            width: 50%;
-            &:first-child {
-                margin-right: 2px;
-            }
-            &:last-child {
-                margin-left: 2px;
-            }
-            mat-select {
-                transform: translateY(-2px); // fix misalignment of mat-input and mat-select
-            }
+          margin: 0 0 8px;
+          width: 100%;
         }
-        &.responsive {
-            @media (max-width: 600px) {
-                flex-direction: column;
-                .half-child {
-                    margin: 0 0 8px;
-                    width: 100%;
-                }
-            }
-        }
+      }
     }
+  }
 }
 
 // endregion
 
 #filter {
-    margin-bottom: 20px;
-    mat-card {
-        overflow: hidden;
-    }
+  margin-bottom: 20px;
+
+  mat-card {
+    overflow: hidden;
+  }
 }
 
 #filter-button {
-    padding: 0 5px;
+  padding: 0 5px;
 }
 
 .container {
-    display: block;
-    width: 100%;
-    padding: 10px 5px;
-    &.middle-container {
-        max-width: 960px;
-    }
+  display: block;
+  width: 100%;
+  padding: 10px 5px;
+
+  &.middle-container {
+    max-width: 960px;
+  }
 }
 
 mat-form-field.big-search {
-    display: block !important;
-    box-sizing: border-box;
-    margin: 0 20px;
-    .mat-form-field-labelwrapper {
-        overflow: visible;
-    }
-    label {
-        font-size: 25px !important;
-    }
-    input {
-        height: 40px;
-        width: 100%;
-        font-size: 25px !important;
-    }
+  display: block !important;
+  box-sizing: border-box;
+  margin: 0 20px;
+
+  .mat-form-field-labelwrapper {
+    overflow: visible;
+  }
+
+  label {
+    font-size: 25px !important;
+  }
+
+  input {
+    height: 40px;
+    width: 100%;
+    font-size: 25px !important;
+  }
 }
 
 mat-list-item {
-    h1, h2, h3, h4, h5, h6, p, span {
-        line-height: normal;
-    }
+  h1, h2, h3, h4, h5, h6, p, span {
+    line-height: normal;
+  }
 }
 
 button[mat-raised-button].square-button,
 button[mat-button].square-button {
-    width: 36px;
-    min-width: 36px;
-    padding: 0;
+  width: 36px;
+  min-width: 36px;
+  padding: 0;
 }
 
 button[mat-fab] {
-    position: absolute;
-    bottom: 53px;
-    right: 23px;
-    color: $primary-light;
+  position: absolute;
+  bottom: 53px;
+  right: 23px;
+  color: $primary-light;
 }
 
 oc-app.oc-mobile button[mat-fab] {
-    bottom: 23px;
+  bottom: 23px;
 }
 
 mat-toolbar.transparent-toolbar {
-    background: none !important;
-    box-shadow: none !important;
+  background: none !important;
+  box-shadow: none !important;
 }
 
 .oc-title-logo {
-    display: flex;
-    height: 100%;
-    cursor: pointer;
+  display: flex;
+  height: 100%;
+  cursor: pointer;
 }

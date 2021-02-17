@@ -8,9 +8,9 @@ describe('OCTitleBarComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ OCTitleBarComponent ]
+      declarations: [OCTitleBarComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

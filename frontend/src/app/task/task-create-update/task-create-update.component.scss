@@ -1,13 +1,13 @@
 mat-form-field {
-    width: 100%;
+  width: 100%;
 
-    textarea {
-        resize: vertical;
-    }
+  textarea {
+    resize: vertical;
+  }
 }
 
 :host {
-    .form-group {
-        padding: 0 4px;
-    }
+  .form-group {
+    padding: 0 4px;
+  }
 }

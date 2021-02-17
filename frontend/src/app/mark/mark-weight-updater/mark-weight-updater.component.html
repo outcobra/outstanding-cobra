@@ -1,18 +1,18 @@
 <div class="updater-wrapper">
-    <div class="non-active-container"
-         cdk-overlay-origin
-         #weightFieldOrigin="cdkOverlayOrigin"
-         #weightFieldTrigger
-         (click)="openWeightField()">
-        <span>{{ markGroup.weight }}</span>
-        <button mat-button
-                class="square-button"
-                type="button"
-                color="accent"
-                [disabled]="disabled">
-            <mat-icon>edit</mat-icon>
-        </button>
-    </div>
+  <div class="non-active-container"
+       cdk-overlay-origin
+       #weightFieldOrigin="cdkOverlayOrigin"
+       #weightFieldTrigger
+       (click)="openWeightField()">
+    <span>{{ markGroup.weight }}</span>
+    <button mat-button
+            class="square-button"
+            type="button"
+            color="accent"
+            [disabled]="disabled">
+      <mat-icon>edit</mat-icon>
+    </button>
+  </div>
 </div>
 <ng-template cdk-connected-overlay
              cdkConnectedOverlayHasBackdrop
@@ -23,29 +23,30 @@
              [cdkConnectedOverlayMinWidth]="triggerWidth"
              [cdkConnectedOverlayHeight]="triggerHeight"
              (backdropClick)="closeWeightField()">
-    <form [formGroup]="weightUpdaterForm"
-          (submit)="submit()"
-          class="update-container">
-        <div class="input-container">
-            <input formControlName="weight"
-                   autocomplete="off">
-            <mat-icon [matTooltip]="'i18n.modules.mark.createUpdate.form.weight.hint' | translate"
-                     matTooltipPosition="below" color="accent">
-                edit
-            </mat-icon>
-        </div>
-        <div class="control-panel">
-            <button mat-button
-                    class="square-button"
-                    type="submit">
-                <mat-icon>check</mat-icon>
-            </button>
-            <button mat-button
-                    class="square-button"
-                    type="button"
-                    (click)="closeWeightField()">
-                <mat-icon>clear</mat-icon>
-            </button>
-        </div>
-    </form>
+  <form [formGroup]="weightUpdaterForm"
+        (submit)="submit()"
+        class="update-container">
+    <div class="input-container">
+      <input formControlName="weight"
+             autocomplete="off">
+      <mat-icon [matTooltip]="'i18n.modules.mark.createUpdate.form.weight.hint' | translate"
+                matTooltipPosition="below"
+                color="accent">
+        edit
+      </mat-icon>
+    </div>
+    <div class="control-panel">
+      <button mat-button
+              class="square-button"
+              type="submit">
+        <mat-icon>check</mat-icon>
+      </button>
+      <button mat-button
+              class="square-button"
+              type="button"
+              (click)="closeWeightField()">
+        <mat-icon>clear</mat-icon>
+      </button>
+    </div>
+  </form>
 </ng-template>

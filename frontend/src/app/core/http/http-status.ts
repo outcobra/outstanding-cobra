@@ -3,5 +3,5 @@
  * Should be expanded when there is the need to.
  */
 export enum HttpStatus {
-    NOT_FOUND = 404
+  NOT_FOUND = 404
 }

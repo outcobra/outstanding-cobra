@@ -1,5 +1,4 @@
 import * as moment from 'moment';
-import {Moment} from 'moment';
 
 /**
  * revives dates from a string
@@ -9,6 +8,7 @@ import {Moment} from 'moment';
  * @param value
  * @returns {any}
  */
+
 /*export function dateReviver(key, value): Date {
     if (typeof value === 'string' && dateRegex.test(value.trim())) {
         return new Date(value.trim());
@@ -26,8 +26,8 @@ import {Moment} from 'moment';
  * @returns {any}
  */
 export function dateReplacer(key, value): string {
-    if (moment.isMoment(this[key])) {
-        return moment(value).format('YYYY-MM-DD');
-    }
-    return value;
+  if (moment.isMoment(this[key])) {
+    return moment(value).format('YYYY-MM-DD');
+  }
+  return value;
 }

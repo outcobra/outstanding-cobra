@@ -2,42 +2,43 @@
      cdkOverlayOrigin
      #searchFieldOrigin="cdkOverlayOrigin"
      #searchFieldTrigger>
-    <div class="oc-filter-search-controls">
-        <div class="oc-search-field-toggler" (click)="openSearchField()">
-            <mat-icon>search</mat-icon>
-            <span>{{ currentPlaceholder }}</span>
-        </div>
-        <div class="oc-filter">
-            <mat-icon>filter_list</mat-icon>
-            <ng-content select="[ocFilter]"></ng-content>
-        </div>
+  <div class="oc-filter-search-controls">
+    <div class="oc-search-field-toggler"
+         (click)="openSearchField()">
+      <mat-icon>search</mat-icon>
+      <span>{{ currentPlaceholder }}</span>
     </div>
+    <div class="oc-filter">
+      <mat-icon>filter_list</mat-icon>
+      <ng-content select="[ocFilter]"></ng-content>
+    </div>
+  </div>
 </div>
 
 <ng-template
-    cdkConnectedOverlay
-    cdkConnectedOverlayHasBackdrop
-    cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
-    [cdkConnectedOverlayOrigin]="searchFieldOrigin"
-    [cdkConnectedOverlayOpen]="showSearchField"
-    [cdkConnectedOverlayPositions]="positions"
-    [cdkConnectedOverlayMinWidth]="triggerWidth"
-    [cdkConnectedOverlayHeight]="triggerHeight"
-    (backdropClick)="closeSearchField()">
-    <form [formGroup]="searchForm"
-          class="oc-search-form">
-        <div class="oc-search-field">
-            <mat-icon>search</mat-icon>
-            <input formControlName="search"
-                   [placeholder]="currentPlaceholder"
-                   ocAutoFocus
-                   [ocAutoSelect]="true"
-                   (keyup)="search$.next($event.target.value)">
-            <button mat-icon-button
-                    type="button"
-                    (click)="closeSearchField()">
-                <mat-icon>close</mat-icon>
-            </button>
-        </div>
-    </form>
+  cdkConnectedOverlay
+  cdkConnectedOverlayHasBackdrop
+  cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+  [cdkConnectedOverlayOrigin]="searchFieldOrigin"
+  [cdkConnectedOverlayOpen]="showSearchField"
+  [cdkConnectedOverlayPositions]="positions"
+  [cdkConnectedOverlayMinWidth]="triggerWidth"
+  [cdkConnectedOverlayHeight]="triggerHeight"
+  (backdropClick)="closeSearchField()">
+  <form [formGroup]="searchForm"
+        class="oc-search-form">
+    <div class="oc-search-field">
+      <mat-icon>search</mat-icon>
+      <input formControlName="search"
+             [placeholder]="currentPlaceholder"
+             ocAutoFocus
+             [ocAutoSelect]="true"
+             (keyup)="search$.next($event.target.value)">
+      <button mat-icon-button
+              type="button"
+              (click)="closeSearchField()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </form>
 </ng-template>

@@ -6,13 +6,13 @@
 @include mat-core();
 
 $config: mat-typography-config(
-    $font-family: 'Montserrat, Roboto, "Helvetica Neue", sans-serif'
+  $font-family: 'Montserrat, Roboto, "Helvetica Neue", sans-serif'
 );
 
 .mat-typography {
-    .mat-subheading-1, .mat-subheading-2 {
-        color: $secondary-dark;
-    }
+  .mat-subheading-1, .mat-subheading-2 {
+    color: $secondary-dark;
+  }
 }
 
 @include mat-base-typography($config);

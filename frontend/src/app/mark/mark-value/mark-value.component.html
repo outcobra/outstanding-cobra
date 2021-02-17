@@ -1,18 +1,27 @@
 <oc-divider *ngIf="showDivider"></oc-divider>
-<div fxLayout="row" class="mark-value-container">
-    <div class="mark-value" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column">
-        <div fxFlex="50%" fxFlex.lt-sm="40px">
-            <mat-icon fxFlex>{{ getIconNameByMarkValue(mark.value) }}</mat-icon>
-            <span fxFlex="grow 1" fxFlexAlign="start">{{ mark.description }}</span>
-        </div>
-        <div fxFlex.gt-sm fxFlex.lt-sm="40px">
-            <div fxLayout="row">
-                <mat-icon fxHide.gt-sm="true"></mat-icon>
-                <span fxFlex
-                      fxFlexAlign="end">{{ 'i18n.modules.mark.common.weight' | translate }}: {{ mark.weight }}</span>
-                <span fxFlex="15%" fxFlexAlign="end" [markHighlighter]="mark.value"><b>{{ mark.value | markValue }}</b></span>
-            </div>
-        </div>
+<div fxLayout="row"
+     class="mark-value-container">
+  <div class="mark-value"
+       fxLayout="row"
+       fxLayout.sm="column"
+       fxLayout.xs="column">
+    <div fxFlex="50%"
+         fxFlex.lt-sm="40px">
+      <mat-icon fxFlex>{{ getIconNameByMarkValue(mark.value) }}</mat-icon>
+      <span fxFlex="grow 1"
+            fxFlexAlign="start">{{ mark.description }}</span>
     </div>
-    <oc-entity-menu *ngIf="editEnabled"></oc-entity-menu>
+    <div fxFlex.gt-sm
+         fxFlex.lt-sm="40px">
+      <div fxLayout="row">
+        <mat-icon fxHide.gt-sm="true"></mat-icon>
+        <span fxFlex
+              fxFlexAlign="end">{{ 'i18n.modules.mark.common.weight' | translate }}: {{ mark.weight }}</span>
+        <span fxFlex="15%"
+              fxFlexAlign="end"
+              [markHighlighter]="mark.value"><b>{{ mark.value | markValue }}</b></span>
+      </div>
+    </div>
+  </div>
+  <oc-entity-menu *ngIf="editEnabled"></oc-entity-menu>
 </div>

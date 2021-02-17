@@ -1,67 +1,67 @@
 @import 'theming';
 
 .border {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .border-left {
-    border-left: 1px solid $slightly-dark;
+  border-left: 1px solid $slightly-dark;
 }
 
 .border-right {
-    border-right: 1px solid $slightly-dark;
+  border-right: 1px solid $slightly-dark;
 }
 
 .border-top {
-    border-top: 1px solid $slightly-dark;
+  border-top: 1px solid $slightly-dark;
 }
 
 .border-bottom {
-    border-bottom: 1px solid $slightly-dark;
+  border-bottom: 1px solid $slightly-dark;
 }
 
 .collapsible-header {
-    mat-icon {
-        width: 2rem;
-        font-size: 1.6rem;
-        height: 100%;
-        vertical-align: middle;
-        line-height: 3rem;
-        display: block;
-        float: left;
-        text-align: center;
-        margin-right: 1rem;
-    }
+  mat-icon {
+    width: 2rem;
+    font-size: 1.6rem;
+    height: 100%;
+    vertical-align: middle;
+    line-height: 3rem;
+    display: block;
+    float: left;
+    text-align: center;
+    margin-right: 1rem;
+  }
 }
 
 .loading-banner {
-    @extend .color-accent;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 400;
+  @extend .color-accent;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
 
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-height: 50px;
+  height: 40vh;
+  width: 100vw;
+
+  h1 {
     position: absolute;
-    top: 0;
-    left: 0;
-    min-height: 50px;
-    height: 40vh;
-    width: 100vw;
-
-    h1 {
-        position: absolute;
-        bottom: 0;
-        padding: 0 20px;
-        color: white;
-    }
+    bottom: 0;
+    padding: 0 20px;
+    color: white;
+  }
 }
 
 .right {
-    float: right;
+  float: right;
 }
 
 .left {
-    float: left;
+  float: left;
 }
 
 input:not([matInput]) {
-    font-family: Montserrat, sans-serif !important;
+  font-family: Montserrat, sans-serif !important;
 }

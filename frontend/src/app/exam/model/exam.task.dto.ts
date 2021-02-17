@@ -1,6 +1,7 @@
-import {Dto} from '../../core/common/dto';
+import { Dto } from '../../core/common/dto';
+
 export interface ExamTaskDto extends Dto {
-    task: string
-    finished: boolean
-    examId: number
+  task: string
+  finished: boolean
+  examId: number
 }

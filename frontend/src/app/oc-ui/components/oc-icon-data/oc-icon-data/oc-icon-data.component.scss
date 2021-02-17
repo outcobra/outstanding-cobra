@@ -4,54 +4,54 @@ $icon-data-height: 72px;
 $icon-data-icon-max-width: 72px;
 
 :host {
-    .icon {
+  .icon {
+    height: $icon-data-height;
+    max-height: $icon-data-height;
+    display: flex;
+    align-items: center;
+    padding-left: 16px;
+    width: $icon-data-icon-max-width;
+    max-width: $icon-data-icon-max-width;
+  }
+
+  .data {
+    min-height: $icon-data-height;
+    padding-right: 16px;
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+
+    .data-wrapper, ::ng-deep oc-icon-data-data, ::ng-deep oc-icon-data-title {
+      > span, > p {
+        margin: 0;
+        padding: 0;
+        font-size: 16px;
+      }
+    }
+
+    .data-title {
+      font-size: 14px;
+    }
+
+    &.multi-child {
+      .data-title {
+        font-size: 18px;
         height: $icon-data-height;
-        max-height: $icon-data-height;
-        display: flex;
-        align-items: center;
-        padding-left: 16px;
-        width: $icon-data-icon-max-width;
-        max-width: $icon-data-icon-max-width;
-    }
+        line-height: $icon-data-height;
+      }
 
-    .data {
-        min-height: $icon-data-height;
-        padding-right: 16px;
+      .data-wrapper ::ng-deep oc-icon-data-child {
         display: flex;
+        flex-direction: column;
         justify-content: center;
-        flex-grow: 1;
-
-        .data-wrapper, ::ng-deep oc-icon-data-data, ::ng-deep oc-icon-data-title {
-            > span, > p {
-                margin: 0;
-                padding: 0;
-                font-size: 16px;
-            }
-        }
-
-        .data-title {
-            font-size: 14px;
-        }
-
-        &.multi-child {
-            .data-title {
-                font-size: 18px;
-                height: $icon-data-height;
-                line-height: $icon-data-height;
-            }
-
-            .data-wrapper ::ng-deep oc-icon-data-child {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                min-height: $icon-data-height !important;
-            }
-        }
+        min-height: $icon-data-height !important;
+      }
     }
+  }
 
-    &.show-divider {
-        .data {
-            border-bottom: 1px solid $slightly-dark;
-        }
+  &.show-divider {
+    .data {
+      border-bottom: 1px solid $slightly-dark;
     }
+  }
 }

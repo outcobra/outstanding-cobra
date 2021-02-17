@@ -1,64 +1,71 @@
 @import '../../sass/color-variables';
 
 :host {
-    overflow-y: scroll;
-    height: 100%;
-    > div {
-        mat-toolbar {
-            padding: 0 calc((100% - 940px) / 2);
-            @media(max-width: 960px) {
-                padding: 0 8px;
-            }
+  overflow-y: scroll;
+  height: 100%;
 
-            #signup-button {
-                margin-right: 4px;
-            }
-        }
+  > div {
+    mat-toolbar {
+      padding: 0 calc((100% - 940px) / 2);
+      @media(max-width: 960px) {
+        padding: 0 8px;
+      }
 
-        #oc-welcome-banner {
-            background-color: mat-color($primary-light-palette);
-            color: white;
-            display: flex;
-            height: 50vh;
-            width: 100%;
-            align-items: center;
-            justify-content: center;
-            #oc-welcome-banner-title {
-                text-align: center;
-                line-height: 1.2em;
-                font-size: 4em;
-                font-weight: 700;
-            }
-        }
+      #signup-button {
+        margin-right: 4px;
+      }
     }
 
-    .bottom-menu {
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        align-self: center;
-        .menu-item {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            outline: none;
-            span {
-                font-weight: normal;
-                font-size: 0.6em;
-            }
-            mat-icon {
-                font-size: 1.2em;
-                transition: .2s all ease-in-out;
-            }
-            &:not(.active) {
-                color: black;
-            }
-            &.active mat-icon {
-                font-size: 1.4em;
-            }
-        }
+    #oc-welcome-banner {
+      background-color: mat-color($primary-light-palette);
+      color: white;
+      display: flex;
+      height: 50vh;
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+
+      #oc-welcome-banner-title {
+        text-align: center;
+        line-height: 1.2em;
+        font-size: 4em;
+        font-weight: 700;
+      }
     }
+  }
+
+  .bottom-menu {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+
+    .menu-item {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      outline: none;
+
+      span {
+        font-weight: normal;
+        font-size: 0.6em;
+      }
+
+      mat-icon {
+        font-size: 1.2em;
+        transition: .2s all ease-in-out;
+      }
+
+      &:not(.active) {
+        color: black;
+      }
+
+      &.active mat-icon {
+        font-size: 1.4em;
+      }
+    }
+  }
 }

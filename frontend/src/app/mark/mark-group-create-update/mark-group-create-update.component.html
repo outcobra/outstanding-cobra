@@ -1,83 +1,90 @@
 <oc-title-bar>
-    <span>{{ 'i18n.modules.mark.group.createUpdate.' + (isEditMode() ? 'update' : 'create') + '.title' | translate }}</span>
+  <span>{{ 'i18n.modules.mark.group.createUpdate.' + (isEditMode() ? 'update' : 'create') + '.title' | translate }}</span>
 </oc-title-bar>
-<form [formGroup]="markGroupCreateUpdateForm" (submit)="submit()" fxLayout fxLayoutAlign="center start">
-    <mat-card fxFlex.gt-sm="960px">
-        <div class="form-group">
-            <div class="half">
-                <mat-form-field>
-                    <input matInput
-                           required
-                           [placeholder]="'i18n.modules.mark.createUpdate.form.weight.label' | translate"
-                           formControlName="weight">
-                    <mat-error
-                            *ngIf="markGroupCreateUpdateForm.get('weight').invalid && markGroupCreateUpdateForm.get('weight').touched">
-                        <ng-template [ngIf]="markGroupCreateUpdateForm.get('weight').hasError('required')">
-                            {{ 'i18n.common.form.error.required' | translate }}
-                        </ng-template>
-                        <ng-template [ngIf]="markGroupCreateUpdateForm.get('weight').hasError('pattern')">
-                            {{ 'i18n.modules.mark.createUpdate.form.weight.error.pattern' | translate }}
-                        </ng-template>
-                    </mat-error>
-                </mat-form-field>
-            </div>
-        </div>
-        <div class="form-group">
-            <mat-form-field>
-                <input matInput
-                       required
-                       [placeholder]="'i18n.modules.mark.group.createUpdate.form.description.label' | translate"
-                       formControlName="description"
-                       maxlength="50" #description>
-                <mat-hint align="end">{{description.value.length}} / 50</mat-hint>
-                <mat-error *ngIf="markGroupCreateUpdateForm.get('description').hasError('required')">
-                    {{ 'i18n.common.form.error.required' | translate }}
-                </mat-error>
-            </mat-form-field>
-        </div>
-        <div class="form-group">
-            <mat-form-field>
-                <mat-select #markSelect
-                            (selectionChange)="newMark$.next($event.value)"
-                            [disabled]="!hasMarksLeft()"
-                            [placeholder]="'i18n.modules.mark.group.createUpdate.form.selectMark.label' | translate">
-                    <mat-option *ngFor="let mark of availableMarks" [value]="mark">
-                        {{ mark.description }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-            <mat-list class="mark-group-children"
-                      *ngIf="selectedMarks.length > 0">
-                <h3 mat-subheader>{{ 'i18n.modules.mark.group.createUpdate.children' | translate }}</h3>
-                <oc-divider></oc-divider>
-                <ng-template ngFor let-mark [ngForOf]="selectedMarks">
-                    <mat-list-item>
-                        <mark-value [mark]="mark"
-                                    [editEnabled]="false"
-                                    [showDivider]="false">
-                        </mark-value>
-                        <button mat-button
-                                color="accent"
-                                (click)="removeMark$.next(mark)"
-                                class="square-button">
-                            <mat-icon>remove_circle_outline</mat-icon>
-                        </button>
-                    </mat-list-item>
-                    <oc-divider></oc-divider>
-                </ng-template>
-            </mat-list>
-        </div>
-        <mat-card-actions>
+<form [formGroup]="markGroupCreateUpdateForm"
+      (submit)="submit()"
+      fxLayout
+      fxLayoutAlign="center start">
+  <mat-card fxFlex.gt-sm="960px">
+    <div class="form-group">
+      <div class="half">
+        <mat-form-field>
+          <input matInput
+                 required
+                 [placeholder]="'i18n.modules.mark.createUpdate.form.weight.label' | translate"
+                 formControlName="weight">
+          <mat-error
+            *ngIf="markGroupCreateUpdateForm.get('weight').invalid && markGroupCreateUpdateForm.get('weight').touched">
+            <ng-template [ngIf]="markGroupCreateUpdateForm.get('weight').hasError('required')">
+              {{ 'i18n.common.form.error.required' | translate }}
+            </ng-template>
+            <ng-template [ngIf]="markGroupCreateUpdateForm.get('weight').hasError('pattern')">
+              {{ 'i18n.modules.mark.createUpdate.form.weight.error.pattern' | translate }}
+            </ng-template>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="form-group">
+      <mat-form-field>
+        <input matInput
+               required
+               [placeholder]="'i18n.modules.mark.group.createUpdate.form.description.label' | translate"
+               formControlName="description"
+               maxlength="50"
+               #description>
+        <mat-hint align="end">{{description.value.length}} / 50</mat-hint>
+        <mat-error *ngIf="markGroupCreateUpdateForm.get('description').hasError('required')">
+          {{ 'i18n.common.form.error.required' | translate }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field>
+        <mat-select #markSelect
+                    (selectionChange)="newMark$.next($event.value)"
+                    [disabled]="!hasMarksLeft()"
+                    [placeholder]="'i18n.modules.mark.group.createUpdate.form.selectMark.label' | translate">
+          <mat-option *ngFor="let mark of availableMarks"
+                      [value]="mark">
+            {{ mark.description }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-list class="mark-group-children"
+                *ngIf="selectedMarks.length > 0">
+        <h3 mat-subheader>{{ 'i18n.modules.mark.group.createUpdate.children' | translate }}</h3>
+        <oc-divider></oc-divider>
+        <ng-template ngFor
+                     let-mark
+                     [ngForOf]="selectedMarks">
+          <mat-list-item>
+            <mark-value [mark]="mark"
+                        [editEnabled]="false"
+                        [showDivider]="false">
+            </mark-value>
             <button mat-button
-                    type="button"
-                    (click)="cancel()">
-                {{ 'i18n.common.action.cancel' | translate }}
+                    color="accent"
+                    (click)="removeMark$.next(mark)"
+                    class="square-button">
+              <mat-icon>remove_circle_outline</mat-icon>
             </button>
-            <button mat-raised-button
-                    color="primary"
-                    type="submit">
-                {{ 'i18n.common.action.save' | translate }}
-            </button>
-        </mat-card-actions>
-    </mat-card>
+          </mat-list-item>
+          <oc-divider></oc-divider>
+        </ng-template>
+      </mat-list>
+    </div>
+    <mat-card-actions>
+      <button mat-button
+              type="button"
+              (click)="cancel()">
+        {{ 'i18n.common.action.cancel' | translate }}
+      </button>
+      <button mat-raised-button
+              color="primary"
+              type="submit">
+        {{ 'i18n.common.action.save' | translate }}
+      </button>
+    </mat-card-actions>
+  </mat-card>
 </form>

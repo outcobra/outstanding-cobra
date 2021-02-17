@@ -1,6 +1,6 @@
 export interface UsernamePasswordDto {
-    username: string,
-    mail: string,
-    password: string,
-    passwordVerify: string
+  username: string,
+  mail: string,
+  password: string,
+  passwordVerify: string
 }

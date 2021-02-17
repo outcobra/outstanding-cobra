@@ -1,25 +1,27 @@
 @import '../../../sass/variables';
 
 :host {
-    width: 100%;
+  width: 100%;
 }
 
 .mark-value {
-    padding: 0 16px;
-    width: 100%;
-    mat-icon {
-        float: left;
-        margin-right: 5px;
-    }
-    mat-icon, span {
-        display: flex;
-        height: $mark-collapsible-header-height;
-        line-height: $mark-collapsible-header-height;
-    }
+  padding: 0 16px;
+  width: 100%;
+
+  mat-icon {
+    float: left;
+    margin-right: 5px;
+  }
+
+  mat-icon, span {
+    display: flex;
+    height: $mark-collapsible-header-height;
+    line-height: $mark-collapsible-header-height;
+  }
 }
 
 :host-context(oc-app.oc-mobile) {
-    .mark-value {
-        padding: 0;
-    }
+  .mark-value {
+    padding: 0;
+  }
 }

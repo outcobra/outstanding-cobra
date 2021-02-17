@@ -1,53 +1,60 @@
 <oc-title-bar>
-    <span>{{ 'i18n.modules.task.linkTitle' | translate }}</span>
+  <span>{{ 'i18n.modules.task.linkTitle' | translate }}</span>
 </oc-title-bar>
 <ng-template #empty>
-    <oc-empty hint="i18n.modules.exam.empty.hint"></oc-empty>
+  <oc-empty hint="i18n.modules.exam.empty.hint"></oc-empty>
 </ng-template>
 <oc-filter-search (search)="search$.next($event)">
-    <form ocFilter [formGroup]="filterForm" class="oc-filter-form">
-        <div>
-            <mat-form-field>
-                <mat-select formControlName="subjectId"
-                            [placeholder]="'i18n.modules.exam.filter.subject' | translate"
-                            floatPlaceholder="never">
-                    <mat-optgroup *ngFor="let schoolClass of schoolClassSubjects"
-                                  [label]="schoolClass.schoolClass.normalizedName">
-                        <mat-option *ngFor="let subject of schoolClass.subjects" [value]="subject.id">
-                            {{ subject.name }}
-                        </mat-option>
-                    </mat-optgroup>
-                </mat-select>
-            </mat-form-field>
-            <button mat-icon-button (click)="filterForm.controls['subjectId'].setValue(null)">
-                <mat-icon>close</mat-icon>
-            </button>
-        </div>
-        <div>
-            <mat-checkbox formControlName="finished">
-                {{ 'i18n.modules.task.filter.showPending' | translate }}
-            </mat-checkbox>
-        </div>
-    </form>
-</oc-filter-search>
-<div fxLayout fxLayoutAlign="center start" *ngIf="tasks.length > 0; else empty">
-    <div class="container middle-container" fxFlex>
-        <mat-accordion>
-            <mat-expansion-panel *ngFor="let task of filteredTasks">
-                <mat-expansion-panel-header>
-                    <task-list-item-header [task]="task"
-                                           (markDone)="markTaskAsDone($event)">
-                    </task-list-item-header>
-                </mat-expansion-panel-header>
-                <task-detail [task]="task"></task-detail>
-            </mat-expansion-panel>
-        </mat-accordion>
+  <form ocFilter
+        [formGroup]="filterForm"
+        class="oc-filter-form">
+    <div>
+      <mat-form-field>
+        <mat-select formControlName="subjectId"
+                    [placeholder]="'i18n.modules.exam.filter.subject' | translate"
+                    floatPlaceholder="never">
+          <mat-optgroup *ngFor="let schoolClass of schoolClassSubjects"
+                        [label]="schoolClass.schoolClass.normalizedName">
+            <mat-option *ngFor="let subject of schoolClass.subjects"
+                        [value]="subject.id">
+              {{ subject.name }}
+            </mat-option>
+          </mat-optgroup>
+        </mat-select>
+      </mat-form-field>
+      <button mat-icon-button
+              (click)="filterForm.controls['subjectId'].setValue(null)">
+        <mat-icon>close</mat-icon>
+      </button>
     </div>
+    <div>
+      <mat-checkbox formControlName="finished">
+        {{ 'i18n.modules.task.filter.showPending' | translate }}
+      </mat-checkbox>
+    </div>
+  </form>
+</oc-filter-search>
+<div fxLayout
+     fxLayoutAlign="center start"
+     *ngIf="tasks.length > 0; else empty">
+  <div class="container middle-container"
+       fxFlex>
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let task of filteredTasks">
+        <mat-expansion-panel-header>
+          <task-list-item-header [task]="task"
+                                 (markDone)="markTaskAsDone($event)">
+          </task-list-item-header>
+        </mat-expansion-panel-header>
+        <task-detail [task]="task"></task-detail>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
 </div>
 <button mat-fab
         color="accent"
         routerLink="/task/new"
         [matTooltip]="'i18n.modules.task.add' | translate"
         matTooltipPosition="left">
-    <mat-icon>add</mat-icon>
+  <mat-icon>add</mat-icon>
 </button>

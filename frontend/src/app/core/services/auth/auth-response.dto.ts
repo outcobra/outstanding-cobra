@@ -1,3 +1,3 @@
 export interface AuthResponseDto {
-    token: string
+  token: string
 }

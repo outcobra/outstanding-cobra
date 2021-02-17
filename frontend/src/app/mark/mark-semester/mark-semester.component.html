@@ -1,105 +1,112 @@
-<div fxLayout fxLayoutAlign="center start">
-    <div class="container middle-container" fxFlex>
-        <h1>{{ 'i18n.modules.mark.semester.average' | translate }} {{ semesterMark.value | markValue }}</h1>
-        <mat-card class="oc-card">
-            <mat-card-content>
-                <oc-collapsible [active]="true" [showDivider]="false">
-                    <oc-collapsible-header>
-                        <mat-icon>business</mat-icon>
-                        <span>{{ semesterMark.institution.name }}</span>
-                    </oc-collapsible-header>
-                    <oc-divider></oc-divider>
-                    <oc-collapsible class="mark-school-class" [active]="true" [showDivider]="false">
-                        <oc-collapsible-header class="mark-school-class-header">
-                            <mat-icon>class</mat-icon>
-                            <span>{{ semesterMark.schoolClass.normalizedName }}</span>
-                        </oc-collapsible-header>
-                        <oc-divider></oc-divider>
-                        <oc-collapsible *ngFor="let subject of semesterMark.subjects"
-                                        class="mark-subject"
-                                        [active]="isActiveSubject(subject.id)"
-                                        [showDivider]="false">
-                            <oc-collapsible-header class="mark-subject-header">
+<div fxLayout
+     fxLayoutAlign="center start">
+  <div class="container middle-container"
+       fxFlex>
+    <h1>{{ 'i18n.modules.mark.semester.average' | translate }} {{ semesterMark.value | markValue }}</h1>
+    <mat-card class="oc-card">
+      <mat-card-content>
+        <oc-collapsible [active]="true"
+                        [showDivider]="false">
+          <oc-collapsible-header>
+            <mat-icon>business</mat-icon>
+            <span>{{ semesterMark.institution.name }}</span>
+          </oc-collapsible-header>
+          <oc-divider></oc-divider>
+          <oc-collapsible class="mark-school-class"
+                          [active]="true"
+                          [showDivider]="false">
+            <oc-collapsible-header class="mark-school-class-header">
+              <mat-icon>class</mat-icon>
+              <span>{{ semesterMark.schoolClass.normalizedName }}</span>
+            </oc-collapsible-header>
+            <oc-divider></oc-divider>
+            <oc-collapsible *ngFor="let subject of semesterMark.subjects"
+                            class="mark-subject"
+                            [active]="isActiveSubject(subject.id)"
+                            [showDivider]="false">
+              <oc-collapsible-header class="mark-subject-header">
                                 <span class="subject-circle"
                                       [style.background-color]="subject.color.hex | color">
                                 </span>
-                                <span>{{ subject.name }}</span>
-                                <div class="oc-filler"></div>
-                                <span [markHighlighter]="subject.subjectMarkGroup.value">
+                <span>{{ subject.name }}</span>
+                <div class="oc-filler"></div>
+                <span [markHighlighter]="subject.subjectMarkGroup.value">
                                     <b>{{ subject.subjectMarkGroup.value | markValue }}</b>
                                 </span>
-                                <mat-icon [matTooltip]="'i18n.modules.mark.common.average' | translate"
-                                          svgIcon="average"></mat-icon>
-                            </oc-collapsible-header>
-                            <mat-list class="mark-value-list">
-                                <mat-list-item class="subject-mark-group-controls">
-                                    <div class="control-row">
-                                        <button mat-button
-                                                color="accent"
-                                                (click)="newMarkGroup$.next(subject.subjectMarkGroup)"
-                                                [disabled]="!currentSemester">
-                                            {{ 'i18n.modules.mark.group.createUpdate.create.action' | translate }}
-                                        </button>
-                                        <button mat-button
-                                                color="accent"
-                                                (click)="newMark$.next(subject.subjectMarkGroup)"
-                                                [disabled]="!currentSemester">
-                                            {{ 'i18n.modules.mark.createUpdate.create.action' | translate }}
-                                        </button>
-                                    </div>
-                                    <div class="oc-filler"></div>
-                                    <div class="control-row">
-                                        <mark-weight-updater [markGroup]="subject.subjectMarkGroup"
-                                                             (weightChange)="editSubjectWeight$.next($event)"
-                                                             [disabled]="!currentSemester">
-                                        </mark-weight-updater>
-                                    </div>
-                                </mat-list-item>
+                <mat-icon [matTooltip]="'i18n.modules.mark.common.average' | translate"
+                          svgIcon="average"></mat-icon>
+              </oc-collapsible-header>
+              <mat-list class="mark-value-list">
+                <mat-list-item class="subject-mark-group-controls">
+                  <div class="control-row">
+                    <button mat-button
+                            color="accent"
+                            (click)="newMarkGroup$.next(subject.subjectMarkGroup)"
+                            [disabled]="!currentSemester">
+                      {{ 'i18n.modules.mark.group.createUpdate.create.action' | translate }}
+                    </button>
+                    <button mat-button
+                            color="accent"
+                            (click)="newMark$.next(subject.subjectMarkGroup)"
+                            [disabled]="!currentSemester">
+                      {{ 'i18n.modules.mark.createUpdate.create.action' | translate }}
+                    </button>
+                  </div>
+                  <div class="oc-filler"></div>
+                  <div class="control-row">
+                    <mark-weight-updater [markGroup]="subject.subjectMarkGroup"
+                                         (weightChange)="editSubjectWeight$.next($event)"
+                                         [disabled]="!currentSemester">
+                    </mark-weight-updater>
+                  </div>
+                </mat-list-item>
 
-                                <mat-list-item class="mark-list-item"
-                                               *ngFor="let mark of subject.subjectMarkGroup?.markValues">
-                                    <mark-value [mark]="mark"
-                                                [editEnabled]="currentSemester"
-                                                (delete)="deleteMark$.next(mark)"
-                                                (edit)="editMark$.next({subjectId: subject.id, groupId: mark.markGroupId, markId: mark.id})"></mark-value>
-                                </mat-list-item>
-                                <mat-list-item *ngFor="let markGroup of subject.subjectMarkGroup?.markGroups"
-                                               class="mark-group-item">
-                                    <oc-collapsible [active]="isActiveMarkGroup(markGroup.id)" [showDivider]="false">
-                                        <oc-collapsible-header class="mark-mark-group-header" [ngClass]="headerClasses">
-                                            <mark-value [mark]="markGroup"
-                                                        [showDivider]="true"
-                                                        [editEnabled]="currentSemester"
-                                                        (delete)="deleteMarkGroup$.next(markGroup)"
-                                                        (edit)="editMarkGroup$.next({subjectId: markGroup.subjectId, groupId: markGroup.id})">
-                                            </mark-value>
-                                        </oc-collapsible-header>
-                                        <oc-divider></oc-divider>
-                                        <mat-list class="mark-group-value-list">
-                                            <mat-list-item>
-                                                <button mat-button
-                                                        color="accent"
-                                                        (click)="newMark$.next(markGroup)"
-                                                        [disabled]="!currentSemester">
-                                                    {{ 'i18n.modules.mark.createUpdate.create.action' | translate }}
-                                                </button>
-                                            </mat-list-item>
-                                            <mat-list-item class="mark-list-item"
-                                                           *ngFor="let markValue of markGroup.markValues">
-                                                <mark-value [mark]="markValue"
-                                                            [editEnabled]="currentSemester"
-                                                            (delete)="deleteMark$.next(markValue)"
-                                                            (edit)="editMark$.next({subjectId: subject.id, groupId: markValue.markGroupId, markId: markValue.id})"></mark-value>
-                                            </mat-list-item>
-                                        </mat-list>
-                                    </oc-collapsible>
-                                </mat-list-item>
-                            </mat-list>
-                            <oc-divider></oc-divider>
-                        </oc-collapsible>
-                    </oc-collapsible>
-                </oc-collapsible>
-            </mat-card-content>
-        </mat-card>
-    </div>
+                <mat-list-item class="mark-list-item"
+                               *ngFor="let mark of subject.subjectMarkGroup?.markValues">
+                  <mark-value [mark]="mark"
+                              [editEnabled]="currentSemester"
+                              (delete)="deleteMark$.next(mark)"
+                              (edit)="editMark$.next({subjectId: subject.id, groupId: mark.markGroupId, markId: mark.id})"></mark-value>
+                </mat-list-item>
+                <mat-list-item *ngFor="let markGroup of subject.subjectMarkGroup?.markGroups"
+                               class="mark-group-item">
+                  <oc-collapsible [active]="isActiveMarkGroup(markGroup.id)"
+                                  [showDivider]="false">
+                    <oc-collapsible-header class="mark-mark-group-header"
+                                           [ngClass]="headerClasses">
+                      <mark-value [mark]="markGroup"
+                                  [showDivider]="true"
+                                  [editEnabled]="currentSemester"
+                                  (delete)="deleteMarkGroup$.next(markGroup)"
+                                  (edit)="editMarkGroup$.next({subjectId: markGroup.subjectId, groupId: markGroup.id})">
+                      </mark-value>
+                    </oc-collapsible-header>
+                    <oc-divider></oc-divider>
+                    <mat-list class="mark-group-value-list">
+                      <mat-list-item>
+                        <button mat-button
+                                color="accent"
+                                (click)="newMark$.next(markGroup)"
+                                [disabled]="!currentSemester">
+                          {{ 'i18n.modules.mark.createUpdate.create.action' | translate }}
+                        </button>
+                      </mat-list-item>
+                      <mat-list-item class="mark-list-item"
+                                     *ngFor="let markValue of markGroup.markValues">
+                        <mark-value [mark]="markValue"
+                                    [editEnabled]="currentSemester"
+                                    (delete)="deleteMark$.next(markValue)"
+                                    (edit)="editMark$.next({subjectId: subject.id, groupId: markValue.markGroupId, markId: markValue.id})"></mark-value>
+                      </mat-list-item>
+                    </mat-list>
+                  </oc-collapsible>
+                </mat-list-item>
+              </mat-list>
+              <oc-divider></oc-divider>
+            </oc-collapsible>
+          </oc-collapsible>
+        </oc-collapsible>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>

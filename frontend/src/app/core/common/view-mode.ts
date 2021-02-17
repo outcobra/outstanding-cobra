@@ -1,4 +1,4 @@
 export enum ViewMode {
-    EDIT,
-    NEW
+  EDIT,
+  NEW
 }

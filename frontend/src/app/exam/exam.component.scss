@@ -1,91 +1,101 @@
 @import '../../sass/color-variables';
 
 mat-form-field#exam-search {
-    display: block !important;
-    box-sizing: border-box;
-    margin: 0 20px;
-    .mat-form-field-labelwrapper {
-        overflow: visible;
-    }
-    label {
-        font-size: 25px !important;
-    }
-    input {
-        height: 40px;
-        width: 100%;
-        font-size: 25px !important;
-    }
+  display: block !important;
+  box-sizing: border-box;
+  margin: 0 20px;
+
+  .mat-form-field-labelwrapper {
+    overflow: visible;
+  }
+
+  label {
+    font-size: 25px !important;
+  }
+
+  input {
+    height: 40px;
+    width: 100%;
+    font-size: 25px !important;
+  }
 }
 
 mat-expansion-panel-header {
-    .mat-content {
-        align-items: center;
-    }
-    .subject-letter-icon {
-        border-radius: 50%;
-        line-height: 32px;
-        font-size: 1.5em;
-        text-align: center;
-        color: $primary-light;
-        width: 32px;
-        height: 32px;
-        margin: 8px 8px 8px 0;
-    }
-    &.mat-expanded .subject-letter-icon {
-        margin: 16px 8px 16px 0;
-    }
+  .mat-content {
+    align-items: center;
+  }
+
+  .subject-letter-icon {
+    border-radius: 50%;
+    line-height: 32px;
+    font-size: 1.5em;
+    text-align: center;
+    color: $primary-light;
+    width: 32px;
+    height: 32px;
+    margin: 8px 8px 8px 0;
+  }
+
+  &.mat-expanded .subject-letter-icon {
+    margin: 16px 8px 16px 0;
+  }
 }
 
 .row {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .task-list-row, .task-detail-row {
-    > div {
-        padding: 0 5px;
-    }
+  > div {
+    padding: 0 5px;
+  }
 }
 
 mat-form-field#task-search {
-    display: block !important;
-    box-sizing: border-box;
-    margin: 0 20px;
-    .mat-form-field-labelwrapper {
-        overflow: visible;
-    }
-    label {
-        font-size: 25px !important;
-    }
-    input {
-        height: 40px;
-        width: 100%;
-        font-size: 25px !important;
-    }
+  display: block !important;
+  box-sizing: border-box;
+  margin: 0 20px;
+
+  .mat-form-field-labelwrapper {
+    overflow: visible;
+  }
+
+  label {
+    font-size: 25px !important;
+  }
+
+  input {
+    height: 40px;
+    width: 100%;
+    font-size: 25px !important;
+  }
 }
 
 form[ocFilter] > div {
-    display: inline-block;
+  display: inline-block;
 }
 
 #filter {
-    margin-bottom: 20px;
-    mat-card {
-        overflow: hidden;
-    }
+  margin-bottom: 20px;
+
+  mat-card {
+    overflow: hidden;
+  }
 }
 
 #filter-button {
-    padding: 0 5px;
+  padding: 0 5px;
 }
 
 mat-icon.filter-toggler {
-    transition: transform .25s ease-in-out;
-    &.filter-shown {
-        transform: rotate(180deg);
-    }
+  transition: transform .25s ease-in-out;
+
+  &.filter-shown {
+    transform: rotate(180deg);
+  }
 }
 
 .search-row {
-    margin: 0;
+  margin: 0;
 }
 

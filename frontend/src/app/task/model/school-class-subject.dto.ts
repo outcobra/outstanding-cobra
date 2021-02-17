@@ -1,6 +1,6 @@
-import {SchoolClassDto, SubjectDto} from '../../manage/model/manage.dto';
+import { SchoolClassDto, SubjectDto } from '../../manage/model/manage.dto';
 
 export interface SchoolClassSubjectDto {
-    schoolClass: SchoolClassDto,
-    subjects: Array<SubjectDto>
+  schoolClass: SchoolClassDto,
+  subjects: Array<SubjectDto>
 }

@@ -1,5 +1,5 @@
 export interface User {
-    id: number,
-    auth0Id: string,
-    username: string
+  id: number,
+  auth0Id: string,
+  username: string
 }

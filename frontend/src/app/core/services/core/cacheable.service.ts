@@ -1,11 +1,10 @@
+import { HttpClient } from '@angular/common/http';
+import { Observable, of as observableOf } from 'rxjs';
 
-import {of as observableOf, Observable} from 'rxjs';
-
-import {share, map} from 'rxjs/operators';
-import {Cacheable} from '../../interfaces/cacheable';
-import {Util} from '../../util/util';
-import {AppService} from './app.service';
-import {HttpClient} from '@angular/common/http';
+import { map, share } from 'rxjs/operators';
+import { Cacheable } from '../../interfaces/cacheable';
+import { Util } from '../../util/util';
+import { AppService } from './app.service';
 
 /**
  * Default implementation of a caching service
@@ -17,68 +16,68 @@ import {HttpClient} from '@angular/common/http';
  * can be set in the constructor
  */
 export abstract class CacheableService<T> extends AppService implements Cacheable<T> {
-    expiration: number;
-    cache: T;
-    observable: Observable<T>;
+  expiration: number;
+  cache: T;
+  observable: Observable<T>;
 
-    /**
-     * @param http HttpClient
-     * @param baseUri of the services http calls
-     * @param expiredAfter time in milliseconds that the cache lives (default 10 minutes)
-     */
-    constructor(http: HttpClient = null, baseUri: string = '', private expiredAfter: number = 600000) {
-        super(http, baseUri);
-    }
+  /**
+   * @param http HttpClient
+   * @param baseUri of the services http calls
+   * @param expiredAfter time in milliseconds that the cache lives (default 10 minutes)
+   */
+  constructor(http: HttpClient = null, baseUri: string = '', private expiredAfter: number = 600000) {
+    super(http, baseUri);
+  }
 
-    getFromCacheOrFetch(fetchFunc: () => Observable<T>) {
-        if (this.hasCache()) return observableOf(this.cache);
-        else if (this.observable) return this.observable;
-        return this.saveObservable(fetchFunc().pipe(
-            map((res: T) => {
-                this.clearObservable();
-                this.saveCache(res);
-                return this.cache;
-            }),share(),));
-    }
+  getFromCacheOrFetch(fetchFunc: () => Observable<T>) {
+    if (this.hasCache()) return observableOf(this.cache);
+    else if (this.observable) return this.observable;
+    return this.saveObservable(fetchFunc().pipe(
+      map((res: T) => {
+        this.clearObservable();
+        this.saveCache(res);
+        return this.cache;
+      }), share(),));
+  }
 
-    /**
-     * save the argument to the cache and reset the expiration
-     * @param arg the object to be saved
-     */
-    saveCache(arg: T): void {
-        this.cache = arg;
-        this.expiration = Util.getMillis();
-    }
+  /**
+   * save the argument to the cache and reset the expiration
+   * @param arg the object to be saved
+   */
+  saveCache(arg: T): void {
+    this.cache = arg;
+    this.expiration = Util.getMillis();
+  }
 
-    /**
-     * save an uncompleted observable to the cache
-     * @param observable
-     * @returns {Observable<T>}
-     */
-    saveObservable(observable: Observable<T>): Observable<T> {
-        return this.observable = observable;
-    }
+  /**
+   * save an uncompleted observable to the cache
+   * @param observable
+   * @returns {Observable<T>}
+   */
+  saveObservable(observable: Observable<T>): Observable<T> {
+    return this.observable = observable;
+  }
 
-    /**
-     * clear the default cache
-     */
-    clearCache(): void {
-        this.cache = null;
-    }
+  /**
+   * clear the default cache
+   */
+  clearCache(): void {
+    this.cache = null;
+  }
 
-    /**
-     * clear the observable cache
-     */
-    clearObservable(): void {
-        this.observable = null;
-    }
+  /**
+   * clear the observable cache
+   */
+  clearObservable(): void {
+    this.observable = null;
+  }
 
-    /**
-     * check if there is cache and if it isn't expired
-     *
-     * @returns {boolean}
-     */
-    hasCache(): boolean {
-        return this.cache && this.expiration && Util.getMillis() - this.expiration <= this.expiredAfter; // cache not older than 10 minutes TODO other?
-    }
+  /**
+   * check if there is cache and if it isn't expired
+   *
+   * @returns {boolean}
+   */
+  hasCache(): boolean {
+    return this.cache && this.expiration && Util.getMillis() - this.expiration <= this.expiredAfter; // cache not older than 10 minutes TODO other?
+  }
 }

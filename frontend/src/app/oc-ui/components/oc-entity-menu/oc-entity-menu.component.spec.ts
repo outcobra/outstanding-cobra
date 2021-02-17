@@ -1,30 +1,30 @@
 /* tslint:disable:no-unused-variable */
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import {OCEntityMenuComponent} from './oc-entity-menu.component';
-import {TestModule} from '../../../core/mock/test.module';
+import { TestModule } from '../../../core/mock/test.module';
+import { OCEntityMenuComponent } from './oc-entity-menu.component';
 
 describe('EntityMenuComponent', () => {
-    let component: OCEntityMenuComponent;
-    let fixture: ComponentFixture<OCEntityMenuComponent>;
+  let component: OCEntityMenuComponent;
+  let fixture: ComponentFixture<OCEntityMenuComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [
-                OCEntityMenuComponent
-            ],
-            imports: [
-                TestModule
-            ]
-        }).compileComponents();
-    }));
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        OCEntityMenuComponent
+      ],
+      imports: [
+        TestModule
+      ]
+    }).compileComponents();
+  }));
 
-    beforeEach(() => {
-        fixture = TestBed.createComponent(OCEntityMenuComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    });
+  beforeEach(() => {
+    fixture = TestBed.createComponent(OCEntityMenuComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });
