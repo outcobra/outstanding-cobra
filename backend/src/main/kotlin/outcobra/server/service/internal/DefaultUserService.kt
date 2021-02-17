@@ -26,7 +26,7 @@ class DefaultUserService
 
     override fun getCurrentUserDto() = userDtoMapper.toDto(getCurrentUser())
 
-    override fun readUserById(id: Long): User = userRepository.findOne(id)
+    override fun readUserById(id: Long): User = userRepository.getOne(id)
 
     override fun checkEmailNotTaken(mail: String) = !userRepository.existsByMail(mail)
 }

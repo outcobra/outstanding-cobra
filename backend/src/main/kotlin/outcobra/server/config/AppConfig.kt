@@ -14,22 +14,18 @@ import outcobra.server.config.ProfileRegistry.Companion.BASIC_AUTH_SECURITY_MOCK
 
 @Configuration
 class AppConfig {
-    companion object {
-        @Bean
-        @Profile("!$BASIC_AUTH_SECURITY_MOCK")
-        @JvmStatic
-        fun getAuthConfigs(): PropertySourcesPlaceholderConfigurer {
-            val configurer = PropertySourcesPlaceholderConfigurer()
-            val yaml = YamlPropertiesFactoryBean()
-            yaml.setResolutionMethod(FIRST_FOUND)
-            yaml.setResources(FileSystemResource("./config/auth.yml"), ClassPathResource("auth.yml"))
-            configurer.setProperties(yaml.`object`)
-            return configurer
-        }
-
-        @Bean
-        @Profile("!$BASIC_AUTH_SECURITY_MOCK")
-        @JvmStatic
-        fun passwordEncoder() = BCryptPasswordEncoder()
+    @Bean
+    @Profile("!$BASIC_AUTH_SECURITY_MOCK")
+    fun getAuthConfigs(): PropertySourcesPlaceholderConfigurer {
+        val configurer = PropertySourcesPlaceholderConfigurer()
+        val yaml = YamlPropertiesFactoryBean()
+        yaml.setResolutionMethod(FIRST_FOUND)
+        yaml.setResources(FileSystemResource("./config/auth.yml"), ClassPathResource("auth.yml"))
+        configurer.setProperties(yaml.`object`)
+        return configurer
     }
+
+    @Bean
+    @Profile("!$BASIC_AUTH_SECURITY_MOCK")
+    fun passwordEncoder() = BCryptPasswordEncoder()
 }

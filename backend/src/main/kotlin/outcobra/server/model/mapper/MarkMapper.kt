@@ -19,8 +19,8 @@ class MarkMapper @Inject constructor(val markGroupRepository: MarkGroupRepositor
     : Mapper<MarkValue, MarkValueDto>, BaseMapper() {
 
     override fun fromDto(from: MarkValueDto): MarkValue {
-        val markGroup = markGroupRepository.findOne(from.markGroupId)
-        val exam = examRepository.findOne(from.examId)
+        val markGroup = markGroupRepository.getOne(from.markGroupId)
+        val exam = examRepository.getOne(from.examId)
         val mark = MarkValue(from.value, from.weight, markGroup, from.description, exam)
         mark.id = from.id
         return mark

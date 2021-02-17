@@ -34,7 +34,7 @@ class SemesterValidator @Inject constructor(val schoolYearRepository: SchoolYear
             ValidationKey.START_BIGGER_THAN_END.throwException()
         }
         val parentId = semester.schoolYear?.id
-        val parent = schoolYearRepository.findOne(parentId)
+        val parent = schoolYearRepository.getOne(parentId)
 
         if (semester !in parent)
             ValidationKey.OUTSIDE_PARENT.throwException()

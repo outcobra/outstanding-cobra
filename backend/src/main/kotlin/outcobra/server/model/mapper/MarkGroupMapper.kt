@@ -32,9 +32,9 @@ class MarkGroupMapper @Inject constructor(val subjectRepository: SubjectReposito
         var subject: Subject? = null
         var parentGroup: MarkGroup? = null
         if (from.parentGroupId == 0L) {
-            subject = subjectRepository.findOne(from.subjectId)
+            subject = subjectRepository.getOne(from.subjectId)
         } else {
-            parentGroup = markGroupRepository.findOne(from.parentGroupId)
+            parentGroup = markGroupRepository.getOne(from.parentGroupId)
         }
         val marks: MutableList<Mark> = from.markValues.map { markValueMapper.fromDto(it) }.toMutableList()
         if (subject != null) {

@@ -31,7 +31,7 @@ open class BaseValidator(val locator: RepositoryLocator, val userService: UserSe
      */
     fun validateRequestById(id: Long, type: KClass<*>) {
         val repository = locator.getForEntityClass(type.java)
-        val entity = repository.findOne(id)
+        val entity = repository.getOne(id)
         if (entity != null && entity is ParentLinked) {
             return entity.checkOwnerIsCurrent()
         }

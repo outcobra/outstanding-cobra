@@ -19,7 +19,7 @@ class ExamTaskMapper @Inject constructor(val examRepository: ExamRepository,
                                          val requestValidator: RequestValidator<ExamDto>) : BaseMapper(), Mapper<ExamTask, ExamTaskDto> {
     override fun fromDto(from: ExamTaskDto): ExamTask {
         requestValidator.validateRequestById(from.examId, Exam::class)
-        val exam = examRepository.findOne(from.examId)
+        val exam = examRepository.getOne(from.examId)
         val examTask = ExamTask(from.task, exam, from.finished)
         examTask.id = from.id
         return examTask

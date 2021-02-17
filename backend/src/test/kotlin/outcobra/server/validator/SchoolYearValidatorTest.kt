@@ -1,12 +1,12 @@
 package outcobra.server.validator
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.Before
-import org.junit.Test
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles
-import org.springframework.test.context.junit4.SpringRunner
+import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.transaction.annotation.Transactional
 import outcobra.server.config.ProfileRegistry.Companion.TEST
 import outcobra.server.model.Institution
@@ -20,7 +20,7 @@ import java.time.LocalDate
 import javax.inject.Inject
 
 
-@RunWith(SpringRunner::class)
+@ExtendWith(SpringExtension::class)
 @SpringBootTest
 @ActiveProfiles(TEST)
 @Transactional
@@ -42,7 +42,7 @@ class SchoolYearValidatorTest {
 
     val now: LocalDate = LocalDate.now()
 
-    @Before
+    @BeforeEach
     fun before() {
         val institution = Institution("TEST", userService.getCurrentUser())
         schoolClass = SchoolClass("tester", institution, listOf())

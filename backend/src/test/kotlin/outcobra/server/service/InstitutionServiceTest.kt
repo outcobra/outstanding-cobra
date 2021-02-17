@@ -1,12 +1,12 @@
 package outcobra.server.service
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.Before
-import org.junit.Test
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles
-import org.springframework.test.context.junit4.SpringRunner
+import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.transaction.annotation.Transactional
 import outcobra.server.config.ProfileRegistry.Companion.TEST
 import outcobra.server.model.Institution
@@ -22,7 +22,7 @@ import javax.inject.Inject
  * @author Joel Messerli
  * @since 1.0.0
  */
-@RunWith(SpringRunner::class)
+@ExtendWith(SpringExtension::class)
 @SpringBootTest
 @ActiveProfiles(TEST)
 @Transactional
@@ -46,7 +46,7 @@ class InstitutionServiceTest {
         val INSTITUTION_NAME: String = "Institution 1"
     }
 
-    @Before
+    @BeforeEach
     fun setup() {
         userId = userService.getCurrentUser().id
     }
@@ -57,7 +57,7 @@ class InstitutionServiceTest {
     @Test
     fun createInstitutionTest() {
         institutionService.save(InstitutionDto(name = INSTITUTION_NAME, userId = userId))
-        val institution = institutionRepository.findOne(QInstitution.institution.name.eq(INSTITUTION_NAME))
+        val institution = institutionRepository.findOne(QInstitution.institution.name.eq(INSTITUTION_NAME)).get()
         assertThat(institution).isNotNull()
         assertThat(institution.name).isEqualTo(INSTITUTION_NAME)
         assertThat(institution.user).isEqualTo(userService.getCurrentUser())
@@ -70,7 +70,7 @@ class InstitutionServiceTest {
         val updatedName = "testUpdateInstitution"
         val updateDto = InstitutionDto(institutionId, userId, updatedName)
         institutionService.save(updateDto)
-        val institution = institutionRepository.findOne(QInstitution.institution.id.eq(institutionId))
+        val institution = institutionRepository.findOne(QInstitution.institution.id.eq(institutionId)).get()
         assertThat(institution).isNotNull()
         assertThat(institution.name).isEqualTo(updatedName)
     }
@@ -113,7 +113,7 @@ class InstitutionServiceTest {
         val institutionDto = institutionService.save(InstitutionDto(name = INSTITUTION_NAME, userId = userId))
         val institutionId = institutionDto.id
         institutionService.delete(institutionId)
-        assertThat(institutionRepository.findOne(QInstitution.institution.id.eq(institutionId))).isNull()
+        assertThat(institutionRepository.existsById(institutionId)).isFalse
     }
 
 }

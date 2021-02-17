@@ -48,7 +48,7 @@ class DefaultMarkGroupService
                 }
             }
             if (currentMarks.isNotEmpty()) {
-                val subjectMarkGroup = repository.findOne(dto.parentGroupId)
+                val subjectMarkGroup = repository.getOne(dto.parentGroupId)
                 currentMarks.forEach {
                     it.markGroup = subjectMarkGroup
                     markValueRepository.save(it)
@@ -67,19 +67,19 @@ class DefaultMarkGroupService
 
     override fun delete(id: Long) {
         requestValidator.validateRequestById(id, MarkGroup::class)
-        val markGroup = repository.findOne(id)
-        markGroup.marks.map { it.id }.forEach(markValueRepository::delete)
+        val markGroup = repository.getOne(id)
+        markGroup.marks.map { it.id }.forEach(markValueRepository::deleteById)
         super.delete(id)
     }
 
     override fun getGroupBySubject(subjectId: Long): MarkGroupDto {
         requestValidator.validateRequestById(subjectId, Subject::class)
-        val markGroup = subjectRepository.findOne(subjectId).markGroup
+        val markGroup = subjectRepository.getOne(subjectId).markGroup
         return mapper.toDto(markGroup as MarkGroup)
     }
 
     override fun getInitialData(semesterId: Long): SemesterMarkDto {
         requestValidator.validateRequestById(semesterId, Semester::class)
-        return semesterMarkDtoMapper.toDto(semesterRepository.findOne(semesterId))
+        return semesterMarkDtoMapper.toDto(semesterRepository.getOne(semesterId))
     }
 }

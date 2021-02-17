@@ -1,12 +1,12 @@
 package outcobra.server.validator
 
 import org.assertj.core.api.Assertions.assertThatThrownBy
-import org.junit.Before
-import org.junit.Test
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles
-import org.springframework.test.context.junit4.SpringRunner
+import org.springframework.test.context.junit.jupiter.SpringExtension
 import outcobra.server.Mocker
 import outcobra.server.config.ProfileRegistry.Companion.TEST
 import outcobra.server.exception.ValidationException
@@ -33,7 +33,7 @@ import javax.transaction.Transactional
  * @since 1.1.0
  */
 @SpringBootTest
-@RunWith(SpringRunner::class)
+@ExtendWith(SpringExtension::class)
 @ActiveProfiles(TEST)
 @Transactional
 class RequestValidatorTest {
@@ -55,9 +55,9 @@ class RequestValidatorTest {
     lateinit var institutionByUser2: Institution
     lateinit var institutionByCurrent: Institution
 
-    @Before
+    @BeforeEach
     fun setup() {
-        val user2 = userRepository.findOne(QUser.user.mail.eq(Mocker.USER2_MAIL))
+        val user2 = userRepository.findOne(QUser.user.mail.eq(Mocker.USER2_MAIL)).get()
         institutionByUser2 = institutionRepository.save(Institution("InstitutionByUser2", user2))
         institutionByCurrent = institutionRepository.findAll(
                 QInstitution.institution.user.mail.ne(userServiceMock.getCurrentUser().mail)).first()

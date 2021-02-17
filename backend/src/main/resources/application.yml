@@ -9,6 +9,18 @@ spring:
   jpa:
     hibernate:
       use-new-id-generator-mappings: true
+
+  profiles:
+    group:
+      production:
+        - mysql_database
+      development:
+        - load_test_data
+        - h2_db
+      test:
+        - load_test_data
+        - h2_db
+        - mock_services
 endpoints:
   cors:
     allowed-origins: "*"
@@ -20,33 +32,33 @@ sentry.dsn: https://00e7fe8c3ae9488ba591314d7773b81a@sentry.pegnu.cloud/2
 # Main Profile definition
 # This part only includes super-profiles like dev/prod/test etc.
 #---
-spring.profiles: development
-#ignore the ugliness bc it doesn't seem to work in a different way
+spring:
+  config:
+    activate:
+      on-profile: development
 endpoints:
   enabled: true
   sensitive: false
-spring:
-  profiles:
-    include: load_test_data,h2_db
 runtime:
   environment: development
 logging.level:
   outcobra: debug
 ---
-spring.profiles: test
-#ignore the ugliness bc it doesn't seem to work in a different way
 spring:
-  profiles:
-    include: load_test_data,h2_db,mock_services
+  config:
+    activate:
+      on-profile: test
   cache:
     type: none
+  main:
+    allow-bean-definition-overriding: true
 runtime:
   environment: test
 ---
-spring.profiles: production
 spring:
-  profiles:
-    include: mysql_database
+  config:
+    activate:
+      on-profile: production
 runtime:
   environment: production
 management:
@@ -57,10 +69,14 @@ management:
 #---
 ---
 spring:
-  profiles: basic_auth_security_mock
+  config:
+    activate:
+      on-profile: basic_auth_security_mock
 ---
 spring:
-  profiles: h2_db
+  config:
+    activate:
+      on-profile: h2_db
   datasource:
     driver-class-name: org.h2.Driver
     url: jdbc:h2:mem:outcobra
@@ -73,14 +89,16 @@ spring:
   h2:
     console:
       enabled: true
+  flyway:
+    enabled: false
 security:
   basic:
     enabled: false
-flyway:
-  enabled: false
 ---
 spring:
-  profiles: mysql_database
+  config:
+    activate:
+      on-profile: mysql_database
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://mysql:3306/outcobra
@@ -91,7 +109,5 @@ spring:
         dialect: org.hibernate.dialect.MySQL5Dialect
     hibernate:
       ddl-auto: validate
-flyway:
-  locations: db/migration
----
-spring.profiles: bit
+  flyway:
+    locations: db/migration

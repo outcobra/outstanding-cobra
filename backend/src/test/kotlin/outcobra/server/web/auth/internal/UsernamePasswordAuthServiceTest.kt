@@ -2,8 +2,8 @@ package outcobra.server.web.auth.internal
 
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
-import org.junit.Test
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.context.TestConfiguration
@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Primary
 import org.springframework.security.crypto.password.NoOpPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.test.context.ActiveProfiles
-import org.springframework.test.context.junit4.SpringRunner
+import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.transaction.annotation.Transactional
 import outcobra.server.config.ProfileRegistry
 import outcobra.server.data.loaders.UserDataLoader
@@ -26,7 +26,7 @@ import outcobra.server.web.auth.util.JwtUtil
 import java.util.*
 import javax.inject.Inject
 
-@RunWith(SpringRunner::class)
+@ExtendWith(SpringExtension::class)
 @SpringBootTest
 @ActiveProfiles(ProfileRegistry.TEST)
 @Transactional
@@ -40,6 +40,7 @@ class UsernamePasswordAuthServiceTest {
 
     @Inject
     lateinit var userRepository: UserRepository
+
     @Inject
     lateinit var identityRepository: IdentityRepository
 
@@ -125,10 +126,8 @@ class UsernamePasswordAuthServiceTest {
 
     @TestConfiguration
     class Config {
-        companion object {
-            @Bean
-            @Primary
-            fun passwordEncoder(): PasswordEncoder? = NoOpPasswordEncoder.getInstance()
-        }
+        @Bean
+        @Primary
+        fun passwordEncoder(): PasswordEncoder? = NoOpPasswordEncoder.getInstance()
     }
 }

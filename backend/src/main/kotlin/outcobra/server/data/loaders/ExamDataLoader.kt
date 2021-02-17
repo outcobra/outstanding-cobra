@@ -72,9 +72,9 @@ class ExamDataLoader @Inject constructor(val examRepository: ExamRepository,
     private fun saveAndLog(exam: Exam, subject: Subject): Exam {
         exam.subject = subject
         exam.mark?.markGroup = subject.markGroup
-        if (exam.mark is Mark) {
-            markValueRepository.save(exam.mark)
-        }
+        /*if (exam.mark is Mark) { WTF
+            exam.mark = markValueRepository.save(exam.mark)
+        }*/
         val entity = examRepository.save(exam)
         LOGGER.debug("Saved exam: ${entity.name} with id ${entity.id}")
         return entity

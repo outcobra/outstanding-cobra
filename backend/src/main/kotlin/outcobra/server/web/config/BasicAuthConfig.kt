@@ -14,7 +14,7 @@ import outcobra.server.config.ProfileRegistry.Companion.BASIC_AUTH_SECURITY_MOCK
 @Profile(BASIC_AUTH_SECURITY_MOCK)
 @Configuration
 @EnableWebSecurity
-@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
+@Order(SecurityProperties.BASIC_AUTH_ORDER - 1)
 class BasicAuthConfig : WebSecurityConfigurerAdapter() {
 
     override fun configure(http: HttpSecurity?) {

@@ -6,8 +6,8 @@ import com.google.api.client.json.webtoken.JsonWebSignature
 import org.apache.commons.lang3.BooleanUtils
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
-import org.junit.Test
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Matchers
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
@@ -17,7 +17,7 @@ import org.springframework.boot.test.context.TestConfiguration
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Primary
 import org.springframework.test.context.ActiveProfiles
-import org.springframework.test.context.junit4.SpringRunner
+import org.springframework.test.context.junit.jupiter.SpringExtension
 import outcobra.server.config.ProfileRegistry
 import outcobra.server.data.loaders.UserDataLoader
 import outcobra.server.exception.ValidationException
@@ -33,7 +33,7 @@ import java.security.SignatureException
 import java.util.*
 import javax.inject.Inject
 
-@RunWith(SpringRunner::class)
+@ExtendWith(SpringExtension::class)
 @SpringBootTest
 @ActiveProfiles(ProfileRegistry.TEST)
 class GoogleAuthServiceTest {
@@ -46,6 +46,7 @@ class GoogleAuthServiceTest {
 
     @Inject
     lateinit var userRepository: UserRepository
+
     @Inject
     lateinit var identityRepository: IdentityRepository
 
@@ -118,25 +119,25 @@ class GoogleAuthServiceTest {
     class Config {
         companion object {
             var NEXT_USER: OutcobraUser = OutcobraUser(USER_NAME, USER_SUB, USER_MAIL)
+        }
 
-            @Bean
-            @Primary
-            fun idTokenVerifier(): GoogleIdTokenVerifier {
-                val mockVerifier = mock(GoogleIdTokenVerifier::class.java)
+        @Bean
+        @Primary
+        fun idTokenVerifier(): GoogleIdTokenVerifier {
+            val mockVerifier = mock(GoogleIdTokenVerifier::class.java)
 
-                `when`(mockVerifier.verify(Matchers.anyString())).then {
-                    val toBoolean = BooleanUtils.toBoolean(it.arguments.first() as String)
-                    if (!toBoolean) {
-                        throw SignatureException("Test Signature Invalid")
-                    }
-                    val payload = GoogleIdToken.Payload()
-                    payload.email = NEXT_USER.mail
-                    payload.subject = NEXT_USER.password
-                    payload["name"] = NEXT_USER.username
-                    GoogleIdToken(JsonWebSignature.Header(), payload, ByteArray(0), ByteArray(0))
+            `when`(mockVerifier.verify(Matchers.anyString())).then {
+                val toBoolean = BooleanUtils.toBoolean(it.arguments.first() as String)
+                if (!toBoolean) {
+                    throw SignatureException("Test Signature Invalid")
                 }
-                return mockVerifier
+                val payload = GoogleIdToken.Payload()
+                payload.email = NEXT_USER.mail
+                payload.subject = NEXT_USER.password
+                payload["name"] = NEXT_USER.username
+                GoogleIdToken(JsonWebSignature.Header(), payload, ByteArray(0), ByteArray(0))
             }
+            return mockVerifier
         }
     }
 }

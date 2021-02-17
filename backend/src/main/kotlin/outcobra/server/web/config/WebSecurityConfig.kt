@@ -26,7 +26,7 @@ import javax.inject.Inject
  */
 @Configuration
 @EnableWebSecurity
-@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER + 1)
+@Order(SecurityProperties.BASIC_AUTH_ORDER + 1)
 class WebSecurityConfig
 @Inject constructor(val environment: Environment,
                     val jwtAuthenticationProvider: JwtAuthenticationProvider) : WebSecurityConfigurerAdapter() {

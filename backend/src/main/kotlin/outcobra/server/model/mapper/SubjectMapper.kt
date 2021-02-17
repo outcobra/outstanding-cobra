@@ -22,12 +22,12 @@ class SubjectMapper @Inject constructor(val semesterRepository: SemesterReposito
 
     override fun fromDto(from: SubjectDto): Subject {
         val id = from.identifier
-        val timetableEntries = timetableRepository.findOne(QTimetable.timetable.semester.id.eq(from.semesterId))?.entries ?: listOf()
-        val reportEntries = markReportRepository.findOne(QMarkReport.markReport.semester.id.eq(from.semesterId))?.entries ?: listOf()
+        val timetableEntries = timetableRepository.findOne(QTimetable.timetable.semester.id.eq(from.semesterId)).map { it.entries }.orElse(listOf())
+        val reportEntries = markReportRepository.findOne(QMarkReport.markReport.semester.id.eq(from.semesterId)).map { it.entries }.orElse(listOf())
         val tasks = taskRepository.findAll(QTask.task.subject.id.eq(id)).toList()
         val exams = examRepository.findAll(QExam.exam.subject.id.eq(id)).toList()
-        val markGroup = markGroupRepository.findOne(QMarkGroup.markGroup1.id.eq(id))
-        val semester = semesterRepository.findOne(from.semesterId)
+        val markGroup = markGroupRepository.findOne(QMarkGroup.markGroup1.id.eq(id)).orElse(null)
+        val semester = semesterRepository.getOne(from.semesterId)
         val subject = Subject(from.name, colorMapper.fromDto(from.color), semester, timetableEntries, tasks, reportEntries, exams, markGroup, null)
         subject.id = from.identifier
         return subject

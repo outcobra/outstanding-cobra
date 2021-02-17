@@ -63,7 +63,7 @@ class DefaultTaskService
 
     override fun updateProgress(taskProgressUpdateDto: TaskProgressUpdateDto): TaskDto {
         requestValidator.validateRequestById(taskProgressUpdateDto.taskId, Task::class)
-        val task = repository.findOne(taskProgressUpdateDto.taskId)
+        val task = repository.getOne(taskProgressUpdateDto.taskId)
         task.progress = taskProgressUpdateDto.progress
         return mapper.toDto(repository.save(task))
     }

@@ -28,7 +28,7 @@ class ExamMapper @Inject constructor(val markMapper: Mapper<MarkValue, MarkValue
     : Mapper<Exam, ExamDto>, BaseMapper() {
 
     override fun fromDto(from: ExamDto): Exam {
-        val subject = subjectRepository.findOne(from.subject.id)
+        val subject = subjectRepository.getOne(from.subject.id)
         var markValue: MarkValue? = markRepository.findAll(QMarkValue.markValue.exam.id.eq(from.id)).firstOrNull()
         if (from.mark != null) {
             markValue = markMapper.fromDto(from.mark)

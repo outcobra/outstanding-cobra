@@ -1,18 +1,18 @@
 package outcobra.server.model.repository
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.Before
-import org.junit.Test
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles
-import org.springframework.test.context.junit4.SpringRunner
+import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.transaction.annotation.Transactional
 import outcobra.server.config.ProfileRegistry.Companion.TEST
 import outcobra.server.model.User
 import javax.inject.Inject
 
-@RunWith(SpringRunner::class)
+@ExtendWith(SpringExtension::class)
 @SpringBootTest
 @Transactional
 @ActiveProfiles(TEST)
@@ -26,7 +26,7 @@ class UserRepositoryTest {
         var userCount = 0L
     }
 
-    @Before
+    @BeforeEach
     fun getUserCount() {
         userCount = userRepository.count()
     }
@@ -37,7 +37,7 @@ class UserRepositoryTest {
         userRepository.flush()
         assertThat(userRepository.count()).isEqualTo(userCount + 1)
 
-        val newUser = userRepository.findOne(saved.id)
+        val newUser = userRepository.getOne(saved.id)
         assertThat(newUser).isEqualTo(myUser)
 
         userRepository.delete(newUser)
@@ -48,11 +48,11 @@ class UserRepositoryTest {
     fun testQueryDslExecutor() {
         val savedUser = userRepository.save(myUser)
 
-        val newUser = userRepository.findOne(savedUser.id)
+        val newUser = userRepository.getOne(savedUser.id)
 
         assertThat(newUser).isEqualTo(myUser)
 
-        userRepository.delete(newUser.id)
+        userRepository.deleteById(newUser.id)
         assertThat(userRepository.count()).isEqualTo(userCount)
     }
 }

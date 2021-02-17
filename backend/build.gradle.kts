@@ -19,12 +19,13 @@ buildscript {
 plugins {
     id("org.springframework.boot")
     id("io.spring.dependency-management")
-    id("org.jetbrains.kotlin.jvm")
-    id("org.jetbrains.kotlin.plugin.spring")
-    id("org.jetbrains.kotlin.plugin.jpa")
-    id("org.jetbrains.kotlin.kapt")
     id("com.gorylenko.gradle-git-properties")
     id("jacoco")
+    id("org.jetbrains.kotlin.jvm")
+    id("org.jetbrains.kotlin.kapt")
+    id("org.jetbrains.kotlin.plugin.allopen")
+    id("org.jetbrains.kotlin.plugin.jpa")
+    id("org.jetbrains.kotlin.plugin.spring")
 }
 
 val ocVersion: String by extra
@@ -80,8 +81,8 @@ dependencies {
     testImplementation("org.assertj:assertj-core:3.8.0")
 
     // Kapt & QueryDsl
-    implementation("com.querydsl:querydsl-jpa:4.1.4")
-    kapt("com.querydsl:querydsl-apt:4.1.4:jpa")
+    implementation("com.querydsl:querydsl-jpa:4.3.1")
+    kapt("com.querydsl:querydsl-apt:4.3.1:jpa")
 
     // Spring Initializr
     implementation("org.springframework.boot:spring-boot-starter-cache")
@@ -93,4 +94,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-tomcat")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+}
+
+tasks.test {
+    useJUnitPlatform()
 }
