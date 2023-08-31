@@ -16,7 +16,9 @@
     "build:fire": "ng build --environment fire -sm",
     "build:prod": "ng build --prod -sm",
     "build:node-sass": "npm rebuild node-sass",
-    "deploy:fire": "firebase deploy"
+    "deploy:fire": "firebase deploy",
+    "prepare": "yarn run snyk-protect",
+    "snyk-protect": "snyk-protect"
   },
   "private": true,
   "dependencies": {
@@ -50,7 +52,8 @@
     "rxjs": "5.5.6",
     "typeface-montserrat": "^0.0.45",
     "web-animations-js": "^2.3.1",
-    "zone.js": "^0.8.4"
+    "zone.js": "^0.8.4",
+    "@snyk/protect": "latest"
   },
   "devDependencies": {
     "@angular/cli": "^1.6",
@@ -74,5 +77,6 @@
     "ts-node": "^4.1.0",
     "tslint": "^5.9.1",
     "typescript": "^2.6.0"
-  }
+  },
+  "snyk": true
 }

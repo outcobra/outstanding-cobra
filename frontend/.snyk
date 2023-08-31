@@ -1,0 +1,52 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.25.1
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  'npm:debug:20170905':
+    - '@angular-devkit/core > chokidar > fsevents > node-pre-gyp > tar-pack > debug':
+        patched: '2023-08-31T14:04:40.679Z'
+        id: 'npm:debug:20170905'
+        path: >-
+          @angular-devkit/core > chokidar > fsevents > node-pre-gyp > tar-pack >
+          debug
+  'npm:extend:20180424':
+    - '@angular-devkit/core > chokidar > fsevents > node-pre-gyp > request > extend':
+        patched: '2023-08-31T14:04:40.679Z'
+        id: 'npm:extend:20180424'
+        path: >-
+          @angular-devkit/core > chokidar > fsevents > node-pre-gyp > request >
+          extend
+  'npm:hoek:20180212':
+    - '@angular-devkit/core > chokidar > fsevents > node-pre-gyp > request > hawk > hoek':
+        patched: '2023-08-31T14:04:40.679Z'
+        id: 'npm:hoek:20180212'
+        path: >-
+          @angular-devkit/core > chokidar > fsevents > node-pre-gyp > request >
+          hawk > hoek
+    - '@angular-devkit/core > chokidar > fsevents > node-pre-gyp > request > hawk > boom > hoek':
+        patched: '2023-08-31T14:04:40.679Z'
+        id: 'npm:hoek:20180212'
+        path: >-
+          @angular-devkit/core > chokidar > fsevents > node-pre-gyp > request >
+          hawk > boom > hoek
+    - '@angular-devkit/core > chokidar > fsevents > node-pre-gyp > request > hawk > sntp > hoek':
+        patched: '2023-08-31T14:04:40.679Z'
+        id: 'npm:hoek:20180212'
+        path: >-
+          @angular-devkit/core > chokidar > fsevents > node-pre-gyp > request >
+          hawk > sntp > hoek
+  'npm:stringstream:20180511':
+    - '@angular-devkit/core > chokidar > fsevents > node-pre-gyp > request > stringstream':
+        patched: '2023-08-31T14:04:40.679Z'
+        id: 'npm:stringstream:20180511'
+        path: >-
+          @angular-devkit/core > chokidar > fsevents > node-pre-gyp > request >
+          stringstream
+  'npm:tough-cookie:20170905':
+    - '@angular-devkit/core > chokidar > fsevents > node-pre-gyp > request > tough-cookie':
+        patched: '2023-08-31T14:04:40.679Z'
+        id: 'npm:tough-cookie:20170905'
+        path: >-
+          @angular-devkit/core > chokidar > fsevents > node-pre-gyp > request >
+          tough-cookie
