@@ -33,7 +33,7 @@
     "@angular/platform-browser": "5.2.3",
     "@angular/platform-browser-dynamic": "5.2.3",
     "@angular/router": "5.2.3",
-    "@angular-devkit/core": "^0.0.29",
+    "@angular-devkit/core": "^0.5.11",
     "@ngx-translate/core": "9.0.2",
     "@ngx-translate/http-loader": "^2.0",
     "angular2-notifications": "^0.9.7",
